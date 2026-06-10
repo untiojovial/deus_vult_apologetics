@@ -1,6 +1,8 @@
 ---
 title: "Filosofia"
 description: "Razon, metafisica y fundamentos para pensar la fe cristiana."
+aliases:
+  - "/categories/filosofia/"
 ---
 
 Esta seccion abre preguntas grandes: verdad, sentido, causa primera, libertad, bien y mal.

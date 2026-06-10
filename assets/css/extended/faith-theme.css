@@ -38,10 +38,25 @@ body {
         radial-gradient(circle at 10% 20%, rgba(156, 111, 26, 0.08), transparent 26%),
         radial-gradient(circle at 90% 10%, rgba(156, 111, 26, 0.06), transparent 30%),
         linear-gradient(180deg, rgba(250, 244, 232, 0.45), rgba(246, 242, 233, 0.9));
+    position: relative;
+}
+
+body::before {
+    content: "\271D \00A0 \2720 \00A0 \271D";
+    position: fixed;
+    right: -1.6rem;
+    top: 5.9rem;
+    font-size: clamp(2.2rem, 4.4vw, 3.7rem);
+    color: rgba(126, 94, 35, 0.1);
+    transform: rotate(-14deg);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .main {
     max-width: 980px;
+    position: relative;
+    z-index: 1;
 }
 
 .logo a,
@@ -59,10 +74,18 @@ body {
     letter-spacing: 0.02em;
 }
 
+.logo a::before {
+    content: "\271D ";
+    color: var(--accent);
+    font-weight: 700;
+}
+
 .header {
     border-bottom: 1px solid var(--border);
     background: color-mix(in srgb, var(--theme) 88%, #fff 12%);
     backdrop-filter: blur(4px);
+    position: relative;
+    z-index: 2;
 }
 
 .nav {
@@ -71,11 +94,26 @@ body {
 
 .nav a {
     border-radius: 999px;
-    padding: 0.3rem 0.75rem;
+    padding: 0.3rem 0.75rem 0.3rem 1.25rem;
+    position: relative;
+}
+
+.nav a::before {
+    content: "\2020";
+    position: absolute;
+    left: 0.52rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: color-mix(in srgb, var(--accent) 56%, var(--secondary) 44%);
+    font-size: 0.72rem;
 }
 
 .nav a:hover {
     background: color-mix(in srgb, var(--accent-soft) 70%, transparent 30%);
+}
+
+.nav a:hover::before {
+    color: var(--accent);
 }
 
 .home-info {
@@ -84,10 +122,55 @@ body {
     border-radius: 14px;
     padding: 1.3rem;
     background: linear-gradient(135deg, color-mix(in srgb, var(--entry) 92%, #fff 8%), color-mix(in srgb, var(--entry) 80%, var(--accent-soft) 20%));
+    position: relative;
+    overflow: hidden;
+}
+
+.home-info::after {
+    content: "\271D";
+    position: absolute;
+    right: 0.75rem;
+    top: 0.45rem;
+    color: color-mix(in srgb, var(--accent) 76%, var(--tertiary) 24%);
+    opacity: 0.58;
+    font-size: 1.12rem;
 }
 
 .home-info .entry-content {
     max-width: 74ch;
+}
+
+.home-info .entry-header h1::before,
+.home-info .entry-header h1::after {
+    color: var(--accent);
+    font-size: 0.9em;
+}
+
+.home-info .entry-header h1::before {
+    content: "\2720\00A0";
+}
+
+.home-info .entry-header h1::after {
+    content: "\00A0\2720";
+}
+
+.home-info .entry-content h3 {
+    margin-top: 0.9rem;
+    margin-bottom: 0.35rem;
+    color: color-mix(in srgb, var(--accent) 70%, var(--primary) 30%);
+    font-family: "Libre Baskerville", Georgia, serif;
+}
+
+.home-info .entry-content a {
+    display: inline-block;
+    border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--border) 58%);
+    border-radius: 999px;
+    padding: 0.24rem 0.7rem;
+    text-decoration: none;
+}
+
+.home-info .entry-content a:hover {
+    background: color-mix(in srgb, var(--accent-soft) 62%, transparent 38%);
 }
 
 .first-entry,
@@ -96,6 +179,19 @@ body {
     border-radius: 14px;
     background: color-mix(in srgb, var(--entry) 94%, #fff 6%);
     box-shadow: 0 10px 26px rgba(38, 26, 12, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.first-entry::before,
+.post-entry::before {
+    content: "\271D";
+    position: absolute;
+    top: 0.5rem;
+    right: 0.72rem;
+    color: color-mix(in srgb, var(--accent) 62%, var(--tertiary) 38%);
+    opacity: 0.55;
+    font-size: 0.86rem;
 }
 
 .post-entry:hover {
@@ -115,6 +211,11 @@ body {
     margin-top: 1.8rem;
     padding-bottom: 0.3rem;
     border-bottom: 1px solid color-mix(in srgb, var(--accent) 42%, var(--border) 58%);
+}
+
+.post-content h2::before {
+    content: "\2720\00A0";
+    color: var(--accent);
 }
 
 .post-content h3 {
@@ -145,6 +246,12 @@ body {
 .post-header {
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.8rem;
+}
+
+.page-header h1::before,
+.post-title::before {
+    content: "\271D\00A0";
+    color: var(--accent);
 }
 
 .pagination a {

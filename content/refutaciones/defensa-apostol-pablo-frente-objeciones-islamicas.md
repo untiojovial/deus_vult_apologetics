@@ -2,6 +2,11 @@
 title: "Defensa del Apostol Pablo frente a objeciones islamicas"
 date: 2026-06-10T16:40:00-05:00
 draft: false
+slug: "defensa-apostol-pablo-frente-objeciones-islamicas"
+url: "/refutaciones/defensa-apostol-pablo-frente-objeciones-islamicas/"
+aliases:
+  - "/categories/refutaciones/defensa-apostol-pablo-frente-objeciones-islamicas/"
+  - "/refutaciones/defensa-pablo-islam/"
 categories: ["refutaciones"]
 tags: ["pablo", "islam", "nuevo testamento", "patristica", "historia"]
 summary: "Refutacion extensa sobre la acusacion de corrupcion paulina, con base biblica, historica y patristrica."
