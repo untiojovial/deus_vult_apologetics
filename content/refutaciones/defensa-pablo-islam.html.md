@@ -1,3 +1,14 @@
+---
+title: "Defensa del Apostol Pablo frente a objeciones islamicas (borrador markdown)"
+date: 2026-06-10T16:40:00-05:00
+draft: true
+url: "/refutaciones/defensa-pablo-islam-markdown/"
+categories: ["refutaciones"]
+tags: ["pablo", "islam", "nuevo testamento", "patristica", "historia"]
+summary: "Version markdown convertida del dossier completo."
+showToc: false
+---
+
 ☰ ÍNDICE
 
 Defensa de Pablo
