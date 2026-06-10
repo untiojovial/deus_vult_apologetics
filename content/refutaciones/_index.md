@@ -9,7 +9,7 @@ aliases:
 
 El objetivo no es humillar al interlocutor, sino aclarar la verdad con firmeza y respeto.
 
-## Lectura recomendada
+## Enlaces utiles
 
-- [Defensa del Apostol Pablo frente a objeciones islamicas](/refutaciones/defensa-apostol-pablo-frente-objeciones-islamicas/)
-- [Dossier completo en HTML](/refutaciones/defensa-pablo-islam.html)
+- [Ir a Respondiendo al Islam](/respondiendo-al-islam/)
+- [Dossier de Pablo en HTML](/refutaciones/defensa-pablo-islam.html)

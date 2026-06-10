@@ -1,0 +1,13 @@
+---
+title: "Respondiendo al Islam"
+description: "Dossiers y respuestas cristianas ante objeciones islamicas, con enfoque historico y biblico."
+aliases:
+  - "/categories/respondiendo-al-islam/"
+---
+
+✝ Este apartado reune material de dialogo apologetico cristiano frente a objeciones islamicas.
+
+## Dossiers disponibles
+
+- [Defensa del Apostol Pablo (Dossier)](/respondiendo-al-islam/defensa-apostol-pablo-dossier/)
+- [Canon Biblia vs Quran (Dossier)](/respondiendo-al-islam/canon-biblia-quran-dossier/)

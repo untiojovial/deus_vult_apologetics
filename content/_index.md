@@ -11,8 +11,11 @@ Aqui encontraras un proyecto de apologetica cristiana con enfoque biblico, histo
 - [Filosofia](/filosofia/)
 - [Historia](/historia/)
 - [Biblia](/biblia/)
+- [Exegesis](/exegesis/)
 - [Refutaciones](/refutaciones/)
 - [Doctrina](/doctrina/)
+- [Respondiendo al Islam](/respondiendo-al-islam/)
+- [Busqueda](/search/)
 
 ## Mision
 
