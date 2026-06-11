@@ -1,7 +1,9 @@
 ---
 title: "Refutaciones"
 description: "Respuestas apologeticas a objeciones comunes contra la fe cristiana."
+url: "/refutaciones/"
 aliases:
+  - "/refutaciones"
   - "/categories/refutaciones/"
 ---
 
@@ -12,4 +14,4 @@ El objetivo no es humillar al interlocutor, sino aclarar la verdad con firmeza y
 ## Enlaces utiles
 
 - [Ir a Respondiendo al Islam](/respondiendo-al-islam/)
-- [Dossier de Pablo en HTML](/refutaciones/defensa-pablo-islam.html)
+- [Ver dossiers en Historia](/historia/)

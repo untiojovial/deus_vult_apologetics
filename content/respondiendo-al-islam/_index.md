@@ -1,7 +1,9 @@
 ---
 title: "Respondiendo al Islam"
 description: "Dossiers y respuestas cristianas ante objeciones islamicas, con enfoque historico y biblico."
+url: "/respondiendo-al-islam/"
 aliases:
+  - "/respondiendo-al-islam"
   - "/categories/respondiendo-al-islam/"
 ---
 

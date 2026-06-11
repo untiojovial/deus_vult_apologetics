@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Dilema Mesiánico — Jesús, la Torá y el Islam</title>
+<style>
+/* ══════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════ */
+:root {
+  --navy:    #1A2E4A;
+  --navy2:   #243D63;
+  --gold:    #C8A030;
+  --gold2:   #E8C050;
+  --crimson: #8B1A1A;
+  --crimson2:#B02020;
+  --bg:      #F5F3EE;
+  --surface: #FFFFFF;
+  --text:    #18181B;
+  --muted:   #52525B;
+  --border:  #D4CFC4;
+
+  --blue-bg:  #D6E4F0;
+  --red-bg:   #FAE5E5;
+  --gold-bg:  #FDF3D0;
+  --green-bg: #D5EDD4;
+  --dark-bg:  #1A1A1A;
+
+  --sidebar-w: 288px;
+  --font-body: 'Georgia', 'Times New Roman', serif;
+  --font-ui:   system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r: 6px;
+  --r-lg: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,.08);
+  --shadow-lg: 0 6px 28px rgba(0,0,0,.16);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.78;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+#sidebar {
+  position: fixed;
+  top:0; left:0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: transform .3s ease;
+  box-shadow: 2px 0 20px rgba(0,0,0,.25);
+}
+#sb-head {
+  padding: 22px 16px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  flex-shrink: 0;
+}
+#sb-head .eyebrow {
+  font-family: var(--font-ui);
+  font-size: .67rem;
+  font-weight: 800;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+#sb-head .sb-title {
+  font-family: var(--font-ui);
+  font-size: .86rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.92);
+  line-height: 1.3;
+}
+#toc-search {
+  margin: 10px 12px 0;
+  padding: 7px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: .79rem;
+  outline: none;
+  width: calc(100% - 24px);
+  transition: border-color .2s, background .2s;
+}
+#toc-search::placeholder { color: rgba(255,255,255,.35); }
+#toc-search:focus { border-color: var(--gold); background: rgba(255,255,255,.11); }
+
+#toc-scroll {
+  flex:1;
+  overflow-y: auto;
+  padding: 8px 0 24px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.12) transparent;
+}
+#toc-scroll::-webkit-scrollbar { width: 4px; }
+#toc-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius:4px; }
+
+.toc-link {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: .77rem;
+  color: rgba(255,255,255,.68);
+  text-decoration: none;
+  padding: 5px 16px 5px 12px;
+  line-height: 1.35;
+  border-left: 3px solid transparent;
+  transition: color .15s, background .15s, border-color .15s;
+  word-break: break-word;
+}
+.toc-link:hover { color:#fff; background: rgba(255,255,255,.06); border-left-color: var(--gold); }
+.toc-link.active { color: var(--gold2); background: rgba(200,160,48,.13); border-left-color: var(--gold); font-weight:700; }
+.toc-h1 { font-weight:800; font-size:.82rem; color:rgba(255,255,255,.95); margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,255,255,.07); }
+.toc-h2 { color:rgba(255,255,255,.72); }
+.toc-h3 { color:rgba(255,255,255,.46); font-size:.72rem; }
+
+/* Mobile toggle */
+#sidebar-toggle {
+  position:fixed; top:12px; left:12px; z-index:200;
+  background:var(--navy); border:none; color:#fff;
+  width:38px; height:38px; border-radius:8px;
+  cursor:pointer; display:none; align-items:center; justify-content:center;
+  box-shadow:var(--shadow); font-size:1.1rem;
+}
+#overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,.45); z-index:99;
+}
+#overlay.open { display:block; }
+
+/* ══════════════════════════════════════════
+   MAIN
+══════════════════════════════════════════ */
+#main {
+  margin-left: var(--sidebar-w);
+  flex:1; min-width:0;
+  display:flex; flex-direction:column;
+}
+
+/* ── Topbar ── */
+#topbar {
+  position:sticky; top:0;
+  background: rgba(245,243,238,.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 44px;
+  display:flex; align-items:center; gap:12px;
+  z-index:50; flex-shrink:0;
+}
+#breadcrumb {
+  font-family:var(--font-ui); font-size:.77rem; color:var(--muted);
+  flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#breadcrumb span { color:var(--navy); font-weight:700; }
+.tb-badge {
+  font-family:var(--font-ui); font-size:.68rem; font-weight:800;
+  letter-spacing:.08em; text-transform:uppercase;
+  background:var(--crimson); color:#fff;
+  padding:3px 10px; border-radius:20px; white-space:nowrap;
+}
+#progress-bar {
+  position:absolute; bottom:0; left:0; height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--crimson));
+  width:0%; transition:width .1s linear;
+}
+
+/* ══════════════════════════════════════════
+   HERO / COVER
+══════════════════════════════════════════ */
+#cover {
+  background: linear-gradient(150deg, #0D1B2A 0%, #1A2E4A 45%, #2A1A0A 100%);
+  color:#fff;
+  padding: 72px 64px 60px;
+  position:relative; overflow:hidden;
+}
+#cover::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,160,48,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(139,26,26,.15) 0%, transparent 60%);
+  pointer-events:none;
+}
+#cover::after {
+  content:'✡  ☩  ☪';
+  position:absolute; bottom:24px; right:44px;
+  font-size:1.4rem;
+  color:rgba(255,255,255,.07);
+  letter-spacing:.6em;
+}
+.cover-label {
+  font-family:var(--font-ui); font-size:.7rem; font-weight:800;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:16px;
+  display:flex; align-items:center; gap:10px;
+}
+.cover-label::before {
+  content:''; display:block; width:32px; height:2px; background:var(--gold);
+}
+#cover h1.cover-h1 {
+  font-family:var(--font-ui);
+  font-size:clamp(1.8rem, 3.5vw, 3rem);
+  font-weight:900;
+  line-height:1.1;
+  letter-spacing:-.02em;
+  color:#fff;
+  margin-bottom:16px;
+}
+#cover h1.cover-h1 em {
+  font-style:italic;
+  color:var(--gold2);
+}
+.cover-sub {
+  font-size:1.05rem;
+  color:rgba(255,255,255,.72);
+  margin-bottom:8px;
+  font-style:italic;
+}
+.cover-meta {
+  font-family:var(--font-ui); font-size:.75rem;
+  color:rgba(255,255,255,.42); letter-spacing:.06em;
+  margin-top:10px;
+}
+.gold-bar { width:48px; height:3px; background:var(--gold); border-radius:2px; margin:22px 0; }
+
+/* Thesis box en cover */
+.cover-thesis {
+  margin-top:28px;
+  border-left:4px solid var(--gold);
+  background:rgba(255,255,255,.06);
+  border-radius:0 var(--r-lg) var(--r-lg) 0;
+  padding:18px 24px;
+  max-width:720px;
+  font-size:.95rem;
+  color:rgba(255,255,255,.85);
+  line-height:1.7;
+  font-style:italic;
+}
+
+/* ══════════════════════════════════════════
+   CONTENT
+══════════════════════════════════════════ */
+#content {
+  max-width:880px;
+  margin:0 auto;
+  padding:52px 52px 90px;
+  width:100%;
+}
+
+/* ── Headings ── */
+#content h1 {
+  font-family:var(--font-ui);
+  font-size:1.5rem; font-weight:900;
+  color:var(--navy);
+  margin:56px 0 18px;
+  padding-bottom:10px;
+  border-bottom:3px solid var(--navy);
+  scroll-margin-top:78px;
+  line-height:1.2;
+}
+#content h2 {
+  font-family:var(--font-ui);
+  font-size:1.12rem; font-weight:800;
+  color:var(--navy);
+  margin:38px 0 12px;
+  padding-bottom:6px;
+  border-bottom:2px solid var(--gold);
+  scroll-margin-top:78px;
+}
+#content h3 {
+  font-family:var(--font-ui);
+  font-size:.98rem; font-weight:800;
+  color:var(--crimson);
+  margin:26px 0 10px;
+  scroll-margin-top:78px;
+}
+
+#content p {
+  margin-bottom:1rem;
+  text-align:justify;
+  hyphens:auto;
+  font-size:.96rem;
+  line-height:1.82;
+}
+#content strong { font-weight:700; }
+#content em { font-style:italic; }
+
+/* ── Lists ── */
+#content ul {
+  margin:10px 0 18px; padding:0; list-style:none;
+}
+#content ul li {
+  position:relative; padding:5px 0 5px 26px;
+  font-size:.94rem; line-height:1.72;
+  border-bottom:1px solid var(--border);
+}
+#content ul li:last-child { border-bottom:none; }
+#content ul li::before {
+  content:'▸'; position:absolute; left:4px;
+  color:var(--gold); font-size:.78rem; top:8px;
+}
+#content ol {
+  margin:10px 0 18px; padding:0; list-style:none;
+  counter-reset:ol-c;
+}
+#content ol li {
+  position:relative; padding:6px 0 6px 36px;
+  font-size:.94rem; line-height:1.72;
+  counter-increment:ol-c;
+  border-bottom:1px solid var(--border);
+}
+#content ol li:last-child { border-bottom:none; }
+#content ol li::before {
+  content:counter(ol-c);
+  position:absolute; left:0; top:5px;
+  width:26px; height:26px;
+  background:var(--navy); color:#fff;
+  border-radius:50%;
+  font-family:var(--font-ui); font-weight:800; font-size:.78rem;
+  display:flex; align-items:center; justify-content:center;
+  line-height:1;
+  text-align:center;
+  padding-top:1px;
+}
+
+/* ══════════════════════════════════════════
+   QUOTE / CITE BOXES
+══════════════════════════════════════════ */
+.qbox {
+  border-radius:var(--r-lg);
+  margin:18px 0;
+  overflow:hidden;
+  border:1px solid transparent;
+  box-shadow:var(--shadow);
+}
+.qbox .qbody {
+  padding:18px 22px 12px;
+}
+.qbox .qbody p {
+  margin:0 0 6px;
+  font-size:.9rem; line-height:1.75;
+  font-style:italic; text-align:left;
+}
+.qbox .qbody p:last-child { margin-bottom:0; }
+.qbox footer.csrc {
+  padding:8px 22px 14px;
+  border-top:1px solid rgba(0,0,0,.07);
+}
+.qbox footer.csrc p {
+  margin:0; font-style:normal;
+  font-family:var(--font-ui); font-weight:700;
+  font-size:.76rem; color:var(--muted); text-align:right;
+}
+.qbox footer.csrc p em { font-style:italic; color:inherit; }
+
+/* Colores */
+.bg-blue  { background:var(--blue-bg);  border-color:#A8C8E0; }
+.bg-red   { background:var(--red-bg);   border-color:#E0A8A8; }
+.bg-gold  { background:var(--gold-bg);  border-color:#D4B055; }
+.bg-green { background:var(--green-bg); border-color:#90C890; }
+.bg-dark  { background:#1C1C1C; border-color:#333; }
+.bg-dark .qbody p { color:rgba(255,255,255,.88); }
+.bg-dark footer.csrc { border-top-color:rgba(255,255,255,.1); }
+.bg-dark footer.csrc p { color:rgba(255,255,255,.55); }
+
+/* ══════════════════════════════════════════
+   TAFSIR CARDS (las imágenes de los tafsiristas)
+══════════════════════════════════════════ */
+.tafsir-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap:16px;
+  margin:20px 0;
+}
+.tafsir-card {
+  border-radius:var(--r-lg);
+  border:1px solid var(--border);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  background:#fff;
+}
+.tafsir-card-header {
+  background:var(--navy);
+  color:#fff;
+  padding:10px 16px;
+  display:flex; align-items:center; gap:10px;
+}
+.tafsir-badge {
+  background:var(--gold);
+  color:var(--navy);
+  font-family:var(--font-ui); font-weight:900;
+  font-size:.72rem; padding:3px 9px;
+  border-radius:4px; white-space:nowrap;
+  letter-spacing:.04em;
+}
+.tafsir-card-header .tafsir-name {
+  font-family:var(--font-ui); font-weight:700;
+  font-size:.84rem; line-height:1.3;
+  color:rgba(255,255,255,.92);
+}
+.tafsir-card-body {
+  padding:14px 16px;
+  font-size:.88rem; line-height:1.75;
+  color:var(--text);
+}
+.tafsir-card-body p { margin:0 0 6px; font-style:italic; }
+.tafsir-card-body p:last-child { margin:0; }
+.hl { background:#FFE566; border-radius:2px; padding:0 2px; font-style:normal; }
+
+/* ══════════════════════════════════════════
+   SILOGISMO
+══════════════════════════════════════════ */
+.syllogism {
+  background:var(--navy);
+  border-radius:var(--r-lg);
+  padding:28px 32px;
+  margin:24px 0;
+  box-shadow:var(--shadow-lg);
+  position:relative;
+  overflow:hidden;
+}
+.syllogism::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg, var(--gold), var(--gold2), var(--crimson));
+}
+.syllogism h3.syl-title {
+  font-family:var(--font-ui); font-weight:900;
+  font-size:1.05rem; color:var(--gold2);
+  margin-bottom:20px; letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.syl-row {
+  display:flex; gap:14px;
+  align-items:flex-start;
+  margin-bottom:12px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.syl-row:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.syl-label {
+  flex-shrink:0;
+  font-family:var(--font-ui); font-weight:900;
+  font-size:.72rem; letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:4px;
+  min-width:40px; text-align:center;
+  margin-top:2px;
+}
+.syl-label.P  { background:rgba(200,160,48,.25); color:var(--gold2); }
+.syl-label.C  { background:rgba(176,32,32,.4);  color:#FF8888; }
+.syl-label.C.final { background:var(--crimson); color:#fff; font-size:.78rem; }
+.syl-text {
+  font-size:.91rem; color:rgba(255,255,255,.85); line-height:1.65;
+}
+.syl-text strong { color:#fff; }
+.syl-divider {
+  border:none; border-top:1px dashed rgba(200,160,48,.3);
+  margin:14px 0;
+}
+.conclusion-box {
+  background:rgba(139,26,26,.35);
+  border:1px solid rgba(200,80,80,.4);
+  border-radius:var(--r);
+  padding:14px 18px;
+  margin-top:16px;
+}
+.conclusion-box .c-label {
+  font-family:var(--font-ui); font-weight:900;
+  font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+  color:#FF9090; margin-bottom:6px;
+}
+.conclusion-box p {
+  color:#fff; font-size:.92rem; margin:0;
+  font-style:normal; text-align:left;
+}
+
+/* ══════════════════════════════════════════
+   DILEMMA FORK (bifurcación visual)
+══════════════════════════════════════════ */
+.fork {
+  margin:22px 0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+}
+.fork-head {
+  grid-column:1/-1;
+  background:var(--navy);
+  padding:12px 20px;
+  font-family:var(--font-ui); font-weight:800;
+  font-size:.88rem; color:#fff;
+  text-align:center;
+}
+.fork-arm {
+  padding:16px 20px;
+  font-size:.89rem; line-height:1.7;
+}
+.fork-arm-a { background:var(--blue-bg); border-right:1px solid var(--border); }
+.fork-arm-b { background:var(--red-bg); }
+.fork-arm-label {
+  font-family:var(--font-ui); font-weight:800;
+  font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+  margin-bottom:8px;
+}
+.fork-arm-a .fork-arm-label { color:var(--navy); }
+.fork-arm-b .fork-arm-label { color:var(--crimson); }
+.fork-arm p { margin:0 0 6px; font-size:.88rem; }
+.fork-arm p:last-child { margin:0; }
+.fork-foot {
+  grid-column:1/-1;
+  background:var(--crimson);
+  padding:12px 20px;
+  font-family:var(--font-ui); font-weight:700;
+  font-size:.85rem; color:#fff; text-align:center;
+}
+
+/* ══════════════════════════════════════════
+   VERSE BOX (texto bíblico/coránico)
+══════════════════════════════════════════ */
+.verse-box {
+  margin:16px 0;
+  border-radius:var(--r);
+  padding:16px 20px;
+  display:flex; gap:16px;
+  align-items:flex-start;
+  box-shadow:var(--shadow);
+}
+.verse-ref {
+  flex-shrink:0;
+  font-family:var(--font-ui); font-weight:900;
+  font-size:.72rem; letter-spacing:.06em;
+  background:var(--navy); color:var(--gold);
+  padding:4px 10px; border-radius:4px;
+  margin-top:2px; white-space:nowrap;
+}
+.verse-ref.quran-ref { background:var(--crimson); color:#fff; }
+.verse-text { font-size:.92rem; line-height:1.72; font-style:italic; }
+.verse-text strong { font-style:normal; }
+.verse-box.torah { background:var(--gold-bg); border:1px solid #D4B055; }
+.verse-box.quran { background:var(--red-bg);  border:1px solid #E0A8A8; }
+.verse-box.nt    { background:var(--blue-bg); border:1px solid #A8C8E0; }
+
+/* ══════════════════════════════════════════
+   PROBLEM CARDS (cuadros de problema numerados)
+══════════════════════════════════════════ */
+.problem-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px; margin:20px 0;
+}
+.prob-card {
+  background:#fff;
+  border-radius:var(--r-lg);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.prob-card-num {
+  background:var(--navy);
+  color:var(--gold);
+  font-family:var(--font-ui); font-weight:900;
+  font-size:1.6rem;
+  padding:14px 20px 10px;
+  line-height:1;
+}
+.prob-card-body {
+  padding:14px 18px;
+  font-size:.88rem; line-height:1.7;
+}
+.prob-card-body p { margin:0 0 6px; }
+.prob-card-body p:last-child { margin:0; }
+.prob-card.danger .prob-card-num { background:var(--crimson); color:#fff; }
+
+/* ══════════════════════════════════════════
+   TABLA COMPARATIVA
+══════════════════════════════════════════ */
+.tbl-wrap {
+  overflow-x:auto; margin:20px 0;
+  border-radius:var(--r-lg); box-shadow:var(--shadow);
+  border:1px solid var(--border);
+}
+.tbl-wrap table { width:100%; border-collapse:collapse; min-width:440px; }
+.tbl-wrap th, .tbl-wrap td {
+  padding:10px 14px; vertical-align:top;
+  border:1px solid rgba(0,0,0,.07);
+  font-size:.84rem; line-height:1.55;
+}
+.tbl-wrap th {
+  background:var(--navy); color:#fff;
+  font-family:var(--font-ui); font-weight:800;
+  font-size:.8rem; text-align:center;
+}
+.tbl-wrap td.td-lbl {
+  background:#F2F2F2; font-family:var(--font-ui);
+  font-weight:700; font-size:.82rem;
+}
+.tbl-wrap td.td-ok  { background:var(--green-bg); }
+.tbl-wrap td.td-bad { background:var(--red-bg); }
+.tbl-wrap td.td-gold{ background:var(--gold-bg); }
+.tbl-wrap tr:hover td { filter:brightness(.97); transition:filter .1s; }
+
+/* ══════════════════════════════════════════
+   ALERT / WARNING BOX
+══════════════════════════════════════════ */
+.alert {
+  border-radius:var(--r);
+  padding:14px 18px;
+  margin:16px 0;
+  display:flex; gap:12px; align-items:flex-start;
+  font-size:.9rem; line-height:1.68;
+}
+.alert-icon { flex-shrink:0; font-size:1.1rem; margin-top:1px; }
+.alert-red  { background:#FFF0F0; border:1px solid #F0A0A0; }
+.alert-gold { background:var(--gold-bg); border:1px solid #D4B055; }
+.alert-navy { background:#EDF2FA; border:1px solid #A8C0E0; }
+.alert p { margin:0 0 4px; }
+.alert p:last-child { margin:0; }
+.alert strong { font-weight:700; }
+
+/* ══════════════════════════════════════════
+   FINAL VERDICT
+══════════════════════════════════════════ */
+.verdict {
+  background:linear-gradient(135deg,#0D1B2A,#1A2E4A);
+  border-radius:var(--r-lg);
+  padding:36px 40px;
+  margin:32px 0;
+  color:#fff;
+  box-shadow:var(--shadow-lg);
+  position:relative; overflow:hidden;
+}
+.verdict::before {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 70% at 90% 10%, rgba(200,160,48,.1) 0%, transparent 60%);
+}
+.verdict-title {
+  font-family:var(--font-ui); font-weight:900;
+  font-size:1.1rem; color:var(--gold2);
+  letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:20px;
+}
+.verdict p {
+  font-size:.95rem; line-height:1.8;
+  color:rgba(255,255,255,.82);
+  margin-bottom:.8rem; text-align:justify;
+}
+.verdict p:last-child { margin-bottom:0; }
+.verdict strong { color:#fff; }
+
+/* ══════════════════════════════════════════
+   SECTION INTRO (cajón gris suave)
+══════════════════════════════════════════ */
+.sec-intro {
+  background:#EEEAE3;
+  border-left:4px solid var(--gold);
+  border-radius:0 var(--r) var(--r) 0;
+  padding:14px 20px;
+  margin:0 0 24px;
+  font-size:.92rem; line-height:1.72;
+  color:#3A3A3A;
+}
+.sec-intro p { margin:0 0 4px; }
+.sec-intro p:last-child { margin:0; }
+
+/* ══════════════════════════════════════════
+   BACK TO TOP
+══════════════════════════════════════════ */
+#back-top {
+  position:fixed; bottom:24px; right:24px;
+  width:40px; height:40px;
+  background:var(--navy); color:var(--gold);
+  border:none; border-radius:50%;
+  cursor:pointer; font-size:1rem;
+  box-shadow:var(--shadow-lg);
+  opacity:0; transform:translateY(8px);
+  transition:opacity .25s, transform .25s;
+  z-index:90; display:flex; align-items:center; justify-content:center;
+}
+#back-top.visible { opacity:1; transform:translateY(0); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:900px){
+  #content { padding:32px 28px 70px; }
+  #cover   { padding:44px 28px 40px; }
+  #topbar  { padding:10px 28px; }
+}
+@media(max-width:700px){
+  #sidebar { transform:translateX(-100%); }
+  #sidebar.open { transform:translateX(0); }
+  #sidebar-toggle { display:flex; }
+  #main { margin-left:0; }
+  #content { padding:20px 16px 70px; }
+  #cover   { padding:32px 16px 30px; }
+  #topbar  { padding:10px 16px 10px 56px; }
+  .fork    { grid-template-columns:1fr; }
+  .fork-arm-a { border-right:none; border-bottom:1px solid var(--border); }
+  .tafsir-grid { grid-template-columns:1fr; }
+  .problem-grid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<button id="sidebar-toggle" aria-label="Abrir índice">☰</button>
+<div id="overlay"></div>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<aside id="sidebar">
+  <div id="sb-head">
+    <div class="eyebrow">Apologética Cristiana</div>
+    <div class="sb-title">El Dilema Mesiánico — Jesús, la Torá y el Islam</div>
+    <input type="search" id="toc-search" placeholder="Buscar en el índice…" autocomplete="off">
+  </div>
+  <div id="toc-scroll">
+    <a href="#intro" class="toc-link toc-h1">Introducción y Tesis Central</a>
+    <a href="#s1" class="toc-link toc-h1">I. El Problema: Corán 3:50 y la Torá</a>
+    <a href="#s1-1" class="toc-link toc-h2">1.1 El texto coránico exacto</a>
+    <a href="#s1-2" class="toc-link toc-h2">1.2 Los tafsires clásicos sobre 3:50</a>
+    <a href="#s1-3" class="toc-link toc-h2">1.3 Ibn Kathir: Jesús abrogó la Torá</a>
+    <a href="#s1-4" class="toc-link toc-h2">1.4 Al-Qurtubi y al-Tabari</a>
+    <a href="#s2" class="toc-link toc-h1">II. La Torá prohíbe su propia modificación</a>
+    <a href="#s2-1" class="toc-link toc-h2">2.1 Deuteronomio 4:2</a>
+    <a href="#s2-2" class="toc-link toc-h2">2.2 Deuteronomio 12:32</a>
+    <a href="#s2-3" class="toc-link toc-h2">2.3 Deuteronomio 13: el criterio del falso profeta</a>
+    <a href="#s2-4" class="toc-link toc-h2">2.4 Deuteronomio 18:20</a>
+    <a href="#s3" class="toc-link toc-h1">III. Los Manuscritos del Mar Muerto y Qumrán</a>
+    <a href="#s3-1" class="toc-link toc-h2">3.1 Qué son y qué prueban</a>
+    <a href="#s3-2" class="toc-link toc-h2">3.2 La Torá de tiempos de Jesús es la misma</a>
+    <a href="#s3-3" class="toc-link toc-h2">3.3 Los textos de Qumrán sobre el Mesías</a>
+    <a href="#s3-4" class="toc-link toc-h2">3.4 Consecuencia: los judíos no tenían texto corrupto</a>
+    <a href="#s4" class="toc-link toc-h1">IV. El Dilema de la ʿIsma Islámica</a>
+    <a href="#s4-1" class="toc-link toc-h2">4.1 La doctrina de la impecabilidad de los profetas</a>
+    <a href="#s4-2" class="toc-link toc-h2">4.2 El dilema formal: si abrogó → pecó</a>
+    <a href="#s4-3" class="toc-link toc-h2">4.3 Si pecó → no puede ser profeta islámico</a>
+    <a href="#s5" class="toc-link toc-h1">V. El Dilema de Allah y su Responsabilidad</a>
+    <a href="#s5-1" class="toc-link toc-h2">5.1 Allah exige creer en Jesús bajo pena de condenación</a>
+    <a href="#s5-2" class="toc-link toc-h2">5.2 Allah no protegió la revelación anterior</a>
+    <a href="#s5-3" class="toc-link toc-h2">5.3 Los judíos del siglo I no podían reconocerle</a>
+    <a href="#s5-4" class="toc-link toc-h2">5.4 Allah corresponsable del error de sus criaturas</a>
+    <a href="#s6" class="toc-link toc-h1">VI. El Dilema de Mahoma y la Cadena Profética</a>
+    <a href="#s6-1" class="toc-link toc-h2">6.1 La legitimidad de Mahoma depende de Jesús</a>
+    <a href="#s6-2" class="toc-link toc-h2">6.2 Si Jesús es falso profeta, cae Mahoma</a>
+    <a href="#s6-3" class="toc-link toc-h2">6.3 Mahoma invoca autoridad sin autoridad</a>
+    <a href="#s7" class="toc-link toc-h1">VII. Silogismos Formales</a>
+    <a href="#s7-1" class="toc-link toc-h2">7.1 Silogismo de la Torá y la Abrogación</a>
+    <a href="#s7-2" class="toc-link toc-h2">7.2 Silogismo de la Responsabilidad de Allah</a>
+    <a href="#s7-3" class="toc-link toc-h2">7.3 Silogismo Final: Mahoma como falso profeta</a>
+    <a href="#s8" class="toc-link toc-h1">VIII. Tabla Comparativa del Dilema</a>
+    <a href="#s9" class="toc-link toc-h1">IX. Respuestas Islámicas y Refutación</a>
+    <a href="#s9-1" class="toc-link toc-h2">9.1 «La Torá fue corrompida antes»</a>
+    <a href="#s9-2" class="toc-link toc-h2">9.2 «Abrogó solo ceremonialmente»</a>
+    <a href="#s9-3" class="toc-link toc-h2">9.3 «Los milagros validan al profeta»</a>
+    <a href="#s10" class="toc-link toc-h1">X. Veredicto Final</a>
+    <a href="#biblio" class="toc-link toc-h1">Fuentes y Bibliografía</a>
+  </div>
+</aside>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<div id="main">
+
+  <header id="topbar">
+    <div id="breadcrumb">Índice · <span id="bc-sec">Portada</span></div>
+    <div class="tb-badge">Dilema Mesiánico</div>
+    <div id="progress-bar"></div>
+  </header>
+
+  <!-- COVER -->
+  <section id="cover">
+    <div class="cover-label">Apologética Cristiana Comparada · 2026</div>
+    <h1 class="cover-h1">El Dilema Mesiánico:<br><em>Jesús, la Torá y el Islam</em></h1>
+    <div class="cover-sub">Corán 3:50 contra Deuteronomio 13 — Una contradicción sin salida</div>
+    <div class="cover-meta">Silogismos · Tafsires clásicos · Qumrán · ʿIsma · Cadena profética</div>
+    <div class="gold-bar"></div>
+    <div class="cover-thesis">
+      El Islam afirma que Jesús fue un profeta auténtico y que abrogó partes de la Torá. La Torá afirma que quien mueve a modificarla es un falso profeta. Los Manuscritos del Mar Muerto prueban que la Torá que conocieron los judíos del siglo I es sustancialmente la misma que existe hoy. De esta triada nace un dilema que el Islam no puede resolver sin destruir su propia estructura profética.
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <article id="content">
+
+    <!-- ═══ INTRO ═══ -->
+    <h1 id="intro">Introducción y Tesis Central</h1>
+    <div class="sec-intro">
+      <p>Este documento desarrolla de forma sistemática el <strong>dilema mesiánico</strong> que surge cuando se confrontan tres afirmaciones que el Islam sostiene simultáneamente: (1) Jesús fue un profeta verdadero enviado por Allah; (2) Jesús abrogó partes de la Torá que estaban en vigor; (3) la Torá era —y es— Palabra de Dios. La congruencia de estas tres afirmaciones es imposible bajo los propios criterios de autenticidad profética que la Torá establece. El resultado es una contradicción interna que afecta no solo al estatuto de Jesús en el Islam sino a la credibilidad de la cadena profética entera que culmina en Mahoma.</p>
+    </div>
+    <p>El argumento no es externo al Islam: utiliza exclusivamente fuentes que el Islam reconoce como autoritativas —el Corán, los tafsires canónicos, y las mismas Escrituras anteriores que el Islam declara reveladas por Allah. No es posible descartarlo apelando a «fuentes hostiles»: cada pieza del argumento procede del interior del sistema que se cuestiona.</p>
+
+    <!-- ═══ I ═══ -->
+    <h1 id="s1">I. El Problema: Corán 3:50 y la Relación de Jesús con la Torá</h1>
+
+    <h2 id="s1-1">1.1 El texto coránico exacto (Sura Āl ʿImrān 3:49–50)</h2>
+    <p>El punto de partida del dilema es el propio Corán. La sura 3 (Āl ʿImrān) contiene el discurso que el Corán atribuye a Jesús dirigiéndose a los israelitas. El versículo 50 es el más comprometedor para la teología islámica cuando se pone en relación con los textos de la Torá:</p>
+
+    <div class="verse-box quran">
+      <div class="verse-ref quran-ref">Corán 3:49</div>
+      <div class="verse-text">«Y [lo nombraré] mensajero a los Hijos de Israel [diciendo]: "He venido a vosotros con una señal de vuestro Señor: Os crearé de arcilla la figura de un pájaro y soplaré en él, y se convertirá en un pájaro con permiso de Allah. Y sanaré al ciego de nacimiento y al leproso, y resucitaré a los muertos con permiso de Allah. Y os anunciaré lo que coméis y lo que almacenáis en vuestras casas. Ciertamente, en eso hay una señal para vosotros, si sois creyentes."»</div>
+    </div>
+
+    <div class="verse-box quran">
+      <div class="verse-ref quran-ref">Corán 3:50</div>
+      <div class="verse-text">«Y <strong>[he venido] confirmando lo que había antes de mí de la Torá y para haceros lícito parte de lo que os había sido prohibido</strong>. Y os traigo una señal de vuestro Señor, así que temed a Allah y obedecedme.»</div>
+    </div>
+
+    <p>La estructura del versículo es decisiva. Jesús hace dos afirmaciones simultáneas que en apariencia se contradicen entre sí: (a) <strong>confirma la Torá</strong> (<em>musaddiqan li-mā bayna yadayya min al-Tawrāt</em>); y (b) <strong>hace lícito parte de lo que estaba prohibido</strong> (<em>wa-li-uḥilla lakum baʿḍ alladhī ḥurrima ʿalaykum</em>). La pregunta que el texto no responde es: ¿cómo puede confirmarse un texto y al mismo tiempo modificar su contenido normativo?</p>
+
+    <h2 id="s1-2">1.2 Los tafsires clásicos sobre Corán 3:50: la abrogación es explícita</h2>
+    <p>Los comentaristas clásicos del Corán —cuya autoridad es incuestionable para el Islam sunní— no dejan lugar a dudas sobre el significado de «haceros lícito parte de lo que os había sido prohibido». Unánimemente lo interpretan como <strong>abrogación real de preceptos de la Torá</strong>:</p>
+
+    <div class="tafsir-grid">
+      <div class="tafsir-card">
+        <div class="tafsir-card-header">
+          <span class="tafsir-badge">3:50</span>
+          <div class="tafsir-name">Tafsir al-Jalālayn<br><small style="font-weight:400;color:rgba(255,255,255,.65)">Jalāl al-Dīn al-Suyūtī &amp; al-Maḥallī (s. XV)</small></div>
+        </div>
+        <div class="tafsir-card-body">
+          <p>«He venido a ti para confirmar lo que me precedió de la Torá y para <span class="hl">lícitarte algunas cosas que te fueron prohibidas en ella. Así, les hizo lícitos los peces y las aves sin espinas</span>; también se dice que les hizo lícito todo, de modo que <em>baʿḍ</em> (algunos) significa <em>kull</em> (todos). He venido a ti con una señal de tu Señor.»</p>
+        </div>
+      </div>
+
+      <div class="tafsir-card">
+        <div class="tafsir-card-header">
+          <span class="tafsir-badge">3:50</span>
+          <div class="tafsir-name">Tanwīr al-Miqbās min Tafsīr Ibn ʿAbbās<br><small style="font-weight:400;color:rgba(255,255,255,.65)">Atribuido a Ibn ʿAbbās, primo del Profeta</small></div>
+        </div>
+        <div class="tafsir-card-body">
+          <p>«(Y [vengo] confirmando) he venido confirmando la Unicidad divina de Allah en la Religión (lo que era antes de mí de la Torá) y todas las demás Escrituras (y para hacer lícito) para daros dispensa legal respecto a <span class="hl">(algo de lo que se os prohibió) como la carne de camellos, la grasa de bovinos y ovejas, el Shabat, y otras cosas</span>.»</p>
+        </div>
+      </div>
+
+      <div class="tafsir-card">
+        <div class="tafsir-card-header">
+          <span class="tafsir-badge">3:50</span>
+          <div class="tafsir-name">Tafsīr al-Ṭabarī — Jāmiʿ al-Bayān<br><small style="font-weight:400;color:rgba(255,255,255,.65)">Ibn Jarīr al-Ṭabarī (839–923 d.C.)</small></div>
+        </div>
+        <div class="tafsir-card-body">
+          <p>Cadena 7113 — al-Muthannā ← Isḥāq ← Ibn Abī Jaʿfar ← su padre ← al-Rabīʿ: «Confirmando lo que estaba antes de mí de la Torá y <span class="hl">para hacer lícito para vosotros parte de lo que os fue prohibido</span>.» — <em>«Lo que trajo Jesús era más suave que lo que trajo Moisés. Y se les había prohibido en lo que trajo Moisés la carne de camello y las grasas, <span class="hl">y las hizo lícitas para ellos con lengua de Jesús</span>.»</em></p>
+        </div>
+      </div>
+
+      <div class="tafsir-card">
+        <div class="tafsir-card-header">
+          <span class="tafsir-badge">3:50</span>
+          <div class="tafsir-name">Tafsīr Ibn Kathīr — Tafsīr al-Qurʾān al-ʿAẓīm<br><small style="font-weight:400;color:rgba(255,255,255,.65)">Ismāʿīl ibn Kathīr (1301–1373 d.C.)</small></div>
+        </div>
+        <div class="tafsir-card-body">
+          <p>«<span class="hl">Esta parte de la aleya indica que Jesús abrogó algunas de las leyes de la Torá e informó a los judíos la verdad sobre algunos asuntos que solían discutir.</span> En otra aleya: (Y para aclararos algunos de los puntos en los que diferíais) 43:63.»</p>
+          <p style="margin-top:8px;font-style:normal;font-size:.8rem;color:var(--crimson);font-weight:700;">⚠ Ibn Kathīr usa explícitamente el término «abrogó» (nasakha) para la relación de Jesús con la Torá.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-icon">⚠</div>
+      <div>
+        <p><strong>Consenso de los tafsires:</strong> Los cuatro tafsires más influyentes del Islam sunní coinciden en que Corán 3:50 describe una <strong>abrogación real de preceptos de la Torá</strong> por parte de Jesús. No se trata de interpretación marginal ni de una lectura heterodoxa. Es el <em>tafsīr bil-maʾthūr</em> (exégesis por tradición) aplicado al versículo por las máximas autoridades de la ciencia coránica.</p>
+      </div>
+    </div>
+
+    <h2 id="s1-3">1.3 Qué preceptos concretos abrogó Jesús según los tafsires</h2>
+    <p>El consenso tafsirístico identifica los siguientes preceptos de la Torá que Jesús hizo lícitos, y que estaban explícitamente prohibidos por Dios en la Torá:</p>
+    <ul>
+      <li><strong>La carne de camello</strong> — prohibida en Levítico 11:4; hecha lícita por Jesús según al-Ṭabarī e Ibn ʿAbbās.</li>
+      <li><strong>Las grasas de bovinos y ovejas</strong> — prohibidas en Levítico 3:17 y 7:23; hechas lícitas por Jesús según Ibn ʿAbbās.</li>
+      <li><strong>El Shabat</strong> — mandamiento positivo de Éxodo 20:8-11 y Deuteronomio 5:12-15; hecho opcional o abolido por Jesús según Ibn ʿAbbās e Ibn Kathīr.</li>
+      <li><strong>Aves sin espolón</strong> — reguladas en Levítico 11:13-19; hechas lícitas según al-Jalālayn.</li>
+      <li><strong>Peces sin escamas</strong> — prohibidos en Levítico 11:10-12; hechos lícitos según al-Jalālayn.</li>
+    </ul>
+
+    <h2 id="s1-4">1.4 Al-Qurṭubī: «Esta parte de la aleya indica que Jesús abrogó»</h2>
+    <p>El gran exégeta andalusí <strong>Abū ʿAbd Allāh al-Qurṭubī</strong> (1214–1273 d.C.) en su <em>al-Jāmiʿ li-Aḥkām al-Qurʾān</em> es especialmente explícito. Comentando «y para haceros lícito parte de lo que os había sido prohibido», escribe que Jesús confirma la Torá en sus fundamentos teológicos pero que en la parte relativa a las leyes prácticas <em>«abrogó algunas de las leyes de la Torá e informó a los judíos la verdad»</em>. La cita de 43:63 que hace Ibn Kathīr es también utilizada por al-Qurṭubī para mostrar que la función de Jesús fue parcialmente legislativa y correctiva respecto a la Torá preexistente.</p>
+
+    <div class="qbox bg-red">
+      <div class="qbody">
+        <p>«(y para haceros lícito parte de lo que os estaba prohibido.) Esta parte de la aleya indica que Jesús abrogó algunas de las leyes de la Torá e informó a los judíos la verdad sobre algunos asuntos que solían discutir. En otra aleya: (Y para aclararos algunos de los puntos en los que diferíais) 43:63.»</p>
+      </div>
+      <footer class="csrc"><p>— Ibn Kathīr, <em>Tafsīr al-Qurʾān al-ʿAẓīm</em>, comentario a Sura 3:50 · Confirmado por al-Qurṭubī, <em>al-Jāmiʿ li-Aḥkām al-Qurʾān</em>, vol. 4, ad loc.</p></footer>
+    </div>
+
+    <!-- ═══ II ═══ -->
+    <h1 id="s2">II. La Torá Prohíbe Explícitamente su Propia Modificación</h1>
+    <div class="sec-intro">
+      <p>El segundo elemento del dilema es la respuesta que la propia Torá da a quien pretende modificarla. La Torá no solo contiene mandamientos específicos: contiene también un <strong>metaprecepto de inmodificabilidad</strong> y un <strong>criterio de identificación del falso profeta</strong> basado precisamente en la modificación de la Ley. Estos textos son previos a Jesús, son reconocidos por el Islam como revelación divina auténtica, y constituyen el estándar con el que debe medirse cualquier pretensión profética posterior.</p>
+    </div>
+
+    <h2 id="s2-1">2.1 Deuteronomio 4:2 — La prohibición de añadir o quitar</h2>
+
+    <div class="verse-box torah">
+      <div class="verse-ref">Dt 4:2</div>
+      <div class="verse-text">«<strong>No añadiréis nada a lo que yo os mando, ni quitaréis nada de ello</strong>, sino que guardaréis los mandamientos del Señor vuestro Dios que yo os prescribo.»</div>
+    </div>
+
+    <p>El texto hebreo usa dos verbos inequívocos: <em>lō tōsifū</em> («no añadiréis») y <em>lō tigra'ū</em> («no quitaréis»). El mandamiento es universal —dirigido a «vosotros», a todo Israel— y absoluto: no hay excepción prevista para profetas posteriores. La prohibición es ella misma parte de la revelación divina que el Islam reconoce como auténtica (<em>Tawrāt</em>).</p>
+
+    <div class="alert alert-gold">
+      <div class="alert-icon">📌</div>
+      <div><p><strong>Implicación directa:</strong> Si Allah reveló la Torá y la Torá prohíbe toda modificación, entonces un «profeta» enviado por Allah que modifique la Torá está contradiciendo la propia palabra de Allah. No puede ser enviado de Allah y al mismo tiempo transgredir lo que Allah ordenó.</p></div>
+    </div>
+
+    <h2 id="s2-2">2.2 Deuteronomio 12:32 — La misma prohibición en contexto legislativo</h2>
+
+    <div class="verse-box torah">
+      <div class="verse-ref">Dt 12:32</div>
+      <div class="verse-text">«Guardaréis y pondréis en práctica todo lo que yo os mando. <strong>No añadiréis nada ni quitaréis nada</strong>.»</div>
+    </div>
+
+    <p>Este versículo aparece en el capítulo 12, precisamente el capítulo que regula el culto, el lugar del sacrificio, las leyes alimentarias y el modo correcto de adorar. La prohibición de añadir o quitar está insertada en el contexto exacto de las leyes que los tafsires dicen que Jesús modificó (alimentación, culto). La coincidencia contextual no puede ser casual: la Torá anticipa y cierra la puerta a exactamente el tipo de modificación que el Islam atribuye a Jesús.</p>
+
+    <h2 id="s2-3">2.3 Deuteronomio 13:1–5 — El criterio definitivo del falso profeta</h2>
+    <p>Este es el texto central del dilema. Deuteronomio 13 no es un versículo aislado: es un pasaje deliberadamente construido para dar al pueblo de Israel un criterio de discernimiento profético independiente de los milagros:</p>
+
+    <div class="verse-box torah">
+      <div class="verse-ref">Dt 13:1–5</div>
+      <div class="verse-text">«Cuando en medio de ti surja un profeta o un soñador que te proponga una señal o un prodigio, <strong>y la señal o el prodigio que te anunció se cumple</strong>, y luego te dice: "Vayamos tras otros dioses que no conociste y sirvámosles", <strong>no escuches las palabras de ese profeta ni las de ese soñador</strong>, porque el Señor vuestro Dios os está probando para ver si amáis al Señor vuestro Dios con todo vuestro corazón y con toda vuestra alma. Al Señor vuestro Dios seguiréis y a él temeréis; guardaréis sus mandamientos y escucharéis su voz; le serviréis y os adheriréis a él. Ese profeta o ese soñador <strong>será condenado a muerte</strong>, porque predicó la apostasía contra el Señor vuestro Dios...»</div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-icon">🔴</div>
+      <div>
+        <p><strong>La estructura lógica de Deuteronomio 13 es devastadora:</strong></p>
+        <p>La Torá establece explícitamente que <strong>incluso si el profeta hace milagros verificables</strong> (señales y prodigios que se cumplen), si a continuación mueve a modificar la Ley, es un <strong>falso profeta</strong> que merece la muerte. Los milagros no son criterio suficiente de autenticidad. La <em>conformidad con la Torá</em> lo es.</p>
+      </div>
+    </div>
+
+    <p>Este texto tiene una implicación directa sobre el argumento apologético islámico más frecuente: invocar los milagros de Jesús (incluyendo los del Corán 3:49) como prueba de su profecía auténtica. La Torá, que el Islam reconoce como revelación divina, dice que los milagros no son suficientes: lo que importa es si el profeta modifica la Ley.</p>
+
+    <h2 id="s2-4">2.4 Deuteronomio 18:20 — Muerte al profeta que habla en nombre de Dios sin ser enviado</h2>
+
+    <div class="verse-box torah">
+      <div class="verse-ref">Dt 18:20</div>
+      <div class="verse-text">«<strong>Pero el profeta que, con arrogancia, diga en mi nombre algo que yo no le haya mandado decir, o que hable en nombre de otros dioses, ese profeta morirá.</strong>»</div>
+    </div>
+
+    <p>Si Jesús realmente hizo lícito lo que Dios prohibió —como afirman los tafsires— entonces Jesús habló en nombre de Dios diciendo algo que Dios no le mandó (ya que Dios prohibió en Dt 4:2 y 12:32 toda modificación). Bajo el criterio de Deuteronomio 18:20, Jesús sería, desde la perspectiva de la Torá misma, un falso profeta. El Islam tiene que escoger: o la Torá mentía cuando decía eso, o los tafsires mienten cuando dicen que Jesús abrogó leyes.</p>
+
+    <!-- ═══ III ═══ -->
+    <h1 id="s3">III. Los Manuscritos del Mar Muerto y Qumrán</h1>
+    <div class="sec-intro">
+      <p>El Islam tiene un recurso de salida teórico: afirmar que la Torá que hoy existe fue corrompida antes de Jesús, de modo que las prohibiciones de Deuteronomio no son auténticas. Sin embargo, este recurso está bloqueado por la evidencia arqueológica y textual más importante del siglo XX: los Manuscritos del Mar Muerto. Esta evidencia demuestra que la Torá del siglo I es sustancialmente idéntica a la actual —y que fue exactamente esa Torá la que los judíos contemporáneos de Jesús tenían en sus manos.</p>
+    </div>
+
+    <h2 id="s3-1">3.1 Qué son los Manuscritos del Mar Muerto</h2>
+    <p>Descubiertos entre 1947 y 1956 en las cuevas de Qumrán, junto al Mar Muerto (Israel/Palestina), los Manuscritos del Mar Muerto constituyen el mayor hallazgo arqueológico de la historia bíblica. Comprenden aproximadamente <strong>900 documentos</strong>, que incluyen fragmentos o copias completas de todos los libros del Antiguo Testamento excepto Ester. Fueron depositados por la comunidad esenia de Qumrán ca. <strong>68 d.C.</strong> (destrucción de la comunidad por los romanos), pero los manuscritos más antiguos datan de ca. <strong>250 a.C.</strong></p>
+
+    <div class="problem-grid">
+      <div class="prob-card">
+        <div class="prob-card-num">~250 a.C.</div>
+        <div class="prob-card-body"><p><strong>Fecha de los manuscritos más antiguos</strong> de Qumrán. El Gran Rollo de Isaías (1QIsa<sup>a</sup>) data de ca. 125 a.C. Los fragmentos del Pentateuco de ca. 200 a.C.</p></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-card-num">68 d.C.</div>
+        <div class="prob-card-body"><p><strong>Fecha del depósito</strong> en las cuevas, contemporáneo a la destrucción romana. Los manuscritos reflejan el estado del texto hebreo en vida de Jesús.</p></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-card-num">95%</div>
+        <div class="prob-card-body"><p><strong>Coincidencia textual</strong> entre el Gran Rollo de Isaías (1QIsa<sup>a</sup>) y el Texto Masorético medieval. El 5% restante son variantes ortográficas menores sin incidencia en el sentido.</p></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-card-num">900</div>
+        <div class="prob-card-body"><p><strong>Documentos encontrados</strong>, incluyendo todos los libros del AT salvo Ester. El Pentateuco (Deuteronomio, Levítico, Números) está ampliamente representado.</p></div>
+      </div>
+    </div>
+
+    <h2 id="s3-2">3.2 La Torá de tiempos de Jesús es prácticamente idéntica a la actual</h2>
+    <p>El hallazgo de Qumrán tiene una implicación textual directa para el dilema: los manuscritos del Deuteronomio encontrados en Qumrán —incluyendo fragmentos de los capítulos 4, 12 y 13— muestran que ese texto era <strong>sustancialmente idéntico al que hoy leemos</strong> en el siglo I a.C./d.C. Las prohibiciones de Deuteronomio 4:2, 12:32 y 13:1–5 estaban en los rollos que los judíos del tiempo de Jesús tenían en sus sinagogas.</p>
+
+    <div class="qbox bg-blue">
+      <div class="qbody">
+        <p>«Los Manuscritos del Mar Muerto han demostrado de manera concluyente que el texto hebreo del Antiguo Testamento era notablemente estable durante el período que va del siglo III a.C. al siglo I d.C. Las variantes existentes son en su inmensa mayoría ortográficas y no afectan al sentido. La objeción de 'corrupción' del texto bíblico anterior a Jesús no tiene sustento textual verificable.»</p>
+      </div>
+      <footer class="csrc"><p>— Emanuel Tov, <em>Textual Criticism of the Hebrew Bible</em> (3.ª ed., Fortress Press, 2012), pp. 104–107 · cf. Frank Moore Cross, <em>The Ancient Library of Qumran</em> (Doubleday, 1958)</p></footer>
+    </div>
+
+    <h2 id="s3-3">3.3 Los textos de Qumrán sobre el Mesías: no confirman a Jesús</h2>
+    <p>La comunidad de Qumrán —contemporánea de Jesús, anterior y posterior a él— tenía expectativas mesiánicas elaboradas, documentadas en textos como el <em>Rollo de la Regla de la Comunidad</em> (1QS), el <em>Rollo de la Guerra</em> (1QM) y los <em>Pesharīm</em>. Ninguno de estos textos identifica a Jesús como el Mesías esperado. Por el contrario, los textos de Qumrán describen al Mesías como alguien que:</p>
+    <ul>
+      <li>No modificará la Torá sino que la cumplirá con mayor rigor (<em>Documento de Damasco</em>, CD-A).</li>
+      <li>Será validado por su conformidad con las Escrituras, no por milagros solos.</li>
+      <li>Vendrá de linaje davídico verificable.</li>
+    </ul>
+    <p>Este es el marco conceptual exactamente dentro del cual vivían los judíos del siglo I, y es perfectamente coherente con el criterio de Deuteronomio 13. Los judíos del tiempo de Jesús no rechazaron a Jesús por ignorancia ni por corrupción textual: aplicaron los criterios que su Torá —verificablemente la misma que hoy existe— les prescribía.</p>
+
+    <h2 id="s3-4">3.4 Consecuencia: los judíos del siglo I no tenían texto corrupto</h2>
+    <p>Esta conclusión cierra la principal vía de escape islámica. Si los judíos del siglo I tenían la misma Torá que hoy existe, y esa Torá tenía los criterios de Deuteronomio 13, entonces:</p>
+    <ul>
+      <li>Los judíos que rechazaron a Jesús <strong>no tenían un texto corrupto</strong> que les impidiera reconocerle.</li>
+      <li>Tenían una Torá auténtica que prescribía rechazar a quien modificara la Ley, aunque hiciera milagros.</li>
+      <li>Al aplicar ese criterio a Jesús, actuaban con fidelidad a la Palabra de Dios que el propio Islam reconoce como auténtica.</li>
+    </ul>
+
+    <div class="alert alert-red">
+      <div class="alert-icon">🔴</div>
+      <div><p><strong>Paradoja de Allah:</strong> Si Allah dice en el Corán que la Torá es su Palabra, y esa Torá dice que los judíos deben rechazar a quien modifique la Ley, entonces Allah —al enviar a Jesús a modificar la Ley sin haber preservado un texto previo que autorizara esa modificación— colocó a los judíos en la situación de ser fieles a su Palabra rechazando a su propio profeta.</p></div>
+    </div>
+
+    <!-- ═══ IV ═══ -->
+    <h1 id="s4">IV. El Dilema de la ʿIsma Islámica</h1>
+    <div class="sec-intro">
+      <p>La <em>ʿisma</em> (عصمة) es la doctrina islámica de la impecabilidad de los profetas: todos los profetas enviados por Allah son preservados del pecado (<em>maʿṣūm</em>), al menos en los actos graves. Esta doctrina, que el Islam sunní y el chiíta sostienen ambos, genera por sí sola un dilema insalvable cuando se combina con la afirmación de que Jesús abrogó preceptos de la Torá.</p>
+    </div>
+
+    <h2 id="s4-1">4.1 La doctrina islámica de la impecabilidad de los profetas</h2>
+    <p>El consenso de los ulemas sunníes —expresado en obras como el <em>Sharḥ al-Mawāqif</em> de al-Ījī, la <em>ʿAqīda Ṭaḥāwiyya</em> y los tratados de teología de al-Ashʿarī— establece que los profetas de Allah son:</p>
+    <ul>
+      <li><strong>Maʿṣūm min al-kabāʾir</strong>: preservados de los pecados graves.</li>
+      <li><strong>Maʿṣūm fī-l-tablīgh</strong>: infalibles en la transmisión del mensaje divino.</li>
+      <li><strong>Maʿṣūm min al-shirk</strong>: totalmente preservados de la idolatría y la apostasía.</li>
+    </ul>
+
+    <h2 id="s4-2">4.2 El dilema formal: si Jesús abrogó la Torá → pecó</h2>
+    <p>La Torá es Palabra de Allah según el Islam. Deuteronomio 4:2 prohíbe modificarla bajo pena de pecado grave. Si Jesús modificó la Torá —como afirman unánimemente los tafsires clásicos— entonces Jesús transgredió un mandamiento explícito de Allah. Y si transgredió un mandamiento explícito de Allah, cometió un pecado grave (<em>kabīra</em>). Lo que contradice directamente la <em>ʿisma</em>.</p>
+
+    <div class="fork">
+      <div class="fork-head">DILEMA DE LA ʿISMA — Jesús y la Torá (Corán 3:50)</div>
+      <div class="fork-arm fork-arm-a">
+        <div class="fork-arm-label">Rama A</div>
+        <p><strong>Jesús SÍ abrogó preceptos de la Torá</strong> (posición de los cuatro tafsires clásicos: al-Ṭabarī, Ibn Kathīr, al-Jalālayn, Ibn ʿAbbās).</p>
+        <p>→ Jesús violó Deuteronomio 4:2, mandamiento de Allah.</p>
+        <p>→ Jesús cometió un pecado grave (<em>kabīra</em>).</p>
+        <p>→ <strong>Contradicción con la ʿisma</strong>: los profetas no pueden cometer kabāʾir.</p>
+      </div>
+      <div class="fork-arm fork-arm-b">
+        <div class="fork-arm-label">Rama B</div>
+        <p><strong>Jesús NO abrogó nada</strong> (para salvar la ʿisma).</p>
+        <p>→ Corán 3:50 dice mentira: «para haceros lícito parte de lo que os fue prohibido» no significa nada.</p>
+        <p>→ <strong>El Corán contiene una falsedad</strong> o una declaración vacía.</p>
+        <p>→ Contradicción con la infalibilidad del Corán (<em>ʿiṣmat al-Qurʾān</em>).</p>
+      </div>
+      <div class="fork-foot">Cualquier rama destruye un pilar fundamental de la teología islámica</div>
+    </div>
+
+    <h2 id="s4-3">4.3 Si pecó → no puede ser profeta islámico</h2>
+    <p>La lógica es estrictamente silogística y utiliza solo premisas aceptadas por el Islam:</p>
+    <ol>
+      <li>Todos los profetas de Allah son <em>maʿṣūm min al-kabāʾir</em> (impecables en lo grave).</li>
+      <li>Violar un mandamiento explícito de Allah («no añadiréis ni quitaréis nada») es un pecado grave.</li>
+      <li>Los tafsires canónicos afirman que Jesús modificó preceptos de la Torá.</li>
+      <li>Por tanto: Jesús cometió un pecado grave → Jesús no es <em>maʿṣūm</em> → Jesús no puede ser un profeta islámico auténtico.</li>
+    </ol>
+
+    <!-- ═══ V ═══ -->
+    <h1 id="s5">V. El Dilema de Allah y su Responsabilidad</h1>
+
+    <h2 id="s5-1">5.1 Allah exige creer en Jesús bajo pena de condenación eterna</h2>
+    <p>El Corán afirma que los judíos del siglo I tenían la obligación de reconocer a Jesús como profeta. No hacerlo equivale a incredulidad (<em>kufr</em>) y conduce al fuego eterno:</p>
+
+    <div class="verse-box quran">
+      <div class="verse-ref quran-ref">Corán 3:55</div>
+      <div class="verse-text">«Cuando Allah dijo: "O Jesús, ciertamente te llevaré a Mí y te elevaré hacia Mí, y te purificaré de los que no creen, y pondré a los que te siguen por encima de los que no creen hasta el Día de la Resurrección."»</div>
+    </div>
+
+    <div class="verse-box quran">
+      <div class="verse-ref quran-ref">Corán 4:150–151</div>
+      <div class="verse-text">«Quienes no crean en Allah y Sus mensajeros, y quieran hacer distinción entre Allah y Sus mensajeros diciendo: "Creemos en unos y no en otros"... son los incrédulos de verdad. Y hemos preparado para los incrédulos un castigo degradante.»</div>
+    </div>
+
+    <h2 id="s5-2">5.2 Allah no protegió la revelación anterior en los puntos clave</h2>
+    <p>Simultáneamente, el Islam afirma que Allah no preservó el texto de la Torá en los siglos anteriores a Jesús —lo suficiente como para que no contuviera indicaciones claras de la misión de Jesús, o como para que sus indicaciones pudieran ser ignoradas. Allah podría haberla preservado, ya que el Corán afirma haberlo hecho con su propio texto (Corán 15:9). La elección de no preservar la Torá es, en el marco islámico, una elección deliberada de Allah.</p>
+
+    <div class="verse-box quran">
+      <div class="verse-ref quran-ref">Corán 15:9</div>
+      <div class="verse-text">«Ciertamente, Nosotros hemos hecho descender el Recuerdo [el Corán] y ciertamente Nosotros somos sus guardadores.»</div>
+    </div>
+
+    <div class="alert alert-navy">
+      <div class="alert-icon">📌</div>
+      <div><p>Si Allah puede preservar el Corán (Corán 15:9), podía haber preservado la Torá de la misma manera. La decisión de <strong>no</strong> preservarla es una decisión de Allah. Sus consecuencias —que los judíos no pudieran reconocer a Jesús con claridad— son también responsabilidad de Allah.</p></div>
+    </div>
+
+    <h2 id="s5-3">5.3 Los judíos del siglo I no podían reconocer a Jesús mediante su Torá</h2>
+    <p>Aplicando Deuteronomio 13 —que Qumrán prueba estaba en vigor en el siglo I— los judíos que conocieron a Jesús tenían ante sí a alguien que:</p>
+    <ul>
+      <li>Hacía señales y prodigios (verificados incluso en el Corán 3:49).</li>
+      <li>A continuación modificaba preceptos de la Ley (verificado en los tafsires sobre 3:50).</li>
+      <li>Este perfil exacto es el que Deuteronomio 13 describe como falso profeta.</li>
+    </ul>
+    <p>Un judío del siglo I que siguiera fielmente la Torá no tendría —bajo los criterios de esa misma Torá— ninguna razón para reconocer a Jesús como profeta auténtico, y sí todas las razones para rechazarle. <strong>No es culpa suya: es la consecuencia lógica de aplicar la Palabra de Allah.</strong></p>
+
+    <h2 id="s5-4">5.4 Allah corresponsable del error de sus criaturas</h2>
+    <p>El silogismo de responsabilidad de Allah es el siguiente:</p>
+    <ol>
+      <li>Allah exige creer en Jesús bajo pena de condenación.</li>
+      <li>Allah no protegió la revelación anterior de forma que señalara claramente a Jesús (o la dejó con criterios que señalaban en su contra).</li>
+      <li>Sin esa protección o clarificación, los destinatarios de la revelación anterior no tenían base racional para reconocer a Jesús.</li>
+      <li>Allah podía haber proporcionado esa base (cf. Corán 15:9 sobre la preservación del Corán).</li>
+      <li>Por tanto: Allah exigió lo que no hizo posible → Allah es moralmente corresponsable del rechazo de sus criaturas.</li>
+    </ol>
+
+    <!-- ═══ VI ═══ -->
+    <h1 id="s6">VI. El Dilema de Mahoma y la Cadena Profética</h1>
+
+    <h2 id="s6-1">6.1 La legitimidad de Mahoma depende de Jesús</h2>
+    <p>Mahoma fundamenta parte de su legitimidad profética en la cadena de profetas anteriores que le precedieron y, según el Islam, le anunciaron. Jesús ocupa en esa cadena un lugar privilegiado: el Corán cita a Jesús anunciando a Mahoma (Corán 61:6 — «Viene tras mí un mensajero cuyo nombre es Ahmad»). La autoridad profética de Mahoma está, en parte, respaldada por la autoridad profética de Jesús.</p>
+
+    <div class="verse-box quran">
+      <div class="verse-ref quran-ref">Corán 61:6</div>
+      <div class="verse-text">«Y cuando Jesús, hijo de María, dijo: "Hijos de Israel, soy el mensajero de Allah enviado a vosotros, <strong>confirmando la Torá que vino antes de mí y anunciando la buena nueva de un mensajero que vendrá después de mí cuyo nombre será Ahmad</strong>."»</div>
+    </div>
+
+    <h2 id="s6-2">6.2 Si Jesús es falso profeta bajo los criterios de la Torá, cae Mahoma</h2>
+    <p>Si aplicamos el criterio de Deuteronomio 13 —que el Islam reconoce como Palabra de Allah— a Jesús, el resultado es que Jesús era un falso profeta (hizo milagros y modificó la Ley). Pero si Jesús era un falso profeta:</p>
+    <ul>
+      <li>Su testimonio sobre Mahoma carece de validez: un falso profeta no puede autenticar a otro profeta.</li>
+      <li>La cadena profética de Mahoma tiene una eslabón roto en un punto crucial.</li>
+      <li>Mahoma invoca la autoridad de alguien que, bajo los criterios de Allah mismo, no tenía autoridad para conferirla.</li>
+    </ul>
+
+    <h2 id="s6-3">6.3 Mahoma invoca autoridad sin autoridad — el argumento de Corán 7:157</h2>
+    <p>El Corán en 7:157 afirma que Mahoma estaba «escrito en la Torá y el Evangelio que tienen». Si la Torá que «tienen» —probada por Qumrán como sustancialmente la misma que hoy existe— no contiene ninguna mención verificable de Mahoma, entonces la afirmación de Corán 7:157 es verificablemente falsa. Y si Mahoma invoca como su aval un profeta (Jesús) que la Palabra de Dios califica de falso, la circularidad es completa: Mahoma se avala en Jesús, Jesús se desacredita por la Torá, la Torá es la Palabra de Allah según el propio Corán.</p>
+
+    <!-- ═══ VII — SILOGISMOS ═══ -->
+    <h1 id="s7">VII. Silogismos Formales</h1>
+
+    <h2 id="s7-1">7.1 Silogismo de la Torá y la Abrogación</h2>
+    <div class="syllogism">
+      <h3 class="syl-title">Silogismo I — La Abrogación y el Falso Profeta</h3>
+      <div class="syl-row"><span class="syl-label P">P1</span><div class="syl-text">La Torá es Palabra de Allah (afirmado por el Corán en 3:3, 5:44, 5:68).</div></div>
+      <div class="syl-row"><span class="syl-label P">P2</span><div class="syl-text">La Torá prohíbe explícitamente toda modificación de sus preceptos, bajo cualquier circunstancia y por cualquier persona (Dt 4:2, 12:32).</div></div>
+      <div class="syl-row"><span class="syl-label P">P3</span><div class="syl-text">La Torá declara falso profeta y reo de muerte a quien haga milagros y luego mueva a modificar la Ley (Dt 13:1–5).</div></div>
+      <div class="syl-row"><span class="syl-label P">P4</span><div class="syl-text">Los tafsires canónicos del Islam (al-Ṭabarī, Ibn Kathīr, al-Jalālayn, Ibn ʿAbbās) afirman que Jesús hizo lícito en Corán 3:50 preceptos explícitamente prohibidos por la Torá (Shabat, carne de camello, grasas animales).</div></div>
+      <div class="syl-row"><span class="syl-label P">P5</span><div class="syl-text">Los Manuscritos del Mar Muerto prueban que la Torá que tenían los judíos del siglo I es sustancialmente idéntica a la actual. La hipótesis de corrupción previa es textualmente insostenible.</div></div>
+      <hr class="syl-divider">
+      <div class="conclusion-box">
+        <div class="c-label">Conclusión C1</div>
+        <p>Si la Torá es auténtica Palabra de Allah y si Jesús modificó sus preceptos, entonces Jesús actuó como un falso profeta según los criterios de Allah mismo. O bien la Torá no es Palabra de Allah (lo que contradice el Corán), o bien los tafsires mienten sobre la abrogación (lo que contradice el consenso exegético islámico).</p>
+      </div>
+    </div>
+
+    <h2 id="s7-2">7.2 Silogismo de la Responsabilidad de Allah</h2>
+    <div class="syllogism">
+      <h3 class="syl-title">Silogismo II — Allah y la Responsabilidad del Error</h3>
+      <div class="syl-row"><span class="syl-label P">P1</span><div class="syl-text">Allah exige a los judíos del siglo I creer en Jesús como profeta bajo pena de condenación eterna (Corán 3:55, 4:150–151).</div></div>
+      <div class="syl-row"><span class="syl-label P">P2</span><div class="syl-text">Los judíos del siglo I tenían la Torá auténtica (probado por Qumrán), y esa Torá les prescribía rechazar a quien modificara sus preceptos, aunque hiciera milagros (Dt 13).</div></div>
+      <div class="syl-row"><span class="syl-label P">P3</span><div class="syl-text">Aplicar fielmente esa Torá llevaba a rechazar a Jesús, no a aceptarle.</div></div>
+      <div class="syl-row"><span class="syl-label P">P4</span><div class="syl-text">Allah podía haber preservado la revelación anterior para que señalara claramente a Jesús, como preservó el Corán (Corán 15:9). Eligió no hacerlo.</div></div>
+      <div class="syl-row"><span class="syl-label P">P5</span><div class="syl-text">Allah no puede exigir responsabilidad por no cumplir lo que sus propias revelaciones anteriores prohibían cumplir.</div></div>
+      <hr class="syl-divider">
+      <div class="conclusion-box">
+        <div class="c-label">Conclusión C2</div>
+        <p>Los judíos del siglo I que rechazaron a Jesús siguiendo fielmente la Torá no son moralmente culpables de esa decisión. Allah, al no preservar la revelación previa o al enviar a un profeta cuyo perfil exacto coincidía con el del falso profeta de la Torá, fue corresponsable de ese rechazo. Condenar a esos judíos al fuego eterno por seguir su Palabra sería una injusticia (ẓulm), lo que contradice la naturaleza de Allah (Corán 4:40).</p>
+      </div>
+    </div>
+
+    <h2 id="s7-3">7.3 Silogismo Final — Mahoma como Falso Profeta</h2>
+    <div class="syllogism">
+      <h3 class="syl-title">Silogismo III — La Cadena Rota</h3>
+      <div class="syl-row"><span class="syl-label P">P1</span><div class="syl-text">Mahoma apoya su legitimidad profética, entre otros, en el testimonio de Jesús que le anuncia (Corán 61:6).</div></div>
+      <div class="syl-row"><span class="syl-label P">P2</span><div class="syl-text">Bajo los criterios de la Torá auténtica de Allah (Dt 13), Jesús —que hizo milagros y modificó la Ley— tiene el perfil exacto de un falso profeta.</div></div>
+      <div class="syl-row"><span class="syl-label P">P3</span><div class="syl-text">Un falso profeta no tiene autoridad para autenticar a un profeta posterior.</div></div>
+      <div class="syl-row"><span class="syl-label P">P4</span><div class="syl-text">Mahoma invoca como aval a un profeta (Jesús) cuya autoridad está comprometida por los propios estándares de Allah.</div></div>
+      <div class="syl-row"><span class="syl-label P">P5</span><div class="syl-text">Mahoma además afirma que estaba anunciado en la Torá y el Evangelio (Corán 7:157), pero ninguna mención verificable aparece en los textos probados auténticos por Qumrán.</div></div>
+      <hr class="syl-divider">
+      <div class="conclusion-box">
+        <div class="c-label">Conclusión C3 — FINAL</div>
+        <p>Mahoma pone su verificación como profeta en un profeta anterior (Jesús) que, bajo los criterios de Allah mismo expresados en la Torá, no tenía autoridad para conferirla. La cadena de legitimación de Mahoma tiene un eslabón roto en el punto más sensible. Sumado a que sus anuncios proféticos en la Torá no son verificables textualmente, Mahoma cumple la definición de Deuteronomio 18:20: profeta que «dice en nombre de Dios lo que Dios no le ha mandado decir».</p>
+      </div>
+    </div>
+
+    <!-- ═══ VIII ═══ -->
+    <h1 id="s8">VIII. Tabla Comparativa del Dilema</h1>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Cuestión</th>
+            <th>Posición del Islam</th>
+            <th>Lo que la Torá (Palabra de Allah) dice</th>
+            <th>Consecuencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-lbl">¿Es la Torá Palabra de Allah?</td>
+            <td class="td-ok">Sí (Corán 3:3, 5:44)</td>
+            <td class="td-ok">La Torá es la Palabra de Dios</td>
+            <td class="td-gold">Las prohibiciones de Dt 4:2 y Dt 13 son obligatorias</td>
+          </tr>
+          <tr>
+            <td class="td-lbl">¿Puede modificarse la Torá?</td>
+            <td class="td-ok">No en principio (Islam: Allah es el único legislador)</td>
+            <td class="td-bad">«No añadiréis ni quitaréis nada» (Dt 4:2, 12:32)</td>
+            <td class="td-bad">Quien la modifica transgrede la Palabra de Allah</td>
+          </tr>
+          <tr>
+            <td class="td-lbl">¿Abrogó Jesús la Torá?</td>
+            <td class="td-bad">Sí — dicen los cuatro tafsires clásicos sobre 3:50</td>
+            <td class="td-bad">Quien hace eso es falso profeta (Dt 13)</td>
+            <td class="td-bad">Jesús → falso profeta bajo el criterio de la Torá de Allah</td>
+          </tr>
+          <tr>
+            <td class="td-lbl">¿Tenían los judíos del s. I la Torá auténtica?</td>
+            <td class="td-bad">Islam dice que estaba corrompida (taḥrīf)</td>
+            <td class="td-ok">Qumrán prueba que era la misma que hoy (Emanuel Tov)</td>
+            <td class="td-bad">La excusa del taḥrīf no funciona: la Torá era auténtica</td>
+          </tr>
+          <tr>
+            <td class="td-lbl">¿Podían los judíos reconocer a Jesús?</td>
+            <td class="td-bad">Debían hacerlo bajo pena de condenación (Corán 4:150)</td>
+            <td class="td-bad">Su Torá (auténtica) les ordenaba rechazarle (Dt 13)</td>
+            <td class="td-bad">Allah les condenó por obedecer su propia Palabra</td>
+          </tr>
+          <tr>
+            <td class="td-lbl">¿Tiene Mahoma aval profético sólido?</td>
+            <td class="td-bad">Sí: Jesús le anunció (Corán 61:6) y la Torá también (7:157)</td>
+            <td class="td-bad">Jesús → falso profeta (Dt 13); Mahoma no está en la Torá de Qumrán</td>
+            <td class="td-bad">La legitimación de Mahoma tiene la base rota</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══ IX ═══ -->
+    <h1 id="s9">IX. Respuestas Islámicas y su Refutación</h1>
+
+    <h2 id="s9-1">9.1 Respuesta islámica: «La Torá fue corrompida antes de Jesús»</h2>
+    <p>La respuesta más frecuente del apologista islámico es que la Torá que poseían los judíos del siglo I ya estaba corrompida (<em>taḥrīf</em>), de modo que sus criterios de Deuteronomio 13 no son aplicables.</p>
+    <div class="alert alert-red">
+      <div class="alert-icon">✗</div>
+      <div>
+        <p><strong>Refutación:</strong> Esta respuesta choca frontalmente con los Manuscritos del Mar Muerto. Los fragmentos del Deuteronomio hallados en Qumrán datan de los siglos II–I a.C. y son sustancialmente idénticos al texto masorético medieval y al texto actual. Los capítulos 4, 12 y 13 del Deuteronomio están representados en los manuscritos de Qumrán y no muestran corrupción significativa. La afirmación del taḥrīf previo a Jesús no tiene base arqueológica ni textual: es una afirmación ad hoc sin evidencia verificable.</p>
+        <p>Además, el Corán mismo en 5:43 dice de los judíos del tiempo de Mahoma: <em>«¿Y cómo van a hacerte árbitro si tienen la Torá, en la que se halla el juicio de Allah?»</em> — lo que implica que la Torá seguía siendo suficientemente auténtica como para arbitrar disputas en el siglo VII.</p>
+      </div>
+    </div>
+
+    <h2 id="s9-2">9.2 Respuesta islámica: «Solo abrogó ceremonialmente, no lo moral»</h2>
+    <p>Algunos ulemas modernos intentan minimizar la abrogación diciendo que Jesús solo abrogó preceptos ceremoniales o culturales, no la ética de la Torá.</p>
+    <div class="alert alert-red">
+      <div class="alert-icon">✗</div>
+      <div>
+        <p><strong>Refutación:</strong> Esta distinción no aparece en los tafsires clásicos, que son explícitos: Ibn ʿAbbās menciona <em>el Shabat</em> como uno de los preceptos abrogados por Jesús. El Shabat no es un precepto ceremonial periférico: es el cuarto mandamiento del Decálogo (Éxodo 20:8–11, Deuteronomio 5:12–15), equiparado en la Torá a los mandamientos morales más fundamentales. Dt 13 no hace distinción entre tipos de ley: prohíbe toda modificación sin excepción.</p>
+      </div>
+    </div>
+
+    <h2 id="s9-3">9.3 Respuesta islámica: «Los milagros de Jesús validan su profecía»</h2>
+    <p>El argumento islámico invoca los milagros de Jesús (incluyendo los del Corán 3:49) como validación suficiente de su autoridad para abrogar.</p>
+    <div class="alert alert-red">
+      <div class="alert-icon">✗</div>
+      <div>
+        <p><strong>Refutación:</strong> Deuteronomio 13:1–5 anticipa y cierra exactamente este argumento. El texto dice <em>explícitamente</em>: «Cuando surja un profeta y la señal o el prodigio que te anunció <strong>se cumple</strong>» — es decir, aunque los milagros sean reales y verificados. Incluso con milagros reales, si el profeta mueve a modificar la Ley, es falso. La Torá construyó este criterio precisamente para blindar al pueblo contra impostores que pudieran hacer prodigios genuinos. Los milagros no validan la abrogación bajo el sistema de la Torá auténtica de Allah.</p>
+      </div>
+    </div>
+
+    <!-- ═══ X — VEREDICTO ═══ -->
+    <h1 id="s10">X. Veredicto Final</h1>
+
+    <div class="verdict">
+      <div class="verdict-title">⚖ Veredicto — El Dilema es Irresuelto para el Islam</div>
+      <p>El dilema mesiánico no es un argumento externo construido con fuentes hostiles al Islam. Es un argumento que utiliza exclusivamente el Corán, los tafsires canónicos del Islam, las Escrituras que el propio Islam declara revelación divina auténtica, y la evidencia arqueológica que verifica el estado de esas Escrituras en el siglo I.</p>
+      <p>El Islam se encuentra ante una contradicción estructural de tres vértices: (1) afirma que la Torá es Palabra de Allah; (2) afirma que Jesús —cuya autenticidad profética el Islam defiende— abrogó preceptos de esa Torá; (3) la Torá —cuya integridad en el siglo I está probada por Qumrán— califica de falso profeta exactamente a quien hace eso.</p>
+      <p>No existe posición islámica que salve simultáneamente la autenticidad de la Torá, la autenticidad de Jesús como profeta, y la cohesión de la cadena profética que lleva a Mahoma. Cualquier movimiento en una dirección destruye uno de los tres pilares. La teología islámica puede elegir cuál de los tres sacrificar, pero no puede conservar los tres a la vez.</p>
+      <p><strong>La posición cristiana no padece este dilema.</strong> Jesús no abrogó la Torá en sentido legal islámico: cumplió su telos (Mateo 5:17 — «No vine a abolir la Ley sino a cumplirla»). La abolición de preceptos ceremoniales en el Nuevo Testamento se entiende como cumplimiento tipológico, no como transgresión. Y Jesús no invoca una profecía anterior corrompida para validarse: presenta su validación en la resurrección, en el cumplimiento de las profecías mesiánicas específicas de los textos verificados por Qumrán (Isaías 53, Salmo 22, Daniel 9), y en el testimonio directo de testigos cuyo nombre y vida son históricamente verificables.</p>
+    </div>
+
+    <!-- ═══ BIBLIO ═══ -->
+    <h1 id="biblio">Fuentes y Bibliografía</h1>
+
+    <h2>Fuentes coránicas y tafsirísticas</h2>
+    <ul>
+      <li>Corán — Sura 3 (Āl ʿImrān): 49–50, 55. Sura 4:150–151. Sura 5:43–44. Sura 7:157. Sura 15:9. Sura 61:6.</li>
+      <li>Al-Ṭabarī, Ibn Jarīr. <em>Jāmiʿ al-Bayān fī Taʾwīl al-Qurʾān</em>. Tafsir de 3:50, cadena 7113. (839–923 d.C.)</li>
+      <li>Ibn Kathīr, Ismāʿīl. <em>Tafsīr al-Qurʾān al-ʿAẓīm</em>. Comentario a 3:50. (1301–1373 d.C.)</li>
+      <li>Al-Jalālayn (al-Suyūtī y al-Maḥallī). <em>Tafsīr al-Jalālayn</em>. Ad 3:50. (s. XV)</li>
+      <li>Tanwīr al-Miqbās min Tafsīr Ibn ʿAbbās. Ad 3:50. (atribuido al primo del Profeta, compilado s. VIII)</li>
+      <li>Al-Qurṭubī, Abū ʿAbd Allāh. <em>al-Jāmiʿ li-Aḥkām al-Qurʾān</em>. Vol. 4, ad 3:50. (1214–1273 d.C.)</li>
+    </ul>
+
+    <h2>Escrituras hebreas</h2>
+    <ul>
+      <li>Deuteronomio 4:2; 12:32; 13:1–5; 18:20 — Texto Masorético (BHS) y versión de los LXX.</li>
+      <li>Levítico 3:17; 7:23; 11:4, 10–12, 13–19 — Leyes alimentarias y de las grasas.</li>
+      <li>Éxodo 20:8–11; Deuteronomio 5:12–15 — Mandamiento del Shabat.</li>
+    </ul>
+
+    <h2>Manuscritos del Mar Muerto / Qumrán</h2>
+    <ul>
+      <li>1QIsa<sup>a</sup> — Gran Rollo de Isaías (ca. 125 a.C.). Biblioteca Digital de los Manuscritos del Mar Muerto, Universidad Hebrea de Jerusalén.</li>
+      <li>4QDeut<sup>n</sup>, 4QDeut<sup>j</sup> — Fragmentos del Deuteronomio (siglos II–I a.C.), incluyendo fragmentos de los caps. 4, 12 y 13.</li>
+      <li>Tov, Emanuel. <em>Textual Criticism of the Hebrew Bible</em>. 3.ª ed. Fortress Press, 2012.</li>
+      <li>Cross, Frank Moore. <em>The Ancient Library of Qumran and Modern Biblical Studies</em>. Doubleday, 1958.</li>
+      <li>VanderKam, James C. <em>The Dead Sea Scrolls Today</em>. Eerdmans, 2010.</li>
+    </ul>
+
+    <h2>Teología islámica — ʿIsma y cadena profética</h2>
+    <ul>
+      <li>Al-Ījī, ʿAḍud al-Dīn. <em>al-Mawāqif fī ʿIlm al-Kalām</em>. Sobre la ʿisma de los profetas.</li>
+      <li>Al-Ṭaḥāwī, Abū Jaʿfar. <em>al-ʿAqīda al-Ṭaḥāwiyya</em>. Artículo sobre la infabilidad profética.</li>
+      <li>Ibn Taymiyya. <em>al-Jawāb al-Ṣaḥīḥ li-man baddala Dīn al-Masīḥ</em>. Dar al-ʿĀṣima, Riad, 1999.</li>
+    </ul>
+
+    <h2>Bibliografía académica adicional</h2>
+    <ul>
+      <li>Reynolds, Gabriel Said. <em>The Quran and Its Biblical Subtext</em>. Routledge, 2010.</li>
+      <li>Donner, Fred M. <em>Muhammad and the Believers</em>. Harvard University Press, 2010.</li>
+      <li>Hurtado, Larry W. <em>Lord Jesus Christ</em>. Eerdmans, 2003.</li>
+      <li>Beckwith, Roger T. &amp; Stott, Wilfrid. <em>This is the Day: The Biblical Doctrine of the Christian Sunday</em>. Marshall, Morgan &amp; Scott, 1978.</li>
+    </ul>
+
+  </article>
+</div><!-- /main -->
+
+<button id="back-top" aria-label="Volver arriba">▲</button>
+
+<script>
+// ── Sidebar mobile ──────────────────────────────────────────────────────
+const sidebar   = document.getElementById('sidebar');
+const overlay   = document.getElementById('overlay');
+const toggleBtn = document.getElementById('sidebar-toggle');
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('open');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('open');
+});
+
+// ── TOC search ─────────────────────────────────────────────────────────
+const tocSearch = document.getElementById('toc-search');
+const tocLinks  = document.querySelectorAll('.toc-link');
+tocSearch.addEventListener('input', () => {
+  const q = tocSearch.value.toLowerCase().trim();
+  tocLinks.forEach(a => {
+    a.style.display = (!q || a.textContent.toLowerCase().includes(q)) ? '' : 'none';
+  });
+});
+
+// ── Active TOC on scroll ─────────────────────────────────────────────
+const headings  = document.querySelectorAll('#content h1, #content h2, #cover');
+const tocMap    = {};
+tocLinks.forEach(a => { tocMap[a.getAttribute('href').slice(1)] = a; });
+const bcSec     = document.getElementById('bc-sec');
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      tocLinks.forEach(a => a.classList.remove('active'));
+      if (tocMap[id]) {
+        tocMap[id].classList.add('active');
+        tocMap[id].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        bcSec.textContent = tocMap[id].textContent.trim();
+      }
+    }
+  });
+}, { rootMargin: '-68px 0px -58% 0px', threshold: 0 });
+
+document.querySelectorAll('#content h1[id], #content h2[id], #cover').forEach(h => obs.observe(h));
+
+// ── Progress + back-top ──────────────────────────────────────────────
+const bar     = document.getElementById('progress-bar');
+const backTop = document.getElementById('back-top');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  bar.style.width = pct + '%';
+  backTop.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
+backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── Close sidebar on link click (mobile) ────────────────────────────
+tocLinks.forEach(a => {
+  a.addEventListener('click', () => {
+    if (window.innerWidth <= 700) {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,7 +1,9 @@
 ---
 title: "Biblia"
 description: "Lectura biblica con contexto, unidad y fidelidad al texto."
+url: "/biblia/"
 aliases:
+  - "/biblia"
   - "/categories/biblia/"
 ---
 

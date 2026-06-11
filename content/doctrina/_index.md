@@ -1,7 +1,9 @@
 ---
 title: "Doctrina"
 description: "Nucleo de la fe cristiana explicado con lenguaje claro."
+url: "/doctrina/"
 aliases:
+  - "/doctrina"
   - "/categories/doctrina/"
 ---
 

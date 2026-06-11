@@ -1,7 +1,9 @@
 ---
 title: "Filosofia"
 description: "Razon, metafisica y fundamentos para pensar la fe cristiana."
+url: "/filosofia/"
 aliases:
+  - "/filosofia"
   - "/categories/filosofia/"
 ---
 
