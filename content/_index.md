@@ -15,6 +15,7 @@ Aqui encontraras un proyecto de apologetica cristiana con enfoque biblico, histo
 - [Refutaciones](/refutaciones/)
 - [Doctrina](/doctrina/)
 - [Respondiendo al Islam](/respondiendo-al-islam/)
+- [Colaboradores](/colaboradores/)
 - [Busqueda](/busqueda/)
 
 ## Mision
