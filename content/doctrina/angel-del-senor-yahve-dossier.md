@@ -10,8 +10,8 @@ summary: "Dossier integral en HTML sobre el Angel del Senor y su interpretacion 
 showToc: false
 ---
 
-> Dossier completo en HTML: [Abrir version integral](/doctrina/angel-del-senor-yahve.html)
+> Dossier completo en HTML: [Abrir version integral](/refutaciones/angel-del-senor-yahve.html)
 
 ## Dossier integral embebido
 
-{{< dossier_iframe src="/doctrina/angel-del-senor-yahve.html" title="Angel del Senor Yahve" >}}
+{{< dossier_iframe src="/refutaciones/angel-del-senor-yahve.html" title="Angel del Senor Yahve" >}}

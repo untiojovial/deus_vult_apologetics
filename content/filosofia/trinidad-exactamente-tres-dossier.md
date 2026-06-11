@@ -10,8 +10,8 @@ summary: "Dossier integral en HTML sobre la formulacion trinitaria de exactament
 showToc: false
 ---
 
-> Dossier completo en HTML: [Abrir version integral](/filosofia/trinidad-exactamente-tres.html)
+> Dossier completo en HTML: [Abrir version integral](/refutaciones/trinidad-exactamente-tres.html)
 
 ## Dossier integral embebido
 
-{{< dossier_iframe src="/filosofia/trinidad-exactamente-tres.html" title="Trinidad Exactamente Tres" >}}
+{{< dossier_iframe src="/refutaciones/trinidad-exactamente-tres.html" title="Trinidad Exactamente Tres" >}}

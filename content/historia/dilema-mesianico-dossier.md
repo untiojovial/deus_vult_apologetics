@@ -10,8 +10,8 @@ summary: "Dossier integral en HTML sobre el dilema mesianico y su analisis histo
 showToc: false
 ---
 
-> Dossier completo en HTML: [Abrir version integral](/historia/dilema-mesianico.html)
+> Dossier completo en HTML: [Abrir version integral](/refutaciones/dilema-mesianico.html)
 
 ## Dossier integral embebido
 
-{{< dossier_iframe src="/historia/dilema-mesianico.html" title="El Dilema Mesianico" >}}
+{{< dossier_iframe src="/refutaciones/dilema-mesianico.html" title="El Dilema Mesianico" >}}

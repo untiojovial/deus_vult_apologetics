@@ -10,8 +10,8 @@ summary: "Dossier integral sobre canonizacion y discrepancias textuales entre Bi
 showToc: false
 ---
 
-> Dossier completo en HTML: [Abrir version integral](/respondiendo-al-islam/canon-biblia-quran.html)
+> Dossier completo en HTML: [Abrir version integral](/refutaciones/canon-biblia-quran.html)
 
 ## Dossier integral embebido
 
-{{< dossier_iframe src="/respondiendo-al-islam/canon-biblia-quran.html" title="Canon Biblia y Quran" >}}
+{{< dossier_iframe src="/refutaciones/canon-biblia-quran.html" title="Canon Biblia vs Quran" >}}

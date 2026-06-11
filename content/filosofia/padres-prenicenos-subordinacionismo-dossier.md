@@ -10,8 +10,8 @@ summary: "Dossier integral en HTML sobre padres prenicenos y el debate del subor
 showToc: false
 ---
 
-> Dossier completo en HTML: [Abrir version integral](/filosofia/padres-prenicenos-subordinacionismo.html)
+> Dossier completo en HTML: [Abrir version integral](/refutaciones/padres-prenicenos-subordinacionismo.html)
 
 ## Dossier integral embebido
 
-{{< dossier_iframe src="/filosofia/padres-prenicenos-subordinacionismo.html" title="Padres Prenicenos y Subordinacionismo" >}}
+{{< dossier_iframe src="/refutaciones/padres-prenicenos-subordinacionismo.html" title="Padres Prenicenos y Subordinacionismo" >}}
