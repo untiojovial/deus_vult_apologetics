@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Josías y el Libro de la Ley — Refutación Apologética</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:      #1B2A4A;
+  --navy-mid:  #243660;
+  --gold:      #C9A84C;
+  --gold-lt:   #E2C97A;
+  --gold-dim:  rgba(201,168,76,0.13);
+  --cream:     #F7F3ED;
+  --text:      #1E1E2E;
+  --text-mid:  #3A3A50;
+  --text-lt:   #6A6A80;
+  --crimson:   #8B1A1A;
+  --cbg:       rgba(139,26,26,0.07);
+  --green:     #1A5C2E;
+  --gbg:       rgba(26,92,46,0.07);
+  --sw:        272px;
+  --hh:        52px;   /* header height */
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: Georgia,'Times New Roman',serif; background: var(--cream); color: var(--text); font-size: 16px; line-height: 1.75; }
+
+/* ── TOP BAR ── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: var(--hh);
+  background: var(--navy); z-index: 500;
+  display: flex; align-items: center; gap: 14px;
+  padding: 0 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+.hamburger {
+  width: 38px; height: 38px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 5px;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.hamburger:hover { background: rgba(201,168,76,0.28); }
+.hamburger span {
+  display: block; width: 18px; height: 2px;
+  background: var(--gold); border-radius: 2px;
+  transition: all 0.28s ease;
+  transform-origin: center;
+}
+/* X state */
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.topbar-title {
+  font-family: system-ui, sans-serif;
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(247,243,237,0.6);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.topbar-badge {
+  margin-left: auto;
+  font-family: system-ui, sans-serif; font-size: 9px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
+  padding: 3px 9px; border-radius: 3px; white-space: nowrap;
+  display: none;
+}
+@media (min-width: 600px) { .topbar-badge { display: block; } }
+
+/* ── OVERLAY ── */
+.overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.48);
+  z-index: 390; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.overlay.show { opacity: 1; pointer-events: auto; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: var(--sw);
+  background: var(--navy);
+  z-index: 400;
+  display: flex; flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto;
+  padding-top: var(--hh);
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 2px; }
+
+.sb-brand {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(201,168,76,0.18);
+}
+.sb-lbl {
+  font-family: system-ui,sans-serif; font-size: 9px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--gold); display: block; margin-bottom: 5px;
+}
+.sb-title {
+  font-size: 12.5px; color: rgba(247,243,237,0.8);
+  font-family: Georgia,serif; font-style: italic; line-height: 1.45;
+}
+
+.toc-wrap { padding: 10px 0 28px; flex: 1; }
+.toc-cat {
+  font-family: system-ui,sans-serif; font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(201,168,76,0.45); padding: 12px 20px 4px;
+}
+.toc-a {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 7px 20px; text-decoration: none;
+  color: rgba(247,243,237,0.55); font-family: system-ui,sans-serif;
+  font-size: 12px; line-height: 1.4;
+  border-left: 2px solid transparent; transition: all 0.18s;
+}
+.toc-a:hover { color: var(--gold-lt); background: rgba(201,168,76,0.07); }
+.toc-a.active { color: var(--gold); border-left-color: var(--gold); background: rgba(201,168,76,0.1); }
+.toc-n { color: var(--gold); font-size: 9.5px; min-width: 20px; padding-top: 2px; opacity: 0.7; }
+
+/* ── MAIN ── */
+.main { padding-top: var(--hh); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  padding: 60px 64px 52px;
+  position: relative; overflow: hidden;
+}
+.hero-wm {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  font-size: 120px; color: rgba(201,168,76,0.05);
+  font-family: Georgia,serif; pointer-events: none; user-select: none;
+}
+.hero-ey {
+  font-family: system-ui,sans-serif; font-size: 9.5px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px; display: block;
+}
+.hero-h1 {
+  font-size: 28px; color: var(--cream); line-height: 1.28;
+  margin-bottom: 12px; max-width: 660px; font-weight: normal;
+}
+.hero-h1 em { color: var(--gold); font-style: italic; }
+.hero-sub {
+  font-family: system-ui,sans-serif; font-size: 13px;
+  color: rgba(247,243,237,0.5); max-width: 540px; line-height: 1.65;
+}
+.hero-pills {
+  display: flex; flex-wrap: wrap; gap: 9px;
+  margin-top: 28px; padding-top: 26px;
+  border-top: 1px solid rgba(201,168,76,0.18);
+}
+.pill {
+  background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 3px; padding: 4px 11px;
+  font-family: system-ui,sans-serif; font-size: 11px; color: rgba(247,243,237,0.65);
+}
+.pill strong { color: var(--gold-lt); }
+
+/* ── CONTENT ── */
+.content { padding: 0 64px 96px; max-width: 920px; }
+@media (max-width: 700px) { .hero, .content { padding-left: 20px; padding-right: 20px; } }
+
+/* ── SECTION ── */
+.sec { padding: 54px 0 22px; border-bottom: 1px solid rgba(27,42,74,0.1); }
+.sec:last-child { border-bottom: none; }
+.sec-hd { display: flex; align-items: baseline; gap: 13px; margin-bottom: 22px; }
+.sec-num { font-family: system-ui,sans-serif; font-size: 11px; color: var(--gold); letter-spacing: 1px; min-width: 24px; opacity: 0.85; }
+.sec-t { font-size: 20px; color: var(--navy); font-weight: normal; line-height: 1.3; border-bottom: 2px solid var(--gold); padding-bottom: 7px; flex: 1; }
+.sec-intro { color: var(--text-mid); font-size: 15.5px; margin-bottom: 20px; max-width: 730px; }
+
+/* ── PROSE ── */
+p { margin-bottom: 14px; font-size: 15.5px; color: var(--text-mid); max-width: 730px; }
+h4 { font-family: system-ui,sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); margin: 26px 0 9px; }
+
+/* ── BIBLE BLOCK ── */
+.bible { background: var(--navy); border-radius: 6px; padding: 20px 24px; margin: 20px 0; }
+.b-ref { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 9px; display: block; }
+.b-heb { font-size: 17px; direction: rtl; color: rgba(247,243,237,0.62); line-height: 1.9; margin-bottom: 11px; display: block; font-family: 'Times New Roman',serif; }
+.b-es { font-size: 14px; color: rgba(247,243,237,0.82); font-style: italic; line-height: 1.65; }
+
+/* ── ARABIC ── */
+.arab { background: rgba(27,42,74,0.05); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 16px 0; }
+.arab-t { font-size: 20px; direction: rtl; color: var(--navy); line-height: 2; display: block; margin-bottom: 7px; font-family: 'Times New Roman',serif; }
+.arab-r { font-family: system-ui,sans-serif; font-size: 11px; color: var(--text-lt); font-style: italic; }
+
+/* ── SYLLOGISM ── */
+.syl { background: var(--navy); border-radius: 8px; padding: 24px 28px; margin: 24px 0; position: relative; overflow: hidden; }
+.syl::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--gold); }
+.syl-t { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.syl-t::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.2); }
+.syl-r { display: flex; gap: 11px; margin-bottom: 10px; align-items: flex-start; }
+.syl-l { font-family: system-ui,sans-serif; font-size: 10.5px; font-weight: 700; color: var(--gold); min-width: 24px; padding-top: 2px; }
+.syl-txt { font-size: 14px; color: rgba(247,243,237,0.82); line-height: 1.6; flex: 1; }
+.syl-c { border-top: 1px solid rgba(201,168,76,0.22); padding-top: 12px; margin-top: 12px; }
+.syl-c .syl-l { font-size: 16px; font-weight: normal; color: var(--gold-lt); }
+.syl-c .syl-txt { color: var(--cream); font-style: italic; font-size: 14.5px; }
+
+/* ── EVIDENCE CARD ── */
+.ev { background: #fff; border: 1px solid rgba(27,42,74,0.11); border-radius: 7px; padding: 18px 22px; margin: 14px 0; }
+.ev-h { font-size: 14px; font-weight: bold; color: var(--navy); margin-bottom: 7px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.badge { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; border: 1px solid; }
+.b-gld { background: var(--gold-dim); color: #8B6914; border-color: rgba(201,168,76,0.35); }
+.b-arc { background: rgba(26,92,46,0.08); color: #1A5C2E; border-color: rgba(26,92,46,0.28); }
+.b-txt { background: rgba(27,42,74,0.06); color: var(--navy); border-color: rgba(27,42,74,0.2); }
+.ev-p { font-size: 14px; color: var(--text-mid); line-height: 1.65; max-width: none; margin: 0; }
+
+/* ── DEBATE PAIR ── */
+.obj { background: var(--cbg); border-left: 3px solid var(--crimson); padding: 14px 18px; border-radius: 0 6px 0 0; margin-bottom: 2px; }
+.ref { background: var(--gbg); border-left: 3px solid var(--green); padding: 14px 18px; border-radius: 0 0 6px 6px; margin-bottom: 16px; }
+.db-l { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--crimson); margin-bottom: 5px; display: block; }
+.ref .db-l { color: var(--green); }
+.db-p { font-size: 14px; line-height: 1.6; color: var(--text-mid); max-width: none; margin: 0; }
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; font-family: system-ui,sans-serif; }
+th { background: var(--navy); color: var(--gold); padding: 8px 12px; text-align: left; font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; font-weight: normal; }
+td { padding: 9px 12px; border-bottom: 1px solid rgba(27,42,74,0.08); color: var(--text-mid); line-height: 1.5; vertical-align: top; }
+tr:nth-child(even) td { background: rgba(27,42,74,0.025); }
+
+/* ── CONCLUSION ── */
+.concl { background: var(--navy); border-radius: 8px; padding: 32px 36px; margin: 28px 0; }
+.concl h3 { color: var(--gold); font-size: 17px; font-weight: normal; margin-bottom: 14px; }
+.concl p { color: rgba(247,243,237,0.78); max-width: none; font-size: 14.5px; margin-bottom: 10px; }
+.concl p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<!-- ══ TOP BAR ══ -->
+<header class="topbar">
+  <button class="hamburger" id="menuBtn" aria-label="Abrir índice" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <span class="topbar-title">Josías · Refutación del Tahríf</span>
+  <span class="topbar-badge">Apologética Bíblica</span>
+</header>
+
+<!-- ══ OVERLAY ══ -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ══ SIDEBAR ══ -->
+<nav class="sidebar" id="sidebar" aria-label="Índice de contenidos">
+  <div class="sb-brand">
+    <span class="sb-lbl">Apologética Histórico-Bíblica</span>
+    <span class="sb-title">Josías y el Hallazgo<br>del Libro de la Ley</span>
+  </div>
+  <div class="toc-wrap" id="toc">
+    <div class="toc-cat">Introducción</div>
+    <a class="toc-a active" href="#s0"><span class="toc-n">§0</span>El Argumento Islámico</a>
+    <a class="toc-a" href="#s1"><span class="toc-n">§1</span>Texto Bíblico del Episodio</a>
+    <div class="toc-cat">Evidencia Textual</div>
+    <a class="toc-a" href="#s2"><span class="toc-n">§2</span>Análisis Filológico de מָצָא</a>
+    <a class="toc-a" href="#s3"><span class="toc-n">§3</span>Pentateuco Samaritano</a>
+    <a class="toc-a" href="#s4"><span class="toc-n">§4</span>Pergaminos de Ketef Hinnom</a>
+    <a class="toc-a" href="#s5"><span class="toc-n">§5</span>Profetas Pre-josiánicos</a>
+    <div class="toc-cat">Evidencia Interna</div>
+    <a class="toc-a" href="#s6"><span class="toc-n">§6</span>La Torah Ordena su Depósito</a>
+    <a class="toc-a" href="#s7"><span class="toc-n">§7</span>La Reacción de Josías</a>
+    <a class="toc-a" href="#s8"><span class="toc-n">§8</span>Hulda: Autenticación Independiente</a>
+    <div class="toc-cat">Evidencia Contextual</div>
+    <a class="toc-a" href="#s9"><span class="toc-n">§9</span>Textos Legales en Templos ANE</a>
+    <a class="toc-a" href="#s10"><span class="toc-n">§10</span>Hipótesis Documentaria Josiánica</a>
+    <div class="toc-cat">Contra-ataque</div>
+    <a class="toc-a" href="#s11"><span class="toc-n">§11</span>El Dilema Coránico</a>
+    <div class="toc-cat">Conclusión</div>
+    <a class="toc-a" href="#s12"><span class="toc-n">§12</span>Silogismos Compilados</a>
+    <a class="toc-a" href="#s13"><span class="toc-n">§13</span>Conclusión General</a>
+  </div>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<div class="main">
+
+  <div class="hero">
+    <span class="hero-wm">מָצָא</span>
+    <span class="hero-ey">Defensa Apologética Completa · 8 Argumentos · 8 Silogismos</span>
+    <h1 class="hero-h1">Josías y el Hallazgo del Libro de la Ley:<br><em>Refutación del Argumento del Tahríf</em></h1>
+    <p class="hero-sub">Análisis filológico, textual, arqueológico y teológico del episodio de 2 Reyes 22 y 2 Crónicas 34 como evidencia contra la doctrina islámica de la corrupción de las Escrituras.</p>
+    <div class="hero-pills">
+      <span class="pill"><strong>Fecha:</strong> ~621 a.C. — Año 18 de Josías</span>
+      <span class="pill"><strong>Fuentes:</strong> 2 Re 22–23 · 2 Cr 34–35</span>
+      <span class="pill"><strong>Refutado:</strong> Tahríf por hallazgo = pérdida / falsificación</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- §0 -->
+    <div class="sec" id="s0">
+      <div class="sec-hd"><span class="sec-num">§0</span><h2 class="sec-t">El Argumento Islámico: Planteamiento y Alcance</h2></div>
+      <p class="sec-intro">El episodio de Josías es uno de los argumentos favoritos de la apologética islámica para sostener la doctrina del <em>tahríf</em> (التحريف), la corrupción o alteración de las Escrituras judías y cristianas. Comprender sus variantes con precisión es indispensable para refutarlas.</p>
+      <h4>Variante A — Argumento de la "Pérdida"</h4>
+      <div class="obj"><span class="db-l">Objeción Islámica</span><p class="db-p">Si el Libro de la Ley tuvo que ser "hallado" en el templo bajo Josías, esto implica que había estado perdido durante un período prolongado. Una Escritura que se pierde no puede considerarse preservada fielmente. Luego, la cadena de transmisión está rota y el texto actual no es el original.</p></div>
+      <h4>Variante B — Argumento de la "Falsificación"</h4>
+      <div class="obj"><span class="db-l">Objeción Islámica</span><p class="db-p">El libro fue en realidad <em>compuesto</em> por el sacerdote Hilcías o el círculo deuteronómico josiánico y presentado como antiguo para legitimar la reforma religiosa del rey. Esto equivale a una falsificación deliberada, lo cual demuestra que la Biblia actual no es la Palabra original de Dios.</p></div>
+      <p>La segunda variante coincide con la hipótesis académica de W.M.L. de Wette (1805). Ambas serán refutadas de forma exhaustiva e independiente.</p>
+    </div>
+
+    <!-- §1 -->
+    <div class="sec" id="s1">
+      <div class="sec-hd"><span class="sec-num">§1</span><h2 class="sec-t">Texto Bíblico Completo del Episodio</h2></div>
+      <p class="sec-intro">Antes de cualquier análisis es imprescindible establecer con exactitud qué dicen los textos — sin añadir ni quitar.</p>
+      <div class="bible">
+        <span class="b-ref">2 Crónicas 34:8 — Marco temporal del hallazgo</span>
+        <span class="b-heb">וּבִשְׁנַת שְׁמֹנֶה עֶשְׂרֵה לְמָלְכוֹ לְטַהֵר הָאָרֶץ וְהַבַּיִת שָׁלַח אֶת־שָׁפָן בֶּן־אֲצַלְיָהוּ</span>
+        <span class="b-es">«En el año dieciocho de su reinado, después de haber limpiado la tierra y la casa, envió a Safán hijo de Azalía...»</span>
+      </div>
+      <div class="bible">
+        <span class="b-ref">2 Crónicas 34:14-15 — El hallazgo</span>
+        <span class="b-heb">מָצָא חִלְקִיָּהוּ הַכֹּהֵן אֶת־סֵפֶר תּוֹרַת יְהוָה בְּיַד־מֹשֶׁה׃ וַיֹּאמֶר סֵפֶר הַתּוֹרָה מָצָאתִי בְּבֵית יְהוָה</span>
+        <span class="b-es">«El sacerdote Hilcías halló el libro de la Torah de YHWH <em>dada por mano de Moisés</em>. Dijo: He hallado el libro de la Torah en la casa de YHWH.»</span>
+      </div>
+      <div class="bible">
+        <span class="b-ref">2 Reyes 22:8 — Fuente paralela independiente</span>
+        <span class="b-heb">סֵפֶר הַתּוֹרָה מָצָאתִי בְּבֵית יְהוָה</span>
+        <span class="b-es">«He hallado el libro de la Torah en la casa de YHWH.»</span>
+      </div>
+      <h4>Lo que el texto afirma y lo que NO afirma</h4>
+      <table>
+        <thead><tr><th>El texto SÍ afirma</th><th>El texto NO afirma</th></tr></thead>
+        <tbody>
+          <tr><td>Hilcías halló un libro en la casa de YHWH</td><td>Que no existieran otras copias en Israel</td></tr>
+          <tr><td>El hallazgo fue durante obras de reparación</td><td>Que la Torah hubiera estado universalmente perdida</td></tr>
+          <tr><td>El libro es la Torah de YHWH dada por Moisés</td><td>Que el libro fuera una composición reciente</td></tr>
+        </tbody>
+      </table>
+      <h4>Cronología interna — 2 Crónicas 34</h4>
+      <table>
+        <thead><tr><th>Año del reinado</th><th>Edad aprox.</th><th>Evento</th><th>Ref.</th></tr></thead>
+        <tbody>
+          <tr><td>Año 1</td><td>8 años</td><td>Accede al trono</td><td>2 Cr 34:1</td></tr>
+          <tr><td>Año 8</td><td>~16 años</td><td>Comienza a buscar al Dios de David</td><td>2 Cr 34:3a</td></tr>
+          <tr><td>Año 12</td><td>~20 años</td><td>Purga activa de ídolos en Judá e Israel</td><td>2 Cr 34:3b–7</td></tr>
+          <tr><td>Año 18</td><td>~26 años</td><td>Reparación del Templo + hallazgo del Libro</td><td>2 Cr 34:8–15</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Dato crucial:</strong> Josías llevaba ya <strong>6 años de reforma activa</strong> antes del hallazgo. La reforma no fue <em>iniciada</em> por el libro; el libro la <em>profundizó</em>. Esto desmonta de raíz la versión del fraude motivador.</p>
+    </div>
+
+    <!-- §2 -->
+    <div class="sec" id="s2">
+      <div class="sec-hd"><span class="sec-num">§2</span><h2 class="sec-t">Análisis Filológico: Lo que מָצָא Implica y No Implica</h2></div>
+      <p class="sec-intro">El argumento de la "pérdida" descansa en una inferencia ilegítima del verbo hebreo מָצָא. Un examen lexicográfico riguroso la desmonta.</p>
+      <table>
+        <thead><tr><th>Referencia</th><th>Objeto "hallado"</th><th>¿Implica pérdida universal?</th></tr></thead>
+        <tbody>
+          <tr><td>Gn 26:19</td><td>Isaac halla un pozo de agua viva</td><td>No — descubrimiento en lugar específico</td></tr>
+          <tr><td>Gn 44:8</td><td>Los hermanos no hallaron la copa</td><td>No — búsqueda acotada</td></tr>
+          <tr><td>Dt 22:28</td><td>Un hombre halla a una joven</td><td>No — encuentro, no recuperación</td></tr>
+          <tr><td>1 S 9:20</td><td>Las asnas halladas tras extravío</td><td>Sí — pero con indicador explícito de extravío previo</td></tr>
+          <tr><td>2 Cr 34:14</td><td>Hilcías halla el libro en el templo</td><td>No — sin indicador de pérdida universal</td></tr>
+        </tbody>
+      </table>
+      <div class="ev">
+        <div class="ev-h"><span class="badge b-txt">Lexicografía</span>El Hallazgo como Descubrimiento en Archivo</div>
+        <p class="ev-p">El libro fue hallado <strong>בְּבֵית יְהוָה</strong> — "en la casa de YHWH". No en una cueva ni en manos de un extranjero, sino exactamente en el recinto del Templo durante trabajos de reparación. Esto es plenamente compatible con que el ejemplar llevara décadas depositado en el archivo sagrado sin ser consultado — estado normal de incontables manuscritos en archivos institucionales de cualquier época y cultura.</p>
+      </div>
+      <div class="syl">
+        <div class="syl-t">Silogismo Preliminar — Falacia de Inferencia</div>
+        <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">El verbo מָצָא designa hallazgo o descubrimiento y no implica, sin indicadores contextuales adicionales, pérdida previa universal del objeto hallado.</span></div>
+        <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El texto bíblico únicamente afirma que Hilcías halló el libro en la casa de YHWH durante reparaciones; no afirma ausencia de otras copias ni pérdida universal del texto.</span></div>
+        <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Del texto bíblico no se puede inferir que la Torah estuviera universalmente "perdida"; el argumento islámico introduce una premisa extraña al texto que pretende citar, cometiendo una falacia de inferencia.</span></div></div>
+      </div>
+    </div>
+
+    <!-- §3 -->
+    <div class="sec" id="s3">
+      <div class="sec-hd"><span class="sec-num">§3</span><h2 class="sec-t">Prueba I — El Pentateuco Samaritano: Testigo Textual Independiente</h2></div>
+      <p class="sec-intro">Esta es quizá la prueba más contundente contra la hipótesis de la falsificación josiánica. El Pentateuco Samaritano constituye un testigo textual completamente independiente del judaísmo jerosolimitano.</p>
+      <div class="ev">
+        <div class="ev-h"><span class="badge b-txt">Manuscrito</span>El Pentateuco Samaritano</div>
+        <p class="ev-p">Los samaritanos son descendientes de los habitantes del Reino del Norte de Israel. Desde la conquista asiria de 722 a.C., su tradición es independiente de Jerusalén. Su canon se limita exactamente a los cinco libros del Pentateuco. El Pentateuco Samaritano contiene el mismo Deuteronomio en su estructura fundamental: los discursos de Moisés, el Decálogo, el código legal, las leyes sobre el rey (Dt 17), el mandato de depósito (Dt 31), las bendiciones y maldiciones del pacto (Dt 28) y el cántico de Moisés (Dt 32).</p>
+      </div>
+      <table>
+        <thead><tr><th>Evento</th><th>Fecha aprox.</th><th>Implicación</th></tr></thead>
+        <tbody>
+          <tr><td>Separación samaritana del Norte</td><td>722 a.C.</td><td>La tradición textual samaritana se independiza de Jerusalén</td></tr>
+          <tr><td>Supuesta falsificación del Deuteronomio</td><td>~621 a.C.</td><td>100 años después de la separación samaritana</td></tr>
+          <tr><td>El Pentateuco Samaritano contiene el mismo Deuteronomio</td><td>Tradición ininterrumpida</td><td>¿Cómo llegó un fraude jerosolimitano tardío a una tradición independiente previa?</td></tr>
+        </tbody>
+      </table>
+      <div class="syl">
+        <div class="syl-t">Silogismo I — El Pentateuco Samaritano Refuta la Falsificación</div>
+        <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">El Pentateuco Samaritano es una tradición textual independiente anterior al siglo VII a.C. que contiene el mismo Deuteronomio en su estructura y contenido fundamental.</span></div>
+        <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Si el Deuteronomio hubiera sido compuesto fraudulentamente en Jerusalén hacia 621 a.C., una tradición independiente no sujeta a Jerusalén no podría contener ese mismo texto sin evidencia histórica de un proceso de adopción, del que no hay rastro alguno.</span></div>
+        <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El Deuteronomio existía en tradiciones independientes de Jerusalén antes de Josías; la hipótesis de la falsificación josiánica es textualmente insostenible.</span></div></div>
+      </div>
+    </div>
+
+    <!-- §4 -->
+    <div class="sec" id="s4">
+      <div class="sec-hd"><span class="sec-num">§4</span><h2 class="sec-t">Prueba II — Pergaminos de Ketef Hinnom: El Testimonio Arqueológico más Antiguo</h2></div>
+      <p class="sec-intro">El descubrimiento de Ketef Hinnom (1979) proporcionó evidencia material irrefutable de que el texto bíblico existía en forma escrita y uso activo durante el período josiánico.</p>
+      <div class="ev">
+        <div class="ev-h"><span class="badge b-arc">Arqueología</span>Los Rollos de Plata de Ketef Hinnom — Jerusalén, 1979</div>
+        <p class="ev-p">El arqueólogo Gabriel Barkay descubrió en Ketef Hinnom (Jerusalén) dos pequeños rollos de plata enrollados, usados como amuletos funerarios. Tras un delicadísimo proceso de desenrollado en el Israel Museum, el texto reveló la <strong>Bendición Aarónica de Números 6:24-26</strong>:</p><br>
+        <p class="ev-p" style="font-style:italic;color:var(--navy);direction:rtl;font-size:17px;font-family:'Times New Roman',serif;">יְבָרֶכְךָ יְהוָה וְיִשְׁמְרֶֽךָ יָאֵר יְהוָה פָּנָיו אֵלֶיךָ וִיחֻנֶּֽךָּ יִשָּׂא יְהוָה פָּנָיו אֵלֶיךָ וְיָשֵׂם לְךָ שָׁלֽוֹם׃</p><br>
+        <p class="ev-p">La datación paleográfica y estratigráfica sitúa estos rollos en el <strong>siglo VII a.C.</strong> — exactamente el período de Josías. Son los <strong>manuscritos bíblicos más antiguos jamás hallados</strong>, anteriores a los Rollos del Mar Muerto por más de cuatro siglos, y su texto coincide sustancialmente con el texto masorético.</p>
+      </div>
+      <div class="syl">
+        <div class="syl-t">Silogismo II — Ketef Hinnom: Continuidad Textual Material</div>
+        <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Textos bíblicos (Nm 6:24-26) fueron inscritos en amuletos funerarios de plata en el siglo VII a.C., coincidiendo sustancialmente con el texto masorético.</span></div>
+        <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Un texto de uso devocional cotidiano inscrito en amuletos personales no puede ser simultáneamente un texto nuevo y desconocido recién falsificado en ese mismo período.</span></div>
+        <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">La evidencia arqueológica confirma que el texto bíblico era antiguo, conocido y reverenciado en el período de Josías; la hipótesis de falsificación contemporánea contradice los datos materiales.</span></div></div>
+      </div>
+    </div>
+
+    <!-- §5 -->
+    <div class="sec" id="s5">
+      <div class="sec-hd"><span class="sec-num">§5</span><h2 class="sec-t">Prueba III — Los Profetas Pre-josiánicos Conocían la Torah</h2></div>
+      <p class="sec-intro">Si la Torah fue falsificada en tiempos de Josías (~621 a.C.), los profetas anteriores no deberían conocer su contenido. La evidencia profética refuta directamente esta posibilidad.</p>
+      <table>
+        <thead><tr><th>Profeta</th><th>Fechas aprox.</th><th>Referencia clave</th><th>Contenido</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Amós</strong></td><td>~760 a.C.</td><td>Am 2:4; 4:4–5; 5:21–27</td><td>Torah de YHWH como norma ya violada; crítica cultual paralela al Deuteronomio</td></tr>
+          <tr><td><strong>Oseas</strong></td><td>~750 a.C.</td><td>Os 4:6; 8:1, 12</td><td>«Los diez mil preceptos de mi Torah» como texto escrito ya establecido y rechazado</td></tr>
+          <tr><td><strong>Isaías</strong></td><td>~740–700 a.C.</td><td>Is 1:10; 2:3; 5:24; 8:20</td><td>Apelación constante a la Torah como norma ya dada; «¡A la Torah y al testimonio!»</td></tr>
+          <tr><td><strong>Miqueas</strong></td><td>~730 a.C.</td><td>Mi 4:2; 6:8</td><td>Torah como norma divina establecida; concepto del pacto de obediencia</td></tr>
+        </tbody>
+      </table>
+      <div class="ev">
+        <div class="ev-h"><span class="badge b-txt">Evidencia Decisiva</span>Oseas 8:12 — c. 750 a.C. (130 años antes de Josías)</div>
+        <p class="ev-p"><strong>«אֶכְתָּב-לוֹ רֻבֵּי תּוֹרָתִי כְּמוֹ-זָר נֶחְשָׁבוּ»</strong> — «Aunque escriba para él la plenitud de mi Torah, son tenidos como algo extraño.» Este versículo presupone: (a) una Torah escrita ya existente, (b) que el pueblo la conoce pero la rechaza, (c) que tiene autoridad normativa establecida. Un texto que aún no existe no puede ser "rechazado como algo extraño" un siglo antes de ser escrito.</p>
+      </div>
+      <div class="syl">
+        <div class="syl-t">Silogismo III — Los Profetas Pre-josiánicos Refutan la Composición Tardía</div>
+        <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si la Torah fuera composición fraudulenta de ~621 a.C., los profetas del siglo VIII a.C. no podrían citarla como norma divina ya establecida.</span></div>
+        <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Amós, Oseas, Isaías y Miqueas (siglo VIII a.C.) apelan explícitamente a la Torah como norma ya dada y conocida por el pueblo, usando terminología y conceptos que presuponen un texto establecido.</span></div>
+        <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">La Torah existía como texto normativo al menos un siglo antes de Josías; la hipótesis de la falsificación josiánica contradice el corpus profético pre-josiánico.</span></div></div>
+      </div>
+    </div>
+
+    <!-- §6 -->
+    <div class="sec" id="s6">
+      <div class="sec-hd"><span class="sec-num">§6</span><h2 class="sec-t">Prueba IV — La Torah Ordena su Propio Depósito en el Templo</h2></div>
+      <p class="sec-intro">Argumento de coherencia interna decisivo: el libro fue hallado exactamente donde la propia Torah ordena depositarlo. El hallazgo confirma la autenticidad del texto, no evidencia pérdida ni fraude.</p>
+      <div class="bible">
+        <span class="b-ref">Deuteronomio 31:24-26 — Mandato de depósito</span>
+        <span class="b-heb">לָקֹחַ אֵת סֵפֶר הַתּוֹרָה הַזֶּה וְשַׂמְתֶּם אֹתוֹ מִצַּד אֲרוֹן בְּרִית-יְהוָה אֱלֹהֵיכֶם וְהָיָה-שָׁם בְּךָ לְעֵד</span>
+        <span class="b-es">«Tomad este libro de la Torah y ponedlo al lado del arca del pacto de YHWH vuestro Dios, y estará allí por testigo contra ti.»</span>
+      </div>
+      <div class="bible">
+        <span class="b-ref">Deuteronomio 17:18-19 — Los reyes deben copiar la Torah</span>
+        <span class="b-heb">וְכָתַב לוֹ אֶת-מִשְׁנֵה הַתּוֹרָה הַזֹּאת עַל-סֵפֶר מִלִּפְנֵי הַכֹּהֲנִים הַלְוִיִּם</span>
+        <span class="b-es">«Escribirá para sí una copia de esta Torah, delante de los sacerdotes levitas.» — Implica múltiples copias existentes; la Torah nunca fue diseñada en ejemplar único.</span>
+      </div>
+      <div class="syl">
+        <div class="syl-t">Silogismo IV — El Libro Estaba Donde la Torah Ordena que Esté</div>
+        <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Deuteronomio 31:26 ordena depositar el libro de la Torah junto al Arca en la casa de YHWH como testimonio permanente.</span></div>
+        <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El libro fue hallado precisamente en la casa de YHWH (2 Cr 34:14), el lugar exacto que la Torah misma señala como su lugar de custodia.</span></div>
+        <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El hallazgo en el templo cumple las instrucciones internas del propio texto; es coherente con la autenticidad y completamente incompatible con la narrativa de pérdida generalizada.</span></div></div>
+      </div>
+    </div>
+
+    <!-- §7 -->
+    <div class="sec" id="s7">
+      <div class="sec-hd"><span class="sec-num">§7</span><h2 class="sec-t">Prueba V — La Reacción de Josías Refuta la Falsificación</h2></div>
+      <p class="sec-intro">La respuesta emocional de Josías al escuchar el libro es uno de los argumentos psicológicos más sólidos contra la hipótesis del fraude piadoso.</p>
+      <div class="bible">
+        <span class="b-ref">2 Reyes 22:11 / 2 Crónicas 34:19</span>
+        <span class="b-heb">וַיְהִי כִּשְׁמֹעַ הַמֶּלֶךְ אֶת-דִּבְרֵי סֵפֶר הַתּוֹרָה וַיִּקְרַע אֶת-בְּגָדָיו</span>
+        <span class="b-es">«Cuando el rey oyó las palabras del libro de la Torah, rasgó sus vestiduras.»</span>
+      </div>
+      <p>Rasgarse las vestiduras (קָרַע בְּגָדִים, <em>qará begadím</em>) es señal inequívoca de duelo extremo o terror en la cultura hebrea (Gn 37:29; 2 S 1:11; Job 1:20). El contenido que aterró a Josías son las maldiciones del pacto de Deuteronomio 28:15-68, que describen las calamidades sobre Israel por desobediencia. Al escucharlas, Josías comprende que su pueblo las ha merecido por generaciones.</p>
+      <div class="obj"><span class="db-l">Objeción islámica / hipótesis académica</span><p class="db-p">Hilcías y los sacerdotes fabricaron el Deuteronomio para centralizar el culto en Jerusalén y empoderar a la clase sacerdotal.</p></div>
+      <div class="ref"><span class="db-l">Refutación</span><p class="db-p">Un falsificador escribe para agradar a su patrón, no para aterrorizarlo. Si el propósito era empoderar al rey, ¿por qué incluir las aterradoras maldiciones del cap. 28 que causaron el duelo real? Adicionalmente, Dt 17:14-20 <em>limita</em> el poder del rey, prohibiéndole acumular caballos, mujeres y riquezas. Un texto fabricado para servir a Josías no habría incluido restricciones al poder real que el propio rey debía acatar.</p></div>
+      <div class="syl">
+        <div class="syl-t">Silogismo V — La Reacción de Terror como Criterio de Autenticidad</div>
+        <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si el Deuteronomio hubiera sido fabricado para servir al rey, habría sido redactado para complacerlo; no contendría pasajes que lo llenaran de terror y lo llevaran a rasgar sus vestiduras.</span></div>
+        <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El texto causó en Josías tal horror que rasgó sus vestiduras (2 Re 22:11; 2 Cr 34:19), señal de duelo o terror extremo según la cultura hebrea.</span></div>
+        <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">La reacción de terror de Josías es psicológicamente incompatible con un texto fabricado para su beneficio; es coherente únicamente con el descubrimiento de un texto genuino y antiguo cuyo contenido le resultó desconocido y devastador.</span></div></div>
+      </div>
+    </div>
+
+    <!-- §8 -->
+    <div class="sec" id="s8">
+      <div class="sec-hd"><span class="sec-num">§8</span><h2 class="sec-t">Prueba VI — Hulda: Autenticación Profética Independiente</h2></div>
+      <p class="sec-intro">Josías no se fió del testimonio de Hilcías sin verificación. Buscó confirmación ante una autoridad profética completamente independiente del sacerdocio del Templo.</p>
+      <div class="bible">
+        <span class="b-ref">2 Reyes 22:13-14 — Josías busca verificación externa</span>
+        <span class="b-heb">וַיְצַו הַמֶּלֶךְ לְכוּ דִרְשׁוּ אֶת-יְהוָה... עַל דִּבְרֵי הַסֵּפֶר הַנִּמְצָא... וַיֵּלְכוּ... אֶל-חֻלְדָּה הַנְּבִיאָה</span>
+        <span class="b-es">«El rey mandó: Id y consultad a YHWH... acerca de las palabras del libro hallado... Y fueron... a la profetisa Hulda.»</span>
+      </div>
+      <div class="ev">
+        <div class="ev-h"><span class="badge b-gld">Epistemología</span>Estructura de Doble Verificación</div>
+        <p class="ev-p">El relato presenta múltiples testigos independientes: (1) Hilcías encuentra el libro, (2) Safán lo lee al rey, (3) Josías, en lugar de aceptarlo sin más, ordena consultar a una profetisa <em>independiente del sacerdocio</em> para verificar su autenticidad. Esta búsqueda activa de validación externa es el comportamiento opuesto al de alguien que participa en un fraude. Los organizadores de una conspiración no promueven voluntariamente la verificación externa que los expondría.</p>
+      </div>
+      <div class="syl">
+        <div class="syl-t">Silogismo VI — La Consulta a Hulda Refuta la Conspiración</div>
+        <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Los organizadores de un fraude no buscarían verificación ante un testigo independiente que pudiera exponerlos.</span></div>
+        <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Josías ordenó consultar a Hulda, profetisa independiente del sacerdocio, para verificar el libro; Hilcías acudió personalmente ante ella.</span></div>
+        <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">La búsqueda activa de validación independiente es comportamiento propio de quien genuinamente desconoce el origen del texto y busca discernir su autenticidad, no de quien participa en su fabricación.</span></div></div>
+      </div>
+    </div>
+
+    <!-- §9 -->
+    <div class="sec" id="s9">
+      <div class="sec-hd"><span class="sec-num">§9</span><h2 class="sec-t">Prueba VII — Textos Legales en Templos del ANE</h2></div>
+      <p class="sec-intro">El hallazgo de un texto legal en un templo durante obras de renovación no es una anomalía bíblica: es una práctica ampliamente documentada en el Antiguo Oriente Próximo.</p>
+      <div class="ev">
+        <div class="ev-h"><span class="badge b-arc">ANE</span>El Código de Hammurabi (c. 1754 a.C.)</div>
+        <p class="ev-p">La estela del Código de Hammurabi fue depositada originalmente en el templo de Marduk en Babilonia. El depósito de códigos legales en templos era práctica estándar en Mesopotamia: el templo funcionaba como archivo sagrado de la ley divina.</p>
+      </div>
+      <div class="ev">
+        <div class="ev-h"><span class="badge b-arc">ANE</span>Tratados Hititas y la Estructura Paralela al Deuteronomio</div>
+        <p class="ev-p">K.A. Kitchen y Meredith Kline documentaron que el Deuteronomio sigue el patrón formal de los <em>tratados de vasallaje hititas</em> del segundo milenio a.C. (siglos XIV–XIII a.C., documentados en Hattusha/Bogazköy), incluyendo seis elementos: preámbulo, prólogo histórico, estipulaciones generales, estipulaciones específicas, lista de testigos divinos, y bendiciones y maldiciones. Esta estructura incluye invariablemente la cláusula de <strong>depósito del tratado en el templo</strong> y su lectura periódica — exactamente lo que Dt 31 ordena. Esta estructura es propia del segundo milenio a.C. y desaparece en los tratados neo-asirios del primer milenio. Un falsificador del siglo VII a.C. no podría haber imitado artificialmente una forma literaria olvidada y no redescubierta por la arqueología hasta el siglo XX.</p>
+      </div>
+    </div>
+
+    <!-- §10 -->
+    <div class="sec" id="s10">
+      <div class="sec-hd"><span class="sec-num">§10</span><h2 class="sec-t">La Hipótesis Documentaria Josiánica: De Wette y Wellhausen</h2></div>
+      <p class="sec-intro">Por honestidad intelectual se refuta también la versión académica secular del argumento. W.M.L. de Wette (1805) propuso que el libro hallado era el Deuteronomio compuesto en la época josiánica.</p>
+      <div class="obj"><span class="db-l">Hipótesis De Wette–Wellhausen</span><p class="db-p">El Deuteronomio fue compuesto hacia el siglo VII a.C. como fraude piadoso para centralizar el culto en Jerusalén y fortalecer la autoridad sacerdotal y real josiánica.</p></div>
+      <div class="ref"><span class="db-l">Refutación en Cuatro Niveles</span><p class="db-p">
+        <strong>(1) El Pentateuco Samaritano</strong> (§3): tradición independiente con el mismo Deuteronomio, proveniente de antes de la supuesta composición.<br><br>
+        <strong>(2) Los profetas del siglo VIII a.C.</strong> (§5): Oseas, Amós e Isaías conocían la Torah más de un siglo antes.<br><br>
+        <strong>(3) La estructura del tratado hitita del 2.º milenio a.C.</strong> (§9): un falsificador del siglo VII a.C. no habría podido imitar una forma literaria desconocida hasta el siglo XX.<br><br>
+        <strong>(4) Dt 17:14-20 limita el poder real</strong>: un texto fabricado para servir a Josías no habría incluido restricciones al poder del propio rey.
+      </p></div>
+    </div>
+
+    <!-- §11 -->
+    <div class="sec" id="s11">
+      <div class="sec-hd"><span class="sec-num">§11</span><h2 class="sec-t">El Dilema Coránico: El Islam Contradice su Propio Argumento</h2></div>
+      <p class="sec-intro">Este es el contra-ataque más directo y devastador. Si la Torah fue corrompida desde tiempos de Josías (~621 a.C.), el propio Corán entra en una contradicción interna irresoluble.</p>
+      <h4>Lo que el Corán afirma sobre la Torah</h4>
+      <div class="arab">
+        <span class="arab-t">إِنَّا أَنزَلْنَا التَّوْرَاةَ فِيهَا هُدًى وَنُورٌ</span>
+        <span class="arab-r">Corán 5:44 — «En verdad, Nosotros enviamos la Torah; en ella hay guía y luz.»</span>
+      </div>
+      <div class="arab">
+        <span class="arab-t">قُلْ يَا أَهْلَ الْكِتَابِ لَسْتُمْ عَلَىٰ شَيْءٍ حَتَّىٰ تُقِيمُوا التَّوْرَاةَ وَالْإِنجِيلَ</span>
+        <span class="arab-r">Corán 5:68 — «Di: Gente del Libro, no tenéis fundamento hasta que pongáis en práctica la Torah y el Evangelio.»</span>
+      </div>
+      <div class="arab">
+        <span class="arab-t">فَإِن كُنتَ فِي شَكٍّ مِّمَّا أَنزَلْنَا إِلَيْكَ فَاسْأَلِ الَّذِينَ يَقْرَءُونَ الْكِتَابَ مِن قَبْلِكَ</span>
+        <span class="arab-r">Corán 10:94 — «Si estás en duda sobre lo que te hemos revelado, pregunta a quienes leen el Libro antes que tú.»</span>
+      </div>
+      <table>
+        <thead><tr><th>Premisa Islámica</th><th>Implicación</th><th>Contradicción con el Corán</span></th></tr></thead>
+        <tbody>
+          <tr><td>Torah corrompida desde Josías (~621 a.C.)</td><td>Corrompida 1.200 años antes de Mahoma</td><td>Q 5:44 afirma que contiene guía y luz divinas</td></tr>
+          <tr><td>La Torah disponible en tiempos de Mahoma era ese texto corrompido</td><td>Texto alterado por más de un milenio</td><td>Q 5:68 ordena ponerla en práctica como norma válida</td></tr>
+          <tr><td>El Corán corrige el texto corrupto</td><td>El Kitab bíblico sería inservible como referencia</td><td>Q 10:94 ordena a Mahoma consultar a los lectores del Libro</td></tr>
+        </tbody>
+      </table>
+      <div class="syl">
+        <div class="syl-t">Silogismo VII — El Dilema Coránico Irresoluble</div>
+        <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">El apologista islámico afirma que la Torah fue corrompida desde tiempos de Josías (~621 a.C.), aproximadamente 1.200 años antes del período coránico.</span></div>
+        <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El Corán (5:44, 5:68, 10:94) apela a la Torah como Palabra de Allah que contiene guía y luz, ordena a los creyentes ponerla en práctica y manda al propio Mahoma consultarla como autoridad, sin indicar que el texto disponible esté corrompido.</span></div>
+        <div class="syl-r"><span class="syl-l">P3</span><span class="syl-txt">Ordenar seguir y consultar un texto corrompido hace más de un milenio como Palabra de Allah sería teológicamente inadmisible en el propio sistema islámico.</span></div>
+        <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">O bien la Torah no estaba corrompida en tiempos de Mahoma (lo que invalida el tahríf retroactivo desde Josías), o bien el Corán ordena seguir un texto corrupto (lo que contradice la teodicea islámica). El dilema es interno e irresoluble: el argumento islámico sobre Josías se destruye con la propia autoridad coránica que sus defensores invocan.</span></div></div>
+      </div>
+    </div>
+
+    <!-- §12 -->
+    <div class="sec" id="s12">
+      <div class="sec-hd"><span class="sec-num">§12</span><h2 class="sec-t">Silogismos Formales: Resumen Compilado para Debate</h2></div>
+      <p class="sec-intro">Los ocho silogismos del análisis presentados en forma condensada, listos para uso directo en debate o presentación.</p>
+
+      <div class="syl"><div class="syl-t">I — La "Pérdida" es una Falacia de Inferencia</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">מָצָא no implica pérdida universal previa del objeto hallado.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El texto solo afirma el hallazgo en el Templo; no afirma ausencia de otras copias.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El argumento de la "pérdida" introduce una premisa extraña al texto; es una inferencia ilegítima.</span></div></div></div>
+
+      <div class="syl"><div class="syl-t">II — El Pentateuco Samaritano Refuta la Falsificación</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Tradición textual independiente anterior al siglo VII a.C. contiene el mismo Deuteronomio.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Un fraude jerosolimitano de 621 a.C. no estaría en una tradición independiente y previa sin evidencia de adopción.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El Deuteronomio existía en tradiciones independientes antes de Josías.</span></div></div></div>
+
+      <div class="syl"><div class="syl-t">III — Ketef Hinnom: El Texto Existía en Uso Activo</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Texto bíblico inscrito en amuletos funerarios de plata en el siglo VII a.C.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Un texto de uso devocional cotidiano no puede ser simultáneamente un texto recién falsificado.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El texto bíblico era antiguo y reverenciado en el período de Josías; la falsificación contemporánea contradice los datos materiales.</span></div></div></div>
+
+      <div class="syl"><div class="syl-t">IV — Los Profetas del Siglo VIII a.C. Conocían la Torah</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si la Torah fuera composición de ~621 a.C., los profetas del siglo VIII a.C. no podrían citarla.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Amós, Oseas, Isaías y Miqueas la citan como norma ya establecida.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">La Torah existía como texto normativo al menos un siglo antes de Josías.</span></div></div></div>
+
+      <div class="syl"><div class="syl-t">V — El Libro Estaba Donde la Torah Ordena que Esté</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Dt 31:26 ordena depositar el libro junto al Arca en la casa de YHWH.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El libro fue hallado precisamente en la casa de YHWH.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El hallazgo confirma coherencia interna del texto y refuerza su autenticidad.</span></div></div></div>
+
+      <div class="syl"><div class="syl-t">VI — La Reacción de Terror de Josías Contradice el Fraude</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Un texto fabricado para complacer al rey no habría generado terror en él.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Josías rasgó sus vestiduras al escuchar el libro: señal de duelo o terror extremo.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">La reacción de Josías es psicológicamente incompatible con la hipótesis del fraude piadoso.</span></div></div></div>
+
+      <div class="syl"><div class="syl-t">VII — La Consulta a Hulda Refuta la Conspiración</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Los organizadores de un fraude no promueven verificación ante testigos independientes.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Josías ordenó consultar a Hulda, profetisa independiente del sacerdocio.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">La búsqueda de validación independiente es comportamiento incompatible con la participación en un fraude.</span></div></div></div>
+
+      <div class="syl"><div class="syl-t">VIII — El Dilema Coránico Irresoluble</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si la Torah fue corrompida desde Josías (~621 a.C.), estaba corrompida 1.200 años antes de Mahoma.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El Corán apela a la Torah como Palabra de Allah con guía y luz, sin indicar corrupción textual (Q 5:44, 5:68, 10:94).</span></div><div class="syl-r"><span class="syl-l">P3</span><span class="syl-txt">Ordenar seguir un texto corrompido como Palabra de Dios es inadmisible en la teodicea islámica.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El tahríf josiánico contradice la posición coránica sobre la Torah; el apologista islámico no puede sostener ambas premisas simultáneamente sin contradicción interna.</span></div></div></div>
+    </div>
+
+    <!-- §13 -->
+    <div class="sec" id="s13">
+      <div class="sec-hd"><span class="sec-num">§13</span><h2 class="sec-t">Conclusión General</h2></div>
+      <div class="concl">
+        <h3>El Episodio de Josías: Un Argumento Refutado en Ocho Frentes Independientes</h3>
+        <p>El argumento islámico del tahríf basado en el hallazgo del Libro de la Ley bajo Josías falla simultáneamente en ocho niveles distintos e independientes entre sí.</p>
+        <p><strong style="color:var(--gold-lt)">1. Filológico —</strong> El verbo מָצָא no implica pérdida universal; el argumento introduce una premisa extraña al texto. <strong style="color:var(--gold-lt)">2. Textual externo —</strong> El Pentateuco Samaritano preserva el mismo Deuteronomio en tradición independiente de antes de Josías. <strong style="color:var(--gold-lt)">3. Arqueológico —</strong> Ketef Hinnom prueba uso activo del texto bíblico en ese período mediante los manuscritos más antiguos jamás hallados.</p>
+        <p><strong style="color:var(--gold-lt)">4. Profético —</strong> Los profetas del siglo VIII a.C. conocían y citaban la Torah más de un siglo antes de Josías. <strong style="color:var(--gold-lt)">5. Interno —</strong> El hallazgo en el Templo cumple exactamente el mandato de Dt 31:26, confirmando la autenticidad. <strong style="color:var(--gold-lt)">6. Psicológico —</strong> La reacción de terror de Josías es incompatible con un texto fabricado para su beneficio.</p>
+        <p><strong style="color:var(--gold-lt)">7. Epistemológico —</strong> La consulta a Hulda como verificación independiente es comportamiento diametralmente opuesto al de un conspirador. <strong style="color:var(--gold-lt)">8. Coránico —</strong> El propio Corán trata la Torah como Palabra de Allah con guía y luz, destruyendo el tahríf retroactivo con la autoridad que el propio apologista islámico invoca.</p>
+        <p>Un argumento que falla en cada uno de sus frentes posibles no es simplemente débil: es insostenible. El episodio de Josías, leído en su contexto bíblico, filológico, histórico, arqueológico y comparativo, es plenamente coherente con una Torah auténtica, antigua y fielmente transmitida.</p>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+(function () {
+  const btn     = document.getElementById('menuBtn');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const links   = document.querySelectorAll('.toc-a');
+  const sections = document.querySelectorAll('.sec');
+
+  function openMenu() {
+    sidebar.classList.add('open');
+    overlay.classList.add('show');
+    btn.classList.add('active');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+    btn.classList.remove('active');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', () =>
+    sidebar.classList.contains('open') ? closeMenu() : openMenu()
+  );
+  overlay.addEventListener('click', closeMenu);
+
+  // Close on link click (mobile)
+  links.forEach(a => a.addEventListener('click', closeMenu));
+
+  // Scrollspy
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = '#' + e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-18% 0px -72% 0px', threshold: 0 });
+
+  sections.forEach(s => io.observe(s));
+})();
+</script>
+</body>
+</html>

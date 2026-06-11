@@ -15,3 +15,7 @@ El objetivo no es humillar al interlocutor, sino aclarar la verdad con firmeza y
 
 - [Ir a Respondiendo al Islam](/respondiendo-al-islam/)
 - [Ver dossiers en Historia](/historia/)
+
+## Dossiers integrados
+
+- [Josias Refutacion (Dossier)](/refutaciones/josias-refutacion-dossier/)

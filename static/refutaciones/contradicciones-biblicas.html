@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 Contradicciones Bíblicas — Resueltas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0c0e14;
+    --surface: #13161f;
+    --surface2: #1c2030;
+    --surface3: #242840;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #7c9fff;
+    --accent2: #b89fff;
+    --accent3: #5ed4a4;
+    --gold: #f0c060;
+    --red: #f08080;
+    --orange: #f0a060;
+    --text: #dde0ed;
+    --text2: #8890aa;
+    --text3: #5a6278;
+    --glow: rgba(124,159,255,0.08);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #0f1628 0%, #0c0e14 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 64px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,159,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.8;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    color: var(--text2);
+    font-size: 0.95rem;
+    max-width: 560px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+  .hero-stats {
+    display: inline-flex;
+    gap: 1px;
+    background: var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .hero-stat {
+    background: var(--surface);
+    padding: 14px 28px;
+    text-align: center;
+  }
+  .hero-stat-num {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    font-family: 'Lora', serif;
+    display: block;
+  }
+  .hero-stat-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text3);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── LAYOUT ── */
+  .app-layout {
+    display: flex;
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: calc(100vh - 220px);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 300px;
+    min-width: 300px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: left 0.3s;
+  }
+  .sb-top {
+    padding: 18px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .sb-title {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 12px;
+  }
+  .search-wrap {
+    position: relative;
+  }
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    font-size: 0.85rem;
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    padding: 9px 12px 9px 32px;
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(124,159,255,0.12);
+  }
+  .search-input::placeholder { color: var(--text3); }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .pill {
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    font-size: 0.68rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.18s;
+    text-transform: capitalize;
+  }
+  .pill:hover { background: var(--surface2); color: var(--text); border-color: var(--border2); }
+  .pill.active { background: var(--accent); color: #0c0e14; border-color: var(--accent); font-weight: 600; }
+
+  .toc-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 10px 20px;
+  }
+  .toc-scroll::-webkit-scrollbar { width: 3px; }
+  .toc-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  .toc-cat-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    padding: 16px 8px 5px;
+    opacity: 0.7;
+  }
+  .toc-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text2);
+    font-size: 0.78rem;
+    line-height: 1.35;
+    transition: all 0.15s;
+  }
+  .toc-link:hover { background: var(--surface2); color: var(--text); }
+  .toc-link.active { background: rgba(124,159,255,0.1); color: var(--accent); }
+  .toc-n {
+    min-width: 24px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: var(--surface3);
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    flex: 1;
+    min-width: 0;
+    padding: 32px 40px 100px;
+  }
+  .main-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .expand-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text2);
+    font-size: 0.8rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .expand-btn:hover { background: var(--surface2); color: var(--text); border-color: var(--border2); }
+  .result-count {
+    font-size: 0.78rem;
+    color: var(--text3);
+  }
+
+  /* ── CATEGORY HEADING ── */
+  .cat-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 44px 0 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .cat-heading:first-of-type { margin-top: 0; }
+  .cat-icon { font-size: 1.2rem; }
+  .cat-name {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .cat-count {
+    margin-left: auto;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text3);
+    background: var(--surface2);
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    scroll-margin-top: 20px;
+    transition: border-color 0.25s;
+    overflow: hidden;
+  }
+  .card:hover { border-color: var(--border2); }
+  .card.open { border-color: rgba(124,159,255,0.2); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .card-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--surface3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    font-family: 'Lora', serif;
+  }
+  .card.open .card-num {
+    background: rgba(124,159,255,0.15);
+  }
+  .card-title {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .card-chevron {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text3);
+    flex-shrink: 0;
+    transition: transform 0.25s, background 0.2s, color 0.2s;
+    font-size: 0.75rem;
+  }
+  .card.open .card-chevron {
+    transform: rotate(180deg);
+    background: rgba(124,159,255,0.12);
+    color: var(--accent);
+  }
+
+  .card-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 0;
+  }
+  .card.open .card-body { display: block; }
+
+  .verses-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 16px 0 14px;
+  }
+  .verse-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    position: relative;
+  }
+  .verse-ref {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    margin-bottom: 7px;
+    opacity: 0.9;
+  }
+  .verse-text {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.83rem;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .resolution-block {
+    background: rgba(94,212,164,0.05);
+    border-left: 2px solid var(--accent3);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin-top: 2px;
+  }
+  .res-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent3);
+    margin-bottom: 8px;
+    opacity: 0.85;
+  }
+  .res-text {
+    font-size: 0.87rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  .tag-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.63rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 12px;
+  }
+  .tag-contexto { background: rgba(124,159,255,0.1); color: var(--accent); border: 1px solid rgba(124,159,255,0.2); }
+  .tag-lenguaje { background: rgba(184,159,255,0.1); color: var(--accent2); border: 1px solid rgba(184,159,255,0.2); }
+  .tag-género { background: rgba(240,192,96,0.1); color: var(--gold); border: 1px solid rgba(240,192,96,0.2); }
+  .tag-cultura { background: rgba(240,128,128,0.1); color: var(--red); border: 1px solid rgba(240,128,128,0.2); }
+  .tag-copista { background: rgba(240,160,96,0.1); color: var(--orange); border: 1px solid rgba(240,160,96,0.2); }
+  .tag-teología { background: rgba(94,212,164,0.1); color: var(--accent3); border: 1px solid rgba(94,212,164,0.2); }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text3);
+  }
+  .empty-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .empty-text { font-size: 0.9rem; }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #0c0e14;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    z-index: 99;
+    transition: transform 0.2s, opacity 0.2s;
+    box-shadow: 0 4px 16px rgba(124,159,255,0.3);
+  }
+  .back-top.visible { display: flex; }
+  .back-top:hover { transform: translateY(-2px); }
+
+  /* ── MOBILE TOGGLE ── */
+  .mobile-toggle {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-size: 1.1rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 150;
+    backdrop-filter: blur(2px);
+  }
+  .overlay.visible { display: block; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 940px) {
+    .sidebar {
+      position: fixed;
+      left: -310px;
+      top: 0;
+      z-index: 160;
+      height: 100vh;
+      transition: left 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    .sidebar.open { left: 0; }
+    .mobile-toggle { display: flex; }
+    .main { padding: 16px 16px 80px; margin-top: 56px; }
+    .hero { padding: 72px 20px 36px; }
+    .verses-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: column; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.55rem; }
+    .hero-stat { padding: 12px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<button class="mobile-toggle" id="mobileToggle" aria-label="Abrir índice">☰</button>
+<div class="overlay" id="overlay"></div>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">Apologética Bíblica</p>
+  <h1>100 <em>Contradicciones</em> Bíblicas<br>Resueltas</h1>
+  <p class="hero-sub">Análisis teológico, histórico y lingüístico de las objeciones más populares contra la coherencia de las Escrituras.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num" id="statTotal">100</span>
+      <span class="hero-stat-label">Contradicciones</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">10</span>
+      <span class="hero-stat-label">Categorías</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">6</span>
+      <span class="hero-stat-label">Tipos de resolución</span>
+    </div>
+  </div>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-top">
+      <div class="sb-title">Índice de Navegación</div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="searchInput" type="text" placeholder="Buscar tema o versículo…" autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+
+    <div class="filter-pills" id="filterPills">
+      <button class="pill active" data-f="all">Todas</button>
+      <button class="pill" data-f="contexto">Contexto</button>
+      <button class="pill" data-f="lenguaje">Lenguaje</button>
+      <button class="pill" data-f="género">Género</button>
+      <button class="pill" data-f="cultura">Cultura</button>
+      <button class="pill" data-f="copista">Copista</button>
+      <button class="pill" data-f="teología">Teología</button>
+    </div>
+
+    <nav class="toc-scroll" id="toc" aria-label="Tabla de contenidos"></nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="main-controls">
+      <button class="expand-btn" id="expandBtn">▸ Expandir todas</button>
+      <span class="result-count" id="resultCount">Mostrando 100 de 100</span>
+    </div>
+    <div id="cardsContainer"></div>
+  </main>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Volver al inicio">↑</button>
+
+<script>
+const DATA = [
+  {id:1,cat:"Creación y Génesis",icon:"🌍",tag:"género",tl:"Género Literario",title:"Orden de creación: ¿plantas antes o después del hombre?",v1r:"Génesis 1:11-27",v1t:"Produzca la tierra hierba verde… [Día 3]. Hagamos al hombre… [Día 6].",v2r:"Génesis 2:5-7",v2t:"Aún no había ninguna planta del campo… Entonces Dios formó al hombre.",res:"Génesis 1 es un relato cronológico de toda la creación. Génesis 2 es un relato temático que hace 'zoom' en el jardín del Edén. La palabra hebrea 'siach' en Génesis 2:5 se refiere específicamente a plantas de cultivo o arbustos del campo que requerían lluvia y labor humana, no a toda la vegetación."},
+  {id:2,cat:"Creación y Génesis",icon:"🌍",tag:"género",tl:"Género Literario",title:"¿Se crearon el hombre y la mujer juntos o por separado?",v1r:"Génesis 1:27",v1t:"Y creó Dios al hombre a su imagen; varón y hembra los creó.",v2r:"Génesis 2:7,21-22",v2t:"Formó al hombre del polvo… luego tomó una costilla y de ella hizo una mujer.",res:"Génesis 1 ofrece el resumen panorámico de la creación de la humanidad como un todo. Génesis 2 narra los detalles específicos del proceso. No hay contradicción; son dos niveles de narración del mismo evento, recurso literario llamado 'waw explicativo' en hebreo."},
+  {id:3,cat:"Creación y Génesis",icon:"🌍",tag:"lenguaje",tl:"Lenguaje",title:"¿La luz fue creada antes que el sol?",v1r:"Génesis 1:3",v1t:"Y dijo Dios: Sea la luz; y fue la luz. [Día 1]",v2r:"Génesis 1:14-19",v2t:"Dijo Dios: Sean lumbreras en la expansión de los cielos. [Día 4]",res:"La luz puede existir de forma independiente al sol. Los físicos saben que el universo estuvo lleno de luz antes de que los cuerpos celestes se condensaran. El día 4 Dios 'asigna' al sol y la luna las funciones de regular las estaciones y los tiempos, no los crea de la nada."},
+  {id:4,cat:"Creación y Génesis",icon:"🌍",tag:"contexto",tl:"Contexto",title:"¿De dónde sacó Caín su esposa?",v1r:"Génesis 4:1-2",v1t:"Adán conoció a su mujer Eva, la cual concibió y dio a luz a Caín… y después a Abel.",v2r:"Génesis 4:17",v2t:"Y conoció Caín a su mujer, la cual concibió y dio a luz a Enoc.",res:"Génesis 5:4 especifica que Adán 'engendró hijos e hijas' durante siglos. La esposa de Caín era una de sus hermanas o sobrinas. Las leyes que prohíben matrimonios entre parientes fueron dadas siglos después con Moisés, cuando la acumulación de mutaciones genéticas ya lo hacía peligroso."},
+  {id:5,cat:"Creación y Génesis",icon:"🌍",tag:"contexto",tl:"Contexto",title:"¿Cuántos animales entró Noé al arca: 2 o 7?",v1r:"Génesis 6:19",v1t:"De todo ser viviente… meterás en el arca dos de cada especie.",v2r:"Génesis 7:2",v2t:"De todo animal limpio tomarás siete parejas; de los animales no limpios, dos.",res:"La instrucción de Génesis 6 es el mandato general de preservación (mínimo dos de cada especie). Génesis 7 da instrucciones adicionales: de los animales 'limpios' se toman siete parejas porque serían usados en sacrificios y alimentación tras el diluvio, sin agotar la especie."},
+  {id:6,cat:"Creación y Génesis",icon:"🌍",tag:"lenguaje",tl:"Lenguaje",title:"¿El diluvio duró 40 días o 150 días?",v1r:"Génesis 7:17",v1t:"Y duró el diluvio cuarenta días sobre la tierra.",v2r:"Génesis 7:24",v2t:"Y prevalecieron las aguas sobre la tierra ciento cincuenta días.",res:"No se contradicen; describen fases distintas: llovió sin parar durante 40 días (fase de inundación activa), pero las aguas tardaron 150 días en alcanzar su nivel máximo y comenzar a descender. Ambas cifras son compatibles y complementarias."},
+  {id:7,cat:"Creación y Génesis",icon:"🌍",tag:"copista",tl:"Error de Copista",title:"¿Cuántos años vivió Matusalén?",v1r:"Génesis 5:27",v1t:"Y fueron todos los días de Matusalén novecientos sesenta y nueve años.",v2r:"Cronología interna del diluvio",v2t:"Según los años registrados, Matusalén podría haber sobrevivido al diluvio.",res:"Algunos calculan que si sumamos las edades en el texto masorético, Matusalén moriría el año del diluvio o incluso después. La Septuaginta (LXX) ajusta los números para que muera antes. Se trata de variantes textuales entre manuscritos, posiblemente errores de copista. El texto hebreo masorético indica que murió exactamente el año del diluvio."},
+  {id:8,cat:"Creación y Génesis",icon:"🌍",tag:"contexto",tl:"Contexto",title:"¿Dios se 'arrepintió' de hacer al hombre o no puede arrepentirse?",v1r:"Génesis 6:6",v1t:"Y le pesó al Señor haber hecho al hombre en la tierra, y se afligió en su corazón.",v2r:"1 Samuel 15:29",v2t:"El que es la Gloria de Israel no mentirá ni se arrepentirá, porque no es hombre para que se arrepienta.",res:"En hebreo se usa 'naham' (consolarse, cambiar de actitud expresiva). Cuando se dice que Dios 'se arrepiente', es lenguaje antropomórfico que describe cómo responde relacionalmente a los cambios humanos. 1 Samuel 15:29 aclara que Dios no cambia de carácter ni propósito último; se refiere a su fidelidad ontológica, no a la carencia de emociones relacionales."},
+  {id:9,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"copista",tl:"Error de Copista",title:"¿Cuántos hombres se enviaron a Hai: 30.000 o 5.000?",v1r:"Josué 8:3",v1t:"Eligió Josué treinta mil hombres fuertes, y los envió de noche.",v2r:"Josué 8:12",v2t:"Tomó alrededor de cinco mil hombres, y los puso en emboscada.",res:"No hay contradicción interna; los versículos describen dos grupos distintos. 30.000 fue la primera fuerza de emboscada enviada de noche. Los 5.000 fueron una segunda partida enviada como refuerzo adicional. Los 12.000 muertos (v.25) son la población total de Hai, no la fuerza atacante."},
+  {id:10,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"contexto",tl:"Contexto",title:"¿Quién mató a Goliat: David o Elhanán?",v1r:"1 Samuel 17:50",v1t:"Así venció David al filisteo con honda y piedra… y lo mató.",v2r:"2 Samuel 21:19",v2t:"Elhanán hijo de Jaré-oregim, de Belén, mató a Goliat geteo.",res:"El texto hebreo original de 2 Samuel 21:19 dice que Elhanán mató 'al hermano de Goliat'. La palabra 'hermano de' cayó por error de copista. Esto se confirma en 1 Crónicas 20:5, el texto paralelo, que claramente dice 'Elhanán… mató a Lahmi, hermano de Goliat'. La versión de los Reyes sufrió una corrupción textual."},
+  {id:11,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"contexto",tl:"Contexto",title:"¿Quién incitó a David a hacer el censo: Dios o Satanás?",v1r:"2 Samuel 24:1",v1t:"El Señor volvió a encenderse en ira contra Israel, e incitó a David a que dijese: Ve, haz el censo.",v2r:"1 Crónicas 21:1",v2t:"Satanás se levantó contra Israel e incitó a David a que hiciese censo.",res:"En la teología bíblica hebrea, Dios permite que actores secundarios (incluyendo Satanás como agente de prueba) ejecuten sus propósitos. Dios usó a Satanás como instrumento para un juicio ya planeado sobre Israel. Ambos son causas verdaderas a distintos niveles causales, como en el libro de Job."},
+  {id:12,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"copista",tl:"Error de Copista",title:"¿Cuántos hombres tenía el ejército de David: 800.000 o 1.100.000?",v1r:"2 Samuel 24:9",v1t:"En Israel había ochocientos mil hombres fuertes… en Judá quinientos mil.",v2r:"1 Crónicas 21:5",v2t:"Todo Israel tenía un millón cien mil hombres… en Judá cuatrocientos setenta mil.",res:"Las cifras difieren entre los dos registros paralelos. Los estudiosos señalan que se trata de variantes textuales o que los cronistas usaron distintos criterios de conteo (por ejemplo, si incluyen o excluyen reservistas, leva, guardias permanentes o las tribus de Leví y Benjamín)."},
+  {id:13,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"contexto",tl:"Contexto",title:"¿Cuándo murió el padre de Abraham: antes o después de que saliera de Harán?",v1r:"Génesis 11:26,32 / 12:4",v1t:"Taré vivió setenta años y engendró a Abram… Taré murió con doscientos cinco años. Abram salió a los setenta y cinco.",v2r:"Hechos 7:4",v2t:"Salió de la tierra de los caldeos; y de allí, muerto su padre, Dios le trasladó.",res:"Si Taré tenía 70 años cuando nació Abraham y murió a los 205, Abraham tenía 135 al morir su padre. Pero Abraham salió a los 75. Esteban en Hechos usa una tradición samaritana (Septuaginta) donde Taré murió a los 145 años, lo cual sí encaja cronológicamente con que Abraham saliera tras su muerte."},
+  {id:14,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"lenguaje",tl:"Lenguaje",title:"¿Elías fue arrebatado en torbellino o en carro de fuego?",v1r:"2 Reyes 2:11",v1t:"Un carro de fuego con caballos de fuego los apartó; y Elías subió al cielo en un torbellino.",v2r:"Interpretación popular",v2t:"Se suele decir que 'subió en el carro de fuego'.",res:"No hay contradicción en el texto; la lectura cuidadosa muestra que el carro de fuego separó a los dos profetas, pero el agente del arrebatamiento fue el torbellino (hebreo 'sáar'). El carro y el torbellino fueron simultáneos; el texto distingue claramente sus funciones."},
+  {id:15,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"contexto",tl:"Contexto",title:"¿Salomón tenía 40.000 o 4.000 caballerizas?",v1r:"1 Reyes 4:26",v1t:"Salomón tenía cuarenta mil caballerizas para sus caballos de tiro.",v2r:"2 Crónicas 9:25",v2t:"Salomón tenía cuatro mil caballerizas para caballos y carros.",res:"'Cuarenta mil' en 1 Reyes parece ser un error de copia; 1 Reyes 10:26 menciona solo 1.400 carros y 12.000 jinetes, incompatible con 40.000 establos. La cifra de Crónicas (4.000) es coherente con esos datos. Se trata de un número alterado en la transmisión del texto."},
+  {id:16,cat:"Ley y Mandamientos",icon:"⚖️",tag:"teología",tl:"Teología",title:"¿Moisés o Dios escribieron los diez mandamientos?",v1r:"Éxodo 31:18",v1t:"Y dio a Moisés dos tablas de piedra escritas con el dedo de Dios.",v2r:"Éxodo 34:27-28",v2t:"Y el Señor dijo a Moisés: Escribe tú estas palabras… Y Moisés escribió en tablas las palabras del pacto.",res:"Éxodo 31 se refiere al primer conjunto de tablas, escritas por Dios y que Moisés rompió (Ex 32:19). Éxodo 34 es el segundo conjunto, tras el incidente del becerro de oro, donde Dios ordena a Moisés que prepare las tablas y dicta los mandamientos que Moisés transcribe. Son dos eventos distintos."},
+  {id:17,cat:"Ley y Mandamientos",icon:"⚖️",tag:"teología",tl:"Teología",title:"¿Son los hijos castigados por los pecados del padre o no?",v1r:"Éxodo 20:5",v1t:"Yo soy Dios celoso, que castigo la maldad de los padres en los hijos hasta la tercera y cuarta generación.",v2r:"Ezequiel 18:20",v2t:"El alma que pecare, esa morirá; el hijo no llevará el pecado del padre.",res:"No se contradicen; hablan de planos distintos. Éxodo 20 habla de consecuencias naturales generacionales (patrones de conducta, trauma, cultura familiar negativa). Ezequiel 18 habla de responsabilidad moral individual ante Dios: nadie es condenado espiritualmente por el pecado ajeno."},
+  {id:18,cat:"Ley y Mandamientos",icon:"⚖️",tag:"contexto",tl:"Contexto",title:"¿Debía honrarse el sábado o podía romperse?",v1r:"Éxodo 20:8",v1t:"Acuérdate del día de reposo para santificarlo. Seis días trabajarás.",v2r:"Marcos 2:27-28",v2t:"El sábado fue hecho por causa del hombre… El Hijo del Hombre es Señor aun del sábado.",res:"Jesús no abolió el sábado; reformuló su propósito. La ley oral del siglo I había convertido el sábado en una carga con 39 categorías de trabajo prohibido. Jesús restaura el principio original: el sábado es para beneficio humano, no una trampa legalista."},
+  {id:19,cat:"Ley y Mandamientos",icon:"⚖️",tag:"teología",tl:"Teología",title:"¿La ley de Moisés fue 'cumplida' o sigue vigente?",v1r:"Mateo 5:17-18",v1t:"No penséis que he venido para abrogar la ley… No pasará una jota ni una tilde de la ley.",v2r:"Romanos 10:4",v2t:"Porque Cristo es el fin de la ley para justicia a todo aquel que cree.",res:"'Fin' en Romanos 10:4 traduce el griego 'telos', que significa tanto 'término' como 'cumplimiento/meta'. Cristo es el cumplimiento hacia el que apuntaba la ley. Mateo 5:17 confirma esto: Jesús no la destruye sino que la lleva a su perfección. La ley como medio de justificación terminó; su función moral y reveladora permanece."},
+  {id:20,cat:"Ley y Mandamientos",icon:"⚖️",tag:"lenguaje",tl:"Lenguaje",title:"¿'No matarás' pero Dios ordenó matar?",v1r:"Éxodo 20:13",v1t:"No matarás.",v2r:"Éxodo 32:27",v2t:"Así ha dicho el Señor… Matad cada uno a su hermano…",res:"El hebreo usa dos palabras distintas: 'ratsaj' (asesinato premeditado, homicidio ilegal) en Éxodo 20:13, y 'harag' (matar en general, ejecutar) en Éxodo 32. El mandamiento prohíbe el homicidio personal motivado por odio o codicia, no la pena capital judicial ni la guerra ordenada por Dios. La distinción léxica es precisa en el original."},
+  {id:21,cat:"Genealogías y Números",icon:"🔢",tag:"copista",tl:"Error de Copista",title:"Genealogía de Jesús: ¿Mateo o Lucas tienen razón?",v1r:"Mateo 1:16",v1t:"Jacob engendró a José, marido de María, de la cual nació Jesús.",v2r:"Lucas 3:23",v2t:"Jesús… hijo de José, hijo de Elí.",res:"El padre de José se llama Jacob en Mateo y Elí en Lucas, lo que sugiere que una genealogía es la de José (legal, línea de David por Salomón) y la otra es la de María (biológica, línea de David por Natán). Era práctica judía registrar la línea de un yerno bajo el nombre del suegro. Ambas establecen la ascendencia davídica de Jesús."},
+  {id:22,cat:"Genealogías y Números",icon:"🔢",tag:"copista",tl:"Error de Copista",title:"¿Cuántas generaciones hay desde Abraham a David según Mateo?",v1r:"Mateo 1:17",v1t:"Desde Abraham hasta David son catorce generaciones.",v2r:"Mateo 1:1-6 (lista real)",v2t:"La lista contiene solo 13 nombres distintos.",res:"Mateo usa un recurso nemotécnico (3 grupos de 14) con propósito teológico, no historiográfico estricto. El hebreo antiguo permite omitir generaciones en genealogías ('engendró' puede significar 'fue antepasado de'). Algunas listas bíblicas comprimen generaciones deliberadamente para destacar personajes clave."},
+  {id:23,cat:"Genealogías y Números",icon:"🔢",tag:"copista",tl:"Error de Copista",title:"¿Cuántos israelitas murieron en el desierto: 23.000 o 24.000?",v1r:"1 Corintios 10:8",v1t:"Ni forniquemos, como algunos de ellos fornicaron, y cayeron en un día veintitrés mil.",v2r:"Números 25:9",v2t:"Y murieron de aquella mortandad veinticuatro mil.",res:"Pablo dice 'en un día'; Números da el total del episodio completo incluyendo los ejecutados por los jueces al día siguiente. Veintitrés mil murieron en la plaga del primer día; mil más fueron ejecutados judicialmente. Pablo y Moisés cuentan momentos distintos del mismo evento."},
+  {id:24,cat:"Genealogías y Números",icon:"🔢",tag:"copista",tl:"Error de Copista",title:"¿Cuántos regresaron del exilio babilónico?",v1r:"Esdras 2:64",v1t:"Toda la congregación junta era de cuarenta y dos mil trescientas sesenta personas.",v2r:"Nehemías 7:66",v2t:"Toda la congregación junta era de cuarenta y dos mil trescientas sesenta personas.",res:"El total coincide, pero muchas cifras individuales por familia difieren entre las dos listas. Ambas fuentes derivan de registros de archivo distintos o de momentos distintos del retorno. Las variaciones son típicas de la transmisión manual de listas numéricas."},
+  {id:25,cat:"Genealogías y Números",icon:"🔢",tag:"contexto",tl:"Contexto",title:"¿Cuántos años estuvo Israel en Egipto: 400 o 430?",v1r:"Génesis 15:13",v1t:"Sabe que tu descendencia morará en tierra ajena, y será oprimida cuatrocientos años.",v2r:"Éxodo 12:40-41",v2t:"El tiempo que los hijos de Israel habitaron en Egipto fue cuatrocientos treinta años.",res:"Génesis 15 redondea el número al hablar de opresión activa. Éxodo 12 da la cifra exacta incluyendo el período previo a la esclavitud. Además, Génesis 15:13 puede contar desde el nacimiento de Isaac, no desde que Jacob entró en Egipto, lo que hace las cifras perfectamente compatibles."},
+  {id:26,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"contexto",tl:"Contexto",title:"¿Cuándo fue la limpieza del templo?",v1r:"Juan 2:13-16",v1t:"Al acercarse la Pascua, Jesús subió a Jerusalén y encontró en el templo a los vendedores… los echó a todos.",v2r:"Marcos 11:15-17",v2t:"Vinieron a Jerusalén; y entrando Jesús en el templo, comenzó a echar fuera a los que vendían.",res:"Hay dos limpiezas del templo, no una. Juan narra la primera al comienzo del ministerio (año ~28 d.C.). Los sinópticos narran la segunda durante la semana de la Pasión (año ~30 d.C.). El abuso habría vuelto tras la primera intervención, justificando una segunda acción."},
+  {id:27,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"contexto",tl:"Contexto",title:"¿El centurión vino en persona o envió emisarios?",v1r:"Mateo 8:5",v1t:"Entrando Jesús en Capernaúm, vino a él un centurión, rogándole.",v2r:"Lucas 7:1-3",v2t:"El centurión envió a unos ancianos de los judíos.",res:"Mateo comprime el relato para mayor claridad narrativa; Lucas incluye el detalle de los intermediarios. En Mateo el centurión 'viene' representado por sus enviados, lo cual era una forma normal de hablar en la cultura de la época. Es una diferencia de estilo narrativo, no de hechos."},
+  {id:28,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"contexto",tl:"Contexto",title:"¿Quién pidió los puestos de honor para Santiago y Juan?",v1r:"Mateo 20:20",v1t:"Entonces la madre de los hijos de Zebedeo se llegó a él… pidiendo algo.",v2r:"Marcos 10:35",v2t:"Jacobo y Juan, hijos de Zebedeo, se le acercaron, diciendo: Queremos que hagas lo que pidiéremos.",res:"No hay contradicción; la madre actuó de portavoz o acompañó a los hijos. En ambos relatos Jesús responde directamente a Santiago y Juan, confirmando que la petición era de ellos. Mateo menciona a la madre como iniciadora; Marcos atribuye la petición a los hijos directamente."},
+  {id:29,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"lenguaje",tl:"Lenguaje",title:"¿Jesús era manso, pero vino a traer espada?",v1r:"Mateo 11:29",v1t:"Soy manso y humilde de corazón.",v2r:"Mateo 10:34",v2t:"No penséis que he venido para traer paz a la tierra; no vine para traer paz, sino espada.",res:"'Espada' es metáfora de división inevitable. El evangelio crea una línea divisoria entre quienes lo aceptan y quienes lo rechazan, incluso dentro de familias. El carácter de Jesús es manso; el efecto de su mensaje es divisivo por la respuesta humana. No son afirmaciones sobre el mismo tema."},
+  {id:30,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"contexto",tl:"Contexto",title:"¿Debían los discípulos llevar bastón y sandalias o no?",v1r:"Marcos 6:8-9",v1t:"Les mandó que no llevasen nada para el camino, sino solamente bordón… y estuviesen calzados.",v2r:"Mateo 10:9-10",v2t:"No proveáis oro… ni sandalias, ni bordón.",res:"En griego, Mateo usa 'ktesasthe' (adquirir/comprar), mientras Marcos usa el verbo de 'llevar'. Mateo prohíbe adquirir equipo extra; Marcos permite usar el bastón y sandalias ya poseídas. No hay conflicto: vayan con lo que ya tienen, sin adquirir provisiones extras."},
+  {id:31,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"contexto",tl:"Contexto",title:"¿Fue bautizado Jesús antes o después del encarcelamiento de Juan?",v1r:"Juan 3:22-24",v1t:"Jesús y sus discípulos bautizaban… pues Juan no había sido aún encarcelado.",v2r:"Lucas 3:20-21",v2t:"Herodes encerró a Juan en la cárcel. Sucedió que cuando todo el pueblo era bautizado, Jesús también fue bautizado.",res:"Lucas estructura su relato temáticamente, no en estricto orden cronológico: cierra el capítulo sobre Juan antes de mencionar el bautismo de Jesús. Juan 3:24 corrige explícitamente cualquier malentendido. El bautismo de Jesús fue antes del arresto de Juan, como confirma el cuarto Evangelio."},
+  {id:32,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿A qué hora crucificaron a Jesús: hora tercera o sexta?",v1r:"Marcos 15:25",v1t:"Era la hora tercera cuando le crucificaron.",v2r:"Juan 19:14",v2t:"Era la preparación de la Pascua, y como la hora sexta. Y dijo Pilato: ¡He aquí vuestro Rey!",res:"El problema es de sistemas horarios. Los romanos contaban el día desde medianoche, los judíos desde el amanecer. Si Juan usa la hora romana, 'hora sexta' = 6 a.m. (Jesús ante Pilato). Si Marcos usa la hora judía, 'hora tercera' = 9 a.m. (crucifixión). Ambas son coherentes cronológicamente."},
+  {id:33,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿Cuántas mujeres fueron al sepulcro?",v1r:"Mateo 28:1",v1t:"María Magdalena y la otra María fueron a ver el sepulcro.",v2r:"Lucas 24:10",v2t:"Eran María Magdalena, Juana, María madre de Jacobo, y las demás con ellas.",res:"Los evangelistas no afirman exclusividad en sus listas; cada uno menciona distintas mujeres del grupo. Mateo menciona las dos más prominentes. Lucas añade otras. Ninguno dice 'sólo estas fueron'. Es el mismo fenómeno de los relatos orales: distintos testigos destacan distintas personas."},
+  {id:34,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿Cuántos ángeles había en el sepulcro: uno o dos?",v1r:"Mateo 28:2 / Marcos 16:5",v1t:"Un ángel había removido la piedra (Mateo). Vieron a un joven sentado (Marcos).",v2r:"Lucas 24:4 / Juan 20:12",v2t:"Se les aparecieron dos varones con vestiduras resplandecientes (Lucas). Vio dos ángeles (Juan).",res:"Mateo y Marcos mencionan el ángel que habló; Lucas y Juan incluyen a los dos presentes. Cuando hay dos, también hay uno: mencionar uno no niega al otro. Los evangelistas enfocaron al mensajero principal, no dieron un inventario exhaustivo."},
+  {id:35,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿El sepulcro ya estaba abierto cuando llegaron las mujeres?",v1r:"Mateo 28:2",v1t:"Y hubo un gran terremoto; porque un ángel del Señor… removió la piedra.",v2r:"Marcos 16:4",v2t:"Pero cuando miraron, vieron que la piedra estaba ya revuelta.",res:"Mateo narra el evento del terremoto y el ángel como flashback explicativo; el texto griego usa el pluscuamperfecto ('había removido'). Marcos describe lo que encontraron las mujeres al llegar. Ambos afirman que al llegar ellas la piedra ya estaba removida."},
+  {id:36,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿Jesús se apareció primero en Galilea o en Jerusalén?",v1r:"Mateo 28:7 / Marcos 16:7",v1t:"Id a Galilea; allí os veré.",v2r:"Lucas 24:33-49 / Juan 20:19",v2t:"Jesús se apareció a los once en Jerusalén el día de la resurrección.",res:"Jesús se apareció primero en Jerusalén (el domingo de la resurrección) y luego en Galilea (después de que los discípulos regresaran al norte). Mateo y Marcos anuncian la cita posterior en Galilea; Lucas y Juan narran las apariciones iniciales en Jerusalén. La cronología completa requiere ambos grupos de textos."},
+  {id:37,cat:"Pasión y Resurrección",icon:"☩",tag:"lenguaje",tl:"Lenguaje",title:"¿El cartel de la cruz decía lo mismo en los cuatro evangelios?",v1r:"Mateo 27:37",v1t:"Este es Jesús, el Rey de los judíos.",v2r:"Lucas 23:38 / Juan 19:19",v2t:"Este es el Rey de los judíos (Lucas). Jesús Nazareno, Rey de los judíos (Juan).",res:"El cartel estaba escrito en tres idiomas (hebreo, latín y griego). Cada evangelista cita la versión del idioma que prefirió o la adaptación que circulaba en su comunidad. Todos concuerdan en el elemento central: 'Rey de los judíos'."},
+  {id:38,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿Judas se ahorcó o se despeñó y reventó?",v1r:"Mateo 27:5",v1t:"Y arrojando las piezas de plata en el templo… fue y se ahorcó.",v2r:"Hechos 1:18",v2t:"Y cayendo de cabeza, se reventó por la mitad, y todas sus entrañas se derramaron.",res:"Los dos relatos son complementarios. Judas se ahorcó (Mateo) en algún lugar elevado. La soga o la rama se rompió, y cayó de cabeza sobre rocas (Hechos), lo que explica la descripción de Hechos. Hechos no dice que fue la causa de muerte."},
+  {id:39,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿Quién compró el campo del alfarero: Judas o los sacerdotes?",v1r:"Mateo 27:7",v1t:"Y habiendo tenido consejo, compraron con ellas [los sacerdotes] el campo del alfarero.",v2r:"Hechos 1:18",v2t:"Este, pues, con el salario de su iniquidad adquirió un campo.",res:"Hechos usa lenguaje metonímico: el dinero de Judas compró el campo, así que Judas 'lo compró' indirectamente. Los sacerdotes compraron el campo con el dinero que técnicamente era de Judas (lo había devuelto). Ambas declaraciones son verdaderas desde perspectivas distintas."},
+  {id:40,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿Jesús llevó su propia cruz o la llevó Simón?",v1r:"Juan 19:17",v1t:"Y él, cargando su cruz, salió al lugar llamado de la Calavera.",v2r:"Marcos 15:21",v2t:"Y obligaron a uno que pasaba, Simón de Cirene… para que llevase la cruz.",res:"No hay contradicción: Jesús comenzó llevando su propia cruz, pero tras los azotes y el agotamiento físico, los soldados obligaron a Simón a cargarla. Juan describe el inicio del camino; los sinópticos narran el momento posterior en que Simón entró en escena."},
+  {id:41,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿La salvación es por fe o por obras?",v1r:"Efesios 2:8-9",v1t:"Porque por gracia sois salvos por medio de la fe… no por obras.",v2r:"Santiago 2:24",v2t:"Vosotros veis que el hombre es justificado por las obras, y no solamente por la fe.",res:"Pablo habla de obras de la ley como medio de justificación inicial ante Dios; Santiago habla de obras como evidencia de fe viva. 'Fe que no tiene obras, está muerta' (Stg 2:17). No se contradicen: uno rechaza las obras como causa de salvación; el otro afirma que la fe genuina produce obras como fruto."},
+  {id:42,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Dios tienta a las personas o no?",v1r:"Santiago 1:13",v1t:"Cuando alguno es tentado, no diga que es tentado de parte de Dios… Dios no tienta a nadie.",v2r:"Génesis 22:1",v2t:"Aconteció… que probó Dios a Abraham.",res:"El hebreo/griego distingue dos conceptos: 'nasar' (probar/examinar con intención de fortalecer) en Génesis 22, y 'peirazein' (tentar con intención de hacer caer) en Santiago 1. Dios prueba (examina, refina, fortalece) pero no tienta (intenta destruir moralmente). La diferencia es de propósito e intención."},
+  {id:43,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Dios es omnisciente o puede 'no saber' algo?",v1r:"1 Juan 3:20",v1t:"Dios es mayor que nuestro corazón, y él sabe todas las cosas.",v2r:"Génesis 3:9",v2t:"¿Dónde estás tú? (preguntó Dios a Adán)",res:"La pregunta de Dios en Génesis 3 no implica ignorancia; es lenguaje dialógico y pedagógico. Dios invita a Adán a reconocer su situación y responder. Es similar a cuando un padre le pregunta a su hijo '¿qué hiciste?' sabiendo perfectamente lo ocurrido. El antropomorfismo dialógico es un recurso narrativo."},
+  {id:44,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Hay un solo Dios o la Biblia habla de muchos dioses?",v1r:"Deuteronomio 6:4",v1t:"Oye, Israel: el Señor nuestro Dios, el Señor uno es.",v2r:"Salmo 82:1",v2t:"Dios está en la reunión de los dioses; en medio de los dioses juzga.",res:"El Salmo 82 usa 'elohim' para referirse a jueces humanos o ángeles con autoridad delegada, como confirma Juan 10:34-35 donde Jesús cita este salmo explicando que 'dioses' se refiere a quienes recibieron la palabra de Dios. El monoteísmo bíblico es consistente; el uso de 'elohim' es polisémico en hebreo."},
+  {id:45,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Puede el hombre ver a Dios directamente?",v1r:"Éxodo 33:20",v1t:"No podrás ver mi rostro; porque no me verá hombre y vivirá.",v2r:"Génesis 32:30",v2t:"Vi a Dios cara a cara, y fue librada mi alma.",res:"La visión directa de la esencia divina plena es imposible para el ser humano (Ex 33:20). Las apariciones de Génesis (teofanías) son manifestaciones parciales o representaciones simbólicas, no la visión de la naturaleza divina completa. Jacob vio la forma angelical de Dios (una teofanía), no la esencia divina en su plenitud."},
+  {id:46,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿El Espíritu Santo fue dado antes o después de Pentecostés?",v1r:"Hechos 2:1-4",v1t:"Cuando llegó el día de Pentecostés… todos fueron llenos del Espíritu Santo.",v2r:"Juan 20:22",v2t:"Habiendo dicho esto, sopló, y les dijo: Recibid el Espíritu Santo.",res:"Son dos momentos distintos de una obra progresiva. En Juan 20 Jesús otorga el Espíritu regenerador (para salvación y comprensión), quizás como anticipo o prenda. En Pentecostés viene el derramamiento para capacitar el testimonio público mundial. Son etapas de la misma obra."},
+  {id:47,cat:"Ética y Moral",icon:"⚡",tag:"teología",tl:"Teología",title:"¿Debemos juzgar o no juzgar a los demás?",v1r:"Mateo 7:1",v1t:"No juzguéis, para que no seáis juzgados.",v2r:"1 Corintios 5:12",v2t:"¿No juzgáis vosotros a los que están dentro?",res:"El juicio prohibido en Mateo 7 es el juicio hipócrita, condenatorio y final (arrogarse la función divina). Pablo habla de discernimiento disciplinario dentro de la comunidad de fe para restaurar al caído. El contexto de Mateo 7 lo confirma: no juzgar el corazón ajeno, sí discernir conductas por sus frutos."},
+  {id:48,cat:"Ética y Moral",icon:"⚡",tag:"teología",tl:"Teología",title:"¿Debemos amar a los enemigos o podemos odiarlos?",v1r:"Mateo 5:44",v1t:"Amad a vuestros enemigos, bendecid a los que os maldicen.",v2r:"Salmo 139:21-22",v2t:"¿No odio, oh Señor, a los que te aborrecen?… Los aborrezco por completo.",res:"El salmista expresa un 'odio teológico' que es lealtad apasionada a Dios contra sus adversarios, no un odio personal rencoroso. El mismo David mostró compasión personal hacia sus enemigos individuales. Jesús eleva la ética al amor activo y personal. Son dos registros distintos: uno teológico-salmódico, otro ético-práctico."},
+  {id:49,cat:"Ética y Moral",icon:"⚡",tag:"contexto",tl:"Contexto",title:"¿Es lícito el divorcio?",v1r:"Mateo 19:9",v1t:"Cualquiera que repudia a su mujer, salvo por causa de fornicación, y se casa con otra, adultera.",v2r:"Marcos 10:11-12",v2t:"Cualquiera que repudia a su mujer y se casa con otra, comete adulterio.",res:"La cláusula de excepción ('salvo por causa de fornicación') aparece en Mateo porque su audiencia judía conocía el debate entre escuelas rabínicas. Marcos, escrito para gentiles romanos, omite la excepción porque en ese contexto no era relevante. Mateo añade el detalle que Marcos no necesitaba incluir para su audiencia."},
+  {id:50,cat:"Ética y Moral",icon:"⚡",tag:"teología",tl:"Teología",title:"¿Debemos resistir al mal o no resistirle?",v1r:"Mateo 5:39",v1t:"No resistáis al que es malo; antes, a cualquiera que te hiera en la mejilla derecha, vuélvele también la otra.",v2r:"Efesios 6:13",v2t:"Tomad toda la armadura de Dios, para que podáis resistir en el día malo.",res:"El principio de Mateo 5 habla de no responder la violencia personal con violencia personal, especialmente en contexto de honor social. Efesios habla de resistir espiritual y activamente al mal moral. Distintos tipos de 'resistencia' ante distintos tipos de 'mal'."},
+  {id:51,cat:"Profecías y Cumplimiento",icon:"🔭",tag:"contexto",tl:"Contexto",title:"¿Vino Elías o no antes del Mesías?",v1r:"Malaquías 4:5",v1t:"He aquí, os envío el profeta Elías, antes que venga el día del Señor.",v2r:"Juan 1:21",v2t:"¿Eres tú Elías? Dijo: No soy.",res:"Jesús explica en Mateo 11:14 que Juan el Bautista fue 'Elías que había de venir', en el espíritu y poder de Elías (Lucas 1:17), no en reencarnación literal. Juan niega ser Elías el tesbita resucitado, que es literalmente verdad. Cumplía la función tipológica de Elías, no era Elías en persona."},
+  {id:52,cat:"Profecías y Cumplimiento",icon:"🔭",tag:"contexto",tl:"Contexto",title:"¿Nació Jesús en Belén o en Nazaret?",v1r:"Lucas 2:4-7",v1t:"José subió de Galilea… a Belén… y dio a luz a su hijo primogénito.",v2r:"Mateo 2:23 / Lucas 2:51",v2t:"Fue y habitó en la ciudad llamada Nazaret. Jesús… descendió con ellos a Nazaret.",res:"No hay contradicción: Jesús nació en Belén (cumpliendo Miqueas 5:2) y creció en Nazaret (su residencia habitual). Por eso se le llama 'Jesús de Nazaret' (gentilicio de residencia) y simultáneamente nació en Belén. Son datos de etapas distintas de su vida."},
+  {id:53,cat:"Profecías y Cumplimiento",icon:"🔭",tag:"lenguaje",tl:"Lenguaje",title:"¿Profetizó Zacarías que Jesús entraría en asno o en pollino?",v1r:"Zacarías 9:9",v1t:"He aquí tu rey vendrá… montado sobre un asno, sobre un pollino hijo de asna.",v2r:"Mateo 21:5-7",v2t:"Trajo el asno y el pollino… y él se sentó encima.",res:"El paralelismo poético hebreo en Zacarías menciona dos animales de forma poética (asno/pollino) para referirse a uno solo con diferentes palabras. Mateo, siendo muy literal, trajo ambos animales. Marcos y Lucas mencionan solo el pollino; Mateo los incluyó ambos por la precisión del cumplimiento de la profecía citada literalmente."},
+  {id:54,cat:"Profecías y Cumplimiento",icon:"🔭",tag:"contexto",tl:"Contexto",title:"¿Fue Tiro destruida para siempre como profetizó Ezequiel?",v1r:"Ezequiel 26:14",v1t:"Y te pondré como una peña lisa; tendedero de redes serás, y nunca más serás reedificada.",v2r:"Historia",v2t:"La ciudad de Tiro fue reconstruida y existe hasta hoy (sur del Líbano).",res:"Ezequiel profetizó contra la ciudad-isla de Tiro antiguo. Nabucodonosor destruyó la ciudad continental; Alejandro destruyó la isla usando los escombros para construir una calzada. La Tiro moderna es una nueva ciudad en diferente ubicación. La profecía se cumplió sobre la Tiro antigua."},
+  {id:55,cat:"Profecías y Cumplimiento",icon:"🔭",tag:"contexto",tl:"Contexto",title:"¿Murió Jesús 'tres días y tres noches' si murió el viernes?",v1r:"Mateo 12:40",v1t:"Como Jonás tres días y tres noches en el vientre del pez, así estará el Hijo del Hombre tres días y tres noches en el corazón de la tierra.",v2r:"Marcos 16:9 / Lucas 24:7",v2t:"Resucitó… al primer día de la semana. Al tercer día resucitar.",res:"En el cómputo judío inclusivo, cualquier parte de un día cuenta como un día completo. El viernes (parte del día) = día 1; el sábado = día 2; el domingo (parte del día) = día 3. 'Tres días y tres noches' es una expresión idiomática hebrea para ese período, no necesariamente 72 horas exactas. El propio texto paralelo dice 'al tercer día'."},
+  {id:56,cat:"Historia y Contexto",icon:"🏛️",tag:"cultura",tl:"Cultura",title:"¿Existió Quirino como gobernador en la época del nacimiento de Jesús?",v1r:"Lucas 2:2",v1t:"Este primer censo fue hecho siendo Cirenio gobernador de Siria.",v2r:"Fuentes históricas",v2t:"Publio Sulpicio Quirinio gobernó Siria del 6 al 12 d.C., cuando Jesús ya tenía ~10 años.",res:"Se han propuesto varias soluciones: (1) Quirinio pudo haber tenido un cargo gubernativo anterior en Siria; (2) la traducción alternativa 'antes del primer empadronamiento bajo Quirinio' es gramaticalmente posible en griego; (3) existió un censo de Herodes el Grande. Algunos papiros egipcios confirman un censo previo al del 6 d.C."},
+  {id:57,cat:"Historia y Contexto",icon:"🏛️",tag:"cultura",tl:"Cultura",title:"¿Mataron históricamente a los inocentes de Belén?",v1r:"Mateo 2:16",v1t:"Herodes… mató a todos los niños menores de dos años en Belén.",v2r:"Fuentes romanas",v2t:"Josefo y otros historiadores romanos no mencionan esta masacre.",res:"Belén era una aldea pequeña: los demógrafos calculan entre 10 y 20 niños varones menores de dos años. Una masacre tan pequeña no sería notable para historiadores que registraban miles de muertos. Herodes era conocido por matar a miembros de su propia familia; este acto sería coherente con su carácter. El argumento del silencio no refuta el evento."},
+  {id:58,cat:"Historia y Contexto",icon:"🏛️",tag:"contexto",tl:"Contexto",title:"¿El mundo fue creado en seis días literales?",v1r:"Génesis 1:5-31",v1t:"Y fue la tarde y la mañana un día… el sexto día.",v2r:"2 Pedro 3:8",v2t:"Para el Señor un día es como mil años, y mil años como un día.",res:"Existen tres interpretaciones principales: (1) días literales de 24 horas; (2) días de eras geológicas ('yom' puede significar 'período'); (3) marco literario no cronológico. 2 Pedro no redefine 'yom' en Génesis; habla de la perspectiva eterna de Dios. La ciencia y la fe no se contradicen si se leen los géneros literarios correctamente."},
+  {id:59,cat:"Historia y Contexto",icon:"🏛️",tag:"cultura",tl:"Cultura",title:"¿Quién tuvo la visión del sueño: Nabucodonosor o Belsasar?",v1r:"Daniel 2:1",v1t:"En el segundo año del reinado de Nabucodonosor, tuvo Nabucodonosor sueños.",v2r:"Daniel 5:1",v2t:"El rey Belsasar hizo un gran banquete…",res:"No hay contradicción; son dos capítulos con dos reyes distintos en momentos separados. Daniel 2 = Nabucodonosor en el inicio de su reinado. Daniel 5 = Belsasar décadas después. Son eventos históricos distintos narrados en el mismo libro."},
+  {id:60,cat:"Historia y Contexto",icon:"🏛️",tag:"cultura",tl:"Cultura",title:"¿Fue Belsasar hijo o nieto de Nabucodonosor?",v1r:"Daniel 5:11",v1t:"Tu padre Nabucodonosor… lo estableció el rey tu padre.",v2r:"Registros históricos",v2t:"Belsasar era hijo de Nabónido, no de Nabucodonosor.",res:"En el arameo semítico bíblico, 'padre' (ab) puede significar ancestro, predecesor o antecesor dinástico. Es un uso normal del idioma sin connotación biológica estricta. Belsasar podía llamar 'padre' a Nabucodonosor como su gran predecesor dinástico, exactamente como Jesús es llamado 'hijo de David' siglos después."},
+  {id:61,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Jesús es igual al Padre o menor que el Padre?",v1r:"Juan 10:30",v1t:"Yo y el Padre uno somos.",v2r:"Juan 14:28",v2t:"El Padre mayor es que yo.",res:"Juan 10:30 habla de unidad ontológica (misma naturaleza divina). Juan 14:28 habla de subordinación funcional: en la encarnación, el Hijo se sometió voluntariamente al Padre (Fil 2:6-8). El Hijo es igual al Padre en esencia pero subordinado en rol durante su ministerio terrenal."},
+  {id:62,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Cristo murió por todos o solo por los elegidos?",v1r:"Juan 3:16",v1t:"Porque de tal manera amó Dios al mundo, que dio a su Hijo unigénito.",v2r:"Juan 10:15",v2t:"Pongo mi vida por las ovejas.",res:"Ambas afirmaciones son verdaderas en marcos distintos: la obra expiatoria de Cristo tiene valor suficiente para todos (1 Juan 2:2, 'propiciación por los pecados de todo el mundo') y es aplicada eficazmente a los que creen. Distintas tradiciones teológicas (calvinismo, arminianismo) enfatizan distintos aspectos."},
+  {id:63,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"contexto",tl:"Contexto",title:"¿Jesús enseñó en público o en secreto?",v1r:"Juan 18:20",v1t:"Yo siempre he enseñado en la sinagoga y en el templo… y en oculto nada he hablado.",v2r:"Marcos 4:34",v2t:"Sin parábolas no les hablaba; pero a sus discípulos en particular les declaraba todo.",res:"No hay contradicción: Jesús enseñó públicamente en sinagogas y templos. Las explicaciones privadas de las parábolas eran para los discípulos como complemento, no como doctrina secreta. El mensaje central fue siempre público; las aclaraciones eran pedagógicas para el círculo íntimo."},
+  {id:64,cat:"Ley y Mandamientos",icon:"⚖️",tag:"teología",tl:"Teología",title:"¿El cristiano está bajo la ley o bajo la gracia?",v1r:"Romanos 6:14",v1t:"El pecado no se enseñoreará de vosotros; pues no estáis bajo la ley, sino bajo la gracia.",v2r:"Romanos 3:31",v2t:"¿Luego por la fe invalidamos la ley? En ninguna manera, sino que confirmamos la ley.",res:"Pablo distingue entre la ley como sistema de justificación (rechazado) y la ley como revelación de la voluntad moral de Dios (confirmada). El creyente no busca salvación en guardar la ley, pero el Espíritu Santo produce obediencia a los principios morales que la ley expresaba (Rom 8:4)."},
+  {id:65,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿La fe es un don de Dios o una decisión humana?",v1r:"Efesios 2:8",v1t:"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios.",v2r:"Romanos 10:9",v2t:"Si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón… serás salvo.",res:"La fe es una respuesta humana real y genuina, y a la vez es posibilitada por la gracia divina. No se excluyen: Dios regenera y capacita, el ser humano responde creyendo. La soberanía divina y la responsabilidad humana coexisten en la tensión bíblica."},
+  {id:66,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"contexto",tl:"Contexto",title:"¿Jonás estuvo tres días en el pez o es solo metáfora?",v1r:"Jonás 1:17",v1t:"Y estuvo Jonás en el vientre del pez tres días y tres noches.",v2r:"Mateo 12:40",v2t:"Como Jonás estuvo en el vientre del pez, así estará el Hijo del Hombre…",res:"Jesús cita a Jonás como evento histórico real, usando su experiencia como tipo profético de la resurrección. Si Jonás fuera solo alegoría, el argumento tipológico de Jesús pierde su fuerza. Biológicamente, algunas especies de tiburones o cachalotes tienen capacidad gástrica suficiente; hay casos documentados de supervivencia."},
+  {id:67,cat:"Historia y Contexto",icon:"🏛️",tag:"cultura",tl:"Cultura",title:"¿Es científicamente posible que el sol 'se detuviera' para Josué?",v1r:"Josué 10:13",v1t:"El sol se detuvo y la luna paró, hasta que la gente se hubo vengado de sus enemigos.",v2r:"Astronomía moderna",v2t:"Detener la rotación terrestre causaría una catástrofe física global.",res:"Varias lecturas son posibles: (1) milagro directo que suspende las leyes naturales momentáneamente; (2) refracción atmosférica que prolongó la luz del día; (3) el texto usa lenguaje fenomenológico (como decimos 'el sol salió') describiendo la percepción, no la mecánica; (4) el énfasis en el granizo mortal sugiere un fenómeno climático-meteorológico."},
+  {id:68,cat:"Creación y Génesis",icon:"🌍",tag:"lenguaje",tl:"Lenguaje",title:"¿La tierra tiene 'pilares' y 'fundamentos'?",v1r:"1 Samuel 2:8 / Job 9:6",v1t:"Porque del Señor son los fundamentos de la tierra. Él sacude la tierra y los pilares de ella tiemblan.",v2r:"Ciencia",v2t:"La tierra es esférica y orbita en el espacio sin pilares físicos.",res:"El lenguaje bíblico sobre los 'pilares' y 'fundamentos' de la tierra es poético y fenomenológico, no un manual de geología. El mismo tipo de lenguaje se usa hoy: 'el sol sale', 'los cuatro puntos cardinales'. La Biblia no pretende describir la física terrestre; usa el lenguaje del observador ordinario con propósito teológico."},
+  {id:69,cat:"Ética y Moral",icon:"⚡",tag:"teología",tl:"Teología",title:"¿El cristiano debe orar en público o solo en privado?",v1r:"Mateo 6:6",v1t:"Pero tú, cuando ores, entra en tu aposento, y cerrada la puerta, ora a tu Padre que está en secreto.",v2r:"1 Timoteo 2:8",v2t:"Quiero, pues, que los hombres oren en todo lugar.",res:"Mateo 6 condena la oración hecha para ser vista y admirada por otros (hipocresía religiosa), no la oración pública en sí. El contexto es el contraste con los fariseos que oraban en esquinas para ser vistos. Pablo ordena orar en todo lugar, que incluye el templo y la asamblea. El criterio es el motivo, no el lugar."},
+  {id:70,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Existe el libre albedrío si Dios endurece los corazones?",v1r:"Romanos 9:18",v1t:"De manera que de quien quiere, tiene misericordia, y al que quiere endurecer, endurece.",v2r:"Ezequiel 18:23",v2t:"¿Quiero yo la muerte del impío? dice el Señor. ¿No quiero que se convierta y viva?",res:"El 'endurecimiento' de Faraón es interactivo: Faraón endureció su propio corazón primero (Ex 8:15, 32; 9:34), y Dios confirmó esa elección ya tomada. Dios no fuerza a nadie contra su voluntad; confirma y permite que el rebelde persista en su rebelión elegida. Romanos 9 habla de soberanía sobre las naciones en la historia."},
+  {id:71,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿Jesús estuvo solo en la cruz o los discípulos estaban allí?",v1r:"Marcos 15:40",v1t:"También había algunas mujeres mirando de lejos, entre las cuales estaban María Magdalena…",v2r:"Juan 19:26",v2t:"Cuando vio Jesús a su madre, y al discípulo a quien él amaba…",res:"No hay contradicción: algunos discípulos estaban a distancia (Marcos); Juan, el discípulo amado, se acercó con las mujeres lo suficiente para que Jesús le hablara. Distintas personas estaban a distintas distancias. La escena es coherente: mayoría observando de lejos, algunos más cerca."},
+  {id:72,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"contexto",tl:"Contexto",title:"¿Cuándo maldijo Jesús la higuera: antes o después de limpiar el templo?",v1r:"Marcos 11:12-15",v1t:"Al día siguiente… maldijo la higuera. Luego llegaron a Jerusalén… limpió el templo.",v2r:"Mateo 21:12-19",v2t:"Entró en el templo y echó a los vendedores… Al día siguiente, viendo la higuera seca.",res:"Marcos mantiene el orden cronológico exacto: higuera el lunes, templo el lunes, higuera seca el martes. Mateo agrupa temáticamente: relata primero el templo y luego la higuera, aunque la higuera fue maldecida antes cronológicamente. Es un recurso de composición narrativa, no un error histórico."},
+  {id:73,cat:"Genealogías y Números",icon:"🔢",tag:"copista",tl:"Error de Copista",title:"¿Cuántos años tenía Acaz cuando comenzó a reinar?",v1r:"2 Reyes 16:2",v1t:"De veinte años era Acaz cuando comenzó a reinar, y dieciséis años reinó en Jerusalén.",v2r:"Cálculo interno con 2 Reyes 18:2",v2t:"Si Acaz tenía 20 al comenzar y su hijo Ezequías 25 al comenzar tras 16 años, eso implica que Acaz tuvo a Ezequías a los ~11 años.",res:"La aritmética interna es tensa. Algunos manuscritos leen '25 años' para Acaz. Es probablemente un error de transmisión numérica, muy común con el sistema de letras-números hebreo, donde un trazo erróneo puede alterar una cifra significativamente."},
+  {id:74,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"contexto",tl:"Contexto",title:"¿Abraham mintió al decir que Sara era su hermana?",v1r:"Génesis 20:2",v1t:"Dijo Abraham de Sara su mujer: Es mi hermana.",v2r:"Génesis 20:12",v2t:"Y además, es verdaderamente mi hermana, hija de mi padre, mas no hija de mi madre.",res:"Abraham reveló que Sara era literalmente su media hermana (mismo padre, diferente madre), algo permitido antes de la ley mosaica. Técnicamente dijo una verdad a medias ocultando que también era su esposa. La Biblia no presenta esto como heroico; es parte de la narrativa de las fallas de Abraham que Dios usa de todas formas."},
+  {id:75,cat:"Ley y Mandamientos",icon:"⚖️",tag:"cultura",tl:"Cultura",title:"¿Podía un israelita comer cerdo o no?",v1r:"Levítico 11:7",v1t:"El cerdo, porque tiene pezuñas, pero no rumia, será inmundo.",v2r:"Marcos 7:19 / Hechos 10:15",v2t:"Jesús declaró limpios todos los alimentos. Lo que Dios limpió, no lo llames tú inmundo.",res:"Las leyes alimentarias del Levítico eran parte del pacto mosaico con Israel, con funciones higiénicas, simbólicas y de identidad nacional. En el Nuevo Pacto, Jesús y el Espíritu Santo declaran que esas distinciones ceremoniales ya cumplieron su propósito tipológico. No son textos contradictorios; son épocas distintas del plan de Dios."},
+  {id:76,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Habrá segunda oportunidad después de la muerte?",v1r:"Hebreos 9:27",v1t:"Está establecido para los hombres que mueran una sola vez, y después el juicio.",v2r:"1 Pedro 3:19",v2t:"Fue y predicó a los espíritus encarcelados.",res:"1 Pedro 3:19 es uno de los pasajes más debatidos del NT. Exégetas proponen: (1) Cristo predicó a los ángeles caídos (Génesis 6); (2) predicó a los espíritus de la generación de Noé anunciando victoria; (3) el Espíritu de Cristo predicó a través de Noé. Ninguna interpretación principal implica 'segunda oportunidad'; Hebreos 9:27 establece el principio general."},
+  {id:77,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿Qué palabras dijo Jesús exactamente en la última cena?",v1r:"Mateo 26:26-28",v1t:"Esto es mi cuerpo… Esto es mi sangre del nuevo pacto.",v2r:"Lucas 22:19-20",v2t:"Esto es mi cuerpo, que por vosotros es dado… Esta copa es el nuevo pacto en mi sangre.",res:"Mateo y Lucas son tradiciones distintas del mismo evento que circulaban en diferentes comunidades litúrgicas. Las diferencias son mínimas y de énfasis. Todas las versiones (incluida la de 1 Corintios 11) transmiten el mismo significado central. Las variaciones en citas de discursos son esperables en la transmisión oral."},
+  {id:78,cat:"Creación y Génesis",icon:"🌍",tag:"teología",tl:"Teología",title:"¿El universo tenía principio o siempre existió?",v1r:"Génesis 1:1",v1t:"En el principio creó Dios los cielos y la tierra.",v2r:"Juan 1:1-3",v2t:"En el principio era el Verbo… Todo fue hecho por él.",res:"Ambos textos afirman que el universo tuvo un principio absoluto y que Dios es su causa. Esto coincide con el modelo cosmológico estándar (Big Bang): el universo, el espacio y el tiempo tienen un origen. No hay contradicción interna; ambos versículos afirman la creación ex nihilo desde perspectivas distintas."},
+  {id:79,cat:"Historia y Contexto",icon:"🏛️",tag:"cultura",tl:"Cultura",title:"¿Fue Daniel históricamente real o es ficción?",v1r:"Daniel 1:1",v1t:"En el año tercero del reinado de Joacim… vino Nabucodonosor… a Jerusalén.",v2r:"Crítica histórica",v2t:"Según algunos críticos, el libro fue escrito en el siglo II a.C. y contiene errores históricos.",res:"Las objeciones históricas han sido respondidas en buena parte por la arqueología: la existencia de Belsasar (confirmada por la Crónica de Nabónido), el cargo de 'tercero del reino' (Daniel 5:16) correlaciona con inscripciones cuneiformes. El debate principal sobre la fecha del libro es teológico (¿puede haber profecía predictiva?), no estrictamente histórico."},
+  {id:80,cat:"Ética y Moral",icon:"⚡",tag:"contexto",tl:"Contexto",title:"¿Deben las mujeres callar en la iglesia?",v1r:"1 Corintios 14:34",v1t:"Vuestras mujeres callen en las congregaciones.",v2r:"1 Corintios 11:5",v2t:"Pero toda mujer que ora o profetiza con la cabeza descubierta, afrenta su cabeza.",res:"Pablo en 1 Corintios 11 asume que las mujeres oran y profetizan en la asamblea. El 'callen' de 1 Corintios 14 se refiere a un tipo específico de habla: la evaluación pública de las profecías (v.29-35), función de autoridad judicial reservada en ese contexto cultural. Es un silencio específico, no absoluto."},
+  {id:81,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"contexto",tl:"Contexto",title:"¿Moisés escribió la Torá si el Deuteronomio narra su muerte?",v1r:"Deuteronomio 34:5-6",v1t:"Y murió allí Moisés… Y fue sepultado… y ninguno conoce el lugar de su sepultura.",v2r:"Juan 5:46",v2t:"Porque si creyeseis a Moisés, me creeríais a mí; porque de mí escribió él.",res:"Moisés escribió la Torá. La mayoría de los eruditos conservadores consideran que el relato de la muerte fue añadido por Josué bajo inspiración divina, como apéndice. Esto no invalida la autoría mosaica del corpus principal; es un epílogo editorial inspirado, práctica habitual en la literatura antigua."},
+  {id:82,cat:"Pasión y Resurrección",icon:"☩",tag:"contexto",tl:"Contexto",title:"¿A quién se apareció primero el resucitado: a Pedro, a María o a los once?",v1r:"1 Corintios 15:5",v1t:"Y que apareció a Cefas [Pedro], y después a los doce.",v2r:"Juan 20:14-16",v2t:"María Magdalena reconoció a Jesús antes de que se apareciera a los discípulos.",res:"María Magdalena fue la primera en ver al resucitado. Pedro fue el primero del grupo de los apóstoles varones. Pablo en 1 Corintios 15 lista apariciones con relevancia para la argumentación apostólica (no incluye a María porque enumera testigos en la cadena de testimonio apostólico oficial)."},
+  {id:83,cat:"Genealogías y Números",icon:"🔢",tag:"copista",tl:"Error de Copista",title:"¿Cuántos años tenía Josías cuando comenzó a reinar?",v1r:"2 Reyes 22:1",v1t:"Tenía Josías ocho años cuando comenzó a reinar.",v2r:"Comparación con eventos de su reinado",v2t:"En el año 18 de su reinado (2 Reyes 23:23) llevó a cabo la Pascua; comenzó reformas en el año 12 (2 Crónicas 34:3).",res:"En realidad ambos textos dicen lo mismo: ocho años. Esto no es una contradicción entre versículos paralelos. La confusión surge de intentar armonizar su edad de coronación con los años de sus reformas, pero la aritmética es consistente si se cuenta correctamente desde los 8 años."},
+  {id:84,cat:"Creación y Génesis",icon:"🌍",tag:"lenguaje",tl:"Lenguaje",title:"¿El arco iris existía antes del diluvio o fue creado como señal?",v1r:"Génesis 9:13",v1t:"Mi arco he puesto en las nubes, el cual será por señal del pacto entre mí y la tierra.",v2r:"Física",v2t:"El arco iris es un fenómeno óptico que ocurre siempre que hay luz y agua.",res:"El texto no dice que Dios creó el arco iris en ese momento; dice que lo 'pone' (o asigna) como señal del pacto. Es posible que el arco iris ya existiera físicamente y Dios le dio un significado convenantal nuevo. La narrativa no afirma que antes del diluvio no había arco iris."},
+  {id:85,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Dios cambia o no cambia?",v1r:"Malaquías 3:6",v1t:"Porque yo el Señor no cambio; por esto, hijos de Jacob, no habéis sido consumidos.",v2r:"Jonás 3:10",v2t:"Y vio Dios lo que hicieron… y Dios se arrepintió del mal que había dicho que les haría.",res:"Malaquías 3:6 habla de la inmutabilidad del carácter, propósito y naturaleza de Dios (su fidelidad, su santidad). Jonás 3 habla de la respuesta relacional de Dios al arrepentimiento genuino humano. Dios no cambia en su ser; sí responde dinámicamente a los cambios en la conducta humana."},
+  {id:86,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"contexto",tl:"Contexto",title:"¿Jesús realizó milagros en Nazaret o no pudo hacerlos allí?",v1r:"Marcos 6:5",v1t:"Y no pudo hacer allí ningún milagro.",v2r:"Lucas 4:23",v2t:"De tantas cosas que hemos oído que se han hecho en Cafarnaúm, hazlas también aquí en tu tierra.",res:"Marcos dice que no 'pudo' en el sentido de que no era apropiado o que la incredulidad creaba el contexto equivocado, no que le faltara poder ontológico. El propio Marcos añade en v.5 que 'sanó a unos pocos enfermos', demostrando que sí hizo algo. 'No pudo' es lenguaje de imposibilidad circunstancial/moral."},
+  {id:87,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿El infierno es eterno o destruye a los no salvos?",v1r:"Mateo 25:46",v1t:"Estos irán al castigo eterno, y los justos a la vida eterna.",v2r:"Malaquías 4:1",v2t:"He aquí, viene el día ardiente como un horno, y todos los soberbios… serán estopa; aquel día los abrasará.",res:"El término 'aionios' (eterno) en Mateo 25 modifica tanto el castigo como la vida, paralelos; si la vida eterna es perpetua, el castigo también. Las imágenes de 'fuego que quema' son consistentes con sufrimiento eterno consciente en la enseñanza directa de Jesús (Mar 9:48). El debate entre infierno eterno consciente y aniquilacionismo es genuino en teología."},
+  {id:88,cat:"Ley y Mandamientos",icon:"⚖️",tag:"teología",tl:"Teología",title:"¿Debemos guardar el sábado en sábado o en domingo?",v1r:"Éxodo 20:8-10",v1t:"Acuérdate del día de reposo para santificarlo. Seis días trabajarás, y el séptimo no hagas obra alguna.",v2r:"Hechos 20:7 / 1 Corintios 16:2",v2t:"El primer día de la semana… partimos el pan. El primer día de la semana cada uno guarde.",res:"La iglesia apostólica comenzó a reunirse el primer día de la semana (domingo) para celebrar la resurrección. Pablo habla de 'sábado' como sombra cumplida en Cristo (Col 2:16-17). El reposo sabático sigue siendo principio teológico (Hebreos 4 lo reinterpreta), pero su observancia cambió con el Nuevo Pacto."},
+  {id:89,cat:"Historia y Contexto",icon:"🏛️",tag:"cultura",tl:"Cultura",title:"¿Existió el éxodo masivo de israelitas de Egipto históricamente?",v1r:"Éxodo 12:37",v1t:"Partieron los hijos de Israel de Rameses a Sucot, como seiscientos mil hombres de a pie, sin contar los niños.",v2r:"Arqueología",v2t:"No hay evidencia arqueológica directa de dos millones de personas atravesando el Sinaí.",res:"La arqueología del Sinaí es escasa (los nómadas no construyen monumentos). Los 600.000 varones adultos son discutidos; algunos leen 'elef' en hebreo como 'unidad militar' además de 'mil'. Papiros egipcios mencionan asiáticos como esclavos en Egipto. El argumento del silencio arqueológico no refuta el evento."},
+  {id:90,cat:"Ética y Moral",icon:"⚡",tag:"teología",tl:"Teología",title:"¿Puede un cristiano perder la salvación?",v1r:"Juan 10:28-29",v1t:"Yo les doy vida eterna; y no perecerán jamás, ni nadie las arrebatará de mi mano.",v2r:"Hebreos 6:4-6",v2t:"Es imposible que los que una vez fueron iluminados… y recayeron, sean otra vez renovados para arrepentimiento.",res:"Hebreos 6 describe a personas que experimentaron dones espirituales externos pero no la regeneración genuina (posición calvinista) o advierte a creyentes reales del peligro de apostasía total (posición arminiana). Juan 10 promete seguridad a las ovejas que pertenecen genuinamente a Cristo. El debate es legítimo y antiguo en el cristianismo."},
+  {id:91,cat:"Personajes del Antiguo Testamento",icon:"📜",tag:"contexto",tl:"Contexto",title:"¿Jefté realmente sacrificó a su hija?",v1r:"Jueces 11:39",v1t:"Y aconteció que al cabo de dos meses volvió a su padre, el cual hizo con ella conforme a su voto.",v2r:"Jueces 11:37",v2t:"Que me dejes por dos meses para que vaya… y llore mi virginidad.",res:"Dos interpretaciones serias: (1) sacrificó literalmente a su hija, un acto trágico de voto irreflexivo que la Biblia no presenta como heroico; (2) la cumplió entregándola al celibato perpetuo en servicio al tabernáculo (de ahí 'llorar su virginidad' y que 'no conoció varón'). El texto no glorifica el voto de Jefté."},
+  {id:92,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Fue Satanás creado malvado o cayó?",v1r:"Ezequiel 28:15",v1t:"Perfecto eras en todos tus caminos desde el día que fuiste creado, hasta que se halló en ti maldad.",v2r:"Juan 8:44",v2t:"Él ha sido homicida desde el principio.",res:"Ezequiel 28 describe la condición original de la criatura gloriosa antes de su caída: fue creada perfecta. Juan 8:44 describe su carácter desde que cayó: desde que surgió el pecado en él, fue homicida. No hay contradicción; describen antes y después de la caída. Dios no creó el mal en Satanás; Satanás eligió la rebelión."},
+  {id:93,cat:"Vida y Enseñanzas de Jesús",icon:"✝️",tag:"lenguaje",tl:"Lenguaje",title:"¿Debemos llamar a alguien 'padre' o no?",v1r:"Mateo 23:9",v1t:"Y no llaméis padre vuestro a nadie en la tierra; porque uno es vuestro Padre, el que está en los cielos.",v2r:"1 Corintios 4:15",v2t:"Porque aunque tengáis diez mil ayos en Cristo, no tendréis muchos padres; pues en Cristo Jesús yo os engendré.",res:"Jesús en Mateo 23 prohíbe el uso de títulos religiosos para inflar el ego espiritual y crear jerarquías de honor. No prohíbe el término familiar o descriptivo. Pablo llama 'padre' a su rol apostólico hacia los corintios sin violar ningún principio, porque no era un título de autoridad espiritual suprema sino de relación."},
+  {id:94,cat:"Historia y Contexto",icon:"🏛️",tag:"contexto",tl:"Contexto",title:"¿Tuvo Herodes el Grande orden de matar a todos los bebés de Belén?",v1r:"Mateo 2:16",v1t:"Mandó matar a todos los niños menores de dos años que había en Belén y en todos sus alrededores.",v2r:"Fuentes históricas",v2t:"Josefo describe a Herodes como asesino de sus propios hijos, pero no menciona la masacre.",res:"El silencio de Josefo no equivale a refutación. Belén tenía una población pequeña; el número de bebés varones menores de dos años habría sido mínimo (estimaciones: 10-20). Herodes mandó matar a tres de sus propios hijos; la masacre de Belén sería un acto menor típico de su paranoia, no notable para los historiadores."},
+  {id:95,cat:"Genealogías y Números",icon:"🔢",tag:"lenguaje",tl:"Lenguaje",title:"¿Cuánta gente mató el ángel en el ejército de Senaquerib: 185.000?",v1r:"2 Reyes 19:35",v1t:"El ángel del Señor salió, y mató ciento ochenta y cinco mil en el campamento asirio.",v2r:"Crónicas asirias",v2t:"Las crónicas asirias no mencionan la derrota.",res:"Las crónicas asirias no registran derrotas propias, solo victorias. Senaquerib menciona el cerco de Jerusalén pero omite su resultado. El historiador Herodoto (2:141) también menciona una derrota misteriosa del ejército asirio ante Egipto, posiblemente el mismo evento narrado desde otra perspectiva cultural."},
+  {id:96,cat:"Creación y Génesis",icon:"🌍",tag:"contexto",tl:"Contexto",title:"¿Fue la serpiente de Edén literalmente una serpiente o Satanás?",v1r:"Génesis 3:1",v1t:"Pero la serpiente era astuta, más que todos los animales del campo que el Señor Dios había hecho.",v2r:"Apocalipsis 12:9",v2t:"La serpiente antigua, que se llama Diablo y Satanás, el cual engaña al mundo entero.",res:"No hay contradicción; Apocalipsis identifica retrospectivamente al agente espiritual detrás de la serpiente de Génesis: Satanás usó a la serpiente como instrumento. El texto de Génesis describe el vehículo visible (serpiente literal); Apocalipsis revela la identidad del poder espiritual que la animaba. Son niveles complementarios de la misma narrativa."},
+  {id:97,cat:"Doctrina y Teología",icon:"🕊️",tag:"teología",tl:"Teología",title:"¿Hay señales y milagros hoy o cesaron con los apóstoles?",v1r:"Marcos 16:17-18",v1t:"Y estas señales seguirán a los que creen: En mi nombre echarán fuera demonios…",v2r:"1 Corintios 13:8",v2t:"Las profecías se acabarán, y cesarán las lenguas, y la ciencia acabará.",res:"1 Corintios 13:8-10 dice que los dones cesarán 'cuando venga lo perfecto'. El debate cesacionista vs. continuacionista gira en torno a qué es 'lo perfecto': ¿el canon completo? ¿la segunda venida? Ambas posiciones son sostenidas por eruditos serios. Marcos 16:17 describe dones como señales de la era mesiánica; el alcance temporal es la cuestión teológica."},
+  {id:98,cat:"Ética y Moral",icon:"⚡",tag:"cultura",tl:"Cultura",title:"¿Aprobó Dios la esclavitud?",v1r:"Levítico 25:44-46",v1t:"Podréis comprar esclavos… los compraréis de las gentes que están en vuestros alrededores.",v2r:"Gálatas 3:28",v2t:"No hay judío ni griego; no hay esclavo ni libre… porque todos vosotros sois uno en Cristo Jesús.",res:"La ley mosaica reguló y limitó la esclavitud existente en el Antiguo Oriente Medio (con protecciones sin paralelo en culturas vecinas: descanso, jubileos, prohibición de devolver esclavos fugitivos) sin abolirla instantáneamente. El principio de Gálatas 3:28 revela la dirección ética del evangelio: igual dignidad humana. La abolición es el cumplimiento lógico del evangelio."},
+  {id:99,cat:"Pasión y Resurrección",icon:"☩",tag:"teología",tl:"Teología",title:"¿Por qué exclamó Jesús '¿Por qué me has abandonado?' si era Dios?",v1r:"Mateo 27:46",v1t:"¡Dios mío, Dios mío!, ¿por qué me has desamparado?",v2r:"Juan 10:30",v2t:"Yo y el Padre uno somos.",res:"Jesús cita el Salmo 22:1, un salmo mesiánico que comienza en abandono y termina en vindicación y adoración universal (v.27-31). No es una ruptura de la Trinidad; es la experiencia del juicio divino sobre el pecado humano que el Hijo cargó ('a quien no conoció pecado, por nosotros lo hizo pecado', 2 Cor 5:21)."},
+  {id:100,cat:"Historia y Contexto",icon:"🏛️",tag:"teología",tl:"Teología",title:"¿Es el Apocalipsis de Juan una profecía futura o pasada?",v1r:"Apocalipsis 1:3",v1t:"Bienaventurado el que lee… porque el tiempo está cerca.",v2r:"Apocalipsis 20:4-6",v2t:"Vi las almas de los decapitados por causa del testimonio de Jesús… y reinaron con Cristo mil años.",res:"El Apocalipsis es interpretado desde cuatro grandes paradigmas: preterismo (ya cumplido en 70 d.C.), historicismo (cumplimiento progresivo en la historia), futurismo (mayoría aún por cumplirse) e idealismo (símbolos atemporales). 'El tiempo está cerca' puede referirse a que los eventos comenzaron a cumplirse pronto, no que todo terminara en la primera generación."}
+];
+
+let activeFilter = 'all';
+let allExpanded = false;
+
+function getVisible() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  return DATA.filter(d => {
+    const matchFilter = activeFilter === 'all' || d.tag === activeFilter;
+    if (!matchFilter) return false;
+    if (!q) return true;
+    return (
+      d.title.toLowerCase().includes(q) ||
+      d.cat.toLowerCase().includes(q) ||
+      d.v1r.toLowerCase().includes(q) ||
+      d.v2r.toLowerCase().includes(q) ||
+      d.res.toLowerCase().includes(q) ||
+      String(d.id) === q
+    );
+  });
+}
+
+function getCats(items) {
+  return [...new Map(items.map(d => [d.cat, {cat: d.cat, icon: d.icon}])).values()];
+}
+
+function buildTOC(visible) {
+  const toc = document.getElementById('toc');
+  toc.innerHTML = '';
+  const cats = getCats(visible);
+  cats.forEach(({cat, icon}) => {
+    const items = visible.filter(d => d.cat === cat);
+    const catEl = document.createElement('div');
+    catEl.className = 'toc-cat-label';
+    catEl.textContent = icon + ' ' + cat;
+    toc.appendChild(catEl);
+    items.forEach(d => {
+      const a = document.createElement('a');
+      a.className = 'toc-link';
+      a.href = '#c' + d.id;
+      a.dataset.id = d.id;
+      a.innerHTML = `<span class="toc-n">${d.id}</span><span>${d.title}</span>`;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const el = document.getElementById('c' + d.id);
+        if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+        setActiveTOC(d.id);
+        if (window.innerWidth < 940) closeSidebar();
+      });
+      toc.appendChild(a);
+    });
+  });
+}
+
+function setActiveTOC(id) {
+  document.querySelectorAll('.toc-link').forEach(a => {
+    a.classList.toggle('active', a.dataset.id == id);
+  });
+  const active = document.querySelector(`.toc-link[data-id="${id}"]`);
+  if (active) active.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+}
+
+function buildCards(visible) {
+  const container = document.getElementById('cardsContainer');
+  container.innerHTML = '';
+  document.getElementById('resultCount').textContent = `Mostrando ${visible.length} de ${DATA.length}`;
+
+  if (!visible.length) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p class="empty-text">No se encontraron resultados para esa búsqueda.</p></div>`;
+    return;
+  }
+
+  const cats = getCats(visible);
+  cats.forEach(({cat, icon}) => {
+    const items = visible.filter(d => d.cat === cat);
+
+    const heading = document.createElement('div');
+    heading.className = 'cat-heading';
+    heading.innerHTML = `<span class="cat-icon">${icon}</span><span class="cat-name">${cat}</span><span class="cat-count">${items.length}</span>`;
+    container.appendChild(heading);
+
+    items.forEach(d => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.id = 'c' + d.id;
+
+      const v2text = d.v2t || d.v2text || '';
+
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="card-num">${d.id}</div>
+          <div class="card-title">${d.title}</div>
+          <div class="card-chevron">▾</div>
+        </div>
+        <div class="card-body">
+          <div class="verses-grid">
+            <div class="verse-box">
+              <div class="verse-ref">${d.v1r}</div>
+              <div class="verse-text">${d.v1t}</div>
+            </div>
+            <div class="verse-box">
+              <div class="verse-ref">${d.v2r}</div>
+              <div class="verse-text">${v2text}</div>
+            </div>
+          </div>
+          <div class="resolution-block">
+            <div class="res-label">✦ Resolución</div>
+            <p class="res-text">${d.res}</p>
+          </div>
+          <span class="tag-badge tag-${d.tag}">${d.tl}</span>
+        </div>
+      `;
+
+      card.querySelector('.card-header').addEventListener('click', () => {
+        card.classList.toggle('open');
+      });
+
+      container.appendChild(card);
+    });
+  });
+}
+
+function render() {
+  const visible = getVisible();
+  buildTOC(visible);
+  buildCards(visible);
+  allExpanded = false;
+  document.getElementById('expandBtn').textContent = '▸ Expandir todas';
+}
+
+// Search
+document.getElementById('searchInput').addEventListener('input', render);
+
+// Filter pills
+document.getElementById('filterPills').addEventListener('click', e => {
+  const pill = e.target.closest('.pill');
+  if (!pill) return;
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  activeFilter = pill.dataset.f;
+  render();
+});
+
+// Expand / collapse all
+document.getElementById('expandBtn').addEventListener('click', () => {
+  allExpanded = !allExpanded;
+  document.querySelectorAll('.card').forEach(c => c.classList.toggle('open', allExpanded));
+  document.getElementById('expandBtn').textContent = allExpanded ? '▾ Contraer todas' : '▸ Expandir todas';
+});
+
+// Back to top
+const backBtn = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backBtn.classList.toggle('visible', window.scrollY > 500);
+
+  // TOC active highlight
+  const cards = document.querySelectorAll('.card');
+  let current = null;
+  cards.forEach(c => {
+    if (c.getBoundingClientRect().top < 160) current = c.id.replace('c', '');
+  });
+  if (current) setActiveTOC(current);
+}, {passive: true});
+
+backBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+// Mobile sidebar
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+document.getElementById('mobileToggle').addEventListener('click', () => {
+  sidebar.classList.add('open');
+  overlay.classList.add('visible');
+});
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('visible');
+}
+
+overlay.addEventListener('click', closeSidebar);
+
+// Initial render
+render();
+</script>
+</body>
+</html>
