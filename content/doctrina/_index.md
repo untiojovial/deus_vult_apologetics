@@ -10,3 +10,7 @@ aliases:
 La doctrina no es teoria fria. Es luz para comprender a Dios, al hombre y el sentido de la vida.
 
 Aqui se desarrollaran los contenidos esenciales de la fe cristiana de forma ordenada.
+
+## Dossiers integrados
+
+- [Angel del Senor Yahve (Dossier)](/doctrina/angel-del-senor-yahve-dossier/)

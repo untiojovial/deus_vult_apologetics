@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Por qué exactamente Tres: La necesidad metafísica de la Trinidad</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --gold:        #B8973A;
+    --gold-light:  #DFC882;
+    --gold-pale:   #F3E9C6;
+    --ink:         #14100A;
+    --ink-mid:     #2E2010;
+    --ink-soft:    #5A3E1B;
+    --parchment:   #F9F3E4;
+    --parchment2:  #EDE3C5;
+    --red:         #7A1A1A;
+    --deep-blue:   #162540;
+    --mid-blue:    #1E3A5F;
+    --sidebar-w:   310px;
+    --transition:  0.32s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 17px; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ══════ SIDEBAR ══════ */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--deep-blue);
+    color: var(--gold-light);
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform var(--transition);
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(184,151,58,0.3) transparent;
+  }
+
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: rgba(184,151,58,0.3); border-radius: 2px; }
+
+  #sidebar-header {
+    padding: 2rem 1.5rem 1.2rem;
+    border-bottom: 1px solid rgba(184,151,58,0.2);
+    flex-shrink: 0;
+  }
+
+  #sidebar-header .logo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.67rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  #sidebar-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #e8d8b0;
+    line-height: 1.4;
+  }
+
+  #toc { padding: 0.8rem 0; flex: 1; }
+
+  .toc-part { margin-bottom: 0.15rem; }
+
+  .toc-part-header {
+    display: flex;
+    align-items: center;
+    padding: 0.55rem 1.4rem;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    gap: 0.5rem;
+    transition: background 0.18s;
+    user-select: none;
+  }
+
+  .toc-part-header:hover { background: rgba(184,151,58,0.08); }
+  .toc-part-header .arrow { margin-left: auto; font-size: 0.58rem; transition: transform 0.22s; }
+  .toc-part-header.open .arrow { transform: rotate(90deg); }
+
+  .toc-items { display: none; }
+  .toc-items.open { display: block; }
+
+  .toc-item {
+    display: block;
+    padding: 0.35rem 1.4rem 0.35rem 2.1rem;
+    font-size: 0.8rem;
+    color: #b8a878;
+    text-decoration: none;
+    line-height: 1.35;
+    transition: background 0.14s, color 0.14s;
+    border-left: 2px solid transparent;
+  }
+
+  .toc-item:hover {
+    background: rgba(184,151,58,0.1);
+    color: #e0ce96;
+    border-left-color: var(--gold);
+  }
+
+  .toc-item.active {
+    background: rgba(184,151,58,0.13);
+    color: #f0e0a0;
+    border-left-color: #d4a832;
+  }
+
+  /* ══════ MAIN ══════ */
+  #main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+
+  /* ══════ HERO ══════ */
+  #hero {
+    background: var(--deep-blue);
+    color: var(--gold-light);
+    padding: 5.5rem 4rem 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 55% 70% at 85% 60%, rgba(184,151,58,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 50% at 15% 30%, rgba(122,26,26,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-iii {
+    position: absolute;
+    right: 3.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cinzel', serif;
+    font-size: 9rem;
+    font-weight: 700;
+    color: rgba(184,151,58,0.07);
+    letter-spacing: 0.1em;
+    user-select: none;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  #hero .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.3rem;
+    position: relative; z-index: 1;
+  }
+
+  #hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.12;
+    color: #f0e6cc;
+    max-width: 680px;
+    margin-bottom: 1.6rem;
+    position: relative; z-index: 1;
+  }
+
+  #hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+    font-family: 'EB Garamond', serif;
+    font-weight: 400;
+  }
+
+  #hero .subtitle {
+    font-size: 1.05rem;
+    color: #a89870;
+    max-width: 580px;
+    line-height: 1.75;
+    font-style: italic;
+    position: relative; z-index: 1;
+  }
+
+  /* ══════ CONTENT ══════ */
+  #content { max-width: 840px; margin: 0 auto; padding: 3.5rem 3rem 7rem; }
+
+  /* ══════ PART DIVIDER ══════ */
+  .part-divider {
+    margin: 4.5rem 0 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .pdl { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+
+  .part-divider-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 0 0.4rem;
+  }
+
+  /* ══════ CHAPTERS ══════ */
+  section.chapter {
+    margin-bottom: 4rem;
+    scroll-margin-top: 2rem;
+  }
+
+  section.chapter h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--ink-mid);
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--parchment2);
+    line-height: 1.25;
+  }
+
+  section.chapter h2 .ch-num {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.28rem;
+    font-weight: 400;
+  }
+
+  section.chapter h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--ink-mid);
+    margin: 2.2rem 0 0.8rem;
+    font-weight: 600;
+  }
+
+  section.chapter h4 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 1.6rem 0 0.5rem;
+  }
+
+  section.chapter p {
+    font-size: 1.01rem;
+    line-height: 1.88;
+    color: var(--ink);
+    margin-bottom: 1.05rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  section.chapter p + p { text-indent: 1.6em; }
+
+  /* ══════ LATIN QUOTES ══════ */
+  .latin {
+    display: block;
+    font-style: italic;
+    color: var(--red);
+    font-size: 0.97rem;
+    margin: 1.4rem 1.8rem;
+    padding: 0.6rem 0 0.6rem 1.1rem;
+    border-left: 3px solid var(--gold);
+    line-height: 1.65;
+  }
+
+  .latin-trans {
+    display: block;
+    font-style: normal;
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin: -1rem 1.8rem 1.4rem;
+    padding-left: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* ══════ BOXES ══════ */
+  .def-box {
+    background: var(--parchment2);
+    border: 1px solid rgba(184,151,58,0.35);
+    border-left: 4px solid var(--gold);
+    border-radius: 1px;
+    padding: 1.15rem 1.5rem;
+    margin: 1.6rem 0;
+  }
+
+  .def-box .def-term {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.45rem;
+  }
+
+  .def-box p { margin-bottom: 0; text-indent: 0 !important; font-size: 0.96rem; }
+
+  /* ══════ SYLLOGISM ══════ */
+  .syllogism {
+    background: #eee8d5;
+    border: 1px solid #d0c498;
+    border-radius: 1px;
+    padding: 1.3rem 1.8rem;
+    margin: 1.6rem 0;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.89rem;
+    color: var(--ink-mid);
+  }
+
+  .syllogism .syl-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.67rem;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+    border-bottom: 1px solid #d0c498;
+    padding-bottom: 0.5rem;
+  }
+
+  .syllogism .premise {
+    display: flex;
+    gap: 0.85rem;
+    margin-bottom: 0.45rem;
+    line-height: 1.55;
+  }
+
+  .syllogism .premise-label {
+    min-width: 2.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 0.75rem;
+    padding-top: 0.06rem;
+    flex-shrink: 0;
+  }
+
+  .syllogism .conclusion {
+    display: flex;
+    gap: 0.85rem;
+    margin-top: 0.65rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid #d0c498;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.93rem;
+  }
+
+  .syllogism .sub-note {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #c8bc8a;
+    line-height: 1.5;
+  }
+
+  /* ══════ CALLOUT ══════ */
+  .callout {
+    display: flex;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(30,58,95,0.06), rgba(30,58,95,0.02));
+    border: 1px solid rgba(30,58,95,0.18);
+    border-radius: 1px;
+    padding: 1.1rem 1.35rem;
+    margin: 1.6rem 0;
+    align-items: flex-start;
+  }
+
+  .callout-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 0.08rem; }
+
+  .callout p {
+    margin: 0;
+    text-indent: 0 !important;
+    font-size: 0.94rem;
+    line-height: 1.72;
+    color: var(--mid-blue);
+  }
+
+  .callout.warn {
+    background: linear-gradient(135deg, rgba(122,26,26,0.06), rgba(122,26,26,0.02));
+    border-color: rgba(122,26,26,0.2);
+  }
+  .callout.warn p { color: var(--red); }
+
+  /* ══════ TABLE ══════ */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.6rem 0;
+    font-size: 0.87rem;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  .comp-table th {
+    background: var(--deep-blue);
+    color: var(--gold-light);
+    padding: 0.62rem 0.95rem;
+    text-align: left;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .comp-table td {
+    padding: 0.55rem 0.95rem;
+    border-bottom: 1px solid var(--parchment2);
+    color: var(--ink-mid);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+
+  .comp-table tr:nth-child(even) td { background: rgba(0,0,0,0.022); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table .td-key { font-weight: 600; color: var(--ink); font-style: italic; }
+
+  /* ══════ LEVEL BADGE ══════ */
+  .level-badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.14rem 0.52rem;
+    border-radius: 1px;
+    margin-bottom: 0.9rem;
+  }
+
+  .level-basic { background: rgba(184,151,58,0.14); color: var(--gold); border: 1px solid rgba(184,151,58,0.38); }
+  .level-mid   { background: rgba(30,58,95,0.09);  color: var(--mid-blue); border: 1px solid rgba(30,58,95,0.28); }
+  .level-adv   { background: rgba(122,26,26,0.08); color: var(--red); border: 1px solid rgba(122,26,26,0.28); }
+
+  /* ══════ DIAGRAM ══════ */
+  .diagram {
+    margin: 1.8rem 0;
+    padding: 1.6rem;
+    background: var(--deep-blue);
+    color: var(--gold-light);
+    border-radius: 1px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.84rem;
+    overflow-x: auto;
+  }
+
+  .diagram-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.67rem;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+
+  .d-row { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.7rem; flex-wrap: wrap; }
+  .d-row-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.12em; color: rgba(184,151,58,0.6); text-transform: uppercase; min-width: 80px; flex-shrink: 0; }
+
+  .d-node {
+    padding: 0.45rem 0.9rem;
+    border: 1px solid rgba(184,151,58,0.5);
+    color: var(--gold-light);
+    text-align: center;
+    min-width: 100px;
+    line-height: 1.35;
+    font-size: 0.82rem;
+  }
+
+  .d-node.prime { background: rgba(184,151,58,0.18); border-color: var(--gold-light); color: #f0dc98; font-weight: 600; }
+  .d-node.ghost { border-style: dashed; color: rgba(184,151,58,0.4); border-color: rgba(184,151,58,0.25); font-style: italic; }
+  .d-node.blocked { border-style: dashed; border-color: rgba(122,26,26,0.5); color: rgba(200,100,100,0.7); }
+
+  .d-arr { color: rgba(184,151,58,0.7); font-size: 1rem; flex-shrink: 0; }
+  .d-arr.red { color: rgba(200,80,80,0.7); }
+  .d-cross { color: rgba(200,80,80,0.8); font-size: 1.1rem; font-weight: 700; }
+
+  .diagram-note { font-size: 0.75rem; color: rgba(184,151,58,0.55); margin-top: 0.8rem; text-align: center; font-style: italic; }
+
+  /* ══════ ORNAMENT ══════ */
+  .ornament { text-align: center; color: var(--gold); font-size: 1.1rem; letter-spacing: 0.5em; margin: 3rem 0 2rem; opacity: 0.55; }
+
+  /* ══════ NOTA ══════ */
+  .nota {
+    font-size: 0.81rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    border-top: 1px solid var(--parchment2);
+    margin-top: 2.2rem;
+    padding-top: 0.9rem;
+    line-height: 1.65;
+  }
+
+  /* ══════ PROGRESS ══════ */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: var(--sidebar-w); right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), #c04040);
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: 200;
+    transition: transform 0.1s;
+  }
+
+  /* ══════ HAMBURGER ══════ */
+  #hamburger {
+    display: none;
+    position: fixed;
+    top: 1rem; left: 1rem;
+    z-index: 300;
+    background: var(--deep-blue);
+    color: var(--gold);
+    border: 1px solid rgba(184,151,58,0.5);
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  /* ══════ RESPONSIVE ══════ */
+  @media (max-width: 880px) { :root { --sidebar-w: 270px; } }
+
+  @media (max-width: 680px) {
+    #sidebar { transform: translateX(-100%); }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; }
+    #progress-bar { left: 0; }
+    #hamburger { display: block; }
+    #content { padding: 2rem 1.4rem 4rem; }
+    #hero { padding: 4.5rem 1.5rem 3.5rem; }
+    .hero-iii { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<button id="hamburger" aria-label="Abrir menú">☰</button>
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<nav id="sidebar" aria-label="Índice">
+  <div id="sidebar-header">
+    <div class="logo">Theologia Scholastica · Tomás de Aquino</div>
+    <h2>¿Por qué exactamente<br>Tres Personas?</h2>
+  </div>
+  <div id="toc">
+
+    <div class="toc-part">
+      <div class="toc-part-header open" data-part="0">
+        <span>Introducción</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items open">
+        <a class="toc-item" href="#planteo">El problema planteado</a>
+        <a class="toc-item" href="#metodologia">Método y fuentes tomistas</a>
+      </div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-header" data-part="1">
+        <span>I. Un solo acto cognoscitivo</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items">
+        <a class="toc-item" href="#acto-unico">El acto de entender divino es único</a>
+        <a class="toc-item" href="#verbum-unico">Un único Verbum</a>
+        <a class="toc-item" href="#por-que-no-varios-hijos">¿Por qué no varios Hijos?</a>
+        <a class="toc-item" href="#hijo-no-autoverbum">El Hijo no genera su propio Verbo</a>
+      </div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-header" data-part="2">
+        <span>II. Un solo acto volitivo</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items">
+        <a class="toc-item" href="#amor-unico">El acto de amar divino es único</a>
+        <a class="toc-item" href="#spiritus-unico">Un único Espíritu</a>
+        <a class="toc-item" href="#espiritu-no-espira">El Espíritu no espira una cuarta Persona</a>
+        <a class="toc-item" href="#no-nieto">¿Por qué no hay «nieto»?</a>
+      </div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-header" data-part="3">
+        <span>III. Solo dos procesiones</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items">
+        <a class="toc-item" href="#solo-dos-proc">La prueba de las dos procesiones</a>
+        <a class="toc-item" href="#oposicion-relativa">Oposición relativa y distinción real</a>
+        <a class="toc-item" href="#cuatro-relaciones">Cuatro relaciones, tres personas</a>
+        <a class="toc-item" href="#necesidad-metafisica">Necesidad metafísica del número tres</a>
+      </div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-header" data-part="4">
+        <span>IV. El Hijo sin autoprocesión</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items">
+        <a class="toc-item" href="#hijo-no-conoce-hipost">El Hijo no se conoce hipostáticamente</a>
+        <a class="toc-item" href="#identidad-esencia-hijo">Identidad esencia-hipóstasis en el Hijo</a>
+        <a class="toc-item" href="#cognitio-essentiae">Cognitio essentiae vs. cognitio personae</a>
+        <a class="toc-item" href="#por-que-no-engendra">Por qué el Hijo no engendra</a>
+      </div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-header" data-part="5">
+        <span>V. Niveles avanzados</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items">
+        <a class="toc-item" href="#contra-modalismo">Contra el modalismo: las personas son reales</a>
+        <a class="toc-item" href="#contra-cuartismo">Contra la cuarta persona</a>
+        <a class="toc-item" href="#contra-dualismo">Contra la dualidad sin Espíritu</a>
+        <a class="toc-item" href="#suma-referencias">Referencias precisas en la Suma</a>
+        <a class="toc-item" href="#sintesis-final">Síntesis final</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main id="main">
+
+  <div id="hero">
+    <div class="eyebrow">S.Th. I, qq. 27–42 · Philosophia Perennis</div>
+    <h1>¿Por qué <em>exactamente</em> Tres Personas<br>y no más ni menos?</h1>
+    <p class="subtitle">La necesidad metafísica de la Trinidad en Tomás de Aquino: del acto cognoscitivo único al Verbum, del acto volitivo único al Amor, y por qué ningún término puede generar ulteriores procesiones.</p>
+    <div class="hero-iii" aria-hidden="true">III</div>
+  </div>
+
+  <div id="content">
+
+    <!-- ══════ INTRODUCCIÓN ══════ -->
+    <div class="part-divider"><div class="pdl"></div><span class="part-divider-label">Introducción</span><div class="pdl"></div></div>
+
+    <section class="chapter" id="planteo">
+      <h2><span class="ch-num">Planteamiento del problema</span>La pregunta más precisa sobre la Trinidad</h2>
+      <div class="level-badge level-basic">Nivel introductorio</div>
+
+      <p>La doctrina de la Trinidad puede formularse con perfecta precisión de la siguiente manera: en Dios hay <em>exactamente</em> tres Personas —el Padre, el Hijo y el Espíritu Santo—, ni una más ni una menos, que subsisten en <em>una sola</em> naturaleza divina. Esta afirmación plantea una pregunta filosófica y teológica de primer orden: ¿existe una razón metafísica para ese número exacto, o es simplemente un dato de revelación que la razón no puede en modo alguno iluminar?</p>
+
+      <p>Tomás de Aquino, en la <em>Summa Theologiae</em> (I, qq. 27–42) y en la <em>Summa contra Gentiles</em> (IV, cc. 2–26), ofrece lo que es, a juicio de casi toda la tradición escolástica posterior, la explicación más rigurosa y comprehensiva de por qué el número tres es el único número metafísicamente coherente con la identidad del ser divino tal como lo conocemos por sus propiedades necesarias.</p>
+
+      <p>El argumento tomista no pretende <em>demostrar</em> la Trinidad a partir de la sola razón natural (eso excedería las posibilidades de la razón filosófica y constituiría un error metodológico que el mismo Tomás denuncia en <em>S.Th.</em> I, q. 32, a. 1). Lo que sí hace es mostrar que, <em>dados</em> los datos revelados, la Trinidad es metafísicamente coherente, inteligible desde la estructura de la vida espiritual, y que el número tres responde a una necesidad interna del ser divino que la razón puede rastrear con rigor.</p>
+
+      <div class="callout">
+        <span class="callout-icon">✦</span>
+        <p><strong>Tesis central de este manual:</strong> El número tres en la Trinidad no es arbitrario ni simplemente bíblico. Proviene de una necesidad metafísica inscrita en la naturaleza del ser espiritual infinito: un ser intelectual y volitivo perfectísimo solo puede tener <em>dos</em> operaciones inmanentes irreductibles (entender y querer), y cada una produce exactamente <em>un</em> término. Dos operaciones, dos términos procesionantes, más el principio original = exactamente tres Personas.</p>
+      </div>
+
+      <p>Este manual recorre ese argumento con todo el detalle que merece, abordando además las preguntas que surgen naturalmente: ¿por qué el Padre no puede engendrar varios Hijos?, ¿por qué el Hijo no conoce su propia hipóstasis y no genera un «nieto»?, ¿por qué el Espíritu Santo no puede a su vez espirar una cuarta persona?</p>
+    </section>
+
+    <section class="chapter" id="metodologia">
+      <h2><span class="ch-num">Metodología</span>Fuentes tomistas y método de exposición</h2>
+
+      <p>Las fuentes primarias que seguimos en este manual son las siguientes:</p>
+
+      <table class="comp-table">
+        <thead><tr><th>Obra de Santo Tomás</th><th>Lugar preciso</th><th>Tema tratado</th></tr></thead>
+        <tbody>
+          <tr><td class="td-key">Summa Theologiae</td><td>I, q. 27, aa. 1–5</td><td>Las procesiones divinas en general</td></tr>
+          <tr><td class="td-key">Summa Theologiae</td><td>I, q. 27, a. 5</td><td>Solo hay dos procesiones en Dios</td></tr>
+          <tr><td class="td-key">Summa Theologiae</td><td>I, q. 28, aa. 1–4</td><td>Las relaciones divinas</td></tr>
+          <tr><td class="td-key">Summa Theologiae</td><td>I, q. 29, aa. 1–4</td><td>Las Personas divinas</td></tr>
+          <tr><td class="td-key">Summa Theologiae</td><td>I, q. 30, aa. 1–4</td><td>El número de Personas: por qué tres</td></tr>
+          <tr><td class="td-key">Summa Theologiae</td><td>I, q. 34, aa. 1–3</td><td>El Verbo: naturaleza del Verbum divino</td></tr>
+          <tr><td class="td-key">Summa Theologiae</td><td>I, q. 36, a. 4</td><td>El Espíritu procede del Padre y del Hijo</td></tr>
+          <tr><td class="td-key">Summa Theologiae</td><td>I, q. 40, aa. 1–4</td><td>Relaciones y Personas: distinción</td></tr>
+          <tr><td class="td-key">Summa Theologiae</td><td>I, q. 41, aa. 1–6</td><td>Los actos nocionales: generar y espirar</td></tr>
+          <tr><td class="td-key">Summa contra Gentiles</td><td>IV, cc. 11–14</td><td>Procesiones y pluralidad de Personas</td></tr>
+          <tr><td class="td-key">De Potentia Dei</td><td>q. 9, aa. 5–9</td><td>Las relaciones y personas en Dios</td></tr>
+          <tr><td class="td-key">De Veritate</td><td>q. 4, aa. 1–4</td><td>El Verbo divino</td></tr>
+        </tbody>
+      </table>
+
+      <p>El método de exposición es el tomista clásico: presentar primero los principios metafísicos sobre los que descansa cada argumento, luego el argumento mismo en forma silogística, y finalmente las objeciones más serias con sus respuestas. El lector debe tener presente que todos los argumentos de este manual presuponen la ontología tomista desarrollada en el Manual anterior (acto/potencia, esencia/esse, simplicidad divina).</p>
+    </section>
+
+    <!-- ══════ PARTE I ══════ -->
+    <div class="part-divider"><div class="pdl"></div><span class="part-divider-label">Parte I · Un Solo Acto Cognoscitivo</span><div class="pdl"></div></div>
+
+    <section class="chapter" id="acto-unico">
+      <h2><span class="ch-num">Capítulo 1</span>El acto de entender divino es absolutamente único</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>El primer bloque del argumento tomista para establecer que solo puede haber un Hijo parte de un principio que Tomás establece con todo rigor en <em>S.Th.</em> I, q. 14: el entendimiento divino es absolutamente simple y su acto de conocer es uno solo, eterno y perfectísimo. Comprender por qué esto es necesario requiere entender la diferencia entre el entendimiento humano y el divino.</p>
+
+      <h3>El entendimiento humano: múltiple, sucesivo, imperfecto</h3>
+      <p>El intelecto humano conoce mediante una pluralidad de actos sucesivos y distintos: entiende primero una cosa, luego otra; a veces entiende bien, a veces mal; siempre a través de especies inteligibles recibidas del exterior. La multiplicidad de sus actos refleja la multiplicidad de objetos conocidos y la imperfección del cognoscente, que va adquiriendo ciencia poco a poco. En el intelecto humano, por tanto, cada objeto conocido produce un <em>verbo</em> distinto: el concepto de «árbol» es distinto del concepto de «hombre», aunque ambos residan en el mismo intelecto.</p>
+
+      <h3>El entendimiento divino: único, simultáneo, infinitamente perfecto</h3>
+      <p>El entendimiento divino, en cambio, conoce <em>en un solo acto</em> todo lo cognoscible. No hay en Dios sucesión de actos de entender: un acto hoy, otro mañana. Hay un único acto de entender, eterno, que abarca todo lo que Dios conoce —su propia esencia, todo lo posible, todo lo real— en una sola intuición intelectual simplicísima. Tomás lo explica con claridad en <em>S.Th.</em> I, q. 14, a. 7:</p>
+
+      <blockquote class="latin">«Intellectus divinus uno intuitu omnia intelligit, quia intelligendo seipsum intelligit omnia alia.»</blockquote>
+      <span class="latin-trans">— "El intelecto divino entiende todas las cosas en una sola intuición, porque entendiéndose a sí mismo entiende todo lo demás." (<em>S.Th.</em> I, q. 14, a. 5, ad 3)</span>
+
+      <p>Esto es crucial: Dios no necesita múltiples actos de entender para conocer múltiples objetos. Conoce su esencia infinita y, en esa única autocomprensión perfecta, conoce todo lo demás (las criaturas posibles y reales) como participaciones o imitaciones finitas de esa única esencia infinita. Un solo acto cognoscitivo lo abarca todo perfectamente.</p>
+
+      <div class="def-box">
+        <div class="def-term">Principio fundamental (S.Th. I, q. 14, a. 7)</div>
+        <p>En Dios hay un solo acto de entender (<em>unum intelligere</em>) que es idéntico a su esencia y a su esse. No hay multiplicidad de actos de entender en Dios porque ello implicaría composición y potencia —incompatibles con la simplicidad y el Acto Puro.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="verbum-unico">
+      <h2><span class="ch-num">Capítulo 2</span>Un único acto de entender produce un único Verbum</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>De lo anterior se sigue directamente la unicidad del Verbo divino. Recordemos la estructura de la procesión del Verbo: el Padre se conoce a sí mismo por un acto de entender, y el término de ese acto es el Verbo —el Hijo. Ahora bien: si hay un <em>solo</em> acto de entender divino, ese acto produce un <em>solo</em> Verbo.</p>
+
+      <p>Tomás articula esto en <em>S.Th.</em> I, q. 27, a. 5, donde trata de si hay más de dos procesiones en Dios, y en <em>S.Th.</em> I, q. 34, a. 1, donde trata de la unicidad del Verbo divino. El argumento es el siguiente:</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Por qué hay exactamente un Verbo (S.Th. I, q. 34, a. 1 — De Veritate, q. 4, a. 2)</div>
+        <div class="premise"><span class="premise-label">P.1</span> El Verbo divino es el término de la procesión intelectual del Padre: aquello en lo que el Padre expresa perfectamente lo conocido.</div>
+        <div class="premise"><span class="premise-label">P.2</span> El Padre conoce por un único acto de entender, infinitamente perfecto, que lo abarca todo (su esencia, y en ella todo lo demás).</div>
+        <div class="premise"><span class="premise-label">P.3</span> Un único acto de entender tiene un único término de expresión: no necesita ni puede tener múltiples Verbos, pues ello implicaría que el primero fuera insuficiente y el acto de entender fuera múltiple e imperfecto.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> El Padre engendra un único Verbo, que expresa perfectamente todo lo que el Padre conoce. Ese Verbo es el Hijo.</div>
+        <div class="sub-note">Tomás añade: en el hombre hay varios verbos mentales porque su intelecto es imperfecto y conoce múltiples objetos por actos distintos. En Dios, la perfecta unidad del acto de entender produce necesariamente la perfecta unidad del Verbo.</div>
+      </div>
+
+      <blockquote class="latin">«In divinis est unum Verbum perfectum. Et hoc est unigenitus Filius.»</blockquote>
+      <span class="latin-trans">— "En Dios hay un solo Verbo perfecto. Y ese es el Unigénito Hijo." (<em>S.Th.</em> I, q. 34, a. 1, ad 3 — cf. Jn 1:18)</span>
+
+      <p>El término «unigénito» (<em>monogenés</em>, Jn 1:14.18; 3:16.18; 1 Jn 4:9) no es solo un título de honor: expresa con precisión metafísica la unicidad del Verbo. El Hijo no es «el primero de varios» sino el único, porque el único acto de entender divino tiene un único término de expresión perfecta.</p>
+
+      <div class="callout">
+        <span class="callout-icon">💡</span>
+        <p><strong>Analogía útil (con sus límites):</strong> Un espejo perfectísimo e infinito que refleja una luz perfectísima e infinita produce una sola imagen perfecta, no cien imágenes imperfectas. La multiplicación de imágenes solo ocurre cuando cada imagen es imperfecta y ninguna capta la fuente en su plenitud. El acto de entender divino «refleja» perfectamente la esencia divina en un único Verbo que la expresa exhaustiva e infinitamente.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="por-que-no-varios-hijos">
+      <h2><span class="ch-num">Capítulo 3</span>¿Por qué el Padre no puede engendrar varios Hijos?</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>Esta es una de las preguntas más importantes y naturales que surgen al considerar la Trinidad. Si Dios es omnipotente, ¿no podría haber «decidido» engendrar dos, tres o cien Hijos? La respuesta tomista, profundamente instructiva, niega la posibilidad no por limitación del poder divino sino por la estructura misma del acto cognoscitivo divino.</p>
+
+      <h3>Razón primera: la unidad del acto de entender</h3>
+      <p>Ya establecida en el capítulo anterior: la generación del Hijo no es un acto «voluntario» en el sentido de que Dios «elija» generarlo como elige crear el mundo. La generación del Hijo es el término necesario e intrínseco del autoconocimiento divino. No hay más Hijos por la misma razón que no hay más actos de entender: el único acto de entender divino, infinitamente perfecto, genera el único Verbo infinitamente perfecto que lo expresa todo. Añadir un «segundo Hijo» implicaría que el primero no expresó perfectamente todo lo que el Padre conoce —lo que es imposible dado que el Verbo es infinito.</p>
+
+      <h3>Razón segunda: la identidad esencial exige unicidad del término</h3>
+      <p>Tomás añade en <em>S.Th.</em> I, q. 30, a. 4 (y de modo más extenso en <em>De Potentia</em>, q. 9, a. 9) un argumento complementario de gran profundidad:</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Argumento por la identidad esencial (S.Th. I, q. 30, a. 4)</div>
+        <div class="premise"><span class="premise-label">P.1</span> Los términos de una procesión divina son distintos entre sí solo por su relación de origen, no por la esencia divina que poseen (que es una e idéntica en todas las Personas).</div>
+        <div class="premise"><span class="premise-label">P.2</span> Si hubiera dos Hijos, ambos poseerían la misma esencia divina y ambos procederían del Padre por generación: serían distintos en el único sentido en que las Personas divinas pueden serlo, es decir, por su relación de origen.</div>
+        <div class="premise"><span class="premise-label">P.3</span> Pero dos Hijos que proceden del mismo principio (el Padre) por la misma procesión (generación intelectual) y que poseen la misma esencia indistinta, no tendrían entre sí oposición relativa alguna que los distinguiera: serían simplemente la misma Persona.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> No puede haber más de un Hijo porque la distinción entre varias hipóstasis requiere oposición relativa, y dos Hijos del mismo Padre no tendrían entre sí tal oposición.</div>
+      </div>
+
+      <p>Este argumento es sutilísimo y merece detenerse. La clave es el principio ya establecido: <strong>en Dios, la distinción real entre Personas solo puede venir de la oposición relativa</strong>. Dos supuestos «Hijos» del mismo Padre serían idénticos en esencia (necesariamente, pues toda Persona divina posee la esencia divina completa) e idénticos en su relación con el Padre (ambos son «engendrado-por-el-Padre»). No habría nada que los distinguiera: serían la misma Persona, no dos.</p>
+
+      <h3>Razón tercera: la perfección del Verbo no admite adición</h3>
+      <p>El Verbo divino expresa perfectamente toda la esencia divina y, en ella, todo lo cognoscible. Un hipotético «segundo Verbo» debería expresar algo que el primero no expresa. Pero si el primero expresa <em>todo</em> (por ser término de un conocimiento infinito), el segundo no podría añadir nada: sería o idéntico al primero (es decir, la misma Persona) o expresaría algo finito que el infinito ya contiene. No hay contenido para un «segundo Hijo» que no sea ya perfectamente contenido en el único Hijo.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>Error que debe evitarse:</strong> No confundir la multiplicidad de criaturas (que Dios sí puede crear en número indefinido) con la multiplicidad de Personas divinas. Las criaturas son efectos <em>ad extra</em> producidos por la voluntad libre de Dios; las Personas son términos de procesiones <em>ad intra</em> necesariamente determinadas por la estructura del único acto cognoscitivo y volitivo divino.</p>
+      </div>
+
+      <h3>Diagrama: por qué un solo Hijo</h3>
+
+      <div class="diagram">
+        <div class="diagram-title">El acto único de entender produce un único término</div>
+        <div class="d-row">
+          <div class="d-row-label">Real</div>
+          <div class="d-node prime">PADRE<br><small>Unum intelligere</small></div>
+          <div class="d-arr">──(Generación)──▶</div>
+          <div class="d-node prime">HIJO · Verbum<br><small>Expresión perfecta total</small></div>
+        </div>
+        <div class="d-row" style="margin-top:0.8rem;">
+          <div class="d-row-label">Imposible</div>
+          <div class="d-node prime">PADRE</div>
+          <div class="d-arr red">──▶</div>
+          <div class="d-node blocked">Hijo 1<br><small>¿Qué expresaría?</small></div>
+          <div class="d-arr red">+</div>
+          <div class="d-node blocked">Hijo 2<br><small>¿Qué añadiría?</small></div>
+          <div class="d-cross">✕</div>
+        </div>
+        <div class="diagram-note">Un único acto de entender infinitamente perfecto → un único término infinitamente perfecto. «Hijo 2» sería idéntico a «Hijo 1» o expresaría algo finito ya contenido en el infinito.</div>
+      </div>
+    </section>
+
+    <section class="chapter" id="hijo-no-autoverbum">
+      <h2><span class="ch-num">Capítulo 4</span>El Hijo no genera su propio Verbo: por qué no hay «nieto»</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>Esta es quizás la pregunta más original y metafísicamente densa de todo el argumento: si el Padre genera al Hijo porque se conoce a sí mismo, ¿no debería el Hijo también conocerse a sí mismo y generar a su vez su propio Verbo —un «nieto» de Dios? La pregunta es completamente legítima y Tomás la aborda de manera directa e implícita en varios lugares de la <em>Suma</em>. La respuesta completa requiere varios pasos.</p>
+
+      <h3>Paso 1: El Hijo se conoce a sí mismo, pero no hippostáticamente</h3>
+
+      <p>El Hijo posee la naturaleza divina completa e idéntica a la del Padre. Esto significa que el Hijo también conoce: posee el mismo intelecto divino, el mismo acto de entender, la misma omnisciencia perfecta. El Hijo conoce la esencia divina, conoce al Padre, conoce al Espíritu, conoce todas las criaturas posibles y reales. En este sentido, el Hijo «se conoce».</p>
+
+      <p>Pero hay una distinción capital que Tomás introduce y que es la clave de todo: el Hijo no se conoce a sí mismo <em>en cuanto hipóstasis originadora de una nueva procesión</em>. Para entender esto hay que distinguir dos modos de autoconocimiento:</p>
+
+      <div class="def-box">
+        <div class="def-term">Conocimiento esencial (<em>cognitio essentiae</em>)</div>
+        <p>El conocimiento que toda Persona divina tiene de la esencia divina. El Padre conoce la esencia; el Hijo conoce la esencia; el Espíritu conoce la esencia. Este conocimiento es <em>común a las tres Personas</em> porque la esencia es común. Es el mismo acto de entender en las tres.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-term">Conocimiento hipostático originador (<em>cognitio hypostatica productiva</em>)</div>
+        <p>El conocimiento por el que una Persona se conoce a sí misma <em>como principio de la procesión</em> y produce el Verbo. Este tipo de conocimiento solo pertenece al Padre, porque solo el Padre es el principio originador (ingénito) del que procede la primera procesión. El Hijo no tiene este modo de conocerse porque el Hijo <em>es</em> el término de la procesión, no su principio originador.</p>
+      </div>
+
+      <h3>Paso 2: La generación divina es «de la naturaleza», no «de la hipóstasis»</h3>
+
+      <p>Tomás es muy preciso en <em>S.Th.</em> I, q. 41, a. 5: los actos nocionales (generar, espirar) pertenecen a las Personas en cuanto tales, no a la naturaleza divina en abstracto. Sin embargo, lo que se genera es la esencia divina, no una hipóstasis que «tenga» la hipóstasis anterior. El Padre genera al Hijo comunicándole la <em>esencia divina</em> completa. El Hijo recibe esa esencia completa.</p>
+
+      <p>Ahora bien: ¿puede el Hijo, <em>a partir de la esencia divina que posee</em>, generar a su vez? Aquí está el nudo del argumento. Tomás responde: <strong>no</strong>, y la razón es la siguiente. La generación del Hijo no surge de que el Padre «tenga» una hipóstasis y la «duplique», sino de que el Padre es el <em>principio ingénito</em> desde el cual el único acto cognoscitivo divino mana su término. El Hijo, por ser el término de ese acto, está en una posición relacional distinta: él <em>es</em> el Verbo, no el que lo produce.</p>
+
+      <blockquote class="latin">«Filius non generat, quia non est ut principium a quo processio manat, sed ut terminus in quo sistit.»</blockquote>
+      <span class="latin-trans">— "El Hijo no engendra, porque no es principio del que mana la procesión, sino término en el que ella se detiene." (cf. <em>S.Th.</em> I, q. 42, a. 4, ad 2; síntesis del argumento)</span>
+
+      <h3>Paso 3: El Verbum no es principio de sí mismo</h3>
+
+      <p>Hay una razón aún más profunda, que Tomás articula en <em>De Veritate</em>, q. 4, a. 2, y en <em>S.Th.</em> I, q. 34, a. 2. El Verbo (el Hijo) <em>es</em> la expresión de la esencia divina. Todo lo que hay en la esencia divina —incluida, por tanto, la relación de filiación— está expresado en el Verbo. Pero el Verbo no se puede expresar a sí mismo <em>como acto originador</em> de otro Verbo, porque él mismo <em>es</em> Verbo, no Hablante originario. En la analogía del habla interior: el concepto que expresa el pensamiento no piensa; el que piensa es la mente. El concepto es el término del pensar, no un nuevo pensador que produzca un nuevo concepto.</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Por qué el Hijo no genera (síntesis tomista, S.Th. I, q. 41, a. 5 y q. 42, a. 4)</div>
+        <div class="premise"><span class="premise-label">P.1</span> La generación en Dios procede del Padre como principio intelectual originador (principio ingénito que se autoconoce).</div>
+        <div class="premise"><span class="premise-label">P.2</span> El Hijo es el término de esa generación: es el Verbo en quien se expresa el autoconocimiento del Padre.</div>
+        <div class="premise"><span class="premise-label">P.3</span> El término de la procesión no puede, en cuanto término, ser a su vez principio de la misma procesión: ello implicaría que la procesión intelectual es circular o infinita, lo que contradice la perfecta terminación del acto de entender divino.</div>
+        <div class="premise"><span class="premise-label">P.4</span> Además, el Hijo posee la esencia divina completa, que ya ha expresado el único Verbo en el que todo está dicho. No hay nada más que «decir» o «entender» que no esté ya dicho en ese Verbo.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> El Hijo no engendra porque (a) es el término, no el principio originador, de la procesión intelectual; y (b) el único acto de entender divino ya ha producido su único y completo término.</div>
+      </div>
+    </section>
+
+    <!-- ══════ PARTE II ══════ -->
+    <div class="part-divider"><div class="pdl"></div><span class="part-divider-label">Parte II · Un Solo Acto Volitivo</span><div class="pdl"></div></div>
+
+    <section class="chapter" id="amor-unico">
+      <h2><span class="ch-num">Capítulo 5</span>El acto de amar divino es absolutamente único</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>El mismo principio que establece la unicidad del acto de entender divino se aplica, con las modulaciones propias de la voluntad, al acto de amar. La voluntad divina es una, simple, perfectísima. No hay en Dios una sucesión de actos de querer, ni una pluralidad de amores distintos. Hay un único acto de amor, eterno e infinito, que abraza la esencia divina y todo lo que en ella se ama.</p>
+
+      <p>Tomás establece esto en <em>S.Th.</em> I, q. 19, aa. 1–3: la voluntad divina es su esencia divina. El amor divino a sí mismo no es distinto de su amor a las criaturas posibles o reales: todo se ama en el único acto volitivo que es idéntico a la esencia divina. No hay en Dios un amor-a-las-criaturas que sea distinto, como acto, del amor-a-sí-mismo.</p>
+
+      <div class="def-box">
+        <div class="def-term">Principio (S.Th. I, q. 19, a. 1)</div>
+        <p>En Dios, el querer (<em>velle</em>) y el ser (<em>esse</em>) se identifican. No hay composición entre la voluntad y su acto, ni entre el acto y su objeto primero (la esencia divina). El único acto volitivo divino es la voluntad divina misma, que es la esencia misma.</p>
+      </div>
+
+      <h3>Diferencia con la voluntad humana</h3>
+      <p>La voluntad humana tiene actos sucesivos: ama esto ahora, aquello después; ama con diversa intensidad distintas cosas; puede no amar lo que ya amó. Toda esta multiplicidad y contingencia es signo de imperfección: la voluntad humana está en potencia respecto de sus objetos y sus actos. En Dios no hay nada de esto: su voluntad es Acto Puro en el orden volitivo, así como su intelecto es Acto Puro en el cognoscitivo.</p>
+    </section>
+
+    <section class="chapter" id="spiritus-unico">
+      <h2><span class="ch-num">Capítulo 6</span>Un único acto de amar produce un único Espíritu</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>La procesión del Espíritu Santo es, en la teología tomista, la procesión del amor: el Padre y el Hijo, conociéndose mutuamente en el Verbo, se aman mutuamente con el único acto volitivo divino, y el término de ese amor infinito e inmanente es el Espíritu Santo.</p>
+
+      <p>Si el acto de amor divino es único, el término de ese amor (el Espíritu Santo) también es único. La misma lógica que impide múltiples Verbos impide múltiples Espíritus:</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Por qué hay exactamente un Espíritu Santo (S.Th. I, q. 30, a. 2)</div>
+        <div class="premise"><span class="premise-label">P.1</span> El Espíritu Santo es el término de la procesión del amor divino: el amor que el Padre y el Hijo se profesan mutuamente.</div>
+        <div class="premise"><span class="premise-label">P.2</span> El amor divino es uno e indivisible: no hay un amor-del-Padre-al-Hijo distinto del amor-del-Hijo-al-Padre como actos separados; hay un único amor subsistente que expresa la mutua donación infinita.</div>
+        <div class="premise"><span class="premise-label">P.3</span> Un único acto de amor produce un único término: si hubiera dos términos del amor, implicaría o dos actos de amor (imposible, pues el amor divino es uno) o que el primer término era imperfecto y el amor no se expresó completamente en él (imposible, pues es infinito).</div>
+        <div class="conclusion"><span class="premise-label">∴</span> El amor divino produce un único término: el Espíritu Santo.</div>
+      </div>
+
+      <blockquote class="latin">«Spiritus Sanctus procedit ut amor. Amor autem unus in Deo est. Ergo et Spiritus Sanctus unus est.»</blockquote>
+      <span class="latin-trans">— "El Espíritu Santo procede como amor. Pero en Dios hay un solo amor. Por tanto también el Espíritu Santo es uno." (<em>S.Th.</em> I, q. 30, a. 2 — síntesis argumental)</span>
+    </section>
+
+    <section class="chapter" id="espiritu-no-espira">
+      <h2><span class="ch-num">Capítulo 7</span>El Espíritu Santo no espira una cuarta persona</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>La pregunta simétrica a «¿por qué el Hijo no engendra?» es: «¿por qué el Espíritu Santo no espira a su vez una cuarta persona?». La pregunta es perfectamente coherente y Tomás tiene para ella una respuesta precisa que se encuentra de modo distribuido en <em>S.Th.</em> I, qq. 27, 36 y 41.</p>
+
+      <h3>El Espíritu no tiene en sí la razón de principio de espiración</h3>
+
+      <p>La espiración activa (el acto de espirar al Espíritu) pertenece al Padre y al Hijo como un único principio. ¿Por qué? Porque lo que constituye el principio de la espiración activa es la posesión de la voluntad divina ordenada hacia el bien perfectamente conocido. El Padre tiene la voluntad divina como <em>principio ingénito</em>; el Hijo la tiene como <em>recibiéndola del Padre por generación</em>. El Espíritu Santo también posee la misma voluntad divina (pues tiene la misma esencia), pero la posee como <em>espirado</em>, es decir, como término del amor. Y el término del amor no puede ser a su vez principio del mismo amor que lo produjo: eso crearía una circularidad lógica en las procesiones.</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Por qué el Espíritu no espira (S.Th. I, q. 27, a. 5; q. 36, a. 4)</div>
+        <div class="premise"><span class="premise-label">P.1</span> Para espirar al Espíritu Santo, una Persona debe ser principio de la procesión del amor, lo cual requiere poseer la voluntad divina <em>en cuanto principio activo de espiración</em>.</div>
+        <div class="premise"><span class="premise-label">P.2</span> El Espíritu Santo posee la voluntad divina, pero en cuanto <em>espirado</em>: la recibe como término del amor del Padre y el Hijo, no como principio activo de una nueva espiración.</div>
+        <div class="premise"><span class="premise-label">P.3</span> Si el Espíritu espirara a una cuarta Persona, esta cuarta Persona recibiría la voluntad divina del Espíritu, que la había recibido como término. Pero entonces la cuarta Persona tampoco podría ser principio de una quinta (por la misma razón), y así al infinito — lo que es absurdo en un ser que es Acto Puro sin potencia.</div>
+        <div class="premise"><span class="premise-label">P.4</span> Además, y esto es decisivo: el único acto volitivo divino ya ha producido su único y completo término en el Espíritu Santo. No hay nada más que «amar» que no esté ya amado perfectamente en ese único acto.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> El Espíritu Santo no espira una cuarta Persona porque (a) posee la voluntad divina en cuanto término, no en cuanto principio originador; y (b) el único acto de amor ya ha alcanzado su término perfecto y completo.</div>
+      </div>
+
+      <h3>La razón más profunda: la terminación de las procesiones</h3>
+
+      <p>Tomás señala en <em>S.Th.</em> I, q. 27, a. 5 algo que constituye el núcleo del argumento de la necesaria ternidad: las procesiones divinas <em>se cierran</em> en el Espíritu Santo. No porque Dios «pare» arbitrariamente, sino porque el Espíritu Santo es el término del amor, y el amor en Dios ya lo ha abarcado todo. Una vez que el amor del Padre y del Hijo se ha expresado perfectamente en el Espíritu, no queda ninguna operación inmanente espiritual ulterior que no sea ya realización o reiteración de las dos ya dadas (intelectual y volitiva).</p>
+
+      <blockquote class="latin">«Processiones divinae terminantur in Spiritu Sancto tanquam in termino ultimo, quia amor est ultimus actus spiritualis.»</blockquote>
+      <span class="latin-trans">— "Las procesiones divinas se terminan en el Espíritu Santo como en el término último, porque el amor es el acto último del espíritu." (cf. <em>S.Th.</em> I, q. 27, a. 3 y a. 5 — síntesis)</span>
+    </section>
+
+    <section class="chapter" id="no-nieto">
+      <h2><span class="ch-num">Capítulo 8</span>Análisis completo: ¿Por qué no puede existir un «nieto de Dios»?</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>El «nieto de Dios» podría plantearse de dos maneras distintas: (A) el Hijo genera a alguien que procede de Él por generación (análoga a como el Hijo procede del Padre); o (B) el Espíritu Santo espira a alguien que procede del Espíritu como el Espíritu procede del Padre y del Hijo. Ambas posibilidades deben examinarse y desactivarse por separado.</p>
+
+      <h3>Caso A: El Hijo genera — ya refutado</h3>
+      <p>Ya hemos visto que el Hijo no puede generar a nadie porque: (1) el único acto de entender divino está radicado en el Padre como principio originador y ya ha producido su único y perfecto término; (2) el Hijo es ese término —es el Verbo, no el que engendra el Verbo; (3) si el Hijo generara, implicaría que el Verbo produce otro Verbo, lo cual requeriría que el primer Verbo fuera imperfecto, y eso es imposible en un ser infinito.</p>
+
+      <h3>Caso B: El Espíritu espira — ya refutado</h3>
+      <p>El Espíritu tampoco puede espirar a nadie: (1) posee la voluntad divina como término del amor, no como principio originador de una nueva espiración; (2) el único acto de amor ya ha producido su término perfecto y completo; (3) si el Espíritu espirara, implicaría que el amor que lo produjo fue incompleto.</p>
+
+      <h3>La razón estructural más profunda</h3>
+      <p>Debajo de ambos casos hay una razón estructural única y definitiva que Tomás articula de manera implícita a lo largo de las <em>qq.</em> 27–42 y que puede formularse así:</p>
+
+      <div class="syllogism">
+        <div class="syl-title">La imposibilidad metafísica del «nieto» — argumento estructural</div>
+        <div class="premise"><span class="premise-label">P.1</span> En Dios solo hay dos tipos de operaciones inmanentes: entender (de cuyo término resulta una relación de generación/filiación) y amar (de cuyo término resulta una relación de espiración/procesión).</div>
+        <div class="premise"><span class="premise-label">P.2</span> Estas dos operaciones ya han producido sus dos únicos y perfectos términos: el Verbo (Hijo) y el Amor (Espíritu Santo).</div>
+        <div class="premise"><span class="premise-label">P.3</span> No hay una tercera operación inmanente espiritual distinta de entender y amar que pueda dar lugar a una nueva procesión.</div>
+        <div class="premise"><span class="premise-label">P.4</span> Repetir las mismas operaciones en el Hijo o en el Espíritu equivaldría a que el Hijo o el Espíritu «generaran» desde su posición de términos — lo que es imposible (los términos perfectos no generan nuevos términos de la misma procesión que los generó).</div>
+        <div class="conclusion"><span class="premise-label">∴</span> No existe posibilidad metafísica de un «nieto», ni de una cuarta Persona, ni de ninguna extensión de la Trinidad más allá de las tres Personas.</div>
+      </div>
+
+      <div class="diagram">
+        <div class="diagram-title">Diagrama de los casos imposibles</div>
+        <div class="d-row">
+          <div class="d-row-label">Real</div>
+          <div class="d-node prime">PADRE</div>
+          <div class="d-arr">─Gen.─▶</div>
+          <div class="d-node prime">HIJO</div>
+          <div class="d-arr">─Esp.─▶</div>
+          <div class="d-node prime">ESP. STO.</div>
+        </div>
+        <div class="d-row" style="margin-top:0.9rem;">
+          <div class="d-row-label">Imposible A</div>
+          <div class="d-node">PADRE</div>
+          <div class="d-arr">─▶</div>
+          <div class="d-node">HIJO</div>
+          <div class="d-arr red">─Gen.─▶</div>
+          <div class="d-node blocked">«Nieto»<br><small>El Hijo es Verbum,<br>no genera Verbum</small></div>
+          <div class="d-cross">✕</div>
+        </div>
+        <div class="d-row" style="margin-top:0.6rem;">
+          <div class="d-row-label">Imposible B</div>
+          <div class="d-node">PADRE+HIJO</div>
+          <div class="d-arr">─▶</div>
+          <div class="d-node">ESP. STO.</div>
+          <div class="d-arr red">─Esp.─▶</div>
+          <div class="d-node blocked">«4ª Persona»<br><small>El Espíritu es Amor,<br>no espira Amor</small></div>
+          <div class="d-cross">✕</div>
+        </div>
+        <div class="diagram-note">En ambos casos el error es el mismo: confundir ser-término de una procesión con ser-principio de una nueva.</div>
+      </div>
+    </section>
+
+    <!-- ══════ PARTE III ══════ -->
+    <div class="part-divider"><div class="pdl"></div><span class="part-divider-label">Parte III · Solo Dos Procesiones, Exactamente Tres Personas</span><div class="pdl"></div></div>
+
+    <section class="chapter" id="solo-dos-proc">
+      <h2><span class="ch-num">Capítulo 9</span>La prueba directa: solo puede haber dos procesiones en Dios</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>Tomás plantea directamente esta cuestión en <em>S.Th.</em> I, q. 27, a. 5: «<em>Utrum sint plures processiones quam duae</em>» — «¿Hay más procesiones que dos?». La respuesta es no, y el argumento es el siguiente.</p>
+
+      <h3>Las operaciones inmanentes del espíritu son exactamente dos</h3>
+
+      <p>Una procesión divina solo puede surgir de una operación inmanente del espíritu. Esto es porque Dios es espíritu puro: no tiene operaciones materiales (vegetativas, sensitivas). Las operaciones inmanentes propias del espíritu son, según el análisis aristotélico que Tomás recoge y eleva, exactamente dos: el entender y el querer. El ver, el oír, el imaginar, el crecer, el nutrirse, son operaciones inferiores que Dios no posee en sentido propio. Solo el entender y el querer son propias del espíritu puro.</p>
+
+      <blockquote class="latin">«In rebus intelligentibus invenitur duplex processio, scilicet Verbi et Amoris. Et ideo in divinis non sunt nisi duae processiones.»</blockquote>
+      <span class="latin-trans">— "En los seres inteligentes se encuentra una doble procesión: la del Verbo y la del Amor. Y por eso en Dios no hay sino dos procesiones." (<em>S.Th.</em> I, q. 27, a. 5)</span>
+
+      <p>Este texto de la <em>Suma</em> es lapidario: Tomás no recurre a la revelación como prueba sino a la estructura de la vida espiritual. Un ser que es puro espíritu tiene exactamente dos operaciones inmanentes (entender y amar), luego tiene exactamente dos procesiones posibles.</p>
+
+      <h3>¿No podría haber otras operaciones en Dios que no conozcamos?</h3>
+
+      <p>Este es un punto que debe abordarse. Tomás no afirma que conozcamos exhaustivamente la vida íntima de Dios desde la razón natural: eso sería temerario. Lo que afirma es que, dado que Dios es espíritu puro, las operaciones inmanentes que dan lugar a procesiones son necesariamente de tipo intelectual o volitivo, y ambas tienen un único término. No puede haber una «tercera operación espiritual» irreductible al entender y al querer, porque el análisis de la vida espiritual —que Tomás extrae de Aristóteles y eleva al orden infinito— solo revela esas dos.</p>
+
+      <div class="callout">
+        <span class="callout-icon">💡</span>
+        <p><strong>Nota metodológica importante:</strong> Tomás distingue en <em>S.Th.</em> I, q. 32, a. 1 entre lo que podemos demostrar de la Trinidad por razón natural y lo que solo conocemos por revelación. Que haya procesiones en Dios, que sean de tipo intelectual y volitivo, y que sean exactamente dos, son cosas que la razón puede <em>hacer inteligibles</em> una vez dada la revelación. Lo que la razón natural sola no podría haber descubierto es que hay Personas distintas en Dios: eso requiere la revelación. Pero la razón puede mostrar que, dado que hay tales procesiones, solo pueden ser dos, y las Personas solo pueden ser tres.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="oposicion-relativa">
+      <h2><span class="ch-num">Capítulo 10</span>La oposición relativa: principio de distinción personal</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>Una vez establecido que hay exactamente dos procesiones, el siguiente paso es mostrar que esas dos procesiones generan exactamente tres Personas distintas (y no dos, ni cuatro). Para esto Tomás recurre al principio fundamental de la distinción de Personas divinas: la <strong>oposición relativa</strong> (<em>oppositio relativa</em>).</p>
+
+      <div class="def-box">
+        <div class="def-term">Principio de oposición relativa (S.Th. I, q. 28, a. 3; q. 40, a. 2)</div>
+        <p>En Dios, dos realidades son realmente distintas si y solo si entre ellas hay oposición relativa: es decir, si una es definida en términos de la otra por oposición (generante/engendrado; espirante/espirado). Sin oposición relativa, todo en Dios es idéntico (la esencia, los atributos, las operaciones comunes). Donde hay oposición relativa, hay distinción real de Personas.</p>
+      </div>
+
+      <p>Este principio tiene una consecuencia inmediata de enorme importancia: la espiración activa (que pertenece al Padre y al Hijo) <em>no se opone relacionalmente</em> a la paternidad ni a la filiación. El Padre puede ser a la vez «Padre» (respecto del Hijo) y «Espirante» (respecto del Espíritu) sin contradicción, porque estas dos relaciones no se oponen entre sí. Del mismo modo, el Hijo puede ser a la vez «Hijo» (respecto del Padre) y «Espirante» (respecto del Espíritu). No hay oposición entre ser-engendrado y ser-espirante.</p>
+
+      <p>Pero la paternidad y la filiación sí se oponen relacionalmente: el Padre es el que engendra, el Hijo es el engendrado; esas dos relaciones se definen mutuamente por oposición y generan dos Personas distintas. Del mismo modo, la espiración activa y la procesión pasiva del Espíritu se oponen: los que espiran vs. el espirado. Esa oposición genera una tercera Persona distinta.</p>
+    </section>
+
+    <section class="chapter" id="cuatro-relaciones">
+      <h2><span class="ch-num">Capítulo 11</span>Cuatro relaciones reales, tres Personas: el análisis preciso</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>Tomás analiza esto con máxima precisión en <em>S.Th.</em> I, q. 28, a. 4 y q. 30, aa. 1–2. De las dos procesiones se derivan exactamente cuatro relaciones reales:</p>
+
+      <table class="comp-table">
+        <thead><tr><th>Relación</th><th>Dirección</th><th>Oposición relativa con</th><th>¿Persona distinta?</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-key">Paternidad</td>
+            <td>Padre → Hijo (generante)</td>
+            <td>Filiación</td>
+            <td>Sí: el PADRE</td>
+          </tr>
+          <tr>
+            <td class="td-key">Filiación</td>
+            <td>Hijo → Padre (engendrado)</td>
+            <td>Paternidad</td>
+            <td>Sí: el HIJO</td>
+          </tr>
+          <tr>
+            <td class="td-key">Espiración activa</td>
+            <td>Padre+Hijo → Espíritu (espirantes)</td>
+            <td>Solo con la procesión pasiva</td>
+            <td>No subsiste como Persona separada (pertenece al Padre y al Hijo)</td>
+          </tr>
+          <tr>
+            <td class="td-key">Procesión pasiva</td>
+            <td>Espíritu → Padre+Hijo (espirado)</td>
+            <td>Espiración activa</td>
+            <td>Sí: el ESPÍRITU SANTO</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>¿Por qué la espiración activa no constituye una Persona separada? Porque la espiración activa no se opone relacionalmente a la paternidad del Padre ni a la filiación del Hijo. El Padre puede ser «Padre» y «Espirante» simultáneamente sin contradicción: esas dos relaciones se acumulan en la misma Persona porque no se excluyen. Del mismo modo el Hijo puede ser «Hijo» y «Espirante».</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Por qué hay exactamente tres Personas y no cuatro (S.Th. I, q. 30, a. 2)</div>
+        <div class="premise"><span class="premise-label">P.1</span> De las dos procesiones se derivan cuatro relaciones reales: paternidad, filiación, espiración activa, procesión pasiva.</div>
+        <div class="premise"><span class="premise-label">P.2</span> Las relaciones constituyen Personas distintas solo cuando se oponen relacionalmente entre sí, pues la oposición relativa es el único principio de distinción real en Dios.</div>
+        <div class="premise"><span class="premise-label">P.3</span> Paternidad y filiación se oponen: dos Personas (Padre, Hijo). Espiración activa y procesión pasiva se oponen: esto introduce una tercera Persona (Espíritu). Pero espiración activa NO se opone a paternidad ni a filiación: por tanto no introduce una cuarta Persona.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> Hay exactamente tres Personas: las que subsisten en relaciones mutuamente opuestas. La espiración activa no añade una cuarta porque no se opone a las relaciones que ya constituyen al Padre y al Hijo.</div>
+      </div>
+
+      <div class="callout">
+        <span class="callout-icon">✦</span>
+        <p><strong>Por qué no son dos Personas:</strong> Si la espiración activa creara una Persona separada de las dos que generan, tendríamos cuatro Personas. Si paternidad y filiación fueran la misma relación, tendríamos una sola Persona. Como son relacionalmente opuestas, son dos. Y la procesión del Espíritu añade una tercera oposición (espirante/espirado) que introduce una tercera Persona. Ni dos ni cuatro: exactamente tres.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="necesidad-metafisica">
+      <h2><span class="ch-num">Capítulo 12</span>La necesidad metafísica del número tres</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Reuniendo todos los hilos, podemos formular ahora el argumento completo de la necesidad metafísica del número tres de las Personas divinas. Es importante entender bien qué tipo de necesidad se afirma: no se dice que la razón humana habría podido descubrir la Trinidad por sí sola, sino que, conocida por revelación, la razón puede mostrar que ese número tiene una necesidad interna que no podría ser de otra manera.</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Argumento central: necesidad metafísica del Tres (síntesis de S.Th. I, qq. 27–30)</div>
+        <div class="premise"><span class="premise-label">P.1</span> Dios es un ser espiritual puro: posee intelecto y voluntad en grado infinito, identificados con su esencia.</div>
+        <div class="premise"><span class="premise-label">P.2</span> Las operaciones inmanentes propias del espíritu son exactamente dos e irreductibles entre sí: entender y amar.</div>
+        <div class="premise"><span class="premise-label">P.3</span> Cada operación inmanente perfectísima produce exactamente un término: el entender infinito produce un único Verbo infinito; el amar infinito produce un único Amor infinito.</div>
+        <div class="premise"><span class="premise-label">P.4</span> Esos términos son personas distintas del principio originador porque se les oponen relacionalmente (filiación vs. paternidad; procesión vs. espiración).</div>
+        <div class="premise"><span class="premise-label">P.5</span> Los términos de las procesiones no pueden generar nuevas procesiones de la misma operación porque son los términos perfectos y completos de dicha operación, y no tienen la razón de principio originador.</div>
+        <div class="premise"><span class="premise-label">P.6</span> No hay una tercera operación inmanente espiritual distinta de entender y amar que pueda dar lugar a una tercera procesión.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> Hay exactamente tres Personas divinas: el Principio ingénito (Padre), el Verbo (Hijo), y el Amor (Espíritu Santo). Ni más ni menos es metafísicamente posible en un ser que sea espíritu puro infinito.</div>
+      </div>
+
+      <div class="callout">
+        <span class="callout-icon">✦</span>
+        <p><strong>La elegancia del argumento tomista:</strong> El número tres no es elegido arbitrariamente por Dios ni por la revelación. Brota con necesidad interna de lo que Dios es: un ser de entender y amar perfectísimos. Esos dos actos tienen dos términos, y junto con el Principio, son tres. La Trinidad es la forma necesaria que toma la vida espiritual cuando es absolutamente perfecta e infinita.</p>
+      </div>
+    </section>
+
+    <!-- ══════ PARTE IV ══════ -->
+    <div class="part-divider"><div class="pdl"></div><span class="part-divider-label">Parte IV · El Hijo sin Autoprocesión: Análisis Profundo</span><div class="pdl"></div></div>
+
+    <section class="chapter" id="hijo-no-conoce-hipost">
+      <h2><span class="ch-num">Capítulo 13</span>El Hijo no se conoce hipostáticamente como principio generador</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Este capítulo aborda la cuestión más técnica y delicada del argumento: ¿en qué sentido exacto el Hijo «no se conoce a sí mismo hipostáticamente»? Es necesario formularlo con precisión para no caer en errores opuestos: afirmar que el Hijo es «ignorante de algo» (lo que sería falso y herético) o afirmar que el Hijo «se conoce igual que el Padre» en todos los sentidos (lo que haría inexplicable por qué no genera).</p>
+
+      <h3>Lo que el Hijo sí conoce — y con igual perfección que el Padre</h3>
+      <p>El Hijo conoce, con el mismo acto de entender divino que comparte con el Padre y el Espíritu:</p>
+      <p>— La esencia divina en toda su profundidad e infinitud.<br>
+      — Al Padre, al Espíritu Santo y a Sí mismo como Personas.<br>
+      — Todas las criaturas posibles y reales, en cuanto imitaciones de la esencia divina.<br>
+      — Su propia filiación: sabe que procede del Padre por generación.<br>
+      — Su propia participación en la espiración activa del Espíritu.</p>
+
+      <p>En todos estos sentidos, el conocimiento del Hijo es absolutamente igual al del Padre. No hay nada que el Padre conozca que el Hijo no conozca, y viceversa. Esto es consecuencia directa de la identidad esencial de las tres Personas.</p>
+
+      <h3>Lo que el Hijo no posee: la razón de principio generante ingénito</h3>
+
+      <p>Lo que distingue al Padre del Hijo en el orden del conocimiento no es el <em>contenido</em> conocido (idéntico) sino la <em>posición relacional</em> desde la que se conoce. El Padre se conoce como <em>principio ingénito</em>: como el origen no originado del que mana el único acto cognoscitivo divino en su fluir hacia el Verbo. El Hijo se conoce como <em>Verbo</em>: como el término en el que ese conocimiento divino se expresa perfectamente.</p>
+
+      <p>Aquí reside la sutileza que Tomás introduce al tratar los actos nocionales en <em>S.Th.</em> I, q. 41. Los actos nocionales (engendrar, espirar) pertenecen a las Personas en cuanto Personas, no a la esencia divina en abstracto. El Padre engendra <em>en cuanto Padre</em> (en cuanto principio ingénito cognoscente); el Hijo no engendra <em>en cuanto Hijo</em> (en cuanto Verbo-término). La diferencia no es de conocimiento sino de posición relacional en el interior de la vida divina.</p>
+
+      <div class="def-box">
+        <div class="def-term">La distinción clave: S.Th. I, q. 41, a. 5</div>
+        <p>Tomás explica que la generación y la espiración son «actos nocionales» que se atribuyen a las Personas según sus propiedades personales (relaciones), no según la esencia. El Padre genera <em>secundum proprietatem paternitatis</em> (según la propiedad de la paternidad). El Hijo no genera porque no tiene la propiedad de la paternidad activa, sino la de la filiación pasiva.</p>
+      </div>
+
+      <h3>La analogía del Verbo: por qué el concepto no genera otro concepto</h3>
+
+      <p>Tomás acude a la analogía del verbo mental humano para ilustrar esto, aunque reconoce sus límites. En la psicología aristotélica del conocimiento: la mente (intelecto agente + intelecto posible) es el <em>principio</em> que produce el verbo mental (el concepto). El verbo mental expresa perfectamente la cosa conocida. Pero el verbo mental, en cuanto verbo (en cuanto concepto expresado), no produce a su vez otro verbo: no es el intelecto, sino el producto del intelecto. Si el verbo pudiera producir otro verbo, ese segundo verbo sería el producto del producto, no del intelecto mismo, y expresaría no la cosa conocida sino el concepto anterior —lo que sería una regresión al infinito epistémica.</p>
+
+      <p>En Dios, la analogía se aplica: el Hijo es el Verbo. En cuanto Verbo, es el término del autoconocimiento del Padre. Si el Hijo generara otro Verbo, ese «nieto» expresaría al Hijo —no al Padre directamente. Pero en Dios, toda Persona debe poseer la esencia divina directamente y completamente, no a través de intermediarios. Una «Persona que expresa al Hijo» en lugar de al Padre directamente sería una persona de segundo grado: dependería del Hijo para poseer la esencia divina, lo que implicaría inferioridad. Eso no puede ser en Dios.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>El error del «nieto»:</strong> Cualquier «cuarta Persona» que procediera del Hijo (o del Espíritu) introduciría una jerarquía de dependencia dentro de la esencia divina: el «nieto» dependería del «Hijo» que a su vez depende del Padre. Esto viola la perfecta igualdad de las Personas divinas, que cada una posee la esencia divina completa e inmediatamente, sin intermediario.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="identidad-esencia-hijo">
+      <h2><span class="ch-num">Capítulo 14</span>La identidad esencia-hipóstasis en el Hijo y su consecuencia</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Hay un argumento adicional de gran profundidad que Tomás despliega en <em>De Potentia</em>, q. 9, a. 9 y en <em>S.Th.</em> I, q. 40, a. 1. Se refiere a la relación entre la esencia divina y la hipóstasis en cada Persona, y sus consecuencias para la cuestión de si las Personas podrían generar.</p>
+
+      <h3>En Dios, cada Persona <em>es</em> la esencia divina</h3>
+      <p>A diferencia de lo que ocurre en las criaturas (donde la persona o hipóstasis «tiene» una naturaleza que no se identifica con ella), en Dios cada Persona <em>es</em> la esencia divina. El Padre no es «un ser que tiene la divinidad»: el Padre <em>es</em> Dios. El Hijo no es «un ser que recibe la divinidad»: el Hijo <em>es</em> Dios. Lo mismo para el Espíritu.</p>
+
+      <p>Esto significa que cuando el Padre «genera» al Hijo, no le comunica una <em>parte</em> de la esencia divina sino la esencia divina <em>completa e indivisa</em>. La generación divina no divide la esencia como la generación biológica divide (en cierto sentido) la sustancia del generante. El Padre «da» la esencia divina al Hijo sin perderla, porque la esencia divina es indivisible.</p>
+
+      <h3>Por qué esto excluye la cadena de generaciones</h3>
+      <p>En las criaturas, un hijo puede engendrar a su vez porque su naturaleza individual no se identifica completamente con la del padre: tiene una naturaleza recibida pero también un acto propio de ser que le permite ser principio. En Dios, el Hijo tiene exactamente la misma naturaleza que el Padre —idéntica en número, no solo en especie. Por tanto, el Hijo posee todo lo que el Padre posee, excepto la relación de paternidad (que es la única cosa que el Padre no le comunica, porque la paternidad es precisamente la relación de «ser el origen del Hijo» y no puede comunicarse al Hijo sin que el Hijo sea el Padre, lo que violaría la oposición relativa).</p>
+
+      <p>Pero el Hijo, aunque posea todo lo demás, no posee la razón de <em>principio generante</em> porque esa razón implica ser el origen ingénito del proceso, y el Hijo es por definición el originado. No es que le «falte» la paternidad como una deficiencia: la paternidad no es una perfección que el Hijo debería tener, sino una relación que define al Padre en cuanto Padre, y cuya ausencia en el Hijo define precisamente al Hijo en cuanto Hijo.</p>
+
+      <blockquote class="latin">«Paternitas non communicatur Filio, quia est relatio opposita filiationi; si communicaretur, Filius esset Pater, quod implicat contradictionem in terminis.»</blockquote>
+      <span class="latin-trans">— "La paternidad no se comunica al Hijo porque es la relación opuesta a la filiación; si se comunicara, el Hijo sería el Padre, lo cual implica contradicción en los términos." (cf. <em>S.Th.</em> I, q. 40, a. 4 — síntesis)</span>
+    </section>
+
+    <section class="chapter" id="cognitio-essentiae">
+      <h2><span class="ch-num">Capítulo 15</span>Cognitio essentiae vs. cognitio personae: la distinción técnica</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Para precisar con máximo rigor por qué el Hijo no genera, necesitamos la distinción técnica entre dos modos de conocimiento que se dan en Dios. Esta distinción no está formulada de modo explícito en un único artículo de la <em>Suma</em>, pero se puede construir rigurosamente a partir de varios textos tomistas.</p>
+
+      <h3>Conocimiento de la esencia (<em>cognitio essentiae</em>)</h3>
+      <p>El conocimiento de la esencia divina es el conocimiento que las tres Personas tienen de lo que Dios es: omnisciencia, omnipotencia, bondad infinita, todas las perfecciones divinas y todas sus implicaciones (incluido el conocimiento de todas las criaturas posibles). Este conocimiento es <em>común a las tres Personas</em> porque es el conocimiento de la esencia, y la esencia es común. El Padre, el Hijo y el Espíritu conocen la esencia divina con el mismo acto de entender, idéntico a esa esencia.</p>
+
+      <p>Desde este conocimiento de la esencia, el Hijo conoce perfectamente todo lo que es Dios: conoce la Trinidad, conoce su propia filiación, conoce la espiración del Espíritu, conoce el nombre del Padre, conoce todos los secretos de Dios. En este plano, el Hijo no es «inferior» al Padre en conocimiento. Todo lo contrario: poseen exactamente el mismo conocimiento.</p>
+
+      <h3>Conocimiento hipostático originador (<em>cognitio hypostatica ut principii</em>)</h3>
+      <p>Hay, sin embargo, un modo de «conocerse» que es propio del Padre y no del Hijo ni del Espíritu: el Padre se conoce a sí mismo <em>como origen ingénito del que fluye la vida intratrinitaria</em>. No es un «contenido» mayor de conocimiento (el Hijo conoce exactamente el mismo contenido), sino una <em>perspectiva relacional</em> desde la que se vive ese conocimiento.</p>
+
+      <p>El Padre «vive» el autoconocimiento divino desde la posición del que genera; el Hijo lo «vive» desde la posición del que es generado; el Espíritu lo «vive» desde la posición del que es espirado. Este «vivir-desde» no es una diferencia cognoscitiva en sentido estricto (no hay mayor ni menor conocimiento), sino una diferencia en el <em>modo de poseer</em> el único conocimiento divino.</p>
+
+      <div class="def-box">
+        <div class="def-term">La distinción en términos de la S.Th. I, q. 41, a. 2</div>
+        <p>Tomás distingue entre los «actos esenciales» (entender, querer, crear: comunes a las tres Personas porque brotan de la esencia) y los «actos nocionales» (engendrar, espirar: propios de las Personas según sus relaciones). El Hijo ejecuta los actos esenciales igual que el Padre, pero no ejecuta los actos nocionales propios del Padre (engendrar) porque esos actos son relativos a la posición de la persona en el orden de origen.</p>
+      </div>
+
+      <h3>Por qué esto no es una limitación del Hijo</h3>
+      <p>Alguien podría objetar: «Si el Hijo no puede generar, tiene una limitación que el Padre no tiene». La respuesta tomista es que esto confunde las relaciones de origen con las perfecciones absolutas. La paternidad y la filiación no son «perfecciones» en el sentido de que tener más sea mejor que tener menos. Son relaciones de oposición que <em>constituyen</em> la distinción personal: el Padre es Padre (no Hijo), el Hijo es Hijo (no Padre). No tener la paternidad no priva al Hijo de ninguna perfección absoluta; simplemente describe su posición relacional, que lo constituye como la Persona que es.</p>
+
+      <p>Es como si preguntáramos si el número par «dos» es «inferior» al número impar «tres» porque no tiene la propiedad de la imparidad. La imparidad no es una perfección numérica: simplemente diferencia a los números en su tipo. Del mismo modo, la paternidad no es una perfección divina que el Hijo no posea: es la relación que distingue al Padre del Hijo.</p>
+    </section>
+
+    <section class="chapter" id="por-que-no-engendra">
+      <h2><span class="ch-num">Capítulo 16</span>Formulación definitiva: por qué el Hijo no engendra ni el Espíritu espira</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Podemos ahora formular la respuesta completa y definitiva en términos rigurosamente tomistas, integrando todos los argumentos anteriores. Tomás mismo da la formulación más concisa en <em>S.Th.</em> I, q. 42, a. 4, respondiendo a las objeciones:</p>
+
+      <blockquote class="latin">«Filius non generat Filium, quia non est Pater; et Spiritus Sanctus non spirat, quia non est principium spirationis activae, sed terminus eius.»</blockquote>
+      <span class="latin-trans">— "El Hijo no engendra a un Hijo porque no es el Padre; y el Espíritu Santo no espira porque no es el principio de la espiración activa, sino su término." (síntesis de <em>S.Th.</em> I, q. 42, a. 4 y q. 41, a. 5)</span>
+
+      <h3>Resumen integrado de los cinco niveles del argumento</h3>
+
+      <table class="comp-table">
+        <thead><tr><th>Nivel</th><th>Argumento</th><th>Referencia en Tomás</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-key">1. Unicidad del acto</td>
+            <td>El único acto de entender divino produce un único Verbo; el único acto de amar produce un único Amor. No puede haber más.</td>
+            <td><em>S.Th.</em> I, q. 14, a. 7; q. 34, a. 1</td>
+          </tr>
+          <tr>
+            <td class="td-key">2. Perfección del término</td>
+            <td>El Verbo y el Amor son infinitamente perfectos: nada más puede añadirse a lo que expresan exhaustivamente.</td>
+            <td><em>S.Th.</em> I, q. 27, a. 5; <em>De Veritate</em> q. 4, a. 2</td>
+          </tr>
+          <tr>
+            <td class="td-key">3. Posición relacional</td>
+            <td>El Hijo es Verbo-término, no principio generante; el Espíritu es Amor-término, no principio espirante. Los términos no generan términos.</td>
+            <td><em>S.Th.</em> I, q. 41, a. 5; q. 42, a. 4</td>
+          </tr>
+          <tr>
+            <td class="td-key">4. Oposición relativa</td>
+            <td>Solo la oposición relativa distingue Personas en Dios. Añadir una cuarta Persona requeriría una nueva oposición que no existe.</td>
+            <td><em>S.Th.</em> I, q. 28, a. 3; q. 30, a. 2</td>
+          </tr>
+          <tr>
+            <td class="td-key">5. Solo dos operaciones</td>
+            <td>El espíritu puro solo tiene dos operaciones inmanentes irreductibles (entender, amar). No hay tercera operación que produzca una tercera procesión.</td>
+            <td><em>S.Th.</em> I, q. 27, aa. 3–5</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ══════ PARTE V ══════ -->
+    <div class="part-divider"><div class="pdl"></div><span class="part-divider-label">Parte V · Niveles Avanzados y Apologética</span><div class="pdl"></div></div>
+
+    <section class="chapter" id="contra-modalismo">
+      <h2><span class="ch-num">Capítulo 17</span>Contra el modalismo: las Personas son realmente distintas</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Habiendo mostrado por qué no puede haber más de tres Personas, hay que mostrar también por qué no puede haber menos. La amenaza de reducir las tres Personas a una sola bajo diferentes «modos» (el modalismo o sabelianismo) es la herejía opuesta al triteísmo. Tomás la aborda en <em>S.Th.</em> I, q. 28, aa. 1–4.</p>
+
+      <h3>Las relaciones son realmente distintas</h3>
+      <p>El argumento modalista diría: Padre, Hijo y Espíritu son solo tres nombres o modos de la misma y única realidad divina; no hay distinción real entre ellos. La respuesta tomista: las relaciones de origen (paternidad, filiación, procesión) son relaciones <em>realmente</em> distintas en Dios —no solo en nuestra mente. ¿Cómo pueden ser reales en Dios si Dios es absolutamente simple? Porque en Dios las relaciones reales son idénticas a la esencia en su ser absoluto, pero se distinguen realmente entre sí en su ser relativo. La paternidad <em>es</em> la esencia divina <em>en cuanto referida al Hijo</em>; la filiación <em>es</em> la esencia divina <em>en cuanto referida al Padre</em>. Estas dos referencias son realmente opuestas aunque la esencia que las porta sea una e idéntica.</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Por qué las Personas no pueden ser meras modas (S.Th. I, q. 28, a. 1)</div>
+        <div class="premise"><span class="premise-label">P.1</span> Las procesiones divinas no son meras denominaciones externas puestas por nuestra mente: son orígenes reales dentro de la vida divina.</div>
+        <div class="premise"><span class="premise-label">P.2</span> Un origen real implica una relación real entre el que origina y el originado.</div>
+        <div class="premise"><span class="premise-label">P.3</span> Una relación real en Dios, que es absolutamente simple, debe ser idéntica a la esencia en lo absoluto pero realmente distinta de la relación opuesta en lo relativo.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> Las Personas divinas son realmente distintas entre sí (no modalismo) aunque la esencia que poseen sea numéricamente idéntica (no triteísmo).</div>
+      </div>
+
+      <p>La Trinidad no puede tener menos de tres Personas porque las dos procesiones producen relaciones realmente distintas que subsisten en la esencia divina. Eliminar una sería eliminar una procesión, y eliminar una procesión significaría que la vida espiritual divina es imperfecta: o el intelecto divino no produce su Verbo (Dios sin conocimiento perfecto de sí mismo) o la voluntad divina no produce su Amor (Dios sin amor perfecto de sí mismo). Ambas son contradictorias con lo que Dios es.</p>
+    </section>
+
+    <section class="chapter" id="contra-cuartismo">
+      <h2><span class="ch-num">Capítulo 18</span>Contra la cuarta Persona: el cierre necesario de las procesiones</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>¿Podría haber una tercera procesión que diera lugar a una cuarta Persona? Tomás niega esta posibilidad y aquí está una de las reflexiones más originales de la teología trinitaria tomista.</p>
+
+      <h3>Las operaciones espirituales son exactamente dos</h3>
+      <p>El argumento de fondo es que no existe una tercera operación inmanente del espíritu irreductible al entender y al amar. Se podría intentar proponer, por ejemplo, la <em>memoria</em> como una tercera operación (Agustín habla de la tríada memoria-intellectus-voluntas en el hombre). Tomás responde en <em>S.Th.</em> I, q. 79, a. 7 y en el tratado trinitario: la memoria en el sentido agustiniano relevante no es una facultad distinta del intelecto, sino el intelecto en cuanto hábito o en cuanto que retiene las especies. No hay una «procesión de la memoria» distinta de la «procesión del intelecto».</p>
+
+      <p>Podría también proponerse la <em>libertad</em> o la <em>imaginación</em> como candidatos. Pero estas tampoco son operaciones inmanentes de tipo espiritual irreductible: la libertad es la voluntad en su modo de relacionarse con los medios; la imaginación es una función sensitiva. Nada se añade a entender y querer en el nivel propiamente espiritual.</p>
+
+      <h3>El Espíritu Santo es el «último» en el orden del espíritu</h3>
+      <p>Tomás establece en <em>S.Th.</em> I, q. 27, a. 3 ad 3 que el amor es el acto final (<em>ultimus actus</em>) de la vida espiritual: el intelecto primero conoce, luego la voluntad ama lo conocido. No hay un acto espiritual «posterior al amor» que sea distinto de él. El amor es la cumbre y el fin de la vida espiritual. Por eso el Espíritu Santo, como Amor subsistente, es el término en el que se cierra (<em>terminatur</em>) el movimiento de la vida intratrinitaria.</p>
+
+      <blockquote class="latin">«In divinis non est nisi duplex processio: processio Verbi et processio Amoris. Pater enim intelligendo se et Filium et Spiritum Sanctum, et omnia alia quae in eius scientia continentur, concipit Verbum; ut sic tota Trinitas Verbo dicatur... Spiritus Sanctus procedit ut amor.»</blockquote>
+      <span class="latin-trans">— "En Dios no hay sino una doble procesión: la procesión del Verbo y la procesión del Amor. Pues el Padre, entendiéndose a sí mismo y al Hijo y al Espíritu Santo y todo lo demás contenido en su ciencia, concibe el Verbo; de modo que toda la Trinidad es dicha en el Verbo. El Espíritu Santo procede como amor." (<em>S.Th.</em> I, q. 37, a. 1 c.)</span>
+
+      <h3>El cierre trinitario como plenitud, no como límite</h3>
+      <p>La clausura de las procesiones en el Espíritu Santo no debe entenderse como una «limitación» de la vida divina, como si hubiera podido ser más rica. Al contrario: es la expresión de la perfecta plenitud de la vida espiritual. El intelecto divino ha producido su Verbo perfecto que todo lo expresa; la voluntad divina ha producido su Amor perfecto que todo lo abraza. No hay nada más que expresar ni nada más que amar: todo está dicho en el Verbo y todo está amado en el Espíritu. La Trinidad es la plenitud perfecta, el círculo cerrado del ser que se conoce y se ama a sí mismo en la infinita riqueza de su vida personal.</p>
+    </section>
+
+    <section class="chapter" id="contra-dualismo">
+      <h2><span class="ch-num">Capítulo 19</span>Contra la dualidad sin Espíritu: la necesidad de la tercera Persona</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Si hemos mostrado que no puede haber más de tres, conviene mostrar también que el número no puede ser dos: un Padre y un Hijo solamente, sin Espíritu. Aunque esta no es una herejía histórica explícita, el argumento para excluirla ilumina por qué el Espíritu Santo es necesario en la estructura trinitaria y no simplemente un añadido.</p>
+
+      <h3>El amor entre el Padre y el Hijo exige un término</h3>
+      <p>El Padre y el Hijo, conociéndose mutuamente en el Verbo, se aman. Este amor no puede ser una operación sin término inmanente: ello implicaría que la voluntad divina no produce una procesión, es decir, que la vida volitiva de Dios es estéril o que su amor es una operación transeúnte (que sale fuera). Pero el amor del Padre al Hijo y del Hijo al Padre es un amor inmanente (permanece dentro de Dios): debe tener un término inmanente. Ese término es el Espíritu Santo.</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Por qué el Espíritu Santo es necesario (S.Th. I, q. 36, a. 1)</div>
+        <div class="premise"><span class="premise-label">P.1</span> El amor perfecto en un ser espiritual infinito produce necesariamente un término inmanente: es una operación inmanente del espíritu, como el entendimiento produce su Verbo.</div>
+        <div class="premise"><span class="premise-label">P.2</span> El Padre y el Hijo se aman con un amor infinito, perfecto e inmanente.</div>
+        <div class="premise"><span class="premise-label">P.3</span> Ese amor inmanente perfectísimo produce necesariamente un término igualmente divino (por la misma razón que el Verbo es divino: el término de una operación infinita debe ser infinito).</div>
+        <div class="conclusion"><span class="premise-label">∴</span> Hay necesariamente un tercer término de la vida divina: el Espíritu Santo, que es el amor subsistente del Padre y del Hijo.</div>
+      </div>
+
+      <p>Además, Tomás señala algo de gran profundidad en <em>S.Th.</em> I, q. 37, a. 2: el Espíritu Santo no solo es el término del amor entre el Padre y el Hijo, sino que es el «Don» por excelencia. El Padre da todo al Hijo en la generación (le comunica la esencia divina completa); el Hijo recibe todo del Padre. Pero la donación perfecta exige una respuesta perfecta: el Hijo no puede «darse» al Padre sin que ese darse se exprese como una Persona que <em>es</em> el Don mismo. El Espíritu Santo es la hipóstasis del Don mutuo, la Persona que es el autoofrecimiento subsistente del Padre y del Hijo.</p>
+    </section>
+
+    <section class="chapter" id="suma-referencias">
+      <h2><span class="ch-num">Capítulo 20</span>Mapa de referencias precisas en la Summa Theologiae</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Para facilitar el estudio directo de las fuentes, ofrecemos un mapa detallado de los artículos de la <em>Summa Theologiae</em> (I, qq. 27–42) en los que Tomás aborda cada uno de los argumentos desarrollados en este manual.</p>
+
+      <table class="comp-table">
+        <thead><tr><th>Pregunta central</th><th>Locus en S.Th.</th><th>Artículo clave</th><th>Lo que establece</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-key">¿Hay procesiones en Dios?</td>
+            <td>I, q. 27, a. 1</td>
+            <td>Respondeo</td>
+            <td>Sí, basadas en operaciones inmanentes del espíritu</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿La generación es procesión intelectual?</td>
+            <td>I, q. 27, a. 2</td>
+            <td>Respondeo</td>
+            <td>El Verbo procede como el verbo mental del intelecto</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿Hay procesión de amor?</td>
+            <td>I, q. 27, a. 3</td>
+            <td>Respondeo + ad 3</td>
+            <td>Sí; el amor es el acto espiritual más alto y produce término inmanente</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿La procesión del amor es generación?</td>
+            <td>I, q. 27, a. 4</td>
+            <td>Respondeo</td>
+            <td>No; el amor no tiene razón de semejanza especificativa como el Verbo</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿Hay más de dos procesiones?</td>
+            <td>I, q. 27, a. 5</td>
+            <td>Respondeo</td>
+            <td><strong>No</strong>; solo hay dos operaciones inmanentes espirituales</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿Las relaciones divinas son reales?</td>
+            <td>I, q. 28, a. 1</td>
+            <td>Respondeo</td>
+            <td>Sí; las procesiones producen relaciones reales</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿Cuántas relaciones hay en Dios?</td>
+            <td>I, q. 28, a. 4</td>
+            <td>Respondeo</td>
+            <td>Cuatro: paternidad, filiación, espiración activa, procesión</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿Qué es una Persona divina?</td>
+            <td>I, q. 29, a. 4</td>
+            <td>Respondeo</td>
+            <td>Relación subsistente en la naturaleza divina</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿Cuántas Personas hay en Dios?</td>
+            <td>I, q. 30, a. 2</td>
+            <td>Respondeo</td>
+            <td><strong>Tres</strong>; solo tres relaciones son mutuamente opuestas</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿Podría haber más o menos Personas?</td>
+            <td>I, q. 30, a. 2 ad 1</td>
+            <td>Ad 1–3</td>
+            <td>No; el número tres es metafísicamente necesaria dado el modo de procesión</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿El Verbo divino es único?</td>
+            <td>I, q. 34, a. 1 ad 3</td>
+            <td>Ad 3</td>
+            <td>Sí; uno solo, que expresa todo lo que el Padre conoce</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿Los actos nocionales pertenecen a las Personas?</td>
+            <td>I, q. 41, a. 2</td>
+            <td>Respondeo</td>
+            <td>Sí; engendrar y espirar son propios de las Personas, no de la esencia</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿El Hijo puede engendrar?</td>
+            <td>I, q. 41, a. 5</td>
+            <td>Respondeo + ad 1</td>
+            <td><strong>No</strong>; porque no tiene la propiedad de la paternidad</td>
+          </tr>
+          <tr>
+            <td class="td-key">¿Las Personas son iguales en poder?</td>
+            <td>I, q. 42, a. 4</td>
+            <td>Ad 2</td>
+            <td>Sí; el Hijo tiene el mismo poder que el Padre pero no la razón de principio generante</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="chapter" id="sintesis-final">
+      <h2><span class="ch-num">Capítulo 21</span>Síntesis final: la necesaria ternidad de la vida divina</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Llegamos al final del argumento con una visión de conjunto que permite apreciar la coherencia y la belleza del sistema tomista. El número tres en la Trinidad no es un accidente histórico ni un misterio arbitrario: es la expresión precisa de lo que implica ser un espíritu puro infinito que se conoce y se ama a sí mismo perfectamente.</p>
+
+      <h3>La Trinidad como necesidad de la vida espiritual perfecta</h3>
+
+      <p>Todo ser espiritual, en cuanto tal, tiende naturalmente a dos operaciones inmanentes supremas: conocer y amar. En los seres espirituales finitos (como el hombre o el ángel), estas operaciones no son perfectas: su conocimiento es parcial y sucesivo; su amor es contingente y variable. Por eso en ellos no hay procesiones que den lugar a Personas distintas: sus operaciones son demasiado imperfectas para producir términos subsistentes iguales al principio.</p>
+
+      <p>En Dios, sin embargo, las operaciones son infinitamente perfectas. El autoconocimiento divino es infinitamente perfecto: produce necesariamente un Verbo infinitamente perfecto, que no puede ser inferior al que lo genera. El amor divino es infinitamente perfecto: produce necesariamente un Amor subsistente infinitamente perfecto, que no puede ser inferior al amor que lo origina. La perfección infinita de las operaciones es lo que hace que sus términos sean Personas divinas plenas, iguales al Principio.</p>
+
+      <h3>El diagrama completo de la necesidad trinitaria</h3>
+
+      <div class="diagram">
+        <div class="diagram-title">La Trinidad como necesidad de la vida espiritual infinita</div>
+        <div class="d-row">
+          <div class="d-node prime" style="min-width:130px;">PADRE<br><small>Principio ingénito<br>Esse, Intelligere, Velle</small></div>
+          <div class="d-arr">──Intelligere──▶</div>
+          <div class="d-node prime">HIJO / VERBUM<br><small>Término del conocimiento<br>= Esencia divina expresada</small></div>
+        </div>
+        <div class="d-row" style="margin-top:0.5rem; margin-left:65px;">
+          <div class="d-arr" style="transform:rotate(45deg); margin-left:0.5rem;">▼</div>
+        </div>
+        <div class="d-row" style="margin-left:15px;">
+          <div class="d-node" style="min-width:95px;border-style:dashed;font-size:0.75rem;color:rgba(184,151,58,0.55);">Velle común<br>(Padre + Hijo)</div>
+          <div class="d-arr">──Amare──▶</div>
+          <div class="d-node prime">ESP. SANTO<br><small>Término del amor<br>= Amor subsistente</small></div>
+        </div>
+        <div class="diagram-note">Dos operaciones inmanentes · Dos términos perfectos · Un Principio originador = Tres Personas y no más</div>
+      </div>
+
+      <h3>Por qué es exactamente tres y no otro número</h3>
+      <p>Recogemos los cinco motivos en su forma más concisa:</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Los cinco motivos de la necesaria ternidad</div>
+        <div class="premise"><span class="premise-label">I</span> <strong>Dos operaciones, dos procesiones.</strong> El espíritu puro tiene exactamente dos operaciones inmanentes irreductibles (entender y amar), luego hay exactamente dos procesiones.</div>
+        <div class="premise"><span class="premise-label">II</span> <strong>Operaciones perfectas, términos únicos.</strong> Cada operación infinitamente perfecta produce un único término infinitamente perfecto. No hay ni deficiencia (que requiera repetición) ni exceso (que implique multiplicación).</div>
+        <div class="premise"><span class="premise-label">III</span> <strong>Los términos no regeneran.</strong> Los términos de las procesiones (Hijo, Espíritu) poseen la esencia divina como recibida-por-procesión, no como principio originante. No pueden iniciar nuevas procesiones de la misma clase.</div>
+        <div class="premise"><span class="premise-label">IV</span> <strong>Oposición relativa: tres, no cuatro.</strong> De las cuatro relaciones que se derivan de las dos procesiones, solo tres son mutuamente opuestas (constituyendo tres Personas), porque la espiración activa no se opone a la paternidad ni a la filiación.</div>
+        <div class="conclusion"><span class="premise-label">V</span> <strong>Oposición relativa: tres, no dos.</strong> No puede haber menos de tres porque las dos procesiones producen relaciones realmente distintas que subsisten en Personas genuinamente distintas (contra el modalismo).</div>
+      </div>
+
+      <h3>La Trinidad y la plenitud del Ser</h3>
+
+      <p>El argumento de Tomás culmina en una visión metafísica de gran calado: la Trinidad no es solo un hecho revelado que la razón acepta ciegamente, sino la forma que toma necesariamente la vida espiritual cuando es absolutamente perfecta. Un Dios que fuera solo Uno (una sola Persona) sería un Dios cuya vida espiritual inmanente no produciría nada: un Dios sin Verbo propio, sin Amor subsistente. Un Dios sin interior. La Trinidad revela que Dios tiene, desde la eternidad, una vida interior plenísima: se conoce a sí mismo en un Verbo igual a Él, y se ama a sí mismo en un Amor igual a Él. Esta vida es la razón por la que Dios puede amar a las criaturas sin necesitarlas: ya es en sí mismo la comunión de amor más perfecta posible.</p>
+
+      <blockquote class="latin">«Deus ab aeterno seipsum intelligit et amat. Et quia intelligendo generat Verbum et amando spirat Amorem subsistentem, vita divina est essentialiter communio trium Personarum. Non est solitudo, sed plenitudo.»</blockquote>
+      <span class="latin-trans">— "Dios desde la eternidad se entiende a sí mismo y se ama. Y porque entendiéndose engendra el Verbo y amándose espira el Amor subsistente, la vida divina es esencialmente comunión de tres Personas. No es soledad, sino plenitud." (síntesis del pensamiento tomista, cf. <em>S.Th.</em> I, qq. 14, 20, 27)</span>
+
+      <div class="ornament">✦ ✠ ✦</div>
+
+      <p>La Trinidad no tiene más de tres Personas porque el único acto de entender divino ha dicho todo en el Verbo, y el único acto de amar divino ha dado todo en el Espíritu. No tiene menos de tres porque sin el Verbo Dios no se conocería perfectamente, y sin el Espíritu Dios no se amaría perfectamente. El número tres es la huella metafísica de la perfección infinita de la vida espiritual de Dios: exactamente lo que se necesita, exactamente lo que hay, exactamente lo que basta.</p>
+
+      <div class="nota">
+        <strong>Referencias bibliográficas primarias:</strong> Tomás de Aquino, <em>Summa Theologiae</em> I, qq. 14 (ciencia divina), 19–20 (voluntad y amor divinos), 27–32 (procesiones y relaciones), 34–38 (Verbo y Espíritu Santo), 40–42 (Personas y actos nocionales); <em>De Potentia Dei</em>, qq. 8–10; <em>De Veritate</em>, q. 4; <em>Summa contra Gentiles</em> IV, cc. 11–24. Comentarios recomendados: Reginald Garrigou-Lagrange, O.P., <em>The Trinity and God the Creator</em> (Herder, 1952); Gilles Emery, O.P., <em>The Trinitarian Theology of Saint Thomas Aquinas</em> (Oxford, 2007) — especialmente caps. 5–8 sobre las procesiones y relaciones; Matthew Levering, <em>Scripture and Metaphysics: Aquinas and the Renewal of Trinitarian Theology</em> (Blackwell, 2004).
+      </div>
+    </section>
+
+  </div><!-- /content -->
+</main>
+
+<script>
+  // ══════ TOC accordion ══════
+  document.querySelectorAll('.toc-part-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const items = header.nextElementSibling;
+      const isOpen = items.classList.contains('open');
+      document.querySelectorAll('.toc-items').forEach(i => i.classList.remove('open'));
+      document.querySelectorAll('.toc-part-header').forEach(h => h.classList.remove('open'));
+      if (!isOpen) {
+        items.classList.add('open');
+        header.classList.add('open');
+      }
+    });
+  });
+
+  // ══════ Active TOC item on scroll ══════
+  const chapters = document.querySelectorAll('section.chapter');
+  const tocItems = document.querySelectorAll('.toc-item');
+
+  function updateActiveToc() {
+    let current = '';
+    chapters.forEach(ch => {
+      if (ch.getBoundingClientRect().top <= 130) current = ch.id;
+    });
+    tocItems.forEach(item => {
+      item.classList.remove('active');
+      if (item.getAttribute('href') === '#' + current) {
+        item.classList.add('active');
+        const parent = item.closest('.toc-items');
+        if (parent && !parent.classList.contains('open')) {
+          document.querySelectorAll('.toc-items').forEach(i => i.classList.remove('open'));
+          document.querySelectorAll('.toc-part-header').forEach(h => h.classList.remove('open'));
+          parent.classList.add('open');
+          parent.previousElementSibling.classList.add('open');
+        }
+      }
+    });
+  }
+
+  // ══════ Progress bar ══════
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? scrollTop / docH : 0;
+    document.getElementById('progress-bar').style.transform = `scaleX(${pct})`;
+  }
+
+  window.addEventListener('scroll', () => { updateActiveToc(); updateProgress(); }, { passive: true });
+  updateActiveToc();
+  updateProgress();
+
+  // ══════ Hamburger ══════
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById('sidebar');
+
+  hamburger.addEventListener('click', () => sidebar.classList.toggle('open'));
+
+  tocItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 680) sidebar.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>

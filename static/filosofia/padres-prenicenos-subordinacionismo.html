@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Subordinacionistas los Padres Pre-Nicenos? Una Defensa Apologética</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --ink:       #1a1611;
+    --parchment: #f7f3ec;
+    --warm-mid:  #e8e0d0;
+    --gold:      #8b6914;
+    --gold-lt:   #c9a227;
+    --crimson:   #7a1f2e;
+    --steel:     #3d4a5c;
+    --muted:     #6b6258;
+    --rule:      #c8bca8;
+    --accent-bg: #f0ebe0;
+    --quote-bg:  #ede7d9;
+    --sidebar-w: 280px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  /* ── SIDEBAR / INDEX ── */
+  #sidebar {
+    position: fixed; top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--ink);
+    color: var(--parchment);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex; flex-direction: column;
+    transition: transform .3s ease;
+  }
+
+  #sidebar-header {
+    padding: 28px 20px 20px;
+    border-bottom: 1px solid #3a3328;
+  }
+
+  #sidebar-header .logo {
+    font-family: 'Crimson Pro', serif;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 6px;
+  }
+
+  #sidebar-header h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #ede7d9;
+  }
+
+  #toc { padding: 16px 0 40px; flex: 1; }
+
+  .toc-section { margin-bottom: 4px; }
+
+  .toc-section > a.toc-main {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 9px 20px;
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #c8bca8;
+    line-height: 1.4;
+    transition: background .15s, color .15s;
+    border-left: 3px solid transparent;
+  }
+  .toc-section > a.toc-main:hover,
+  .toc-section > a.toc-main.active {
+    background: #2a2520;
+    color: var(--gold-lt);
+    border-left-color: var(--gold-lt);
+  }
+  .toc-section > a.toc-main .num {
+    flex-shrink: 0;
+    font-family: 'Crimson Pro', serif;
+    font-size: 14px;
+    color: var(--gold);
+    min-width: 22px;
+  }
+
+  .toc-sub { padding-left: 52px; display: none; }
+  .toc-sub.open { display: block; }
+  .toc-sub a {
+    display: block; padding: 5px 16px 5px 0;
+    text-decoration: none;
+    font-size: 11.5px;
+    color: #8a7e70;
+    border-left: 2px solid #2e2a24;
+    transition: color .15s, border-color .15s;
+  }
+  .toc-sub a:hover { color: #c8bca8; border-left-color: #5a4e3a; }
+
+  /* ── MAIN CONTENT ── */
+  #main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  #hero {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 80px 60px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, #2d1f0a 0%, transparent 65%),
+                linear-gradient(135deg, #1a1611 0%, #0f0d0a 100%);
+    pointer-events: none;
+  }
+  #hero .eyebrow {
+    position: relative;
+    font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  #hero .eyebrow::after {
+    content: ''; display: block; height: 1px; width: 60px; background: var(--gold);
+  }
+  #hero h1 {
+    position: relative;
+    font-family: 'Crimson Pro', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+    max-width: 760px;
+    margin-bottom: 24px;
+  }
+  #hero h1 em { font-style: italic; color: var(--gold-lt); }
+  #hero .subtitle {
+    position: relative;
+    font-size: 16px; color: #a09080; max-width: 620px; line-height: 1.6;
+    margin-bottom: 36px;
+  }
+  #hero .meta-strip {
+    position: relative;
+    display: flex; gap: 32px; flex-wrap: wrap;
+    border-top: 1px solid #3a3328;
+    padding-top: 20px;
+    font-size: 12px; color: #6b6258;
+    letter-spacing: .05em;
+  }
+  #hero .meta-strip span { display: flex; align-items: center; gap: 6px; }
+  #hero .meta-strip strong { color: #c8bca8; }
+
+  /* CONTENT WRAPPER */
+  .content-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 56px 48px;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    display: inline-block;
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--rule);
+    padding: 4px 10px;
+    margin-bottom: 16px;
+    border-radius: 2px;
+  }
+
+  h2.section-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .section-rule {
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold) 0%, transparent 60%);
+    margin-bottom: 32px;
+    border: none;
+  }
+
+  h3.sub-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--steel);
+    margin: 36px 0 14px;
+    padding-left: 16px;
+    border-left: 4px solid var(--gold-lt);
+  }
+
+  h4.mini-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin: 28px 0 10px;
+  }
+
+  p { margin-bottom: 18px; }
+
+  /* QUOTE BLOCKS */
+  .quote-block {
+    background: var(--quote-bg);
+    border-left: 5px solid var(--gold);
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-block .quote-text {
+    font-family: 'Crimson Pro', serif;
+    font-size: 19px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .quote-block .quote-text .greek,
+  .quote-block .quote-text .latin {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--steel);
+    font-size: .88em;
+  }
+  .quote-block .source {
+    font-size: 12px; letter-spacing: .08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    border-top: 1px solid var(--rule);
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+  .quote-block .source strong { color: var(--gold); }
+
+  /* DANGER / PROBLEM quote (objection-style) */
+  .quote-objection {
+    background: #f5eee8;
+    border-left: 5px solid var(--crimson);
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .quote-objection .q-label {
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--crimson); margin-bottom: 6px; font-weight: 600;
+  }
+  .quote-objection .quote-text {
+    font-family: 'Crimson Pro', serif;
+    font-size: 17px; font-style: italic; color: #4a2020; margin-bottom: 8px;
+  }
+  .quote-objection .source { font-size: 12px; color: #8a6060; }
+
+  /* RESPONSE / SOLUTION quote */
+  .quote-response {
+    background: #edf3ee;
+    border-left: 5px solid #3d7a48;
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .quote-response .q-label {
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: #2d6a3a; margin-bottom: 6px; font-weight: 600;
+  }
+  .quote-response .quote-text {
+    font-family: 'Crimson Pro', serif;
+    font-size: 17px; font-style: italic; color: #1a3a22; margin-bottom: 8px;
+  }
+  .quote-response .source { font-size: 12px; color: #4a7058; }
+
+  /* SYLLOGISM BOX */
+  .syllogism {
+    background: var(--ink);
+    color: var(--parchment);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .syllogism .syl-label {
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--gold-lt); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .syllogism .syl-label::after {
+    content: ''; flex: 1; height: 1px; background: #3a3328;
+  }
+  .syllogism .premise {
+    display: flex; gap: 14px; margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .syllogism .premise .tag {
+    flex-shrink: 0;
+    font-family: 'Crimson Pro', serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--gold);
+    background: #2a2520;
+    border: 1px solid #3a3328;
+    padding: 2px 8px;
+    border-radius: 3px;
+    min-width: 38px;
+    text-align: center;
+  }
+  .syllogism .premise .text {
+    font-size: 15px; color: #e8e0d0; line-height: 1.5;
+    padding-top: 2px;
+  }
+  .syllogism .premise.conclusion {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #3a3328;
+  }
+  .syllogism .premise.conclusion .tag {
+    background: var(--gold); color: var(--ink);
+    border-color: var(--gold);
+  }
+  .syllogism .premise.conclusion .text {
+    font-family: 'Crimson Pro', serif;
+    font-size: 17px; font-style: italic; color: var(--parchment);
+  }
+
+  /* KEY CONCEPT CARDS */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .concept-card {
+    background: var(--accent-bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .concept-card .card-term {
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--ink); margin-bottom: 6px;
+  }
+  .concept-card .card-greek {
+    font-size: 12px; color: var(--gold);
+    letter-spacing: .06em; margin-bottom: 8px;
+  }
+  .concept-card p { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.6; }
+
+  /* COMPARISON TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14px; }
+  .compare-table th {
+    background: var(--ink); color: var(--gold-lt);
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    padding: 12px 16px; text-align: left;
+  }
+  .compare-table td {
+    padding: 12px 16px; border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: var(--accent-bg); }
+  .compare-table .yes { color: #2d6a3a; font-weight: 600; }
+  .compare-table .no  { color: var(--crimson); font-weight: 600; }
+
+  /* CALLOUT */
+  .callout {
+    border: 1px solid var(--gold);
+    background: #faf5e8;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 28px 0;
+    display: flex; gap: 14px;
+  }
+  .callout .icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .callout .callout-body p { margin: 0; font-size: 14.5px; line-height: 1.65; color: #3a3020; }
+  .callout .callout-body strong { color: var(--ink); }
+
+  /* FATHER PROFILE */
+  .father-header {
+    display: flex; align-items: flex-end; gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--rule);
+  }
+  .father-badge {
+    width: 70px; height: 70px;
+    background: var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Crimson Pro', serif;
+    font-size: 28px; color: var(--gold-lt);
+    flex-shrink: 0;
+    border: 3px solid var(--gold);
+  }
+  .father-info { flex: 1; }
+  .father-info h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--ink); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .father-info .dates { font-size: 13px; color: var(--muted); }
+  .father-info .works {
+    font-size: 12px; color: var(--gold);
+    letter-spacing: .06em; margin-top: 4px;
+  }
+
+  /* ACCORDION */
+  .accordion { margin: 16px 0; }
+  .acc-item { border: 1px solid var(--rule); border-radius: 4px; margin-bottom: 6px; }
+  .acc-header {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 500;
+    user-select: none;
+    background: var(--accent-bg);
+    border-radius: 4px;
+    transition: background .15s;
+  }
+  .acc-header:hover { background: #e8e0d0; }
+  .acc-header .acc-icon {
+    width: 20px; height: 20px;
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+    transition: transform .2s;
+  }
+  .acc-item.open .acc-header .acc-icon { transform: rotate(45deg); }
+  .acc-body {
+    display: none;
+    padding: 16px 18px 18px;
+    font-size: 14.5px; line-height: 1.7;
+    border-top: 1px solid var(--rule);
+  }
+  .acc-item.open .acc-body { display: block; }
+
+  /* SECTION DIVIDERS */
+  .page-section { padding: 56px 0; border-top: 1px solid var(--rule); }
+  .page-section:first-child { border-top: none; padding-top: 0; }
+
+  /* TAGS */
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+  .tag {
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px;
+    font-weight: 500;
+  }
+  .tag-proto    { background: #e8f0e8; color: #2d6a3a; }
+  .tag-econ     { background: #e8eaf0; color: #3d4a8a; }
+  .tag-onto     { background: #f0e8e8; color: #7a1f2e; }
+  .tag-plat     { background: #f5f0e0; color: #7a5a14; }
+  .tag-context  { background: #ece8f5; color: #4a2a7a; }
+
+  /* PROGRESS / BREADCRUMB */
+  #progress-bar {
+    position: fixed; top: 0; left: var(--sidebar-w); right: 0;
+    height: 3px;
+    background: transparent;
+    z-index: 200;
+  }
+  #progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-lt) 100%);
+    width: 0%; transition: width .1s linear;
+  }
+
+  /* MOBILE TOGGLE */
+  #menu-btn {
+    display: none;
+    position: fixed; top: 16px; left: 16px;
+    z-index: 300;
+    background: var(--ink); color: var(--parchment);
+    border: none; border-radius: 4px;
+    padding: 8px 12px; font-size: 18px; cursor: pointer;
+  }
+
+  /* FOOTNOTE STYLE */
+  .footnote {
+    font-size: 12.5px; color: var(--muted);
+    border-top: 1px solid var(--rule);
+    margin-top: 32px; padding-top: 12px;
+    line-height: 1.6;
+  }
+
+  /* HIGHLIGHT INLINE */
+  mark { background: #fff0c0; padding: 0 2px; border-radius: 2px; }
+  em.key { font-style: normal; color: var(--gold); font-weight: 600; }
+  .nt { font-size: .85em; color: var(--muted); }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    :root { --sidebar-w: 0px; }
+    #sidebar { transform: translateX(-280px); width: 280px; }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; }
+    #menu-btn { display: flex; }
+    #progress-bar { left: 0; }
+    .content-wrap { padding: 40px 24px; }
+    #hero { padding: 80px 24px 48px; }
+    .concept-grid { grid-template-columns: 1fr; }
+    .father-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+<button id="menu-btn" aria-label="Menú">☰</button>
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="logo">Apologética Patrística</div>
+    <h2>¿Eran los Padres pre-nicenos subordinacionistas?</h2>
+  </div>
+  <div id="toc">
+
+    <div class="toc-section">
+      <a class="toc-main" href="#introduccion">
+        <span class="num">I</span>
+        <span>Introducción y Tesis Central</span>
+      </a>
+    </div>
+
+    <div class="toc-section">
+      <a class="toc-main" href="#lenguaje-prenicenico">
+        <span class="num">II</span>
+        <span>El Lenguaje Pre-niceno: Platón vs. Aristóteles</span>
+      </a>
+      <div class="toc-sub">
+        <a href="#platonismo-medio">El Platonismo Medio</a>
+        <a href="#logos-platonico">El Logos Platónico</a>
+        <a href="#audiencia-apologetica">Audiencia Apologética</a>
+        <a href="#terminologia-tecnica">Terminología Pre-nicena</a>
+      </div>
+    </div>
+
+    <div class="toc-section">
+      <a class="toc-main" href="#acusacion-sintetica">
+        <span class="num">III</span>
+        <span>Síntesis de la Acusación</span>
+      </a>
+      <div class="toc-sub">
+        <a href="#jerarquia-numerica">Jerarquía numérica</a>
+        <a href="#otro-dios">El problema de "otro Dios"</a>
+        <a href="#distincion-numerica">Distinción numérica</a>
+        <a href="#ausencia-homoousios">Ausencia de homoousios</a>
+      </div>
+    </div>
+
+    <div class="toc-section">
+      <a class="toc-main" href="#justino">
+        <span class="num">IV</span>
+        <span>Justino Mártir (†165)</span>
+      </a>
+      <div class="toc-sub">
+        <a href="#justino-objections">Pasajes problemáticos</a>
+        <a href="#justino-context">Armonización contextual</a>
+        <a href="#justino-citas-fuertes">Citas de cosustancialidad</a>
+        <a href="#justino-silogismos">Silogismos</a>
+      </div>
+    </div>
+
+    <div class="toc-section">
+      <a class="toc-main" href="#ireneo">
+        <span class="num">V</span>
+        <span>San Ireneo de Lyon (†202)</span>
+      </a>
+      <div class="toc-sub">
+        <a href="#ireneo-objections">Objeciones habituales</a>
+        <a href="#ireneo-refutacion">Refutación y citas clave</a>
+      </div>
+    </div>
+
+    <div class="toc-section">
+      <a class="toc-main" href="#tertuliano">
+        <span class="num">VI</span>
+        <span>Tertuliano (†220)</span>
+      </a>
+      <div class="toc-sub">
+        <a href="#tertuliano-derivado">El problema del "derivado"</a>
+        <a href="#tertuliano-tres-personas">Tres personas, una sustancia</a>
+        <a href="#tertuliano-citas-fuertes">Citas de unidad sustancial</a>
+      </div>
+    </div>
+
+    <div class="toc-section">
+      <a class="toc-main" href="#origenes">
+        <span class="num">VII</span>
+        <span>Orígenes de Alejandría (†254)</span>
+      </a>
+      <div class="toc-sub">
+        <a href="#origenes-deuteros">Deuteros Theos y el problema</a>
+        <a href="#origenes-refutacion">Refutación contextual</a>
+        <a href="#origenes-citas-fuertes">Citas pro-nicenas avant la lettre</a>
+      </div>
+    </div>
+
+    <div class="toc-section">
+      <a class="toc-main" href="#basilio-clave">
+        <span class="num">VIII</span>
+        <span>La Clave Hermenéutica: Basilio y la Economía</span>
+      </a>
+    </div>
+
+    <div class="toc-section">
+      <a class="toc-main" href="#silogismos-finales">
+        <span class="num">IX</span>
+        <span>Silogismos Apologéticos Globales</span>
+      </a>
+    </div>
+
+    <div class="toc-section">
+      <a class="toc-main" href="#conclusion">
+        <span class="num">X</span>
+        <span>Conclusión: Consenso Patrístico</span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main id="main">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="eyebrow">Apologética Patrística &amp; Teología Trinitaria</div>
+    <h1>¿Eran los Padres Pre-nicenos<br><em>Subordinacionistas</em>?</h1>
+    <p class="subtitle">Una defensa apologética exhaustiva del pensamiento trinitario de Justino Mártir, Ireneo, Tertuliano y Orígenes frente a la acusación moderna de subordinacionismo ontológico.</p>
+    <div class="meta-strip">
+      <span>⏱ <strong>Lectura:</strong> ~45 min</span>
+      <span>📖 <strong>Padres tratados:</strong> Justino · Ireneo · Tertuliano · Orígenes</span>
+      <span>🔑 <strong>Idiomas citados:</strong> Griego · Latín · Español</span>
+    </div>
+  </section>
+
+  <!-- ══ I. INTRODUCCIÓN ══ -->
+  <div class="content-wrap">
+  <section id="introduccion" class="page-section">
+    <div class="section-label">I · Introducción</div>
+    <h2 class="section-title">Tesis Central y Marco Metodológico</h2>
+    <hr class="section-rule">
+
+    <p>La acusación de subordinacionismo ontológico contra los Padres pre-nicenos es uno de los tópicos más recurrentes y, a la vez, más metodológicamente deficientes de la teología histórica moderna. Quienes la sostienen cometen un error epistemológico de primer orden: <mark>leer textos del siglo II con lentes del siglo IV</mark>, exigir a Justino Mártir que hable con la terminología de Nicea 325 d.C. antes de que esa terminología existiera, y aislar frases de su contexto apologético, polémico y litúrgico.</p>
+
+    <p>La tesis de este documento es triple y acumulativa:</p>
+
+    <div class="callout">
+      <div class="icon">①</div>
+      <div class="callout-body"><p><strong>El lenguaje pre-niceno no es subordinacionista: es económico y platónico-funcional</strong>, adaptado a un auditorio helenístico y a una controversia antiidolátrica, no a un debate arriano que aún no existía.</p></div>
+    </div>
+
+    <div class="callout">
+      <div class="icon">②</div>
+      <div class="callout-body"><p><strong>Los mismos Padres acusados afirman explícitamente la igualdad de naturaleza</strong> entre el Padre y el Hijo, la generación eterna del Logos, y la unidad de voluntad y acción, que son precisamente los contenidos dogmáticos de Nicea.</p></div>
+    </div>
+
+    <div class="callout">
+      <div class="icon">③</div>
+      <div class="callout-body"><p><strong>La distinción hermenéutica entre subordinación ontológica y económica</strong>, articulada sistemáticamente por Basilio el Grande, es la clave exegética correcta para leer a los pre-nicenos, y es la que usa la propia Iglesia.</p></div>
+    </div>
+
+    <p>Esta defensa no es concesiva: no "salva" a los Padres reconociendo que "algo había de subordinacionismo" en ellos. La posición es que el subordinacionismo ontológico no está en sus textos; está en los ojos anacrónicos de sus críticos.</p>
+  </section>
+
+  <!-- ══ II. LENGUAJE PRE-NICENO ══ -->
+  <section id="lenguaje-prenicenico" class="page-section">
+    <div class="section-label">II · Marco Filosófico</div>
+    <h2 class="section-title">El Lenguaje Pre-niceno: Platón frente a Aristóteles</h2>
+    <hr class="section-rule">
+
+    <p>Para entender por qué los Padres del siglo II–III suenan "distintos" a los del siglo IV, hay que comprender la diferencia filosófica radical entre el marco platónico que usaban y el marco aristotélico-escolástico que Nicea y sus sucesores sistematizaron.</p>
+
+    <h3 id="platonismo-medio" class="sub-title">1. El Platonismo Medio y el Logos Cósmico</h3>
+
+    <p>El "Platonismo Medio" (siglos I a.C. – III d.C.) — representado por Plutarco, Apuleyo y Numenio de Apamea — era la filosofía dominante en el mundo culto grecorromano cuando Justino escribía. Este sistema <strong>no era el de Platón puro, sino una síntesis</strong> que introducía una jerarquía de principios divinos (lo Uno, el Nous/Intelecto, el Alma del mundo) sin que esa jerarquía implicara diferencia de naturaleza entre los niveles superiores.</p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="card-term">Taxis (τάξις)</div>
+        <div class="card-greek">gr. τάξις — "orden, disposición"</div>
+        <p>En el platonismo medio, el "orden" en la divinidad es una distinción de <em>rol relacional</em>, no de naturaleza o mérito. El "segundo" puede ser igual en sustancia al "primero".</p>
+      </div>
+      <div class="concept-card">
+        <div class="card-term">Logos (Λόγος)</div>
+        <div class="card-greek">gr. Λόγος — "palabra, razón, principio"</div>
+        <p>Para los estoicos y platónicos medios, el Logos era el principio racional del cosmos, inmanente y trascendente a la vez. Justino lo identifica con Cristo, <em>no lo degradando</em> sino elevando al Logos al máximo rango.</p>
+      </div>
+      <div class="concept-card">
+        <div class="card-term">Ousia (οὐσία)</div>
+        <div class="card-greek">gr. οὐσία — "esencia, ser"</div>
+        <p>Aristóteles fijó este término técnicamente. En el platonismo medio era más fluido: "participación en la misma naturaleza" no requería el término <em>homoousios</em>, acuñado por Nicea en contexto post-arriano.</p>
+      </div>
+      <div class="concept-card">
+        <div class="card-term">Hypostasis (ὑπόστασις)</div>
+        <div class="card-greek">gr. ὑπόστασις — "subsistencia, persona"</div>
+        <p>Antes de Nicea I y Constantinopla I (381), <em>hypostasis</em> y <em>ousia</em> eran a menudo sinónimos en algunos autores, lo que explica ambigüedades aparentes que no son doctrinales sino terminológicas.</p>
+      </div>
+    </div>
+
+    <h3 id="logos-platonico" class="sub-title">2. El Logos como Puente Apologético, no como Degradación</h3>
+
+    <p>Cuando Justino llama a Cristo "el Logos", <strong>no lo está rebajando</strong>; lo está afirmando ante su audiencia pagana e ilustrada. Para un lector de Heráclito, los estoicos o Filón de Alejandría, el Logos era la Razón Divina suprema que ordenaba el cosmos. Identificar a Cristo con el Logos era un acto de proclamación de su divinidad máxima, no de su inferioridad.</p>
+
+    <div class="quote-block">
+      <div class="quote-text">"Jesucristo es el único Hijo en propiedad engendrado por Dios, siendo su Logos, su Primogénito y su Poder."</div>
+      <div class="source"><strong>Justino Mártir</strong> · Primera Apología, cap. 23</div>
+    </div>
+
+    <h3 id="audiencia-apologetica" class="sub-title">3. La Audiencia y el Problema del Monoteísmo</h3>
+
+    <p>Los Padres pre-nicenos tenían dos audiencias simultáneas con problemas opuestos:</p>
+
+    <div class="compare-table-wrap" style="overflow-x:auto;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Audiencia</th>
+          <th>Su objeción</th>
+          <th>Respuesta patrística</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Filósofos paganos</strong></td>
+          <td>"Los cristianos adoran a un hombre crucificado como Dios — son idólatras de un ser finito"</td>
+          <td>El Hijo es el Logos eterno de Dios, pre-existente, no una criatura. → Énfasis en su <em>divinidad</em>.</td>
+        </tr>
+        <tr>
+          <td><strong>Judíos monoteístas</strong></td>
+          <td>"Dios es absolutamente uno (Dt 6:4). Adorar a Jesús además del Padre es politeísmo"</td>
+          <td>El Hijo es numéricamente distinto del Padre pero comparte su naturaleza, como el fuego engendrado. → Énfasis en la <em>distinción personal</em>.</td>
+        </tr>
+        <tr>
+          <td><strong>Gnósticos dualistas</strong></td>
+          <td>"El Dios del AT y el NT son distintos. El Demiurgo es inferior"</td>
+          <td>El mismo Logos que creó el mundo se encarnó. → Énfasis en la <em>unidad del plan salvífico</em>.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p>Esta tensión apologética explica por qué el mismo Justino puede, en el mismo párrafo, afirmar que el Hijo es "distinto en número" (frente a los judíos) y que no hay "otro Dios" en el sentido de un segundo dios autónomo (frente a los gnósticos). No es contradicción: es precisión trinitaria ante interlocutores distintos.</p>
+
+    <h3 id="terminologia-tecnica" class="sub-title">4. Glosario Comparativo: Terminología Pre-nicena vs. Nicena</h3>
+
+    <div class="accordion">
+      <div class="acc-item open">
+        <div class="acc-header"><span class="acc-icon">+</span> <strong>Generación / Engendrado</strong> (γεννητός vs. ἀγέννητος)</div>
+        <div class="acc-body">
+          <p>Pre-nicenos: "generado" (γεννητός) indica <em>origen relacional</em> del Hijo respecto al Padre, no una creación temporal. Justino distingue explícitamente entre <em>gennetos</em> (engendrado, eterno) y <em>genetos</em> (creado, temporal). Los arrianos confundirían estas dos palabras; Justino no lo hace.<br>Niceno: el Credo usa "engendrado, no creado" (γεννηθέντα, οὐ ποιηθέντα) — exactamente el concepto de Justino, con terminología más precisa.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-header"><span class="acc-icon">+</span> <strong>"Segundo Dios" / Deuteros Theos</strong></div>
+        <div class="acc-body">
+          <p>Esta expresión en Platón (Timeo 34b) indicaba el <em>Demiurgo</em> — el Logos ordenador del cosmos, que participa plenamente de la naturaleza divina pero en relación <em>funcional</em> de dependencia con el Uno. Justino usa esta terminología platónica no para rebajar al Hijo, sino para comunicar a su audiencia ilustrada que Cristo es el Logos eterno del que habla su filosofía, ahora revelado como persona. La expresión es apologéticamente estratégica, no ontológicamente definidora.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-header"><span class="acc-icon">+</span> <strong>"Antes de todas las criaturas" (πρὸ πάντων τῶν κτισμάτων)</strong></div>
+        <div class="acc-body">
+          <p>Esta frase, usada por Justino e Ireneo, establece que el Hijo existe antes de toda creación, lo que implica que él mismo <em>no es una creatura</em>. Arianos como Arrio citarían Prov. 8:22 ("me creó como primicia") para colocar al Hijo en el tiempo; los Padres pre-nicenos se anticipan negando esta lectura al afirmar la existencia del Logos "antes de toda creatura".</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-header"><span class="acc-icon">+</span> <strong>Homoousios (ὁμοούσιος) — ¿Por qué no aparece antes de Nicea?</strong></div>
+        <div class="acc-body">
+          <p>El término <em>homoousios</em> (de la misma sustancia) fue acuñado formalmente en el Concilio de Nicea I (325 d.C.) para cerrar específicamente la controversia arriana. Antes de Arrio, el problema no era la naturaleza del Hijo, sino la distinción persona-esencia y la relación con el monoteísmo judío. Que los pre-nicenos no usen el término no implica que rechacen el concepto: <strong>Justino usa la analogía del fuego que implica idéntica naturaleza; Tertuliano usa <em>una substantia</em>; Orígenes usa <em>homoousion</em> en contexto diferente</strong>. Exigir homoousios antes de Nicea es un anacronismo lógico — equivale a acusar a Moisés de no usar el término "alianza bilateral sinalagmática".</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ III. ACUSACIÓN ══ -->
+  <section id="acusacion-sintetica" class="page-section">
+    <div class="section-label">III · La Acusación</div>
+    <h2 class="section-title">Síntesis de la Acusación Subordinacionista</h2>
+    <hr class="section-rule">
+
+    <p>La crítica moderna al pensamiento trinitario pre-niceno agrupa sus argumentos en cuatro ejes. Los exponemos con precisión antes de refutarlos, pues una apologética de calidad debe conocer la acusación mejor que quien la formula.</p>
+
+    <h3 id="jerarquia-numerica" class="sub-title">1. Jerarquía numérica: "segundo lugar" y "tercer lugar"</h3>
+
+    <div class="quote-objection">
+      <div class="q-label">Cita problemática</div>
+      <div class="quote-text">"Y que nosotros le damos culto razonablemente, habiendo aprendido que Él es el Hijo del mismo Dios verdadero, y que lo tenemos en el segundo lugar, y al Espíritu profético en el tercero, lo probaremos."</div>
+      <div class="source">Justino Mártir · Primera Apología, cap. 13</div>
+    </div>
+
+    <p>La objeción argumenta que "segundo lugar" y "tercer lugar" implican una gradación ontológica: el Padre posee la plenitud de la deidad, el Hijo la posee en grado inferior y el Espíritu Santo en grado aún más remoto.</p>
+
+    <p><strong>Refutación:</strong> El término griego es <em>en deuterā chōrā</em> (ἐν δευτέρᾳ χώρᾳ) — "en segundo lugar" en el <em>orden de la presentación apologética</em>, no en la ontología. En el mismo capítulo 13, Justino está describiendo <em>el orden litúrgico del culto cristiano</em>, no una jerarquía metafísica. El "segundo lugar" responde a la pregunta pagana "¿a quiénes adoráis?", no a "¿quién es mayor entre los tres?". Compárese con el Credo Niceno-Constantinopolitano, que tampoco define al Espíritu Santo primero antes del Hijo.</p>
+
+    <h3 id="otro-dios" class="sub-title">2. Subordinación funcional leída como ontológica: "otro Dios"</h3>
+
+    <div class="quote-objection">
+      <div class="q-label">Cita problemática</div>
+      <div class="quote-text">"Me esforzaré por persuadiros... de que hay, y se dice que hay, otro Dios y Señor sujeto al Hacedor de todas las cosas."</div>
+      <div class="source">Justino Mártir · Diálogo con Trifón, cap. 56</div>
+    </div>
+
+    <p>Se argumenta que "otro Dios" implica un segundo dios de categoría inferior al Padre.</p>
+
+    <p><strong>Refutación:</strong> El contexto inmediato del Diálogo con Trifón es polémico-judío. Trifón ha negado que cualquier ser distinto del Dios del AT pueda ser adorado o llamado "Dios". Justino le responde que las propias Escrituras hebreas hablan de otra figura divina (el "Ángel del Señor", la "Sabiduría" de Prov. 8). La expresión "otro Dios" es una concesión retórica al marco judío de Trifón — Justino está diciendo: <em>incluso desde tu propio texto sagrado hay "otro" que es llamado Dios</em>. Inmediatamente después, Justino aclara que este "otro" no implica diferencia de naturaleza: la analogía del fuego aparece en el capítulo 61.</p>
+
+    <h3 id="distincion-numerica" class="sub-title">3. Distinción numérica: ¿separación de esencias?</h3>
+
+    <div class="quote-objection">
+      <div class="q-label">Cita problemática</div>
+      <div class="quote-text">"Él es llamado Dios, es distinto (héteros) de Aquel que hizo todas las cosas — numéricamente (arithmō), quiero decir, no distinto en voluntad (gnōmati)."</div>
+      <div class="source">Justino Mártir · Diálogo con Trifón, cap. 56</div>
+    </div>
+
+    <p>Se interpreta "distinto en número" como una separación de esencias, no una distinción de personas.</p>
+
+    <p><strong>Refutación:</strong> La clave está en la segunda parte de la misma frase, que los críticos sistemáticamente truncan: <mark>"no distinto en voluntad (gnōmati)"</mark>. Justino no dice "distinto en naturaleza" (οὐσίᾳ), sino "distinto en número" (ἀριθμῷ), y luego niega inmediatamente una distinción de voluntad. Esto es precisamente el corazón de la ortodoxia trinitaria: <strong>distinción real de personas + unidad de naturaleza y voluntad</strong>. La distinción "numérica" es hipostática (personal), no ousial (de esencia). El propio San Juan Damasceno y Santo Tomás de Aquino usan lenguaje análogo.</p>
+
+    <h3 id="ausencia-homoousios" class="sub-title">4. La ausencia del término homoousios</h3>
+
+    <p>Se argumenta que, como los pre-nicenos no usan el término <em>homoousios</em>, su teología es, en el mejor de los casos, "proto-arriana".</p>
+
+    <p><strong>Refutación:</strong> Este argumento es un ejemplo clásico de <em>petitio principii</em> con sabor anacrónico:</p>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo de la Falacia Anacrónica</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">La ortodoxia trinitaria requiere el uso del término homoousios.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">Los pre-nicenos no usan el término homoousios.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">⊥</span>
+        <span class="text">∴ Los pre-nicenos no son ortodoxos trinilarios. <em>[Pero P1 es falsa: homoousios fue acuñado para responder a una controversia futura. La ausencia del término no implica la ausencia del concepto.]</em></span>
+      </div>
+    </div>
+
+    <p>La premisa 1 es falsa: el término fue acuñado por Nicea I (325) para refutar a Arrio, quien fue la causa de esa controversia. Antes de Arrio, la cuestión no se había formulado con esa precisión. Exigir el término a los pre-nicenos es como exigir que Atanasio refutara a Lutero.</p>
+
+  </section>
+
+  <!-- ══ IV. JUSTINO ══ -->
+  <section id="justino" class="page-section">
+    <div class="father-header">
+      <div class="father-badge">JM</div>
+      <div class="father-info">
+        <h2>Justino Mártir</h2>
+        <div class="dates">c. 100 – 165 d.C. · Apologista · Filósofo · Mártir</div>
+        <div class="works">Primera Apología · Segunda Apología · Diálogo con Trifón</div>
+      </div>
+    </div>
+
+    <div class="section-label">IV · Análisis Patrístico</div>
+    <h2 class="section-title">Justino Mártir: Apologista Trinitario Avant la Lettre</h2>
+    <hr class="section-rule">
+
+    <p>Justino Mártir (c. 100–165 d.C.) es el primer gran apologista cristiano que desarrolla una teología del Logos explícita y sistemática. Su contexto es el del platonismo medio: escribe para un público cultivado grecorromano que conocía el Logos de Heráclito y Filón, y para judíos que conocían la Sabiduría personificada de Proverbios 8.</p>
+
+    <div class="tag-row">
+      <span class="tag tag-plat">Platonismo Medio</span>
+      <span class="tag tag-econ">Subordinación Económica</span>
+      <span class="tag tag-context">Polémica Anti-Judía</span>
+      <span class="tag tag-proto">Proto-Niceno</span>
+    </div>
+
+    <h3 id="justino-objections" class="sub-title">Pasajes Problemáticos y Su Contexto Real</h3>
+
+    <!-- Cita problemática 1 -->
+    <h4 class="mini-title">El "Primogénito antes de todas las criaturas"</h4>
+
+    <div class="quote-objection">
+      <div class="q-label">Cita frecuentemente mal usada</div>
+      <div class="quote-text">"El Hijo de Dios, Logos primogénito antes de todas las criaturas, se hizo hombre."</div>
+      <div class="source">Justino · Segunda Apología, cap. 6</div>
+    </div>
+
+    <p><strong>Análisis:</strong> El término "primogénito" (πρωτότοκος, <em>prōtotokos</em>) es bíblico (Col. 1:15; Sal. 89:28 LXX) y en el uso de Justino, como en Pablo, indica <em>primacía y preeminencia</em>, no creaturalidad. "Antes de todas las criaturas" (<em>pro pantōn tōn ktismatōn</em>) establece explícitamente que el Logos no pertenece a la categoría de lo creado — pues existe <em>antes</em> de esa categoría. Quien sea "antes de todas las criaturas" no puede ser él mismo una criatura. El razonamiento es el mismo que usará Atanasio contra los arrianos un siglo y medio después.</p>
+
+    <!-- Cita problemática 2 -->
+    <h4 class="mini-title">"Sujeto al Hacedor de todas las cosas"</h4>
+
+    <div class="quote-objection">
+      <div class="q-label">Cita problemática</div>
+      <div class="quote-text">"Otro Dios y Señor sujeto al Hacedor de todas las cosas."</div>
+      <div class="source">Justino · Diálogo con Trifón, cap. 56</div>
+    </div>
+
+    <p><strong>Análisis:</strong> La sujeción ("sujeto al Hacedor") es claramente <em>económico-funcional</em>: el Hijo actúa en el mundo como enviado, como Logos encarnado, como el que "viene para hacer no mi voluntad sino la del que me envió" (Jn. 6:38). Esta subordinación de misión y función es perfectamente ortodoxa: Juan 5:19 ("el Hijo no puede hacer nada por sí mismo") está en el NT. La Iglesia nunca ha condenado la subordinación económica. Justino no está hablando de una inferioridad de ser, sino de la relación de misión dentro de la economía trinitaria.</p>
+
+    <h3 id="justino-context" class="sub-title">La Analogía del Fuego: Refutación Interna del Subordinacionismo</h3>
+
+    <p>El texto más devastador para la tesis subordinacionista <em>está en el propio Justino</em>:</p>
+
+    <div class="quote-block">
+      <div class="quote-text">"Este poder fue engendrado por el Padre del universo, por su voluntad y poder, antes de todas las criaturas; y como lo vemos también en la práctica cuando se enciende un fuego de otro fuego — el fuego del que se toma queda igual, sin disminuirse, mientras que el encendido de él aparece como un fuego real."</div>
+      <div class="source"><strong>Justino Mártir</strong> · Diálogo con Trifón, cap. 61 · <span class="greek">Ἐν τῷ Διαλόγῳ πρὸς Τρύφωνα</span></div>
+    </div>
+
+    <p>Esta analogía del fuego es <strong>letalmente incompatible con el subordinacionismo ontológico</strong> por tres razones:</p>
+    <p><strong>a)</strong> El fuego encendido de otro fuego es <em>idéntico en naturaleza</em> al fuego original — no un "segundo fuego de categoría inferior". <strong>b)</strong> El fuego original "queda igual, sin disminuirse" — la generación del Hijo no implica pérdida en el Padre ni degradación en el Hijo. <strong>c)</strong> Justino afirma que es un "fuego real" — el Hijo es Dios real (ἀληθής), no Dios en sentido derivado o disminuido.</p>
+
+    <p>Esta analogía será adoptada directamente por la tradición nicena y post-nicena. El Credo Niceno-Constantinopolitano dirá "Dios de Dios, luz de luz, Dios verdadero de Dios verdadero" — es exactamente la estructura de la analogía de Justino.</p>
+
+    <h3 id="justino-citas-fuertes" class="sub-title">Citas Contundentes de Cosustancialidad en Justino</h3>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Padre del universo tiene un Hijo, quien siendo el Logos primogénito de Dios es también Dios."<br><span class="greek">[πρωτότοκος τοῦ Θεοῦ, καὶ Θεὸς ὑπάρχει]</span></div>
+      <div class="source"><strong>Justino Mártir</strong> · Primera Apología, cap. 63</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Hijo del mismo Dios verdadero, que tiene al Padre como su principio, fue engendrado de Él como una potencia racional de sí mismo — es el Verbo del Padre, su Sabiduría, su Poder."</div>
+      <div class="source"><strong>Justino Mártir</strong> · Diálogo con Trifón, cap. 105</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"Cristo es el Hijo primogénito de Dios, que es el Logos del que participa todo el género humano. Aquellos que vivieron con el Logos son cristianos, aunque fueran llamados ateos."</div>
+      <div class="source"><strong>Justino Mártir</strong> · Primera Apología, cap. 46</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"Hemos aprendido que Cristo es el Primogénito de Dios, y hemos declarado que es el Logos del que todo género humano fue hecho partícipe. Los que vivieron conforme al Logos son, en cierto sentido, cristianos, aunque fueron tenidos por ateos."</div>
+      <div class="source"><strong>Justino Mártir</strong> · Primera Apología, cap. 46</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Verbo de Dios es su Hijo... Es llamado Ángel porque anuncia a los hombres lo que desea anunciar. Y este poder es indivisible e inseparable del Padre."<br><span class="greek">[ἀχώριστον καὶ ἀναφαίρετον τοῦ Πατρός]</span></div>
+      <div class="source"><strong>Justino Mártir</strong> · Diálogo con Trifón, cap. 128</div>
+    </div>
+
+    <p>La expresión <em>achōriston kai anaphaireton tou Patros</em> — "indivisible e inseparable del Padre" — es una afirmación directa de la unidad ontológica del Hijo con el Padre. No hay subordinacionismo posible en un Hijo que es inseparable del Padre en su ser.</p>
+
+    <h3 id="justino-silogismos" class="sub-title">Silogismos a partir de Justino Mártir</h3>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo I — El Fuego y la Naturaleza Común</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">Justino afirma que la generación del Hijo es análoga al fuego que enciende otro fuego: el segundo fuego es idéntico en naturaleza al primero y el primero no disminuye. (Diálogo 61)</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">Si el Hijo fuera ontológicamente inferior al Padre, la analogía correcta sería la de una vela que produce calor pero no fuego — algo de naturaleza distinta y menor.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">Justino usa explícitamente la analogía del fuego igual, no la de un subproducto de naturaleza disminuida.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">Justino afirma que el Hijo posee la misma naturaleza divina que el Padre, sin disminución ni inferioridad ontológica.</span>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo II — "Antes de todas las criaturas" y la No-Creaturalidad</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">Justino afirma que el Logos existe "antes de todas las criaturas" (pro pantōn tōn ktismatōn). (2ª Apología 6; Diálogo 61)</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">Si algo existe antes de todas las criaturas, no puede pertenecer a la categoría de las criaturas, pues es anterior a la totalidad de esa categoría.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">El subordinacionismo arriano (y el moderno análogo) afirma que el Hijo es la primera criatura de Dios.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">La teología de Justino es incompatible con el subordinacionismo arriano: el Hijo no es una criatura sino el Logos eterno que precede a toda creación.</span>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo III — "Indivisible e Inseparable del Padre"</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">Justino describe al Logos como "indivisible e inseparable del Padre" (achōriston kai anaphaireton tou Patros). (Diálogo 128)</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">Un ser ontológicamente inferior a Dios (no de su misma naturaleza) sería separable de Dios en su ser, pues no compartirían la misma naturaleza divina.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">Lo que es inseparable de Dios en su ser comparte la naturaleza de Dios.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">Justino enseña implícitamente la cosustancialidad del Hijo con el Padre, anticipando la doctrina de Nicea.</span>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo IV — Distinción Numérica sin Distinción de Voluntad</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">Justino afirma que el Hijo es "numéricamente distinto" (arithmō héteros) del Padre, pero "no distinto en voluntad" (ou gnōmati). (Diálogo 56)</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">La voluntad (gnōmē) en Justino es expresión de la naturaleza. Si el Hijo no tiene voluntad distinta del Padre, comparte la misma naturaleza volitiva divina.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">El subordinacionismo ontológico implica una naturaleza inferior y, por tanto, una voluntad funcionalmente diferente o subordinada en ser.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">Justino refuta el subordinacionismo ontológico con sus propias palabras: distinción personal + unidad de voluntad y naturaleza es precisamente la definición nicena de la Trinidad.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ V. IRENEO ══ -->
+  <section id="ireneo" class="page-section">
+    <div class="father-header">
+      <div class="father-badge">IL</div>
+      <div class="father-info">
+        <h2>San Ireneo de Lyon</h2>
+        <div class="dates">c. 130 – 202 d.C. · Obispo · Heresiarca · Padre de la Teología Católica</div>
+        <div class="works">Adversus Haereses (5 libros) · Demostración de la Predicación Apostólica</div>
+      </div>
+    </div>
+
+    <div class="section-label">V · Análisis Patrístico</div>
+    <h2 class="section-title">Ireneo de Lyon: El Guardián de la Recapitulación</h2>
+    <hr class="section-rule">
+
+    <p>Ireneo de Lyon es el primer gran sistematizador de la teología cristiana y el más explícito de los pre-nicenos en afirmar la <em>recapitulación</em> (ἀνακεφαλαίωσις) de toda la humanidad en Cristo. Su teología trinitaria está absolutamente enmarcada en la soteriología: si el Hijo no es plenamente Dios, la salvación es imposible. Este argumento soteriológico-ontológico lo hace el anti-subordinacionista más claro de los pre-nicenos.</p>
+
+    <h3 id="ireneo-objections" class="sub-title">Objeciones Habituales a Ireneo</h3>
+
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-header"><span class="acc-icon">+</span> Objeción: "Ireneo habla del Padre como el único Dios verdadero"</div>
+        <div class="acc-body">
+          <p>Texto: "Hay un solo Dios Padre, que está por encima de todo y a través de todo y en todo." (Adversus Haereses I, 10, 1). <br><strong>Respuesta:</strong> Este pasaje recita la <em>regula fidei</em> (la "regla de fe") y, en su contexto, se opone al gnosticismo dualista que proponía dos dioses (el Demiurgo y el Dios superior). Ireneo afirma el monoteísmo contra el dualismo, no la inferioridad del Hijo. En el mismo Adversus Haereses (III, 6, 2) Ireneo afirma que "el Hijo es Dios, pues es todo lo que el Padre es."</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-header"><span class="acc-icon">+</span> Objeción: "Ireneo llama al Padre 'invisible' y al Hijo 'visible'"</div>
+        <div class="acc-body">
+          <p><strong>Respuesta:</strong> Esta distinción es puramente económico-funcional: el Padre es invisible en su trascendencia, y el Hijo es la "figura visible" de Dios en las teofanías del AT y en la Encarnación. Ireneo lo dice explícitamente: el Hijo es la "mano y el brazo derecho del Padre" — lenguaje metafórico de misión y acción, no de inferioridad ontológica. El Hijo no es "menos Dios" que el Padre; es el mismo Dios que se manifiesta y actúa en la historia.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 id="ireneo-refutacion" class="sub-title">Citas Contundentes de Ireneo sobre la Divinidad Plena del Hijo</h3>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Hijo, que existía siempre con el Padre, ha revelado al Padre a los ángeles y arcángeles y potestades y virtudes y a todos aquellos a quienes Dios ha querido revelar."</div>
+      <div class="source"><strong>Ireneo de Lyon</strong> · Adversus Haereses II, 30, 9</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"A menos que el hombre se hubiera unido a Dios, no habría podido participar de la incorruptibilidad. Porque era necesario que el Mediador de Dios y de los hombres tuviera por Su afinidad con ambos una conexión con cada uno de ellos, y les llevara a la amistad y la concordia, y que presentara al hombre a Dios, y revelara a Dios a los hombres."</div>
+      <div class="source"><strong>Ireneo de Lyon</strong> · Adversus Haereses III, 18, 7</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Padre es la plenitud, y el Hijo es la expresión de la plenitud: es el Padre que se comunica."<br><span class="greek">[Pater autem plenitudo, Filius vero expressio huius plenitudinis]</span></div>
+      <div class="source"><strong>Ireneo de Lyon</strong> · Adversus Haereses IV, 6, 7</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Espíritu Santo da a conocer al Hijo, y el Hijo conduce al Padre; el Padre confiere la incorrupción y la vida eterna que advienen a todos a causa de la visión de Dios."</div>
+      <div class="source"><strong>Ireneo de Lyon</strong> · Adversus Haereses IV, 20, 5</div>
+    </div>
+
+    <div class="callout">
+      <div class="icon">🔑</div>
+      <div class="callout-body"><p><strong>Argumento soteriológico de Ireneo contra el subordinacionismo:</strong> Para Ireneo, si el Hijo fuera ontológicamente inferior a Dios, la Encarnación no podría salvar al hombre. La divinización (θέωσις) del hombre requiere que aquél que se une a la humanidad sea plenamente Dios. Esta es la lógica que Atanasio tomará directamente de Ireneo: "Se hizo lo que somos para hacernos lo que Él es" (Adv. Haer. Praef. V). Este argumento es estructuralmente anti-subordinacionista.</p></div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"Se hizo lo que somos nosotros para que Él nos hiciera lo que Él mismo es."<br><span class="greek">[factus est quod et nos sumus, uti nos perficeret esse quod est et ipse]</span></div>
+      <div class="source"><strong>Ireneo de Lyon</strong> · Adversus Haereses V, Prefacio</div>
+    </div>
+
+  </section>
+
+  <!-- ══ VI. TERTULIANO ══ -->
+  <section id="tertuliano" class="page-section">
+    <div class="father-header">
+      <div class="father-badge">Trt</div>
+      <div class="father-info">
+        <h2>Tertuliano</h2>
+        <div class="dates">c. 155 – 220 d.C. · Jurista · Apologista · Inventor de la Terminología Trinitaria Latina</div>
+        <div class="works">Adversus Praxean · Apologeticum · De Praescriptione Haereticorum · Adversus Marcionem</div>
+      </div>
+    </div>
+
+    <div class="section-label">VI · Análisis Patrístico</div>
+    <h2 class="section-title">Tertuliano: El Arquitecto de la Trinidad Latina</h2>
+    <hr class="section-rule">
+
+    <p>Tertuliano es el padre de la terminología trinitaria latina. Acuñó las expresiones <em>una substantia, tres personae</em> ("una sustancia, tres personas"), <em>Trinitas</em> y la distinción <em>oeconomia/monarchia</em>. Sin Tertuliano, el Concilio de Nicea no habría tenido el vocabulario para formular el Credo. La acusación de subordinacionismo contra Tertuliano es, en cierto sentido, la más absurda de todas.</p>
+
+    <h3 id="tertuliano-derivado" class="sub-title">El Problema del "Derivado": Portio y Derivatio</h3>
+
+    <div class="quote-objection">
+      <div class="q-label">Cita frecuentemente mal usada</div>
+      <div class="quote-text">"El Padre es toda la sustancia, pero el Hijo es una derivación (derivatio) y una porción (portio) de ella."</div>
+      <div class="source">Tertuliano · Adversus Praxean, cap. 9</div>
+    </div>
+
+    <p><strong>Análisis contextual:</strong> Este pasaje se malinterpreta sacándolo del argumento completo de <em>Adversus Praxean</em>. Tertuliano escribe contra los sabelianos/modalistas (representados por Praxeas), quienes afirmaban que Padre, Hijo y Espíritu son el mismo Sujeto bajo diferentes "modos" o "máscaras". Tertuliano necesita afirmar la <em>distinción real</em> de personas. Cuando dice "derivación" (derivatio) y "porción" (portio), no afirma inferioridad ontológica sino <em>distinción relacional de origen</em> dentro de la misma sustancia.</p>
+
+    <p>La metáfora que él mismo usa es la de la <em>raíz-arbusto-fruto</em> y la de <em>fuente-río-canal</em>: en ambas, el "derivado" comparte exactamente la misma naturaleza que el origen. El arbusto no es "menos árbol" que la raíz. El río no es "menos agua" que la fuente. Esta es la misma lógica de la analogía del fuego de Justino.</p>
+
+    <div class="quote-block">
+      <div class="quote-text">"Así también la Trinidad que emana del Padre a través de intervalos de grado interconectados no perturba la Monarquía, mientras que preserva el estado de la Economía."<br><span class="latin">[Trinitas... a Patre contenetur... Monarchiam non destruit quam custodit οeconomia]</span></div>
+      <div class="source"><strong>Tertuliano</strong> · Adversus Praxean, cap. 3</div>
+    </div>
+
+    <p>Nótese: <em>no perturba la Monarquía</em>. Tertuliano afirma explícitamente que la distinción de personas en la Trinidad no implica división de la única naturaleza divina (Monarquía).</p>
+
+    <h3 id="tertuliano-tres-personas" class="sub-title">Una Sustancia, Tres Personas: La Fórmula Canónica</h3>
+
+    <p>Tertuliano es el inventor de la fórmula que Nicea y toda la tradición posterior utilizarían:</p>
+
+    <div class="quote-block">
+      <div class="quote-text">"Todos son de una sola sustancia, de una sola condición, de un solo poder, pues hay un solo Dios de quien se toman estos grados, formas y aspectos en el nombre del Padre, del Hijo y del Espíritu Santo."<br><span class="latin">[Omnia unius sunt, per unitatem substantiae... unus Deus]</span></div>
+      <div class="source"><strong>Tertuliano</strong> · Adversus Praxean, cap. 2</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"Cuídate, pues, de no disolver lo que la Trinidad tiene como único, es decir, el único principio, que es la unidad de la sustancia."<br><span class="latin">[Una Trinitas... sed Tres Personae, una Substantia]</span></div>
+      <div class="source"><strong>Tertuliano</strong> · Adversus Praxean, cap. 25</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Padre es toda la Deidad, pero el Hijo es todo lo que el Padre es."</div>
+      <div class="source"><strong>Tertuliano</strong> · Adversus Praxean, cap. 18</div>
+    </div>
+
+    <h3 id="tertuliano-citas-fuertes" class="sub-title">Citas Definitivas de Tertuliano sobre la Unidad Sustancial</h3>
+
+    <div class="quote-block">
+      <div class="quote-text">"El mismo Dios que lo ha engendrado, ¿pudo haberlo hecho inferior? De ninguna manera: pues si engendra de su propia sustancia, lo que engendra comparte su naturaleza."</div>
+      <div class="source"><strong>Tertuliano</strong> · Adversus Praxean, cap. 7</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"Cristo no pudo haber venido de nada: porque en aquel entonces no existía nada que pudiera haber sido su origen. Así que vino del Padre, de su esencia misma."<br><span class="latin">[de substantia Patris prolatus]</span></div>
+      <div class="source"><strong>Tertuliano</strong> · Adversus Hermogenem, cap. 18</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo V — El Argumento de Tertuliano contra el Subordinacionismo</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">Tertuliano afirma que el Hijo es <em>de substantia Patris</em> — de la sustancia del Padre — y no de otra sustancia o de la nada.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">Lo que es de la sustancia de X comparte la misma naturaleza esencial que X (axioma filosófico básico, no controvertido).</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">La sustancia del Padre es la sustancia divina plena.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">El Hijo, siendo de la sustancia del Padre, comparte plenamente la naturaleza divina. Esto es homoousios en contenido, aunque sin el término acuñado en Nicea.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ VII. ORÍGENES ══ -->
+  <section id="origenes" class="page-section">
+    <div class="father-header">
+      <div class="father-badge">Or</div>
+      <div class="father-info">
+        <h2>Orígenes de Alejandría</h2>
+        <div class="dates">c. 185 – 254 d.C. · Exégeta · Teólogo · Maestro de la Escuela Alejandrina</div>
+        <div class="works">Sobre los Principios (De Principiis) · Contra Celso · Comentario al Evangelio de Juan</div>
+      </div>
+    </div>
+
+    <div class="section-label">VII · Análisis Patrístico</div>
+    <h2 class="section-title">Orígenes: El Caso Más Complejo y Su Justa Lectura</h2>
+    <hr class="section-rule">
+
+    <p>Orígenes es, con diferencia, el caso más complejo de los pre-nicenos. Su obra fue inmensa, especulativa e influyente; pero también fue parcialmente condenada en el Segundo Concilio de Constantinopla (553 d.C.) por algunas de sus hipótesis cosmológicas (pre-existencia de almas, apocatástasis universal). Esta situación ha llevado a algunos críticos a inferir que toda su teología trinitaria era igualmente heterodoxa. Ese salto es inválido.</p>
+
+    <div class="callout">
+      <div class="icon">⚠️</div>
+      <div class="callout-body"><p><strong>Cautela metodológica:</strong> Gran parte de la obra de Orígenes nos ha llegado en traducciones latinas (Rufino de Aquileia, Jerónimo) que a veces suavizaron o modificaron los textos más polémicos. El texto griego original se conserva solo fragmentariamente. Esto hace que muchas "citas problemáticas" de Orígenes sean, en realidad, interpretaciones de sus traductores, no sus propias palabras.</p></div>
+    </div>
+
+    <h3 id="origenes-deuteros" class="sub-title">El Problema: Deuteros Theos y la Subordinación Aparente</h3>
+
+    <div class="quote-objection">
+      <div class="q-label">Cita frecuentemente mal usada</div>
+      <div class="quote-text">"Llamamos al Padre Dios con el artículo definido; al Hijo, Dios sin artículo. El Padre es αὐτόθεος ['Dios en sí mismo']; el Hijo es δεύτερος θεός ['segundo Dios']."</div>
+      <div class="source">Orígenes · Comentario al Evangelio de Juan, II, 2 (fragmento)</div>
+    </div>
+
+    <p><strong>Análisis contextual:</strong> Este pasaje aparece en el contexto de una discusión sobre Jn. 1:1 ("el Logos estaba con Dios, y el Logos era Dios"). La distinción entre "Dios con artículo" (ὁ Θεός) y "Dios sin artículo" (Θεός) es una distinción <em>gramatical-exegética</em> sobre Juan, no una declaración de inferioridad ontológica. Orígenes está explicando que el Padre es la <em>fuente</em> de la divinidad, y el Hijo la <em>recibe plenamente</em> de Él. En el mismo comentario, Orígenes afirma:</p>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Hijo es la imagen del Padre en todo, y puesto que el Padre es luz invisible, el Hijo es la imagen de esa luz. Por eso Él dice: 'Yo soy la luz del mundo.'"</div>
+      <div class="source"><strong>Orígenes</strong> · Comentario al Evangelio de Juan, I, 24</div>
+    </div>
+
+    <div class="quote-objection">
+      <div class="q-label">Segunda cita problemática</div>
+      <div class="quote-text">"Hay muchas cosas en que el Hijo es menos que el Padre."</div>
+      <div class="source">Orígenes · De Principiis (versión latina de Rufino)</div>
+    </div>
+
+    <p><strong>Análisis:</strong> Esta frase aparece únicamente en la traducción latina de Rufino, no en fragmentos griegos. Además, en su contexto, se refiere a la <em>encarnación</em> y a la <em>kenosis</em> del Hijo — el Hijo encarnado es "menor" que el Padre en cuanto a su humanidad asumida (cf. Jn. 14:28: "el Padre es mayor que yo", que toda la tradición patrística interpreta como referido a la naturaleza humana de Cristo, no a su naturaleza divina).</p>
+
+    <h3 id="origenes-refutacion" class="sub-title">La Generación Eterna: Contribución Decisiva de Orígenes</h3>
+
+    <p>Una de las contribuciones teológicas más importantes de Orígenes — y la que más lo vincula a la ortodoxia nicena — es su doctrina de la <strong>generación eterna del Hijo</strong>. Contra quienes decían que el Hijo "comenzó a existir", Orígenes afirma:</p>
+
+    <div class="quote-block">
+      <div class="quote-text">"Nunca hubo un tiempo en que el Hijo no existiera. Pues como la luz no puede existir sin su resplandor, así tampoco puede el Padre sin el Hijo."<br><span class="greek">[οὐδέποτε ἦν ὅτε οὐκ ἦν ὁ Υἱός]</span></div>
+      <div class="source"><strong>Orígenes</strong> · De Principiis, IV, 4, 1 (fragmento griego conservado)</div>
+    </div>
+
+    <p>Esta frase <em>nunquam fuit quando Filius non erat</em> — "nunca hubo [tiempo] en que el Hijo no era" — sería luego la piedra de toque de Atanasio contra los arrianos, que afirmaban precisamente lo contrario: "hubo un tiempo en que no era" (ἦν ποτε ὅτε οὐκ ἦν). Orígenes se anticipó exactamente a la respuesta ortodoxa, un siglo antes de que el problema arriano existiera.</p>
+
+    <h3 id="origenes-citas-fuertes" class="sub-title">Citas Pro-Nicenas de Orígenes</h3>
+
+    <div class="quote-block">
+      <div class="quote-text">"Nosotros decimos que el Salvador y el Espíritu Santo trascienden a todos los seres creados en una medida incomparable... pero también que el Padre trasciende al Hijo en una medida igual o mayor a la que el Hijo y el Espíritu Santo trascienden a los demás seres."</div>
+      <div class="source"><strong>Orígenes</strong> · Contra Celso, VIII, 15 — <em>Contexto: polémica con el politeísmo pagano, donde Orígenes afirma la superioridad absoluta del Hijo sobre toda creación.</em></div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Hijo es tan inseparable del Padre que el pensamiento no puede siquiera concebir al Hijo sin el Padre, ni al Padre sin el Hijo."</div>
+      <div class="source"><strong>Orígenes</strong> · Comentario a Romanos, VIII, 5</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"El Logos que 'era en el principio junto a Dios' es siempre con el Padre; no tuvo comienzo en el tiempo, sino que fue engendrado eternamente."</div>
+      <div class="source"><strong>Orígenes</strong> · Comentario al Evangelio de Juan, I, 22</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"La sabiduría de Dios no tiene inicio en el tiempo; es por ello que se dice: 'El Señor me poseyó en el comienzo de sus caminos' — no como inicio temporal sino como principio ontológico."</div>
+      <div class="source"><strong>Orígenes</strong> · De Principiis, I, 2, 2</div>
+    </div>
+
+    <div class="callout">
+      <div class="icon">⚖️</div>
+      <div class="callout-body"><p><strong>Balance sobre Orígenes:</strong> El propio Atanasio de Alejandría, el campeón de Nicea, usó ampliamente a Orígenes como autoridad en sus escritos anti-arrianos. Si Orígenes fuera un subordinacionista, sería paradójico que el más férreo defensor de la cosustancialidad lo citara a su favor. Este hecho histórico solo tiene sentido si la lectura pro-subordinacionista de Orígenes es incorrecta o, al menos, parcial.</p></div>
+    </div>
+
+  </section>
+
+  <!-- ══ VIII. BASILIO ══ -->
+  <section id="basilio-clave" class="page-section">
+    <div class="section-label">VIII · Clave Hermenéutica</div>
+    <h2 class="section-title">La Clave Hermenéutica: San Basilio y la Distinción Ontología / Economía</h2>
+    <hr class="section-rule">
+
+    <p>San Basilio el Grande (c. 330–379 d.C.), en su tratado <em>Sobre el Espíritu Santo</em>, proporciona el instrumento hermenéutico definitivo para leer a todos los pre-nicenos. Esta distinción no es una invención posterior para "salvar" a los pre-nicenos: es la sistematización explícita de lo que ellos ya intuían y practicaban.</p>
+
+    <h4 class="mini-title">La Distinción Fundamental</h4>
+
+    <div class="compare-table-wrap" style="overflow-x:auto;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Tipo de Subordinación</th>
+          <th>Qué afirma</th>
+          <th>¿Herética?</th>
+          <th>¿Está en los pre-nicenos?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Ontológica</strong><br><em>(del Ser)</em></td>
+          <td>El Hijo tiene una naturaleza inferior, menor o disminuida respecto al Padre. Es "menos Dios".</td>
+          <td class="no">SÍ (Arrianismo)</td>
+          <td class="no">NO — como hemos demostrado</td>
+        </tr>
+        <tr>
+          <td><strong>Económica / Funcional</strong><br><em>(del Rol)</em></td>
+          <td>El Hijo tiene un rol de misión y obediencia respecto al Padre en el plan de salvación, sin diferencia de naturaleza.</td>
+          <td class="yes">NO — Doctrina bíblica</td>
+          <td class="yes">SÍ — Esto es lo que enseñan</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"Porque si en esencia Él es sin variación, también sin variación es en poder. Y de aquellos cuyo poder es igual, también la operación es igual en todos los sentidos. Y Cristo es la potencia de Dios, y la sabiduría de Dios."<br><span class="greek">[εἰ γὰρ κατ' οὐσίαν ἄτρεπτος, ἄτρεπτος καὶ κατὰ δύναμιν]</span></div>
+      <div class="source"><strong>San Basilio el Grande</strong> · Sobre el Espíritu Santo, cap. VIII</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"¿Acaso el uso de 'a través de' implica inferioridad? En absoluto. Si 'a través del Hijo' significara inferioridad, ¿no diría Pablo 'a través de quien recibimos la gracia y el apostolado' (Rom. 1:5)? No hay deshonra en la preposición, sino expresión de la economía."</div>
+      <div class="source"><strong>San Basilio el Grande</strong> · Sobre el Espíritu Santo, cap. V</div>
+    </div>
+
+    <p>Basilio enseña explícitamente que el lenguaje de "a través del Hijo" (<em>dia tou Hyiou</em>), que aparece constantemente en los pre-nicenos, no indica inferioridad ontológica sino el <em>orden de la economía trinitaria</em> — el modo en que la Trinidad actúa hacia afuera en la creación y la salvación.</p>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo VI — El Argumento de Basilio aplicado a los Pre-Nicenos</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">Basilio el Grande, testigo primario de la tradición patrística, enseña que el lenguaje de "subordinación" en los Padres anteriores es económico o funcional, no ontológico.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">La tradición patrística es el intérprete privilegiado de sí misma: los Padres posteriores que conocieron y usaron los textos pre-nicenos son los mejores exégetas de esos textos.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">Los críticos modernos que acusan a los pre-nicenos de subordinacionismo ontológico se oponen a la interpretación de Basilio el Grande, Atanasio, y toda la tradición nicena que usó a esos Padres.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">La lectura subordinacionista de los pre-nicenos contraviene tanto el testimonio interno de sus propios textos como la tradición hermenéutica autorizada. Es metodológicamente indefendible.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ IX. SILOGISMOS GLOBALES ══ -->
+  <section id="silogismos-finales" class="page-section">
+    <div class="section-label">IX · Síntesis Apologética</div>
+    <h2 class="section-title">Silogismos Apologéticos Globales</h2>
+    <hr class="section-rule">
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo VII — El Argumento del Anacronismo Conceptual</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">El subordinacionismo ontológico fue definido y condenado como herejía arriana por Nicea I (325 d.C.).</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">Justino, Ireneo, Tertuliano y Orígenes escribieron entre el 150 y el 250 d.C., es decir, <em>antes</em> de que existiera la controversia arriana y su terminología de refutación.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">Juzgar la teología de los Padres pre-nicenos con los criterios anti-arrianos de Nicea requiere que conocieran y refutaran una controversia que aún no había ocurrido.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">La acusación de subordinacionismo ontológico contra los Padres pre-nicenos aplica estándares anacrónicos. El estándar correcto es: ¿enseñaban que el Hijo es creatura o no? Todos ellos enseñaban que <em>no</em> — "antes de todas las criaturas", "inseparable del Padre", "de la sustancia del Padre", "nunca hubo tiempo en que no era".</span>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo VIII — El Argumento del Uso Patrístico Posterior</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">Atanasio de Alejandría, el campeón de Nicea y el más férreo oponente al subordinacionismo arriano, cita extensamente a Justino, Ireneo y Orígenes como autoridades en favor de la cosustancialidad.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">Si esos Padres fueran subordinacionistas, Atanasio — que conocía sus obras exhaustivamente — no los habría citado a su favor, pues ello hubiera debilitado su posición.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">Atanasio era un exégeta y polemista de primera clase, perfectamente capaz de detectar heterodoxia en sus fuentes.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">El uso que la generación nicena hace de los pre-nicenos como autoridades a favor de la ortodoxia trinitaria es evidencia positiva de que esos Padres no eran subordinacionistas ontológicos.</span>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo IX — El Argumento del Consenso Litúrgico</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">Justino, Ireneo y Tertuliano describen una praxis litúrgica trinitaria en la que se glorifica al Padre <em>por el Hijo en el Espíritu</em> con igual honor.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">La lex orandi (ley de oración) es expresión de la lex credendi (ley de fe): lo que la comunidad ora revela lo que cree.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">Una liturgia que glorifica al Hijo con igual honor que al Padre es incompatible con el subordinacionismo ontológico, que implicaría que dar igual honor al Hijo y al Padre sería idolatría o injusticia divina.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">La praxis litúrgica de las comunidades de Justino, Ireneo y Tertuliano refuta el subordinacionismo ontológico desde la evidencia de la vida de fe concreta.</span>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="syl-label">Silogismo X — El Argumento Soteriológico de Ireneo (Reformulado)</div>
+      <div class="premise">
+        <span class="tag">P1</span>
+        <span class="text">Ireneo enseña que la salvación consiste en que el hombre sea "hecho lo que Dios es" — divinizado — a través de la unión con Cristo encarnado.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P2</span>
+        <span class="text">Si Cristo no fuera plenamente Dios (sino una divinidad subordinada e inferior), su unión con la humanidad no podría transmitir la naturaleza divina plena.</span>
+      </div>
+      <div class="premise">
+        <span class="tag">P3</span>
+        <span class="text">Pero Ireneo afirma explícitamente que la salvación consiste en participar de la naturaleza divina plena.</span>
+      </div>
+      <div class="premise conclusion">
+        <span class="tag">∴</span>
+        <span class="text">La soteriología de Ireneo presupone necesariamente la divinidad plena del Hijo. El subordinacionismo ontológico destruye su soterología desde dentro — lo que implica que Ireneo no podía ser subordinacionista sin contradecirse en el punto más central de su teología.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ X. CONCLUSIÓN ══ -->
+  <section id="conclusion" class="page-section">
+    <div class="section-label">X · Conclusión</div>
+    <h2 class="section-title">Conclusión: El Consenso Patrístico Pre-niceno y la Fe de Nicea</h2>
+    <hr class="section-rule">
+
+    <p>El recorrido por Justino Mártir, Ireneo de Lyon, Tertuliano y Orígenes revela un cuadro coherente y consistente: los Padres pre-nicenos no son subordinacionistas ontológicos. Son pensadores trinitarios que operan con las herramientas filosóficas de su tiempo (platonismo medio), para audiencias específicas (paganos cultos, judíos monoteístas, gnósticos dualistas), en el contexto de controversias anteriores a la crisis arriana.</p>
+
+    <p>Sus afirmaciones "problemáticas" son o bien <strong>económicas</strong> (referidas al rol del Hijo en la economía de la salvación), o bien <strong>apologéticas</strong> (concesiones retóricas al marco conceptual del interlocutor), o bien <strong>terminológicas</strong> (uso de vocabulario platónico que no coincide exactamente con la terminología técnica nicena pero expresa el mismo contenido). Ninguna de estas categorías es subordinacionismo ontológico.</p>
+
+    <p>Sus afirmaciones "fuertes" — el Logos es Dios (Justino), "indivisible e inseparable del Padre" (Justino), "primogénito antes de todas las criaturas" (pre-existencia increada, Justino), "de la sustancia del Padre" (Tertuliano), "nunca hubo cuando no era" (Orígenes), "se hizo lo que somos para hacernos lo que Él es" (Ireneo) — son rigurosamente nicenas en contenido.</p>
+
+    <h4 class="mini-title">La Continuidad de Fe</h4>
+
+    <div class="compare-table-wrap" style="overflow-x:auto;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Doctrina Nicena</th>
+          <th>Justino</th>
+          <th>Ireneo</th>
+          <th>Tertuliano</th>
+          <th>Orígenes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hijo es Dios verdadero</td>
+          <td class="yes">✓ 1Ap.63</td>
+          <td class="yes">✓ AH III,6,2</td>
+          <td class="yes">✓ AP 18</td>
+          <td class="yes">✓ Jn I,24</td>
+        </tr>
+        <tr>
+          <td>No hay dos dioses de distinta naturaleza</td>
+          <td class="yes">✓ Dial.128</td>
+          <td class="yes">✓ AH II,1,1</td>
+          <td class="yes">✓ AP 3</td>
+          <td class="yes">✓ CC VIII,15</td>
+        </tr>
+        <tr>
+          <td>El Hijo no es una criatura</td>
+          <td class="yes">✓ 2Ap.6</td>
+          <td class="yes">✓ AH II,30,9</td>
+          <td class="yes">✓ AH 7</td>
+          <td class="yes">✓ DP IV,4,1</td>
+        </tr>
+        <tr>
+          <td>Generación eterna (no temporal)</td>
+          <td class="yes">✓ Dial.61</td>
+          <td class="yes">✓ AH II,13,8</td>
+          <td class="yes">✓ AP 5</td>
+          <td class="yes">✓ DP I,2,2</td>
+        </tr>
+        <tr>
+          <td>Una sola naturaleza divina</td>
+          <td class="yes">✓ Dial.128</td>
+          <td class="yes">✓ AH IV,6,7</td>
+          <td class="yes">✓ AP 25</td>
+          <td class="yes">✓ Jn I,22</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"La fe que una vez fue dada a los santos." <span class="greek">[τῇ ἅπαξ παραδοθείσῃ τοῖς ἁγίοις πίστει]</span></div>
+      <div class="source">Judas 1:3 · El fundamento del argumento patrístico</div>
+    </div>
+
+    <p>El Concilio de Nicea no inventó una nueva doctrina: <em>codificó, con terminología precisa y definitiva, lo que los Padres pre-nicenos ya creían y enseñaban</em> bajo formas filosóficas más variadas y menos técnicas. La continuidad entre el Justino que escribe "inseparable del Padre" en el 155 d.C. y el Credo que profesa "de la misma sustancia que el Padre" en el 325 d.C. es real, coherente e históricamente demostrable.</p>
+
+    <p>La acusación de subordinacionismo a los Padres pre-nicenos no es una conclusión histórica: es un prejuicio metodológico que aplica categorías ajenas, aísla textos de su contexto y desconoce la hermenéutica patrística que la propia tradición ha desarrollado para leer esos textos. Una apologética rigurosa no solo puede, sino que debe, rechazarla sin concesiones.</p>
+
+    <div class="callout">
+      <div class="icon">✝️</div>
+      <div class="callout-body"><p><strong>Conclusión final:</strong> Quien acuse a Justino Mártir, Ireneo, Tertuliano u Orígenes de subordinacionismo ontológico está en desacuerdo no solo con los textos de esos Padres, sino con Atanasio de Alejandría, Basilio el Grande, el Concilio de Nicea, y dieciséis siglos de tradición patrística y teológica. La carga de la prueba es aplastantemente favorable a la ortodoxia trinitaria de los pre-nicenos.</p></div>
+    </div>
+
+    <div class="footnote">
+      <p><strong>Abreviaturas:</strong> 1Ap. = Primera Apología de Justino · 2Ap. = Segunda Apología de Justino · Dial. = Diálogo con Trifón de Justino · AH = Adversus Haereses de Ireneo · AP = Adversus Praxean de Tertuliano · DP = De Principiis de Orígenes · CC = Contra Celso de Orígenes · Jn = Comentario al Evangelio de Juan de Orígenes.</p>
+      <p style="margin-top:8px;"><strong>Fuentes primarias recomendadas:</strong> Migne, Patrologia Graeca (PG) · Migne, Patrologia Latina (PL) · Ante-Nicene Fathers (ANF), ed. Roberts &amp; Donaldson · Sources Chrétiennes (SC) · Corpus Christianorum Series Graeca (CCSG).</p>
+    </div>
+
+  </section>
+  </div><!-- end content-wrap -->
+
+</main>
+
+<script>
+// ── Progress bar ──
+const fill = document.getElementById('progress-fill');
+window.addEventListener('scroll', () => {
+  const d = document.documentElement;
+  const pct = (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100;
+  fill.style.width = pct + '%';
+});
+
+// ── Sidebar toggle (mobile) ──
+const sidebar = document.getElementById('sidebar');
+document.getElementById('menu-btn').addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+});
+
+// ── TOC accordion ──
+document.querySelectorAll('.toc-main').forEach(link => {
+  link.addEventListener('click', () => {
+    const sub = link.nextElementSibling;
+    if (sub && sub.classList.contains('toc-sub')) {
+      sub.classList.toggle('open');
+    }
+  });
+});
+
+// ── Active section highlight ──
+const sections = document.querySelectorAll('[id]');
+const tocLinks = document.querySelectorAll('.toc-main');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      tocLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -75% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ── Accordion ──
+document.querySelectorAll('.acc-header').forEach(h => {
+  h.addEventListener('click', () => {
+    h.parentElement.classList.toggle('open');
+  });
+});
+
+// ── Smooth anchor scroll with offset ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 32;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+      if (window.innerWidth <= 900) sidebar.classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>

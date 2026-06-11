@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual Tomista: Metafísica y Trinidad</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --gold:       #C9A84C;
+    --gold-light: #E8D5A0;
+    --gold-pale:  #F5EDD5;
+    --ink:        #1A1309;
+    --ink-mid:    #3D2E14;
+    --ink-soft:   #5C4A2A;
+    --parchment:  #F8F2E3;
+    --parchment2: #EFE7CC;
+    --red:        #8B2020;
+    --blue-acc:   #1E3A5F;
+    --sidebar-w:  320px;
+    --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 17px; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ══════════════ SIDEBAR ══════════════ */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--ink);
+    color: var(--gold-light);
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform var(--transition);
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sidebar-header {
+    padding: 2rem 1.5rem 1.2rem;
+    border-bottom: 1px solid #3a2d14;
+    flex-shrink: 0;
+  }
+
+  #sidebar-header .logo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  #sidebar-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1.3;
+  }
+
+  #toc {
+    padding: 1rem 0;
+    flex: 1;
+  }
+
+  .toc-part {
+    margin-bottom: 0.2rem;
+  }
+
+  .toc-part-header {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    gap: 0.5rem;
+    transition: background 0.2s;
+    user-select: none;
+  }
+
+  .toc-part-header:hover { background: rgba(201,168,76,0.08); }
+
+  .toc-part-header .arrow {
+    margin-left: auto;
+    font-size: 0.6rem;
+    transition: transform 0.25s;
+  }
+
+  .toc-part-header.open .arrow { transform: rotate(90deg); }
+
+  .toc-items {
+    display: none;
+    padding-left: 0;
+  }
+
+  .toc-items.open { display: block; }
+
+  .toc-item {
+    display: block;
+    padding: 0.38rem 1.5rem 0.38rem 2.2rem;
+    font-size: 0.82rem;
+    color: #c4b58a;
+    text-decoration: none;
+    line-height: 1.35;
+    transition: background 0.15s, color 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  .toc-item:hover {
+    background: rgba(201,168,76,0.1);
+    color: var(--gold-light);
+    border-left-color: var(--gold);
+  }
+
+  .toc-item.active {
+    background: rgba(201,168,76,0.12);
+    color: #f0e0a8;
+    border-left-color: var(--gold);
+  }
+
+  /* ══════════════ MAIN ══════════════ */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* ══════════════ HERO ══════════════ */
+  #hero {
+    background: var(--ink);
+    color: var(--gold-light);
+    padding: 5rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,168,76,0.07), transparent),
+      radial-gradient(ellipse 40% 60% at 20% 20%, rgba(139,32,32,0.08), transparent);
+    pointer-events: none;
+  }
+
+  #hero .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  #hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #f5ead8;
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+  }
+
+  #hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  #hero .subtitle {
+    font-size: 1.1rem;
+    color: #b8a880;
+    max-width: 600px;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  #hero .cross-ornament {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8rem;
+    color: rgba(201,168,76,0.06);
+    user-select: none;
+    pointer-events: none;
+    font-family: serif;
+  }
+
+  /* ══════════════ CONTENT ══════════════ */
+  #content {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 3rem 6rem;
+  }
+
+  /* ══════════════ SECTIONS ══════════════ */
+  .part-divider {
+    margin: 4rem 0 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .part-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .part-divider-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 0 0.5rem;
+  }
+
+  section.chapter {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 2rem;
+  }
+
+  section.chapter h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--ink-mid);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--parchment2);
+    line-height: 1.25;
+  }
+
+  section.chapter h2 .ch-num {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+  }
+
+  section.chapter h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--ink-mid);
+    margin: 2rem 0 0.7rem;
+    font-weight: 600;
+  }
+
+  section.chapter h4 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  section.chapter p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  section.chapter p + p { text-indent: 1.5em; }
+
+  /* Latin quotes */
+  .latin {
+    display: block;
+    font-style: italic;
+    color: var(--red);
+    font-size: 0.95rem;
+    margin: 1.2rem 2rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--gold);
+    line-height: 1.6;
+  }
+
+  .latin-trans {
+    display: block;
+    font-style: normal;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin: -0.8rem 2rem 1.2rem;
+    padding-left: 1rem;
+  }
+
+  /* Definition boxes */
+  .def-box {
+    background: var(--parchment2);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-left: 4px solid var(--gold);
+    border-radius: 2px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .def-box .def-term {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .def-box p {
+    margin-bottom: 0;
+    text-indent: 0 !important;
+    font-size: 0.95rem;
+  }
+
+  /* Syllogism boxes */
+  .syllogism {
+    background: #f0eadc;
+    border: 1px solid #d4c79a;
+    border-radius: 2px;
+    padding: 1.3rem 1.8rem;
+    margin: 1.5rem 0;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+  }
+
+  .syllogism .syl-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid #d4c79a;
+    padding-bottom: 0.5rem;
+  }
+
+  .syllogism .premise {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+  }
+
+  .syllogism .premise-label {
+    min-width: 2.5rem;
+    font-weight: 600;
+    color: var(--gold);
+    font-size: 0.78rem;
+    padding-top: 0.05rem;
+    flex-shrink: 0;
+  }
+
+  .syllogism .conclusion {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid #d4c79a;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Accent callouts */
+  .callout {
+    display: flex;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(30,58,95,0.05), rgba(30,58,95,0.02));
+    border: 1px solid rgba(30,58,95,0.15);
+    border-radius: 2px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.5rem 0;
+    align-items: flex-start;
+  }
+
+  .callout-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .callout p {
+    margin: 0;
+    text-indent: 0 !important;
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: var(--blue-acc);
+  }
+
+  /* Table */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.88rem;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  .comp-table th {
+    background: var(--ink-mid);
+    color: var(--gold-light);
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .comp-table td {
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid var(--parchment2);
+    color: var(--ink-mid);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+
+  .comp-table tr:nth-child(even) td { background: rgba(0,0,0,0.025); }
+  .comp-table tr:last-child td { border-bottom: none; }
+
+  .comp-table .td-key {
+    font-weight: 600;
+    color: var(--ink);
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  /* Level badge */
+  .level-badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.55rem;
+    border-radius: 1px;
+    margin-bottom: 0.8rem;
+  }
+
+  .level-basic { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.4); }
+  .level-mid   { background: rgba(30,58,95,0.1);  color: var(--blue-acc); border: 1px solid rgba(30,58,95,0.3); }
+  .level-adv   { background: rgba(139,32,32,0.08); color: var(--red); border: 1px solid rgba(139,32,32,0.3); }
+
+  /* Ornament divider */
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+    margin: 2.5rem 0;
+    opacity: 0.6;
+  }
+
+  /* Diagram: acto/potencia */
+  .diagram {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--ink);
+    color: var(--gold-light);
+    border-radius: 2px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    overflow-x: auto;
+  }
+
+  .diagram-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .diagram-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .d-box {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    text-align: center;
+    min-width: 110px;
+    line-height: 1.3;
+  }
+
+  .d-box.highlight { background: rgba(201,168,76,0.15); }
+  .d-box.god-box { background: rgba(201,168,76,0.25); border-color: #f0d060; color: #f0d060; font-weight: 600; }
+
+  .d-arrow { color: var(--gold); font-size: 1.1rem; }
+
+  /* Footnote style */
+  .nota {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    border-top: 1px solid var(--parchment2);
+    margin-top: 2rem;
+    padding-top: 0.8rem;
+    line-height: 1.6;
+  }
+
+  /* Progress indicator */
+  #progress-bar {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-w);
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--red));
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: 200;
+    transition: transform 0.1s;
+  }
+
+  /* Hamburger */
+  #hamburger {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 300;
+    background: var(--ink);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.5rem 0.7rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  /* ══════════════ RESPONSIVE ══════════════ */
+  @media (max-width: 900px) {
+    :root { --sidebar-w: 280px; }
+  }
+
+  @media (max-width: 700px) {
+    #sidebar { transform: translateX(-100%); }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; }
+    #progress-bar { left: 0; }
+    #hamburger { display: block; }
+    #content { padding: 2rem 1.5rem 4rem; }
+    #hero { padding: 4rem 1.5rem 3rem; }
+    .cross-ornament { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<button id="hamburger" aria-label="Menú">☰</button>
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<nav id="sidebar" aria-label="Índice de contenidos">
+  <div id="sidebar-header">
+    <div class="logo">Philosophia Perennis</div>
+    <h2>Manual Tomista:<br>Metafísica y Trinidad</h2>
+  </div>
+  <div id="toc">
+
+    <div class="toc-part">
+      <div class="toc-part-header open" data-part="0">
+        <span>Introducción</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items open">
+        <a class="toc-item" href="#intro">Prólogo metafísico</a>
+        <a class="toc-item" href="#metodo">Método escolástico</a>
+      </div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-header" data-part="1">
+        <span>I. Fundamentos</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items">
+        <a class="toc-item" href="#ser">El ser y el ente</a>
+        <a class="toc-item" href="#acto-potencia">Acto y potencia</a>
+        <a class="toc-item" href="#sustancia">Sustancia</a>
+        <a class="toc-item" href="#esencia">Esencia</a>
+        <a class="toc-item" href="#naturaleza">Naturaleza</a>
+        <a class="toc-item" href="#operacion">Operación</a>
+      </div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-header" data-part="2">
+        <span>II. El Ser Divino</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items">
+        <a class="toc-item" href="#simplicidad">Simplicidad divina</a>
+        <a class="toc-item" href="#ipsum-esse">Ipsum Esse Subsistens</a>
+        <a class="toc-item" href="#atributos">Atributos divinos</a>
+      </div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-header" data-part="3">
+        <span>III. Doctrina Trinitaria</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items">
+        <a class="toc-item" href="#procesiones">Las procesiones divinas</a>
+        <a class="toc-item" href="#hijo-verbum">El Hijo como Verbum</a>
+        <a class="toc-item" href="#spiritus-amor">El Espíritu como Amor</a>
+        <a class="toc-item" href="#relaciones">Relaciones subsistentes</a>
+        <a class="toc-item" href="#hipostasis">Hipóstasis y persona</a>
+        <a class="toc-item" href="#opera-ad-extra">Opera ad extra</a>
+      </div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-header" data-part="4">
+        <span>IV. Niveles Avanzados</span><span class="arrow">▶</span>
+      </div>
+      <div class="toc-items">
+        <a class="toc-item" href="#distincion-real">Distinción real vs. razón</a>
+        <a class="toc-item" href="#communicatio">Communicatio Idiomatum</a>
+        <a class="toc-item" href="#debates">Debates escolásticos</a>
+        <a class="toc-item" href="#herejias">Herejías y sus errores</a>
+        <a class="toc-item" href="#apologetica">Apologética tomista</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main id="main">
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="eyebrow">Philosophia Perennis · Theologia Scholastica</div>
+    <h1>Manual Tomista de <em>Metafísica</em> y Doctrina Trinitaria</h1>
+    <p class="subtitle">De la potencia al acto puro — del ente al Ipsum Esse Subsistens — de la esencia única a las tres Personas.</p>
+    <div class="cross-ornament">✠</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div id="content">
+
+    <!-- ══════ INTRODUCCIÓN ══════ -->
+    <div class="part-divider">
+      <div class="part-divider-line"></div>
+      <span class="part-divider-label">Introducción</span>
+      <div class="part-divider-line"></div>
+    </div>
+
+    <section class="chapter" id="intro">
+      <h2><span class="ch-num">Prólogo</span>Introducción metafísica general</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>La metafísica —<em>prima philosophia</em> según Aristóteles, retomada y superada por Tomás de Aquino— es la ciencia que estudia el ente <em>en cuanto ente</em>: no en sus determinaciones físicas, biológicas o matemáticas, sino en aquello que hace que cualquier cosa <em>sea</em> en absoluto. Su objeto propio es el <strong>ser</strong> y sus propiedades trascendentales: unidad, verdad, bondad y belleza.</p>
+
+      <p>Para el tomismo, esta ciencia no es un ejercicio académico abstracto: es la puerta de entrada racional a la comprensión de Dios. El camino va desde las criaturas —que <em>tienen</em> ser— hasta el Creador, que <em>es</em> el Ser mismo. Y desde allí, la teología revelada nos eleva más alto aún: al misterio de un Dios que no solo es el Ser Subsistente, sino que es internamente fecundo, una Trinidad de Personas en una única esencia.</p>
+
+      <p>Este manual recorre ese camino en cuatro grandes etapas: los fundamentos metafísicos (ser, acto, potencia, sustancia, esencia, naturaleza), la doctrina del ser divino (simplicidad, atributos), la doctrina trinitaria (procesiones, relaciones, personas), y finalmente los niveles técnicos avanzados donde los debates escolásticos alcanzan su máxima profundidad.</p>
+
+      <div class="callout">
+        <span class="callout-icon">✦</span>
+        <p>La metafísica tomista no es un sistema cerrado impuesto desde afuera de la realidad: es un intento de articular lo que la inteligencia descubre cuando interroga al ente con rigor. Por eso puede funcionar como puente entre la razón filosófica y la fe teológica.</p>
+      </div>
+
+      <blockquote class="latin">«Omne ens, inquantum ens, est bonum.»</blockquote>
+      <span class="latin-trans">— "Todo ente, en cuanto ente, es bueno." (Tomás de Aquino, <em>De Veritate</em>, q. 21, a. 1)</span>
+    </section>
+
+    <section class="chapter" id="metodo">
+      <h2><span class="ch-num">Prólogo</span>El método escolástico tomista</h2>
+
+      <p>Santo Tomás hereda de Aristóteles el método demostrativo (silogismo científico) y lo aplica tanto a la filosofía como a la teología. El procedimiento típico en la <em>Summa Theologiae</em> es:</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Estructura del artículo escolástico</div>
+        <div class="premise"><span class="premise-label">Utrum</span> ¿Si X tiene tal propiedad? (Pregunta)</div>
+        <div class="premise"><span class="premise-label">Obj.</span> Objeciones en contra de la respuesta correcta.</div>
+        <div class="premise"><span class="premise-label">Sed c.</span> <em>Sed contra</em>: autoridad o argumento opuesto a las objeciones.</div>
+        <div class="premise"><span class="premise-label">Resp.</span> <em>Respondeo dicendum</em>: la respuesta argumentada de Tomás.</div>
+        <div class="conclusion"><span class="premise-label">Ad 1</span> Respuesta a cada objeción en particular.</div>
+      </div>
+
+      <p>Este método garantiza que ningún argumento en contra quede sin respuesta, y que la verdad se alcance por demostración racional, no por mera autoridad. Tomás siempre buscaba comprender <em>racionalmente</em> lo que la fe propone, porque la gracia no destruye la naturaleza, sino que la perfecciona (<em>gratia non tollit naturam, sed perficit eam</em>).</p>
+    </section>
+
+    <!-- ══════ PARTE I ══════ -->
+    <div class="part-divider">
+      <div class="part-divider-line"></div>
+      <span class="part-divider-label">Parte I · Fundamentos Metafísicos</span>
+      <div class="part-divider-line"></div>
+    </div>
+
+    <!-- SER -->
+    <section class="chapter" id="ser">
+      <h2><span class="ch-num">Capítulo 1</span>El Ser y el Ente</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>La primera distinción que Tomás hereda de Avicena y purifica es la distinción entre <strong>ens</strong> (ente) y <strong>esse</strong> (ser). El <em>ente</em> es aquello que es; el <em>ser</em> (<em>esse</em>) es el acto en virtud del cual el ente es. No son lo mismo: en toda criatura, el ente que existe <em>tiene</em> el ser; no es idéntico a él. La piedra, el árbol, el ángel: todos tienen un ser que les es, en cierto modo, prestado.</p>
+
+      <div class="def-box">
+        <div class="def-term">Esse</div>
+        <p>El acto de ser (<em>actus essendi</em>): aquello por lo que un ente existe actualmente. Es el acto de todos los actos y la perfección de todas las perfecciones (<em>actus omnium actuum et perfectio omnium perfectionum</em>). En las criaturas, el esse es recibido y limitado por la esencia que lo recibe.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-term">Ens</div>
+        <p>El ente: aquello que tiene o participa del ser. Puede ser sustancial (una cosa que existe por sí) o accidental (una cualidad, relación, etc. que existe en otro).</p>
+      </div>
+
+      <p>Los trascendentales del ente son propiedades que se convierten con el ente mismo en toda su extensión: <strong>Unum</strong> (unidad, el ente es indiviso en sí mismo), <strong>Verum</strong> (verdad, el ente es cognoscible), <strong>Bonum</strong> (bondad, el ente es apetecible), <strong>Res</strong> (cosa, el ente tiene quididad), <strong>Aliquid</strong> (algo, el ente es distinto de los demás). Estas propiedades se aplican a todo ente sin excepción, incluyendo a Dios —aunque en Él no de modo participado sino eminentemente subsistente.</p>
+    </section>
+
+    <!-- ACTO Y POTENCIA -->
+    <section class="chapter" id="acto-potencia">
+      <h2><span class="ch-num">Capítulo 2</span>Acto y Potencia</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>La distinción entre <strong>acto</strong> y <strong>potencia</strong> es, para Tomás, la distinción metafísica más fundamental después de la de ser y esencia. Fue introducida por Aristóteles para resolver el problema del cambio: ¿cómo puede algo devenir lo que aún no es? La respuesta: porque ya lo es en potencia, aunque no en acto.</p>
+
+      <div class="def-box">
+        <div class="def-term">Potencia (<em>potentia</em>)</div>
+        <p>La capacidad real de recibir una determinación o perfección que aún no se posee en acto. No es mera posibilidad lógica: es una capacidad real fundada en la naturaleza del sujeto. La cera es potencia respecto de la figura; el agua fría es potencia respecto del calor; el niño es potencia respecto de la ciencia.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-term">Acto (<em>actus</em>)</div>
+        <p>La perfección, plenitud o determinación que actualiza una potencia. El acto es siempre anterior a la potencia en el orden del ser (aunque no siempre en el tiempo). «El acto es anterior a la potencia» (<em>actus prior est potentia</em>). La forma encendida es el acto de la cera en potencia; el calor es el acto del agua fría.</p>
+      </div>
+
+      <p>Tomás distingue varios sentidos de acto:</p>
+
+      <h3>Acto primero y acto segundo</h3>
+      <p>El <strong>acto primero</strong> es la forma sustancial o la esencia que constituye a un ente como lo que es (por ejemplo, el alma respecto del cuerpo). El <strong>acto segundo</strong> es la operación que brota de esa esencia constituida (el pensamiento que brota del alma intelectiva). Esta distinción será crucial para la Teología Trinitaria: las procesiones divinas son <em>operaciones</em> inmanentes, actos segundos que proceden de la naturaleza divina.</p>
+
+      <h3>Potencia activa y potencia pasiva</h3>
+      <p>La <strong>potencia activa</strong> es la capacidad de producir algo en otro o en sí mismo (el fuego tiene potencia activa de calentar). La <strong>potencia pasiva</strong> es la capacidad de recibir una acción o perfección de otro (la madera tiene potencia pasiva de ser tallada). En Dios solo hay potencia activa, nunca pasiva, pues Él no puede recibir ninguna perfección que no tenga ya plenamente.</p>
+
+      <div class="diagram">
+        <div class="diagram-title">Escala del ser: de la potencia pura al acto puro</div>
+        <div class="diagram-row">
+          <div class="d-box">Materia prima<br><small>potencia pura sin acto</small></div>
+          <span class="d-arrow">→</span>
+          <div class="d-box">Entes materiales<br><small>potencia + acto mixtos</small></div>
+          <span class="d-arrow">→</span>
+          <div class="d-box">Entes espirituales<br><small>esencia ≠ esse</small></div>
+          <span class="d-arrow">→</span>
+          <div class="d-box god-box">Dios<br><small>Acto Puro · Esse Subsistens</small></div>
+        </div>
+      </div>
+
+      <h3>La composición acto-potencia en las criaturas</h3>
+      <p>Toda criatura es una composición de acto y potencia. En los entes materiales: composición de materia (potencia) y forma (acto). En todos los entes finitos: composición de esencia (potencia receptora) y esse (acto de ser recibido). Solo en Dios no hay composición: Él es su propio esse, es Acto Puro sin mezcla de potencia alguna.</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Silogismo: Dios como Acto Puro</div>
+        <div class="premise"><span class="premise-label">P.1</span> Todo lo que contiene potencia puede ser perfeccionado por otro y no es su propio ser.</div>
+        <div class="premise"><span class="premise-label">P.2</span> Dios es el primer motor inmóvil que mueve sin ser movido, y el ser del que todos los entes participan.</div>
+        <div class="premise"><span class="premise-label">P.3</span> Nada puede ser a la vez potencia y principio originario de todo acto.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> Dios no contiene potencia alguna: es Acto Puro (<em>Actus Purus</em>).</div>
+      </div>
+    </section>
+
+    <!-- SUSTANCIA -->
+    <section class="chapter" id="sustancia">
+      <h2><span class="ch-num">Capítulo 3</span>Sustancia</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>La categoría de <strong>sustancia</strong> (<em>substantia, οὐσία</em>) es la primera y más fundamental de las categorías aristotélicas. Designa aquello que existe por sí mismo (<em>per se</em>), no en otro como sujeto de inhesión. En contraposición, los accidentes (color, tamaño, relación, etc.) existen <em>en</em> una sustancia, no por sí mismos.</p>
+
+      <div class="def-box">
+        <div class="def-term">Sustancia primera (<em>substantia prima</em>)</div>
+        <p>El individuo concreto que existe: este hombre, este árbol, este ángel. Es la sustancia en sentido más propio y estricto. Aristóteles la llama <em>tóde ti</em>: «este algo» concreto y determinado.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-term">Sustancia segunda (<em>substantia secunda</em>)</div>
+        <p>La especie o el género bajo el cual se clasifica la sustancia primera: «hombre», «animal», «viviente». Existe solo en los individuos y en la mente que los abstrae.</p>
+      </div>
+
+      <h3>Sustancia compuesta e incompleta</h3>
+      <p>En los entes materiales, la sustancia es una composición hilemórfica (<em>hylé</em> = materia, <em>morphé</em> = forma). La materia primera es potencia pura; la forma sustancial es el acto que determina a la materia para ser este tipo de cosa. Ninguna de las dos es sustancia completa por sí sola: solo el compuesto (el <em>synolon</em>) lo es.</p>
+
+      <p>En los entes espirituales (ángeles, Dios), no hay composición hilemórfica. El ángel es forma pura subsistente, pero aun así es una sustancia compuesta de esencia y esse. Solo Dios es sustancia absolutamente simple.</p>
+
+      <h3>Sustancia y accidente</h3>
+      <p>Los nueve géneros de accidente aristotélicos (cantidad, cualidad, relación, lugar, tiempo, posición, hábito, acción, pasión) existen solamente <em>en</em> la sustancia. No pueden subsistir sin ella. Cuando en la Eucaristía los accidentes del pan y el vino persisten sin su sustancia, esto es un milagro que trasciende el orden natural, posible solo porque el esse de los accidentes puede ser sustentado directamente por el Esse Divino.</p>
+
+      <table class="comp-table">
+        <thead><tr><th>Sustancia</th><th>Accidente</th></tr></thead>
+        <tbody>
+          <tr><td class="td-key">Existe por sí (<em>per se</em>)</td><td>Existe en otro (<em>in alio</em>)</td></tr>
+          <tr><td class="td-key">Sujeto de los predicados</td><td>Predicado de la sustancia</td></tr>
+          <tr><td class="td-key">Proporciona el esse</td><td>Modifica el esse ya constituido</td></tr>
+          <tr><td class="td-key">Ej: Sócrates, este árbol</td><td>Ej: blancura, altura, relación paterna</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ESENCIA -->
+    <section class="chapter" id="esencia">
+      <h2><span class="ch-num">Capítulo 4</span>Esencia</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>La <strong>esencia</strong> (<em>essentia, quidditas</em>) es aquello que hace que una cosa sea <em>lo que es</em>: su quididad (<em>quod quid erat esse</em>, como decía Aristóteles). No responde a la pregunta «¿qué existe?» sino a «¿qué es lo que existe?». La esencia del hombre es «animal racional»; la del triángulo es «figura de tres lados».</p>
+
+      <div class="def-box">
+        <div class="def-term">Esencia (<em>essentia / quidditas</em>)</div>
+        <p>El principio inteligible de la cosa, aquello que se expresa en la definición. En los entes materiales, la esencia comprende forma y materia (aunque la materia entre en la definición solo de modo genérico, no con sus particularidades individuales). En los espirituales, la esencia se identifica con la forma subsistente.</p>
+      </div>
+
+      <p>Tomás, en el <em>De Ente et Essentia</em>, analiza con rigor cómo la esencia se relaciona con el esse (acto de ser) y con el sujeto individual. Su tesis fundamental: en toda criatura, <strong>la esencia y el esse son realmente distintos</strong>. La esencia es la potencia que recibe el esse; el esse es el acto que la esencia recibe. Solo en Dios la esencia y el esse se identifican: Dios <em>es</em> su esencia, y su esencia <em>es</em> su esse.</p>
+
+      <h3>Esencia en sentido lógico vs. metafísico</h3>
+      <p>La esencia puede considerarse en sentido absoluto (la naturaleza como tal, prescindiendo de si existe en los individuos o en la mente: «hombre»), en los individuos (la esencia contraída por la materia individual: «Sócrates-como-hombre»), o en el intelecto (el concepto universal abstráído: el «hombre» del lógico). Las tres son la misma esencia, en modos distintos de ser.</p>
+
+      <h3>Distinción real esencia–esse</h3>
+
+      <div class="syllogism">
+        <div class="syl-title">Argumento de la distinción real (De Ente et Essentia, c. 4)</div>
+        <div class="premise"><span class="premise-label">P.1</span> Todo lo que no pertenece al concepto de la esencia le viene a esta desde fuera y compone con ella.</div>
+        <div class="premise"><span class="premise-label">P.2</span> El esse no pertenece al concepto de ninguna esencia finita (puedo entender qué es un fénix sin saber si existe; puedo entender qué es el hombre sin que ello me diga si hay hombres).</div>
+        <div class="conclusion"><span class="premise-label">∴</span> En las criaturas, la esencia y el esse son realmente distintos y se componen entre sí.</div>
+      </div>
+
+      <p>Esta distinción real es la clave de toda la metafísica tomista. Explica la contingencia de las criaturas (su esencia no implica su existencia), la dependencia de todo ente finito respecto de Dios (que les comunica el esse), y la absoluta unicidad de Dios (cuya esencia <em>es</em> el esse).</p>
+    </section>
+
+    <!-- NATURALEZA -->
+    <section class="chapter" id="naturaleza">
+      <h2><span class="ch-num">Capítulo 5</span>Naturaleza</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>El término <strong>naturaleza</strong> (<em>natura</em>, del latín <em>nasci</em>, nacer; equivalente al griego <em>φύσις / phýsis</em>) designa la esencia en cuanto principio de operaciones propias. Si la esencia responde a la pregunta «¿qué es?», la naturaleza responde a «¿cómo actúa, qué hace, hacia qué tiende?». La naturaleza es la esencia considerada <em>dinámicamente</em>, como fuente interna de movimiento y operación.</p>
+
+      <div class="def-box">
+        <div class="def-term">Naturaleza (<em>natura / phýsis</em>)</div>
+        <p>La esencia en cuanto principio de actividades u operaciones características. En el hombre, su naturaleza racional es la fuente de que pueda conocer, razonar y querer libremente. En Dios, su naturaleza divina es el principio de sus operaciones ad intra (conocer y amar en la Trinidad) y ad extra (crear, conservar, gobernar).</p>
+      </div>
+
+      <h3>Naturaleza, esencia, sustancia: un resumen</h3>
+
+      <table class="comp-table">
+        <thead><tr><th>Término</th><th>Pregunta que responde</th><th>Énfasis</th></tr></thead>
+        <tbody>
+          <tr><td class="td-key">Esencia (<em>essentia</em>)</td><td>¿Qué es la cosa?</td><td>Constitución inteligible, quididad</td></tr>
+          <tr><td class="td-key">Naturaleza (<em>natura</em>)</td><td>¿Cuál es su principio de operación?</td><td>Dinamismo, finalidad, actividad</td></tr>
+          <tr><td class="td-key">Sustancia (<em>substantia</em>)</td><td>¿Existe por sí mismo?</td><td>Modo de existir (per se / in alio)</td></tr>
+          <tr><td class="td-key">Hipóstasis/persona</td><td>¿Quién existe?</td><td>El sujeto individual subsistente</td></tr>
+        </tbody>
+      </table>
+
+      <p>En la Teología Trinitaria, esta distinción es crucial: hay <strong>una sola naturaleza/esencia divina</strong> y <strong>tres hipóstasis/personas</strong>. Las tres Personas comparten la misma naturaleza, pero son tres sujetos subsistentes distintos. En la Cristología, Jesucristo tiene <strong>dos naturalezas</strong> (divina y humana) en <strong>una sola hipóstasis</strong> (la del Verbo divino).</p>
+    </section>
+
+    <!-- OPERACIÓN -->
+    <section class="chapter" id="operacion">
+      <h2><span class="ch-num">Capítulo 6</span>Operación e immanencia</h2>
+      <div class="level-badge level-basic">Nivel básico</div>
+
+      <p>La <strong>operación</strong> (<em>operatio</em>) es el acto segundo que brota de la naturaleza como de su principio. Toda naturaleza tiende a operar: el fuego calienta, el ojo ve, el intelecto conoce, la voluntad ama. La operación manifiesta lo que la naturaleza es.</p>
+
+      <div class="def-box">
+        <div class="def-term">Operación (<em>operatio / actus secundus</em>)</div>
+        <p>El acto que procede de una naturaleza ya constituida (acto primero) y la perfecciona o perfecciona a otro. Las operaciones son la actualización del poder activo que reside en la naturaleza.</p>
+      </div>
+
+      <h3>Operación transeúnte vs. inmanente</h3>
+      <p>La distinción más importante para la Teología Trinitaria es la siguiente:</p>
+
+      <div class="def-box">
+        <div class="def-term">Operación transeúnte (<em>actio transiens</em>)</div>
+        <p>La que pasa hacia afuera del agente y produce un efecto en un sujeto exterior. Ejemplo: el carpintero talla la madera; el fuego calienta el agua. El término de la acción está <em>fuera</em> del agente. Las operaciones de Dios <em>ad extra</em> (crear, conservar, redimir) son de este tipo.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-term">Operación inmanente (<em>actio immanens</em>)</div>
+        <p>La que permanece dentro del agente mismo y lo perfecciona a él: ver, entender, querer, amar. El término de la acción está <em>dentro</em> del agente. Esta es la clave de las procesiones divinas intratrinitarias: el Padre engendra al Hijo por una operación inmanente del intelecto divino, y el Espíritu Santo procede por una operación inmanente de la voluntad divina.</p>
+      </div>
+
+      <p>La grandeza del argumento tomista es que las procesiones trinitarias son <em>operaciones inmanentes</em> en el ser absolutamente infinito: por tanto, su término (el Hijo, el Espíritu) no puede ser inferior al principio, sino igual en naturaleza, porque en un ser infinito la operación inmanente no puede producir algo menor que el principio que la origina.</p>
+
+      <div class="callout">
+        <span class="callout-icon">💡</span>
+        <p><strong>Analogía aristotélica:</strong> Cuando el intelecto humano entiende algo, produce dentro de sí un <em>verbo mental</em> (la especie expresa, el concepto). Este verbo no sale del intelecto sino que permanece en él. De modo análogo, el Padre «entiende» su propia esencia y el término de ese entendimiento inmanente infinito es el Hijo, el Verbo eterno.</p>
+      </div>
+    </section>
+
+    <!-- ══════ PARTE II ══════ -->
+    <div class="part-divider">
+      <div class="part-divider-line"></div>
+      <span class="part-divider-label">Parte II · El Ser Divino</span>
+      <div class="part-divider-line"></div>
+    </div>
+
+    <!-- SIMPLICIDAD -->
+    <section class="chapter" id="simplicidad">
+      <h2><span class="ch-num">Capítulo 7</span>La Simplicidad Divina</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>La simplicidad divina (<em>simplicitas Dei</em>) es, para Tomás, el atributo más fundamental de Dios: todos los demás atributos divinos se derivan de ella o son consecuencias suyas. Un ser es simple cuando carece de composición de ningún tipo. La composición implica que algo recibe una perfección de algo distinto de sí: pero Dios, como causa primera de toda perfección, no puede recibir nada de fuera. Por eso es absolutamente simple.</p>
+
+      <h3>Las siete negaciones de composición</h3>
+      <p>Tomás articula la simplicidad divina negando sucesivamente siete tipos de composición (<em>S.Th.</em> I, q. 3):</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Las negaciones tomistas de composición en Dios</div>
+        <div class="premise"><span class="premise-label">1°</span> Dios no es un cuerpo: no tiene composición de partes cuantitativas (materia extensa). La primera vía demuestra que es motor inmóvil; lo corpóreo es movido y divisible.</div>
+        <div class="premise"><span class="premise-label">2°</span> Dios no tiene composición de forma y materia: es pura forma, sin potencia material pasiva.</div>
+        <div class="premise"><span class="premise-label">3°</span> Dios no es distinto de su naturaleza o esencia: no hay en Él suposición que reciba una naturaleza. Él <em>es</em> su naturaleza.</div>
+        <div class="premise"><span class="premise-label">4°</span> Dios no se distingue de su esencia: lo que Dios es, es exactamente lo que Dios es su esencia. «Dios es su propia esencia» (<em>Deus est sua essentia</em>).</div>
+        <div class="premise"><span class="premise-label">5°</span> Dios no se distingue de su esse: en las criaturas, esencia ≠ esse. En Dios, esencia = esse. Dios <em>es</em> el Esse.</div>
+        <div class="premise"><span class="premise-label">6°</span> Dios no tiene accidentes: los accidentes son perfecciones añadidas a la sustancia. Pero Dios tiene todas las perfecciones en su esencia. Nada puede añadírsele.</div>
+        <div class="conclusion"><span class="premise-label">7°</span> Dios no se compone de género y diferencia específica: no hay un género más amplio «ser» bajo el cual Dios caiga como especie. El ser divino es único y no clasificable.</div>
+      </div>
+
+      <h3>Consecuencias de la simplicidad</h3>
+
+      <p>Si Dios es absolutamente simple, entonces todos sus atributos se identifican con su esencia y entre sí: la sabiduría de Dios <em>es</em> su poder, su poder <em>es</em> su bondad, su bondad <em>es</em> su vida, etc. No son propiedades que Dios <em>tiene</em> como un hombre tiene inteligencia y bondad como realidades distintas: en Dios, son una sola realidad vista bajo perspectivas diferentes por nuestra mente finita.</p>
+
+      <div class="callout">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>Objeción frecuente:</strong> Si los atributos divinos son idénticos, ¿no se hace vacío el concepto de Dios, diciendo todo y no diciendo nada? — Respuesta tomista: la distinción entre los atributos es real en nuestra mente (<em>distinctio rationis ratiocinatae</em>) porque nuestra inteligencia finita solo puede captar la infinita riqueza divina a través de conceptos múltiples y parciales. La realidad divina supera, sin negarlos, a todos nuestros conceptos.</p>
+      </div>
+
+      <h3>¿Cómo es posible la Trinidad si Dios es simple?</h3>
+      <p>Esta es la tensión más alta del pensamiento tomista: Dios es absolutamente simple (una sola esencia, sin composición), y sin embargo es tres Personas. La respuesta de Tomás es que las tres Personas no son «partes» de Dios ni «divisiones» de la esencia divina. Son <em>relaciones subsistentes</em> que se distinguen entre sí por su oposición relativa, no por la esencia que comparten. La esencia divina es una e indivisa en las tres Personas; las Personas se distinguen solo por su relación de origen.</p>
+    </section>
+
+    <!-- IPSUM ESSE -->
+    <section class="chapter" id="ipsum-esse">
+      <h2><span class="ch-num">Capítulo 8</span>Ipsum Esse Subsistens</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>La cima de la teología natural tomista es la identificación de Dios con el <em>Ipsum Esse Subsistens</em>: el Ser Mismo Subsistente. Esta expresión resume toda la doctrina de Dios en la tradición tomista y conecta la metafísica con la revelación bíblica del nombre divino «Yo soy el que soy» (<em>Ehyeh asher Ehyeh</em>, Éxodo 3:14).</p>
+
+      <blockquote class="latin">«Deus est ipsum esse subsistens.»</blockquote>
+      <span class="latin-trans">— "Dios es el Ser mismo subsistente." (<em>S.Th.</em> I, q. 4, a. 2)</span>
+
+      <p>La argumentación tomista procede así: todo ente finito tiene el ser <em>por participación</em> (su esencia no es su esse). Debe haber, por tanto, un ente que tenga el ser <em>por esencia</em>, cuya esencia sea idéntica a su esse. Ese ente es Dios. En Él no hay composición de esencia y esse porque Él <em>es</em> el Esse mismo: no recibe el ser de ningún principio exterior, sino que es el principio de todo ser.</p>
+
+      <h3>Por qué Dios no puede ser un género</h3>
+      <p>Si Dios fuera el «ser en general» (el género ser), entonces podría especificarse en múltiples especies de seres, y habría multiplicidad de «dioses». Pero Dios no es el género ser sino el <em>Esse Subsistente</em>: el ser que no está limitado por ninguna esencia receptora, el ser que <em>es</em> su propia esencia. Por eso es único, irrepetible, incomparable.</p>
+
+      <h3>La via negativa y la via eminentiae</h3>
+      <p>Como el Esse divino supera toda esencia finita, nuestros conceptos positivos («bueno», «sabio», «poderoso») solo se aplican a Dios de modo <em>analógico</em>: ni unívocamente (con el mismo significado que en las criaturas) ni equívocamente (con un significado totalmente diferente), sino analógicamente (con un significado proporcionalmente semejante, pero eminentemente superior). La vía negativa (<em>via negativa</em>) niega de Dios todo lo que implique limitación; la vía de eminencia (<em>via eminentiae</em>) afirma que lo que se niega en modo limitado se da en Dios en modo infinito y supraeminente.</p>
+    </section>
+
+    <!-- ATRIBUTOS -->
+    <section class="chapter" id="atributos">
+      <h2><span class="ch-num">Capítulo 9</span>Atributos Divinos</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>Dado que la esencia divina es idéntica a su esse y no admite composición, los atributos divinos no son propiedades separadas que Dios «tiene» como un ser finito: son distintas perspectivas bajo las cuales nuestra mente finita comprende la única y simple realidad divina infinita. Aun así, Tomás analiza con cuidado sus contenidos.</p>
+
+      <table class="comp-table">
+        <thead><tr><th>Atributo</th><th>Definición tomista</th><th>Fundamento metafísico</th></tr></thead>
+        <tbody>
+          <tr><td class="td-key">Simplicidad</td><td>Ausencia de toda composición</td><td>Acto Puro sin potencia</td></tr>
+          <tr><td class="td-key">Perfección</td><td>Posesión eminente de toda perfección</td><td>Causa contiene eminentemente sus efectos</td></tr>
+          <tr><td class="td-key">Bondad</td><td>Apetecible por sí mismo, fin último</td><td>El esse es idéntico al bien</td></tr>
+          <tr><td class="td-key">Infinitud</td><td>Sin límite ni medida</td><td>El esse no está limitado por esencia receptora</td></tr>
+          <tr><td class="td-key">Omnipresencia</td><td>Presente en todo por esencia, presencia y potencia</td><td>Causa del esse de todo lo existente</td></tr>
+          <tr><td class="td-key">Inmutabilidad</td><td>Impasibilidad total ante el cambio</td><td>Acto Puro: nada puede añadírsele ni quitársele</td></tr>
+          <tr><td class="td-key">Eternidad</td><td>Posesión simultánea de todo el ser sin sucesión</td><td>Sin potencia temporal; el tiempo es medida del movimiento</td></tr>
+          <tr><td class="td-key">Omnisciencia</td><td>Conocimiento perfecto de todo lo real y posible</td><td>Se conoce a sí mismo y en sí mismo a todo lo demás</td></tr>
+          <tr><td class="td-key">Omnipotencia</td><td>Poder hacer todo lo que implica ser</td><td>Potencia activa infinita; solo lo contradictorio es imposible</td></tr>
+          <tr><td class="td-key">Unidad</td><td>No multiplicable ni divisible</td><td>Esse puro no puede replicarse en múltiples instancias</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ══════ PARTE III ══════ -->
+    <div class="part-divider">
+      <div class="part-divider-line"></div>
+      <span class="part-divider-label">Parte III · Doctrina Trinitaria</span>
+      <div class="part-divider-line"></div>
+    </div>
+
+    <!-- PROCESIONES -->
+    <section class="chapter" id="procesiones">
+      <h2><span class="ch-num">Capítulo 10</span>Las Procesiones Divinas</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>El fundamento del tratado trinitario tomista son las <strong>procesiones</strong> (<em>processiones</em>): los orígenes intratrinitarios por los que las Personas divinas proceden unas de otras. Tomás las fundamenta en la estructura de la vida espiritual: el intelecto y la voluntad son las facultades más elevadas del ser espiritual, y sus operaciones inmanentes dan lugar a términos que, en el ser infinito, deben ser igualmente divinos.</p>
+
+      <div class="def-box">
+        <div class="def-term">Procesión (<em>processio</em>)</div>
+        <p>El origen de una Persona divina a partir de otra por una operación inmanente. No es un movimiento hacia afuera sino una emanación dentro del ser divino mismo. Hay dos procesiones: la generación (del Padre al Hijo, por vía de intelecto) y la espiración (del Padre y del Hijo al Espíritu Santo, por vía de voluntad).</p>
+      </div>
+
+      <h3>Analogía intelectual: el Verbum</h3>
+      <p>Cuando el intelecto humano conoce una cosa, produce dentro de sí un <em>verbo mental</em>: la representación inteligible de la cosa conocida. Este verbo es el término inmanente de la operación de entender. Ahora bien, el Padre divino se conoce a sí mismo con un conocimiento infinito y perfecto. El término de ese autoconocimiento infinito es otro «yo» perfectamente idéntico al que conoce en todo excepto en que <em>procede</em> de Él: el Hijo, el Verbo eterno.</p>
+
+      <blockquote class="latin">«In divinis est processio Verbi, quam dicimus generationem.»</blockquote>
+      <span class="latin-trans">— "En Dios hay una procesión del Verbo, que llamamos generación." (<em>S.Th.</em> I, q. 27, a. 2)</span>
+
+      <h3>Analogía volitiva: el Amor</h3>
+      <p>Cuando la voluntad humana ama un bien, se produce un <em>impulso volitivo</em>: el amor como fuerza que mueve hacia el amado y que, en cierto modo, imprime al amado en el amante. Del amor mutuo entre el Padre y el Hijo (que se conocen perfectamente y en ese conocimiento se aman infinitamente) procede el Espíritu Santo como el Amor subsistente, el Don personal en que el Padre y el Hijo se dan mutuamente.</p>
+
+      <div class="diagram">
+        <div class="diagram-title">Las dos procesiones intratrinitarias</div>
+        <div class="diagram-row">
+          <div class="d-box god-box">PADRE<br><small>Principio sin principio</small></div>
+          <span class="d-arrow">──Generación (Intellectus)──▶</span>
+          <div class="d-box highlight">HIJO<br><small>Verbo eterno</small></div>
+        </div>
+        <div class="diagram-row" style="margin-top:0.8rem;">
+          <div class="d-box god-box">PADRE + HIJO</div>
+          <span class="d-arrow">──Espiración (Voluntas)──▶</span>
+          <div class="d-box highlight">ESPÍRITU SANTO<br><small>Amor / Don</small></div>
+        </div>
+      </div>
+
+      <h3>Por qué solo dos procesiones</h3>
+      <p>Dios es espíritu puro. Las operaciones inmanentes propias del espíritu son el entendimiento y la voluntad. Por tanto, solo hay dos procesiones: la del Verbo (por intelecto) y la del Amor (por voluntad). No hay una tercera porque no hay otra operación inmanente espiritual distinta de estas dos. La Trinidad es exactamente trinitaria, ni dúplice ni cuádruple.</p>
+    </section>
+
+    <!-- HIJO VERBUM -->
+    <section class="chapter" id="hijo-verbum">
+      <h2><span class="ch-num">Capítulo 11</span>El Hijo como Verbo: Acto Consciente Subsistente</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>El Hijo es el <strong>Verbum</strong> del Padre: el término de la operación de autoconocimiento divino. Entender esto con precisión requiere distinguir varios niveles en la epistemología aristotélico-tomista.</p>
+
+      <h3>La estructura del conocimiento intelectual</h3>
+
+      <p>Cuando el intelecto conoce algo, el proceso tiene varios momentos:</p>
+
+      <div class="syllogism">
+        <div class="syl-title">Estructura del acto de entender</div>
+        <div class="premise"><span class="premise-label">1°</span> <strong>Especie impresa</strong> (<em>species impressa</em>): la forma inteligible recibida del objeto, que dispone al intelecto para conocer.</div>
+        <div class="premise"><span class="premise-label">2°</span> <strong>Acto de entender</strong> (<em>intelligere in actu</em>): la operación inmanente del intelecto que aprehende el objeto.</div>
+        <div class="premise"><span class="premise-label">3°</span> <strong>Verbo mental</strong> (<em>verbum mentis / species expressa</em>): el término de esa operación, la concepción o concepto en el que se expresa lo conocido. Es el «de lo» que el intelecto habla cuando entiende.</div>
+      </div>
+
+      <p>El Verbo mental no es el objeto conocido ni es el intelecto mismo: es el <em>término engendrado</em> por el acto de conocer. Por eso Tomás dice que el Padre «engendra» al Hijo: la relación entre el que conoce y el verbo engendrado es análoga a la generación, porque el verbo «nace» del intelecto como de un principio.</p>
+
+      <h3>El Verbo divino como hipóstasis</h3>
+      <p>En el intelecto humano, el verbo mental es solo una representación, no una persona. ¿Por qué en Dios el Verbo es una Persona distinta? Porque en Dios el acto de conocer es infinitamente perfecto e idéntico a su esencia. El Padre se conoce a sí mismo (conoce el Esse divino infinito) y el término de ese conocimiento debe ser infinitamente perfecto, idéntico en naturaleza al Padre. No puede ser «menos» que el Padre porque un conocimiento infinito no puede engendrar un término finito. Por eso el Verbo es consubstancial al Padre: posee la misma esencia divina, aunque recibida por procesión.</p>
+
+      <blockquote class="latin">«Verbum in divinis proprie dicitur... Verbum enim in nobis proprie dictum est id quod intellectus in seipso concipit de re intellecta.»</blockquote>
+      <span class="latin-trans">— "En Dios se dice propiamente Verbo... Pues el verbo en nosotros, en sentido propio, es lo que el intelecto concibe en sí mismo sobre la cosa entendida." (<em>S.Th.</em> I, q. 34, a. 1)</span>
+
+      <h3>El Hijo como acto consciente: análisis profundo</h3>
+
+      <p>Cuando decimos que el Hijo es la <em>hipóstasis del acto consciente</em>, queremos decir: el Padre es el intelecto divino en su acto de autoconocimiento; el Hijo es el término subsistente de ese acto. El Hijo no es el acto de conocer en sí (eso es la operación que comparte con el Padre), sino la <em>persona que resulta</em> como término de esa operación inmanente. Es el «¿qué es Dios?» respondido perfectamente dentro de la vida divina misma: el Padre se conoce perfectamente, y esa respuesta perfecta a «¿quién soy?» es el Hijo.</p>
+
+      <div class="callout">
+        <span class="callout-icon">✦</span>
+        <p><strong>Implicación apologética:</strong> No es que Dios primero exista y luego «decida» tener un Hijo. El Padre conoce su esencia infinita <em>eternamente</em>: por tanto, el Hijo es engendrado eternamente. No hubo tiempo en que el Hijo no existiera. El «antes» del Hijo es solo relacional (el Padre es principio), no temporal.</p>
+      </div>
+
+      <h3>Nombres del Hijo: Verbo, Imagen, Sabiduría, Luz</h3>
+      <p>Los múltiples nombres bíblicos del Hijo son iluminados por esta estructura: <em>Verbo</em> (Jn 1:1): porque es el término del conocimiento divino; <em>Imagen</em> (Col 1:15): porque expresa perfectamente al Padre como el verbo expresa la cosa conocida; <em>Sabiduría</em> (1 Cor 1:24): porque en Él subsiste el conocimiento divino total; <em>Luz de luz</em> (Niceno): porque procede del Padre como la luz del sol procede de la fuente luminosa, sin disminuirla.</p>
+    </section>
+
+    <!-- ESPÍRITU AMOR -->
+    <section class="chapter" id="spiritus-amor">
+      <h2><span class="ch-num">Capítulo 12</span>El Espíritu Santo como Amor Subsistente: Acto Volitivo</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>Si el Hijo es el Verbo que procede del Padre por vía de intelecto, el Espíritu Santo es el <strong>Amor</strong> que procede del Padre y del Hijo por vía de voluntad. El Espíritu Santo no es el amor como operación abstracta: es el <em>amor subsistente</em>, la Persona que <em>es</em> el amor mutuo del Padre y del Hijo hipostatizado.</p>
+
+      <h3>La estructura del acto de amor</h3>
+
+      <p>En la voluntad humana, el amor produce una <em>impresión</em> del amado en el amante: una fuerza afectiva que mueve hacia el bien amado y lo une al sujeto amante. Tomás llama a esto el <em>amor ut motus</em>: el amor como impulso que brota del conocimiento del bien y se dirige hacia él. El término inmanente de ese amor es el don (<em>donum</em>): la apertura de sí mismo al otro.</p>
+
+      <div class="def-box">
+        <div class="def-term">El Espíritu como «nexus» y «donum»</div>
+        <p>El Espíritu Santo es el Vínculo de amor (<em>nexus amoris</em>) entre el Padre y el Hijo: la Persona en que se hipostatiza el amor mutuo entre ellos. Es también el Don por excelencia (<em>donum per excellentiam</em>): la primera donación, la donación de sí mismo que Dios hace a sí mismo intratrinitariamente, y que luego se extiende hacia las criaturas en la gracia y la inhabitación.</p>
+      </div>
+
+      <blockquote class="latin">«Spiritus Sanctus est amor quo Pater diligit Filium et Filius Patrem.»</blockquote>
+      <span class="latin-trans">— "El Espíritu Santo es el amor con el que el Padre ama al Hijo y el Hijo al Padre." (Agustín de Hipona, <em>De Trinitate</em> VI, 5)</span>
+
+      <h3>El Filioque: «y del Hijo»</h3>
+      <p>La teología latina (y tomista) defiende que el Espíritu Santo procede del Padre <em>y del Hijo</em> (<em>Filioque</em>) como de un único principio. El argumento tomista: el Padre y el Hijo son un único principio de espiración porque lo que los distingue (ser Padre / ser Hijo) no interfiere en lo que tienen en común (poseer la voluntad divina perfecta). La espiración activa es una sola porque la voluntad divina es una sola. El Espíritu procede de la esencia divina común al Padre y al Hijo, no de la paternidad ni de la filiación.</p>
+
+      <h3>El Espíritu como acto volitivo: análisis</h3>
+
+      <p>Cuando decimos que el Espíritu es la <em>hipóstasis del acto volitivo</em>, queremos decir: del amor infinito que el Padre y el Hijo se tienen mutuamente (amor que es infinito porque ambos conocen perfectamente la bondad infinita del otro) brota un término subsistente: la Persona del Espíritu. Así como el Hijo es el «¿quién eres Tú?» respondido por el Padre en su conocimiento, el Espíritu Santo es el «¡Tú eres infinitamente amable!» subsistente, el amor mismo hecho Persona.</p>
+
+      <div class="callout">
+        <span class="callout-icon">✦</span>
+        <p><strong>Distinción crucial:</strong> El Espíritu Santo no es engendrado sino <em>espirado</em>. La diferencia: la generación da lugar a alguien de la misma naturaleza que el generante y se denomina «hijo»; la espiración también da lugar a alguien de la misma naturaleza, pero por la vía del amor (no del conocimiento) y no se denomina «hijo» sino «don». Por eso el Espíritu es consustancial pero no es «Hijo de los hijos».</p>
+      </div>
+    </section>
+
+    <!-- RELACIONES -->
+    <section class="chapter" id="relaciones">
+      <h2><span class="ch-num">Capítulo 13</span>Las Relaciones Subsistentes</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>La solución tomista al problema de cómo la Trinidad es a la vez una en esencia y trina en personas se basa en la doctrina de las <strong>relaciones subsistentes</strong>. Las Personas divinas no son sustancias distintas (eso sería triteísmo) ni meramente modos de una sustancia única (eso sería modalismo): son <em>relaciones reales</em> que subsisten porque en Dios no hay distinción real entre la relación y la sustancia que la porta.</p>
+
+      <h3>Relaciones reales en Dios</h3>
+      <p>En las criaturas, las relaciones son accidentes: ser «padre» es una relación accidental que se añade a la sustancia del individuo. En Dios no puede haber accidentes (simplicidad divina). Por tanto, si hay relaciones reales en Dios, deben <em>ser</em> la divina sustancia misma. La relación de paternidad <em>es</em> la esencia divina considerada como principio del Hijo. La relación de filiación <em>es</em> la esencia divina considerada como procedente del Padre. Pero estas dos consideraciones son realmente distintas entre sí (no solo en nuestra mente) porque se oponen relacionalmente.</p>
+
+      <div class="def-box">
+        <div class="def-term">Relación subsistente (<em>relatio subsistens</em>)</div>
+        <p>Una relación que, en lugar de inhesar en una sustancia como accidente, <em>es</em> ella misma subsistente porque en Dios la relación real se identifica con la esencia divina. Las Personas son relaciones subsistentes: son la esencia divina en cuanto referida (relacionada) a otra Persona.</p>
+      </div>
+
+      <h3>Las cuatro relaciones, las tres Personas</h3>
+
+      <table class="comp-table">
+        <thead><tr><th>Relación</th><th>Sentido</th><th>Persona</th></tr></thead>
+        <tbody>
+          <tr><td class="td-key">Paternidad (<em>Paternitas</em>)</td><td>El Padre respecto del Hijo (generante)</td><td>Padre</td></tr>
+          <tr><td class="td-key">Filiación (<em>Filiatio</em>)</td><td>El Hijo respecto del Padre (engendrado)</td><td>Hijo</td></tr>
+          <tr><td class="td-key">Espiración activa</td><td>Padre e Hijo respecto del Espíritu (espiradores)</td><td>No subsiste como Persona separada: pertenece al Padre y al Hijo</td></tr>
+          <tr><td class="td-key">Procesión pasiva (<em>Processio</em>)</td><td>El Espíritu respecto del Padre y el Hijo (espirado)</td><td>Espíritu Santo</td></tr>
+        </tbody>
+      </table>
+
+      <p>Son cuatro relaciones reales, pero solo tres son <em>subsistentes</em> como personas, porque la espiración activa no se opone relacionalmente a la paternidad ni a la filiación (no las contradice). Por eso el Padre y el Hijo son el único principio activo de la espiración.</p>
+    </section>
+
+    <!-- HIPÓSTASIS Y PERSONA -->
+    <section class="chapter" id="hipostasis">
+      <h2><span class="ch-num">Capítulo 14</span>Hipóstasis, Persona y la Distinción Trinitaria</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>El término <strong>hipóstasis</strong> (ὑπόστασις) fue fijado en el Concilio de Nicea (325) y clarificado en el de Constantinopla (381) para designar la realidad individual subsistente en Dios: hay tres hipóstasis en una sola <em>ousía</em> (esencia). La palabra latina equivalente más precisa es <em>persona</em>, aunque Tomás analiza ambas con cuidado.</p>
+
+      <div class="def-box">
+        <div class="def-term">Hipóstasis (<em>hypostasis</em>)</div>
+        <p>El individuo subsistente en una naturaleza determinada. Es la «sustancia primera» en terminología aristotélica: el sujeto concreto que existe, no como predicado de otro. En la Trinidad: el Padre, el Hijo y el Espíritu Santo son tres hipóstasis distintas que subsisten en la única naturaleza/esencia divina.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-term">Persona (<em>persona</em>)</div>
+        <p>Definición clásica de Boecio, adoptada por Tomás: «La sustancia individual de naturaleza racional» (<em>rationalis naturae individua substantia</em>). Tomás la perfecciona: la persona es la subsistencia en una naturaleza racional, es decir, el modo de ser del individuo racional como sujeto último de todas sus operaciones y propiedades.</p>
+      </div>
+
+      <h3>Persona y relación en la Trinidad</h3>
+      <p>En Dios, «persona» no añade ninguna realidad absoluta (esencial) a la esencia divina: las tres Personas tienen la misma esencia idéntica. Lo que «persona» añade en Dios es <em>solo la relación de origen</em>: la distinción personal es pura y exclusivamente relacional. El Padre es Padre por ser principio del Hijo; el Hijo es Hijo por proceder del Padre; el Espíritu es el Espíritu porque procede del Padre y del Hijo por espiración.</p>
+
+      <div class="callout">
+        <span class="callout-icon">💡</span>
+        <p><strong>Regla de oro trinitaria:</strong> En Dios, todo es idéntico donde no hay oposición relativa. Las Personas se distinguen <em>solo</em> por sus relaciones de origen, nunca por la esencia, los atributos, la naturaleza ni las operaciones ad extra.</p>
+      </div>
+
+      <h3>Propiedades y nociones personales</h3>
+      <p>Cada Persona tiene propiedades que la caracterizan: el Padre tiene la <em>innascibilidad</em> (no procede de nadie) y la <em>paternidad</em>; el Hijo tiene la <em>filiación</em>; el Espíritu tiene la <em>procesión</em>. Las <em>nociones</em> son los conceptos por los que conocemos los modos de origen: innascibilidad, paternidad, filiación, espiración activa, procesión pasiva (cinco nociones en total).</p>
+    </section>
+
+    <!-- OPERA AD EXTRA -->
+    <section class="chapter" id="opera-ad-extra">
+      <h2><span class="ch-num">Capítulo 15</span>Las Operaciones ad extra y la Apropiación</h2>
+      <div class="level-badge level-mid">Nivel intermedio</div>
+
+      <p>Las operaciones divinas <em>hacia afuera</em> (<em>opera ad extra</em>) son las acciones de Dios sobre las criaturas: la creación, la providencia, la redención, la santificación. Un principio fundamental del pensamiento trinitario es que <strong>las obras de Dios ad extra son comunes a las tres Personas</strong>, porque brotan de la única esencia divina compartida por las tres.</p>
+
+      <blockquote class="latin">«Opera Trinitatis ad extra indivisa sunt.»</blockquote>
+      <span class="latin-trans">— "Las obras de la Trinidad hacia afuera son indivisibles." (Regla teológica clásica, cf. Agustín, <em>De Trinitate</em> I, 4)</span>
+
+      <p>Sin embargo, la teología usa el recurso de la <strong>apropiación</strong> (<em>appropriatio</em>): atribuir ciertos efectos de la acción divina ad extra a una Persona en particular, en razón de una analogía o semejanza con lo que es propio de esa Persona. Así, la creación se apropia al Padre (principio sin principio), la redención al Hijo (el Verbo encarnado), y la santificación al Espíritu Santo (el Amor y el Don).</p>
+
+      <p>La apropiación es una herramienta pedagógica legítima pero no implica que solo esa Persona actúe: cuando el Hijo se encarna, no actúa solo sino como una de las tres Personas que comparten la única voluntad y omnipotencia divinas. Lo propio y exclusivo del Hijo es <em>ser</em> el Verbo encarnado, no simplemente «actuar» en la Encarnación.</p>
+    </section>
+
+    <!-- ══════ PARTE IV ══════ -->
+    <div class="part-divider">
+      <div class="part-divider-line"></div>
+      <span class="part-divider-label">Parte IV · Niveles Avanzados</span>
+      <div class="part-divider-line"></div>
+    </div>
+
+    <!-- DISTINCIÓN REAL VS RAZÓN -->
+    <section class="chapter" id="distincion-real">
+      <h2><span class="ch-num">Capítulo 16</span>Distinción Real, Formal y de Razón</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>El debate sobre los tipos de distinción es uno de los más técnicos y decisivos de la escolástica medieval, con implicaciones directas para la doctrina trinitaria. Hay tres tipos principales:</p>
+
+      <h3>Distinción real (<em>distinctio realis</em>)</h3>
+      <p>Dos cosas son realmente distintas cuando lo son independientemente de cualquier operación del intelecto: cuando podrían separarse o al menos una puede existir sin la otra. En la Trinidad, el Padre y el Hijo son realmente distintos (son dos hipóstasis genuinamente distintas). La esencia y el esse en las criaturas son realmente distintos (argumento de Tomás en el <em>De Ente et Essentia</em>).</p>
+
+      <h3>Distinción formal (<em>distinctio formalis a parte rei</em>) — Escoto</h3>
+      <p>Duns Escoto introdujo un tipo intermedio de distinción: dos formalidades son formalmente distintas cuando son distinguibles antes de cualquier operación del intelecto (son «objetivamente» distintas) aunque no sean separables ni cosas distintas. Escoto aplica esto a los atributos divinos: la bondad divina y la sabiduría divina son formalmente distintas aunque idénticas <em>ex parte rei</em>. Tomás rechazaría esto como incompatible con la perfecta simplicidad divina.</p>
+
+      <h3>Distinción de razón (<em>distinctio rationis</em>)</h3>
+      <p>Dos nociones son solo «de razón» distintas cuando la diferencia existe únicamente en la mente que las concibe, no en la realidad. A su vez:</p>
+
+      <div class="def-box">
+        <div class="def-term">Distinctio rationis ratiocinantis</div>
+        <p>Distinción puramente lógica sin ningún fundamento en la realidad (como «el hombre» y «el animal racional»: son lo mismo sin diferencia alguna en el objeto). Tomás niega que los atributos divinos sean solo de este tipo.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-term">Distinctio rationis ratiocinatae (cum fundamento in re)</div>
+        <p>Distinción que existe en la mente pero con fundamento real en el objeto: la realidad divina es tan infinitamente rica que necesita múltiples conceptos para ser parcialmente expresada. Tomás acepta este tipo para los atributos: la bondad y la sabiduría son idénticas en Dios, pero son conceptos distintos con fundamento en la riqueza infinita del ser divino.</p>
+      </div>
+
+      <h3>Aplicación trinitaria</h3>
+      <p>La distinción entre las Personas divinas es real (no solo de razón): el Padre y el Hijo son genuinamente distintos. Pero la distinción entre las Personas y la esencia divina es peculiar: la esencia no es «ni las Personas» ni «otra cosa que las Personas», sino que cada Persona <em>es</em> la esencia divina en su totalidad, pero no <em>como</em> tal o cual Persona. Esta distinción se denomina <em>distinctio realis minor</em> o distinción relativa real: real en cuanto que las relaciones son realmente distintas entre sí, pero sin implicar una distinción de sustancia o esencia.</p>
+    </section>
+
+    <!-- COMMUNICATIO IDIOMATUM -->
+    <section class="chapter" id="communicatio">
+      <h2><span class="ch-num">Capítulo 17</span>Communicatio Idiomatum y Cristología tomista</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>La doctrina de la <em>communicatio idiomatum</em> (comunicación de los atributos / propiedades) es una consecuencia directa de la doctrina trinitaria aplicada a la Cristología. Si en Cristo hay dos naturalezas en una sola hipóstasis (definición del Concilio de Calcedonia, 451), entonces los atributos de ambas naturalezas pueden predicarse del <em>mismo sujeto</em>, que es la única Persona del Verbo.</p>
+
+      <p>Así, podemos decir legítimamente: «Dios nació de la Virgen María» (porque el que nació es la Persona del Verbo, que es Dios), «Dios murió en la Cruz» (porque la muerte sucedió en la naturaleza humana, pero es la Persona divina la que la asumió), «María es Madre de Dios» (<em>Θεοτόκος / Theotokos</em>: la que dio a luz a Dios).</p>
+
+      <h3>La unión hipostática</h3>
+      <p>La <em>unio hypostatica</em> es la unión de las dos naturalezas (divina y humana) en la única hipóstasis del Verbo. No es una mezcla (nestorianismo: dos personas; monofisismo: una sola naturaleza compuesta) sino la subsistencia de la naturaleza humana asumida en la hipóstasis del Verbo. La naturaleza humana de Cristo no tiene hipóstasis propia: su hipóstasis es la del Verbo divino. Esto se llama <em>enhypostasia</em>.</p>
+
+      <div class="def-box">
+        <div class="def-term">Enhypostasia (<em>ἐνυπόστασις</em>)</div>
+        <p>La naturaleza humana de Cristo existe «en» la hipóstasis del Verbo: no tiene su propia hipóstasis humana separada. Fue asumida directamente por la Persona del Verbo. La naturaleza humana de Cristo es real y completa (contra el apolinarismo) pero no es una persona separada (contra el nestorianismo).</p>
+      </div>
+
+      <blockquote class="latin">«In Christo sunt duae naturae, sed una persona.»</blockquote>
+      <span class="latin-trans">— "En Cristo hay dos naturalezas pero una sola persona." (Definición calcedónica, 451)</span>
+    </section>
+
+    <!-- DEBATES ESCOLÁSTICOS -->
+    <section class="chapter" id="debates">
+      <h2><span class="ch-num">Capítulo 18</span>Debates Escolásticos Avanzados</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <h3>I. El problema de los universales y la Trinidad</h3>
+      <p>El debate medieval sobre los universales (realismo, nominalismo, conceptualismo) tiene consecuencias trinitarias directas. El nominalismo radical (Ockham) tendría dificultades para sostener que la «naturaleza divina» es algo realmente existente y no solo un nombre: si la naturaleza divina es solo un concepto, la unidad de Dios corre peligro de volverse meramente nominal. El realismo tomista (los universales tienen fundamento real en las cosas) permite afirmar con coherencia que la única naturaleza divina es realmente una y es realmente poseída íntegra por las tres Personas.</p>
+
+      <h3>II. Procesiones y eternidad: ¿coeternidad del Hijo?</h3>
+      <p>Arrio argumentaba que si el Hijo procede del Padre, hubo un tiempo en que no era. Tomás responde con la distinción entre prioridad de naturaleza y prioridad temporal: el Padre es principio del Hijo en el orden del origen (el Padre es la fuente, el Hijo el que procede), pero no en el orden del tiempo, porque la generación divina es eterna. Como Dios está fuera del tiempo (eternidad = posesión simultánea e interminable del ser), en Él no hay «antes» ni «después»: el Padre engendra eternamente, el Hijo es eternamente engendrado. La generación no implica anterioridad temporal.</p>
+
+      <h3>III. Conocimiento divino y libertad de las criaturas: la ciencia media</h3>
+      <p>Un debate más tardío (Molina, Báñez) gira en torno a cómo Dios conoce los futuros contingentes libres sin destruir la libertad creatural. La posición tomista dominicana (Domingo Báñez) defiende la <em>praemotio physica</em>: Dios mueve físicamente la voluntad creatural a través de una moción intrínseca que no destruye la libertad porque el modo de moción es ajustado al modo de ser del ente libre. El conocimiento divino no es «desde fuera» sino constitutivo del acto libre mismo. La posición jesuítica (Luis de Molina) propone la <em>ciencia media</em>: Dios conoce los futuros contingentes mediante los «condicionales de la libertad» (qué haría libremente Pedro en tal circunstancia), pero sin mover físicamente la voluntad.</p>
+
+      <h3>IV. ¿Puede haber múltiples Encarnaciones?</h3>
+      <p>Tomás discute si el mismo Verbo podría haberse encarnado en múltiples naturalezas humanas simultáneamente, o si la segunda o tercera Persona podrían haberse encarnado en lugar de la primera. Su respuesta: es metafísicamente posible (ninguna contradicción formal) pero no fue el camino de hecho elegido, y existen razones de conveniencia (la Encarnación del Verbo —el que expresa la sabiduría del Padre— es la más apropiada para manifestar quién es Dios y reparar la soberbia del pecado mediante la humildad del conocimiento).</p>
+
+      <h3>V. Oposición relativa y la distinción de Personas</h3>
+      <p>Un principio técnico fundamental: dos cosas en Dios son realmente distintas <em>solo si</em> hay entre ellas <em>oposición relativa</em> (<em>oppositio relativa</em>). La espiración activa (que pertenece al Padre y al Hijo) no se opone relacionalmente a la paternidad ni a la filiación: por eso no constituye una Persona separada. Las Personas se distinguen solo porque sus relaciones son mutuamente opuestas: la paternidad y la filiación son opuestas relacionalmente (el que genera y el que es engendrado se definen mutuamente por oposición). Sin esta oposición, no habría distinción real.</p>
+    </section>
+
+    <!-- HEREJÍAS -->
+    <section class="chapter" id="herejias">
+      <h2><span class="ch-num">Capítulo 19</span>Las Herejías Trinitarias y sus Errores Metafísicos</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>Las grandes herejías trinitarias no son errores arbitrarios: cada una refleja una dificultad filosófica genuina mal resuelta. Analizarlas desde la metafísica tomista ilumina tanto el error como la solución ortodoxa.</p>
+
+      <table class="comp-table">
+        <thead><tr><th>Herejía</th><th>Tesis</th><th>Error metafísico</th><th>Respuesta tomista</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-key">Modalismo (Sabelio, s. III)</td>
+            <td>Padre, Hijo y Espíritu son solo modos o «máscaras» del mismo Dios</td>
+            <td>No reconoce que las relaciones de origen son realmente distintas en Dios</td>
+            <td>Las procesiones producen relaciones realmente opuestas que son genuinamente distintas</td>
+          </tr>
+          <tr>
+            <td class="td-key">Arrianismo (Arrio, s. IV)</td>
+            <td>El Hijo es la primera criatura, no es consustancial al Padre</td>
+            <td>Confunde la prioridad de origen (el Padre es principio) con inferioridad de naturaleza</td>
+            <td>En una procesión de naturaleza infinita, el término debe ser igual al principio</td>
+          </tr>
+          <tr>
+            <td class="td-key">Macedonianismo (s. IV)</td>
+            <td>El Espíritu Santo es una criatura o un ángel, no es Dios</td>
+            <td>Aplica al Espíritu el mismo error ariano: si procede, es inferior</td>
+            <td>El Espíritu procede por vía del amor del ser infinito, luego debe ser infinito</td>
+          </tr>
+          <tr>
+            <td class="td-key">Nestorianismo (Nestorio, s. V)</td>
+            <td>En Cristo hay dos personas: el hombre Jesús y el Verbo divino</td>
+            <td>No distingue entre naturaleza e hipóstasis: dos naturalezas → dos personas</td>
+            <td>Una hipóstasis puede asumir dos naturalezas; la enhypostasia resuelve el problema</td>
+          </tr>
+          <tr>
+            <td class="td-key">Monofisismo (Eutiques, s. V)</td>
+            <td>En Cristo hay solo una naturaleza (resultante de la mezcla de las dos)</td>
+            <td>Confunde la unidad de persona con la unidad de naturaleza</td>
+            <td>La unión es hipostática, no natural: las dos naturalezas permanecen íntegras</td>
+          </tr>
+          <tr>
+            <td class="td-key">Triteísmo</td>
+            <td>Hay tres dioses distintos</td>
+            <td>Confunde la distinción real de personas con la distinción real de esencias/sustancias</td>
+            <td>La distinción real de personas es solo relacional, no sustancial ni esencial</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- APOLOGÉTICA TOMISTA -->
+    <section class="chapter" id="apologetica">
+      <h2><span class="ch-num">Capítulo 20</span>Apologética Tomista: Defensa racional de la Trinidad</h2>
+      <div class="level-badge level-adv">Nivel avanzado</div>
+
+      <p>La Trinidad no es un misterio contra la razón sino <em>supra rationem</em>: por encima de lo que la razón puede alcanzar por sus propias fuerzas, pero no contradictorio con ella. La apologética tomista procede en dos movimientos: demostrar que la Trinidad no implica contradicción, y mostrar que es inteligible desde los fundamentos metafísicos ya establecidos.</p>
+
+      <h3>La Trinidad no viola el principio de no-contradicción</h3>
+
+      <div class="syllogism">
+        <div class="syl-title">Argumento contra el acusador de contradicción</div>
+        <div class="premise"><span class="premise-label">P.1</span> Una contradicción real es: «X es A y X no es A, en el mismo sentido y al mismo tiempo».</div>
+        <div class="premise"><span class="premise-label">P.2</span> La Trinidad afirma: «Dios es uno en esencia» y «Dios es tres en personas».</div>
+        <div class="premise"><span class="premise-label">P.3</span> «Uno en esencia» y «tres en personas» no son afirmaciones en el mismo sentido: la unidad es esencial/sustancial; la trinidad es relacional/personal.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> La Trinidad no viola el principio de no-contradicción.</div>
+      </div>
+
+      <h3>La fecundidad del Ser Absoluto: argumento filosófico</h3>
+      <p>Un Dios absolutamente simple y perfectamente bueno que no puede comunicarse a ninguna otra realidad igualmente divina sería, en cierto sentido, un bien que solo puede darse hacia las criaturas. Pero la bondad infinita sugiere una fecundidad interna que supera la mera producción creatural. El Ipsum Esse Subsistens, que es idéntico a la Bondad Absoluta y al Intelecto absoluto, «tiende» a la autodonación dentro de sí mismo. La Trinidad revela que Dios no necesita criaturas para ser comunión de amor: en sí mismo es ya la plenitud de la vida personal y el amor interpersonal.</p>
+
+      <h3>Respuesta a la objeción islámica: Tawhīd vs. Trinidad</h3>
+      <p>El islam (<em>Tawhīd</em>) acusa a la Trinidad de politeísmo: «Dios no tiene hijo» (Cor. 112:3). La respuesta tomista distingue:</p>
+
+      <div class="callout">
+        <span class="callout-icon">⚠️</span>
+        <p>El «hijo» en sentido biológico (generación corporal, diferencia de sustancia entre padre e hijo) es incompatible con Dios. Pero el «Hijo» en sentido espiritual (procesión de la misma naturaleza por operación inmanente del intelecto infinito) no implica corporalidad, ni dependencia, ni pluralidad de esencias. Es el islam quien impone inconscientemente una analogía corporal a un concepto que la teología cristiana siempre ha descrito en términos espirituales.</p>
+      </div>
+
+      <div class="syllogism">
+        <div class="syl-title">Silogismo trinitario contra el unipersonalismo</div>
+        <div class="premise"><span class="premise-label">P.1</span> Un ser que posee intelecto y voluntad infinitos y perfectos realiza operaciones inmanentes perfectas e infinitas.</div>
+        <div class="premise"><span class="premise-label">P.2</span> Las operaciones inmanentes perfectas e infinitas deben tener términos perfectos e infinitos (una operación infinita no puede producir un término inferior).</div>
+        <div class="premise"><span class="premise-label">P.3</span> Términos perfectos e infinitos de operaciones inmanentes en el ser divino no pueden ser criaturas (que son finitas) sino deben ser igualmente divinos.</div>
+        <div class="conclusion"><span class="premise-label">∴</span> Un Dios absolutamente simple pero espiritual (con intelecto y voluntad) puede ser internamente trinitario sin violar su unidad esencial.</div>
+      </div>
+
+      <h3>El nombre divino YHWH y el Ipsum Esse</h3>
+      <p>Tomás conecta el nombre revelado de Dios en el Éxodo 3:14 —<em>Ehyeh asher Ehyeh</em>, «Yo soy el que soy»— con su doctrina del <em>Ipsum Esse Subsistens</em>. Dios no dice «Yo soy el bueno» o «Yo soy el poderoso», sino «Yo soy el que soy»: el Ser mismo. Este nombre es el más apropiado para Dios en razón de su inmensidad (no circunscribe a Dios bajo ningún género), de su universalidad (se dice del ser puro) y de su presente eterno (el nombre está en tiempo presente: no «fui» ni «seré», sino «SOY»).</p>
+
+      <blockquote class="latin">«Hoc nomen QUI EST est maxime proprium nomen Dei, propter tria.»</blockquote>
+      <span class="latin-trans">— "Este nombre QUI EST es el nombre más propio de Dios, por tres razones." (<em>S.Th.</em> I, q. 13, a. 11)</span>
+
+      <h3>El Logos trinitario y la filosofía griega</h3>
+      <p>La doctrina del Logos tiene raíces en la filosofía griega (Heráclito, los estoicos, Filón de Alejandría) pero la teología joánica y tomista la transforma radicalmente: el Logos no es solo un principio racional cósmico abstracto ni una emanación inferior del Uno (como en Plotino), sino una Persona divina, consubstancial al Padre, que asumió la naturaleza humana. Frente al Logos plotiniano (hipóstasis inferior al Uno), el Verbo cristiano es igual al Padre: la diferencia está en que la teología cristiana trabaja con la analogía de la operación inmanente (el verbo interior) y no con la de la emanación espacial o degradación gradual del Uno.</p>
+
+      <h3>La circumincessión o perichoresis</h3>
+
+      <div class="def-box">
+        <div class="def-term">Perichoresis / Circumincessio (περιχώρησις)</div>
+        <p>La mutua inhabitación de las Personas divinas: el Padre está totalmente en el Hijo y en el Espíritu; el Hijo está totalmente en el Padre y en el Espíritu; el Espíritu está totalmente en el Padre y en el Hijo. Esto es posible porque la esencia divina es una sola e indivisa: donde está una Persona está la esencia divina completa, y donde está la esencia divina completa están las tres Personas.</p>
+      </div>
+
+      <p>La perichoresis no diluye la distinción de Personas (error del monadismo): las Personas se interpenetran sin confundirse, porque lo que las une (la esencia) no es lo mismo que lo que las distingue (las relaciones). La Trinidad es la comunión más perfecta posible: unidad sin confusión, distinción sin división.</p>
+
+      <div class="ornament">✦ ✠ ✦</div>
+
+      <p>El sistema tomista culmina así en una visión coherente y profunda: desde la más elemental noción de que «algo existe» hasta la revelación de que ese Ser que todo lo sostiene es en sí mismo una vida trinitaria de conocimiento y amor. La razón llega hasta la puerta; la fe la abre; la inteligencia —perfeccionada por la gracia— contempla lo que hay dentro.</p>
+
+      <blockquote class="latin">«Deus est in omnibus rebus, non sicut pars essentiae, vel sicut accidens, sed sicut agens adest ei in quod agit.»</blockquote>
+      <span class="latin-trans">— "Dios está en todas las cosas, no como parte de su esencia ni como accidente, sino como el agente está presente en aquello sobre lo que actúa." (<em>S.Th.</em> I, q. 8, a. 1)</span>
+
+      <div class="nota">
+        Nota bibliográfica: Los textos primarios de referencia son la <em>Summa Theologiae</em> (especialmente I, qq. 1-43), el <em>De Ente et Essentia</em>, la <em>Summa contra Gentiles</em> (lib. I y IV), y el <em>De Potentia</em> de Santo Tomás de Aquino. Para los debates posteriores: Cayetano, <em>Commentaria in STh</em>; Juan de Santo Tomás, <em>Cursus Theologicus</em>; y en el siglo XX, Réginald Garrigou-Lagrange, <em>Dieu, son existence et sa nature</em>.
+      </div>
+    </section>
+
+  </div><!-- /content -->
+</main>
+
+<script>
+  // ══════ TOC accordion ══════
+  document.querySelectorAll('.toc-part-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const items = header.nextElementSibling;
+      const isOpen = items.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.toc-items').forEach(i => i.classList.remove('open'));
+      document.querySelectorAll('.toc-part-header').forEach(h => h.classList.remove('open'));
+      if (!isOpen) {
+        items.classList.add('open');
+        header.classList.add('open');
+      }
+    });
+  });
+
+  // ══════ Active toc item on scroll ══════
+  const chapters = document.querySelectorAll('section.chapter');
+  const tocItems = document.querySelectorAll('.toc-item');
+
+  function updateActiveToc() {
+    let current = '';
+    chapters.forEach(ch => {
+      const rect = ch.getBoundingClientRect();
+      if (rect.top <= 120) current = ch.id;
+    });
+    tocItems.forEach(item => {
+      item.classList.remove('active');
+      if (item.getAttribute('href') === '#' + current) {
+        item.classList.add('active');
+        // Open parent accordion
+        const parentItems = item.closest('.toc-items');
+        if (parentItems && !parentItems.classList.contains('open')) {
+          parentItems.classList.add('open');
+          parentItems.previousElementSibling.classList.add('open');
+        }
+      }
+    });
+  }
+
+  // ══════ Progress bar ══════
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? scrollTop / docH : 0;
+    document.getElementById('progress-bar').style.transform = `scaleX(${pct})`;
+  }
+
+  window.addEventListener('scroll', () => {
+    updateActiveToc();
+    updateProgress();
+  }, { passive: true });
+
+  updateActiveToc();
+  updateProgress();
+
+  // ══════ Hamburger ══════
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById('sidebar');
+
+  hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+  });
+
+  // Close sidebar when clicking a link on mobile
+  tocItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 700) {
+        sidebar.classList.remove('open');
+      }
+    });
+  });
+</script>
+</body>
+</html>
