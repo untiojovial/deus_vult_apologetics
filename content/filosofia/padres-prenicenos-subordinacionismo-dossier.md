@@ -1,9 +1,11 @@
 ---
 title: "Padres Prenicenos y Subordinacionismo (Dossier)"
-date: 2026-06-11T09:00:00-05:00
+date: 2026-06-10T09:00:00-05:00
 draft: false
 slug: "padres-prenicenos-subordinacionismo-dossier"
 url: "/filosofia/padres-prenicenos-subordinacionismo-dossier/"
+aliases:
+  - "/filosofia/padres-prenicenos-subordinacionismo-dossier"
 categories: ["filosofia"]
 tags: ["filosofia", "padres-prenicenos", "subordinacionismo", "dossier"]
 summary: "Dossier integral en HTML sobre padres prenicenos y el debate del subordinacionismo."
