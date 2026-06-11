@@ -16,3 +16,4 @@ La idea es responder con argumentos claros, fuentes serias y lenguaje comprensib
 - [Padres Prenicenos y Subordinacionismo (Dossier)](/filosofia/padres-prenicenos-subordinacionismo-dossier/)
 - [Trinidad Exactamente Tres (Dossier)](/filosofia/trinidad-exactamente-tres-dossier/)
 - [Manual Tomista de la Trinidad (Dossier)](/filosofia/manual-tomista-trinidad-dossier/)
+- [El Colapso del Teismo Imperfecto (Dossier)](/filosofia/colapso-teismo-neoclasico-dossier/)

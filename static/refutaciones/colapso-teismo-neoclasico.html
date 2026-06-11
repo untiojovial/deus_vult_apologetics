@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Colapso del Teísmo Imperfecto — Compendio Tomista</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg:        #080810;
+    --bg2:       #0e0e1c;
+    --bg3:       #13132a;
+    --bg4:       #1a1a35;
+    --gold:      #c9a84c;
+    --gold-dim:  #8a6e2f;
+    --gold-glow: #e8c96a;
+    --red:       #c0392b;
+    --red-dim:   #7d241a;
+    --blue:      #2c5ba8;
+    --blue-light:#5b8de8;
+    --green:     #27ae60;
+    --green-dim: #1a7a3f;
+    --text:      #e8e4da;
+    --text-dim:  #9090a8;
+    --text-faint:#555570;
+    --border:    rgba(201,168,76,0.18);
+    --border-red:rgba(192,57,43,0.3);
+    --border-blue:rgba(91,141,232,0.25);
+    --border-green:rgba(39,174,96,0.3);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ═══════════════════════════════════════ SIDEBAR ══ */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 290px;
+    height: 100vh;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: transparent; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  .sidebar-header {
+    padding: 28px 22px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg2);
+    z-index: 1;
+  }
+  .sidebar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .sidebar-sub {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  .nav-section {
+    padding: 14px 0 4px 22px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 7px 22px 7px 22px;
+    font-size: 13px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: 'EB Garamond', serif;
+    line-height: 1.35;
+    transition: color 0.15s, background 0.15s, border-left 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .nav-item:hover, .nav-item.active {
+    color: var(--gold-glow);
+    background: rgba(201,168,76,0.06);
+    border-left-color: var(--gold);
+  }
+  .nav-item.sub {
+    padding-left: 36px;
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+  .nav-item.sub:hover { color: var(--text-dim); border-left-color: var(--gold-dim); }
+
+  .nav-badge {
+    display: inline-block;
+    background: var(--red-dim);
+    color: var(--gold-glow);
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: 1px;
+  }
+
+  /* ═══════════════════════════════════════ MAIN ══ */
+  #main {
+    margin-left: 290px;
+    min-height: 100vh;
+  }
+
+  /* ═══════════════════════════════════════ HERO ══ */
+  #hero {
+    background: linear-gradient(160deg, #0a0a1f 0%, #0e0e1c 60%, #12102a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 72px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--text-dim);
+    margin-bottom: 48px;
+    max-width: 680px;
+  }
+
+  /* Stats row */
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--gold-glow);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Resumen ejecutivo */
+  .resumen-box {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 28px 36px;
+    max-width: 820px;
+  }
+  .resumen-box p {
+    font-size: 17px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .resumen-box p:last-child { margin-bottom: 0; }
+
+  /* ═══════════════════════════════════════ SECTIONS ══ */
+  .content-section {
+    padding: 64px 72px;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+  .content-section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .section-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-intro {
+    font-size: 17px;
+    color: var(--text);
+    line-height: 1.85;
+    max-width: 820px;
+    margin-bottom: 44px;
+  }
+  .section-intro p { margin-bottom: 18px; }
+  .section-intro p:last-child { margin-bottom: 0; }
+
+  /* ═══════════════════════════════════════ SILOGISMO ══ */
+  .silo-grid {
+    display: grid;
+    gap: 28px;
+    margin-bottom: 16px;
+  }
+  .silo-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+
+  .silo-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    padding: 28px 30px 24px;
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .silo-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    box-shadow: 0 0 32px rgba(201,168,76,0.07);
+  }
+  .silo-card.red { border-top-color: var(--red); }
+  .silo-card.blue { border-top-color: var(--blue-light); }
+  .silo-card.green { border-top-color: var(--green); }
+
+  .silo-num {
+    position: absolute;
+    top: -14px; left: 24px;
+    background: var(--gold);
+    color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 12px;
+    letter-spacing: 1px;
+  }
+  .silo-card.red .silo-num { background: var(--red); color: #fff; }
+  .silo-card.blue .silo-num { background: var(--blue); color: #fff; }
+  .silo-card.green .silo-num { background: var(--green); color: #fff; }
+
+  .silo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold-glow);
+    margin-bottom: 20px;
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+  }
+  .silo-card.red .silo-title { color: #e87070; }
+  .silo-card.blue .silo-title { color: var(--blue-light); }
+  .silo-card.green .silo-title { color: #5dd9a0; }
+
+  .silo-premise {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .premise-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    min-width: 28px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .silo-card.red .premise-label { color: #e87070; }
+  .silo-card.blue .premise-label { color: var(--blue-light); }
+  .silo-card.green .premise-label { color: #5dd9a0; }
+
+  .premise-text {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  .silo-divider {
+    border: none;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    margin: 16px 0;
+  }
+  .silo-card.red .silo-divider { border-top-color: rgba(192,57,43,0.3); }
+  .silo-card.blue .silo-divider { border-top-color: rgba(91,141,232,0.25); }
+  .silo-card.green .silo-divider { border-top-color: rgba(39,174,96,0.3); }
+
+  .silo-conclusion {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: rgba(201,168,76,0.07);
+    padding: 12px 16px;
+    border-left: 3px solid var(--gold);
+    margin-top: 4px;
+  }
+  .silo-card.red .silo-conclusion { background: rgba(192,57,43,0.08); border-left-color: var(--red); }
+  .silo-card.blue .silo-conclusion { background: rgba(91,141,232,0.08); border-left-color: var(--blue-light); }
+  .silo-card.green .silo-conclusion { background: rgba(39,174,96,0.08); border-left-color: var(--green); }
+
+  .conclusion-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold-glow);
+    min-width: 28px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .silo-card.red .conclusion-label { color: #e87070; }
+  .silo-card.blue .conclusion-label { color: var(--blue-light); }
+  .silo-card.green .conclusion-label { color: #5dd9a0; }
+
+  .conclusion-text {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1.65;
+  }
+
+  /* SILOGISMO MAESTRO */
+  .silo-master {
+    background: linear-gradient(135deg, #12102a 0%, #1a1030 100%);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-top: 4px solid var(--gold);
+    padding: 40px 44px 36px;
+    position: relative;
+    margin-top: 40px;
+  }
+  .silo-master::before {
+    content: 'SILOGISMO MAESTRO';
+    position: absolute;
+    top: -14px; left: 30px;
+    background: var(--gold);
+    color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 16px;
+    letter-spacing: 3px;
+  }
+  .silo-master .silo-title {
+    font-size: 17px;
+    margin-top: 10px;
+  }
+  .silo-master .silo-conclusion {
+    background: rgba(201,168,76,0.12);
+    padding: 18px 20px;
+    margin-top: 8px;
+  }
+  .silo-master .conclusion-text {
+    font-size: 17px;
+  }
+
+  /* ═══════════════════════════════════════ BLOQUES ESPECIALES ══ */
+  .distinction-box {
+    background: rgba(44,91,168,0.08);
+    border: 1px solid var(--border-blue);
+    border-left: 3px solid var(--blue-light);
+    padding: 24px 30px;
+    margin: 32px 0;
+  }
+  .distinction-box .box-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--blue-light);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .distinction-box p {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .distinction-box p:last-child { margin-bottom: 0; }
+
+  .objection-block {
+    background: rgba(192,57,43,0.06);
+    border: 1px solid var(--border-red);
+    padding: 20px 26px;
+    margin-bottom: 20px;
+  }
+  .objection-block .obj-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #e87070;
+    margin-bottom: 8px;
+  }
+  .objection-block p {
+    font-size: 15px;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.75;
+  }
+
+  .corollary-box {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid var(--border-green);
+    border-left: 3px solid var(--green);
+    padding: 20px 28px;
+    margin: 28px 0;
+  }
+  .corollary-box .box-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #5dd9a0;
+    margin-bottom: 8px;
+  }
+  .corollary-box p {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .quote-block {
+    padding: 28px 0 28px 32px;
+    border-left: 2px solid var(--gold-dim);
+    margin: 36px 0;
+  }
+  .quote-text {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .quote-source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold-dim);
+    letter-spacing: 1px;
+  }
+
+  /* COLLAPSE (objeción + respuesta) */
+  .collapse-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    padding: 16px 20px;
+    background: rgba(192,57,43,0.07);
+    border: 1px solid var(--border-red);
+    margin-bottom: 2px;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .collapse-header:hover { background: rgba(192,57,43,0.12); }
+  .collapse-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--red);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .collapse-header.open .collapse-icon { transform: rotate(90deg); }
+  .collapse-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #e87070;
+  }
+  .collapse-title {
+    font-size: 15px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .collapse-body {
+    display: none;
+    padding: 20px 24px;
+    background: rgba(13,13,26,0.6);
+    border: 1px solid var(--border-red);
+    border-top: none;
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .collapse-body.open { display: block; }
+
+  /* ═══════════════════════════════════════ TRIPLE COLAPSO CARDS ══ */
+  .triple-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin: 32px 0;
+  }
+  .triple-card {
+    padding: 24px 22px;
+    border: 1px solid;
+    position: relative;
+  }
+  .triple-card.tc-red { border-color: var(--border-red); background: rgba(192,57,43,0.05); }
+  .triple-card.tc-blue { border-color: var(--border-blue); background: rgba(91,141,232,0.05); }
+  .triple-card.tc-green { border-color: var(--border-green); background: rgba(39,174,96,0.05); }
+  .triple-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    opacity: 0.12;
+    position: absolute;
+    top: 10px; right: 16px;
+    line-height: 1;
+  }
+  .tc-red .triple-card-num { color: var(--red); }
+  .tc-blue .triple-card-num { color: var(--blue-light); }
+  .tc-green .triple-card-num { color: var(--green); }
+  .triple-card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+  .tc-red .triple-card-label { color: #e87070; }
+  .tc-blue .triple-card-label { color: var(--blue-light); }
+  .tc-green .triple-card-label { color: #5dd9a0; }
+  .triple-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .triple-card p {
+    font-size: 14.5px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ═══════════════════════════════════════ CONCLUSIÓN FINAL ══ */
+  #conclusion-final {
+    background: linear-gradient(160deg, #07070f 0%, #0f0a20 100%);
+    border-top: 1px solid var(--border);
+  }
+  .conclusion-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .conclusion-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 18px 24px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .conclusion-item:hover { border-color: rgba(201,168,76,0.35); }
+  .ci-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--gold-dim);
+    min-width: 40px;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+  .ci-text {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.8;
+    padding-top: 4px;
+  }
+
+  .final-quote {
+    margin-top: 48px;
+    padding: 40px 48px;
+    background: rgba(201,168,76,0.04);
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .final-quote .qt {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .final-quote .qt-trans {
+    font-size: 14px;
+    color: var(--text-faint);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .final-quote .qt-src {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold-dim);
+    letter-spacing: 2px;
+  }
+
+  /* ═══════════════════════════════════════ UTILITIES ══ */
+  em { color: var(--gold-glow); font-style: normal; font-weight: 500; }
+  strong { color: #fff; font-weight: 600; }
+  .latin { font-style: italic; color: var(--text-dim); }
+
+  .sub-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold-glow);
+    margin: 44px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sub-heading.red { color: #e87070; border-bottom-color: var(--border-red); }
+  .sub-heading.blue { color: var(--blue-light); border-bottom-color: var(--border-blue); }
+  .sub-heading.green { color: #5dd9a0; border-bottom-color: var(--border-green); }
+
+  .inline-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-faint);
+    margin: -12px 0 28px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ═══════════════════════════════════════ PROGRESS ══ */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 290px; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: 200;
+    transition: transform 0.1s;
+  }
+
+  /* ═══════════════════════════════════════ BACK TO TOP ══ */
+  #back-top {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    width: 44px; height: 44px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s, background 0.2s;
+    z-index: 150;
+    text-decoration: none;
+  }
+  #back-top.visible { opacity: 1; }
+  #back-top:hover { background: rgba(201,168,76,0.1); }
+
+  /* ═══════════════════════════════════════ MOBILE TOGGLE ══ */
+  #sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 16px; left: 16px;
+    z-index: 300;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    width: 40px; height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    align-items: center; justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    #sidebar { transform: translateX(-100%); }
+    #sidebar.open { transform: translateX(0); }
+    #sidebar-toggle { display: flex; }
+    #main { margin-left: 0; }
+    #progress-bar { left: 0; }
+    .content-section { padding: 48px 28px; }
+    #hero { padding: 64px 28px 48px; }
+    .silo-grid.cols-2 { grid-template-columns: 1fr; }
+    .triple-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<button id="sidebar-toggle" onclick="toggleSidebar()" aria-label="Menú">☰</button>
+
+<!-- ══════════════════════════ SIDEBAR ══════════════════════════ -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Compendio Tomista</div>
+    <div class="sidebar-sub">27 silogismos · numeración única</div>
+  </div>
+
+  <div class="nav-section">Estructura</div>
+  <a class="nav-item" href="#resumen">Resumen ejecutivo</a>
+  <a class="nav-item" href="#intro">Introducción filosófica</a>
+
+  <div class="nav-section">Bloque I — Potencia</div>
+  <a class="nav-item" href="#sec-potencia">Potencia e imperfección</a>
+  <a class="nav-item sub" href="#sec-potencia">Sil. 1 — Potencia → imperfección</a>
+  <a class="nav-item sub" href="#sec-potencia">Sil. 2 — Actuante exterior</a>
+  <a class="nav-item sub" href="#sec-potencia">Sil. 3 — Regreso al infinito</a>
+  <a class="nav-item" href="#sec-pasiva">Potencia pasiva</a>
+  <a class="nav-item sub" href="#sec-pasiva">Sil. 4 — Viola la aseidad</a>
+  <a class="nav-item sub" href="#sec-pasiva">Sil. 5 — Inversión causal</a>
+  <a class="nav-item sub" href="#sec-pasiva">Sil. 6 — Omnipotencia</a>
+
+  <div class="nav-section">Bloque II — Composición</div>
+  <a class="nav-item" href="#sec-composicion">Simplicidad divina</a>
+  <a class="nav-item sub" href="#sec-composicion">Sil. 7 — Causa componente</a>
+  <a class="nav-item sub" href="#sec-composicion">Sil. 8 — Límite de identidad</a>
+  <a class="nav-item sub" href="#sec-composicion">Sil. 9 — Ser mayor concebible</a>
+  <a class="nav-item sub" href="#sec-composicion">Navaja de Ockham</a>
+
+  <div class="nav-section">Bloque III — Amor y Mutabilidad</div>
+  <a class="nav-item" href="#sec-amor">El Dios que empieza a amar</a>
+  <a class="nav-item sub" href="#sec-amor">Sil. 10 — Cambio real</a>
+  <a class="nav-item sub" href="#sec-amor">Sil. 11 — Menos perfecto antes</a>
+  <a class="nav-item sub" href="#sec-amor">Sil. 12 — Dependencia causal</a>
+  <a class="nav-item sub" href="#sec-amor">Sil. 13 — Potencia de amar</a>
+  <a class="nav-item" href="#sec-tawhid">Tawhid y el hablar divino</a>
+  <a class="nav-item sub" href="#sec-tawhid">Sil. 14 — Acto nuevo</a>
+  <a class="nav-item sub" href="#sec-tawhid">Sil. 15 — Relatio rationis</a>
+  <a class="nav-item sub" href="#sec-tawhid">Sil. 16 — Verbo eterno</a>
+  <a class="nav-item" href="#sec-triple">Triple colapso del amor condicionado</a>
+  <a class="nav-item sub" href="#sec-triple">Sil. 17 — Mutabilidad</a>
+  <a class="nav-item sub" href="#sec-triple">Sil. 18 — Dependencia</a>
+  <a class="nav-item sub" href="#sec-triple">Sil. 19 — Finitud del amor</a>
+  <a class="nav-item sub" href="#sec-triple">Sil. 20 — Summum Bonum</a>
+
+  <div class="nav-section">Bloque IV — Actos y Límites</div>
+  <a class="nav-item" href="#sec-actos">Multiplicidad de actos</a>
+  <a class="nav-item sub" href="#sec-actos">Sil. 21 — Actos heterogéneos</a>
+  <a class="nav-item sub" href="#sec-actos">Sil. 22 — Distinción de razón</a>
+  <a class="nav-item sub" href="#sec-actos">Sil. 23 — Acto nuevo en el tiempo</a>
+  <a class="nav-item" href="#sec-limites">Límite de identidad y Ockham</a>
+  <a class="nav-item sub" href="#sec-limites">Sil. 24 — Finitud</a>
+  <a class="nav-item sub" href="#sec-limites">Sil. 25 — Navaja de Ockham</a>
+  <a class="nav-item sub" href="#sec-limites">Sil. 26 — Ser mayor</a>
+  <a class="nav-item sub" href="#sec-limites">Sil. 27 — Causa componente</a>
+
+  <div class="nav-section">Bloque V — Causa Componente</div>
+  <a class="nav-item" href="#sec-causa-a">Fund. ontológico <span class="nav-badge">A</span></a>
+  <a class="nav-item sub" href="#sec-causa-a">Sil. A1 — No autoexplicativa</a>
+  <a class="nav-item sub" href="#sec-causa-a">Sil. A2 — Elementos no se unifican</a>
+  <a class="nav-item sub" href="#sec-causa-a">Sil. A3 — Potencia previa</a>
+  <a class="nav-item" href="#sec-causa-b">Causa superior <span class="nav-badge">B</span></a>
+  <a class="nav-item sub" href="#sec-causa-b">Sil. B1 — Anterior al compuesto</a>
+  <a class="nav-item sub" href="#sec-causa-b">Sil. B2 — Más perfecta en unidad</a>
+  <a class="nav-item sub" href="#sec-causa-b">Sil. B3 — No puede ser el mismo</a>
+  <a class="nav-item" href="#sec-causa-c">Aplicación al divino <span class="nav-badge">C</span></a>
+  <a class="nav-item sub" href="#sec-causa-c">Sil. C1 — No Ser Necesario</a>
+  <a class="nav-item sub" href="#sec-causa-c">Sil. C2 — Potencia en elementos</a>
+  <a class="nav-item sub" href="#sec-causa-c">Sil. C3 — Prioridad interna</a>
+  <a class="nav-item sub" href="#sec-causa-c">Sil. C4 — Unidad recibida</a>
+  <a class="nav-item" href="#sec-causa-d">Refutación escapatorias <span class="nav-badge">D</span></a>
+  <a class="nav-item sub" href="#sec-causa-d">Sil. D1 — Composición eterna</a>
+  <a class="nav-item sub" href="#sec-causa-d">Sil. D2 — Elementos como actos</a>
+  <a class="nav-item sub" href="#sec-causa-d">Sil. D3 — Sui generis</a>
+  <a class="nav-item" href="#sec-maestro">Silogismo Maestro</a>
+
+  <div class="nav-section">Cierre</div>
+  <a class="nav-item" href="#conclusion-final">Conclusión general</a>
+</nav>
+
+<!-- ══════════════════════════ MAIN ══════════════════════════ -->
+<main id="main">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-eyebrow">Philosophia Perennis · Tomás de Aquino · Metafísica Clásica</div>
+    <h1 class="hero-title">El Colapso del<br><span>Teísmo Imperfecto</span></h1>
+    <p class="hero-subtitle">Potencia, Composición y Mutabilidad — Refutación Tomista del Dios Deficiente</p>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">27</div>
+        <div class="stat-label">Silogismos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">10</div>
+        <div class="stat-label">Secciones</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Objeciones<br>refutadas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Conclusión<br>necesaria</div>
+      </div>
+    </div>
+
+    <div id="resumen" class="resumen-box">
+      <p><strong>Resumen ejecutivo:</strong> Esta exposición demuestra silogísticamente que cualquier concepción de Dios que le atribuya potencia —de cualquier tipo—, composición de atributos realmente distintos, inicio temporal de actos como el amor o el habla, o amor condicionado a la conducta de las criaturas, es internamente contradictoria y filosóficamente incoherente.</p>
+      <p>El argumento procede en cinco bloques: (1) la potencia como marca formal de imperfección y la necesidad del Actus Purus; (2) la potencia pasiva como violación de la aseidad; (3) la composición como fuente de dependencia causal y contingencia; (4) el inicio temporal del amor y el habla como cambio real incompatible con la inmutabilidad; (5) la demostración de que todo compuesto requiere por definición una causa componente, lo que introduce potencia y destruye la condición de Primer Principio.</p>
+      <p>La única salida filosóficamente coherente es el <em>Actus Purus</em> tomista: un Dios en el que esencia, existencia y todos los atributos son idénticos entre sí y con su ser, sin composición, sin potencia y sin inicio temporal de ningún acto.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       INTRODUCCIÓN
+       ════════════════════════════════════════════════════════ -->
+  <section id="intro" class="content-section">
+    <div class="section-eyebrow">Fundamentos Metodológicos</div>
+    <h2 class="section-title">Introducción Filosófica</h2>
+    <p class="section-subtitle">El único criterio: consistencia interna. El único tribunal: la razón.</p>
+
+    <div class="section-intro">
+      <p>La teología racional no es un ejercicio de fe ciega sino de rigor metafísico. Cuando se afirma la existencia de un Dios perfecto, ilimitado, necesario y fundamento de todo lo que existe, se está comprometiendo con una serie de implicaciones lógicas que no pueden violarse sin contradicción performativa: el teísta que afirma a Dios como Ser Supremo y al mismo tiempo le atribuye potencia, composición, inicio temporal del amor o del habla, o atributos condicionados por la conducta de las criaturas, no está describiendo al Dios del monoteísmo filosófico — está describiendo un ser finito, derivado y contingente al que ha puesto el nombre de "Dios".</p>
+      <p>Esta exposición es una demolición silogística sistemática. No apela a la fe ni a la revelación, sino exclusivamente a los principios de la metafísica clásica tal como los formula Tomás de Aquino siguiendo a Aristóteles: el principio de no-contradicción, la distinción entre acto y potencia, la doctrina de la simplicidad divina, la causalidad, y la irreversibilidad de la relación entre la Primera Causa y sus efectos. Cualquier teísmo — monoteísmo islámico estricto (<em>Tawhid</em> radical), teísmo unitario, deísmo, o cualquier concepción de un Dios que empiece a amar, cambie internamente o tenga atributos separables de su ser — será evaluado aquí con un único criterio: la consistencia interna.</p>
+      <p>El resultado es siempre el mismo: el Dios imperfecto se destruye a sí mismo antes de poder sostener el peso lógico que se le exige.</p>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">"Deus est suum esse subsistens"</div>
+      <div class="quote-source">Tomás de Aquino, Summa Theologiae I, q. 4, a. 2</div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       BLOQUE I — POTENCIA E IMPERFECCIÓN
+       ════════════════════════════════════════════════════════ -->
+  <section id="sec-potencia" class="content-section">
+    <div class="section-eyebrow">Bloque I · Secciones 1–3</div>
+    <h2 class="section-title">La Potencia como Marca de Imperfección Ontológica</h2>
+    <p class="section-subtitle">In Deo nulla est potentialitas — ST I, q. 3, a. 1</p>
+
+    <div class="section-intro">
+      <p>La distinción aristotélica entre acto y potencia no es una construcción arbitraria sino la descripción más básica del modo en que los seres existen y cambian. Todo lo que en un ser no es actualmente lo que podría ser, está en potencia respecto de ello. La madera es en potencia mesa; el niño es en potencia adulto; el ignorante es en potencia sabio. Lo que aún no es actualizado es, en ese preciso respecto, una ausencia: una carencia ontológica.</p>
+      <p>Cuando se dice que Dios tiene potencia —sea cual sea la forma que adopte— se está diciendo que hay en Dios algo que no es todavía actualmente lo que podría ser. Eso es una imperfección formal en el ser de Dios.</p>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card">
+        <div class="silo-num">SIL. 1</div>
+        <div class="silo-title">De la Potencia a la Imperfección</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Todo ser que tiene potencia respecto de alguna perfección no posee actualmente esa perfección en plenitud.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Todo ser que no posee una perfección en plenitud está limitado en ese orden.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Todo ser limitado en algún orden de perfección positiva es, en ese orden, imperfecto.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Todo ser con potencia es, en aquel respecto en que tiene potencia, ontológicamente imperfecto.</span></div>
+      </div>
+
+      <div class="silo-card">
+        <div class="silo-num">SIL. 2</div>
+        <div class="silo-title">La Potencia Exige un Actuante Exterior</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">La potencia, por sí misma, no se actualiza: ser potencial no implica ser actual.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Todo paso de potencia a acto requiere una causa que actualice lo que estaba en potencia.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Una causa que actualiza desde fuera es superior, en ese respecto, al ser que es actualizado.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Lo que requiere una causa que lo actualice no puede ser la causa incausada de todo.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Un Dios con potencia requiere un actualizador externo y, por ende, no puede ser el Primer Motor ni la Primera Causa.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card">
+        <div class="silo-num">SIL. 3</div>
+        <div class="silo-title">El Regreso al Infinito si Dios Tiene Potencia</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si Dios tiene potencia, necesita ser actualizado por una causa.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Esa causa, si también tiene potencia, necesita otra causa.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Una cadena de actualizaciones no puede ser infinita (argumento cosmológico clásico).</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Debe existir un Actualizador sin potencia alguna, es decir, Acto Puro. Si Dios no es ese Acto Puro, entonces hay algo por encima de él — lo cual destruye su condición de Dios.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POTENCIA PASIVA -->
+  <section id="sec-pasiva" class="content-section">
+    <div class="section-eyebrow">Bloque I · Secciones 4–6</div>
+    <h2 class="section-title">Potencia Pasiva — La Receptividad que Destruye la Aseidad</h2>
+    <p class="section-subtitle">La pasividad metafísica es propia de la materia, no del Ser Absoluto</p>
+
+    <div class="section-intro">
+      <p>La potencia pasiva es la capacidad de recibir una determinación desde fuera: ser informado, ser actuado, ser modificado por otro. Es la pasividad metafísica por excelencia. Es propia de la materia prima, que es pura potencialidad. Introducir potencia pasiva en Dios es introducir materia metafísica en el ser absoluto — es afirmar que hay en Dios un vacío que algo externo puede venir a llenar.</p>
+    </div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card red">
+        <div class="silo-num">SIL. 4</div>
+        <div class="silo-title">La Potencia Pasiva Viola la Aseidad</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">La potencia pasiva es la capacidad de ser determinado por otro.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Lo que puede ser determinado por otro depende de ese otro para su actualización.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que depende de otro para alguna actualización no es absolutamente <span class="latin">a se</span> (de sí mismo).</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Dios, por definición, es <span class="latin">ens a se</span> — ser que existe de sí mismo, sin dependencia.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Un Dios con potencia pasiva no puede ser <span class="latin">ens a se</span> y, por tanto, no puede ser Dios.</span></div>
+      </div>
+
+      <div class="silo-card red">
+        <div class="silo-num">SIL. 5</div>
+        <div class="silo-title">La Potencia Pasiva Invierte la Causalidad</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">En la relación causal, la causa es ontológicamente superior al efecto en aquello que le comunica.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Si Dios es determinado en su amor, en su habla o en cualquier atributo por la existencia o la conducta de la criatura, la criatura actúa causalmente sobre Dios.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">La causa es superior al efecto en la línea de lo que le comunica.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">La criatura sería causalmente superior a Dios en esa línea — contradicción directa con la relación creador-criatura.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card red">
+        <div class="silo-num">SIL. 6</div>
+        <div class="silo-title">Potencia Pasiva y Limitación de la Omnipotencia</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">La omnipotencia implica que Dios no está limitado por ningún agente externo.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">La potencia pasiva implica que un agente externo puede actualizar (y por ende, limitar o modificar) al sujeto.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que puede ser modificado por un agente externo está limitado por ese agente.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Un Dios con potencia pasiva no es omnipotente en sentido estricto — su estado interno puede ser afectado desde fuera.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       BLOQUE II — COMPOSICIÓN
+       ════════════════════════════════════════════════════════ -->
+  <section id="sec-composicion" class="content-section">
+    <div class="section-eyebrow">Bloque II · Secciones 7–9 · Navaja de Ockham</div>
+    <h2 class="section-title">Simplicidad Divina y la Composición que Todo lo Destruye</h2>
+    <p class="section-subtitle">Si los atributos son realmente distintos, Dios es compuesto — y todo compuesto depende</p>
+
+    <div class="section-intro">
+      <p>La doctrina tomista de la simplicidad divina (<span class="latin">simplicitas Dei</span>) afirma que en Dios no hay composición de ningún tipo: no hay composición de materia y forma, de sustancia y accidentes, de esencia y existencia, ni distinción real entre los atributos. La omnisciencia, la eternidad, la omnipotencia, la bondad, el amor — no son partes de Dios, sino el ser infinito de Dios considerado bajo distintas razones formales por el intelecto finito.</p>
+    </div>
+
+    <div class="distinction-box">
+      <div class="box-label">Distinción crítica — Pluralidad real vs. distinción de razón</div>
+      <p>No toda pluralidad implica composición en sentido metafísicamente degradante. Tomás admite que puede haber distinción real sin composición cuando esa distinción es <strong>constitutiva de la naturaleza misma del ser y no implica que las partes sean ontológicamente anteriores al todo</strong>. En las relaciones de origen trinitarias, las procesiones no son partes que componen a Dios sino modos de subsistir de la única esencia divina.</p>
+      <p>Sin embargo, esta solución sólo funciona dentro de una metafísica en la que hay acto eterno <em>ad intra</em>. Además, la pluralidad real de atributos que son distintos en su contenido, que se limitan mutuamente y donde uno no incluye al otro, sí introduce composición en sentido pleno — como se demuestra a continuación.</p>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card blue">
+        <div class="silo-num">SIL. 7</div>
+        <div class="silo-title">La Composición Exige una Causa Componente</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Todo ser compuesto de partes debe su unidad a algo que une esas partes.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Lo que requiere algo que lo una es posterior, en el orden del ser, a aquello que lo une.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que es posterior en el orden del ser no puede ser el Primer Principio.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Todo ser compuesto de partes realmente distintas requiere una causa que lo componga y, por ende, no puede ser la Primera Causa.</span></div>
+      </div>
+    </div>
+
+    <div class="sub-heading blue">Los Atributos Distintos se Limitan Mutuamente</div>
+    <p class="inline-note">Ejemplo concreto: omnisciencia y eternidad como atributos realmente distintos</p>
+
+    <div class="silo-grid">
+      <div class="silo-card blue">
+        <div class="silo-num">SIL. 8</div>
+        <div class="silo-title">Los Atributos Distintos se Limitan Mutuamente</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si la omnisciencia y la eternidad son atributos realmente distintos en Dios, entonces la omnisciencia no es la eternidad y la eternidad no es la omnisciencia.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Lo que no es X está, en ese preciso respecto, limitado respecto de X: la omnisciencia, al no ser la eternidad, no incluye en sí misma el contenido de la eternidad.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que no incluye en sí mismo cierta perfección positiva está limitado en ese orden.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Lo limitado en algún orden positivo es imperfecto en ese orden.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Si los atributos son realmente distintos, cada uno es imperfecto respecto del otro — lo cual destruye la perfección absoluta del ser divino.</span></div>
+      </div>
+
+      <div class="silo-card blue">
+        <div class="silo-num">SIL. 9</div>
+        <div class="silo-title">Los Atributos Distintos Generan un Ser Mayor Concebible</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si Dios tiene atributos realmente distintos (omnisciencia + eternidad + omnipotencia + bondad...), entonces existe un posible ser que los tiene todos unificados en un único acto simple.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Un ser que tiene todas esas perfecciones en unidad simple es ontológicamente mayor que un ser que las tiene como partes distintas, pues en el segundo caso cada parte es limitada respecto de las otras.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Dios, por definición, es el ser mayor que el cual ninguno puede concebirse (fórmula anselmiana).</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El Dios compuesto de atributos distintos no es el ser mayor concebible — hay un ser mayor: el ser simple que las unifica. Luego, el Dios compuesto no es Dios en sentido pleno.</span></div>
+      </div>
+    </div>
+
+    <div class="sub-heading">La Navaja de Ockham Aplicada a los Atributos</div>
+
+    <div class="distinction-box">
+      <div class="box-label">Principio de parsimonia — Aplicación ontológica</div>
+      <p>Si los múltiples atributos de Dios son realmente distintos, necesitamos explicar: (1) qué los une en un único ser; (2) por qué son exactamente esos y no otros; (3) qué limita a cada uno en su identidad — qué hace que la omnisciencia <em>termine</em> donde empieza la eternidad.</p>
+      <p>Esta tercera cuestión es filosóficamente devastadora: <strong>todo atributo real y distinto tiene un límite de identidad</strong>. La omnisciencia es omnisciencia y no eternidad. Ese "y no" es un límite. Ese límite es una negación. Esa negación introduce finitud en el atributo.</p>
+      <p>La navaja de Ockham dicta que la única salida es la identidad real de todos los atributos: no hay múltiples atributos realmente distintos, sino un único acto infinito del cual el intelecto finito extrae distintas razones formales. Esta es precisamente la posición tomista.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       BLOQUE III — AMOR Y MUTABILIDAD
+       ════════════════════════════════════════════════════════ -->
+  <section id="sec-amor" class="content-section">
+    <div class="section-eyebrow">Bloque III · Secciones 10–13</div>
+    <h2 class="section-title">El Dios que Empieza a Amar — Mutabilidad Disfrazada</h2>
+    <p class="section-subtitle">En el Dios unipersonal sin vida ad intra, el amor sólo puede ser temporal — y eso lo destruye</p>
+
+    <div class="section-intro">
+      <p>En toda concepción de un Dios unipersonal sin vida interna <em>ad intra</em> — es decir, sin el tipo de autorreferencia que en la teología trinitaria se expresa como generación del Verbo y espiración del Amor — el amor divino no puede tener objeto eterno antes de la creación. No hay en ese Dios ningún "tú" eterno al que amar. En ese contexto, cuando Dios "ama", ese amor es necesariamente <em>ad extra</em>, dirigido hacia criaturas que comienzan a existir en el tiempo. Esto tiene consecuencias filosóficas catastróficas.</p>
+    </div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card">
+        <div class="silo-num">SIL. 10</div>
+        <div class="silo-title">El Inicio del Amor es Cambio Real</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Amar es un acto del sujeto amante: implica que el sujeto está en acto de amor.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Antes de la existencia de la criatura, ese sujeto no estaba en acto de amor (pues no había objeto al que amar).</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Pasar de no-estar-en-acto-de-amor a estar-en-acto-de-amor es un cambio real en el sujeto.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Todo cambio real implica paso de potencia a acto.</span></div>
+        <div class="silo-premise"><span class="premise-label">P5</span><span class="premise-text">Dios no tiene potencia.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Dios no puede pasar de no amar a amar. Si lo hace, no es el Dios sin potencia — es un ser distinto al que se le ha dado el nombre de Dios impropiamente.</span></div>
+      </div>
+
+      <div class="silo-card">
+        <div class="silo-num">SIL. 11</div>
+        <div class="silo-title">El Amor Temporal Implica que Dios era Antes Menos Perfecto</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">El amor es una perfección positiva en el ser que ama.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Si Dios empieza a amar en el momento T, antes del momento T carecía de esa perfección.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Carecer de una perfección positiva es ser menos perfecto en ese orden.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Antes del momento T, Dios era menos perfecto que después — lo cual contradice la perfección absoluta e inmutable de la divinidad.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card">
+        <div class="silo-num">SIL. 12</div>
+        <div class="silo-title">El Amor Condicionado a la Existencia de la Criatura</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si el amor de Dios comienza cuando la criatura comienza a existir, la existencia de la criatura es condición necesaria para el amor de Dios.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Lo que tiene una condición necesaria depende de que esa condición se cumpla.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que depende de la existencia de la criatura no es absolutamente independiente de la criatura.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Un Dios cuyo amor está condicionado a la existencia de la criatura no es absolutamente independiente — viola la aseidad y la perfección absoluta.</span></div>
+      </div>
+
+      <div class="silo-card">
+        <div class="silo-num">SIL. 13</div>
+        <div class="silo-title">La Potencia de Amar Previa al Amor es Potencia Real en Dios</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si antes del acto de amar Dios tenía la <em>potencia</em> de amar, esa potencia es real en Dios.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Toda potencia real en un ser es una determinación incompleta: el ser está, en ese respecto, aún no actualizado.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo no actualizado en Dios contradice el Acto Puro.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Incluso la solución de "potencia de amar previa" introduce potencia real en Dios — incompatible con el <span class="latin">Actus Purus</span>. No hay escapatoria por esa vía.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAWHID Y EL HABLAR -->
+  <section id="sec-tawhid" class="content-section">
+    <div class="section-eyebrow">Bloque III · Secciones 14–16</div>
+    <h2 class="section-title">El Tawhid Estricto y el Problema del Hablar Divino</h2>
+    <p class="section-subtitle">¿Por qué la solución de la relatio rationis no salva al Dios unipersonal?</p>
+
+    <div class="section-intro">
+      <p>La respuesta tomista clásica al problema del cambio al crear es elegante: cuando Dios crea, la relación es real en la criatura y de razón en Dios, que no cambia. Esto funciona porque en Tomás, Dios ya es eternamente acto pleno de conocer, querer y amar — su acto eterno <em>ad intra</em> es tan completo que la creación no añade nada a Dios. Pero en el Dios del Tawhid estricto unipersonal, sin Verbo eterno, sin procesiones internas, no hay ese acto eterno <em>ad intra</em> que sirva de base para la <span class="latin">relatio rationis</span>.</p>
+    </div>
+
+    <div class="objection-block">
+      <div class="obj-label">Objeción a refutar</div>
+      <p>"Cuando Dios habla o crea, sólo cambia la criatura, no Dios — es un cambio externo (<span class="latin">relatio rationis</span>), no interno."</p>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card green">
+        <div class="silo-num">SIL. 14</div>
+        <div class="silo-title">Sin Acto Eterno ad intra, el Hablar es Acto Nuevo</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Un acto de habla es real en el sujeto que habla: implica que ese sujeto está en acto de significar.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Si el Dios unipersonal no tenía ningún Verbo interno eterno, no estaba previamente en ningún acto de significación.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Pasar de no-estar-en-acto-de-significar a estarlo es adquirir un acto nuevo.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Adquirir un acto nuevo implica cambio real en el sujeto.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El Dios unipersonal que empieza a hablar cambia realmente — viola la inmutabilidad.</span></div>
+      </div>
+
+      <div class="silo-card green">
+        <div class="silo-num">SIL. 15</div>
+        <div class="silo-title">La Relatio Rationis Requiere lo que el Tawhid Estricto Niega</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">La <span class="latin">relatio rationis</span> en Dios sólo es viable si Dios ya es, desde la eternidad, acto pleno y completo que no recibe nada nuevo del exterior.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">El Dios pleno y completo <em>ad intra</em> requiere que su acto de conocer, querer y amar sea eterno, perfecto y sin inicio temporal.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">El Tawhid estricto unipersonal niega las procesiones internas eternas y, por ende, niega que haya un acto eterno de amor y conocimiento perfectamente subsistente <em>ad intra</em>.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El Tawhid estricto no tiene derecho a usar la solución de la <span class="latin">relatio rationis</span> — carece de la base metafísica que esa solución requiere. El cambio al hablar es real, no meramente relacional.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card green">
+        <div class="silo-num">SIL. 16</div>
+        <div class="silo-title">El Dios que Habla sin Verbo Eterno Adquiere Nuevos Contenidos Inteligibles</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Hablar es expresar un contenido inteligible ya presente en el intelecto del hablante.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Si el Dios unipersonal no tiene un Verbo eterno en que estén presentes los contenidos inteligibles, esos contenidos no estaban previamente en su intelecto de modo actual.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Adquirir contenidos inteligibles que antes no se tenían es un cambio en el intelecto del sujeto.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El Dios unipersonal que habla sin Verbo eterno adquiere nuevos contenidos inteligibles al hablar — su intelecto cambia, incompatible con la omnisciencia eterna e inmutable.</span></div>
+      </div>
+    </div>
+
+    <div class="corollary-box">
+      <div class="box-label">Corolario del Tawhid</div>
+      <p>La única salida es afirmar que el Dios del Tawhid tiene, desde la eternidad, un acto pleno de autoconocimiento y autoamor real, subsistente y distinto del simple "ser" de Dios. Pero esto — un acto eterno en que el sujeto que conoce y el objeto conocido se distinguen — es exactamente lo que en la teología trinitaria se llama Verbo eterno. El Tawhid que rechaza el Logos para preservar la unidad termina, o aceptando el cambio en Dios, o aceptando de facto el germen de la distinción intradivina.</p>
+    </div>
+  </section>
+
+  <!-- TRIPLE COLAPSO -->
+  <section id="sec-triple" class="content-section">
+    <div class="section-eyebrow">Bloque III · Secciones 17–20</div>
+    <h2 class="section-title">"Dios Ama Sólo a Quien Se Porta Bien" — Triple Colapso</h2>
+    <p class="section-subtitle">El amor condicionado destruye simultáneamente tres atributos divinos fundamentales</p>
+
+    <div class="triple-grid">
+      <div class="triple-card tc-red">
+        <div class="triple-card-num">I</div>
+        <div class="triple-card-label">Primer Colapso</div>
+        <div class="triple-card-title">Mutabilidad</div>
+        <p>Si Dios ama al justo y deja de amar al pecador, el estado del amor divino varía con la conducta humana. Toda variación es cambio. Dios inmutable no cambia. Contradicción formal.</p>
+      </div>
+      <div class="triple-card tc-blue">
+        <div class="triple-card-num">II</div>
+        <div class="triple-card-label">Segundo Colapso</div>
+        <div class="triple-card-title">Dependencia Ontológica</div>
+        <p>Si el amor de Dios depende de la conducta de la criatura, la criatura determina el estado de Dios. La causa es determinada por su efecto — violación directa del principio de causalidad.</p>
+      </div>
+      <div class="triple-card tc-green">
+        <div class="triple-card-num">III</div>
+        <div class="triple-card-label">Tercer Colapso</div>
+        <div class="triple-card-title">Finitud del Acto</div>
+        <p>El amor limitado a una clase de seres es un amor finito. Un acto finito no puede ser idéntico al Ser Infinito. Ese amor no es Dios mismo: es un accidente en Dios → composición → no-Dios.</p>
+      </div>
+    </div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card red">
+        <div class="silo-num">SIL. 17</div>
+        <div class="silo-title">El Amor Condicionado Implica Variación Interna</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si Dios ama al justo y no ama al pecador, el estado del amor de Dios varía según varía la conducta humana.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Cuando Pedro peca, Dios deja de amarlo; cuando Pedro se arrepiente, Dios vuelve a amarlo. Eso es una variación.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Toda variación en el estado interno de un sujeto es un cambio real en ese sujeto.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Dios es absolutamente inmutable — no admite cambio real alguno.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El amor condicionado introduce cambio real en Dios — contradicción directa con la inmutabilidad divina. El dilema es perfecto: si el amor es eternamente igual, se destruye el amor condicionado; si varía, Dios muta.</span></div>
+      </div>
+
+      <div class="silo-card red">
+        <div class="silo-num">SIL. 18</div>
+        <div class="silo-title">La Criatura Determina a Dios</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si el amor de Dios aumenta cuando la criatura actúa bien, la buena acción de la criatura es causa del incremento del amor divino.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">La causa es ontológicamente anterior y superior al efecto en la línea de lo que produce.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Si la conducta de la criatura produce un incremento en Dios, la criatura es, en esa línea, causalmente superior a Dios.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">La criatura sería parcialmente causa de Dios — invierte completamente la relación creador-criatura y destruye la aseidad divina.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card red">
+        <div class="silo-num">SIL. 19</div>
+        <div class="silo-title">El Amor Parcial No Puede ser Idéntico al Ser Infinito</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">El amor de Dios, si es idéntico a su ser (como exige la simplicidad), es infinito en su extensión y alcance.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Un amor que excluye a ciertos seres (los pecadores, los no-obedientes) no es infinito en extensión: tiene límites.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo limitado en extensión no es infinito. Si el amor divino es finito, no puede ser idéntico al Ser Infinito de Dios.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El amor condicionado introduce en Dios una distinción entre su ser y su amor — introduce composición. Y todo lo compuesto colapsa.</span></div>
+      </div>
+
+      <div class="silo-card red">
+        <div class="silo-num">SIL. 20</div>
+        <div class="silo-title">El Amor Condicionado Viola el Summum Bonum</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">El Bien Supremo (<span class="latin">Summum Bonum</span>) difunde su bondad sin restricción — <span class="latin">Bonum est diffusivum sui</span> (el bien se difunde por sí mismo).</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Un amor que se restringe en función de la conducta del receptor no se difunde sin restricción.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que no se difunde sin restricción no es el Bien Supremo en sentido absoluto.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El Dios de amor condicionado no es el Bien Supremo — es un bien limitado que dispensa favores según méritos: la estructura de un ser finito, no del Ser Absoluto.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       BLOQUE IV — ACTOS Y LÍMITES
+       ════════════════════════════════════════════════════════ -->
+  <section id="sec-actos" class="content-section">
+    <div class="section-eyebrow">Bloque IV · Secciones 21–23</div>
+    <h2 class="section-title">La Multiplicidad de Actos Divinos — Una Pluralidad que Requiere Anclaje</h2>
+    <p class="section-subtitle">Conocer, querer, amar: ¿actos realmente distintos o razones formales de un único acto?</p>
+
+    <div class="section-intro">
+      <p>La distinción fundamental: en la metafísica tomista, no toda pluralidad implica composición degradante. La pluralidad de relaciones de origen es constitutiva del ser mismo y no implica que el todo dependa de las partes. Sin embargo, en el Dios unipersonal sin procesiones eternas, si se distinguen los actos divinos, esa distinción no puede ser de relaciones de origen, sino de contenidos heterogéneos. Y eso sí introduce composición.</p>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card">
+        <div class="silo-num">SIL. 21</div>
+        <div class="silo-title">Actos Heterogéneos en Dios Implican Composición Real</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si conocer y amar son actos realmente distintos en Dios (distintos en contenido, no meramente en razón formal), entonces cada uno tiene un contenido que el otro no tiene.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Tener un contenido que otro no tiene implica que ese contenido es una determinación positiva que limita al acto en su identidad.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Un acto limitado en su identidad es un acto finito en ese respecto.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Actos finitos en un ser son partes de ese ser. Las partes de un ser componen ese ser.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Un Dios cuyos actos son realmente distintos en contenido es un Dios compuesto de partes — con todas las consecuencias ya demostradas.</span></div>
+      </div>
+
+      <div class="silo-card">
+        <div class="silo-num">SIL. 22</div>
+        <div class="silo-title">Si los Actos son Idénticos, la Distinción es de Razón, No Real</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si conocer, querer y amar son en Dios un único e idéntico acto infinito, sólo son distintos según la razón con que el intelecto finito los capta.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">La distinción de razón no introduce composición real en el ser.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">La única forma de salvar la simplicidad divina es afirmar que todos los "actos" de Dios son un único Acto Puro. Pero entonces no puede haber "acto nuevo" en quien ya es Acto pleno desde la eternidad — el teísmo que atribuía actos temporalmente distintos colapsa.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card">
+        <div class="silo-num">SIL. 23</div>
+        <div class="silo-title">El Acto Nuevo en el Tiempo Implica que el Acto Eterno era Incompleto</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si Dios realiza un acto en el tiempo T (amar, hablar, crear) que no realizaba antes, ese acto es temporalmente nuevo.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Lo temporalmente nuevo no existía antes.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que no existía antes en Dios era, antes de existir, o bien nada (y entonces Dios adquiere algo de la nada, lo cual es creación de sí mismo), o bien potencia (y entonces hay potencia en Dios).</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Ambas alternativas son incompatibles con el <span class="latin">Actus Purus</span>.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">No puede haber en Dios ningún acto temporalmente nuevo — todos sus "actos" son el único e idéntico Acto eterno. El dilema no tiene salida para el teísmo imperfecto.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LÍMITE DE IDENTIDAD -->
+  <section id="sec-limites" class="content-section">
+    <div class="section-eyebrow">Bloque IV · Secciones 24–27 · Argumento del Límite de Identidad</div>
+    <h2 class="section-title">Limitación, Navaja de Ockham y el Límite de Identidad</h2>
+    <p class="section-subtitle">Todo atributo real y distinto tiene un límite donde termina — ese límite es finitud</p>
+
+    <div class="section-intro">
+      <p>Tomemos dos atributos supuestamente distintos: la omnisciencia (O) y la eternidad (E). Si son realmente distintos, la omnisciencia no incluye el contenido de la eternidad. Hay algo en el ser de Dios (la eternidad) que la omnisciencia, en cuanto tal, no es. La omnisciencia tiene un límite: llega hasta donde termina su contenido y comienza el de la eternidad. Ese límite no es un accidente descriptivo — es una determinación ontológica que introduce finitud.</p>
+    </div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card">
+        <div class="silo-num">SIL. 24</div>
+        <div class="silo-title">El Límite de Identidad Introduce Finitud</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Todo atributo realmente distinto de otro tiene un límite de identidad: es lo que es y no lo que el otro es.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">El límite de identidad es una negación determinada: "X no es Y".</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Toda negación determinada en un ser positivo introduce finitud en ese ser: el ser está limitado por aquello que no es.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Lo infinito no tiene negaciones determinadas — precisamente porque lo infinito incluye, de modo eminente, todo contenido positivo.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Todo atributo realmente distinto de otro es finito en su identidad. Luego, un Dios con atributos realmente distintos es un Dios de atributos finitos — no el Ser Infinito.</span></div>
+      </div>
+
+      <div class="silo-card">
+        <div class="silo-num">SIL. 25</div>
+        <div class="silo-title">La Navaja de Ockham Contra la Multiplicidad de Atributos</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">No deben multiplicarse las entidades (o las distinciones reales) sin necesidad.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Si la multiplicidad real de atributos en Dios introduce composición, dependencia de una causa componente, finitud en cada atributo y necesidad de explicar el límite de identidad de cada uno...</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">...entonces esa multiplicidad real introduce más problemas explicativos de los que resuelve. La hipótesis alternativa — un único Acto Infinito captado bajo distintas razones formales — explica los mismos fenómenos sin ninguno de esos problemas.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Por parsimonia ontológica, la distinción real de atributos debe rechazarse en favor de la identidad real con distinción de razón. El Dios compuesto de múltiples atributos distintos viola la navaja de Ockham — es ontológicamente superfluo y explicativamente inferior.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card">
+        <div class="silo-num">SIL. 26</div>
+        <div class="silo-title">El Conjunto de Atributos Compone un Ser Mayor Concebible</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si los atributos de Dios son realmente distintos, existe la posibilidad lógica de un ser que tenga exactamente esos mismos atributos pero en unidad perfecta y simple.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Un ser que tiene las mismas perfecciones en unidad simple es mayor que un ser que las tiene dispersas en atributos distintos, pues en el segundo caso cada atributo es limitado por los demás.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Dios, por definición, es el ser del que no puede concebirse uno mayor.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Si los atributos son distintos, puede concebirse un ser mayor que Dios — luego el Dios de atributos distintos no es Dios en sentido anselmiano. La composición destruye la perfección absoluta.</span></div>
+      </div>
+
+      <div class="silo-card">
+        <div class="silo-num">SIL. 27</div>
+        <div class="silo-title">La Composición Exige Explicar la Unificación</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si Dios es compuesto de múltiples atributos realmente distintos, esa composición es un hecho metafísico que requiere explicación.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">La explicación de una composición es la causa que compone: algo ha unido esos atributos en ese ser.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Esa causa es ontológicamente anterior y superior a la composición que produce.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Lo que tiene una causa anterior y superior no puede ser el Ser Primero sin causa.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El Dios compuesto de atributos realmente distintos requiere una causa que lo componga — lo cual destruye su carácter de Ser Necesario e incausado.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       BLOQUE V — CAUSA COMPONENTE (Silogismos A, B, C, D)
+       ════════════════════════════════════════════════════════ -->
+  <section id="sec-causa-a" class="content-section">
+    <div class="section-eyebrow">Bloque V — Fundamento Ontológico</div>
+    <h2 class="section-title">Todo Compuesto Requiere Causa Componente</h2>
+    <p class="section-subtitle">Demostración filosófica rigurosa desde el principio de razón suficiente</p>
+
+    <div class="section-intro">
+      <p>Los siguientes silogismos constituyen la demostración independiente y más exhaustiva de una tesis central: no sólo es que la composición introduce imperfección, sino que la composición es, por definición estructural, imposible en el Ser Primero — porque toda composición, incluso eterna, requiere una causa que la explique, lo que implica algo anterior a Dios y potencia en sus elementos.</p>
+    </div>
+
+    <div class="sub-heading">Bloque A — Fundamento Ontológico de la Composición</div>
+
+    <div class="silo-grid">
+      <div class="silo-card blue">
+        <div class="silo-num">SIL. A1</div>
+        <div class="silo-title">La Composición No es Autoexplicativa</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Todo estado de cosas que podría no darse requiere una razón suficiente de por qué se da y no de otro modo.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">La unión de dos o más elementos en un compuesto es un estado de cosas que podría no darse: los elementos podrían no estar unidos, o estar unidos de otro modo.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Luego, la unión constitutiva de todo compuesto requiere una razón suficiente que explique por qué esos elementos están unidos así y no de otro modo.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Una razón suficiente que explica una unión es, en sentido propio, una causa de esa unión.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Todo compuesto requiere una causa de su composición. La composición nunca es un hecho bruto autoexplicativo — siempre remite a algo exterior a los elementos mismos que los une.</span></div>
+      </div>
+
+      <div class="silo-card blue">
+        <div class="silo-num">SIL. A2</div>
+        <div class="silo-title">Los Elementos No se Unifican por Sí Mismos</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Dos elementos realmente distintos, en cuanto distintos, no contienen en sí mismos la razón de su unión: si la contuviesen, serían uno y no dos.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Lo que no contiene en sí mismo la razón de algo requiere esa razón desde fuera.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Requerir la razón de la propia unión desde fuera es depender causalmente de algo exterior.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Lo que depende causalmente de algo exterior para su unión no subsiste por sí mismo en cuanto compuesto.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Ningún compuesto subsiste por sí mismo en virtud de sus elementos solos. Un Dios compuesto no subsiste <span class="latin">a se</span> sino <span class="latin">ab alio</span> en cuanto a su composición.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card blue">
+        <div class="silo-num">SIL. A3</div>
+        <div class="silo-title">La Distinción Real Introduce Potencia Antes de la Unión</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Antes de que dos elementos realmente distintos estén compuestos, cada uno es lo que es sin ser el otro.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Ser lo que uno es sin incluir al otro significa que cada elemento, considerado aisladamente, <em>puede</em> ser unido al otro o no serlo — esa posibilidad es potencia real.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">La potencia de ser unido es una potencia real en cada elemento antes de la composición.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Luego, la composición actualiza una potencia que los elementos tenían antes de estar compuestos. Lo que actualiza una potencia es una causa actualizante.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Todo compuesto presupone potencia en sus elementos y requiere una causa que actualice esa potencia. No puede haber composición sin potencia previa y sin causa actualizante. Si Dios es compuesto, hubo en sus elementos potencia de composición — incompatible con el <span class="latin">Actus Purus</span>.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-causa-b" class="content-section">
+    <div class="section-eyebrow">Bloque V — La Causa es Superior al Compuesto</div>
+    <h2 class="section-title">La Causa Componente es Ontológicamente Superior al Compuesto</h2>
+    <p class="section-subtitle">Lo que produce la unidad de un ser es más fundamental que ese ser</p>
+
+    <div class="sub-heading blue">Bloque B — Superioridad Ontológica de la Causa Componente</div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card">
+        <div class="silo-num">SIL. B1</div>
+        <div class="silo-title">La Causa de la Unión es Anterior al Compuesto</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">La causa es ontológicamente anterior al efecto en la línea de lo que produce.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">La composición es el efecto producido por la causa componente.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Luego, la causa componente es ontológicamente anterior a la composición que produce. Lo que es ontológicamente anterior al compuesto es, en esa línea, más fundamental que el compuesto.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Si Dios fuese compuesto, habría algo ontológicamente más fundamental que Dios — es decir, habría algo antes de Dios. Pero Dios es el Ser Primero. Contradicción.</span></div>
+      </div>
+
+      <div class="silo-card">
+        <div class="silo-num">SIL. B2</div>
+        <div class="silo-title">Lo que Compone es Más Perfecto en el Orden de la Unidad</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">La unidad es una perfección trascendental: todo ser es uno en la medida en que es ser (<span class="latin">ens et unum convertuntur</span>).</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">La causa que produce la unidad de un compuesto posee esa unidad en acto — de lo contrario no podría comunicarla.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que posee en acto la perfección de la unidad es más uno que el compuesto que recibe esa unidad desde fuera. Lo más uno es, en el orden del ser, más perfecto y más fundamental.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">La causa componente es más perfecta en el orden de la unidad que el compuesto que ella produce. Luego, el Dios compuesto tiene por encima de sí algo más uno, más simple y más perfecto. Pero nada puede ser más perfecto que Dios — nueva contradicción.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid">
+      <div class="silo-card">
+        <div class="silo-num">SIL. B3</div>
+        <div class="silo-title">La Causa Componente No Puede ser el Propio Compuesto</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Nada puede ser causa eficiente de sí mismo en el mismo respecto en que es efecto: esto violaría el principio de no-contradicción (<span class="latin">idem non potest esse simul causa et effectus sui ipsius in eodem genere</span>).</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Si el Dios compuesto fuese causa de su propia composición, sería causa de sí mismo en el mismo respecto en que es efecto de esa composición.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Esto viola el principio de no-contradicción.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El compuesto no puede ser causa de su propia composición. La causa componente debe ser exterior al compuesto en cuanto compuesto. Luego, el Dios compuesto requiere necesariamente una causa exterior — lo cual destruye su aseidad y su condición de Primer Principio.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-causa-c" class="content-section">
+    <div class="section-eyebrow">Bloque V — Aplicación al Divino Compuesto</div>
+    <h2 class="section-title">Aplicación Directa al Divino Compuesto</h2>
+    <p class="section-subtitle">El Dios compuesto es contingente, dependiente y no necesario</p>
+
+    <div class="sub-heading green">Bloque C — Consecuencias para el Ser Divino</div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card green">
+        <div class="silo-num">SIL. C1</div>
+        <div class="silo-title">El Dios Compuesto No es Ser Necesario</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">El Ser Necesario existe por sí mismo con necesidad absoluta: no puede no existir y no puede ser de otro modo.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Un ser compuesto podría, en principio, no estar compuesto: sus elementos podrían no estar unidos, o podrían estar unidos de otro modo.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que podría no ser así como es, o podría no ser en absoluto, no existe con necesidad absoluta.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Ningún ser compuesto puede ser el Ser Necesario. Todo compuesto es contingente en cuanto a su composición — depende de que la causa componente lo una efectivamente. El Dios compuesto es un ser contingente con el nombre de Dios.</span></div>
+      </div>
+
+      <div class="silo-card green">
+        <div class="silo-num">SIL. C2</div>
+        <div class="silo-title">El Dios Compuesto Tiene Potencia en Sus Elementos</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Los elementos que componen un ser, antes de estar compuestos, están en potencia respecto de la composición: pueden ser compuestos o no.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Si los atributos o partes de Dios son realmente distintos entre sí, cada uno de ellos, en cuanto distinto, está en potencia respecto de su unión con los demás.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Potencia en los elementos de Dios es potencia en Dios mismo, pues esos elementos son Dios (o partes de Dios). Potencia en Dios contradice el <span class="latin">Actus Purus</span>.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Un Dios compuesto tiene necesariamente potencia — aunque sea en el orden de la composición de sus propios elementos. La composición y el <span class="latin">Actus Purus</span> son mutuamente excluyentes sin excepción posible.</span></div>
+      </div>
+    </div>
+
+    <div class="silo-grid cols-2">
+      <div class="silo-card green">
+        <div class="silo-num">SIL. C3</div>
+        <div class="silo-title">El Compuesto Divino Introduce un Orden de Prioridad Interno</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">En todo compuesto, los elementos son ontológicamente anteriores al compuesto que forman: el compuesto depende de los elementos, no al revés.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Si Dios es compuesto de esencia y existencia (o de sustancia y atributos), esos elementos son ontológicamente anteriores a Dios en cuanto compuesto.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que es ontológicamente anterior a Dios es más fundamental que Dios. Nada puede ser más fundamental que el Ser Primero.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El Dios compuesto tiene algo más fundamental que él dentro de sí mismo — sus propios elementos lo preceden en el orden del ser. O los elementos son idénticos a Dios (y desaparece la composición real), o son anteriores a Dios (y entonces Dios no es el Primero). No hay término medio.</span></div>
+      </div>
+
+      <div class="silo-card green">
+        <div class="silo-num">SIL. C4</div>
+        <div class="silo-title">La Composición Divina Implica que Dios Recibe su Unidad</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Todo compuesto recibe su unidad de la causa que lo compone.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Recibir es propio de lo que está en potencia respecto de lo que recibe.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Si Dios recibe su unidad de una causa componente, Dios está en potencia respecto de esa unidad. Estar en potencia respecto de la propia unidad es no-ser-uno por sí mismo.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">No-ser-uno por sí mismo es ser uno sólo contingente y derivadamente.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">El Dios compuesto no es uno por sí mismo sino por su causa. Su unidad es prestada, no intrínseca. Pero Dios debe ser uno absolutamente por sí mismo — la composición destruye la unidad absoluta de Dios.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-causa-d" class="content-section">
+    <div class="section-eyebrow">Bloque V — Refutación de Escapatorias</div>
+    <h2 class="section-title">Refutación de las Posibles Escapatorias</h2>
+    <p class="section-subtitle">Las tres objeciones más sofisticadas y por qué ninguna salva al Dios compuesto</p>
+
+    <div class="sub-heading red">Bloque D — Objeciones y Respuestas</div>
+
+    <!-- Objeción 1 -->
+    <div class="objection-block">
+      <div class="obj-label">Objeción D1</div>
+      <p>"La composición en Dios es eterna y no requiere inicio temporal. Los elementos nunca estuvieron separados y nunca hubo un 'momento' en que se unieran. Luego, no se requiere una causa temporal de la composición."</p>
+    </div>
+    <div class="silo-grid">
+      <div class="silo-card red">
+        <div class="silo-num">SIL. D1</div>
+        <div class="silo-title">La Composición Eterna No Elimina la Dependencia Causal</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">La dependencia causal no es necesariamente temporal: una causa puede ser simultánea a su efecto y, sin embargo, ontológicamente anterior (causa <span class="latin">in esse</span>, no sólo <span class="latin">in fieri</span>).</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">La composición eterna de Dios seguiría requiriendo una causa que sostenga la unión <span class="latin">in esse</span> — es decir, una causa que en la eternidad misma mantenga unidos los elementos.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Una causa que sostiene eternamente la unión es ontológicamente anterior a esa unión, aunque no temporalmente anterior. Algo ontológicamente anterior a Dios en la eternidad misma es más fundamental que Dios.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">La eternidad de la composición no elimina la dependencia causal — sólo la hace eterna también. Un Dios eternamente compuesto depende eternamente de su causa componente. La composición eterna no salva al Dios compuesto: lo hace eternamente dependiente.</span></div>
+      </div>
+    </div>
+
+    <!-- Objeción 2 -->
+    <div class="objection-block" style="margin-top:32px;">
+      <div class="obj-label">Objeción D2</div>
+      <p>"La composición no implica potencia si los elementos son todos igualmente acto. Los elementos del Dios compuesto son todos actos puros — sin potencia — y su unión no actualiza ninguna potencia sino que es simplemente la coexistencia de actos."</p>
+    </div>
+    <div class="silo-grid">
+      <div class="silo-card red">
+        <div class="silo-num">SIL. D2</div>
+        <div class="silo-title">La "Coexistencia de Actos Puros" es un Mero Agregado — No una Unidad</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Si dos elementos son actos puros realmente distintos, cada uno es acto pleno en su orden y no requiere nada exterior para ser lo que es.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Si cada elemento no requiere nada exterior para ser lo que es, su unión con el otro no añade nada a su ser — es extrínseca y accidental a cada uno.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que está unido de modo extrínseco y accidental puede estar desunido sin que ninguno de los elementos pierda nada de su ser.</span></div>
+        <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">Lo que puede estar desunido sin pérdida ontológica para los elementos no forma con ellos una unidad sustancial sino un mero agregado.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">Si los elementos son actos puros realmente distintos, su "composición" es un mero agregado extrínseco, no una unidad sustancial. Un Dios que es mero agregado de actos puros distintos es una colección — posterior a sus miembros, contingente en su agrupación y dependiente de una causa que la agrupe. La objeción se destruye a sí misma.</span></div>
+      </div>
+    </div>
+
+    <!-- Objeción 3 -->
+    <div class="objection-block" style="margin-top:32px;">
+      <div class="obj-label">Objeción D3</div>
+      <p>"En Dios la composición puede ser <span class="latin">sui generis</span>, de un tipo completamente distinto al de las criaturas — tan distinto que los argumentos anteriores no apliquen."</p>
+    </div>
+    <div class="silo-grid">
+      <div class="silo-card red">
+        <div class="silo-num">SIL. D3</div>
+        <div class="silo-title">La "Composición Sui Generis" es un Pseudoconcepto</div>
+        <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Una composición completamente <span class="latin">sui generis</span>, que no comparte ninguna estructura con la composición en general, es, por definición, una categoría para la que no tenemos ningún concepto determinado.</span></div>
+        <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Predicar de Dios una "composición" de la que no podemos decir nada determinado es predicar una palabra vacía de contenido.</span></div>
+        <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Las predicaciones vacías de contenido no informan nada sobre el ser al que se aplican.</span></div>
+        <hr class="silo-divider">
+        <div class="silo-conclusion"><span class="conclusion-label">∴ C</span><span class="conclusion-text">O la composición divina comparte la estructura básica de toda composición — y entonces todos los argumentos anteriores aplican — o es un pseudoconcepto vacío. No hay término medio viable. El teísmo que recurre a una composición incomprensible para escapar de la silogística ha abandonado la teología racional y se ha refugiado en el irracionalismo.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SILOGISMO MAESTRO -->
+  <section id="sec-maestro" class="content-section">
+    <div class="section-eyebrow">Síntesis del Bloque V</div>
+    <h2 class="section-title">Silogismo Maestro Integrador</h2>
+    <p class="section-subtitle">La síntesis de todos los argumentos sobre composición y causa componente</p>
+
+    <div class="silo-master">
+      <div class="silo-title">Síntesis: Por qué Todo Compuesto Requiere Causa y Eso Implica Potencia</div>
+      <div class="silo-premise"><span class="premise-label">P1</span><span class="premise-text">Todo compuesto tiene elementos realmente distintos entre sí.</span></div>
+      <div class="silo-premise"><span class="premise-label">P2</span><span class="premise-text">Elementos realmente distintos entre sí no contienen en sí mismos la razón de su unión.</span></div>
+      <div class="silo-premise"><span class="premise-label">P3</span><span class="premise-text">Lo que no contiene en sí mismo la razón de su unión requiere esa razón desde fuera — es decir, requiere una causa componente.</span></div>
+      <div class="silo-premise"><span class="premise-label">P4</span><span class="premise-text">La causa componente es ontológicamente anterior y superior al compuesto en la línea de la unidad.</span></div>
+      <div class="silo-premise"><span class="premise-label">P5</span><span class="premise-text">Lo que tiene algo ontológicamente anterior y superior no puede ser el Primer Principio sin causa.</span></div>
+      <div class="silo-premise"><span class="premise-label">P6</span><span class="premise-text">Antes de ser compuestos, los elementos están en potencia respecto de la composición.</span></div>
+      <div class="silo-premise"><span class="premise-label">P7</span><span class="premise-text">Potencia en los elementos de Dios es potencia en Dios.</span></div>
+      <div class="silo-premise"><span class="premise-label">P8</span><span class="premise-text">Potencia en Dios contradice el <span class="latin">Actus Purus</span> y destruye la condición de Primer Motor Inmóvil.</span></div>
+      <div class="silo-premise"><span class="premise-label">P9</span><span class="premise-text">Un Dios que requiere causa componente y que tiene potencia en sus elementos no puede ser el Ser Necesario, Simple, Primero e Inmutable que el concepto de Dios exige.</span></div>
+      <hr class="silo-divider">
+      <div class="silo-conclusion">
+        <span class="conclusion-label">∴ C</span>
+        <span class="conclusion-text">Es metafísicamente imposible que el Ser Divino sea compuesto en ningún sentido en que esa composición sea real. Toda composición real en Dios introduce simultáneamente: (a) dependencia de una causa exterior, (b) potencia en los elementos, (c) contingencia en la unión, y (d) algo ontológicamente anterior a Dios dentro o fuera de él. Cualquiera de estas cuatro consecuencias, tomada sola, destruye el concepto filosófico coherente de Dios. Las cuatro juntas hacen la posición no sólo falsa sino internamente contradictoria.</span>
+      </div>
+    </div>
+
+    <div class="quote-block" style="margin-top:40px;">
+      <div class="quote-text">"Omne compositum est posterius suis componentibus et dependens ab eis."</div>
+      <div class="quote-source" style="margin-bottom:8px;">Tomás de Aquino, De Ente et Essentia, c. 4</div>
+      <div style="font-size:15px; color:var(--text-faint); font-style:italic;">"Todo compuesto es posterior a sus componentes y depende de ellos."</div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       CONCLUSIÓN FINAL
+       ════════════════════════════════════════════════════════ -->
+  <section id="conclusion-final" class="content-section">
+    <div class="section-eyebrow">Conclusión General</div>
+    <h2 class="section-title">El Ser que Resiste — Sólo el Acto Puro Sobrevive</h2>
+    <p class="section-subtitle">Cada argumento converge en la misma conclusión estructural necesaria</p>
+
+    <div class="section-intro">
+      <p>Cada uno de los argumentos presentados a lo largo de esta exposición converge en una misma conclusión estructural: todo teísmo que atribuya a Dios potencia, composición, inicio temporal de actos, atributos condicionalmente ejercidos, o atributos realmente distintos entre sí y de su ser, termina describiendo un ser que no puede ser Dios.</p>
+    </div>
+
+    <div class="conclusion-items">
+      <div class="conclusion-item">
+        <div class="ci-num">01</div>
+        <div class="ci-text">Todo Dios con potencia (activa o pasiva no idéntica a su acto) está ontológicamente incompleto — requiere un actualizador exterior y no puede ser la Primera Causa ni el Primer Motor.</div>
+      </div>
+      <div class="conclusion-item">
+        <div class="ci-num">02</div>
+        <div class="ci-text">Un Dios cuyos atributos no son idénticos a su ser es compuesto y, por tanto, derivado — requiere una causa que lo componga, lo que destruye la aseidad y el carácter de Ser Necesario.</div>
+      </div>
+      <div class="conclusion-item">
+        <div class="ci-num">03</div>
+        <div class="ci-text">Un Dios que empieza a amar o hablar sin acto eterno <em>ad intra</em> sufre cambio real — viola la inmutabilidad absoluta. La solución de la <span class="latin">relatio rationis</span> sólo funciona si Dios ya es plenamente Acto <em>ad intra</em>.</div>
+      </div>
+      <div class="conclusion-item">
+        <div class="ci-num">04</div>
+        <div class="ci-text">El amor condicionado, limitado o temporalmente iniciado introduce finitud, dependencia y mutabilidad — destruye los atributos que hacen a Dios Dios: inmutabilidad, aseidad, infinitud, Summum Bonum.</div>
+      </div>
+      <div class="conclusion-item">
+        <div class="ci-num">05</div>
+        <div class="ci-text">Los atributos realmente distintos se limitan mutuamente en su identidad, generan un ser mayor concebible y exigen una causa componente — hacen del Dios compuesto un ser contingente, finito y no primero.</div>
+      </div>
+      <div class="conclusion-item">
+        <div class="ci-num">06</div>
+        <div class="ci-text">La única salida filosóficamente coherente es el <em>Actus Purus</em>: un Dios en el que esencia, existencia y todos los atributos son idénticos entre sí y con su ser, sin composición, sin potencia y sin inicio temporal de ningún acto.</div>
+      </div>
+    </div>
+
+    <div class="final-quote">
+      <div class="qt">"Esse autem Dei est sua essentia, et eius essentia est sua bonitas, et eius bonitas est sua sapientia, et eius sapientia est eius amor, et eius amor est eius gaudium — et haec omnia sunt unum."</div>
+      <div class="qt-trans">El ser de Dios es su esencia, y su esencia es su bondad, y su bondad es su sabiduría, y su sabiduría es su amor, y su amor es su gozo — y todo esto es uno.</div>
+      <div class="qt-src">Parafraseando la síntesis de Tomás de Aquino — Summa contra Gentiles, I, cc. 37–45</div>
+    </div>
+  </section>
+
+</main>
+
+<a id="back-top" href="#hero" title="Volver arriba">↑</a>
+
+<script>
+  // Progress bar
+  const bar = document.getElementById('progress-bar');
+  const bt = document.getElementById('back-top');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = `scaleX(${scrolled / total})`;
+    bt.classList.toggle('visible', scrolled > 400);
+  });
+
+  // Sidebar toggle (mobile)
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  // Close sidebar on nav click (mobile)
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        document.getElementById('sidebar').classList.remove('open');
+      }
+    });
+  });
+
+  // Collapsibles
+  document.querySelectorAll('.collapse-header').forEach(header => {
+    header.addEventListener('click', () => {
+      header.classList.toggle('open');
+      const body = header.nextElementSibling;
+      if (body && body.classList.contains('collapse-body')) {
+        body.classList.toggle('open');
+      }
+    });
+  });
+
+  // Active nav item on scroll
+  const sections = document.querySelectorAll('[id]');
+  const navItems = document.querySelectorAll('.nav-item[href^="#"]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
