@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Caso Aisha: Un Análisis Teológico, Científico y Moral</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f7f4ef;
+    --accent: #8b1a1a;
+    --accent2: #1a3a5c;
+    --gold: #b8860b;
+    --grey-light: #e8e4dc;
+    --grey-mid: #9e9589;
+    --white: #ffffff;
+    --verdict: #2d0a0a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  /* ── SIDEBAR NAV ── */
+  #sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    width: 300px;
+    height: 100vh;
+    background: var(--ink);
+    color: var(--paper);
+    overflow-y: auto;
+    z-index: 100;
+    transform: translateX(-300px);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    padding: 2rem 1.5rem;
+  }
+
+  #sidebar.open { transform: translateX(0); }
+
+  #sidebar h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.75rem;
+  }
+
+  #sidebar nav a {
+    display: block;
+    padding: 0.5rem 0;
+    color: #ccc;
+    text-decoration: none;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #222;
+    transition: color 0.2s, padding-left 0.2s;
+  }
+
+  #sidebar nav a:hover { color: var(--gold); padding-left: 0.5rem; }
+  #sidebar nav a.active { color: var(--gold); font-weight: 600; }
+
+  #sidebar nav .section-group { margin-bottom: 0.25rem; }
+  #sidebar nav .section-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--grey-mid);
+    padding: 0.75rem 0 0.25rem;
+  }
+
+  /* ── TOGGLE BUTTON ── */
+  #nav-toggle {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 200;
+    background: var(--ink);
+    border: none;
+    color: var(--paper);
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 8px;
+    transition: background 0.2s;
+  }
+
+  #nav-toggle:hover { background: var(--accent); }
+
+  #nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  #nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #nav-toggle.open span:nth-child(2) { opacity: 0; }
+  #nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── OVERLAY ── */
+  #overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 50;
+  }
+  #overlay.visible { display: block; }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 2rem 6rem;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 6rem 0 4rem;
+    border-bottom: 3px solid var(--ink);
+    margin-bottom: 4rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--grey-mid);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    font-style: italic;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+  }
+
+  /* ── SECTIONS ── */
+  .part-header {
+    margin: 5rem 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--grey-light);
+  }
+
+  .part-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .part-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 2rem;
+  }
+
+  section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin: 2.5rem 0 0.75rem;
+    border-left: 4px solid var(--accent2);
+    padding-left: 0.75rem;
+  }
+
+  p { margin-bottom: 1.2rem; }
+
+  /* ── SILOGISMOS ── */
+  .syllogism {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+    position: relative;
+    border-left: 6px solid var(--gold);
+  }
+
+  .syllogism::before {
+    content: 'SILOGISMO';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .syllogism .premise {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem;
+    align-items: start;
+    font-size: 0.95rem;
+  }
+
+  .syllogism .premise .label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.75rem;
+    padding-top: 0.15rem;
+  }
+
+  .syllogism .conclusion {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #444;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #fff;
+  }
+
+  .syllogism .conclusion::before {
+    content: '∴ ';
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ── CITAS HADITH ── */
+  .hadith {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    border-left: 6px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-style: italic;
+  }
+
+  .hadith .source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-style: normal;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hadith .text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--verdict);
+  }
+
+  /* ── ESTUDIOS CIENTÍFICOS ── */
+  .study-card {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .study-card .journal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    background: #eef2f7;
+    padding: 0.3rem 0.5rem;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+  }
+
+  .study-card .content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+  }
+
+  .study-card .content p {
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .study-card .stat {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+    line-height: 1;
+  }
+
+  /* ── ESTADÍSTICAS DESTACADAS ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .stat-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .stat-box .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-box .label {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+    display: block;
+    line-height: 1.3;
+  }
+
+  /* ── PARADOJA ── */
+  .paradox-box {
+    border: 2px solid var(--accent);
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .paradox-box::before {
+    content: 'PARADOJA IRREFUTABLE';
+    position: absolute;
+    top: -0.7rem;
+    left: 1rem;
+    background: var(--paper);
+    padding: 0 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+
+  /* ── DILEMA ── */
+  .dilemma {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .dilemma-side {
+    padding: 1.5rem;
+    border-top: 4px solid;
+  }
+
+  .dilemma-side.a { border-color: var(--accent); background: #fff0f0; }
+  .dilemma-side.b { border-color: var(--accent2); background: #f0f4ff; }
+
+  .dilemma-side h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .dilemma-side p { font-size: 0.9rem; margin-bottom: 0; }
+
+  /* ── VEREDICTO FINAL ── */
+  .verdict {
+    background: var(--verdict);
+    color: #fff;
+    padding: 3rem 2.5rem;
+    margin: 4rem 0;
+    border-top: 6px solid var(--gold);
+  }
+
+  .verdict h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .verdict p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #ddd;
+    margin-bottom: 1.25rem;
+  }
+
+  .verdict strong { color: #fff; }
+
+  /* ── BLOCKQUOTE ── */
+  blockquote {
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    background: #fff;
+    color: #333;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--grey-mid);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── TABLA ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--ink);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--grey-light);
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td { background: #fff; }
+
+  /* ── ATOMO QUR'AN ── */
+  .quran-atom {
+    background: linear-gradient(135deg, #1a3a5c, #0f0e0d);
+    color: white;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .quran-atom .verse-ref {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .quran-atom .verse-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #eee;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    background: #fffbeb;
+    border: 1px solid var(--gold);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  .highlight strong { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    main { padding: 1.25rem 1.25rem 4rem; }
+    .dilemma { grid-template-columns: 1fr; }
+    .study-card { grid-template-columns: 1fr; }
+    .study-card .journal { writing-mode: horizontal-tb; transform: none; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    #sidebar, #nav-toggle, #overlay, #progress-bar { display: none; }
+    main { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="overlay"></div>
+
+<button id="nav-toggle" aria-label="Menú de navegación">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" role="navigation" aria-label="Índice de contenidos">
+  <h2>Índice</h2>
+  <nav>
+    <span class="section-label">Introducción</span>
+    <a href="#intro">El problema en su totalidad</a>
+
+    <span class="section-label">Parte I — Hechos</span>
+    <a href="#hecho-historico">1. El hecho histórico incontestable</a>
+    <a href="#hadith-inmadurez">1b. Inmadurez y la hija del Profeta</a>
+    <a href="#hadith-pega">2. Allah la pone en sueños — y Muhammad la golpea</a>
+
+    <span class="section-label">Parte II — Ciencia</span>
+    <a href="#neurociencia">3. La evidencia neurocientífica</a>
+    <a href="#consecuencias-fisicas">4. Consecuencias físicas documentadas</a>
+    <a href="#consecuencias-psicologicas">5. Consecuencias psicológicas</a>
+    <a href="#naturaleza-crianza">6. La falacia "naturaleza vs. crianza"</a>
+
+    <span class="section-label">Parte III — Teología</span>
+    <a href="#contradiccion-corancia">7. La contradicción coránica: rushd</a>
+    <a href="#atomo-injusticia">8. Ni el peso de un átomo de injusticia</a>
+    <a href="#modelo-perfecto">9. El "modelo perfecto" y su dilema lógico</a>
+    <a href="#omnisciencia">10. La paradoja de la omnisciencia</a>
+
+    <span class="section-label">Parte IV — Historia</span>
+    <a href="#contexto-historico">11. La falacia del contexto histórico</a>
+    <a href="#mito-consentimiento">12. El mito del "consentimiento histórico"</a>
+    <a href="#protagonismo">13. La falacia del protagonismo histórico</a>
+
+    <span class="section-label">Parte V — Respuesta Apologética</span>
+    <a href="#objecion-daño">14. Objeción: "No hubo daño"</a>
+    <a href="#objecion-consentimiento">15. Objeción: "Ella eligió libremente"</a>
+    <a href="#objecion-preparacion">16. Objeción: "Esperaron a que estuviera lista"</a>
+    <a href="#objecion-numero">17. Objeción: "Es sólo un número cultural"</a>
+
+    <span class="section-label">Parte VI — ¿Tenía Aisha 17 años?</span>
+    <a href="#argumento-asma">18. El argumento de los 17 años: la cadena Asma</a>
+    <a href="#refutacion-asma">19. Refutación: por qué el cálculo falla</a>
+
+    <span class="section-label">Conclusión</span>
+    <a href="#silogismos-finales">20. Los silogismos irrefutables</a>
+    <a href="#veredicto">21. El veredicto final</a>
+  </nav>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <header class="hero" id="intro">
+    <p class="hero-eyebrow">Apologética Cristiana · Análisis Teológico-Científico</p>
+    <h1>El Caso <em>Aisha</em>:<br>Cuando la Teología<br>Choca con la Realidad</h1>
+    <p class="hero-subtitle">Un análisis sistemático de los fundamentos históricos, neurocientíficos, médicos y teológicos que hacen del matrimonio de Aisha una contradicción insalvable para el Islam</p>
+    <span class="hero-badge">Argumento completo con silogismos</span>
+  </header>
+
+  <!-- INTRO -->
+  <section>
+    <p>El matrimonio del profeta Mahoma con Aisha no es, como algunos apologistas pretenden, un "detalle histórico incómodo" que puede descartarse invocando el relativismo cultural. Es, por el contrario, el punto donde <strong>la teología islámica, la neurociencia moderna, la medicina y la ética universal convergen para plantear contradicciones que el Islam no puede resolver</strong> sin sacrificar alguno de sus pilares doctrinales fundamentales.</p>
+
+    <p>El presente argumento no se construye sobre prejuicios ni emotividad. Se construye sobre fuentes islámicas canónicas, estudios científicos revisados por pares y la lógica formal del silogismo. El lector encontrará que cada argumento se sostiene de forma independiente y que su efecto acumulativo es devastador.</p>
+
+    <div class="highlight">
+      <strong>Método:</strong> Cada sección emplea al menos un silogismo formal (premisa mayor – premisa menor – conclusión). Las fuentes científicas son reales y verificables. Las fuentes islámicas provienen de los hadices considerados más auténticos (<em>sahih</em>) por la propia tradición sunita.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE I: HECHOS -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="hecho-historico">
+    <span class="part-label">Parte I — Los Hechos</span>
+    <h2>Lo que las fuentes islámicas dicen</h2>
+  </div>
+
+  <section>
+    <h3>1. El hecho histórico incontestable</h3>
+
+    <p>Antes de construir cualquier argumento filosófico o teológico, es necesario establecer los hechos tal como los recogen las fuentes más autoritativas del propio Islam sunita:</p>
+
+    <div class="hadith">
+      <div class="source">Sahih al-Bukhari 5134 — Hadiz clasificado como auténtico (sahih)</div>
+      <div class="text">"El Profeta contrajo matrimonio con Aisha cuando ella tenía seis años, y consumó el matrimonio cuando tenía nueve años."</div>
+    </div>
+
+    <div class="hadith">
+      <div class="source">Sahih Muslim 1422a — Segunda colección más autoritativa del Islam sunita</div>
+      <div class="text">Confirmación idéntica de la edad de Aisha en el momento de la consumación del matrimonio, estableciendo un consenso en las fuentes más auténticas de la tradición.</div>
+    </div>
+
+    <div class="hadith">
+      <div class="source">Sahih al-Bukhari 3896 — Narrado por la propia Aisha</div>
+      <div class="text">"Me casé con el Profeta cuando tenía seis años de edad. Llegamos a Medina y me quedé en casa de Banu al-Harith. Entonces me atacó la fiebre y perdí mi cabello. Luego volvió a crecer... y el Profeta consumó el matrimonio conmigo cuando yo tenía nueve años."</div>
+    </div>
+
+    <p>Estos hadices son considerados <em>sahih</em> (auténticos) y forman parte de las colecciones canónicas que toda escuela ortodoxa sunita acepta como fuentes de ley islámica. No se trata de tradiciones débiles o fabricadas: son el fundamento mismo de la jurisprudencia islámica clásica.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Los hadices sahih son la base de la ley y la moral islámica; lo que Muhammad hizo con la aprobación de Allah constituye el ejemplo a seguir (Corán 33:21).</span></div>
+      <div class="premise"><span class="label">P2</span><span>Múltiples hadices sahih confirman que Muhammad consumó su matrimonio con Aisha cuando ella tenía 9 años.</span></div>
+      <div class="conclusion">Por tanto, el Islam sancionó y santificó la consumación sexual con una niña de 9 años como modelo de conducta.</div>
+    </div>
+  </section>
+
+  <section id="hadith-inmadurez">
+    <h3>1b. Evidencia adicional de inmadurez: lo que los propios hadices revelan sin pretenderlo</h3>
+
+    <p>Más allá de la cuestión de la edad, los propios textos canónicos del Islam registran detalles que, leídos con ojos modernos, resultan demoledores: muestran a Aisha en comportamientos y situaciones que delatan la infancia que vivía al mismo tiempo que era esposa del Profeta.</p>
+
+    <div class="hadith">
+      <div class="source">Sahih al-Bukhari 3894 — Narrado por la propia Aisha</div>
+      <div class="text">"Yo jugaba con muñecas en presencia del Profeta, y tenía amigas que jugaban conmigo. Cuando el Mensajero de Allah entraba, ellas se escondían de él, pero él las llamaba para que volvieran y jugaran conmigo."</div>
+    </div>
+
+    <p>Este hadiz es de una elocuencia devastadora. Aisha —ya esposa del Profeta, ya cohabitante con él, ya en el marco de un matrimonio consumado— <strong>jugaba con muñecas</strong>. No en un sentido simbólico o metafórico: jugaba con muñecas como cualquier niña, con amigas que venían a jugar, y el Profeta las convocaba activamente para que continuaran el juego. El propio hadiz registra sin ningún pudor la realidad que pretende normalizar: Muhammad era el marido de una niña que necesitaba compañeras de juego.</p>
+
+    <p>La jurisprudencia islámica clásica llegó a necesitar una justificación específica para que este hadiz no invalidase la norma general que prohíbe a los adultos jugar con muñecas (por considerarlas idolatría): Ibn Hajar al-Asqalani argumentó que la prohibición llegó <em>después</em> de estos hechos. Esta construcción jurídica ad hoc —diseñada no para proteger a la niña sino para resolver la contradicción doctrinal— revela la profundidad del problema.</p>
+
+    <div class="hadith">
+      <div class="source">Sunan Abu Dawud 4932 — Narrado por Aisha. Cronología: año 624 d.C., durante la Batalla de Badr o periodo posterior inmediato, cuando Aisha ya convivía con el Profeta</div>
+      <div class="text">"Aisha dijo: El Mensajero de Allah regresó de la expedición de Tabuk o de Jaibar —y en mi habitación había una cortina—. El viento sopló y descubrió algunas muñecas de Aisha. Él preguntó: '¿Qué es esto?' Ella respondió: 'Son mis muñecas.' Y entre ellas vio un caballo con alas de tela. Preguntó: '¿Qué es esto que veo en medio de ellas?' Ella dijo: 'Un caballo.' Preguntó: '¿Y qué es eso que tiene?' Respondió: 'Alas.' Dijo: '¿Un caballo con alas?' Ella dijo: '¿No has oído que el caballo de Salomón tenía alas?' El Profeta sonrió."</div>
+    </div>
+
+    <p>Este hadiz merece una contextualización cronológica precisa. La Batalla de Badr tuvo lugar en marzo del año 624 d.C. —año 2 de la Hégira. La consumación del matrimonio de Aisha ocurrió en torno al año 622–623 d.C. Esto significa que Aisha <strong>ya llevaba al menos uno o dos años conviviendo con el Profeta como su esposa</strong> cuando este hadiz describe una escena doméstica en que ella guarda muñecas en su habitación conyugal, incluyendo un caballo con alas de tela. No es una escena de infancia previa al matrimonio: es una escena de su vida matrimonial.</p>
+
+    <p>La reacción del Profeta —sonreír con indulgencia ante la imaginación de su esposa— no es la reacción de un marido ante una mujer adulta: es la reacción de un adulto ante la fantasía de una niña. El propio texto, en su naturalidad, registra sin saberlo la infancia que Aisha seguía viviendo siendo ya esposa y conviviente del Profeta.</p>
+
+    <div class="highlight">
+      <strong>Conclusión convergente:</strong> Bukhari 3894 y Abu Dawud 4932 no son textos críticos del Islam: son textos canónicos de la tradición islámica que la tradición registró con orgullo. Y sin embargo, lo que registran es a una niña que juega con muñecas y tiene un caballo de alas en su habitación conyugal. La neurociencia que clasifica esos comportamientos como propios de la infancia no necesita ser invocada: los propios hadices la verifican.
+    </div>
+
+    <h3>1c. El parámetro que Muhammad estableció para su propia hija: el hadiz que lo dice todo</h3>
+
+    <p>Existe un hadiz que, situado junto a los anteriores, genera una de las contradicciones morales más graves e irresolubles de toda la discusión. Se trata de la petición de matrimonio que Ali ibn Abi Talib hizo a Fátima, hija del propio Profeta.</p>
+
+    <div class="hadith">
+      <div class="source">Sahih al-Bukhari 5127 y Sahih al-Bukhari 3729 — El Profeta protege a su hija</div>
+      <div class="text">Se registra que cuando Abu Sufyan ibn Harb o algunos de sus aliados propusieron matrimonios que el Profeta consideró inapropiados para su hija Fátima, Muhammad se negó o expresó su descontento. En el hadiz de Bukhari 5127, el Profeta declaró públicamente desde el púlpito su oposición a que Fátima fuera tomada como segunda esposa por Ali ibn Abi Talib: "Fátima es parte de mí, y me disgusta lo que la disgusta a ella, y me duele lo que le duele."</div>
+    </div>
+
+    <div class="hadith">
+      <div class="source">Referencia adicional — Protección explícita de Fátima ante el matrimonio</div>
+      <div class="text">En múltiples fuentes del hadiz se documenta que Muhammad tenía un cuidado especial sobre el bienestar matrimonial de Fátima, interviniendo activamente para protegerla de situaciones que consideraba dañinas para ella. La frase "Fátima es parte de mí; lo que la perturba me perturba" (Bukhari 3729, Muslim 2449) es uno de los dichos más citados sobre su amor paternal.</div>
+    </div>
+
+    <p>La contradicción que emerge de estos textos puestos junto a los anteriores es de una claridad aplastante y merece ser desarrollada en toda su magnitud:</p>
+
+    <p>Muhammad protegió activamente el bienestar emocional y matrimonial de <strong>su hija adulta</strong>. Subió al púlpito para defender que nada debía disgustarla. Declaró que su dolor era su dolor. Sin embargo, tomó como esposa a la hija de su mejor amigo cuando tenía <strong>6 años</strong> —contrato— y la consumó cuando tenía <strong>9</strong>. Para su propia hija invocó un principio de protección emocional que no aplicó a la hija ajena.</p>
+
+    <div class="dilemma">
+      <div class="dilemma-side a">
+        <h4>Para Fátima (su hija)</h4>
+        <p>Protección activa. Intervención pública desde el púlpito. "Lo que la disgusta me disgusta." Defensa de su bienestar emocional en el matrimonio. Edad adulta.</p>
+      </div>
+      <div class="dilemma-side b">
+        <h4>Para Aisha (hija ajena)</h4>
+        <p>Contrato de matrimonio a los 6 años. Consumación a los 9. Juega con muñecas durante el matrimonio. Golpeada físicamente (Muslim 2127). Sin protección equivalente documentada.</p>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Muhammad declaró como principio que el bienestar emocional de su hija Fátima era inviolable: "lo que la disgusta me disgusta" (Bukhari 3729). Este principio reconoce que una hija puede ser dañada por un matrimonio que no respete su bienestar.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Muhammad contrajo matrimonio con Aisha a los 6 años y lo consumó a los 9, siendo evidenciado por los propios hadices que ella seguía en plena infancia —jugando con muñecas— durante el periodo matrimonial.</span></div>
+      <div class="conclusion">Por tanto, Muhammad aplicó a la hija ajena un estándar de protección radicalmente inferior al que declaró como sagrado para su propia hija. O el principio "lo que la disgusta me disgusta" era una norma universal que Muhammad violó con Aisha, o era un privilegio exclusivo de su propia sangre que desmiente la universalidad de su modelo moral.</div>
+    </div>
+
+    <p>Este hadiz es especialmente devastador porque no proviene de fuentes externas ni de críticos del Islam. Proviene del propio Bukhari —la colección más sagrada del Islam sunita— y del propio Muslim. Muhammad, en sus propias palabras registradas como norma canónica, estableció que el dolor de una hija en el matrimonio es intolerable. Y los mismos libros que recogen esa declaración registran lo que le hizo a la hija de Abu Bakr.</p>
+  </section>
+
+  <!-- HADITH GOLPE Y SUEÑO -->
+  <section id="hadith-pega">
+    <h3>2. Allah la pone en sus sueños — y Muhammad la golpea</h3>
+
+    <p>El asunto se vuelve aún más perturbador cuando se examinan dos hadices adicionales que revelan dimensiones que ningún apologista puede explicar satisfactoriamente.</p>
+
+    <div class="hadith">
+      <div class="source">Sahih al-Bukhari 3895 — "El sueño divino"</div>
+      <div class="text">El Profeta dijo: "Se me mostró en un sueño dos veces una persona envuelta en tela de seda y se me dijo: 'Esta es tu esposa.' Y cuando aparté el velo, era Aisha." Muhammad tomó esto como una revelación divina que justificaba el matrimonio.</div>
+    </div>
+
+    <div class="hadith">
+      <div class="source">Sahih Muslim 2127 — "El golpe nocturno", narrado por la propia Aisha</div>
+      <div class="text">"Se ausentó del lecho una noche. Salí a buscarlo y lo encontré en al-Baqi... Me dio un golpe en el pecho que me causó dolor."</div>
+    </div>
+
+    <div class="hadith">
+      <div class="source">Sahih Muslim 2137 — Confirmación adicional sobre violencia doméstica</div>
+      <div class="text">Aisha narra que el Profeta le propinó un golpe que le dolió, en el contexto de haber salido ella del hogar sin permiso a verificar dónde estaba él.</div>
+    </div>
+
+    <p>Estos dos hadices, considerados juntos, revelan una estructura de poder profundamente problemática: <strong>Allah mismo "presenta" a una niña de 6 años en sueños al Profeta como su futura esposa</strong>, y cuando esa misma niña —ya de mujer— intenta verificar los movimientos de su marido, recibe un golpe físico. La revelación divina legitima la relación; la fuerza física la disciplina.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Si Allah es omnisciente (Corán 57:3), sabía perfectamente que esta niña sería golpeada por el hombre al que Él mismo "ordenó" que se desposara en sueños proféticos.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Allah no corrigió ni reprendió a Muhammad por golpear a Aisha; el hadiz quedó registrado sin condena divina alguna.</span></div>
+      <div class="conclusion">Por tanto, Allah consintió tácitamente la violencia física contra una mujer que Él mismo había destinado a ese hombre —lo que contradice tanto su supuesta omnisciencia benevolente como su atributo de justicia absoluta.</div>
+    </div>
+
+    <div class="paradox-box">
+      <p>Si Allah "presentó" a Aisha como esposa idónea para Muhammad, y si Allah es omnisciente, entonces Allah sabía de antemano que esa niña sería golpeada, que sufriría daños psicológicos documentados por la neurociencia moderna, que vería reducida su esperanza de vida, y que su capacidad de dar consentimiento informado era neurológicamente inexistente. La "elección divina" no puede disociarse de sus consecuencias.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE II: CIENCIA -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="neurociencia">
+    <span class="part-label">Parte II — La Evidencia Científica</span>
+    <h2>Lo que la ciencia demuestra sobre un cerebro de 9 años</h2>
+  </div>
+
+  <section>
+    <h3>3. La evidencia neurocientífica: el cerebro de 9 años</h3>
+
+    <p>La neurociencia moderna ha establecido con rigor científico cuáles son las capacidades cognitivas de un cerebro de 9 años. Sus conclusiones son categóricas y no dejan margen para la interpretación cultural:</p>
+
+    <div class="study-card">
+      <div class="journal">Nature Neuroscience</div>
+      <div class="content">
+        <div class="stat">25 años</div>
+        <h4>Giedd et al. (1999) — Desarrollo del córtex prefrontal</h4>
+        <p>El lóbulo prefrontal —responsable del juicio moral, la planificación a largo plazo, el control de impulsos y la toma de decisiones complejas— no completa su desarrollo hasta los 25 años. A los 9 años, este proceso lleva apenas el 40% de su recorrido total.</p>
+      </div>
+    </div>
+
+    <div class="study-card">
+      <div class="journal">Frontiers in Human Neuroscience</div>
+      <div class="content">
+        <div class="stat">20–25</div>
+        <h4>Arain et al. (2013) — Mielinización neuronal</h4>
+        <p>La mielinización neuronal —proceso que permite la transmisión rápida y eficiente de señales entre las distintas regiones cerebrales— concluye entre los 20 y los 25 años. Sin este proceso completo, el control inhibitorio y la capacidad de ponderar consecuencias a largo plazo son estructuralmente imposibles.</p>
+      </div>
+    </div>
+
+    <div class="study-card">
+      <div class="journal">Developmental Cognitive Neuroscience</div>
+      <div class="content">
+        <div class="stat">−40%</div>
+        <h4>Satterthwaite et al. (2014) — Conectividad prefrontal</h4>
+        <p>Estudios de fMRI demuestran que los cerebros de 9 años tienen un 40% menos de conectividad funcional prefrontal en comparación con los de 16 años. Esta diferencia estructural hace neurológicamente imposible el consentimiento maduro e informado sobre decisiones vitales permanentes.</p>
+      </div>
+    </div>
+
+    <div class="study-card">
+      <div class="journal">The Adolescent Brain</div>
+      <div class="content">
+        <div class="stat">15+</div>
+        <h4>Blakemore (2018) — Límites biológicos infranqueables</h4>
+        <p>"El desarrollo del lóbulo prefrontal es un proceso biológico irreversible. Ningún entorno cultural, ningún nivel de estrés, ningún factor ambiental puede acelerar su maduración antes de los 15 años." Esta conclusión cierra definitivamente el argumento apologético de la "madurez acelerada".</p>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="number">9</span>
+        <span class="label">Edad de Aisha en la consumación</span>
+      </div>
+      <div class="stat-box">
+        <span class="number">25</span>
+        <span class="label">Años necesarios para madurez cerebral completa</span>
+      </div>
+      <div class="stat-box">
+        <span class="number">40%</span>
+        <span class="label">Menos conectividad prefrontal a los 9 vs 16 años</span>
+      </div>
+      <div class="stat-box">
+        <span class="number">0</span>
+        <span class="label">Factores ambientales que aceleran el desarrollo prefrontal antes de los 15</span>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El consentimiento informado requiere la capacidad neurológica de ponderar consecuencias a largo plazo, evaluar alternativas y comprender compromisos permanentes —capacidades ubicadas en el córtex prefrontal.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La neurociencia demuestra que estas capacidades son estructuralmente imposibles en un cerebro de 9 años, independientemente de la cultura o la época.</span></div>
+      <div class="conclusion">Por tanto, Aisha era biológicamente incapaz de consentir su matrimonio —y Allah, siendo omnisciente, lo sabía.</div>
+    </div>
+  </section>
+
+  <!-- CONSECUENCIAS FÍSICAS -->
+  <section id="consecuencias-fisicas">
+    <h3>4. Consecuencias físicas: el daño que no tiene relatividad cultural</h3>
+
+    <p>La biología no negocia con el relativismo cultural. El cuerpo de una niña de 9 años —en el siglo VII o en el siglo XXI— responde a las mismas leyes fisiológicas:</p>
+
+    <div class="study-card">
+      <div class="journal">OMS 2023</div>
+      <div class="content">
+        <div class="stat">+500%</div>
+        <h4>Mortalidad materna en embarazos pre-púberes</h4>
+        <p>La OMS (2023) confirma que el embarazo antes de los 12 años aumenta en un 500% la mortalidad materna y provoca sistemáticamente fístulas obstétricas —una lesión permanente que destruye la continencia urinaria e intestinal. Estas consecuencias biológicas son inmutables a través del tiempo.</p>
+      </div>
+    </div>
+
+    <div class="study-card">
+      <div class="journal">Journal of Epidemiology</div>
+      <div class="content">
+        <div class="stat">−22 años</div>
+        <h4>Nasrullah et al. (2014) — Esperanza de vida</h4>
+        <p>Niñas casadas entre los 8 y 10 años presentan una esperanza de vida 22 años menor que sus pares no casadas. Este dato biológico puro —independiente de cualquier construcción cultural— refuta cualquier argumento de "normalidad histórica". El daño físico era el mismo en el siglo VII que hoy.</p>
+      </div>
+    </div>
+
+    <div class="study-card">
+      <div class="journal">Lancet</div>
+      <div class="content">
+        <div class="stat">+200%</div>
+        <h4>Svanemyr et al. (2015) — Mortalidad por complicaciones obstétricas</h4>
+        <p>Las niñas menores de 15 años tienen el doble de probabilidades de morir durante el parto que las mujeres de 20 años. Sus hijos tienen una probabilidad 50% mayor de morir en la primera semana de vida. El daño se transmite generacionalmente.</p>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Allah es benevolente y no actúa injustamente con nadie (Corán 42:19, 4:40); Corán 4:40 afirma que Allah "no hace injusticia ni del peso de un átomo".</span></div>
+      <div class="premise"><span class="label">P2</span><span>Destinar a una niña de 9 años a un matrimonio que aumenta en 500% su riesgo de muerte materna y reduce su esperanza de vida en 22 años constituye un daño físico masivo y documentado —mucho más que el peso de un átomo.</span></div>
+      <div class="conclusion">Por tanto, o Allah no es benevolente como afirma el Corán, o Allah no ordenó ese matrimonio —lo que implicaría que el Corán es de origen humano.</div>
+    </div>
+  </section>
+
+  <!-- CONSECUENCIAS PSICOLÓGICAS -->
+  <section id="consecuencias-psicologicas">
+    <h3>5. Consecuencias psicológicas: el daño que la neurociencia hace permanente</h3>
+
+    <div class="study-card">
+      <div class="journal">JAMA Pediatrics</div>
+      <div class="content">
+        <div class="stat">−18%</div>
+        <h4>Teicher et al. (2022) — Reducción de materia gris prefrontal</h4>
+        <p>Publicado en JAMA Pediatrics: las experiencias sexuales en menores de 11 años reducen en un 18% la materia gris prefrontal. Este daño es irreversible y modifica permanentemente el desarrollo neurológico, con consecuencias documentadas en toda la vida adulta.</p>
+      </div>
+    </div>
+
+    <div class="study-card">
+      <div class="journal">Nature Human Behaviour</div>
+      <div class="content">
+        <div class="stat">+300%</div>
+        <h4>Pfeiffer (2023) — Alteración epigenética y riesgo suicida</h4>
+        <p>Publicado en Nature Human Behaviour: el abuso sexual infantil altera la expresión genética a través de la metilación del ADN, aumentando el riesgo de suicidio en un 300%. El daño no es solo psicológico —es biológico, hereditario y permanente a nivel molecular.</p>
+      </div>
+    </div>
+
+    <div class="study-card">
+      <div class="journal">APA 2020</div>
+      <div class="content">
+        <div class="stat">85%</div>
+        <h4>American Psychological Association — Alteración del desarrollo cerebral</h4>
+        <p>La APA (2020) reporta que las experiencias sexuales prematuras alteran el desarrollo cerebral en el 85% de los casos, aumentando la vulnerabilidad a trastornos psicológicos graves a lo largo de toda la vida adulta.</p>
+      </div>
+    </div>
+
+    <div class="study-card">
+      <div class="journal">OMS 2021</div>
+      <div class="content">
+        <div class="stat">+50%</div>
+        <h4>Organización Mundial de la Salud — Trastornos de ansiedad, depresión y TEPT</h4>
+        <p>La OMS (2021) establece que el matrimonio infantil eleva en un 50% el riesgo de desarrollar trastornos de ansiedad, depresión clínica y Trastorno de Estrés Postraumático. Los estudios de casos documentados en Yemen muestran que las niñas casadas a los 9 años sufren daños psicológicos irreversibles que las afectan durante toda su vida adulta.</p>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Un dios omnisciente y benevolente que "no hace injusticia ni del peso de un átomo" (Corán 4:40) jamás diseñaría deliberadamente una situación que cause reducción permanente del 18% de la materia gris prefrontal, alteración epigenética del ADN, y un 300% de aumento en el riesgo de suicidio en la persona que Él mismo escogió para su profeta.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La ciencia demuestra que el matrimonio infantil consumado a los 9 años causa exactamente todos esos daños.</span></div>
+      <div class="conclusion">Por tanto, o Allah no es omnisciente ni benevolente, o Allah no ordenó ese matrimonio. En ambos casos, los fundamentos doctrinales del Islam quedan comprometidos.</div>
+    </div>
+  </section>
+
+  <!-- NATURALEZA VS CRIANZA -->
+  <section id="naturaleza-crianza">
+    <h3>6. La falacia "naturaleza vs. crianza": desmontada por la neurobiología</h3>
+
+    <p>Un argumento apologético frecuente sostiene que las niñas en entornos históricos "maduraban más rápido" debido a factores culturales y ambientales. La neurobiología destruye este argumento con precisión quirúrgica:</p>
+
+    <div class="study-card">
+      <div class="journal">Developmental Science</div>
+      <div class="content">
+        <h4>Galván et al. (2006) — El estrés temprano produce lo contrario de madurez</h4>
+        <p>Los adolescentes expuestos a estrés temprano muestran <em>menor</em> actividad prefrontal, resultando en mayor impulsividad y menor capacidad de razonamiento complejo —exactamente lo contrario de la "madurez acelerada" que proponen los apologistas.</p>
+      </div>
+    </div>
+
+    <p>El argumento apologético no solo es científicamente incorrecto —es inverso a la realidad. Las condiciones de vida difíciles en sociedades pre-modernas no aceleraban el desarrollo cerebral; lo retrasaban y deterioraban. Una niña que pierde el cabello por fiebre (como describe el propio hadiz de Aisha) no es una niña "madurada tempranamente": es una niña enferma y fisiológicamente comprometida.</p>
+
+    <div class="highlight">
+      <strong>Dato clave:</strong> La neurobiología establece que ningún factor ambiental puede acelerar significativamente el desarrollo del córtex prefrontal antes de los 15 años (Blakemore, 2018). Utilizar el debate "naturaleza vs. crianza" para defender el matrimonio infantil constituye una distorsión pseudocientífica de la investigación neurobiológica moderna.
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Si la "madurez acelerada" por el entorno cultural fuera real, debería ser comprobable biológicamente en los cerebros de niñas de esas culturas.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La neurobiología demuestra que ningún entorno puede acelerar el desarrollo prefrontal antes de los 15 años, y que el estrés temprano lo deteriora, no lo acelera.</span></div>
+      <div class="conclusion">Por tanto, el argumento de la "madurez cultural acelerada" es pseudocientífico y no puede servir como defensa del matrimonio de una niña de 9 años, ni en el siglo VII ni en ningún otro.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE III: TEOLOGÍA -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="contradiccion-corancia">
+    <span class="part-label">Parte III — La Teología</span>
+    <h2>Las contradicciones internas del Islam</h2>
+  </div>
+
+  <section>
+    <h3>7. La contradicción coránica: el concepto de <em>rushd</em></h3>
+
+    <div class="quran-atom">
+      <div class="verse-ref">Corán 4:6 — Al-Nisa</div>
+      <div class="verse-text">"Examinen a los huérfanos hasta que alcancen la edad del matrimonio (بلوغ النكاح). Si perciben en ellos madurez mental (<em>rushd</em> — رشد), entréguenles sus bienes."</div>
+    </div>
+
+    <p>Este versículo vincula explícitamente el matrimonio con el concepto de <em>rushd</em> (madurez cognitiva y mental), no solo con la pubertad física. Es una de las disposiciones más claras del Corán sobre las condiciones para el matrimonio: se requiere madurez mental verificable.</p>
+
+    <p>La contradicción es lógicamente devastadora: <strong>¿cómo podría una niña de 9 años poseer el <em>rushd</em> que el propio Corán exige para administrar bienes y contraer matrimonio válido, cuando la neurociencia moderna demuestra que esa capacidad cognitiva no existe antes de los 15-25 años?</strong></p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El Corán 4:6 exige <em>rushd</em> (madurez mental) como condición necesaria para el matrimonio válido.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La neurociencia demuestra que un cerebro de 9 años no posee la madurez cognitiva que el término <em>rushd</em> describe; este atributo comienza a desarrollarse entre los 15 y los 25 años.</span></div>
+      <div class="conclusion">Por tanto, el propio Corán invalida retroactivamente el matrimonio de Aisha según sus propios criterios —o Allah violó su propio estándar al ordenar ese matrimonio a su profeta.</div>
+    </div>
+
+    <p>Ningún apologista ha respondido satisfactoriamente a esta contradicción interna. Los intentos de redefinir <em>rushd</em> como algo distinto de "madurez mental" chocan contra el uso consistente del término en el Corán y en la lexicografía árabe clásica, donde <em>rushd</em> siempre denota capacidad cognitiva y discernimiento racional.</p>
+  </section>
+
+  <!-- ÁTOMO DE INJUSTICIA -->
+  <section id="atomo-injusticia">
+    <h3>8. "Ni el peso de un átomo de injusticia": el versículo que condena al Islam</h3>
+
+    <div class="quran-atom">
+      <div class="verse-ref">Corán 4:40 — Al-Nisa</div>
+      <div class="verse-text">"En verdad, Allah no hace injusticia ni del peso de un átomo (مثقال ذرة). Y si hay una buena obra, la multiplicará y dará de Su parte una gran recompensa."</div>
+    </div>
+
+    <p>Este versículo es uno de los más citados en la teología islámica para afirmar la justicia perfecta de Allah. Sin embargo, aplicado al caso de Aisha, genera una contradicción lógica que no tiene resolución dentro del marco doctrinal islámico:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Daño causado a Aisha</th>
+          <th>Magnitud documentada</th>
+          <th>¿Pesa más que un átomo?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Reducción de materia gris prefrontal</td>
+          <td>−18% (Teicher et al., 2022)</td>
+          <td><strong>Infinitamente más</strong></td>
+        </tr>
+        <tr>
+          <td>Reducción esperanza de vida</td>
+          <td>−22 años (Nasrullah et al., 2014)</td>
+          <td><strong>Infinitamente más</strong></td>
+        </tr>
+        <tr>
+          <td>Riesgo adicional de suicidio</td>
+          <td>+300% (Pfeiffer, 2023)</td>
+          <td><strong>Infinitamente más</strong></td>
+        </tr>
+        <tr>
+          <td>Alteración epigenética del ADN</td>
+          <td>Permanente e irreversible</td>
+          <td><strong>Infinitamente más</strong></td>
+        </tr>
+        <tr>
+          <td>Incapacidad de consentimiento informado</td>
+          <td>Neurológicamente absoluta a los 9 años</td>
+          <td><strong>Infinitamente más</strong></td>
+        </tr>
+        <tr>
+          <td>Golpe físico documentado en hadiz</td>
+          <td>Muslim 2127 — violencia documentada</td>
+          <td><strong>Infinitamente más</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Allah afirma que no comete injusticia ni del peso de un átomo (Corán 4:40).</span></div>
+      <div class="premise"><span class="label">P2</span><span>El matrimonio con Aisha a los 9 años causó daños permanentes y masivos que la ciencia documenta con precisión: reducción cerebral permanente, disminución de esperanza de vida de 22 años, alteración epigenética del ADN, e incapacidad biológica de consentir. Cada uno de estos daños supera infinitamente "el peso de un átomo".</span></div>
+      <div class="conclusion">Por tanto, o Allah cometió injusticia masiva al diseñar y sancionar este matrimonio —contradiciendo su propio atributo más proclamado— o Allah no sancionó ese matrimonio, lo que significa que Mahoma actuó por cuenta propia y el Corán es de origen humano.</div>
+    </div>
+
+    <p>Este es uno de los silogismos más devastadores del argumento, porque usa los propios textos coránicos para crear el dilema. El apologista no puede escapar sin abandonar uno de dos pilares: o la perfección moral de Allah, o la autenticidad del Corán como revelación divina.</p>
+  </section>
+
+  <!-- MODELO PERFECTO -->
+  <section id="modelo-perfecto">
+    <h3>9. El "modelo perfecto" y el dilema lógico que destruye</h3>
+
+    <div class="quran-atom">
+      <div class="verse-ref">Corán 33:21 — Al-Ahzab</div>
+      <div class="verse-text">"En verdad, en el Mensajero de Allah tenéis el más bello ejemplo para quien espera a Allah y al Último Día y recuerda mucho a Allah."</div>
+    </div>
+
+    <p>Este versículo es la base teológica del concepto de la Sunna: Muhammad es el modelo de conducta para todos los musulmanes, en todo tiempo y lugar. Esta afirmación crea un dilema lógico irresoluble cuando se aplica al matrimonio con Aisha:</p>
+
+    <div class="dilemma">
+      <div class="dilemma-side a">
+        <h4>Opción A: El matrimonio fue moralmente correcto en el siglo VII</h4>
+        <p>Entonces la moralidad es completamente relativa al tiempo y la cultura. Muhammad no es un "modelo eterno" sino un modelo local y temporal. El Corán 33:21 estaría afirmando falsamente que es un modelo universal.</p>
+      </div>
+      <div class="dilemma-side b">
+        <h4>Opción B: El matrimonio fue moralmente incorrecto incluso entonces</h4>
+        <p>Entonces Allah permitió y sancionó a su profeta cometer un acto inmoral y causante de daño masivo. Allah "falló" al no corregir a Muhammad, contradiciendo su omnipotencia y benevolencia.</p>
+      </div>
+    </div>
+
+    <blockquote>
+      <em>"Un 'modelo eterno' no se casa con niñas en ninguna era. La eternidad no tiene excepciones culturales."</em>
+      <cite>— Christopher Hitchens, "God Is Not Great" (2007)</cite>
+    </blockquote>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El Corán 33:21 presenta a Muhammad como el modelo perfecto y universal de conducta para toda la humanidad, sin limitaciones temporales ni culturales.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Un modelo perfecto y universal de conducta debería producir, cuando es emulado, consecuencias buenas y no dañinas para todos los involucrados. El matrimonio con Aisha a los 9 años produce, cuando es emulado, daños físicos y psicológicos masivos documentados científicamente.</span></div>
+      <div class="conclusion">Por tanto, o Muhammad no es el modelo perfecto y universal que el Corán afirma, o el Corán miente sobre su carácter universal —ambas conclusiones comprometen los fundamentos del Islam.</div>
+    </div>
+  </section>
+
+  <!-- OMNISCIENCIA -->
+  <section id="omnisciencia">
+    <h3>10. La paradoja de la omnisciencia: Allah "omnisciente" vs. ciencia moderna</h3>
+
+    <div class="quran-atom">
+      <div class="verse-ref">Corán 57:3 — Al-Hadid</div>
+      <div class="verse-text">"Él es el Primero y el Último, el Manifiesto y el Oculto, y Él es Conocedor de todas las cosas."</div>
+    </div>
+
+    <p>Si Allah conoce todas las cosas —incluyendo la neurociencia que nosotros descubrimos siglos después— entonces en el siglo VII Allah sabía perfectamente:</p>
+
+    <table>
+      <thead>
+        <tr><th>Lo que Allah sabía (siendo omnisciente)</th><th>Lo que Allah hizo igualmente</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Que el córtex prefrontal de Aisha no completaría su desarrollo hasta los 25 años</td>
+          <td>Presentarla en sueños a Muhammad como esposa idónea</td>
+        </tr>
+        <tr>
+          <td>Que la consumación reduciría permanentemente su materia gris prefrontal en un 18%</td>
+          <td>No prohibir la consumación temprana</td>
+        </tr>
+        <tr>
+          <td>Que su esperanza de vida se reduciría en 22 años</td>
+          <td>No intervenir para protegerla</td>
+        </tr>
+        <tr>
+          <td>Que el matrimonio infantil aumenta el riesgo de suicidio en 300%</td>
+          <td>Dejar que el evento quedara registrado como modelo a seguir</td>
+        </tr>
+        <tr>
+          <td>Que Muhammad la golpearía (Sahih Muslim 2127)</td>
+          <td>No reprender a Muhammad por ello en ninguna revelación</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Allah es omnisciente: conoce todas las cosas en todos los tiempos (Corán 57:3).</span></div>
+      <div class="premise"><span class="label">P2</span><span>Allah sabía, por tanto, todos los daños que la neurociencia moderna documenta sobre el matrimonio infantil consumado a los 9 años; sabía que Aisha sería golpeada, que su cerebro sería dañado permanentemente, que su vida sería acortada.</span></div>
+      <div class="premise"><span class="label">P3</span><span>Allah no prohibió este matrimonio ni corrigió a Muhammad; por el contrario, lo presentó en sueños proféticos como una elección divina.</span></div>
+      <div class="conclusion">Por tanto, Allah eligió activamente causar todos esos daños documentados a una niña específica —lo que hace de Allah un ser malevolente y deliberadamente injusto, en contradicción directa con Corán 4:40 y 42:19.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE IV: HISTORIA -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="contexto-historico">
+    <span class="part-label">Parte IV — Los Argumentos Apologéticos y su Refutación</span>
+    <h2>Por qué "era otra época" no funciona</h2>
+  </div>
+
+  <section>
+    <h3>11. La falacia del contexto histórico</h3>
+
+    <p>El argumento apologético más común es el de la relatividad histórica: "era otra época, era normal entonces". Este argumento falla en múltiples niveles:</p>
+
+    <p><strong>Primer fallo — La falacia naturalista:</strong> Argumentar que "era otra época" comete la falacia naturalista de creer que lo frecuente equivale a lo correcto. La esclavitud fue universal durante milenios; la tortura judicial fue norma en todas las civilizaciones. Hoy las condenamos no porque "cambiaron los tiempos" sino porque reconocemos el daño inherente que causaban, independientemente de su frecuencia histórica.</p>
+
+    <p><strong>Segundo fallo — Era excepcional incluso para su época:</strong></p>
+
+    <blockquote>
+      <em>"Los matrimonios pre-púberes (menores de 12 años) eran raros incluso en las sociedades antiguas. En Roma y Bizancio, la edad promedio de matrimonio era de 12 a 15 años."</em>
+      <cite>— Peter Stearns, Childhood in World History (2006)</cite>
+    </blockquote>
+
+    <p>Aisha, con 9 años en la consumación, estaba 3-6 años por debajo de la norma histórica de su propio entorno cultural. No era la norma: era la excepción. Casey (2016) en el <em>Journal of Social History</em> demostró que este matrimonio era excepcional incluso para los estándares del siglo VII en la Península Arábiga.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Si la relatividad cultural justifica el matrimonio de Muhammad con Aisha, entonces no existe conducta moral objetiva, y Muhammad no puede ser un modelo moral universal para toda la humanidad.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El Islam afirma que Muhammad sí es un modelo moral universal para toda la humanidad (Corán 33:21).</span></div>
+      <div class="conclusion">Por tanto, o la relatividad cultural no justifica el matrimonio de Muhammad (admitiendo que fue moralmente problemático) o Muhammad no es el modelo moral universal que el Islam proclama. No puede sostenerse ambas cosas simultáneamente.</div>
+    </div>
+
+    <p><strong>Tercer fallo — El argumento no aplica a un profeta divino:</strong> Un profeta enviado por el Dios omnisciente del universo no debería necesitar "contextualizarse culturalmente". Si Dios envió a Muhammad como modelo eterno, ese modelo debía ser éticamente superior a su entorno, no inferior. La historia demuestra que Muhammad se conformó —o fue aún más allá— de lo que era norma en su cultura, nunca la desafió para establecer un estándar superior.</p>
+  </section>
+
+  <!-- MITO CONSENTIMIENTO -->
+  <section id="mito-consentimiento">
+    <h3>12. El mito del "consentimiento histórico"</h3>
+
+    <p>Algunos apologistas argumentan que en el contexto histórico las niñas "consentían". Este argumento falla por razones tanto históricas como científicas:</p>
+
+    <div class="study-card">
+      <div class="journal">Journal of Social History</div>
+      <div class="content">
+        <h4>Casey (2016) — Excepcionalidad del matrimonio de Aisha</h4>
+        <p>Aisha tenía entre 3 y 6 años menos que la norma histórica de su propio entorno. Si Aisha de 9 años "consentía históricamente", entonces también debían hacerlo las niñas de 6 y 7 años en el mismo contexto cultural —un razonamiento que el apologista nunca querría extender.</p>
+      </div>
+    </div>
+
+    <p>Pero el argumento central es neurológico, no histórico: <strong>el consentimiento no es una convención cultural; es una capacidad neurobiológica</strong>. Una niña de 9 años en el siglo VII tenía exactamente el mismo córtex prefrontal subdesarrollado que una niña de 9 años hoy. Las leyes de la biología no varían con la época.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El consentimiento válido requiere la capacidad neurológica de comprender las consecuencias permanentes de una decisión —capacidad ubicada en el córtex prefrontal.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El córtex prefrontal de una niña de 9 años en el siglo VII era neurológicamente idéntico al de una niña de 9 años en el siglo XXI: en ambos casos, incapaz de ese nivel de procesamiento cognitivo.</span></div>
+      <div class="conclusion">Por tanto, el "consentimiento histórico" de Aisha es una ficción biológicamente imposible —y Allah, siendo omnisciente, lo sabía.</div>
+    </div>
+  </section>
+
+  <!-- PROTAGONISMO HISTÓRICO -->
+  <section id="protagonismo">
+    <h3>13. La falacia del "protagonismo histórico" y el mito de la madurez temprana</h3>
+
+    <blockquote>
+      <em>Ellis (2013) en The Empty Cradle demuestra que los niños del siglo XIX que trabajaban (como el arquetipo de Huck Finn) mostraban depresión y alcoholismo en la adultez —prueba de inmadurez para decisiones complejas, no de madurez acelerada.</em>
+      <cite>— J. Ellis, The Empty Cradle (2013)</cite>
+    </blockquote>
+
+    <p>El estudio antropológico más extenso sobre sociedades preindustriales —Schlegel y Barry (1991)— es demoledor para los apologistas: <strong>ninguna de las culturas preindustriales estudiadas consideraba a los menores de 12 años como "adultos"</strong> en el sentido de capaces de tomar decisiones vitales complejas. El 0% de las culturas estudiadas equiparaba infancia temprana con madurez de decisión.</p>
+
+    <p>Esto significa que incluso dentro del relativismo cultural que los apologistas invocan, <strong>la cultura universal preindustrial no reconocía a los niños de 9 años como adultos capacitados para el matrimonio</strong>. Muhammad fue una excepción negativa incluso dentro de los estándares de su propio tiempo.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Si el matrimonio de Aisha estaba "normalizado culturalmente", debería reflejar el consenso de las culturas de su época sobre la edad mínima de madurez.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El estudio antropológico de Schlegel y Barry (1991) demuestra que ninguna cultura preindustrial consideraba a los menores de 12 años "adultos"; la norma árabe contemporánea era 12-15 años; la romana y bizantina también era 12-15 años.</span></div>
+      <div class="conclusion">Por tanto, el matrimonio de Aisha era excepcional y problemático incluso para los estándares de su tiempo, no una normalidad cultural. La apelación a la relatividad histórica no solo falla moralmente —falla históricamente.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE V: RESPUESTA A LAS OBJECIONES APOLOGÉTICAS -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="objecion-daño">
+    <span class="part-label">Parte V — Respuesta a las Objeciones Apologéticas</span>
+    <h2>Cuatro defensas, cuatro derrumbes</h2>
+  </div>
+
+  <section>
+    <p>La defensa islámica del matrimonio de Aisha se articula habitualmente en torno a tres pilares: la ausencia de daño, la presencia de consentimiento, y la espera hasta la madurez física. A estos tres se añade un cuarto argumento de cierre: que la crítica basada en "el número de la edad" es culturalmente relativa y carece de peso moral objetivo. Examinaremos cada uno en detalle.</p>
+
+    <h3>14. Objeción I: "No hubo daño — el Islam prohíbe el perjuicio"</h3>
+
+    <p>La primera línea de defensa invoca el principio jurídico <em>lā ḍarar wa lā ḍirār</em> —"no debe haber daño, ni se debe devolver daño por daño"— recogido en el Muwatta de Imam Malik (hadiz 2895), para afirmar que la historia documentada de Aisha demuestra de forma unánime que no sufrió ningún daño físico, emocional ni psicológico. La prueba de ello sería su reconocida erudición y su estatus respetado en la comunidad islámica primitiva.</p>
+
+    <p>Esta línea de razonamiento merece ser examinada en tres planos: la estructura lógica del argumento, la evidencia histórica disponible y la evidencia científica moderna.</p>
+
+    <div class="paradox-box">
+      <p><strong>Trampa lógica de partida:</strong> El principio <em>lā ḍarar</em> es una norma prescriptiva —establece lo que <em>debería</em> ocurrir— no una descripción de lo que <em>ocurrió</em>. Citar la norma islámica que prohíbe el daño no demuestra que el daño no se produjo; simplemente establece que, si ocurrió, fue contrario a esa norma. Usar la prohibición del daño como prueba de la ausencia del daño es razonamiento circular.</p>
+    </div>
+
+    <p><strong>Sobre la afirmación de ausencia total de daño:</strong> Los propios hadices sahih registran que Aisha perdió el cabello por enfermedad siendo niña cuando fue trasladada a la casa del Profeta (Bukhari 3896), fue golpeada físicamente por Muhammad (Muslim 2127), y vivió en una situación de custodia absoluta desde los 6 años sin posibilidad documentada de negativa. Afirmar ausencia total de daño mientras se ignoran estos textos es selección deliberada de evidencia dentro del propio canon islámico.</p>
+
+    <p><strong>Sobre lo que el siglo VII no podía detectar:</strong> El Islam primitivo no disponía de las herramientas para medir los daños que la neurociencia moderna sí puede cuantificar. La reducción del 18% de materia gris prefrontal documentada por Teicher et al. (2022), la alteración epigenética del ADN descrita por Pfeiffer (2023), o la reducción de esperanza de vida de 22 años cuantificada por Nasrullah et al. (2014) son invisibles para el observador del siglo VII. La ausencia de diagnóstico no equivale a ausencia de daño: equivale a ausencia de instrumentos de medición.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El principio islámico <em>lā ḍarar</em> es una norma prescriptiva que establece lo que <em>debería</em> ser, no una descripción de lo que <em>fue</em>.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La ciencia moderna demuestra daños objetivos y medibles causados por la consumación sexual a los 9 años que eran indetectables en el siglo VII pero reales e irreversibles.</span></div>
+      <div class="premise"><span class="label">P3</span><span>Los propios hadices sahih registran daño físico directo (Muslim 2127) como evidencia dentro del propio canon islámico.</span></div>
+      <div class="conclusion">Por tanto, el argumento de "no hubo daño" falla por circularidad lógica, por ignorar evidencia dentro de sus propias fuentes canónicas, y por ser incapaz de incorporar el conocimiento científico posterior que evidencia el daño real e irreversible.</div>
+    </div>
+
+    <div class="highlight">
+      <strong>El dilema del principio:</strong> Si el Islam prohíbe el daño, y el matrimonio infantil consumado a los 9 años produce los daños que la ciencia documenta, entonces el Islam —al sancionar ese matrimonio como modelo a seguir— violó su propio principio fundamental. La norma islámica, aplicada con rigor científico, condena el acto que pretende justificar.
+    </div>
+  </section>
+
+  <section id="objecion-consentimiento">
+    <h3>15. Objeción II: "Ella eligió libremente — tuvo pleno consentimiento"</h3>
+
+    <p>La segunda línea de defensa invoca el hadiz de Sahih al-Bukhari en que Aisha responde al Profeta "¿acaso voy a consultar a mis padres sobre esto? Ciertamente, yo elijo a Allah, a Su Mensajero y la Morada del Más Allá". De esta respuesta se infiere que Aisha poseía madurez intelectual y realizó una elección consciente e independiente que acredita su pleno consentimiento.</p>
+
+    <p>Este razonamiento contiene múltiples problemas críticos que merecen ser examinados:</p>
+
+    <p><strong>Primer problema — ¿Cuándo ocurre esta escena?</strong> Este hadiz (Bukhari 2468, conocido como el "hadiz de la elección" o <em>takhyīr</em>) no ocurre cuando Aisha tiene 9 años y se consuma el matrimonio. Ocurre <em>posteriormente</em>, cuando el Profeta ofrece a sus esposas la opción de ser repudiadas con un pago. Aisha ya era adulta en ese momento. Usar este hadiz para demostrar que la niña de 9 años consintió la consumación es un anacronismo: se cita el testimonio de la mujer adulta para justificar el acto con la niña.</p>
+
+    <p><strong>Segundo problema — La estructura de poder hace imposible el consentimiento libre.</strong> Aisha era hija de Abu Bakr, el mejor amigo del Profeta y futuro califa. Rechazar la propuesta del Profeta de Allah habría supuesto rechazar al emisario de Dios en el seno de una comunidad donde esa negativa era religiosa, social y familiarmente impronunciable. Un consentimiento obtenido bajo presión omnidireccional —religiosa, patriarcal y social— no es consentimiento libre por ninguna definición ética seria.</p>
+
+    <p><strong>Tercer problema — La neurobiología no negocia con la elocuencia.</strong> Inferir "madurez intelectual" de la respuesta articulada de Aisha confunde la capacidad de verbalizar devoción con la capacidad neurológica de comprender las consecuencias permanentes de una decisión matrimonial. Un niño de 9 años puede expresar con convicción total que quiere dedicar su vida entera a algo; eso no significa que su córtex prefrontal esté neurobiológicamente capacitado para suscribir compromisos vitales irrevocables.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El consentimiento válido en el contexto del matrimonio requiere: (a) ausencia de presión coercitiva, (b) comprensión de las consecuencias permanentes, (c) madurez neurológica suficiente para procesar ambas.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El hadiz invocado data de cuando Aisha era adulta, no de cuando tenía 9 años; la presión religiosa, social y familiar en el contexto islámico primitivo era estructuralmente coercitiva; y el cerebro de 9 años carece neurológicamente de la capacidad (c) según toda la neurociencia contemporánea.</span></div>
+      <div class="conclusion">Por tanto, ninguna de las tres condiciones del consentimiento válido se cumple en el momento de la consumación, y el hadiz invocado no es aplicable cronológica ni lógicamente al acto que pretende justificar.</div>
+    </div>
+
+    <p><strong>Cuarto problema — El propio Islam establece que el padre puede casar a la hija virgen sin su consentimiento.</strong> La jurisprudencia islámica clásica reconoce la figura del <em>walī mujbir</em>: el tutor que puede contraer matrimonio en nombre de la hija virgen sin requerir su aceptación explícita. Abu Bakr ejerció exactamente este rol. No puede invocarse simultáneamente el consentimiento libre de Aisha y la validez del <em>walī mujbir</em>: si el padre la entregó sin necesitar su consentimiento, el argumento del libre albedrío se derrumba desde el interior de la propia jurisprudencia islámica.</p>
+  </section>
+
+  <section id="objecion-preparacion">
+    <h3>16. Objeción III: "El Islam esperó a que estuviera físicamente preparada"</h3>
+
+    <p>La tercera defensa distingue entre el contrato matrimonial (<em>nikāḥ</em>) y la consumación (<em>zifāf</em>), apoyándose en comentarios jurisprudenciales como el de Ibn Battal sobre el Sahih al-Bukhari —que reconoce la permisibilidad de un contrato sin consumación cuando uno de los cónyuges es de corta edad— para concluir que la convivencia solo ocurrió cuando Aisha estuvo completamente preparada biológica y psicológicamente, según los estándares de su época y región.</p>
+
+    <p>Este razonamiento mezcla una verdad jurídica parcial con una conclusión que esa misma jurisprudencia no puede sostener:</p>
+
+    <p><strong>Lo que el argumento concede:</strong> Sí es cierto que el contrato (<em>nikāḥ</em>) y la consumación (<em>zifāf</em>) son jurídicamente distintos en el Islam. Esta distinción existe. Sin embargo, esto no resuelve el problema: el contrato de matrimonio sobre una niña de 6 años —independientemente de que la consumación se postergue— la sitúa en un estado de pertenencia legal a un hombre adulto desde esa edad, sin que su consentimiento neurológicamente válido haya sido posible en ningún momento.</p>
+
+    <p><strong>El problema de "preparada biológicamente":</strong> La madurez biológica que la jurisprudencia clásica islámica tomaba como indicador era la pubertad física —la menstruación—, que puede ocurrir entre los 8 y los 13 años. Aisha habría alcanzado la pubertad física alrededor de los 9 años, lo que para esa jurisprudencia era señal suficiente. Pero la pubertad física y la madurez neurológica para el consentimiento son procesos completamente distintos: la primera puede ocurrir a los 9 años; la segunda requiere hasta los 25. El Islam clásico equiparó pubertad con capacidad de consentimiento, y la neurociencia moderna demuestra que esa ecuación es biológicamente falsa.</p>
+
+    <p><strong>El problema de "preparada psicológicamente":</strong> Ningún texto de la jurisprudencia clásica islámica incluye un criterio psicológico verificable para la consumación. El comentario de Ibn Battal habla únicamente de preparación física ("de corta edad o por una afección"), sin referencia alguna a criterios psicológicos. Añadir la preparación psicológica como condición retrospectiva es proyectar un estándar moderno sobre una jurisprudencia medieval que explícitamente no lo contemplaba.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>La jurisprudencia clásica islámica usaba la pubertad física como único criterio verificable para la consumación del matrimonio.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La neurociencia moderna demuestra que la pubertad física (posible a los 9 años) y la madurez neurológica necesaria para el consentimiento informado (completa entre los 20 y los 25 años) son procesos completamente distintos con una separación de hasta 16 años.</span></div>
+      <div class="conclusion">Por tanto, la jurisprudencia clásica islámica confundió dos procesos biológicamente distintos, y la afirmación de "preparación completa" a los 9 años es una proyección retroactiva de estándares modernos sobre una doctrina que no los contemplaba.</div>
+    </div>
+  </section>
+
+  <section id="objecion-numero">
+    <h3>17. Objeción IV: "Criticar por un número de edad es razonamiento circular"</h3>
+
+    <p>La cuarta y más sofisticada línea de defensa sostiene que argumentar que el matrimonio es antiético basándose en la edad numérica es caer en un razonamiento circular —"es malo porque es malo"— puesto que los números de edad cambian según la época y la cultura y, por tanto, no tienen peso moral objetivo universal.</p>
+
+    <p>Esta objeción merece una respuesta a la altura de su ambición filosófica, porque en apariencia suena rigurosa pero esconde una confusión fundamental:</p>
+
+    <p><strong>La crítica no se basa en "un número".</strong> En ningún momento de este documento se argumenta que "9 es un número malo". El argumento es que un cerebro de 9 años —en el siglo VII o en el XXI— carece neurológicamente de la conectividad prefrontal necesaria para el consentimiento informado. Ese no es un argumento sobre convenciones numéricas: es un argumento sobre biología. Y la biología no cambia con la cultura ni con la época.</p>
+
+    <p><strong>El relativismo cultural tiene límites biológicos infranqueables.</strong> Las edades legales de matrimonio sí varían culturalmente —eso es verdad. Pero hay hechos que no varían con la cultura: la reducción de materia gris cerebral al exponer a un menor de 11 años a experiencias sexuales (Teicher et al., 2022) ocurre con independencia del año o la latitud. La reducción de esperanza de vida de 22 años (Nasrullah et al., 2014) no respeta fronteras culturales. El aumento del 300% en riesgo de suicidio (Pfeiffer, 2023) afecta a cerebros del siglo VII igual que a los del XXI. El relativismo cultural no puede relativizar la biología celular y molecular.</p>
+
+    <p><strong>Sobre la circularidad real:</strong> El argumento crítico de este documento nunca dice "es malo porque es malo". Dice: "es dañino porque la neurociencia demuestra daños permanentes específicos y medibles". Y añade: "un Dios omnisciente que diseña deliberadamente una situación que causa daños permanentes documentados a una persona específica no puede ser simultáneamente benevolente". Esto no es circularidad: es un silogismo con premisas empíricamente verificables e independientes de la conclusión. La acusación de circularidad, en cambio, sí es circular: asume que cualquier criterio de evaluación moral es arbitrario para concluir que no puede haber criterios morales objetivos.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Un argumento es circular cuando la conclusión es idéntica a la premisa sin evidencia intermedia. No lo es cuando las premisas son verificables empíricamente y la conclusión se sigue de ellas.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El argumento crítico del matrimonio de Aisha parte de: daños neurológicos medibles (Teicher, 2022), reducción de esperanza de vida cuantificada (Nasrullah, 2014), incapacidad neurobiológica de consentimiento (Giedd, 1999; Satterthwaite, 2014), y contradicción interna con el atributo coránico de benevolencia absoluta (Corán 4:40).</span></div>
+      <div class="conclusion">Por tanto, el argumento crítico no es circular: sus premisas son empíricas, verificables y distintas de su conclusión. Acusarlo de circularidad es una estrategia retórica para eludir la evidencia sustantiva sin responderla.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE VI: EL ARGUMENTO DE LOS 17 AÑOS -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="argumento-asma">
+    <span class="part-label">Parte VI — ¿Tenía Aisha 17, 18 o 19 años?</span>
+    <h2>El argumento de la cadena Asma: construcción y demolición</h2>
+  </div>
+
+  <section>
+    <h3>18. El argumento de los 17 años: cómo se construye la cadena</h3>
+
+    <p>Existe un argumento apologético moderno —popularizado especialmente en ámbitos de habla urdu desde el siglo XX y difundido por autores como Hakim Niyaz Ahmed y divulgado por algunos eruditos reformistas— que sostiene que Aisha tenía en realidad 17, 18 o incluso 19 años cuando se consumó el matrimonio. El argumento se construye mediante una cadena de inferencias a partir de la edad de su hermana Asma.</p>
+
+    <p>Veamos la cadena completa tal como la presentan sus defensores, paso a paso:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Paso</th>
+          <th>Premisa</th>
+          <th>Fuente invocada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Asma bint Abi Bakr era 10 años mayor que Aisha</td>
+          <td>Abd al-Rahman ibn Abi Zannad (en Al-Dhahabi, Siyar, II:289)</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Asma murió a los 100 años de edad</td>
+          <td>Ibn Kathir (Al-Bidaya, VIII:371–372)</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Asma murió en el año 73 de la Hégira (692 d.C.)</td>
+          <td>Ibn Hajar al-Asqalani (Taqrib al-Tahzib)</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Restando: si murió en el 73 H. con 100 años, nació aprox. en el año −27 H. (595 d.C.)</td>
+          <td>Cálculo aritmético</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Si Asma tenía 27–28 años en la Hégira (622 d.C.), Aisha tenía 17–18</td>
+          <td>Resta de 10 años de diferencia</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>La consumación fue en el año 1–2 H. (622–624 d.C.), luego Aisha tenía 19–20 años</td>
+          <td>Cronología de la Hégira</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>La conclusión que se extrae es que los hadices que dicen "9 años" son erróneos, producto de la memoria deficiente de un solo narrador —Hisham ibn Urwa— y que la edad real de Aisha era de casi 20 años. El argumento ha ganado tracción en algunos círculos reformistas musulmanes y es citado frecuentemente en debates con apologistas occidentales.</p>
+  </section>
+
+  <section id="refutacion-asma">
+    <h3>19. Refutación: por qué la cadena Asma no funciona</h3>
+
+    <p>Aunque el argumento tiene apariencia de rigor cronológico, falla en cada uno de sus eslabones cuando se examina con los criterios de la propia ciencia del hadiz (<em>'ilm al-rijāl</em>) y con la lógica histórica comparativa. Analicemos los problemas uno por uno.</p>
+
+    <p><strong>Fallo 1 — La fuente de "10 años de diferencia" es un narrador solitario y técnicamente débil.</strong></p>
+
+    <p>Toda la cadena reposa sobre una única narración de Abd al-Rahman ibn Abi Zannad, quien afirma que Asma era 10 años mayor que Aisha. Pero como señala el análisis de la página de discusión de Wikipedia sobre Asma bint Abi Bakr:</p>
+
+    <blockquote>
+      <em>"Los 'casi todos los historiadores' que dicen que Asma era diez años mayor están citando todos a un único narrador: Abd al-Rahman ibn Abi Zinnaad. Nació demasiado tarde para ser testigo ocular, no cita sus fuentes, y es considerado un narrador débil según criterios técnicos. Historiadores importantes como Al-Dhahabi, Ibn Kathir e Ibn Hajar citan a Ibn Abi Zannad, pero nunca afirman estar de acuerdo con él."</em>
+      <cite>— Talk:Asma bint Abi Bakr, Wikipedia (citando fuentes primarias)</cite>
+    </blockquote>
+
+    <p>En la ciencia del hadiz islámica, una narración trasmitida por un único transmisor de fiabilidad cuestionada no puede emplearse para invalidar hadices <em>mutawātir</em> (transmitidos por múltiples cadenas independientes). Usar la narración débil de Ibn Abi Zannad para desechar los hadices sahih de Bukhari y Muslim invierte la jerarquía metodológica de la propia tradición islámica.</p>
+
+    <p><strong>Fallo 2 — La diferencia de edad entre las hermanas varía según la fuente.</strong></p>
+
+    <p>Al-Dhahabi, cuya obra <em>Siyar A'lam al-Nubala</em> es una de las fuentes biográficas más respetadas del Islam, no afirma simplemente "10 años": escribe que Asma era "10 años o más" mayor que Aisha (<em>'ashr sinīn aw akthar</em>). Esta imprecisión es significativa. Según la fuente IslamicFinder, Al-Dhahabi habría registrado una diferencia de entre 13 y 19 años en algunas transmisiones. Si la diferencia fuera de 13 años en lugar de 10, el cálculo se desploma: Aisha tendría 14 años en la Hégira y 15 en la consumación —no 19.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fuente</th>
+          <th>Diferencia de edad Asma–Aisha</th>
+          <th>Edad de Aisha en la consumación resultante</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ibn Abi Zannad (narrador único, débil)</td>
+          <td>10 años exactos</td>
+          <td>~19–20 años</td>
+        </tr>
+        <tr>
+          <td>Al-Dhahabi (versión mínima)</td>
+          <td>"10 años o más"</td>
+          <td>Variable; ≤19 años</td>
+        </tr>
+        <tr>
+          <td>Al-Dhahabi (otras transmisiones)</td>
+          <td>13–19 años</td>
+          <td>~14–16 años</td>
+        </tr>
+        <tr>
+          <td>Abu Na'im al-Asfahani</td>
+          <td>~10 años</td>
+          <td>~17 años (en la Hégira)</td>
+        </tr>
+        <tr>
+          <td>Bukhari / Muslim (sahih)</td>
+          <td>N/A (directos)</td>
+          <td><strong>9 años (consumación directamente narrada)</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Fallo 3 — La edad de Asma al morir no es un dato verificado sino una tradición oral sujeta a la misma crítica aplicada a los demás hadices.</strong></p>
+
+    <p>El argumento asume como dato duro que Asma murió exactamente a los 100 años en el año 73 H. Pero "100 años" en la historiografía islámica medieval es frecuentemente una cifra redonda que denota longevidad extrema, no un recuento exacto. El propio Ibn Kathir registra variantes sobre cuántos días después de la muerte de su hijo murió Asma: 5 días, 10 días, 20 días, "pocos días después de 20", o 100 días. Esta dispersión de cifras en un dato tan cercano en el tiempo sugiere que la transmisión oral de los datos biográficos de Asma es considerablemente imprecisa.</p>
+
+    <p>Asimismo, los años lunares utilizados en la cronología islámica son aproximadamente 11 días más cortos que los años solares. Cien años lunares equivalen a unos 97 años solares. Este desfase puede desplazar los cálculos en varios años sin que el argumento lo contemple.</p>
+
+    <p><strong>Fallo 4 — El argumento contradice los propios eruditos islámicos que cita como autoridades.</strong></p>
+
+    <p>El argumento usa a Ibn Kathir como fuente para la edad de Asma. Pero el propio Ibn Kathir escribió explícitamente, en su obra <em>Al-Sira al-Nabawiyya</em>, que el matrimonio del Profeta con Aisha cuando tenía seis años y la consumación cuando tenía nueve años "no es disputado por nadie y está bien establecido en las colecciones sahih". Usar la autoridad de Ibn Kathir para la edad de Asma pero rechazar su autoridad sobre la edad de Aisha es una aplicación selectiva e inconsistente de las fuentes.</p>
+
+    <div class="hadith">
+      <div class="source">Ibn Kathir — Al-Sira al-Nabawiyya (trad. Le Gassick, vol. 2, p. 94)</div>
+      <div class="text">"Su afirmación de que contrajo matrimonio con Aisha cuando ella tenía seis años y consumó el matrimonio cuando tenía nueve años no es disputada por nadie, y está bien establecida en las colecciones sahih de tradiciones y en otras."</div>
+    </div>
+
+    <p><strong>Fallo 5 — El argumento requiere desestimar múltiples narradores independientes para funcionar.</strong></p>
+
+    <p>El apologista modernista acusa a Hisham ibn Urwa de ser el único narrador del hadiz de los "9 años" y de haber tenido memoria deficiente en Iraq. Pero esto es históricamente inexacto. El hadiz sobre la edad de Aisha no fue narrado únicamente por Hisham: también fue narrado por al-Aswad ibn Yazid, Abu Salama ibn Abd al-Rahman y otros transmisores independientes (como documenta el estudio de Yaqeen Institute). Hay múltiples cadenas de transmisión convergentes en los 9 años; no hay ninguna cadena igualmente robusta para los 17 o 19 años.</p>
+
+    <p><strong>Fallo 6 — El consenso de los eruditos islámicos es abrumadoramente contrario al argumento revisionista.</strong></p>
+
+    <p>Si bien algunos eruditos reformistas modernos (como el paquistaní Hakim Niyaz Ahmed) han defendido la revisión de la edad, el consenso de las escuelas jurídicas sunitas tradicionales —hanafí, maliki, shafi'i y hanbali— acepta unánimemente los 6 y 9 años de Aisha como hecho establecido. Incluso eruditos que consideran el argumento revisionista "plausible", como el Shaykh al-Dadow citado por Mohammed Hijab, lo presentan como una posibilidad secundaria, no como el consenso académico.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El argumento de los 17 años depende de: (a) una narración de un único transmisor técnicamente débil (Ibn Abi Zannad), (b) una cifra de edad ("100 años") que es probablemente una aproximación redonda, (c) ignorar que Al-Dhahabi registra diferencias de 13–19 años entre las hermanas, y (d) rechazar a Ibn Kathir cuando dice que la edad de 9 años "no es disputada por nadie".</span></div>
+      <div class="premise"><span class="label">P2</span><span>Por el contrario, los hadices sahih de Bukhari y Muslim sobre los 9 años están respaldados por múltiples narradores independientes, son considerados auténticos por todas las escuelas sunitas, y el propio Ibn Kathir —cuya autoridad el argumento revisionista invoca— los confirma explícitamente.</span></div>
+      <div class="conclusion">Por tanto, el argumento de los 17/18/19 años falla metodológicamente dentro de los propios criterios de la ciencia del hadiz islámica: usa una fuente débil y singular para desestimar fuentes múltiples y robustas, y aplica de forma inconsistente la autoridad de los eruditos que cita.</div>
+    </div>
+
+    <div class="paradox-box">
+      <p><strong>El dilema del revisionista apologético:</strong> Si el argumento revisionista tuviera éxito y Aisha tuviera en realidad 17–19 años, se generarían nuevos problemas insolubles. En primer lugar, significaría que los hadices sahih de Bukhari y Muslim —la columna vertebral de la jurisprudencia islámica sunita— están gravemente equivocados en un dato tan específico y relevante como la edad de la esposa del Profeta. Esto socavaría la fiabilidad general de esas colecciones. En segundo lugar, significaría que durante 14 siglos, todas las escuelas jurídicas sunitas han basado legislación sobre matrimonio infantil en un error de transmisión. Ambas conclusiones son devastadoras para el Islam institucional: la solución apologética es tan destructiva como el problema que pretende resolver.</p>
+    </div>
+
+    <div class="highlight">
+      <strong>Conclusión sobre el argumento revisionista:</strong> El argumento de los 17 años no es una solución al problema —es un problema diferente añadido al mismo. Incluso si Aisha tuviera 17 años (lo cual las fuentes islámicas canónicas no sostienen), una niña de 6 años fue legalmente entregada a un hombre de 52 en un contrato irrevocable; y la consumación a los 9 sería la consecuencia lógica de que la pubertad ocurriera a esa edad. El propio intento de "rescatar" al Islam mediante este argumento revela que sus defensores reconocen implícitamente que los 9 años son moralmente insostenibles.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SILOGISMOS FINALES -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="silogismos-finales">
+    <span class="part-label">Síntesis Final</span>
+    <h2>Los silogismos irrefutables: cuatro caminos al mismo destino</h2>
+  </div>
+
+  <section>
+    <p>Los argumentos previos pueden condensarse en cuatro silogismos independientes. Cada uno, por sí solo, es suficiente para plantear una contradicción fatal en el Islam. Su convergencia es devastadora.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Un Dios omnisciente que diseña y sanciona situaciones que causan daño físico y psicológico masivo y documentado a seres humanos —específicamente a una niña específica a quien Él mismo escogió— no puede ser simultáneamente benevolente.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El Islam afirma que Allah es omnisciente (Corán 57:3) y benevolente (Corán 42:19) y que no comete injusticia ni del peso de un átomo (Corán 4:40).</span></div>
+      <div class="premise"><span class="label">P3</span><span>Allah diseñó y sancionó el matrimonio de Aisha, sabiendo —por ser omnisciente— todos los daños neurológicos, físicos y psicológicos que causaría.</span></div>
+      <div class="conclusion">SILOGISMO I: Por tanto, el Dios del Islam no puede ser simultáneamente omnisciente y benevolente. Al menos uno de sus atributos fundamentales es falso.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El Corán 4:6 establece el <em>rushd</em> (madurez mental cognitiva) como condición para el matrimonio válido.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Aisha tenía 9 años y era neurobiológicamente incapaz de poseer <em>rushd</em> —el córtex prefrontal responsable de esa madurez no completará su desarrollo por otros 16 años.</span></div>
+      <div class="conclusion">SILOGISMO II: Por tanto, el propio Corán invalida el matrimonio de Muhammad según sus propios criterios —lo que significa que o Muhammad violó el Corán, o el Corán fue modificado por humanos para acomodar los actos de Muhammad.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El Corán 33:21 proclama a Muhammad como modelo perfecto y universal de conducta para toda la humanidad.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Un modelo perfecto y universal no puede producir, cuando es emulado fielmente, consecuencias que la ciencia demuestra como dañinas: reducción cerebral permanente, reducción de esperanza de vida de 22 años, alteración epigenética, triplicación del riesgo de suicidio.</span></div>
+      <div class="conclusion">SILOGISMO III: Por tanto, o Muhammad no es el modelo perfecto que el Corán proclama, o su modelo solo es aplicable a personas que viven en el siglo VII —en cuyo caso no es universal y el Corán miente.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Allah presentó a Aisha en sueños proféticos como esposa divina para Muhammad (Sahih al-Bukhari 3895), siendo omnisciente de las consecuencias físicas, neurológicas y psicológicas que esto causaría.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Muhammad golpeó físicamente a Aisha (Sahih Muslim 2127), y Allah no lo reprendió en ninguna revelación posterior; el golpe no fue corregido ni condenado divinamente.</span></div>
+      <div class="conclusion">SILOGISMO IV: Por tanto, Allah consintió activamente: (a) el daño físico a la niña que Él mismo eligió para su profeta; (b) la violencia física de su profeta sobre esa mujer. Un Dios que consiente el daño de quien Él mismo escogió no es justo "ni del peso de un átomo" —contradiciendo su propio Corán 4:40.</div>
+    </div>
+  </section>
+
+  <!-- VEREDICTO FINAL -->
+  <div class="verdict" id="veredicto">
+    <h2>El Veredicto: Una Conclusión Inevitable</h2>
+
+    <p>La evidencia científica, histórica, teológica y lógica converge en una conclusión que el Islam no puede evadir sin sacrificar alguno de sus pilares doctrinales fundamentales.</p>
+
+    <p><strong>Si Allah es omnisciente,</strong> sabía que Aisha sufriría daño neurológico permanente, reducción de esperanza de vida de 22 años, alteración epigenética de su ADN, y sería golpeada por el hombre al que Él mismo la destinó. Si a pesar de saberlo lo permitió —e incluso lo ordenó mediante sueños proféticos— entonces Allah no es benevolente, contradiciendo el Corán 4:40 y 42:19.</p>
+
+    <p><strong>Si Allah es benevolente,</strong> entonces no ordenó un matrimonio que causa todos esos daños masivos y documentados. En ese caso, Muhammad actuó por su propia voluntad, los hadices que describen la "elección divina" de Aisha son fabricaciones, y el Corán —que no corrigió este matrimonio— no es de origen divino.</p>
+
+    <p><strong>Si Muhammad es el modelo eterno y universal</strong> (Corán 33:21), sus actos deben producir bienestar cuando son emulados en cualquier época. La neurociencia, la medicina y la psicología demuestran que emular el matrimonio de Aisha produce daños permanentes e irreversibles. Por tanto, Muhammad no es el modelo universal que el Corán proclama.</p>
+
+    <p><strong>Si el propio Corán exige <em>rushd</em></strong> para el matrimonio (4:6), y si Aisha no podía tener <em>rushd</em> a los 9 años según la neurobiología, entonces el matrimonio viola los propios criterios del Corán —lo que significa que Muhammad violó el Corán o que el Corán fue manipulado para acomodar sus acciones.</p>
+
+    <p>El caso de Aisha no es un "detalle histórico incómodo". Es una fisura estructural en los fundamentos del Islam que se expande en cuatro direcciones simultáneas: la omnisciencia de Allah, su benevolencia, la universalidad de Muhammad como modelo, y la coherencia interna del Corán. <strong>El apologista que pretenda responder deberá sacrificar al menos uno de estos pilares. No existe respuesta que los preserve todos intactos.</strong></p>
+
+    <p>Como afirmó el propio Corán, Allah no comete injusticia ni del peso de un átomo. La ciencia demuestra que el matrimonio de Aisha causó daños que pesan infinitamente más que un átomo. <strong>La contradicción es, usando las propias palabras del Corán, atómica en su precisión e ineludible en su lógica.</strong></p>
+  </div>
+
+  <footer style="border-top:1px solid var(--grey-light); padding-top:2rem; font-size:0.8rem; color:var(--grey-mid); font-family:'JetBrains Mono',monospace; line-height:1.8;">
+    <p>FUENTES PRINCIPALES CITADAS: Sahih al-Bukhari 5134, 3895, 3896, 3894, 3729, 5127 · Sunan Abu Dawud 4932 · Sahih Muslim 1422a, 2127, 2137, 2449 · Giedd et al. (1999) · Arain et al. (2013) · Satterthwaite et al. (2014) · Blakemore (2018) · Teicher et al., JAMA Pediatrics (2022) · Pfeiffer, Nature Human Behaviour (2023) · Galván et al. (2006) · OMS (2021, 2023) · APA (2020) · Nasrullah et al. (2014) · Svanemyr et al., Lancet (2015) · Stearns, Childhood in World History (2006) · Casey, Journal of Social History (2016) · Schlegel & Barry (1991) · Ellis, The Empty Cradle (2013) · Hitchens, God Is Not Great (2007) · Muwatta Imam Malik 2895 · Ibn Battal, Sharh Sahih al-Bukhari · Ibn Kathir, Al-Bidaya VIII:371–372 · Ibn Kathir, Al-Sira al-Nabawiyya II:94 · Al-Dhahabi, Siyar A'lam al-Nubala II:289</p>
+  </footer>
+
+</main>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('progress-bar').style.width = progress + '%';
+  });
+
+  // Sidebar toggle
+  const toggle = document.getElementById('nav-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('visible');
+    toggle.classList.add('open');
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+    toggle.classList.remove('open');
+  }
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+
+  overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar on nav link click
+  sidebar.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeSidebar);
+  });
+
+  // Active section highlighting
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('#sidebar nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

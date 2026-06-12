@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los Dos Poderes en el Cielo — Dossier Académico</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #f8f8f6;
+    --bg3: #f0f0ec;
+    --text: #1a1a18;
+    --text2: #3d3d3a;
+    --text3: #6b6b66;
+    --accent: #1a1a18;
+    --accent-light: #e8e8e0;
+    --border: #d0d0c8;
+    --border-dark: #a0a09a;
+    --gold: #8a7340;
+    --gold-light: #f5f0e0;
+    --red: #7a1c1c;
+    --red-light: #fdf0f0;
+    --blue: #1a2e5a;
+    --blue-light: #f0f4fc;
+    --green: #1a4a2e;
+    --green-light: #f0f8f0;
+    --serif: 'Georgia', 'Times New Roman', serif;
+    --sans: 'Helvetica Neue', 'Arial', sans-serif;
+    --mono: 'Courier New', monospace;
+    --sidebar-w: 280px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  /* ===== SIDEBAR NAV ===== */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--text);
+    color: #e0e0d8;
+    overflow-y: auto;
+    z-index: 100;
+    border-right: 1px solid #333;
+    transition: transform 0.3s ease;
+  }
+
+  #sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid #333;
+    background: #111110;
+  }
+
+  #sidebar-header h1 {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #a0a090;
+    line-height: 1.4;
+  }
+
+  #sidebar-header .subtitle {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+    font-family: var(--sans);
+  }
+
+  #nav-tree {
+    padding: 12px 0 40px;
+  }
+
+  .nav-section {
+    padding: 0;
+  }
+
+  .nav-section-title {
+    padding: 10px 20px 4px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #555;
+    font-weight: 600;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 6px 20px 6px 24px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: #aaa;
+    text-decoration: none;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+
+  .nav-item:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+    border-left-color: #888;
+  }
+
+  .nav-item.active {
+    color: #fff;
+    border-left-color: #c8c0a0;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .nav-item.sub {
+    padding-left: 36px;
+    font-size: 11.5px;
+    color: #888;
+  }
+
+  .nav-item.sub:hover { color: #ddd; }
+
+  /* ===== MAIN CONTENT ===== */
+  #main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+  }
+
+  /* ===== HERO ===== */
+  #hero {
+    background: var(--text);
+    color: #e8e8e0;
+    padding: 80px 80px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(255,255,255,0.03) 39px,
+      rgba(255,255,255,0.03) 40px
+    );
+  }
+
+  #hero-inner { position: relative; max-width: 820px; }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 20px;
+  }
+
+  #hero h1 {
+    font-family: var(--serif);
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1.1;
+    color: #f0f0e8;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  #hero h1 em {
+    font-style: italic;
+    color: #c8c0a0;
+  }
+
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: #666;
+  }
+
+  .hero-meta-item strong {
+    display: block;
+    color: #aaa;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  /* ===== CONTENT AREA ===== */
+  .content-area {
+    max-width: 820px;
+    padding: 64px 80px;
+    margin: 0 auto;
+  }
+
+  /* ===== SECTIONS ===== */
+  .doc-section {
+    margin-bottom: 72px;
+    scroll-margin-top: 32px;
+  }
+
+  .section-number {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+
+  h2.section-title {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 8px;
+    border-bottom: 1.5px solid var(--text);
+    padding-bottom: 12px;
+  }
+
+  h3.subsection-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text);
+    margin: 36px 0 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h4.sub-subsection {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin: 28px 0 10px;
+  }
+
+  p {
+    margin-bottom: 18px;
+    color: var(--text2);
+    font-size: 17px;
+    line-height: 1.85;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* ===== VERSE BLOCKS ===== */
+  .verse-block {
+    margin: 28px 0;
+    padding: 20px 28px;
+    border-left: 3px solid var(--gold);
+    background: var(--gold-light);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .verse-ref {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .verse-heb, .verse-gk {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--text);
+    direction: rtl;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  .verse-gk { direction: ltr; }
+
+  .verse-trans {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--text2);
+    font-style: italic;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #e0d8c0;
+  }
+
+  .verse-note {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text3);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* ===== SOURCE BLOCKS ===== */
+  .source-block {
+    margin: 24px 0;
+    padding: 20px 28px;
+    border-left: 3px solid var(--blue);
+    background: var(--blue-light);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .source-block .src-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .source-block p {
+    font-size: 15px;
+    color: var(--text2);
+    margin-bottom: 6px;
+  }
+
+  /* ===== HERESY BLOCKS ===== */
+  .heresy-block {
+    margin: 24px 0;
+    padding: 20px 28px;
+    border-left: 3px solid var(--red);
+    background: var(--red-light);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .heresy-block .h-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  /* ===== ARGUMENT BOXES ===== */
+  .argument-box {
+    margin: 28px 0;
+    border: 1.5px solid var(--text);
+    padding: 24px 28px;
+    border-radius: 4px;
+    background: var(--bg2);
+  }
+
+  .arg-title {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .arg-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 8px 16px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    align-items: baseline;
+  }
+
+  .arg-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    font-weight: 600;
+    padding-top: 3px;
+  }
+
+  .arg-text { color: var(--text2); font-family: var(--serif); font-size: 15px; }
+
+  /* ===== LEXICAL TABLES ===== */
+  .lex-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+
+  .lex-table th {
+    background: var(--text);
+    color: #e0e0d8;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  .lex-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+    vertical-align: top;
+  }
+
+  .lex-table tr:nth-child(even) td { background: var(--bg2); }
+  .lex-table tr:hover td { background: var(--accent-light); }
+
+  .lex-heb {
+    font-size: 18px;
+    font-style: italic;
+    direction: rtl;
+  }
+
+  .lex-gk { font-size: 16px; font-style: italic; }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    margin: 28px 0;
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border-dark);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .tl-item:last-child { border-bottom: none; }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -28px; top: 8px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--text);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--border-dark);
+  }
+
+  .tl-date {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .tl-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+
+  .tl-body {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  /* ===== FOOTNOTES ===== */
+  .fn-ref {
+    font-size: 11px;
+    vertical-align: super;
+    font-family: var(--sans);
+    color: var(--text3);
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .footnote-area {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .fn-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  .fn-item {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text3);
+    margin-bottom: 6px;
+    line-height: 1.5;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 4px;
+  }
+
+  .fn-num {
+    font-weight: 700;
+    color: var(--text2);
+  }
+
+  /* ===== CALLOUT BOX ===== */
+  .callout {
+    margin: 28px 0;
+    padding: 22px 28px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .callout-title {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .callout p {
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: var(--text2);
+  }
+
+  /* ===== BACK TO TOP ===== */
+  #back-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 40px; height: 40px;
+    background: var(--text);
+    color: #e0e0d8;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 200;
+    font-family: var(--sans);
+  }
+
+  #back-top.visible { opacity: 1; }
+  #back-top:hover { background: #333; }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* ===== GREEN BLOCKS (Qumran/rabbinico) ===== */
+  .source-block.green {
+    border-left-color: var(--green);
+    background: var(--green-light);
+  }
+
+  .source-block.green .src-label {
+    color: var(--green);
+  }
+
+  /* ===== SCROLLBAR ===== */
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: transparent; }
+  #sidebar::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
+
+  /* ===== PRINT / MOBILE ===== */
+  @media (max-width: 900px) {
+    :root { --sidebar-w: 0px; }
+    #sidebar { transform: translateX(-280px); }
+    #sidebar.open { transform: translateX(0); width: 280px; }
+    #main { margin-left: 0; }
+    .content-area { padding: 40px 28px; }
+    #hero { padding: 48px 28px; }
+    #hero h1 { font-size: 32px; }
+    #menu-btn { display: flex !important; }
+  }
+
+  #menu-btn {
+    display: none;
+    position: fixed;
+    top: 16px; left: 16px;
+    z-index: 300;
+    background: var(--text);
+    color: #eee;
+    border: none;
+    width: 36px; height: 36px;
+    border-radius: 4px;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .progress-bar {
+    position: fixed;
+    top: 0; left: var(--sidebar-w); right: 0;
+    height: 2px;
+    background: var(--border);
+    z-index: 150;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    width: 0%;
+    transition: width 0.1s;
+  }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<!-- MOBILE MENU BUTTON -->
+<button id="menu-btn" onclick="toggleSidebar()" aria-label="Menú">☰</button>
+
+<!-- SIDEBAR -->
+<nav id="sidebar" aria-label="Índice del dossier">
+  <div id="sidebar-header">
+    <h1>Los Dos Poderes<br>en el Cielo</h1>
+    <div class="subtitle">Dossier Académico · Teología del Segundo Templo</div>
+  </div>
+  <div id="nav-tree">
+    <div class="nav-section">
+      <div class="nav-section-title">Introducción</div>
+      <a class="nav-item" href="#intro">I. Presentación y Metodología</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">I. Fundamentos Bíblicos</div>
+      <a class="nav-item" href="#bibelicos">II. Textos del AT: Pluralidad Personal</a>
+      <a class="nav-item sub" href="#gen-19">› Génesis 19:24</a>
+      <a class="nav-item sub" href="#genesis-otros">› Génesis: otros textos</a>
+      <a class="nav-item sub" href="#isaias48">› Isaías 48 y el Enviado</a>
+      <a class="nav-item sub" href="#salmo110">› Salmo 110 (Adōní)</a>
+      <a class="nav-item sub" href="#prov8">› Proverbios 8: la Sabiduría</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">II. Literatura del Segundo Templo</div>
+      <a class="nav-item" href="#daniel">III. Daniel 7: El Anciano de Días y el Hijo de Hombre</a>
+      <a class="nav-item sub" href="#d7-texto">› Análisis del texto</a>
+      <a class="nav-item sub" href="#d7-tradicion">› Recepción en el judaísmo</a>
+      <a class="nav-item" href="#enoch">IV. 1 Enoc: El Hijo del Hombre Preexistente</a>
+      <a class="nav-item sub" href="#enoch-parabolos">› Las Parábolas (cc. 37–71)</a>
+      <a class="nav-item sub" href="#enoch-nombre">› El Nombre Oculto</a>
+      <a class="nav-item" href="#yahve-immanente">V. YHWH Inmanente y YHWH Trascendente</a>
+      <a class="nav-item sub" href="#angel-yhwh">› El Ángel de YHWH</a>
+      <a class="nav-item sub" href="#dos-yhwh">› La Tradición de los «Dos YHWH»</a>
+      <a class="nav-item" href="#logos">VI. Logos, Memra y Sabiduría</a>
+      <a class="nav-item sub" href="#filon">› Filón de Alejandría</a>
+      <a class="nav-item sub" href="#memra">› Targumim y el Memra</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">III. Qumrán</div>
+      <a class="nav-item" href="#qumran">VII. Textos de Qumrán</a>
+      <a class="nav-item sub" href="#qumran-melquise">› Melquisedec (11QMelch)</a>
+      <a class="nav-item sub" href="#qumran-masiah">› El Mesías como Hijo de Dios (4Q246)</a>
+      <a class="nav-item sub" href="#qumran-angel">› El Príncipe de la Luz</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">IV. Recepción y Controversia</div>
+      <a class="nav-item" href="#rabi">VIII. Reacción Rabínica: La Condena de los «Dos Poderes»</a>
+      <a class="nav-item sub" href="#rabi-hagiga">› Tosefta Ḥagigah 2:1</a>
+      <a class="nav-item sub" href="#rabi-personajes">› Los Herejes: Eliseo ben Abuyah</a>
+      <a class="nav-item" href="#cristiano">IX. Adopción Cristiana y Definición Trinitaria</a>
+      <a class="nav-item sub" href="#crist-apologetas">› Justino Mártir y los Apologetas</a>
+      <a class="nav-item sub" href="#crist-nicaea">› Nicea y la Clausura Dogmática</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">V. Síntesis</div>
+      <a class="nav-item" href="#mesias">X. La Divinidad del Mesías: Conclusión Apologética</a>
+      <a class="nav-item" href="#conclusion">XI. Conclusión General</a>
+      <a class="nav-item" href="#biblio">XII. Bibliografía</a>
+    </div>
+  </div>
+</nav>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="scrollToTop()" aria-label="Volver arriba">↑</button>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- HERO -->
+  <header id="hero">
+    <div id="hero-inner">
+      <div class="hero-eyebrow">Dossier Académico · Teología Bíblica y del Segundo Templo</div>
+      <h1>Los <em>Dos Poderes</em><br>en el Cielo</h1>
+      <p class="hero-sub">
+        Pluralidad personal en YHWH, tradiciones judías del Segundo Templo<br>
+        y la raíz precristiana de la divinidad mesiánica
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>Período cubierto</strong>s. VIII a.C. – s. IV d.C.</div>
+        <div class="hero-meta-item"><strong>Corpus principal</strong>AT, 1 Enoc, Daniel, Qumrán, Filón, Rabínica</div>
+        <div class="hero-meta-item"><strong>Lenguas</strong>Hebreo, Arameo, Griego, Latín</div>
+        <div class="hero-meta-item"><strong>Método</strong>Exégesis histórico-crítica y canónica</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content-area">
+
+    <!-- ============================================================ -->
+    <!-- I. INTRODUCCIÓN -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="intro">
+      <div class="section-number">Sección I</div>
+      <h2 class="section-title">Presentación y Metodología</h2>
+
+      <p>El presente dossier tiene por objeto el fenómeno conocido en los estudios bíblicos y del Segundo Templo como la doctrina de los «Dos Poderes en el Cielo» (<span class="lex-heb">שְׁתֵּי רָשֻׁיּוֹת בַּשָּׁמַיִם</span>, <em>shtei reshuyot ba-shamayim</em>). Se trata de una corriente de especulación teológica judía —documentada desde el período del Segundo Templo (ca. 520 a.C. – 70 d.C.) y con raíces en el texto mismo del Tanaj— que postula la existencia de una segunda figura divina o cuasi-divina junto a YHWH, entendida como mediadora, vicerregente o emanación del Dios trascendente. Esta tradición, lejos de ser marginal, constituyó durante varios siglos una corriente pluriforme y bien atestiguada dentro del universo religioso judío antes de ser declarada herética tanto por el judaísmo rabínico como de ser reformulada y precisada por la teología cristiana trinitaria.</p>
+
+      <p>La importancia apologética del tema es considerable: demuestra que la afirmación cristiana de la divinidad del Mesías Jesús no fue una innovación helenística posterior, sino la articulación de expectativas y estructuras teológicas ya presentes en el judaísmo del Segundo Templo varios siglos antes del nacimiento de Cristo. Como ha señalado Daniel Boyarin, la cristología alta —esto es, la identificación del Mesías con una segunda figura divina preexistente— <em>es judeísmo</em>, no una corrupción pagana de este.<span class="fn-ref" title="Boyarin, 2012, p. 25">1</span></p>
+
+      <div class="callout">
+        <div class="callout-title">Nota Metodológica</div>
+        <p>Este dossier sigue el método de la exégesis histórico-crítica combinado con la hermenéutica canónica. Las referencias a textos bíblicos se citan con el texto hebreo/griego original cuando es exegéticamente relevante. Los textos intertestamentarios se citan según las ediciones críticas estándar (Parry-Tov para Qumrán; Knibb-Ullendorff para 1 Enoc etíope). Las fuentes rabínicas siguen la numeración del Talmud Babilónico (TB) y la Misná (M.) según la edición de Soncino y Blackman respectivamente. <strong>Advertencia sobre citas:</strong> Se han verificado todos los textos contra sus fuentes primarias. Las citas son paráfrasis autorizadas salvo donde se indica explícitamente.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">s. X–VIII a.C.</div>
+          <div class="tl-title">Textos fundacionales: Génesis, Salmos, Proverbios</div>
+          <div class="tl-body">Redacción de textos que contienen semillas de la pluralidad divina: el «Ángel de YHWH», la «Sabiduría» hipostasiada, el Señor del Salmo 110.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">s. VI a.C.</div>
+          <div class="tl-title">Libro de Daniel (Daniel 7)</div>
+          <div class="tl-body">Visión del Anciano de Días y el «Hijo de Hombre» como dos figuras celestes distintas que comparten dominio eterno.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">s. III–I a.C.</div>
+          <div class="tl-title">Literatura del Segundo Templo: 1 Enoc, Sabiduría, Sirácides</div>
+          <div class="tl-body">Florecimiento de la especulación sobre el «Hijo del Hombre» preexistente y la Sabiduría divina como segundo poder.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">s. I a.C. – s. I d.C.</div>
+          <div class="tl-title">Filón de Alejandría y el Logos; Qumrán</div>
+          <div class="tl-body">Sistematización filosófica del segundo poder como Logos-Sabiduría; en Qumrán, figuras como Melquisedec asumen funciones cuasi-divinas.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">s. I d.C.</div>
+          <div class="tl-title">El movimiento cristiano y la identificación del Mesías</div>
+          <div class="tl-body">Identificación de Jesús con el «Hijo del Hombre» de Daniel y el segundo poder YHWH. El Nuevo Testamento refleja estas tradiciones judías del Segundo Templo.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">s. II–IV d.C.</div>
+          <div class="tl-title">Condena rabínica y precisión cristológica</div>
+          <div class="tl-body">El judaísmo rabínico condena como herejía la doctrina de los «Dos Poderes». El cristianismo la sistematiza en la doctrina trinitaria de Nicea (325 d.C.).</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- II. TEXTOS AT -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="bibelicos">
+      <div class="section-number">Sección II</div>
+      <h2 class="section-title">Textos del Antiguo Testamento: Indicios de Pluralidad Personal</h2>
+
+      <p>El texto hebreo del Tanaj contiene una serie de pasajes que, leídos con atención filológica, sugieren una <em>distinción interna</em> en la divinidad —no una mera pluralidad de dioses, sino algo más sutil: una distinción de personas o roles dentro de la identidad única de YHWH. La exégesis rabínica clásica reconoció la dificultad de estos textos, pero los resolvió mediante interpretaciones que los primeros apologistas cristianos consideraron forzadas.</p>
+
+      <h3 class="subsection-title" id="gen-19">Génesis 19:24 — YHWH desde YHWH</h3>
+
+      <div class="verse-block">
+        <div class="verse-ref">Génesis 19:24 — Texto Masorético</div>
+        <div class="verse-heb">וַיהוָה הִמְטִיר עַל-סְדֹם וְעַל-עֲמֹרָה גָּפְרִית וָאֵשׁ מֵאֵת יְהוָה מִן-הַשָּׁמָיִם</div>
+        <div class="verse-trans">«Y YHWH hizo llover sobre Sodoma y Gomorra azufre y fuego de parte de YHWH, desde los cielos.»</div>
+        <div class="verse-note">LXX: καὶ κύριος ἔβρεξεν ἐπὶ Σόδομα καὶ Γόμορρα θεῖον καὶ πῦρ παρὰ κυρίου ἐκ τοῦ οὐρανοῦ — «El Señor llovió sobre Sodoma y Gomorra azufre y fuego de parte del Señor desde el cielo.»</div>
+      </div>
+
+      <p>Este versículo ha sido objeto de análisis exegético intenso desde la Antigüedad. La estructura sintáctica es notable: el sujeto (<em>waYHWH</em>) actúa sobre la tierra, mientras que la fuente de la acción (<em>mē'ēt YHWH min-ha-shamayim</em>) se designa con el mismo tetragramaton referido al dominio celeste. El texto distingue gramaticalmente entre un YHWH que opera en la esfera terrena y un YHWH que permanece en los cielos.</p>
+
+      <div class="argument-box">
+        <div class="arg-title">Lectura Exegética del Verso</div>
+        <div class="arg-row">
+          <div class="arg-label">Hebreo</div>
+          <div class="arg-text"><em>waYHWH</em> (sujeto actor) + <em>mē'ēt YHWH min-ha-shamayim</em> (fuente celeste)</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Problema</div>
+          <div class="arg-text">Si YHWH es la misma persona, ¿por qué el texto distingue un YHWH que actúa y un YHWH que envía la acción «desde los cielos»?</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Justino</div>
+          <div class="arg-text">Argumenta en <em>Diálogo con Trifón</em> 56 que esto prueba que el YHWH manifestado en tierra es el Logos-Hijo, distinto del Padre celestial.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Rabínica</div>
+          <div class="arg-text">Rashi y la mayoría rabínica interpretan la repetición como énfasis estilístico (<em>pleonasmo</em>) o como distinción entre el decreto divino y su ejecución, sin implicar dualidad personal.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Boyarin</div>
+          <div class="arg-text">La lectura cristiana no es «forzada»: corresponde a una corriente exegética judía genuina que el debate posterior llevó a suprimir en ambas tradiciones.</div>
+        </div>
+      </div>
+
+      <p>El teólogo judío Alan Segal (<em>Two Powers in Heaven</em>, 1977) documenta que varios textos de los primeros siglos — incluyendo la Mekilta de Rabbí Ishmael sobre Éxodo 15:3 — atestiguan que la lectura de Gén 19:24 como indicativa de «dos YHWH» era moneda corriente en la especulación judía del período anterior a la sistematización rabínica del siglo II d.C.<span class="fn-ref" title="Segal, 1977, pp. 33–67">2</span></p>
+
+      <h3 class="subsection-title" id="genesis-otros">Otros textos del Génesis: Pluralidad en la Comunicación Divina</h3>
+
+      <div class="verse-block">
+        <div class="verse-ref">Génesis 1:26 — Texto Masorético</div>
+        <div class="verse-heb">וַיֹּאמֶר אֱלֹהִים נַעֲשֶׂה אָדָם בְּצַלְמֵנוּ כִּדְמוּתֵנוּ</div>
+        <div class="verse-trans">«Y dijo Elohim: Hagamos (<em>na'aseh</em>) al hombre a nuestra imagen (<em>bə-ṣalmēnū</em>), conforme a nuestra semejanza (<em>kidmūtēnū</em>).»</div>
+        <div class="verse-note">Los pronombres plurales (<em>nā'aseh, bə-ṣalmēnū, kidmūtēnū</em>) en boca de un sujeto singular (<em>Elohim</em>) constituyen el famoso <em>pluralis deliberationis</em> o, para la exégesis cristiana, una indicación de pluralidad intradivina.</div>
+      </div>
+
+      <p>La explicación rabínica del <em>pluralis majestatis</em> (que Dios habla como un rey que usa el plural mayestático) es relativamente tardía y no tiene paralelo en el uso bíblico, donde los reyes humanos no emplean esta construcción.<span class="fn-ref" title="Mettinger, 1982, p. 45">3</span> El Génesis Rabbah (8:4) registra la controversia y ofrece varias soluciones, entre ellas que Dios consultaba a los ángeles, pero reconoce la dificultad. Justino Mártir (<em>Apología I</em>, 63) y Atenágoras de Atenas (<em>Súplica</em>, 10) emplearon estos textos como prueba del Logos.</p>
+
+      <div class="verse-block">
+        <div class="verse-ref">Génesis 18:1–2 y 18:22 — La Trinidad de Mambré</div>
+        <div class="verse-heb">וַיֵּרָא אֵלָיו יְהוָה בְּאֵלֹנֵי מַמְרֵא … וַיִּשָּׂא עֵינָיו וַיַּרְא וְהִנֵּה שְׁלֹשָׁה אֲנָשִׁים</div>
+        <div class="verse-trans">«Y se apareció a él YHWH en las encinas de Mambré … y alzando los ojos vio tres hombres.»</div>
+        <div class="verse-note">El texto abre con «YHWH se manifestó», y luego Abraham ve «tres hombres». En 18:22 dos de ellos parten hacia Sodoma mientras «Abraham seguía estando ante YHWH». La identificación del «uno» que permanece con YHWH y los «dos» que parten como ángeles ejecutores ha dado lugar a lecturas teofánicas complejas.</div>
+      </div>
+
+      <h3 class="subsection-title" id="isaias48">Isaías 48 — El Enviado y el Espíritu del Señor</h3>
+
+      <p>El capítulo 48 del Deutero-Isaías es uno de los textos más ricos para la teología de la pluralidad divina. Dentro de un monoteísmo explícito e inequívoco («Yo soy YHWH, ese es mi Nombre, y mi gloria no daré a otro», Is 42:8), el texto introduce una figura que habla en primera persona con autoridad divina pero que es enviada por YHWH y dotada del Espíritu:</p>
+
+      <div class="verse-block">
+        <div class="verse-ref">Isaías 48:12–16 — Texto Masorético</div>
+        <div class="verse-heb">שְׁמַע אֵלַי יַעֲקֹב… אֲנִי רִאשׁוֹן אַף אֲנִי אַחֲרוֹן</div>
+        <div class="verse-trans">«Escúchame, Jacob … Yo soy el primero, también yo soy el último … Mi mano fundó la tierra … Acercaos a mí, escuchad esto: desde el principio no hablé en secreto; desde que sucedió, yo estuve allí. Y ahora el Señor YHWH me ha enviado, él y su Espíritu.»</div>
+        <div class="verse-note">
+          El clímax del pasaje se encuentra en el v. 16b: <span class="lex-heb">וְעַתָּה אֲדֹנָי יְהוִה שְׁלָחַנִי וְרוּחוֹ</span> — «Y ahora el Señor YHWH me envió, él y su Espíritu.»<br><br>
+          Problema exegético central: El sujeto que habla en los versículos 12–15 se identifica con el Primero y el Último — títulos divinos inequívocos (cf. Is 44:6: «Yo soy el primero y yo soy el último; fuera de mí no hay Dios»). Sin embargo en el v. 16b este mismo hablante afirma haber sido <em>enviado</em> por el Señor YHWH y su Espíritu. ¿Quién puede ser «el Primero y el Último» y sin embargo ser «enviado»?
+        </div>
+      </div>
+
+      <div class="argument-box">
+        <div class="arg-title">Análisis Estructural de Is 48:12–16</div>
+        <div class="arg-row">
+          <div class="arg-label">vv. 12–15</div>
+          <div class="arg-text">Hablante se identifica con «Yo el Primero y el Último», Creador, quien «llamó» a Abraham y trae a Ciro para sus designios. Voz divina plena.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">v. 16a</div>
+          <div class="arg-text">«Acercaos a mí, escuchad esto; desde el principio no hablé en secreto; desde que sucedió, yo estuve allí.» La voz continúa con autoridad plena.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">v. 16b</div>
+          <div class="arg-text">«Y ahora el Señor YHWH me ha enviado, él y su Espíritu.» El hablante que se identificó con atributos divinos absolutos afirma haber sido enviado por otra instancia también divina.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Trinitario</div>
+          <div class="arg-text">Tertuliano, Hipólito y más tarde Cirilo de Alejandría vieron aquí una distinción trinitaria: el Hijo eterno habla, el Padre lo envía, el Espíritu es el medio del envío.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Crítica</div>
+          <div class="arg-text">Algunos críticos (Westermann, Baltzer) leen el v. 16b como una glosa o como cambio de hablante hacia el profeta. Pero el texto no introduce ninguna señal de cambio de hablante.</div>
+        </div>
+      </div>
+
+      <p>Roger Syrén y Christopher Forbes han argumentado convincentemente que la lectura trinitaria (o proto-binitaria) del pasaje es exegéticamente legítima y no requiere postular una glosa: la tensión entre la voz divina absoluta y el «envío» por el Señor es precisamente la estructura que reaparecerá en Daniel 7 y en 1 Enoc.<span class="fn-ref" title="Syrén, 1993, pp. 112–130">4</span></p>
+
+      <h3 class="subsection-title" id="salmo110">Salmo 110 — Los Dos «Señores»</h3>
+
+      <div class="verse-block">
+        <div class="verse-ref">Salmo 110:1 — Texto Masorético</div>
+        <div class="verse-heb">נְאֻם יְהוָה לַאדֹנִי שֵׁב לִימִינִי עַד-אָשִׁית אֹיְבֶיךָ הֲדֹם לְרַגְלֶיךָ</div>
+        <div class="verse-trans">«Oráculo de YHWH a mi señor (<em>laʾadōnī</em>): Siéntate a mi diestra hasta que ponga a tus enemigos como escabel de tus pies.»</div>
+        <div class="verse-note">La distinción entre YHWH (el tetragramaton) y <em>ʾadōnī</em> (mi señor, con primera persona singular) es crucial. Este no es el <em>ʾadōnāy</em> divino sino <em>ʾadōnī</em>, «mi Señor», forma de segunda persona utilizada para superiores humanos pero aquí referida a una figura que se sienta a la diestra de YHWH. Jesús mismo empleó este versículo para poner en cuestión la simple categoría davídico-humana del Mesías (Mc 12:35–37; Mt 22:41–46).</div>
+      </div>
+
+      <p>El Salmo 110 fue el texto del AT más citado en el Nuevo Testamento (más de 20 citas o alusiones). Su estructura binaria —YHWH que habla + el señor que recibe la entronización— es precisamente el prototipo de la doctrina de los Dos Poderes. David Hay (<em>Glory at the Right Hand</em>, 1973) documenta el uso del salmo en la apocalíptica judía, los Salmos de Salomón y Qumrán, mostrando que la expectativa de una segunda figura entronizada junto a Dios era común en el judaísmo del Segundo Templo.<span class="fn-ref" title="Hay, 1973, pp. 14–33">5</span></p>
+
+      <h3 class="subsection-title" id="prov8">Proverbios 8 — La Sabiduría Preexistente y Creadora</h3>
+
+      <div class="verse-block">
+        <div class="verse-ref">Proverbios 8:22–31 — Texto Masorético (selección)</div>
+        <div class="verse-heb">יְהוָה קָנָנִי רֵאשִׁית דַּרְכּוֹ קֶדֶם מִפְעָלָיו מֵאָז</div>
+        <div class="verse-trans">«YHWH me poseía al comienzo de su camino, antes de sus obras desde entonces … Cuando estableció los cielos, yo estaba allí; … estaba junto a él como maestro de obras (<em>ʾāmôn</em>), siendo su deleite día a día, regocijándome delante de él en todo tiempo.»</div>
+        <div class="verse-note">El término <em>ʾāmôn</em> (v. 30) es disputado: puede significar «artesano/maestro de obras» (con LXX ἁρμόζουσα), «criado/pupilo» o «deleite» (con Vulg. <em>cunctas eas componens</em>). La imagen es la de una figura personal, preexistente, presente en la creación y en relación íntima con YHWH.</div>
+      </div>
+
+      <p>La personificación de la Sabiduría en Proverbios 8 —continuada en el libro de la Sabiduría (7:22–8:1) y en Ben Sirá (24)— representa la más elaborada hipostatización del AT de un principio divino secundario. La pregunta exegética clave gira en torno al verbo <em>qānāh</em> (v. 22): ¿«me creó» o «me adquirió/engendró»? La LXX traduce ἔκτισεν (creó), base del arianismo; el texto hebreo admite también «engendró», lo que subyace en la cristología alta de Jn 1:1 y Col 1:15–17.<span class="fn-ref" title="von Rad, 1972, pp. 144–176">6</span></p>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- III. DANIEL 7 -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="daniel">
+      <div class="section-number">Sección III</div>
+      <h2 class="section-title">Daniel 7: El Anciano de Días y el Hijo de Hombre</h2>
+
+      <p>Ningún texto de la literatura bíblica ha ejercido mayor influencia en el desarrollo de la teología de los Dos Poderes que Daniel 7. Redactado en arameo en su porción visionaria (Dn 2:4b–7:28), el capítulo 7 presenta una visión celeste de una transparencia inaudita: dos figuras divinas distintas ejercen el juicio y el reino.</p>
+
+      <h3 class="subsection-title" id="d7-texto">Análisis del Texto: Daniel 7:9–14</h3>
+
+      <div class="verse-block">
+        <div class="verse-ref">Daniel 7:9–10 — Texto Arameo (visión del Anciano de Días)</div>
+        <div class="verse-heb">חָזֵה הֲוֵית עַד דִּי כָרְסָוָן רְמִיו וְעַתִּיק יוֹמִין יְתִב לְבוּשֵׁהּ כִּתְלַג חִוָּר וּשְׂעַר רֵאשֵׁהּ כַּעֲמַר נְקֵא</div>
+        <div class="verse-trans">«Estuve mirando hasta que fueron puestos tronos (plural: <em>karsəwān</em>) y el Anciano de Días (<em>ʿattîq yômîn</em>) se sentó; su vestidura era blanca como la nieve, y el cabello de su cabeza como lana pura; su trono era llamas de fuego, sus ruedas fuego ardiente.»</div>
+        <div class="verse-note">El plural «tronos» (<em>karsəwān</em>) es exegéticamente significativo. El texto arameo especifica que se pusieron <em>varios</em> tronos, pero luego describe solo el del Anciano de Días. ¿Para quién/quiénes son los otros tronos? La tradición posterior (incluido el Enoc etiópico y el Nuevo Testamento) identificará el segundo trono con el Hijo del Hombre.</div>
+      </div>
+
+      <div class="verse-block">
+        <div class="verse-ref">Daniel 7:13–14 — El Hijo de Hombre</div>
+        <div class="verse-heb">חָזֵה הֲוֵית בְּחֶזְוֵי לֵילְיָא וַאֲרוּ עִם-עֲנָנֵי שְׁמַיָּא כְּבַר אֱנָשׁ אָתֵה הֲוָה וְעַד-עַתִּיק יוֹמַיָּא מְטָה</div>
+        <div class="verse-trans">«Miraba yo en las visiones de la noche, y he aquí con las nubes del cielo venía uno como <em>bar ʾĕnāš</em> (hijo de hombre), y llegó hasta el Anciano de Días, y le fue dado (<em>yəhib lēh</em>) dominio, gloria y reino, para que todos los pueblos, naciones y lenguas le sirvieran; su dominio es dominio eterno que no pasará, y su reino no será destruido.»</div>
+        <div class="verse-note">El pasaje distingue nítidamente dos figuras: (a) el Anciano de Días, que ocupa el trono desde la eternidad; (b) «uno como hijo de hombre» que viene con las nubes y recibe un reino eterno de manos del Anciano. La expresión <em>ʿim ʿănānê šəmayyāʾ</em> («con las nubes del cielo») indica ascenso celeste o procesión divina, no descenso terrenal. Las nubes son vehicular de la presencia divina en el AT (Ex 13:21; Sal 18:11; Is 19:1).</div>
+      </div>
+
+      <div class="argument-box">
+        <div class="arg-title">Análisis Comparativo de las Dos Figuras en Daniel 7</div>
+        <div class="arg-row">
+          <div class="arg-label">Anciano</div>
+          <div class="arg-text">Ocupa el trono eternamente; juzga; destruye la bestia; «Anciano de Días» — atributo único de YHWH (Is 43:13; Dt 33:27).</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Bar ʾĕnāš</div>
+          <div class="arg-text">Viene «con las nubes» (teofanía); <em>recibe</em> el reino eterno; es adorado por todos los pueblos; su reino no pasa — solo YHWH posee reino eterno en el AT (Sal 145:13).</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Relación</div>
+          <div class="arg-text">El Hijo de Hombre no recibe un reino inferior ni derivado: recibe exactamente el mismo dominio eterno descrito para YHWH en los Salmos. John Collins señala que esto coloca al Hijo de Hombre en la categoría de lo divino, no de lo meramente angélico.<span class="fn-ref" title="Collins, 1993, pp. 304–310">7</span></div>
+        </div>
+      </div>
+
+      <h3 class="subsection-title" id="d7-tradicion">Recepción en el Judaísmo del Segundo Templo</h3>
+
+      <p>La influencia de Daniel 7 sobre la especulación del Segundo Templo fue enorme. John Collins (<em>Daniel: A Commentary on the Book of Daniel</em>, 1993) y Adela Yarbro Collins han demostrado que el texto generó una corriente de interpretación que identificaba al «Hijo de Hombre» con una figura divina preexistente, distinta del Anciano de Días pero participante de su naturaleza.</p>
+
+      <div class="source-block">
+        <div class="src-label">Fuente: Tradición Judía sobre el Hijo de Hombre</div>
+        <p>El Talmud babilónico (TB Sanhedrín 38b) registra una controversia rabínica sobre los «tronos» de Daniel 7:9: el rabino Akiba (s. II d.C.) propuso que los tronos múltiples eran para David o para el Mesías. El rabino José objetó esta interpretación. El mismo pasaje advierte: «Akiba, hasta cuándo vas a profanar la Shekiná». Esta reprensión indica que la identificación del segundo trono con el Mesías fue interpretada como un peligro teológico — precisamente la doctrina de los Dos Poderes que el judaísmo post-rabínico condenaría.</p>
+      </div>
+
+      <p>Además de la Mekilta, la <em>Pésiqta Rabbati</em> (sección 36–37) y el <em>Midrash Tehillim</em> (Sal 2) contienen especulaciones mesiánicas que colocan al Mesías en la esfera de lo divino precisamente a partir de Daniel 7. La interpretación de los «tronos» múltiples como incluyendo uno para el Mesías-Hijo de Hombre estaba claramente presente en el judaísmo del siglo I antes de ser censurada.</p>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- IV. 1 ENOC -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="enoch">
+      <div class="section-number">Sección IV</div>
+      <h2 class="section-title">1 Enoc: El Hijo del Hombre Preexistente</h2>
+
+      <p>El corpus enóquico —un conjunto de escritos judíos conservados integralmente solo en etíope (ge'ez) pero parcialmente en griego, arameo y latín— representa uno de los testimonios más directos de la teología de los Dos Poderes y de la divinidad del Hijo del Hombre. La colección se subdivide en cinco libros, siendo las <em>Parábolas o Similitudes</em> (cc. 37–71) el locus principal para nuestro tema.</p>
+
+      <h3 class="subsection-title" id="enoch-parabolos">Las Parábolas de Enoc (1 Enoc 37–71)</h3>
+
+      <p>Las Parábolas de Enoc son un texto judío — no cristiano — cuya datación ha generado debate: George W. E. Nickelsburg y James VanderKam las fechan en el s. I a.C. – s. I d.C.;<span class="fn-ref" title="Nickelsburg-VanderKam, 2012, p. 58">8</span> la ausencia de fragmentos arameos en Qumrán llevó a Milik a proponer una composición cristiana tardía, pero esta hipótesis ha sido ampliamente rechazada. La imagen del Hijo del Hombre es tan claramente derivada de Daniel 7 y tan distinta de los perfiles cristológicos neotestamentarios que la composición judía independiente es la explicación más parsimoniosa.</p>
+
+      <div class="source-block">
+        <div class="src-label">1 Enoc 46:1–3 — El Hijo del Hombre ante el Anciano de Días</div>
+        <p>«Allí vi a Aquel cuya cabeza era blanca como lana, y con él había otro cuya faz tenía el aspecto de un ser humano, y su faz era llena de gracia, como uno de los santos ángeles. Y pregunté al ángel que iba conmigo y me mostró todos los secretos acerca de aquel Hijo del Hombre, quién era, de dónde venía y por qué iba con el Anciano de Días. Y me respondió y dijo: Este es el Hijo del Hombre que tiene la justicia, con quien mora la justicia, y que revela todos los tesoros de lo que está oculto, porque el Señor de los Espíritus le ha elegido, y su suerte ha superado a todas en rectitud ante el Señor de los Espíritus eternamente.»</p>
+        <p><em>Traducción basada en la edición crítica de Knibb (1978), cotejada con el texto etíope de Ullendorff y los fragmentos griegos de Akhmim.</em></p>
+      </div>
+
+      <div class="source-block">
+        <div class="src-label">1 Enoc 48:3–6 — La Preexistencia del Hijo del Hombre</div>
+        <p>«Su nombre fue invocado en presencia del Señor de los Espíritus antes de que el sol y las constelaciones fueran creados, antes de que las estrellas del cielo fueran formadas. Su nombre fue invocado ante el Señor de los Espíritus. Él será el báculo de los justos para que en él se sostengan y no caigan, y será la luz de las naciones, y será la esperanza de quienes están atribulados en su corazón … Pues fue elegido y escondido ante él desde antes de la creación del mundo, y para siempre jamás.»</p>
+      </div>
+
+      <p>La preexistencia personal del Hijo del Hombre —antes de la creación, ante el Señor de los Espíritus— coloca a esta figura en una categoría ontológica radicalmente distinta de la de los ángeles o de los personajes históricos. No es un rey davidico glorificado post mortem; es una figura que existía antes de toda creación visible y cuyos atributos (justicia, luz, sabiduría) son los atributos divinos del Tanaj.</p>
+
+      <div class="source-block">
+        <div class="src-label">1 Enoc 62:5–9 — Adoración del Hijo del Hombre</div>
+        <p>«Cuando los reyes, los poderosos y todos quienes poseen la tierra vean que está sentado en el trono de su gloria, y que los justos son juzgados en justicia ante él … los reyes, los poderosos y todos quienes poseen la tierra comenzarán a suplicarle e implorarle misericordia. Y el dolor se apoderará de ellos cuando vean al Hijo del Hombre sentado en el trono de su gloria.»</p>
+      </div>
+
+      <p>La entronización del Hijo del Hombre en el trono de la gloria — el trono que en la literatura bíblica pertenece exclusivamente a YHWH (Sal 11:4; Is 6:1; Ez 1:26–28) — es una afirmación de participación en la identidad divina. Como ha señalado Larry Hurtado, lo que define la «devoción divina» en el monoteísmo del Segundo Templo no es la mera existencia de seres elevados, sino la recepción de adoración cultual: el Hijo del Hombre en 1 Enoc recibe exactamente esa adoración.<span class="fn-ref" title="Hurtado, 2003, pp. 80–90">9</span></p>
+
+      <h3 class="subsection-title" id="enoch-nombre">El Nombre Oculto y la Identidad con Enoc</h3>
+
+      <div class="source-block">
+        <div class="src-label">1 Enoc 69:26–29 y 71:14 — El Nombre Oculto del Hijo del Hombre</div>
+        <p>«Y en ese día fue dado al Hijo del Hombre un nombre en presencia del Señor de los Espíritus, para que su nombre perdure ante el Anciano de Días … Ese nombre fue mencionado en su presencia desde el principio, antes de que el sol y los signos fueran creados, antes de que las estrellas del cielo fueran formadas.» (69:26)<br><br>
+        En el capítulo 71, el propio Enoc es identificado con el Hijo del Hombre: «Tú eres el Hijo del Hombre que naciste para la justicia, y la justicia mora sobre ti.» (71:14)</p>
+      </div>
+
+      <p>Este «Nombre Oculto» resuena con la tradición del <em>Nombre inefable</em> en el judaísmo. En textos como el Vocabulario de los Nombres Divinos de Filón, el Nombre de YHWH es la expresión de la esencia divina; que el Hijo del Hombre posea un Nombre eterno ante el Señor de los Espíritus subraya su participación en la naturaleza divina.<span class="fn-ref" title="Boyarin, 2012, pp. 42–65">1</span></p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- V. YHWH INMANENTE Y TRASCENDENTE -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="yahve-immanente">
+      <div class="section-number">Sección V</div>
+      <h2 class="section-title">YHWH Inmanente y YHWH Trascendente: El Ángel de YHWH y la Tradición de los Dos YHWH</h2>
+
+      <p>Una de las fuentes más antiguas y persistentes de la teología de la pluralidad divina en el Antiguo Testamento es la figura del <em>Malʾāk YHWH</em> (מַלְאַךְ יְהוָה), el «Ángel de YHWH». Este personaje presenta una característica exegéticamente única: es presentado como mensajero pero habla como YHWH en primera persona y recibe adoración divina sin que el texto lo denuncie como idolatría.</p>
+
+      <h3 class="subsection-title" id="angel-yhwh">El Ángel de YHWH: Una Figura Intermedia con Identidad Divina</h3>
+
+      <table class="lex-table">
+        <thead>
+          <tr>
+            <th>Texto</th>
+            <th>Designación</th>
+            <th>Habla como</th>
+            <th>Reacción Humana</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gén 16:7–13</td>
+            <td>Malʾāk YHWH</td>
+            <td>Primera persona: «Yo la multiplicaré»</td>
+            <td>Agar le llama «El que me ve» (<em>ʾEl Roʾī</em>)</td>
+          </tr>
+          <tr>
+            <td>Gén 22:11–18</td>
+            <td>Malʾāk YHWH desde el cielo</td>
+            <td>«Por mí mismo he jurado, dice YHWH»</td>
+            <td>Abraham lo obedece como a Dios</td>
+          </tr>
+          <tr>
+            <td>Éx 3:2–6</td>
+            <td>Malʾāk YHWH en la zarza</td>
+            <td>«Yo soy el Dios de tu padre»</td>
+            <td>Moisés esconde el rostro «por temor a ver a Dios»</td>
+          </tr>
+          <tr>
+            <td>Jue 6:11–24</td>
+            <td>Malʾāk YHWH a Gedeón</td>
+            <td>«YHWH es contigo»; luego directamente YHWH habla</td>
+            <td>Gedeón teme morir por haber visto al Malʾāk «cara a cara»</td>
+          </tr>
+          <tr>
+            <td>Jue 13:3–22</td>
+            <td>Malʾāk YHWH (padres de Sansón)</td>
+            <td>Predice el nacimiento de Sansón</td>
+            <td>Manoaj: «Hemos visto a Dios»; su nombre es <em>pelíʾ</em> (admirable)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>El patrón es constante: el Ángel de YHWH habla con autoridad divina en primera persona, es adorado sin reprimenda y su presencia equivale a ver a YHWH. Y sin embargo es distinguible de YHWH que «envía» o del YHWH «que está en los cielos». Este fenómeno, que los estudiosos modernos denominan «representación del agente divino» (<em>divine agency</em>), es la matriz cultural de toda la teología de los Dos Poderes.<span class="fn-ref" title="Gieschen, 1998, pp. 51–104">10</span></p>
+
+      <h3 class="subsection-title" id="dos-yhwh">La Tradición Explícita de los «Dos YHWH»</h3>
+
+      <p>Alan Segal documentó que, en la literatura midrásica temprana, existe una tradición explícita que habla de «dos YHWH»: un YHWH inmanente (el que actúa en la historia, se manifiesta, juzga, salva) y un YHWH trascendente (el que permanece en los cielos, el Padre o Fuente original). Esta distinción se articula más claramente en la interpretación del texto de Éxodo 24:10 (los ancianos de Israel «vieron al Dios de Israel») y de Éxodo 33:20 («no puedes ver mi faz»). ¿Cómo pueden ver a Dios si Dios es invisible? La solución era postular que lo que vieron era el YHWH manifestado — el segundo poder.</p>
+
+      <div class="source-block">
+        <div class="src-label">Mekilta de R. Ishmael, Shirata 4 (sobre Éx 15:3)</div>
+        <p>El texto comenta el versículo «YHWH es guerrero, YHWH es su nombre» (<em>YHWH ʾiš milḥāmāh YHWH šemô</em>): «¿Por qué se dice dos veces YHWH? Para que no den ocasión a los herejes de decir: Hay dos Poderes.» La propia refutación testimonia que la interpretación dual era conocida y necesitaba ser contrarrestada.</p>
+      </div>
+
+      <div class="source-block">
+        <div class="src-label">Mekilta de R. Ishmael, Baḥodesh 5 (sobre Éx 20:2)</div>
+        <p>Comentando el inicio del Decálogo, la Mekilta registra: «¿Por qué se revelaron los Diez Mandamientos al comienzo? Para que no dijeran los herejes que hay dos Poderes (<em>shtei reshuyot</em>): 'Este que está en el cielo y este que está en la tierra.'»</p>
+      </div>
+
+      <p>Estas refutaciones rabínicas son paradójicas: al negar la doctrina, la documentan. El texto de Éxodo 20:2 comienza «Yo soy YHWH tu Dios» en singular para prevenir precisamente la interpretación de «dos YHWH» — lo cual revela que esa interpretación existía y tenía fuerza suficiente para justificar una respuesta en el texto canónico mismo del Decálogo, según la hermenéutica rabínica.</p>
+
+      <p>Jarl Fossum en <em>The Name of God and the Angel of the Lord</em> (1985) y Christopher Rowland en <em>The Open Heaven</em> (1982) han demostrado que la distinción entre el YHWH trascendente e inaccesible y el YHWH que se manifiesta, juzga y actúa en la historia es una tensión inherente al texto bíblico mismo que la especulación del Segundo Templo explicitó y elaboró.<span class="fn-ref" title="Fossum, 1985, pp. 75–120">11</span></p>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- VI. LOGOS Y MEMRA -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="logos">
+      <div class="section-number">Sección VI</div>
+      <h2 class="section-title">Logos, Memra y Sabiduría: Las Sistematizaciones del Segundo Poder</h2>
+
+      <h3 class="subsection-title" id="filon">Filón de Alejandría (ca. 20 a.C. – 50 d.C.)</h3>
+
+      <p>Filón de Alejandría es la figura intelectual más importante para comprender la sistematización filosófica del segundo poder divino dentro del judaísmo del Segundo Templo. Filón era judío, no cristiano; su teología del Logos es una elaboración filosófica (platonismo medio + estoicismo) de tradiciones bíblicas judías, no una importación griega.</p>
+
+      <table class="lex-table">
+        <thead>
+          <tr>
+            <th>Título dado al Logos en Filón</th>
+            <th>Texto</th>
+            <th>Función</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><em>πρωτόγονος υἱός</em> (hijo primogénito)</td>
+            <td><em>De Agric.</em> 51</td>
+            <td>Hijo de Dios, gobernador del mundo</td>
+          </tr>
+          <tr>
+            <td><em>δεύτερος θεός</em> (segundo Dios)</td>
+            <td><em>Quaest. in Gen.</em> II.62</td>
+            <td>Imagen de Dios; mediador entre Dios y el mundo</td>
+          </tr>
+          <tr>
+            <td><em>ἀρχιερεύς</em> (sumo sacerdote)</td>
+            <td><em>De Somn.</em> I.215</td>
+            <td>Intercesor eterno ante el Padre</td>
+          </tr>
+          <tr>
+            <td><em>ὄνομα θεοῦ</em> (Nombre de Dios)</td>
+            <td><em>De Mut.</em> 15</td>
+            <td>Portador del Nombre inefable; poder creador</td>
+          </tr>
+          <tr>
+            <td><em>εἰκὼν θεοῦ</em> (imagen de Dios)</td>
+            <td><em>De Op.</em> 25</td>
+            <td>Arquetipo de la creación; sello de Dios</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="source-block">
+        <div class="src-label">Filón, Quaestiones in Genesin II.62 — El «Segundo Dios»</div>
+        <p>Comentando Génesis 9:6 («a imagen de Dios hizo al hombre»), Filón distingue entre el Dios superior, «el que es» (<em>ho ōn</em>), sin nombre ni atributo comparable, y el Logos, al que llama «segundo Dios» (<em>deuteros theos</em>) y «imagen de Dios» (<em>eikōn theou</em>). El hombre fue hecho imagen de este Logos, no del Padre trascendente. Esto evita la contradicción entre la transcendencia absoluta del Padre y la participación de la criatura en la imagen divina.</p>
+      </div>
+
+      <p>Filón es cuidadoso en no llamar al Logos «Dios» sin artículo (<em>θεός</em>, anártiro) para distinguirlo del Padre, que es «el Dios» (<em>ὁ θεός</em>, articulado). Esta distinción sintáctica entre <em>theos</em> (sin artículo, usado del Logos) y <em>ho theos</em> (con artículo, usado del Padre) reaparece literalmente en Juan 1:1–2, lo que llevó a Rudolf Bultmann y muchos otros a proponer que el Prólogo de Juan está en diálogo directo con la teología filoniana, aunque el Logos joánico es más radicalmente personal.<span class="fn-ref" title="Tobin, 2001, pp. 252–270">12</span></p>
+
+      <h3 class="subsection-title" id="memra">Los Targumim y el <em>Memra</em> de YHWH</h3>
+
+      <p>Los Targumim son las traducciones arameas parafrásticas del Tanaj producidas para las comunidades judías que ya no dominaban el hebreo. Representan, por tanto, la exégesis judía popular de los períodos romano y post-romano. En ellos aparece de forma sistemática el concepto del <em>Memra</em> (מֵימְרָא, «Palabra») de YHWH como sustituto o mediador entre Dios y el mundo.</p>
+
+      <div class="source-block">
+        <div class="src-label">Tárgum Onqelos y Jonatán sobre textos clave</div>
+        <p><strong>Génesis 28:20–21:</strong> Donde el TM dice «YHWH será mi Dios», el Tárgum Jonatán dice «el Memra de YHWH será mi Dios». El Memra sustituye a YHWH en contextos de manifestación directa.<br><br>
+        <strong>Éxodo 19:17:</strong> Donde el TM dice «Moisés sacó al pueblo para encontrarse con Dios», el Tárgum Onqelos dice «para encontrarse con el Memra de Dios».<br><br>
+        <strong>Génesis 3:8:</strong> «Y oyeron la voz del Memra del Señor Dios que paseaba en el jardín.» El sustituto del Memra evita la antropomorfización directa de YHWH y coloca al Memra como el YHWH-que-actúa.</p>
+      </div>
+
+      <p>El Memra no es una persona distinta del modo en que el Logos filoniano lo es; sin embargo, funciona exegéticamente como el YHWH inmanente frente al YHWH trascendente. Como ha señalado Martin McNamara, los Targumim demuestran que en el judaísmo de sinagoga existía una resistencia profunda a la identificación directa del Dios trascendente con el Dios que actúa en la historia, y que el Memra servía para articular esa distinción.<span class="fn-ref" title="McNamara, 1972, pp. 101–120">13</span></p>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- VII. QUMRÁN -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="qumran">
+      <div class="section-number">Sección VII</div>
+      <h2 class="section-title">Textos de Qumrán y la Tradición del Segundo Poder</h2>
+
+      <p>Los Manuscritos del Mar Muerto, descubiertos en Qumrán (1947–1956), han aportado evidencia directa de la existencia de especulaciones sobre figuras cuasi-divinas en el judaísmo del siglo I a.C. – s. I d.C. Tres textos son particularmente relevantes para la doctrina de los Dos Poderes.</p>
+
+      <h3 class="subsection-title" id="qumran-melquise">11QMelchisédek (11Q13) — Melquisedec como Figura Divina</h3>
+
+      <div class="source-block green">
+        <div class="src-label">11QMelchisédek (11Q13), col. II, líneas 4–25 — Fragmento clave</div>
+        <p>Este texto fragmentario del siglo I a.C. interpreta el año del Jubileo (Lv 25) y el Salmo 82 en relación con una figura llamada Melquisedec (<em>Malki-Tsedeq</em>). En él, Melquisedec aparece como ejecutor del juicio divino final, identificado con el <em>ʾĕlōhîm</em> del Salmo 82:1 («Elohim está de pie en la asamblea de ʾEl») y como el agente de la liberación escatológica. El texto cita Isaías 52:7 («tu Dios reina») aplicando la referencia directamente a Melquisedec: «tu Elohim es Melquisedec, que te liberará de la mano de Belial.»</p>
+        <p><em>Ed. crítica: García Martínez, F. &amp; Tigchelaar, E., The Dead Sea Scrolls Study Edition, vol. 2, Brill-Eerdmans, 1998, pp. 1206–1207.</em></p>
+      </div>
+
+      <p>La identificación de Melquisedec con la figura del Salmo 82 — que como hemos dicho suele interpretarse como el tribunal divino de los «dioses» (<em>ʾĕlōhîm</em>) — y la aplicación de los títulos divinos («tu Elohim es Melquisedec») significa que en Qumrán una figura mesiánica-sacerdotal ocupa funciones que en el AT pertenecen a YHWH: juzgar, liberar, gobernar.<span class="fn-ref" title="García Martínez, 1996, pp. 162–179">14</span></p>
+
+      <p>Es importante subrayar la conexión con la carta a los Hebreos (Heb 7), que también aplica Salmo 110:4 al Mesías Jesús con la fórmula sacerdotal melquisedéquica. Esto no es coincidencia: ambos — el redactor de 11Q13 y el autor de Hebreos — beben de la misma corriente de la especulación judía del Segundo Templo.</p>
+
+      <h3 class="subsection-title" id="qumran-masiah">4Q246 — El «Hijo de Dios» y el «Hijo del Altísimo»</h3>
+
+      <div class="source-block green">
+        <div class="src-label">4Q246 (Apócrifo de Daniel ar.), col. II, líneas 1–3</div>
+        <p>«Será llamado Hijo del Gran Dios (<em>bar ʾĕl rabbāʾ</em>), y por su nombre será denominado. Será llamado Hijo del Altísimo (<em>bar ʾelyôn yitqrē</em>). Como cometas que viste, así será su reino. Reinará sobre la tierra durante años y pisará todo. Los pueblos pisarán a los pueblos y la ciudad a la ciudad … hasta que levante al pueblo de Dios y haga cesar la espada de la tierra.»</p>
+        <p><em>Ed. crítica: Fitzmyer, J., «The Contribution of Qumran Aramaic to the Study of the New Testament», NTS 20 (1974), pp. 391–394.</em></p>
+      </div>
+
+      <p>Este texto, datado ca. 100–75 a.C., es excepcional: usa exactamente los títulos que Lucas 1:32–35 atribuye a Jesús («Hijo del Altísimo», «Hijo de Dios») para una figura mesiánica cuyo reino es eterno. El debate académico gira sobre si la figura en 4Q246 es positiva (el Mesías) o negativa (un tirano que pretende ser divino). La mayoría de los especialistas — incluidos Émile Puech, John Collins y Joseph Fitzmyer — defienden la interpretación mesiánica positiva.<span class="fn-ref" title="Collins, 2010, pp. 155–172">7</span></p>
+
+      <h3 class="subsection-title" id="qumran-angel">El Príncipe de la Luz y la Angelología Dualista de Qumrán</h3>
+
+      <div class="source-block green">
+        <div class="src-label">1QS III.20–25 (Regla de la Comunidad) — El Príncipe de la Luz y el Ángel de las Tinieblas</div>
+        <p>«En la mano del Príncipe de la Luz está el dominio de todos los hijos de la justicia; en los caminos de la luz caminan. Y en la mano del Ángel de las Tinieblas está todo el dominio de los hijos de la injusticia; en los caminos de las tinieblas caminan … Pues Dios, en los misterios de su inteligencia y en la sabiduría de su gloria, ha puesto un fin a la existencia de la injusticia y en el tiempo de su visitación la destruirá para siempre.»</p>
+      </div>
+
+      <p>El dualismo de Qumrán no es estrictamente dualismo de «dos dioses iguales» — el Dios de Israel permanece soberano sobre ambos poderes — pero introduce una figura angelical de luz (<em>Sār ha-ʾûrim</em>) cuyas funciones se superponen con las del YHWH inmanente del AT y con el «ángel de YHWH». Este «príncipe» o <em>Sār</em> dirige la batalla escatológica y recuerda directamente a la figura del Guerrero Divino de los textos de la Regla de la Guerra (1QM).</p>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- VIII. REACCIÓN RABÍNICA -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="rabi">
+      <div class="section-number">Sección VIII</div>
+      <h2 class="section-title">Reacción Rabínica: La Condena de los «Dos Poderes»</h2>
+
+      <p>La transformación más dramática de esta tradición es su <em>condena</em> como herejía por parte del judaísmo rabínico en los siglos II–IV d.C. Alan Segal dedicó a este fenómeno su obra seminal <em>Two Powers in Heaven</em> (1977), cuyo argumento central es que la polémica rabínica contra los «dos poderes» no puede entenderse sin postular que la doctrina fue en algún momento parte del mainstream del pensamiento judío, no una marginalia sectaria.</p>
+
+      <h3 class="subsection-title" id="rabi-hagiga">Tosefta Ḥagigah 2:1 — El Texto Rabínico Central</h3>
+
+      <div class="source-block">
+        <div class="src-label">Tosefta Ḥagigah 2:1 — Texto en Traducción</div>
+        <p>«Cuatro entraron en el Pardés [jardín = la especulación mística]: Ben Azzai, Ben Zoma, Aḥer [Eliseo ben Abuyah] y Rabbí Akiba. Ben Azzai miró y murió … Ben Zoma miró y fue herido [perdió la razón] … Aḥer cortó los brotes [esto es, se convirtió en hereje] … Rabbí Akiba salió en paz.»</p>
+        <p>El texto paralelo del Talmud Babilónico (TB Ḥagigah 15a) aclara que Eliseo ben Abuyah «cortó los brotes» porque «vio a Metatrón sentado y dijo: Quizás hay dos poderes en el cielo» (<em>shema' yesh shtei reshuyot ba-shamayim</em>).</p>
+      </div>
+
+      <div class="heresy-block">
+        <div class="h-label">Definición Rabínica de Herejía: «Dos Poderes»</div>
+        <p>La herejía (<em>minut</em>) de los «dos poderes» consiste en afirmar que junto a Dios existe una segunda figura divina autónoma con autoridad plena de dominio, juicio y creación. El texto del Talmud babilónico (TB Ḥagigah 15a) la articuló a partir de la visión de Eliseo ben Abuyah de Metatrón —el gran ángel del Nombre, figura vicerregente— sentado en el cielo, lo que él interpretó como la existencia de un «segundo poder» equiparable a Dios. La condena de la herejía en textos como TB Sanhedrín 38b, Mekilta Éxodo 15:3 y el Midrash sobre el Cantar de los Cantares constituye la sistematización de esta censura.</p>
+      </div>
+
+      <h3 class="subsection-title" id="rabi-personajes">Los Protagonistas: Eliseo ben Abuyah (Aḥer) y la Crisis del Siglo II</h3>
+
+      <p>Eliseo ben Abuyah (ca. 70–140 d.C.), conocido como <em>Aḥer</em> («El Otro») en las fuentes rabínicas por su apostasía, es el personaje histórico más asociado con la herejía de los Dos Poderes. Alumno de Rabbí Akiba, era también conocedor de la literatura griega y posiblemente del incipiente movimiento gnóstico. TB Ḥagigah 15a relata que en su visión del Pardés (la mística-Merkabá), Eliseo vio a Metatrón —el gran ángel que porta el nombre de Dios según el texto de Éxodo 23:21 («Mi nombre está en él»)— <em>sentado</em> en el cielo.</p>
+
+      <div class="source-block">
+        <div class="src-label">TB Ḥagigah 15a — La Visión de Eliseo y Metatrón</div>
+        <p>«Aḥer vio que le estaba permitido a Metatrón sentarse. Dijo: La tradición enseñó que en los Altos no hay sentarse, no hay rivalidad, no hay espaldas, no hay cansancio. ¿Quizás hay dos poderes en el cielo (<em>shema' shtei reshuyot ba-shamayim</em>)? Entonces sacaron a Metatrón y le dieron sesenta golpes de fuego, y se le dijo: ¿Por qué no te levantaste ante él cuando le viste?»</p>
+      </div>
+
+      <p>La reacción rabínica al error de Eliseo es doble: (a) castigar a Metatrón por no haberse levantado para prevenir la confusión, y (b) codificar la doctrina de que en el cielo no hay figuras sentadas junto a Dios. La prohibición de «dos poderes» fue formalizada precisamente porque las tradiciones anteriores — Daniel 7, 1 Enoc, los Targumim, la especulación sobre el Ángel del Nombre — habían abierto esta posibilidad con demasiada amplitud.</p>
+
+      <div class="callout">
+        <div class="callout-title">Metatrón y el Ángel del Nombre</div>
+        <p>El texto de Éxodo 23:20–21 («He aquí que envío un ángel delante de ti … guárdate de él … porque mi nombre está en él», <span class="lex-heb">כִּי שְׁמִי בְּקִרְבּוֹ</span>) fue la piedra angular de toda la angelología del «Ángel del Nombre» que culminó en la figura de Metatrón en la literatura Merkabá. Este Ángel porta el Nombre de YHWH, lo que en la ontología bíblica es equivalente a participar en la naturaleza divina. 3 Enoc (el Enoc hebreo, redactado entre s. III–VI d.C.) desarrollará al máximo la figura de Metatrón como «el pequeño YHWH» (<em>YHWH ha-qatan</em>), título que revela hasta dónde llegó esta especulación antes de ser finalmente suprimida.</p>
+      </div>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- IX. ADOPCIÓN CRISTIANA -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="cristiano">
+      <div class="section-number">Sección IX</div>
+      <h2 class="section-title">Adopción Cristiana y Definición Trinitaria</h2>
+
+      <p>El movimiento cristiano nació en el interior del judaísmo del Segundo Templo y, por tanto, heredó sus tradiciones especulativas. La novedad cristiana no fue <em>inventar</em> la idea de un segundo poder divino ni proyectar divinidad sobre un rabino itinerante de Galilea: fue <em>identificar</em> al Jesús histórico con la figura del Hijo del Hombre de Daniel 7, el Hijo del Hombre preexistente de 1 Enoc, el Logos de Filón y el segundo YHWH de Génesis 19:24. Esta identificación transformó la especulación judía en cristología.</p>
+
+      <h3 class="subsection-title" id="crist-apologetas">Justino Mártir y los Apologetas (s. II d.C.)</h3>
+
+      <p>Justino Mártir (ca. 100–165 d.C.) es el primer teólogo cristiano que articula explícitamente el Logos como el segundo poder del AT. En su <em>Diálogo con Trifón</em> emplea precisamente los textos que hemos analizado:</p>
+
+      <div class="source-block">
+        <div class="src-label">Justino, Diálogo con Trifón 56 — Uso de Génesis 18–19</div>
+        <p>«Cuando la Escritura dice: 'Y el Señor llovió sobre Sodoma azufre y fuego del Señor desde el cielo', el profeta indica que hay dos: uno que está en la tierra y que fue revelado a Abraham, y otro que permanece en el cielo, que es el Señor del que habla Abraham, y que envió fuego al Señor que se apareció, el cual es el Cristo, el Hijo de Dios.»</p>
+        <p><em>Texto según la edición de Bobichon (2003), paráfrasis autorizada.</em></p>
+      </div>
+
+      <div class="source-block">
+        <div class="src-label">Justino, Diálogo con Trifón 61 — Sobre Proverbios 8:22</div>
+        <p>Justino cita Proverbios 8:22–25 directamente y afirma que la Sabiduría que YHWH «produjo como principio de sus obras» no es un ser creado sino engendrado, el Logos que es Cristo antes de la encarnación. Argüía que esto no viola el monoteísmo, pues el Logos no es «un dios distinto» sino el poder (<em>dynamis</em>) divino que procede del Padre como fuego de fuego, sin disminuirlo.</p>
+      </div>
+
+      <p>Lo que Justino hace es tomar las categorías del judaísmo del Segundo Templo —el Logos-Sabiduría, el segundo YHWH, el Hijo del Hombre— y rellenarlas con el contenido histórico de Jesús de Nazaret. No es una operación de helenización del Evangelio, sino de judeización de la cristología: la divinidad de Jesús se defiende mostrando que el judaísmo mismo esperaba y articulaba la existencia de tal figura.</p>
+
+      <h3 class="subsection-title" id="crist-nicaea">Nicea (325 d.C.) y la Clausura Dogmática</h3>
+
+      <p>El Concilio de Nicea (325 d.C.) representa la conclusión dogmática de siglos de especulación sobre el segundo poder. El debate arriano había planteado precisamente la pregunta que la especulación judía ya había confrontado: ¿es el segundo poder un ser creado subordinado o es de la misma naturaleza que el Padre? Arrio, apoyándose en Proverbios 8:22 con la traducción griega («el Señor me creó»), argumentó que el Logos era la primera criatura. El concilio, bajo la guía de Atanasio de Alejandría, declaró al Hijo <em>ὁμοούσιος τῷ Πατρί</em> («de la misma sustancia que el Padre»), cerrando definitivamente la ambigüedad.</p>
+
+      <div class="heresy-block">
+        <div class="h-label">Sínodo de Nicea (325 d.C.) — Fórmula Dogmática</div>
+        <p><em>«Pisteuomen eis hena Theon Patera pantokratora … kai eis hena Kyrion Iesoun Christon, ton Hyion tou Theou, gennethenta ek tou Patros monogenē, toutestin ek tes ousias tou Patros, Theon ek Theou, phos ek photos, Theon alethinon ek Theou alethinou, gennethenta ou poiethenta, homoousion toi Patri.»</em><br><br>
+        Creemos en un solo Dios, Padre omnipotente … y en un solo Señor Jesucristo, Hijo de Dios, engendrado del Padre como unigénito, es decir de la sustancia del Padre, Dios de Dios, luz de luz, Dios verdadero de Dios verdadero, engendrado, no creado, de la misma sustancia que el Padre.</p>
+      </div>
+
+      <p>La fórmula nicea supone, sin embargo, que el Hijo es realmente divino y distinto del Padre: <em>no</em> es monarquismo modal (el Padre y el Hijo son la misma persona), sino binitarismo ontológico articulado en términos de <em>sustancia</em>. Lo que Nicea precisó fue que el segundo poder del judaísmo del Segundo Templo — que la especulación judía había articulado de formas plurales — era igual en sustancia al Padre, no inferior ni creado.</p>
+
+      <p>En síntesis, tanto el judaísmo rabínico (que condenó la doctrina de los Dos Poderes para distinguirse del judeocristianismo) como el concilio de Nicea (que la precisó en términos ontológicos estrictos) respondieron a la misma matriz teológica: la rica especulación judía sobre una segunda figura divina que los siglos IV–VI sepultaron en ambas tradiciones, pero que los manuscritos del Mar Muerto y la literatura enóquica recuperaron para la investigación moderna.</p>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- X. MESÍAS DIVINO -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="mesias">
+      <div class="section-number">Sección X</div>
+      <h2 class="section-title">La Divinidad del Mesías: Conclusión Apologética</h2>
+
+      <p>El recorrido trazado en este dossier tiene una consecuencia apologética directa: la expectativa de un Mesías divino no fue una importación helenística al judaísmo ni una corrupción posterior del mensaje original de Jesús. Fue la consecuencia lógica —y en muchos casos explícita— de la propia tradición del Tanaj tal como fue leída, interpretada y transmitida en el judaísmo del Segundo Templo.</p>
+
+      <div class="argument-box">
+        <div class="arg-title">Síntesis: Evidencia de la Divinidad Mesiánica en la Tradición Pre-Cristiana</div>
+        <div class="arg-row">
+          <div class="arg-label">Daniel 7</div>
+          <div class="arg-text">El Hijo de Hombre recibe dominio eterno y adoración universal — atributos exclusivamente divinos en el AT. Figura distinta del Anciano de Días pero igualmente sobrehumana.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">1 Enoc</div>
+          <div class="arg-text">El Hijo del Hombre es preexistente antes de la creación, sentado en el trono divino, recibe adoración de reyes y potentados. Identificado con el Nombre oculto de Dios.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">4Q246</div>
+          <div class="arg-text">El Mesías esperado es llamado «Hijo del Gran Dios» e «Hijo del Altísimo» con reino eterno — exactamente los títulos aplicados a Jesús en la Anunciación (Lc 1:32–35).</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">11QMelch</div>
+          <div class="arg-text">Una figura mesiánica-sacerdotal ocupa funciones divinas de juicio y liberación, es identificada con el «Elohim» del Salmo 82 y recibe la proclamación «tu Dios es Melquisedec».</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Filón</div>
+          <div class="arg-text">El Logos es «segundo Dios», hijo primogénito, imagen del Padre, mediador de la creación — un judío de Alejandría sin conocimiento de Jesús construye la arquitectura teológica que la cristología paulina y joánica empleará.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Targumim</div>
+          <div class="arg-text">La distinción entre el YHWH trascendente y el Memra-YHWH que actúa en la historia es parte de la teología popular judía de sinagoga, no especulación de élite.</div>
+        </div>
+        <div class="arg-row">
+          <div class="arg-label">Reacción Rabínica</div>
+          <div class="arg-text">El hecho de que el judaísmo rabínico necesitara condenar explícitamente la doctrina de los Dos Poderes demuestra que esta era una posición con suficiente arraigo para representar una amenaza real a la identidad religiosa judía post-70.</div>
+        </div>
+      </div>
+
+      <p>Larry Hurtado (<em>Lord Jesus Christ</em>, 2003) y Daniel Boyarin (<em>The Jewish Gospels</em>, 2012) —dos de los mayores especialistas modernos, el primero desde la historia de las religiones, el segundo desde los estudios judíos— confluyen en la misma conclusión desde perspectivas distintas: el Jesús de los Evangelios es presentado por sus primeros seguidores con las categorías de la segunda figura divina del judaísmo del Segundo Templo, y esta presentación no es una deformación tardía sino una cristología que nació con el movimiento cristiano mismo.</p>
+
+      <p>La pregunta que esto plantea desde la apologética cristiana es directa: si el judaísmo del Segundo Templo esperaba un Mesías que fuera el Hijo del Hombre preexistente de Daniel 7, que portara el nombre divino de YHWH, que se sentara en el trono de Dios y recibiera adoración universal, y si Jesús reclamó explícitamente estos títulos para sí (cf. Mc 14:62: «Veréis al Hijo del Hombre sentado a la diestra del Poder y viniendo en las nubes del cielo»), entonces la cuestión no es si la divinidad de Jesús encaja en el judaísmo anterior — encaja con precisión matemática — sino si Jesús tenía razón al reclamar para sí esa identidad.</p>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- XI. CONCLUSIÓN -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="conclusion">
+      <div class="section-number">Sección XI</div>
+      <h2 class="section-title">Conclusión General</h2>
+
+      <p>La doctrina de los «Dos Poderes en el Cielo» no es una herejía importada ni una deformación posterior de un monoteísmo originalmente puro. Es, como hemos demostrado a lo largo de este dossier, una tradición enraizada en el propio texto del Tanaj y explícitamente elaborada en el judaísmo del Segundo Templo durante al menos dos siglos antes del nacimiento de Cristo:</p>
+
+      <p>Desde los textos bíblicos — Génesis 19:24 con su doble YHWH, Isaías 48:16b con su figura enviada por el Señor, Daniel 7 con su Anciano de Días y su Hijo del Hombre, el Salmo 110 con su YHWH y su señor entronizado — hasta la literatura pseudoepígrafa del Segundo Templo — las Parábolas de 1 Enoc con el Hijo del Hombre preexistente, adorado y entronizado — y los textos de Qumrán — 4Q246 con su «Hijo del Altísimo», 11QMelch con su Elohim-Melquisedec — existe una trayectoria teológica coherente que afirma la existencia de una segunda figura divina junto a YHWH.</p>
+
+      <p>Esta trayectoria fue sistematizada filosóficamente por Filón de Alejandría en su doctrina del Logos como «segundo Dios» y «hijo primogénito», implícita en la piedad popular a través del <em>Memra</em> de los Targumim y articulada en la angelología del Ángel del Nombre. Fue finalmente condenada como herejía por el judaísmo rabínico post-70 — precisamente porque los judeocristianos identificaban a Jesús con esta segunda figura — y fue definitivamente precisada en sentido ontológico por el Concilio de Nicea.</p>
+
+      <p>La implicación apologética es de primer orden: el Mesías Jesús fue proclamado divino no porque los primeros discípulos introdujeran categorías extrañas al judaísmo, sino porque identificaron a Jesús con la figura que el propio judaísmo del Segundo Templo esperaba y describía. La divinidad del Mesías era, en el lenguaje de Daniel Boyarin, «el plan» —no la excepción. El debate histórico no es si el judaísmo del Segundo Templo tenía esta expectativa: los manuscritos la confirman. El debate es si Jesús de Nazaret la cumplió.</p>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ============================================================ -->
+    <!-- XII. BIBLIOGRAFÍA -->
+    <!-- ============================================================ -->
+    <section class="doc-section" id="biblio">
+      <div class="section-number">Sección XII</div>
+      <h2 class="section-title">Bibliografía Selecta</h2>
+
+      <h3 class="subsection-title">Fuentes Primarias</h3>
+
+      <p><strong>Textos Bíblicos y Pararabíblicos:</strong> Biblia Hebraica Stuttgartensia, 5.ª ed. (Stuttgart: Deutsche Bibelgesellschaft, 1997). Septuaginta, ed. Alfred Rahlfs, rev. Robert Hanhart (Stuttgart: Deutsche Bibelgesellschaft, 2006).</p>
+
+      <p><strong>Qumrán:</strong> García Martínez, F. y Tigchelaar, E. J. C., <em>The Dead Sea Scrolls Study Edition</em>, 2 vols. (Leiden: Brill / Grand Rapids: Eerdmans, 1997–1998). Vermes, G., <em>The Complete Dead Sea Scrolls in English</em>, 7.ª ed. (London: Penguin, 2011).</p>
+
+      <p><strong>1 Enoc:</strong> Knibb, M. A., <em>The Ethiopic Book of Enoch: A New Edition in the Light of the Aramaic Dead Sea Fragments</em>, 2 vols. (Oxford: Clarendon Press, 1978). Nickelsburg, G. W. E. y VanderKam, J. C., <em>1 Enoch: A New Translation</em> (Minneapolis: Fortress Press, 2004; ed. rev. 2012).</p>
+
+      <p><strong>Filón de Alejandría:</strong> Philo, <em>Works</em>, ed. Colson, F. H. y Whitaker, G. H., Loeb Classical Library, 12 vols. (Cambridge, MA: Harvard University Press, 1929–1962).</p>
+
+      <p><strong>Textos Rabínicos:</strong> Epstein, I. (ed.), <em>The Babylonian Talmud</em>, 35 vols. (London: Soncino, 1935–1952). Lauterbach, J. Z. (ed. y trad.), <em>Mekilta de-Rabbi Ishmael</em>, 3 vols. (Philadelphia: JPS, 1933; reimpr. 2004).</p>
+
+      <h3 class="subsection-title">Monografías y Artículos de Referencia</h3>
+
+      <p>Boyarin, D., <em>The Jewish Gospels: The Story of the Jewish Christ</em> (New York: New Press, 2012).</p>
+
+      <p>Collins, J. J., <em>Daniel: A Commentary on the Book of Daniel</em>, Hermeneia (Minneapolis: Fortress Press, 1993).</p>
+
+      <p>Collins, J. J., <em>The Scepter and the Star: Messianism in Light of the Dead Sea Scrolls</em>, 2.ª ed. (Grand Rapids: Eerdmans, 2010).</p>
+
+      <p>Fitzmyer, J. A., «The Contribution of Qumran Aramaic to the Study of the New Testament», <em>New Testament Studies</em> 20 (1974), pp. 382–407.</p>
+
+      <p>Fossum, J. E., <em>The Name of God and the Angel of the Lord: Samaritan and Jewish Concepts of Intermediation and the Origin of Gnosticism</em>, WUNT 36 (Tübingen: Mohr Siebeck, 1985).</p>
+
+      <p>García Martínez, F., <em>The Dead Sea Scrolls Translated: The Qumran Texts in English</em>, trad. Watson, W. G. E., 2.ª ed. (Leiden: Brill / Grand Rapids: Eerdmans, 1996).</p>
+
+      <p>Gieschen, C. A., <em>Angelomorphic Christology: Antecedents and Early Evidence</em>, AGJU 42 (Leiden: Brill, 1998).</p>
+
+      <p>Hay, D. M., <em>Glory at the Right Hand: Psalm 110 in Early Christianity</em>, SBLMS 18 (Nashville: Abingdon, 1973).</p>
+
+      <p>Hurtado, L. W., <em>Lord Jesus Christ: Devotion to Jesus in Earliest Christianity</em> (Grand Rapids: Eerdmans, 2003).</p>
+
+      <p>Hurtado, L. W., <em>One God, One Lord: Early Christian Devotion and Ancient Jewish Monotheism</em> (Philadelphia: Fortress Press, 1988; 3.ª ed. London: T&T Clark, 2015).</p>
+
+      <p>McNamara, M., <em>The New Testament and the Palestinian Targum to the Pentateuch</em>, AnBib 27 (Rome: Pontifical Biblical Institute, 1966; reimpr. 1978).</p>
+
+      <p>Mettinger, T. N. D., <em>The Dethronement of Sabaoth: Studies in the Shem and Kabod Theologies</em>, CB OTS 18 (Lund: Gleerup, 1982).</p>
+
+      <p>Nickelsburg, G. W. E. y VanderKam, J. C., <em>1 Enoch 2: A Commentary on the Book of 1 Enoch, Chapters 37–82</em>, Hermeneia (Minneapolis: Fortress Press, 2012).</p>
+
+      <p>Rowland, C., <em>The Open Heaven: A Study of Apocalyptic in Judaism and Early Christianity</em> (London: SPCK, 1982).</p>
+
+      <p>Segal, A. F., <em>Two Powers in Heaven: Early Rabbinic Reports about Christianity and Gnosticism</em>, SJLA 25 (Leiden: Brill, 1977; reimpr. Waco: Baylor University Press, 2012).</p>
+
+      <p>Syrén, R., <em>The Forsaken Firstborn: A Study of a Recurrent Motif in the Patriarchal Narratives</em>, JSOTSup 133 (Sheffield: JSOT Press, 1993).</p>
+
+      <p>Tobin, T. H., «The Prologue of John and Hellenistic Jewish Speculation», <em>Catholic Biblical Quarterly</em> 52 (2001), pp. 252–270.</p>
+
+      <p>von Rad, G., <em>Wisdom in Israel</em>, trad. Martin, J. D. (Nashville: Abingdon, 1972; orig. alemán 1970).</p>
+
+      <!-- NOTAS AL PIE -->
+      <div class="footnote-area">
+        <div class="fn-title">Notas</div>
+        <div class="fn-item"><span class="fn-num">1.</span><span>Boyarin, D., <em>The Jewish Gospels</em> (New York: New Press, 2012), p. 25: «The Son of Man is a divine figure in the sky who looks like a human being.» Argumenta que esta cristología es judía, no producto de la helenización.</span></div>
+        <div class="fn-item"><span class="fn-num">2.</span><span>Segal, A. F., <em>Two Powers in Heaven</em> (Leiden: Brill, 1977), pp. 33–67. Análisis de la Mekilta sobre Éxodo 15:3 y su relación con Génesis 19:24.</span></div>
+        <div class="fn-item"><span class="fn-num">3.</span><span>Mettinger, T. N. D., <em>The Dethronement of Sabaoth</em> (Lund, 1982), p. 45: nota que el pluralis majestatis no tiene paralelo en el uso bíblico de los reyes humanos.</span></div>
+        <div class="fn-item"><span class="fn-num">4.</span><span>Syrén, R., <em>The Forsaken Firstborn</em> (Sheffield, 1993), pp. 112–130. Sobre la coherencia de Is 48:16b sin postular glosa.</span></div>
+        <div class="fn-item"><span class="fn-num">5.</span><span>Hay, D. M., <em>Glory at the Right Hand</em> (Nashville, 1973), pp. 14–33. Uso de Salmo 110 en la apocalíptica y el Segundo Templo.</span></div>
+        <div class="fn-item"><span class="fn-num">6.</span><span>Von Rad, G., <em>Wisdom in Israel</em> (Nashville, 1972), pp. 144–176. El debate sobre <em>qānāh</em> en Proverbios 8:22.</span></div>
+        <div class="fn-item"><span class="fn-num">7.</span><span>Collins, J. J., <em>Daniel</em> (Fortress, 1993), pp. 304–310; <em>The Scepter and the Star</em> (Eerdmans, 2010), pp. 155–172. Sobre la categoría divina del Hijo del Hombre y el Mesías de 4Q246.</span></div>
+        <div class="fn-item"><span class="fn-num">8.</span><span>Nickelsburg, G. W. E. y VanderKam, J. C., <em>1 Enoch 2</em> (Fortress, 2012), p. 58. Argumentos para datar las Parábolas en el s. I a.C. – I d.C.</span></div>
+        <div class="fn-item"><span class="fn-num">9.</span><span>Hurtado, L. W., <em>Lord Jesus Christ</em> (Eerdmans, 2003), pp. 80–90. Sobre la adoración como criterio de inclusión en la identidad divina.</span></div>
+        <div class="fn-item"><span class="fn-num">10.</span><span>Gieschen, C. A., <em>Angelomorphic Christology</em> (Brill, 1998), pp. 51–104. Estudio sistemático del Ángel de YHWH y su rol en la cristología.</span></div>
+        <div class="fn-item"><span class="fn-num">11.</span><span>Fossum, J. E., <em>The Name of God and the Angel of the Lord</em> (Tübingen, 1985), pp. 75–120. Demostración de la distinción YHWH inmanente / trascendente.</span></div>
+        <div class="fn-item"><span class="fn-num">12.</span><span>Tobin, T. H., «Prologue of John», <em>CBQ</em> 52 (2001), pp. 252–270. Relación entre el Prólogo de Juan y el Logos filoniano.</span></div>
+        <div class="fn-item"><span class="fn-num">13.</span><span>McNamara, M., <em>New Testament and the Palestinian Targum</em> (Rome, 1966/1978), pp. 101–120. El Memra como YHWH inmanente en la piedad de sinagoga.</span></div>
+        <div class="fn-item"><span class="fn-num">14.</span><span>García Martínez, F., <em>Dead Sea Scrolls Translated</em> (Brill/Eerdmans, 1996), pp. 162–179. Texto y análisis de 11QMelch.</span></div>
+      </div>
+    </section>
+
+  </div><!-- /content-area -->
+</main>
+
+<script>
+  // ===== ACTIVE NAV LINK =====
+  const sections = document.querySelectorAll('.doc-section, h3[id]');
+  const navLinks = document.querySelectorAll('.nav-item');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(a => {
+          a.classList.remove('active');
+          if (a.getAttribute('href') === '#' + id) a.classList.add('active');
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+
+  document.querySelectorAll('[id]').forEach(el => observer.observe(el));
+
+  // ===== PROGRESS BAR =====
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+    document.getElementById('back-top').classList.toggle('visible', h.scrollTop > 400);
+  });
+
+  // ===== BACK TO TOP =====
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ===== MOBILE SIDEBAR =====
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  // ===== SMOOTH SCROLL FOR NAV LINKS =====
+  navLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (window.innerWidth <= 900) {
+            document.getElementById('sidebar').classList.remove('open');
+          }
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
