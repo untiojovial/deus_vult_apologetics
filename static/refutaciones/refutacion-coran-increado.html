@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refutación Tomista de la Doctrina del Corán Increado</title>
+<style>
+  :root{
+    --dark-blue:#1a2744;
+    --mid-blue:#2c4a8c;
+    --gold:#b8860b;
+    --light-bg:#f0f4ff;
+    --row-alt:#dde7f5;
+    --red:#8b1a1a;
+    --grey:#333333;
+    --border:#aabbd0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family: Georgia, 'Times New Roman', serif;
+    color:var(--grey); background:#fafbff; line-height:1.6;
+  }
+  /* ── Reading progress bar ── */
+  #progress{
+    position:fixed; top:0; left:0; height:3px; background:var(--gold);
+    width:0%; z-index:1000; transition:width .1s linear;
+  }
+
+  /* ── Layout ── */
+  .layout{ display:flex; min-height:100vh; }
+  main{ flex:1; padding:0; max-width:980px; margin:0 auto; transition:margin-left .25s ease; }
+  .page{ padding:48px 56px; }
+
+  /* ── TOC toggle button (floating) ── */
+  #tocToggle{
+    position:fixed; top:16px; left:16px; z-index:1001;
+    width:44px; height:44px; border-radius:8px; border:none; cursor:pointer;
+    background:var(--dark-blue); color:var(--gold);
+    font-family:Helvetica, Arial, sans-serif; font-size:18px;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.25); transition:left .25s ease, background .15s;
+  }
+  #tocToggle:hover{ background:var(--mid-blue); }
+
+  /* ── TOC panel ── */
+  nav#toc{
+    width:320px; flex-shrink:0; background:var(--dark-blue); color:#fff;
+    position:fixed; top:0; left:0; height:100vh; overflow-y:auto;
+    padding:70px 16px 24px; z-index:999;
+    transform:translateX(-100%); transition:transform .25s ease;
+    box-shadow:4px 0 24px rgba(0,0,0,.25);
+  }
+  nav#toc.open{ transform:translateX(0); }
+  body.toc-open main{ margin-left:320px; }
+  body.toc-open #tocToggle{ left:336px; }
+
+  /* search box */
+  #tocSearch{
+    width:100%; padding:9px 12px; border-radius:6px; border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.06); color:#fff; font-size:13px;
+    font-family:Helvetica, Arial, sans-serif; margin-bottom:14px; outline:none;
+  }
+  #tocSearch::placeholder{ color:#8da0c9; }
+  #tocSearch:focus{ border-color:var(--gold); background:rgba(255,255,255,.1); }
+
+  nav#toc h2{
+    font-family: Helvetica, Arial, sans-serif; font-size:11px;
+    letter-spacing:2px; text-transform:uppercase; color:var(--gold);
+    margin:0 0 10px; opacity:.85;
+  }
+
+  /* Collapsible groups */
+  nav#toc .group{ margin-bottom:2px; }
+  nav#toc .group-head{
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+    cursor:pointer; padding:8px 10px; border-radius:6px;
+    font-family:Helvetica, Arial, sans-serif; font-size:13.5px; font-weight:bold;
+    color:#eaf0fc; transition:background .15s; user-select:none;
+  }
+  nav#toc .group-head:hover{ background:rgba(255,255,255,.07); }
+  nav#toc .group-head .chev{
+    font-size:10px; color:var(--gold); transition:transform .2s ease; flex-shrink:0;
+  }
+  nav#toc .group.open > .group-head .chev{ transform:rotate(90deg); }
+  nav#toc .group-body{
+    max-height:0; overflow:hidden; transition:max-height .25s ease;
+    padding-left:6px; border-left:2px solid rgba(255,255,255,.08); margin-left:14px;
+  }
+  nav#toc .group.open > .group-body{ max-height:1200px; }
+
+  nav#toc ul{ list-style:none; padding:0; margin:0; }
+  nav#toc li{ margin:0; }
+  nav#toc a{
+    display:block; color:#c3cfea; text-decoration:none; font-size:12.5px;
+    font-family: Helvetica, Arial, sans-serif;
+    padding:6px 10px; border-radius:6px; transition: background .15s, color .15s;
+    border-left:3px solid transparent; white-space:normal; line-height:1.35;
+  }
+  nav#toc > ul > li > a{
+    font-size:13.5px; font-weight:bold; color:#eaf0fc; padding:8px 10px;
+  }
+  nav#toc a.lvl3{ font-size:11.5px; color:#9fb0d4; padding-left:14px; }
+  nav#toc a:hover, nav#toc a.active{
+    background:rgba(184,134,11,.15); color:#fff; border-left-color:var(--gold);
+  }
+  nav#toc a.active{ background:rgba(184,134,11,.22); }
+
+  /* hide non-matching items during search */
+  nav#toc.searching li.no-match{ display:none; }
+  nav#toc.searching .group-body{ max-height:1200px !important; }
+  nav#toc.searching .group:not(.has-match){ display:none; }
+
+  /* overlay for mobile */
+  #tocOverlay{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:998;
+  }
+  body.toc-open #tocOverlay{ display:block; }
+
+  @media (max-width: 860px){
+    body.toc-open main{ margin-left:0; }
+    body.toc-open #tocToggle{ left:16px; }
+    nav#toc{ width:85%; max-width:340px; }
+  }
+
+  /* ── Cover ── */
+  .cover{
+    text-align:center; padding:90px 40px 60px; border-bottom:4px solid var(--gold);
+  }
+  .cover h1{
+    font-size:32px; color:var(--dark-blue); margin:0 0 4px; letter-spacing:1px;
+  }
+  .cover h1.sub{ font-size:24px; color:var(--dark-blue); margin-bottom:18px;}
+  .cover .tag{ color:var(--mid-blue); font-style:italic; font-size:16px; margin:6px 0;}
+  .cover .meta{ color:#888; font-size:13px; margin-top:40px; font-family:Helvetica, Arial, sans-serif;}
+
+  /* ── Headings ── */
+  h1.section{
+    background:var(--dark-blue); color:#fff; font-family:Helvetica, Arial, sans-serif;
+    font-size:18px; padding:12px 18px; border-radius:4px; margin:0 0 16px;
+    letter-spacing:.5px;
+  }
+  h2.sub{
+    color:var(--dark-blue); font-size:16px; margin:28px 0 10px;
+    border-bottom:2px solid var(--mid-blue); padding-bottom:4px;
+    font-family:Helvetica, Arial, sans-serif;
+  }
+  h3.sub3{ color:var(--mid-blue); font-size:14px; margin:18px 0 8px; font-family:Helvetica, Arial, sans-serif;}
+
+  p{ text-align:justify; margin:0 0 12px; font-size:15px; }
+
+  /* ── Definition cards (glossary grid) ── */
+  .defgrid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:12px; margin:14px 0 24px;
+  }
+  .defcard{
+    background:var(--light-bg); border:1px solid var(--border); border-radius:8px;
+    padding:12px 14px; border-top:3px solid var(--mid-blue);
+  }
+  .defcard .term{
+    font-family:Helvetica, Arial, sans-serif; font-weight:bold; color:var(--dark-blue);
+    font-size:13.5px; margin:0 0 6px; display:flex; align-items:center; gap:6px;
+  }
+  .defcard .term::before{
+    content:"§"; color:var(--gold); font-weight:bold; font-size:13px;
+  }
+  .defcard .def{ font-size:13px; text-align:justify; margin:0; }
+  /* single-column variant for long entries */
+  .defgrid.defgrid-wide{ grid-template-columns:repeat(auto-fit, minmax(380px, 1fr)); }
+
+  /* ── Syllogism boxes ── */
+  .syllogism{
+    background:#f7f9ff; border:1px solid var(--mid-blue); border-radius:6px;
+    padding:14px 18px; margin:16px 0;
+  }
+  .syllogism .label{
+    font-family:Helvetica, Arial, sans-serif; font-weight:bold; font-size:12px;
+    color:var(--gold); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px;
+  }
+  .syllogism .premise{ color:var(--dark-blue); font-size:14px; margin:4px 0; }
+  .syllogism .premise b{ color:var(--mid-blue); }
+  .syllogism hr{ border:none; border-top:1px solid var(--red); margin:8px 0; opacity:.5;}
+  .syllogism .conclusion{
+    color:var(--red); font-weight:bold; font-size:14px; margin:6px 0;
+  }
+  .syllogism .nota{
+    color:#555; font-style:italic; font-size:12.5px; margin-top:6px;
+  }
+
+  /* ── Highlight / quote box ── */
+  .highlight{
+    background:var(--light-bg); border:1px solid var(--gold); border-radius:6px;
+    padding:16px 20px; margin:16px 0; font-size:14.5px;
+  }
+  .highlight.red{ background:#fff0f0; border-color:var(--red); }
+
+  /* ── Comparison table ── */
+  table.cmp{ width:100%; border-collapse:collapse; margin:14px 0 22px; font-size:13px; }
+  table.cmp th{
+    background:var(--dark-blue); color:#fff; padding:8px 10px; text-align:left;
+    font-family:Helvetica, Arial, sans-serif; font-size:12.5px;
+  }
+  table.cmp td{
+    padding:8px 10px; border:1px solid var(--border); text-align:justify; vertical-align:top;
+  }
+  table.cmp tr:nth-child(even) td{ background:var(--row-alt); }
+  table.cmp tr:nth-child(odd) td{ background:var(--light-bg); }
+
+  /* ── Three-line map ── */
+  .lineblock{
+    background:var(--light-bg); border:1px solid var(--mid-blue); border-radius:4px;
+    padding:14px 18px; margin:14px 0; border-top:4px solid var(--mid-blue);
+  }
+  .lineblock.red-line{ border-top-color:var(--red); }
+  .lineblock.dark-line{ border-top-color:var(--dark-blue); }
+  .lineblock h4{
+    font-family:Helvetica, Arial, sans-serif; color:#fff; background:var(--mid-blue);
+    display:inline-block; padding:4px 10px; border-radius:3px; margin:0 0 8px; font-size:13px;
+  }
+  .lineblock.red-line h4{ background:var(--red); }
+  .lineblock.dark-line h4{ background:var(--dark-blue); }
+  .lineblock ul{ margin:6px 0 0; padding-left:20px; font-size:13.5px; }
+  .lineblock li{ margin-bottom:6px; text-align:justify; }
+
+  /* ── Objections ── */
+  .obj{ color:var(--red); font-style:italic; margin:14px 0 4px; font-size:14.5px; }
+  .resp{ color:var(--mid-blue); margin:0 0 14px; font-size:14.5px; padding-left:14px; border-left:3px solid var(--border); }
+
+  /* ── Conclusions list ── */
+  .conc-item{ margin-bottom:10px; }
+  .conc-item b{ color:var(--dark-blue); }
+
+  hr.gold{ border:none; border-top:1.5px solid var(--gold); margin:24px 0; }
+  .final{ text-align:center; color:#999; font-style:italic; font-size:13px; margin-top:30px; }
+
+  /* mobile */
+  @media (max-width: 860px){
+    .page{ padding:28px 20px; }
+    .defgrid{ grid-template-columns:1fr; }
+  }
+
+  /* scroll-margin so anchored sections land below the toggle button */
+  section, h2.sub{ scroll-margin-top: 24px; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<button id="tocToggle" title="Abrir/cerrar índice (tecla: M)">☰</button>
+<div id="tocOverlay"></div>
+<div class="layout">
+
+  <!-- ═══════════════════ ÍNDICE INTERACTIVO ═══════════════════ -->
+  <nav id="toc">
+    <h2>Índice de contenidos</h2>
+    <input type="text" id="tocSearch" placeholder="Buscar sección o silogismo… (ej. 'silogismo 9')">
+
+    <ul>
+      <li><a href="#portada">Portada</a></li>
+      <li><a href="#nota-metodologica">Nota metodológica</a></li>
+      <li><a href="#sec1">I. Glosario de términos fundamentales</a></li>
+      <li><a href="#sec2">II. Tesis islámica y su distinción interna</a></li>
+
+      <li>
+        <div class="group" data-default="open">
+          <div class="group-head"><span>III. Batería silogística</span><span class="chev">▶</span></div>
+          <div class="group-body">
+            <ul>
+              <li><a href="#sec3">→ Introducción al bloque</a></li>
+
+              <li>
+                <div class="group">
+                  <div class="group-head"><span>A · Sustancia y accidente</span><span class="chev">▶</span></div>
+                  <div class="group-body">
+                    <ul>
+                      <li><a href="#bloqueA">Texto del bloque A</a></li>
+                      <li><a class="lvl3" href="#sil1">Silogismo 1 — Atributo real ⇒ accidente</a></li>
+                      <li><a class="lvl3" href="#sil2">Silogismo 2 — Pluralidad ⇒ no necesidad</a></li>
+                      <li><a class="lvl3" href="#sil3">Silogismo 3 — Dilema increado/distinto</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="group">
+                  <div class="group-head"><span>B · Acto divino y creación</span><span class="chev">▶</span></div>
+                  <div class="group-body">
+                    <ul>
+                      <li><a href="#bloqueB">Texto del bloque B</a></li>
+                      <li><a class="lvl3" href="#sil4">Silogismo 4 — Acto eterno ≠ efecto eterno</a></li>
+                      <li><a class="lvl3" href="#sil5">Silogismo 5 — Falacia de composición</a></li>
+                      <li><a class="lvl3" href="#sil6">Silogismo 6 — Volición ⇒ contingencia</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="group">
+                  <div class="group-head"><span>C · Significado puro y lenguaje</span><span class="chev">▶</span></div>
+                  <div class="group-body">
+                    <ul>
+                      <li><a href="#bloqueC">Definiciones del bloque C</a></li>
+                      <li><a class="lvl3" href="#sil7">Silogismo 7 — Acto en potencia ⇒ composición</a></li>
+                      <li><a class="lvl3" href="#sil8">Silogismo 8 — Polisemia excluye pureza</a></li>
+                      <li><a class="lvl3" href="#sil9">Silogismo 9 — Recipiente imperfecto</a></li>
+                      <li><a class="lvl3" href="#sil10">Silogismo 10 — No es falacia, es desproporción</a></li>
+                      <li><a class="lvl3" href="#sil11">Silogismo 11 — Palabras = significado limitado</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="group">
+                  <div class="group-head"><span>D · Pluralidad vs. Logos tomista</span><span class="chev">▶</span></div>
+                  <div class="group-body">
+                    <ul>
+                      <li><a href="#bloqueD">Tabla comparativa</a></li>
+                      <li><a class="lvl3" href="#sil12">Silogismo 12 — Tomismo evita pluralidad</a></li>
+                      <li><a class="lvl3" href="#sil13">Silogismo 13 — Kalám nafsí redundante</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="group">
+                  <div class="group-head"><span>E · El número 2 y los universales</span><span class="chev">▶</span></div>
+                  <div class="group-body">
+                    <ul>
+                      <li><a href="#bloqueE">Reductio ad absurdum</a></li>
+                      <li><a class="lvl3" href="#sil14">Silogismo 14 — El número 2 increado</a></li>
+                      <li><a class="lvl3" href="#sil15">Silogismo 15 — Mis palabras interiores</a></li>
+                      <li><a class="lvl3" href="#sil16">Silogismo 16 — Criterio correcto excluye kalám</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li><a href="#sec4">IV. Síntesis y mapa de la refutación</a></li>
+      <li><a href="#sec5">V. Objeciones previsibles y respuestas</a></li>
+      <li><a href="#sec6">VI. Conclusión</a></li>
+
+      <li>
+        <div class="group">
+          <div class="group-head"><span>Apéndice · Subsistencia y números</span><span class="chev">▶</span></div>
+          <div class="group-body">
+            <ul>
+              <li><a href="#apendice">Introducción al apéndice</a></li>
+              <li><a href="#ap1">1. Definición de subsistencia</a></li>
+              <li><a href="#ap2">2. Problema: 1 ≠ 2 en Dios</a></li>
+
+              <li>
+                <div class="group">
+                  <div class="group-head"><span>3 · Silogismos resolutivos</span><span class="chev">▶</span></div>
+                  <div class="group-body">
+                    <ul>
+                      <li><a href="#ap3">Tabla de los 4 niveles</a></li>
+                      <li><a class="lvl3" href="#silA">Silogismo A — Distinción no afecta acto</a></li>
+                      <li><a class="lvl3" href="#silB">Silogismo B — Una sola esencia, no species</a></li>
+                      <li><a class="lvl3" href="#silC">Silogismo C — Ideas: distintas en relación</a></li>
+                      <li><a class="lvl3" href="#silD">Silogismo D — Simplicidad es del ser</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <li><a href="#ap4">4. Consecuencia apologética directa</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════ CONTENIDO ═══════════════════ -->
+  <main>
+
+    <!-- PORTADA -->
+    <section id="portada" class="cover">
+      <h1>REFUTACIÓN TOMISTA</h1>
+      <h1 class="sub">DE LA DOCTRINA DEL CORÁN INCREADO</h1>
+      <hr class="gold" style="width:60%;margin:18px auto;">
+      <p class="tag">Análisis silogístico desde los principios de Santo Tomás de Aquino</p>
+      <p class="tag">Sobre la imposibilidad metafísica de que el significado puro sea increado<br>
+      y de que pueda informar lo imperfecto sin corrupción ontológica</p>
+      <p class="meta">Tratado de apologética comparada · Edición técnica</p>
+    </section>
+
+    <div class="page">
+
+      <!-- NOTA METODOLÓGICA -->
+      <section id="nota-metodologica">
+        <h1 class="section">NOTA METODOLÓGICA</h1>
+        <p>El presente tratado opera exclusivamente con los principios metafísicos desarrollados
+        por Santo Tomás de Aquino en la <i>Summa Theologiae</i>, la <i>Summa contra Gentiles</i>
+        y los <i>Quaestiones Disputatae</i>. La refutación es interna: no asume la verdad del
+        cristianismo para atacar el islam, sino que muestra que la doctrina de la eternidad del
+        Corán (<i>qidam al-Qur'an</i>) es internamente inconsistente bajo cualquier metafísica
+        rigurosa del ser, el lenguaje y la perfección divina — incluyendo la propia metafísica
+        aristotélico-aviceniana que los teólogos mu'tazilíes y ash'aríes habitualmente emplean.</p>
+        <p>Los silogismos están construidos en forma categórica estándar (Bárbara, Celarent, Darapti, etc.).
+        Cada bloque está precedido por las definiciones de los términos técnicos que emplea, de modo que
+        el adversario no pueda disputar el sentido de los conceptos sin abandonar su propio marco.</p>
+        <hr class="gold">
+      </section>
+
+      <!-- SECCIÓN I -->
+      <section id="sec1">
+        <h1 class="section">I. GLOSARIO DE TÉRMINOS FUNDAMENTALES</h1>
+        <p>Antes de proceder a la argumentación silogística es imprescindible fijar con precisión
+        los términos. La ambigüedad terminológica es el mayor aliado de una tesis débil.</p>
+
+        <div class="defgrid">
+          <div class="defcard">
+            <p class="term">Increado (a se)</p>
+            <p class="def">Lo que no recibe su ser de otro; lo que existe por esencia propia, no por participación. Implica necesidad absoluta de existencia, independencia total, inmutabilidad radical y ausencia de potencialidad. Solo puede predicarse de Dios según la teología clásica.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Creado (ab alio)</p>
+            <p class="def">Lo que recibe su ser de un principio extrínseco. Implica contingencia, dependencia ontológica y distinción real entre esencia y existencia (distinción esse-essentia de Avicena y Tomás).</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Sustancia</p>
+            <p class="def">Lo que existe en sí y no en otro como en sujeto (ens per se subsistens). Categoría predicamental suprema. Solo las sustancias son portadoras primarias de ser.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Accidente</p>
+            <p class="def">Lo que existe en otro como en sujeto (ens in alio). No tiene ser propio; su ser es un ser-en. Ejemplo: el color, la cantidad, la relación, el habitus lingüístico.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Forma</p>
+            <p class="def">Principio determinante de un compuesto; aquello por lo cual algo es tal cosa. La forma puede ser sustancial (determina la especie) o accidental (determina la cualidad).</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Materia</p>
+            <p class="def">Principio potencial de un compuesto; substrato indeterminado que recibe la forma. En sentido estricto, toda materia es potencial con respecto a la forma que la actualiza.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Significado puro</p>
+            <p class="def">Contenido inteligible de un enunciado prescindiendo de toda materialidad fonética o gráfica. Los escolásticos lo denominan species intelligibilis o verbum mentis. Es el objeto propio del intelecto en cuanto intelecto.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Signo lingüístico</p>
+            <p class="def">Unidad compuesta de significante (forma sensible: sonido, grafema) y significado. El significante es material y convencional; el significado es formal e inteligible.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Logos / Verbum</p>
+            <p class="def">En Tomás, la palabra interior del intelecto (verbum mentis), expresión inmanente del acto de conocimiento. El Logos divino (segunda Persona) es la autoexpresión perfecta e idéntica de la esencia divina, coextensiva con Dios mismo.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Pluralidad ontológica</p>
+            <p class="def">Situación en la que hay más de un ente realmente distinto. Implica que al menos uno de ellos no es totalmente simple, pues la distinción real requiere principios de individuación (materia, limitación de forma, finitud).</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Acto puro</p>
+            <p class="def">Ser en el que no hay ninguna potencialidad; plena actualidad sin mezcla de potencia. Solo Dios es acto puro (ST I, q.3, a.2). Todo compuesto de acto y potencia es creado.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Simplicidad divina</p>
+            <p class="def">Atributo por el que en Dios no hay ninguna composición real: ni de materia y forma, ni de esencia y existencia, ni de género y diferencia, ni de sustancia y accidente (ST I, q.3, aa.1-7). Cualquier pluralidad real en Dios destruye la necesidad absoluta.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN II -->
+      <section id="sec2">
+        <h1 class="section">II. LA TESIS ISLÁMICA Y SU DISTINCIÓN INTERNA</h1>
+        <p>La posición clásica ash'arí sobre el Corán increado opera con una distinción que el propio
+        Al-Ash'arí introdujo para resolver la crisis mu'tazilí: la distinción entre
+        <i>al-Qur'an al-nafsí</i> (el Corán del alma/mente divina, el significado eterno)
+        y <i>al-Qur'an al-lafzí</i> (la expresión verbal, los sonidos, la tinta y el papel).</p>
+
+        <table class="cmp">
+          <tr><th>Al-Qur'an al-nafsí</th><th>Al-Qur'an al-lafzí</th></tr>
+          <tr><td>Significado eterno, atributo divino del kalám, increado, no compuesto de letras ni sonidos.</td>
+              <td>Expresión fonética o gráfica del Corán: sonidos recitados, tinta, papel. Se admite que esto es creado.</td></tr>
+          <tr><td>Subsiste en la esencia divina como atributo (sifa).</td>
+              <td>Subsiste en las criaturas: voz del recitador, grafemas del escriba.</td></tr>
+        </table>
+
+        <p>El apologista musulmán dirá: <i>«No afirmamos que el papel sea increado, sino solo el
+        significado eterno; y ese significado es un atributo divino, luego es increado como Dios
+        mismo».</i> Esta distinción es el punto de ataque central. Mostraremos que, lejos de
+        resolver el problema, lo agudiza: o bien se genera una pluralidad ontológica inaceptable
+        en Dios, o bien el significado «increado» no puede ser el significado del Corán histórico.</p>
+        <hr class="gold">
+      </section>
+
+      <!-- SECCIÓN III -->
+      <section id="sec3">
+        <h1 class="section">III. BATERÍA SILOGÍSTICA</h1>
+        <p>Los silogismos están agrupados en cinco bloques temáticos, ordenados de mayor a menor
+        nivel de abstracción metafísica, de modo que cada bloque cierra el paso a una retirada
+        posible de la posición adversaria.</p>
+
+        <!-- BLOQUE A -->
+        <h2 class="sub" id="bloqueA">A. BLOQUE DE LA SUSTANCIA Y EL ACCIDENTE</h2>
+        <p>El argumento de la sustancia ataca la tesis de que el significado eterno pueda
+        ser un <i>atributo</i> (sifa) de Dios sin introducir composición real.</p>
+
+        <div class="syllogism" id="sil1">
+          <div class="label">Silogismo 1 — Todo atributo real es accidental o es la sustancia misma</div>
+          <p class="premise"><b>P.M.:</b> Todo lo que se predica de una sustancia como distinto de ella realmente es un accidente (pues el accidente se define como lo que existe en otro; cf. Aristóteles, <i>Cat.</i> 5; Tomás, <i>ST</i> I, q.3, a.6).</p>
+          <p class="premise"><b>P.m.:</b> El <i>kalám nafsí</i> (significado eterno del Corán) se predica de Dios como distinto de Su esencia, según los ash'aríes (es uno de los siete atributos eternos —sifát— realmente distintos de la esencia).</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: El kalám nafsí es un accidente de Dios — o Dios es un ser accidentado — lo cual es incompatible con la simplicidad divina y con el Acto Puro.</p>
+          <p class="nota"><i>Nota:</i> El ash'arí puede responder que las sifát no son «accidentes» en sentido aristotélico, sino subsistentes en la esencia. Pero esto solo desplaza el problema al silogismo 2.</p>
+        </div>
+
+        <div class="syllogism" id="sil2">
+          <div class="label">Silogismo 2 — La pluralidad real en Dios destruye la necesidad absoluta</div>
+          <p class="premise"><b>P.M.:</b> Todo ser que posee atributos realmente distintos de su esencia es un compuesto de esencia y propiedades; y todo compuesto requiere un principio que una sus partes, siendo por tanto dependiente y contingente (Tomás, <i>SCG</i> I, c.18).</p>
+          <p class="premise"><b>P.m.:</b> Si el kalám nafsí es realmente distinto de la esencia divina, Dios es un compuesto de esencia + kalám (+ otros seis atributos ash'aríes).</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: Dios — según la teología ash'arí — es un ser compuesto, dependiente y, por tanto, no absolutamente necesario: no puede ser el fundamento último del ser.</p>
+          <p class="nota"><i>Nota:</i> Si el ash'arí responde que el kalám nafsí ES la esencia (identificación real), entonces el kalám nafsí no añade nada específico: es simplemente Dios, y el Corán histórico no puede identificarse con Dios sin herejía intra-islámica (shirk).</p>
+        </div>
+
+        <div class="syllogism" id="sil3">
+          <div class="label">Silogismo 3 — Ningún atributo puede ser a la vez increado y distinto del increado</div>
+          <p class="premise"><b>P.M.:</b> «Increado» (wajib al-wujud bi-dhatihi) significa: ser cuya existencia no procede de ningún principio externo. Solo puede haber un ente tal, pues dos seres absolutamente necesarios serían indistinguibles o diferirían por algo —y ese algo sería el principio de individuación, que no existe en lo absolutamente simple.</p>
+          <p class="premise"><b>P.m.:</b> El kalám nafsí se postula como increado y distinto de la esencia divina (distinguible al menos conceptualmente como atributo específico).</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: Hay una contradicción interna: o el kalám nafsí es idéntico a Dios (y no hay «Corán» distinto que sea increado), o es distinto de Dios (y entonces es creado, pues solo uno puede ser absolutamente necesario).</p>
+          <p class="nota"><i>Nota:</i> Este dilema es el reductio al corazón de la doctrina. No hay tercera opción dentro de una metafísica estricta del ser necesario.</p>
+        </div>
+
+        <!-- BLOQUE B -->
+        <h2 class="sub" id="bloqueB">B. BLOQUE DEL ACTO DIVINO Y LA CREACIÓN</h2>
+        <p>Este bloque refuta el argumento típico de que «el Corán viene de un acto de Dios
+        que es eterno, luego el Corán también es eterno».</p>
+
+        <div class="syllogism" id="sil4">
+          <div class="label">Silogismo 4 — El efecto de un acto eterno no es necesariamente increado</div>
+          <p class="premise"><b>P.M.:</b> Un acto es eterno si procede de la voluntad o potencia de Dios desde la eternidad. Pero el producto de ese acto puede ser temporal o creado: Dios quiso eternamente crear el mundo, y el mundo es creado (Tomás, <i>ST</i> I, q.46, a.1-2). La eternidad del acto no se transfiere al efecto.</p>
+          <p class="premise"><b>P.m.:</b> Se afirma que el kalám (habla divina) es un acto eterno de Dios, y que el Corán es el producto o expresión de ese acto.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: El Corán, como producto o expresión del acto divino de hablar, puede ser perfectamente creado aunque el acto mismo sea eterno. La premisa de la eternidad del acto no prueba la eternidad del efecto.</p>
+          <p class="nota"><i>Nota:</i> Analogía exacta: Dios quiso eternamente crear a Moisés; pero Moisés es creado. La voluntad eterna no hace eterno al objeto querido.</p>
+        </div>
+
+        <div class="syllogism" id="sil5">
+          <div class="label">Silogismo 5 — El argumento «viene de Dios, luego es increado» es una falacia de composición</div>
+          <p class="premise"><b>P.M.:</b> La falacia de composición consiste en atribuir al todo o al efecto una propiedad que pertenece a la causa o a una parte. Su forma inválida: «P causa Q; P tiene propiedad F; luego Q tiene propiedad F.»</p>
+          <p class="premise"><b>P.m.:</b> El argumento islámico reza: «Dios es increado; el Corán procede de Dios (es su habla); luego el Corán es increado.» Este argumento tiene exactamente la forma de la falacia de composición.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: El argumento «el Corán procede de Dios, luego es increado» es lógicamente inválido: es una falacia de composición. No puede establecer la eternidad del Corán.</p>
+          <p class="nota"><i>Nota:</i> Contraejemplos directos: el mundo procede de Dios (es su efecto); el mundo es creado. Los ángeles proceden de Dios; los ángeles son creados. La Torah (en la versión islámica) procede de Dios; la Torah es creada. Ningún teólogo islámico afirma que el mundo sea increado por proceder de Dios.</p>
+        </div>
+
+        <div class="syllogism" id="sil6">
+          <div class="label">Silogismo 6 — Lo que depende de una volición para ser expresado es contingente</div>
+          <p class="premise"><b>P.M.:</b> Todo lo que requiere una volición (irada) para existir como expresado o comunicado depende de ese acto volitivo, y lo que depende de algo para existir como tal es ontológicamente contingente en esa determinación (no absolutamente necesario).</p>
+          <p class="premise"><b>P.m.:</b> El kalám nafsí, según los ash'aríes, se expresa en el Corán árabe por una decisión volitiva de Dios (Dios eligió el árabe, eligió esta revelación a Muhammad); esta expresión depende de la voluntad divina.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: La expresión concreta del kalám — el Corán árabe como tal — es contingente y, por tanto, creada. La necesidad del acto volitivo en Dios no transfiere necesidad al objeto volitivamente determinado.</p>
+          <p class="nota"><i>Nota:</i> Si el ash'arí responde que el kalám nafsí no requiere volición (es necesario), entonces el kalám nafsí no puede distinguirse en contenido del necesario conocimiento divino de sí mismo, y el Corán no añade nada que no sea ya el Logos divino auto-conocido — lo que destruye la especificidad de la revelación coránica.</p>
+        </div>
+
+        <!-- BLOQUE C -->
+        <h2 class="sub" id="bloqueC">C. BLOQUE DEL SIGNIFICADO PURO Y LA IMPERFECCIÓN DEL LENGUAJE</h2>
+        <p>Este bloque es el más demoledor a nivel lingüístico-metafísico. Demuestra que
+        el significado puro (perfecto, increado) no puede «descender» a articularse en
+        lenguaje humano sin dejar de ser puro — y que pretender lo contrario genera
+        contradicciones fundamentales, no falacias de composición.</p>
+
+        <h3 class="sub3">Definiciones específicas del Bloque C</h3>
+        <div class="defgrid">
+          <div class="defcard">
+            <p class="term">Significado puro</p>
+            <p class="def">Contenido inteligible absolutamente determinado, sin potencialidad ni polisemia, sin dependencia de ningún substrato material para su inteligibilidad. Si es increado, debe ser acto puro: sin potencia, sin mezcla de no-ser.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Lenguaje natural</p>
+            <p class="def">Sistema de signos convencionalmente establecidos, cuyos significantes son materiales (sonidos físicos, grafemas), cuya relación significante-significado es arbitraria (de Saussure; ya Aristóteles, <i>De Int.</i> 1: «por convención»), y cuyos significados son polisémicos, contextuales y dependientes del uso comunitario.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Información</p>
+            <p class="def">En sentido metafísico estricto: la acción por la cual una forma determina a una materia. Para que X informe a Y, X debe ser proporcionado a Y: la forma debe poder actualizarse en la potencialidad de la materia.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Proporción ontológica</p>
+            <p class="def">Principio tomista: el acto solo puede actualizarse en una potencia proporcionada. El acto puro no puede «informar» ninguna potencia sin descender a su nivel, es decir, sin mezclarse con potencialidad — lo que destruiría su pureza.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Polisemia esencial</p>
+            <p class="def">Propiedad necesaria de todo lenguaje natural: los significantes son potencialmente portadores de múltiples significados. Esto es una forma de potencialidad semántica, irreducible a ningún lenguaje humano concreto.</p>
+          </div>
+        </div>
+
+        <div class="syllogism" id="sil7">
+          <div class="label">Silogismo 7 — El significado puro (acto) no puede actualizarse en lo imperfecto (potencia) sin composición</div>
+          <p class="premise"><b>P.M.:</b> Ningún acto puro puede actualizarse en una potencia sin que el resultante sea compuesto de acto y potencia — lo cual implica que el acto ya no es puro sino limitado por la potencia que lo recibe (Tomás, <i>De Pot.</i> q.7, a.2; <i>ST</i> I, q.7, a.1).</p>
+          <p class="premise"><b>P.m.:</b> El lenguaje natural (árabe coránico) es un sistema de signos materiales y convencionales, es decir, es un substrato que tiene potencialidad semántica (puede significar múltiples cosas según contexto, uso y receptor): es pura potencia receptiva respecto de significados.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: Si el significado puro (increado, acto puro) se articulara en lenguaje natural, el resultado sería un compuesto de acto (significado) y potencia (lenguaje). Ese compuesto ya no sería significado puro sino significado limitado, condicionado y, por tanto, creado.</p>
+          <p class="nota"><i>Nota:</i> En términos directos: el significado puro no puede «bajar» al lenguaje sin degradarse ontológicamente. El Corán árabe no puede contener significado puro increado: lo contendría solo degradado, lo cual ya no sería el supuesto kalám nafsí eterno.</p>
+        </div>
+
+        <div class="syllogism" id="sil8">
+          <div class="label">Silogismo 8 — El lenguaje natural es esencialmente polisémico, luego no puede portar significado puro</div>
+          <p class="premise"><b>P.M.:</b> Todo significante de lenguaje natural tiene potencialidad semántica múltiple (polisemia esencial): su relación con el significado es convencional, contextual y revisable. Esto es una forma de potencialidad, no de acto puro. (Aristóteles, <i>De Interpretatione</i> 1, 16a: «las voces son símbolos por convención».)</p>
+          <p class="premise"><b>P.m.:</b> El significado absolutamente puro es acto semántico puro: sin potencialidad, sin ambigüedad, sin polisemia, sin dependencia del contexto o del receptor.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: El lenguaje natural (árabe coránico) no puede portar significado absolutamente puro, pues posee esencialmente la potencialidad semántica que la pureza del significado excluye. El Corán árabe no puede ser el significado puro increado.</p>
+          <p class="nota"><i>Nota:</i> Prueba empírica: los propios ulema islámicos debaten el tafsír (exégesis) del Corán, afrontando ambigüedades (āyāt mutashābihāt), pluralidad de lecturas (qirā'āt) y variaciones de significado. Esto confirma la polisemia esencial del texto árabe.</p>
+        </div>
+
+        <div class="syllogism" id="sil9">
+          <div class="label">Silogismo 9 — Un contenedor imperfecto no puede contener perfección ilimitada sin destruirse o deformarla</div>
+          <p class="premise"><b>P.M.:</b> Todo recipiente finito que recibe un contenido solo puede recibirlo según su propia capacidad: <i>quidquid recipitur ad modum recipientis recipitur</i> (lo que se recibe, se recibe según el modo del recipiente) — principio tomista universal (<i>ST</i> I, q.12, a.4; I, q.75, a.5).</p>
+          <p class="premise"><b>P.m.:</b> El lenguaje árabe coránico es un recipiente finito, convencional y material: sus modos de recepción son fonológicos, morfológicos y sintácticos — todos ellos finitos y determinados culturalmente.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: Si el significado increado (infinito, puro) es «recibido» en el árabe coránico, solo puede ser recibido según el modo árabe — es decir, finita y parcialmente. Lo recibido no sería el significado puro increado sino una proyección finita y creada del mismo. La doctrina del kalám nafsí eterno en el lafz árabe es metafísicamente imposible.</p>
+          <p class="nota"><i>Nota:</i> Esto equivale a pretender que el infinito matemático cabe dentro de una caja de madera: no es que la caja se rompa — es que lo que entra ya no es el infinito.</p>
+        </div>
+
+        <div class="syllogism" id="sil10">
+          <div class="label">Silogismo 10 — Esto no es falacia de composición sino imposibilidad proporcional</div>
+          <p class="premise"><b>P.M.:</b> La falacia de composición atribuye al todo la propiedad de la parte, o al efecto la propiedad de la causa, cuando dicha propiedad no se transfiere por la composición. Es un error sobre la transmisión de propiedades.</p>
+          <p class="premise"><b>P.m.:</b> El argumento del silogismo 9 no transfiere ninguna propiedad: afirma que la proporción ontológica es una condición necesaria de la información (la forma solo puede actuar en potencia proporcionada) y que el lenguaje finito no es potencia proporcionada al acto puro infinito.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: El argumento de la imperfección del lenguaje como recipiente del significado puro NO es una falacia de composición. Es un argumento de proporcionalidad ontológica: niega la posibilidad de la relación de información misma, no el resultado de una composición accidental.</p>
+          <p class="nota"><i>Nota:</i> Diferencia clave: la composición agrega; la información requiere proporción previa. No decimos «el árabe + significado puro = impuro» (composición). Decimos: «el árabe no puede recibir el significado puro porque no tiene capacidad proporcional» (imposibilidad relacional). Son argumentos categorialmente distintos.</p>
+        </div>
+
+        <div class="syllogism" id="sil11">
+          <div class="label">Silogismo 11 — Las palabras no producen significado puro sino significado convencional limitado</div>
+          <p class="premise"><b>P.M.:</b> El significado que las palabras producen en el oyente/lector depende de: (a) la competencia lingüística del receptor, (b) el contexto pragmático, (c) la convención comunitaria del código. Ninguno de estos factores es absoluto ni necesario.</p>
+          <p class="premise"><b>P.m.:</b> El significado absolutamente puro no dependería de ningún factor contingente (receptor, contexto, convención), pues la pureza absoluta implica independencia absoluta de toda potencialidad extrínseca.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: Las palabras — incluyendo el árabe coránico — no pueden producir ni contener significado absolutamente puro. Producen siempre significado condicionado, relativo y contingente. Luego el Corán árabe no puede ser portador del kalám nafsí increado.</p>
+          <p class="nota"><i>Nota:</i> Esto excluye la posibilidad incluso en el nivel pragmático-lingüístico, antes de llegar al nivel metafísico. El problema no es solo filosófico: es constitutivo del lenguaje como tal.</p>
+        </div>
+
+        <!-- BLOQUE D -->
+        <h2 class="sub" id="bloqueD">D. BLOQUE COMPARATIVO: PLURALIDAD ISLÁMICA vs. LOGOS TOMISTA</h2>
+        <p>Este bloque muestra que el marco tomista resuelve coherentemente lo que la teología
+        ash'arí no puede resolver, y que la solución islámica genera una pluralidad
+        ontológica inmanejable frente a la unidad del Logos divino.</p>
+
+        <table class="cmp">
+          <tr><th>Criterio</th><th>Teología Ash'arí</th><th>Metafísica Tomista</th></tr>
+          <tr>
+            <td>Palabra de Dios</td>
+            <td>Kalám nafsí: atributo eterno subsistente en la esencia, distinto de ella y de otros seis atributos eternos.</td>
+            <td>Verbum / Logos: autoexpresión inmanente del intelecto divino, idéntica a la esencia (ST I, q.34). No hay distinción real entre Dios y Su conocimiento.</td>
+          </tr>
+          <tr>
+            <td>Pluralidad ontológica</td>
+            <td>Sí: esencia + 7 atributos eternos realmente distintos (voluntad, poder, vida, conocimiento, habla, oído, visión). Pluralidad de 8 entidades.</td>
+            <td>No: en Dios hay relaciones subsistentes (Personas), pero no atributos añadidos a la esencia. Cada atributo divino = la esencia misma.</td>
+          </tr>
+          <tr>
+            <td>Simplicidad divina</td>
+            <td>Comprometida: Dios es la esencia + los atributos. La 'simplicidad' se defiende solo nominalmente.</td>
+            <td>Estrictamente mantenida: Dios es esencia = existencia = intelecto = voluntad = amor. Ninguna composición real (ST I, q.3).</td>
+          </tr>
+          <tr>
+            <td>Conocimiento divino</td>
+            <td>Dios conoce mediante un atributo de 'ilm separable conceptualmente de Su esencia. El kalám es un atributo de 'habla' adicional al 'ilm.</td>
+            <td>Dios conoce mediante Su Logos (Verbum), que ES Su esencia expresada a Sí mismo. No hay atributos superpuestos, sino la esencia una como acto de conocimiento.</td>
+          </tr>
+          <tr>
+            <td>El Corán eterno</td>
+            <td>Añade una entidad increada adicional: el kalám nafsí eterno, que genera una pluralidad real en el ser divino.</td>
+            <td>Innecesario: el Logos divino es la Palabra perfecta idéntica a Dios. La Escritura creada (Biblia/Corán) es una expresión creada del Logos, proporcionada a la capacidad humana.</td>
+          </tr>
+        </table>
+
+        <div class="syllogism" id="sil12">
+          <div class="label">Silogismo 12 — La solución tomista evita la pluralidad; la ash'arí la genera</div>
+          <p class="premise"><b>P.M.:</b> Toda multiplicación de entidades más allá de lo necesario es metafísicamente viciosa (navaja de Ockham en sentido metafísico; principio de simplicidad del ser necesario).</p>
+          <p class="premise"><b>P.m.:</b> La teología ash'arí postula al menos ocho entidades eternas distintas (esencia + 7 sifát) para explicar la acción y el habla divinas. La metafísica tomista explica lo mismo con una sola esencia que ES su propio acto de conocimiento y amor, sin atributos superpuestos.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: La teología ash'arí multiplica entidades eternas innecesariamente, violando el principio de parsimonia y comprometiendo la unidad y simplicidad del ser necesario. La metafísica tomista es ontológicamente superior en economía y coherencia.</p>
+        </div>
+
+        <div class="syllogism" id="sil13">
+          <div class="label">Silogismo 13 — El Logos divino tomista conoce sin mediación lingüística: el kalám nafsí es redundante</div>
+          <p class="premise"><b>P.M.:</b> En la metafísica tomista, Dios conoce todas las cosas mediante Su esencia (<i>ST</i> I, q.14, a.5): su Verbum interior ES la expresión perfecta de todo lo inteligible, sin necesidad de un atributo lingüístico separado.</p>
+          <p class="premise"><b>P.m.:</b> El kalám nafsí postula que Dios tiene un atributo específico de 'habla' separable de Su conocimiento y de Su esencia, necesario para la revelación coránica.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: El kalám nafsí ash'arí es ontológicamente redundante y multiplicador: el Logos divino ya contiene en acto perfecto todo lo que el kalám nafsí pretende añadir, sin generar pluralidad. La doctrina del kalám nafsí introduce complejidad sin solucionar nada que la identificación de Dios con su Logos no resuelva con mayor elegancia.</p>
+        </div>
+
+        <!-- BLOQUE E -->
+        <h2 class="sub" id="bloqueE">E. BLOQUE DEL REDUCTIO: EL NÚMERO 2 Y LOS UNIVERSALES</h2>
+        <p>Este bloque cierra el argumento mediante el reductio ad absurdum más directo: si el criterio
+        que hace al kalám nafsí increado es el mismo que se puede aplicar a cualquier significado o
+        entidad abstracta, entonces el criterio no distingue nada específicamente divino.</p>
+
+        <div class="syllogism" id="sil14">
+          <div class="label">Silogismo 14 — Por el mismo criterio, el número 2 sería increado</div>
+          <p class="premise"><b>P.M.:</b> El argumento por el que el kalám nafsí es increado reza: «Es un significado/contenido inteligible que existe independientemente de la expresión material, eterno e inmutable; luego es increado.»</p>
+          <p class="premise"><b>P.m.:</b> El número 2 (y cualquier universal matemático o lógico) es un contenido inteligible que existe independientemente de cualquier expresión material, inmutable y eternamente verdadero.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: Por el mismo criterio, el número 2 sería increado — lo cual es absurdo para cualquier teología monoteísta, que reserva el ser increado solo a Dios. El criterio que hace al kalám nafsí increado no es específico: convierte en increado todo significado abstracto, todo universal, toda verdad matemática.</p>
+          <p class="nota"><i>Nota:</i> Consecuencia: o bien la teología islámica debe aceptar la eternidad increada de infinitos universales (lo que destruye el tawhid puro), o bien debe admitir que la inmutabilidad e independencia material no bastan para conferir el estatuto de increado.</p>
+        </div>
+
+        <div class="syllogism" id="sil15">
+          <div class="label">Silogismo 15 — El mismo criterio haría increadas mis propias palabras interiores</div>
+          <p class="premise"><b>P.M.:</b> Cuando yo pienso una proposición matemática verdadera, en mi mente hay un verbum mentis (palabra interior) que es: inmaterial en cuanto acto intelectual, inmutable en cuanto contenido (2+2=4 no cambia), e independiente de su expresión fonética.</p>
+          <p class="premise"><b>P.m.:</b> Si el criterio de incrédito es: contenido inmaterial, inmutable e independiente de la expresión, entonces mis palabras interiores sobre verdades necesarias cumplen los mismos criterios que el kalám nafsí.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: Por el mismo criterio, las palabras interiores de cualquier intelecto que piensa verdades necesarias serían increadas — lo cual es absurdo y destruye toda distinción entre lo divino y lo creado.</p>
+          <p class="nota"><i>Nota:</i> Este silogismo muestra que el criterio ash'arí de incrédito para el kalám nafsí es demasiado amplio: incluye entidades que ningún teólogo islámico aceptaría como increadas. El criterio está mal formulado.</p>
+        </div>
+
+        <div class="syllogism" id="sil16">
+          <div class="label">Silogismo 16 — El criterio correcto de incrédito excluye al kalám nafsí</div>
+          <p class="premise"><b>P.M.:</b> El criterio correcto de incrédito (tomista y metafísicamente riguroso) es: ser cuya esencia ES su existencia; ser totalmente simple, sin ninguna potencialidad, sin distinción real entre lo que es y el que lo piensa (Tomás, <i>SCG</i> I, cc.22-23).</p>
+          <p class="premise"><b>P.m.:</b> El kalám nafsí, incluso en la versión ash'arí más favorable, es un atributo que subsiste en la esencia divina: hay en él una distinción conceptual respecto de la esencia, un contenido determinado (el Corán y no otro texto), y una relación a un receptor (la humanidad a quien se revela). Nada de esto es compatible con la absoluta simplicidad del ser increado.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: Bajo el criterio correcto de incrédito, el kalám nafsí ash'arí NO puede ser increado, pues no es totalmente simple, no es idéntico a la esencia divina sin resto, y tiene determinación de contenido que introduce un límite en lo ilimitado.</p>
+        </div>
+      </section>
+
+      <!-- SECCIÓN IV -->
+      <section id="sec4">
+        <h1 class="section">IV. SÍNTESIS Y MAPA DE LA REFUTACIÓN</h1>
+        <p>Los dieciséis silogismos convergen en tres líneas de ataque independientes, cada una de
+        las cuales es suficiente por sí misma para refutar la doctrina del Corán increado:</p>
+
+        <div class="lineblock">
+          <h4>LÍNEA 1: SUSTANCIA Y SIMPLICIDAD</h4>
+          <ul>
+            <li>Silogismos 1-3: La postulación del kalám nafsí como atributo distinto de la esencia divina genera pluralidad ontológica real en Dios, lo cual destruye la necesidad absoluta y la simplicidad divina.</li>
+            <li>La única escapatoria (identificar el kalám con la esencia) elimina la especificidad del Corán como revelación distinta.</li>
+          </ul>
+        </div>
+
+        <div class="lineblock dark-line">
+          <h4>LÍNEA 2: ACTO DIVINO Y CREACIÓN</h4>
+          <ul>
+            <li>Silogismos 4-6: Que el Corán provenga de un acto eterno de Dios no lo hace increado. El argumento es una falacia de composición. La determinación volitiva del contenido coránico (árabe, esta revelación, a Muhammad) introduce contingencia en lo supuestamente necesario.</li>
+          </ul>
+        </div>
+
+        <div class="lineblock red-line">
+          <h4>LÍNEA 3: SIGNIFICADO Y LENGUAJE</h4>
+          <ul>
+            <li>Silogismos 7-11: El significado puro (acto puro) no puede articularse en lenguaje natural (potencia semántica) sin degradarse. El lenguaje árabe no es proporcional al significado increado. El Corán árabe es, por eso mismo, un significado creado y contingente.</li>
+            <li>Silogismos 14-16: El criterio ash'arí de incrédito es demasiado amplio (haría increado el número 2 y mis pensamientos) y, bajo el criterio correcto, el kalám nafsí no pasa el test.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SECCIÓN V -->
+      <section id="sec5">
+        <h1 class="section">V. OBJECIONES PREVISIBLES Y RESPUESTAS</h1>
+
+        <p class="obj">OBJ. 1: «Los atributos divinos en el ash'arismo no son accidentes; son modos de la esencia, no entidades separadas.»</p>
+        <p class="resp">Respuesta: Esta distinción no resuelve el problema: si los atributos son 'modos' realmente distintos de la esencia (y el ash'arismo clásico los trata así en la polémica con los mu'tazilíes), entonces introduce distinción real en Dios. Si son idénticos a la esencia (posición mu'tazilí), entonces el kalám no es un atributo específico y el Corán no tiene fundamento eterno distinto del autoconocimiento divino de la esencia. El dilema es exhaustivo.</p>
+
+        <p class="obj">OBJ. 2: «El principio 'quidquid recipitur ad modum recipientis' es tomista, no islámico. No podemos usarlo contra el ash'arismo.»</p>
+        <p class="resp">Respuesta: El principio es aristotélico anterior a Tomás y fue adoptado por Avicena (Ibn Sīnā) y Averroes (Ibn Rushd), ambos parte del legado filosófico islámico. Además, el ash'arismo mismo usa el principio implícitamente cuando afirma que Dios se adapta a la comprensión humana en la revelación. El adversario no puede rechazar el principio sin rechazar parte de su propio arsenal filosófico.</p>
+
+        <p class="obj">OBJ. 3: «La polisemia del Corán es intencional; la multiplicidad de significados es una señal de su profundidad divina, no de su creaturalidad.»</p>
+        <p class="resp">Respuesta: Esta respuesta confirma el argumento: la polisemia es exactamente lo que excluye la pureza del significado increado. Un significado absolutamente puro no puede ser «intencionalmente polisémico»: la intención requiere potencialidad (elección entre determinaciones posibles), lo que ya es mezcla de acto y potencia. La polisemia intencional es una forma sofisticada de admitir la creaturalidad del significado.</p>
+
+        <p class="obj">OBJ. 4: «El número 2 no es increado porque depende del conocimiento divino, no existe por sí mismo; el kalám nafsí existe en la esencia divina.»</p>
+        <p class="resp">Respuesta: Esta respuesta es auto-derrotante: si el número 2 depende del conocimiento divino para existir, entonces el contenido del kalám nafsí (los decretos coránicos) también depende del conocimiento divino — y lo que existe solo en dependencia de algo no es increado en sentido primario. Además, si los universales matemáticos existen en la esencia divina como objetos del conocimiento divino, la esencia divina ya contiene una pluralidad de contenidos — volvemos al problema de la pluralidad ontológica.</p>
+      </section>
+
+      <!-- SECCIÓN VI -->
+      <section id="sec6">
+        <h1 class="section">VI. CONCLUSIÓN</h1>
+        <p>La doctrina islámica del Corán increado, en su versión ash'arí clásica, es metafísicamente
+        incoherente por cuatro razones independientes:</p>
+
+        <div class="conc-item"><b>1. Sustancial:</b> Genera pluralidad ontológica real en Dios, destruyendo la necesidad absoluta y la simplicidad divina que cualquier teología monoteísta rigurosa exige.</div>
+        <div class="conc-item"><b>2. Causal:</b> Comete una falacia de composición al inferir la eternidad del efecto (Corán) de la eternidad de la causa (acto divino de habla).</div>
+        <div class="conc-item"><b>3. Semántica:</b> Viola el principio de proporcionalidad ontológica al pretender que el significado puro (acto) puede articularse en lenguaje natural (potencia) sin degradación. El lenguaje árabe no es proporcional al significado increado.</div>
+        <div class="conc-item"><b>4. Definitoria:</b> El criterio de incrédito empleado es demasiado amplio: convierte en increados los universales matemáticos y los propios pensamientos humanos sobre verdades necesarias. Bajo el criterio correcto y estricto, el kalám nafsí no califica.</div>
+
+        <div class="highlight">
+          La metafísica tomista ofrece una solución alternativa superior: el Logos divino es la Palabra
+          perfecta idéntica a la esencia, sin pluralidad ontológica; las Escrituras creadas son
+          expresiones finitas y proporcionadas de ese Logos infinito para la comprensión humana.
+          Esta solución mantiene la unidad radical de Dios, evita la composición en el ser divino,
+          y da cuenta de la revelación sin postular una entidad cuasi-divina adicional.
+        </div>
+      </section>
+
+      <!-- APÉNDICE -->
+      <section id="apendice">
+        <h1 class="section">APÉNDICE TÉCNICO — SUBSISTENCIA, DISTINCIÓN NUMÉRICA Y SIMPLICIDAD</h1>
+        <p>Una objeción filosófica de primer orden merece tratamiento separado: si Dios conoce
+        en su mente el número 1 y el número 2, y 1 ≠ 2, entonces en la mente divina hay
+        una distinción real entre dos contenidos. ¿No introduce esto pluralidad en Dios y
+        destruye la simplicidad? Este apéndice resuelve el problema con precisión tomista,
+        definiendo los términos clave y mostrando que la distinción numérica en el objeto
+        conocido no implica distinción real en el sujeto cognoscente divino.</p>
+
+        <h2 class="sub" id="ap1">1. Definición de subsistencia y términos relacionados</h2>
+        <div class="defgrid">
+          <div class="defcard">
+            <p class="term">Subsistencia</p>
+            <p class="def">Modo de existir propio de la sustancia: existir en sí y por sí, sin necesitar otro sujeto en el cual inherir. <i>Subsistere</i> = estar debajo de los accidentes como su fundamento, o existir absolutamente sin soporte ajeno. Una naturaleza subsiste cuando no es solo una forma abstracta sino una realidad concreta que tiene ser propio (Tomás, <i>ST</i> I, q.29, a.2).</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Subsistente (suppositum)</p>
+            <p class="def">El individuo concreto que subsiste: aquello de lo que se predica todo lo demás. En el hombre: este hombre concreto (no 'la humanidad'). En Dios: la esencia divina misma en cuanto subsistente, o cada Persona divina como <i>suppositum</i> de la naturaleza divina.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Naturaleza vs. suppositum</p>
+            <p class="def">La <i>natura</i> es lo que algo es (quid); el <i>suppositum</i> es quien existe. En las criaturas hay distinción real entre ambos (Pedro no es la humanidad). En Dios son idénticos: la esencia divina es su propio suppositum — Dios no 'tiene' naturaleza divina, Dios ES su naturaleza divina (ST I, q.3, a.3).</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Relación subsistente</p>
+            <p class="def">En la Trinidad tomista, las Personas son 'relaciones subsistentes': no son accidentes relacionales sino relaciones que tienen el modo de ser de la sustancia porque se identifican con la esencia divina (ST I, q.29, a.4; q.40, a.1). Las relaciones de origen (paternidad, filiación, espiración) son reales pero no añaden composición a la esencia: la esencia es una; las relaciones la distinguen solo según el modo de origen, no según el ser sustancial.</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Distinción real</p>
+            <p class="def">Distinción que existe en las cosas independientemente de la operación del intelecto. Ejemplo: Pedro y Juan son realmente distintos. En Dios, las Personas son realmente distintas entre sí (el Padre no es el Hijo), pero cada una es realmente idéntica a la esencia divina (el Padre es Dios, el Hijo es Dios).</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Distinción de razón (distinctio rationis)</p>
+            <p class="def">Distinción introducida por la operación del intelecto en algo que en la realidad es uno. Puede ser: (a) <i>rationis ratiocinantis</i>: puro artificio mental sin fundamento en la cosa (ej.: 'Tulio' y 'Cicerón'); (b) <i>rationis ratiocinatae</i> (distinción virtual): fundada en la riqueza objetiva de la cosa misma, aunque no implique composición real. Los atributos divinos se distinguen entre sí con distinción de razón fundada en la esencia (ST I, q.13, a.4).</p>
+          </div>
+          <div class="defcard">
+            <p class="term">Distinción virtual</p>
+            <p class="def">Forma especial de distinción de razón fundada en la cosa: la esencia divina contiene eminentemente y de modo unitario toda la perfección que en las criaturas está dispersa y dividida. El intelecto humano, al no poder abarcar esa riqueza en un solo concepto, la analiza bajo múltiples conceptos (bondad, sabiduría, poder...) que corresponden a distintos aspectos de una misma realidad indivisa. La distinción es en el modo de conocer, no en el ser conocido.</p>
+          </div>
+        </div>
+
+        <h2 class="sub" id="ap2">2. El problema: si Dios conoce que 1 ≠ 2, ¿hay pluralidad en Dios?</h2>
+        <p>La objeción tiene esta forma:</p>
+
+        <div class="syllogism" style="background:#fff0f0; border-color:var(--red);">
+          <div class="label" style="color:var(--red);">Formulación de la objeción</div>
+          <p class="premise"><b>P.M.:</b> En la mente divina están presentes todos los objetos del conocimiento divino.</p>
+          <p class="premise"><b>P.m.:</b> El número 1 y el número 2 son objetos distintos del conocimiento divino (pues Dios conoce que 1 ≠ 2).</p>
+          <p class="premise"><b>P.3.:</b> Todo aquello en cuya mente hay distintos contenidos tiene una mente compuesta por distintos actos o formas.</p>
+          <hr>
+          <p class="conclusion">∴ La mente de Dios es compuesta — lo que contradice la simplicidad divina.</p>
+        </div>
+
+        <p>Esta objeción confunde el objeto conocido con el acto de conocimiento y con el medio
+        por el que se conoce. La respuesta tomista exige distinguir cuatro niveles:</p>
+
+        <table class="cmp">
+          <tr><th>Nivel</th><th>¿Qué es?</th><th>¿Hay distinción?</th><th>¿Afecta a la simplicidad?</th></tr>
+          <tr>
+            <td>1. La esencia divina</td>
+            <td>El acto de ser puro de Dios en sí mismo.</td>
+            <td>Ninguna.</td>
+            <td>No aplica: es el fundamento de la simplicidad.</td>
+          </tr>
+          <tr>
+            <td>2. El acto de conocer</td>
+            <td>La operación intelectual divina: idéntica a la esencia. Dios no 'hace' actos de conocer sucesivos; su conocer ES su ser.</td>
+            <td>Ninguna distinción real: hay un solo acto eterno.</td>
+            <td>No. Un solo acto indivisible.</td>
+          </tr>
+          <tr>
+            <td>3. El medio de conocimiento (species / ratio)</td>
+            <td>Aquello por lo que Dios conoce las cosas. En las criaturas: species impressa. En Dios: su propia esencia es el medio (ST I, q.14, a.5).</td>
+            <td>Ninguna: la esencia divina una es el medio único de todo conocimiento divino.</td>
+            <td>No. Un solo medio.</td>
+          </tr>
+          <tr>
+            <td>4. Los objetos conocidos (res cognitae)</td>
+            <td>Las cosas externas a Dios conocidas por Él: números, criaturas, posibilidades. El número 1 y el número 2 son objetos conocidos.</td>
+            <td>Sí: 1 ≠ 2 en sí mismos, como objetos extramentales (o como posibilidades en la mente divina).</td>
+            <td><b>No.</b> La distinción está en los objetos, no en el acto ni en el sujeto cognoscente.</td>
+          </tr>
+        </table>
+
+        <h2 class="sub" id="ap3">3. Silogismos resolutivos</h2>
+
+        <div class="syllogism" id="silA">
+          <div class="label">Silogismo A — La distinción en el objeto no implica distinción en el acto de conocer</div>
+          <p class="premise"><b>P.M.:</b> Si un acto de conocimiento puede abarcar simultáneamente múltiples objetos distintos sin dividirse en partes, entonces la distinción entre los objetos no implica distinción en el acto. (Prueba en las criaturas: el intelecto humano puede conocer en un único acto de juicio que 1 ≠ 2, sin que ese acto único se parta en dos actos.)</p>
+          <p class="premise"><b>P.m.:</b> El acto de conocimiento divino es infinitamente más perfecto que el humano: conoce en un único acto eterno, simple e indivisible, todo lo cognoscible — incluyendo todas las distinciones entre objetos — sin que ese acto se divida (ST I, q.14, aa.2-7).</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: La distinción real entre el número 1 y el número 2 como objetos conocidos no implica ninguna distinción en el acto de conocer divino. La pluralidad está en los objetos, no en el sujeto cognoscente.</p>
+          <p class="nota"><i>Nota:</i> Analogía: un espejo perfecto refleja simultáneamente un millón de objetos distintos sin que el espejo se fragmente. La unidad del medio de reflejo es compatible con la pluralidad de los reflejados. En Dios, la esencia-espejo es infinitamente más simple que cualquier espejo material.</p>
+        </div>
+
+        <div class="syllogism" id="silB">
+          <div class="label">Silogismo B — Dios conoce los objetos mediante su esencia, no mediante formas múltiples</div>
+          <p class="premise"><b>P.M.:</b> En el conocimiento humano, para cada objeto conocido se requiere una <i>species intelligibilis</i> distinta (una forma cognitiva proporcional al objeto). Múltiples objetos → múltiples species → pluralidad en el cognoscente.</p>
+          <p class="premise"><b>P.m.:</b> En Dios no hay species distintas para cada objeto: Dios conoce todas las cosas mediante un único 'medio', que es su propia esencia infinita. La esencia divina, siendo acto puro e infinito, contiene eminentemente toda perfección que en las criaturas está dispersa (ST I, q.14, a.5; q.15, a.2).</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: Dios no necesita formas cognitivas múltiples (una para el 1, otra para el 2): conoce ambos mediante la única esencia infinita que los contiene eminentemente. No hay pluralidad de instrumentos cognitivos en Dios. La simplicidad se mantiene.</p>
+          <p class="nota"><i>Nota:</i> Esto distingue radicalmente el conocimiento divino del humano: en nosotros, la pluralidad de objetos genera pluralidad de actos y formas; en Dios, la infinitud de la esencia hace que un solo acto y una sola forma basten.</p>
+        </div>
+
+        <div class="syllogism" id="silC">
+          <div class="label">Silogismo C — Las ideas divinas son distintas en su relación a los objetos, no en sí mismas</div>
+          <p class="premise"><b>P.M.:</b> Las 'ideas divinas' (rationes rerum in mente Dei) son las razones por las que Dios conoce cada criatura como imitable de su esencia de un modo particular. Son distintas <i>secundum respectum ad creaturas</i> (por su relación a objetos distintos), pero idénticas <i>in se</i> (en sí mismas, pues todas son la esencia divina) — Tomás, <i>ST</i> I, q.15, aa.1-2; <i>De Ver.</i> q.3, a.2.</p>
+          <p class="premise"><b>P.m.:</b> La distinción entre la idea del número 1 y la idea del número 2 en Dios es una distinción <i>ex parte objectorum</i> (por parte de los objetos) y <i>secundum rationem</i> (según la razón), no una distinción real en la esencia divina.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: La pluralidad de ideas divinas (incluidos los números) no introduce pluralidad real en Dios. Las ideas son la esencia divina en cuanto término de distintas relaciones cognoscitivas, no partes ni atributos añadidos a esa esencia.</p>
+          <p class="nota"><i>Nota:</i> Esto es la distinción virtual aplicada al conocimiento: la esencia infinita puede ser conocida bajo infinitos aspectos sin dividirse, porque contiene eminentemente todo lo que en las criaturas está dividido.</p>
+        </div>
+
+        <div class="syllogism" id="silD">
+          <div class="label">Silogismo D — La simplicidad divina se define respecto al ser, no respecto a la cognoscibilidad</div>
+          <p class="premise"><b>P.M.:</b> La simplicidad divina significa que en Dios no hay composición en el orden del <i>esse</i> (ser): no hay materia y forma, no hay esencia y existencia distintas, no hay género y diferencia, no hay sustancia y accidentes reales (ST I, q.3, aa.1-7). Se define en el orden ontológico.</p>
+          <p class="premise"><b>P.m.:</b> Que Dios conozca verdades matemáticas distintas (1 ≠ 2, 3 ≠ 7...) no introduce composición en el <i>esse</i> divino: introduce solo una relación de conocimiento a objetos múltiples, y esa relación no es una composición real en el ser del sujeto cognoscente.</p>
+          <hr>
+          <p class="conclusion">∴ Conclusión: La distinción numérica en los objetos del conocimiento divino no viola la simplicidad divina, porque la simplicidad se predica del ser de Dios, no de la multiplicidad de verdades que ese ser único e indivisible conoce. Que Dios sea simple no significa que sepa pocas cosas: significa que lo sabe todo con un solo acto de ser.</p>
+        </div>
+
+        <h2 class="sub" id="ap4">4. Consecuencia apologética directa</h2>
+        <p>Este análisis tiene una consecuencia directa sobre la refutación del Corán increado:</p>
+
+        <div class="highlight">
+          <p class="premise" style="margin:0 0 8px;"><b>Consecuencia:</b></p>
+          <p class="premise">Si el ash'arí argumenta que el kalám nafsí debe ser increado porque es un contenido inteligible en la mente de Dios, y si esto fuera válido, entonces todos los contenidos inteligibles en la mente de Dios serían igualmente increados: el número 1, el número 2, la idea de árbol, la idea de piedra, la idea de todo lo posible.</p>
+          <p class="premise">Pero el ash'arí no quiere decir que el número 2 sea increado. Luego debe admitir que estar en la mente de Dios no confiere el estatuto de increado a un contenido inteligible.</p>
+          <p class="premise">Y si estar en la mente de Dios no confiere el estatuto de increado, el kalám nafsí tampoco lo adquiere por ese solo hecho. Necesita un criterio adicional — que no puede proporcionar sin generar pluralidad ontológica (Sils. 1-3) o falacia de composición (Sils. 4-6).</p>
+          <hr style="border-top-color:var(--gold); opacity:1;">
+          <p class="conclusion" style="color:var(--dark-blue);">∴ El argumento «el kalám nafsí está en Dios, luego es increado» o bien prueba demasiado (todo objeto del conocimiento divino es increado) o no prueba nada (estar en la mente de Dios no confiere incrédito).</p>
+        </div>
+
+        <p>La solución tomista al problema de fondo es elegante: el número 2, la idea de árbol, el
+        contenido del Corán — todos son conocidos por Dios mediante su única esencia infinita, que
+        los contiene eminentemente como distintas imitaciones posibles de sí misma. Ninguno de ellos
+        es Dios. Ninguno es increado. Dios los conoce eternamente sin que ese conocimiento añada nada
+        a su ser simple. La revelación coránica, como expresión temporal y creada dirigida a seres
+        humanos finitos, es uno de esos contenidos: conocido desde la eternidad, pero realizado en el
+        tiempo como criatura — exactamente como el mundo mismo.</p>
+
+        <hr class="gold">
+        <p class="nota"><i>Nota bene:</i> Este apéndice resuelve simultáneamente la objeción a la
+        Trinidad tomista: las tres Personas son realmente distintas entre sí, pero su distinción es
+        de relaciones de origen (no de esencias ni de atributos), y cada Persona es real e
+        idénticamente la esencia divina una. No hay tres esencias, ni tres actos de ser, ni tres
+        conocimientos: hay tres modos de subsistir de un único ser infinitamente simple.</p>
+
+        <p class="final"><i>Finis coronat opus.</i> — Tratado de apologética tomista comparada.</p>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  const toc = document.getElementById('toc');
+  const tocToggle = document.getElementById('tocToggle');
+  const tocOverlay = document.getElementById('tocOverlay');
+  const tocSearch = document.getElementById('tocSearch');
+  const body = document.body;
+
+  // ── Open/close TOC ──
+  function openToc(){ toc.classList.add('open'); body.classList.add('toc-open'); }
+  function closeToc(){ toc.classList.remove('open'); body.classList.remove('toc-open'); }
+  function toggleToc(){ toc.classList.contains('open') ? closeToc() : openToc(); }
+
+  tocToggle.addEventListener('click', toggleToc);
+  tocOverlay.addEventListener('click', closeToc);
+  document.addEventListener('keydown', e => {
+    if (e.key.toLowerCase() === 'm' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){
+      toggleToc();
+    }
+    if (e.key === 'Escape') closeToc();
+  });
+
+  // Open by default on wide screens
+  if (window.innerWidth > 860) openToc();
+
+  // ── Collapsible groups ──
+  document.querySelectorAll('#toc .group').forEach(g => {
+    if (g.dataset.default === 'open') g.classList.add('open');
+    const head = g.querySelector(':scope > .group-head');
+    head.addEventListener('click', () => g.classList.toggle('open'));
+  });
+
+  // ── Reading progress bar ──
+  const progress = document.getElementById('progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const max = h.scrollHeight - h.clientHeight;
+    progress.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+  }
+
+  // ── Scroll-spy with auto-expand of parent groups ──
+  const links = Array.from(document.querySelectorAll('#toc a'));
+  const sections = links.map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+
+  function onScroll(){
+    updateProgress();
+    let current = sections[0];
+    const scrollPos = window.scrollY + 140;
+    for (const sec of sections){
+      if (sec.offsetTop <= scrollPos) current = sec;
+    }
+    links.forEach(l => l.classList.remove('active'));
+    if (!current) return;
+    const active = document.querySelector(`#toc a[href="#${current.id}"]`);
+    if (active){
+      active.classList.add('active');
+      // Auto-expand ancestor groups so the active item is visible
+      let g = active.closest('.group');
+      while (g){
+        g.classList.add('open');
+        g = g.parentElement.closest('.group');
+      }
+    }
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // ── Smooth scroll + close on mobile ──
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+      if (window.innerWidth <= 860) closeToc();
+    });
+  });
+
+  // ── Live search ──
+  tocSearch.addEventListener('input', () => {
+    const q = tocSearch.value.trim().toLowerCase();
+    const allLis = document.querySelectorAll('#toc li');
+    if (!q){
+      toc.classList.remove('searching');
+      allLis.forEach(li => li.classList.remove('no-match'));
+      document.querySelectorAll('#toc .group').forEach(g => g.classList.remove('has-match'));
+      return;
+    }
+    toc.classList.add('searching');
+    // Mark matches on leaf <li> that directly contain an <a>
+    document.querySelectorAll('#toc li').forEach(li => {
+      const a = li.querySelector(':scope > a');
+      if (!a){ return; } // group containers handled via has-match below
+      const text = a.textContent.toLowerCase();
+      if (text.includes(q)){
+        li.classList.remove('no-match');
+        let g = li.closest('.group');
+        while (g){ g.classList.add('has-match'); g = g.parentElement.closest('.group'); }
+      } else {
+        li.classList.add('no-match');
+      }
+    });
+    // Reset has-match on groups with no matching descendant
+    document.querySelectorAll('#toc .group').forEach(g => {
+      const hasVisible = Array.from(g.querySelectorAll(':scope .group-body li > a'))
+        .some(a => !a.closest('li').classList.contains('no-match'));
+      g.classList.toggle('has-match', hasVisible);
+    });
+  });
+</script>
+</body>
+</html>

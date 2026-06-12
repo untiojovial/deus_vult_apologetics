@@ -17,3 +17,4 @@ La idea es responder con argumentos claros, fuentes serias y lenguaje comprensib
 - [Trinidad Exactamente Tres (Dossier)](/filosofia/trinidad-exactamente-tres-dossier/)
 - [Manual Tomista de la Trinidad (Dossier)](/filosofia/manual-tomista-trinidad-dossier/)
 - [El Colapso del Teismo Imperfecto (Dossier)](/filosofia/colapso-teismo-neoclasico-dossier/)
+- [Refutacion del Coran Increado (Dossier)](/filosofia/refutacion-coran-increado-dossier/)

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeremías 8:8 — Refutación Apologética</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:     #1B2A4A;
+  --gold:     #C9A84C;
+  --gold-lt:  #E2C97A;
+  --gold-dim: rgba(201,168,76,0.13);
+  --cream:    #F7F3ED;
+  --text:     #1E1E2E;
+  --text-mid: #3A3A50;
+  --text-lt:  #6A6A80;
+  --crimson:  #8B1A1A;
+  --cbg:      rgba(139,26,26,0.07);
+  --green:    #1A5C2E;
+  --gbg:      rgba(26,92,46,0.07);
+  --amber:    #7A4F00;
+  --abg:      rgba(122,79,0,0.07);
+  --sw:       272px;
+  --hh:       52px;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: Georgia,'Times New Roman',serif; background: var(--cream); color: var(--text); font-size: 16px; line-height: 1.78; }
+
+/* ── TOP BAR ── */
+.topbar {
+  position: fixed; top:0; left:0; right:0; height: var(--hh);
+  background: var(--navy); z-index: 500;
+  display: flex; align-items: center; gap: 14px; padding: 0 20px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.3);
+}
+.hamburger {
+  width: 38px; height: 38px;
+  background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 6px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  flex-shrink: 0; transition: background 0.2s;
+}
+.hamburger:hover { background: rgba(201,168,76,0.28); }
+.hamburger span {
+  display: block; width: 18px; height: 2px;
+  background: var(--gold); border-radius: 2px;
+  transition: all 0.28s ease; transform-origin: center;
+}
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.topbar-title { font-family: system-ui,sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(247,243,237,0.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topbar-badge { margin-left: auto; font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 3px 9px; border-radius: 3px; white-space: nowrap; display: none; }
+@media (min-width: 600px) { .topbar-badge { display: block; } }
+
+/* ── OVERLAY ── */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.48); z-index: 390; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.overlay.show { opacity: 1; pointer-events: auto; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed; top:0; left:0; bottom:0; width: var(--sw);
+  background: var(--navy); z-index: 400;
+  display: flex; flex-direction: column;
+  transform: translateX(-100%); transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto; padding-top: var(--hh);
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 2px; }
+
+.sb-brand { padding: 20px 20px 16px; border-bottom: 1px solid rgba(201,168,76,0.18); }
+.sb-lbl { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 5px; }
+.sb-title { font-size: 12.5px; color: rgba(247,243,237,0.8); font-family: Georgia,serif; font-style: italic; line-height: 1.45; }
+
+.toc-wrap { padding: 10px 0 28px; flex: 1; }
+.toc-cat { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(201,168,76,0.45); padding: 12px 20px 4px; }
+.toc-a { display: flex; align-items: flex-start; gap: 8px; padding: 7px 20px; text-decoration: none; color: rgba(247,243,237,0.55); font-family: system-ui,sans-serif; font-size: 12px; line-height: 1.4; border-left: 2px solid transparent; transition: all 0.18s; }
+.toc-a:hover { color: var(--gold-lt); background: rgba(201,168,76,0.07); }
+.toc-a.active { color: var(--gold); border-left-color: var(--gold); background: rgba(201,168,76,0.1); }
+.toc-n { color: var(--gold); font-size: 9.5px; min-width: 20px; padding-top: 2px; opacity: 0.7; }
+
+/* ── MAIN ── */
+.main { padding-top: var(--hh); }
+
+/* ── HERO ── */
+.hero { background: var(--navy); padding: 60px 64px 52px; position: relative; overflow: hidden; }
+.hero-wm { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); font-size: 100px; color: rgba(201,168,76,0.05); font-family: Georgia,serif; pointer-events: none; user-select: none; line-height: 1; }
+.hero-ey { font-family: system-ui,sans-serif; font-size: 9.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+.hero-h1 { font-size: 28px; color: var(--cream); line-height: 1.28; margin-bottom: 12px; max-width: 660px; font-weight: normal; }
+.hero-h1 em { color: var(--gold); font-style: italic; }
+.hero-sub { font-family: system-ui,sans-serif; font-size: 13px; color: rgba(247,243,237,0.5); max-width: 540px; line-height: 1.65; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 28px; padding-top: 26px; border-top: 1px solid rgba(201,168,76,0.18); }
+.pill { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); border-radius: 3px; padding: 4px 11px; font-family: system-ui,sans-serif; font-size: 11px; color: rgba(247,243,237,0.65); }
+.pill strong { color: var(--gold-lt); }
+
+/* ── CONTENT ── */
+.content { padding: 0 64px 96px; max-width: 920px; }
+@media (max-width: 700px) { .hero, .content { padding-left: 20px; padding-right: 20px; } }
+
+/* ── SECTION ── */
+.sec { padding: 54px 0 22px; border-bottom: 1px solid rgba(27,42,74,0.1); }
+.sec:last-child { border-bottom: none; }
+.sec-hd { display: flex; align-items: baseline; gap: 13px; margin-bottom: 22px; }
+.sec-num { font-family: system-ui,sans-serif; font-size: 11px; color: var(--gold); letter-spacing: 1px; min-width: 24px; opacity: 0.85; }
+.sec-t { font-size: 20px; color: var(--navy); font-weight: normal; line-height: 1.3; border-bottom: 2px solid var(--gold); padding-bottom: 7px; flex: 1; }
+.sec-intro { color: var(--text-mid); font-size: 15.5px; margin-bottom: 20px; max-width: 730px; }
+
+/* ── PROSE ── */
+p { margin-bottom: 14px; font-size: 15.5px; color: var(--text-mid); max-width: 730px; }
+h4 { font-family: system-ui,sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); margin: 26px 0 9px; }
+
+/* ── VERSE BLOCK ── */
+.verse { background: var(--navy); border-radius: 6px; padding: 22px 26px; margin: 20px 0; }
+.v-ref { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 9px; display: block; }
+.v-heb { font-size: 19px; direction: rtl; color: rgba(247,243,237,0.65); line-height: 2; margin-bottom: 12px; display: block; font-family: 'Times New Roman',serif; }
+.v-es { font-size: 14px; color: rgba(247,243,237,0.82); font-style: italic; line-height: 1.65; }
+.v-note { font-size: 12px; color: rgba(201,168,76,0.7); margin-top: 8px; font-family: system-ui,sans-serif; font-style: normal; display: block; }
+
+/* ── ARABIC ── */
+.arab { background: rgba(27,42,74,0.05); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 16px 0; }
+.arab-t { font-size: 20px; direction: rtl; color: var(--navy); line-height: 2; display: block; margin-bottom: 7px; font-family: 'Times New Roman',serif; }
+.arab-r { font-family: system-ui,sans-serif; font-size: 11px; color: var(--text-lt); font-style: italic; }
+
+/* ── SYLLOGISM ── */
+.syl { background: var(--navy); border-radius: 8px; padding: 24px 28px; margin: 24px 0; position: relative; overflow: hidden; }
+.syl::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--gold); }
+.syl-t { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.syl-t::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.2); }
+.syl-r { display: flex; gap: 11px; margin-bottom: 10px; align-items: flex-start; }
+.syl-l { font-family: system-ui,sans-serif; font-size: 10.5px; font-weight: 700; color: var(--gold); min-width: 24px; padding-top: 2px; }
+.syl-txt { font-size: 14px; color: rgba(247,243,237,0.82); line-height: 1.6; flex: 1; }
+.syl-c { border-top: 1px solid rgba(201,168,76,0.22); padding-top: 12px; margin-top: 12px; }
+.syl-c .syl-l { font-size: 16px; font-weight: normal; color: var(--gold-lt); }
+.syl-c .syl-txt { color: var(--cream); font-style: italic; font-size: 14.5px; }
+
+/* ── EVIDENCE CARD ── */
+.ev { background: #fff; border: 1px solid rgba(27,42,74,0.11); border-radius: 7px; padding: 18px 22px; margin: 14px 0; }
+.ev-h { font-size: 14px; font-weight: bold; color: var(--navy); margin-bottom: 7px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.badge { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; border: 1px solid; }
+.b-gld { background: var(--gold-dim); color: #8B6914; border-color: rgba(201,168,76,0.35); }
+.b-arc { background: rgba(26,92,46,0.08); color: #1A5C2E; border-color: rgba(26,92,46,0.28); }
+.b-txt { background: rgba(27,42,74,0.06); color: var(--navy); border-color: rgba(27,42,74,0.2); }
+.b-amb { background: var(--abg); color: var(--amber); border-color: rgba(122,79,0,0.3); }
+.ev-p { font-size: 14px; color: var(--text-mid); line-height: 1.65; max-width: none; margin: 0; }
+
+/* ── WORD ANALYSIS BOX ── */
+.word-box { background: rgba(27,42,74,0.04); border: 1px solid rgba(27,42,74,0.12); border-radius: 7px; padding: 20px 24px; margin: 16px 0; }
+.word-row { display: flex; gap: 16px; align-items: baseline; margin-bottom: 10px; flex-wrap: wrap; }
+.word-row:last-child { margin-bottom: 0; }
+.word-heb { font-size: 22px; direction: rtl; color: var(--navy); font-family: 'Times New Roman',serif; min-width: 80px; }
+.word-trans { font-family: system-ui,sans-serif; font-size: 12px; color: var(--gold); letter-spacing: 0.5px; font-style: italic; min-width: 80px; }
+.word-def { font-size: 13.5px; color: var(--text-mid); flex: 1; line-height: 1.5; }
+
+/* ── DEBATE PAIR ── */
+.obj { background: var(--cbg); border-left: 3px solid var(--crimson); padding: 14px 18px; border-radius: 0 6px 0 0; margin-bottom: 2px; }
+.ref { background: var(--gbg); border-left: 3px solid var(--green); padding: 14px 18px; border-radius: 0 0 6px 6px; margin-bottom: 16px; }
+.db-l { font-family: system-ui,sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--crimson); margin-bottom: 5px; display: block; }
+.ref .db-l { color: var(--green); }
+.db-p { font-size: 14px; line-height: 1.6; color: var(--text-mid); max-width: none; margin: 0; }
+
+/* ── HIGHLIGHT ── */
+.hl-gold { background: rgba(201,168,76,0.15); padding: 1px 4px; border-radius: 3px; color: var(--navy); font-style: normal; }
+
+/* ── CONTEXT STRIP ── */
+.ctx-strip { border-left: 3px solid rgba(27,42,74,0.2); padding: 4px 0 4px 18px; margin: 6px 0; }
+.ctx-v { font-family: system-ui,sans-serif; font-size: 10px; color: var(--text-lt); letter-spacing: 1px; margin-bottom: 3px; }
+.ctx-text { font-size: 14px; color: var(--text-mid); font-style: italic; line-height: 1.55; }
+.ctx-strip.active-v { border-left-color: var(--gold); background: rgba(201,168,76,0.05); border-radius: 0 5px 5px 0; padding-right: 12px; }
+.ctx-strip.active-v .ctx-text { color: var(--navy); font-weight: normal; }
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; font-family: system-ui,sans-serif; }
+th { background: var(--navy); color: var(--gold); padding: 8px 12px; text-align: left; font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; font-weight: normal; }
+td { padding: 9px 12px; border-bottom: 1px solid rgba(27,42,74,0.08); color: var(--text-mid); line-height: 1.5; vertical-align: top; }
+tr:nth-child(even) td { background: rgba(27,42,74,0.025); }
+
+/* ── CONCLUSION ── */
+.concl { background: var(--navy); border-radius: 8px; padding: 32px 36px; margin: 28px 0; }
+.concl h3 { color: var(--gold); font-size: 17px; font-weight: normal; margin-bottom: 14px; }
+.concl p { color: rgba(247,243,237,0.78); max-width: none; font-size: 14.5px; margin-bottom: 10px; }
+.concl p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <button class="hamburger" id="menuBtn" aria-label="Abrir índice" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <span class="topbar-title">Jeremías 8:8 — Refutación del Tahríf</span>
+  <span class="topbar-badge">Apologética Bíblica</span>
+</header>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar" aria-label="Índice">
+  <div class="sb-brand">
+    <span class="sb-lbl">Apologética Histórico-Bíblica</span>
+    <span class="sb-title">Jeremías 8:8<br>¿Prueba de corrupción<br>de la Torah?</span>
+  </div>
+  <div class="toc-wrap" id="toc">
+    <div class="toc-cat">Introducción</div>
+    <a class="toc-a active" href="#s0"><span class="toc-n">§0</span>El Argumento Islámico</a>
+    <a class="toc-a" href="#s1"><span class="toc-n">§1</span>Texto Hebreo y Análisis Literal</a>
+
+    <div class="toc-cat">Contexto</div>
+    <a class="toc-a" href="#s2"><span class="toc-n">§2</span>Contexto Inmediato: Jer 8:4-12</a>
+    <a class="toc-a" href="#s3"><span class="toc-n">§3</span>Contexto Mayor: El Sermón del Templo</a>
+
+    <div class="toc-cat">Análisis del Texto</div>
+    <a class="toc-a" href="#s4"><span class="toc-n">§4</span>Filología: עֵט שֶׁקֶר סֹפְרִים</a>
+    <a class="toc-a" href="#s5"><span class="toc-n">§5</span>El Objeto Implícito de עָשָׂה</a>
+    <a class="toc-a" href="#s6"><span class="toc-n">§6</span>Versículo 9: La Clave Interpretativa</a>
+    <a class="toc-a" href="#s7"><span class="toc-n">§7</span>שֶׁקֶר en Jeremías: Patrón Léxico</a>
+
+    <div class="toc-cat">Evidencia Interna</div>
+    <a class="toc-a" href="#s8"><span class="toc-n">§8</span>Jeremías Apela a la Torah Vigente</a>
+    <a class="toc-a" href="#s9"><span class="toc-n">§9</span>Jeremías 31:31-34: La Nueva Alianza</a>
+    <a class="toc-a" href="#s10"><span class="toc-n">§10</span>El Argumento de la Autorefutación</a>
+
+    <div class="toc-cat">Evidencia Externa</div>
+    <a class="toc-a" href="#s11"><span class="toc-n">§11</span>Manuscritos Posteriores a Jeremías</a>
+    <a class="toc-a" href="#s12"><span class="toc-n">§12</span>Consenso de los Comentaristas</a>
+
+    <div class="toc-cat">Contra-ataque</div>
+    <a class="toc-a" href="#s13"><span class="toc-n">§13</span>El Dilema Coránico</a>
+
+    <div class="toc-cat">Conclusión</div>
+    <a class="toc-a" href="#s14"><span class="toc-n">§14</span>Silogismos Compilados</a>
+    <a class="toc-a" href="#s15"><span class="toc-n">§15</span>Conclusión General</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="hero">
+  <span class="hero-wm">שֶׁקֶר</span>
+  <span class="hero-ey">Defensa Apologética · Análisis Filológico, Contextual y Teológico</span>
+  <h1 class="hero-h1">Jeremías 8:8 y el Argumento del Tahríf:<br><em>Refutación Exhaustiva</em></h1>
+  <p class="hero-sub">El versículo más citado por la apologética islámica para afirmar que la Torah fue corrompida por escribas, analizado desde su contexto inmediato, contexto mayor, gramática hebrea, léxico jeremiano y evidencia manuscrita.</p>
+  <div class="hero-pills">
+    <span class="pill"><strong>Versículo:</strong> Jeremías 8:8</span>
+    <span class="pill"><strong>Contexto:</strong> Sermón del Templo — Jer 7:1–8:12</span>
+    <span class="pill"><strong>Argumento refutado:</strong> "La pluma mentirosa" = corrupción textual</span>
+    <span class="pill"><strong>Fecha del profeta:</strong> ~627–586 a.C.</span>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- §0 -->
+<div class="sec" id="s0">
+  <div class="sec-hd"><span class="sec-num">§0</span><h2 class="sec-t">El Argumento Islámico: Planteamiento Exacto</h2></div>
+  <p class="sec-intro">Jeremías 8:8 es el versículo más invocado en la apologética islámica moderna para sostener que la misma Biblia confiesa la corrupción textual de la Torah. El argumento aparece en Deedat, Badawi, Naik y decenas de obras apologéticas islámicas. Es necesario entenderlo con precisión antes de refutarlo.</p>
+
+  <h4>Formulación del Argumento</h4>
+  <div class="obj">
+    <span class="db-l">Argumento Islámico Central</span>
+    <p class="db-p">Jeremías 8:8 dice: «¿Cómo podéis decir: somos sabios y la Ley del Señor está con nosotros? La pluma mentirosa de los escribas la ha convertido en mentira.» Esto es una confesión bíblica explícita de que los escribas judíos <em>falsificaron</em> la Torah. Si la propia Biblia admite que la Torah fue corrompida por sus propios escribas, entonces el texto actual no es la Palabra original de Dios, confirmando la doctrina islámica del tahríf.</p>
+  </div>
+
+  <h4>Lo que la Refutación Demostrará</h4>
+  <p>El argumento islámico falla en catorce frentes independientes. Los más decisivos son:</p>
+  <table>
+    <thead><tr><th>Nivel de análisis</th><th>Problema para el argumento islámico</th></tr></thead>
+    <tbody>
+      <tr><td>Contexto inmediato (8:4-12)</td><td>El pasaje habla de hipocresía moral y liderazgo corrupto, no de alteración textual</td></tr>
+      <tr><td>Contexto mayor (Jer 7–8)</td><td>El Sermón del Templo denuncia conducta falsa, no manuscritos falsificados</td></tr>
+      <tr><td>Gramática: objeto implícito</td><td>El objeto de "ha hecho mentira" es la <em>pretensión</em> de sabiduría, no el texto de la Torah</td></tr>
+      <tr><td>Versículo 9</td><td>Los escribas "rechazaron la Palabra de YHWH" — el texto sigue siendo la Palabra de Dios</td></tr>
+      <tr><td>Léxico de שֶׁקֶר en Jeremías</td><td>Sheqer en Jeremías siempre denota engaño moral/profético, nunca alteración textual</td></tr>
+      <tr><td>Jeremías apela a la Torah</td><td>Jeremías la cita como norma vigente en Jer 11, 17, 26, 31, 34</td></tr>
+      <tr><td>Jer 31:31-34</td><td>La Nueva Alianza no reemplaza una Torah corrupta sino una <em>relación rota</em></td></tr>
+      <tr><td>Argumento de la autorefutación</td><td>Usar la Biblia para probar que la Biblia es corrupta es epistemológicamente incoherente</td></tr>
+      <tr><td>Manuscritos posteriores</td><td>LXX, DSS y MT convergen en el mismo texto — sin evidencia de corrupción josiánico-jeremiana</td></tr>
+      <tr><td>Dilema coránico</td><td>El Corán apela a la Torah como vigente y autorizada 1.200 años después de Jeremías</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- §1 -->
+<div class="sec" id="s1">
+  <div class="sec-hd"><span class="sec-num">§1</span><h2 class="sec-t">Texto Hebreo Completo y Análisis Literal</h2></div>
+  <p class="sec-intro">Antes de cualquier interpretación, es imprescindible examinar el texto hebreo con rigor gramatical y lexicográfico.</p>
+
+  <div class="verse">
+    <span class="v-ref">Jeremías 8:8 — Texto Hebreo (BHS)</span>
+    <span class="v-heb">אֵיכָה תֹאמְרוּ חֲכָמִים אֲנַחְנוּ וְתוֹרַת יְהוָה אִתָּנוּ אָכֵן הִנֵּה לַשֶּׁקֶר עָשָׂה עֵט שֶׁקֶר סֹפְרִים</span>
+    <span class="v-es">«¿Cómo podéis decir: somos sabios y la Torah de YHWH está con nosotros? Pero en verdad — he aquí que en mentira ha hecho la pluma mentirosa de los escribas.»</span>
+    <span class="v-note">RVR1960: «...la pluma mentirosa de los escribas la ha convertido en mentira.» (el pronombre "la" en español es una adición interpretativa no presente en el hebreo)</span>
+  </div>
+
+  <h4>Análisis Morfológico y Léxico de Cada Elemento</h4>
+  <div class="word-box">
+    <div class="word-row">
+      <span class="word-heb">אֵיכָה</span>
+      <span class="word-trans">ekhá</span>
+      <span class="word-def">Partícula interrogativa de lamento: «¿Cómo es posible que...?» — Evoca estupor y acusación, no descripción neutral</span>
+    </div>
+    <div class="word-row">
+      <span class="word-heb">חֲכָמִים אֲנַחְנוּ</span>
+      <span class="word-trans">chakhamím anáchnú</span>
+      <span class="word-def">«Somos sabios» — La reclamación de sabiduría que el versículo desmontará. No una proposición neutral sino la pretensión arrogante que Jeremías refuta</span>
+    </div>
+    <div class="word-row">
+      <span class="word-heb">וְתוֹרַת יְהוָה אִתָּנוּ</span>
+      <span class="word-trans">ve-Torát YHWH itánu</span>
+      <span class="word-def">«Y la Torah de YHWH está con nosotros» — Afirmación de posesión y conocimiento de la Torah. El versículo NO dice que esta afirmación sea falsa; denuncia que su conducta contradice esta posesión</span>
+    </div>
+    <div class="word-row">
+      <span class="word-heb">אָכֵן</span>
+      <span class="word-trans">akhén</span>
+      <span class="word-def">Partícula adversativa/aseverativa: «Pero en verdad / Ciertamente sin embargo...» — Introduce la refutación de la afirmación precedente. Equivalente a «¡Vaya si es cierto!» con matiz irónico</span>
+    </div>
+    <div class="word-row">
+      <span class="word-heb">לַשֶּׁקֶר עָשָׂה</span>
+      <span class="word-trans">lashshéqer asá</span>
+      <span class="word-def"><span class="hl-gold">«Ha hecho en/hacia la mentira»</span> — Verbo עָשָׂה («hacer, convertir») + לַשֶּׁקֶר (preposición + «falsedad»). El objeto directo NO está explícito en el hebreo original. Esta ausencia es gramaticalmente decisiva</span>
+    </div>
+    <div class="word-row">
+      <span class="word-heb">עֵט שֶׁקֶר סֹפְרִים</span>
+      <span class="word-trans">et shéqer sofrim</span>
+      <span class="word-def">«La pluma de falsedad de escribas» / «La pluma mentirosa de los escribas» — Sujeto de עָשָׂה. Los escribas son los agentes; su producción (su «pluma», su actividad de escritura) es caracterizada como שֶׁקֶר</span>
+    </div>
+  </div>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-gld">Punto Gramatical Decisivo</span>El Objeto Implícito No Es la Torah</div>
+    <p class="ev-p">La frase hebrea <strong>לַשֶּׁקֶר עָשָׂה</strong> carece de objeto directo explícito. Las versiones españolas que traducen «la ha convertido en mentira» añaden el pronombre «la» (refiriéndolo a la Torah) como decisión interpretativa del traductor — no como dato gramatical del hebreo. El texto original podría igualmente traducirse: «ha hecho [sus pretensiones / sus obras / sus rulings] en mentira». La pregunta gramatical fundamental — ¿qué ha hecho la pluma mentirosa en falsedad? — no tiene respuesta automática, sino que depende de la lectura del contexto. La sección §5 demostrará por qué el referente más natural no es la Torah sino la pretensión de sabiduría.</p>
+  </div>
+</div>
+
+<!-- §2 -->
+<div class="sec" id="s2">
+  <div class="sec-hd"><span class="sec-num">§2</span><h2 class="sec-t">Contexto Inmediato: Jeremías 8:4-12</h2></div>
+  <p class="sec-intro">El contexto inmediato es el primer y más poderoso argumento contra la lectura islámica. El pasaje completo trata de apostasía moral y liderazgo hipócrita — no de alteración de manuscritos.</p>
+
+  <h4>La Perícopa Completa (Jer 8:4-12)</h4>
+
+  <div class="ctx-strip"><span class="ctx-v">Jer 8:4-5</span><span class="ctx-text">«Cuando los hombres caen, ¿no se levantan? Si uno se aparta, ¿no vuelve? ¿Por qué pues este pueblo de Jerusalén se ha vuelto con perpetua apostasía? Retienen el engaño, se niegan a volver.»<br><em>— Tema: apostasía persistente y rechazo de la conversión</em></span></div>
+
+  <div class="ctx-strip"><span class="ctx-v">Jer 8:6</span><span class="ctx-text">«He prestado atención y escuchado; no hablan lo recto. No hay quien se arrepienta de su maldad, diciendo: ¿Qué he hecho? Cada uno se vuelve a su propia carrera, como caballo que se lanza a la batalla.»<br><em>— Tema: ausencia de arrepentimiento moral</em></span></div>
+
+  <div class="ctx-strip"><span class="ctx-v">Jer 8:7</span><span class="ctx-text">«Aun la cigüeña en el cielo conoce sus tiempos... pero mi pueblo no conoce la <em>mishpat</em> (ordenanza/derecho) de YHWH.»<br><em>— Tema: ignorancia voluntaria de las ordenanzas divinas</em></span></div>
+
+  <div class="ctx-strip active-v"><span class="ctx-v">Jer 8:8 ← VERSÍCULO EN CUESTIÓN</span><span class="ctx-text">«¿Cómo podéis decir: somos sabios y la Torah de YHWH está con nosotros? Pero en verdad, la pluma mentirosa de los escribas ha hecho [su pretensión de sabiduría] en falsedad.»</span></div>
+
+  <div class="ctx-strip"><span class="ctx-v">Jer 8:9</span><span class="ctx-text">«Los sabios son avergonzados, están consternados y atrapados. He aquí, <strong>han rechazado la Palabra de YHWH</strong>, ¿y qué sabiduría tienen?»<br><em>— Clave interpretativa: la Torah sigue siendo "la Palabra de YHWH" que ellos rechazan</em></span></div>
+
+  <div class="ctx-strip"><span class="ctx-v">Jer 8:10-11</span><span class="ctx-text">«Desde el menor hasta el mayor todos son codiciosos de ganancias deshonestas; desde el profeta hasta el sacerdote todos practican el engaño. Curan ligeramente la herida de mi pueblo, diciendo: paz, paz, cuando no hay paz.»<br><em>— Tema: corrupción moral del liderazgo religioso (profetas y sacerdotes)</em></span></div>
+
+  <div class="ctx-strip"><span class="ctx-v">Jer 8:12</span><span class="ctx-text">«¿Acaso se avergonzaron de haber cometido abominación? No, no se avergonzaron en absoluto, ni supieron sonrojarse. Por tanto caerán entre los que caen.»<br><em>— Tema: ausencia de vergüenza moral ante el pecado</em></span></div>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-txt">Contexto</span>El Tema Unificador de la Perícopa</div>
+    <p class="ev-p">La perícopa 8:4-12 es una unidad literaria sobre <strong>hipocresía religiosa y liderazgo moralmente corrupto</strong>. La acusación va contra quienes <em>reclaman</em> sabiduría y Torah pero viven en apostasía. El versículo 8 encaja perfectamente en este cuadro como denuncia del <em>gap</em> entre la pretensión religiosa («tenemos la Torah, somos sabios») y la conducta real (codicia, engaño, falsas promesas de paz). Introducir en este contexto la idea de corrupción textual de un manuscrito sagrado es completamente ajeno a la lógica literaria del pasaje.</p>
+  </div>
+
+  <div class="syl">
+    <div class="syl-t">Silogismo I — El Contexto Inmediato Refuta la Lectura de Corrupción Textual</div>
+    <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">El principio hermenéutico fundamental establece que un versículo debe interpretarse en coherencia con el tema y vocabulario de su perícopa inmediata.</span></div>
+    <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">La perícopa Jer 8:4-12 trata exclusivamente de apostasía moral, hipocresía religiosa del liderazgo y ausencia de arrepentimiento; ninguno de sus otros versículos alude a manipulación de manuscritos.</span></div>
+    <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Leer 8:8 como denuncia de corrupción textual de la Torah introduce una categoría completamente ajena al contexto literario del pasaje; viola el principio básico de interpretación contextual.</span></div></div>
+  </div>
+</div>
+
+<!-- §3 -->
+<div class="sec" id="s3">
+  <div class="sec-hd"><span class="sec-num">§3</span><h2 class="sec-t">Contexto Mayor: El Sermón del Templo (Jer 7:1–8:12)</h2></div>
+  <p class="sec-intro">El contexto mayor en el que se inscribe 8:4-12 es el Sermón del Templo, uno de los discursos proféticos más famosos de la Biblia. Su tema es radicalmente diferente de la corrupción textual.</p>
+
+  <h4>Estructura del Sermón del Templo</h4>
+  <table>
+    <thead><tr><th>Pasaje</th><th>Tema</th></tr></thead>
+    <tbody>
+      <tr><td>Jer 7:1-7</td><td>El Templo no protege a quienes viven en injusticia — la «caverna de ladrones»</td></tr>
+      <tr><td>Jer 7:8-15</td><td>Confianza falsa en el Templo; comparación con Siló (destruido por Dios)</td></tr>
+      <tr><td>Jer 7:16-20</td><td>Jeremías no debe interceder; el pueblo adora a la «Reina del Cielo»</td></tr>
+      <tr><td>Jer 7:21-28</td><td>YHWH no quiso sacrificios sino obediencia; el pueblo no escuchó</td></tr>
+      <tr><td>Jer 7:29–8:3</td><td>Contaminación del Templo con idolatría; juicio sobre los huesos de los líderes</td></tr>
+      <tr><td>Jer 8:4-12</td><td>Apostasía persistente; falsa reclamación de sabiduría; corrupción del liderazgo</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-txt">Contexto Mayor</span>El Tema Unificador del Sermón</div>
+    <p class="ev-p">El Sermón del Templo (Jer 7–8) denuncia una sola cosa en múltiples dimensiones: la <strong>religiosidad sin ética</strong>. El pueblo y sus líderes participan en los rituales del Templo, invocan a YHWH, reclaman poseer la Torah — pero su vida práctica es de injusticia, idolatría y engaño. Jeremías denuncia este uso del nombre y las instituciones de Dios como pantalla de legitimación para una vida contraria a lo que Dios manda. Jer 8:8 es la acusación específica al estrato letrado («los sabios, los escribas») dentro de este patrón general: ellos producen textos y rulings que les permiten reclamar sabiduría y conocimiento de la Torah mientras en realidad son agentes de engaño.</p>
+  </div>
+</div>
+
+<!-- §4 -->
+<div class="sec" id="s4">
+  <div class="sec-hd"><span class="sec-num">§4</span><h2 class="sec-t">Análisis Filológico: עֵט שֶׁקֶר סֹפְרִים</h2></div>
+  <p class="sec-intro">La frase clave del versículo — «la pluma mentirosa de los escribas» — tiene una semántica precisa en el hebreo bíblico que no equivale a «falsificación de un texto sagrado».</p>
+
+  <h4>¿Qué significa עֵט (et) en este contexto?</h4>
+  <p>El sustantivo עֵט significa «estilete, instrumento de escritura». En el mundo del Antiguo Israel, los escribas (סֹפְרִים, <em>sofrim</em>) no eran solo copistas de textos sagrados: eran redactores de documentos legales, contratos, edictos reales, opiniones legales (<em>torot</em> sacerdotales), y también maestros que interpretaban y aplicaban la ley. El «pen/estilete» del escriba designa metonímicamente <em>toda su actividad de producción escritural</em>.</p>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-txt">Lingüística</span>«Pluma» como Metonimia de Actividad Interpretativa</div>
+    <p class="ev-p">El uso de «pluma» o «lengua» como metonimia de producción intelectual está documentado en el hebreo bíblico. El Salmo 45:1 dice: «mi lengua es como la pluma de un hábil escriba» — la pluma designa la <em>actividad</em>, no solo la copia mecánica. En Jer 8:8, «la pluma mentirosa de los escribas» denuncia la <em>producción legal y hermenéutica</em> de los escribas — sus rulings, sus interpretaciones, sus documentos oficiales — como esencialmente fraudulenta. No afirma que estén alterando físicamente el rollo de la Torah guardado en el Templo.</p>
+  </div>
+
+  <h4>El Rol de los Sofrim en el Israel del Siglo VII a.C.</h4>
+  <p>Los escribas (sofrim) tenían múltiples funciones en el período jeremiano:</p>
+  <table>
+    <thead><tr><th>Función</th><th>Descripción</th></tr></thead>
+    <tbody>
+      <tr><td>Copistas</td><td>Copiaban textos sagrados y documentos reales</td></tr>
+      <tr><td>Redactores legales</td><td>Producían contratos, escrituras, documentos de compra-venta</td></tr>
+      <tr><td>Formuladores de <em>torot</em> sacerdotales</td><td>Producían instrucción/rulings legales en nombre del sacerdocio</td></tr>
+      <tr><td>Intérpretes de la Ley</td><td>Aplicaban los principios de la Torah a casos concretos</td></tr>
+      <tr><td>Redactores de profecía oficial</td><td>Producían textos «proféticos» legitimando decisiones del poder</td></tr>
+    </tbody>
+  </table>
+  <p>Lo que Jeremías denuncia es la función de <em>intérpretes y formuladores de law</em>, no la de copistas del rollo sagrado. Los escribas producían textos y rulings que distorsionaban el espíritu de la Torah para servir a intereses particulares.</p>
+
+  <div class="syl">
+    <div class="syl-t">Silogismo II — La Pluma Mentirosa Refiere Actividad Interpretativa, No Falsificación Textual</div>
+    <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Los sofrim del período jeremiano eran productores de documentos legales, rulings hermenéuticos e interpretaciones de la Torah — no solo copistas de textos sagrados.</span></div>
+    <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El término עֵט («pluma») en el contexto de los sofrim designa metonímicamente toda su actividad de producción escritural, incluyendo opiniones legales, interpretaciones y documentos de autoridad.</span></div>
+    <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">«La pluma mentirosa de los escribas» denuncia la producción legal-hermenéutica fraudulenta de los escribas; no es una afirmación sobre la alteración del texto sagrado de la Torah.</span></div></div>
+  </div>
+</div>
+
+<!-- §5 -->
+<div class="sec" id="s5">
+  <div class="sec-hd"><span class="sec-num">§5</span><h2 class="sec-t">El Objeto Implícito de עָשָׂה: ¿La Torah o la Pretensión?</h2></div>
+  <p class="sec-intro">Este es el análisis gramatical más fino y decisivo. El verbo עָשָׂה («ha hecho/convertido») carece de objeto explícito en el hebreo. Determinar el referente del objeto implícito resuelve la ambigüedad interpretativa.</p>
+
+  <h4>La Estructura Sintáctica del Versículo</h4>
+  <div class="verse">
+    <span class="v-ref">Jer 8:8 — Estructura Lógico-Sintáctica</span>
+    <span class="v-heb">אֵיכָה תֹאמְרוּ [חֲכָמִים אֲנַחְנוּ וְתוֹרַת יְהוָה אִתָּנוּ] — אָכֵן הִנֵּה לַשֶּׁקֶר עָשָׂה עֵט שֶׁקֶר סֹפְרִים</span>
+    <span class="v-es">«¿Cómo podéis decir [RECLAMACIÓN: somos sabios y la Torah de YHWH está con nosotros]? — Pero en verdad, he aquí que en mentira ha hecho [OBJETO IMPLÍCITO: ???] la pluma mentirosa de los escribas.»</span>
+  </div>
+
+  <p>Las dos lecturas posibles del objeto implícito:</p>
+
+  <div class="obj">
+    <span class="db-l">Lectura Islámica — Objeto: la Torah</span>
+    <p class="db-p">«La pluma mentirosa de los escribas ha convertido <em>[la Torah]</em> en mentira.» — Los escribas alteraron el texto de la Torah haciéndolo falso.</p>
+  </div>
+  <div class="ref">
+    <span class="db-l">Lectura Contextual — Objeto: la Reclamación de Sabiduría</span>
+    <p class="db-p">«La pluma mentirosa de los escribas ha convertido <em>[su reclamación de sabiduría / su pretensión de poseer la Torah]</em> en mentira.» — La producción fraudulenta de los escribas desmiente su propia pretensión de ser sabios que conocen la Torah.</p>
+  </div>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-gld">Gramática Hebrea</span>El Antecedente Natural del Objeto Implícito</div>
+    <p class="ev-p">En hebreo bíblico, cuando un verbo transitivo carece de objeto explícito, el referente implícito tiende a ser recuperable del contexto inmediato anterior. El contexto anterior más inmediato a <strong>לַשֶּׁקֶר עָשָׂה</strong> es la frase parentética: <em>«somos sabios y la Torah de YHWH está con nosotros»</em>. Esta es la RECLAMACIÓN que la pluma mentirosa de los escribas ha convertido en mentira: su propia pretensión de sabiduría y posesión de la Torah queda desmentida por su comportamiento y producción. La lectura más natural en hebreo es: «has convertido [tu propia reclamación] en mentira.»</p>
+  </div>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-txt">Argumento Adicional</span>La Partícula אָכֵן Como Señal Interpretativa</div>
+    <p class="ev-p">La partícula <strong>אָכֵן</strong> (<em>akhén</em>) tiene función adversativa-irónica: «¡Ciertamente sí, pero...!» o «¡Vaya que sí!». En su uso jeremiano (cf. Jer 3:20; 4:10), introduce una corrección irónica de una afirmación previa. Aquí introduce la corrección de <em>su reclamación de sabiduría</em> — no la revelación de un hecho nuevo sobre la Torah. La ironía es: «¿Decís que sois sabios? ¡Ciertamente la pluma mentirosa de sus propios escribas ha hecho de esa pretensión una mentira!»</p>
+  </div>
+
+  <div class="syl">
+    <div class="syl-t">Silogismo III — El Objeto Implícito es la Pretensión, No el Texto</div>
+    <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">El verbo עָשָׂה en Jer 8:8 carece de objeto directo explícito; el referente debe recuperarse del contexto inmediato.</span></div>
+    <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El contexto inmediato anterior al verbo es la reclamación «somos sabios y la Torah de YHWH está con nosotros»; la partícula adversativa-irónica אָכֵן introduce una corrección de esa reclamación.</span></div>
+    <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El objeto más natural de «ha convertido en mentira» es la reclamación de sabiduría de los escribas, no el texto de la Torah; la lectura islámica impone al texto un referente que el hebreo no exige y que contradice la lógica literaria del versículo.</span></div></div>
+  </div>
+</div>
+
+<!-- §6 -->
+<div class="sec" id="s6">
+  <div class="sec-hd"><span class="sec-num">§6</span><h2 class="sec-t">Versículo 9: La Clave Interpretativa Definitiva</h2></div>
+  <p class="sec-intro">El versículo siguiente, 8:9, es el argumento exegético más contundente. Demuestra que la Torah no estaba corrompida — sino que los escribas la habían rechazado.</p>
+
+  <div class="verse">
+    <span class="v-ref">Jeremías 8:9 — El Versículo que Los Apologistas Islámicos No Citan</span>
+    <span class="v-heb">הֹבִישׁוּ חֲכָמִים חַתּוּ וַיִּלָּכֵדוּ הִנֵּה בִדְבַר-יְהוָה מָאָסוּ וְחָכְמַת מֶה לָהֶם</span>
+    <span class="v-es">«Los sabios son avergonzados, están consternados y atrapados. He aquí, <strong>han rechazado la Palabra de YHWH</strong>, ¿y qué sabiduría tienen?»</span>
+  </div>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-gld">Argumento Definitivo</span>«Rechazaron», No «Corrompieron»</div>
+    <p class="ev-p">El versículo 9 describe la acción de los escribas hacia la Torah con el verbo <strong>מָאַס</strong> (<em>maas</em>): «rechazar, repudiar, desestimar». Los escribas <em>rechazaron</em> la Palabra de YHWH — no la corrompieron, no la alteraron, no la falsificaron. Este vocabulario es semánticamente radicalmente diferente de «falsificar»: se puede rechazar algo que permanece intacto y auténtico. Si la Torah hubiera sido corrompida por los propios escribas, el texto no podría llamarla «la Palabra de YHWH» sin contradicción: ¿cómo rechazar lo que ya uno mismo ha destruido? El versículo 9 confirma que la Torah sigue siendo «la Palabra de YHWH» — lo que los escribas hacen es <em>ignorarla y rechazarla</em>, no alterarla.</p>
+  </div>
+
+  <div class="syl">
+    <div class="syl-t">Silogismo IV — Jer 8:9 Refuta la Lectura de Falsificación</div>
+    <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si la Torah hubiera sido textualmente corrompida por los escribas en v.8, ya no podría llamarse «la Palabra de YHWH» en v.9 sin contradicción interna.</span></div>
+    <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El versículo 9 llama a la Torah «דְּבַר יְהוָה» (la Palabra de YHWH) y describe la relación de los escribas con ella mediante מָאַס («rechazar»), no mediante un verbo de falsificación o alteración.</span></div>
+    <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Jer 8:9 confirma que la Torah permanece intacta como Palabra auténtica de Dios; los escribas la rechazan — la ignoran y la contradicen con su conducta — pero no la han corrompido textualmente.</span></div></div>
+  </div>
+</div>
+
+<!-- §7 -->
+<div class="sec" id="s7">
+  <div class="sec-hd"><span class="sec-num">§7</span><h2 class="sec-t">שֶׁקֶר en Jeremías: El Patrón Léxico Completo</h2></div>
+  <p class="sec-intro">Un análisis del uso de שֶׁקֶר (sheqer) a lo largo del libro de Jeremías revela que la palabra pertenece consistentemente al campo semántico del engaño moral y la falsa profecía — nunca al de la alteración textual de manuscritos.</p>
+
+  <h4>Usos de שֶׁקֶר en el Libro de Jeremías</h4>
+  <table>
+    <thead><tr><th>Referencia</th><th>Contexto de שֶׁקֶר</th><th>¿Refiere a texto alterado?</th></tr></thead>
+    <tbody>
+      <tr><td>Jer 3:10</td><td>Israel volvió a YHWH falsamente (lashsheqer) — insinceridad moral</td><td>No</td></tr>
+      <tr><td>Jer 5:2</td><td>Juran «¡Vive YHWH!» pero juran en falso (lashsheqer) — falsos juramentos</td><td>No</td></tr>
+      <tr><td>Jer 5:31</td><td>Los profetas profetizan sheqer — profecía falsa</td><td>No</td></tr>
+      <tr><td>Jer 6:13</td><td>Desde el menor al mayor, todos practican sheqer — corrupción moral general</td><td>No</td></tr>
+      <tr><td>Jer 7:4</td><td>«No confiéis en divré hashsheqer (palabras de falsedad)» — confianza falsa en el Templo</td><td>No</td></tr>
+      <tr><td>Jer 7:8</td><td>«Confiáis en divré hashsheqer que no benefician» — ilusiones religiosas</td><td>No</td></tr>
+      <tr><td><strong>Jer 8:8</strong></td><td>«Pluma mentirosa de los escribas»</td><td>No necesariamente — ver §5</td></tr>
+      <tr><td>Jer 9:3(2)</td><td>Doblan su lengua como arco para sheqer — engaño cotidiano</td><td>No</td></tr>
+      <tr><td>Jer 14:14</td><td>Los profetas profetizan sheqer en nombre de YHWH — profecía falsa</td><td>No</td></tr>
+      <tr><td>Jer 23:14, 25-26</td><td>Los profetas de Jerusalén profetizan sheqer, sueñan sueños de sheqer</td><td>No</td></tr>
+      <tr><td>Jer 27:10, 14-16</td><td>Los profetas os profetizan sheqer — falsa promesa de paz</td><td>No</td></tr>
+      <tr><td>Jer 29:21-23</td><td>Ahab y Sedequías profetizan sheqer en nombre de YHWH</td><td>No</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-gld">Patrón Léxico Decisivo</span>שֶׁקֶר en Jeremías es Siempre Engaño Moral/Profético</div>
+    <p class="ev-p">En los más de 20 usos de שֶׁקֶר en el libro de Jeremías, la palabra designa invariablemente: <strong>(a)</strong> engaño moral interpersonal, <strong>(b)</strong> falsa profecía en nombre de YHWH, <strong>(c)</strong> confianza religiosa infundada, o <strong>(d)</strong> juramento falso. En ninguna de sus ocurrencias en Jeremías se refiere a la alteración física o textual de un documento sagrado. Importar ese significado en 8:8 contraviene radicalmente el patrón léxico consistente del propio libro.</p>
+  </div>
+
+  <div class="syl">
+    <div class="syl-t">Silogismo V — El Patrón Léxico de שֶׁקֶר Refuta la Lectura de Falsificación Textual</div>
+    <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">El principio de coherencia léxica establece que una palabra debe interpretarse en un texto dado de acuerdo con su uso consistente en ese mismo texto, salvo indicadores explícitos de cambio semántico.</span></div>
+    <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">שֶׁקֶר en el libro de Jeremías designa consistentemente engaño moral, falsa profecía o confianza religiosa infundada — nunca alteración textual de un escrito sagrado.</span></div>
+    <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Leer שֶׁקֶר en 8:8 como referencia a falsificación textual contradice el uso lexicográfico consistente de la palabra en el mismo libro; la interpretación islámica viola el principio de coherencia léxica intratextual.</span></div></div>
+  </div>
+</div>
+
+<!-- §8 -->
+<div class="sec" id="s8">
+  <div class="sec-hd"><span class="sec-num">§8</span><h2 class="sec-t">Jeremías Apela a la Torah como Autoridad Vigente y Auténtica</h2></div>
+  <p class="sec-intro">Si Jeremías creyera que los escribas habían corrompido la Torah, resultaría inexplicable que él mismo la invocara repetidamente a lo largo de su libro como norma divina vigente.</p>
+
+  <div class="verse">
+    <span class="v-ref">Jeremías 11:3-4 — Jeremías predica la Torah del Sinaí como vigente</span>
+    <span class="v-heb">אָרוּר הָאִישׁ אֲשֶׁר לֹא יִשְׁמַע אֶת-דִּבְרֵי הַבְּרִית הַזֹּאת... אֲשֶׁר צִוִּיתִי אֶת-אֲבוֹתֵיכֶם בְּיוֹם הוֹצִיאִי-אוֹתָם מֵאֶרֶץ מִצְרַיִם</span>
+    <span class="v-es">«Maldito el hombre que no escuche las palabras de este pacto... el que ordené a vuestros padres el día en que los saqué de la tierra de Egipto.»</span>
+  </div>
+
+  <div class="verse">
+    <span class="v-ref">Jeremías 26:4-5 — Jeremías invoca la Torah como norma vigente</span>
+    <span class="v-heb">אִם-לֹא תִשְׁמְעוּ אֵלַי לָלֶכֶת בְּתוֹרָתִי אֲשֶׁר נָתַתִּי לִפְנֵיכֶם</span>
+    <span class="v-es">«Si no me escucháis para andar en mi Torah que puse delante de vosotros...»</span>
+  </div>
+
+  <div class="verse">
+    <span class="v-ref">Jeremías 34:13-14 — Jeremías apela a la ley del jubileo como vinculante</span>
+    <span class="v-heb">כֹּה-אָמַר יְהוָה... בְּיוֹם הוֹצֵאתִי אוֹתָם מֵאֶרֶץ מִצְרַיִם מִבֵּית עֲבָדִים לֵאמֹר מִקֵּץ שֶׁבַע שָׁנִים תְּשַׁלְּחוּ אִישׁ אֶת-אָחִיו הָעִבְרִי</span>
+    <span class="v-es">«Así dice YHWH... al día que los saqué de Egipto... diciendo: Al cabo de siete años liberaréis a vuestro hermano hebreo.» — Jeremías apela directamente a la ley sabática de Dt 15 como vigente</span>
+  </div>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-gld">Coherencia Interna</span>Jeremías No Actuaría Así si Creyera la Torah Corrompida</div>
+    <p class="ev-p">A lo largo de Jer 7:1-8:12, Jer 11, Jer 17, Jer 26, Jer 34 y Jer 35, el profeta apela a la Torah mosaica como norma divina vigente, auténtica y vinculante. Cita la ley del jubileo (Dt 15), la ley del Sinaí (Ex/Dt), las estipulaciones del pacto. Si Jeremías creyera que esa Torah había sido corrompida por los escribas de su generación, su propio ministerio entero quedaría sin fundamento normativo: ¿a qué Torah auténtica apela? La respuesta es que Jeremías no creía en ninguna corrupción textual; creía en una desobediencia moral hacia una Torah intacta.</p>
+  </div>
+
+  <div class="syl">
+    <div class="syl-t">Silogismo VI — El Ministerio de Jeremías Presupone una Torah Textualmente Íntegra</div>
+    <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si Jeremías hubiera creído que la Torah fue corrompida textualmente por los escribas de su época, invocarla como norma divina vinculante en su ministerio habría sido epistemológicamente incoherente.</span></div>
+    <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Jeremías apela a la Torah mosaica como norma divina auténtica y vigente en múltiples pasajes de su libro (Jer 11, 17, 26, 34, 35).</span></div>
+    <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Jeremías no creía que la Torah hubiera sido corrompida textualmente; su propio ministerio profético presupone su integridad. La lectura islámica de 8:8 contradice el testimonio del conjunto del libro de Jeremías.</span></div></div>
+  </div>
+</div>
+
+<!-- §9 -->
+<div class="sec" id="s9">
+  <div class="sec-hd"><span class="sec-num">§9</span><h2 class="sec-t">Jeremías 31:31-34: La Nueva Alianza No Reemplaza una Torah Corrupta</h2></div>
+  <p class="sec-intro">El pasaje más sublime de Jeremías — la promesa de la Nueva Alianza — contiene un argumento definitivo contra la hipótesis de la corrupción textual.</p>
+
+  <div class="verse">
+    <span class="v-ref">Jeremías 31:31-33 — La Nueva Alianza</span>
+    <span class="v-heb">הִנֵּה יָמִים בָּאִים נְאֻם-יְהוָה וְכָרַתִּי אֶת-בֵּית יִשְׂרָאֵל וְאֶת-בֵּית יְהוּדָה בְּרִית חֲדָשָׁה... נָתַתִּי אֶת-תּוֹרָתִי בְּקִרְבָּם וְעַל-לִבָּם אֶכְתְּבֶנָּה</span>
+    <span class="v-es">«He aquí vienen días, dice YHWH, en que concertaré con la casa de Israel y la casa de Judá un nuevo pacto... pondré mi Torah dentro de ellos y la escribiré en su corazón.»</span>
+  </div>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-gld">Teología</span>תּוֹרָתִי: «Mi Torah» — La Misma Torah, Nueva Modalidad</div>
+    <p class="ev-p">La promesa de la Nueva Alianza no dice que Dios vaya a dar una <em>nueva Torah</em> en lugar de una Torah corrupta, sino que pondrá <strong>תּוֹרָתִי</strong> (<em>Toratí</em>: «mi Torah», con pronombre posesivo de primera persona divina) <em>dentro de ellos</em>. Es la <em>misma Torah</em> — identificada como «de Dios» — pero con una modalidad nueva de inscripción: no en piedra sino en el corazón. Si la Torah hubiera sido corrompida por los escribas, Dios no la llamaría «mi Torah» ni la identificaría como el contenido de la Nueva Alianza. El problema que Jer 31:31-34 diagnostica no es un texto corrompido, sino un pueblo que tiene el texto pero no lo ha internalizado.</p>
+  </div>
+
+  <div class="syl">
+    <div class="syl-t">Silogismo VII — Jer 31:31-34 Identifica el Problema Como Relacional, No Textual</div>
+    <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si el problema con la Torah fuera su corrupción textual, la solución prometida sería una Torah nueva y auténtica que reemplazara el texto corrupto.</span></div>
+    <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">La solución que Jer 31:31-34 promete es inscribir «mi Torah» (תּוֹרָתִי — la misma Torah, posesivo divino) en el corazón del pueblo; el diagnóstico del problema es externo/relacional (v.32: ellos rompieron mi pacto), no textual.</span></div>
+    <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Jeremías 31 diagnostica el problema de Israel como una relación rota con una Torah auténtica — no como la posesión de un texto corrompido; esto confirma que la Torah no fue textualmente falsificada.</span></div></div>
+  </div>
+</div>
+
+<!-- §10 -->
+<div class="sec" id="s10">
+  <div class="sec-hd"><span class="sec-num">§10</span><h2 class="sec-t">El Argumento de la Autorefutación Epistemológica</h2></div>
+  <p class="sec-intro">El argumento islámico basado en Jer 8:8 contiene una contradicción epistemológica interna que lo hace lógicamente insostenible desde su propia base.</p>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-amb">Argumento Decisivo</span>La Petición de Principio del Apologista Islámico</div>
+    <p class="ev-p">El argumento islámico es: «La Biblia (Jer 8:8) prueba que la Biblia es corrupta.» Esta estructura argumentativa es lógicamente incoherente:</p><br>
+    <p class="ev-p"><strong>Si la Biblia es suficientemente fiable para extraer de ella Jer 8:8 como evidencia válida</strong>, entonces es fiable en sus otros pasajes también — incluyendo todos los que confirman la autenticidad de la Torah.<br><br><strong>Si la Biblia está tan corrompida que no puede confiarse en ella</strong>, entonces Jer 8:8 tampoco es evidencia válida de nada — ni de la corrupción ni de ninguna otra cosa.<br><br>El apologista islámico no puede citar Jer 8:8 como evidencia confiable <em>mientras simultáneamente</em> afirma que el texto que lo contiene es corrupto. Esta es una petición de principio: usa la fiabilidad del texto para probar la infiabilidad del texto.</p>
+  </div>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-amb">Argumento Adicional</span>Los Escribas No Eliminaron su Propia Condena</div>
+    <p class="ev-p">Si los escribas tenían el poder y la voluntad de corromper la Torah, ¿por qué dejaron en el texto bíblico el versículo que los condena directamente (Jer 8:8-9)? Los copistas de textos sagrados que supuestamente alteraban la Torah para favorecer sus intereses habrían eliminado este pasaje que los acusa de ser «escribas mentirosos». La preservación de Jer 8:8 en el texto bíblico es evidencia de que los escribas no ejercieron corrupción sistemática del texto; al contrario, preservaron incluso los pasajes que los incriminaban.</p>
+  </div>
+
+  <div class="syl">
+    <div class="syl-t">Silogismo VIII — La Autorefutación Epistemológica del Argumento Islámico</div>
+    <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si el texto bíblico está corrompido de forma que no puede confiarse en él, ningún versículo extraído de él puede usarse como evidencia válida de ninguna proposición.</span></div>
+    <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El argumento islámico usa Jer 8:8 (un versículo del supuestamente corrupto texto bíblico) como evidencia válida de la corrupción de ese mismo texto.</span></div>
+    <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El argumento islámico es epistemológicamente autocontradictorio: presupone la fiabilidad del texto para argumentar su infiabilidad; es una petición de principio que se destruye a sí misma.</span></div></div>
+  </div>
+</div>
+
+<!-- §11 -->
+<div class="sec" id="s11">
+  <div class="sec-hd"><span class="sec-num">§11</span><h2 class="sec-t">Manuscritos Posteriores a Jeremías: Sin Evidencia de Corrupción</h2></div>
+  <p class="sec-intro">Si la Torah fue textualmente corrompida por los escribas en el período de Jeremías (~600 a.C.), cabría esperar evidencia manuscrita de esa corrupción en las tradiciones textuales posteriores. No existe tal evidencia.</p>
+
+  <h4>Las Tres Grandes Tradiciones Textuales del Pentateuco</h4>
+  <table>
+    <thead><tr><th>Tradición</th><th>Fecha</th><th>Origen</th><th>Relación con el texto actual</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Texto Masorético (MT)</strong></td><td>Forma fijada s. VI-X d.C.; tradición anterior al s. I a.C.</td><td>Tradición rabínica palestinense</td><td>Base del texto hebreo estándar actual</td></tr>
+      <tr><td><strong>Septuaginta (LXX)</strong></td><td>~250-150 a.C.</td><td>Judíos alejandrinos — independiente de Palestina</td><td>Traducción del mismo Pentateuco hebreo; divergencias mínimas</td></tr>
+      <tr><td><strong>Pentateuco Samaritano (SP)</strong></td><td>Tradición pre-exílica</td><td>Tradición del norte de Israel — independiente de Judá</td><td>Mismo Pentateuco en esencia; ~6.000 variantes ortográficas/dialectales</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-arc">Textual Crítica</span>Convergencia de Tres Tradiciones Independientes</div>
+    <p class="ev-p">Si los escribas de Jerusalén corrompieron la Torah en el período jeremiano (~600 a.C.), este texto corrompido debería divergir de las tradiciones textuales independientes que se separaron antes o durante ese período. Sin embargo, el Pentateuco Samaritano (separado de Jerusalén en 722 a.C. o antes) y la Septuaginta (producida en Alejandría, independiente de la tradición palestinense) convergen en esencia con el texto masorético. Las divergencias existentes son de carácter ortográfico, dialectal o secundario — no alteraciones sustanciales de contenido. Esta convergencia de tres tradiciones independientes, geográficamente separadas y con contextos institucionales distintos, hace prácticamente imposible una corrupción scribal sistemática del texto en el siglo VI a.C.</p>
+  </div>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-arc">Arqueología</span>Los Rollos del Mar Muerto (DSS)</div>
+    <p class="ev-p">Los Rollos del Mar Muerto (descubiertos 1947-1956), que incluyen fragmentos del Pentateuco datados en el siglo III-I a.C., muestran un texto prácticamente idéntico al masorético para la Torah. El Gran Rollo de Isaías (1QIsa), datado en ~125 a.C., coincide en más del 95% con el texto masorético. No hay rastro en el corpus de Qumrán de un período de corrupción textual massiva en el período josiánico-jeremiano.</p>
+  </div>
+</div>
+
+<!-- §12 -->
+<div class="sec" id="s12">
+  <div class="sec-hd"><span class="sec-num">§12</span><h2 class="sec-t">Consenso de los Comentaristas Académicos</h2></div>
+  <p class="sec-intro">Por rigor intelectual, se examina el consenso de los comentaristas académicos de Jeremías — incluidos aquellos que no tienen compromisos confesionales conservadores.</p>
+
+  <table>
+    <thead><tr><th>Comentarista</th><th>Obra</th><th>Interpretación de 8:8</th></tr></thead>
+    <tbody>
+      <tr><td>John Bright</td><td><em>Jeremiah</em>, Anchor Bible (1965)</td><td>El versículo denuncia a los escribas que interpretan la Torah de modo que contradice el mensaje profético; es una crítica de interpretación, no de alteración textual</td></tr>
+      <tr><td>Jack Lundbom</td><td><em>Jeremiah 1-20</em>, Anchor Bible (1999)</td><td>«La pluma mentirosa» refiere a la producción legal de los escribas (legal rulings); el versículo critica la actividad hermenéutica escribal, no la copia de textos sagrados</td></tr>
+      <tr><td>William Holladay</td><td><em>Jeremiah 1</em>, Hermeneia (1986)</td><td>La acusación es contra escribas que producen documentos legales que distorsionan el espíritu de la Torah; «pluma mentirosa» = actividad de escritura legal fraudulenta</td></tr>
+      <tr><td>William McKane</td><td><em>Jeremiah I</em>, ICC (1986)</td><td>Los sofrim son intérpretes de la Torá que producen una tradición legal (torah scribal) que Jeremías considera falsa; no es una afirmación sobre el texto del Pentateuco</td></tr>
+      <tr><td>Robert Carroll</td><td><em>Jeremiah</em>, OTL (1986)</td><td>Incluso en la lectura más crítica, el pasaje refiere a la producción de textos hermenéuticos y no a la falsificación del texto recibido de Moisés</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ev">
+    <div class="ev-h"><span class="badge b-txt">Consenso</span>Ningún Comentarista Serio Lee 8:8 Como Admisión de Falsificación del Texto</div>
+    <p class="ev-p">El consenso académico es notable: incluyendo comentaristas de orientación histórico-crítica que en ningún caso tienen interés apologético conservador, ninguno interpreta Jer 8:8 como una afirmación de que el texto del Pentateuco fue alterado o falsificado por escribas. La lectura estándar es que Jeremías denuncia la actividad hermenéutica e interpretativa de los escribas — no la integridad del texto que interpretaban.</p>
+  </div>
+</div>
+
+<!-- §13 -->
+<div class="sec" id="s13">
+  <div class="sec-hd"><span class="sec-num">§13</span><h2 class="sec-t">El Dilema Coránico Aplicado a Jeremías</h2></div>
+  <p class="sec-intro">El mismo dilema coránico que destruye el argumento josiánico destruye igualmente el argumento jeremiano, con idéntica contundencia.</p>
+
+  <h4>El Argumento Islámico Lleva las Fechas</h4>
+  <table>
+    <thead><tr><th>Evento</th><th>Fecha aprox.</th></tr></thead>
+    <tbody>
+      <tr><td>Ministerio de Jeremías (supuesta época de la corrupción scribal)</td><td>~627–586 a.C.</td></tr>
+      <tr><td>Revelación del Corán a Mahoma</td><td>~610–632 d.C.</td></tr>
+      <tr><td>Intervalo entre "corrupción" y el Corán</td><td>~1.220–1.260 años</td></tr>
+    </tbody>
+  </table>
+
+  <div class="arab">
+    <span class="arab-t">وَكَيْفَ يُحَكِّمُونَكَ وَعِندَهُمُ التَّوْرَاةُ فِيهَا حُكْمُ اللَّهِ</span>
+    <span class="arab-r">Corán 5:43 — «¿Cómo acuden a ti para que juzgues, siendo que tienen la Torah en la cual está el juicio de Allah?»</span>
+  </div>
+
+  <div class="arab">
+    <span class="arab-t">إِنَّا أَنزَلْنَا التَّوْرَاةَ فِيهَا هُدًى وَنُورٌ</span>
+    <span class="arab-r">Corán 5:44 — «En verdad Nosotros enviamos la Torah; en ella hay guía y luz.»</span>
+  </div>
+
+  <div class="arab">
+    <span class="arab-t">قُلْ يَا أَهْلَ الْكِتَابِ لَسْتُمْ عَلَىٰ شَيْءٍ حَتَّىٰ تُقِيمُوا التَّوْرَاةَ وَالْإِنجِيلَ</span>
+    <span class="arab-r">Corán 5:68 — «Di: Gente del Libro, no tenéis fundamento hasta que pongáis en práctica la Torah y el Evangelio.»</span>
+  </div>
+
+  <div class="syl">
+    <div class="syl-t">Silogismo IX — El Dilema Coránico Aplicado al Caso Jeremías</div>
+    <div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si los escribas de la época de Jeremías (~600 a.C.) corrompieron la Torah, esa Torah permanecería corrupta aproximadamente 1.230 años antes de la revelación del Corán.</span></div>
+    <div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El Corán (5:43, 5:44, 5:68) afirma que la Torah disponible en tiempos de Mahoma contiene el juicio de Allah, tiene guía y luz, y debe ser puesta en práctica — sin indicar que el texto disponible sea una versión corrupta.</span></div>
+    <div class="syl-r"><span class="syl-l">P3</span><span class="syl-txt">Afirmar que la Torah disponible en tiempos de Mahoma (el texto corrompido desde Jeremías, según el argumento islámico) contiene «el juicio de Allah» y «guía y luz» sería una contradicción teológica inadmisible en el sistema islámico.</span></div>
+    <div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El Corán no puede simultáneamente afirmar que la Torah disponible en tiempos de Mahoma contiene el juicio de Allah Y que esa misma Torah fue corrompida por escribas 1.230 años antes; el argumento islámico basado en Jer 8:8 se destruye con la propia autoridad coránica.</span></div></div>
+  </div>
+</div>
+
+<!-- §14 -->
+<div class="sec" id="s14">
+  <div class="sec-hd"><span class="sec-num">§14</span><h2 class="sec-t">Silogismos Formales: Resumen Compilado para Debate</h2></div>
+  <p class="sec-intro">Los nueve silogismos del análisis en forma condensada, listos para uso directo en debate.</p>
+
+  <div class="syl"><div class="syl-t">I — El Contexto Inmediato Refuta la Lectura de Corrupción Textual</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Un versículo debe interpretarse en coherencia con el tema de su perícopa inmediata.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Jer 8:4-12 trata de hipocresía moral y liderazgo corrupto, no de alteración de manuscritos.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Leer 8:8 como denuncia de corrupción textual viola el principio básico de interpretación contextual.</span></div></div></div>
+
+  <div class="syl"><div class="syl-t">II — La Pluma Mentirosa Refiere Actividad Interpretativa, No Falsificación</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Los sofrim producían rulings legales e interpretaciones, no solo copiaban textos sagrados.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">עֵט («pluma») designa metonímicamente toda su actividad de producción escritural, incluidas interpretaciones y documentos legales.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">«La pluma mentirosa» denuncia producción hermenéutica fraudulenta; no afirma alteración del texto sagrado.</span></div></div></div>
+
+  <div class="syl"><div class="syl-t">III — El Objeto Implícito es la Pretensión, No el Texto</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">עָשָׂה carece de objeto directo explícito; el referente debe recuperarse del contexto.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El contexto inmediato anterior es la reclamación «somos sabios y la Torah está con nosotros»; אָכֵן introduce la corrección irónica de esa reclamación.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El objeto natural de «ha convertido en mentira» es la reclamación de sabiduría, no el texto de la Torah.</span></div></div></div>
+
+  <div class="syl"><div class="syl-t">IV — Jer 8:9 Confirma que la Torah Sigue Siendo «La Palabra de YHWH»</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si la Torah hubiera sido corrompida por los escribas, no podría llamarse «la Palabra de YHWH» en el versículo siguiente.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Jer 8:9 identifica la Torah como דְּבַר יְהוָה y describe la acción de los escribas como מָאַס («rechazar»), no como alterar o falsificar.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">La Torah permanece intacta como Palabra de Dios; los escribas la rechazan, no la corrompen textualmente.</span></div></div></div>
+
+  <div class="syl"><div class="syl-t">V — El Patrón Léxico de שֶׁקֶר en Jeremías Refuta la Lectura de Falsificación</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">La coherencia léxica exige que una palabra se interprete según su uso consistente en el mismo texto.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">שֶׁקֶר en Jeremías designa siempre engaño moral o falsa profecía, nunca alteración textual de manuscritos.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Leer שֶׁקֶר en 8:8 como falsificación textual contradice el uso lexicográfico consistente del propio libro de Jeremías.</span></div></div></div>
+
+  <div class="syl"><div class="syl-t">VI — El Ministerio de Jeremías Presupone una Torah Íntegra</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si Jeremías creyera la Torah corrompida, invocarla como norma divina sería incoherente.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Jeremías apela a la Torah mosaica como norma vigente en múltiples pasajes de su libro.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Jeremías no creía en ninguna corrupción textual; su ministerio presupone la integridad de la Torah.</span></div></div></div>
+
+  <div class="syl"><div class="syl-t">VII — Jer 31 Diagnostica un Problema Relacional, No Textual</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si el problema fuera un texto corrupto, la solución sería una Torah nueva y auténtica.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">Jer 31:31-34 promete inscribir «mi Torah» (la misma Torah divina) en el corazón; el problema diagnosticado es relacional.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">Jeremías 31 confirma que la Torah es auténtica; el problema de Israel es una relación rota con ella, no un texto falsificado.</span></div></div></div>
+
+  <div class="syl"><div class="syl-t">VIII — Autorefutación Epistemológica del Argumento Islámico</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si el texto bíblico no es fiable, ningún versículo extraído de él puede usarse como evidencia válida.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El argumento islámico usa Jer 8:8 (del supuestamente corrupto texto bíblico) como evidencia de esa corrupción.</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El argumento es epistemológicamente autocontradictorio: presupone la fiabilidad del texto para argumentar su infiabilidad.</span></div></div></div>
+
+  <div class="syl"><div class="syl-t">IX — El Dilema Coránico Irresoluble</div><div class="syl-r"><span class="syl-l">P1</span><span class="syl-txt">Si la Torah fue corrompida en la época de Jeremías (~600 a.C.), llevaba corrompida ~1.230 años cuando fue revelado el Corán.</span></div><div class="syl-r"><span class="syl-l">P2</span><span class="syl-txt">El Corán afirma que la Torah disponible en tiempos de Mahoma contiene el juicio, la guía y la luz de Allah (Q 5:43-44, 5:68).</span></div><div class="syl-c"><div class="syl-r"><span class="syl-l">∴</span><span class="syl-txt">El Corán se contradice internamente si la Torah estaba corrompida desde Jeremías; el argumento islámico se destruye con la propia autoridad que invoca.</span></div></div></div>
+</div>
+
+<!-- §15 -->
+<div class="sec" id="s15">
+  <div class="sec-hd"><span class="sec-num">§15</span><h2 class="sec-t">Conclusión General</h2></div>
+  <div class="concl">
+    <h3>Jeremías 8:8: Un Argumento Refutado en Nueve Frentes Independientes</h3>
+    <p>El versículo Jeremías 8:8, leído en su contexto inmediato, su contexto mayor, su gramática original, su patrón léxico y su coherencia interna, no contiene ninguna afirmación de corrupción textual de la Torah.</p>
+    <p><strong style="color:var(--gold-lt)">1. Contextual —</strong> La perícopa Jer 8:4-12 trata de hipocresía moral; ningún otro versículo del pasaje alude a alteración de manuscritos. <strong style="color:var(--gold-lt)">2. Gramatical —</strong> La frase hebraica לַשֶּׁקֶר עָשָׂה carece de objeto explícito; el referente natural es la pretensión de sabiduría, no el texto de la Torah. <strong style="color:var(--gold-lt)">3. Filológico —</strong> «Pluma» designa la actividad hermenéutica de los sofrim, no la copia del rollo sagrado.</p>
+    <p><strong style="color:var(--gold-lt)">4. Semántico (Jer 8:9) —</strong> Los escribas «rechazaron» la Palabra de YHWH — vocabulario de rechazo moral, no de falsificación. <strong style="color:var(--gold-lt)">5. Léxico —</strong> שֶׁקֶר en Jeremías designa siempre engaño moral o falsa profecía, nunca alteración textual. <strong style="color:var(--gold-lt)">6. Intertextual —</strong> Jeremías invoca la Torah como norma auténtica vigente a lo largo de todo su libro.</p>
+    <p><strong style="color:var(--gold-lt)">7. Teológico (Jer 31) —</strong> La Nueva Alianza promete inscribir «mi Torah» (la misma) en el corazón; el problema es relacional, no textual. <strong style="color:var(--gold-lt)">8. Epistemológico —</strong> Usar la Biblia para probar que la Biblia es corrupta es una petición de principio autocontradictoria. <strong style="color:var(--gold-lt)">9. Coránico —</strong> El Corán no puede afirmar que la Torah de los contemporáneos de Mahoma contiene el juicio de Allah si fue corrompida 1.230 años antes.</p>
+    <p>El apologista islámico que invoca Jeremías 8:8 no solo ha leído el texto fuera de su contexto: ha construido un argumento que se derrumba por sus propias reglas, con sus propias fuentes, en cada uno de sus frentes posibles.</p>
+  </div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+(function () {
+  const btn = document.getElementById('menuBtn');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const links   = document.querySelectorAll('.toc-a');
+  const sections = document.querySelectorAll('.sec');
+
+  function open()  { sidebar.classList.add('open'); overlay.classList.add('show'); btn.classList.add('active'); btn.setAttribute('aria-expanded','true'); }
+  function close() { sidebar.classList.remove('open'); overlay.classList.remove('show'); btn.classList.remove('active'); btn.setAttribute('aria-expanded','false'); }
+
+  btn.addEventListener('click', () => sidebar.classList.contains('open') ? close() : open());
+  overlay.addEventListener('click', close);
+  links.forEach(a => a.addEventListener('click', close));
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = '#' + e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-18% 0px -72% 0px', threshold: 0 });
+
+  sections.forEach(s => io.observe(s));
+})();
+</script>
+</body>
+</html>
