@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier Apologético · Deuteronomio 22:28–29</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+:root {
+  --ink:       #1a1207;
+  --parchment: #f6efdf;
+  --aged:      #ece2cb;
+  --deep:      #2a1f0e;
+  --gold:      #8b6914;
+  --gold-lt:   #c49a28;
+  --crimson:   #7a1b1b;
+  --margin:    #5a4a2a;
+  --rule:      #c4a96a;
+  --nav-bg:    #1a1106;
+  --nav-w:     260px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+/* body is plain block — no flex */
+body {
+  background: var(--deep);
+  font-family: 'EB Garamond', Georgia, serif;
+  color: var(--ink);
+}
+
+/* ═══════════════════════════════════════
+   HAMBURGER BUTTON  (fixed, top-left)
+═══════════════════════════════════════ */
+#toc-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 400;
+  background: var(--nav-bg);
+  border: 1px solid var(--gold);
+  color: var(--gold-lt);
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 8px 13px 8px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.55);
+  transition: background 0.15s;
+  user-select: none;
+  line-height: 1;
+}
+#toc-btn:hover { background: #2a1c08; }
+
+.hbars { display: flex; flex-direction: column; gap: 4px; }
+.hbars span {
+  display: block; width: 17px; height: 1.5px;
+  background: var(--gold-lt);
+  transition: transform 0.22s, opacity 0.22s;
+  transform-origin: center;
+}
+#toc-btn.is-open .hbars span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+#toc-btn.is-open .hbars span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#toc-btn.is-open .hbars span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+/* ═══════════════════════════════════════
+   OVERLAY
+═══════════════════════════════════════ */
+#toc-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+#toc-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ═══════════════════════════════════════
+   SIDEBAR DRAWER  (fixed, slides from left)
+═══════════════════════════════════════ */
+#toc-panel {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--nav-w);
+  background: var(--nav-bg);
+  border-right: 3px double var(--gold);
+  z-index: 350;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 0 48px;
+  transform: translateX(calc(-1 * var(--nav-w) - 8px));
+  transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+  box-shadow: 6px 0 30px rgba(0,0,0,0.6);
+}
+#toc-panel.is-open {
+  transform: translateX(0);
+}
+#toc-panel::-webkit-scrollbar { width: 3px; }
+#toc-panel::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+.toc-spacer { height: 60px; }
+
+.toc-title {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 4px;
+  color: var(--gold-lt);
+  text-transform: uppercase;
+  padding: 0 18px 12px;
+  border-bottom: 1px solid rgba(196,169,106,0.2);
+  margin-bottom: 4px;
+}
+
+.toc-group {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  padding: 13px 18px 3px;
+}
+
+#toc-panel a {
+  display: block;
+  padding: 7px 14px 7px 22px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11.5px;
+  color: rgba(230,215,180,0.72);
+  text-decoration: none;
+  line-height: 1.35;
+  border-left: 3px solid transparent;
+  transition: background 0.13s, color 0.13s, border-color 0.13s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#toc-panel a:hover {
+  color: var(--gold-lt);
+  background: rgba(196,169,106,0.08);
+  border-left-color: rgba(196,169,106,0.4);
+}
+#toc-panel a.active {
+  color: var(--gold-lt);
+  background: rgba(196,169,106,0.13);
+  border-left-color: var(--gold-lt);
+}
+
+/* ═══════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════ */
+#main {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--parchment);
+  min-height: 100vh;
+  box-shadow: 0 0 60px rgba(0,0,0,0.6);
+}
+
+/* ── COVER ── */
+.cover {
+  background: #18100a;
+  padding: 64px 56px 54px;
+  text-align: center;
+  position: relative;
+  border-bottom: 6px double var(--gold);
+}
+.cover::before {
+  content: '';
+  position: absolute; inset: 12px;
+  border: 1px solid rgba(196,169,106,0.28);
+  pointer-events: none;
+}
+.cover-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: var(--gold-lt);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.cover-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #f5eedf;
+  line-height: 1.16;
+  margin-bottom: 12px;
+}
+.cover-sub {
+  font-style: italic;
+  color: var(--rule);
+  font-size: 1.08rem;
+  margin-bottom: 32px;
+}
+.cover-verse {
+  display: inline-block;
+  font-style: italic;
+  color: var(--aged);
+  font-size: .93rem;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding: 10px 28px;
+  line-height: 1.72;
+}
+.heb-lg {
+  display: block;
+  direction: rtl;
+  font-size: 1.8rem;
+  color: var(--gold-lt);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 48px 56px 44px;
+  border-bottom: 1px solid var(--rule);
+}
+section:last-child { border-bottom: none; }
+
+.sec-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--crimson);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--rule);
+}
+h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: #3d2b05;
+  margin: 24px 0 10px;
+}
+p { line-height: 1.78; margin-bottom: 14px; font-size: 1.01rem; }
+p:last-child { margin-bottom: 0; }
+
+/* ── BLOCKQUOTE ── */
+blockquote {
+  margin: 20px 0;
+  padding: 16px 20px 16px 30px;
+  background: var(--aged);
+  border-left: 4px solid var(--gold);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: #3a2808;
+  position: relative;
+}
+blockquote::before {
+  content: '\201C';
+  font-size: 3rem;
+  color: var(--rule);
+  position: absolute;
+  top: -4px; left: 7px;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+.src {
+  display: block;
+  font-style: normal;
+  font-size: .78rem;
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--gold);
+  margin-top: 8px;
+  letter-spacing: .4px;
+}
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .92rem; }
+thead tr { background: #2a1f0e; color: var(--aged); }
+thead th {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  text-align: left;
+}
+tbody tr:nth-child(odd)  { background: var(--parchment); }
+tbody tr:nth-child(even) { background: var(--aged); }
+td { padding: 9px 12px; line-height: 1.5; vertical-align: top; }
+td:first-child { font-family: 'Cinzel', serif; font-size: .82rem; color: var(--crimson); font-weight: 600; }
+
+/* ── CARD ── */
+.card {
+  background: var(--aged);
+  border: 1px solid var(--rule);
+  padding: 18px 22px;
+  margin: 18px 0;
+}
+.card-lbl {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+/* ── VERDICT ── */
+.verdict {
+  background: #2a1f0e;
+  color: var(--aged);
+  padding: 24px 28px;
+  margin: 24px 0 0;
+  border-left: 5px solid var(--gold-lt);
+}
+.verdict-lbl {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: var(--gold-lt);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.verdict p { color: var(--aged); margin-bottom: 10px; }
+.verdict p:last-child { margin-bottom: 0; }
+.verdict .la, .verdict em, .verdict i { color: var(--rule); }
+.verdict .gr { color: #a8c890; }
+.verdict .he { color: var(--gold-lt); }
+.verdict strong { color: #f0e4c0; }
+
+/* ── OBJECTION ── */
+.obj { margin: 22px 0; }
+.obj-q {
+  background: #ede5d0;
+  border-left: 4px solid var(--crimson);
+  padding: 12px 18px;
+  font-style: italic;
+  color: var(--crimson);
+  font-size: .97rem;
+  line-height: 1.6;
+}
+.obj-q::before { content: '✦ Objeción: '; font-style: normal; font-weight: 700; }
+.obj-r {
+  background: var(--aged);
+  border-left: 4px solid var(--gold);
+  padding: 12px 18px;
+  line-height: 1.72;
+  font-size: .97rem;
+  color: var(--ink);
+}
+.obj-r::before { content: '→ Respuesta: '; font-weight: 700; color: var(--gold); }
+
+/* ── SCHOLAR GRID ── */
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin: 18px 0; }
+.sc { background: var(--aged); border: 1px solid var(--rule); padding: 14px 16px; }
+.sc-name {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.sc p { font-size: .88rem; line-height: 1.56; margin: 0; }
+
+/* ── INLINE LANG ── */
+.he { direction: rtl; font-size: 1.18rem; color: var(--crimson); font-weight: 600; display: inline-block; line-height: 1.7; }
+.la { font-style: italic; color: #4a3a1a; }
+.gr { font-style: italic; color: #2a3a1a; }
+strong { font-weight: 700; color: #2a1f0e; }
+
+/* ── HIGHLIGHT BOX ── */
+.hl {
+  border: 1.5px solid var(--gold);
+  padding: 14px 20px;
+  margin: 16px 0;
+  background: #faf4e6;
+  font-size: .96rem;
+  line-height: 1.72;
+}
+
+/* ── FOOTNOTE ── */
+.footnote {
+  border-top: 1px solid var(--rule);
+  margin-top: 32px;
+  padding-top: 14px;
+  font-size: .79rem;
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--margin);
+  line-height: 1.65;
+}
+
+@media (max-width: 680px) {
+  .cover { padding: 40px 22px 32px; }
+  .cover-title { font-size: 1.45rem; }
+  section { padding: 32px 20px 28px; }
+  .sg { grid-template-columns: 1fr; }
+  h2 { font-size: 1.08rem; }
+  #main { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HAMBURGER BUTTON ═══ -->
+<button id="toc-btn" aria-controls="toc-panel" aria-expanded="false" aria-label="Abrir índice">
+  <span class="hbars" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </span>
+  Índice
+</button>
+
+<!-- ═══ OVERLAY ═══ -->
+<div id="toc-overlay" aria-hidden="true"></div>
+
+<!-- ═══ SIDEBAR PANEL ═══ -->
+<nav id="toc-panel" aria-label="Índice de contenidos">
+  <div class="toc-spacer"></div>
+  <div class="toc-title">Contenido</div>
+
+  <div class="toc-group">Fundamentos</div>
+  <a href="#texto">I. El texto hebreo</a>
+  <a href="#verbos">II. Los verbos clave</a>
+  <a href="#taxonomia">III. Taxonomía del cap. 22</a>
+
+  <div class="toc-group">Versiones antiguas</div>
+  <a href="#lxx">IV. La LXX: βιασάμενος</a>
+  <a href="#tertuliano">V. Tertuliano y la Vetus Latina</a>
+  <a href="#jeronimo">VI. Jerónimo y la Vulgata</a>
+
+  <div class="toc-group">Evidencias</div>
+  <a href="#exodo">VII. Paralelo Éx 22:16–17</a>
+  <a href="#descubiertos">VIII. «Fueron descubiertos»</a>
+  <a href="#ane">IX. Derecho del ANE</a>
+  <a href="#rabinos">X. Tradición rabínica</a>
+  <a href="#ibnezra">XI. El caso Ibn Ezra</a>
+  <a href="#comentaristas">XII. Comentaristas modernos</a>
+
+  <div class="toc-group">Defensa</div>
+  <a href="#objeciones">XIII. Objeciones y respuestas</a>
+  <a href="#conclusion">Conclusión</a>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<div id="main">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Dossier Apologético · Exégesis del Pentateuco</div>
+  <h1 class="cover-title">Deuteronomio 22:28–29<br>¿Violación o Seducción?</h1>
+  <p class="cover-sub">Defensa exegética, filológica, textual y jurídica</p>
+  <div class="cover-verse">
+    <span class="heb-lg">וּתְפָשָׂהּ וְשָׁכַב עִמָּהּ וְנִמְצָאוּ</span>
+    <em>"Si invenerit vir puellam virginem quae non habet sponsum,<br>
+    et apprehendens concubuerit cum illa, et res ad iudicium venerit…"</em><br>
+    <span style="font-size:.78rem;color:var(--rule);">Vulgata de San Jerónimo · Dt 22:28</span>
+  </div>
+</div>
+
+<!-- I -->
+<section id="texto">
+  <div class="sec-label">Sección I</div>
+  <h2>El Texto Hebreo Original</h2>
+  <div class="card">
+    <div class="card-lbl">Texto Masorético — Deuteronomio 22:28–29</div>
+    <p style="direction:rtl;text-align:right;font-size:1.38rem;line-height:2.1;color:var(--crimson);">
+      כִּי יִמְצָא אִישׁ נַעֲרָ֤ בְתוּלָה֙ אֲשֶׁ֣ר לֹא־אֹרָ֔שָׂה <strong style="color:#7a1b1b;">וּתְפָשָׂ֖הּ</strong> וְשָׁכַ֣ב עִמָּ֑הּ וְנִמְצָֽאוּ׃
+    </p>
+    <p style="direction:rtl;text-align:right;font-size:1.15rem;line-height:2;color:#3a2808;margin-top:10px;">
+      וְנָתַן֩ הָאִ֨ישׁ הַשֹּׁכֵ֥ב עִמָּ֛הּ לַאֲבִ֥י הַנַּעֲרָ֖ חֲמִשִּׁ֣ים כָּ֑סֶף וְלֹו תִהְיֶ֤ה לְאִשָּׁה֙ תַּ֣חַת אֲשֶׁ֣ר <strong style="color:#7a1b1b;">עִנָּ֔הּ</strong> לֹא־יוּכַ֥ל שַׁלְּחָ֖הּ כָּל־יָמָֽיו׃
+    </p>
+  </div>
+  <p>Los dos verbos marcados en rojo son las palabras técnicamente decisivas: <strong><span class="he">וּתְפָשָׂהּ</span></strong> (<em>wetafasah</em>, «y la asió») en v. 28 y <strong><span class="he">עִנָּהּ</span></strong> (<em>innah</em>, «la humilló») en v. 29. El análisis de estos dos términos en su contexto literario y jurídico constituye el núcleo de toda la defensa.</p>
+</section>
+
+<!-- II -->
+<section id="verbos">
+  <div class="sec-label">Sección II</div>
+  <h2>Los Verbos Hebreos: La Clave Filológica</h2>
+
+  <h3>A) <span class="he">תָּפַשׂ</span> (<em>tapas</em>) — el verbo de Dt 22:28</h3>
+  <p>El verbo <em>tapas</em> tiene en el Tanaj un campo semántico de asimiento relacional, no de agresión sexual técnica:</p>
+  <table>
+    <thead><tr><th>Referencia</th><th>Contexto</th><th>Sentido de <em>tapas</em></th></tr></thead>
+    <tbody>
+      <tr><td>Gén 39:12</td><td>La mujer de Potifar «asió» a José por la ropa para seducirlo</td><td>Sujetar sin violencia</td></tr>
+      <tr><td>Is 3:6</td><td>«Tomará a su hermano»</td><td>Tomar de la mano para hablar</td></tr>
+      <tr><td>Gén 4:21</td><td>«Padre de los que manejan arpa»</td><td>Tocar, manejar</td></tr>
+      <tr><td>Jer 2:8</td><td>«Los que manejan la Ley»</td><td>Ocuparse de, empuñar</td></tr>
+      <tr><td>Prov 30:9</td><td>«Tomare el nombre de Dios»</td><td>Tomar para sí</td></tr>
+    </tbody>
+  </table>
+  <p>El ejemplo de Gén 39:12 es especialmente ilustrativo: el mismo verbo <em>tapas</em> describe a una mujer asiendo a un hombre con el fin de seducirlo. Una mujer que actuara con violencia física no terminaría con la ropa del hombre en la mano mientras él escapa. El verbo describe contacto relacional, no agresión forzada.</p>
+
+  <h3>B) <span class="he">חָזַק</span> (<em>chazaq</em>) y <span class="he">עִנָּה</span> (<em>innah</em>) — los verbos de violación real</h3>
+  <p>El vocabulario técnico bíblico de la violación es consistente en todo el Tanaj y no incluye <em>tapas</em>:</p>
+  <table>
+    <thead><tr><th>Texto</th><th>Caso</th><th>Verbo usado</th></tr></thead>
+    <tbody>
+      <tr><td>Gén 34:2</td><td>Siquem viola a Dina</td><td><span class="he">וַיְעַנֶּהָ</span> — <em>innah</em></td></tr>
+      <tr><td>2 Sam 13:11,14</td><td>Amnón viola a Tamar</td><td><span class="he">וַיְחַזֶּק מִמֶּנָּה</span> — <em>chazaq</em></td></tr>
+      <tr><td>Jue 19:25</td><td>Violación colectiva en Gabaa</td><td>Vocabulario de abuso brutal</td></tr>
+      <tr><td><strong>Dt 22:25–27</strong></td><td><strong>Violación en el campo</strong></td><td><span class="he">וְהֶחֱזִיק־בָּהּ</span> — <em>chazaq</em></td></tr>
+      <tr><td><strong>Dt 22:28</strong></td><td><strong>El caso en cuestión</strong></td><td><span class="he">וּתְפָשָׂהּ</span> — <em>tapas</em> (verbo deliberadamente diferente)</td></tr>
+    </tbody>
+  </table>
+  <div class="verdict">
+    <div class="verdict-lbl">Argumento Nuclear</div>
+    <p>El redactor de Deuteronomio tenía el verbo <em>chazaq</em> literalmente dos versículos antes (v. 25) y lo omitió deliberadamente en v. 28. En un corpus legal de esta precisión, el cambio de verbo equivale a un cambio de tipificación del delito. En todo el Tanaj, ningún caso documentado de violación emplea la combinación <em>tapas + anah</em>. Los casos de violación siempre combinan <em>chazaq</em> o <em>innah</em> con indicadores explícitos de resistencia o fuerza física.</p>
+  </div>
+
+  <h3>C) <span class="he">עִנָּהּ</span> (<em>innah</em>) en v. 29: ¿prueba de violación?</h3>
+  <p>El v. 29 dice «por cuanto la humilló» (<em>innah</em>). La raíz <span class="he">ענה</span> en su segunda acepción designa cualquier acto que deshonra o degrada socialmente a la mujer, no exclusivamente la violación física. La seducción que destruye el honor matrimonial de una virgen la «humilla» en este sentido preciso. Si <em>innah</em> en v. 29 significara inequívocamente violación, la penalidad tendría que ser la muerte del agresor, como en v. 27. La incoherencia penal refuta esa lectura desde dentro del propio sistema legal.</p>
+</section>
+
+<!-- III -->
+<section id="taxonomia">
+  <div class="sec-label">Sección III</div>
+  <h2>Taxonomía Jurídica del Capítulo 22</h2>
+  <p>Leer el versículo 28 en aislamiento es un error metodológico. El capítulo 22 construye una escala graduada de delitos sexuales con penalidades en progresión descendente:</p>
+  <table>
+    <thead><tr><th>Caso</th><th>Vv.</th><th>Situación</th><th>Verbo clave</th><th>Penalidad</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td>13–21</td><td>Calumnia sobre virginidad de esposa</td><td>—</td><td>Hombre azotado + multa; o mujer ejecutada</td></tr>
+      <tr><td>B</td><td>22</td><td>Adulterio bilateral</td><td>—</td><td>Ambos mueren</td></tr>
+      <tr><td>C</td><td>23–24</td><td>Relación en ciudad, comprometida</td><td>—</td><td>Ambos mueren</td></tr>
+      <tr><td>D</td><td>25–27</td><td><strong>Violación</strong> en campo, comprometida</td><td><em>chazaq</em></td><td>Solo el hombre muere</td></tr>
+      <tr><td>E</td><td>28–29</td><td>Relación sin esponsales</td><td><em>tapas</em></td><td>Multa 50 siclos + matrimonio</td></tr>
+    </tbody>
+  </table>
+  <p>Si el caso E fuera también violación, su penalidad tendría que ser idéntica o superior al caso D. La reducción drástica de la pena —de muerte a compensación económica— solo es jurídicamente coherente si los delitos son cualitativamente distintos.</p>
+</section>
+
+<!-- IV -->
+<section id="lxx">
+  <div class="sec-label">Sección IV</div>
+  <h2>La Septuaginta: βιασάμενος y sus implicaciones</h2>
+  <p>Este punto es fundamental para comprender por qué algunas traducciones y autores antiguos hablan de «fuerza» en Dt 22:28. La Septuaginta (LXX), traducción griega realizada entre los siglos III–II a.C., traduce el versículo así:</p>
+  <div class="card">
+    <div class="card-lbl">LXX — Deuteronomio 22:28 (Codex Vaticanus / Rahlfs)</div>
+    <p style="font-size:1.2rem;color:#2a3a1a;line-height:1.9;">
+      ἐὰν δέ τις εὕρῃ τὴν παῖδα τὴν παρθένον ἥτις οὐ μεμνήστευται καὶ
+      <strong style="color:var(--crimson);">βιασάμενος</strong>
+      κοιμηθῇ μετ᾽ αὐτῆς καὶ εὑρεθῇ…
+    </p>
+    <p style="margin-top:10px;font-size:.88rem;font-style:italic;color:var(--margin);">
+      «Y si alguien encontrare a la joven virgen que no está desposada, y <strong>forzando</strong> se acostare con ella y fuere hallado…» — Brenton: «should <em>force</em> and lie with her, and be found»
+    </p>
+  </div>
+
+  <h3>El verbo griego: βιάζω (<em>biazō</em>)</h3>
+  <p>El participio <strong class="gr">βιασάμενος</strong> proviene de <span class="gr">βιάζω</span> («usar la fuerza, compeler»), raíz del sustantivo <span class="gr">βία</span> (violencia). En griego clásico y helenístico designa coacción o acción forzada.</p>
+
+  <h3>¿Por qué los traductores de la LXX eligieron este verbo?</h3>
+  <p><strong>1. Posible diferencia en el texto base hebreo.</strong> Los traductores alejandrinos pudieron trabajar desde un manuscrito con una variante léxica distinta —quizás con <em>chazaq</em> en lugar de <em>tapas</em>. Las tradiciones textuales pre-masoréticas no eran uniformes, como evidencian los manuscritos de Qumrán para el Deuteronomio.</p>
+  <p><strong>2. Estrategia traductológica.</strong> La LXX no siempre traduce palabra por palabra. Los traductores pudieron interpretar <em>tapas</em> combinado con <em>shakab</em> como un acto que implicaba cierta presión o iniciativa del hombre, y volcarlo con un término más contundente en griego.</p>
+  <p><strong>3. La LXX no equipara el caso penológicamente.</strong> Crucialmente, incluso con <span class="gr">βιασάμενος</span>, la LXX mantiene exactamente la misma penalidad: multa y matrimonio, sin pena de muerte. Si sus traductores hubieran entendido este caso como idéntico a la violación de los vv. 25–27, habrían reflejado la pena capital. No lo hicieron.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Consecuencia directa para Tertuliano</div>
+    <p>Tertuliano, como todos los Padres latinos anteriores a Jerónimo, leía el AT a través de la <em>Vetus Latina</em> —traducción latina realizada desde la LXX griega, no desde el hebreo. La <em>Vetus Latina</em> trasladó <span class="gr">βιασάμενος</span> con vocabulario latino de fuerza. Por eso cuando Tertuliano cita Dt 22:28–29 habla de «violence»: no está leyendo el hebreo, sino el eco de la LXX a través de la Vetus Latina.</p>
+  </div>
+</section>
+
+<!-- V -->
+<section id="tertuliano">
+  <div class="sec-label">Sección V</div>
+  <h2>Tertuliano: <em>Adversus Marcionem</em> IV.34 — Análisis Crítico</h2>
+
+  <h3>La cita verificada</h3>
+  <blockquote>
+    "The Creator, however, except on account of adultery, does not put asunder what He Himself joined together — the same Moses in another passage enacting that he who had married after <strong>violence to a damsel</strong> should not have it in his power to put away his wife [Deut. xxii. 28, 29]. Now, if a compulsory marriage contracted after violence shall be permanent, how much more shall a voluntary one, the result of agreement!"
+    <span class="src">— Tertuliano, <em>Adversus Marcionem</em> IV.34 (ed. Ernest Evans, Oxford UP, 1972; CCEL ANF vol. 3; New Advent)</span>
+  </blockquote>
+
+  <h3>Qué hace realmente Tertuliano aquí</h3>
+  <p>El propósito de Tertuliano en este capítulo es refutar a Marción, quien sostenía que el Dios del AT y el de Cristo eran dioses distintos y contradictorios en materia de divorcio. Tertuliano responde demostrando que la ley mosaica y Cristo van en la misma dirección: proteger el matrimonio. Para ello construye un argumento <em>a fortiori</em>: «si incluso un matrimonio contraído tras presión física es indisoluble por ley mosaica, <em>cuánto más</em> lo será uno voluntario». El versículo le sirve como caso extremo del espectro. No está analizando si el acto fue seducción o violación.</p>
+
+  <h3>La cadena de transmisión textual que explica su vocabulario</h3>
+  <div class="hl">
+    <strong>Texto hebreo (TM):</strong> <span class="he">וּתְפָשָׂהּ</span> — <em>tapas</em> (asir, tomar)<br><br>
+    <strong>↓ LXX griega:</strong> <span class="gr">βιασάμενος</span> — <em>biazō</em> (forzar, usar la fuerza)<br><br>
+    <strong>↓ Vetus Latina</strong> (traducción latina de la LXX, usada por los Padres latinos): vocabulario de fuerza/violencia<br><br>
+    <strong>↓ Tertuliano</strong> cita la <em>Vetus Latina</em> → «violence to a damsel»
+  </div>
+  <p>El vocabulario de violencia en Tertuliano es un artefacto de la cadena de transmisión textual, no una exégesis independiente del hebreo. Quien accede al texto hebreo original —como Jerónimo— obtiene un verbo (<em>tapas</em>) que pertenece a un campo semántico de asimiento relacional, distinto del <em>chazaq</em> que aparece en el caso de violación real del v. 25. Jerónimo traduce ambos casos con <span class="la"><em>apprehendens</em></span> —verbo neutro de contacto físico— y los diferencia mediante la penalidad, que es donde el hebreo los diferencia.</p>
+</section>
+
+<!-- VI -->
+<section id="jeronimo">
+  <div class="sec-label">Sección VI</div>
+  <h2>Jerónimo y la Vulgata: Lectura Honesta y Argumento Correcto</h2>
+  <p>San Jerónimo (347–420 d.C.) aprendió hebreo de maestros judíos en Belén, dominaba hebreo, griego y latín, y trabajó desde manuscritos hebreos anteriores a la fijación masorética definitiva. El análisis de su traducción en este pasaje requiere, sin embargo, precisión y honestidad.</p>
+
+  <h3>El dato exacto: Jerónimo usa <em>apprehendens</em> en ambos versículos</h3>
+  <p>Es necesario señalar un hecho que algunas presentaciones apologéticas pasan por alto: la Vulgata (y la Nova Vulgata, que sigue a Jerónimo) emplea el mismo verbo <span class="la"><em>apprehendens</em></span> tanto en el v. 25 (violación de comprometida) como en el v. 28 (el caso en cuestión):</p>
+
+  <div class="card">
+    <div class="card-lbl">Vulgata — Deuteronomio 22:25 y 22:28 comparados</div>
+    <p><strong>Dt 22:25 (violación, pena de muerte):</strong><br>
+    <span class="la">«Sin autem in agro reppererit vir puellam, quae desponsata est, et <strong>apprehendens</strong> concubuerit cum illa, <strong>ipse morietur solus</strong>»</span></p>
+    <p style="margin-top:12px;"><strong>Dt 22:28 (el caso en cuestión, multa y matrimonio):</strong><br>
+    <span class="la">«Si invenerit vir puellam virginem, quae non habet sponsum, et <strong>apprehendens</strong> concubuerit cum ea… <strong>dabit quinquaginta siclos argenti</strong>»</span></p>
+  </div>
+
+  <p>Este hecho invalida el argumento de que Jerónimo distingue los dos casos <em>dentro de Deuteronomio 22</em> mediante vocabulario diferente. El argumento debe reformularse con precisión.</p>
+
+  <h3>La vía de salida correcta: lo que sí distingue Jerónimo — y lo que eso demuestra</h3>
+
+  <p><strong>1. La distinción de Jerónimo opera mediante la penalidad, no el verbo.</strong> Jerónimo usa <span class="la"><em>apprehendens</em></span> en ambos versículos pero los diferencia radicalmente en la consecuencia jurídica: v. 25 termina en <span class="la"><em>ipse morietur solus</em></span> («solo él morirá»); v. 28 termina en compensación económica y matrimonio. Para Jerónimo, la distinción entre los dos casos no reside en el verbo de acción sino en la estructura penal total del texto. Esto es exactamente lo que el argumento exegético ha sostenido desde el principio: la diferencia entre los casos la marcan el hebreo subyacente (<em>chazaq</em> vs. <em>tapas</em>) y la penalidad, no una única palabra aislada.</p>
+
+  <p><strong>2. Que <em>apprehendens</em> aparezca en el caso de violación (v. 25) no convierte a <em>apprehendens</em> en vocabulario técnico de violación.</strong> El latín <span class="la"><em>apprehendere</em></span> significa «asir, tomar, agarrar» — describe una acción física de contacto que puede ser violenta o no según el contexto. Su aparición en v. 25 no le confiere un significado especializado de violación: el v. 25 es violación porque la mujer estaba comprometida, gritó, y solo el hombre muere; no porque el verbo <span class="la"><em>apprehendens</em></span> lo indique. Jerónimo usa el mismo verbo precisamente porque en hebreo v. 25 emplea <span class="la"><em>chazaq</em></span> y v. 28 emplea <span class="la"><em>tapas</em></span>, ambos verbos de acción física que en latín caen dentro del rango semántico de <span class="la"><em>apprehendere</em></span> — pero con contextos y penas completamente distintos.</p>
+
+  <p><strong>3. Cuando Jerónimo quiere señalar violación explícita sin ambigüedad, usa vocabulario distinto.</strong> En Génesis 34:2 (Siquem viola a Dina), la Vulgata dice: <span class="la">«<em>rapuitque</em> eam et dormivit cum illa <em>vi oppressam</em>»</span> — «la arrebató y durmió con ella violentándola por la fuerza». El uso de <span class="la"><em>rapuit</em></span> y <span class="la"><em>vi oppressam</em></span> cuando la violación es inequívoca y sin ambigüedad narrativa demuestra que Jerónimo tenía a su disposición un vocabulario de violación explícito y lo empleaba cuando el texto lo requería. El hecho de que no lo empleara en Dt 22:28 — donde sí lo habría justificado si leyera violación — refuerza que su lectura del v. 28 no equivale a la de Gén 34:2.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Conclusión revisada sobre Jerónimo</div>
+    <p>El argumento correcto sobre la Vulgata no descansa en una distinción léxica <em>dentro</em> de Deuteronomio 22 — porque Jerónimo usa <span class="la"><em>apprehendens</em></span> en ambos versículos. El argumento correcto es triple: (a) <span class="la"><em>apprehendens</em></span> no es vocabulario técnico de violación en latín clásico ni en la Vulgata; (b) Jerónimo distingue los dos casos mediante la penalidad, que es exactamente donde el texto hebreo los distingue; y (c) cuando Jerónimo quiso decir violación sin ambigüedad (Gén 34:2), usó <span class="la"><em>rapuit / vi oppressam</em></span>, no <span class="la"><em>apprehendens</em></span>. La corrección desde el hebreo que Jerónimo aporta opera a nivel de sistema legal completo, no de una sola palabra.</p>
+  </div>
+</section>
+
+<!-- VII -->
+<section id="exodo">
+  <div class="sec-label">Sección VII</div>
+  <h2>El Paralelo de Éxodo 22:16–17: La Ley Gemela</h2>
+  <blockquote>
+    «Si alguno <strong>sedujere</strong> [<span class="he">יְפַתֶּה</span> — <em>yefateh</em>] a una virgen que no estuviere desposada, y durmiere con ella, deberá dotarla y tomarla por mujer. Si su padre no quisiere dársela, él pesará la plata conforme a la dote de las vírgenes.»
+    <span class="src">— Éxodo 22:16–17 (Código de la Alianza)</span>
+  </blockquote>
+
+  <h3>1. El verbo es פָּתָה (<em>pathah</em>): seducir</h3>
+  <p><em>Pathah</em> significa persuadir sentimentalmente, seducir. Aparece en Os 2:14, Jue 14:15 y Jer 20:7 siempre en contextos de conquista amorosa o persuasión. El Código de la Alianza eligió este verbo para el mismo caso que Deuteronomio designa con <em>tapas</em>: ambos se sitúan en el registro de la acción relacional, no violenta.</p>
+
+  <h3>2. El padre puede vetar el matrimonio</h3>
+  <p>«Si su padre <strong>no quisiere dársela</strong>» — esta cláusula sería jurídicamente absurda en un caso de violación. El veto paterno presupone un acto de seducción donde el hombre es evaluado como candidato matrimonial posible pero rechazable.</p>
+
+  <h3>3. La compensación es civil, no penal</h3>
+  <p>El pago equivale a la dote estándar: es reparación por daño social, no pena criminal por violencia. Si fuera violación, la penalidad correspondiente sería la muerte (Dt 22:25–27).</p>
+</section>
+
+<!-- VIII -->
+<section id="descubiertos">
+  <div class="sec-label">Sección VIII</div>
+  <h2>«Y Fueron Descubiertos»: El Plural Acusatorio</h2>
+  <p>El v. 28 concluye con <strong><span class="he">וְנִמְצָאוּ</span></strong> (<em>wenimtze'u</em>): «y <strong>fueron</strong> descubiertos» — forma plural, tercera persona, masculino y femenino.</p>
+  <p>En los casos de violación real (vv. 25–27), el texto establece explícitamente que la mujer es inocente: «no hay en la joven pecado digno de muerte» (v. 26). La mujer no es «descubierta» como partícipe — es la víctima que grita y no es oída. Por contraste, en el v. 28 ambos son «descubiertos» en plural, en la misma categoría de hallazgo. Este plural indica corresponsabilidad o presencia mutua sin resistencia activa documentada, coherente con la seducción.</p>
+  <p>Si el caso fuera violación, la narrativa textual esperada sería: la mujer denuncia, el hombre es acusado. No que «ambos fueron descubiertos».</p>
+</section>
+
+<!-- IX -->
+<section id="ane">
+  <div class="sec-label">Sección IX</div>
+  <h2>Derecho Comparado del Antiguo Oriente Próximo</h2>
+
+  <h3>Leyes Medioasirias (MAL) §55–56</h3>
+  <div class="card">
+    <div class="card-lbl">MAL §55–56 (Martha Roth, <em>Law Collections from Mesopotamia</em>, SBL, 1997)</div>
+    <p><strong>§55:</strong> «Si un hombre toma por la fuerza a una doncella virgen que reside en la casa de su padre, que no está desposada… el padre de la doncella tomará a la esposa del violador y la entregará para ser ultrajada.» — Pena severa.</p>
+    <p style="margin-top:10px;"><strong>§56:</strong> «Si una doncella se da de buen grado a un hombre — el hombre jurará; el fornicador pagará el triple de la plata según el valor de la doncella; el padre tratará a su hija como quiera.»</p>
+    <p style="margin-top:10px;font-style:italic;color:var(--margin);">Paralelo estructural más cercano a Dt 22:28–29 y Éx 22:16–17. Dt 22:28–29 corresponde al caso §56 (consentida).</p>
+  </div>
+
+  <h3>Código de Hammurabi §130 y §156</h3>
+  <p><strong>§130:</strong> Pena de muerte para quien viola a la prometida de otro — paralelo con Dt 22:25–27.</p>
+  <p><strong>§156:</strong> Compensación económica, sin pena capital — paralelo con el esquema de Dt 22:28–29. La distinción universal en el derecho del ANE entre acto forzado (muerte) y acto no forzado (compensación) confirma que Dt 22:28–29 pertenece a la segunda categoría.</p>
+</section>
+
+<!-- X -->
+<section id="rabinos">
+  <div class="sec-label">Sección X</div>
+  <h2>Tradición Rabínica: La Distinción Técnica</h2>
+  <table>
+    <thead><tr><th>Término</th><th>Raíz</th><th>Significado técnico</th></tr></thead>
+    <tbody>
+      <tr><td><span class="he">אוֹנֵס</span> (<em>ones</em>)</td><td>אנס</td><td>Violador; quien coacciona por fuerza física</td></tr>
+      <tr><td><span class="he">מְפַתֶּה</span> (<em>mefateh</em>)</td><td>פתה</td><td>Seductor; del verbo <em>pathah</em> de Éx 22:16</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Maimónides — <em>Mishneh Torah</em>, <em>Hilkhot Na'arah Betulah</em></h3>
+  <p>Maimónides trata <em>ones</em> y <em>mefateh</em> en capítulos distintos con penalidades distintas. Incluso en el caso del <em>ones</em>, establece que la mujer tiene <strong>derecho de rechazar el matrimonio</strong>. La ley nunca obliga a la víctima; obliga al agresor a asumir responsabilidad permanente.</p>
+
+  <h3>Mishná — <em>Ketuvot</em> 3:1–4</h3>
+  <p>La Mishná elabora con plena distinción técnica las diferencias de penalidad entre ambos casos. Que el tractado las trate como dos categorías separadas confirma que son jurídicamente inconmensurables.</p>
+
+  <h3>Keil y Delitzsch</h3>
+  <p>Clasifican Dt 22:28–29 bajo «Seducción de una virgen» y observan que el delito involucrado fue «su obra» —expresión que implica el concurso de voluntad de ambas partes— comparando la ley directamente con Éx 22:16–17. (<em>Biblical Commentary on the OT</em>, vol. 3, p. 412)</p>
+</section>
+
+<!-- XI -->
+<section id="ibnezra">
+  <div class="sec-label">Sección XI</div>
+  <h2>El Caso Ibn Ezra: Respuesta Directa</h2>
+  <p>Ibn Ezra (1089–1167) sostiene en su comentario a Dt 22:28 que el versículo trata de violación (<em>ones</em>), no de seducción. Es la objeción rabínica más seria y merece respuesta directa.</p>
+
+  <p><strong>1. Inconsistencia penal irresuelta.</strong> Si Dt 22:25–27 y Dt 22:28–29 son ambos violaciones, ¿por qué la primera recibe pena de muerte y la segunda solo una multa? Ibn Ezra responde que la diferencia está en el estatus de la mujer (comprometida vs. libre), pero eso implica que violar a una mujer libre merece menos pena que violar a una comprometida — una distinción que desprotege a la mujer libre, difícilmente defendible como principio de justicia.</p>
+
+  <p><strong>2. El paralelo de Éxodo refuta la posición.</strong> Ibn Ezra reconoce que Éx 22:16 trata seducción. Si Dt 22:28–29 fuera violación, ¿por qué ambos pasajes legislan exactamente la misma penalidad? La igualdad de la pena indica que son el mismo tipo de caso.</p>
+
+  <p><strong>3. El debate rabínico no es unánime.</strong> Rashi no identifica el v. 28 con violación en sentido técnico. Keil y Delitzsch, conociendo perfectamente a Ibn Ezra, lo contradicen. La posición de Ibn Ezra no representa el consenso exegético judío.</p>
+
+  <p><strong>4. La conclusión práctica no cambia.</strong> Incluso aceptando a Ibn Ezra, el derecho rabínico otorga a la mujer el derecho de rechazar al violador (Maimónides). La acusación de que «la ley obliga a la víctima a casarse con su agresor» colapsa incluso dentro del marco de Ibn Ezra.</p>
+</section>
+
+<!-- XII -->
+<section id="comentaristas">
+  <div class="sec-label">Sección XII</div>
+  <h2>Consenso de Comentaristas Académicos</h2>
+  <div class="sg">
+    <div class="sc">
+      <div class="sc-name">Meredith Kline</div>
+      <p>«El seductor de una virgen no comprometida estaba obligado a tomarla como esposa, pagando el precio habitual por la novia y perdiendo el derecho al divorcio.» (<em>Treaty of the Great King</em>, p. 111)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Matthew Henry</div>
+      <p>«…si él y la doncella consintieran, él estaría obligado a casarse con ella y nunca a divorciarse de ella.» (<em>Comentario sobre toda la Biblia</em>, ad loc.)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">J.A. Thompson</div>
+      <p>«Seducción de una joven. El hombre estaba obligado a pagar el precio habitual de la novia y casarse con ella. No se le permitía despedirla.» (<em>Deuteronomy</em>, Tyndale Series, p. 237)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">James Jordan</div>
+      <p>«El verbo "apoderarse" es más débil que el verbo para "forzar" del v. 25. La violación moderna estaría sujeta a la pena de muerte de Dt 22:25–27.» (<em>The Law of the Covenant</em>, p. 149)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Charles Foster Kent (Yale)</div>
+      <p>Distinguió «la ley relativa a la violación en Dt 22:25–27 y la ley relativa a la seducción en Dt 22:28–29.» (<em>Israel's Laws and Legal Precedents</em>, 1907, pp. 117–118)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">John Gill</div>
+      <p>«…cediendo ella a él, y por lo tanto no es expresivo de una violación, como Dt 22:25, donde se usa una palabra diferente… obtenido con palabras seductoras, profesiones de amor y promesas de matrimonio, pero no sin su consentimiento.» (<em>Exposición de la Biblia</em>)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Nueva Biblia del Intérprete</div>
+      <p>«La norma aquí se dirige a casos de seducción en los que se supone que la mujer estaba, o pudo haber estado, consentiendo la relación sexual.» (Abingdon Press, 2003, pp. 278–279)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Greg Bahnsen</div>
+      <p>«El verbo en v. 28 se cambia al simple "tomar" — indicando una acción menos intensa y violenta que la del v. 25.» (<em>Pre-Marital Sexual Relations</em>)</p>
+    </div>
+  </div>
+</section>
+
+<!-- XIII -->
+<section id="objeciones">
+  <div class="sec-label">Sección XIII</div>
+  <h2>Objeciones y Respuestas Sistemáticas</h2>
+
+  <div class="obj">
+    <div class="obj-q">La LXX dice βιασάμενος (forzar) — esa es la traducción auténtica del texto.</div>
+    <div class="obj-r">La LXX tiene valor textual propio, pero no es el texto hebreo original. El TM usa <em>tapas</em> (asir), no <em>chazaq</em> (forzar violentamente), que es el verbo usado dos versículos antes para la violación real. Jerónimo, con dominio del hebreo y acceso a manuscritos más antiguos, corrigió la LXX eligiendo <span class="la"><em>apprehendens</em></span>. Además, la propia LXX mantiene la penalidad menor sin pena de muerte, demostrando que ni sus traductores equipararon este caso con la violación de los vv. 25–27.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Tertuliano dice «violence» — un Padre de la Iglesia que cita el pasaje como violación.</div>
+    <div class="obj-r">El vocabulario de Tertuliano es un artefacto de la cadena de transmisión textual: leía la <em>Vetus Latina</em>, traducida de la LXX, que usa <span class="gr">βιασάμενος</span>. Además, su uso del versículo en <em>Adv. Marc.</em> IV.34 no es exégesis técnica del caso legal, sino un argumento retórico <em>a fortiori</em> sobre indisolubilidad matrimonial. Su propósito argumentativo no requería distinguir si el acto fue seducción o violación.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">El versículo dice «la humilló» (<em>innah</em>) en v. 29 — eso confirma que fue violación.</div>
+    <div class="obj-r">La raíz <span class="he">ענה</span> designa cualquier acto que deshonra socialmente a la mujer, no exclusivamente la violación física. La seducción que destruye el honor matrimonial de una virgen también la «humilla». Si <em>innah</em> aquí significara exclusivamente violación, la penalidad tendría que ser la muerte, como en v. 27. La incoherencia penal refuta esa lectura desde dentro del sistema legal.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Ibn Ezra identifica el v. 28 con violación — eso es autoridad decisiva.</div>
+    <div class="obj-r">La posición de Ibn Ezra no es el consenso rabínico (Rashi, Keil-Delitzsch, la Mishná Ketuvot y Maimónides no la comparten), crea inconsistencia penal irresuelta, y es refutada por el paralelo de Éxodo. Y crucialmente, incluso bajo su lectura, el derecho rabínico otorga a la mujer el derecho de rechazar al violador, eliminando la acusación de que «la ley obliga a la víctima a casarse con su agresor».</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">La Biblia de Jerusalén traduce «viola» en v. 28 — ¿no es esa la traducción oficial católica?</div>
+    <div class="obj-r">La Biblia de Jerusalén es respetable pero interpretativa en este punto, apoyándose en la LXX. La Vulgata de Jerónimo —Biblia oficial de la Iglesia Católica durante más de un milenio— usa <span class="la"><em>apprehendens</em></span>, sin vocabulario de violación. La Douay-Rheims, derivada de la Vulgata, traduce «taking her». El magisterio exegético de Jerónimo, con su acceso al hebreo, prevalece sobre traducciones modernas que siguen la LXX.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Aunque sea seducción, ¿por qué obligar a la mujer a casarse con quien la manipuló?</div>
+    <div class="obj-r">La mujer no está jurídicamente obligada: su padre puede rechazar el matrimonio (Éx 22:17). La obligación recae exclusivamente sobre el hombre. La cláusula «no podrá despedirla jamás» es una restricción permanente del hombre: le impide seducir, casarse y luego repudiar. En el contexto del ANE, una virgen que había perdido ese estatus quedaba sin protección social. El matrimonio garantizado por ley era la única reparación efectiva en ese mundo. Juzgar esta norma con categorías del siglo XXI es anacronismo metodológico.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">La Vulgata de Jerónimo usa el mismo verbo <em>apprehendens</em> en Dt 22:25 (caso de violación) y en Dt 22:28 — luego su traducción no distingue los dos casos y no puede usarse como argumento a favor de seducción.</div>
+    <div class="obj-r">
+      Es un hecho verificado: la Vulgata usa <span class="la"><em>apprehendens</em></span> en ambos versículos. Esta objeción es válida contra cierta formulación del argumento sobre Jerónimo, y debe responderse con precisión.<br><br>
+      <strong>Primero</strong>, <span class="la"><em>apprehendere</em></span> en latín clásico y en la Vulgata significa «asir, tomar, agarrar» — describe acción física de contacto, no violación sexual técnica. Su aparición en v. 25 no le confiere un significado especializado de violación: v. 25 es violación por sus otros marcadores (la mujer estaba comprometida, gritó sin ser socorrida, y el agresor muere solo), no por el verbo. El mismo verbo en v. 28 carece de esos marcadores y tiene pena radicalmente inferior.<br><br>
+      <strong>Segundo</strong>, Jerónimo distingue los dos casos exactamente donde el texto los distingue: en la penalidad. Dt 22:25 concluye con <span class="la"><em>ipse morietur solus</em></span>; Dt 22:28 concluye con compensación económica y matrimonio. La distinción jurídica opera mediante la estructura penal total, no mediante el verbo de acción aislado.<br><br>
+      <strong>Tercero</strong>, cuando Jerónimo traduce una violación sin ambigüedad narrativa —Gén 34:2, Siquem y Dina— usa vocabulario completamente distinto: <span class="la"><em>rapuitque eam… vi oppressam</em></span>. El hecho de que ese vocabulario explícito de violencia no aparezca en Dt 22:28 —donde habría sido igualmente aplicable si Jerónimo leyera violación— confirma que su elección de <span class="la"><em>apprehendens</em></span> para ambos versículos de Deuteronomio 22 es neutra respecto a la violencia, y que la distinción entre los casos la carga el contexto y la pena, no el verbo.
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Algunos Padres de la Iglesia sostenían que la LXX estaba inspirada; por tanto su traducción βιασάμενος («forzar») debe ser la correcta, y el texto describe violación.</div>
+    <div class="obj-r">
+      Esta objeción combina una premisa teológica con una conclusión exegética que no se sigue de ella. Merece respuesta en tres planos:<br><br>
+      <strong>1. La doctrina de la inspiración de la LXX no fue el consenso patrístico universal.</strong> Ciertos Padres alejandrinos —en la tradición de la Carta de Aristeas, Filón (<em>De Vita Mosis</em> II.37–40) y Justino Mártir (<em>Apología</em> I.31)— atribuían autoridad providencial a la LXX. Sin embargo, el propio San Jerónimo la rechazó explícitamente, afirmando que la LXX era una traducción humana útil pero con errores, y defendiendo la <em>Hebraica veritas</em> como base de toda exégesis. Su intercambio epistolar con Agustín (Epístolas 28, 71, 104, 112) giró precisamente en torno a esta cuestión. La Iglesia terminó adoptando la Vulgata jerónima —basada en el hebreo— como texto oficial: un juicio institucional a favor del hebreo sobre la LXX.<br><br>
+      <strong>2. Incluso concediendo inspiración a la LXX, la inspiración no resuelve el problema penológico.</strong> La LXX usa <span class="gr">βιασάμενος</span> en v. 28 pero mantiene la misma penalidad: multa y matrimonio, sin pena de muerte. Si los traductores inspirados hubieran entendido este caso como equivalente a la violación de los vv. 25–27, habrían reflejado la pena capital. No lo hicieron. La propia LXX, al conservar la penalidad menor, confirma que el pasaje pertenece a una categoría de menor gravedad incluso dentro de la tradición textual griega.<br><br>
+      <strong>3. La inspiración de una traducción no puede anular el texto fuente del que traduce.</strong> Si la LXX estuviera divinamente inspirada en cada elección léxica, surgiría la paradoja de que Dios habría inspirado una traducción que contradice el texto hebreo que Él mismo dictó originalmente. La solución teológicamente coherente es reconocer que <span class="gr">βιασάμενος</span> refleja la interpretación de los traductores alejandrinos y no cancela lo que el hebreo masorético dice con <em>tapas</em>. La providencia divina sobre la LXX, tal como la entendían sus defensores más matizados, operaba a nivel de preservación canónica global, no de inerrancia léxica versículo por versículo.
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section id="conclusion">
+  <div class="sec-label">Conclusión</div>
+  <h2>Síntesis Probatoria</h2>
+  <table>
+    <thead><tr><th>Nivel de análisis</th><th>Evidencia</th><th>Veredicto</th></tr></thead>
+    <tbody>
+      <tr><td>Léxico (TM)</td><td>Usa <em>tapas</em>, no <em>chazaq</em>/<em>innah</em></td><td>El hebreo no indica violación</td></tr>
+      <tr><td>Contexto literario</td><td>Contraste deliberado con vv. 25–27 que sí usan <em>chazaq</em></td><td>Son casos tipificados distintos</td></tr>
+      <tr><td>LXX</td><td>Usa <span class="gr">βιασάμενος</span> pero mantiene pena sin muerte</td><td>No equipara el caso con violación penológica</td></tr>
+      <tr><td>Vetus Latina / Tertuliano</td><td>Eco de la LXX, no del hebreo; uso retórico, no exegético</td><td>Testimonio condicionado por cadena textual</td></tr>
+      <tr><td>Vulgata (Jerónimo)</td><td>Usa <span class="la"><em>apprehendens</em></span> en vv. 25 y 28; distinción opera en penalidad, no en verbo; <span class="la"><em>vi oppressam</em></span> reservado para Gén 34:2</td><td><span class="la"><em>apprehendens</em></span> es neutro; la distinción es penal, no léxica en latín</td></tr>
+      <tr><td>Paralelo de Éxodo</td><td>Éx 22:16 usa <em>pathah</em> (seducir), misma pena</td><td>Es seducción</td></tr>
+      <tr><td>Plural «descubiertos»</td><td><span class="he">וְנִמְצָאוּ</span> en plural implica corresponsabilidad</td><td>No hay resistencia documentada</td></tr>
+      <tr><td>ANE comparado</td><td>MAL §55–56 distingue exactamente los dos casos</td><td>Confirma seducción</td></tr>
+      <tr><td>Tradición rabínica</td><td>Incluso en la lectura <em>ones</em>, la mujer tiene derecho de rechazo</td><td>La víctima nunca está obligada</td></tr>
+      <tr><td>Académicos modernos</td><td>Keil-Delitzsch, Thompson, Kline, Henry, Jordan, Kent, Gill</td><td>Consenso: seducción</td></tr>
+      <tr><td>Inspiración de la LXX</td><td>No implica inerrancia léxica; la LXX misma mantiene pena menor; Jerónimo rechazó su primacía</td><td>No vincula el pasaje a violación</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Veredicto Final</div>
+    <p>Deuteronomio 22:28–29 no legisla sobre violación. Legisla sobre la seducción prematrimonial de una virgen no comprometida, obligando al seductor a asumir permanentemente las consecuencias del daño social que ha causado. La mujer o su padre conservan el derecho de rechazar el matrimonio. La ley protege a la mujer en el único lenguaje que su mundo podía ofrecer.</p>
+    <p>La lectura que identifica este pasaje con violación descansa sobre la LXX —que introduce <span class="gr">βιασάμενος</span>— y sobre traducciones modernas derivadas de ella, ignorando el texto hebreo original, el paralelo de Éxodo, la corrección de Jerónimo, la taxonomía penal del capítulo 22, el derecho comparado del ANE y el peso mayoritario de la exégesis académica.</p>
+  </div>
+
+  <div class="footnote">
+    <strong>Fuentes primarias verificadas:</strong>
+    Texto hebreo TM (BHS); LXX (Rahlfs ed., Deutsche Bibelgesellschaft 1935/2006);
+    Tertuliano, <em>Adversus Marcionem</em> IV.34 (ed. Ernest Evans, Oxford UP, 1972; CCEL ANF vol. 3);
+    Vulgata de Jerónimo (vulgate.org); Douay-Rheims (Challoner ed.);
+    Maimónides, <em>Mishneh Torah</em>, Hilkhot Na'arah Betulah;
+    Martha T. Roth, <em>Law Collections from Mesopotamia and Asia Minor</em>, SBL, 1997;
+    Keil &amp; Delitzsch, <em>Biblical Commentary on the OT</em>, vol. 3, Clark, 1872;
+    C.F. Kent, <em>Israel's Laws and Legal Precedents</em>, Scribner, 1907;
+    M. Kline, <em>Treaty of the Great King</em>, Eerdmans, 1963;
+    J.A. Thompson, <em>Deuteronomy</em>, Tyndale OT Commentaries, IVP, 1974;
+    J. Jordan, <em>The Law of the Covenant</em>, ICE, 1984;
+    <em>The New Interpreter's Study Bible</em>, Abingdon Press, 2003.
+  </div>
+</section>
+
+</div><!-- /#main -->
+
+<script>
+(function () {
+  var btn     = document.getElementById('toc-btn');
+  var panel   = document.getElementById('toc-panel');
+  var overlay = document.getElementById('toc-overlay');
+
+  function open() {
+    panel.classList.add('is-open');
+    overlay.classList.add('is-open');
+    btn.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    panel.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    btn.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', function () {
+    panel.classList.contains('is-open') ? close() : open();
+  });
+  overlay.addEventListener('click', close);
+
+  /* close on nav-link click */
+  panel.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', close);
+  });
+
+  /* active-link tracking */
+  var links = panel.querySelectorAll('a');
+  var secs  = document.querySelectorAll('section[id]');
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          var active = panel.querySelector('a[href="#' + e.target.id + '"]');
+          if (active) {
+            active.classList.add('active');
+            active.scrollIntoView({ block: 'nearest' });
+          }
+        }
+      });
+    }, { rootMargin: '0px 0px -55% 0px', threshold: 0 });
+
+    secs.forEach(function (s) { io.observe(s); });
+  }
+}());
+</script>
+</body>
+</html>
