@@ -1,6 +1,6 @@
 ---
 title: "Defensa de Deuteronomio 22:28 (Dossier)"
-date: 2026-06-15T10:00:00-05:00
+date: 2026-06-10T12:00:00-05:00
 draft: false
 slug: "defensa-deut-22-28-dossier"
 url: "/exegesis/defensa-deut-22-28-dossier/"

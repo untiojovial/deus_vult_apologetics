@@ -1,6 +1,6 @@
 ---
 title: "Mateo 28:19 - Autenticidad (Dossier)"
-date: 2026-06-15T10:00:00-05:00
+date: 2026-06-10T12:00:00-05:00
 draft: false
 slug: "mateo-28-19-autenticidad-dossier"
 url: "/biblia/mateo-28-19-autenticidad-dossier/"

@@ -1,6 +1,6 @@
 ---
 title: "Concilios de Constantinopla I, II y III (Dossier)"
-date: 2026-06-15T10:00:00-05:00
+date: 2026-06-10T12:00:00-05:00
 draft: false
 slug: "concilios-constantinopla-dossier"
 url: "/historia/concilios-constantinopla-dossier/"
