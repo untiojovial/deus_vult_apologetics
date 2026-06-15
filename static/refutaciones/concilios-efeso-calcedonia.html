@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concilios de Éfeso (431) y Calcedonia (451) — Historia Completa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@300;400;600&display=swap');
+
+  :root {
+    --negro: #0a0a0a;
+    --negro-medio: #111111;
+    --negro-panel: #1a1a1a;
+    --negro-card: #222222;
+    --amarillo-oro: #F5C518;
+    --amarillo-claro: #FFD700;
+    --amarillo-tenue: #c9a227;
+    --amarillo-brillante: #ffe566;
+    --blanco: #ffffff;
+    --blanco-hueso: #f5f5f0;
+    --blanco-gris: #e0e0d8;
+    --gris-texto: #b0b0a0;
+    --borde: #2a2a2a;
+    --borde-oro: rgba(245,197,24,0.3);
+    /* Colores de acento para distinguir los dos concilios */
+    --efeso: #F5C518;
+    --calcedonia: #E8A020;
+    --efeso-tenue: rgba(245,197,24,0.15);
+    --calcedonia-tenue: rgba(232,160,32,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco-hueso);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  /* ── NAVEGACIÓN ── */
+  #nav-toggle {
+    position: fixed; top: 18px; left: 18px; z-index: 999;
+    background: var(--amarillo-oro); color: var(--negro);
+    border: none; padding: 10px 16px;
+    font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 600;
+    cursor: pointer; border-radius: 3px; letter-spacing: 1px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 12px rgba(245,197,24,0.4);
+  }
+  #nav-toggle:hover { background: var(--amarillo-brillante); }
+
+  #sidebar {
+    position: fixed; top: 0; left: -360px;
+    width: 360px; height: 100vh;
+    background: var(--negro-panel);
+    border-right: 2px solid var(--amarillo-oro);
+    z-index: 998; overflow-y: auto;
+    transition: left 0.35s cubic-bezier(.4,0,.2,1);
+    padding: 70px 0 30px;
+  }
+  #sidebar.open { left: 0; }
+
+  #sidebar h3 {
+    font-family: 'Cinzel', serif; color: var(--amarillo-oro);
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    padding: 0 24px 10px; border-bottom: 1px solid var(--borde-oro);
+    margin-bottom: 6px;
+  }
+  #sidebar .nav-concilio-label {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 12px 24px 6px;
+    display: block;
+  }
+  #sidebar .nav-efeso { color: var(--efeso); border-left: 3px solid var(--efeso); }
+  #sidebar .nav-calcedonia { color: var(--calcedonia); border-left: 3px solid var(--calcedonia); }
+
+  #sidebar ul { list-style: none; }
+  #sidebar ul li a {
+    display: block; padding: 8px 24px;
+    color: var(--blanco-gris); text-decoration: none;
+    font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 300;
+    letter-spacing: 0.5px; border-left: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  #sidebar ul li a:hover { color: var(--amarillo-oro); background: rgba(245,197,24,0.07); border-left-color: var(--amarillo-oro); }
+  #sidebar ul li.sub a { padding-left: 40px; font-size: 12px; }
+  #sidebar ul li.subsub a { padding-left: 56px; font-size: 11px; color: var(--gris-texto); }
+
+  #overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6); z-index: 997;
+  }
+  #overlay.active { display: block; }
+
+  /* ── HERO DOBLE ── */
+  .hero-dual {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 80px 40px;
+    background: radial-gradient(ellipse at 30% 0%, rgba(245,197,24,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 100%, rgba(232,160,32,0.08) 0%, transparent 50%),
+                var(--negro);
+    position: relative; overflow: hidden;
+  }
+  .hero-dual::before {
+    content: 'χ'; position: absolute;
+    font-family: 'Cinzel', serif; font-size: 500px;
+    color: rgba(245,197,24,0.025);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Oswald', sans-serif; font-size: 12px;
+    letter-spacing: 5px; color: var(--amarillo-tenue);
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+
+  .hero-concilios {
+    display: flex; gap: 60px; align-items: center;
+    flex-wrap: wrap; justify-content: center; margin-bottom: 40px;
+  }
+  .hero-concilio {
+    text-align: center;
+  }
+  .hero-concilio h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 4.5vw, 62px);
+    font-weight: 900; line-height: 1.1; margin-bottom: 6px;
+  }
+  .hero-concilio.ef h1 { color: var(--efeso); }
+  .hero-concilio.cal h1 { color: var(--calcedonia); }
+  .hero-concilio .year {
+    font-family: 'Oswald', sans-serif; font-size: 13px;
+    letter-spacing: 4px; color: var(--gris-texto);
+    text-transform: uppercase;
+  }
+
+  .hero-vs {
+    font-family: 'Cinzel', serif; font-size: 48px;
+    color: rgba(255,255,255,0.08); font-weight: 900;
+    align-self: center;
+  }
+
+  .hero-subtitle {
+    font-family: 'EB Garamond', serif; font-size: clamp(16px, 2.2vw, 22px);
+    color: var(--blanco-gris); font-style: italic;
+    max-width: 780px; line-height: 1.9; margin-bottom: 50px;
+  }
+
+  .hero-stats {
+    display: flex; gap: 40px; flex-wrap: wrap; justify-content: center;
+  }
+  .hero-stat {
+    text-align: center; padding: 16px 28px;
+    border: 1px solid var(--borde-oro);
+    background: rgba(245,197,24,0.04);
+  }
+  .hero-stat .num {
+    font-family: 'Cinzel', serif; font-size: 32px;
+    font-weight: 900; color: var(--amarillo-oro); display: block;
+  }
+  .hero-stat .lbl {
+    font-family: 'Oswald', sans-serif; font-size: 11px;
+    letter-spacing: 2px; color: var(--gris-texto); text-transform: uppercase;
+  }
+
+  /* ── DIVISOR DE CONCILIO ── */
+  .concilio-header {
+    width: 100%; padding: 60px 40px 30px;
+    display: flex; align-items: center; gap: 30px;
+    max-width: 980px; margin: 0 auto;
+  }
+  .concilio-header.ef .ch-bar { background: var(--efeso); }
+  .concilio-header.cal .ch-bar { background: var(--calcedonia); }
+  .ch-bar { width: 6px; height: 80px; flex-shrink: 0; }
+  .ch-text {}
+  .ch-num {
+    font-family: 'Oswald', sans-serif; font-size: 11px;
+    letter-spacing: 4px; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .concilio-header.ef .ch-num { color: var(--efeso); }
+  .concilio-header.cal .ch-num { color: var(--calcedonia); }
+  .ch-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(26px, 4vw, 52px);
+    font-weight: 900; color: var(--blanco); line-height: 1.1;
+  }
+  .ch-sub {
+    font-family: 'EB Garamond', serif; font-size: 18px;
+    color: var(--gris-texto); font-style: italic; margin-top: 6px;
+  }
+
+  /* ── SECCIONES ── */
+  section {
+    max-width: 980px; margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  .section-divider {
+    border: none; border-top: 1px solid var(--borde-oro);
+    margin: 0 auto; max-width: 980px;
+  }
+  .section-divider-thick {
+    border: none; border-top: 3px solid var(--amarillo-oro);
+    margin: 0 auto; max-width: 980px;
+  }
+
+  h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(22px, 3vw, 38px);
+    font-weight: 700; color: var(--blanco);
+    margin-bottom: 10px; line-height: 1.2;
+  }
+  h2 .h2-num {
+    color: var(--amarillo-oro); font-size: 0.45em;
+    letter-spacing: 3px; display: block;
+    font-family: 'Oswald', sans-serif; font-weight: 300;
+    margin-bottom: 4px; text-transform: uppercase;
+  }
+  h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(16px, 1.8vw, 22px);
+    color: var(--amarillo-oro); margin: 34px 0 12px;
+    font-weight: 700; border-left: 3px solid var(--amarillo-oro);
+    padding-left: 16px;
+  }
+  h4 {
+    font-family: 'Oswald', sans-serif; font-size: 15px;
+    color: var(--amarillo-tenue); letter-spacing: 1px;
+    text-transform: uppercase; margin: 22px 0 8px;
+  }
+
+  p { margin-bottom: 18px; color: var(--blanco-gris); }
+
+  /* ── CITA ── */
+  .quote {
+    background: var(--negro-card);
+    border-left: 4px solid var(--amarillo-oro);
+    padding: 22px 28px; margin: 26px 0;
+    border-radius: 0 4px 4px 0; position: relative;
+  }
+  .quote::before {
+    content: '\201C'; font-family: 'Cinzel', serif; font-size: 80px;
+    color: rgba(245,197,24,0.12); position: absolute;
+    top: -10px; left: 10px; line-height: 1;
+  }
+  .quote-text {
+    font-style: italic; color: var(--blanco-hueso);
+    font-size: 16px; line-height: 1.85; margin-bottom: 10px;
+  }
+  .quote-source {
+    font-family: 'Oswald', sans-serif; font-size: 11px;
+    letter-spacing: 1.5px; color: var(--amarillo-tenue); text-transform: uppercase;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    gap: 18px; margin: 24px 0;
+  }
+  .card {
+    background: var(--negro-card); border: 1px solid var(--borde);
+    padding: 22px; border-top: 3px solid var(--amarillo-oro);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--amarillo-brillante); }
+  .card-name {
+    font-family: 'Cinzel', serif; font-size: 14px;
+    color: var(--blanco); margin-bottom: 4px; font-weight: 700;
+  }
+  .card-role {
+    font-family: 'Oswald', sans-serif; font-size: 10px;
+    letter-spacing: 2px; color: var(--amarillo-tenue);
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .card-desc { font-size: 14px; color: var(--gris-texto); line-height: 1.7; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding: 10px 0; margin: 24px 0; }
+  .timeline::before {
+    content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--amarillo-oro), transparent);
+  }
+  .tl-item {
+    display: flex; gap: 28px; margin-bottom: 30px;
+    padding-left: 68px; position: relative;
+  }
+  .tl-dot {
+    position: absolute; left: 18px; top: 4px;
+    width: 22px; height: 22px; background: var(--amarillo-oro);
+    border-radius: 50%; border: 3px solid var(--negro);
+    box-shadow: 0 0 0 2px var(--amarillo-oro);
+  }
+  .tl-content { flex: 1; }
+  .tl-year {
+    font-family: 'Cinzel', serif; font-size: 12px;
+    color: var(--amarillo-oro); font-weight: 700;
+    letter-spacing: 1px; margin-bottom: 3px;
+  }
+  .tl-title {
+    font-family: 'Oswald', sans-serif; font-size: 15px;
+    color: var(--blanco); font-weight: 600; margin-bottom: 5px;
+  }
+  .tl-body { font-size: 14px; color: var(--gris-texto); }
+
+  /* ── TABLA ── */
+  .table-wrap { overflow-x: auto; margin: 22px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th {
+    background: var(--amarillo-oro); color: var(--negro);
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 12px 14px; text-align: left; font-size: 11px;
+  }
+  tbody tr { border-bottom: 1px solid var(--borde); }
+  tbody tr:hover { background: rgba(245,197,24,0.05); }
+  tbody td { padding: 11px 14px; color: var(--blanco-gris); vertical-align: top; }
+  tbody td:first-child { color: var(--amarillo-tenue); font-family: 'Oswald', sans-serif; font-size: 12px; }
+
+  /* ── HIGHLIGHT ── */
+  .highlight {
+    background: linear-gradient(135deg, rgba(245,197,24,0.08), rgba(245,197,24,0.03));
+    border: 1px solid var(--borde-oro); padding: 26px 30px;
+    margin: 26px 0; border-radius: 4px;
+  }
+  .highlight.danger {
+    background: linear-gradient(135deg, rgba(200,50,50,0.1), rgba(200,50,50,0.04));
+    border-color: rgba(200,80,80,0.4);
+  }
+  .highlight.success {
+    background: linear-gradient(135deg, rgba(50,180,100,0.08), rgba(50,180,100,0.03));
+    border-color: rgba(50,180,100,0.3);
+  }
+  .highlight-title {
+    font-family: 'Cinzel', serif; font-size: 13px;
+    color: var(--amarillo-oro); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 12px; font-weight: 700;
+  }
+  .highlight.danger .highlight-title { color: #e06060; }
+  .highlight.success .highlight-title { color: #50c878; }
+
+  /* ── HEREJÍA BOX ── */
+  .heresy-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px; margin: 24px 0;
+  }
+  .heresy-card {
+    background: var(--negro-panel); border: 1px solid var(--borde);
+    border-left: 4px solid;
+    padding: 18px 20px;
+  }
+  .heresy-card.bad { border-left-color: #cc4444; }
+  .heresy-card.good { border-left-color: #50c878; }
+  .heresy-name {
+    font-family: 'Cinzel', serif; color: var(--blanco);
+    font-size: 14px; font-weight: 700; margin-bottom: 3px;
+  }
+  .heresy-label {
+    font-family: 'Oswald', sans-serif; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .heresy-card.bad .heresy-label { color: #cc4444; }
+  .heresy-card.good .heresy-label { color: #50c878; }
+  .heresy-desc { font-size: 13.5px; color: var(--gris-texto); line-height: 1.7; }
+
+  /* ── SESIÓN TABS ── */
+  .sesion-tabs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    border-bottom: 2px solid var(--borde-oro);
+  }
+  .sesion-tab {
+    background: var(--negro-card); color: var(--gris-texto);
+    border: 1px solid var(--borde); border-bottom: none;
+    padding: 9px 16px; font-family: 'Oswald', sans-serif;
+    font-size: 12px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
+  }
+  .sesion-tab:hover, .sesion-tab.active {
+    background: var(--amarillo-oro); color: var(--negro);
+    border-color: var(--amarillo-oro); font-weight: 600;
+  }
+  .sesion-content {
+    display: none; background: var(--negro-card);
+    border: 1px solid var(--borde-oro); border-top: none; padding: 24px;
+  }
+  .sesion-content.active { display: block; }
+
+  /* ── PERSONA CARD ── */
+  .persona-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px; margin: 22px 0;
+  }
+  .persona-card {
+    background: var(--negro-panel); border: 1px solid var(--borde);
+    border-left: 4px solid var(--amarillo-oro); padding: 18px 20px;
+  }
+  .persona-name {
+    font-family: 'Cinzel', serif; color: var(--blanco);
+    font-size: 14px; font-weight: 700; margin-bottom: 2px;
+  }
+  .persona-dates {
+    font-family: 'Oswald', sans-serif; font-size: 10px;
+    color: var(--amarillo-tenue); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .persona-quote {
+    font-style: italic; font-size: 13.5px; color: var(--blanco-gris);
+    line-height: 1.7; margin-bottom: 6px;
+    border-left: 2px solid rgba(245,197,24,0.3); padding-left: 10px;
+  }
+  .persona-ref { font-family: 'Oswald', sans-serif; font-size: 10px; color: var(--gris-texto); }
+
+  /* ── DEFINICIÓN DOGMÁTICA ── */
+  .dogma-box {
+    border: 2px solid var(--amarillo-oro);
+    padding: 36px 40px; margin: 32px 0;
+    background: rgba(245,197,24,0.04);
+    position: relative;
+  }
+  .dogma-box::before {
+    content: 'DEFINITIO FIDEI'; position: absolute;
+    top: -14px; left: 30px;
+    background: var(--negro); padding: 0 12px;
+    font-family: 'Cinzel', serif; font-size: 11px;
+    color: var(--amarillo-oro); letter-spacing: 3px;
+  }
+  .dogma-text {
+    font-size: 17px; line-height: 1.95; color: var(--blanco-hueso);
+    font-style: italic;
+  }
+
+  /* ── NATURALEZAS CRISTO ── */
+  .naturezas {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 0; margin: 32px 0; align-items: stretch;
+  }
+  .nat-box {
+    background: var(--negro-card); border: 1px solid var(--borde);
+    padding: 28px 24px; text-align: center;
+  }
+  .nat-label {
+    font-family: 'Cinzel', serif; font-size: 18px;
+    font-weight: 900; color: var(--amarillo-oro);
+    display: block; margin-bottom: 10px;
+  }
+  .nat-desc { font-size: 14px; color: var(--gris-texto); line-height: 1.7; }
+  .nat-center {
+    background: var(--amarillo-oro); display: flex;
+    align-items: center; justify-content: center; padding: 0 20px;
+  }
+  .nat-center-text {
+    font-family: 'Cinzel', serif; font-size: 13px;
+    color: var(--negro); font-weight: 900; letter-spacing: 2px;
+    writing-mode: vertical-rl; text-transform: uppercase;
+    transform: rotate(180deg);
+  }
+
+  /* ── LEAD ── */
+  .lead {
+    font-size: 19px; color: var(--blanco-gris); line-height: 1.9;
+    font-style: italic; margin-bottom: 28px;
+    border-left: 3px solid var(--amarillo-oro); padding-left: 20px;
+  }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block; background: var(--amarillo-oro);
+    color: var(--negro); font-family: 'Oswald', sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 2px 8px;
+    border-radius: 2px; margin-left: 6px; vertical-align: middle;
+  }
+  .badge-red { background: #cc4444; color: #fff; }
+  .badge-green { background: #50c878; color: var(--negro); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--negro-panel); border-top: 2px solid var(--amarillo-oro);
+    text-align: center; padding: 50px 40px;
+  }
+  footer p {
+    font-family: 'Oswald', sans-serif; font-size: 11px;
+    letter-spacing: 2px; color: var(--gris-texto); text-transform: uppercase;
+  }
+
+  .gold { color: var(--amarillo-oro); }
+  .white { color: var(--blanco); }
+  .red { color: #e06060; }
+  .green { color: #50c878; }
+
+  @media (max-width: 680px) {
+    section { padding: 40px 18px; }
+    .hero-stats { gap: 16px; }
+    .hero-stat { padding: 12px 16px; }
+    #sidebar { width: 88vw; }
+    .naturezas { grid-template-columns: 1fr; }
+    .nat-center { padding: 12px; writing-mode: horizontal-tb; transform: none; }
+    .nat-center-text { writing-mode: horizontal-tb; transform: none; }
+    .concilio-header { padding: 40px 18px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOGGLE Y SIDEBAR -->
+<button id="nav-toggle" onclick="toggleNav()">☰ ÍNDICE</button>
+<div id="overlay" onclick="closeNav()"></div>
+
+<nav id="sidebar">
+  <h3>Éfeso · 431 · Calcedonia · 451</h3>
+
+  <span class="nav-concilio-label nav-efeso">✦ Concilio de Éfeso (431)</span>
+  <ul>
+    <li><a href="#hero" onclick="closeNav()">Inicio</a></li>
+    <li><a href="#efeso-contexto" onclick="closeNav()">I. Contexto — El Mundo en 431</a></li>
+    <li class="sub"><a href="#nestorio" onclick="closeNav()">Nestorio y la controversia</a></li>
+    <li><a href="#efeso-convocatoria" onclick="closeNav()">II. La Convocatoria</a></li>
+    <li><a href="#efeso-participantes" onclick="closeNav()">III. Participantes</a></li>
+    <li class="sub"><a href="#cirilo" onclick="closeNav()">Cirilo de Alejandría</a></li>
+    <li class="sub"><a href="#otros-ef" onclick="closeNav()">Otras delegaciones</a></li>
+    <li><a href="#efeso-sesiones" onclick="closeNav()">IV. Las Sesiones</a></li>
+    <li class="sub"><a href="#primera-sesion-ef" onclick="closeNav()">Sesión I — Deposición</a></li>
+    <li class="sub"><a href="#contrasinodo" onclick="closeNav()">El Contrasinodo de Juan</a></li>
+    <li class="sub"><a href="#reunion-ef" onclick="closeNav()">Reunificación</a></li>
+    <li><a href="#efeso-debate" onclick="closeNav()">V. El Gran Debate Teológico</a></li>
+    <li class="sub"><a href="#theotokos" onclick="closeNav()">Theotokos vs Christotokos</a></li>
+    <li class="sub"><a href="#cirilo-nestorio" onclick="closeNav()">Cirilo vs Nestorio</a></li>
+    <li><a href="#efeso-horos" onclick="closeNav()">VI. El Decreto</a></li>
+    <li><a href="#efeso-despues" onclick="closeNav()">VII. Después de Éfeso</a></li>
+    <li class="sub"><a href="#formula-union" onclick="closeNav()">Fórmula de Unión 433</a></li>
+    <li><a href="#efeso-repercusiones" onclick="closeNav()">VIII. Repercusiones</a></li>
+  </ul>
+
+  <span class="nav-concilio-label nav-calcedonia">✦ Concilio de Calcedonia (451)</span>
+  <ul>
+    <li><a href="#calc-contexto" onclick="closeNav()">IX. Contexto — Entre Éfeso y 451</a></li>
+    <li class="sub"><a href="#eutiques" onclick="closeNav()">Eutiques y el Monofisismo</a></li>
+    <li class="sub"><a href="#efeso2" onclick="closeNav()">El Latrocinio de Éfeso 449</a></li>
+    <li><a href="#calc-convocatoria" onclick="closeNav()">X. La Convocatoria</a></li>
+    <li><a href="#calc-participantes" onclick="closeNav()">XI. Participantes</a></li>
+    <li><a href="#calc-sesiones" onclick="closeNav()">XII. Las Sesiones</a></li>
+    <li><a href="#calc-debate" onclick="closeNav()">XIII. El Gran Debate</a></li>
+    <li class="sub"><a href="#dos-naturalezas" onclick="closeNav()">¿Dos naturalezas?</a></li>
+    <li class="sub"><a href="#tomus-leonis" onclick="closeNav()">El Tomus de León</a></li>
+    <li><a href="#calc-definicion" onclick="closeNav()">XIV. La Definición — Horos</a></li>
+    <li><a href="#cirilo-aceptado" onclick="closeNav()">XV. ¿Cirilo aceptó dos naturalezas?</a></li>
+    <li><a href="#calc-despues" onclick="closeNav()">XVI. Después de Calcedonia</a></li>
+    <li class="sub"><a href="#cisma-oriental" onclick="closeNav()">Las iglesias disidentes</a></li>
+    <li><a href="#calc-repercusiones" onclick="closeNav()">XVII. Repercusiones</a></li>
+    <li><a href="#fuentes" onclick="closeNav()">XVIII. Fuentes</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  HERO                                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="hero" class="hero-dual">
+  <div class="hero-eyebrow">Tercer y Cuarto Concilio Ecuménico · Cristología Clásica</div>
+
+  <div class="hero-concilios">
+    <div class="hero-concilio ef">
+      <h1>Éfeso</h1>
+      <div class="year">431 d.C. · III Concilio</div>
+    </div>
+    <div class="hero-vs">&amp;</div>
+    <div class="hero-concilio cal">
+      <h1>Calcedonia</h1>
+      <div class="year">451 d.C. · IV Concilio</div>
+    </div>
+  </div>
+
+  <p class="hero-subtitle">
+    Veinte años separaron estos dos concilios. En el primero se definió que María es
+    <em>Theotokos</em> —Madre de Dios— y se condenó el nestorianismo. En el segundo se proclamó
+    que Cristo es una sola Persona en dos naturalezas completas, perfectas e indivisas.
+    Juntos, constituyen la cumbre de la cristología ortodoxa clásica.
+  </p>
+
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">431</span><span class="lbl">Año — Éfeso</span></div>
+    <div class="hero-stat"><span class="num">III</span><span class="lbl">Concilio Ecuménico</span></div>
+    <div class="hero-stat"><span class="num">200+</span><span class="lbl">Obispos en Éfeso</span></div>
+    <div class="hero-stat"><span class="num">451</span><span class="lbl">Año — Calcedonia</span></div>
+    <div class="hero-stat"><span class="num">IV</span><span class="lbl">Concilio Ecuménico</span></div>
+    <div class="hero-stat"><span class="num">520+</span><span class="lbl">Obispos en Calcedonia</span></div>
+    <div class="hero-stat"><span class="num">2</span><span class="lbl">Naturalezas en Cristo</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                                                         -->
+<!--  PARTE I — CONCILIO DE ÉFESO (431)                     -->
+<!--                                                         -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<hr class="section-divider-thick">
+<div class="concilio-header ef">
+  <div class="ch-bar"></div>
+  <div class="ch-text">
+    <div class="ch-num">Tercer Concilio Ecuménico</div>
+    <div class="ch-title">Concilio de Éfeso</div>
+    <div class="ch-sub">22 de junio – 31 de julio de 431 · Éfeso, Asia Menor</div>
+  </div>
+</div>
+
+<!-- I. CONTEXTO ÉFESO -->
+<hr class="section-divider">
+<section id="efeso-contexto">
+  <h2><span class="h2-num">I · Contexto Histórico</span>El Mundo Cristiano en el 431</h2>
+
+  <p class="lead">El siglo V hereda la victoria del Credo de Nicea (325) y la derrota definitiva del arrianismo en Constantinopla (381). Pero la paz doctrinal fue breve: la siguiente gran batalla iba a librarse no sobre la divinidad del Hijo, sino sobre cómo se relacionaban en Cristo lo divino y lo humano.</p>
+
+  <p>El Imperio Romano de Occidente agonizaba: en 410, los visigodos de Alarico habían saqueado Roma, un trauma psicológico de proporciones bíblicas. En Oriente, el trono de Constantinopla lo ocupaba <span class="gold">Teodosio II</span> (r. 408–450), un emperador piadoso y débil, dominado en la práctica por su hermana <span class="gold">Pulqueria Augusta</span> y por funcionarios de corte. Este equilibrio de poderes en Constantinopla tendría consecuencias directas sobre el concilio.</p>
+
+  <p>La Iglesia de Oriente estaba dividida en dos grandes polos teológicos que llevaban décadas en tensión creciente:</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Escuela de Alejandría</div>
+      <div class="card-role">Tradición teológica</div>
+      <div class="card-desc">Énfasis en la <strong style="color:#F5C518">unidad</strong> de Cristo. El Logos divino asumió la humanidad en una única realidad personal. Palabras clave: <em>hypostasis</em>, unión, divinización. Representantes: Atanasio, Cirilo. El riesgo de este polo: diluir la humanidad en la divinidad (camino al monofisismo).</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Escuela de Antioquía</div>
+      <div class="card-role">Tradición teológica</div>
+      <div class="card-desc">Énfasis en la <strong style="color:#F5C518">distinción</strong> de las realidades en Cristo. La humanidad debe ser completa y real para que la salvación sea real. Palabras clave: <em>prósopon</em>, unión moral, templo. Representantes: Diodoro de Tarso, Teodoro de Mopsuestia, Nestorio. El riesgo: dividir a Cristo en dos sujetos (camino al nestorianismo).</div>
+    </div>
+  </div>
+
+  <h3 id="nestorio">Nestorio y la Controversia — 428–431</h3>
+
+  <p><span class="gold">Nestorio</span> (ca. 381–451) era un monje sirio de brillante formación retórica, discípulo de la escuela antioquena de Teodoro de Mopsuestia. En 428, el emperador Teodosio II lo nombró patriarca de Constantinopla, la sede más políticamente importante del Oriente cristiano.</p>
+
+  <p>Nestorio llegó a Constantinopla con su propio capellán, <span class="gold">Anastasio</span>, quien en uno de sus primeros sermones rechazó públicamente el título de <em>Theotokos</em> (Madre de Dios) aplicado a María, sustituyéndolo por <em>Anthropotokos</em> (Madre del hombre) o <em>Christotokos</em> (Madre de Cristo). Nestorio respaldó a su capellán.</p>
+
+  <p>La reacción fue inmediata y violenta. El pueblo de Constantinopla, profundamente devoto del título <em>Theotokos</em>, estalló en protestas. Clérigos, monjes y laicos se alinearon contra el nuevo patriarca. El conflicto llegó a oídos del monje <span class="gold">Cirilo de Alejandría</span>, que no necesitó más invitación para lanzar la más devastadora campaña teológica y política que la historia patrística recuerda.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">428</div>
+        <div class="tl-title">Nestorio es nombrado patriarca de Constantinopla</div>
+        <div class="tl-body">Su nombramiento fue el resultado de un compromiso político. Teodosio II buscaba una figura que no estuviera vinculada a ninguna de las facciones locales. Nestorio llegó de Antioquía con reputación de predicador brillante y heresiológo firme.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">428 — Navidad</div>
+        <div class="tl-title">El sermón de Anastasio: «no llaméis a María Theotokos»</div>
+        <div class="tl-body">El escándalo estalla en Constantinopla. Nestorio respalda la postura: María es madre del hombre Cristo, no de Dios. El título <em>Theotokos</em> sería una confusión metafísica: «¿Puede Dios tener una madre?»</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">429</div>
+        <div class="tl-title">Cirilo de Alejandría entra en la controversia</div>
+        <div class="tl-body">Cirilo escribe su primera carta a los monjes de Egipto explicando la postura ortodoxa. Después escribe directamente a Nestorio. La correspondencia se deteriora rápidamente en un intercambio de acusaciones teológicas y ataques personales.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">430 — Agosto</div>
+        <div class="tl-title">Cirilo convoca un sínodo en Alejandría — los «Doce Anatemas»</div>
+        <div class="tl-body">El sínodo alejandrino condena a Nestorio y exige su retractación bajo pena de excomunión. Cirilo envía sus célebres <em>Doce Anatemas</em>, proposiciones que Nestorio debe suscribir. Nestorio responde con sus propios «contraanatemas». La guerra teológica está declarada.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">430 — Noviembre</div>
+        <div class="tl-title">El Papa Celestino I condena a Nestorio en sínodo romano</div>
+        <div class="tl-body">Roma, consultada por Cirilo, condena la postura de Nestorio y encarga a Cirilo ejecutar la sentencia si Nestorio no se retracta en diez días. Es el primer paso hacia la convocatoria del concilio general.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">430 — Noviembre</div>
+        <div class="tl-title">Teodosio II convoca el Concilio General</div>
+        <div class="tl-body">Presionado por todas partes, el emperador convoca un concilio general para Pentecostés de 431 en Éfeso, ciudad de gran simbolismo mariano (tradición decía que María había vivido y muerto allí). Todos los obispos del Imperio deben asistir.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- II. CONVOCATORIA ÉFESO -->
+<hr class="section-divider">
+<section id="efeso-convocatoria">
+  <h2><span class="h2-num">II · La Convocatoria</span>¿Quién lo Convocó y por Qué Éfeso?</h2>
+
+  <p>La convocatoria formal del concilio la emitió el <span class="gold">emperador Teodosio II</span> en noviembre de 430, con Pentecostés de 431 como fecha límite. La sede escogida fue <span class="gold">Éfeso</span>, en la costa occidental de Asia Menor (actual Turquía).</p>
+
+  <p>La elección no fue arbitraria. Éfeso era la ciudad donde, según la tradición, la Virgen María había vivido sus últimos años junto al apóstol Juan, y donde se veneraba su memoria. Celebrar allí el concilio que decidiría si María era <em>Theotokos</em> era una declaración de intenciones. La basílica de Santa María de Éfeso —donde se celebrarían las sesiones— es la primera basílica mariana conocida de la historia cristiana.</p>
+
+  <div class="highlight">
+    <div class="highlight-title">⚠ El Escándalo de las Fechas: un Concilio sin Quórum</div>
+    <p>El concilio debía comenzar el 7 de junio de 431, pero la delegación de Antioquía con Juan de Antioquía —que apoyaba a Nestorio— llegaba con retraso. Cirilo, que tenía la mayoría sin los antioquenos, forzó la apertura el <strong>22 de junio</strong> sin esperar a Juan. Esta decisión unilateral envenenarían el concilio desde el primer día y darían munición a los defensores de Nestorio durante décadas.</p>
+  </div>
+</section>
+
+<!-- III. PARTICIPANTES ÉFESO -->
+<hr class="section-divider">
+<section id="efeso-participantes">
+  <h2><span class="h2-num">III · Los Participantes</span>Las Delegaciones y sus Agendas</h2>
+
+  <h3 id="cirilo">Cirilo de Alejandría (376–444): El Arquitecto del Concilio</h3>
+
+  <p><span class="gold">Cirilo de Alejandría</span> es la figura dominante de Éfeso y, en muchos sentidos, de toda la cristología del siglo V. Sobrino del influyente patriarca Teófilo de Alejandría, heredó la sede alejandrina en 412 con energía brutal: expulsó a los judíos de Alejandría y fue responsable —aunque el debate histórico sobre su grado exacto de responsabilidad persiste— del linchamiento de la filósofa pagana Hipatia en 415.</p>
+
+  <p>Teológicamente, Cirilo es un gigante. Su comprensión de la Encarnación, construida sobre la herencia de Atanasio, articuló con precisión sin precedentes cómo el Logos eterno se unió a la humanidad. Su obra antiheréticca, especialmente sus escritos contra Nestorio y su defensa de la <em>comunicatio idiomatum</em> (comunicación de idiomas o propiedades), se convertiría en el fundamento sobre el que Calcedonia edificaría su definición.</p>
+
+  <div class="quote">
+    <p class="quote-text">«El Verbo, nacido de Dios Padre antes de todos los siglos, se hizo hombre según las Escrituras. No que haya asumido un hombre y habitado en él como en un templo, sino que siendo Dios se hizo perfectamente hombre, permaneciendo lo que era.»</p>
+    <div class="quote-source">Cirilo de Alejandría, Segunda Carta a Nestorio — ACO I,1,1 p. 26</div>
+  </div>
+
+  <p>Sin embargo, Cirilo también era un político consumado y sin escrúpulos. Documentos del Concilio de Éfeso revelan que sobornó masivamente a funcionarios imperiales en Constantinopla para asegurarse el apoyo de la corte. Una lista de sus «donaciones» conservada en las actas incluye ropa, tapices, pieles, dinero y objetos de valor enviados a decenas de personas con influencia, incluyendo a la esposa del chambelán imperial.</p>
+
+  <div class="highlight danger">
+    <div class="highlight-title">📜 Los Sobornos de Cirilo — Fuente Documentada</div>
+    <p>La carta de Cirilo a su representante en Constantinopla, Epifanio, describe con detalle la lista de regalos enviados. El texto fue conservado en las actas conciliares (ACO I,4, p. 222–225) y es una de las fuentes más perturbadoras del período. Los historiadores modernos (Wessel, McGuckin, Price) reconocen la autenticidad del documento. La teología de Cirilo era impecable; sus métodos, no tanto.</p>
+  </div>
+
+  <h3 id="otros-ef">Las Demás Delegaciones</h3>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Nestorio</div>
+      <div class="card-role">Patriarca de Constantinopla (428–431)</div>
+      <div class="card-desc">Brillante predicador, monje antioqueno. Su postura sobre el <em>Theotokos</em> le granjeó un conflicto que no buscaba. Se negó a capitular ante Cirilo. Llegó al concilio con escolta imperial pero sin base teológica ni política suficiente para resistir.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Juan de Antioquía</div>
+      <div class="card-role">Patriarca de Antioquía</div>
+      <div class="card-desc">Llegó tarde al concilio, cuando Nestorio ya había sido depuesto. Convocó un contrasinodo con los obispos orientales y suspendió a Cirilo. El cisma entre Alejandría y Antioquía duró dos años hasta la Fórmula de Unión de 433.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Legados del Papa Celestino I</div>
+      <div class="card-role">Delegados pontificios</div>
+      <div class="card-desc">Los presbíteros Arcadio y Proyectado, y el obispo Felipe. Llegaron tarde (1 de julio) pero ratificaron todo lo actuado por Cirilo. El papa Celestino respaldó plenamente la condena de Nestorio.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Memnón de Éfeso</div>
+      <div class="card-role">Obispo anfitrión de la sede</div>
+      <div class="card-desc">Aliado firme de Cirilo. Controló el acceso a la basílica durante el concilio, impidiendo que los obispos favorables a Nestorio participaran con plena libertad. Una figura menor teológicamente pero crucial políticamente.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Teodosio II</div>
+      <div class="card-role">Emperador de Oriente (408–450)</div>
+      <div class="card-desc">Convocó el concilio sin tener una postura doctrinal clara. Inicialmente apoyó las tres condenas (Nestorio, Cirilo y Memnón por parte de los antioquenos) hasta que la presión política lo empujó definitivamente al lado de Cirilo.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Teodoreto de Ciro</div>
+      <div class="card-role">Obispo de Ciro — Antioquía</div>
+      <div class="card-desc">El más brillante teólogo del bando antioqueno. Defensor de Nestorio, crítico de los Doce Anatemas de Cirilo. Jugará un papel crucial en Calcedonia veinte años después. Su caso será uno de los más controvertidos de ambos concilios.</div>
+    </div>
+  </div>
+
+  <p><strong>Número aproximado de participantes:</strong> La primera sesión —la única que deliberó sobre Nestorio— contó con aproximadamente <span class="gold">200 obispos</span>, todos ellos del bando de Cirilo. Los 43 obispos orientales que apoyaban a Nestorio celebraron su propio contrasinodo y no participaron en las votaciones decisivas.</p>
+</section>
+
+<!-- IV. LAS SESIONES -->
+<hr class="section-divider">
+<section id="efeso-sesiones">
+  <h2><span class="h2-num">IV · Las Sesiones</span>Desarrollo del Concilio de Éfeso</h2>
+
+  <p class="lead">El Concilio de Éfeso se celebró en condiciones de enorme tensión política y casi sin quórum representativo en su sesión más importante. Fue, en palabras del historiador Henry Chadwick, «un concilio que procedió con una prisa que rozaba la ilegalidad canónica.»</p>
+
+  <div id="primera-sesion-ef">
+  <div class="sesion-tabs" id="tabs-ef">
+    <button class="sesion-tab active" onclick="switchTabEf(0)">Sesión I — 22 Jun</button>
+    <button class="sesion-tab" onclick="switchTabEf(1)">Sesión II — 10 Jul</button>
+    <button class="sesion-tab" onclick="switchTabEf(2)">Sesión III — 11 Jul</button>
+    <button class="sesion-tab" onclick="switchTabEf(3)">Sesión IV — 16 Jul</button>
+    <button class="sesion-tab" onclick="switchTabEf(4)">Sesión V — 17 Jul</button>
+    <button class="sesion-tab" onclick="switchTabEf(5)">Sesión VI — 22 Jul</button>
+    <button class="sesion-tab" onclick="switchTabEf(6)">Sesión VII — 31 Jul</button>
+  </div>
+
+  <div class="sesion-content active">
+    <h4>Primera Sesión — 22 de junio de 431 · La Gran Deposición</h4>
+    <p><strong style="color:#F5C518">Tema central:</strong> Juicio y deposición de Nestorio.</p>
+    <p>Esta es la sesión fundacional del concilio y su acto más dramático. Cirilo, que presidía, abrió la sesión pese a que faltaban los obispos de Antioquía y a que el representante imperial Candidiano había ordenado esperar. Se leyeron íntegramente las dos cartas de Cirilo a Nestorio y la respuesta de Nestorio, el texto de la condena sinodal romana, y un florilegio de citas patrísticas sobre la <em>Theotokos</em>.</p>
+    <p>Nestorio fue convocado tres veces para comparecer. Se negó las tres. Tras siete horas de sesión, los 200 obispos presentes votaron su deposición. El decreto se clavó en la puerta de Nestorio esa misma tarde.</p>
+    <p>La reacción de la ciudad fue eufórica: la multitud iluminó la ciudad con antorchas, acompañó a los obispos hasta sus alojamientos cantando y arrojando flores. «La ciudad arde de alegría», escribió Cirilo al clero de Alejandría en una carta célebre.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Segunda Sesión — 10 de julio de 431</h4>
+    <p><strong style="color:#F5C518">Tema central:</strong> Recepción de los legados papales y ratificación.</p>
+    <p>Los legados de Roma llegaron el 10 de julio y ratificaron todo lo actuado. El presbítero Felipe declaró que el papa Celestino «era partícipe en el sínodo a través de nosotros». La condena de Nestorio fue confirmada con el respaldo pontificio, lo que le daba al acto toda la legitimidad canónica que le faltaba por la ausencia antioquena.</p>
+  </div>
+  <div class="sesion-content" id="contrasinodo">
+    <h4>Tercera Sesión — 11 de julio de 431 · El Contrasinodo de Juan</h4>
+    <p><strong style="color:#F5C518">Contexto:</strong> Juan de Antioquía llega y forma su propio concilio.</p>
+    <p>Juan de Antioquía y sus 43 obispos, llegados con varios días de retraso, encontraron a Nestorio ya depuesto. Furiosos, celebraron su propio «concilio» en el que: (a) depusieron a Cirilo de Alejandría, (b) depusieron a Memnón de Éfeso, (c) excomulgaron a todos los participantes del primer concilio.</p>
+    <p>Teodosio II, ante la situación caótica, ordenó inicialmente que todos permanecieran en sus puestos: Nestorio depuesto por el concilio de Cirilo y Cirilo depuesto por el concilio de Juan, con lo que nadie iba a ningún sitio. El caos era total.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Cuarta Sesión — 16 de julio de 431</h4>
+    <p><strong style="color:#F5C518">Tema:</strong> Lectura de memoriales y reafirmación de la condena de Nestorio.</p>
+    <p>Se leyeron los memoriales enviados por diferentes grupos al emperador: los de los obispos que apoyaban a Cirilo, los de los antioquenos, los de los monjes de Constantinopla. Quedó patente la profundidad del cisma. El concilio cirileano ratificó nuevamente su postura y rechazó el contrasinodo de Juan como canónicamente inválido.</div>
+  </div>
+  <div class="sesion-content">
+    <h4>Quinta Sesión — 17 de julio de 431</h4>
+    <p><strong style="color:#F5C518">Tema:</strong> Promulgación del canon que prohíbe otro símbolo de fe.</p>
+    <p>El concilio adoptó el célebre canon VII, que prohibía componer, enseñar o transmitir a los catecúmenos cualquier otra «fe» distinta al Credo de Nicea (325). Este canon será invocado en Calcedonia para debatir si la nueva definición era un «símbolo nuevo» prohibido por Éfeso.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Sexta Sesión — 22 de julio de 431</h4>
+    <p><strong style="color:#F5C518">Tema:</strong> Lectura de las actas y documentos; promulgación de cánones disciplinares.</p>
+    <p>Se leyeron y ratificaron las actas de las sesiones previas. Se adoptaron ocho cánones disciplinares sobre la eclesiología y la jurisdicción episcopal. El canon VIII es especialmente relevante: regulaba la jurisdicción del obispo de Chipre, en un claro movimiento político que afectaba las relaciones entre patriarcados.</p>
+  </div>
+  <div class="sesion-content" id="reunion-ef">
+    <h4>Séptima Sesión — 31 de julio de 431</h4>
+    <p><strong style="color:#F5C518">Tema:</strong> Sesión final; el emperador opta por el bando de Cirilo.</p>
+    <p>Teodosio II, finalmente, tomó partido. Ratificó la deposición de Nestorio y ordenó que Cirilo y Memnón fueran liberados de la custodia imperial en la que habían sido puestos provisionalmente. Nestorio fue enviado de regreso a su monasterio de Antioquía y más tarde exiliado al Alto Egipto, donde moriría hacia el año 451.</p>
+    <p>El cisma entre Alejandría y Antioquía no se cerró ese día. Haría falta la <span class="gold">Fórmula de Unión de 433</span> para sellar la paz provisional.</p>
+  </div>
+  </div>
+</section>
+
+<!-- V. EL GRAN DEBATE TEOLÓGICO -->
+<hr class="section-divider">
+<section id="efeso-debate">
+  <h2><span class="h2-num">V · El Gran Debate Teológico</span>Theotokos, Christotokos y la Naturaleza de la Unión</h2>
+
+  <h3 id="theotokos">¿Theotokos o Christotokos? — La Clave de Todo</h3>
+
+  <p>El debate sobre el título mariano puede parecer un asunto litúrgico puntual. En realidad, concentra la pregunta cristológica más profunda: <em>¿cómo se unen lo divino y lo humano en Cristo?</em> La respuesta a esa pregunta determina qué tipo de Salvador es Cristo y cómo nos salva.</p>
+
+  <div class="heresy-grid">
+    <div class="heresy-card bad">
+      <div class="heresy-name">Postura de Nestorio</div>
+      <div class="heresy-label">⚠ Condenada en Éfeso</div>
+      <div class="heresy-desc">María es <em>Christotokos</em> (Madre de Cristo), no <em>Theotokos</em> (Madre de Dios). El hombre Jesús y el Logos divino están unidos moralmente, como un hombre en quien Dios habita como en un templo. Hay dos sujetos distintos: el Logos eterno y el hombre Jesús. Por tanto, María es madre del hombre, no de Dios.</div>
+    </div>
+    <div class="heresy-card good">
+      <div class="heresy-name">Postura de Cirilo — Ortodoxa</div>
+      <div class="heresy-label">✓ Ratificada en Éfeso</div>
+      <div class="heresy-desc">María es <em>Theotokos</em> porque engendró al Logos encarnado. No hay dos sujetos en Cristo: hay una sola <em>hypostasis</em> (persona) que es el Hijo eterno de Dios, que asumió una naturaleza humana completa. Por eso todo lo que se dice de Cristo puede decirse de Dios (comunicación de idiomas).</div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-title">🔑 La Comunicación de Idiomas (Communicatio Idiomatum)</div>
+    <p>El principio teológico que fundamenta el <em>Theotokos</em> y que Éfeso ratificó es la <em>communicatio idiomatum</em>: dado que Cristo es una sola Persona, los atributos de ambas naturalezas pueden predicarse del único sujeto. Así se puede decir: «Dios sufrió», «el eterno nació», «el Creador murió» —no porque la divinidad sea pasible, sino porque el sujeto que sufrió, nació y murió es el mismo Dios eterno encarnado. Nestorio rechazaba este principio como una confusión. Cirilo lo defendió como el corazón de la fe cristiana.</p>
+  </div>
+
+  <h3 id="cirilo-nestorio">Cirilo vs Nestorio: Los Textos del Debate</h3>
+
+  <p>El intercambio epistolar entre Cirilo y Nestorio es uno de los documentos teológicos más apasionantes de la antigüedad cristiana. En sus cartas se dan cita la profundidad metafísica y la acritud personal en proporciones iguales.</p>
+
+  <div class="quote">
+    <p class="quote-text">«No dividimos el Hijo único e indivisible en dos hijos. [...] No decimos que la naturaleza del Verbo se transmutó en carne, ni que se convirtió en hombre completo compuesto de alma y cuerpo. Decimos más bien que el Verbo, uniendo hipostáticamente consigo mismo la carne animada de un alma racional, se hizo hombre de modo inefable e incomprensible, siendo llamado Hijo del hombre, no según sola voluntad ni por beneplácito, tampoco por asunción de persona, y que las naturalezas que se unieron son verdaderamente diversas, pero que de ambas resulta un solo Cristo e Hijo.»</p>
+    <div class="quote-source">Cirilo de Alejandría, Segunda Carta a Nestorio (la «Epistola II») — ACO I,1,1, pp. 25–28. Texto ratificado como orthodox por el Concilio de Éfeso y Calcedonia.</div>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«Si llamamos a María <em>Theotokos</em>, como si Dios pudiese tener una madre, estamos atribuyendo a la Divinidad un nacimiento que le es impropio. [...] El hombre que fue formado en el vientre de María no es Dios en sí mismo, sino que Dios habitó en él a partir de la concepción, asumiendo la persona del que fue asumido.»</p>
+    <div class="quote-source">Nestorio, Segunda Carta a Cirilo — ACO I,1,1, pp. 29–32. Texto leído en la Sesión I de Éfeso y condenado.</div>
+  </div>
+
+  <h4>Los Doce Anatemas de Cirilo — El Documento Central</h4>
+  <p>En agosto de 430, Cirilo envió a Nestorio sus célebres <em>Doce Anatemas</em>, proposiciones que Nestorio debía suscribir como condición para no ser condenado. Su rechazo fue uno de los detonantes formales del concilio.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Anatema de Cirilo</th><th>Lo que condena en Nestorio</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Quien no confiese que Emanuel es verdadero Dios y por ello la Virgen es <em>Theotokos</em>: anatema.</td><td>La negación del <em>Theotokos</em></td></tr>
+        <tr><td>2</td><td>Quien no confiese que el Verbo de Dios Padre está unido a la carne según la hipóstasis: anatema.</td><td>La mera «unión moral» nestoriana</td></tr>
+        <tr><td>3</td><td>Quien divida las hipóstasis en el único Cristo y solo las una por una conjunción de honor: anatema.</td><td>La «unión de dignidad» en lugar de unión hipostática</td></tr>
+        <tr><td>4</td><td>Quien atribuya las palabras evangélicas a dos personas o hipóstasis: anatema.</td><td>La división del sujeto en Cristo</td></tr>
+        <tr><td>5</td><td>Quien llame a Cristo un hombre portador de Dios (Theodochós) en lugar de Dios verdadero: anatema.</td><td>La cristología del «templo» antioquena</td></tr>
+        <tr><td>6</td><td>Quien llame al Verbo de Dios Padre Dios o Señor de Cristo, y no confiese que es él mismo Dios y hombre: anatema.</td><td>La división implícita del sujeto</td></tr>
+        <tr><td>7</td><td>Quien diga que el hombre Jesús es movido por el Verbo como por una presencia interna y no que es el mismo Verbo: anatema.</td><td>El modelo del hombre inspirado</td></tr>
+        <tr><td>8</td><td>Quien diga que el hombre asumido debe ser co-adorado con el Verbo de Dios como si fuera otro sujeto: anatema.</td><td>El desdoblamiento del sujeto de adoración</td></tr>
+        <tr><td>9</td><td>Quien diga que el único Señor Jesucristo fue glorificado por el Espíritu como por una potencia ajena: anatema.</td><td>La separación del Espíritu del Cristo</td></tr>
+        <tr><td>10</td><td>Quien diga que el sumo sacerdote e intercesor no es el mismo Verbo de Dios, sino un hombre diferente de él: anatema.</td><td>La separación del Cristo sacerdote del Logos</td></tr>
+        <tr><td>11</td><td>Quien no confiese que la carne del Señor es vivificante porque es propia del Verbo que la vivifica todo: anatema.</td><td>La separación de la Eucaristía del Logos</td></tr>
+        <tr><td>12</td><td>Quien no confiese que el Verbo de Dios padeció en la carne y fue crucificado en la carne: anatema.</td><td>La impassibilidad absoluta que excluye la pasión del sujeto único</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- VI. EL DECRETO -->
+<hr class="section-divider">
+<section id="efeso-horos">
+  <h2><span class="h2-num">VI · El Decreto de Éfeso</span>Definición Dogmática y Cánones</h2>
+
+  <p>El resultado doctrinal del Concilio de Éfeso no fue un extenso documento sistemático como el Horos de Nicea II. Fue esencialmente:</p>
+
+  <div class="dogma-box">
+    <p class="dogma-text">«El Sínodo Santo ha definido: Si alguno no confiesa que el Emanuel es verdadero Dios, y por ello la Santa Virgen es <em>Theotokos</em> —pues engendró carnalmente al Verbo de Dios que se hizo carne—, sea anatema.»</p>
+    <p style="margin-top:16px;font-family:'Oswald',sans-serif;font-size:12px;color:var(--amarillo-tenue);letter-spacing:2px;text-transform:uppercase;">Concilio de Éfeso, Decreto dogmático central — ACO I,1,7 p. 117 · Denzinger 252</p>
+  </div>
+
+  <p>Además, el concilio ratificó explícitamente la <span class="gold">Segunda Carta de Cirilo a Nestorio</span> como expresión ortodoxa de la fe, y condenó la respuesta de Nestorio. Estableció también ocho cánones disciplinares y promulgó el canon VII —prohibición de nuevos símbolos de fe— que será clave en la controversia calcedoniense.</p>
+
+  <div class="highlight">
+    <div class="highlight-title">📌 Lo que Éfeso NO dijo — Punto Crucial</div>
+    <p>Éfeso no definió cómo se relacionaban las dos naturalezas en Cristo. Definió la <strong>unidad de persona</strong> (contra Nestorio) y que la Virgen es <em>Theotokos</em>. Pero no elaboró una ontología de la unión. Esa tarea quedó pendiente para Calcedonia. La ambigüedad dejada por Éfeso fue la que, paradójicamente, permitió la emergencia del monofisismo en los veinte años siguientes.</p>
+  </div>
+</section>
+
+<!-- VII. DESPUÉS DE ÉFESO -->
+<hr class="section-divider">
+<section id="efeso-despues">
+  <h2><span class="h2-num">VII · Después de Éfeso</span>El Cisma y la Fórmula de Unión</h2>
+
+  <h3 id="formula-union">La Fórmula de Unión de 433: ¿Victoria o Capitulación?</h3>
+
+  <p>El cisma entre Alejandría y Antioquía que estalló en Éfeso duró dos años. Finalmente, en 433, con la mediación del obispo Acacio de Beroe y la presión imperial, Cirilo y Juan de Antioquía suscribieron la llamada <span class="gold">Fórmula de Unión</span>. Este documento es de enorme importancia para entender la historia posterior hacia Calcedonia.</p>
+
+  <div class="quote">
+    <p class="quote-text">«Confesamos, pues, que nuestro Señor Jesucristo, el Hijo único de Dios, es Dios perfecto y hombre perfecto, de alma racional y cuerpo, engendrado del Padre antes de los siglos según la divinidad, y en los últimos días por nosotros y por nuestra salvación de María Virgen según la humanidad; que es de la misma naturaleza que el Padre según la divinidad y de la misma naturaleza que nosotros según la humanidad, pues se produjo la unión de dos naturalezas. Por lo cual confesamos un solo Cristo, un solo Hijo, un solo Señor.»</p>
+    <div class="quote-source">Fórmula de Unión de 433, carta de Juan de Antioquía a Cirilo — ACO I,1,4 pp. 8–9. Texto que preanuncia la definición de Calcedonia.</div>
+  </div>
+
+  <p>Esta fórmula, que Cirilo suscribió en 433, es crucial porque habla explícitamente de <span class="gold">«unión de dos naturalezas»</span>. Los seguidores más radicales de Cirilo —los que luego serían monofisitas— la vieron como una traición. El propio Cirilo tuvo que escribir cartas explicando por qué la aceptaba. Esta tensión interna al cirilerismo será la semilla del conflicto que llevará al Concilio de Calcedonia.</p>
+</section>
+
+<!-- VIII. REPERCUSIONES ÉFESO -->
+<hr class="section-divider">
+<section id="efeso-repercusiones">
+  <h2><span class="h2-num">VIII · Repercusiones de Éfeso</span>Un Concilio que Cambió la Historia</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">🕊 El Theotokos y la devoción mariana</div>
+      <div class="card-role">Impacto litúrgico y devocional</div>
+      <div class="card-desc">La definición de María como <em>Theotokos</em> desató un florecimiento sin precedentes de la devoción mariana en toda la Iglesia. Se construyeron basílicas marianas en Constantinopla, Roma (Santa María Mayor, ca. 432), Jerusalén y Nazaret. El título se incorporó definitivamente a la liturgia.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">⛪ La Iglesia Asiria del Oriente</div>
+      <div class="card-role">Cisma permanente</div>
+      <div class="card-desc">La Iglesia de Persia, que se había desarrollado de forma independiente siguiendo la teología antioquena de Teodoro de Mopsuestia, no aceptó los decretos de Éfeso y siguió una cristología que sus adversarios denominaron nestoriana. Sobrevive hasta hoy como la Iglesia Asiria del Oriente.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">📚 El exilio y la obra de Nestorio</div>
+      <div class="card-role">Legado intelectual</div>
+      <div class="card-desc">Nestorio escribió desde el exilio su obra apologética <em>El Libro de Heráclides</em> (Bazaar of Heraclides), redescubierta en siríaco en 1895. En ella se defiende sosteniendo que su postura no era la que Cirilo le atribuía. El debate sobre si Nestorio era realmente «nestoriano» sigue abierto entre los especialistas.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">⚠ Semilla del Monofisismo</div>
+      <div class="card-role">Consecuencia inesperada</div>
+      <div class="card-desc">Al insistir en la unidad de persona y al dejar indefinida la relación entre las naturalezas, Éfeso abrió el camino a que algunos discípulos de Cirilo radicalizaran su teología hasta negar la dualidad de naturalezas. El próximo gran concilio (Calcedonia, 451) nacería de este problema.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--                                                         -->
+<!--  PARTE II — CONCILIO DE CALCEDONIA (451)               -->
+<!--                                                         -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<hr class="section-divider-thick">
+<div class="concilio-header cal">
+  <div class="ch-bar"></div>
+  <div class="ch-text">
+    <div class="ch-num">Cuarto Concilio Ecuménico</div>
+    <div class="ch-title">Concilio de Calcedonia</div>
+    <div class="ch-sub">8 de octubre – 1 de noviembre de 451 · Calcedonia, Bitinia</div>
+  </div>
+</div>
+
+<!-- IX. CONTEXTO CALCEDONIA -->
+<hr class="section-divider">
+<section id="calc-contexto">
+  <h2><span class="h2-num">IX · Contexto</span>De Éfeso a Calcedonia: Veinte Años Cruciales</h2>
+
+  <p class="lead">Los veinte años entre Éfeso y Calcedonia no fueron de paz. La ambigüedad teológica dejada por Éfeso, la muerte de Cirilo en 444, y la ascensión política de figuras extremistas produjeron una nueva crisis que puso al borde del abismo la cristología cristiana.</p>
+
+  <h3 id="eutiques">Eutiques y el Monofisismo (ca. 444–449)</h3>
+
+  <p><span class="gold">Eutiques</span> (ca. 380–456) era archimandrita de un gran monasterio en Constantinopla, venerado como monje austero y ortodoxo firme. Era discípulo espiritual del difunto Cirilo y feroz defensor de Éfeso. Pero en su celo anti-nestoriano llegó a una postura que revertía el error en la dirección contraria.</p>
+
+  <p>La postura de Eutiques puede resumirse así: antes de la Encarnación, Cristo tiene dos naturalezas (la divina y la humana que asumió). <em>Después</em> de la Encarnación, solo hay una naturaleza, resultado de la fusión. La humanidad de Cristo queda absorbida por la divinidad «como una gota de vinagre en el océano». Esta postura se denominó <span class="gold">monofisismo</span> (mono = una, physis = naturaleza).</p>
+
+  <div class="heresy-grid">
+    <div class="heresy-card bad">
+      <div class="heresy-name">Nestorianismo</div>
+      <div class="heresy-label">⚠ Condenado en Éfeso 431</div>
+      <div class="heresy-desc">Dos naturalezas → <strong>Dos personas/sujetos.</strong> Cristo está dividido. María es madre del hombre, no de Dios. La unión es solo moral, de «voluntad y honor».</div>
+    </div>
+    <div class="heresy-card bad">
+      <div class="heresy-name">Monofisismo (Eutiquianismo)</div>
+      <div class="heresy-label">⚠ Condenado en Calcedonia 451</div>
+      <div class="heresy-desc">Una sola persona → <strong>Una sola naturaleza.</strong> La humanidad queda absorbida en la divinidad tras la Encarnación. Cristo no es «consubstancial con nosotros» en humanidad.</div>
+    </div>
+    <div class="heresy-card good">
+      <div class="heresy-name">Ortodoxia Calcedoniense</div>
+      <div class="heresy-label">✓ Definida en Calcedonia 451</div>
+      <div class="heresy-desc">Una sola persona/hipóstasis → <strong>Dos naturalezas completas, distintas, sin mezcla ni separación.</strong> Cristo es consubstancial al Padre en divinidad y consubstancial a nosotros en humanidad.</div>
+    </div>
+  </div>
+
+  <p>En 448, Eutiques fue llevado ante el sínodo local de Constantinopla presidido por el obispo <span class="gold">Flaviano</span>. Interrogado, rechazó confesar que Cristo tenía dos naturalezas después de la Encarnación. Fue condenado y depuesto. Pero Eutiques tenía un poderoso aliado: el eunuco <span class="gold">Crisafio</span>, chambelán del palacio imperial y yerno político de Eutiques, que tenía el oído del débil Teodosio II.</p>
+
+  <h3 id="efeso2">El «Latrocinio de Éfeso» — 449: El Concilio que no Fue</h3>
+
+  <p>Crisafio convenció a Teodosio II para convocar un nuevo concilio en Éfeso (449) presidido por el inflexible obispo <span class="gold">Dióscoro de Alejandría</span>, sucesor de Cirilo. El «concilio» de 449 fue lo opuesto a un proceso canónico:</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">449 — Agosto</div>
+        <div class="tl-title">El concilio abre bajo presidencia de Dióscoro</div>
+        <div class="tl-body">Dióscoro prohibió expresamente que se leyera la carta del papa León I (el Tomus Leonis) —el documento doctrinal más importante enviado por Roma—. El legado papal Hilario protestó. Fue ignorado.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">449 — Agosto</div>
+        <div class="tl-title">Rehabilitación de Eutiques</div>
+        <div class="tl-body">El concilio rehabilitó a Eutiques, absolvió su herejía monofisita, y anuló la condena del sínodo de Flaviano.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">449 — Agosto</div>
+        <div class="tl-title">Deposición por violencia de Flaviano de Constantinopla</div>
+        <div class="tl-body">Lo más escandaloso: Dióscoro convocó a sus monjes y partidarios a la sala y literalmente golpearon al obispo Flaviano. Flaviano fue depuesto y después murió de las heridas pocas semanas después. El papa León I llamó al evento <em>Latrocinium</em> —latrocinio, robo a mano armada— y no lo reconoció como concilio.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">450 — Julio</div>
+        <div class="tl-title">Muerte de Teodosio II — Todo cambia</div>
+        <div class="tl-body">El emperador Teodosio II murió al caer de su caballo. Su sucesor, <strong>Marciano</strong>, esposo de la emperatriz Pulqueria, era un hombre de mentalidad diferente: militar, ortodoxo y sin deudas políticas con Crisafio. Ordenó ejecutar a Crisafio. Convocó un nuevo concilio general.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- X. CONVOCATORIA CALCEDONIA -->
+<hr class="section-divider">
+<section id="calc-convocatoria">
+  <h2><span class="h2-num">X · La Convocatoria</span>Marciano, Pulqueria y el Papa León I</h2>
+
+  <p>El nuevo concilio fue convocado por el <span class="gold">emperador Marciano</span> (r. 450–457) y su esposa <span class="gold">Pulqueria Augusta</span>, a petición del papa <span class="gold">León I el Grande</span> (r. 440–461). La sede escogida fue inicialmente Nicea, pero razones logísticas llevaron a trasladarlo a <span class="gold">Calcedonia</span>, en la costa asiática del Bósforo, frente a Constantinopla.</p>
+
+  <p>Esta cercanía a la capital imperial no fue accidental: permitió al propio Marciano asistir a la sesión final y supervisar directamente el proceso. Fue el concilio con mayor participación episcopal de la historia cristiana hasta ese momento: entre <span class="gold">520 y 630 obispos</span> según las fuentes.</p>
+
+  <p>El <span class="gold">papa León I</span> no asistió en persona —ningún papa occidental había cruzado los Alpes para un concilio— pero envió cuatro legados con plenos poderes y, sobre todo, envió su monumental carta doctrinal a Flaviano, el <em>Tomus Leonis</em>, que se convirtió en el documento teológico central del concilio.</p>
+</section>
+
+<!-- XI. PARTICIPANTES CALCEDONIA -->
+<hr class="section-divider">
+<section id="calc-participantes">
+  <h2><span class="h2-num">XI · Los Participantes</span>Calcedonia: Las Fuerzas en Presencia</h2>
+
+  <div class="persona-grid">
+    <div class="persona-card">
+      <div class="persona-name">Papa León I el Grande</div>
+      <div class="persona-dates">440–461 d.C. — Ausente pero omnipresente</div>
+      <div class="persona-quote">Su <em>Tomus ad Flavianum</em> definió el lenguaje dogmático del concilio. Los padres lo aclamaron: «Pedro ha hablado por boca de León.»</div>
+      <div class="persona-ref">Actas de Calcedonia, Sesión II — ACO II,1,2 p. 81</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Emperador Marciano</div>
+      <div class="persona-dates">450–457 d.C.</div>
+      <div class="persona-quote">Presidió la sesión final con Pulqueria. Le interesaba la unidad del Imperio, no la teología fina. Aceptó la definición calcedoniense como instrumento de cohesión.</div>
+      <div class="persona-ref">Participó en la Sesión VI (última) — ACO II,1,3</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Dióscoro de Alejandría</div>
+      <div class="persona-dates">444–451 d.C. como patriarca</div>
+      <div class="persona-quote">El gran villano del concilio. Fue juzgado y depuesto por su conducta en el Latrocinio de 449 y por rechazar la carta del papa. No fue condenado explícitamente por herejía monofisita, sino por conducta canónica.</div>
+      <div class="persona-ref">Depuesto en la Sesión I de Calcedonia — ACO II,1,1</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Anatolio de Constantinopla</div>
+      <div class="persona-dates">Patriarca 449–458</div>
+      <div class="persona-quote">Presidió las sesiones teológicas. Había sido clérigo de Dióscoro pero se adaptó rápidamente al nuevo viento político. Redactó el famoso Canon 28 que elevaba la sede de Constantinopla.</div>
+      <div class="persona-ref">Preside las sesiones I–V — ACO II,1</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Teodoreto de Ciro</div>
+      <div class="persona-dates">ca. 393–460 d.C.</div>
+      <div class="persona-quote">El más brillante teólogo antioqueno. Había sido condenado en el Latrocinio de 449. Rehabilitado en Calcedonia, pero obligado a pronunciar el anatema contra Nestorio antes de ser readmitido —algo que hizo con evidente resistencia.</div>
+      <div class="persona-ref">Rehabilitado en Sesión VIII — ACO II,1,3 p. 27</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Legados del Papa León I</div>
+      <div class="persona-dates">Enviados con plenos poderes</div>
+      <div class="persona-quote">El obispo Pascasino de Lilibeo, el obispo Lucencio de Ascoli, y los presbíteros Bonifacio y Basilio. Presidieron el concilio (Pascasino), aunque Anatolio condujo las deliberaciones.</div>
+      <div class="persona-ref">Presidencia — ACO II,1,1</div>
+    </div>
+  </div>
+</section>
+
+<!-- XII. LAS SESIONES DE CALCEDONIA -->
+<hr class="section-divider">
+<section id="calc-sesiones">
+  <h2><span class="h2-num">XII · Las Sesiones</span>Calcedonia Sesión por Sesión</h2>
+
+  <div class="sesion-tabs" id="tabs-cal">
+    <button class="sesion-tab active" onclick="switchTabCal(0)">Ses. I</button>
+    <button class="sesion-tab" onclick="switchTabCal(1)">Ses. II</button>
+    <button class="sesion-tab" onclick="switchTabCal(2)">Ses. III</button>
+    <button class="sesion-tab" onclick="switchTabCal(3)">Ses. IV</button>
+    <button class="sesion-tab" onclick="switchTabCal(4)">Ses. V</button>
+    <button class="sesion-tab" onclick="switchTabCal(5)">Ses. VI</button>
+    <button class="sesion-tab" onclick="switchTabCal(6)">Ses. VII–XVI</button>
+  </div>
+
+  <div class="sesion-content active">
+    <h4>Primera Sesión — 8 de octubre de 451 · Juicio de Dióscoro</h4>
+    <p>La primera sesión no fue teológica sino judicial. Se juzgó la conducta de <strong>Dióscoro de Alejandría</strong> en el Latrocinio de 449. Se leyeron las actas de dicho concilio fraudulento, los testimonios de los obispos víctimas de la violencia, y la declaración de Flaviano (ya muerto). Dióscoro rechazó responder a las acusaciones alegando que él había presidido un concilio ecuménico legítimo. Fue depuesto —no por herejía monofisita explícita, sino por conducta anticanónica— y exiliado a Gangra en el Ponto, donde murió en 454.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Segunda Sesión — 10 de octubre de 451 · El Tomus de León</h4>
+    <p>Se leyó públicamente la carta doctrinal del papa León I a Flaviano (<em>Tomus ad Flavianum</em>). Cuando el lector terminó, los padres conciliares aclamaron: «¡Así creemos todos! Pedro ha hablado por boca de León. León ha enseñado piadosamente. Así enseñó Cirilo. León y Cirilo enseñan lo mismo. Anatema al que crea de otra manera.»</p>
+    <p>Sin embargo, algunos obispos del bando alejandrino y egipcio objetaron que las fórmulas de León eran incompatibles con los anatemas de Cirilo. Se nombró una comisión de 23 obispos para examinar si el Tomus era compatible con las cartas de Cirilo ratificadas en Éfeso.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Tercera Sesión — 13 de octubre de 451 · Rehabilitación de los depuestos en 449</h4>
+    <p>Se rehabilitaron todos los obispos que habían sido depuestos injustamente en el Latrocinio de 449: Teodoreto de Ciro, Ibas de Edesa (aunque con condición de anatematizar a Nestorio), Domno de Antioquía y otros. Esta sesión fue importante para el equilibrio entre los partidos. La condición de anatematizar a Nestorio fue un precio que los antioquenos pagaron para su rehabilitación.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Cuarta Sesión — 17 de octubre de 451 · Debate doctrinal y comisión</h4>
+    <p>La comisión de 23 obispos informó que el Tomus de León era compatible con los escritos de Cirilo de Éfeso y con la Fórmula de Unión de 433. Con esto se allanó el camino para la definición dogmática. Se propuso inicialmente reutilizar el Credo de Nicea y la Fórmula de Unión sin añadir nada nuevo, invocando el canon VII de Éfeso. Pero los legados papales insistieron en que se necesitaba una nueva y más precisa definición. El debate fue intenso.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Quinta Sesión — 22 de octubre de 451 · Redacción del Horos</h4>
+    <p>La sesión clave. Una comisión de redacción trabajó el texto del Horos (decreto dogmático). Los debates sobre el lenguaje fueron minuciosos: ¿«en dos naturalezas» (<em>en dyo physesin</em>) o «de dos naturalezas» (<em>ek dyo physeōn</em>)? La primera formulación era calcedoniense-romana; la segunda podía tener lecturas monofisitas (sugería la fusión en una). Se optó por «<em>en</em> dos naturalezas» como más preciso. Se redactó el texto que sería aprobado en la sesión siguiente.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Sexta Sesión — 25 de octubre de 451 · Promulgación del Horos</h4>
+    <p>La sesión más solemne. El texto del Horos fue leído ante los emperadores Marciano y Pulqueria, presentes en persona. Al terminar la lectura, los padres aclamaron: «¡Esta es la fe de los apóstoles! ¡Marciano, nuevo Constantino; Pulqueria, nueva Helena!» Todos los obispos suscribieron el texto.</p>
+    <p>Fue adoptado también el tristemente célebre <strong>Canon 28</strong>, que declaraba al obispo de Constantinopla con «los mismos privilegios de honor» que el obispo de Roma por ser la ciudad «nueva Roma». Los legados papales protestaron enérgicamente y el papa León I rechazó el Canon 28 hasta su muerte, aunque lo aceptó implícitamente al no anular el concilio.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Sesiones VII–XVI — Cánones disciplinares y casos pendientes</h4>
+    <p>Las sesiones restantes (hasta el 1 de noviembre) se dedicaron a asuntos canónicos: definición de jurisdicciones eclesiásticas, regulación de la vida monástica, casos de clérigos individuales, la cuestión de Palestina (monjes monofisitas habían tomado Jerusalén). El concilio adoptó 30 cánones disciplinares además del Horos dogmático.</p>
+  </div>
+</section>
+
+<!-- XIII. EL GRAN DEBATE DE CALCEDONIA -->
+<hr class="section-divider">
+<section id="calc-debate">
+  <h2><span class="h2-num">XIII · El Gran Debate Teológico</span>Las Dos Naturalezas de Cristo</h2>
+
+  <h3 id="dos-naturalezas">La Pregunta Central: ¿Una o Dos Naturalezas después de la Encarnación?</h3>
+
+  <p>La pregunta que Calcedonia debía responder era la que Éfeso había dejado sin responder: <em>¿cómo coexisten lo divino y lo humano en Cristo después de la Encarnación?</em> Hay cuatro posiciones históricas:</p>
+
+  <div class="heresy-grid">
+    <div class="heresy-card bad">
+      <div class="heresy-name">Apolinarismo</div>
+      <div class="heresy-label">⚠ Condenado en Constantinopla I (381)</div>
+      <div class="heresy-desc">El Logos ocupa el lugar del alma racional en Cristo. Un ser con naturaleza divina completa pero humanidad incompleta (sin alma racional humana). <em>Condenado antes de Calcedonia.</em></div>
+    </div>
+    <div class="heresy-card bad">
+      <div class="heresy-name">Nestorianismo</div>
+      <div class="heresy-label">⚠ Condenado en Éfeso (431)</div>
+      <div class="heresy-desc">Dos naturalezas completas + dos sujetos/personas unidos moralmente. Cristo es un hombre en quien Dios habita. <em>Condenado en Éfeso.</em></div>
+    </div>
+    <div class="heresy-card bad">
+      <div class="heresy-name">Monofisismo (Eutiquianismo)</div>
+      <div class="heresy-label">⚠ Condenado en Calcedonia (451)</div>
+      <div class="heresy-desc">Una sola naturaleza tras la Encarnación, resultado de la fusión de lo divino y lo humano. La humanidad queda absorbida. <em>Condenado en Calcedonia.</em></div>
+    </div>
+    <div class="heresy-card good">
+      <div class="heresy-name">Calcedoniense — Ortodoxia</div>
+      <div class="heresy-label">✓ Definido en Calcedonia (451)</div>
+      <div class="heresy-desc">Una sola Persona/hipóstasis, dos naturalezas completas, sin mezcla, sin cambio, sin división, sin separación. El Hijo eterno de Dios, única persona, posee divinidad perfecta y humanidad perfecta.</div>
+    </div>
+  </div>
+
+  <h3 id="tomus-leonis">El Tomus de León: El Texto que Definió el Lenguaje</h3>
+
+  <p>La carta del papa León I a Flaviano (449) —el <em>Tomus ad Flavianum</em>— es uno de los documentos más importantes de la historia de la cristología. Escrita en latín con una claridad y precisión que los teólogos orientales admiraron, articuló por primera vez el lenguaje técnico que Calcedonia haría dogma.</p>
+
+  <div class="quote">
+    <p class="quote-text">«Cada una de las dos naturalezas conserva sin defecto su propia propiedad, y así como la forma de Dios no quita la forma de siervo, así la forma de siervo no menoscaba la forma de Dios. [...] El mismo que es verdadero Dios es asimismo verdadero hombre: en esta unidad no hay engaño alguno, porque se dan conjuntamente la humildad de la humanidad y la excelsa condición de la divinidad. Pues así como Dios no es mudado por la compasión que ejercita, así tampoco el hombre es consumido por la dignidad que recibe.»</p>
+    <div class="quote-source">Papa León I, Tomus ad Flavianum (Ep. 28) — ACO II,2,1 pp. 24–33. PL 54, 755–782. Texto leído y aclamado en Calcedonia.</div>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«Para pagar la deuda de nuestra condición, la inviolable naturaleza se unió a la naturaleza pasible, de modo que, como lo exigía nuestro remedio, un solo y mismo Mediador entre Dios y los hombres, el hombre Cristo Jesús, pudiese tanto morir según la una como no poder morir según la otra.»</p>
+    <div class="quote-source">Papa León I, Tomus ad Flavianum — PL 54, 763B. Esta formulación fue el fundamento del «<em>en dos naturalezas</em>» de Calcedonia.</div>
+  </div>
+
+  <h4>La Controversia sobre «En» vs «De» dos naturalezas</h4>
+
+  <p>El debate más técnico de Calcedonia fue la preposición utilizada para describir la relación entre las naturalezas. Aunque parece minucia gramatical, era teológicamente decisiva:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Formulación</th><th>Preposición griega</th><th>Implicación</th><th>Quién la prefería</th></tr></thead>
+      <tbody>
+        <tr><td>«De dos naturalezas»</td><td>ἐκ δύο φύσεων (<em>ek dyo physeōn</em>)</td><td>La unión resulta de la fusión de dos. Compatible con el monofisismo de Dióscoro.</td><td>Alejandrinos radicales</td></tr>
+        <tr><td>«En dos naturalezas»</td><td>ἐν δύο φύσεσιν (<em>en dyo physesin</em>)</td><td>Las dos naturalezas subsisten en la única persona, distintas pero unidas. Excluye la fusión monofisita.</td><td>Antioquenos, legados papales</td></tr>
+        <tr><td>Texto final del Horos</td><td>Ambas incluidas con adverbios delimitadores</td><td>«en dos naturalezas, sin mezcla, sin cambio, sin división, sin separación» — eliminó ambigüedades de ambos lados</td><td>Consenso del concilio</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- XIV. LA DEFINICIÓN DE CALCEDONIA -->
+<hr class="section-divider">
+<section id="calc-definicion">
+  <h2><span class="h2-num">XIV · La Definición de Calcedonia</span>El Horos — Texto Completo y Análisis</h2>
+
+  <p class="lead">El Horos de Calcedonia es el documento cristológico más preciso y equilibrado de toda la historia de la teología. Sus cuatro adverbios negativos son la contribución más duradera de toda la patrística a la dogmática cristiana.</p>
+
+  <div class="dogma-box">
+    <p class="dogma-text">«Siguiendo, pues, a los santos Padres, todos a una voz enseñamos que se ha de confesar a un solo y mismo Hijo, nuestro Señor Jesucristo, el mismo perfecto en divinidad y el mismo perfecto en humanidad, Dios verdaderamente y el mismo verdaderamente hombre, de alma racional y de cuerpo, consustancial con el Padre en cuanto a la divinidad, y el mismo consustancial con nosotros en cuanto a la humanidad, semejante en todo a nosotros, excepto en el pecado; engendrado del Padre antes de los siglos en cuanto a la divinidad, y el mismo en los últimos días, por nosotros y por nuestra salvación, de María Virgen, Madre de Dios (<em>Theotokos</em>), en cuanto a la humanidad; que se ha de reconocer a un solo y el mismo Cristo Hijo Señor unigénito en dos naturalezas, sin confusión, sin cambio, sin división, sin separación, sin que en modo alguno se suprima la diferencia de naturalezas por causa de la unión, sino conservando más bien cada naturaleza su propiedad y concurriendo en una sola persona y una sola hipóstasis; no partido o dividido en dos personas, sino uno solo y el mismo Hijo unigénito, Dios Verbo, Señor Jesucristo, como de antiguo acerca de él enseñaron los profetas y el mismo Jesucristo nos enseñó y nos ha transmitido el símbolo de los Padres.»</p>
+    <p style="margin-top:20px;font-family:'Oswald',sans-serif;font-size:11px;color:var(--amarillo-tenue);letter-spacing:2px;text-transform:uppercase;">Concilio de Calcedonia, Horos (Sesión V) — ACO II,1,2 pp. 126–130 · Denzinger 301–302</p>
+  </div>
+
+  <h3>Los Cuatro Adverbios Negativos: La Clave del Horos</h3>
+
+  <p>El genio teológico del Horos de Calcedonia reside en que define la fe <em>negativamente</em>: no dice exactamente qué es la unión de naturalezas (algo que excede la comprensión humana), sino que delimita con precisión lo que NO es, cerrando las cuatro herejías posibles:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Adverbio</th><th>Griego</th><th>Herejía que excluye</th><th>Lo que afirma</th></tr></thead>
+      <tbody>
+        <tr><td>Sin confusión</td><td>ἀσυγχύτως (asynchytōs)</td><td>Monofisismo — fusión de naturalezas</td><td>Las dos naturalezas permanecen distintas</td></tr>
+        <tr><td>Sin cambio</td><td>ἀτρέπτως (atreptōs)</td><td>Eutiquianismo — transmutación de lo humano en divino</td><td>Ninguna naturaleza se transforma en la otra</td></tr>
+        <tr><td>Sin división</td><td>ἀδιαιρέτως (adiairetōs)</td><td>Nestorianismo — dos sujetos separados</td><td>La unidad de persona es real e indivisible</td></tr>
+        <tr><td>Sin separación</td><td>ἀχωρίστως (achōristōs)</td><td>Nestorianismo — unión meramente moral</td><td>La unión no es externa ni accidental</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="naturezas">
+    <div class="nat-box">
+      <span class="nat-label">Naturaleza Divina</span>
+      <p class="nat-desc">Perfecta · Eterna · Consustancial al Padre · Omnipotente · Impassible per se · Increada · Sin límite</p>
+    </div>
+    <div class="nat-center">
+      <span class="nat-center-text">Una sola Persona · Hypostasis</span>
+    </div>
+    <div class="nat-box">
+      <span class="nat-label">Naturaleza Humana</span>
+      <p class="nat-desc">Perfecta · Temporal · Consustancial a nosotros · Con límites · Passible · Creada · Racional</p>
+    </div>
+  </div>
+  <p style="text-align:center;font-family:'Oswald',sans-serif;font-size:12px;color:var(--amarillo-tenue);letter-spacing:2px;margin-bottom:28px;">SIN MEZCLA · SIN CAMBIO · SIN DIVISIÓN · SIN SEPARACIÓN</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- XV. LA PREGUNTA CLAVE: ¿CIRILO ACEPTÓ DOS NATURALEZAS? -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="cirilo-aceptado">
+  <h2><span class="h2-num">XV · La Pregunta Decisiva</span>¿Cirilo de Alejandría Aceptó Dos Naturalezas en Cristo?</h2>
+
+  <p class="lead">Esta es la pregunta más importante y más debatida de la historia de la cristología patrística. La respuesta afecta directamente a si Calcedonia fue una traición a Éfeso o su legítimo cumplimiento.</p>
+
+  <div class="highlight">
+    <div class="highlight-title">🔍 La Respuesta Corta: SÍ y NO — Pero el SÍ es más matizado de lo que parece</div>
+    <p>Cirilo usó el lenguaje de «dos naturalezas» en ciertos contextos. Pero su terminología preferida fue «una sola naturaleza del Verbo encarnado» (<em>mia physis tou theou logou sesarkōmenē</em>). La aparente contradicción se debe a que Cirilo y los calcedonenses usaban <em>physis</em> (naturaleza) con diferentes significados.</p>
+  </div>
+
+  <h3>La Evidencia Textual: ¿Cuándo Cirilo Dijo «Dos Naturalezas»?</h3>
+
+  <p>Hay un texto de Cirilo que es absolutamente decisivo en este debate. En su <span class="gold">carta a Acacio de Melitene</span> (ca. 431–433), Cirilo escribe:</p>
+
+  <div class="quote">
+    <p class="quote-text">«Si bien decimos que el Hijo único tiene dos naturalezas unidas sin confusión, sin mezcla y sin alteración, no entendemos que la unión sea una conjunción según la dignidad o la autoridad o el poder; [...] Confesamos que una sola naturaleza del Verbo se encarnó y se hizo hombre.»</p>
+    <div class="quote-source">Cirilo de Alejandría, Carta a Acacio de Melitene — ACO I,1,4 p. 25. PG 77, 184–201.</div>
+  </div>
+
+  <p>Cirilo también suscribió la <span class="gold">Fórmula de Unión de 433</span>, que habla explícitamente de «unión de dos naturalezas». Y en su carta a Juan de Antioquía que acepta dicha fórmula escribe:</p>
+
+  <div class="quote">
+    <p class="quote-text">«Que algunos de los santos se refirieron a que las naturalezas del Señor eran dos, y que esta distinción se hace en la sola theoría [contemplación intelectual], nosotros no ignoramos. Por eso también nosotros usamos este modo de hablar cuando queremos evitar el malentendido de que el Verbo de Dios sufrió cambio en la carne.»</p>
+    <div class="quote-source">Cirilo de Alejandría, Carta a Juan de Antioquía (433) — ACO I,1,4 p. 9. PG 77, 173A.</div>
+  </div>
+
+  <h3>El Problema del Vocabulario: ¿Usaban «Physis» del Mismo Modo?</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Término</th><th>Sentido en Cirilo</th><th>Sentido en Calcedonia</th><th>Equivalencia</th></tr></thead>
+      <tbody>
+        <tr><td><em>Physis</em> (naturaleza)</td><td>Frecuentemente equivale a <em>hypostasis</em> (individuo concreto). Una physis = un ser individual.</td><td>Conjunto de propiedades esenciales que definen un tipo de ser. Abstracto.</td><td>⚠ Equívoco terminológico</td></tr>
+        <tr><td><em>Hypostasis</em> (persona)</td><td>A veces sinónimo de physis; a veces = individuo concreto.</td><td>Sujeto personal concreto, distinto de la naturaleza.</td><td>⚠ Equívoco terminológico</td></tr>
+        <tr><td><em>Prosopon</em> (persona)</td><td>Casi siempre = máscara/apariencia externa. Uso cuidadoso.</td><td>Sinónimo de hypostasis en el Horos.</td><td>Convergencia parcial</td></tr>
+        <tr><td>«Una naturaleza del Verbo encarnado»</td><td><em>Mia physis tou Logou sesarkōmenē</em>: el Verbo concreto encarnado, sujeto único con humanidad asumida.</td><td>Si <em>physis</em> = esencia: una sola esencia → monofisismo. Pero eso no era lo que Cirilo quería decir.</td><td>⚠ Ambigüedad fatal</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>La Postura de los Especialistas Modernos</h3>
+
+  <p>Los historiadores modernos de la patrística han alcanzado un amplio consenso sobre este punto:</p>
+
+  <div class="persona-grid">
+    <div class="persona-card">
+      <div class="persona-name">John Anthony McGuckin</div>
+      <div class="persona-dates">Especialista en Cirilo</div>
+      <div class="persona-quote">«La cristología de Cirilo, correctamente interpretada, es perfectamente compatible con Calcedonia. Cirilo nunca afirmó que la humanidad de Cristo quedara absorbida en la divinidad. Su <em>mia physis</em> describe el sujeto concreto del Verbo encarnado, no una mezcla de naturalezas.»</div>
+      <div class="persona-ref">McGuckin, <em>Saint Cyril of Alexandria and the Christological Controversy</em>, Brill, 1994, p. 213</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Richard Price</div>
+      <div class="persona-dates">Especialista en Calcedonia</div>
+      <div class="persona-quote">«Calcedonia explicitó lo que estaba implícito en los mejores escritos de Cirilo. La aparente contradicción entre Éfeso y Calcedonia es un problema de terminología, no de contenido doctrinal.»</div>
+      <div class="persona-ref">Price & Gaddis, <em>The Acts of the Council of Chalcedon</em>, TTH, 2005, vol. I, p. 72</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Aloys Grillmeier</div>
+      <div class="persona-dates">Teólogo e historiador de dogmas</div>
+      <div class="persona-quote">«El Horos de Calcedonia representa la síntesis de la tradición alejandrina (unidad de sujeto) y la antioquena (integridad de la humanidad). No traicionó a Cirilo; completó lo que Éfeso no había podido decir.»</div>
+      <div class="persona-ref"><em>Christ in Christian Tradition</em>, vol. I, Mowbray, 1975, p. 480</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Diálogos ecuménicos modernos</div>
+      <div class="persona-dates">Siglo XX–XXI</div>
+      <div class="persona-quote">En 1990, la Iglesia Católica Romana y la Iglesia Copta Ortodoxa (no calcedoniense) suscribieron una declaración común afirmando que su fe en Cristo es la misma, expresada en terminologías diferentes. El «cisma» de Calcedonia fue en gran medida terminológico.</div>
+      <div class="persona-ref">Declaración Común Juan Pablo II — Papa Shenouda III, 1990</div>
+    </div>
+  </div>
+
+  <h3>La Postura de Cirilo Desglosada: Tres Documentos Clave</h3>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">ca. 428–430</div>
+        <div class="tl-title">Cirilo contra Nestorio: énfasis en la <em>unidad</em> de physis</div>
+        <div class="tl-body">En este período, Cirilo desarrolla su fórmula favorita: <em>mia physis tou theou Logou sesarkōmenē</em> («una sola naturaleza del Logos de Dios encarnada»). Este lenguaje procede de su lectura de Atanasio y del pseudo-Apolinar. En este contexto, Cirilo usa <em>physis</em> para referirse al sujeto concreto, no a la esencia abstracta.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">433</div>
+        <div class="tl-title">Fórmula de Unión: Cirilo acepta «dos naturalezas» con matices</div>
+        <div class="tl-body">Cirilo suscribe la Fórmula que dice «unión de dos naturalezas». En su carta explicativa a sus seguidores escribe que acepta el lenguaje de «dos naturalezas en teoría» (en la distinción intelectual) siempre que se entienda que la unión es real e hipostática. Es el Cirilo más cercano a Calcedonia.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">438–444</div>
+        <div class="tl-title">Última etapa: Cirilo matiza pero mantiene su fórmula</div>
+        <div class="tl-body">En sus últimas obras (<em>Contra Diodorum et Theodorum</em>), Cirilo ataca la teología antioquena pero sin retractarse de haber suscrito la Fórmula de Unión. Muere en 444 sin haber resuelto explícitamente la tensión entre su <em>mia physis</em> y el «dos naturalezas» de la Fórmula. Sus discípulos se dividirán en dos tradiciones: los que privilegiarán el <em>mia physis</em> (camino al monofisismo de Dióscoro) y los que privilegiarán la Fórmula (camino a Calcedonia).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight success">
+    <div class="highlight-title">✓ Conclusión sobre Cirilo y las Dos Naturalezas</div>
+    <p><strong>Sí, Cirilo aceptó la distinción de dos naturalezas</strong> al suscribir la Fórmula de Unión de 433 y al escribir expresamente que los santos Padres que hablaron de «dos naturalezas» lo hicieron legítimamente para preservar la integridad de la humanidad.</p>
+    <p><strong>Pero</strong> su lenguaje preferido siguió siendo <em>mia physis</em>, y nunca resolvió de forma sistemática la tensión terminológica. Su postura fue que «dos naturalezas en theoría» equivale a lo que él llamaba «una physis concreta del Verbo encarnado»: el mismo contenido, distinto lenguaje.</p>
+    <p><strong>El veredicto histórico:</strong> Calcedonia es el desarrollo legítimo de Cirilo, no su negación. Los padres de Calcedonia lo declararon expresamente al ratificar las cartas de Cirilo como orthodoxas. El monofisismo de Dióscoro y Eutiques fue una radicalización unilateral de Cirilo que el propio Cirilo, de haber vivido, muy probablemente habría rechazado.</p>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«Si alguno dijese que la unión se hizo según la sola dignidad, o autoridad o dominio, y no más bien según concurso de naturaleza: sea anatema. [...] Confesamos que una sola naturaleza del Verbo se hizo carne, pero no afirmamos que la naturaleza de la divinidad y la del cuerpo sean la misma cosa, sino que permanecen distintas en la unión.»</p>
+    <div class="quote-source">Cirilo de Alejandría, Carta a Succenso de Diocesarea — PG 77, 228A–241A. Texto que la tradición calcedoniense consideró prefiguración del Horos.</div>
+  </div>
+</section>
+
+<!-- XVI. DESPUÉS DE CALCEDONIA -->
+<hr class="section-divider">
+<section id="calc-despues">
+  <h2><span class="h2-num">XVI · Después de Calcedonia</span>Un Concilio que Dividió el Oriente</h2>
+
+  <p class="lead">Calcedonia fue el concilio más divisivo de la historia cristiana. Su Horos fue aceptado universalmente en Occidente y en gran parte de Oriente, pero generó cismas permanentes que persisten hasta hoy.</p>
+
+  <h3 id="cisma-oriental">Las Iglesias «Miafisitas» — El Gran Cisma Oriental</h3>
+
+  <p>Las iglesias que no aceptaron Calcedonia no lo rechazaron por ignorancia teológica sino por fidelidad a la fórmula <em>mia physis</em> de Cirilo, que interpretaban literalmente. Se denominan hoy <span class="gold">iglesias orientales antiguas</span> o <span class="gold">iglesias miafisitas</span> (de <em>mia</em> = una). No son monofisitas en el sentido de Eutiques —no afirman que la humanidad de Cristo fuera absorbida— sino que prefieren el lenguaje de «una naturaleza encarnada» al de «dos naturalezas».</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Iglesia</th><th>Postura sobre Calcedonia</th><th>Distribución geográfica actual</th></tr></thead>
+      <tbody>
+        <tr><td>Iglesia Copta Ortodoxa</td><td>No acepta Calcedonia. Sigue a Dióscoro.</td><td>Egipto, Etiopía, Eritrea</td></tr>
+        <tr><td>Iglesia Etíope Ortodoxa Tewahedo</td><td>No acepta Calcedonia.</td><td>Etiopía (50+ millones de fieles)</td></tr>
+        <tr><td>Iglesia Siríaca Ortodoxa</td><td>No acepta Calcedonia. Jacobita.</td><td>Siria, Irak, India (Malabar)</td></tr>
+        <tr><td>Iglesia Apostólica Armenia</td><td>No acepta Calcedonia.</td><td>Armenia, diaspora mundial</td></tr>
+        <tr><td>Iglesia Malankara (India)</td><td>No acepta Calcedonia.</td><td>Kerala, India</td></tr>
+        <tr><td>Iglesias calcedonenses</td><td>Aceptan Calcedonia.</td><td>Roma, Constantinopla, Antioquía griega, Moscú, etc.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>El Canon 28: La Otra Gran Controversia de Calcedonia</h3>
+
+  <p>Además del Horos cristológico, Calcedonia adoptó el <span class="gold">Canon 28</span>, que declaraba que el obispo de Constantinopla tenía «los mismos privilegios de honor» que el obispo de Roma, por ser Constantinopla «la nueva Roma». El papa León I protestó enérgicamente y rechazó este canon.</p>
+
+  <p>Este canon fue el primer paso formal hacia lo que siglos más tarde cristalizaría en el Gran Cisma de 1054. La disputa sobre si Constantinopla tenía paridad de honor con Roma, o si Roma tenía primacía no solo de honor sino de jurisdicción, recorre toda la historia medieval.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">451–484</div>
+        <div class="tl-title">Resistencia monofisita en Egipto y Siria</div>
+        <div class="tl-body">Dióscoro muere en el exilio (454) convertido en mártir para los suyos. Egipto nunca aceptó a los obispos calcedonenses impuestos por Constantinopla. El partido anticalcedoniano se organizó bajo la figura de Timoteo «Eluro» (el Gato) en Alejandría.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">482</div>
+        <div class="tl-title">El Henoticón del emperador Zenón — Intento fallido de unión</div>
+        <div class="tl-body">El emperador Zenón promulgó el <em>Henoticón</em>, un decreto de compromiso que evitaba mencionar Calcedonia sin condenarlo, intentando reunir calcedonenses y miafisitas. Roma lo rechazó. Produjo el primer gran cisma entre Roma y Constantinopla: el <em>Cisma Acaciano</em> (484–519).</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">519</div>
+        <div class="tl-title">Fin del Cisma Acaciano — Restauración de Calcedonia</div>
+        <div class="tl-body">El emperador Justino I y el papa Hormisdas sellaron la paz mediante la <em>Formula Hormisdae</em>, que restauró plenamente Calcedonia. Este acuerdo contiene una de las afirmaciones más claras del primado romano de la historia patrística.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">553</div>
+        <div class="tl-title">Concilio de Constantinopla II — Los «Tres Capítulos»</div>
+        <div class="tl-body">El emperador Justiniano, intentando acercar a los miafisitas, convocó el V Concilio Ecuménico que condenó retroactivamente escritos de Teodoreto de Ciro, Ibas de Edesa y Teodoro de Mopsuestia. Papa Vigilio fue arrastrado a un penoso conflicto. El concilio fue ecumenico pero su relación con Calcedonia es compleja.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">638–681</div>
+        <div class="tl-title">Monoteletismo — La última herejía cristológica</div>
+        <div class="tl-body">Intentando conciliar calcedonenses y miafisitas, el patriarca Sergio de Constantinopla propuso que Cristo, aunque tuviera dos naturalezas, tenía una sola voluntad (<em>thélēma</em>). Condenado en el VI Concilio Ecuménico de Constantinopla III (681), que definió que Cristo tiene dos voluntades naturales, conforme a sus dos naturalezas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- XVII. REPERCUSIONES DE CALCEDONIA -->
+<hr class="section-divider">
+<section id="calc-repercusiones">
+  <h2><span class="h2-num">XVII · Las Grandes Repercusiones</span>El Legado de Calcedonia</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">⛪ El Gran Cisma Oriental (siglo V–hoy)</div>
+      <div class="card-role">Consecuencia eclesiológica</div>
+      <div class="card-desc">Las iglesias miafisitas (Copta, Etíope, Siríaca, Armenia, Malankara) se separaron de la comunión con Roma y Constantinopla. Representan hoy más de 60 millones de cristianos. Los diálogos ecuménicos del siglo XX han acercado posiciones pero no restaurado la comunión plena.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">📚 Fundamento de la Cristología Clásica</div>
+      <div class="card-role">Impacto dogmático</div>
+      <div class="card-desc">El Horos de Calcedonia es el texto cristológico de referencia para católicos, ortodoxos y la mayor parte de las iglesias protestantes. Los Reformadores (Lutero, Calvino, Zuinglio) mantuvieron explícitamente la cristología calcedoniense. Es el terreno cristológico compartido más amplio del cristianismo.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🏛 Canon 28 y la Eclesiología</div>
+      <div class="card-role">Semilla del Cisma de 1054</div>
+      <div class="card-desc">La disputa sobre la equiparación de honores entre Roma y Constantinopla, inaugurada en el Canon 28 de Calcedonia, prefigura el Gran Cisma de 1054. El primado romano versus la pentarquía de patriarcados es el debate que Calcedonia encendió y que sigue sin resolverse.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🤝 Diálogos Ecuménicos Modernos</div>
+      <div class="card-role">Herencia contemporánea</div>
+      <div class="card-desc">En 1990, Juan Pablo II y el papa copto Shenouda III firmaron una declaración conjunta afirmando que la fe en Cristo de ambas tradiciones es esencialmente la misma. Declaraciones similares se han firmado con la Iglesia Siríaca (1984) y la Armenia (1996).</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🕊 La Definición del Canon Ecuménico</div>
+      <div class="card-role">Impacto conciliar</div>
+      <div class="card-desc">Calcedonia estableció definitivamente el procedimiento ecuménico: lectura de las actas de sínodos anteriores, florilegio patrístico, debate de comisión, votación por aclamación. Este procedimiento siguió siendo el modelo para Nicea II (787) y los concilios medievales.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">✝ La Soteriología</div>
+      <div class="card-role">Impacto en la teología de la salvación</div>
+      <div class="card-desc">La insistencia calcedoniense en la humanidad completa de Cristo (consubstancial a nosotros) tiene consecuencias directas en la soteriología: si Cristo no tenía humanidad completa, no nos salvó completamente. El principio de Gregorio Nacianceno: «lo no asumido no es redimido» es la raíz de la definición.</div>
+    </div>
+  </div>
+</section>
+
+<!-- XVIII. FUENTES -->
+<hr class="section-divider">
+<section id="fuentes">
+  <h2><span class="h2-num">XVIII · Fuentes y Bibliografía</span></h2>
+
+  <h3>Fuentes Primarias — Concilio de Éfeso</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuente</th><th>Contenido</th><th>Localización</th></tr></thead>
+      <tbody>
+        <tr><td>Actas del Concilio de Éfeso</td><td>Actas oficiales completas</td><td>ACO (Acta Conciliorum Oecumenicorum), ed. Schwartz, vol. I,1–7. De Gruyter, 1927–1930.</td></tr>
+        <tr><td>Cartas de Cirilo a Nestorio</td><td>Ep. I, II y III (Tercera = Anatemas)</td><td>ACO I,1,1 pp. 10–28. PG 77, 9–120. Trad. española: BAC, Concilios Ecuménicos.</td></tr>
+        <tr><td>Cartas de Nestorio a Cirilo</td><td>Respuesta a la segunda carta de Cirilo</td><td>ACO I,1,1 pp. 29–32. Trad. inglesa: Wickham, <em>Cyril of Alexandria: Select Letters</em>, Oxford, 1983.</td></tr>
+        <tr><td>Fórmula de Unión (433)</td><td>Acuerdo postconciliar Cirilo–Juan de Antioquía</td><td>ACO I,1,4 pp. 8–9. PG 77, 173A. Denzinger 271–273.</td></tr>
+        <tr><td>Cirilo, <em>Carta a Acacio de Melitene</em></td><td>Acepta el lenguaje de «dos naturalezas»</td><td>ACO I,1,4 pp. 20–31. PG 77, 184–201.</td></tr>
+        <tr><td>Nestorio, <em>Liber Heracleidis</em></td><td>Obra apologética tardía, en siríaco</td><td>Ed. Bedjan (1910); trad. inglesa: Driver &amp; Hodgson, <em>The Bazaar of Heraclides</em>, Oxford, 1925.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Fuentes Primarias — Concilio de Calcedonia</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuente</th><th>Contenido</th><th>Localización</th></tr></thead>
+      <tbody>
+        <tr><td>Actas del Concilio de Calcedonia</td><td>Actas completas de las 16 sesiones</td><td>ACO II,1–4. De Gruyter, 1933–1938. Trad. inglesa: Price &amp; Gaddis, 3 vols., TTH 45, Liverpool, 2005.</td></tr>
+        <tr><td>Horos de Calcedonia</td><td>Definición dogmática central</td><td>ACO II,1,2 pp. 126–130. Denzinger 301–302. Trad. española: BAC, <em>Concilios Ecuménicos</em>.</td></tr>
+        <tr><td>Papa León I, <em>Tomus ad Flavianum</em> (Ep. 28)</td><td>Texto doctrinal fundamental</td><td>ACO II,2,1 pp. 24–33. PL 54, 755–782. Trad. inglesa: NPNF2, vol. 12.</td></tr>
+        <tr><td>Papa León I, <em>Epistulae</em></td><td>Correspondencia conciliar completa</td><td>PL 54–55. Ed. crítica: ACO IV. Trad. española parcial: BAC.</td></tr>
+        <tr><td>Cirilo, <em>Carta a Succenso</em> (Ep. 45–46)</td><td>Explicación de la <em>mia physis</em></td><td>PG 77, 228A–245C. ACO I,1,6 pp. 151–163.</td></tr>
+        <tr><td>Evagrio Escolástico, <em>Historia Eclesiástica</em></td><td>Narración del período 431–594</td><td>PG 86, 2415–2906. Trad. inglesa: TTH 33, Liverpool, 2000.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Bibliografía Científica Moderna</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Autor</th><th>Obra</th><th>Editorial / Año</th></tr></thead>
+      <tbody>
+        <tr><td>McGuckin, John A.</td><td><em>Saint Cyril of Alexandria and the Christological Controversy</em></td><td>Brill, 1994 · Repr. SVS Press, 2004</td></tr>
+        <tr><td>Price, R. &amp; Gaddis, M.</td><td><em>The Acts of the Council of Chalcedon</em> (3 vols.)</td><td>Liverpool University Press (TTH 45), 2005</td></tr>
+        <tr><td>Grillmeier, Aloys</td><td><em>Christ in Christian Tradition</em>, vol. I y II</td><td>Mowbray/Westminster Knox, 1975–1995</td></tr>
+        <tr><td>Wessel, Susan</td><td><em>Cyril of Alexandria and the Nestorian Controversy</em></td><td>Oxford University Press, 2004</td></tr>
+        <tr><td>Wickham, Lionel R.</td><td><em>Cyril of Alexandria: Select Letters</em></td><td>Oxford Early Christian Texts, Clarendon, 1983</td></tr>
+        <tr><td>Chadwick, Henry</td><td><em>The Church in Ancient Society</em>, caps. 26–29</td><td>Oxford University Press, 2001</td></tr>
+        <tr><td>Meyendorff, John</td><td><em>Christ in Eastern Christian Thought</em></td><td>SVS Press, 1975</td></tr>
+        <tr><td>Sellers, Robert Victor</td><td><em>The Council of Chalcedon: A Historical and Doctrinal Survey</em></td><td>SPCK, 1953</td></tr>
+        <tr><td>Gray, Patrick T.R.</td><td><em>The Defense of Chalcedon in the East (451–553)</em></td><td>Brill, 1979</td></tr>
+        <tr><td>Anastos, Milton V.</td><td><em>Aspects of the Mind of Byzantium</em> (Iconoclasm cap.)</td><td>Variorum, 2001</td></tr>
+        <tr><td>Breyfogle, Todd (ed.)</td><td><em>Literary Imagination, Ancient and Modern</em></td><td>University of Chicago, 1999</td></tr>
+        <tr><td>Frend, W.H.C.</td><td><em>The Rise of the Monophysite Movement</em></td><td>Cambridge University Press, 1972</td></tr>
+        <tr><td>De Halleux, André</td><td>«La définition christologique à Chalcédoine»</td><td><em>Revue théologique de Louvain</em> 7 (1976), 3–23 y 155–170</td></tr>
+        <tr><td>Torrance, Thomas F.</td><td><em>Theology in Reconciliation</em>, cap. 5</td><td>Geoffrey Chapman, 1975</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-title">✦ Conclusión General: Los Dos Concilios en Perspectiva</div>
+    <p><strong>Éfeso (431)</strong> respondió a la pregunta: ¿Quién es el sujeto de la Encarnación? Respuesta: el Hijo eterno de Dios, una sola persona. Por ello María es <em>Theotokos</em>. El título no es una devoción piadosa: es la consecuencia directa de la cristología.</p>
+    <p><strong>Calcedonia (451)</strong> respondió a la pregunta: ¿Cómo coexisten lo divino y lo humano en ese único sujeto? Respuesta: en dos naturalezas completas, sin mezcla, sin cambio, sin división y sin separación. La humanidad de Cristo es tan real como su divinidad, y ninguna absorbe a la otra.</p>
+    <p>Estos dos concilios no se contradicen: se complementan. Juntos afirman que en Jesucristo hay una persona que posee dos naturalezas completas, que esta persona es el Hijo eterno de Dios, que su humanidad es real y completa (por lo que puede salvar a la humanidad), y que la Virgen que lo engendró engendró a Dios encarnado.</p>
+  </div>
+</section>
+
+<footer>
+  <p style="font-family:'Cinzel',serif;font-size:16px;color:#F5C518;letter-spacing:3px;margin-bottom:10px;">✦ ÉFESO (431) · CALCEDONIA (451) ✦</p>
+  <p>Tercer y Cuarto Concilio Ecuménico · Cristología Clásica</p>
+  <p style="margin-top:6px;">Fuentes: ACO (Schwartz) · PG · Denzinger · Price &amp; Gaddis · McGuckin</p>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('active');
+  }
+  function closeNav() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('active');
+  }
+
+  // Tabs Éfeso
+  const tabsEf = document.querySelectorAll('#tabs-ef .sesion-tab');
+  const contentsEf = document.querySelectorAll('#tabs-ef ~ .sesion-content');
+
+  function switchTabEf(idx) {
+    tabsEf.forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+      contentsEf[i].classList.toggle('active', i === idx);
+    });
+  }
+
+  // Tabs Calcedonia
+  const tabsCal = document.querySelectorAll('#tabs-cal .sesion-tab');
+  const contentsCal = document.querySelectorAll('#tabs-cal ~ .sesion-content');
+
+  function switchTabCal(idx) {
+    tabsCal.forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+      contentsCal[i].classList.toggle('active', i === idx);
+    });
+  }
+
+  // Highlight de navegación activa
+  const navLinks = document.querySelectorAll('#sidebar a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === '#' + id) {
+            link.style.color = '#F5C518';
+            link.style.borderLeftColor = '#F5C518';
+          } else {
+            link.style.color = '';
+            link.style.borderLeftColor = '';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('section[id], div[id]').forEach(el => {
+    if (el.id) observer.observe(el);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeNav();
+  });
+</script>
+</body>
+</html>

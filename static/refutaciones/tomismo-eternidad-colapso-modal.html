@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eternidad del Mundo y Colapso Modal — Dossier Tomista</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0A; --bg-card:#111111; --bg-raised:#1A1A1A; --bg-deep:#060606;
+  --yellow:#F5C518; --yellow-soft:#D4A800; --yellow-glow:rgba(245,197,24,0.12);
+  --yellow-border:rgba(245,197,24,0.28);
+  --white:#F2F2F2; --white-dim:#C8C8C8; --white-muted:#787878;
+  --border:#242424;
+  --red:#D64040; --red-bg:rgba(214,64,64,0.08); --red-border:rgba(214,64,64,0.30);
+  --green:#3E9E6A; --green-bg:rgba(62,158,106,0.08); --green-border:rgba(62,158,106,0.30);
+  --blue:#4A90D9; --blue-bg:rgba(74,144,217,0.08); --blue-border:rgba(74,144,217,0.30);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'EB Garamond',Georgia,serif;font-size:18px;line-height:1.75;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--yellow-soft);border-radius:3px;}
+
+/* ── LAYOUT ── */
+.layout{display:grid;grid-template-columns:275px 1fr;min-height:100vh;}
+
+/* ── SIDEBAR ── */
+.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--bg-deep);border-right:1px solid var(--border);padding:1.5rem 0;z-index:100;scrollbar-width:thin;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sb-brand{padding:0 1.25rem 1.25rem;border-bottom:1px solid var(--border);margin-bottom:.75rem;}
+.sb-eye{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--yellow);letter-spacing:.22em;text-transform:uppercase;margin-bottom:.4rem;}
+.sb-name{font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;color:var(--white);line-height:1.35;}
+.toc{list-style:none;padding:0 .5rem;}
+.toc-part{margin-bottom:.15rem;}
+.tc-h{display:flex;align-items:center;gap:.6rem;padding:.45rem .85rem;border-radius:3px;text-decoration:none;color:var(--white-dim);transition:all .18s;border-left:3px solid transparent;}
+.tc-h:hover,.tc-h.active{background:var(--yellow-glow);color:var(--yellow);border-left-color:var(--yellow);}
+.tc-num{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--yellow);min-width:1.4rem;opacity:.8;}
+.tc-lbl{font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;letter-spacing:.02em;}
+.toc-sub{list-style:none;padding-left:2.2rem;margin:.1rem 0 .3rem;}
+.toc-sub a{display:block;padding:.22rem .6rem;font-size:.7rem;color:var(--white-muted);text-decoration:none;border-radius:2px;font-family:'EB Garamond',serif;transition:all .14s;}
+.toc-sub a:hover,.toc-sub a.active{color:var(--yellow);background:var(--yellow-glow);}
+
+/* ── MAIN ── */
+.main{min-width:0;}
+
+/* ── HERO ── */
+.hero{padding:5rem 4rem 4rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 70% 55% at 18% 40%,rgba(245,197,24,0.07) 0%,transparent 70%),var(--bg);}
+.hero-stamp{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--yellow);letter-spacing:.24em;text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:.9rem;}
+.hero-stamp::after{content:'';display:block;width:50px;height:1px;background:var(--yellow);opacity:.5;}
+.hero-title{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(1.9rem,3.5vw,3.2rem);line-height:1.08;color:var(--white);margin-bottom:.75rem;}
+.hero-title em{color:var(--yellow);font-style:normal;}
+.hero-sub{font-size:1.08rem;color:var(--white-muted);font-style:italic;max-width:620px;margin-bottom:2.75rem;line-height:1.65;}
+
+/* Latin axiom block */
+.axiom-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);max-width:740px;margin-bottom:1.5rem;}
+.ax-card{background:var(--bg-card);padding:1rem 1.2rem;}
+.ax-lbl{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--yellow);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.3rem;}
+.ax-lat{font-style:italic;color:var(--yellow);font-size:.88rem;font-family:'EB Garamond',serif;margin-bottom:.2rem;}
+.ax-trans{font-size:.78rem;color:var(--white-muted);}
+
+/* ── SECTIONS ── */
+.sec{padding:4.5rem 4rem;border-bottom:1px solid var(--border);}
+.sec:nth-child(odd){background:var(--bg);}
+.sec:nth-child(even){background:var(--bg-card);}
+.sec-eye{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--yellow);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem;}
+.sec-eye::before{content:'';display:block;width:24px;height:1px;background:var(--yellow);opacity:.6;}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,2.6vw,2rem);font-weight:700;color:var(--white);margin-bottom:.4rem;line-height:1.2;}
+.sec-title em{color:var(--yellow);font-style:normal;}
+.sec-lead{font-size:1.05rem;color:var(--white-muted);font-style:italic;max-width:720px;margin-bottom:2.75rem;padding-left:1.25rem;border-left:2px solid var(--yellow-soft);}
+.sub{margin-bottom:2.75rem;}
+.sub-title{font-family:'Cinzel',serif;font-size:1rem;font-weight:600;color:var(--yellow);margin-bottom:.9rem;padding-bottom:.4rem;border-bottom:1px solid var(--border);}
+h4{font-family:'Cinzel',serif;font-size:.88rem;font-weight:600;color:var(--white-dim);margin:1.4rem 0 .6rem;letter-spacing:.02em;}
+p{margin-bottom:.85rem;color:var(--white-dim);max-width:760px;}
+p:last-child{margin-bottom:0;}
+
+/* ── DEFINITION CARDS ── */
+.def-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.75rem 0;max-width:960px;}
+.def-card{background:var(--bg-raised);padding:1.25rem 1.4rem;}
+.def-card.full{grid-column:span 2;}
+.def-term{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;color:var(--yellow);margin-bottom:.15rem;}
+.def-lat{font-family:'EB Garamond',serif;font-style:italic;font-size:.82rem;color:var(--white-muted);margin-bottom:.5rem;}
+.def-src{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--yellow-soft);letter-spacing:.06em;margin-bottom:.5rem;}
+.def-body{font-size:.88rem;color:var(--white-dim);line-height:1.6;}
+.def-body strong{color:var(--white);}
+
+/* ── VERSE / SOURCE BLOCKS ── */
+.src-block{background:var(--bg-raised);border-left:3px solid var(--yellow);padding:1.1rem 1.4rem;margin:1.4rem 0;max-width:760px;}
+.src-ref{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--yellow);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.src-lat{font-style:italic;color:var(--yellow);font-size:.95rem;line-height:1.6;margin-bottom:.5rem;}
+.src-trans{color:var(--white-dim);font-size:.92rem;line-height:1.6;margin-bottom:.5rem;}
+.src-note{font-size:.86rem;color:var(--white-muted);line-height:1.55;}
+.src-note strong{color:var(--white-dim);}
+
+/* ── OBJECTION / SOLUTION ── */
+.obj{background:var(--red-bg);border:1px solid var(--red-border);border-left:3px solid var(--red);padding:1.15rem 1.4rem;margin:1.4rem 0;max-width:760px;}
+.obj-lbl{font-family:'Space Mono',monospace;font-size:.57rem;letter-spacing:.14em;color:var(--red);text-transform:uppercase;margin-bottom:.4rem;}
+.obj-body{color:var(--white-dim);font-size:.94rem;line-height:1.65;}
+.sol{background:var(--green-bg);border:1px solid var(--green-border);border-left:3px solid var(--green);padding:1.15rem 1.4rem;margin:1.4rem 0;max-width:760px;}
+.sol-lbl{font-family:'Space Mono',monospace;font-size:.57rem;letter-spacing:.14em;color:var(--green);text-transform:uppercase;margin-bottom:.4rem;}
+.sol-body{color:var(--white-dim);font-size:.94rem;line-height:1.65;}
+.nota{background:var(--blue-bg);border:1px solid var(--blue-border);border-left:3px solid var(--blue);padding:1.15rem 1.4rem;margin:1.4rem 0;max-width:760px;}
+.nota-lbl{font-family:'Space Mono',monospace;font-size:.57rem;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;margin-bottom:.4rem;}
+.nota-body{color:var(--white-dim);font-size:.94rem;line-height:1.65;}
+
+/* ── SYLLOGISMS ── */
+.syl{background:var(--bg-raised);border:1px solid var(--yellow-border);padding:1.4rem;margin:1.4rem 0;max-width:760px;}
+.syl-title{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--yellow);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.9rem;}
+.syl-row{display:flex;gap:.85rem;margin-bottom:.45rem;font-size:.93rem;color:var(--white-dim);}
+.syl-lbl{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--yellow);min-width:2.2rem;flex-shrink:0;padding-top:.1rem;}
+.syl-concl{display:flex;gap:.85rem;margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--border);font-size:.93rem;color:var(--white);font-weight:600;}
+
+/* ── KEY FACT ── */
+.kf{background:var(--yellow);color:var(--bg);padding:1.25rem 1.75rem;margin:1.75rem 0;max-width:760px;}
+.kf-lbl{font-family:'Space Mono',monospace;font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.35rem;opacity:.65;}
+.kf-text{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;line-height:1.4;}
+
+/* ── TABLES ── */
+.tbl-wrap{overflow-x:auto;margin:1.75rem 0;max-width:960px;}
+table{width:100%;border-collapse:collapse;font-size:.88rem;}
+thead tr{background:var(--yellow);}
+thead th{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.07em;text-transform:uppercase;color:var(--bg);padding:.7rem .9rem;text-align:left;}
+tbody tr{border-bottom:1px solid var(--border);}
+tbody tr:hover{background:var(--yellow-glow);}
+tbody td{padding:.65rem .9rem;color:var(--white-dim);vertical-align:top;line-height:1.55;}
+tbody td:first-child{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--yellow);}
+
+/* ── CARDS GRID ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.25rem;margin:1.75rem 0;}
+.card{background:var(--bg-raised);border:1px solid var(--border);border-top:3px solid var(--yellow);padding:1.35rem;}
+.card-num{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--yellow);opacity:.25;margin-bottom:.4rem;}
+.card-title{font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.6rem;}
+.card-text{font-size:.82rem;color:var(--white-muted);line-height:1.55;}
+
+/* ── INLINE TYPOGRAPHY ── */
+.lat{font-style:italic;color:var(--white-muted);}
+.lat-y{font-style:italic;color:var(--yellow);}
+strong{color:var(--white-dim);}
+.ref{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--yellow-soft);}
+
+/* ── DISTINCTION BOX ── */
+.dist-box{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:1.75rem 0;max-width:760px;}
+.dist-side{background:var(--bg-raised);padding:1.2rem 1.4rem;}
+.dist-head{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem;}
+.dist-head.y{color:var(--yellow);}
+.dist-head.r{color:var(--red);}
+.dist-head.g{color:var(--green);}
+.dist-item{font-size:.88rem;color:var(--white-dim);margin-bottom:.35rem;padding-left:.75rem;border-left:2px solid var(--border);}
+
+/* ── BIBLIOGRAPHY ── */
+.bib{background:var(--bg-deep);padding:3rem 4rem;border-top:1px solid var(--border);}
+.bib-title{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--yellow);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.25rem;}
+.bib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.3rem;}
+.bib-item{font-size:.78rem;color:var(--white-muted);padding:.4rem 0;border-bottom:1px solid var(--border);}
+.bib-item strong{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--yellow);}
+
+/* ── MOBILE ── */
+#mob-btn{display:none;position:fixed;bottom:1.5rem;right:1.5rem;background:var(--yellow);color:var(--bg);border:none;padding:.65rem 1.1rem;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;cursor:pointer;z-index:300;text-transform:uppercase;}
+@media(max-width:880px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{display:none;position:fixed;top:0;left:0;height:100vh;width:275px;z-index:400;}
+  .sidebar.open{display:block;}
+  #mob-btn{display:block;}
+  .sec,.hero,.bib{padding:3rem 1.5rem;}
+  .axiom-strip,.def-grid,.dist-box{grid-template-columns:1fr;}
+  .def-card.full{grid-column:span 1;}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-brand">
+    <div class="sb-eye">Dossier Filosófico-Teológico</div>
+    <div class="sb-name">Tomismo: Eternidad<br>y Colapso Modal</div>
+  </div>
+  <ul class="toc" id="toc">
+    <li class="toc-part"><a href="#s0" class="tc-h"><span class="tc-num">00</span><span class="tc-lbl">Problema y Tesis</span></a></li>
+    <li class="toc-part">
+      <a href="#s1" class="tc-h"><span class="tc-num">01</span><span class="tc-lbl">Corpus de Definiciones</span></a>
+      <ul class="toc-sub">
+        <li><a href="#def-tempus">Tempus · Aeternitas · Aevum</a></li>
+        <li><a href="#def-voluntas">Voluntas · Liberum Arbitrium</a></li>
+        <li><a href="#def-ser">Esse · Essentia · Actus Purus</a></li>
+        <li><a href="#def-creatio">Creatio · Conservatio</a></li>
+        <li><a href="#def-modal">Necessitas · Contingentia · Colapso Modal</a></li>
+      </ul>
+    </li>
+    <li class="toc-part">
+      <a href="#s2" class="tc-h"><span class="tc-num">02</span><span class="tc-lbl">Eternidad del Mundo</span></a>
+      <ul class="toc-sub">
+        <li><a href="#e-problema">2.1 El Problema Planteado</a></li>
+        <li><a href="#e-posicion">2.2 La Posición de Tomás</a></li>
+        <li><a href="#e-aristoteles">2.3 Argumentos Eternistas</a></li>
+        <li><a href="#e-refutacion">2.4 La Respuesta Tomista</a></li>
+        <li><a href="#e-fe">2.5 Fe y Comienzo Temporal</a></li>
+        <li><a href="#e-silogismos">2.6 Silogismos sobre la Eternidad</a></li>
+      </ul>
+    </li>
+    <li class="toc-part">
+      <a href="#s3" class="tc-h"><span class="tc-num">03</span><span class="tc-lbl">El Colapso Modal</span></a>
+      <ul class="toc-sub">
+        <li><a href="#cm-objecion">3.1 La Objeción Formal</a></li>
+        <li><a href="#cm-simp">3.2 Simplicidad Divina como Trasfondo</a></li>
+        <li><a href="#cm-voluntas">3.3 Voluntad y Necesidad</a></li>
+        <li><a href="#cm-objeto">3.4 Objeto Primario vs. Secundario</a></li>
+        <li><a href="#cm-nec">3.5 Necessitas Consequentiae vs. Consequentis</a></li>
+        <li><a href="#cm-creatio">3.6 Creatio Ex Nihilo como Solución</a></li>
+        <li><a href="#cm-silogismos">3.7 Silogismos sobre el Colapso Modal</a></li>
+      </ul>
+    </li>
+    <li class="toc-part">
+      <a href="#s4" class="tc-h"><span class="tc-num">04</span><span class="tc-lbl">Síntesis Final</span></a></li>
+  </ul>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main">
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-stamp">Dossier Tomista-Católico — Metafísica y Filosofía de Dios</div>
+  <h1 class="hero-title">
+    <em>Eternidad del Mundo<br>y Colapso Modal:</em><br>
+    La Solución Tomista
+  </h1>
+  <p class="hero-sub">Análisis técnico y preciso de la posición de Tomás de Aquino sobre la eternidad del mundo, la naturaleza del tiempo y la voluntad divina, y la refutación del supuesto colapso modal desde la metafísica escolástica.</p>
+
+  <div class="axiom-strip">
+    <div class="ax-card">
+      <div class="ax-lbl">Tempus (ST I, q.10, a.1)</div>
+      <div class="ax-lat">Numerus motus secundum prius et posterius</div>
+      <div class="ax-trans">"La medida del movimiento según el antes y el después"</div>
+    </div>
+    <div class="ax-card">
+      <div class="ax-lbl">Voluntas (ST I, q.19, a.3)</div>
+      <div class="ax-lat">Deus necessitate naturali vult bonitatem suam; creaturis autem non necessitate vult</div>
+      <div class="ax-trans">"Dios quiere su bondad por necesidad natural; pero no quiere las criaturas por necesidad"</div>
+    </div>
+    <div class="ax-card">
+      <div class="ax-lbl">Creatio (ST I, q.46, a.2)</div>
+      <div class="ax-lat">Mundum non semper fuisse sola fide tenetur, et demonstrative probari non potest</div>
+      <div class="ax-trans">"Que el mundo no ha existido siempre se sostiene sólo por la fe, y no puede probarse demostrativament"</div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════ PARTE 0: TESIS CENTRAL ══════ -->
+<section class="sec" id="s0">
+  <div class="sec-eye">Tesis Central</div>
+  <h2 class="sec-title"><em>00.</em> Los Dos Problemas y Su Articulación</h2>
+  <p class="sec-lead">Dos problemas metafísicos de primera magnitud confluyen en la teología tomista: si el mundo pudo ser eterno y si la necesidad divina colapsa toda contingencia creada. Ambos tienen solución, pero exigen precisión terminológica radical.</p>
+
+  <div class="sub">
+    <h3 class="sub-title">Los Dos Problemas</h3>
+    <div class="dist-box">
+      <div class="dist-side">
+        <div class="dist-head y">Problema I — Eternidad del Mundo</div>
+        <div class="dist-item"><strong>Pregunta:</strong> ¿Pudo Dios crear un mundo sin inicio temporal? ¿El comienzo en el tiempo es filosóficamente demostrable o sólo de fe?</div>
+        <div class="dist-item"><strong>Posición errónea A:</strong> La razón demuestra que el mundo es eterno (Aristóteles, Averroes)</div>
+        <div class="dist-item"><strong>Posición errónea B:</strong> La razón demuestra que el mundo tuvo inicio (Bonaventura, algunos agustinianos)</div>
+        <div class="dist-item"><strong>Tomás:</strong> La eternidad del mundo no es ni filosóficamente demostrable ni filosóficamente refutable. Se conoce el inicio por la <em>fe</em>, no por demostración.</div>
+      </div>
+      <div class="dist-side">
+        <div class="dist-head y">Problema II — Colapso Modal</div>
+        <div class="dist-item"><strong>Pregunta:</strong> Si Dios es simple (voluntad = esencia = ser) y su esencia es necesaria, ¿no se sigue que todo lo que Dios quiere es necesario? ¿Destruye esto la contingencia?</div>
+        <div class="dist-item"><strong>Objeción:</strong> Dios necesariamente quiere el mundo actual → el mundo actual es necesario → no hay seres contingentes (colapso modal)</div>
+        <div class="dist-item"><strong>Tomás:</strong> La necesidad del <em>acto</em> de querer no se transfiere a la <em>necesidad de los objetos</em> queridos. Dios quiere libremente las criaturas aunque su acto de querer sea eterno e inmutable.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3 class="sub-title">Por Qué Es Crucial la Articulación de Ambos</h3>
+    <p>La conexión entre los dos problemas no es casual. Si el mundo <em>tuviera que</em> existir (colapso modal), entonces el mundo sería eterno e incausado en sentido fuerte — lo que es contradictorio con la <em>creatio ex nihilo</em>. Inversamente, mostrar que Dios crea libremente (sin colapso modal) implica que Dios <em>pudo</em> no crear, y por tanto que el mundo tiene inicio no por necesidad metafísica sino por decreto libre. Los dos problemas son las dos caras de la misma moneda: la relación entre la necesidad divina y la contingencia del mundo.</p>
+    <div class="kf"><div class="kf-lbl">Tesis Articuladora</div><div class="kf-text">La solución tomista a ambos problemas descansa en una sola distinción: la diferencia entre el objeto primario de la voluntad divina (Dios mismo, querido necesariamente) y los objetos secundarios (las criaturas, queridas libremente). Esta distinción preserva tanto la simplicidad divina como la contingencia real del mundo.</div></div>
+  </div>
+</section>
+
+<!-- ══════ PARTE 1: DEFINICIONES ══════ -->
+<section class="sec" id="s1">
+  <div class="sec-eye">Parte I — Propedéutica</div>
+  <h2 class="sec-title"><em>Corpus de Definiciones</em> Fundamentales</h2>
+  <p class="sec-lead">Antes de argumentar hay que definir. El escolasticismo sabe que la confusión conceptual es la madre de todos los errores filosóficos. Las definiciones siguientes son operativas: intervendrán directamente en los argumentos de las Partes II y III.</p>
+
+  <!-- TIEMPO -->
+  <div class="sub" id="def-tempus">
+    <h3 class="sub-title">Bloque A — Tiempo, Eternidad y Eviternidad</h3>
+    <div class="def-grid">
+
+      <div class="def-card full">
+        <div class="def-term">TEMPUS — Tiempo</div>
+        <div class="def-lat">«Numerus motus secundum prius et posterius»</div>
+        <div class="def-src">Aristóteles, Física IV.11, 219b1 · Tomás de Aquino, In Phys. IV, lect. 17 · ST I, q.10, a.1</div>
+        <div class="def-body">El tiempo es la <strong>medida del movimiento según el antes y el después</strong>. No es el movimiento mismo, sino la medida que la mente aplica a la sucesión real del movimiento. Requiere: (a) un substrato material capaz de cambio; (b) una inteligencia que numere dicha sucesión. Consecuencias metafísicas cruciales: <strong>(1)</strong> Sin materia no hay movimiento, sin movimiento no hay tiempo. <strong>(2)</strong> El tiempo no puede ser infinito <em>a parte ante</em> si el movimiento tuvo inicio. <strong>(3)</strong> El "antes" de la creación es un <em>imaginarium</em> sin realidad: no hay tiempo antes del tiempo. El <span class="lat-y">nunc</span> (ahora) es el límite indivisible entre pasado y futuro — análogo al punto en la línea, pero dinámico. Tomás distingue: <span class="lat-y">tempus reale</span> (sucesión en las cosas) y la medida mental que la numera. Ambos son necesarios para que haya "tiempo" en sentido pleno.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">AETERNITAS — Eternidad</div>
+        <div class="def-lat">«Interminabilis vitae tota simul et perfecta possessio»</div>
+        <div class="def-src">Boecio, Cons. Phil. V.6 · ST I, q.10, a.1c · SCG I, c.15</div>
+        <div class="def-body">La posesión <strong>total, simultánea y perfecta de una vida sin límites</strong>. La clave es <span class="lat-y">tota simul</span> (toda a la vez): la eternidad no es tiempo indefinidamente extendido sino la <strong>ausencia de toda sucesión</strong>. Dios no tiene pasado ni futuro: su "ahora eterno" (<span class="lat-y">nunc stans</span>) abarca todo tiempo como simultáneamente presente. Diferencia esencial con el tiempo: en el tiempo, los eventos son <em>mutuamente excluyentes</em> (pasado ya no es, futuro aún no es); en la eternidad, todo es <em>co-presente</em>. Esto es decisivo para entender la ciencia divina y la providencia.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">AEVUM — Eviternidad</div>
+        <div class="def-lat">«Mensura entium quae nec tempori obnoxia sunt nec aeternitate fruuntur»</div>
+        <div class="def-src">ST I, q.10, a.5 · De Veritate, q.23, a.1</div>
+        <div class="def-body">Modo de duración <strong>intermedio</strong> entre el tiempo y la eternidad. Propio de los ángeles y (en la cosmología aristotélico-medieval) los cuerpos celestes. El ser eviternado tiene inicio pero no sucesión intrínseca: no envejece, no cambia sustancialmente. Cambia <em>en relación a lo temporal</em> (los ángeles actúan en el tiempo) pero no en sí mismos. Relevancia: muestra que <em>durar</em> y <em>ser en el tiempo</em> son conceptos distintos. Un mundo creado sin inicio temporal no estaría en el tiempo de la misma manera que el mundo actual.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">NUNC STANS — El Ahora Eterno</div>
+        <div class="def-lat">«Praesens sine praeterito et futuro — totum simul»</div>
+        <div class="def-src">ST I, q.10, a.2 ad 1 · SCG I, c.66 · De Aeternitate Mundi</div>
+        <div class="def-body">El "ahora permanente" de Dios. Frente al <span class="lat-y">nunc fluens</span> (el ahora que fluye y siempre pasa) del tiempo, el <span class="lat-y">nunc stans</span> es un <strong>presente permanente que contiene toda la extensión temporal como simultáneamente presente</strong>. Analogía tomista: como desde una colina se ven simultáneamente todos los viajeros de una carretera, Dios desde su eternidad ve simultáneamente todos los eventos temporales. Esto es decisivo para la providencia: Dios no "prevé" sino que <em>ve</em> el futuro como presente ante Él.</div>
+      </div>
+
+    </div><!-- /def-grid -->
+  </div>
+
+  <!-- VOLUNTAD -->
+  <div class="sub" id="def-voluntas">
+    <h3 class="sub-title">Bloque B — Voluntad, Libertad y Querer Divino</h3>
+    <div class="def-grid">
+
+      <div class="def-card">
+        <div class="def-term">VOLUNTAS — Voluntad</div>
+        <div class="def-lat">«Appetitus rationalis — inclinatio naturalis in bonum intellectu apprehensum»</div>
+        <div class="def-src">ST I, q.80, a.2 · ST I-II, q.8, a.1 · De Veritate, q.22, a.4</div>
+        <div class="def-body">El <strong>apetito racional</strong>: la inclinación natural de la naturaleza intelectual hacia el bien en cuanto conocido por el entendimiento. Siempre está ordenada al <em>bien</em>: nadie quiere el mal bajo la razón de mal. Distinguida del apetito sensitivo (instinto, concupiscencia) por la mediación del <em>intelecto</em>. Actos: <span class="lat-y">velle</span> (querer), <span class="lat-y">nolle</span> (rechazar activamente), <span class="lat-y">non velle</span> (no querer — negación simple). La voluntad mueve a todas las potencias hacia su fin en cuanto al <em>ejercicio</em> del acto.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">VOLUNTAS DEI — Voluntad Divina</div>
+        <div class="def-lat">«Voluntas Dei est ipsa essentia Dei — non est aliud ab intellectu divino»</div>
+        <div class="def-src">ST I, q.19, a.1-3 · SCG I, cc.72-80 · De Potentia, q.1, a.5</div>
+        <div class="def-body">En Dios, la voluntad <strong>es idéntica a su esencia y a su intelecto</strong> (simplicidad divina). Esto tiene dos consecuencias: (a) Dios no <em>adquiere</em> el querer como accidente — es su mismo ser; (b) no hay en Dios distinción real entre entender y querer. Distinción del objeto: Dios quiere <em>necesariamente</em> su propia bondad (objeto primario); quiere <em>libremente</em> las criaturas (objetos secundarios). La necesidad del acto de querer no implica la necesidad de todos los objetos queridos.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">LIBERUM ARBITRIUM — Libre Albedrío</div>
+        <div class="def-lat">«Facultas voluntatis et rationis qua bonum in particulari eligitur»</div>
+        <div class="def-src">ST I, q.83, a.1-4 · De Veritate, q.24 · SCG II, c.48</div>
+        <div class="def-body">La <strong>capacidad de elegir entre bienes particulares</strong> ordenados a un fin último. No es indiferencia hacia el bien (esto sería defecto, no libertad), sino la capacidad de determinar los medios. En las criaturas: implica posibilidad de error (elegir un bien aparente). En Dios: no hay libre albedrío respecto a su propia bondad (la quiere necesariamente), pero sí respecto a las criaturas — podría no haber creado nada, o haber creado algo diferente. La libertad divina es la más perfecta precisamente porque no depende de ningún bien externo.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">AMOR / DILECTIO DIVINA — Amor Divino</div>
+        <div class="def-lat">«Deus amat omnia existentia, in quantum sunt bona — non propter aliquid aliud sed propter se ipsum»</div>
+        <div class="def-src">ST I, q.20, a.1-4 · SCG I, c.91</div>
+        <div class="def-body">El amor divino es el <strong>acto de la voluntad divina por el que quiere el bien de los seres</strong>. No es una pasión ni un movimiento afectivo (Dios es impasible) sino el acto volitivo por el que Dios difunde el bien en los seres. Es causa del ser de las criaturas: "Amor Dei est infundens et creans bonitatem in rebus" (ST I, q.20, a.2). Relevante para el colapso modal: el amor divino a las criaturas es <em>libre</em>, no necesitado — Dios no ama a las criaturas porque las necesite sino porque su bondad es comunicativa por naturaleza.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SER -->
+  <div class="sub" id="def-ser">
+    <h3 class="sub-title">Bloque C — Ser, Esencia y Acto Puro</h3>
+    <div class="def-grid">
+
+      <div class="def-card">
+        <div class="def-term">ESSE — Acto de Ser</div>
+        <div class="def-lat">«Esse est actus omnium actuum et perfectio omnium perfectionum»</div>
+        <div class="def-src">De Potentia, q.7, a.2 ad 9 · ST I, q.3, a.4 · Quodlibet IX, q.2, a.1</div>
+        <div class="def-body">El <em>esse</em> (acto de ser) es <strong>la actualidad más íntima y profunda de cualquier cosa</strong> — no lo que una cosa es (esencia) sino el <em>que</em> existe. Aportación original de Tomás frente a Aristóteles: junto a la composición acto/potencia (forma/materia), existe en las criaturas una composición más radical: <span class="lat-y">esse</span> y <span class="lat-y">essentia</span>. El <em>esse</em> es recibido y limitado por la esencia. En Dios: Dios ES su esse (esse subsistens) — de ahí "Ego sum qui sum" (Ex 3:14). Toda criatura recibe el ser por participación (<span class="lat-y">ens per participationem</span>).</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">ESSENTIA — Esencia</div>
+        <div class="def-lat">«Quod quid est — id per quod et in quo ens habet esse»</div>
+        <div class="def-src">De Ente et Essentia, cc.1-2 · ST I, q.3, a.3 · In Metaph. VII, lect.5</div>
+        <div class="def-body">Lo que una cosa es: su <strong>determinación, su naturaleza, aquello por lo que pertenece a una especie</strong>. En las criaturas, la esencia es distinta realmente del <em>esse</em>: la esencia del hombre (animal racional) no incluye en sí misma la existencia — por eso los hombres pueden no existir. En Dios, esencia y ser son idénticos: la esencia divina incluye existir por sí misma. Esta distinción real <span class="lat-y">esse-essentia</span> es la marca metafísica de la contingencia criaturil.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">ACTUS PURUS — Acto Puro</div>
+        <div class="def-lat">«Deus est actus purus sine aliqua permixtione potentiae»</div>
+        <div class="def-src">ST I, q.3, a.2 · SCG I, c.16 · Compendium Theologiae, c.9</div>
+        <div class="def-body">Dios como <strong>pura actualidad sin mezcla alguna de potencia</strong>. En las criaturas, ser y obrar son actos superpuestos a una potencia (poder ser de otra manera, cambiar, perecer). Dios no tiene potencia pasiva: no puede ser movido, afectado, cambiado, ni puede no ser. Consecuencias: (a) Dios es absolutamente inmutable; (b) Dios no puede no existir; (c) Dios no mejora ni empeora. Esta aserción es el fundamento de la solución al colapso modal: el actus purus no puede "producir" por necesidad natural como lo hace una causa material.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">SIMPLICITAS DIVINA — Simplicidad Divina</div>
+        <div class="def-lat">«In Deo non est compositio aliqua — idem est quod habet et quod est»</div>
+        <div class="def-src">ST I, q.3 (toda la q.) · SCG I, cc.18-26 · De Potentia, q.7, a.1</div>
+        <div class="def-body">Dios <strong>no tiene partes de ningún tipo</strong>: ni materia-forma, ni sustancia-accidente, ni género-diferencia, ni esencia-esse. Todo lo que hay en Dios <em>es</em> Dios. Los "atributos" divinos (bondad, poder, sabiduría, voluntad) son realmente idénticos entre sí y con la esencia — solo los distinguimos conceptualmente (<span class="lat-y">distinctio rationis</span>). Esto es lo que hace amenazante el colapso modal: si voluntad = esencia = ser necesario, ¿no se sigue que todo lo querido es necesario? La solución distingue entre identidad del acto y necesidad de los objetos.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CREATIO -->
+  <div class="sub" id="def-creatio">
+    <h3 class="sub-title">Bloque D — Creación y Conservación</h3>
+    <div class="def-grid">
+
+      <div class="def-card">
+        <div class="def-term">CREATIO EX NIHILO</div>
+        <div class="def-lat">«Productio rei ex nihilo sui et subiecti per actionem liberam agentis omnipotentis»</div>
+        <div class="def-src">ST I, q.45, a.1-3 · SCG II, cc.6-37 · De Potentia, q.3, a.1</div>
+        <div class="def-body">La producción de una cosa <strong>desde absolutamente nada</strong> — ni desde materia preexistente, ni desde la propia substancia del Creador (contra el panteísmo), ni desde el caos (contra el dualismo). Tres notas esenciales: (a) el término es el ser completo de la criatura, no solo su forma; (b) el agente es únicamente Dios (solo la potencia infinita puede producir desde la nada); (c) es acto <em>libre</em>, no necesitado por la naturaleza divina. Este último punto es crucial para el colapso modal.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">CONSERVATIO IN ESSE</div>
+        <div class="def-lat">«Conservatio rerum a Deo non est per aliquam novam actionem sed est continuatio actionis qua dat esse»</div>
+        <div class="def-src">ST I, q.104, a.1-4 · SCG III, cc.65-67 · De Potentia, q.5, a.1</div>
+        <div class="def-body">La <strong>acción divina continuada que mantiene a las criaturas en el ser</strong>. No es una segunda acción distinta de la creación sino la <em>prolongación</em> del acto creador. Si Dios retirara su acción conservadora, las criaturas volverían a la nada instantáneamente. Relevancia: la dependencia de las criaturas no es solo en el origen sino en cada instante de su existencia — la contingencia es permanente, no solo inicial.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">EMANATIO vs. CREATIO</div>
+        <div class="def-lat">«Emanatio neoplatonica: necessaria ex natura Dei. Creatio catholica: libera ex voluntate Dei»</div>
+        <div class="def-src">SCG II, cc.31-32 · ST I, q.19, a.3 · De Causis, prop.3 (comm. Thomae)</div>
+        <div class="def-body"><strong>Distinción fundamental</strong> para el colapso modal. En la cosmología neoplatónica (Plotino, al-Fārābī, Avicena), el mundo emana necesariamente de Dios como la luz del sol: no puede no emanar. En la teología católica, el mundo es fruto de un acto <em>libre</em> de la voluntad divina. La diferencia: en la emanación el mundo ES necesario; en la creación el mundo es <em>contingente</em>. Solo la creatio ex nihilo preserva la contingencia real del cosmos.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">PARTICIPATIO — Participación</div>
+        <div class="def-lat">«Participare est quasi partem capere — creaturarum esse est participatum, Dei esse est per essentiam»</div>
+        <div class="def-src">De Hebdomadibus (comm. Thomae) · ST I, q.44, a.1 · SCG I, c.40</div>
+        <div class="def-body">Las criaturas <strong>poseen el ser por participación</strong>, no por esencia. Analogía: como el calor del hierro candente es participación del calor, pero el fuego es caliente por esencia. Dios es el <span class="lat-y">esse per essentiam</span>; las criaturas son <span class="lat-y">entia per participationem</span>. La participación explica la causalidad creadora: Dios, por ser el ser mismo, difunde el ser a las criaturas sin merma de sí mismo. También explica por qué ninguna criatura agota la bondad divina: toda criatura es una participación limitada e imperfecta.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="sub" id="def-modal">
+    <h3 class="sub-title">Bloque E — Necesidad, Contingencia y Colapso Modal</h3>
+    <div class="def-grid">
+
+      <div class="def-card">
+        <div class="def-term">NECESSITAS — Necesidad</div>
+        <div class="def-lat">«Necessarium est quod non potest non esse — quod impossibile est aliter se habere»</div>
+        <div class="def-src">ST I, q.82, a.1 · SCG II, c.30 · In Metaph. V, lect.6</div>
+        <div class="def-body">Lo que <strong>no puede no ser</strong>. Tomás distingue varios tipos: (a) <span class="lat-y">necessitas absoluta</span>: lo que es imposible que no sea por esencia (solo Dios); (b) <span class="lat-y">necessitas ex suppositione</span>: la necesidad condicional (si Sócrates corre, Sócrates está en movimiento — necesario <em>dada la condición</em>); (c) <span class="lat-y">necessitas consequentiae</span>: la necesidad lógica de la inferencia ("si A entonces B" es necesaria aunque A sea contingente); (d) <span class="lat-y">necessitas coactionis</span>: la necesidad por coacción externa. La confusión entre estos tipos es la raíz del problema del colapso modal.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">CONTINGENTIA — Contingencia</div>
+        <div class="def-lat">«Contingens est quod potest esse et non esse — habet esse ab alio non a se»</div>
+        <div class="def-src">ST I, q.2, a.3 (3ª vía) · SCG II, c.30 · De Aeternitate Mundi</div>
+        <div class="def-body">Lo que <strong>puede ser y puede no ser</strong>. Las criaturas son contingentes en dos sentidos: (a) ontológico: su esencia no incluye la existencia (pueden no existir); (b) causal: tienen su ser de otro (dependen de Dios). La contingencia no es un defecto: es la marca de la creaturalidad, de la distinción entre Creador y criatura. El problema del colapso modal es: ¿puede un Dios necesario producir seres genuinamente contingentes? La respuesta tomista es sí, por la libertad del decreto.</div>
+      </div>
+
+      <div class="def-card full">
+        <div class="def-term">COLAPSO MODAL — Modal Collapse</div>
+        <div class="def-lat">«Si omnia quae Deus vult necessario vult, tunc omnia entia necessaria sunt — nulla contingentia dantur»</div>
+        <div class="def-src">Formulación contemporánea: Plantinga, Dorr, Crisp · Respondida en clave tomista: Dolezal, Leftow, Wippel</div>
+        <div class="def-body">La tesis del <strong>colapso modal</strong> afirma que si la voluntad divina es idéntica a la esencia necesaria de Dios, entonces todo lo que Dios quiere es necesario, y por tanto todos los seres existentes son necesarios — colapsando la distinción entre posible y actual, entre necesario y contingente. Es la objeción más seria contra la combinación de <em>simplicidad divina</em> y <em>libre creación</em>. La solución tomista distingue: la <strong>necesidad del acto</strong> volitivo divino (que es necesario como todo lo divino) y la <strong>necesidad de los objetos</strong> queridos por ese acto (que puede ser contingente). El fuego <em>necesariamente</em> quema, pero que queme <em>este</em> leño es contingente.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">NECESSITAS CONSEQUENTIAE</div>
+        <div class="def-lat">«Necessitas quae est in ipsa consecutione — non in rebus de quibus fit consecutio»</div>
+        <div class="def-src">ST I, q.19, a.3 · ST I, q.14, a.13 ad 3 · In Peri Hermeneias I, lect.14</div>
+        <div class="def-body">La <strong>necesidad de la inferencia</strong>: "Si Dios quiere X, entonces X" es una verdad necesaria — la consecuencia es necesaria. Pero esto no significa que X en sí misma sea necesaria. Ejemplo: "Si Pedro corre, Pedro está en movimiento" es una necesidad de la consecuencia (<span class="lat-y">necessitas consequentiae</span>). Pero que Pedro corra es contingente (<span class="lat-y">necessitas consequentis</span> = falsa). La confusión de ambas es el error del colapso modal.</div>
+      </div>
+
+      <div class="def-card">
+        <div class="def-term">NECESSITAS CONSEQUENTIS</div>
+        <div class="def-lat">«Necessitas quae est in ipsa re de qua enuntiatur — res ipsa necessaria est»</div>
+        <div class="def-src">ST I, q.19, a.3 · ST I, q.14, a.13 · In Peri Hermeneias I, lect.14</div>
+        <div class="def-body">La <strong>necesidad del consecuente</strong>: que la cosa misma enunciada sea necesaria. "Pedro necesariamente corre" afirmaría que es imposible que Pedro no corra — lo que sería falso si el correr de Pedro es contingente. El error del colapso modal consiste en inferir: "Dios necesariamente quiere X" → "X es necesaria" — pasando ilegítimamente de la <span class="lat-y">necessitas consequentiae</span> a la <span class="lat-y">necessitas consequentis</span>.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PARTE 2: ETERNIDAD DEL MUNDO ══════ -->
+<section class="sec" id="s2">
+  <div class="sec-eye">Parte II</div>
+  <h2 class="sec-title"><em>La Eternidad del Mundo:</em> Razón, Fe y Metafísica</h2>
+  <p class="sec-lead">Tomás de Aquino sostuvo una posición singular y valiente: ni los partidarios de la eternidad del mundo ni sus adversarios filosóficos pueden ganar el debate por la sola razón. El comienzo temporal del mundo es artículo de fe, no conclusión filosófica.</p>
+
+  <!-- 2.1 -->
+  <div class="sub" id="e-problema">
+    <h3 class="sub-title">2.1 El Problema Planteado</h3>
+    <p>El problema filosófico de la eternidad del mundo fue heredado por el medioevo a través de Aristóteles (Física I-VIII, De Caelo), quien afirmó que el mundo es eterno porque el movimiento no puede haber comenzado (¿qué movió al primer motor para moverse <em>ahora</em> y no antes?). El mundo sería un proceso eterno de movimiento mantenido por el Motor Inmóvil.</p>
+    <p>Esto chocó frontalmente con la fe cristiana y la revelación bíblica. La pregunta para los teólogos medievales fue: ¿puede refutarse filosóficamente a Aristóteles? ¿O hay que aceptar que el inicio del mundo solo puede sostenerse por la fe?</p>
+    <div class="obj">
+      <div class="obj-lbl">El Debate Medieval</div>
+      <div class="obj-body">
+        <strong>Posición I (Averroes, herencia aristotélica):</strong> El mundo es eterno; demostrarlo es tarea de la física y la metafísica.<br><br>
+        <strong>Posición II (San Buenaventura, corriente agustiniana):</strong> Se puede demostrar filosóficamente que el mundo tuvo inicio (argumentos por la imposibilidad del infinito actual, la imposibilidad de un número infinito de almas, etc.).<br><br>
+        <strong>Posición III (Tomás de Aquino):</strong> Ninguna de las dos posiciones anteriores tiene éxito demostrativo. El mundo tuvo inicio <em>de hecho</em>, pero esto solo se conoce por la Revelación. La eternidad del mundo es filosóficamente posible aunque <em>de facto</em> no se dio.
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.2 -->
+  <div class="sub" id="e-posicion">
+    <h3 class="sub-title">2.2 La Posición de Tomás — Textos Primarios</h3>
+
+    <div class="src-block">
+      <div class="src-ref">Summa Theologiae I, q.46, a.1 — «Utrum mundus semper fuerit»</div>
+      <div class="src-lat">«Mundum non semper fuisse sola fide tenetur, et demonstrative probari non potest — sicut et supra de mysterio Trinitatis dictum est.»</div>
+      <div class="src-trans">"Que el mundo no siempre haya existido se sostiene solo por la fe, y no puede probarse demostrativament — como se dijo arriba del misterio de la Trinidad."</div>
+      <div class="src-note"><strong>Clave interpretativa:</strong> Tomás no es escéptico sobre el poder de la razón en general — es preciso sobre qué tipo de verdades son accesibles a la razón natural. El inicio temporal del mundo no es una verdad necesaria que la razón pueda derivar de principios primeros; pertenece al orden de los "misterios" revelados.</div>
+    </div>
+
+    <div class="src-block">
+      <div class="src-ref">De Aeternitate Mundi contra Murmurantes (c. 1271) — Opusculum dedicado al problema</div>
+      <div class="src-lat">«Posito enim per fidem quod mundus non semper fuerit, quaeritur utrum potuerit semper fuisse. Ad hoc dicendum quod potuit.»</div>
+      <div class="src-trans">"Puesto por la fe que el mundo no siempre ha sido, se pregunta si pudo haber existido siempre. A esto hay que decir que pudo."</div>
+      <div class="src-note"><strong>Nótese la distinción crucial:</strong> Tomás <em>no</em> afirma que el mundo fue eterno. Afirma que <em>pudo</em> haberlo sido — es filosóficamente posible una creación sin inicio temporal, aunque de facto no ocurrió. Quienes niegan esta posibilidad hacen un flaco favor a la fe al apoyarla en argumentos filosóficos débiles.</div>
+    </div>
+
+    <div class="kf"><div class="kf-lbl">Posición Canónica de Tomás</div><div class="kf-text">La eternidad del mundo es filosóficamente posible pero de facto no se dio. El inicio temporal es un dato de la Revelación (Concilio Lateranense IV, 1215), no una conclusión de la razón pura. Quienes pretenden demostrarlo filosóficamente debilitan la fe al ligarla a argumentos refutables.</div></div>
+  </div>
+
+  <!-- 2.3 -->
+  <div class="sub" id="e-aristoteles">
+    <h3 class="sub-title">2.3 Los Argumentos Eternistas y por qué Fallan</h3>
+    <p>Aristóteles adujo varios argumentos para la eternidad del mundo. Tomás los examina exhaustivamente en el <span class="lat">Commentarium in Physicam</span> y en la <span class="lat">SCG II</span>, mostrando que ninguno demuestra necesariamente la eternidad.</p>
+
+    <h4>Argumento 1 — El tiempo no puede haber comenzado</h4>
+    <div class="obj">
+      <div class="obj-lbl">Argumento aristotélico (Física IV)</div>
+      <div class="obj-body">El tiempo es la medida del movimiento. Todo comenzar es un movimiento. Luego el comienzo del tiempo sería un movimiento que ocurre en el tiempo — lo que presupondría el tiempo. Ergo el tiempo no puede haber comenzado: es eterno.</div>
+    </div>
+    <div class="sol">
+      <div class="sol-lbl">Respuesta tomista</div>
+      <div class="sol-body">El argumento da por supuesto que todo comienzo es un cambio dentro del tiempo. Pero la creación divina no es un cambio <em>en</em> el tiempo sino la producción de la totalidad de lo real, incluido el tiempo mismo. No hay un "antes" de la creación que presuponga el tiempo: el tiempo comienza con y en la creación. La creación es el límite inicial del tiempo, no un evento dentro del tiempo.</div>
+    </div>
+
+    <h4>Argumento 2 — El agente eterno produce un efecto eterno</h4>
+    <div class="obj">
+      <div class="obj-lbl">Argumento aristotélico (Metafísica XII)</div>
+      <div class="obj-body">Si la causa es eterna y suficiente, el efecto debe ser igualmente eterno. Si Dios es causa suficiente del mundo desde siempre, el mundo existe desde siempre. No puede haber causa plena sin efecto.</div>
+    </div>
+    <div class="sol">
+      <div class="sol-lbl">Respuesta tomista (ST I, q.46, a.1 ad 9)</div>
+      <div class="sol-body">Esto sería verdad de una causa <em>natural</em> que actúa por necesidad de naturaleza (como el fuego produce calor necesariamente). Pero Dios actúa por <em>voluntad libre</em>, no por necesidad natural. La voluntad libre puede querer que el efecto empiece en un determinado momento aunque la causa sea eterna. Analogía: un artesano puede existir durante años sin producir nada, y luego producir una obra en un momento determinado sin cambiar él mismo.</div>
+    </div>
+
+    <h4>Argumento 3 — El movimiento primo no pudo comenzar</h4>
+    <div class="obj">
+      <div class="obj-lbl">Argumento aristotélico (Física VIII)</div>
+      <div class="obj-body">Cualquier movimiento supone un movimiento anterior (el que lo pone en marcha). Luego no puede haber un primer movimiento: el movimiento es eterno.</div>
+    </div>
+    <div class="sol">
+      <div class="sol-lbl">Respuesta tomista</div>
+      <div class="sol-body">Este argumento vale dentro del orden de las causas <em>naturales</em> — donde toda causa es también efecto de otra. Pero la creación <em>ex nihilo</em> es la producción del orden causal mismo, no una causa dentro de ese orden. El primer movimiento no fue "puesto en marcha" por otro movimiento anterior sino creado junto con el tiempo mismo. El argumento de Aristóteles presupondría que la creación es un cambio, pero ya se vio que no lo es.</div>
+    </div>
+  </div>
+
+  <!-- 2.4 -->
+  <div class="sub" id="e-refutacion">
+    <h3 class="sub-title">2.4 Por Qué los Argumentos CONTRA la Eternidad también Fallan</h3>
+    <p>Tomás es igualmente crítico con quienes pretenden demostrar filosóficamente el <em>inicio</em> temporal del mundo. Los argumentos de San Buenaventura son los más elaborados:</p>
+
+    <h4>Argumento de Buenaventura — Imposibilidad del infinito actual</h4>
+    <div class="obj">
+      <div class="obj-lbl">Argumento de San Buenaventura (In Sent. II, d.1, p.1, a.1, q.2)</div>
+      <div class="obj-body">Si el mundo fuera eterno, habría un número infinito de días pasados. Pero un infinito actual es imposible (no puede completarse). Luego el mundo no puede ser eterno: tuvo inicio.</div>
+    </div>
+    <div class="sol">
+      <div class="sol-lbl">Crítica de Tomás (ST I, q.46, a.2 ad 6)</div>
+      <div class="sol-body">El argumento confunde el infinito potencial con el infinito actual. En un mundo eterno, los días pasados serían infinitos en número pero nunca simultáneamente actuales — son siempre un número finito en cualquier momento dado, con adición sucesiva hacia el pasado sin límite. Tomás no considera esto demostrativamente imposible. El infinito actual podría ser problemático, pero la eternidad del mundo no implica un infinito actual sino un infinito <em>potencial</em> hacia el pasado.</div>
+    </div>
+
+    <div class="nota">
+      <div class="nota-lbl">Nota de Precisión</div>
+      <div class="nota-body">La posición de Tomás no implica que sea indiferente qué dice la fe sobre el comienzo del mundo. Implica que la razón filosófica por sí sola no puede zanjar la cuestión. Esto es humildad epistémica, no escepticismo. La fe en la creación temporal no necesita apoyarse en demostraciones filosóficas — tiene su propia autoridad revelacional independiente.</div>
+    </div>
+  </div>
+
+  <!-- 2.5 -->
+  <div class="sub" id="e-fe">
+    <h3 class="sub-title">2.5 Lo que la Fe Enseña sobre el Inicio Temporal</h3>
+
+    <div class="src-block">
+      <div class="src-ref">Concilio Lateranense IV (1215) — Definición dogmática</div>
+      <div class="src-lat">«...Creator omnium visibilium et invisibilium, spiritualium et corporalium; qui sua omnipotenti virtute simul ab initio temporis utramque de nihilo condidit creaturam, spiritualem et corporalem...»</div>
+      <div class="src-trans">"...Creador de todo lo visible e invisible, espiritual y corporal; quien por su omnipotente fuerza simultáneamente desde el inicio del tiempo creó de la nada a ambas creaturas, espiritual y corporal..."</div>
+      <div class="src-note"><strong>Clave dogmática:</strong> "<span class="lat-y">ab initio temporis</span>" — desde el inicio del tiempo. El mundo tiene inicio temporal. Esto es dogma de fe, no tesis filosófica.</div>
+    </div>
+
+    <div class="src-block">
+      <div class="src-ref">Concilio Vaticano I (1870) — Dei Filius, Canon 5</div>
+      <div class="src-lat">«Si quis non confiteatur, mundum, resque omnes quae in eo continentur, et spirituales et materiales, secundum totam suam substantiam a Deo ex nihilo esse productas: anathema sit.»</div>
+      <div class="src-trans">"Si alguno no confiesa que el mundo y todas las cosas que en él se contienen, espirituales y materiales, según toda su sustancia, han sido producidas por Dios de la nada: sea anatema."</div>
+      <div class="src-note">La definición dogmática de la <em>creatio ex nihilo</em> como verdad de fe obligatoria.</div>
+    </div>
+  </div>
+
+  <!-- 2.6 SILOGISMOS -->
+  <div class="sub" id="e-silogismos">
+    <h3 class="sub-title">2.6 Silogismos Formales sobre la Eternidad del Mundo</h3>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo I — La Razón No Puede Demostrar el Inicio Temporal</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>Solo puede demostrarse imposible lo que implica contradicción lógica</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>Un mundo creado sin inicio temporal no implica contradicción lógica (puede pensarse coherentemente)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>La eternidad del mundo es precisamente ese caso: una creación sin inicio temporal</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>La eternidad del mundo no puede demostrarse imposible por la sola razón. <span class="ref">(ST I, q.46, a.1)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo II — El Inicio Temporal es Artículo de Fe</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>Los artículos de fe son verdades reveladas que exceden la demostración natural pero no la contradicen</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>El inicio temporal del mundo ha sido definido como verdad revelada (Lateranense IV)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Esta verdad no puede ser demostrada ni refutada filosóficamente (como se probó en P1)</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>El inicio temporal del mundo es artículo de fe que se sostiene con certeza sobrenatural, independientemente de la demostración filosófica. <span class="ref">(ST I, q.46, a.2)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo III — El Tiempo Comienza con la Creación</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>El tiempo es la medida del movimiento (<span class="lat-y">numerus motus</span>) — sin movimiento no hay tiempo</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>El movimiento requiere seres materiales que se muevan</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Los seres materiales son parte de la creación</div></div>
+      <div class="syl-row"><div class="syl-lbl">P4</div><div>Antes de la creación no hay seres materiales ni movimiento</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>Antes de la creación no hay tiempo. El tiempo comenzó con la creación; no tiene sentido preguntar "qué había antes" porque no había antes. <span class="ref">(In Phys. VIII · ST I, q.46, a.1 ad 6)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo IV — Una Causa Libre No Exige Efecto Eterno</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>Una causa natural necesariamente produce su efecto mientras existe la causa (el fuego produce calor mientras es fuego)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>Una causa libre puede diferir la producción del efecto aunque la causa exista plenamente</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Dios actúa por voluntad libre, no por necesidad natural (<span class="lat-y">per voluntatem, non per naturam</span>)</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>Que Dios sea causa eterna y omnipotente no implica que el mundo sea eterno. La voluntad libre puede querer que el efecto empiece en un momento determinado. <span class="ref">(ST I, q.46, a.1 ad 9 · De Aeternitate Mundi)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo V — La Creación No Es Un Cambio Dentro del Tiempo</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>Todo cambio natural supone un substrato preexistente que cambia (la madera que se hace ceniza)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>La creación ex nihilo no tiene substrato preexistente: produce la totalidad de lo real</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Los argumentos aristotélicos contra el inicio temporal suponen que el inicio es un cambio (y presuponen un substrato y un tiempo previo)</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>Los argumentos aristotélicos contra el inicio temporal no atacan a la creatio ex nihilo — confunden dos categorías radicalmente distintas. <span class="ref">(ST I, q.45, a.2 · SCG II, c.37)</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PARTE 3: COLAPSO MODAL ══════ -->
+<section class="sec" id="s3">
+  <div class="sec-eye">Parte III — El Problema Central</div>
+  <h2 class="sec-title"><em>El Colapso Modal</em> y su Solución Tomista</h2>
+  <p class="sec-lead">El colapso modal es la objeción más técnicamente sofisticada contra la combinación de simplicidad divina y libertad creadora. Su solución exige distinguir con precisión quirúrgica entre la necesidad del acto divino y la contingencia de sus objetos.</p>
+
+  <!-- 3.1 -->
+  <div class="sub" id="cm-objecion">
+    <h3 class="sub-title">3.1 La Objeción Formal Completa</h3>
+    <div class="obj">
+      <div class="obj-lbl">El Argumento del Colapso Modal — Formulación Técnica</div>
+      <div class="obj-body">
+        <strong>(1)</strong> Dios existe necesariamente (ens a se, actus purus — no puede no ser)<br>
+        <strong>(2)</strong> La voluntad de Dios es idéntica a su esencia (simplicidad divina — ST I, q.3)<br>
+        <strong>(3)</strong> La esencia de Dios es absolutamente necesaria (de (1))<br>
+        <strong>(4)</strong> ∴ La voluntad de Dios es absolutamente necesaria (de (2) y (3))<br>
+        <strong>(5)</strong> Lo que una voluntad necesaria quiere, lo quiere necesariamente<br>
+        <strong>(6)</strong> Dios quiere el mundo actual (la creación es acto de la voluntad divina)<br>
+        <strong>(7)</strong> ∴ Dios quiere el mundo actual necesariamente (de (4), (5), (6))<br>
+        <strong>(8)</strong> Lo que Dios quiere necesariamente existe necesariamente (omnipotencia)<br>
+        <strong>(9)</strong> ∴ El mundo actual existe necesariamente (de (7) y (8))<br>
+        <strong>(10)</strong> Si el mundo actual existe necesariamente, no hay seres contingentes<br>
+        <strong>(11)</strong> ∴ No hay seres contingentes — <em>colapso modal total</em> (de (9) y (10))
+      </div>
+    </div>
+    <p>Nótese que las premisas (1), (2), (6) y (8) son tesis genuinamente tomistas. La objeción no es un hombre de paja: usa los recursos conceptuales del propio Tomás para generar una conclusión que él rechazaría. Esto la hace una objeción interna seria.</p>
+  </div>
+
+  <!-- 3.2 -->
+  <div class="sub" id="cm-simp">
+    <h3 class="sub-title">3.2 La Simplicidad Divina como Trasfondo Necesario</h3>
+    <p>La simplicidad divina (<span class="lat-y">simplicitas Dei</span>) es la doctrina según la cual en Dios no hay composición real de ningún tipo. Esto significa que los "atributos" de Dios — bondad, poder, saber, voluntad — no son partes o accidentes de Dios sino el mismo Dios considerado desde distintas perspectivas conceptuales.</p>
+
+    <div class="src-block">
+      <div class="src-ref">Summa Theologiae I, q.3, a.4 — La identidad de esencia y ser en Dios</div>
+      <div class="src-lat">«In Deo non est aliud esse et aliud essentia, quia Deus est suum esse subsistens.»</div>
+      <div class="src-trans">"En Dios no hay un ser distinto de la esencia, porque Dios es su mismo ser subsistente."</div>
+      <div class="src-note">Este es el punto más elevado de la metafísica tomista: Dios no <em>tiene</em> el ser como las criaturas — Dios <em>es</em> el ser. La identidad de esencia y ser en Dios es la máxima expresión de la absolutidad divina.</div>
+    </div>
+
+    <p>La simplicidad divina es una verdad filosófica de primera importancia, pero cuando se combina irreflexivamente con la omnipotencia y la causalidad creadora, produce el problema del colapso modal. La solución no pasa por negar la simplicidad sino por entender correctamente qué implica y qué no implica.</p>
+
+    <div class="nota">
+      <div class="nota-lbl">Distinción Operativa</div>
+      <div class="nota-body">La simplicidad divina implica que el acto de querer es idéntico a la esencia divina. <strong>No implica</strong> que todos los objetos queridos por ese acto sean idénticos a la esencia divina, ni que sean necesarios. El objeto del querer divino es variable (puede ser esto o lo otro); el acto de querer es uno y eterno. Esta es la distinción clave.</div>
+    </div>
+  </div>
+
+  <!-- 3.3 -->
+  <div class="sub" id="cm-voluntas">
+    <h3 class="sub-title">3.3 Voluntad Divina: Necesidad del Acto, Libertad en los Objetos</h3>
+
+    <div class="src-block">
+      <div class="src-ref">Summa Theologiae I, q.19, a.3 — «Utrum Deus necessitate velit quaecumque vult»</div>
+      <div class="src-lat">«Ad tertium sic proceditur... Deus ex necessitate vult bonitatem suam, non autem ex necessitate vult alia a se.»</div>
+      <div class="src-trans">"Dios quiere su bondad por necesidad, pero no quiere por necesidad las cosas que son distintas de Él."</div>
+      <div class="src-note"><strong>Este es el texto clave.</strong> Tomás distingue taxativamente: el objeto primario (la bondad divina propia) es querido necesariamente; los objetos secundarios (las criaturas) son queridos libremente. La necesidad del acto volitivo divino no transmite necesidad a todos sus objetos.</div>
+    </div>
+
+    <p>La distinción tiene su fundamento metafísico en la <em>suficiencia de la bondad divina</em>: ninguna criatura añade nada a la perfección divina. Dios no <em>necesita</em> las criaturas para ser perfecto — por tanto no las quiere por necesidad sino por pura liberalidad.</p>
+
+    <div class="src-block">
+      <div class="src-ref">Summa Theologiae I, q.19, a.3 — Continuación del texto</div>
+      <div class="src-lat">«Ratio autem quare alia a se non ex necessitate vult, haec est: quia bonitas divina est finis divinorum volitorum... creaturae autem ad bonitatem divinam ordinantur ut ad finem. Non autem necesse est quod Deus velit ea quae ad finem ordinantur, nisi supposito quod velit finem.»</div>
+      <div class="src-trans">"La razón por la que no quiere necesariamente las cosas distintas de Él es esta: porque la bondad divina es el fin de todo lo divino querido... Las criaturas, en cambio, se ordenan a la bondad divina como a su fin. Pero no es necesario que Dios quiera las cosas ordenadas al fin, a no ser suponiendo que quiere el fin."</div>
+    </div>
+
+    <p>La estructura argumental es clara: Dios quiere necesariamente el fin (su propia bondad). Los medios para ese fin (las criaturas) no son necesarios para el fin — la bondad divina es perfecta sin ninguna criatura. Por tanto Dios puede no querer ninguna criatura sin ninguna mengua de su perfección.</p>
+  </div>
+
+  <!-- 3.4 -->
+  <div class="sub" id="cm-objeto">
+    <h3 class="sub-title">3.4 Objeto Primario vs. Objeto Secundario de la Voluntad Divina</h3>
+    <p>Esta distinción es el corazón de la solución tomista. No es una distinción arbitraria sino que tiene fundamento en la naturaleza del fin y los medios:</p>
+
+    <div class="dist-box">
+      <div class="dist-side">
+        <div class="dist-head y">Objeto Primario — Querido Necesariamente</div>
+        <div class="dist-item"><strong>Qué es:</strong> La propia bondad de Dios, su esencia perfectísima</div>
+        <div class="dist-item"><strong>Razón:</strong> La voluntad siempre tiende al bien supremo bajo pena de irracionalidad; Dios que es el bien supremo se quiere a sí mismo necesariamente</div>
+        <div class="dist-item"><strong>Tipo de necesidad:</strong> Necessitas naturalis (no coactio — es la forma más alta de libertad)</div>
+        <div class="dist-item"><strong>Consecuencia:</strong> Dios no puede no quererse a sí mismo — pero esto no es una limitación sino la expresión de su perfección</div>
+      </div>
+      <div class="dist-side">
+        <div class="dist-head g">Objetos Secundarios — Queridos Libremente</div>
+        <div class="dist-item"><strong>Qué son:</strong> Las criaturas, en toda su variedad posible</div>
+        <div class="dist-item"><strong>Razón:</strong> Ninguna criatura es necesaria para la perfección divina; la bondad divina sería igualmente perfecta sin ninguna criatura</div>
+        <div class="dist-item"><strong>Tipo de querer:</strong> Acto libre — Dios podría haber no creado nada o haber creado algo diferente</div>
+        <div class="dist-item"><strong>Consecuencia:</strong> Las criaturas son radicalmente contingentes — dependen del decreto libre de una voluntad que podría haber decretado de otro modo</div>
+      </div>
+    </div>
+
+    <div class="src-block">
+      <div class="src-ref">De Potentia, q.1, a.5 — La libertad del decreto creador</div>
+      <div class="src-lat">«Deus est agens per voluntatem et intellectum, non per necessitatem naturae; et ideo potest non agere vel aliter agere quam agit.»</div>
+      <div class="src-trans">"Dios actúa por voluntad e intelecto, no por necesidad de naturaleza; y por eso puede no actuar o actuar de manera distinta a como actúa."</div>
+      <div class="src-note">Esta afirmación es explícita: Dios podría no haber creado nada. La creación no le es necesaria. Esto destruye la premisa (5) del argumento del colapso modal.</div>
+    </div>
+  </div>
+
+  <!-- 3.5 -->
+  <div class="sub" id="cm-nec">
+    <h3 class="sub-title">3.5 La Distinción Decisiva: Necessitas Consequentiae vs. Consequentis</h3>
+    <p>Esta distinción lógica es la clave técnica más precisa para desmantelar el argumento del colapso modal. La encontramos en Tomás de Aquino pero también en Aristóteles (<span class="lat">De Interpretatione</span>) y en toda la lógica modal medieval.</p>
+
+    <div class="dist-box">
+      <div class="dist-side">
+        <div class="dist-head y">Necessitas Consequentiae</div>
+        <div class="dist-item"><strong>Def.:</strong> La necesidad de la inferencia: "Si A, entonces B" es una verdad necesaria</div>
+        <div class="dist-item"><strong>Ejemplo:</strong> "Si Dios quiere X, entonces X será" — esta condicional es necesariamente verdadera (omnipotencia)</div>
+        <div class="dist-item"><strong>Otro ej.:</strong> "Si Pedro corre, Pedro está en movimiento" — necesariamente verdadera</div>
+        <div class="dist-item"><strong>Lo que dice:</strong> La relación entre A y B es necesaria</div>
+        <div class="dist-item"><strong>Lo que NO dice:</strong> Que A, ni que B, sean en sí mismos necesarios</div>
+      </div>
+      <div class="dist-side">
+        <div class="dist-head r">Necessitas Consequentis</div>
+        <div class="dist-item"><strong>Def.:</strong> La necesidad del consecuente mismo: B es necesario en sí mismo</div>
+        <div class="dist-item"><strong>Ejemplo inválido:</strong> "Luego X es necesario en sí mismo" — NO se sigue de lo anterior</div>
+        <div class="dist-item"><strong>Otro ej.:</strong> "Pedro necesariamente corre" — esto afirma necesidad en la cosa, no en la inferencia</div>
+        <div class="dist-item"><strong>Error del colapso modal:</strong> Inferir de la necessitas consequentiae (si Dios quiere X → X) que hay necessitas consequentis (X es necesaria)</div>
+        <div class="dist-item"><strong>Por qué es error:</strong> La necesidad del "si... entonces" no transmite necesidad al consecuente</div>
+      </div>
+    </div>
+
+    <div class="src-block">
+      <div class="src-ref">ST I, q.19, a.3 ad 4 — Tomás aplica la distinción explícitamente</div>
+      <div class="src-lat">«Licet ea quae Deus vult ex necessitate velit, non tamen haec vel illa ex necessitate vult. Sic, licet homo ex necessitate velit esse beatus, non tamen ex necessitate vult bibere vinum vel ire ad hoc iter.»</div>
+      <div class="src-trans">"Aunque Dios quiera necesariamente lo que quiere, no quiere sin embargo estas o aquellas cosas necesariamente. Así, aunque el hombre quiera necesariamente ser feliz, no quiere sin embargo necesariamente beber vino o ir por este camino."</div>
+      <div class="src-note"><strong>Analogía magistral:</strong> El hombre quiere necesariamente la felicidad (el bien universal), pero los medios para la felicidad son libres. Análogamente, Dios quiere necesariamente su bondad, pero los medios concretos (las criaturas) son libres.</div>
+    </div>
+
+    <div class="kf"><div class="kf-lbl">La Distinción Técnica Decisiva</div><div class="kf-text">El colapso modal confunde "Dios necesariamente quiere lo que quiere" (necessitas consequentiae: la inmutabilidad del acto divino) con "lo que Dios quiere es necesario" (necessitas consequentis: la naturaleza del objeto querido). El primero es verdadero; el segundo es falso para los objetos secundarios (criaturas).</div></div>
+  </div>
+
+  <!-- 3.6 -->
+  <div class="sub" id="cm-creatio">
+    <h3 class="sub-title">3.6 La Creatio Ex Nihilo como Fundamento Metafísico de la Contingencia</h3>
+    <p>La solución al colapso modal no es solo lógica (la distinción entre tipos de necesidad) sino también metafísica: la doctrina de la creación ex nihilo es lo que garantiza ontológicamente la contingencia de los seres creados.</p>
+
+    <p>En la cosmología neoplatónica (Plotino, Avicena, en parte al-Fārābī), el mundo emana necesariamente de Dios como la luz del sol o el calor del fuego: no puede no emanar. En ese caso el mundo sería necesario. La creación ex nihilo, por el contrario, significa que Dios produce el mundo por un acto libre de voluntad, no por necesidad de naturaleza.</p>
+
+    <div class="src-block">
+      <div class="src-ref">SCG II, c.23 — La diferencia entre agir por naturaleza y por voluntad</div>
+      <div class="src-lat">«Agens quod agit per modum naturae non producit nisi unum effectum determinatum... agens autem per voluntatem potest producere hoc vel illud, et non producere.»</div>
+      <div class="src-trans">"El agente que actúa por modo de naturaleza no produce sino un efecto determinado... el agente por voluntad puede producir esto o aquello, y puede no producir."</div>
+    </div>
+
+    <p>La creación ex nihilo implica necesariamente que el mundo es contingente: si Dios lo produce libremente, podría no haberlo producido, y lo producido es radicalmente dependiente del decreto libre. La contingencia no es una apariencia ni un defecto — es la marca ontológica de todo lo que es creado libremente.</p>
+
+    <div class="sol">
+      <div class="sol-lbl">Solución Metafísica de Fondo</div>
+      <div class="sol-body">La contingencia de las criaturas <strong>fluye del decreto libre divino</strong>. Dios no establece contingencia a pesar de su necesidad, sino precisamente <em>mediante</em> su libertad. Un Dios necesario que crea libremente produce seres genuinamente contingentes. El colapso modal solo se daría si Dios creara por necesidad de naturaleza — lo que es la posición neoplatónica, no la cristiana.</div>
+    </div>
+  </div>
+
+  <!-- 3.7 SILOGISMOS -->
+  <div class="sub" id="cm-silogismos">
+    <h3 class="sub-title">3.7 Silogismos Formales sobre el Colapso Modal</h3>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo VI — Refutación de la Premisa (5): Lo querido necesariamente ≠ necesario en sí</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>La necessitas consequentiae (necesidad de la inferencia) no transfiere necessitas consequentis (necesidad del consecuente)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>"Dios quiere X" implica "X será" por necessitas consequentiae (omnipotencia)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Esta relación condicional necesaria no implica que X en sí misma sea necesaria</div></div>
+      <div class="syl-row"><div class="syl-lbl">P4</div><div>Ejemplo: "Si Pedro corre, Pedro está en movimiento" es necesariamente verdadera, pero el correr de Pedro es contingente</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>La premisa (5) del colapso modal es ambigua: si significa necessitas consequentiae, es verdadera pero no produce colapso; si significa necessitas consequentis, es falsa. <span class="ref">(ST I, q.19, a.3 ad 4 · In Peri Herm. I, lect.14)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo VII — La Distinción Objeto Primario / Secundario</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>Dios quiere necesariamente su propio bien (objeto primario) — ningún bien externo perfeccionaría a Dios</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>Dios quiere las criaturas como objetos secundarios — que participan de su bondad pero no la agotan</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Lo que se ordena como medio a un fin perfectísimo no es necesario para ese fin cuando el fin es ya absolutamente perfecto sin él</div></div>
+      <div class="syl-row"><div class="syl-lbl">P4</div><div>La bondad divina es absolutamente perfecta sin ninguna criatura</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>Dios no quiere necesariamente ninguna criatura en particular ni el conjunto de las criaturas. Son objetos libres de su voluntad. <span class="ref">(ST I, q.19, a.3 · SCG I, c.81)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo VIII — La Simplcidad Divina No Produce Colapso</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>La simplicidad divina significa: el acto de querer = la esencia divina (no hay composición acto-potencia en el querer)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>Esta identidad no significa: los objetos queridos = la esencia divina</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Las criaturas son queridas <em>por</em> Dios, no son <em>parte</em> de Dios ni necesariamente idénticas a Él</div></div>
+      <div class="syl-row"><div class="syl-lbl">P4</div><div>La necesidad del acto (idéntico a la esencia) no se transmite a la necesidad de los objetos (distintos de la esencia)</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>La simplicidad divina es compatible con la contingencia de las criaturas. El colapso modal confunde el acto con su objeto. <span class="ref">(ST I, q.3, a.2 · ST I, q.19, a.1-3)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo IX — La Libertad Divina Como Fundamento de la Contingencia</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>Un agente necesario que actúa por necesidad de naturaleza produce efectos necesarios (causa natural)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>Un agente necesario que actúa por libertad puede producir efectos contingentes (causa voluntaria)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Dios actúa por voluntad libre respecto a las criaturas, no por necesidad natural</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>Dios, siendo necesario, produce criaturas contingentes. La necesidad del agente no implica necesidad en los efectos cuando el agente actúa libremente. <span class="ref">(SCG II, c.23 · De Potentia, q.1, a.5)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo X — La Creatio Ex Nihilo Garantiza la Contingencia Ontológica</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>En la emanación neoplatónica, el mundo fluye necesariamente de la naturaleza divina — no puede no fluir</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>En la creación ex nihilo cristiana, el mundo es producido por decreto libre — puede no ser producido</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Lo que puede no ser producido es, una vez producido, contingente (podría no haber sido)</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>La creatio ex nihilo es la garantía metafísica de la contingencia real del mundo. El colapso modal solo amenaza a cosmologías emanacionistas, no al teísmo de la creación. <span class="ref">(ST I, q.45, a.2 · SCG II, cc.6-37)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo XI — El Decreto Libre como Eternamente Contingente</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>El decreto divino de crear es un acto eterno (Dios no decide en el tiempo sino eternamente)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>Un acto eterno puede ser, sin embargo, libre — la eternidad no excluye la libertad</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>El decreto de crear es libre en el sentido de que Dios podría haber decretado no crear (sin contradicción)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P4</div><div>Lo que es libremente decretado es contingente: podría no haber sido decretado</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>El mundo es eternamente decretado y realmente contingente. La eternidad del decreto no colapsa su libertad ni la contingencia del mundo decretado. <span class="ref">(ST I, q.19, a.3 · ST I, q.22, a.4)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo XII — Analogía del Fuego: El Acto Necesario y el Objeto Contingente</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>El fuego necesariamente quema (es su naturaleza): el acto de quemar es necesario en el fuego</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>Que el fuego queme <em>este leño concreto</em> es contingente: depende del encuentro entre el fuego y ese leño</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>La necesidad del acto no implica la necesidad de los objetos particulares del acto</div></div>
+      <div class="syl-row"><div class="syl-lbl">P4</div><div>Análogamente: el acto de querer divino es necesario (idéntico a la esencia), pero los objetos particulares (criaturas) son contingentes</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>La necesidad del acto volitivo divino es compatible con la contingencia de los objetos particulares queridos. <span class="ref">(ST I, q.19, a.3 · Analogía propia de Tomás)</span></div></div>
+    </div>
+
+    <div class="syl">
+      <div class="syl-title">Silogismo XIII — Refutación Global del Colapso Modal</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>El colapso modal requiere que la necesidad del acto divino se transfiera a todos los objetos de ese acto</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>Esta transferencia es lógicamente inválida (confunde necessitas consequentiae y consequentis)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Esta transferencia es también metafísicamente falsa: Dios es agente libre, no agente natural necesitado</div></div>
+      <div class="syl-row"><div class="syl-lbl">P4</div><div>Los objetos secundarios de la voluntad divina (criaturas) son libremente elegidos y por tanto contingentes</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>El colapso modal es una falacia que confunde tres niveles distintos: (a) la necesidad de Dios como ser, (b) la necesidad del acto volitivo divino como eterno e inmutable, y (c) la necesidad de los objetos queridos por ese acto. Solo (a) y (b) son verdaderas. (c) es falsa para los objetos secundarios. <span class="ref">(ST I, q.19, aa.3-5 · De Pot., q.1, a.5)</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PARTE 4: SÍNTESIS ══════ -->
+<section class="sec" id="s4">
+  <div class="sec-eye">Parte IV</div>
+  <h2 class="sec-title"><em>Síntesis Final:</em> La Coherencia del Sistema Tomista</h2>
+  <p class="sec-lead">El sistema tomista preserva simultáneamente la necesidad absoluta de Dios, la libertad de la creación, la contingencia real del mundo y el inicio temporal por revelación. No hay tensión irresoluble entre estas verdades.</p>
+
+  <div class="sub">
+    <h3 class="sub-title">Las Cinco Tesis del Sistema y su Coherencia</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-num">01</div>
+        <div class="card-title">Dios es Necesario (Actus Purus)</div>
+        <div class="card-text">Dios no puede no existir, no puede cambiar, no puede ser determinado por nada externo. Su voluntad es idéntica a su esencia y por tanto igualmente necesaria en cuanto acto.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <div class="card-title">Dios Crea Libremente</div>
+        <div class="card-text">La creación no fluye de la naturaleza divina por necesidad (contra el emanacionismo) sino de su voluntad libre. Dios podría no haber creado ninguna criatura sin mengua de su perfección.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <div class="card-title">El Mundo es Realmente Contingente</div>
+        <div class="card-text">La contingencia de las criaturas no es aparente sino real. Fluye directamente del carácter libre del decreto creador. Lo que fue libremente decretado podría no haber sido decretado.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">04</div>
+        <div class="card-title">El Inicio Temporal es de Fe</div>
+        <div class="card-text">El inicio temporal del mundo no puede demostrarse ni refutarse filosóficamente. Es una verdad revelada (Lateranense IV) que se sostiene por la autoridad de la Revelación, no por argumento racional.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">05</div>
+        <div class="card-title">No Hay Colapso Modal</div>
+        <div class="card-text">La necesidad de Dios no transmite necesidad al mundo porque: (a) Dios crea libremente, no por naturaleza; (b) la necesidad del acto no implica necesidad de los objetos del acto; (c) la creatio ex nihilo garantiza la contingencia ontológica.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3 class="sub-title">Tabla Maestra: Los Errores Posibles y la Solución Tomista</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Posición</th><th>Tesis sobre el mundo</th><th>Error cometido</th><th>Respuesta de Tomás</th></tr></thead>
+        <tbody>
+          <tr><td>Aristóteles / Averroes</td><td>El mundo es eterno por demostración filosófica</td><td>Confunde causalidad natural con causalidad libre; no considera la creatio ex nihilo</td><td>Ningún argumento filosófico demuestra la eternidad necesaria del mundo</td></tr>
+          <tr><td>Bonaventura (exceso)</td><td>Se demuestra filosóficamente que el mundo tuvo inicio</td><td>Sus argumentos (infinito actual, etc.) no son conclusivos — son atacables</td><td>El inicio temporal es artículo de fe, no conclusión filosófica; no usar argumentos débiles en su favor</td></tr>
+          <tr><td>Neoplatonismo (Plotino, Avicena)</td><td>El mundo emana necesariamente de Dios</td><td>Confunde la causalidad divina con causalidad natural necesitante</td><td>Dios actúa por voluntad libre, no por necesidad de naturaleza; creatio ≠ emanatio</td></tr>
+          <tr><td>Colapso Modal (Plantinga obj.)</td><td>Si Dios es simple y necesario, el mundo es necesario</td><td>Confunde necessitas consequentiae y consequentis; confunde acto volitivo y objeto volitivo</td><td>La necesidad del acto no transfiere necesidad a los objetos secundarios; Dios crea libremente</td></tr>
+          <tr><td>Tomás de Aquino (correcto)</td><td>El mundo de hecho tuvo inicio (fe); filosóficamente pudo ser eterno; es radicalmente contingente</td><td>—</td><td>Distinción objeto primario / secundario · Necessitas consequentiae ≠ consequentis · Creatio ex nihilo como decreto libre</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3 class="sub-title">Silogismo Integrador Final</h3>
+    <div class="syl">
+      <div class="syl-title">Silogismo XIV — La Coherencia Global del Sistema Tomista</div>
+      <div class="syl-row"><div class="syl-lbl">P1</div><div>Dios es actus purus: necesario, simple, inmutable, libre respecto a la creación</div></div>
+      <div class="syl-row"><div class="syl-lbl">P2</div><div>La voluntad divina es idéntica a la esencia (simplicitas): el acto de querer es necesario</div></div>
+      <div class="syl-row"><div class="syl-lbl">P3</div><div>Los objetos secundarios del querer divino (criaturas) son libremente elegidos (no necesarios)</div></div>
+      <div class="syl-row"><div class="syl-lbl">P4</div><div>Lo libremente elegido podría no haber sido elegido: es contingente por definición</div></div>
+      <div class="syl-row"><div class="syl-lbl">P5</div><div>El inicio temporal del mundo es un dato revelado, coherente con P3 y P4 pero no deducible de ellos solos</div></div>
+      <div class="syl-concl"><div class="syl-lbl">∴</div><div>El sistema tomista es coherente: un Dios necesario y simple puede crear libremente un mundo radicalmente contingente con inicio temporal. No hay colapso modal porque la necesidad divina se predica del acto, no de los objetos secundarios. La distinción objeto primario/secundario + la creatio ex nihilo disuelven la objeción.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BIBLIOGRAFÍA -->
+<div class="bib">
+  <div class="bib-title">Fuentes Primarias y Bibliografía Secundaria</div>
+  <div class="bib-grid">
+    <div class="bib-item"><strong>Tomás de Aquino.</strong> Summa Theologiae I, qq.3, 10, 14, 19, 44-46, 82-83, 104</div>
+    <div class="bib-item"><strong>Tomás de Aquino.</strong> Summa Contra Gentiles I, cc.15-16, 40, 72-81 · II, cc.6-37</div>
+    <div class="bib-item"><strong>Tomás de Aquino.</strong> De Aeternitate Mundi contra Murmurantes (c. 1271)</div>
+    <div class="bib-item"><strong>Tomás de Aquino.</strong> De Potentia, qq.1, 3, 5, 7</div>
+    <div class="bib-item"><strong>Tomás de Aquino.</strong> De Ente et Essentia (c. 1252-56)</div>
+    <div class="bib-item"><strong>Tomás de Aquino.</strong> In Aristotelis Physicam (Commentaria)</div>
+    <div class="bib-item"><strong>Tomás de Aquino.</strong> Quaestiones Quodlibetales IX, q.2</div>
+    <div class="bib-item"><strong>Aristóteles.</strong> Física IV (tiempo) · VIII (eternidad) · Metafísica XII</div>
+    <div class="bib-item"><strong>Boecio.</strong> Consolatio Philosophiae V, prosa 6 (aeternitas)</div>
+    <div class="bib-item"><strong>San Agustín.</strong> Confessiones XI (tiempo y eternidad) · De Civitate Dei XII, cc.15-16</div>
+    <div class="bib-item"><strong>Concilio Lateranense IV (1215).</strong> Cap. 1: Firmiter credimus</div>
+    <div class="bib-item"><strong>Concilio Vaticano I (1870).</strong> Dei Filius, Cánones 1-5</div>
+    <div class="bib-item"><strong>Dolezal, J.E.</strong> God Without Parts: Divine Simplicity (2011)</div>
+    <div class="bib-item"><strong>Leftow, B.</strong> God and Necessity (2012)</div>
+    <div class="bib-item"><strong>Plantinga, A.</strong> Does God Have a Nature? (1980)</div>
+    <div class="bib-item"><strong>Stump, E. & Kretzmann, N.</strong> Eternity, Journal of Philosophy (1981)</div>
+    <div class="bib-item"><strong>Wippel, J.F.</strong> The Metaphysical Thought of Thomas Aquinas (2000)</div>
+    <div class="bib-item"><strong>Davies, B.</strong> The Thought of Thomas Aquinas (1992)</div>
+    <div class="bib-item"><strong>Kenny, A.</strong> Aquinas on Mind / The God of the Philosophers (1979)</div>
+    <div class="bib-item"><strong>Gilson, É.</strong> Le Thomisme (6ª ed., 1965) / El ser y los filósofos</div>
+    <div class="bib-item"><strong>Fabro, C.</strong> Participation et causalité selon saint Thomas (1961)</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<button id="mob-btn" onclick="toggleSidebar()">☰ ÍNDICE</button>
+
+<script>
+// ── SCROLLSPY ──
+const tocLinks = document.querySelectorAll('#toc a[href^="#"]');
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.getAttribute('id');
+      tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -72% 0px', threshold: 0 });
+document.querySelectorAll('[id]').forEach(el => spy.observe(el));
+
+// ── MOBILE ──
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+document.querySelectorAll('#toc a').forEach(l => l.addEventListener('click', () => {
+  if (window.innerWidth <= 880) document.getElementById('sidebar').classList.remove('open');
+}));
+</script>
+</body>
+</html>

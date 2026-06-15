@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad ibn Abdallah — Historia Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --black-mid: #111111;
+    --black-light: #1a1a1a;
+    --black-soft: #222222;
+    --gold: #F5C518;
+    --gold-deep: #D4A017;
+    --gold-muted: #8B6914;
+    --gold-pale: #FFF3B0;
+    --white: #F5F5F0;
+    --white-soft: #E8E8E0;
+    --gray: #888880;
+    --gray-light: #555550;
+    --border: rgba(245,197,24,0.2);
+    --section-quran: #F5C518;
+    --section-ishaq: #E87D2B;
+    --section-academic: #5B9BD5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  html { scroll-behavior: smooth; font-size: 16px; }
+  
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ═══════════ SCROLLBAR ═══════════ */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--black-mid); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-muted); border-radius: 3px; }
+
+  /* ═══════════ HERO ═══════════ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #1a1200 0%, var(--black) 70%);
+    padding: 2rem;
+  }
+
+  .hero-geo {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.07;
+    animation: slowRotate 60s linear infinite;
+  }
+
+  @keyframes slowRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .hero-arabic {
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 40px rgba(245,197,24,0.4);
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title span {
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--gray);
+    margin-top: 1.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-dates {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold-muted);
+    margin-top: 0.75rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-line {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2rem auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-intro {
+    max-width: 680px;
+    font-size: 1.1rem;
+    color: var(--white-soft);
+    font-weight: 300;
+    position: relative;
+    z-index: 2;
+    line-height: 1.9;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    z-index: 2;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(6px); }
+  }
+
+  .hero-scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--gold-muted);
+    border-bottom: 2px solid var(--gold-muted);
+    transform: rotate(45deg);
+  }
+
+  /* ═══════════ LAYOUT ═══════════ */
+  .layout {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+  }
+
+  /* ═══════════ SIDEBAR NAV ═══════════ */
+  .sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 2rem 0;
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--border);
+    scrollbar-width: thin;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 3px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--black-light); }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+  }
+
+  .nav-section-title {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-section-title .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-quran { background: var(--section-quran); }
+  .dot-ishaq { background: var(--section-ishaq); }
+  .dot-academic { background: var(--section-academic); }
+
+  .nav-color-quran { color: var(--section-quran); }
+  .nav-color-ishaq { color: var(--section-ishaq); }
+  .nav-color-academic { color: var(--section-academic); }
+
+  .nav-link {
+    display: block;
+    padding: 0.4rem 0.75rem;
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 0.82rem;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.4;
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--white);
+    background: rgba(245,197,24,0.06);
+  }
+
+  .nav-link.active-quran { border-left-color: var(--section-quran); color: var(--gold); }
+  .nav-link.active-ishaq { border-left-color: var(--section-ishaq); color: var(--section-ishaq); }
+  .nav-link.active-academic { border-left-color: var(--section-academic); color: var(--section-academic); }
+
+  /* ═══════════ MAIN CONTENT ═══════════ */
+  .main {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 0 3rem 3rem;
+  }
+
+  /* ═══════════ PART HEADERS ═══════════ */
+  .part-header {
+    position: relative;
+    padding: 3rem 2rem 2rem 2rem;
+    margin: 3rem 0 2rem 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .part-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background: currentColor;
+  }
+
+  .part-header-quran {
+    border-left: 5px solid var(--section-quran);
+    color: var(--section-quran);
+    background: rgba(245,197,24,0.03);
+  }
+
+  .part-header-ishaq {
+    border-left: 5px solid var(--section-ishaq);
+    color: var(--section-ishaq);
+    background: rgba(232,125,43,0.03);
+  }
+
+  .part-header-academic {
+    border-left: 5px solid var(--section-academic);
+    color: var(--section-academic);
+    background: rgba(91,155,213,0.03);
+  }
+
+  .part-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    opacity: 0.8;
+  }
+
+  .part-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .part-title span { color: currentColor; }
+
+  .part-desc {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--gray);
+    font-weight: 300;
+    max-width: 600px;
+    line-height: 1.8;
+  }
+
+  /* ═══════════ SECTION HEADERS ═══════════ */
+  .section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--gold);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .section-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title-ishaq { color: var(--section-ishaq); }
+  .section-title-academic { color: var(--section-academic); }
+
+  /* ═══════════ TEXT CONTENT ═══════════ */
+  .content p {
+    font-size: 1rem;
+    color: var(--white-soft);
+    margin-bottom: 1.2rem;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  .content p strong {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .content p em {
+    color: var(--white);
+    font-style: italic;
+  }
+
+  /* ═══════════ QUOTE BLOCKS ═══════════ */
+  .quran-quote {
+    background: rgba(245,197,24,0.05);
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    position: relative;
+  }
+
+  .quran-quote::before {
+    content: '﴿ ﴾';
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 1.5rem;
+    color: var(--gold-muted);
+    opacity: 0.5;
+  }
+
+  .quran-arabic {
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    text-align: right;
+    margin-bottom: 0.75rem;
+    line-height: 2;
+    direction: rtl;
+  }
+
+  .quran-text {
+    font-style: italic;
+    color: var(--white-soft);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+  }
+
+  .quran-ref {
+    font-size: 0.75rem;
+    color: var(--gold-muted);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .hadith-quote {
+    background: rgba(245,197,24,0.03);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold-muted);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .hadith-text {
+    font-style: italic;
+    color: var(--white-soft);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+  }
+
+  .hadith-ref {
+    font-size: 0.75rem;
+    color: var(--gold-muted);
+    font-weight: 600;
+  }
+
+  .ishaq-quote {
+    background: rgba(232,125,43,0.05);
+    border-left: 3px solid var(--section-ishaq);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ishaq-text {
+    font-style: italic;
+    color: var(--white-soft);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+  }
+
+  .ishaq-ref {
+    font-size: 0.75rem;
+    color: var(--section-ishaq);
+    font-weight: 600;
+  }
+
+  .academic-quote {
+    background: rgba(91,155,213,0.05);
+    border-left: 3px solid var(--section-academic);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .academic-text {
+    font-style: italic;
+    color: var(--white-soft);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+  }
+
+  .academic-ref {
+    font-size: 0.75rem;
+    color: var(--section-academic);
+    font-weight: 600;
+  }
+
+  /* ═══════════ INFO BOXES ═══════════ */
+  .info-box {
+    background: var(--black-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .info-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .info-box-title::before {
+    content: '▸';
+    color: var(--gold-muted);
+  }
+
+  .info-box p {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* ═══════════ TIMELINE EVENTS ═══════════ */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+
+  .timeline-event {
+    position: relative;
+    padding: 1rem 0 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(245,197,24,0.08);
+  }
+
+  .timeline-event:last-child { border-bottom: none; }
+
+  .timeline-event::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 1.2rem;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(245,197,24,0.4);
+  }
+
+  .timeline-year {
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-event-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-event-desc {
+    font-size: 0.88rem;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* ═══════════ DATA TABLE ═══════════ */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  .data-table th {
+    background: rgba(245,197,24,0.1);
+    color: var(--gold);
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid var(--gold-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .data-table td {
+    padding: 0.7rem 1rem;
+    color: var(--white-soft);
+    border-bottom: 1px solid rgba(245,197,24,0.06);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .data-table tr:hover td { background: rgba(245,197,24,0.02); }
+
+  /* ═══════════ SOURCE BADGES ═══════════ */
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-right: 0.3rem;
+  }
+
+  .badge-quran { background: rgba(245,197,24,0.15); color: var(--gold); }
+  .badge-hadith { background: rgba(245,197,24,0.08); color: var(--gold-muted); }
+  .badge-ishaq { background: rgba(232,125,43,0.15); color: var(--section-ishaq); }
+  .badge-academic { background: rgba(91,155,213,0.15); color: var(--section-academic); }
+
+  /* ═══════════ DIVIDER ═══════════ */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-muted), transparent);
+    margin: 3rem 0;
+    opacity: 0.3;
+  }
+
+  /* ═══════════ FOOTNOTE / NOTA ═══════════ */
+  .nota {
+    background: var(--black-mid);
+    border: 1px solid rgba(245,197,24,0.1);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  .nota strong { color: var(--gold-muted); }
+
+  /* ═══════════ MOBILE NAV TOGGLE ═══════════ */
+  .mobile-nav-btn {
+    display: none;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(245,197,24,0.4);
+    transition: transform 0.2s;
+  }
+
+  .mobile-nav-btn:hover { transform: scale(1.1); }
+
+  /* ═══════════ PROGRESS BAR ═══════════ */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-muted), var(--gold));
+    z-index: 1000;
+    transition: width 0.1s;
+  }
+
+  /* ═══════════ BACK TO TOP ═══════════ */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--black-light);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    z-index: 99;
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
+
+  .back-to-top.visible { opacity: 1; transform: translateY(0); }
+
+  /* ═══════════ FOOTER ═══════════ */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+    color: var(--gray-light);
+    line-height: 1.8;
+  }
+
+  .footer-arabic {
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 1.5rem;
+    color: var(--gold-muted);
+    margin-bottom: 1rem;
+  }
+
+  /* ═══════════ RESPONSIVE ═══════════ */
+  @media (max-width: 900px) {
+    .sidebar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 100vh;
+      background: var(--black);
+      z-index: 200;
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--border);
+    }
+    .sidebar.open { display: block; }
+    .main { padding: 2rem 1rem; }
+    .mobile-nav-btn { display: flex; align-items: center; justify-content: center; }
+    .layout { padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <svg class="hero-geo" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="300" cy="300" r="280" stroke="#F5C518" stroke-width="1"/>
+    <circle cx="300" cy="300" r="220" stroke="#F5C518" stroke-width="0.5"/>
+    <circle cx="300" cy="300" r="160" stroke="#F5C518" stroke-width="1"/>
+    <polygon points="300,30 562,165 562,435 300,570 38,435 38,165" fill="none" stroke="#F5C518" stroke-width="1"/>
+    <polygon points="300,80 520,200 520,400 300,520 80,400 80,200" fill="none" stroke="#F5C518" stroke-width="0.5"/>
+    <line x1="300" y1="30" x2="300" y2="570" stroke="#F5C518" stroke-width="0.3"/>
+    <line x1="30" y1="300" x2="570" y2="300" stroke="#F5C518" stroke-width="0.3"/>
+    <line x1="80" y1="80" x2="520" y2="520" stroke="#F5C518" stroke-width="0.3"/>
+    <line x1="520" y1="80" x2="80" y2="520" stroke="#F5C518" stroke-width="0.3"/>
+    <circle cx="300" cy="300" r="40" stroke="#F5C518" stroke-width="1.5"/>
+    <polygon points="300,180 390,260 355,370 245,370 210,260" fill="none" stroke="#F5C518" stroke-width="0.8"/>
+    <polygon points="300,420 210,340 245,230 355,230 390,340" fill="none" stroke="#F5C518" stroke-width="0.8"/>
+  </svg>
+
+  <div class="hero-arabic">محمد بن عبد الله ﷺ</div>
+  <div class="hero-line"></div>
+  <h1 class="hero-title">Muhammad ibn Abdallah<span>Historia Completa</span></h1>
+  <p class="hero-subtitle">Profeta del Islam · Fundador de una Civilización · Figura Histórica</p>
+  <p class="hero-dates">c. 570 d.C. — 8 de junio de 632 d.C.</p>
+  <div class="hero-line"></div>
+  <p class="hero-intro">
+    Un estudio exhaustivo en tres niveles: la tradición sagrada del Corán y la Sunnah, la narrativa biográfica de Ibn Isḥāq, y el análisis crítico de la historiografía académica moderna. Tres perspectivas sobre el hombre que transformó Arabia y el mundo.
+  </p>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-arrow"></div>
+    Explorar
+  </div>
+</section>
+
+<!-- LAYOUT PRINCIPAL -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-brand">Índice de Contenidos</div>
+
+    <div class="nav-section-title nav-color-quran"><span class="dot dot-quran"></span>I · Corán & Sunnah</div>
+    <a href="#q-origen" class="nav-link">Linaje y Origen</a>
+    <a href="#q-nacimiento" class="nav-link">Nacimiento y Señales</a>
+    <a href="#q-infancia" class="nav-link">Infancia en el Desierto</a>
+    <a href="#q-juventud" class="nav-link">Juventud y Carácter</a>
+    <a href="#q-matrimonio" class="nav-link">Matrimonio con Jadiya</a>
+    <a href="#q-retiro" class="nav-link">Retiro Espiritual</a>
+    <a href="#q-revelacion" class="nav-link">La Primera Revelación</a>
+    <a href="#q-mision" class="nav-link">Inicio de la Misión</a>
+    <a href="#q-persecucion" class="nav-link">Persecución en La Meca</a>
+    <a href="#q-isra" class="nav-link">Al-Isrā' wal-Mi'rāj</a>
+    <a href="#q-hiyra" class="nav-link">La Hégira a Medina</a>
+    <a href="#q-medina" class="nav-link">Construcción de la Umma</a>
+    <a href="#q-batallas" class="nav-link">Las Grandes Batallas</a>
+    <a href="#q-hudaybiya" class="nav-link">Pacto de Hudaybiya</a>
+    <a href="#q-meca" class="nav-link">Conquista de La Meca</a>
+    <a href="#q-hajj" class="nav-link">El Último Peregrinaje</a>
+    <a href="#q-muerte" class="nav-link">Muerte del Profeta</a>
+    <a href="#q-caracter" class="nav-link">Carácter y Personalidad</a>
+
+    <div class="nav-section-title nav-color-ishaq"><span class="dot dot-ishaq"></span>II · Ibn Isḥāq</div>
+    <a href="#i-metodologia" class="nav-link">Metodología de la Sīra</a>
+    <a href="#i-preislam" class="nav-link">Arabia Preislámica</a>
+    <a href="#i-genealogia" class="nav-link">La Genealogía Profética</a>
+    <a href="#i-elefante" class="nav-link">Año del Elefante</a>
+    <a href="#i-nacimiento-i" class="nav-link">Signos del Nacimiento</a>
+    <a href="#i-ama" class="nav-link">Halima y el Desierto</a>
+    <a href="#i-bahira" class="nav-link">El Monje Baḥīrā</a>
+    <a href="#i-waraqa" class="nav-link">Waraqa ibn Nawfal</a>
+    <a href="#i-primeros" class="nav-link">Los Primeros Creyentes</a>
+    <a href="#i-islam-arabe" class="nav-link">Expansión en La Meca</a>
+    <a href="#i-hiyra-i" class="nav-link">La Hégira Detallada</a>
+    <a href="#i-guerras" class="nav-link">Las Gazawāt Completas</a>
+    <a href="#i-judios" class="nav-link">Tribus Judías de Medina</a>
+    <a href="#i-epistolas" class="nav-link">Epístolas a los Reyes</a>
+    <a href="#i-legado" class="nav-link">Legado de la Sīra</a>
+
+    <div class="nav-section-title nav-color-academic"><span class="dot dot-academic"></span>III · Historia Académica</div>
+    <a href="#a-fuentes" class="nav-link">Crítica de Fuentes</a>
+    <a href="#a-contexto" class="nav-link">Arabia del siglo VII</a>
+    <a href="#a-quraish" class="nav-link">Los Quraysh y el Poder</a>
+    <a href="#a-nacimiento-a" class="nav-link">Fecha y Lugar Real</a>
+    <a href="#a-muhammadhistorico" class="nav-link">Muhammad el Predicador</a>
+    <a href="#a-politica" class="nav-link">Genio Político</a>
+    <a href="#a-tradiciones" class="nav-link">Tradiciones Orales</a>
+    <a href="#a-batallas-a" class="nav-link">Las Batallas Históricas</a>
+    <a href="#a-expansion" class="nav-link">Expansión del Islam</a>
+    <a href="#a-legado-a" class="nav-link">Impacto Civilizacional</a>
+    <a href="#a-debate" class="nav-link">Debates Académicos</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ════════════════════════════════════════════════
+         PARTE I: CORÁN Y SUNNAH
+    ════════════════════════════════════════════════ -->
+    <div class="part-header part-header-quran">
+      <div class="part-label">Parte I — Perspectiva Islámica</div>
+      <h2 class="part-title">La Tradición Sagrada:<br><span>Corán y Sunnah</span></h2>
+      <p class="part-desc">Lo que sigue no representa la posición de los autores de este documento ni un juicio histórico independiente. Es una exposición fiel de <strong>cómo la tradición musulmana comprende y narra</strong> la vida de Muhammad, basándose en el texto coránico y en los hadices clasificados como <em>ṣaḥīḥ</em> (auténticos) por los eruditos islámicos —principalmente las colecciones de al-Bukhārī y Muslim. Se trata de una tradición viva que, para los más de 1.800 millones de musulmanes del mundo, constituye una verdad revelada y no simplemente un relato histórico. Al mismo tiempo, incluso dentro de este corpus sagrado, ciertos hadices permiten entrever facetas de Muhammad más complejas, contradictorias o humanamente crudas que la narrativa devocional habitual tiende a suavizar.</p>
+    </div>
+
+    <!-- AVISO DE LECTURA -->
+    <div class="nota" style="margin-bottom:2rem; border-left:3px solid var(--gold); font-size:0.9rem;">
+      <strong>Nota de lectura:</strong> Todo lo expuesto en esta sección reproduce <em>la visión que el Islam tiene de sí mismo</em>: cómo los musulmanes comprenden, narran y experimentan la vida de Muhammad a partir de sus fuentes sagradas. Este documento no avala ni refuta esas afirmaciones. Los editores las presentan como lo que son: una cosmovisión religiosa viva, internamente coherente, que para más de 1.800 millones de personas constituye verdad revelada. Donde ciertos hadices dejan ver tensiones, ambigüedades o facetas menos idealizadas del Profeta, se señala expresamente.
+    </div>
+
+    <!-- 1. Linaje -->
+    <section class="section" id="q-origen">
+      <h3 class="section-title"><span class="section-num">I.1</span> Linaje y Origen</h3>
+      <div class="content">
+        <p>Desde la perspectiva islámica, Muhammad no irrumpe en la historia como un hombre más: es el eslabón final de una cadena profética que el Corán describe como iniciada con Adán y continuada por Noé, Abraham, Moisés y Jesús. El texto sagrado lo presenta explícitamente como el <strong>"sello de los profetas"</strong> (khātam al-nabiyyīn, Corán 33:40), lo que para la teología musulmana significa que después de él no vendrá ningún otro portador de revelación divina. Esta es la creencia islámica; no una afirmación histórica verificable externamente.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">إِنَّا أَرْسَلْنَاكَ شَاهِدًا وَمُبَشِّرًا وَنَذِيرًا</div>
+          <div class="quran-text">"En verdad te hemos enviado como testigo, portador de buenas nuevas y amonestador."</div>
+          <div class="quran-ref">Corán 48:8</div>
+        </div>
+
+        <p>La tradición islámica sitúa a Muhammad dentro del clan de los <strong>Banū Hāshim</strong>, rama de los <strong>Quraysh</strong>, guardianes de la Kaaba. Su cadena genealógica reconocida en las fuentes islámicas es: Muhammad — Abdallah — Abd al-Muṭṭalib — Hāshim — Abd Manāf — Quṣayy — Kilāb, remontándose después, según la fe islámica, hasta Ismael y Abraham. Conviene subrayar que esta genealogía no es verificable históricamente más allá de unas pocas generaciones; lo relevante dentro del marco islámico es su función teológica: legitimar a Muhammad como heredero del monoteísmo abrahámico.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">هُوَ الَّذِي بَعَثَ فِي الْأُمِّيِّينَ رَسُولًا مِّنْهُمْ</div>
+          <div class="quran-text">"Él es quien ha enviado entre los iletrados un mensajero de entre ellos mismos."</div>
+          <div class="quran-ref">Corán 62:2</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-title">La cadena abrahàmica: función teológica, no genealogía verificable</div>
+          <p>Para los creyentes, la genealogía que conecta a Muhammad con Abraham a través de Ismael es una verdad de fe que da coherencia al relato de la revelación universal de Dios. Desde una perspectiva no confesional, se trata de una genealogía sacralizada cuya función es situar al Islam dentro de la historia profética semítica, no un árbol familiar documentado históricamente. Ambas lecturas coexisten en este documento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Nacimiento -->
+    <section class="section" id="q-nacimiento">
+      <h3 class="section-title"><span class="section-num">I.2</span> Nacimiento y Señales</h3>
+      <div class="content">
+        <p>Según la tradición islámica, Muhammad nació en La Meca en el año llamado <strong>Am al-Fīl</strong> (el Año del Elefante), que el propio Corán evoca en la Sura 105. Los musulmanes leen la coincidencia entre su nacimiento y la protección divina de la Kaaba como una señal de su elección. Esta sincronía es un elemento de fe; externamente es una construcción narrativa elaborada por las fuentes islámicas posteriores al Profeta. Su padre, <strong>Abdallah</strong>, había fallecido en un viaje antes o poco después del nacimiento.</p>
+
+        <p>La Sunnah recoge que el abuelo Abd al-Muṭṭalib llevó al recién nacido a la Kaaba y le dio el nombre <strong>Muḥammad</strong> —"el Alabado"—, inusual para la época, que los musulmanes interpretan como una designación providencial anterior incluso al conocimiento del abuelo de su significado.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">أَلَمْ يَجِدْكَ يَتِيمًا فَآوَىٰ</div>
+          <div class="quran-text">"¿Acaso no te encontró huérfano y te amparó?"</div>
+          <div class="quran-ref">Corán 93:6 — Una de las referencias más personales que el Corán hace al Profeta</div>
+        </div>
+
+        <p>La Sura Ad-Duḥā (93) fue revelada, según los hadices de al-Bukhārī, en un momento de crisis interior intensa: la revelación se había interrumpido semanas y Muhammad temía haber sido abandonado por Dios. El texto coránico funciona así como consuelo directo a su propio receptor. Esto convierte esa sura en una ventana única —dentro del marco islámico— hacia la vulnerabilidad interior del Profeta.</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"El Mensajero de Dios ﷺ dijo: 'Yo soy el Elegido (al-Muṣṭafā) y no me ufano de ello; soy el último de los profetas; soy el que intercederá (al-shafī')...'"</div>
+          <div class="hadith-ref">Muslim, Sahīḥ, Kitāb al-Īmān</div>
+        </div>
+
+        <div class="nota">
+          <strong>Faceta que los hadices no suavizan:</strong> El mismo Corán que presenta a Muhammad como profeta elegido antes de los tiempos recoge también momentos en que él mismo duda y necesita consuelo. Esa tensión entre la elección divina y la fragilidad humana es parte constitutiva del retrato islámico del Profeta, aunque la piedad popular tiende a enfatizar solo el primero de esos polos.
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Infancia -->
+    <section class="section" id="q-infancia">
+      <h3 class="section-title"><span class="section-num">I.3</span> Infancia en el Desierto</h3>
+      <div class="content">
+        <p>La tradición islámica describe la infancia de Muhammad como una sucesión de pérdidas protegidas providencialmente. Siguiendo la costumbre árabe de las familias nobles, fue confiado a una nodriza beduina. La Sunnah lo presenta como preparación divina: el futuro portador del árabe más perfecto —el Corán— fue criado entre los depositarios de la lengua más pura.</p>
+
+        <p>Su madre <strong>Āmina</strong> murió cuando tenía unos seis años, durante el regreso de Medina. Pasó entonces al cuidado de su abuelo <strong>Abd al-Muṭṭalib</strong>, y a la muerte de éste (unos ocho años de edad) quedó bajo la protección de su tío <strong>Abū Ṭālib</strong>, quien nunca se convertiría al Islam pero lo defendería hasta su propia muerte. Ese detalle —que el protector del Profeta murió fuera del Islam— es registrado en la Sunnah con una incomodidad teológica que los propios hadices no ocultan.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">وَوَجَدَكَ ضَالًّا فَهَدَىٰ ﴿٧﴾ وَوَجَدَكَ عَائِلًا فَأَغْنَىٰ</div>
+          <div class="quran-text">"Te encontró perdido y te guió; te encontró necesitado y te enriqueció."</div>
+          <div class="quran-ref">Corán 93:7-8</div>
+        </div>
+
+        <div class="nota">
+          <strong>Una tensión que la Sunnah preserva:</strong> Abū Ṭālib murió sin pronunciar la shahāda, según hadices de al-Bukhārī y Muslim. El hombre que salvó al Islam en sus años más frágiles queda, según la doctrina clásica, excluido del Paraíso. Los hadices registran que Muhammad intentó interceder por él y que Dios le recordó los límites de esa intercesión. Es uno de los pasajes más dolorosos y humanamente honestos de toda la Sunnah.
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Juventud -->
+    <section class="section" id="q-juventud">
+      <h3 class="section-title"><span class="section-num">I.4</span> Juventud y Carácter</h3>
+      <div class="content">
+        <p>La tradición islámica describe la juventud previa a la revelación como un período de perfección moral natural, entendida como preparación providencial. Muhammad es recordado por sus propios contemporáneos —incluso algunos que después serían sus enemigos— con los epítetos <strong>al-Amīn</strong> (el Digno de Confianza) y <strong>al-Ṣādiq</strong> (el Sincero). Los musulmanes interpretan esto como evidencia de que su carácter era de origen divino y precede a la revelación misma. Un lector externo puede verlo como el retrato de un hombre genuinamente honesto en una sociedad que valoraba el honor.</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"Los Quraysh llamaban al Mensajero de Dios durante la Jahiliyya: 'el Veraz' (al-Ṣādiq) y 'el Digno de Confianza' (al-Amīn)."</div>
+          <div class="hadith-ref">Al-Ṭabarānī, Mu'jam al-Kabīr</div>
+        </div>
+
+        <p>La Sunnah recoge también su participación en el <strong>Ḥilf al-Fuḍūl</strong> (Pacto de los Virtuosos), una alianza preislámica para proteger a los débiles que Muhammad recordó con admiración incluso después de la revelación, afirmando que si lo invitasen hoy, aceptaría.</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"El Profeta ﷺ dijo: 'Asistí en casa de Ibn Jud'ān a un pacto tal que, si hoy en el Islam se me convocara, respondería. Fue un pacto para devolver los derechos a los oprimidos.'"</div>
+          <div class="hadith-ref">Al-Bayhaqi, Sunan al-Kubra</div>
+        </div>
+
+        <div class="nota">
+          <strong>Lo que este hadiz revela:</strong> Muhammad reconoce aquí valor moral en un acuerdo <em>preislámico y politeísta</em>, llegando a decir que lo respetaría desde la fe islámica. Es una de las afirmaciones más llamativas de la Sunnah: el Profeta no concebía su misión como una ruptura total con el pasado moral de su pueblo, sino como su culminación.
+        </div>
+
+        <p>Muhammad trabajó desde joven como pastor —oficio que la Sunnah atribuye a todos los profetas como escuela de paciencia— y más tarde como comerciante para la que sería su futura esposa Jadīja. Los hadices no registran que bebiera alcohol ni participara en los ritos idólatras de La Meca, presentando esta abstención como signo de su «preservación» divina (<em>iṣma</em>).</p>
+      </div>
+    </section>
+
+    <!-- 5. Matrimonio con Jadiya -->
+    <section class="section" id="q-matrimonio">
+      <h3 class="section-title"><span class="section-num">I.5</span> Matrimonio con Jadīja</h3>
+      <div class="content">
+        <p>Hacia los veinticinco años, Muhammad gestionó una caravana para <strong>Jadīja bint Juwaylid</strong>, una empresaria viuda de posición privilegiada. Impresionada por su honestidad, Jadīja —según la Sunnah— tomó la iniciativa de proponer el matrimonio. La tradición islámica lee esto como confirmación de la integridad del Profeta: fue ella quien lo eligió, no al revés.</p>
+
+        <p>Jadīja es descrita en los hadices como la primera persona en creer en Muhammad, antes que cualquier hombre o joven. Su papel fue, según la propia Sunnah, decisivo para que Muhammad no colapsara de terror tras la primera revelación: fue ella quien lo calmó, lo cubrió, y lo llevó con el conocedor de las Escrituras. La tradición la venera como pilar del Islam en su momento más frágil.</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"El Mensajero de Dios ﷺ dijo: 'Jadīja creyó en mí cuando la gente me rechazó; me sostuvo con su riqueza cuando me la negaron; y Dios me concedió hijos a través de ella pero no de las demás.'"</div>
+          <div class="hadith-ref">Ahmad ibn Ḥanbal, Musnad</div>
+        </div>
+
+        <p>De este matrimonio nacieron: <strong>al-Qāsim</strong>, <strong>Zaynab</strong>, <strong>Ruqayya</strong>, <strong>Umm Kulthūm</strong>, <strong>Fāṭima</strong> y <strong>Abdallah</strong>. Los varones murieron en la infancia. Fāṭima fue la única que sobrevivió al Profeta y de quien desciende la línea alīda.</p>
+
+        <div class="nota">
+          <strong>Una faceta que los hadices preservan sin idealizarla:</strong> Años después de la muerte de Jadīja, Ā'isha —la esposa más joven y favorita— confesó en hadices canónicos de al-Bukhārī que jamás sintió celos de ninguna mujer viva como los sentía de Jadīja, muerta años antes. Muhammad seguía mencionándola con frecuencia. Ā'isha llegó a decirle: "Actúas como si Dios no te hubiera dado una esposa mejor que esa vieja desdentada." Muhammad se irritó. Ese intercambio —conservado textualmente en al-Bukhārī— es uno de los momentos más humanamente complejos de toda la Sunnah: muestra un amor que persistía más allá de la muerte, los celos de una mujer piadosa, y un momento de enojo profético que los compiladores de hadices decidieron no borrar.
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Retiro Espiritual -->
+    <section class="section" id="q-retiro">
+      <h3 class="section-title"><span class="section-num">I.6</span> Retiro Espiritual en la Cueva de Ḥirā'</h3>
+      <div class="content">
+        <p>Aproximadamente a partir de los treinta y cinco años, Muhammad comenzó a practicar el <strong>taḥannuth</strong>: retiros de varios días en la <strong>Cueva de Ḥirā'</strong>, en el Monte de la Luz, a unos cinco kilómetros de La Meca. La Sunnah describe este impulso como algo que Dios le infundió, una antesala necesaria de la revelación. No hay en las fuentes islámicas explicación de cómo Muhammad llegó a esta práctica; simplemente se dice que "se le hizo amar el retiro." Esa formulación pasiva es teológicamente significativa para los musulmanes: es Dios quien moldea al Profeta sin que él lo sepa aún.</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"Ā'isha narró: 'Al Mensajero de Dios ﷺ se le hizo amar el retiro y se retiraba en la cueva de Ḥirā', adorando allí varios días antes de volver con Jadīja para aprovisionarse de nuevo.'"</div>
+          <div class="hadith-ref">Al-Bukhārī, Sahīḥ, Kitāb Bad' al-Waḥy, Hadiz 3</div>
+        </div>
+
+        <p>La Sunnah describe también que durante ese período Muhammad comenzó a tener <strong>sueños que se cumplían</strong> con exactitud (ru'yā ṣādiqa), "claros como el alba." La teología islámica los interpreta como el primer estadio de la revelación. Leídos desde fuera de ese marco, son los sueños de un hombre de mediana edad atravesando un proceso de búsqueda espiritual intensa en soledad, marcado por experiencias oníricas que considera significativas.</p>
+      </div>
+    </section>
+
+    <!-- 7. La Primera Revelación -->
+    <section class="section" id="q-revelacion">
+      <h3 class="section-title"><span class="section-num">I.7</span> La Primera Revelación: El Encuentro con Gabriel</h3>
+      <div class="content">
+        <p>Para los musulmanes, el momento central de la historia humana ocurre en la cueva de Ḥirā' cuando Muhammad tenía <strong>cuarenta años</strong>, en el mes de Ramaḍān del año 610 d.C. Lo que se reproduce a continuación es el relato que el Islam considera su fundamento: no una posición de los autores de este documento, sino la narración sagrada que da origen a una de las grandes tradiciones religiosas de la humanidad.</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"El ángel vino a él y le dijo: '¡Lee!'. El Profeta respondió: 'No sé leer'. Entonces el ángel lo abrazó y lo apretó fuertemente hasta que sintió que no podía más; luego lo soltó y repitió: '¡Lee!'. El Profeta respondió de nuevo: 'No sé leer'. El ángel lo abrazó por segunda vez y lo apretó con fuerza, luego lo soltó y dijo: '¡Lee!'. El Profeta respondió: 'No sé leer'. El ángel lo abrazó por tercera vez, lo apretó, y dijo: '¡Lee en el nombre de tu Señor que creó; creó al hombre de un coágulo. Lee, que tu Señor es el Más Generoso...' Y el Mensajero de Dios volvió temblando de miedo, entró donde Jadīja y dijo: ¡Cubridme, cubridme! Y ella lo cubrió hasta que se le pasó el temblor."</div>
+          <div class="hadith-ref">Al-Bukhārī, Sahīḥ, Kitāb Bad' al-Waḥy, Hadiz 1 — transmitido por Ā'isha</div>
+        </div>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ ﴿١﴾ خَلَقَ الْإِنسَانَ مِنْ عَلَقٍ</div>
+          <div class="quran-text">"Lee en el nombre de tu Señor que creó. Creó al hombre de un coágulo."</div>
+          <div class="quran-ref">Corán 96:1-2 — Los primeros versículos revelados según el consenso islámico</div>
+        </div>
+
+        <p>Muhammad descendió de la cueva aterrorizado. Jadīja lo calmó y lo llevó con su primo <strong>Waraqa ibn Nawfal</strong>, un anciano conocedor de las Escrituras, quien identificó al visitante como el arcángel Gabriel —el mismo que se había aparecido a Moisés— y confirmó la vocación profética de Muhammad. Tras la primera revelación vino un período de silencio (<em>al-fatra</em>) que la Sunnah describe como de angustia extrema para el Profeta.</p>
+
+        <div class="nota">
+          <strong>Lo que el propio relato canónico muestra:</strong> El hadiz de al-Bukhārī —el más auténtico del Islam— describe a Muhammad "temblando de miedo", pidiéndole a su esposa que lo cubriera, incapaz de comprender lo que le acababa de suceder. Fue <em>Jadīja</em> quien lo consoló. Fue <em>Waraqa</em> —un cristiano— quien interpretó la experiencia. La tradición islámica lee todo esto como autenticidad: un impostor no hubiera reaccionado así. Leído en paralelo, es el retrato de un hombre profundamente conmocionado que necesita a otros para entender su propia experiencia. Ambas lecturas son posibles; este documento expone las dos sin forzar ninguna.
+        </div>
+
+        <p>Algunos hadices —fuera del Sahīḥ de al-Bukhārī pero presentes en fuentes como al-Ṭabarī— mencionan que durante la <em>fatra</em> Muhammad temió tanto que llegó a tener pensamientos de arrojarse desde un peñasco. La Sunnah ortodoxa mayoritaria rechaza esas versiones. Pero su presencia en el corpus hadístico más amplio muestra que la tradición misma reconoció la profundidad de la crisis que siguió al primer encuentro.</p>
+      </div>
+    </section>
+
+    <!-- 8. Misión -->
+    <section class="section" id="q-mision">
+      <h3 class="section-title"><span class="section-num">I.8</span> Inicio de la Misión Profética</h3>
+      <div class="content">
+        <p>Durante los primeros tres años la predicación fue privada. Solo tras la revelación del versículo "¡Proclama lo que se te ordena!" (Corán 15:94) comenzó la predicación pública, que desencadenó la hostilidad de los líderes Quraysh. La tradición islámica lee el paso de lo privado a lo público como obediencia a un mandato divino; no como una decisión táctica de Muhammad.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">فَاصْدَعْ بِمَا تُؤْمَرُ وَأَعْرِضْ عَنِ الْمُشْرِكِينَ</div>
+          <div class="quran-text">"Proclama lo que se te ordena y apártate de los idólatras."</div>
+          <div class="quran-ref">Corán 15:94</div>
+        </div>
+
+        <p>Los primeros creyentes según la Sunnah forman un grupo deliberadamente plural: <strong>Jadīja</strong> (mujer de mediana edad), <strong>Alī</strong> (un niño), <strong>Abū Bakr</strong> (comerciante respetado), <strong>Zayd</strong> (ex-esclavo). La predicación se orientó hacia tres ejes: el monoteísmo absoluto contra el politeísmo de la Kaaba, la inevitabilidad del Juicio Final, y la justicia social frente a la jerarquía tribal.</p>
+
+        <div class="nota">
+          <strong>Una tensión interna que la Sunnah no oculta:</strong> El episodio conocido como los "versículos satánicos" —donde según algunas fuentes clásicas como al-Ṭabarī, Muhammad reconoció temporalmente a tres diosas árabes como intercesoras antes de que Gabriel le corrigiera— es rechazado por la mayoría de los eruditos islámicos. Pero el hecho de que aparezca en fuentes tan importantes como al-Ṭabarī muestra que incluso dentro de la tradición hubo consciencia de momentos de ambigüedad en la misión temprana.
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Persecución -->
+    <section class="section" id="q-persecucion">
+      <h3 class="section-title"><span class="section-num">I.9</span> Persecución en La Meca</h3>
+      <div class="content">
+        <p>Desde la perspectiva islámica, la persecución de los primeros musulmanes es prueba de la veracidad de su fe: los más poderosos de Arabia intentaron destruir el Islam y fracasaron. La Sunnah documenta las torturas con un nivel de detalle que cumplía también una función de memoria martirial y cohesión comunitaria. Estas narraciones no son adorno: son el registro de sufrimiento real que la tradición decidió preservar.</p>
+
+        <p><strong>Bilāl ibn Rabāḥ</strong>, esclavo etíope, fue tumbado sobre la arena ardiente con una roca sobre el pecho; su respuesta "Aḥad, aḥad" (¡Uno!) se convirtió en símbolo de resistencia. <strong>Sumayya bint Jāyyāṭ</strong>, madre de Ammār, fue asesinada por Abū Jahl: primera mártir del Islam. <strong>Ammār</strong> recitó fórmulas de apostasía para salvar su vida mientras su corazón permanecía fiel, lo que llevó al Corán a sancionar el principio del disimulo permitido bajo coacción (<em>taqiyya</em>, Corán 16:106).</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"El Profeta ﷺ pasó junto a Ammār y su familia mientras eran torturados y dijo: '¡Paciencia, familia de Yāsir! Vuestra cita es el Paraíso.'"</div>
+          <div class="hadith-ref">Al-Ḥākim, Mustadrak; clasificado ṣaḥīḥ</div>
+        </div>
+
+        <div class="nota">
+          <strong>Lo que este período revela:</strong> Muhammad, en estos años, no tenía poder para proteger a sus propios seguidores. Los hadices no maquillan esa impotencia. Prometió el Paraíso, pero no pudo detener las torturas. El "Año de la Pena" (619 d.C.) —cuando murieron Jadīja y Abū Ṭālib en pocos meses— dejó al Profeta desprotegido en un sentido muy concreto y humano. La Sunnah describe ese período sin añadir consuelo fácil.
+        </div>
+
+        <p>Muhammad autorizó la emigración a Abisinia (c. 615 d.C.), donde el rey cristiano Negus concedió refugio a los perseguidos. Este acto de hospitalidad cristiana fue recordado positivamente por el Profeta en la Sunnah, un detalle que la narrativa devocional más cerrada a veces omite.</p>
+      </div>
+    </section>
+
+    <!-- 10. Al-Isra wal Mi'raj -->
+    <section class="section" id="q-isra">
+      <h3 class="section-title"><span class="section-num">I.10</span> Al-Isrā' wal-Mi'rāj: El Viaje Nocturno y la Ascensión</h3>
+      <div class="content">
+        <p>Para la fe islámica, el viaje nocturno es un hecho sobrenatural real. El Corán lo anuncia en un único versículo (17:1); la Sunnah lo desarrolla con gran riqueza narrativa. La propia teología islámica clásica debatió si el viaje fue corporal o espiritual —debate que los hadices dejan abierto—, lo que indica que incluso dentro del Islam esta experiencia fue percibida como extraordinaria y difícil de categorizar.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">سُبْحَانَ الَّذِي أَسْرَىٰ بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى</div>
+          <div class="quran-text">"Gloria a Quien hizo viajar a su siervo de noche desde la Mezquita Sagrada hasta la Mezquita más Lejana."</div>
+          <div class="quran-ref">Corán 17:1</div>
+        </div>
+
+        <p>Los hadices de al-Bukhārī y Muslim describen el <strong>Isrā'</strong> (viaje a Jerusalén) y el <strong>Mi'rāj</strong> (ascensión por los siete cielos): Muhammad es transportado en la criatura Burāq, ora con los profetas anteriores en Jerusalén, asciende encontrando a Adán, Juan, Jesús, José, Enoc, Moisés y Abraham, y recibe de Dios la prescripción de <strong>cincuenta oraciones diarias</strong>, que Moisés lo ayuda a negociar hasta quedar reducidas a cinco.</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"Anas ibn Mālik narró que el Profeta ﷺ dijo: 'Se me prescribieron cincuenta oraciones... Volví a Moisés y me dijo: ¿Qué te ha prescrito tu Señor? Dije: Cincuenta oraciones. Dijo: Vuelve a tu Señor, pues tu comunidad no podrá con eso... Y así seguí yendo y viniendo entre mi Señor y Moisés hasta que dijo: Son cinco oraciones al día...'"</div>
+          <div class="hadith-ref">Al-Bukhārī, Sahīḥ, Libro del Principio de la Creación, Hadiz 3207</div>
+        </div>
+
+        <div class="nota">
+          <strong>Lo que este relato muestra desde dentro de la Sunnah:</strong> El hadiz presenta a Muhammad recibiendo un mandato divino y luego negociándolo a la baja con la mediación de Moisés. Para los musulmanes, esto demuestra la misericordia de Dios y el amor del Profeta por su comunidad. Leído en paralelo, es notable que el texto canónico del Islam presente al Profeta reduciendo una prescripción divina mediante intercesión: una escena de diálogo y reajuste que humaniza profundamente la relación entre Muhammad y su Señor.
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Hégira -->
+    <section class="section" id="q-hiyra">
+      <h3 class="section-title"><span class="section-num">I.11</span> La Hégira a Medina (622 d.C.)</h3>
+      <div class="content">
+        <p>Para el Islam, la Hégira no es simplemente una huida: es el momento en que la comunidad pasa de ser una minoría perseguida a comenzar la construcción de un orden social propio. Por eso el calendario islámico empieza aquí, no con el nacimiento de Muhammad ni con la primera revelación. Teológicamente, es el instante en que la fe se hace historia colectiva.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">وَإِذْ يَمْكُرُ بِكَ الَّذِينَ كَفَرُوا لِيُثْبِتُوكَ أَوْ يَقْتُلُوكَ أَوْ يُخْرِجُوكَ ۚ وَيَمْكُرُونَ وَيَمْكُرُ اللَّهُ</div>
+          <div class="quran-text">"Cuando los incrédulos tramaban encarcelarte, matarte o expulsarte: ellos conspiraban, y Dios conspiraba. Pero Dios es el mejor de los conspiradores."</div>
+          <div class="quran-ref">Corán 8:30</div>
+        </div>
+
+        <p>La Sunnah describe la salida de La Meca con detalle: Muhammad hizo que <strong>Alī</strong> durmiera en su cama para engañar a los vigilantes, escapó con <strong>Abū Bakr</strong>, se refugiaron tres días en la cueva de Thawr y completaron el viaje a Medina. Su llegada fue recibida con canciones de bienvenida por los Anṣār, en un ambiente que los hadices describen con un calor humano sin equivalente en el período mequeño.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">إِذْ هُمَا فِي الْغَارِ إِذْ يَقُولُ لِصَاحِبِهِ لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا</div>
+          <div class="quran-text">"Cuando ambos estaban en la cueva, decía a su compañero: 'No te aflijas, en verdad Dios está con nosotros.'"</div>
+          <div class="quran-ref">Corán 9:40</div>
+        </div>
+
+        <div class="nota">
+          <strong>Lo que la Sunnah deja ver:</strong> Abū Bakr lloraba de miedo en la cueva mientras Muhammad lo consolaba. Es decir: el Profeta sostenía emocionalmente a quienes lo acompañaban en su propio momento de mayor peligro personal. Para la tradición islámica, esto es prueba de su carácter excepcional. Leído en un registro más humano, es el retrato de un líder bajo presión extrema que mantiene la calma para que otros no se desmoronan.
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Construcción de la Umma -->
+    <section class="section" id="q-medina">
+      <h3 class="section-title"><span class="section-num">I.12</span> Construcción de la Umma en Medina</h3>
+      <div class="content">
+        <p>La tradición islámica describe el período mediní como el paso de la predicación pura a la organización de una comunidad completa. Muhammad no fue en Medina solo guía espiritual: fue legislador, árbitro de conflictos tribales, jefe militar y diplomático. El Corán mediní refleja este cambio: sus suras son ya largas regulaciones de herencias, matrimonios, guerra y comercio, no los breves poemas apocalípticos de La Meca.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">كُنتُمْ خَيْرَ أُمَّةٍ أُخْرِجَتْ لِلنَّاسِ تَأْمُرُونَ بِالْمَعْرُوفِ وَتَنْهَوْنَ عَنِ الْمُنكَرِ</div>
+          <div class="quran-text">"Sois la mejor comunidad que ha surgido para la humanidad: ordenáis lo que está bien y prohibís lo que está mal."</div>
+          <div class="quran-ref">Corán 3:110 — Desde la perspectiva islámica, una descripción de la umma ideal; no una afirmación de superioridad que este documento avale.</div>
+        </div>
+
+        <p>El <strong>hermanamiento (al-mu'ākhāt)</strong> fue una medida de redistribución radical: algunos anṣār ofrecieron la mitad de su patrimonio a sus hermanos asignados. Los hadices también recogen que no todos lo hicieron con igual entusiasmo, y que existieron fricciones que el Corán aborda en los extensos pasajes sobre la hipocresía (<em>nifāq</em>).</p>
+
+        <div class="nota">
+          <strong>Una dimensión que los hadices no idealizan:</strong> El Corán mediní dedica atención considerable a los <strong>munāfiqūn</strong> (hipócritas): personas que profesaban el Islam públicamente pero no creían o actuaban contra la comunidad en privado. La Sura 63 está enteramente dedicada a ellos. Que el Corán y los hadices documenten extensamente este fenómeno significa que la primera comunidad islámica no era la <em>umma</em> perfecta que la memoria devocional posterior tiende a proyectar: era una comunidad real, con disidentes, oportunistas y traidores, a la que Muhammad tuvo que gobernar con realismo político además de fe.
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Las Grandes Batallas -->
+    <section class="section" id="q-batallas">
+      <h3 class="section-title"><span class="section-num">I.13</span> Las Grandes Batallas</h3>
+      <div class="content">
+        <p>Desde la perspectiva islámica, las batallas del período mediní son defensa legítima de una comunidad expulsada de su hogar y perseguida durante años. El Corán establece los principios del combate lícito con claridad, limitando la violencia a quien primero ataca:</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">وَقَاتِلُوا فِي سَبِيلِ اللَّهِ الَّذِينَ يُقَاتِلُونَكُمْ وَلَا تَعْتَدُوا ۚ إِنَّ اللَّهَ لَا يُحِبُّ الْمُعْتَدِينَ</div>
+          <div class="quran-text">"Combatid en el camino de Dios a quienes os combatan, pero no os excedáis: en verdad Dios no ama a los transgresores."</div>
+          <div class="quran-ref">Corán 2:190</div>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-event">
+            <div class="timeline-year">624 d.C. — 2 H</div>
+            <div class="timeline-event-title">Batalla de Badr</div>
+            <div class="timeline-event-desc">La tradición islámica presenta la victoria de 313 musulmanes sobre un ejército Quraysh de ~1.000 como intervención divina directa, con asistencia angélica (Corán 3:123-125). El Corán la denomina "Yawm al-Furqān" (el Día de la Distinción). Que los hadices conserven la oración angustiada de Muhammad antes de la batalla —"Señor, si esta banda perece, no volverás a ser adorado en la tierra"— muestra que él mismo no daba la victoria por segura: era genuina vulnerabilidad, no actuación.</div>
+          </div>
+          <div class="timeline-event">
+            <div class="timeline-year">625 d.C. — 3 H</div>
+            <div class="timeline-event-title">Batalla de Uḥud</div>
+            <div class="timeline-event-desc">Los musulmanes sufrieron una severa derrota parcial. Muhammad resultó herido en la cara. El Corán (3:139-175) aborda la derrota sin maquillarla, explicando que fue consecuencia de la desobediencia de algunos arqueros que abandonaron sus posiciones. Este episodio es notable: la tradición islámica conserva una derrota como lección moral y no la oculta. Los hadices registran que Muhammad lloró junto al cadáver mutilado de su tío Ḥamza.</div>
+          </div>
+          <div class="timeline-event">
+            <div class="timeline-year">627 d.C. — 5 H</div>
+            <div class="timeline-event-title">Batalla del Foso (Jhandaq)</div>
+            <div class="timeline-event-desc">Una coalición de 10.000 guerreros sitiaron Medina durante semanas. La táctica del foso, propuesta por el persa Salmān al-Fārisī, fue completamente ajena al modo árabe de guerrear y desconcertó al enemigo. Los hadices recogen el hambre y el frío que sufrieron los sitiados, y que Muhammad cavó el foso junto a los demás. El asedio se levantó por desunión interna del enemigo y —según la fe islámica— por vientos enviados por Dios (Corán 33:9).</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. Hudaybiya -->
+    <section class="section" id="q-hudaybiya">
+      <h3 class="section-title"><span class="section-num">I.14</span> El Pacto de Ḥudaybiya</h3>
+      <div class="content">
+        <p>En 628 d.C., Muhammad marchó hacia La Meca con 1.400 peregrinos en actitud claramente pacífica, sin armas de guerra. Los Quraysh bloquearon el paso. El tratado resultante impuso condiciones que los propios Compañeros vivieron como humillantes: no peregrinan ese año, deben devolver a los desertores Quraysh que se unan a los musulmanes, pero no al revés. <strong>Umar ibn al-Khaṭṭāb</strong> protestó abiertamente, cuestionando al Profeta. Muhammad firmó de todas formas.</p>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا</div>
+          <div class="quran-text">"Verdaderamente te hemos concedido una victoria manifiesta."</div>
+          <div class="quran-ref">Corán 48:1 — Revelado, según la Sunnah, sobre este tratado</div>
+        </div>
+
+        <div class="nota">
+          <strong>Lo que este episodio revela:</strong> Los hadices conservan la protesta de Umar, el desconcierto colectivo y la firmeza de Muhammad frente a sus propios seguidores. La "victoria manifiesta" que proclama el Corán era una que nadie en la comunidad veía como tal en ese momento. Esta tensión entre la comprensión profética y la comprensión humana del mismo evento es uno de los pasajes más psicológicamente ricos de toda la Sunnah. El resultado estratégico le dio la razón a Muhammad, pero eso no quita que en el momento de firmar estuviera solo frente a la incomprensión de sus más cercanos.
+        </div>
+
+        <p>El pacto permitió la peregrinación al año siguiente y abrió un período de conversiones masivas, incluyendo a <strong>Jālid ibn al-Walīd</strong> y <strong>Amr ibn al-Āṣ</strong>, que se convertirían en los principales generales del Islam.</p>
+      </div>
+    </section>
+
+    <!-- 15. Conquista de La Meca -->
+    <section class="section" id="q-meca">
+      <h3 class="section-title"><span class="section-num">I.15</span> Conquista de La Meca (630 d.C.)</h3>
+      <div class="content">
+        <p>Cuando los aliados Quraysh rompieron el tratado de Ḥudaybiya atacando a los aliados musulmanes, Muhammad marchó sobre La Meca con 10.000 hombres en el año 8 H. La ciudad se rindió casi sin resistencia. Los hadices son insistentes en la humildad con la que Muhammad entró: cabeza inclinada sobre la montura, sin triunfalismo. La tradición islámica lee ese gesto como la actitud correcta del creyente ante el triunfo que Dios concede.</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"El Profeta ﷺ entró a La Meca el día de la Conquista con la cabeza tan inclinada que casi tocaba el cuello de su montura, humillándose ante Dios Altísimo."</div>
+          <div class="hadith-ref">Abū Dāwūd, Sunan</div>
+        </div>
+
+        <p>Muhammad proclamó una amnistía general con la fórmula <em>"Id, sois libres"</em> para quienes se acogieran a su casa o a la mezquita. Destruyó los 360 ídolos de la Kaaba recitando el versículo coránico. Esta escena es el clímax narrativo de la Sīra islámica: el Profeta expulsado regresa como vencedor y perdona.</p>
+
+        <div class="nota">
+          <strong>Lo que los hadices también recogen:</strong> La amnistía fue general pero no absoluta. Un pequeño número de personas fueron excluidas expresamente —poetas satíricos, ciertos traidores— y algunos fueron ejecutados incluso refugiados en la Kaaba. Los hadices los nombran. La narrativa devocional tiende a enfatizar la magnanimidad generalizada; la lectura completa de los hadices muestra un perdón que tuvo excepciones calculadas, lo que revela una mente que sopesaba la política además de actuar por piedad.
+        </div>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">وَقُلْ جَاءَ الْحَقُّ وَزَهَقَ الْبَاطِلُ ۚ إِنَّ الْبَاطِلَ كَانَ زَهُوقًا</div>
+          <div class="quran-text">"Di: Ha llegado la Verdad y ha desaparecido la falsedad. En verdad, la falsedad estaba destinada a desaparecer."</div>
+          <div class="quran-ref">Corán 17:81</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16. El Último Peregrinaje -->
+    <section class="section" id="q-hajj">
+      <h3 class="section-title"><span class="section-num">I.16</span> El Último Peregrinaje (632 d.C.)</h3>
+      <div class="content">
+        <p>En el año 10 H, Muhammad realizó su único peregrinaje completo a La Meca, la <strong>Ḥijjat al-Wadā'</strong> (Peregrinación del Adiós). Más de 100.000 peregrinos lo acompañaron. En el Monte Arafat pronunció el discurso que la tradición islámica llama el Sermón del Adiós. Se reproduce aquí como la tradición lo transmite, no como afirmación propia de este documento:</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"¡Oh gente! Escuchad mis palabras, pues no sé si después de este año me encontraréis de nuevo en este lugar... Vuestra sangre y vuestros bienes son sagrados entre vosotros... Toda deuda de la era de la ignorancia queda abolida... Los hombres tenéis derechos sobre vuestras mujeres y ellas tienen derechos sobre vosotros... No retornéis tras de mí a la incredulidad, golpeándoos el cuello unos a otros... ¿Acaso no os he transmitido el Mensaje? ¡Oh Dios, sé testigo!"</div>
+          <div class="hadith-ref">Compilado de las versiones de al-Bukhārī, Muslim y al-Tirmidhī</div>
+        </div>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">الْيَوْمَ أَكْمَلْتُ لَكُمْ دِينَكُمْ وَأَتْمَمْتُ عَلَيْكُمْ نِعْمَتِي وَرَضِيتُ لَكُمُ الْإِسْلَامَ دِينًا</div>
+          <div class="quran-text">"Hoy he completado vuestra religión para vosotros, he colmado mi gracia y me he complacido en que el Islam sea vuestra religión."</div>
+          <div class="quran-ref">Corán 5:3 — Revelado, según la Sunnah, durante este peregrinaje</div>
+        </div>
+
+        <div class="nota">
+          <strong>Lo que el Sermón muestra leído en toda su extensión:</strong> La frase "no sé si después de este año me encontraréis de nuevo" indica que Muhammad sabía o presentía que se acercaba su muerte. El Sermón tiene el carácter de un testamento. La tradición islámica lee la revelación del versículo de la plenitud (5:3) ese mismo día como el cierre perfecto del ciclo profético. Leído en un registro más humano, es también el discurso de despedida de un hombre de sesenta y dos años que se dirige a su pueblo por última vez.
+        </div>
+      </div>
+    </section>
+
+    <!-- 17. Muerte -->
+    <section class="section" id="q-muerte">
+      <h3 class="section-title"><span class="section-num">I.17</span> Los Últimos Días y la Muerte del Profeta</h3>
+      <div class="content">
+        <p>Muhammad regresó a Medina enfermo y fue empeorando durante semanas. Los hadices de al-Bukhārī documentan sus últimos días con una crudeza inusual en la literatura religiosa: las fiebres, los dolores de cabeza, su insistencia en seguir dirigiendo la oración aunque apenas podía sostenerse, y el cuidado de Ā'isha. Se reproducen aquí tal como la tradición los transmite.</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"Ā'isha narró: 'En su enfermedad el Profeta ﷺ preguntaba repetidamente: ¿Mañana dónde estaré? ¿Mañana dónde estaré? Quería el turno de Ā'isha. Sus esposas le dieron permiso para quedarse donde quisiese, y él se quedó en casa de Ā'isha hasta morir.'"</div>
+          <div class="hadith-ref">Al-Bukhārī, Sahīḥ, Libro de los enfermos</div>
+        </div>
+
+        <p>Muhammad falleció el <strong>12 de Rabī' al-Awwal del año 11 H</strong> (8 de junio de 632 d.C.), con la cabeza en el regazo de Ā'isha. Sus últimas palabras, según la Sunnah, fueron: <em>"con el Compañero supremo"</em> (al-Rafīq al-A'lā). Abū Bakr pronunció entonces las palabras que la tradición islámica recuerda como la mayor declaración de sobriedad teológica del Islam:</p>
+
+        <div class="hadith-quote">
+          <div class="hadith-text">"Abū Bakr dijo: 'Quienquiera que adorara a Muhammad, sepa que Muhammad ha muerto. Y quienquiera que adore a Dios, sepa que Dios vive y nunca muere.' Y recitó: 'Muhammad no es sino un mensajero; ya han pasado mensajeros antes de él...' [Corán 3:144]."</div>
+          <div class="hadith-ref">Al-Bukhārī, Sahīḥ, Libro de las Virtudes de los Compañeros</div>
+        </div>
+
+        <div class="nota">
+          <strong>Lo que los hadices preservan sin idealizarlo:</strong> Los relatos de la muerte en al-Bukhārī son de una honestidad notable. Se mencionan delirios; se narra que Muhammad pidió tinta y papel para dictar algo que evitara el extravío de su comunidad, y que Umar se lo impidió diciendo "el Profeta delira" —disputa que dividirá al Islam en sunníes y chiíes para siempre—. Hay desacuerdo entre los Compañeros sobre dónde enterrarlo. Hay llanto y confusión. La muerte del Profeta, tal como la Sunnah la registra, no fue una partida serena y gloriosa. Fue la muerte de un hombre que dejaba un inmenso vacío y una comunidad que no sabía exactamente qué hacer.
+        </div>
+      </div>
+    </section>
+
+    <!-- 18. Carácter -->
+    <section class="section" id="q-caracter">
+      <h3 class="section-title"><span class="section-num">I.18</span> Carácter y Personalidad: Lo que la Sunnah Muestra</h3>
+      <div class="content">
+        <p>Los hadices ofrecen el retrato más detallado de una persona que existe en cualquier tradición religiosa premoderna. La célebre respuesta de Ā'isha —"su carácter era el Corán"— resume la perspectiva devocional: Muhammad encarnaba el texto sagrado. Pero la misma Ā'isha es también la fuente de muchos hadices que muestran a un Muhammad más complejo, a veces irritable, profundamente humano en su vida doméstica. La tradición preservó ambas cosas.</p>
+
+        <table class="data-table">
+          <thead>
+            <tr><th>Aspecto</th><th>Lo que la Sunnah dice</th><th>Matiz presente en los mismos hadices</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Humildad</td><td>Remendaba su calzado, barría su casa, ordeñaba sus cabras</td><td>Podía mostrar irritación ante quienes lo interrumpían o desobedecían deliberadamente</td></tr>
+            <tr><td>Generosidad</td><td>Nunca rechazó una petición cuando podía atenderla</td><td>Sus esposas protestaron en ocasiones por la escasez en su hogar (Corán 33:28)</td></tr>
+            <tr><td>Trato a las mujeres</td><td>Consultaba a sus esposas, ayudaba en tareas domésticas</td><td>La Sunnah registra tensiones conyugales, celos entre esposas, y el "mes de distanciamiento"</td></tr>
+            <tr><td>Misericordia</td><td>Llamado en el Corán "misericordia para los mundos" (21:107)</td><td>Los hadices también registran órdenes militares severas y ejecuciones que él sancionó</td></tr>
+            <tr><td>Ecuanimidad</td><td>Rara vez se enfadaba por asuntos personales</td><td>La Sunnah distingue entre su paciencia personal y su firmeza cuando se violaban límites divinos</td></tr>
+          </tbody>
+        </table>
+
+        <div class="quran-quote">
+          <div class="quran-arabic">وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ</div>
+          <div class="quran-text">"No te hemos enviado sino como misericordia para todos los mundos."</div>
+          <div class="quran-ref">Corán 21:107 — Así lo afirma el Corán; así lo creen los musulmanes.</div>
+        </div>
+
+        <div class="nota">
+          <strong>Conclusión de esta sección:</strong> La tradición islámica presenta a Muhammad como el modelo humano más perfecto posible. Pero la riqueza excepcional de la Sunnah, que no borró las escenas de miedo en la cueva, los celos domésticos, la protesta de sus Compañeros, los errores tácticos o los momentos de vulnerabilidad extrema, hace que el Muhammad de los hadices sea también una figura humana de una complejidad que pocas tradiciones religiosas se han atrevido a preservar sobre sus fundadores. Esa tensión —entre el Profeta elegido y el hombre que tiembla en una cueva— es parte de lo que hace esta figura extraordinaria desde cualquier perspectiva. Esta sección ha reproducido la visión islámica; las secciones II y III ofrecen otras.
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ════════════════════════════════════════════════
+         PARTE II: IBN ISḤĀQ
+    ════════════════════════════════════════════════ -->
+    <div class="part-header part-header-ishaq">
+      <div class="part-label">Parte II</div>
+      <h2 class="part-title">La Sīra de <span>Ibn Isḥāq</span></h2>
+      <p class="part-desc">Muhammad ibn Isḥāq ibn Yasār (704–767 d.C.) fue el primer gran biógrafo del Profeta. Su obra, conocida como <em>Sīrat Rasūl Allāh</em>, llegó a nosotros a través de la versión editada por Ibn Hishām. Contiene materiales narrativos únicos, poesía preislámica, y relatos no siempre presentes en los hadices canónicos.</p>
+    </div>
+
+    <!-- Metodología -->
+    <section class="section" id="i-metodologia">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.1</span> Metodología de la Sīra</h3>
+      <div class="content">
+        <p>Muhammad ibn Isḥāq nació en Medina hacia el 704 d.C., siendo nieto de un persa convertido al Islam capturado en Irak. Tuvo acceso a fuentes extraordinarias: escuchó relatos de compañeros del Profeta y sus hijos, accedió a archivos tribales, y recogió la poesía épica que acompañaba los eventos históricos del Islam temprano.</p>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"Supe esto de Wahhāb ibn Kaysan, quien me dijo: 'Yo estuve presente cuando Jābir ibn Abdallah narró esto a Umar ibn Jathm al-Aslamī...' De modo que la narración viajó así: Ibn Isḥāq ← Wahhāb ibn Kaysan ← Jābir ibn Abdallah (Compañero del Profeta)."</div>
+          <div class="ishaq-ref">Ejemplo de cadena de transmisión (isnād) en Ibn Isḥāq / Ibn Hishām</div>
+        </div>
+
+        <p>Ibn Hishām, el editor que depuró y transmitió la obra de Ibn Isḥāq, eliminó aquellos relatos que consideraba dudosos, ciertos versos poéticos y algunos episodios de la vida de Jacob y José. Lo que nos queda es una selección que combina hadices, poesía épica de batalla, y narrativas tribalísticas de gran valor etnográfico.</p>
+
+        <div class="info-box">
+          <div class="info-box-title">Valor historiográfico de la Sīra</div>
+          <p>La Sīra de Ibn Isḥāq es la fuente biográfica árabe más completa del Islam temprano. Aunque los juristas como Mālik ibn Anas cuestionaron la fiabilidad de algunas cadenas de transmisión de Ibn Isḥāq, la mayoría de los eruditos modernos la consideran una fuente imprescindible para comprender el período fundacional.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arabia Preislámica -->
+    <section class="section" id="i-preislam">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.2</span> Arabia Preislámica según Ibn Isḥāq</h3>
+      <div class="content">
+        <p>Ibn Isḥāq abre su Sīra con una extensa sección sobre la Arabia anterior al Islam, comenzando con la historia del Diluvio, los pueblos de 'Ād y Zamūd, y la descendencia de Adnān hasta los antepasados directos de Muhammad. Este encuadre cosmológico sitúa la profecía en el marco de una historia sagrada universal.</p>
+
+        <p>Describe la <strong>Jahiliyya</strong> (período de ignorancia preislámica) como una época de:<br>
+        — Politeísmo con 360 ídolos en la Kaaba<br>
+        — Enterramiento vivo de niñas recién nacidas (wa'd al-banāt)<br>
+        — Guerras tribales perpetuas y vendetas interminables<br>
+        — Juego, alcohol y libertinaje sexual<br>
+        — Pero también: códigos de honor, generosidad legendaria, y una poesía de extraordinaria riqueza</p>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"En la Ka'ba había cuatrocientos ídolos o más, y los árabes los adoraban a todos. Y eran conocidos por su generosidad y su valentía y la pureza de su lengua, aunque vivían en la ignorancia de Dios y de sus mensajes."</div>
+          <div class="ishaq-ref">Ibn Isḥāq / Ibn Hishām, Sīrat Rasūl Allāh, sección sobre los ídolos de Arabia</div>
+        </div>
+
+        <p>La Sīra describe las rutas comerciales que hacían de La Meca un nudo económico entre Yemen, Siria, Irak y Abisinia. Los Quraysh gozaban de los privilegios del <strong>ilāf</strong> (alianzas comerciales protegidas), mencionados en el Corán (106:1-4), que les permitían comerciar libremente con todos los reinos vecinos.</p>
+      </div>
+    </section>
+
+    <!-- Genealogía -->
+    <section class="section" id="i-genealogia">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.3</span> La Genealogía Profética Detallada</h3>
+      <div class="content">
+        <p>Ibn Isḥāq presenta la genealogía más completa de Muhammad disponible en las fuentes árabes clásicas. La cadena desde Muhammad hasta Adnān cuenta con unos veinte eslabones; desde Adnān hasta Abraham, Ibn Isḥāq omite deliberadamente los eslabones diciendo: "Y entre Adnān y Abraham hay padres cuyos nombres no me es posible verificar con certeza."</p>
+
+        <div class="timeline">
+          <div class="timeline-event">
+            <div class="timeline-year">Antepasado fundador</div>
+            <div class="timeline-event-title">Quṣayy ibn Kilāb (siglo V d.C.)</div>
+            <div class="timeline-event-desc">Unificó los clanes Quraysh alrededor de la Kaaba. Instituyó las funciones de guardián de la Kaaba (ḥijāba), aguatero de los peregrinos (siqāya), y llave del templo. Su influencia fue decisiva para establecer la hegemonía Qurayshī en La Meca.</div>
+          </div>
+          <div class="timeline-event">
+            <div class="timeline-year">Bisabuelo</div>
+            <div class="timeline-event-title">Hāshim ibn Abd Manāf</div>
+            <div class="timeline-event-desc">Fundó el clan Hāshimī. Instituyó las caravanas de verano (a Siria) e invierno (a Yemen) mencionadas en el Corán. Murió en Gaza, Palestina, durante un viaje comercial.</div>
+          </div>
+          <div class="timeline-event">
+            <div class="timeline-year">Abuelo</div>
+            <div class="timeline-event-title">Abd al-Muṭṭalib ibn Hāshim</div>
+            <div class="timeline-event-desc">Redescubrió el pozo de Zamzam. Hizo el voto de sacrificar a su hijo Abdallah si Dios le concedía diez varones, voto que fue redimido con cien camellos. Fue el líder de La Meca durante la invasión de Abraha.</div>
+          </div>
+          <div class="timeline-event">
+            <div class="timeline-year">Padre</div>
+            <div class="timeline-event-title">Abdallah ibn Abd al-Muṭṭalib</div>
+            <div class="timeline-event-desc">Muere joven, entre 25-28 años, antes o poco después del nacimiento de Muhammad, durante un viaje comercial a Medina donde fue enterrado en casa de los Banū al-Naŷŷār.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Año del Elefante -->
+    <section class="section" id="i-elefante">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.4</span> El Año del Elefante</h3>
+      <div class="content">
+        <p>Ibn Isḥāq ofrece el relato más detallado de esta campaña que marcó el año del nacimiento de Muhammad. Abraha al-Ashram, el poderoso virrey del rey yemení (vasallo del Imperio Etíope), había construido la catedral cristiana de Ṣan'ā' para desviar las peregrinaciones árabes de La Meca. Un árabe mancilló la catedral, lo que provocó la expedición punitiva con elefantes de guerra.</p>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"Y Abd al-Muṭṭalib fue a ver a Abraha y era el hombre más hermoso que los ojos habían visto. Cuando Abraha lo vio, lo honró y lo hizo sentar a su lado... Abd al-Muṭṭalib dijo: 'El Señor de esta Casa la defenderá a ella, y yo defenderé mis camellos.' Y Abraha respondió: '¡Nadie puede defenderla de mí!' Y Abd al-Muṭṭalib dijo: 'Eso está entre tú y Él.'"</div>
+          <div class="ishaq-ref">Ibn Isḥāq / Ibn Hishām, Sīra, sección del Año del Elefante</div>
+        </div>
+
+        <p>Ibn Isḥāq narra cómo los pájaros Ababīl (mencionados en Corán 105:3) arrojaron piedras sobre el ejército de Abraha y lo dispersaron. El elefante principal, llamado <strong>Maḥmūd</strong>, se arrodillaba y se negaba a avanzar hacia La Meca pero corría voluntariamente en dirección opuesta.</p>
+      </div>
+    </section>
+
+    <!-- Signos del Nacimiento -->
+    <section class="section" id="i-nacimiento-i">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.5</span> Signos y Prodigios del Nacimiento</h3>
+      <div class="content">
+        <p>La Sīra de Ibn Isḥāq recoge una serie de prodigios que habrían acompañado el nacimiento de Muhammad, ausentes o apenas referenciados en los hadices canónicos. Estos relatos pertenecen al género de la <em>dalā'il al-nubuwwa</em> (indicios de la profecía):</p>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"Āmina bint Wahb, la madre del Mensajero de Dios, narró que cuando estaba encinta de él, oyó una voz que le decía: 'Estás encinta del señor de este pueblo; cuando nazca di: Pongo bajo la protección del Único de todos los que le envidian; llámalo Muhammad.' Y vio en sueños que una luz salía de ella e iluminaba los palacios de Busra en Siria."</div>
+          <div class="ishaq-ref">Ibn Isḥāq / Ibn Hishām, Sīra, sección sobre el nacimiento del Profeta</div>
+        </div>
+
+        <p>Según estos relatos, la noche del nacimiento de Muhammad: el palacio del Cosroes (rey de Persia) se sacudió, catorce de sus almenas cayeron, el fuego sagrado de los zoroastrianos en Persia se apagó por primera vez en mil años, y el lago Sawa de Persia se secó. Ibn Isḥāq atribuye estos relatos a fuentes tanto árabes como persas y sirias.</p>
+      </div>
+    </section>
+
+    <!-- Halima -->
+    <section class="section" id="i-ama">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.6</span> Ḥalīma al-Sa'diyya y el Desierto</h3>
+      <div class="content">
+        <p>Ibn Isḥāq desarrolla con detalle el período de Muhammad con su nodriza <strong>Ḥalīma bint Abī Dhu'ayb</strong>, de la tribu de los Banū Sa'd ibn Bakr, cuya lengua era considerada la más pura de Arabia. Ḥalīma y su esposo estaban en La Meca buscando niños para criar cuando tomaron a Muhammad.</p>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"Ḥalīma narró: 'Salí de mi tierra en un año de sequía total y escasez, yo y mi esposo en una asna canosa vieja, y una camella sin leche. Nuestra asna nos retrasaba y no podíamos dormir por el hambre del niño que llevábamos. Cuando llegamos a La Meca, cada mujer de nuestro grupo rechazó al niño Muhammad porque era huérfano y sabíamos que el padre era quien pagaba. Pero no encontramos otro niño y lo tomamos. En el momento en que lo puse en mi regazo, mis pechos se llenaron de leche; bebió hasta saciarse y su hermano de leche también...'"</div>
+          <div class="ishaq-ref">Ibn Isḥāq / Ibn Hishām, Sīra, sección sobre la nodriza del Profeta</div>
+        </div>
+
+        <p>En la Sīra se narra también el incidente conocido como <strong>Sharḥ al-Ṣadr</strong> (la Apertura del Pecho): dos ángeles vestidos de blanco abrieron el pecho del niño Muhammad, extrajeron su corazón, lo lavaron en una palangana de oro con agua de Zamzam, y devolvieron al niño. Ibn Isḥāq dice que Ḥalīma, alarmada, devolvió a Muhammad a su madre Āmina.</p>
+      </div>
+    </section>
+
+    <!-- El Monje Baḥīrā -->
+    <section class="section" id="i-bahira">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.7</span> El Monje Baḥīrā</h3>
+      <div class="content">
+        <p>Uno de los relatos más significativos exclusivo de la Sīra es el del monje cristiano <strong>Baḥīrā</strong> (o Sergiō en algunas fuentes sirianas). Cuando Muhammad tenía unos nueve años, acompañó a su tío Abū Ṭālib en una caravana comercial a Siria. Al pasar por Buṣrā, el monje Baḥīrā, que había observado señales que le revelaban la inminencia de un profeta, salió a examinar a los viajeros.</p>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"Baḥīrā miró fijamente a Muhammad, examinó su cuerpo y encontró las señales que conocía de los libros. Cuando terminó de comer, preguntó: '¿Quién de vosotros es su guardián?' Abū Ṭālib dijo: 'Yo.' Baḥīrā le dijo: 'Vuélvete a tu tierra con tu sobrino y guárdate de los judíos con él, pues por Dios, si lo ven y saben lo que yo sé de él, le harán daño. Este sobrino tuyo tendrá un gran rango.'"</div>
+          <div class="ishaq-ref">Ibn Isḥāq / Ibn Hishām, Sīra, capítulo de Baḥīrā</div>
+        </div>
+
+        <p>Este episodio es uno de los más debatidos de la Sīra. Los eruditos islámicos lo ven como un indicio del reconocimiento cristiano de la profecía de Muhammad. Los historiadores académicos lo han analizado como un ejemplo del diálogo interreligioso temprano y como posible fuente de conocimiento bíblico de Muhammad.</p>
+      </div>
+    </section>
+
+    <!-- Waraqa -->
+    <section class="section" id="i-waraqa">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.8</span> Waraqa ibn Nawfal y el Contexto Cristiano</h3>
+      <div class="content">
+        <p>La Sīra otorga especial relevancia a <strong>Waraqa ibn Nawfal</strong>, primo de Jadīja, descrito como un hanīf (monoteísta preislámico), cristiano arabizado que sabía leer las Escrituras en árabe y hebreo. Fue quien identificó la revelación de Gabriel a Muhammad como la misma visión que había visitado a Moisés.</p>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"Waraqa dijo: '¡Santo, santo! Por Aquel en cuyas manos está el alma de Waraqa, si me crees, oh Jadīja, esto es el Nāmūs [el Gran Espíritu, término árabe del griego Nomos] que vino a Moisés. En verdad él es el profeta de esta nación. Dile que sea firme.' Después Waraqa murió, y la revelación se interrumpió por un tiempo."</div>
+          <div class="ishaq-ref">Ibn Isḥāq / Ibn Hishām, Sīra, sección del Comienzo de la Revelación</div>
+        </div>
+
+        <p>Ibn Isḥāq también documenta el círculo de los <strong>Ḥunafā'</strong> (hanafíes o buscadores del monoteísmo puro) en La Meca preislámica: Zayd ibn Amr, Waraqa ibn Nawfal, Uthmān ibn al-Ḥuwayrith, y Ubaydallah ibn Jaḥsh. Estos hombres habían rechazado el politeísmo árabe buscando la religión de Abraham antes de la revelación de Muhammad.</p>
+      </div>
+    </section>
+
+    <!-- Los Primeros Creyentes -->
+    <section class="section" id="i-primeros">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.9</span> Los Primeros Creyentes según Ibn Isḥāq</h3>
+      <div class="content">
+        <p>La Sīra ofrece listas detalladas de los primeros convertidos al Islam, organizados por grupos: hombres libres, esclavos, mujeres. Esta documentación tiene valor histórico como primer intento de establecer el orden de conversión, aunque las listas varían entre fuentes.</p>
+
+        <table class="data-table">
+          <thead>
+            <tr><th>Nombre</th><th>Relación con Muhammad</th><th>Condición Social</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Jadīja bint Juwaylid</td><td>Esposa</td><td>Libre, acaudalada</td></tr>
+            <tr><td>Alī ibn Abī Ṭālib</td><td>Primo y yerno</td><td>Libre, menor de edad</td></tr>
+            <tr><td>Abū Bakr al-Ṣiddīq</td><td>Amigo íntimo</td><td>Libre, comerciante respetado</td></tr>
+            <tr><td>Zayd ibn Ḥāritha</td><td>Liberto adoptivo</td><td>Ex-esclavo, liberado</td></tr>
+            <tr><td>Uthmān ibn Affān</td><td>Futuro califa</td><td>Libre, acaudalado</td></tr>
+            <tr><td>Zubayr ibn al-Awwām</td><td>Sobrino de Jadīja</td><td>Libre</td></tr>
+            <tr><td>Bilāl ibn Rabāḥ</td><td>Esclavo etíope</td><td>Esclavo, torturado</td></tr>
+            <tr><td>Ammar ibn Yāsir</td><td>Hijo de primeros mártires</td><td>Condición humilde</td></tr>
+          </tbody>
+        </table>
+
+        <p>Ibn Isḥāq incluye en su Sīra largas secciones de <strong>poesía de los Compañeros</strong>, especialmente los poemas de Ḥassān ibn Thābit (el poeta del Profeta), que glorifican las victorias del Islam y responden a los versos satíricos de los Quraysh. Esta poesía es fuente histórica de primera magnitud para reconstruir el ambiente cultural del período.</p>
+      </div>
+    </section>
+
+    <!-- Hégira Detallada -->
+    <section class="section" id="i-hiyra-i">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.10</span> La Hégira según Ibn Isḥāq: Detalles Únicos</h3>
+      <div class="content">
+        <p>La Sīra aporta detalles de la Hégira ausentes en los hadices canónicos. Describe el complot de los Quraysh en Dār al-Nadwa (la Casa de Consejo): representantes de cada clan decidieron asesinar simultáneamente a Muhammad para distribuir la culpa entre todos y evitar la venganza de los Hāshimíes.</p>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"El diablo se presentó en la forma de un anciano jeque de Naŷd y dijo: 'Aceptad mi consejo: coged a un hombre fuerte de cada clan y dadle una espada afilada, que golpeen a Muhammad simultáneamente, y así la sangre de Muhammad quedará distribuida entre todos los clanes y los Hāshimíes no podrán combatir a todos.' Y les gustó su opinión."</div>
+          <div class="ishaq-ref">Ibn Isḥāq / Ibn Hishām, Sīra, capítulo de la Conspiración contra el Profeta</div>
+        </div>
+
+        <p>Según Ibn Isḥāq, Muhammad hizo que <strong>Alī ibn Abī Ṭālib</strong> durmiera en su cama cubierto con su manto verde para que los conspiradores creyeran que él seguía en casa. Muhammad salió de La Meca esa noche recitando los primeros versículos de la Sura Yā-Sīn (36), pasando invisiblemente entre sus enemigos que habían rodeado la casa.</p>
+      </div>
+    </section>
+
+    <!-- Las Gazawāt -->
+    <section class="section" id="i-guerras">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.11</span> Las Gazawāt Completas según Ibn Isḥāq</h3>
+      <div class="content">
+        <p>La Sīra de Ibn Isḥāq es la fuente más completa sobre las expediciones militares del Profeta (ghazawāt, singular: ghazwa). Registra el número de combatientes, los nombres de los caídos, los botines, las palabras del Profeta antes y después de la batalla, y las poesías compuestas para commemmorar cada evento.</p>
+
+        <div class="info-box">
+          <div class="info-box-title">Estadísticas de las Expediciones Militares</div>
+          <p>Ibn Isḥāq registra entre 27 y 29 expediciones en las que Muhammad participó personalmente (ghazawāt) y más de 50 expediciones en las que envió a sus compañeros sin participar él mismo (sarāyā). El número total varía ligeramente entre distintas versiones del texto.</p>
+        </div>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"Cuando el Profeta ﷺ fue derrotado en Uḥud, su diente fue roto, fue herido en la cabeza, y sangró, de modo que el Profeta limpió la sangre de su cara y dijo: '¿Cómo prosperará un pueblo que mancha de sangre la cara de su Profeta que les llama a Dios?' Y Dios reveló: 'No te corresponde a ti nada en este asunto...' [Corán 3:128]."</div>
+          <div class="ishaq-ref">Ibn Isḥāq / Ibn Hishām, Sīra, capítulo de la Batalla de Uḥud</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tribus Judías -->
+    <section class="section" id="i-judios">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.12</span> Las Tribus Judías de Medina</h3>
+      <div class="content">
+        <p>La Sīra proporciona el relato más completo sobre las tres grandes tribus judías de Medina: <strong>Banū Qaynuqā'</strong>, <strong>Banū al-Naḍīr</strong> y <strong>Banū Qurayẓa</strong>. Sus relaciones con Muhammad pasaron de la alianza inicial (plasmada en la Constitución de Medina) a la ruptura y el conflicto.</p>
+
+        <div class="ishaq-quote">
+          <div class="ishaq-text">"Ka'b ibn al-Ashraf [poeta de los Banū al-Naḍīr] compuso versos lamentando a los muertos Quraysh caídos en Badr y versos lujuriosos sobre las mujeres musulmanas. Cuando Muhammad supo esto, dijo: '¿Quién se encargará de Ka'b ibn al-Ashraf, pues ha ofendido a Dios y a su Profeta?' Muhammad ibn Maslama dijo: 'Yo, oh Profeta.'"</div>
+          <div class="ishaq-ref">Ibn Isḥāq / Ibn Hishām, Sīra, capítulo de Ka'b ibn al-Ashraf</div>
+        </div>
+
+        <p>El episodio más dramático narrado por Ibn Isḥāq es el de los <strong>Banū Qurayẓa</strong>, quienes fueron acusados de traición durante la Batalla del Foso (habían negociado con el enemigo). Tras la rendición, su destino fue decidido por su aliado tribal <strong>Sa'd ibn Mu'ādh</strong>, que murió poco después de sus heridas de batalla. Ibn Isḥāq registra que los varones adultos fueron ejecutados y las mujeres y niños tomados como esclavos.</p>
+      </div>
+    </section>
+
+    <!-- Epístolas -->
+    <section class="section" id="i-epistolas">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.13</span> Epístolas a los Grandes Reyes</h3>
+      <div class="content">
+        <p>Ibn Isḥāq documenta las cartas enviadas por Muhammad a los grandes soberanos del mundo conocido en el año 6 H (628 d.C.), invitándolos al Islam. Estas misivas fueron llevadas por embajadores específicos.</p>
+
+        <table class="data-table">
+          <thead>
+            <tr><th>Destinatario</th><th>Título</th><th>Respuesta</th><th>Embajador</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cosroes II (Khosrow Parviz)</td><td>Rey de Persia</td><td>Rasgó la carta; Muhammad profetizó su caída</td><td>Abdallah ibn Hudhayfa</td></tr>
+            <tr><td>Heraclio I</td><td>Emperador Bizantino</td><td>Respondió con respeto pero no se convirtió</td><td>Diḥya al-Kalbī</td></tr>
+            <tr><td>Al-Naŷāshī (Negus)</td><td>Rey de Abisinia</td><td>Se convirtió según la tradición islámica</td><td>Amr ibn Umayya</td></tr>
+            <tr><td>Muqawqis</td><td>Gobernador de Egipto</td><td>Envió regalos y dos esclavas coptas (María)</td><td>Ḥāṭib ibn Abī Balta'a</td></tr>
+            <tr><td>Harith ibn Abī Shamir</td><td>Rey Ghassánida</td><td>Rechazó con burla</td><td>Shujā' ibn Wahb</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Legado -->
+    <section class="section" id="i-legado">
+      <h3 class="section-title section-title-ishaq"><span class="section-num">II.14</span> Legado de la Sīra de Ibn Isḥāq</h3>
+      <div class="content">
+        <p>La Sīra de Ibn Isḥāq no solo fue el modelo para todas las biografías proféticas posteriores sino que estableció el género literario árabe de la <em>sīra</em> y la <em>maghāzī</em> (relatos de las guerras). Autores como <strong>al-Wāqidī</strong> (con su Kitāb al-Maghāzī), <strong>Ibn Sa'd</strong> (con su extenso Ṭabaqāt al-Kubrā) y posteriormente <strong>Ibn Kathīr</strong> (con su Al-Bidāya wal-Nihāya) se basaron en la Sīra para construir sus propias narrativas.</p>
+
+        <div class="nota">
+          <strong>Nota crítica:</strong> Los eruditos hadísticos clásicos como Yaḥyā ibn Sa'īd al-Qaṭṭān, Mālik ibn Anas y al-Shāfi'ī cuestionaron la fiabilidad de algunas cadenas de transmisión de Ibn Isḥāq. Ibn Isḥāq usaba a veces el término <em>ḥaddathanī</em> (me narró) y otras veces simplemente omitía la cadena completa. Sin embargo, la grandeza de su Sīra radica precisamente en haber recogido material histórico que de otro modo se habría perdido.
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ════════════════════════════════════════════════
+         PARTE III: ACADÉMICA
+    ════════════════════════════════════════════════ -->
+    <div class="part-header part-header-academic">
+      <div class="part-label">Parte III</div>
+      <h2 class="part-title">La Visión<br><span>Histórico-Académica</span></h2>
+      <p class="part-desc">El análisis académico moderno de la vida de Muhammad, basado en la comparación crítica de fuentes, arqueología, numismática, papirología, y el contexto histórico del Oriente Próximo del siglo VII. Representado por autores como Montgomery Watt, Maxime Rodinson, Fred Donner, Tilman Nagel y Patricia Crone.</p>
+    </div>
+
+    <!-- Crítica de Fuentes -->
+    <section class="section" id="a-fuentes">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.1</span> Crítica de las Fuentes Históricas</h3>
+      <div class="content">
+        <p>El mayor desafío historiográfico sobre Muhammad es la naturaleza tardía de las fuentes escritas. Todos los documentos narrativos que poseemos fueron compilados entre 150 y 250 años después de la muerte del Profeta. Los hadices de al-Bukhārī se compilaron hacia el año 846 d.C., más de doscientos años post-Muhammad; la Sīra de Ibn Isḥāq fue compuesta hacia el 767 d.C., ciento treinta y cinco años después.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"El problema central para el historiador de los orígenes islámicos es que la tradición islámica sobre Muhammad y el Corán fue compilada dos siglos después de los eventos que pretende describir... Las cadenas de transmisión (isnāds) no son garantía de historicidad, ya que pueden ser fabricadas retrospectivamente."</div>
+          <div class="academic-ref">Patricia Crone & Michael Cook, Hagarism: The Making of the Islamic World (1977)</div>
+        </div>
+
+        <p>Sin embargo, la posición más equilibrada en los estudios islámicos contemporáneos no adopta el escepticismo radical de Crone y Cook. Historiadores como <strong>Fred M. Donner</strong> (Universidad de Chicago) han argumentado que, con las herramientas críticas adecuadas, es posible extraer un núcleo histórico fiable de las fuentes islámicas.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"Aunque las fuentes islámicas se compilaron tardíamente, existen razones para creer que transmiten información auténtica sobre los inicios del Islam. El Corán mismo, compilado en vida de los Compañeros, es una fuente contemporánea de primera magnitud."</div>
+          <div class="academic-ref">Fred M. Donner, Muhammad and the Believers: At the Origins of Islam (2010)</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-title">Fuentes Externas al Islam Temprano</div>
+          <p>Las crónicas sirias del siglo VII (como la Crónica del 640 y la Apocalíptica de Pseudo-Metodio), el Didascalia de Jacob (634 d.C.) y varias fuentes armenias y griegas mencionan a "Muhammad" o a los árabes conquistadores. Sin embargo, ninguna fuente no islámica proporciona una biografía detallada de Muhammad.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arabia del siglo VII -->
+    <section class="section" id="a-contexto">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.2</span> Arabia en el Siglo VII: El Contexto Histórico</h3>
+      <div class="content">
+        <p>Los historiadores académicos sitúan el surgimiento del Islam en el contexto de la crisis geopolítica de principios del siglo VII. El Imperio Romano Bizantino y el Imperio Sasánida Persa habían librado décadas de guerras devastadoras que culminaron con la conquista persa de Jerusalén (614 d.C.) y la posterior reconquista por Heraclio (628 d.C.). Ambos imperios estaban agotados militarmente cuando el Islam emergió de Arabia.</p>
+
+        <p>Arabia en el siglo VII no era un desierto culturalmente vacío. Los estudios arqueológicos de las últimas décadas han revelado:</p>
+        <p>— Una Arabia interconectada con los grandes imperios circundantes a través de rutas comerciales activas<br>
+        — Comunidades judías establecidas en el Ḥijāz desde siglos antes, probablemente desde la destrucción del Segundo Templo (70 d.C.)<br>
+        — Presencia cristiana en tribus como los Ghassánidas (aliados de Bizancio) y los Lahmíes (aliados de Persia)<br>
+        — Un politeísmo árabe altamente sofisticado con centros de peregrinación, poesía épica y sistemas tribales de arbitraje</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"La Arabia del siglo VII no era el desierto culturalmente aislado que las narrativas apologéticas han pintado. Era una zona de intenso intercambio comercial, religioso y cultural. El Islam no surgió en un vacío sino en un ambiente saturado de influencias monoteístas."</div>
+          <div class="academic-ref">G.R. Hawting, The Idea of Idolatry and the Emergence of Islam (1999)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Los Quraysh y el Poder -->
+    <section class="section" id="a-quraish">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.3</span> Los Quraysh: Política y Economía</h3>
+      <div class="content">
+        <p>Los estudios históricos han profundizado en la naturaleza del poder Qurayshī en La Meca preislámica. Historiadores como <strong>Patricia Crone</strong> en su obra <em>Meccan Trade and the Rise of Islam</em> (1987) cuestionaron la imagen de La Meca como un gran centro comercial internacional, argumentando que las fuentes árabes exageran su importancia económica. Sin embargo, esta tesis ha sido criticada y parcialmente refutada.</p>
+
+        <p>Lo que sí está bien establecido es que La Meca era el principal <strong>santuario tribal</strong> de Arabia central. La Kaaba cumplía funciones de centro cultual compartido por numerosas tribus, lo que le otorgaba a los Quraysh, como guardianes del santuario, una posición de arbitraje y neutralidad privilegiada. Los meses sagrados (en los que estaba prohibido el combate) garantizaban ferias comerciales seguras.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"La institución de la Kaaba como santuario inviolable permitía a los Quraysh ejercer funciones cuasi-estatales en un entorno donde el poder político estaba fragmentado en centenares de unidades tribales. La proclamación del monoteísmo de Muhammad amenazaba directamente este sistema."</div>
+          <div class="academic-ref">W. Montgomery Watt, Muhammad at Mecca (1953)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fecha y Lugar Real -->
+    <section class="section" id="a-nacimiento-a">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.4</span> Fecha y Lugar: El Problema Historiográfico</h3>
+      <div class="content">
+        <p>La fecha de nacimiento de Muhammad es incierta desde el punto de vista histórico. La tradición islámica más extendida fija la fecha en el <strong>12 de Rabī' al-Awwal del Año del Elefante</strong>, calculado generalmente como el año 570 d.C. Sin embargo, las propias fuentes islámicas no son unánimes: algunas proponen el año 571, otras el 569, e incluso el 573.</p>
+
+        <p>El "Año del Elefante" mismo es objeto de debate histórico. Aunque hay menciones en fuentes étiopes y yemeníes de una campaña de Abraha contra el norte de Arabia, la relación exacta entre esta campaña y el año de nacimiento de Muhammad es difícil de verificar con fuentes independientes.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"La fecha de 570 d.C. para el nacimiento de Muhammad es una convención útil más que un hecho establecido. Las diferencias entre las fuentes islámicas reflejan el trabajo de sistematización cronológica realizado por generaciones de eruditos que intentaron organizar tradiciones orales sin un sistema calendárico árabe preislámico preciso."</div>
+          <div class="academic-ref">Uri Rubin, The Eye of the Beholder: The Life of Muhammad as Viewed by the Early Muslims (1995)</div>
+        </div>
+
+        <p>La ciudad de La Meca como lugar de nacimiento tampoco ha podido ser verificada arqueológicamente de manera independiente. La arqueología de La Meca es prácticamente inaccesible para investigadores no musulmanes, y los desarrollos modernos han destruido gran parte del tejido urbano histórico.</p>
+      </div>
+    </section>
+
+    <!-- Muhammad el Predicador -->
+    <section class="section" id="a-muhammadhistorico">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.5</span> Muhammad el Predicador: Análisis Histórico</h3>
+      <div class="content">
+        <p>El consenso académico reconoce a Muhammad como una figura histórica real cuya predicación transformó radicalmente Arabia. El análisis histórico de la predicación mequeña revela un mensaje adaptado al contexto cultural árabe pero con claras conexiones con las tradiciones monoteístas preexistentes.</p>
+
+        <p>Los eruditos han identificado tres fases en la predicación islámica temprana, reconocibles en el propio texto coránico por su estilo, vocabulario y temáticas:</p>
+
+        <p><strong>Fase Mequeña Temprana</strong> (610–615 d.C.): Suras cortas, de estilo casi poético, centradas en el Juicio Final, la resurrección y la justicia social. Las suras de este período (Al-Alaq, Al-Fātiḥa, Al-Mudaththir, Al-Qiyāma) comparten un tono urgente y apocalíptico.<br><br>
+        <strong>Fase Mequeña Media</strong> (615–619 d.C.): Suras más largas que introducen las narrativas de los profetas anteriores (Adán, Noé, Abraham, Moisés, Jesús), estableciendo la continuidad de la tradición profética.<br><br>
+        <strong>Fase Mediní</strong> (622–632 d.C.): Regulación legislativa detallada de la vida comunitaria: matrimonio, herencia, guerra, alimentación, oración.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"El Corán como texto es la evidencia primaria más fiable que tenemos sobre Muhammad. El análisis interno del Corán nos permite reconstruir la evolución del pensamiento profético y la situación social de la comunidad primitiva con un grado de confianza imposible para otras religiones antiguas."</div>
+          <div class="academic-ref">Angelika Neuwirth, Der Koran als Text der Spätantike (2010)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Genio Político -->
+    <section class="section" id="a-politica">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.6</span> Muhammad como Genio Político</h3>
+      <div class="content">
+        <p>Uno de los aspectos más estudiados por los historiadores académicos es la dimensión política del liderazgo de Muhammad en Medina. Su logro político fue extraordinario por varias razones:</p>
+
+        <p>1. <strong>Superación del tribalismo árabe</strong>: Muhammad logró crear una <em>umma</em> (comunidad) que superaba las lealtades tribales, algo sin precedentes en Arabia. La identidad religiosa sustituyó paulatinamente a la identidad tribal como principio organizador.<br><br>
+        2. <strong>La Constitución de Medina</strong>: Este documento (cuya autenticidad los historiadores defienden mayoritariamente) estableció un proto-Estado plural que incluía a diversas tribus árabes e islámicas y a las comunidades judías bajo una autoridad común.<br><br>
+        3. <strong>Diplomacia tribal</strong>: Muhammad fue un maestro de las alianzas tribales, los matrimonios políticos y la integración de antiguos enemigos como líderes militares (caso de Jālid ibn al-Walīd).<br><br>
+        4. <strong>Institucionalización religiosa</strong>: Creó instituciones duraderas —la oración colectiva, el zakat, el ayuno de Ramaḍān, el peregrinaje— que mantuvieron la cohesión comunitaria más allá de su persona.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"Muhammad fue el arquitecto de una nueva forma de organización política: una comunidad definida por la fe y no por la sangre. Este modelo fue enormemente exitoso precisamente porque movilizaba solidaridades tribales existentes pero las trascendía, creando una coalición árabe capaz de proyectarse militarmente sobre el mundo tardoantiguo."</div>
+          <div class="academic-ref">Robert G. Hoyland, In God's Path: The Arab Conquests and the Creation of an Islamic Empire (2015)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tradiciones Orales -->
+    <section class="section" id="a-tradiciones">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.7</span> El Problema de la Transmisión Oral</h3>
+      <div class="content">
+        <p>El sistema de transmisión de hadices (al-isnād, cadena de transmisores) fue desarrollado por los eruditos islámicos como mecanismo de verificación histórica. Sin embargo, desde el siglo XIX, los orientalistas han debatido su fiabilidad.</p>
+
+        <p><strong>Ignaz Goldziher</strong> (1889) argumentó que la mayoría de los hadices eran falsificaciones del siglo II H que proyectaban hacia el Profeta las posiciones jurídicas y teológicas de épocas posteriores. <strong>Joseph Schacht</strong> (1950) desarrolló esta tesis argumentando que el isnād más completo era paradójicamente el menos fiable, ya que más elaboración indica más trabajo retroproyectivo.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"The isnad was typically created retrogressively... the more perfect the isnad the more likely it was to be forged."</div>
+          <div class="academic-ref">Joseph Schacht, The Origins of Muhammadan Jurisprudence (1950)</div>
+        </div>
+
+        <p>Esta posición fue contestada por <strong>G.H.A. Juynboll</strong> y posteriormente por <strong>Harald Motzki</strong>, quien mediante análisis filológico detallado de las tradiciones sobre los primeros juristas demostró que algunos hadices pueden rastrearse de manera fiable hasta mediados del siglo I H. La metodología de la <em>isnad-cum-matn analysis</em> (análisis del isnād combinado con el contenido) permite identificar tradiciones probablemente auténticas.</p>
+      </div>
+    </section>
+
+    <!-- Las Batallas Históricas -->
+    <section class="section" id="a-batallas-a">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.8</span> Las Batallas desde la Historia Académica</h3>
+      <div class="content">
+        <p>Los historiadores académicos analizan las batallas del Islam temprano no solo como eventos religiosos sino como estrategia militar y geopolítica. Algunos hallazgos relevantes:</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"La Batalla de Badr fue estratégicamente una razzia de intercepcción de caravana que se convirtió en enfrentamiento abierto. Su magnificación religiosa posterior respondía a la necesidad de la comunidad de justificar las actividades militares que financiaban el naciente Estado mediní."</div>
+          <div class="academic-ref">Michael Lecker, Muslims, Jews and Pagans: Studies on Early Islamic Medina (1995)</div>
+        </div>
+
+        <p>Los estudios sobre la Batalla del Foso (Jhandaq) han señalado que la táctica del foso, atribuida en la tradición islámica a <strong>Salmān al-Fārisī</strong> (un persa convertido), refleja un conocimiento de las tácticas militares sasánidas que no existía en la tradición árabe. Esto ilustra cómo la umma islámica integró rápidamente conocimientos militares de diversas culturas.</p>
+
+        <p>El tratamiento de los <strong>Banū Qurayẓa</strong> ha sido objeto de intenso debate académico. Historiadores como <strong>William N. Arafat</strong> han cuestionado el número de ejecutados registrado en las fuentes islámicas. La investigación moderna tiende a ver el episodio como la ruptura de una alianza tribal en tiempos de guerra, juzgada según las normas de la ley tribal árabe vigente, no como un acto de persecución religiosa.</p>
+      </div>
+    </section>
+
+    <!-- Expansión -->
+    <section class="section" id="a-expansion">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.9</span> La Expansión del Islam: Causas Históricas</h3>
+      <div class="content">
+        <p>La rapidez de las conquistas árabes (632–661 d.C.) que en treinta años alcanzaron desde el Atlántico hasta Asia Central es uno de los fenómenos más estudiados de la historia. Los historiadores han propuesto múltiples explicaciones complementarias:</p>
+
+        <p><strong>Factor religioso-ideológico</strong>: La nueva fe proporcionó una poderosa motivación y cohesión. El concepto de <em>yihād</em> (esfuerzo en el camino de Dios) y la promesa del Paraíso para los caídos en combate generaron una disposición al sacrificio extraordinaria.<br><br>
+        <strong>Factor militar-táctico</strong>: Los guerreros árabes, acostumbrados a la guerra de deserción y la movilidad extrema, adoptaron tácticas que desconcertaban a los ejércitos sedentarios. La caballería árabe tenía una movilidad superior a la pesada infantería bizantina y la caballería catafracta persa.<br><br>
+        <strong>Factor geopolítico</strong>: El agotamiento mutuo de Bizancio y Persia tras décadas de guerras (603–628 d.C.) dejó ambos imperios en posición de extrema vulnerabilidad justo cuando el Islam emergió.<br><br>
+        <strong>Factor económico</strong>: Las poblaciones de Siria, Egipto e Irak sufrían una pesada carga fiscal bajo el dominio imperial. Los árabes ofrecieron inicialmente condiciones fiscales más favorables, lo que redujo la resistencia local.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"Las conquistas árabes deben entenderse como el producto de una serie de factores convergentes extraordinariamente favorables: el agotamiento imperial, la insatisfacción de las poblaciones locales, la cohesión ideológica del Islam naciente y las capacidades militares de los guerreros de la estepa árabe."</div>
+          <div class="academic-ref">Hugh Kennedy, The Great Arab Conquests (2007)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impacto Civilizacional -->
+    <section class="section" id="a-legado-a">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.10</span> Impacto Civilizacional</h3>
+      <div class="content">
+        <p>El impacto histórico de Muhammad en la civilización mundial es difícilmente cuantificable. Michael Hart, en su obra <em>The 100: A Ranking of the Most Influential Persons in History</em> (1978), situó a Muhammad en el primer lugar de su lista, fundamentándose en el impacto combinado religioso, político y militar de su legado.</p>
+
+        <p>Los historiadores académicos reconocen los siguientes ámbitos de transformación civilizacional:</p>
+
+        <p><strong>Unificación lingüística</strong>: El árabe coránico se convirtió en la lengua de la ciencia, la filosofía y la cultura en un área que se extendía desde España hasta Indonesia.<br><br>
+        <strong>Transmisión del conocimiento clásico</strong>: Los califatos islámicos preservaron, tradujeron y desarrollaron el conocimiento filosófico y científico greco-romano durante los siglos en que Europa occidental había perdido el acceso a estas obras.<br><br>
+        <strong>Revolución comercial</strong>: El Islam creó las condiciones para el desarrollo de una de las mayores zonas de libre comercio de la historia premoderna, desde el Mediterráneo hasta el Índico.<br><br>
+        <strong>Derecho y jurisprudencia</strong>: La Sharia representó un sistema legal sistematizado que anticipó en varios siglos la codificación jurídica occidental.<br><br>
+        <strong>Arte y arquitectura</strong>: De la prohibición islámica de la representación figurativa (en espacios sagrados) surgió el arte de la caligrafía, el arabesco y la geometría decorativa, influyendo profundamente en el arte mediterráneo.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"El Islam del siglo VII al XIII fue la civilización más avanzada del mundo en términos científicos, filosóficos, médicos y matemáticos. Este florecimiento fue posible gracias a la creación de las condiciones de estabilidad, intercambio cultural y mecenazgo que la nueva fe y sus instituciones políticas proporcionaron."</div>
+          <div class="academic-ref">George Saliba, Islamic Science and the Making of the European Renaissance (2007)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Debates Académicos -->
+    <section class="section" id="a-debate">
+      <h3 class="section-title section-title-academic"><span class="section-num">III.11</span> Debates Académicos Actuales</h3>
+      <div class="content">
+        <p>Los estudios islámicos académicos del siglo XXI continúan debatiendo cuestiones fundamentales sobre los orígenes del Islam:</p>
+
+        <p><strong>El debate sobre la compilación del Corán</strong>: Todos los académicos reconocen que el texto coránico fue compilado y fijado durante el califato de Uthmān (644–656 d.C.). La cuestión es si la versión utmánica preserva con exactitud la revelación original. Los manuscritos de Saná'a (Yemen, siglo VII) han aportado nueva evidencia textual analizada por <strong>Gerd Puin</strong> y otros investigadores.</p>
+
+        <p><strong>El debate sobre la fecha de La Meca</strong>: <strong>Patricia Crone</strong> y <strong>Michael Cook</strong> propusieron en su polémica obra <em>Hagarism</em> (1977) que el Islam se formó no en La Meca sino en un contexto judeo-árabe palestino, tesis que no ha sido aceptada por el consenso académico posterior.</p>
+
+        <p><strong>El debate sobre el término "islam"</strong>: <strong>Fred Donner</strong> ha argumentado que el movimiento de Muhammad era inicialmente un movimiento de "creyentes" (mu'minūn) monoteísta amplio que incluía a judíos y cristianos devotes, y que la distinción sectaria entre Islam, Judaísmo y Cristianismo se consolidó solo en el período tardío del siglo VII.</p>
+
+        <div class="academic-quote">
+          <div class="academic-text">"Lo que el Profeta inició fue un movimiento de creyentes, no una religión diferenciada. La formación del Islam como religión separada fue un proceso gradual que se extendió a lo largo del primer siglo islámico y que no estaba necesariamente preconfigurado en el mensaje original de Muhammad."</div>
+          <div class="academic-ref">Fred M. Donner, Muhammad and the Believers (2010)</div>
+        </div>
+
+        <div class="nota">
+          <strong>Balance Académico Actual:</strong> El consenso predominante en los estudios islámicos (2020s) rechaza tanto el escepticismo radical que niega toda historicidad a las fuentes islámicas como la aceptación acrítica de la tradición. Se trabaja con un método crítico que combina el análisis filológico de las fuentes árabes, la comparación con fuentes externas (sirias, armenias, griegas, coptas), la arqueología y los estudios numismáticos para reconstruir la historia del Islam temprano con el máximo rigor posible.
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-arabic">بسم الله الرحمن الرحيم</div>
+  <p class="footer-text">
+    Este documento es una síntesis histórica con fines educativos.<br>
+    Las tres perspectivas presentadas (Corán y Sunnah, Ibn Isḥāq, y académica) representan marcos interpretativos distintos.<br>
+    Las fuentes académicas citadas son representativas de la historiografía moderna sobre el Islam temprano.<br><br>
+    Muhammad ibn Abdallah (c. 570 – 632 d.C.) · La Meca y Medina, Arabia
+  </p>
+</footer>
+
+<a href="#top" class="back-to-top" id="backToTop">↑</a>
+<button class="mobile-nav-btn" id="mobileNavBtn" onclick="toggleNav()" title="Índice">☰</button>
+
+<script>
+  // Progreso de lectura
+  const progressBar = document.getElementById('progressBar');
+  const backToTop = document.getElementById('backToTop');
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    progressBar.style.width = progress + '%';
+
+    if (scrollTop > 400) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+
+    updateActiveNav();
+  });
+
+  // Navegación activa
+  function updateActiveNav() {
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    let currentId = '';
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 120 && rect.bottom >= 120) {
+        currentId = section.id;
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active', 'active-quran', 'active-ishaq', 'active-academic');
+      const href = link.getAttribute('href').replace('#', '');
+      if (href === currentId) {
+        if (currentId.startsWith('q-')) {
+          link.classList.add('active-quran');
+        } else if (currentId.startsWith('i-')) {
+          link.classList.add('active-ishaq');
+        } else if (currentId.startsWith('a-')) {
+          link.classList.add('active-academic');
+        }
+      }
+    });
+  }
+
+  // Cierre del nav móvil al hacer clic en un enlace
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        document.getElementById('sidebar').classList.remove('open');
+      }
+    });
+  });
+
+  // Toggle nav móvil
+  function toggleNav() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener('click', (e) => {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('mobileNavBtn');
+    if (window.innerWidth <= 900 && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+
+  // Smooth scroll con offset
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#top') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        const offset = 40;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

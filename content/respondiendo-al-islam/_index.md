@@ -14,3 +14,4 @@ aliases:
 - [Defensa del Apostol Pablo (Dossier)](/respondiendo-al-islam/defensa-apostol-pablo-dossier/)
 - [Canon Biblia vs Quran (Dossier)](/respondiendo-al-islam/canon-biblia-quran-dossier/)
 - [Matrimonio Aisha (Dossier)](/respondiendo-al-islam/matrimonio-aisha-dossier/)
+- [Juicio Islámico (Dossier)](/respondiendo-al-islam/juicio-islamico-dossier/)

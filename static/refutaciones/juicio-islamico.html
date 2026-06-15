@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Juicio Divino en el Islam: La Imperfección Incorporada</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --black:     #0a0a0a;
+    --black-2:   #111111;
+    --black-3:   #1a1a1a;
+    --black-4:   #222222;
+    --black-5:   #2c2c2c;
+    --yellow:    #f5c518;
+    --yellow-dim:#c9a012;
+    --yellow-bg: #1c1800;
+    --white:     #f0f0f0;
+    --white-dim: #aaaaaa;
+    --white-faint:#555555;
+    --border:    #2e2e2e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--black-2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+  }
+
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: transparent; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sidebar-header {
+    padding: 1.6rem 1.4rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-header .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+  }
+  .sidebar-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.35;
+  }
+
+  .nav-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+    padding: 1.2rem 1.4rem 0.5rem;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 0.6rem 1.4rem;
+    text-decoration: none;
+    color: var(--white-dim);
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .nav-item:hover {
+    color: var(--yellow);
+    background: var(--yellow-bg);
+    border-left-color: var(--yellow-dim);
+  }
+  .nav-item.active {
+    color: var(--yellow);
+    background: var(--yellow-bg);
+    border-left-color: var(--yellow);
+    font-weight: 500;
+  }
+
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 280px;
+    right: 0; height: 2px;
+    background: var(--border);
+    z-index: 200;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--yellow);
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  /* ── MAIN ── */
+  #main {
+    margin-left: 280px;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--black-2);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(245,197,24,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--white);
+    max-width: 760px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span {
+    color: var(--yellow);
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    color: var(--white-dim);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border);
+    color: var(--white-dim);
+    border-radius: 2px;
+  }
+  .tag.highlight {
+    border-color: var(--yellow-dim);
+    color: var(--yellow);
+    background: var(--yellow-bg);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 4rem 4rem 3rem;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 20px;
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 0.8rem;
+  }
+
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 1.8rem;
+  }
+
+  .section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--yellow);
+    margin: 2rem 0 0.8rem;
+  }
+
+  p {
+    color: var(--white-dim);
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+  }
+  p strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  /* ── BLOCKQUOTES / CITAS ── */
+  .quran-block {
+    background: var(--black-3);
+    border-left: 3px solid var(--yellow);
+    padding: 1.2rem 1.5rem;
+    margin: 1.4rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .quran-block .arabic {
+    font-size: 1.4rem;
+    direction: rtl;
+    text-align: right;
+    color: var(--yellow-dim);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.7rem;
+    line-height: 2;
+  }
+  .quran-block .translation {
+    color: var(--white-dim);
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 0.4rem;
+  }
+  .quran-block .ref {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--yellow);
+  }
+
+  /* ── SILOGISMOS ── */
+  .syllogism-box {
+    background: var(--black-4);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--yellow);
+    padding: 1.8rem 2rem;
+    margin: 1.8rem 0;
+    border-radius: 0 0 4px 4px;
+  }
+  .syllogism-box .syl-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 1.2rem;
+  }
+  .premise {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+    align-items: flex-start;
+  }
+  .premise-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--yellow-dim);
+    min-width: 70px;
+    padding-top: 0.15rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .premise-text {
+    color: var(--white-dim);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .conclusion-line {
+    border-top: 1px solid var(--border);
+    margin: 1rem 0 0.8rem;
+  }
+  .conclusion {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .conclusion-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--yellow);
+    min-width: 70px;
+    padding-top: 0.15rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .conclusion-text {
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* ── FACTOR CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 1.8rem 0;
+  }
+  .card {
+    background: var(--black-3);
+    border: 1px solid var(--border);
+    padding: 1.4rem;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--yellow-dim); }
+  .card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--yellow);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.6rem;
+  }
+  .card h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .card p {
+    font-size: 0.82rem;
+    color: var(--white-dim);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ── SCHEMA / DIAGRAMA ── */
+  .schema {
+    background: var(--black-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    margin: 2rem 0;
+    overflow-x: auto;
+  }
+  .schema-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 1.5rem;
+  }
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+  .flow-node {
+    background: var(--black-5);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+    min-width: 130px;
+    text-align: center;
+    flex: 1 1 130px;
+    max-width: 180px;
+  }
+  .flow-node.highlight {
+    border-color: var(--yellow);
+    background: var(--yellow-bg);
+  }
+  .flow-node.danger {
+    border-color: #c0392b;
+    background: #1a0000;
+  }
+  .flow-node span {
+    font-size: 0.78rem;
+    color: var(--white-dim);
+    line-height: 1.4;
+    display: block;
+  }
+  .flow-node.highlight span { color: var(--yellow); font-weight: 500; }
+  .flow-node.danger span { color: #e74c3c; }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 0.4rem;
+    color: var(--yellow-dim);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  /* ── CASOS CONCRETOS ── */
+  .case-block {
+    background: var(--black-3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--white-faint);
+    padding: 1.4rem 1.6rem;
+    margin: 1.2rem 0;
+    border-radius: 0 4px 4px 0;
+    transition: border-left-color 0.2s;
+  }
+  .case-block:hover { border-left-color: var(--yellow); }
+  .case-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+    margin-bottom: 0.5rem;
+  }
+  .case-block h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+  .case-block p {
+    font-size: 0.85rem;
+    margin: 0;
+  }
+  .case-verdict {
+    margin-top: 0.8rem;
+    padding: 0.5rem 0.8rem;
+    background: var(--yellow-bg);
+    border: 1px solid var(--yellow-dim);
+    border-radius: 3px;
+    font-size: 0.8rem;
+    color: var(--yellow);
+    font-weight: 500;
+  }
+
+  /* ── OBJECIONES / DESTRUCCIÓN ── */
+  .objection-block {
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .obj-header {
+    background: var(--black-4);
+    padding: 0.9rem 1.3rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .obj-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .obj-badge.objection { background: #1a0000; color: #e74c3c; border: 1px solid #5a1010; }
+  .obj-badge.refutation { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-dim); }
+  .obj-header-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--white);
+    font-style: italic;
+  }
+  .obj-body {
+    padding: 1.2rem 1.3rem;
+    background: var(--black-3);
+  }
+  .obj-body p { font-size: 0.85rem; margin: 0; }
+
+  /* ── ALERTA CONCLUSIÓN ── */
+  .conclusion-alert {
+    background: var(--yellow-bg);
+    border: 1px solid var(--yellow);
+    border-radius: 6px;
+    padding: 2rem 2.2rem;
+    margin: 2.5rem 0;
+  }
+  .conclusion-alert .alert-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+  }
+  .conclusion-alert p {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    margin-bottom: 0.7rem;
+  }
+  .conclusion-alert p:last-child { margin: 0; }
+
+  /* ── TABLA ATRIBUTOS ── */
+  .attr-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+  .attr-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    background: var(--black-4);
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--yellow-dim);
+  }
+  .attr-table td {
+    padding: 0.75rem 1rem;
+    color: var(--white-dim);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .attr-table tr:hover td { background: var(--black-3); }
+  .attr-table td.attr-name {
+    color: var(--white);
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+  }
+  .attr-table td.problem { color: #e74c3c; }
+
+  /* ── PILL DESTACADO ── */
+  .highlight-pill {
+    display: inline-block;
+    background: var(--yellow-bg);
+    border: 1px solid var(--yellow-dim);
+    color: var(--yellow);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin: 0 0.15rem;
+  }
+
+  /* ── SEPARATOR ── */
+  .sep {
+    height: 1px;
+    background: linear-gradient(90deg, var(--yellow-dim), transparent);
+    margin: 2rem 0;
+    opacity: 0.4;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    padding: 2.5rem 4rem;
+    background: var(--black-2);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .site-footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--white-faint);
+    margin: 0;
+  }
+
+  /* ── TOGGLE SIDEBAR MOBILE ── */
+  #menu-btn {
+    display: none;
+    position: fixed;
+    top: 1rem; left: 1rem;
+    z-index: 300;
+    background: var(--black-3);
+    border: 1px solid var(--border);
+    color: var(--yellow);
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+
+  @media (max-width: 860px) {
+    #menu-btn { display: block; }
+    #sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+    }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; }
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .section { padding: 3rem 1.5rem 2.5rem; }
+    .site-footer { padding: 2rem 1.5rem; }
+    .progress-bar { left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<button id="menu-btn" onclick="toggleSidebar()">☰</button>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">Análisis Teológico</div>
+    <h2>El Juicio Divino en el Islam</h2>
+  </div>
+  <div class="nav-label">Índice</div>
+  <a class="nav-item" onclick="scrollTo('s1')">La Promesa de Justicia Perfecta</a>
+  <a class="nav-item" onclick="scrollTo('s2')">El Mecanismo que Rompe el Sistema</a>
+  <a class="nav-item" onclick="scrollTo('s3')">Silogismo Central</a>
+  <a class="nav-item" onclick="scrollTo('s4')">La Variable Humana: Imperfección Estructural</a>
+  <a class="nav-item" onclick="scrollTo('s5')">La Gran Objeción Destruida</a>
+  <a class="nav-item" onclick="scrollTo('s6')">El 0,1%: Cuantificando la Injusticia</a>
+  <a class="nav-item" onclick="scrollTo('s7')">Casos Concretos</a>
+  <a class="nav-item" onclick="scrollTo('s8')">La Trampa Teológica: Al-Adl vs Al-Qadir</a>
+  <a class="nav-item" onclick="scrollTo('s9')">Más Objeciones y sus Destrucciones</a>
+  <a class="nav-item" onclick="scrollTo('s10')">Veredicto Final</a>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow">Apologética Filosófico-Teológica</div>
+    <h1>El Juicio Divino en el Islam:<br><span>La Imperfección Incorporada</span></h1>
+    <p class="hero-subtitle">
+      El Islam proclama a Allah como Al-Adl —La Justicia Absoluta—. Este análisis demuestra, 
+      a través de los propios textos islámicos, que el sistema de juicio escatológico contiene 
+      por diseño una imperfección estructural irresolvable que contradice ese atributo en sentido estricto.
+    </p>
+    <div class="hero-tags">
+      <span class="tag highlight">Huquq al-Ibad</span>
+      <span class="tag highlight">Sahih Muslim 2581</span>
+      <span class="tag">Filosofía del Juicio</span>
+      <span class="tag">Atributos Divinos</span>
+      <span class="tag">Silogismo Formal</span>
+      <span class="tag">Teología Islámica</span>
+    </div>
+  </header>
+
+  <!-- SECCIÓN 1 -->
+  <section class="section" id="s1">
+    <div class="section-eyebrow">Fundamentos</div>
+    <h2>La Promesa de Justicia Perfecta</h2>
+
+    <p>El Islam no simplemente <em>sugiere</em> que Allah es justo. Lo declara como <strong>atributo ontológico absoluto</strong>. Allah es <strong>Al-Adl</strong> —La Justicia misma— y <strong>Al-Hakam</strong> —El Juez Supremo—. No es que Allah <em>practique</em> la justicia: Allah <em>es</em> la justicia. Esta distinción es filosóficamente crucial.</p>
+
+    <div class="quran-block">
+      <div class="translation">«Allah no hace ni el peso de un átomo de injusticia.»</div>
+      <div class="ref">Surah An-Nisa — 4:40</div>
+    </div>
+
+    <div class="quran-block">
+      <div class="translation">«Hoy cada alma será recompensada por lo que ganó. No habrá injusticia hoy. Allah es rápido en ajustar cuentas.»</div>
+      <div class="ref">Surah Ghafir — 40:17</div>
+    </div>
+
+    <div class="quran-block">
+      <div class="translation">«No se le hará injusticia a nadie en nada.»</div>
+      <div class="ref">Surah Ya-Sin — 36:54</div>
+    </div>
+
+    <div class="quran-block">
+      <div class="translation">«Ese día las personas saldrán en grupos para que se les muestren sus obras. Quien haya hecho el peso de un átomo de bien, lo verá. Y quien haya hecho el peso de un átomo de mal, lo verá.»</div>
+      <div class="ref">Surah Az-Zalzalah — 99:7-8</div>
+    </div>
+
+    <div class="quran-block">
+      <div class="translation">«Ciertamente Allah no hace injusticia a los hombres en nada; son los hombres quienes se hacen injusticia a sí mismos.»</div>
+      <div class="ref">Surah Yunus — 10:44</div>
+    </div>
+
+    <p>La promesa es <strong>total</strong>. El estándar es <strong>absoluto</strong>. No hay margen para error, arbitrariedad o factor externo que contamine el resultado.</p>
+
+    <div class="conclusion-alert">
+      <div class="alert-title">⚠ La apuesta que el Islam hace</div>
+      <p>Un sistema que se declara absolutamente justo debe serlo en <em>cada componente</em>. Basta un solo engranaje imperfecto para que la máquina no sea perfecta. El Islam no promete justicia <em>mayormente</em> perfecta: promete justicia absolutamente perfecta. Esa es precisamente la apuesta que vamos a evaluar.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2 -->
+  <section class="section" id="s2">
+    <div class="section-eyebrow">El Mecanismo Crítico</div>
+    <h2>El Mecanismo que Rompe el Sistema</h2>
+
+    <p>El Islam distingue de manera fundamental entre dos categorías de derechos:</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-num">CATEGORÍA A</div>
+        <h4>Huquq Allah</h4>
+        <p>Los derechos de Allah: violaciones rituales, omisiones religiosas, pecados contra Dios. <strong>Allah puede perdonarlos unilateralmente</strong> sin condición adicional.</p>
+      </div>
+      <div class="card" style="border-color: var(--yellow-dim);">
+        <div class="card-num">CATEGORÍA B — CRÍTICA</div>
+        <h4>Huquq al-Ibad</h4>
+        <p>Los derechos de los siervos: daños causados a otras personas. <strong>Allah no los perdona sin el consentimiento de la víctima.</strong> Este es el mecanismo que introduce la imperfección.</p>
+      </div>
+    </div>
+
+    <p>Esta no es una interpretación marginal. Es doctrina <em>mainstream</em> islámica respaldada por hadices <strong>sahih</strong> del canon más auténtico:</p>
+
+    <div class="quran-block">
+      <div class="translation">«¿Sabes quién es el verdadero arruinado (al-muflis)? Aquel que llegue el Día de la Resurrección con oraciones, ayuno y zakah, pero habiendo insultado a este, golpeado a aquel, y tomado el dinero de otro. A cada uno se le darán sus buenas obras, y si se agotan antes de saldar la deuda, se le cargarán los pecados de los agraviados y será lanzado al Fuego.»</div>
+      <div class="ref">Sahih Muslim — 2581 | Hadith auténtico, nivel más alto de fiabilidad</div>
+    </div>
+
+    <div class="quran-block">
+      <div class="translation">«Los derechos serán devueltos a sus dueños el Día de la Resurrección, hasta que la oveja sin cuernos recibirá justicia frente a la oveja con cuernos.»</div>
+      <div class="ref">Sahih Muslim — 2582</div>
+    </div>
+
+    <div class="quran-block">
+      <div class="translation">«Quien haya cometido una injusticia contra su hermano, ya sea en su honor o en cualquier otra cosa, que busque su perdón hoy, antes de que no haya ni dinar ni dirham.»</div>
+      <div class="ref">Sahih al-Bukhari — 2449</div>
+    </div>
+
+    <div class="quran-block">
+      <div class="translation">«La recompensa del mal es un mal equivalente, pero quien perdone y se reconcilie, su recompensa está con Allah.»</div>
+      <div class="ref">Surah Ash-Shura — 42:40</div>
+    </div>
+
+    <h3>Diagrama del flujo escatológico</h3>
+
+    <div class="schema">
+      <div class="schema-title">Esquema — ¿Quién decide tu destino?</div>
+      <div class="flow">
+        <div class="flow-node highlight"><span>Acto del agresor contra otra persona</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><span>Día del Juicio: Allah evalúa buenas obras</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node highlight"><span>¿La víctima perdona?</span></div>
+      </div>
+      <div style="display:flex; gap:2rem; margin-top:1rem; flex-wrap:wrap;">
+        <div style="flex:1; min-width:200px;">
+          <div style="text-align:center; color: var(--yellow-dim); font-size:0.8rem; margin-bottom:0.5rem;">SÍ perdona</div>
+          <div class="flow-node" style="max-width:100%"><span>Buenas obras del agresor intactas → posible Paraíso</span></div>
+        </div>
+        <div style="flex:1; min-width:200px;">
+          <div style="text-align:center; color:#e74c3c; font-size:0.8rem; margin-bottom:0.5rem;">NO perdona</div>
+          <div class="flow-node danger" style="max-width:100%"><span>Buenas obras transferidas → pecados de la víctima cargados → posible Fuego</span></div>
+        </div>
+      </div>
+      <div style="margin-top:1.2rem; padding:0.8rem; background:var(--black-5); border-radius:4px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--yellow); letter-spacing:0.1em;">CONCLUSIÓN DEL ESQUEMA:</span>
+        <span style="font-size:0.8rem; color:var(--white-dim); margin-left:0.6rem;">El destino eterno del agresor no depende únicamente de sus actos ni de la voluntad de Allah, sino de la <strong style="color:var(--white)">decisión libre y arbitraria de otra criatura humana imperfecta.</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3 -->
+  <section class="section" id="s3">
+    <div class="section-eyebrow">Argumento Formal</div>
+    <h2>Silogismo Central</h2>
+
+    <p>Formalizamos el argumento de modo que no admita salida dentro de la lógica del propio sistema islámico:</p>
+
+    <div class="syllogism-box">
+      <div class="syl-title">Silogismo I — Justicia y Arbitrariedad</div>
+      <div class="premise">
+        <span class="premise-label">P1</span>
+        <span class="premise-text">Un sistema de justicia es absolutamente justo si y solo si cada variable que determina el resultado es objetiva, consistente y no arbitraria.</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P2</span>
+        <span class="premise-text">En el juicio islámico, el destino final de una persona puede ser alterado por la decisión de otra persona humana (perdonar o no perdonar), decisión que es subjetiva, emocionalmente condicionada y no sujeta a estándar objetivo externo.</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P3</span>
+        <span class="premise-text">Una decisión subjetiva, emocionalmente condicionada y no sujeta a estándar objetivo es, por definición, una variable arbitraria.</span>
+      </div>
+      <div class="conclusion-line"></div>
+      <div class="conclusion">
+        <span class="conclusion-label">∴ C</span>
+        <span class="conclusion-text">El juicio islámico contiene al menos una variable arbitraria. Por lo tanto, no es absolutamente justo.</span>
+      </div>
+    </div>
+
+    <div class="syllogism-box">
+      <div class="syl-title">Silogismo II — Responsabilidad del Diseñador</div>
+      <div class="premise">
+        <span class="premise-label">P1</span>
+        <span class="premise-text">Si un sistema de justicia contiene una variable arbitraria, quien lo diseñó e implementó es responsable de esa arbitrariedad.</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P2</span>
+        <span class="premise-text">Allah diseñó el sistema de juicio islámico, lo codificó en la Sunnah y lo hace vinculante.</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P3</span>
+        <span class="premise-text">El sistema contiene la variable arbitraria de la decisión humana sobre perdón (demostrado en Silogismo I).</span>
+      </div>
+      <div class="conclusion-line"></div>
+      <div class="conclusion">
+        <span class="conclusion-label">∴ C</span>
+        <span class="conclusion-text">Allah es responsable de haber incorporado una fuente de arbitrariedad —es decir, de injusticia— en el sistema de juicio, contradiciendo el atributo de Al-Adl en sentido absoluto.</span>
+      </div>
+    </div>
+
+    <div class="syllogism-box">
+      <div class="syl-title">Silogismo III — Corolario sobre casos iguales</div>
+      <div class="premise">
+        <span class="premise-label">P1</span>
+        <span class="premise-text">La justicia requiere que casos iguales reciban trato igual (principio de igualdad formal, universalmente reconocido).</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P2</span>
+        <span class="premise-text">Dos agresores que cometen el mismo acto con el mismo arrepentimiento y la misma fe pueden recibir destinos eternos distintos dependiendo únicamente del carácter personal de sus respectivas víctimas.</span>
+      </div>
+      <div class="conclusion-line"></div>
+      <div class="conclusion">
+        <span class="conclusion-label">∴ C</span>
+        <span class="conclusion-text">El sistema islámico viola el principio de igualdad formal en el juicio, que es un requisito necesario de toda justicia digna de ese nombre.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4 -->
+  <section class="section" id="s4">
+    <div class="section-eyebrow">Análisis Estructural</div>
+    <h2>La Variable Humana: Por Qué es Necesariamente Imperfecta</h2>
+
+    <p>Alguien podría argumentar que la víctima también tomará una decisión justa. Este argumento ignora que la imperfección de la variable humana no es accidental sino <strong>estructural e inevitable</strong>:</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-num">Factor 01</div>
+        <h4>Asimetría de Información</h4>
+        <p>La víctima no tiene acceso a las intenciones reales del agresor, su contexto, su arrepentimiento interno, ni los factores que condicionaron su conducta. Juzga inevitablemente con información parcial.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Factor 02</div>
+        <h4>Condicionamiento Emocional</h4>
+        <p>El trauma psicológico altera la capacidad de perdonar. Una víctima de abuso severo puede ser neurológicamente incapaz de perdonar, no por maldad, sino por lesión real documentable.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Factor 03</div>
+        <h4>Inconsistencia entre Víctimas</h4>
+        <p>El mismo crimen cometido contra dos personas distintas produce destinos eternos distintos según el carácter de cada víctima. Mismo acto, mismo arrepentimiento, misma fe → eternidades diferentes.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Factor 04</div>
+        <h4>El Rencor como Motor</h4>
+        <p>Nada en el sistema impide que la víctima niegue el perdón por puro deseo de venganza o rencor acumulado. El sistema le otorga ese poder sin requerirle motivación justa para ejercerlo.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Factor 05</div>
+        <h4>Víctimas sin Capacidad de Pronunciarse</h4>
+        <p>Víctimas que murieron en estado de demencia, inconsciencia, o en la infancia no pueden pronunciarse. ¿Su silencio cuenta como negativa? Ningún texto sahih da respuesta definitiva.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Factor 06</div>
+        <h4>Cadena de Transferencias en Cascada</h4>
+        <p>Si los pecados de la víctima se transfieren al agresor (hadith del muflis), esos pecados adicionales pueden impedir que él pague sus propias deudas con otras víctimas, creando una cascada de injusticia compuesta.</p>
+      </div>
+    </div>
+
+    <div class="schema">
+      <div class="schema-title">Esquema — Fuentes de Imperfección de la Decisión Humana</div>
+      <div style="display:grid; grid-template-columns:1fr 2fr; gap:0.8rem; align-items:start;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--yellow); padding:0.6rem 0;">VARIABLE</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--yellow); padding:0.6rem 0;">IMPACTO EN EL JUICIO</div>
+
+        <div style="color:var(--white); font-size:0.82rem; padding:0.5rem 0; border-top:1px solid var(--border);">Trauma psicológico</div>
+        <div style="color:var(--white-dim); font-size:0.82rem; padding:0.5rem 0; border-top:1px solid var(--border);">Incapacidad estructural de perdonar → condenación del agresor sin culpa moral de la víctima</div>
+
+        <div style="color:var(--white); font-size:0.82rem; padding:0.5rem 0; border-top:1px solid var(--border);">Identidad de la víctima</div>
+        <div style="color:var(--white-dim); font-size:0.82rem; padding:0.5rem 0; border-top:1px solid var(--border);">Mismo pecado + víctima generosa vs. víctima resentida = destinos eternos opuestos</div>
+
+        <div style="color:var(--white); font-size:0.82rem; padding:0.5rem 0; border-top:1px solid var(--border);">Muerte sin pronunciarse</div>
+        <div style="color:var(--white-dim); font-size:0.82rem; padding:0.5rem 0; border-top:1px solid var(--border);">Indeterminación escatológica que no tiene resolución textual clara</div>
+
+        <div style="color:var(--white); font-size:0.82rem; padding:0.5rem 0; border-top:1px solid var(--border);">Transferencia en cascada</div>
+        <div style="color:var(--white-dim); font-size:0.82rem; padding:0.5rem 0; border-top:1px solid var(--border);">Resultado final completamente desproporcionado respecto del acto original</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 5 -->
+  <section class="section" id="s5">
+    <div class="section-eyebrow">Destrucción del Argumento Central</div>
+    <h2>La Gran Objeción: «Allah Puede Perdonarlo Él Solo»</h2>
+
+    <p>Este es el contraargumento más socorrido y aparentemente más poderoso. Merece ser destruido con precisión quirúrgica, punto por punto.</p>
+
+    <div class="objection-block">
+      <div class="obj-header">
+        <span class="obj-badge objection">Objeción</span>
+        <span class="obj-header-text">«Aunque la víctima no perdone, Allah en su misericordia puede perdonar al agresor directamente, porque Su misericordia supera todo sistema.»</span>
+      </div>
+      <div class="obj-body">
+        <p>Argumento recurrente en teología islámica popular y entre apologistas. Parece resolver el problema apelando a la omnipotencia misericordiosa de Allah.</p>
+      </div>
+    </div>
+
+    <h3>Destrucción 1 — El texto lo niega directamente</h3>
+    <p>El hadith del muflis (Sahih Muslim 2581) no dice «Allah podría intervenir». Dice que si las buenas obras se agotan, <strong>los pecados de los agraviados se transfieren al agresor y este es lanzado al Fuego</strong>. El texto es prescriptivo, no condicional. Allah no aparece en ese hadith como variable de rescate. La narrativa del propio Profeta ﷺ describe el proceso como automático y mecánico.</p>
+
+    <h3>Destrucción 2 — Vacía de contenido los Huquq al-Ibad</h3>
+    <p>Si Allah puede perdonar unilateralmente los derechos de los siervos, la distinción entre Huquq Allah y Huquq al-Ibad no tiene ningún contenido real. La doctrina islámica mayoritaria (Hanafi, Shafi'i, Hanbali, Maliki) sostiene que Allah <strong>no perdona</strong> los Huquq al-Ibad sin el consentimiento de la víctima precisamente porque hacerlo violaría los derechos de esta. Si el apologista dice que sí puede, está contradiciendo las cuatro escuelas jurídicas principales.</p>
+
+    <h3>Destrucción 3 — Genera una nueva injusticia</h3>
+
+    <div class="syllogism-box">
+      <div class="syl-title">Silogismo IV — El Dilema del Perdón Unilateral</div>
+      <div class="premise">
+        <span class="premise-label">P1</span>
+        <span class="premise-text">Si Allah perdona unilateralmente al agresor por los derechos de la víctima, lo hace sin el consentimiento de la víctima, violando sus derechos legítimos.</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P2</span>
+        <span class="premise-text">Violar los derechos de alguien sin su consentimiento —aunque sea para beneficiar a otro— es una injusticia.</span>
+      </div>
+      <div class="conclusion-line"></div>
+      <div class="conclusion">
+        <span class="conclusion-label">∴ C-A</span>
+        <span class="conclusion-text">El perdón unilateral de Allah beneficia al agresor a costa de los derechos de la víctima. Resuelve una injusticia creando otra.</span>
+      </div>
+    </div>
+
+    <div class="syllogism-box">
+      <div class="syl-title">Silogismo V — El Dilema de la No Intervención</div>
+      <div class="premise">
+        <span class="premise-label">P1</span>
+        <span class="premise-text">Si Allah no interviene y la víctima no perdona, el agresor es condenado o perjudicado por la subjetividad emocional de la víctima.</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P2</span>
+        <span class="premise-text">Ser condenado por la subjetividad emocional de otro, no por los propios actos, es una injusticia.</span>
+      </div>
+      <div class="conclusion-line"></div>
+      <div class="conclusion">
+        <span class="conclusion-label">∴ C-B</span>
+        <span class="conclusion-text">La no intervención de Allah también produce injusticia.</span>
+      </div>
+    </div>
+
+    <div class="conclusion-alert">
+      <div class="alert-title">Meta-conclusión del Dilema</div>
+      <p><strong>C-A + C-B:</strong> El sistema produce injusticia <em>tanto si Allah interviene como si no</em>. La trampa no está en la ejecución sino en el <strong>diseño</strong>. No hay movimiento que resuelva el problema sin crear otro.</p>
+    </div>
+
+    <h3>Destrucción 4 — El argumento de la omnipotencia es no falsificable</h3>
+    <p>Decir «Allah puede hacer lo que quiera» como respuesta a cualquier contradicción convierte el sistema en <strong>inmune a toda evaluación</strong>. Si cualquier resultado es compatible con la justicia divina porque «Allah puede intervenir en cualquier momento de cualquier forma», entonces el concepto de justicia divina pierde todo contenido cognitivo.</p>
+    <p>Una afirmación que no puede ser falsificada bajo ninguna circunstancia <span class="highlight-pill">no es una afirmación filosófica</span>: es una <strong>tautología vacía</strong>. Y una tautología vacía no puede sostener la afirmación de justicia perfecta que el Islam hace.</p>
+
+    <h3>Destrucción 5 — Contradicción con el propósito del sistema</h3>
+    <p>El Islam justifica la existencia de los Huquq al-Ibad como un mecanismo de <em>protección de los oprimidos</em>: nadie podrá escapar sin rendir cuentas a quienes dañó. Si Allah pudiera perdonar unilateralmente esos derechos, la protección del oprimido sería ilusoria. El agresor poderoso que muere con mucha fe y pocas víctimas dispuestas a perdonar podría entrar al Paraíso mientras sus víctimas observan. Eso no es justicia, es indulto arbitrario.</p>
+  </section>
+
+  <!-- SECCIÓN 6 -->
+  <section class="section" id="s6">
+    <div class="section-eyebrow">Cuantificación Filosófica</div>
+    <h2>El 0,1%: Cuantificando la Injusticia Estructural</h2>
+
+    <p>Alguien podría argumentar: <em>«aunque haya imperfección, es tan pequeña que es irrelevante»</em>. Este argumento es filosóficamente indefendible por tres razones fundamentales:</p>
+
+    <div class="cards-grid">
+      <div class="card" style="border-color: var(--yellow-dim);">
+        <div class="card-num">Razón 01</div>
+        <h4>La justicia absoluta es binaria</h4>
+        <p>Un sistema que se declara absolutamente justo no puede tener un 0,1% de injusticia incorporada. La justicia absoluta no admite porcentajes: o es absoluta o no lo es. Un embarazo no puede ser «un 0,1% presente». Una promesa no puede ser «un 0,1% rota».</p>
+      </div>
+      <div class="card" style="border-color: var(--yellow-dim);">
+        <div class="card-num">Razón 02</div>
+        <h4>Las consecuencias son absolutas</h4>
+        <p>Una persona puede ir al Infierno <em>eternamente</em> como resultado directo de ese 0,1% de injusticia. El Infierno en el Islam es eterno para los no creyentes. Que una causa pequeña produzca consecuencias absolutas no la hace menos relevante: la hace <strong>más relevante.</strong></p>
+      </div>
+      <div class="card" style="border-color: var(--yellow-dim);">
+        <div class="card-num">Razón 03</div>
+        <h4>El 0,1% es conservador</h4>
+        <p>Considerando el número de personas que mueren sin poder pedir perdón, el número de víctimas incapaces de perdonar por trauma, la asimetría de información severa… el porcentaje real es sustancialmente mayor. La cifra es deliberadamente conservadora.</p>
+      </div>
+    </div>
+
+    <div class="schema">
+      <div class="schema-title">Esquema — ¿Por qué el porcentaje real es mayor que 0,1%?</div>
+      <div style="display:flex; flex-direction:column; gap:0.7rem;">
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div style="width:12px; height:12px; background:var(--yellow); border-radius:50%; flex-shrink:0;"></div>
+          <span style="font-size:0.85rem; color:var(--white-dim);">Personas que mueren en accidentes sin tiempo de pedir perdón a todas sus víctimas</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div style="width:12px; height:12px; background:var(--yellow); border-radius:50%; flex-shrink:0;"></div>
+          <span style="font-size:0.85rem; color:var(--white-dim);">Víctimas con trastorno de estrés postraumático severo estructuralmente incapaces de perdonar</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div style="width:12px; height:12px; background:var(--yellow); border-radius:50%; flex-shrink:0;"></div>
+          <span style="font-size:0.85rem; color:var(--white-dim);">Casos donde la identidad de la víctima, no la gravedad del acto, determina el resultado</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div style="width:12px; height:12px; background:var(--yellow); border-radius:50%; flex-shrink:0;"></div>
+          <span style="font-size:0.85rem; color:var(--white-dim);">Cadenas de transferencia de pecados con efecto compuesto desproporcionado</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div style="width:12px; height:12px; background:var(--yellow); border-radius:50%; flex-shrink:0;"></div>
+          <span style="font-size:0.85rem; color:var(--white-dim);">Víctimas que murieron sin capacidad cognitiva o legal de pronunciarse</span>
+        </div>
+      </div>
+      <div style="margin-top:1.2rem; padding:0.8rem 1rem; background:var(--black-5); border-radius:4px; border:1px solid var(--border);">
+        <span style="font-size:0.82rem; color:var(--white-dim);">El 0,1% se usa como <strong style="color:var(--white)">umbral mínimo conservador</strong>: ni siquiera hace falta demostrar que el porcentaje es alto. Basta con demostrar que es <span class="highlight-pill">mayor que cero</span> para falsificar la justicia perfecta absoluta.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 7 -->
+  <section class="section" id="s7">
+    <div class="section-eyebrow">Casos de Estudio</div>
+    <h2>Casos Concretos: La Injusticia Hecha Visible</h2>
+
+    <p>La abstracción filosófica se materializa en escenarios reales que el sistema no puede resolver sin producir injusticia:</p>
+
+    <div class="case-block">
+      <div class="case-label">Caso A</div>
+      <h4>El agresor y la víctima con daño neurológico</h4>
+      <p>Un hombre humilla públicamente a una mujer que posteriormente desarrolla trastorno de estrés postraumático severo. El trauma le impide neurológicamente procesar el perdón —no por voluntad, sino por lesión psicológica documentable—. El hombre muere arrepentido, con décadas de devoción, pero sin poder obtener el perdón porque la víctima está disociada.</p>
+      <div class="case-verdict">⚠ Pregunta sin respuesta: ¿Es justo que su destino eterno dependa de la salud mental de su víctima y no de sus propios actos?</div>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label">Caso B</div>
+      <h4>Mismo acto, destinos opuestos</h4>
+      <p>Dos hombres roban la misma cantidad a dos personas distintas. Uno roba a alguien generoso que perdona fácilmente. Otro roba a alguien que creció en pobreza extrema y para quien ese dinero era todo. El segundo no perdona, no por maldad, sino porque el daño fue devastador para él.</p>
+      <div class="case-verdict">⚠ Mismo crimen, mismo arrepentimiento, misma fe → uno puede entrar al Paraíso, el otro no. El resultado depende de la víctima, no del acto ni del actor.</div>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label">Caso C</div>
+      <h4>La cadena de transferencias</h4>
+      <p>Persona A cometió pecados menores contra B, C y D. B perdona. C no perdona, y le transfiere a A sus propios pecados. Esos pecados adicionales hacen que A no pueda pagar su deuda con D, quien tampoco perdona y le transfiere más pecados. El resultado final acumula injusticias sucesivas completamente desproporcionadas al acto original de A.</p>
+      <div class="case-verdict">⚠ La cascada hace que el castigo final sea el resultado de una cadena de subjetividades encadenadas, no del acto original.</div>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label">Caso D</div>
+      <h4>El niño que murió antes de pronunciarse</h4>
+      <p>Un hombre maltrató a un niño que murió poco después sin capacidad cognitiva de articular perdón. ¿Quién ejerce el derecho del niño? ¿Sus padres? ¿Allah? Si es Allah, volvemos al problema del perdón unilateral. Si son los padres, ¿con qué autoridad? Si el derecho queda en limbo, el agresor permanece en indefinición escatológica.</p>
+      <div class="case-verdict">⚠ El sistema no ofrece respuesta textual clara. Esa laguna es en sí misma una imperfección estructural.</div>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label">Caso E</div>
+      <h4>El rencor como herramienta de condena</h4>
+      <p>Una víctima que sufrió un daño menor pero que alberga un rencor desproporcionado decide no perdonar por satisfacción personal. El daño objetivo era pequeño y el agresor está genuinamente arrepentido. El sistema islámico no ofrece ningún mecanismo para ponderar la proporcionalidad del rencor de la víctima.</p>
+      <div class="case-verdict">⚠ El agresor puede ser condenado por la desproporción emocional de la víctima, no por la gravedad de su acto.</div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 8 -->
+  <section class="section" id="s8">
+    <div class="section-eyebrow">Contradicción Interna</div>
+    <h2>La Trampa Teológica: Al-Adl vs Al-Qadir</h2>
+
+    <p>El Islam afirma simultáneamente tres atributos que, combinados con lo demostrado, producen una <strong>contradicción irresolvable</strong>:</p>
+
+    <table class="attr-table">
+      <thead>
+        <tr>
+          <th>Atributo</th>
+          <th>Significado</th>
+          <th>Implicación problemática</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="attr-name">Al-Adl</td>
+          <td>Absolutamente justo, sin injusticia de ningún tipo</td>
+          <td class="problem">El sistema produce injusticia por diseño → contradicción directa</td>
+        </tr>
+        <tr>
+          <td class="attr-name">Al-Qadir</td>
+          <td>Omnipotente, sin limitación de ningún tipo</td>
+          <td class="problem">Podía haber diseñado un sistema sin este defecto y no lo hizo → o no pudo o eligió no hacerlo</td>
+        </tr>
+        <tr>
+          <td class="attr-name">Al-Alim</td>
+          <td>Omnisciente, conoce el resultado de cada decisión antes de crearla</td>
+          <td class="problem">Sabía que el sistema produciría resultados desiguales para actos iguales y lo implementó de todas formas</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="syllogism-box">
+      <div class="syl-title">Silogismo VI — El Trilema de los Atributos Divinos</div>
+      <div class="premise">
+        <span class="premise-label">P1</span>
+        <span class="premise-text">Allah es omnisciente → sabía, antes de crear el sistema, que produciría resultados desiguales para actos iguales dependiendo de la identidad de la víctima.</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P2</span>
+        <span class="premise-text">Allah es omnipotente → podía haber diseñado un sistema sin este defecto estructural.</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P3</span>
+        <span class="premise-text">Allah diseñó el sistema tal como es → lo eligió deliberadamente, con pleno conocimiento de sus consecuencias.</span>
+      </div>
+      <div class="premise">
+        <span class="premise-label">P4</span>
+        <span class="premise-text">Elegir deliberadamente incorporar injusticia en un sistema cuando se tenía la capacidad y el conocimiento de no hacerlo es, en sí mismo, un acto injusto.</span>
+      </div>
+      <div class="conclusion-line"></div>
+      <div class="conclusion">
+        <span class="conclusion-label">∴ C</span>
+        <span class="conclusion-text">O Allah no es omnipotente (no pudo diseñar algo mejor), o no es omnisciente (no sabía el resultado), o no es Al-Adl en sentido absoluto (eligió incorporar injusticia). No hay cuarta opción dentro del sistema teológico islámico clásico.</span>
+      </div>
+    </div>
+
+    <div class="schema">
+      <div class="schema-title">Esquema — El Trilema sin salida</div>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem;">
+        <div style="background:var(--black-5); border:1px solid var(--border); padding:1.2rem; border-radius:4px; text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--yellow-dim); margin-bottom:0.6rem; letter-spacing:0.1em;">OPCIÓN A</div>
+          <div style="font-size:0.85rem; color:var(--white); font-weight:600; margin-bottom:0.4rem;">No es omnipotente</div>
+          <div style="font-size:0.75rem; color:var(--white-dim);">No pudo diseñar un sistema mejor</div>
+          <div style="margin-top:0.6rem; font-size:0.7rem; color:#e74c3c;">Contradice Al-Qadir</div>
+        </div>
+        <div style="background:var(--black-5); border:1px solid var(--border); padding:1.2rem; border-radius:4px; text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--yellow-dim); margin-bottom:0.6rem; letter-spacing:0.1em;">OPCIÓN B</div>
+          <div style="font-size:0.85rem; color:var(--white); font-weight:600; margin-bottom:0.4rem;">No es omnisciente</div>
+          <div style="font-size:0.75rem; color:var(--white-dim);">No previó las consecuencias del diseño</div>
+          <div style="margin-top:0.6rem; font-size:0.7rem; color:#e74c3c;">Contradice Al-Alim</div>
+        </div>
+        <div style="background:var(--black-5); border:1px solid var(--border); padding:1.2rem; border-radius:4px; text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--yellow-dim); margin-bottom:0.6rem; letter-spacing:0.1em;">OPCIÓN C</div>
+          <div style="font-size:0.85rem; color:var(--white); font-weight:600; margin-bottom:0.4rem;">No es Al-Adl absoluto</div>
+          <div style="font-size:0.75rem; color:var(--white-dim);">Eligió incorporar injusticia deliberadamente</div>
+          <div style="margin-top:0.6rem; font-size:0.7rem; color:#e74c3c;">Contradice Al-Adl</div>
+        </div>
+      </div>
+      <div style="margin-top:1rem; padding:0.8rem 1rem; background:var(--black-5); border-radius:4px; border:1px solid var(--yellow-dim);">
+        <span style="font-size:0.82rem; color:var(--yellow);">Este no es un ataque externo al Islam. Es una <strong>contradicción interna</strong> dentro del propio sistema teológico islámico clásico.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 9 -->
+  <section class="section" id="s9">
+    <div class="section-eyebrow">Objeciones Adicionales</div>
+    <h2>Más Objeciones y sus Destrucciones</h2>
+
+    <div class="objection-block">
+      <div class="obj-header">
+        <span class="obj-badge objection">Objeción</span>
+        <span class="obj-header-text">«La víctima también será juzgada si no perdona por rencor»</span>
+      </div>
+      <div class="obj-body">
+        <p>El Islam enseña que la víctima que no perdona sin razón justa también incurrirá en responsabilidad. Por tanto, el sistema se autorregula.</p>
+      </div>
+    </div>
+    <div class="objection-block">
+      <div class="obj-header">
+        <span class="obj-badge refutation">Destrucción</span>
+        <span class="obj-header-text">Añade una segunda injusticia sin eliminar la primera</span>
+      </div>
+      <div class="obj-body">
+        <p>Correcto, pero eso no elimina el daño ya causado al agresor. La víctima es penalizada por ejercer un derecho que el propio sistema le otorgó. Además, si la víctima tiene razones emocionales genuinas para no perdonar —trauma, dolor profundo—, ¿se le juzgará por ello? Si no, el sistema no se corrige. Si sí, se castiga a la víctima por ser humana. En cualquier caso se produce injusticia.</p>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <div class="objection-block">
+      <div class="obj-header">
+        <span class="obj-badge objection">Objeción</span>
+        <span class="obj-header-text">«Allah en su infinita sabiduría equilibra todo perfectamente»</span>
+      </div>
+      <div class="obj-body">
+        <p>La sabiduría divina trasciende nuestra comprensión. Lo que parece injusto a nosotros es perfecto desde la perspectiva de Allah.</p>
+      </div>
+    </div>
+    <div class="objection-block">
+      <div class="obj-header">
+        <span class="obj-badge refutation">Destrucción</span>
+        <span class="obj-header-text">Tautología vacía que destruye la posibilidad de evaluación</span>
+      </div>
+      <div class="obj-body">
+        <p>Este argumento es un <strong>non sequitur epistémico</strong>: si cualquier resultado es compatible con la justicia divina porque «la sabiduría de Allah lo equilibra», entonces el concepto de justicia divina no tiene contenido evaluable. Una afirmación que no puede ser falsificada bajo ninguna circunstancia no es una afirmación filosófica significativa. Además, el propio Islam usa el argumento de la justicia divina como <em>prueba</em> de su verdad; si esa justicia no puede ser evaluada, tampoco puede ser usada como argumento apologético.</p>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <div class="objection-block">
+      <div class="obj-header">
+        <span class="obj-badge objection">Objeción</span>
+        <span class="obj-header-text">«El sistema permite al agresor buscar el perdón antes de morir»</span>
+      </div>
+      <div class="obj-body">
+        <p>El Islam exhorta a pedir perdón en vida. Si el agresor no lo hizo, es su responsabilidad. El sistema es justo porque ofrece la oportunidad.</p>
+      </div>
+    </div>
+    <div class="objection-block">
+      <div class="obj-header">
+        <span class="obj-badge refutation">Destrucción</span>
+        <span class="obj-header-text">La oportunidad no garantiza el resultado justo</span>
+      </div>
+      <div class="obj-body">
+        <p>La <em>oportunidad</em> de buscar perdón no garantiza que la víctima lo conceda. El problema no es si el agresor tuvo oportunidad de pedir: es que el resultado final depende de la <strong>respuesta de la víctima</strong>, no de la petición del agresor. Un sistema donde hacer lo correcto (pedir perdón) no garantiza la justicia en el resultado sigue siendo un sistema con justicia imperfecta. Además, muchas personas mueren sin haber podido contactar a todas sus víctimas, por distancia, tiempo o desconocimiento de que causaron daño.</p>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <div class="objection-block">
+      <div class="obj-header">
+        <span class="obj-badge objection">Objeción</span>
+        <span class="obj-header-text">«Este mismo problema existe en cualquier sistema de justicia, incluido el cristiano»</span>
+      </div>
+      <div class="obj-body">
+        <p>Ningún sistema es perfecto. La crítica es aplicable a cualquier religión.</p>
+      </div>
+    </div>
+    <div class="objection-block">
+      <div class="obj-header">
+        <span class="obj-badge refutation">Destrucción</span>
+        <span class="obj-header-text">La comparación invalida la afirmación islámica específica, no la crítica</span>
+      </div>
+      <div class="obj-body">
+        <p>Primero, esta es una <em>tu quoque</em> que no refuta el argumento sino que lo esquiva. Segundo, el problema es específicamente islámico porque el Islam hace la afirmación específica de que Allah es Al-Adl <em>en sentido absoluto</em>. Si otros sistemas tienen problemas similares, eso no resuelve el problema islámico: lo extiende. Tercero, la teología cristiana, especialmente la católico-tomista, resuelve esta tensión de manera diferente: el juicio divino en Cristo no depende del perdón de ninguna víctima humana, sino de la misericordia y justicia divinas aplicadas directamente al alma.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 10 -->
+  <section class="section" id="s10">
+    <div class="section-eyebrow">Veredicto</div>
+    <h2>Veredicto Final</h2>
+
+    <p>El juicio divino en el Islam, tal como está documentado en sus textos más auténticos y respaldado por las cuatro escuelas jurídicas principales, <strong>no cumple el estándar de justicia perfecta absoluta</strong> que el propio Islam le atribuye a Allah.</p>
+
+    <h3>Resumen de lo demostrado</h3>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-num">Punto 01</div>
+        <h4>La promesa es absoluta</h4>
+        <p>El Islam promete justicia perfecta absoluta como atributo ontológico de Allah, documentada en múltiples surahs y hadices sahih.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Punto 02</div>
+        <h4>La variable humana es real</h4>
+        <p>El sistema de juicio incorpora la voluntad humana como variable escatológica vinculante, documentada en los hadices más auténticos del canon islámico.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Punto 03</div>
+        <h4>La variable es estructuralmente imperfecta</h4>
+        <p>Esa voluntad es subjetiva, emocionalmente condicionada, asimétrica en información y produce resultados distintos para casos idénticos por razones completamente ajenas al acto juzgado.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Punto 04</div>
+        <h4>El rescate divino no funciona</h4>
+        <p>El contraargumento del perdón unilateral de Allah destruye la distinción Huquq al-Ibad, viola los derechos de la víctima, contradice las cuatro escuelas y vacía el concepto de justicia de contenido evaluable.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Punto 05</div>
+        <h4>El porcentaje no importa</h4>
+        <p>Aunque el porcentaje fuera solo 0,1%, sus consecuencias son absolutas (eternidad) y la justicia perfecta no admite ningún porcentaje de injusticia incorporada.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">Punto 06</div>
+        <h4>El trilema es irresolvable</h4>
+        <p>La combinación de Al-Adl, Al-Qadir y Al-Alim con el diseño deliberado del sistema crea una contradicción interna que no puede resolverse dentro del marco teológico islámico clásico.</p>
+      </div>
+    </div>
+
+    <div class="conclusion-alert">
+      <div class="alert-title">La Conclusión Inescapable</div>
+      <p>El juicio islámico es <em>mayoritariamente</em> justo, <em>funcionalmente</em> justo para la mayoría de los casos. Pero <strong>no es absolutamente justo</strong> en el sentido que el propio Islam reivindica.</p>
+      <p>Y una justicia que no es absolutamente perfecta, viniendo de un ser que el Islam define como <em>La Justicia Absoluta</em>, no es un fallo menor de calibración. Es una <strong>contradicción en el corazón del sistema</strong>.</p>
+      <p>La imperfección no está en la ejecución, ni en los seres humanos que pecan. Está en el <strong>diseño deliberado</strong> de un ser que, según el propio Islam, era omnipotente para haberlo diseñado de otro modo y omnisciente para saber lo que estaba produciendo.</p>
+    </div>
+
+    <div class="quran-block">
+      <div class="translation">«¿Acaso Allah no es el más sabio de los jueces?»</div>
+      <div class="ref">Surah At-Tin — 95:8</div>
+    </div>
+
+    <p style="color: var(--white-dim); font-style: italic; font-size: 0.9rem; margin-top: 1rem;">Esa es exactamente la pregunta que este análisis deja sin respuesta satisfactoria dentro del propio sistema teológico islámico.</p>
+  </section>
+
+  <footer class="site-footer">
+    <p>Análisis Filosófico-Teológico · Apologética Católica · Justicia Escatológica Islámica</p>
+  </footer>
+
+</main>
+
+<script>
+  function scrollTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (window.innerWidth <= 860) {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  }
+
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('.section');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => item.classList.remove('active'));
+        const active = document.querySelector(`.nav-item[onclick="scrollTo('${id}')"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

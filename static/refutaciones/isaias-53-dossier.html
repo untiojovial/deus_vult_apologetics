@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isaías 53 — Argumento Mesiánico Académico y Teológico</title>
+<style>
+:root{
+  --navy:#1B3A6B;--navy2:#2D5298;--gold:#9A7A2A;--gold-lt:#C9A84C;
+  --gold-bg:#F0E8D0;--cream:#F7F4EE;--cream2:#EDE8DC;--red:#8B1A1A;
+  --ink:#1A1A1A;--gray:#555;--sw:300px;
+  --fd:Georgia,'Times New Roman',serif;
+  --fb:'Segoe UI',Calibri,Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--cream);color:var(--ink);line-height:1.7;font-size:16px}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:0;left:0;width:var(--sw);height:100vh;background:var(--navy);
+  color:#fff;display:flex;flex-direction:column;z-index:100;overflow:hidden;transition:transform .3s}
+#sh{padding:18px 16px 14px;border-bottom:2px solid var(--gold);flex-shrink:0}
+#sh h2{font-family:var(--fd);font-size:11px;color:var(--gold-lt);letter-spacing:.1em;text-transform:uppercase}
+#sh .hb{font-size:17px;color:rgba(255,255,255,.85);margin-top:5px;font-family:var(--fd);line-height:1.4}
+#sh .prog-wrap{margin-top:10px;background:rgba(255,255,255,.12);border-radius:4px;height:4px;overflow:hidden}
+#sh .prog-bar{height:4px;background:var(--gold);width:0%;transition:width .15s linear;border-radius:4px}
+#toc-scroll{flex:1;overflow-y:auto;padding:8px 0 20px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+#toc-scroll::-webkit-scrollbar{width:3px}
+#toc-scroll::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+#toc{list-style:none}
+#toc li{border-left:3px solid transparent;transition:border-color .18s,background .18s}
+#toc li.active{border-color:var(--gold-lt);background:rgba(154,122,42,.18)}
+#toc li a{display:block;text-decoration:none;color:rgba(255,255,255,.72);font-size:12px;
+  line-height:1.3;padding:4px 12px 4px 10px;transition:color .18s}
+#toc li a:hover{color:var(--gold-lt)}
+#toc li.active a{color:#fff;font-weight:600}
+#toc li.lv1>a{font-size:11px;color:var(--gold-lt);font-weight:700;text-transform:uppercase;
+  letter-spacing:.05em;margin-top:6px;padding-top:6px}
+#toc li.lv2>a{padding-left:16px}
+#toc li.lv3>a{padding-left:26px;font-size:11.5px;color:rgba(255,255,255,.55)}
+#toc li.lv4>a{padding-left:36px;font-size:11px;color:rgba(255,255,255,.45)}
+
+/* TOGGLE */
+#ttg{display:none;position:fixed;top:12px;left:12px;z-index:200;background:var(--navy);
+  color:#fff;border:none;border-radius:6px;padding:7px 11px;font-size:17px;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.3)}
+
+/* MAIN */
+#main{margin-left:var(--sw);min-height:100vh}
+
+/* TOP PROGRESS BAR */
+#prog{position:fixed;top:0;left:var(--sw);right:0;height:3px;background:var(--gold);
+  transform-origin:left;transform:scaleX(0);z-index:110;transition:transform .08s linear}
+
+/* HERO */
+#hero{background:var(--navy);color:#fff;padding:72px 56px 52px;position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--gold)}
+#hero::after{content:'עַבְדִּי';position:absolute;right:36px;top:20px;font-size:110px;
+  font-family:var(--fd);color:rgba(255,255,255,.04);pointer-events:none;line-height:1}
+#hero h1{font-family:var(--fd);font-size:clamp(38px,6vw,64px);letter-spacing:.02em;line-height:1.1;margin-bottom:12px}
+#hero .sub{color:var(--gold-lt);font-family:var(--fd);font-size:clamp(15px,2vw,20px);margin-bottom:20px;letter-spacing:.04em}
+.htags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:32px}
+.htags span{background:rgba(154,122,42,.22);border:1px solid var(--gold);color:var(--gold-lt);
+  padding:3px 11px;border-radius:20px;font-size:11.5px;letter-spacing:.04em}
+.hvs{background:rgba(255,255,255,.07);border-left:4px solid var(--gold);padding:16px 22px;
+  border-radius:0 8px 8px 0;max-width:680px}
+.hvs .hl{font-family:var(--fd);font-size:24px;color:var(--gold-lt);display:block;margin-bottom:7px}
+.hvs .gl{font-style:italic;color:rgba(255,255,255,.74);font-size:14.5px}
+.hvs .rf{font-size:12px;color:var(--gold);font-weight:700;margin-top:4px;display:block}
+
+/* CONTENT */
+#ct{max-width:840px;margin:0 auto;padding:0 38px 80px}
+
+/* SECTION DIVIDER */
+.sd{background:var(--navy);color:#fff;padding:38px 38px 26px;margin:56px -38px 0;
+  position:relative;overflow:hidden}
+.sd::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--gold)}
+.sd .rm{font-size:10px;color:var(--gold-lt);letter-spacing:.16em;text-transform:uppercase;
+  margin-bottom:5px;padding-left:14px}
+.sd h2{font-family:var(--fd);font-size:clamp(20px,2.8vw,28px);padding-left:14px;margin-bottom:7px}
+.sd .ss{font-size:13.5px;color:rgba(255,255,255,.62);font-style:italic;padding-left:14px;line-height:1.5}
+
+/* HEADINGS */
+h2.h2{font-family:var(--fd);color:var(--navy);font-size:19px;margin:40px 0 12px;
+  padding-bottom:6px;border-bottom:2px solid var(--gold-bg)}
+h3.h3{font-family:var(--fd);color:var(--gold);font-size:16px;margin:26px 0 9px;font-style:italic}
+h4.h4{color:var(--red);font-size:14px;margin:20px 0 7px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.04em}
+
+p{margin-bottom:13px;text-align:justify;hyphens:auto}
+p:last-child{margin-bottom:0}
+strong.r{color:var(--red)}
+strong.n{color:var(--navy)}
+
+/* HEBREW BLOCK */
+.hb-blk{background:var(--gold-bg);border:1.5px solid var(--gold);border-radius:8px;
+  padding:20px 26px 16px;margin:18px 0;text-align:center;
+  box-shadow:0 2px 10px rgba(27,58,107,.09);transition:box-shadow .2s}
+.hb-blk:hover{box-shadow:0 4px 18px rgba(27,58,107,.15)}
+.hb-blk .vr{display:block;font-size:11px;color:var(--gold);font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px}
+.hb-blk .ht{font-family:var(--fd);font-size:24px;color:var(--navy);font-weight:700;
+  display:block;margin-bottom:9px;line-height:1.65}
+.hb-blk .tr{font-size:12.5px;color:var(--navy2);font-style:italic;display:block;
+  margin-bottom:9px;letter-spacing:.03em}
+.hb-blk .gl{font-size:14.5px;color:var(--ink);font-style:italic;border-top:1px solid rgba(154,122,42,.4);
+  padding-top:9px;display:block}
+
+/* BLOCKQUOTE */
+blockquote{border-left:5px solid var(--gold);background:var(--cream2);padding:16px 20px;
+  margin:22px 0;border-radius:0 6px 6px 0;font-style:italic;color:#333;
+  font-family:var(--fd);font-size:15px;line-height:1.7}
+blockquote cite{display:block;margin-top:9px;font-size:12.5px;font-style:normal;
+  font-weight:700;color:var(--navy)}
+
+/* LISTS */
+ul.cl,ol.cl{margin:10px 0 14px;padding-left:26px}
+ul.cl li,ol.cl li{margin-bottom:6px;font-size:15px;line-height:1.6}
+ul.cl li::marker{color:var(--gold)}
+
+/* VERB TABLE */
+table.vt{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+table.vt th{background:var(--navy);color:#fff;padding:8px 11px;text-align:left;
+  font-family:var(--fd);font-size:12.5px}
+table.vt td{padding:7px 11px;border-bottom:1px solid var(--cream2)}
+table.vt tr:nth-child(even) td{background:var(--cream2)}
+table.vt .hc{font-family:var(--fd);font-size:16px;color:var(--navy);font-weight:700}
+table.vt .tc{font-style:italic;color:var(--navy2)}
+
+/* SILOGISMO */
+.sil{border:2px solid var(--navy);border-radius:10px;overflow:hidden;margin:28px 0;
+  box-shadow:0 3px 14px rgba(27,58,107,.11)}
+.sil-hd{background:var(--red);color:#fff;padding:11px 18px;font-family:var(--fd);
+  font-size:14.5px;font-weight:700;letter-spacing:.03em}
+.sil-hd .sn{color:rgba(255,255,255,.68);font-size:11.5px;font-style:italic;margin-right:7px}
+.pr{display:flex;border-bottom:1px solid #ddd;background:#fff}
+.pr:nth-child(even){background:var(--cream)}
+.pr .pl{background:var(--navy);color:#fff;font-family:var(--fd);font-size:14px;font-weight:700;
+  padding:12px 14px;min-width:46px;display:flex;align-items:flex-start;
+  justify-content:center;flex-shrink:0}
+.pr .pt{padding:11px 15px;font-size:14px;line-height:1.6;color:var(--ink)}
+.cn{background:var(--red);color:#fff;padding:13px 18px;font-size:14px;font-weight:700;
+  font-family:var(--fd);line-height:1.5}
+.cn .th{font-size:17px;margin-right:7px}
+
+/* SILOGISMO MAESTRO */
+.sm{border:3px solid var(--navy);border-radius:12px;overflow:hidden;margin:32px 0;
+  box-shadow:0 6px 28px rgba(27,58,107,.18)}
+.sm-hd{background:var(--navy);color:#fff;padding:15px 22px;font-family:var(--fd);
+  font-size:17px;font-weight:700;letter-spacing:.03em;text-align:center}
+.sm-hd span{display:block;font-size:11.5px;color:var(--gold-lt);font-weight:400;margin-top:3px;letter-spacing:.08em}
+
+/* OBJECION */
+.ob{border-left:5px solid var(--red);padding:14px 18px;background:#fff;
+  margin:20px 0;border-radius:0 6px 6px 0;box-shadow:0 1px 5px rgba(0,0,0,.05)}
+.ob-hd{font-weight:700;color:var(--red);font-size:13.5px;margin-bottom:7px;
+  text-transform:uppercase;letter-spacing:.04em}
+.ob-c{background:var(--navy);color:#fff;padding:9px 13px;border-radius:4px;
+  font-size:13.5px;font-weight:600;margin-top:9px;font-family:var(--fd);line-height:1.5}
+
+/* CUMPLIMIENTO */
+.cp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.cb{padding:14px 16px;border-radius:6px;font-size:14px;line-height:1.6}
+.cb.pr2{background:var(--gold-bg);border:1.5px solid var(--gold)}
+.cb.cu{background:#EEF2FA;border:1.5px solid var(--navy2)}
+.cb .lb{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:5px;display:block}
+.cb.pr2 .lb{color:var(--gold)}
+.cb.cu .lb{color:var(--navy)}
+.cb .vs{font-style:italic;color:#333;font-family:var(--fd)}
+
+/* QUIASMO */
+.qm{margin:20px 0;padding:0 24px}
+.qr{display:flex;align-items:center;margin-bottom:7px}
+.ql{font-family:var(--fd);font-weight:700;font-size:14px;min-width:42px;color:var(--navy)}
+.qb{flex:1;padding:11px 16px;border-radius:4px;font-size:14px;font-weight:600;
+  font-family:var(--fd);color:#fff;text-align:center}
+.qb.a{background:var(--navy)}
+.qb.b{background:var(--red);margin:0 36px}
+.qb.ap{background:var(--navy)}
+
+/* NOTE BOX */
+.nb{background:var(--cream2);border:1px solid var(--gold);border-radius:6px;
+  padding:13px 17px;margin:16px 0;font-size:14px;color:#333;line-height:1.65}
+.nb strong{color:var(--navy)}
+
+/* BIBLIOGRAPHY */
+.bib h4{color:var(--navy);font-size:14px;margin:20px 0 9px;text-transform:uppercase;letter-spacing:.06em}
+.bl{list-style:none;padding:0}
+.bl li{padding:6px 0 6px 18px;border-bottom:1px solid var(--cream2);
+  font-size:13.5px;line-height:1.55;position:relative;color:#333}
+.bl li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-size:10px;top:9px}
+
+/* BACK TO TOP */
+#btt{position:fixed;bottom:22px;right:22px;background:var(--navy);color:var(--gold-lt);
+  border:none;border-radius:50%;width:42px;height:42px;font-size:17px;cursor:pointer;
+  box-shadow:0 2px 10px rgba(0,0,0,.24);opacity:0;transform:translateY(8px);
+  transition:opacity .28s,transform .28s;z-index:99}
+#btt.vis{opacity:1;transform:translateY(0)}
+
+/* FOOTER */
+footer{background:var(--navy);color:rgba(255,255,255,.45);text-align:center;
+  padding:22px;font-size:12.5px}
+footer span{color:var(--gold-lt)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  :root{--sw:260px}
+  #ct{padding:0 22px 60px}
+  #hero{padding:56px 22px 38px}
+  .sd{margin:46px -22px 0}
+  .cp{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  #ttg{display:block}
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  #main{margin-left:0}
+  #prog{left:0}
+  #ct{padding:0 15px 60px}
+  #hero{padding:48px 15px 34px}
+  #hero::after{display:none}
+  .sd{margin:38px -15px 0}
+  .qb.b{margin:0 18px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<button id="ttg" aria-label="Abrir índice">☰</button>
+<div id="prog"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar" aria-label="Índice de contenidos">
+  <div id="sh">
+    <h2>Isaías 53 — Índice</h2>
+    <div class="hb">עַבְדִּי יַשְׂכִּיל</div>
+    <div class="prog-wrap"><div class="prog-bar" id="spb"></div></div>
+  </div>
+  <div id="toc-scroll"><ul id="toc"></ul></div>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+<!-- HERO -->
+<header id="hero">
+  <h1>Isaías 53</h1>
+  <p class="sub">Siervo, Mesías y Jesús de Nazaret</p>
+  <div class="htags">
+    <span>Análisis Gramatical Hebreo</span>
+    <span>Contexto Canónico del AT</span>
+    <span>Hermenéutica</span>
+    <span>Tipología</span>
+    <span>7 Silogismos Formales</span>
+    <span>Argumentación Filosófica</span>
+    <span>XI Capítulos</span>
+    <span>105 Diapositivas</span>
+  </div>
+  <div class="hvs">
+    <span class="hl">הִנֵּה יַשְׂכִּיל עַבְדִּי יָרוּם וְנִשָּׂא וְגָבַהּ מְאֹד</span>
+    <span class="gl">«He aquí, prosperará mi siervo; será levantado, exaltado y muy encumbrado»</span>
+    <span class="rf">Isaías 52:13</span>
+  </div>
+</header>
+
+<div id="ct">
+
+<!-- ══ PREFACIO ════════════════════════════════ -->
+<section id="prefacio" data-h1="Prefacio Metodológico">
+<div class="sd"><div class="rm">Prefacio</div><h2>Prefacio Metodológico</h2>
+<p class="ss">Naturaleza, alcance y niveles epistemológicos del argumento</p></div>
+
+<h2 id="pref-obj" class="h2" data-h2="Objetivo general">Objetivo General</h2>
+<p>El presente argumento tiene por finalidad demostrar, mediante un análisis riguroso y multidisciplinar, que Isaías 53 —el cuarto y más extenso Cántico del Siervo (Is&nbsp;52:13–53:12)— <strong class="r">no puede interpretarse adecuadamente como una alegoría de la nación de Israel</strong>, y que, por el contrario, todos sus predicados gramaticales, literarios, teológicos y canónicos apuntan de manera convergente hacia <strong>un individuo mesíanico singular</strong>, cuya identidad histórica y soteriológica encuentra su cumplimiento preciso en la persona de Jesús de Nazaret.</p>
+<p>La argumentación se desplegará en varios niveles epistemológicos:</p>
+<ol class="cl">
+  <li><strong>Análisis gramatical</strong> del texto hebreo: persona, número, género y semántica verbal.</li>
+  <li><strong>Análisis literario</strong> de la estructura del poema y sus unidades de sentido.</li>
+  <li><strong>Análisis contextual</strong> dentro del libro de Isaías, el Deutero-Isaías y el corpus completo del AT.</li>
+  <li><strong>Refutación de la interpretación corporativa</strong> (Israel = el Siervo).</li>
+  <li><strong>Silogismos formales</strong> que articulan las premisas teológicas y gramaticales.</li>
+  <li><strong>Aplicación cristológica</strong> y cumplimiento histórico en Jesús.</li>
+</ol>
+
+<h2 id="pref-fnt" class="h2" data-h2="Fuentes y método">Fuentes y Método</h2>
+<p>A lo largo de todo el documento se citarán y analizarán las siguientes fuentes primarias:</p>
+<ul class="cl">
+  <li><strong>Texto Masorético (TM / BHS):</strong> base del análisis gramatical hebreo.</li>
+  <li><strong>Septuaginta (LXX):</strong> versión griega del siglo III-II a.C., testimonio textual independiente.</li>
+  <li><strong>Targum Jonatán:</strong> paráfrasis aramea de los Profetas (siglos I-II d.C.).</li>
+  <li><strong>Rollos del Mar Muerto (Qumrán):</strong> manuscritos del siglo III a.C. al siglo I d.C.</li>
+  <li><strong>Talmud Babilónico (Sanhedrín 98b):</strong> evidencia de interpretación mesiánica judía.</li>
+  <li><strong>Zohar:</strong> tradición mística judía con materiales del Segundo Templo.</li>
+</ul>
+<p>El objeto de este aparato crítico multifuente es ofrecer una argumentación que trascienda cualquier acusación de etnocentrismo hermenéutico y se apoye en la <strong>crítica textual más sólida disponible</strong>, incluyendo fuentes que son anteriores o contemporáneas al propio movimiento cristiano del siglo I d.C.</p>
+</section>
+
+<!-- ══ I. TEXTO MASORÉTICO ════════════════════ -->
+<section id="sec1" data-h1="I. Texto Masorético">
+<div class="sd"><div class="rm">I</div><h2>El Texto Masorético — Isaías 52:13–53:12</h2>
+<p class="ss">Texto hebreo con transliteración y traducción literal interlineal</p></div>
+
+<p>El pasaje conocido como el «Cuarto Cántico del Siervo» se extiende desde Isaías 52:13 hasta 53:12. La delimitación precisa del cántico ha sido objeto de debate entre los comentaristas, pero existe un <strong>consenso generalizado</strong> en que la perícopa comienza con la primera persona divina del versículo 52:13 («He aquí que mi Siervo…») y concluye con la segunda intervención divina de 53:12.</p>
+
+<h2 id="s1-txt" class="h2" data-h2="Texto hebreo interlineal">Texto Hebreo y Traducción Literal Interlineal</h2>
+
+<div class="hb-blk"><span class="vr">Isaías 52:13</span><span class="ht">הִנֵּה יַשְׂכִּיל עַבְדִּי יָרוּם וְנִשָּׂא וְגָבַהּ מְאֹד</span><span class="tr">hinnēh yaśkîl ʿavdî yārûm wenissā' wegābahh meʾōd</span><span class="gl">«He aquí, prosperará mi siervo; será levantado, exaltado y muy encumbrado»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 52:14</span><span class="ht">כַּאֲשֶׁר שָׁמְמוּ עָלֶיךָ רַבִּים כֵּן מִשְׁחַת מֵאִישׁ מַרְאֵהוּ</span><span class="tr">kaʾăšer šāmmû ʿāleykā rabbîm kēn mišḥat mēʾîš marʾēhû</span><span class="gl">«Como se asombraron de él muchos, así de desfigurado su aspecto más que el de cualquier hombre»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 52:15</span><span class="ht">כֵּן יַזֶּה גוֹיִם רַבִּים עָלָיו יִקְפְּצוּ מְלָכִים פִּיהֶם</span><span class="tr">kēn yazzeh gôyim rabbîm ʿālāyw yiqpetsû melākhîm pîhem</span><span class="gl">«Así rociará a naciones numerosas; ante él cerrarán los reyes su boca»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:1</span><span class="ht">מִי הֶאֱמִין לִשְׁמֻעָתֵנוּ וּזְרוֹעַ יְהוָה עַל מִי נִגְלָתָה</span><span class="tr">mî heʾĕmîn lišmûʿātēnû ûzrôaʿ YHWH ʿal mî niglātāh</span><span class="gl">«¿Quién ha creído a nuestro mensaje? ¿Y a quién ha sido revelado el brazo del SEÑOR?»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:2</span><span class="ht">וַיַּעַל כַּיּוֹנֵק לְפָנָיו וְכַשֹּׁרֶשׁ מֵאֶרֶץ צִיָּה</span><span class="tr">wayyaʿal kayyôneq lepānāyw wekašōreš mēʾerets tsiyyāh</span><span class="gl">«Creció delante de él como renuevo tierno, como raíz de tierra árida»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:3</span><span class="ht">נִבְזֶה וַחֲדַל אִישִׁים אִישׁ מַכְאֹבוֹת וִידוּעַ חֹלִי</span><span class="tr">nibzeh waḥădal ʾîšîm ʾîš makʾōbôt wîdûaʿ ḥŏlî</span><span class="gl">«Despreciado y desechado entre los hombres; varón de dolores y experimentado en quebranto»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:4</span><span class="ht">אָכֵן חֳלָיֵנוּ הוּא נָשָׂא וּמַכְאֹבֵינוּ סְבָלָם</span><span class="tr">ʾākhēn ḥŏlāyēnû hûʾ nāśāʾ ûmakʾōbēynû sebālām</span><span class="gl">«Ciertamente él llevó nuestras enfermedades y soportó nuestros dolores»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:5</span><span class="ht">וְהוּא מְחֹלָל מִפְּשָׁעֵנוּ מְדֻכָּא מֵעֲוֹנֹתֵינוּ</span><span class="tr">wehûʾ meḥōlāl mippešāʿēnû medukāʾ mēʿăwōnōtēynû</span><span class="gl">«Pero él fue herido por nuestras transgresiones, molido por nuestras iniquidades»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:6</span><span class="ht">כֻּלָּנוּ כַּצֹּאן תָּעִינוּ אִישׁ לְדַרְכּוֹ פָּנִינוּ</span><span class="tr">kullānû katstsōʾn tāʿînû ʾîš ledarkô pānînû</span><span class="gl">«Todos nosotros nos descarriamos como ovejas, cada uno se volvió por su camino»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:7</span><span class="ht">נִגַּשׂ וְהוּא נַעֲנֶה וְלֹא יִפְתַּח פִּיו כַּשֶּׂה לַטֶּבַח יוּבָל</span><span class="tr">niggaś wehûʾ naʿăneh welo yiptaḥ pîw kaśśeh latttebaḥ yûbāl</span><span class="gl">«Fue oprimido y afligido, pero no abrió su boca; como cordero llevado al matadero»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:8</span><span class="ht">מֵעֹצֶר וּמִמִּשְׁפָּט לֻקָּח וְאֶת דּוֹרוֹ מִי יְשׂוֹחֵחַ</span><span class="tr">mēʿōtser ûmimmišpāt luqqāḥ weʾet dôrô mî yešôḥēaḥ</span><span class="gl">«Por opresión y por juicio fue quitado; ¿quién considerará su generación?»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:9</span><span class="ht">וַיִּתֵּן אֶת רְשָׁעִים קִבְרוֹ וְאֶת עָשִׁיר בְּמֹתָיו</span><span class="tr">wayyittēn ʾet rešāʿîm qibrô weʾet ʿāšîr bemōtāyw</span><span class="gl">«Se dispuso su sepultura con los impíos, pero con el rico estuvo en su muerte»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:10</span><span class="ht">וַיהוָה חָפֵץ דַּכְּאוֹ הֶחֱלִי אִם תָּשִׂים אָשָׁם נַפְשׁוֹ</span><span class="tr">waYHWH ḥāpēts dakkʾô heḥĕlî ʾim tāśîm ʾāšām napšô</span><span class="gl">«Pero el SEÑOR quiso aplastarlo, haciéndolo sufrir; cuando su alma presentó ofrenda por la culpa»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:11</span><span class="ht">מֵעֲמַל נַפְשׁוֹ יִרְאֶה יִשְׂבָּע בְּדַעְתּוֹ יַצְדִּיק צַדִּיק עַבְדִּי לָרַבִּים</span><span class="tr">mēʿămal napšô yirʾeh yiśbāʿ bedaʿtô yatsdîq tsaddîq ʿavdî lārabbîm</span><span class="gl">«Del trabajo de su alma verá y quedará satisfecho; por su conocimiento justificará mi Siervo justo a los muchos»</span></div>
+<div class="hb-blk"><span class="vr">Isaías 53:12</span><span class="ht">לָכֵן אֲחַלֶּק לוֹ בָרַבִּים וְאֶת עֲצוּמִים יְחַלֵּק שָׁלָל</span><span class="tr">lākhēn aḥalleq lô bārabbîm weʾet ʿatsûmîm yeḥalleq šālāl</span><span class="gl">«Por tanto le daré parte con los grandes, y con los fuertes repartirá despojos»</span></div>
+</section>
+
+<!-- ══ II. ANÁLISIS GRAMATICAL ════════════════ -->
+<section id="sec2" data-h1="II. Análisis Gramatical">
+<div class="sd"><div class="rm">II</div><h2>Análisis Gramatical Exhaustivo del Hebreo</h2>
+<p class="ss">Persona, número, género, semántica verbal y terminología cultual</p></div>
+
+<h2 id="s2-1" class="h2" data-h2="II.1 El sujeto gramatical">II.1 — El Sujeto Gramatical: Singular Absoluto vs. Plural</h2>
+<p>El argumento más fundamental a nivel gramatical es el de la persona y el número. A lo largo de todo el texto masorético del cántico, el Siervo es referido consistentemente en <strong>singular masculino (זָכָר, zakar)</strong>. No existe ni una sola instancia en el poema en la que la figura del Siervo sea conjugada en plural. Este dato de primer orden <strong class="r">invalida la identificación colectiva del Siervo con «Israel como nación»</strong>.</p>
+<p>El sustantivo hebreo <strong>עַבְדִּי ('avdî)</strong> es gramaticalmente singular, primera persona del singular en estado constructo con sufijo posesivo: literalmente «mi siervo» (singular), hablado por YHWH. No es עֲבָדַי ('avadai, «mis siervos», plural) ni עֲבָדֶיךָ ('avadekha, «tus siervos»). La morfología es unívoca.</p>
+
+<h3 id="s2-1-1" class="h3" data-h3="Tabla de formas verbales singulares">II.1.1 — Tabla de Formas Verbales Singulares</h3>
+<p>Las siguientes formas verbales, todas en tercera persona masculino singular (3ms), consolidan la individualidad del Siervo:</p>
+<table class="vt">
+  <thead><tr><th>Forma Hebrea</th><th>Transliteración</th><th>Análisis</th><th>Traducción</th></tr></thead>
+  <tbody>
+    <tr><td class="hc">יַשְׂכִּיל</td><td class="tc">yaśkîl</td><td>3ms Hifil impf.</td><td>«prosperará, actuará con prudencia»</td></tr>
+    <tr><td class="hc">יָרוּם</td><td class="tc">yārûm</td><td>3ms Qal impf.</td><td>«será levantado»</td></tr>
+    <tr><td class="hc">נִשָּׂא</td><td class="tc">niśśā'</td><td>3ms Nifal perf.</td><td>«será exaltado»</td></tr>
+    <tr><td class="hc">יַזֶּה</td><td class="tc">yazzeh</td><td>3ms Hifil impf.</td><td>«rociará» (término sacerdotal)</td></tr>
+    <tr><td class="hc">נַעֲנֶה</td><td class="tc">na'aneh</td><td>3ms Nifal ptcp.</td><td>«siendo afligido»</td></tr>
+    <tr><td class="hc">יִרְאֶה</td><td class="tc">yir'eh</td><td>3ms Qal impf.</td><td>«verá» (post-mortem, individual)</td></tr>
+    <tr><td class="hc">יַצְדִּיק</td><td class="tc">yatsdîq</td><td>3ms Hifil impf.</td><td>«justificará» (función judicial individual)</td></tr>
+  </tbody>
+</table>
+<p><strong class="r">Ninguna de estas formas admite interpretación colectiva sin alterar violentamente la morfología hebrea.</strong> La gramática hebrea posee formas plurales perfectamente disponibles que el autor no utiliza en ningún momento para el Siervo.</p>
+
+<h2 id="s2-2" class="h2" data-h2="II.2 La distinción él / nosotros">II.2 — La Distinción «Nosotros» / «Él»: La Voz de los Hablantes</h2>
+<p>Uno de los fenómenos gramaticales más decisivos del poema es el contraste deliberado y sostenido entre la <strong>primera persona plural (אֲנַחְנוּ — «nosotros»)</strong> y la <strong>tercera persona singular masculina (הוּא — «él»)</strong>. Este contraste es estructural y recorre todo el texto desde 53:1 hasta 53:12.</p>
+<p>En 53:4-6, el pronombre <strong>אָכֵן הוּא</strong> («ciertamente él») y el contraste con «nosotros» es explícito tres veces:</p>
+<ul class="cl">
+  <li>«nuestras enfermedades él las llevó» (v.4)</li>
+  <li>«nuestros dolores él los soportó» (v.4)</li>
+  <li>«fue herido por nuestras transgresiones» (v.5)</li>
+</ul>
+<p>La lógica de la sustitución vicaria requiere ontológica y lógicamente que el sufriente y los beneficiados sean <strong class="r">dos entidades distintas</strong>. Si el «nosotros» = Israel, el «él» no puede ser también Israel.</p>
+<div class="nb"><strong>Nota hermenéutica:</strong> El estudioso judío Nehemia Gordon reconoció este problema: el Siervo no puede ser simultáneamente el <em>portador</em> del sufrimiento sustitutorio y la comunidad <em>por cuya culpa</em> ese sufrimiento se produce. La dualidad gramatical «él / nosotros» es un argumento gramatical irrefutable contra la interpretación corporativa.</div>
+
+<h2 id="s2-3" class="h2" data-h2="II.3 El verbo יַזֶּה (yazzeh)">II.3 — El Verbo יַזֶּה (yazzeh): «Rociará» en 52:15</h2>
+<p>El verbo <strong>נָזָה en Hifil (yazzeh)</strong> es de uso exclusivamente sacerdotal y cultual en el Antiguo Testamento. Aparece en: Levítico 4:6; 4:17 (aspersión de la sangre del becerro ante YHWH); Levítico 16:14-19 (ritual del Gran Día de la Expiación, Yom Kippur); Números 19:4 (aspersión de la sangre de la vaca alazana). Siempre en el contexto del <strong>ritual de aspersión de la sangre expiatoria</strong>.</p>
+<p>Su uso en Isaías 52:15 («así rociará a naciones numerosas») es deliberado: atribuye al Siervo una <strong>función sacerdotal de purificación</strong> que aplica a las naciones (גּוֹיִם רַבִּים). <strong class="r">Una nación no puede ejercer función sacerdotal sobre sí misma según la teología levítica</strong>; el sacerdote es siempre un individuo que media entre el pueblo y Dios.</p>
+
+<h2 id="s2-4" class="h2" data-h2="II.4 El término אָשָׁם (asham)">II.4 — El Término אָשָׁם (asham): «Ofrenda por la Culpa» en 53:10</h2>
+<p>La palabra <strong>אָשָׁם</strong> es terminología técnica del sistema sacrificial levítico. En Levítico 5:14–6:7 y Números 5:5-8, el <em>'asham</em> es una categoría específica de sacrificio de reparación, distinto del עֹלָה (holocausto), el חַטָּאת (sacrificio por el pecado) y el שֶׁלֶם (ofrenda de paz). El <em>'asham</em> requería un individuo como ofertante y una víctima sacrificial.</p>
+<p>Aplicar este término al <strong>alma (נֶפֶשׁ, nefesh) del Siervo</strong> implica que el Siervo mismo es la víctima expiatoria. <strong class="r">Israel como nación nunca fue presentado como ofrenda 'asham en ningún texto del Pentateuco ni de los Profetas.</strong></p>
+
+<h2 id="s2-5" class="h2" data-h2="II.5 La raíz נגשׂ — opresión judicial">II.5 — La Raíz נגשׂ (nagas): Opresión Judicial en 53:7</h2>
+<p>El verbo <strong>נִגַּשׂ (niggaś)</strong> en el versículo 53:7 connota una opresión de carácter judicial. El mismo término aparece en Éxodo 3:7 (la opresión de Egipto) y en varios contextos de proceso judicial. La afirmación «por opresión y por juicio fue quitado» (מֵעֹצֶר וּמִמִּשְׁפָּט לֻקָּח, v.8) contiene el sustantivo <strong>מִשְׁפָּט (mishpat, «juicio / proceso legal»)</strong>, apuntando a una ejecución judicial injusta. Esto encaja con un individuo sometido a juicio, no con una nación entera.</p>
+
+<h2 id="s2-6" class="h2" data-h2="II.6 «Con el rico en su muerte»">II.6 — «Con el Rico en su Muerte» — Singular Colectivo Imposible (53:9)</h2>
+<p>El versículo 53:9 es gramaticalmente extraordinario: <em>«Se dispuso su sepultura con los impíos, pero con el rico estuvo en su muerte (בְּמֹתָיו, bemotav)»</em>. La forma <strong>בְּמֹתָיו</strong> es inusual: literalmente «en sus muertes» (plural morfológico con sufijo singular), que varios gramáticos interpretan como un <strong>plural de intensidad o plural de magnificencia</strong>. El texto habla de un sepulcro individual, una muerte individual e identificable, y una tumba en concreto con alguien rico. <strong class="r">Israel como nación no tiene una tumba individual asignable a ninguna persona rica específica.</strong></p>
+
+<h2 id="s2-7" class="h2" data-h2="II.7 La cláusula de resurrección">II.7 — La Cláusula de Resurrección y Longevidad en 53:10-11</h2>
+<p>El versículo 53:10 establece: <em>«cuando su alma presentare ofrenda por la culpa, verá su descendencia, prolongará sus días, y la voluntad del SEÑOR será prosperada en su mano»</em>. Hay aquí una tensión temporal deliberada: el Siervo muere (v.8-9) y sin embargo verá descendencia y prolongará sus días. <strong>La única resolución coherente de esta tensión es la resurrección personal.</strong></p>
+<p>Aplicar esto a Israel como nación resultaría en que la «nación» muere y luego «ve su descendencia», lo cual es una tautología vacía si la nación = el pueblo que ya tiene descendencia.</p>
+</section>
+
+<!-- ══ III. ANÁLISIS LITERARIO ════════════════ -->
+<section id="sec3" data-h1="III. Análisis Literario">
+<div class="sd"><div class="rm">III</div><h2>Análisis Literario y Estructura Compositiva</h2>
+<p class="ss">Los cuatro Cánticos del Siervo y la arquitectura del poema</p></div>
+
+<h2 id="s3-1" class="h2" data-h2="III.1 Los cuatro Cánticos">III.1 — Los Cuatro Cánticos del Siervo (Ebed-YHWH Lieder)</h2>
+<p>El conjunto de Isaías 40-55 contiene cuatro pasajes que la crítica literaria, desde <strong>Bernhard Duhm (1892)</strong>, ha agrupado bajo la designación de «Cánticos del Siervo» (<em>Ebed-Jahwe-Lieder</em>):</p>
+<ol class="cl">
+  <li><strong>Primer Cántico:</strong> Isaías 42:1-4 (o 42:1-9)</li>
+  <li><strong>Segundo Cántico:</strong> Isaías 49:1-6 (o 49:1-13)</li>
+  <li><strong>Tercer Cántico:</strong> Isaías 50:4-9 (o 50:4-11)</li>
+  <li><strong>Cuarto Cántico:</strong> Isaías 52:13–53:12</li>
+</ol>
+<p>La trayectoria de los cuatro cánticos describe una <strong>progresión narrativa coherente</strong>: el Siervo es comisionado (C.1), se lamenta de su aparente fracaso pero confía en Dios (C.2), soporta el sufrimiento con obediencia (C.3), y finalmente padece, muere, es vindicado y justifica a muchos (C.4). Esta narrativa progresiva e individual es <strong class="r">incompatible con la identificación corporativa del Siervo con Israel</strong>, que habría tenido que ser consistente en los cuatro pasajes.</p>
+
+<h2 id="s3-2" class="h2" data-h2="III.2 El Siervo ≠ Israel (Is 49)">III.2 — El Siervo en Isaías 49:1-6: Individuo Distinto de Israel</h2>
+<p>Uno de los argumentos más contundentes a nivel literario proviene del propio texto de Isaías 49:5-6:</p>
+<blockquote>«Él me dijo: Poco es que tú seas mi siervo para levantar las tribus de Jacob y para restaurar a los preservados de Israel; también te pondré por luz de las naciones, para que seas mi salvación hasta los confines de la tierra.»<cite>Isaías 49:6</cite></blockquote>
+<p>Este texto es decisivo: si el Siervo fuera idéntico a Israel, la frase resultaría en la <strong class="r">tautología absurda</strong> de que Israel tiene la misión de restaurar a Israel. El texto supone necesariamente que el Siervo es una <strong>entidad distinta de la nación de Israel</strong>.</p>
+
+<h2 id="s3-3" class="h2" data-h2="III.3 La obertura quiástica 52:13-15">III.3 — Isaías 52:13-15: La Obertura Divina y su Estructura Quiástica</h2>
+<p>Los versículos 52:13-15 funcionan como obertura del cántico, pronunciados por YHWH en primera persona. La estructura es un <strong>quiasmo</strong> que describe el arco vital de un individuo que pasa del mayor sufrimiento a la mayor gloria:</p>
+<div class="qm">
+  <div class="qr"><span class="ql">A</span><div class="qb a">v.13 — Exaltación suprema del Siervo</div></div>
+  <div class="qr"><span class="ql">B</span><div class="qb b">v.14 — Humillación extrema: desfigurado más que cualquier hombre</div></div>
+  <div class="qr"><span class="ql">A'</span><div class="qb ap">v.15 — Exaltación sobre naciones y reyes: rociará a pueblos numerosos</div></div>
+</div>
+<p>El paralelismo con la trayectoria de Jesús (Pasión → Muerte → Resurrección → Glorificación) es estructuralmente idéntico.</p>
+
+<h2 id="s3-4" class="h2" data-h2="III.4 El lamento de los portavoces">III.4 — El Lamento de los Portavoces (53:1-9)</h2>
+<p>El núcleo del poema (53:1-9) está pronunciado por una voz plural en primera persona —los «nosotros»— que reconoce haber errado en su juicio sobre el Siervo. Han despreciado al Siervo (v.3), lo han tenido por castigado de Dios (v.4b), y solo ahora comprenden que el Siervo cargó sus iniquidades (v.5-6). Los «nosotros» son distintos del Siervo, y su reflexión es el reconocimiento tardío de una <strong>sustitución vicaria</strong>. Esta estructura narrativa solo funciona si el Siervo es un tercero distinguible del grupo que habla.</p>
+</section>
+
+<!-- ══ IV. CONTEXTO CANÓNICO AT ═══════════════ -->
+<section id="sec4" data-h1="IV. Contexto Canónico AT">
+<div class="sd"><div class="rm">IV</div><h2>Contexto Canónico en el Antiguo Testamento</h2>
+<p class="ss">La figura mesiánica desde el Pentateuco hasta los Profetas Menores</p></div>
+
+<h2 id="s4-1" class="h2" data-h2="IV.1 El Mesías en el Pentateuco">IV.1 — El Mesías en el Pentateuco</h2>
+<h3 id="s4-gn3" class="h3" data-h3="Génesis 3:15 — protoevangelio">Génesis 3:15 — El Protoevangelio</h3>
+<p>La anticipación mesiánica comienza en Génesis 3:15: <em>«pondré enemistad entre ti y la mujer, y entre tu simiente y su simiente; esta te herirá en la cabeza, y tú la herirás en el calcañar»</em>. El texto anticipa una figura <strong>individual</strong> («su simiente», זַרְעָהּ, <em>zarʿāh</em> — singular, no el plural) que derrotará al adversario pero sufrirá en el proceso. La herida en el calcañar corresponde al sufrimiento y muerte del Siervo de Isaías 53; la herida en la cabeza corresponde a la victoria post-mortem.</p>
+
+<h3 id="s4-gn49" class="h3" data-h3="Génesis 49:10 — Bendición de Jacob">Génesis 49:10 — Bendición de Jacob</h3>
+<p><em>«no será quitado el cetro de Judá ni el legislador de entre sus pies, hasta que venga Siloh, y a él se congregarán los pueblos»</em>. Este oráculo mesiánico-real anticipa un gobernante judío escatológico al que «las naciones se congregarán», paralelo exacto al «rociamiento de naciones» del Siervo en Isaías 52:15.</p>
+
+<h3 id="s4-nm24" class="h3" data-h3="Números 24:17 — Oráculo de Balaam">Números 24:17 — Oráculo de Balaam</h3>
+<p><em>«saldrá ESTRELLA de Jacob, y surgirá cetro de Israel; herirá las sienes de Moab, y destruirá a todos los hijos de Set»</em>. La imagen de la «estrella» como figura individual de liberación escatológica es mesiánica y vuelve a ser individual, no corporativa.</p>
+
+<h2 id="s4-2" class="h2" data-h2="IV.2 El Mesías en los Salmos">IV.2 — El Mesías en los Salmos</h2>
+<p>El <strong>Salmo 22</strong> (recitado por Jesús en la Cruz: Mt 27:46) describe con precisión el sufrimiento de un inocente: traspasado de manos y pies (v.16), vestiduras repartidas por suertes (v.18), rodeado de adversarios (v.12-13), despreciado y escarnecido (v.6-8). <strong>El Salmo 22 es el Isaías 53 en forma sálmica.</strong></p>
+<p>El <strong>Salmo 110</strong> —el más citado del NT— establece la doble filiación del Mesías: Rey («siéntate a mi diestra», v.1) y Sacerdote eterno según el orden de Melquisedec (v.4), unificando las dos funciones que el Siervo ejerce en Isaías 53.</p>
+
+<h2 id="s4-3" class="h2" data-h2="IV.3 El Mesías en los Profetas">IV.3 — El Mesías en los Profetas</h2>
+<p><strong>Miqueas 5:2:</strong> <em>«Pero tú, Belén Efrata…de ti me saldrá el que ha de ser gobernante en Israel; y sus salidas son desde el principio, desde los días de la eternidad»</em>. La combinación de procedencia histórica (Belén) con existencia eterna solo se resuelve en una encarnación. Jesús de Nazaret nació en Belén (Mt 2:1; Lc 2:4-7).</p>
+<p><strong>Zacarías 12:10:</strong> <em>«derramaré sobre la casa de David…espíritu de gracia y de oración; y mirarán a mí, a quien traspasaron, y llorarán como se llora por hijo unigénito»</em>. La primera persona divina «a mí, a quien traspasaron» plantea el enigma de un YHWH traspasado —aplicado a Jesús en Jn 19:37 y Ap 1:7.</p>
+<p><strong>Zacarías 9:9:</strong> El rey mesiánico humilde, cabalgando sobre un asno — corresponde exactamente al Siervo sin majestad de Isaías 53:2.</p>
+
+<h2 id="s4-4" class="h2" data-h2="IV.4 Figuras tipológicas">IV.4 — Figuras Tipológicas del Siervo en el AT</h2>
+<ul class="cl">
+  <li><strong>José:</strong> vendido por sus hermanos, injustamente encarcelado, pero exaltado para salvar a muchos (Génesis 37-50). Paradigma de sufrimiento inocente que resulta en salvación colectiva.</li>
+  <li><strong>Moisés:</strong> mediador entre Dios y el pueblo, que intercede por Israel a riesgo de su propia vida (Éx 32:31-32). Sustitución vicaria prefigurada.</li>
+  <li><strong>Jeremías:</strong> el «profeta lloroso», perseguido y rechazado por su propio pueblo, cuyas «Confesiones» son paralelas al lenguaje del Siervo en los cánticos.</li>
+</ul>
+<p><strong class="r">Ninguno de estos tipos se identifica con «Israel» como nación</strong> — son individuos que padecen en beneficio de la colectividad. La tipología del AT apunta consistentemente hacia un mediador individual.</p>
+</section>
+
+<!-- ══ V. REFUTACIÓN CORPORATIVA ══════════════ -->
+<section id="sec5" data-h1="V. Refutación Corporativa">
+<div class="sd"><div class="rm">V</div><h2>Refutación Sistemática de la Interpretación Corporativa</h2>
+<p class="ss">Diez objeciones gramaticales, textuales, lógicas y canónicas</p></div>
+
+<h2 id="s5-0" class="h2" data-h2="V.1 La tesis corporativa">V.1 — La Tesis Corporativa y sus Proponentes</h2>
+<p>La interpretación que identifica al Siervo con la nación de Israel tiene defensores medievales ilustres: <strong>Rashi</strong> (Shlomo Yitzhaki, 1040-1105), <strong>Abraham Ibn Ezra</strong> (1089-1164), <strong>David Kimchi</strong> (RaDaK, 1160-1235) y <strong>Joseph Albo</strong> (1380-1444). En el ámbito crítico-histórico moderno fue defendida por Karl Marti, Paul Volz y otros. Esta interpretación, aunque respetable y erudita, se enfrenta a objeciones gramaticales, textuales, lógicas y canónicas que la hacen <strong>insostenible como interpretación primaria y literal del texto</strong>.</p>
+
+<div class="ob"><div class="ob-hd" id="ob1" data-h3="Objeción 1 — El texto distingue al Siervo de Israel">Objeción 1 — El texto distingue al Siervo de Israel</div><p>El mismo corpus isaiano distingue ontológicamente al Siervo de Israel. En Isaías 41:8, YHWH dice a Israel: «Pero tú, Israel, siervo mío eres» (2ª persona). Sin embargo, en los Cánticos del Siervo, el Siervo es referido en tercera persona, y en Isaías 49:5-6 tiene una misión <em>hacia</em> Israel, lo cual es imposible si ambos son idénticos.<div class="ob-c">∴ La misma relación gramatical «yo / tú / él» confirma que el Siervo es una entidad separada del pueblo al que YHWH dirige su discurso.</div></div>
+
+<div class="ob"><div class="ob-hd" id="ob2" data-h3="Objeción 2 — Israel no es «sin pecado»">Objeción 2 — Israel no es «sin pecado»</div><p>Isaías 53:9b afirma que el Siervo «no había hecho maldad, ni hubo engaño en su boca». Este predicado es absolutamente inaplicable a la nación de Israel. El mismo Isaías, en Is 1:2-4; 5:1-7, acusa a Israel de corrupción profunda: «¡Oh gente pecadora, pueblo cargado de maldad, generación de malignos, hijos depravados!» (Is 1:4).<div class="ob-c">∴ Un texto que afirma la inocencia moral del Siervo no puede referirse a la misma nación a la que el mismo Isaías acusa de grave pecado.</div></div>
+
+<div class="ob"><div class="ob-hd" id="ob3" data-h3="Objeción 3 — El sufrimiento es vicario, no penal">Objeción 3 — El sufrimiento es vicario, no penal</div><p>En la interpretación corporativa, el sufrimiento de Israel sería resultado de sus propios pecados. Pero Isaías 53 afirma lo contrario: el Siervo padece por los pecados de otros. La preposición מִן (min) en «herido por nuestras transgresiones» (מְחֹלָל מִפְּשָׁעֵנוּ, v.5) tiene función causal clara: «a causa de nuestras transgresiones».<div class="ob-c">∴ Si el Siervo = «nosotros» (Israel), el sufrimiento no es vicario sino autoinfligido, lo que destruye la coherencia lógica del texto.</div></div>
+
+<div class="ob"><div class="ob-hd" id="ob4" data-h3="Objeción 4 — El «nosotros» en la interpretación corporativa">Objeción 4 — El «nosotros» en la interpretación corporativa</div><p>Si Israel es el Siervo, ¿quiénes son el «nosotros» que dice «nuestras transgresiones él las cargó»? La interpretación corporativa identifica al «nosotros» con las naciones gentiles. Pero esto crea una ironía teológica: ¿Israel sufre el exilio babilónico vicariamente por los pecados de Babilonia? Ningún texto profético del AT plantea esta idea.<div class="ob-c">∴ Hacer al «nosotros» = gentiles para salvar la coherencia de la teoría corporativa es un movimiento ad hoc sin apoyo en el texto.</div></div>
+
+<div class="ob"><div class="ob-hd" id="ob5" data-h3="Objeción 5 — La sepultura como hecho individual">Objeción 5 — La sepultura como hecho individual</div><p>El versículo 53:9 habla de una sepultura individual y específica: «se le puso su sepultura entre los malhechores». La palabra קֶבֶר (qever) es singular. Israel como nación no tiene una tumba singular. El exilio de Babilonia no implicó la muerte y sepultura del pueblo, sino su desplazamiento.<div class="ob-c">∴ La lectura natural del hebreo es una muerte y una sepultura individuales.</div></div>
+
+<div class="ob"><div class="ob-hd" id="ob6" data-h3="Objeción 6 — La resurrección post-mortem">Objeción 6 — La resurrección post-mortem</div><p>El versículo 53:10b afirma que el Siervo, después de morir, «verá su descendencia» y «prolongará sus días». La única interpretación coherente es la de un individuo que muere y resucita. La nación de Israel no fue «cortada de la tierra de los vivientes» en ningún sentido que corresponda a muerte individual y sepultura literal.<div class="ob-c">∴ El predicado de vida post-mortem exige la resurrección de un individuo, no la restauración de una nación.</div></div>
+
+<div class="ob"><div class="ob-hd" id="ob7" data-h3="Objeción 7 — Los Rollos del Mar Muerto">Objeción 7 — Los Rollos del Mar Muerto</div><p>Los Rollos del Mar Muerto (Qumrán, siglos III a.C.–I d.C.) muestran que la interpretación mesiánica individual era exegéticamente viable y practicada <em>antes del nacimiento del cristianismo</em>. El documento 4Q285 aplica al Siervo de Is 53 a una figura mesiánica. Flavio Josefo también aplicó elementos del «Siervo» a figuras individuales.<div class="ob-c">∴ La lectura mesiánica individual no fue una invención cristiana sino una posibilidad hermenéutica operativa en el judaísmo precristiano.</div></div>
+
+<div class="ob"><div class="ob-hd" id="ob8" data-h3="Objeción 8 — El Targum Jonatán: «mi Siervo el Mesías»">Objeción 8 — El Targum Jonatán: «mi Siervo el Mesías»</div><p>El Targum Jonatán en Isaías 52:13 traduce: «He aquí que <strong>mi Siervo el Mesías</strong> prosperará». La palabra MESÍAS (מְשִׁיחָא, <em>meshiḥa'</em>) aparece explícitamente en la primera línea del cántico.<div class="ob-c">∴ La tradición targúmica confirma que la lectura mesiánica individual no fue una invención cristiana.</div></div>
+
+<blockquote>He aquí mi Siervo el Mesías prosperará; será exaltado y engrandecido y muy glorificado<cite>Targum Jonatán sobre Isaías 52:13</cite></blockquote>
+
+<div class="ob"><div class="ob-hd" id="ob9" data-h3="Objeción 9 — El Talmud Babilónico (Sanhedrín 98b)">Objeción 9 — El Talmud Babilónico (Sanhedrín 98b)</div><p>El Talmud Babilónico (Sanh. 98b) conserva una discusión donde los rabinos aplican Isaías 53:4 a la figura del Mesías, atribuyéndole el nombre «el Leproso de la casa de Estudio de Rabbi Judá el Príncipe», citando literalmente: «ciertamente nuestras enfermedades él las cargó y nuestros dolores él los llevó».<div class="ob-c">∴ Los propios rabinos del período amoraítico aplicaban Isaías 53:4 a la figura del Mesías.</div></div>
+
+<div class="ob"><div class="ob-hd" id="ob10" data-h3="Objeción 10 — El giro de Rashi y su contexto apologético-polemista">Objeción 10 — El giro de Rashi y su contexto apologético-polemista</div><p>Es historiográficamente significativo que la interpretación corporativa se popularice sistemáticamente en el judaísmo a partir del siglo XI, coincidiendo con el período de las Cruzadas y la intensa polémica judaeo-cristiana. El historiador David Berger ha documentado que esta polémica influyó significativamente en la re-orientación de la exégesis rabínica.<div class="ob-c">∴ El argumento histórico-crítico invita a valorar con precaución cualquier interpretación nacida en el calor de la controversia interreligiosa.</div></div>
+</section>
+
+<!-- ══ VI. SILOGISMOS FORMALES ════════════════ -->
+<section id="sec6" data-h1="VI. Silogismos Formales">
+<div class="sd"><div class="rm">VI</div><h2>Silogismos Formales</h2>
+<p class="ss">Siete demostraciones lógicas que articulan las premisas teológicas, gramaticales y filosóficas</p></div>
+
+<div class="sil" id="sil1" data-h2="Silogismo I — De la Inocencia"><div class="sil-hd"><span class="sn">Silogismo I</span>De la Inocencia</div>
+<div class="pr"><div class="pl">P1</div><div class="pt">El texto de Isaías 53:9b afirma explícitamente que el Siervo no había cometido maldad ni había engaño en su boca (condición de inocencia moral absoluta).</div></div>
+<div class="pr"><div class="pl">P2</div><div class="pt">Israel, a lo largo de toda la narrativa del AT (especialmente Isaías 1:2-4; Ez 20; Jer 2-3), es consistentemente descrito como una nación pecadora, incapaz de satisfacer la condición de inocencia moral absoluta.</div></div>
+<div class="pr"><div class="pl">P3</div><div class="pt">El principio de identidad lógica establece que A ≠ B si A posee P y B no posee P.</div></div>
+<div class="cn"><span class="th">∴</span>El Siervo de Isaías 53 no puede ser Israel, dado que Israel no satisface el predicado de inocencia moral que el texto atribuye al Siervo.</div></div>
+
+<div class="sil" id="sil2" data-h2="Silogismo II — De la Sustitución Vicaria"><div class="sil-hd"><span class="sn">Silogismo II</span>De la Sustitución Vicaria</div>
+<div class="pr"><div class="pl">P1</div><div class="pt">La sustitución vicaria (A padece en lugar de B, siendo A distinto de B) requiere que el sufriente y los beneficiados sean dos entidades ontológicamente distintas.</div></div>
+<div class="pr"><div class="pl">P2</div><div class="pt">En Isaías 53:4-6, el Siervo («él») padece a causa de las transgresiones de «nosotros», estructura que gramaticalmente supone dos entidades distintas.</div></div>
+<div class="pr"><div class="pl">P3</div><div class="pt">Si Siervo = «nosotros» (Israel), entonces la sustitución sería de Israel por Israel, lo que reduce la proposición a una tautología vacía de contenido lógico-soteriológico.</div></div>
+<div class="cn"><span class="th">∴</span>El Siervo no puede ser idéntico al colectivo «nosotros» (Israel) sin destruir la coherencia lógica del texto; por tanto, el Siervo es una entidad individual distinta de Israel.</div></div>
+
+<div class="sil" id="sil3" data-h2="Silogismo III — De la Misión hacia Israel"><div class="sil-hd"><span class="sn">Silogismo III</span>De la Misión Hacia Israel</div>
+<div class="pr"><div class="pl">P1</div><div class="pt">El Siervo en Isaías 49:5-6 recibe la misión explícita de «levantar las tribus de Jacob y restaurar a los preservados de Israel».</div></div>
+<div class="pr"><div class="pl">P2</div><div class="pt">Un agente no puede ser idéntico al objeto de su propia misión (nadie puede ser enviado a sí mismo para salvarse a sí mismo sin que ello sea una tautología vacía).</div></div>
+<div class="pr"><div class="pl">P3</div><div class="pt">La misión del Siervo tiene como objeto a Israel (las tribus de Jacob y los preservados de Israel).</div></div>
+<div class="cn"><span class="th">∴</span>El Siervo es una entidad distinta de Israel, comisionada con una misión hacia Israel.</div></div>
+
+<div class="sil" id="sil4" data-h2="Silogismo IV — De la Función Sacerdotal"><div class="sil-hd"><span class="sn">Silogismo IV</span>De la Función Sacerdotal</div>
+<div class="pr"><div class="pl">P1</div><div class="pt">La aspersión cultual (נָזָה, nazah, 52:15) es, en el sistema levítico, una función sacerdotal individual que un mediador ejerce sobre el pueblo.</div></div>
+<div class="pr"><div class="pl">P2</div><div class="pt">El Siervo en Isaías 52:15 ejerce la función de aspersión (rociamiento purificatorio) sobre «naciones numerosas».</div></div>
+<div class="pr"><div class="pl">P3</div><div class="pt">Una nación no puede ejercer función sacerdotal de aspersión sobre sí misma en el esquema teológico del AT.</div></div>
+<div class="cn"><span class="th">∴</span>El Siervo actúa como sacerdote individual que purifica a otros, lo que es ontológicamente incompatible con la identificación corporativa del Siervo con una nación.</div></div>
+
+<div class="sil" id="sil5" data-h2="Silogismo V — Del 'Asham"><div class="sil-hd"><span class="sn">Silogismo V</span>Del 'Asham — Ofrenda por la Culpa</div>
+<div class="pr"><div class="pl">P1</div><div class="pt">En la teología levítica, el אָשָׁם (asham, Lev 5:14-6:7) es una ofrenda animal que requiere un individuo ofertante y una víctima sacrificial; nunca se describe una nación entera como ofrenda 'asham.</div></div>
+<div class="pr"><div class="pl">P2</div><div class="pt">Isaías 53:10 aplica el término אָשָׁם al alma (נֶפֶשׁ) del Siervo: su propia persona es la ofrenda por la culpa.</div></div>
+<div class="pr"><div class="pl">P3</div><div class="pt">Aplicar el esquema 'asham a una nación requiere que la nación entera sea tanto sacerdote (ofertante) como víctima, lo que contradice el sistema tipológico.</div></div>
+<div class="cn"><span class="th">∴</span>El Siervo es un individuo cuya vida es ofrecida como 'asham vicario, función teológica incompatible con una identificación corporativa de la nación de Israel.</div></div>
+
+<div class="sil" id="sil6" data-h2="Silogismo VI — De la Resurrección"><div class="sil-hd"><span class="sn">Silogismo VI</span>De la Resurrección</div>
+<div class="pr"><div class="pl">P1</div><div class="pt">El Siervo muere (53:8-9: «cortado de la tierra de los vivientes», «se le puso su sepultura con los malhechores») y a continuación «ve su descendencia y prolonga sus días» (53:10).</div></div>
+<div class="pr"><div class="pl">P2</div><div class="pt">La única forma coherente de que un individuo que muere y es sepultado «prolongue sus días» y «vea» es mediante una resurrección corporal.</div></div>
+<div class="pr"><div class="pl">P3</div><div class="pt">La nación de Israel no fue «cortada de la tierra de los vivientes» en ningún sentido que corresponda a muerte individual y sepultura literal; el exilio babilónico no equivale a la muerte total del pueblo.</div></div>
+<div class="cn"><span class="th">∴</span>El predicado de vida post-mortem del Siervo exige la resurrección de un individuo, lo que no puede predicarse coherentemente de una nación y sí puede predicarse de Jesús de Nazaret.</div></div>
+
+<div class="sil" id="sil7" data-h2="Silogismo VII — Del Cumplimiento Histórico"><div class="sil-hd"><span class="sn">Silogismo VII</span>Del Cumplimiento Histórico</div>
+<div class="pr"><div class="pl">P1</div><div class="pt">Si Isaías 53 es una profecía de un individuo mesiánico que: (a) padece inocentemente, (b) es rechazado por su pueblo, (c) muere de manera judicial violenta, (d) es sepultado en tumba de un rico, (e) resucita y es exaltado — la profecía demanda un cumplimiento histórico preciso.</div></div>
+<div class="pr"><div class="pl">P2</div><div class="pt">Jesús de Nazaret satisface todas estas condiciones: (a) inocente según Pilato, Herodes y Judas; (b) rechazado por los líderes de Israel; (c) ejecutado judicialmente por crucifixión; (d) sepultado en la tumba de José de Arimatea, hombre rico (Mt 27:57-60); (e) resucitó al tercer día, testificado por más de quinientos testigos (1 Cor 15:3-8).</div></div>
+<div class="pr"><div class="pl">P3</div><div class="pt">Ningún otro individuo en la historia conocida satisface simultáneamente todas estas condiciones.</div></div>
+<div class="cn"><span class="th">∴</span>Jesús de Nazaret es el cumplimiento histórico e individual de la profecía de Isaías 53.</div></div>
+
+</section>
+
+<!-- ══ VII–IX. APLICACIÓN CRISTOLÓGICA ══════════ -->
+<section id="sec7" data-h1="VII–IX. Aplicación Cristológica">
+<div class="sd"><div class="rm">VII – IX</div><h2>Aplicación Cristológica — Jesús y Cada Predicado del Siervo</h2>
+<p class="ss">Correspondencia versículo a versículo entre profecía e historia</p></div>
+
+<h2 id="s7-1" class="h2" data-h2="VII.1 Metodología">VII.1 — Metodología de la Correspondencia</h2>
+<p>La argumentación cristológica que conecta Isaías 53 con Jesús no es un ejercicio de eiségesis retroactiva. Los propios textos del NT, escritos en el siglo I d.C., citan explícitamente Isaías 53 en su aplicación a Jesús, y lo hacen a partir de una tradición hermenéutica que el propio Jesús inauguró (Lc 24:26-27; 44-47). Citas directas en el NT: Mt 8:16-17 (Is 53:4); Mc 10:45 y 14:24 (Is 53:11-12); Jn 12:37-38 (Is 53:1); Ro 10:16 y 15:21 (Is 53:1; 52:15); 1 Pe 2:22-25 (Is 53:5,9); Hch 8:32-33 (Is 53:7-8); <strong>Lc 22:37 (Is 53:12 — por boca del propio Jesús).</strong></p>
+
+<h2 id="s7-2" class="h2" data-h2="VII.2 Correspondencias versículo a versículo">VII.2 — Correspondencias Versículo a Versículo</h2>
+
+<h3 class="h3">Is 52:13 — Exaltación del Siervo</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 52:13</span><span class="vs">«He aquí que mi Siervo prosperará, será enaltecido y levantado y muy exaltado.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Fil 2:9-11: «Dios también lo exaltó hasta lo sumo y le dio un nombre que es sobre todo nombre»; Hch 2:33: «exaltado a la diestra de Dios».</div></div>
+
+<h3 class="h3">Is 52:14 — La Desfiguración del Rostro</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 52:14</span><span class="vs">«Tanto fue lo que se desfiguró su semblante más que el de cualquier hombre.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Mt 27:26; Mc 15:15: Flagelación romana. Jn 19:2: Corona de espinas y golpeteo en el rostro. Mt 26:67: Golpeado y escupido ante el Sanedrín.</div></div>
+
+<h3 class="h3">Is 52:15 — El Rociamiento de Naciones</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 52:15</span><span class="vs">«Así rociará a naciones numerosas; ante él cerrarán los reyes su boca.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Ro 15:20-21: Pablo cita Is 52:15 para justificar su misión al mundo gentil. Mt 28:19: La Gran Comisión — «haced discípulos de todas las naciones».</div></div>
+
+<h3 class="h3">Is 53:1 — La Incredulidad ante el Mensaje</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:1</span><span class="vs">«¿Quién ha creído a nuestro mensaje? ¿Y a quién ha sido revelado el brazo del SEÑOR?»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Juan 12:37-38: cita literal este versículo. Romanos 10:16: Pablo cita Is 53:1. El cuarto evangelista interpreta el rechazo a Jesús como cumplimiento directo.</div></div>
+
+<h3 class="h3">Is 53:2 — El Origen Humilde</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:2</span><span class="vs">«Subirá cual renuevo delante de él, y como raíz de tierra seca.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Jn 1:14: Encarnación del Logos eterno. Mc 6:3: Carpintero de Galilea. Lc 2:7: Nacido en un establo en Judea. Jn 7:41: «¿De Galilea ha de venir el Cristo?»</div></div>
+
+<h3 class="h3">Is 53:3 — El Desprecio y el Rechazo</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:3</span><span class="vs">«Despreciado y desechado entre los hombres, varón de dolores, experimentado en quebranto.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Jn 1:11: «a lo suyo vino, y los suyos no le recibieron». Mc 15:13-14: grito de «¡Crucifícale!». Mc 14:50: sus discípulos le abandonaron.</div></div>
+
+<h3 class="h3">Is 53:4 — Las Cargas Llevadas</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:4</span><span class="vs">«Ciertamente llevó él nuestras enfermedades, y sufrió nuestros dolores.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Mateo 8:16-17 cita literalmente este versículo en relación con el ministerio sanador de Jesús.</div></div>
+
+<h3 class="h3">Is 53:5 — Las Heridas Salvadoras</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:5</span><span class="vs">«Mas él herido fue por nuestras rebeliones, molido por nuestros pecados; el castigo de nuestra paz fue sobre él, y por su llaga fuimos nosotros curados.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>1 Pedro 2:24: «quien llevó él mismo nuestros pecados en su cuerpo sobre el madero... por cuya herida fuisteis sanados.» Romanos 4:25.</div></div>
+
+<h3 class="h3">Is 53:7 — El Silencio ante los Acusadores</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:7</span><span class="vs">«No abrió su boca; como cordero fue llevado al matadero.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Mt 27:14: «No le respondió ni una palabra; de tal manera que el gobernador se maravillaba mucho.» Jn 1:29: «He aquí el Cordero de Dios.»</div></div>
+
+<h3 class="h3">Is 53:8 — El Proceso Judicial Injusto</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:8</span><span class="vs">«Por opresión y por juicio fue quitado... y por la rebelión de mi pueblo fue herido.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Juzgado en sesión nocturna (contra la ley judía), ante testigos falsos (Mc 14:56-59), condenado por Pilato que reconoció su inocencia (Lc 23:14).</div></div>
+
+<h3 class="h3">Is 53:9 — La Tumba del Rico</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:9</span><span class="vs">«Se dispuso con los impíos su sepultura, mas con los ricos fue en su muerte.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Mc 15:27: Crucificado entre dos ladrones. Mt 27:57-60: José de Arimatea, «hombre rico», le dio sepultura en su sepulcro nuevo.</div></div>
+
+<h3 class="h3">Is 53:10-11 — La Resurrección y la Justificación</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:10-11</span><span class="vs">«Verá linaje, vivirá por largos días... por su conocimiento justificará mi Siervo justo a los muchos.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>1 Corintios 15:3-4: «que Cristo murió por nuestros pecados, conforme a las Escrituras; y que resucitó al tercer día, conforme a las Escrituras.»</div></div>
+
+<h3 class="h3">Is 53:12 — La Intercesión por los Transgresores</h3>
+<div class="cp"><div class="cb pr2"><span class="lb">Profecía — Is 53:12</span><span class="vs">«Fue contado con los pecadores, habiendo él llevado el pecado de muchos, y orado por los transgresores.»</span></div><div class="cb cu"><span class="lb">Cumplimiento — NT</span>Lc 22:37: Jesús cita Is 53:12 y lo aplica a sí mismo. Lc 23:34: «Padre, perdónalos.» Mc 15:27: crucificado entre ladrones.</div></div>
+
+<blockquote>Porque os digo que es necesario que se cumpla todavía en mí aquello que está escrito: «Y fue contado con los inicuos»; porque lo que está escrito de mí, tiene cumplimiento.<cite>Lucas 22:37 — Jesús citando Isaías 53:12 la noche de su arresto, aplicando el texto a sí mismo de manera explícita</cite></blockquote>
+
+<h2 id="s7-3" class="h2" data-h2="IX.1 Autoconciencia mesiánica">IX.1 — La Autoconciencia Mesiánica de Jesús</h2>
+<p>Los Evangelios Sinópticos documentan que Jesús tenía una clara autoconciencia de ser el Siervo de Isaías. <strong>Marcos 10:45</strong> —considerado por la mayoría de los exégetas como uno de los <em>logia</em> más auténticos de Jesús histórico—: <em>«el Hijo del Hombre no vino para ser servido, sino para servir, y para dar su vida en rescate por muchos (λύτρον ἀντὶ πολλῶν)»</em>. La expresión «por muchos» es eco inequívoco de Isaías 53:11 (לָרַבִּים).</p>
+
+<h2 id="s7-4" class="h2" data-h2="IX.2 El bautismo de Jesús">IX.2 — El Bautismo de Jesús: La Voz Celestial</h2>
+<p>En el bautismo de Jesús (Mc 1:10-11), la voz celestial declara: <em>«Tú eres mi Hijo amado; en ti tengo complacencia»</em>. Esta frase es una composición intertextual precisa: «mi Hijo amado» evoca el Salmo 2:7, y «en quien tengo complacencia» (ἐν ᾧ εὐδόκησα) es alusión directa a Isaías 42:1 —Primer Cántico del Siervo—. <strong>Dios mismo identifica a Jesús con el Siervo de YHWH desde el inicio de su ministerio.</strong></p>
+
+<h2 id="s7-5" class="h2" data-h2="IX.3 La Última Cena">IX.3 — La Última Cena: «Por Muchos» Derramada</h2>
+<p>En la institución de la Eucaristía (Mt 26:28): <em>«Esta es mi sangre del nuevo pacto, que por muchos es derramada para remisión de los pecados»</em>. La expresión «por muchos» (περὶ πολλῶν) es el eco de Isaías 53:12 («cargó el pecado de muchos») e Isaías 53:11. <strong>Jesús interpreta su propia muerte inminente en los términos del Siervo sufriente de Isaías 53.</strong></p>
+
+<h2 id="s7-6" class="h2" data-h2="IX.4 La Pasión y Is 53">IX.4 — La Pasión como Cumplimiento de Isaías 53 Punto por Punto</h2>
+<ul class="cl">
+  <li><strong>Is 53:3 / Mc 14:50:</strong> «Sus discípulos le abandonaron todos y huyeron» — «desprecio y rechazo».</li>
+  <li><strong>Is 53:7 / Mt 27:12-14:</strong> Silencio ante el Sanedrín y ante Pilato — «no abrió su boca».</li>
+  <li><strong>Is 53:5 / Mc 15:15:</strong> La flagelación — «molido por nuestras iniquidades».</li>
+  <li><strong>Is 53:12b / Mc 15:27:</strong> «Y crucificaron con él a dos ladrones» — «fue contado con los transgresores».</li>
+  <li><strong>Is 53:9 / Mt 27:57-60:</strong> Sepultado en la tumba de José de Arimatea, hombre rico.</li>
+  <li><strong>Is 53:12c / Lc 23:34:</strong> «Padre, perdónalos» — «intercedió por los transgresores».</li>
+  <li><strong>Is 53:10-11 / 1 Cor 15:4:</strong> La resurrección — «verá su descendencia, prolongará sus días».</li>
+</ul>
+
+<h2 id="s7-7" class="h2" data-h2="IX.5 Felipe y el etíope">IX.5 — Felipe y el Etíope: Hermenéutica Apostólica (Hechos 8:26-35)</h2>
+<p>El diácono Felipe encuentra a un oficial etíope leyendo precisamente Isaías 53:7-8. Ante la pregunta del etíope: <em>«¿De quién habla el profeta esto? ¿De sí mismo, o de algún otro?»</em> — Felipe, «abriendo su boca, y comenzando desde esta escritura, le anunció el evangelio de Jesús». La pregunta griega (περὶ τίνος ὁ προφήτης λέγει τοῦτο;) excluye la interpretación corporativa como opción natural. <strong>El texto se presta espontáneamente a una lectura individual, no corporativa.</strong></p>
+</section>
+
+<!-- ══ VIII. ARGUMENTOS FILOSÓFICOS ══════════ -->
+<section id="sec8" data-h1="VIII. Argumentos Filosóficos">
+<div class="sd"><div class="rm">VIII</div><h2>Argumentos Filosóficos y Epistemológicos</h2>
+<p class="ss">Probabilidad acumulativa, coherencia hermenéutica y ontología del acto salvífico</p></div>
+
+<h2 id="s8-1" class="h2" data-h2="VIII.1 Probabilidad acumulativa">VIII.1 — El Argumento de la Probabilidad Acumulativa</h2>
+<p>Un argumento filosófico de gran solidez es el de la <strong>probabilidad acumulativa</strong> («cumulative case argument»), desarrollado por Basil Mitchell, Richard Swinburne y C. S. Lewis. La convergencia acumulativa de múltiples predicados independientes <strong>eleva exponencialmente la probabilidad del cumplimiento intencional.</strong></p>
+<p>Los diez predicados específicos verificados en Jesús: (1) Origen humilde; (2) Sin pecado moral; (3) Rechazado por su pueblo; (4) Muerte judicial violenta; (5) Silencio ante acusadores; (6) Crucificado entre criminales; (7) Sepultado en tumba de hombre rico; (8) Muerte considerada castigo divino; (9) Vida post-mortem; (10) Intercesión por los transgresores.</p>
+<p>El matemático <strong>Peter Stoner</strong> calculó que la probabilidad de que ocho profecías mesiánicas se cumplan por casualidad en un individuo es de <strong>1 en 10<sup>17</sup></strong>, lo que supera el número de electrones en el universo observable.</p>
+
+<h2 id="s8-2" class="h2" data-h2="VIII.2 Coherencia hermenéutica">VIII.2 — El Argumento de la Coherencia Hermenéutica</h2>
+<p>La interpretación que postula un cumplimiento individual en Jesús es más coherente porque: (a) respeta la gramática del texto sin forzarla; (b) no requiere que una sola entidad sea simultáneamente agente y paciente de la acción soteriológica; (c) se inscribe en una tradición hermenéutica continua (Qumrán, Targum, Talmud, NT); (d) satisface el principio de especificidad progresiva de la revelación bíblica.</p>
+
+<h2 id="s8-3" class="h2" data-h2="VIII.3 Criterio de la vergüenza">VIII.3 — El Criterio de la Vergüenza (Theissen)</h2>
+<p>El historiador crítico <strong>Gerd Theissen</strong> formuló el «criterio de la vergüenza»: si un dato sobre Jesús habría sido vergonzoso para la comunidad cristiana primitiva, es probable que sea histórico porque nadie lo habría inventado. La muerte de Jesús por crucifixión —la pena más deshonrosa del mundo romano— era una «vergüenza» que ningún movimiento religioso habría inventado para su fundador. El hecho de que los primeros cristianos proclamaran un «Cristo crucificado» —«escándalo para los judíos y locura para los griegos» (1 Cor 1:23)— confirma que era un dato histórico real.</p>
+
+<h2 id="s8-4" class="h2" data-h2="VIII.4 Consistencia ontológica">VIII.4 — La Consistencia Ontológica del AT</h2>
+<p>El sistema teológico del AT descansa sobre la noción de un Dios que actúa en la historia de manera personal y particular: YHWH llama a Abraham por nombre, habla con Moisés de manera personal, escoge a David como rey. La lógica de esta teología de la particularidad (<em>Heilsgeschichte</em>) apunta hacia un acontecimiento salvífico singular: no un proceso colectivo difuso, sino un acto personal puntual realizado por un mediador individual. Isaías 53 describe precisamente este tipo de acto.</p>
+
+<h2 id="s8-5" class="h2" data-h2="VIII.5 Convergencia de tradiciones">VIII.5 — La Convergencia de Tradiciones</h2>
+<p>Cuando tradiciones hermenéuticas diversas y a veces antagónicas convergen en aplicar un texto a una figura mesiánica individual, el peso acumulativo tiene valor epistemológico: gramática del texto → individuo singular; Targum Jonatán → introduce «Mesías» en 52:13; Talmud Babilónico (Sanh. 98b) → aplica Is 53:4 al Mesías; Qumrán → lectura mesiánica individual; el propio Jesús → autoidentificación (Lc 22:37).</p>
+</section>
+
+<!-- ══ X. HISTORIA DE LA INTERPRETACIÓN ══════ -->
+<section id="sec10" data-h1="X. Historia de la Interpretación">
+<div class="sd"><div class="rm">X</div><h2>Historia de la Interpretación</h2>
+<p class="ss">Tradición judía del Segundo Templo, Rashi, y los Padres de la Iglesia</p></div>
+
+<h2 id="s10-1" class="h2" data-h2="X.1 Judaísmo del Segundo Templo">X.1 — La Interpretación Individual en el Judaísmo del Segundo Templo</h2>
+<p>Antes del nacimiento de Rashi (siglo XI), la interpretación dominante en el judaísmo del período de la Mishná y el Talmud era frecuentemente individual y mesiánica:</p>
+<ul class="cl">
+  <li><strong>Targum Jonatán (siglos I-II d.C.):</strong> introduce «el Mesías» en 52:13</li>
+  <li><strong>Talmud Babilónico, Sanhedrín 98b:</strong> aplica Is 53:4 al Mesías</li>
+  <li><strong>Zohar III.212b:</strong> aplica el pasaje al Mesías en el «Palacio del Pájaro Enfermo»</li>
+  <li><strong>Maimonides (1135-1204):</strong> aunque no acepta a Jesús, no aplica Is 53 a Israel en su Mishné Torá</li>
+</ul>
+
+<h2 id="s10-2" class="h2" data-h2="X.2 El giro de Rashi">X.2 — El Giro de Rashi (s. XI) y su Contexto Apologético</h2>
+<p>Es historiográficamente significativo que la interpretación corporativa (Israel = el Siervo) se popularice sistemáticamente en el judaísmo a partir del siglo XI, coincidiendo con el período de las Cruzadas y de una intensa polémica judaeo-cristiana. <strong>Rashi (1040-1105)</strong>, en su comentario al pasaje, afirma que el Siervo es Israel. Sin embargo, algunos estudiosos judíos modernos han notado que este es un movimiento <strong>apologético-polemista</strong> más que una exégesis puramente textual. El estudioso judío <strong>David Berger</strong> y otros han documentado que la polémica judeo-cristiana medieval influyó significativamente en esta re-orientación.</p>
+
+<h2 id="s10-3" class="h2" data-h2="X.3 Interpretación cristológica patrística">X.3 — La Interpretación Cristológica: NT y Padres de la Iglesia</h2>
+<ul class="cl">
+  <li><strong>Justino Mártir,</strong> «Diálogo con Trifón» (c. 155 d.C.), cap. 89-102: demuestra que Isaías 53 se refiere a Cristo.</li>
+  <li><strong>Ireneo de Lyon</strong> (c. 180 d.C.), «Adversus Haereses»: tipología del Siervo como fundamento de la teología de la recapitulación.</li>
+  <li><strong>Orígenes de Alejandría</strong> (c. 240 d.C.), «Contra Celso» 1.54-55: responde explícitamente a la objeción judía y a la interpretación corporativa.</li>
+</ul>
+<p>La continuidad entre la exégesis apostólica (Pablo, Pedro, Lucas, Juan) y la patrística confirma que la interpretación cristológica <strong>no fue una innovación tardía sino la hermenéutica original del movimiento cristiano</strong> —desde dentro del judaísmo del Segundo Templo.</p>
+</section>
+
+<!-- ══ XI. CONCLUSIÓN ══════════════════════════ -->
+<section id="sec11" data-h1="XI. Conclusión General">
+<div class="sd"><div class="rm">XI</div><h2>Conclusión General</h2>
+<p class="ss">Síntesis de los argumentos y Silogismo Maestro</p></div>
+
+<h2 id="s11-1" class="h2" data-h2="XI.1 Síntesis de los argumentos">XI.1 — Síntesis de los Argumentos</h2>
+<ul class="cl">
+  <li><strong>Nivel gramatical:</strong> El Siervo es consistentemente singular masculino; el contraste «él / nosotros» es estructural y requiere dos entidades distintas; los verbos sacerdotales (נזה, 'asham) son de aplicación individual.</li>
+  <li><strong>Nivel literario:</strong> La progresión narrativa de los cuatro Cánticos describe un individuo; Isaías 49:5-6 distingue explícitamente al Siervo de Israel.</li>
+  <li><strong>Nivel canónico:</strong> La figura mesiánica del AT (Génesis 3:15; 49:10; Números 24:17; Salmos 22; 110; Zacarías 9:9; 12:10; Miqueas 5:2) converge en un individuo sufriente-glorificado que corresponde al Siervo.</li>
+  <li><strong>Nivel lógico (silogístico):</strong> Siete silogismos formales demuestran que la identificación corporativa del Siervo con Israel genera contradicciones lógicas irresolubles.</li>
+  <li><strong>Nivel histórico-exegético:</strong> El Targum Jonatán, el Talmud Babilónico (Sanhedrín 98b), los Rollos del Mar Muerto y la tradición zohárica confirman que la interpretación mesiánica individual era viable y operativa en el judaísmo antes y durante el período del NT.</li>
+  <li><strong>Nivel cristológico:</strong> Jesús de Nazaret cumple todos y cada uno de los predicados específicos del cántico con correspondencia histórica verificable; el propio Jesús se identifica con el Siervo (Lc 22:37; Mc 10:45).</li>
+  <li><strong>Nivel filosófico:</strong> El argumento de la probabilidad acumulativa, el principio de coherencia hermenéutica, el criterio de la vergüenza y la consistencia ontológica convergen en confirmar que la identificación de Jesús con el Siervo es la explicación más parsimoniosa y epistémicamente sólida del texto.</li>
+</ul>
+
+<h2 id="s11-2" class="h2" data-h2="XI.2 Silogismo Maestro">XI.2 — Silogismo Maestro: Síntesis Final</h2>
+<div class="sm">
+  <div class="sm-hd">SILOGISMO MAESTRO — SÍNTESIS FINAL<span>Convergencia de todos los niveles argumentativos</span></div>
+  <div class="pr"><div class="pl">P1</div><div class="pt">Isaías 53 describe a un individuo singular, inocente, que padece sufrimiento vicario sustitutorio en beneficio de «nosotros», muere judicialmente, es sepultado en la tumba de un rico, y vive post-mortem justificando a muchos — predicados que son gramatical, lógica y teológicamente incompatibles con la identificación corporativa del Siervo con la nación de Israel.</div></div>
+  <div class="pr"><div class="pl">P2</div><div class="pt">El corpus del Antiguo Testamento, desde el Pentateuco hasta los profetas menores, anticipa progresivamente la figura de un Mesías individual sufriente-glorificado cuyas características convergen con los predicados del Siervo de Isaías 53.</div></div>
+  <div class="pr"><div class="pl">P3</div><div class="pt">Jesús de Nazaret es el único individuo en la historia documentada que satisface simultánea y completamente todos los predicados del Siervo (humildad de origen, inocencia moral, rechazo por su pueblo, silencio ante acusadores, muerte violenta-judicial, sepultura con el rico, vida post-mortem), y que además se auto-identificó explícitamente con el Siervo mediante citas directas del cántico.</div></div>
+  <div class="pr"><div class="pl">P4</div><div class="pt">El principio epistemológico de economía explicativa (navaja de Ockham) exige preferir la hipótesis que explica todos los datos sin generar contradicciones internas adicionales.</div></div>
+  <div class="cn" style="font-size:15px;padding:16px 20px"><span class="th">∴</span>El Siervo de Isaías 53 es un Mesías humano individual, y Jesús de Nazaret es el cumplimiento histórico y escatológico de esta profecía, tanto por correspondencia empírica como por coherencia teológica, lógica y canónica.</div>
+</div>
+
+<h2 id="s11-3" class="h2" data-h2="XI.3 Palabras finales">XI.3 — Palabras Finales</h2>
+<p>La convergencia de argumentos gramaticales, literarios, canónicos, lógicos, histórico-exegéticos y filosóficos forma una acumulación de evidencia que, tomada en conjunto, constituye uno de los argumentos más sólidos disponibles en la apologética cristiana y en la teología bíblica. No se trata de un argumento de un solo «texto de prueba» (<em>proof-texting</em>), sino de una demostración sistemática que recorre todos los niveles del análisis académico disponible.</p>
+<p>La profecía de Isaías 53, escrita siglos antes de Jesús de Nazaret, describe con una precisión que desafía cualquier explicación meramente coincidental la figura de un individuo que padece, muere, resucita y justifica a muchos.</p>
+<blockquote>Cuando haya puesto su vida en expiación por el pecado, verá linaje, vivirá por largos días, y la voluntad del SEÑOR será en su mano prosperada.<cite>Isaías 53:10 — La promesa de vida post-mortem que solo la resurrección puede satisfacer</cite></blockquote>
+</section>
+
+<!-- ══ BIBLIOGRAFÍA ════════════════════════════ -->
+<section id="biblio" data-h1="Bibliografía">
+<div class="sd"><div class="rm">Bibliografía</div><h2>Bibliografía Selecta</h2>
+<p class="ss">Textos primarios, comentarios, monografías, gramáticas hebreas y obras filosóficas</p></div>
+<div class="bib">
+<h4 id="b1" data-h2="Textos primarios">Textos Primarios</h4>
+<ul class="bl">
+  <li>Biblia Hebraica Stuttgartensia (BHS), ed. K. Elliger y W. Rudolph. Deutsche Bibelgesellschaft, 1977.</li>
+  <li>Septuaginta (LXX), ed. A. Rahlfs y R. Hanhart. Deutsche Bibelgesellschaft, 2006.</li>
+  <li>Targum Jonatán a los Profetas — <em>The Targum of Isaiah</em>, trad. J. F. Stenning. Oxford: Clarendon Press, 1949.</li>
+  <li>Rollo de Isaías (1QIsa<sup>a</sup>), en: <em>The Dead Sea Scrolls Bible</em>, trad. M. Abegg, P. Flint, E. Ulrich. HarperOne, 1999.</li>
+  <li>Talmud Babilónico, tractado Sanhedrín 98b. Edición Artscroll/Mesorah Publications, 1996.</li>
+  <li>Zohar III.212b — <em>The Zohar</em>, trad. D. C. Matt. Stanford University Press, 2004.</li>
+</ul>
+<h4 id="b2" data-h2="Comentarios y monografías">Comentarios y Monografías</h4>
+<ul class="bl">
+  <li>Childs, Brevard S. <em>Isaiah</em>. The Old Testament Library. Westminster John Knox Press, 2001.</li>
+  <li>Goldingay, John. <em>Isaiah</em>. NIBC. Hendrickson Publishers, 2001.</li>
+  <li>Motyer, J. Alec. <em>The Prophecy of Isaiah</em>. IVP Academic, 1993.</li>
+  <li>Oswalt, John N. <em>The Book of Isaiah, Chapters 40-66</em>. NICOT. Eerdmans, 1998.</li>
+  <li>Westermann, Claus. <em>Isaiah 40-66: A Commentary</em>. OTL. Westminster Press, 1969.</li>
+  <li>Janowski, Bernd y Stuhlmacher, Peter (eds.). <em>The Suffering Servant: Isaiah 53 in Jewish and Christian Sources</em>. Eerdmans, 2004.</li>
+  <li>Hengel, Martin y Stuhlmacher, Peter. <em>The Atonement: The Origins of the Doctrine in the New Testament</em>. Fortress Press, 1981.</li>
+  <li>North, Christopher R. <em>The Suffering Servant in Deutero-Isaiah</em>. Oxford University Press, 1948.</li>
+  <li>Zimmerli, Walther y Jeremias, Joachim. <em>The Servant of God</em>. SCM Press, 1965.</li>
+</ul>
+<h4 id="b3" data-h2="Gramática hebrea">Gramática Hebrea</h4>
+<ul class="bl">
+  <li>Gesenius, Wilhelm. <em>Gesenius' Hebrew Grammar</em>, ed. E. Kautzsch y A. E. Cowley. Oxford: Clarendon Press, 1910.</li>
+  <li>Joüon, Paul y Muraoka, T. <em>A Grammar of Biblical Hebrew</em>. Pontificio Istituto Biblico, 2006.</li>
+  <li>Waltke, Bruce K. y O'Connor, M. <em>An Introduction to Biblical Hebrew Syntax</em>. Eisenbrauns, 1990.</li>
+</ul>
+<h4 id="b4" data-h2="Apologética y filosofía">Apologética y Filosofía de la Religión</h4>
+<ul class="bl">
+  <li>Stoner, Peter W. <em>Science Speaks</em>. Moody Press, 1963.</li>
+  <li>Swinburne, Richard. <em>The Resurrection of God Incarnate</em>. Oxford University Press, 2003.</li>
+  <li>Habermas, Gary R. <em>The Historical Jesus</em>. College Press, 1996.</li>
+  <li>Wright, N. T. <em>The Resurrection of the Son of God</em>. Fortress Press, 2003.</li>
+  <li>Lewis, C. S. <em>Mere Christianity</em>. Geoffrey Bles, 1952.</li>
+  <li>Theissen, Gerd y Merz, Annette. <em>The Historical Jesus: A Comprehensive Guide</em>. Fortress Press, 1998.</li>
+</ul>
+</div>
+</section>
+
+</div><!-- /#ct -->
+<footer>Isaías 53 — Argumento Mesiánico Académico y Teológico &nbsp;·&nbsp; <span>Siervo · Mesías · Jesús de Nazaret</span></footer>
+</main>
+
+<button id="btt" aria-label="Volver al inicio">↑</button>
+
+<script>
+(function(){
+'use strict';
+const toc=document.getElementById('toc');
+const tocScroll=document.getElementById('toc-scroll');
+const prog=document.getElementById('prog');
+const spb=document.getElementById('spb');
+const btt=document.getElementById('btt');
+const sidebar=document.getElementById('sidebar');
+const ttg=document.getElementById('ttg');
+const main=document.getElementById('main');
+
+/* ── BUILD TOC ──────────────────────────────── */
+function buildTOC(){
+  const entries=[];
+  // H1 anchors (section data-h1)
+  document.querySelectorAll('[data-h1]').forEach(el=>{
+    if(!el.id) el.id='sec-'+Math.random().toString(36).slice(2,7);
+    entries.push({id:el.id,label:el.getAttribute('data-h1'),lv:1,el});
+  });
+  // H2 anchors
+  document.querySelectorAll('[data-h2]').forEach(el=>{
+    if(!el.id) el.id='h2-'+Math.random().toString(36).slice(2,7);
+    entries.push({id:el.id,label:el.getAttribute('data-h2'),lv:2,el});
+  });
+  // H3 anchors
+  document.querySelectorAll('[data-h3]').forEach(el=>{
+    if(!el.id) el.id='h3-'+Math.random().toString(36).slice(2,7);
+    entries.push({id:el.id,label:el.getAttribute('data-h3'),lv:3,el});
+  });
+  // Sort by DOM order
+  entries.sort((a,b)=>{
+    const r=a.el.compareDocumentPosition(b.el);
+    return r&Node.DOCUMENT_POSITION_FOLLOWING?-1:1;
+  });
+  entries.forEach(e=>{
+    const li=document.createElement('li');
+    li.className='lv'+e.lv;
+    li.dataset.id=e.id;
+    const a=document.createElement('a');
+    a.href='#'+e.id;
+    a.textContent=e.label;
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+}
+
+/* ── INTERSECTION OBSERVER ──────────────────── */
+function setupObserver(){
+  const items=document.querySelectorAll('#toc li[data-id]');
+  const idToLi={};
+  items.forEach(li=>{ idToLi[li.dataset.id]=li; });
+  const visible=new Set();
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) visible.add(e.target.id);
+      else visible.delete(e.target.id);
+    });
+    let active=null;
+    // Pick first visible in DOM order
+    const all=Array.from(document.querySelectorAll('[data-h1],[data-h2],[data-h3]'));
+    for(const el of all){
+      if(visible.has(el.id)&&idToLi[el.id]){active=el.id;break;}
+    }
+    // Fallback: last item above viewport
+    if(!active){
+      const scrollTop=window.scrollY||document.documentElement.scrollTop;
+      let best=null,bestTop=-Infinity;
+      all.forEach(el=>{
+        if(!idToLi[el.id]) return;
+        const t=el.getBoundingClientRect().top+scrollTop;
+        if(t<=scrollTop+80&&t>bestTop){bestTop=t;best=el.id;}
+      });
+      if(best) active=best;
+    }
+    items.forEach(li=>li.classList.remove('active'));
+    if(active&&idToLi[active]){
+      const li=idToLi[active];
+      li.classList.add('active');
+      // Auto-scroll TOC
+      const lTop=li.offsetTop;
+      const lH=li.offsetHeight;
+      const sTop=tocScroll.scrollTop;
+      const sH=tocScroll.offsetHeight;
+      if(lTop<sTop+50) tocScroll.scrollTop=lTop-50;
+      else if(lTop+lH>sTop+sH-50) tocScroll.scrollTop=lTop-sH+lH+60;
+    }
+  },{rootMargin:'-5% 0px -60% 0px',threshold:0});
+
+  document.querySelectorAll('[data-h1],[data-h2],[data-h3]').forEach(el=>{
+    if(idToLi[el.id]) observer.observe(el);
+  });
+}
+
+/* ── PROGRESS ───────────────────────────────── */
+function updateProgress(){
+  const max=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=max>0?window.scrollY/max:0;
+  prog.style.transform='scaleX('+pct+')';
+  spb.style.width=(pct*100).toFixed(1)+'%';
+  btt.classList.toggle('vis',window.scrollY>500);
+}
+
+/* ── MOBILE TOC TOGGLE ──────────────────────── */
+ttg.addEventListener('click',()=>sidebar.classList.toggle('open'));
+document.addEventListener('click',e=>{
+  if(!sidebar.contains(e.target)&&!ttg.contains(e.target))
+    sidebar.classList.remove('open');
+});
+// Close on link click (mobile)
+toc.addEventListener('click',e=>{
+  if(e.target.tagName==='A'&&window.innerWidth<=700)
+    sidebar.classList.remove('open');
+});
+
+/* ── BACK TO TOP ────────────────────────────── */
+btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ── INIT ───────────────────────────────────── */
+buildTOC();
+setupObserver();
+window.addEventListener('scroll',updateProgress,{passive:true});
+updateProgress();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concilio de Nicea II (787 d.C.) — Historia Completa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@300;400;600&display=swap');
+
+  :root {
+    --negro: #0a0a0a;
+    --negro-medio: #111111;
+    --negro-panel: #1a1a1a;
+    --negro-card: #222222;
+    --amarillo-oro: #F5C518;
+    --amarillo-claro: #FFD700;
+    --amarillo-tenue: #c9a227;
+    --amarillo-brillante: #ffe566;
+    --blanco: #ffffff;
+    --blanco-hueso: #f5f5f0;
+    --blanco-gris: #e0e0d8;
+    --gris-texto: #b0b0a0;
+    --borde: #2a2a2a;
+    --borde-oro: rgba(245,197,24,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco-hueso);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  /* ── NAVEGACIÓN ── */
+  #nav-toggle {
+    position: fixed;
+    top: 18px; left: 18px;
+    z-index: 999;
+    background: var(--amarillo-oro);
+    color: var(--negro);
+    border: none;
+    padding: 10px 16px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 12px rgba(245,197,24,0.4);
+  }
+  #nav-toggle:hover { background: var(--amarillo-brillante); }
+
+  #sidebar {
+    position: fixed;
+    top: 0; left: -340px;
+    width: 340px; height: 100vh;
+    background: var(--negro-panel);
+    border-right: 2px solid var(--amarillo-oro);
+    z-index: 998;
+    overflow-y: auto;
+    transition: left 0.35s cubic-bezier(.4,0,.2,1);
+    padding: 70px 0 30px;
+  }
+  #sidebar.open { left: 0; }
+
+  #sidebar h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--amarillo-oro);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0 24px 12px;
+    border-bottom: 1px solid var(--borde-oro);
+    margin-bottom: 10px;
+  }
+
+  #sidebar ul { list-style: none; }
+  #sidebar ul li a {
+    display: block;
+    padding: 9px 24px;
+    color: var(--blanco-gris);
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  #sidebar ul li a:hover {
+    color: var(--amarillo-oro);
+    background: rgba(245,197,24,0.07);
+    border-left-color: var(--amarillo-oro);
+  }
+  #sidebar ul li.sub a { padding-left: 40px; font-size: 12px; }
+  #sidebar ul li.subsub a { padding-left: 56px; font-size: 11px; color: var(--gris-texto); }
+
+  #overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 997;
+  }
+  #overlay.active { display: block; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 40px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(245,197,24,0.12) 0%, transparent 60%),
+      var(--negro);
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '✦';
+    position: absolute;
+    font-size: 600px;
+    color: rgba(245,197,24,0.03);
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 5px;
+    color: var(--amarillo-oro);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  #hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(36px, 6vw, 80px);
+    font-weight: 900;
+    color: var(--blanco);
+    line-height: 1.1;
+    max-width: 900px;
+    margin-bottom: 12px;
+  }
+  #hero h1 span { color: var(--amarillo-oro); }
+
+  .hero-sub {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(16px, 2.5vw, 26px);
+    color: var(--amarillo-tenue);
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  .hero-desc {
+    max-width: 700px;
+    color: var(--blanco-gris);
+    font-size: 18px;
+    line-height: 1.9;
+    font-style: italic;
+    margin-bottom: 48px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .hero-stat {
+    text-align: center;
+    padding: 18px 30px;
+    border: 1px solid var(--borde-oro);
+    background: rgba(245,197,24,0.05);
+  }
+  .hero-stat .num {
+    font-family: 'Cinzel', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--amarillo-oro);
+    display: block;
+  }
+  .hero-stat .lbl {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--gris-texto);
+    text-transform: uppercase;
+  }
+
+  /* ── SECCIONES ── */
+  section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--borde-oro);
+    margin: 0 auto;
+    max-width: 980px;
+  }
+
+  h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(24px, 3.5vw, 42px);
+    font-weight: 700;
+    color: var(--blanco);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  h2 .h2-num {
+    color: var(--amarillo-oro);
+    font-size: 0.5em;
+    letter-spacing: 3px;
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(17px, 2vw, 24px);
+    color: var(--amarillo-oro);
+    margin: 36px 0 14px;
+    font-weight: 700;
+    border-left: 3px solid var(--amarillo-oro);
+    padding-left: 16px;
+  }
+
+  h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    color: var(--amarillo-tenue);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 24px 0 10px;
+  }
+
+  p { margin-bottom: 18px; color: var(--blanco-gris); }
+
+  /* ── CITA ── */
+  .quote {
+    background: var(--negro-card);
+    border-left: 4px solid var(--amarillo-oro);
+    padding: 24px 30px;
+    margin: 28px 0;
+    border-radius: 0 4px 4px 0;
+    position: relative;
+  }
+  .quote::before {
+    content: '"';
+    font-family: 'Cinzel', serif;
+    font-size: 80px;
+    color: rgba(245,197,24,0.15);
+    position: absolute;
+    top: -10px; left: 10px;
+    line-height: 1;
+  }
+  .quote-text {
+    font-style: italic;
+    color: var(--blanco-hueso);
+    font-size: 16.5px;
+    line-height: 1.85;
+    margin-bottom: 12px;
+  }
+  .quote-source {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 28px 0;
+  }
+  .card {
+    background: var(--negro-card);
+    border: 1px solid var(--borde);
+    padding: 24px;
+    border-top: 3px solid var(--amarillo-oro);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover { border-color: var(--amarillo-brillante); transform: translateY(-2px); }
+  .card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    color: var(--blanco);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .card-role {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .card-desc { font-size: 14.5px; color: var(--gris-texto); line-height: 1.7; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding: 10px 0; margin: 28px 0; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--amarillo-oro), transparent);
+  }
+  .tl-item {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 34px;
+    padding-left: 70px;
+    position: relative;
+  }
+  .tl-dot {
+    position: absolute;
+    left: 18px; top: 4px;
+    width: 22px; height: 22px;
+    background: var(--amarillo-oro);
+    border-radius: 50%;
+    border: 3px solid var(--negro);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px var(--amarillo-oro);
+  }
+  .tl-content { flex: 1; }
+  .tl-year {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--amarillo-oro);
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    color: var(--blanco);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .tl-body { font-size: 14.5px; color: var(--gris-texto); }
+
+  /* ── TABLA ── */
+  .table-wrap { overflow-x: auto; margin: 24px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+  thead th {
+    background: var(--amarillo-oro);
+    color: var(--negro);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 12px;
+  }
+  tbody tr { border-bottom: 1px solid var(--borde); }
+  tbody tr:hover { background: rgba(245,197,24,0.05); }
+  tbody td { padding: 12px 16px; color: var(--blanco-gris); vertical-align: top; }
+  tbody td:first-child { color: var(--amarillo-tenue); font-family: 'Oswald', sans-serif; font-size: 13px; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    background: linear-gradient(135deg, rgba(245,197,24,0.08), rgba(245,197,24,0.03));
+    border: 1px solid var(--borde-oro);
+    padding: 28px 32px;
+    margin: 28px 0;
+    border-radius: 4px;
+  }
+  .highlight-title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: var(--amarillo-oro);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  /* ── PADRE CARD ── */
+  .padre-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    margin: 24px 0;
+  }
+  .padre-card {
+    background: var(--negro-panel);
+    border: 1px solid var(--borde);
+    border-left: 4px solid var(--amarillo-oro);
+    padding: 20px 22px;
+  }
+  .padre-name {
+    font-family: 'Cinzel', serif;
+    color: var(--blanco);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .padre-dates {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    color: var(--amarillo-tenue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .padre-quote {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--blanco-gris);
+    line-height: 1.7;
+    margin-bottom: 8px;
+    border-left: 2px solid rgba(245,197,24,0.3);
+    padding-left: 12px;
+  }
+  .padre-ref {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    color: var(--gris-texto);
+    letter-spacing: 1px;
+  }
+
+  /* ── SESIÓN TABS ── */
+  .sesion-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    border-bottom: 2px solid var(--borde-oro);
+    padding-bottom: 0;
+  }
+  .sesion-tab {
+    background: var(--negro-card);
+    color: var(--gris-texto);
+    border: 1px solid var(--borde);
+    border-bottom: none;
+    padding: 10px 18px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .sesion-tab:hover, .sesion-tab.active {
+    background: var(--amarillo-oro);
+    color: var(--negro);
+    border-color: var(--amarillo-oro);
+    font-weight: 600;
+  }
+  .sesion-content {
+    display: none;
+    background: var(--negro-card);
+    border: 1px solid var(--borde-oro);
+    border-top: none;
+    padding: 28px;
+  }
+  .sesion-content.active { display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--negro-panel);
+    border-top: 2px solid var(--amarillo-oro);
+    text-align: center;
+    padding: 50px 40px;
+  }
+  footer p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--gris-texto);
+    text-transform: uppercase;
+  }
+
+  /* ── UTILIDADES ── */
+  .gold { color: var(--amarillo-oro); }
+  .white { color: var(--blanco); }
+  .italic { font-style: italic; }
+  .oswald { font-family: 'Oswald', sans-serif; }
+  .mt { margin-top: 32px; }
+  .badge {
+    display: inline-block;
+    background: var(--amarillo-oro);
+    color: var(--negro);
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 2px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .lead {
+    font-size: 19px;
+    color: var(--blanco-gris);
+    line-height: 1.9;
+    font-style: italic;
+    margin-bottom: 30px;
+    border-left: 3px solid var(--amarillo-oro);
+    padding-left: 20px;
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 50px 20px; }
+    .hero-stats { gap: 20px; }
+    .hero-stat { padding: 14px 20px; }
+    #sidebar { width: 85vw; }
+    .sesion-tabs { gap: 4px; }
+    .sesion-tab { padding: 8px 12px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOGGLE Y SIDEBAR -->
+<button id="nav-toggle" onclick="toggleNav()">☰ ÍNDICE</button>
+
+<div id="overlay" onclick="closeNav()"></div>
+
+<nav id="sidebar">
+  <h3>Concilio de Nicea II — 787</h3>
+  <ul>
+    <li><a href="#hero" onclick="closeNav()">✦ Inicio</a></li>
+    <li><a href="#contexto" onclick="closeNav()">I. Contexto Histórico</a></li>
+    <li class="sub"><a href="#contexto-iconoclastia" onclick="closeNav()">Crisis iconoclasta</a></li>
+    <li class="sub"><a href="#contexto-politico" onclick="closeNav()">Escenario político</a></li>
+    <li><a href="#convocatoria" onclick="closeNav()">II. La Convocatoria</a></li>
+    <li class="sub"><a href="#irene" onclick="closeNav()">Emperatriz Irene</a></li>
+    <li class="sub"><a href="#tarasio" onclick="closeNav()">Patriarca Tarasio</a></li>
+    <li><a href="#participantes" onclick="closeNav()">III. Participantes</a></li>
+    <li class="sub"><a href="#legados" onclick="closeNav()">Legados papales</a></li>
+    <li class="sub"><a href="#obispos" onclick="closeNav()">Obispos y delegaciones</a></li>
+    <li><a href="#sesiones" onclick="closeNav()">IV. Las Sesiones</a></li>
+    <li class="sub"><a href="#ses1" onclick="closeNav()">Sesiones I–VII</a></li>
+    <li class="sub"><a href="#horos" onclick="closeNav()">El Horos final</a></li>
+    <li><a href="#debate" onclick="closeNav()">V. El Gran Debate</a></li>
+    <li class="sub"><a href="#argumentos" onclick="closeNav()">Argumentos iconoclastas</a></li>
+    <li class="sub"><a href="#respuestas" onclick="closeNav()">Respuestas iconófilas</a></li>
+    <li><a href="#invencion" onclick="closeNav()">VI. ¿Se Inventó la Veneración?</a></li>
+    <li class="sub"><a href="#siglos-anteriores" onclick="closeNav()">Evidencias previas</a></li>
+    <li><a href="#padres" onclick="closeNav()">VII. Padres Anteriores</a></li>
+    <li class="sub"><a href="#siglos-i-ii" onclick="closeNav()">Siglos I–II</a></li>
+    <li class="sub"><a href="#siglos-iii-iv" onclick="closeNav()">Siglos III–IV</a></li>
+    <li class="sub"><a href="#siglos-v-vi" onclick="closeNav()">Siglos V–VI</a></li>
+    <li class="sub"><a href="#damasceno" onclick="closeNav()">Juan Damasceno</a></li>
+    <li><a href="#arqueologia" onclick="closeNav()">VIII. Arqueología</a></li>
+    <li class="sub"><a href="#catacumbas" onclick="closeNav()">Catacumbas</a></li>
+    <li class="sub"><a href="#dura" onclick="closeNav()">Dura Europos</a></li>
+    <li class="sub"><a href="#hallazgos" onclick="closeNav()">Otros hallazgos</a></li>
+    <li><a href="#despues" onclick="closeNav()">IX. Después del Concilio</a></li>
+    <li class="sub"><a href="#recepcion" onclick="closeNav()">Recepción en Occidente</a></li>
+    <li class="sub"><a href="#nicea-fracaso" onclick="closeNav()">Segunda iconoclastia</a></li>
+    <li class="sub"><a href="#victoria-final" onclick="closeNav()">Victoria definitiva 843</a></li>
+    <li><a href="#repercusiones" onclick="closeNav()">X. Repercusiones</a></li>
+    <li><a href="#teologia" onclick="closeNav()">XI. Teología del Icono</a></li>
+    <li><a href="#fuentes" onclick="closeNav()">XII. Fuentes</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  HERO                                      -->
+<!-- ══════════════════════════════════════════ -->
+<section id="hero" style="max-width:100%;padding:0;">
+  <div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 40px;background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.12) 0%,transparent 60%),#0a0a0a;position:relative;overflow:hidden;">
+    <div class="hero-eyebrow">Séptimo Concilio Ecuménico · Nicea, Bitinia · 787 d.C.</div>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(36px,6vw,80px);font-weight:900;color:#fff;line-height:1.1;max-width:900px;margin-bottom:12px;">
+      El <span style="color:#F5C518;">Concilio</span> de Nicea II
+    </h1>
+    <div class="hero-sub">La Gran Controversia sobre las Imágenes Sagradas</div>
+    <p class="hero-desc">
+      En 787 d.C., ciento treinta años después de que el Imperio Romano de Oriente desencadenara
+      la mayor crisis religiosa desde el arrianismo, los obispos del mundo cristiano se reunieron
+      en la ciudad de Nicea para restaurar el culto de las imágenes. No para inventarlo.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">787</span><span class="lbl">Año</span></div>
+      <div class="hero-stat"><span class="num">VII</span><span class="lbl">Concilio Ecuménico</span></div>
+      <div class="hero-stat"><span class="num">350+</span><span class="lbl">Obispos presentes</span></div>
+      <div class="hero-stat"><span class="num">130</span><span class="lbl">Años de lucha iconoclasta</span></div>
+      <div class="hero-stat"><span class="num">7</span><span class="lbl">Sesiones conciliares</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- I. CONTEXTO HISTÓRICO                      -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="contexto">
+  <h2><span class="h2-num">I · Contexto Histórico</span>El Mundo que Parió el Concilio</h2>
+
+  <p class="lead">Para entender Nicea II hay que retroceder un siglo hasta el momento en que un emperador convirtió una disputa artística en cisma imperial.</p>
+
+  <h3 id="contexto-iconoclastia">La Primera Iconoclastia (726–787)</h3>
+
+  <p>El Imperio Bizantino del siglo VIII vivía bajo una presión triple: las victorias militares del Islam que arrebataban provincia tras provincia, las incursiones búlgaras en los Balcanes, y una teología que el nuevo islam y el viejo judaísmo usaban como arma acusadora, llamando a los cristianos idólatras por venerar imágenes.</p>
+
+  <p>Fue en este contexto que el emperador <span class="gold">León III el Isáurico</span> (r. 717–741) tomó una decisión que sacudiría la Iglesia durante un siglo. En el año <span class="gold">726</span>, ordenó retirar la imagen de Cristo que presidía la Puerta de Bronce del Palacio de Constantinopla. Cuando sus soldados intentaron ejecutar la orden, fueron linchados por una turba enfurecida de fieles. En <span class="gold">730</span>, fue más lejos: convocó al patriarca Germano I y le exigió que firmara el edicto iconoclasta. Germano se negó y fue depuesto. León impuso al dócil Anastasio en su lugar.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">ca. 726</div>
+        <div class="tl-title">León III ordena retirar el Cristo de la Puerta de Bronce</div>
+        <div class="tl-body">El primer acto abierto de iconoclastia imperial. El pueblo reacciona con violencia. En Roma, el papa Gregorio II escribe cartas de firme condena al emperador.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">730</div>
+        <div class="tl-title">Edicto imperial iconoclasta — deposición del patriarca Germano</div>
+        <div class="tl-body">Germano I rechaza suscribir la política imperial y es forzado a dimitir. El papa Gregorio III celebra un sínodo en Roma (731) que excomunica a los iconoclastas. León responde confiscando patrimonios papales en Sicilia y Calabria.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">741–775</div>
+        <div class="tl-title">Constantino V: radicalización de la iconoclastia</div>
+        <div class="tl-body">Hijo de León III, más teólogo y más brutal. Convoca el Concilio de Hieria (754), llama iconólatras a los veneradores de imágenes, persigue monjes, destierra obispos, clausura monasterios y usa iglesias como establos. Es el período más oscuro.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">775–780</div>
+        <div class="tl-title">León IV el Jázaro — distensión moderada</div>
+        <div class="tl-body">Hijo de Constantino V, mantiene formalmente la iconoclastia pero no la persigue con el mismo ardor. Al morir en 780, deja a su hijo Constantino VI, de nueve años, bajo la regencia de su esposa Irene, que era devota de las imágenes.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">780–787</div>
+        <div class="tl-title">Regencia de Irene — preparativos para el Concilio</div>
+        <div class="tl-body">Irene restaura el culto de las imágenes en la corte, libera monjes encarcelados y abre negociaciones con Roma. Nombra al laico Tarasio como nuevo patriarca de Constantinopla (784), pieza clave en la organización del concilio.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 id="contexto-politico">El Escenario Político en 787</h3>
+
+  <p>El año 787 encuentra el mundo cristiano profundamente fragmentado. En Oriente, la corte imperial de Constantinopla está gobernada de facto por <span class="gold">Irene de Atenas</span>, regente del joven Constantino VI. En Occidente, <span class="gold">Carlomagno</span> acaba de consolidar su poder sobre los francos y aspirará pronto al título imperial. El papa <span class="gold">Adriano I</span> (r. 772–795) gobierna Roma y ha enviado sus legados al concilio con instrucciones precisas.</p>
+
+  <p>El contexto geopolítico es crucial: la pérdida de Siria, Palestina, Egipto y el norte de África ante el Islam en el siglo VII había reducido el Oriente cristiano y generado una profunda crisis de identidad teológica. Algunos historiadores modernos (como el propio Peter Brown) han señalado cómo la presión del monoteísmo islámico acusador de idolatría influyó en la política iconoclasta, aunque esta interpretación no es unánime.</p>
+
+  <div class="highlight">
+    <div class="highlight-title">⚠ El Concilio de Hieria (754): el "conciliábulo" que Nicea II debía refutar</div>
+    <p>Constantino V había convocado en 754 una asamblea de 338 obispos que se autodenominó "Séptimo Concilio Ecuménico" y condenó las imágenes. Uno de los trabajos principales de Nicea II fue demostrar que Hieria no era ecuménico: no asistió ningún representante de Roma ni de los patriarcados orientales de Alejandría, Antioquía y Jerusalén. La ausencia de estos cinco criterios canónicos lo invalidaba.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- II. LA CONVOCATORIA                        -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="convocatoria">
+  <h2><span class="h2-num">II · La Convocatoria</span>Quién lo Convocó y Por Qué</h2>
+
+  <h3 id="irene">La Emperatriz Irene de Atenas (752–803)</h3>
+
+  <p>La convocatoria formal del Concilio es obra de la <span class="gold">emperatriz Irene</span>, que ejercía la regencia en nombre de su hijo Constantino VI (aún menor de edad en 784–787). Irene era ateniense, educada en la veneración de las imágenes, y su acceso al poder tras la muerte de León IV en 780 representó un vuelco radical de la política religiosa imperial.</p>
+
+  <p>El primer intento de celebrar el concilio en Constantinopla en <span class="gold">786</span> fracasó estrepitosamente: las tropas leales a la memoria iconoclasta de Constantino V irrumpieron en la iglesia de los Santos Apóstoles y disolvieron la asamblea con la espada. Irene, con inteligencia política, disolvió esas unidades militares, las reemplazó por tropas de Tracia y convocó el concilio de nuevo para el año siguiente, esta vez en la ciudad de Nicea, en Bitinia, donde el primer gran concilio cristiano había tenido lugar en 325.</p>
+
+  <p>La elección de Nicea era simbólica: vincular la restauración de las imágenes con la autoridad del primer concilio ecuménico que había condenado el arrianismo. Era un mensaje teológico tan poderoso como político.</p>
+
+  <h3 id="tarasio">El Patriarca Tarasio (730–806)</h3>
+
+  <p>La otra figura clave en la convocatoria fue <span class="gold">Tarasio</span>, nombrado patriarca de Constantinopla en diciembre de <span class="gold">784</span> de forma extraordinaria: era laico, primer secretario imperial (asecretis), cuando fue elegido. En un solo día recibió todos los grados de las órdenes sagradas. Su elección fue controvertida —el papa Adriano I protestó— pero Tarasio era exactamente lo que Irene necesitaba: un hombre culto, moderado, hábil en la negociación y comprometido con la restauración de las imágenes.</p>
+
+  <p>Tarasio presidió el Concilio como patriarca de Constantinopla, coordinó la admisión de los obispos que se reconciliaban, supervisó la redacción del Horos (decreto final) y condujo el diálogo teológico con los legados papales.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Irene de Atenas</div>
+      <div class="card-role">Emperatriz Regente (780–797)</div>
+      <div class="card-desc">Convocó formalmente el Concilio, financió su logística, presidió la sesión final en Magnaura con su hijo. Depuso las guarniciones iconoclastas que impidieron el primer intento en 786.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Constantino VI</div>
+      <div class="card-role">Emperador nominal</div>
+      <div class="card-desc">Tenía dieciséis años en 787. Firmó los decretos junto a su madre. Presidió la última sesión en Magnaura, Constantinopla.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Patriarca Tarasio</div>
+      <div class="card-role">Patriarca de Constantinopla</div>
+      <div class="card-desc">Presidió teológicamente el Concilio. Ex laico y primer secretario imperial. Maniobró hábilmente para reunir a las delegaciones orientales.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Papa Adriano I</div>
+      <div class="card-role">Obispo de Roma (772–795)</div>
+      <div class="card-desc">Envió dos legados con instrucciones de restaurar las imágenes y recuperar las propiedades papales confiscadas por León III. Su carta dogmática al concilio fue leída y aceptada.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- III. PARTICIPANTES                         -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="participantes">
+  <h2><span class="h2-num">III · Los Participantes</span>Delegaciones y Figuras Principales</h2>
+
+  <h3 id="legados">Los Legados del Papa Adriano I</h3>
+
+  <p>El papa Adriano I envió dos representantes con plenos poderes para actuar en su nombre. Su presencia era esencial para que el concilio pudiera reivindicar su condición de ecuménico —algo que Hieria no había podido hacer.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Pedro, presbítero</div>
+      <div class="card-role">Legado papal — vicario romano en la corte</div>
+      <div class="card-desc">Representó directamente al papa con plenipotencia. Ocupó el primer lugar en el orden de precedencia, incluso antes del patriarca Tarasio, siguiendo el protocolo canónico.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Pedro, abad de San Sabas</div>
+      <div class="card-role">Segundo legado pontificio</div>
+      <div class="card-desc">Monje del famoso monasterio de San Sabas en Palestina. Su presencia vinculaba el concilio con la antigua tradición monástica oriental veneradora de imágenes.</div>
+    </div>
+  </div>
+
+  <h3 id="obispos">Obispos, Delegaciones y Patriarcados</h3>
+
+  <p>Los patriarcados orientales de <span class="gold">Alejandría, Antioquía y Jerusalén</span> estaban bajo dominio islámico y no pudieron enviar a sus patriarcas en persona. Sin embargo, enviaron delegados monjes que representaron a sus iglesias. Este punto fue discutido en el concilio pero resuelto satisfactoriamente: la representación delegada era canónicamente válida.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Delegación</th><th>Representantes</th><th>Observaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Roma</td><td>Pedro (presbítero) y Pedro (abad S. Sabas)</td><td>Plenipotenciarios papales. Primer rango de precedencia.</td></tr>
+        <tr><td>Constantinopla</td><td>Patriarca Tarasio + numerosos obispos</td><td>Presidía el concilio. Mayor delegación numérica.</td></tr>
+        <tr><td>Alejandría</td><td>Juan, monje representante</td><td>El patriarca Politiano no pudo asistir por estar bajo dominio abasí.</td></tr>
+        <tr><td>Antioquía</td><td>Juan, monje representante</td><td>Igual situación. La ciudad estaba bajo califato.</td></tr>
+        <tr><td>Jerusalén</td><td>Juan, monje (posiblemente el mismo)</td><td>El patriarca Teodoro envió delegados formales.</td></tr>
+        <tr><td>Obispos arrepentidos</td><td>~300 obispos ex iconoclastas</td><td>Muchos habían firmado en Hieria (754). Fueron readmitidos tras lectura pública de retractación.</td></tr>
+        <tr><td>Abades y monjes</td><td>Numerosas delegaciones monásticas</td><td>Los monjes habían sido los grandes mártires de la iconoclastia. Su presencia era simbólicamente esencial.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Figuras Teológicas Destacadas en el Período</h3>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Juan Damasceno (+749)</div>
+      <div class="card-role">El gran defensor teológico de las imágenes</div>
+      <div class="card-desc">Aunque ya había muerto antes del concilio, su obra <em>Discursos en defensa de las imágenes</em> fue el arsenal teológico que los padres conciliares utilizaron. Sus textos fueron leídos en las sesiones.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Teodoro Estudita (759–826)</div>
+      <div class="card-role">Abad del monasterio de Studion</div>
+      <div class="card-desc">No participó en el concilio por ser joven en 787, pero fue la voz más importante en defensa de Nicea II durante la segunda iconoclastia (815–843). Sus Antirrhéticos son fundamentales.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Nicéforo I (+828)</div>
+      <div class="card-role">Patriarca de Constantinopla (806–815)</div>
+      <div class="card-desc">Participó en el concilio como laico. Más tarde, como patriarca, fue exiliado por los iconoclastas. Escribió los <em>Antirhéticos</em> y el <em>Apologeticus</em> en defensa de las imágenes.</div>
+    </div>
+  </div>
+
+  <p><strong>Número de participantes:</strong> Las actas registran aproximadamente <span class="gold">350 obispos</span>, aunque la historiografía moderna (Lamberz, Speck) reduce la cifra fiable a entre 250 y 300 presentes de forma efectiva en alguna sesión. Fue, de todas formas, el concilio más numeroso en participación hasta esa fecha en la historia de la Iglesia.</p>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- IV. LAS SESIONES                           -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="sesiones">
+  <h2><span class="h2-num">IV · Las Sesiones</span>Desarrollo del Concilio</h2>
+
+  <p class="lead">El Concilio de Nicea II se celebró entre el <strong class="gold">24 de septiembre</strong> y el <strong class="gold">13 de octubre de 787</strong> en la basílica de Santa Sofía de Nicea (no confundir con la de Constantinopla). La última sesión se trasladó al Palacio de Magnaura en Constantinopla.</p>
+
+  <div class="sesion-tabs" id="ses1">
+    <button class="sesion-tab active" onclick="switchTab(0)">Sesión I</button>
+    <button class="sesion-tab" onclick="switchTab(1)">Sesión II</button>
+    <button class="sesion-tab" onclick="switchTab(2)">Sesión III</button>
+    <button class="sesion-tab" onclick="switchTab(3)">Sesión IV</button>
+    <button class="sesion-tab" onclick="switchTab(4)">Sesión V</button>
+    <button class="sesion-tab" onclick="switchTab(5)">Sesión VI</button>
+    <button class="sesion-tab" onclick="switchTab(6)">Sesión VII</button>
+  </div>
+
+  <div class="sesion-content active">
+    <h4>Primera Sesión — 24 de septiembre de 787</h4>
+    <p><strong style="color:#F5C518;">Tema central:</strong> Readmisión de los obispos ex iconoclastas.</p>
+    <p>El problema más delicado era qué hacer con los cientos de obispos que habían firmado los decretos del Concilio de Hieria (754) y que ahora querían ser readmitidos en la comunión. Los legados papales y algunos monjes más rigoristas querían deposición inmediata. Tarasio propuso una solución de economía pastoral: aquellos que se retractaran públicamente serían readmitidos en sus cargos.</p>
+    <p>La sesión fue intensa. Los representantes del papa aceptaron finalmente la posición de Tarasio. Se leyó la carta de reconciliación de los obispos que habían abjurado y se procedió a su readmisión formal.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Segunda Sesión — 26 de septiembre de 787</h4>
+    <p><strong style="color:#F5C518;">Tema central:</strong> Lectura de la carta dogmática del papa Adriano I.</p>
+    <p>Se leyó en voz alta la extensa carta del papa Adriano al concilio, en la que defendía teológicamente las imágenes con citas patrísticas. También se leyó la carta de Adriano a los emperadores (Irene y Constantino VI). Ambas cartas fueron aclamadas por los padres conciliares.</p>
+    <p>La carta papal citaba a Gregorio Magno, Silvestre I, Basilio el Grande y otros Padres como testimonios de la práctica antigua de venerar imágenes, respondiendo así a la acusación iconoclasta de novedad.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Tercera Sesión — 28 de septiembre de 787</h4>
+    <p><strong style="color:#F5C518;">Tema central:</strong> Lectura y análisis de los Padres de la Iglesia que testifican a favor de las imágenes.</p>
+    <p>Esta sesión fue la más extensa en trabajo documental. Se reunió un florilegio patrístico —una antología de citas de los Padres— que demostraba que la veneración de imágenes era una práctica antiquísima y no una innovación. Se leyeron textos de Dionisio Areopagita, Gregorio de Nisa, Basilio de Cesarea, Juan Crisóstomo y otros.</p>
+    <p>Los iconoclastas habían sostenido que ningún Padre anterior enseñaba la veneración de imágenes. Este florilegio fue la refutación directa de esa afirmación, constituyendo el corazón teológico del concilio.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Cuarta Sesión — 1 de octubre de 787</h4>
+    <p><strong style="color:#F5C518;">Tema central:</strong> Lectura y condena de los textos iconoclastas.</p>
+    <p>Se leyeron y refutaron sistemáticamente los textos del Concilio de Hieria (754) y los escritos de los principales teólogos iconoclastas. Se demostró que Hieria no había citado correctamente a los Padres de la Iglesia y que había falsificado o mutilado citas patrísticas para hacerlas parecer favorables a su postura.</p>
+    <p>Esta sesión fue crucial para establecer la ilegitimidad de Hieria como concilio ecuménico.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Quinta Sesión — 4 de octubre de 787</h4>
+    <p><strong style="color:#F5C518;">Tema central:</strong> Continuación del debate doctrinal. Distinción entre latría y próskynesis.</p>
+    <p>Se discutió la distinción teológica fundamental entre <em>latría</em> (adoración debida solo a Dios) y <em>timé</em>/<em>proskynesis</em> (veneración/reverencia debida a las imágenes y los santos). Esta distinción, ya elaborada por Juan Damasceno, se convirtió en el corazón del decreto final.</p>
+    <p>Se leyeron más testimonios patrísticos y se discutieron casos de imágenes milagrosas conocidas en la tradición, así como textos litúrgicos que mencionaban imágenes.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Sexta Sesión — 6 de octubre de 787</h4>
+    <p><strong style="color:#F5C518;">Tema central:</strong> Discusión de los canones disciplinares.</p>
+    <p>Se elaboraron los 22 cánones disciplinares del concilio, que regulaban aspectos como: la obligación de los clérigos de conocer los salmos, el comportamiento de los monjes, la prohibición de vender oficios eclesiásticos (simonía), la regulación de la vida monástica femenina, etc. Estos cánones mostraban que el concilio tenía también una agenda de reforma interna de la Iglesia.</p>
+  </div>
+  <div class="sesion-content">
+    <h4>Séptima Sesión — 13 de octubre de 787</h4>
+    <p><strong style="color:#F5C518;">Lugar:</strong> Palacio de Magnaura, Constantinopla.</p>
+    <p>La sesión final se trasladó a la capital imperial para darle máximo rango y visibilidad. Los emperadores Irene y Constantino VI presidieron personalmente. Se leyó, debatió y aprobó el <em>Horos</em> (decreto dogmático final). Todos los padres conciliares lo suscribieron. La emperatriz Irene firmó en primer lugar, seguida de Constantino VI, luego los legados papales, el patriarca Tarasio, y el resto de obispos y abades.</p>
+    <p>Se proclamó formalmente la condena de la iconoclastia, la restauración del culto de las imágenes, y la rehabilitación de todos los que habían sido perseguidos por defenderlas.</p>
+  </div>
+
+  <h3 id="horos">El Horos: el Decreto Dogmático Final</h3>
+
+  <p>El <em>Horos</em> (del griego ὅρος, "límite, definición") es el decreto dogmático que constituye el resultado doctrinal del concilio. Es un documento de extraordinaria precisión teológica. Sus puntos principales son:</p>
+
+  <div class="highlight">
+    <div class="highlight-title">Contenido del Horos de Nicea II</div>
+    <p><strong>1. Afirmación de la legitimidad de las imágenes</strong> en todas sus formas: pinturas, mosaicos, esculturas en relieve, cruces, libros, vestiduras y utensilios sagrados, y otros objetos de arte sagrado.</p>
+    <p><strong>2. Distinción dogmática fundamental:</strong> la veneración (προσκύνησις τιμητική, <em>proskinesis timética</em>) debida a las imágenes es diferente de la adoración (λατρεία, <em>latría</em>) que solo le es debida a Dios. El honor tributado a la imagen asciende al prototipo.</p>
+    <p><strong>3. Fundamento teológico:</strong> se apoya en la Encarnación: Cristo al hacerse hombre se hizo representable. Quien niega que Cristo puede ser representado niega implícitamente que se hizo verdaderamente hombre.</p>
+    <p><strong>4. Condena:</strong> quienes rechacen las imágenes son anatematizados. El texto enumera específicamente a los líderes de la herejía iconoclasta.</p>
+    <p><strong>5. Autoridad patrística:</strong> el decreto invoca explícitamente la tradición no escrita (παράδοσις) de la Iglesia y los testimonios de los Padres, nombrando a varios de ellos.</p>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«Definimos con toda exactitud y cuidado que las venerables e imágenes sagradas, al igual que la representación de la cruz preciosa y vivificante, sean expuestas en las santas iglesias de Dios, en los vasos y vestiduras sagradas, en las paredes y tablas, en las casas y en los caminos; tanto la imagen de nuestro Señor Dios y Salvador Jesucristo, como la de nuestra Señora sin mancilla la santa Madre de Dios, la de los honorables ángeles y la de todos los santos y hombres piadosos. [...] El honor que se tributa a la imagen asciende al prototipo, y el que venera la imagen venera en ella a la persona representada.»</p>
+    <div class="quote-source">Horos del Concilio de Nicea II, 787 d.C. — Mansi XIII, col. 378</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- V. EL GRAN DEBATE                          -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="debate">
+  <h2><span class="h2-num">V · El Gran Debate Teológico</span>Iconoclastas vs. Iconófilos</h2>
+
+  <h3 id="argumentos">Los Argumentos Iconoclastas</h3>
+
+  <p>Los iconoclastas no eran simplistas. Tenían argumentos teológicos elaborados, especialmente los desarrollados por el propio Constantino V en sus <em>Peuseis</em> (Cuestionamientos), un tratado que el concilio tuvo que refutar punto por punto.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Argumento Iconoclasta</th><th>Respuesta Iconófila (Nicea II)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Las imágenes violan el segundo mandamiento (Éxodo 20:4)</td>
+          <td>El mandamiento prohibía ídolos para desviar la adoración hacia dioses falsos, no toda representación artística. El mismo Éxodo 25:18–22 ordena hacer querubines de oro para el Arca. La Encarnación cambia radicalmente el contexto: Dios se hizo visible en Cristo.</td>
+        </tr>
+        <tr>
+          <td>Cristo no puede ser representado: su naturaleza divina es inconscribible (aperígrapton)</td>
+          <td>Respondido por Tarasio y el florilegio patrístico: se representa la persona (hypóstasis) de Cristo en cuanto que se hizo hombre con naturaleza humana visible. Negarlo lleva al docetismo.</td>
+        </tr>
+        <tr>
+          <td>La única verdadera imagen de Cristo es la Eucaristía</td>
+          <td>Argumento de Constantino V rechazado como confusión de categorías: la Eucaristía no es una imagen sino el Cuerpo y Sangre reales. Las imágenes son imágenes, no sacramentos.</td>
+        </tr>
+        <tr>
+          <td>Ningún Padre antiguo ordenó venerar imágenes</td>
+          <td>El florilegio de la Sesión III demostró que múltiples Padres anteriores (Basilio, Juan Crisóstomo, Gregorio de Nisa, etc.) no solo toleraban sino que recomendaban el uso de imágenes.</td>
+        </tr>
+        <tr>
+          <td>Las imágenes son obra del paganismo</td>
+          <td>El uso cristiano de imágenes tiene intención completamente distinta. Los iconófilos distinguen entre ídolos (representaciones de falsos dioses con culto de latría) e iconos (representaciones del Dios verdadero encarnado y sus santos, con veneración de timé).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="respuestas">La Argumentación Iconófila — Estructura Teológica</h3>
+
+  <p>La defensa teológica de las imágenes en Nicea II descansa sobre cuatro pilares que los padres conciliares articularon con rigor:</p>
+
+  <div class="highlight">
+    <div class="highlight-title">⛪ Los Cuatro Pilares Teológicos de Nicea II</div>
+    <p><strong>1. La Encarnación como fundamento:</strong> Dios se hizo visible en Cristo. Al asumir una naturaleza humana con cuerpo material, Cristo se hizo representable. Rechazar toda imagen de Cristo equivale a negar su humanidad real. "El que ha visto al Hijo ha visto al Padre" (Jn 14:9) implica que el Hijo fue visto con ojos corporales.</p>
+    <p><strong>2. La distinción latría/timé:</strong> Basada en Basilio de Cesarea (De Spiritu Sancto), la distinción entre adoración (latría) y veneración (timé/proskinesis) permite honrar a los santos e iconos sin incurrir en idolatría. El honor dado a la imagen asciende al prototipo (Basilio, Ep. 38).</p>
+    <p><strong>3. La Tradición apostólica no escrita (Paradosis):</strong> El uso de imágenes forma parte de la tradición oral y práctica transmitida desde los apóstoles, igual que otras prácticas litúrgicas no consignadas en las Escrituras pero universalmente observadas.</p>
+    <p><strong>4. El testimonio unánime de los Padres:</strong> El concilio presentó un florilegio de citas de decenas de Padres del siglo I al VII que testimoniaban el uso y la legitimidad de las imágenes. Este argumento del consenso patrístico era irrebatible en el contexto teológico de la época.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- VI. ¿SE INVENTÓ LA VENERACIÓN?             -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="invencion">
+  <h2><span class="h2-num">VI · La Pregunta Fundamental</span>¿Se Inventó la Veneración de Imágenes en Nicea II?</h2>
+
+  <p class="lead">La respuesta es un <strong class="gold">rotundo no</strong>. Nicea II no inventó la veneración de imágenes: la <em>restauró</em> y <em>definió dogmáticamente</em> lo que era una práctica ya antiquísima. Esta distinción es esencial.</p>
+
+  <p>Este es precisamente el punto que el concilio mismo se encargó de demostrar con exhaustividad. Los iconoclastas sostenían que la veneración de imágenes era una innovación. Los padres conciliares respondieron con historia, arqueología, patrística y liturgia.</p>
+
+  <div class="highlight">
+    <div class="highlight-title">📜 Lo que Nicea II Hizo (y lo que NO hizo)</div>
+    <p><strong>SÍ hizo:</strong> Definió dogmáticamente la distinción teológica entre latría y timé. Declaró que la veneración de imágenes es compatible con la fe cristiana. Condenó la iconoclastia como herejía. Restableció la práctica interrumpida por el edicto iconoclasta.</p>
+    <p><strong>NO hizo:</strong> No introdujo una práctica nueva. No inventó el culto de imágenes. No estableció una norma litúrgica sin precedente. El concilio mismo se presentó explícitamente como restaurador de una tradición anterior, no como innovador.</p>
+  </div>
+
+  <h3 id="siglos-anteriores">Evidencias de Veneración de Imágenes Anteriores al Siglo VIII</h3>
+
+  <p>Las evidencias de uso y veneración de imágenes en el cristianismo anterior a la iconoclastia son abrumadoras y provienen de cuatro categorías independientes:</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">📚 Testimonios literarios</div>
+      <div class="card-role">Siglos II–VII</div>
+      <div class="card-desc">Decenas de textos de Padres y escritores eclesiásticos mencionan imágenes de Cristo y los santos en contextos de veneración, sin condenarlos como idolatría.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🏛 Arqueología</div>
+      <div class="card-role">Siglos II–VII</div>
+      <div class="card-desc">Las catacumbas romanas (siglos II–IV), Dura Europos (ca. 232 d.C.), mosaicos de Rávena (siglo VI) y centenares de hallazgos arqueológicos confirman el uso de imágenes sagradas.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">📜 Fuentes litúrgicas</div>
+      <div class="card-role">Siglos IV–VII</div>
+      <div class="card-desc">Textos litúrgicos y hagiográficos de los siglos IV–VII mencionan imágenes en iglesias, procesiones, y contextos devocionales privados como algo ordinario y no controvertido.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🏺 Objetos devocionales</div>
+      <div class="card-role">Siglos IV–VII</div>
+      <div class="card-desc">Amuletos, ánforas, lámparas de arcilla, cucharas, frescos domésticos con imágenes de Cristo, la Virgen y los santos, hallados en contextos arqueológicos de toda la cuenca mediterránea.</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«Las imágenes no son una innovación de los pintores, sino la legislación y tradición aprobada de la Iglesia Católica. [...] Lo que la Escritura comunica a través de las palabras, las imágenes lo anuncian mediante el color y lo hacen presente.»</p>
+    <div class="quote-source">Horos de Nicea II, citando el principio establecido por Basilio de Cesarea (Mansi XIII, col. 377)</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- VII. PADRES DE LA IGLESIA ANTERIORES       -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="padres">
+  <h2><span class="h2-num">VII · Padres de la Iglesia</span>Testimonios Anteriores a la Iconoclastia</h2>
+
+  <p class="lead">Juan Damasceno (+749), en sus tres <em>Discursos en defensa de las imágenes</em> (escritos ca. 726–730), recopiló sistemáticamente los testimonios de los Padres anteriores. El concilio de Nicea II utilizó ampliamente su obra. A continuación, los testimonios patrísticos clave, organizados cronológicamente.</p>
+
+  <h3 id="siglos-i-ii">Siglos I–II: Los Orígenes</h3>
+
+  <p>Ya en el período más antiguo del cristianismo encontramos evidencias del uso de imágenes, aunque el discurso teológico sobre ellas no estará plenamente elaborado hasta el siglo IV.</p>
+
+  <div class="padre-grid">
+    <div class="padre-card">
+      <div class="padre-name">Eusebio de Cesarea</div>
+      <div class="padre-dates">ca. 260–339 d.C.</div>
+      <div class="padre-quote">«He visto las imágenes de sus apóstoles Pablo y Pedro, y del mismo Cristo, conservadas en pinturas. [...] Supongo que los antiguos tenían la costumbre de honrar así a sus salvadores sin cuestionarlo, siguiendo una práctica gentil.» <em>(Historia Eclesiástica VII, 18)</em></div>
+      <div class="padre-ref">Testimoniado por Nicea II — Mansi XIII, col. 317</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">Pseudo-Dionisio Areopagita</div>
+      <div class="padre-dates">ca. 500 d.C. (citado en contexto apostólico)</div>
+      <div class="padre-quote">Usa ampliamente el lenguaje de "imágenes" e "íconos" para los símbolos litúrgicos. Su <em>Jerarquía Eclesiástica</em> describe el uso de representaciones sagradas como parte normal de la liturgia cristiana.</div>
+      <div class="padre-ref">Leído en la Sesión III de Nicea II</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«En Cesarea Filipo hay una estatua de bronce, que dicen fue colocada por la mujer que padeció flujo de sangre y fue curada por nuestro Señor [...] He visto también las imágenes de los apóstoles Pedro y Pablo y del mismo Cristo en colores en una pintura.»</p>
+    <div class="quote-source">Eusebio de Cesarea, Historia Eclesiástica VII, 18 (ca. 313 d.C.)</div>
+  </div>
+
+  <h3 id="siglos-iii-iv">Siglos III–IV: La Edad de Oro Patrística</h3>
+
+  <p>Los grandes Padres del siglo IV son quienes más abundantemente testimonian el uso de imágenes en el culto cristiano. Sus textos fueron el principal arsenal de Nicea II.</p>
+
+  <div class="padre-grid">
+    <div class="padre-card">
+      <div class="padre-name">San Basilio de Cesarea</div>
+      <div class="padre-dates">329–379 d.C.</div>
+      <div class="padre-quote">«El honor que se tributa a la imagen asciende al prototipo.» (τὴν τῆς εἰκόνος τιμὴν ἐπὶ τὸ πρωτότυπον διαβαίνειν). Esta frase fue el fundamento dogmático central de Nicea II.</div>
+      <div class="padre-ref">De Spiritu Sancto, XVIII, 45 — PG 32, 149C</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Basilio de Cesarea</div>
+      <div class="padre-dates">329–379 d.C.</div>
+      <div class="padre-quote">«Los pintores de imágenes también contribuyen grandemente al decoro de la Iglesia, y quienes ilustran con colores las hazañas valerosas de los mártires [...] los que edifican espléndidos santuarios a Dios.»</div>
+      <div class="padre-ref">Homilía en honor del mártir Barlaam — PG 31, 489B</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Gregorio de Nisa</div>
+      <div class="padre-dates">ca. 335–394 d.C.</div>
+      <div class="padre-quote">«A menudo he visto pinturas del sacrificio de Isaac y no puedo pasar ante tal imagen sin lágrimas, pues el arte me pone la historia ante los ojos con toda viveza.»</div>
+      <div class="padre-ref">De divinitate Filii et Spiritus Sancti — PG 46, 572B. Leído en Nicea II.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Gregorio Nacianceno</div>
+      <div class="padre-dates">329–390 d.C.</div>
+      <div class="padre-quote">Menciona imágenes de Cristo pintadas como práctica habitual de los fieles y aprueba su uso devocional, comparando al artista que representa a Cristo con el teólogo que lo describe con palabras.</div>
+      <div class="padre-ref">Carmina, PG 37. Citado por Juan Damasceno, Discurso I, §40.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Juan Crisóstomo</div>
+      <div class="padre-dates">349–407 d.C.</div>
+      <div class="padre-quote">«Muchos llevan en su anillo la imagen de Pablo pintada [...]. Por eso el bienaventurado Pablo dijo que llevaba en sí mismo las marcas del Señor. Así también nosotros llevamos las imágenes de los santos con nosotros.»</div>
+      <div class="padre-ref">In Iohannem, hom. 17 — PG 59, 113. Citado por Damasceno, Discurso I, §39.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Ambrosio de Milán</div>
+      <div class="padre-dates">340–397 d.C.</div>
+      <div class="padre-quote">Describe imágenes de santos en las iglesias de Milán como algo absolutamente ordinario y aceptado. Menciona concretamente imágenes veneradas por los fieles sin ningún gesto de condena.</div>
+      <div class="padre-ref">De obitu Theodosii, §51 — PL 16, 1399. Citado en el florilegio de Nicea II.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Agustín de Hipona</div>
+      <div class="padre-dates">354–430 d.C.</div>
+      <div class="padre-quote">Aunque critica los abusos supersticiosos, no condena las imágenes como tales y describe su función pedagógica. Distingue entre idolatría (adorar la imagen como dios) y uso legítimo.</div>
+      <div class="padre-ref">De consensu evangelistarum I, 10 — PL 34, 1049.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Jerónimo de Estridón</div>
+      <div class="padre-dates">347–420 d.C.</div>
+      <div class="padre-quote">«Exaltamos las imágenes de los santos no como si fueran dioses —lejos de nosotros tal insensatez—, sino para honrar en la imagen la memoria de aquellos cuya imagen es.»</div>
+      <div class="padre-ref">Contra Vigilantium, §7 — PL 23, 363. Texto usado en Nicea II.</div>
+    </div>
+  </div>
+
+  <h3 id="siglos-v-vi">Siglos V–VI: Vísperas de la Crisis</h3>
+
+  <div class="padre-grid">
+    <div class="padre-card">
+      <div class="padre-name">San Cirilo de Alejandría</div>
+      <div class="padre-dates">378–444 d.C.</div>
+      <div class="padre-quote">Usa la terminología de imagen/prototipo en contextos teológicos y apoya el uso devocional de representaciones de Cristo y los santos. Su cristología es el fundamento de la iconografía cristológica.</div>
+      <div class="padre-ref">Citado por Juan Damasceno, Discurso III, §33.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">Eutiquio de Constantinopla</div>
+      <div class="padre-dates">512–582 d.C.</div>
+      <div class="padre-quote">Como patriarca de Constantinopla, instala y venera imágenes en la catedral de Santa Sofía sin ninguna controversia. El hecho mismo de que no hubiera controversia demuestra que era una práctica aceptada.</div>
+      <div class="padre-ref">Cronología mencionada en las actas de Nicea II, Mansi XIII.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Gregorio Magno (Gregorio I)</div>
+      <div class="padre-dates">540–604 d.C.</div>
+      <div class="padre-quote">«Lo que la escritura es para los que saben leer, eso mismo son las pinturas para los iletrados que las contemplan, porque en ellas los ignorantes ven lo que deben seguir, en ellas leen quienes no conocen las letras.»</div>
+      <div class="padre-ref">Epistulae XI, 10 (a Sereno de Marsella) — PL 77, 1128. Leído en Nicea II.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Gregorio Magno</div>
+      <div class="padre-dates">540–604 d.C.</div>
+      <div class="padre-quote">En su segunda carta a Sereno, aunque aprueba la destrucción de imágenes que estuvieran siendo adoradas, condena explícitamente la destrucción de todas las imágenes: «Romper las imágenes no se debería haber hecho en absoluto.»</div>
+      <div class="padre-ref">Epistulae XI, 13 — PL 77, 1128. Texto fundamental para Nicea II.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">San Leoncio de Neápolis (Chipre)</div>
+      <div class="padre-dates">ca. 590–650 d.C.)</div>
+      <div class="padre-quote">«Cuando adoro la imagen de Cristo, no adoro la madera ni el pigmento sino al Cristo invisible. [...] Así como Jacob adoró la punta del bastón de José, así nosotros veneramos y besamos las imágenes de Cristo y de los santos.»</div>
+      <div class="padre-ref">Apología contra los judíos, leída íntegramente en la Sesión IV de Nicea II — Mansi XIII, col. 45–80.</div>
+    </div>
+    <div class="padre-card">
+      <div class="padre-name">Anastasio del Sinaí</div>
+      <div class="padre-dates">ca. 630–700 d.C.</div>
+      <div class="padre-quote">En sus Quaestiones et responsiones defiende el uso de imágenes contra los que lo impugnan, demostrando que la práctica ya era debatida localmente en el siglo VII pero que la posición ortodoxa la defendía.</div>
+      <div class="padre-ref">Quaestiones et responsiones LIV — PG 89, 676.</div>
+    </div>
+  </div>
+
+  <h3 id="damasceno">Juan Damasceno: El Gran Sintetizador (675–749)</h3>
+
+  <p>Aunque Juan Damasceno murió antes del concilio (ca. 749), su obra fue el fundamento doctrinal sobre el que se construyó Nicea II. Vivía en el califato omeya de Damasco, fuera del alcance del brazo iconoclasta imperial, lo que le permitió escribir con libertad.</p>
+
+  <p>Sus tres <span class="gold">Discursos en Defensa de las Imágenes</span> (<em>Πρὸς τοὺς διαβάλλοντας τὰς ἁγίας εἰκόνας</em>) son una obra sistemática que:</p>
+
+  <div class="highlight">
+    <div class="highlight-title">Estructura de los Tres Discursos de Juan Damasceno</div>
+    <p><strong>Discurso I (ca. 726):</strong> Respuesta inmediata al edicto de León III. Establece la distinción entre latría y proskinesis. Demuestra que las Escrituras mismas ordenan venerar ciertas realidades materiales (el Arca, los Querubines, la Tienda). Reúne los primeros testimonios patrísticos.</p>
+    <p><strong>Discurso II:</strong> Profundización teológica. La Encarnación como fundamento de toda iconografía. Ontología de la imagen: la imagen participa del modelo. Más florilegio patrístico.</p>
+    <p><strong>Discurso III:</strong> Síntesis sistemática. Incluye el florilegio más amplio: citas de Dionisio Areopagita, Basilio, Gregorio de Nisa, Juan Crisóstomo, Cirilo, Leoncio de Neápolis, Anastasio del Sinaí, y muchos más.</p>
+  </div>
+
+  <p>Los Padres que Juan Damasceno cita explícitamente en sus tres discursos en defensa de las imágenes incluyen:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Padre citado</th><th>Siglo</th><th>Obra citada</th></tr></thead>
+      <tbody>
+        <tr><td>Dionisio Areopagita</td><td>ca. V–VI</td><td>De ecclesiastica hierarchia, De caelesti hierarchia</td></tr>
+        <tr><td>Basilio de Cesarea</td><td>IV</td><td>De Spiritu Sancto; Homilía sobre Barlaam</td></tr>
+        <tr><td>Gregorio de Nisa</td><td>IV</td><td>Sobre la Divinidad del Hijo; Sobre Abrahán</td></tr>
+        <tr><td>Juan Crisóstomo</td><td>IV–V</td><td>Comentario sobre Juan; varios</td></tr>
+        <tr><td>Cirilo de Alejandría</td><td>V</td><td>Thesaurus de Sancta Trinitate</td></tr>
+        <tr><td>Gregorio Nacianceno</td><td>IV</td><td>Carmina; varios discursos</td></tr>
+        <tr><td>Leoncio de Neápolis</td><td>VI–VII</td><td>Vida de San Simeón Salos; Apología</td></tr>
+        <tr><td>Anastasio del Sinaí</td><td>VII</td><td>Quaestiones et responsiones</td></tr>
+        <tr><td>Sofronio de Jerusalén</td><td>VII</td><td>Milagros de los santos Ciro y Juan</td></tr>
+        <tr><td>Atanasio de Alejandría</td><td>IV</td><td>Carta a Marcellino</td></tr>
+        <tr><td>Eusebio de Cesarea</td><td>IV</td><td>Historia Eclesiástica VII, 18</td></tr>
+        <tr><td>Epifanio de Salamina</td><td>IV</td><td>Carta al Testamento (debatida como interpolación)</td></tr>
+        <tr><td>Gregorio Magno</td><td>VI–VII</td><td>Cartas a Sereno de Marsella</td></tr>
+        <tr><td>Teodoro de Ancira</td><td>V</td><td>Homilía sobre la Natividad</td></tr>
+        <tr><td>Andrés de Creta</td><td>VII</td><td>Homilías marianas</td></tr>
+        <tr><td>Germano I de Constantinopla</td><td>VII–VIII</td><td>Epístola sobre las imágenes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«No fabrico imágenes del Dios invisible e incorpóreo. Pero cuando veo a Dios haciéndose hombre, entonces represento al Dios invisible no como invisible, sino como visible por nuestra salvación, mediante carne y sangre. No adoro la materia, sino que adoro al Hacedor de la materia, que se hizo materia por mí, que quiso morar en la materia y que a través de la materia obró mi salvación; y no cesaré de honrar a la materia mediante la cual vino mi salvación.»</p>
+    <div class="quote-source">Juan Damasceno, Discurso en Defensa de las Imágenes I, §16 — PG 94, 1245A</div>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«El que Dios hubiera dicho al principio "no te harás imagen tallada" no nos prohíbe hacer imágenes ahora. En aquel tiempo, cuando nadie conocía a Dios cara a cara, hubiera sido error fabricar una imagen de Dios. Pero ahora que Dios se ha manifestado en carne y ha vivido entre los hombres, hacemos imágenes de lo que vimos de Dios.»</p>
+    <div class="quote-source">Juan Damasceno, Discurso en Defensa de las Imágenes I, §8 — PG 94, 1236B</div>
+  </div>
+
+  <h4>Germano I de Constantinopla (ca. 634–733)</h4>
+  <p>El patriarca que fue depuesto por León III en 730 antes del concilio dejó escritas sus propias cartas en defensa de las imágenes, dirigidas a los obispos iconoclastas. Estos textos, escritos décadas antes de Nicea II, son testimonios directos de la práctica:</p>
+
+  <div class="quote">
+    <p class="quote-text">«Tenemos la costumbre de venerar la imagen del Salvador, la de su Madre siempre Virgen y la de todos los santos; y esto no como algo reciente sino como una tradición antigua y primordial en la Iglesia.»</p>
+    <div class="quote-source">Germano I de Constantinopla, Carta a Tomás de Claudiopolis — PG 98, 164A</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- VIII. ARQUEOLOGÍA                          -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="arqueologia">
+  <h2><span class="h2-num">VIII · La Evidencia Arqueológica</span>Imágenes Anteriores a la Iconoclastia</h2>
+
+  <p class="lead">La arqueología proporciona evidencia independiente, no literaria, del uso de imágenes sagradas en el cristianismo primitivo, mucho antes de cualquier controversia medieval. Estos hallazgos son irrefutables.</p>
+
+  <h3 id="catacumbas">Las Catacumbas Romanas (Siglos II–IV)</h3>
+
+  <p>Las catacumbas de Roma son el archivo arqueológico más antiguo del arte cristiano. Ya en el siglo II los cristianos decoraban sus lugares de sepultura con imágenes de contenido bíblico y cristológico.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Catacumba</th><th>Fecha aproximada</th><th>Contenido artístico</th></tr></thead>
+      <tbody>
+        <tr><td>Catacumba de Priscila (Roma)</td><td>ca. 150–200 d.C.</td><td>La imagen más antigua conocida de María con el Niño (fresco). La escena del Buen Pastor. Representaciones de orantes.</td></tr>
+        <tr><td>Catacumba de San Calixto (Roma)</td><td>ca. 200–250 d.C.</td><td>El Buen Pastor, Jonás, los Tres Jóvenes en el horno, el Bautismo de Jesús. Múltiples capillas decoradas.</td></tr>
+        <tr><td>Catacumba de Domitila (Roma)</td><td>ca. 100–400 d.C.</td><td>Una de las más extensas. Imágenes de Cristo, apóstoles Pedro y Pablo identificados con inscripciones.</td></tr>
+        <tr><td>Catacumba de San Pedro y Marcelino</td><td>ca. 250–350 d.C.</td><td>Cristo entronizado entre Pedro y Pablo. Representación del Pantocrátor en los ábsides. Mártires retratados.</td></tr>
+        <tr><td>Catacumba de la Vía Latina (Roma)</td><td>ca. 320–360 d.C.</td><td>Ciclo narrativo de la vida de Cristo. Heracles junto a escenas bíblicas. Arte de transición.</td></tr>
+        <tr><td>Catacumba de Commodilla (Roma)</td><td>ca. 375–400 d.C.</td><td>Primera imagen conocida de Cristo con barba, entronizado. Imágenes de santa Mena.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«La presencia sistemática de imágenes sagradas en las catacumbas romanas desde el siglo II demuestra de manera irrefutable que el uso de imágenes religiosas no fue una innovación medieval sino una práctica constante del cristianismo primitivo desde sus primeras generaciones documentadas.»</p>
+    <div class="quote-source">Robin Margaret Jensen, <em>Face to Face: Portraits of the Divine in Early Christianity</em>, Fortress Press, 2005, p. 12</div>
+  </div>
+
+  <h3 id="dura">Dura Europos: El Testimonio Más Antiguo (ca. 232–256 d.C.)</h3>
+
+  <p>El descubrimiento arqueológico más decisivo para la cuestión de las imágenes en el cristianismo primitivo es la iglesia doméstica de <span class="gold">Dura Europos</span>, en la actual Siria, excavada entre 1931 y 1935. Se trata de la iglesia cristiana más antigua arqueológicamente identificada.</p>
+
+  <p>Esta iglesia, convertida en lugar de culto en torno al año <span class="gold">232 d.C.</span> y destruida cuando los persas sitiaron la ciudad en el 256 d.C., contenía frescos de temática bíblica que cubrían sus paredes:</p>
+
+  <div class="highlight">
+    <div class="highlight-title">🏛 Los Frescos de Dura Europos (ca. 232–256 d.C.)</div>
+    <p><strong>El Buen Pastor:</strong> Representación de Cristo como pastor con el rebaño. Ocupa una posición prominente sobre el baptisterio.</p>
+    <p><strong>La procesión de las Mirófonas:</strong> Las mujeres que van al sepulcro de Cristo. Escena narrativa de la Resurrección.</p>
+    <p><strong>Cristo caminando sobre las aguas:</strong> Con Pedro hundiéndose. Escena del Evangelio.</p>
+    <p><strong>La parálisis del paralítico:</strong> Escena de milagro.</p>
+    <p><strong>David y Goliat</strong> y otras escenas del Antiguo Testamento.</p>
+    <p>Estos frescos estaban en una habitación usada como baptisterio. Su existencia prueba que los cristianos de mediados del siglo III decoraban sus espacios litúrgicos con imágenes sin ningún escrúpulo doctrinal.</p>
+  </div>
+
+  <h3 id="hallazgos">Otros Hallazgos Arqueológicos Fundamentales</h3>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">ca. 300–313</div>
+        <div class="tl-title">Mosaico de la Villa Romana de Piazza Armerina (Sicilia)</div>
+        <div class="tl-body">Aunque de contexto complejo (mezcla pagano-cristiana), evidencia la transición hacia imágenes simbólicas de contenido cristiano antes del Edicto de Milán.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">ca. 313–350</div>
+        <div class="tl-title">Sarcófagos paleocristianos (Roma, Milán)</div>
+        <div class="tl-body">Centenares de sarcófagos esculpidos con escenas de Cristo y los apóstoles, hallados en las basílicas de San Pedro y San Pablo. El Museo del Vaticano conserva la mayor colección. Algunos llevan epigrafías de homenaje a los representados.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">ca. 390–430</div>
+        <div class="tl-title">Mosaicos de Santa Pudenciana (Roma) y Santa María Mayor</div>
+        <div class="tl-body">El mosaico absidal de Santa Pudenciana (ca. 390–417) muestra a Cristo entronizado en majestad rodeado de los apóstoles, en la basílica romana. Es uno de los mosaicos paleocristianos más importantes conservados.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">ca. 458–526</div>
+        <div class="tl-title">Mosaicos de Rávena (San Apolinar Nuevo, San Vital)</div>
+        <div class="tl-body">Rávena conserva el ciclo musivario paleocristiano más completo del mundo. Imágenes de Cristo, la Virgen, los apóstoles y los santos en paredes y ábsides, con función abiertamente devocional y litúrgica. La imagen de Cristo Pantocrátor en San Vital (ca. 526) es paradigmática.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">ca. 550–650</div>
+        <div class="tl-title">Sinaiita Codex, íconos del Monasterio de Santa Catalina</div>
+        <div class="tl-body">El Monasterio de Santa Catalina en el Sinaí conserva los íconos pintados más antiguos del mundo, datados en el siglo VI–VII d.C. El ícono de "Cristo Pantocrátor" del Sinaí (siglo VI) es el icono más antiguo conocido.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">ca. 600–700</div>
+        <div class="tl-title">Cerámica devocional norteafricana y siria</div>
+        <div class="tl-body">Miles de pequeños objetos cerámicos —lámparas, ánforas de peregrino (ampollas de Tierra Santa), medallas— con imágenes de Cristo, María y los santos hallados en todo el Mediterráneo, usados como objetos devocionales privados.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-title">📌 La Imagen de Cristo Pantocrátor del Sinaí (siglo VI)</div>
+    <p>Conservado en el Monasterio de Santa Catalina desde el siglo VI, este ícono pintado al encausto es el ícono datado con mayor certeza como anterior a la iconoclastia. Su mera existencia —anterior en dos siglos al primer edicto iconoclasta— refuta la tesis de que la iconografía devocional fue una innovación tardía. El icono muestra a Cristo con dos lados del rostro asimétricos, interpretado por algunos estudiosos como una representación intencional de sus dos naturalezas (divina y humana).</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- IX. DESPUÉS DEL CONCILIO                   -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="despues">
+  <h2><span class="h2-num">IX · Después de Nicea II</span>Recepción, Crisis y Victoria Final</h2>
+
+  <h3 id="recepcion">La Recepción en Occidente: El Escándalo Franco</h3>
+
+  <p>La recepción occidental del Concilio de Nicea II fue sorprendentemente complicada. El papa Adriano I lo aceptó y lo reconoció como ecuménico. Pero la corte franca de Carlomagno reaccionó con hostilidad, y esta reacción generó uno de los documentos teológicos más curiosos y malentendidos de la Edad Media.</p>
+
+  <p>El problema fue una <span class="gold">mala traducción al latín</span>. Las actas del concilio llegaron a la corte franca en una traducción latina deficiente que confundía sistemáticamente los términos griegos: <em>latría</em> (adoración) y <em>timé/proskinesis</em> (veneración) fueron traducidos de forma poco precisa, haciendo parecer que el concilio ordenaba adorar las imágenes igual que a Dios.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">ca. 790–793</div>
+        <div class="tl-title">Los Libros Carolinos (Libri Carolini)</div>
+        <div class="tl-body">Por encargo de Carlomagno y redactados principalmente por Teodulfo de Orléans, los <em>Libri Carolini</em> critican ferozmente lo que ellos entienden que Nicea II ordenó. Pero critican una posición que el concilio nunca sostuvo. Su argumento se basa en la mala traducción. El papa Adriano rechazó los Libri Carolini.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">794</div>
+        <div class="tl-title">Sínodo de Frankfurt</div>
+        <div class="tl-body">Carlomagno convoca este sínodo que, basándose en los Libri Carolini, "condena" lo que se supone que Nicea II enseñó. Pero el sínodo de Frankfurt ni siquiera rechaza el uso de imágenes en sí (algo que el propio Carlomagno tenía en su palacio de Aquisgrán): rechaza únicamente la adoración que malentendieron que el concilio exigía.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">825</div>
+        <div class="tl-title">Sínodo de París</div>
+        <div class="tl-body">Otro sínodo franco que perpetúa la misma confusión. Sin embargo, la posición franca fue una posición de compromiso: imágenes sí, pero como decoración instructiva, no como objeto de veneración. No era la iconoclastia imperial griega.</div>
+      </div>
+    </div>
+  </div>
+
+  <p>La disputa franco-romana sobre Nicea II se resolvió con el tiempo a favor de Roma. Cuando la Iglesia occidental recibió correctamente las actas del concilio en griego (con mejor traducción), la teología del concilio fue reconocida como perfectamente ortodoxa.</p>
+
+  <h3 id="nicea-fracaso">La Segunda Iconoclastia (815–843)</h3>
+
+  <p>La victoria de Nicea II fue incompleta. Solo veintiocho años después del concilio, una nueva ola iconoclasta barrió el Imperio Bizantino.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">797</div>
+        <div class="tl-title">Irene depone y ciega a su hijo Constantino VI</div>
+        <div class="tl-body">El reinado personal de Irene termina en 802 cuando es depuesta por un golpe de estado. Muere en 803. La inestabilidad política posterior beneficia a las facciones iconoclastas del ejército.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">815</div>
+        <div class="tl-title">León V el Armenio restaura la iconoclastia</div>
+        <div class="tl-body">Militar exitoso que atribuía sus victorias a los emperadores iconoclastas anteriores, León V fuerza al patriarca Nicéforo I al exilio y convoca un concilio que restaura los decretos de Hieria (754). El patriarca Nicéforo y el abad Teodoro Estudita encabezan la resistencia.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">815–843</div>
+        <div class="tl-title">Persecución, exilio y martirio de los iconófilos</div>
+        <div class="tl-body">Teodoro Estudita es desterrado varias veces. Escribe desde el exilio miles de cartas alentando a los iconófilos. Muchos monjes son torturados, mutilados (los "Graptoi", monjes a quienes se les tatuó el rostro con versos ignominiosos) o ejecutados.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year">843</div>
+        <div class="tl-title">El "Triunfo de la Ortodoxia"</div>
+        <div class="tl-body">La emperatriz <strong>Teodora</strong>, regente de su hijo Miguel III, restaura definitivamente el culto de las imágenes el primer domingo de Cuaresma de 843. Este día se convirtió en el "Domingo de la Ortodoxia", celebrado hasta hoy por la Iglesia Ortodoxa cada primer domingo de Cuaresma.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 id="victoria-final">La Victoria Definitiva: 843 y el Domingo de la Ortodoxia</h3>
+
+  <p>El año 843 marca el fin definitivo de la iconoclastia. La emperatriz Teodora convocó un sínodo bajo el nuevo patriarca Metodio I, que restauró formalmente los decretos de Nicea II. Las imágenes fueron devueltas a todas las iglesias. Los iconoclastas fueron anatemizados. Los mártires de la causa iconófila fueron proclamados santos.</p>
+
+  <div class="highlight">
+    <div class="highlight-title">☩ El Synodikon de la Ortodoxia (843)</div>
+    <p>El documento proclamado en 843 se convirtió en el <em>Synodikon de la Ortodoxia</em>, leído cada año el primer domingo de Cuaresma. Proclama la victoria de todos los concilios ecuménicos, incluido Nicea II, y anatematiza las herejías condenadas, incluida la iconoclastia. Sigue siendo uno de los textos litúrgicos más importantes de la Iglesia Ortodoxa.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- X. REPERCUSIONES                           -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="repercusiones">
+  <h2><span class="h2-num">X · Las Grandes Repercusiones</span>Impacto Histórico y Teológico</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">🎨 Arte e Iconografía</div>
+      <div class="card-role">Impacto cultural</div>
+      <div class="card-desc">Nicea II liberó la producción artística cristiana. El arte sacro bizantino floreció en los siglos IX–XV, produciendo la tradición iconográfica que todavía hoy define a la Iglesia Ortodoxa. Las reglas iconográficas (cánones del icono) se sistematizaron en el período posnicea.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">⛪ Eclesiología</div>
+      <div class="card-role">Impacto institucional</div>
+      <div class="card-desc">El concilio reforzó la autoridad del episcopado frente al poder imperial en materias de fe. El intento de Constantino V de usar el concilio de Hieria para definir la doctrina fue rechazado: la fe no la define el emperador sino los obispos en comunión con Roma.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🏛 Cisma de Oriente y Occidente</div>
+      <div class="card-role">Impacto político-eclesiástico</div>
+      <div class="card-desc">La disputa en torno a Nicea II entre francos y Bizancio contribuyó al alejamiento entre las dos iglesias que culminaría en 1054. La coronación de Carlomagno como Emperador Romano (800) tuvo también como trasfondo la controversia conciliar.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">📚 Teología de la Materia</div>
+      <div class="card-role">Impacto dogmático</div>
+      <div class="card-desc">Nicea II afirmó que la materia puede ser santificada y usada para la gloria de Dios. Esto tiene repercusiones en la teología de los sacramentos, de la creación, y en la doctrina de la Encarnación. Es un rechazo al dualismo gnóstico que desprecia lo material.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">✝ Relación con el Islam</div>
+      <div class="card-role">Impacto apologético</div>
+      <div class="card-desc">La definición de Nicea II estableció la diferencia entre adoración (latría, reservada a Dios) y veneración (timé), respondiendo a la acusación islámica de que los cristianos son idólatras. Esta distinción sigue siendo el eje del debate cristiano-islámico sobre imágenes hasta hoy.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🔄 La Reforma Protestante</div>
+      <div class="card-role">Impacto en el siglo XVI</div>
+      <div class="card-desc">Los reformadores (Calvino, Zuinglio especialmente) rechazaron Nicea II y retomaron argumentos iconoclastas. Calvino llamó a la veneración de imágenes idolatría. El debate del siglo XVI fue en muchos puntos un remontarse al debate del siglo VIII.</div>
+    </div>
+  </div>
+
+  <h3>Los 22 Cánones Disciplinares</h3>
+
+  <p>Además de su definición dogmática sobre las imágenes, Nicea II aprobó 22 cánones disciplinares de gran importancia para la vida de la Iglesia:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Canon</th><th>Contenido</th></tr></thead>
+      <tbody>
+        <tr><td>Canon 1</td><td>Los cánones de los concilios anteriores tienen fuerza obligatoria.</td></tr>
+        <tr><td>Canon 2</td><td>Los obispos y clérigos deben conocer el Salterio entero antes de ser ordenados.</td></tr>
+        <tr><td>Canon 3</td><td>Prohibición de ordenaciones de clérigos por autoridad civil (simonía indirecta).</td></tr>
+        <tr><td>Canon 4</td><td>Los monjes no pueden fundar monasterios por su cuenta sin permiso episcopal.</td></tr>
+        <tr><td>Canon 7</td><td>Las reliquias deben estar presentes en todo altar consagrado.</td></tr>
+        <tr><td>Canon 11</td><td>Cada diócesis debe tener un ecónomo que gestione los bienes de la Iglesia.</td></tr>
+        <tr><td>Canon 12</td><td>Prohibición de que los obispos enajenen bienes eclesiásticos.</td></tr>
+        <tr><td>Canon 17</td><td>Los clérigos no deben tener dos iglesias al mismo tiempo.</td></tr>
+        <tr><td>Canon 20</td><td>No está permitido que un monje tenga dos monasterios.</td></tr>
+        <tr><td>Canon 22</td><td>Condenación de la simonía en todas sus formas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- XI. TEOLOGÍA DEL ICONO                     -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="teologia">
+  <h2><span class="h2-num">XI · La Teología del Icono</span>Síntesis Doctrinal</h2>
+
+  <p class="lead">Nicea II no es únicamente una decisión disciplinar o política: es una de las definiciones doctrinales más profundas del Concilio Ecuménico sobre la naturaleza de la Encarnación y su relación con el mundo material.</p>
+
+  <h3>El Argumento Ontológico de la Imagen</h3>
+
+  <p>El fundamento último de la teología del icono elaborada en el período que culmina en Nicea II es ontológico: ¿qué es una imagen? Los padres nicenos respondieron a partir de la filosofía platónica transformada por la teología cristiana.</p>
+
+  <div class="highlight">
+    <div class="highlight-title">⚖ La Cadena: Prototipo → Imagen → Honor</div>
+    <p>El esquema que funda la veneración de imágenes tiene tres momentos:</p>
+    <p><strong>1. El Prototipo</strong> (ἀρχέτυπον): La persona real representada — Cristo, la Virgen, el santo. El prototipo existe con realidad plena.</p>
+    <p><strong>2. La Imagen</strong> (εἰκών): Participa del prototipo no en sustancia sino en la forma, en la <em>similitud de la hypostasis</em>. La imagen es realmente distinta del prototipo en cuanto a sustancia (madera, pigmento), pero comparte con él la forma visible.</p>
+    <p><strong>3. El Honor</strong> (τιμή): El honor que se tributa a la imagen asciende al prototipo. No termina en la materia de la imagen, sino que a través de ella alcanza a la persona representada. Esto es lo que hace que la veneración no sea idolatría.</p>
+    <p>Este esquema, formulado por Basilio de Cesarea y desarrollado por Juan Damasceno, fue ratificado dogmáticamente por Nicea II.</p>
+  </div>
+
+  <h3>La Distinción Fundamental: Latría vs. Proskinesis/Timé</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Término</th><th>Significado</th><th>A quién se debe</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td>Latría (λατρεία)</td><td>Adoración absoluta, culto religioso supremo</td><td>Solo a Dios (Padre, Hijo, Espíritu Santo)</td><td>La Misa, la oración de adoración</td></tr>
+        <tr><td>Dulía (δουλεία)</td><td>Veneración a los siervos de Dios</td><td>A los santos y ángeles</td><td>Intercesión a los santos</td></tr>
+        <tr><td>Hiperdulía (ὑπερδουλεία)</td><td>Veneración superior a los demás santos</td><td>A María, Madre de Dios</td><td>Culto mariano en sus formas</td></tr>
+        <tr><td>Timé/Proskinesis (τιμή / προσκύνησις)</td><td>Honor, reverencia, veneración</td><td>A las imágenes sagradas, cruces, reliquias</td><td>Besar el icono, inclinarse ante la cruz</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«Definimos que las sagradas imágenes deben ser propuestas para la veneración (προσκυνήσεως) —no para el verdadero culto de latría (λατρείαν), que pertenece solo a la divina naturaleza— sino al modo en que se da a la honorable y vivificante Cruz, al santo Evangelio y a los demás sagrados objetos, ofrendando a esas imágenes incienso y luces, como se hacía piadosamente desde antiguo.»</p>
+    <div class="quote-source">Horos de Nicea II — Mansi XIII, col. 377–378</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- XII. FUENTES                               -->
+<!-- ══════════════════════════════════════════ -->
+<hr class="section-divider">
+<section id="fuentes">
+  <h2><span class="h2-num">XII · Fuentes y Bibliografía</span>Fuentes Primarias y Estudios</h2>
+
+  <h3>Fuentes Primarias</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuente</th><th>Tipo</th><th>Localización</th></tr></thead>
+      <tbody>
+        <tr><td>Actas del Concilio de Nicea II</td><td>Fuente conciliar primaria</td><td>Mansi, Sacrorum Conciliorum Collectio, vol. XII–XIII. Hardouin, Conciliorum Collectio Regia Maxima, vol. IV.</td></tr>
+        <tr><td>Horos de Nicea II</td><td>Documento dogmático</td><td>Mansi XIII, col. 370–382. Trad. española: Concilios Ecuménicos, BAC.</td></tr>
+        <tr><td>Juan Damasceno, Discursos sobre las Imágenes</td><td>Teología fundamental</td><td>PG 94, 1232–1420. Ed. crítica: Kotter, PTS 17 (1975).</td></tr>
+        <tr><td>Teodoro Estudita, Antirrhéticos</td><td>Defensa posnicena</td><td>PG 99, 327–436.</td></tr>
+        <tr><td>Nicéforo I, Apologeticus</td><td>Defensa posnicena</td><td>PG 100, 533–832.</td></tr>
+        <tr><td>Libri Carolini</td><td>Respuesta franca</td><td>MGH, Concilia II, supp. 1 (Freeman, 1998).</td></tr>
+        <tr><td>Basilio de Cesarea, De Spiritu Sancto</td><td>Fuente patrística</td><td>PG 32, 67–218. SC 17bis.</td></tr>
+        <tr><td>Gregorio Magno, Epistulae XI</td><td>Fuente patrística occidental</td><td>PL 77, 1116–1130. MGH Epistulae II.</td></tr>
+        <tr><td>Leoncio de Neápolis, Apología</td><td>Fuente patrística</td><td>Ed. Déroche, Travaux et Mémoires 12 (1994).</td></tr>
+        <tr><td>Germano I de Constantinopla, De haeresibus</td><td>Fuente patrística prenicena</td><td>PG 98, 40–88.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Bibliografía Científica Moderna</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Autor</th><th>Obra</th><th>Editorial / Año</th></tr></thead>
+      <tbody>
+        <tr><td>Sahas, Daniel J.</td><td><em>Icon and Logos: Sources in Eighth-Century Iconoclasm</em></td><td>University of Toronto Press, 1986</td></tr>
+        <tr><td>Brubaker, Leslie & Haldon, John</td><td><em>Byzantium in the Iconoclast Era (ca. 680–850)</em></td><td>Cambridge University Press, 2011</td></tr>
+        <tr><td>Pelikan, Jaroslav</td><td><em>Imago Dei: The Byzantine Apologia for Icons</em></td><td>Princeton University Press, 1990</td></tr>
+        <tr><td>Parry, Ken</td><td><em>Depicting the Word: Byzantine Iconophile Thought</em></td><td>Brill, 1996</td></tr>
+        <tr><td>Jensen, Robin M.</td><td><em>Face to Face: Portraits of the Divine in Early Christianity</em></td><td>Fortress Press, 2005</td></tr>
+        <tr><td>Belting, Hans</td><td><em>Bild und Kult: Eine Geschichte des Bildes vor dem Zeitalter der Kunst</em></td><td>C.H. Beck, 1990 (trad. inglesa: Chicago UP, 1994)</td></tr>
+        <tr><td>Freedberg, David</td><td><em>The Power of Images: Studies in the History and Theory of Response</em></td><td>University of Chicago Press, 1989</td></tr>
+        <tr><td>Thümmel, Hans G.</td><td><em>Die Frühgeschichte der ostkirchlichen Bilderlehre</em></td><td>Akademie Verlag, 1992</td></tr>
+        <tr><td>Lamberz, Erich (ed.)</td><td><em>Concilium Universale Nicaenum Secundum</em></td><td>ACO II/3, De Gruyter, 2008</td></tr>
+        <tr><td>Noble, Thomas F.X.</td><td><em>Images, Iconoclasm, and the Carolingians</em></td><td>University of Pennsylvania Press, 2009</td></tr>
+        <tr><td>Louth, Andrew</td><td><em>St. John Damascene: Tradition and Originality in Byzantine Theology</em></td><td>Oxford University Press, 2002</td></tr>
+        <tr><td>Corrigan, Kathleen</td><td><em>Visual Polemics in the Ninth-Century Byzantine Psalters</em></td><td>Cambridge University Press, 1992</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-title">✦ Conclusión: Nicea II en su Contexto</div>
+    <p>El Concilio de Nicea II (787 d.C.) fue, en síntesis, un concilio de <strong>restauración y definición</strong>, no de invención. Las evidencias patrísticas, arqueológicas y litúrgicas demuestran con absoluta claridad que la veneración de imágenes sagradas era una práctica constante del cristianismo desde el siglo II. Nicea II no creó esta práctica: la definió teológicamente con precisión, la protegió de la herejía iconoclasta, y la declaró coherente con los dogmas fundamentales de la Encarnación y la Trinidad.</p>
+    <p>Quienes afirman que Nicea II "inventó" la veneración de imágenes deben explicar cómo conciliar esa afirmación con los frescos de Dura Europos (232 d.C.), las catacumbas romanas (siglos II–IV), las cartas de Basilio de Cesarea (siglo IV), los sermones de Juan Crisóstomo (siglo IV–V), las epístolas de Gregorio Magno (siglo VI), y cientos de hallazgos arqueológicos anteriores en siglos a cualquier decreto conciliar medieval sobre el tema.</p>
+  </div>
+</section>
+
+<footer>
+  <p style="font-family:'Cinzel',serif;font-size:18px;color:#F5C518;letter-spacing:3px;margin-bottom:12px;">✦ CONCILIO DE NICEA II · 787 D.C. ✦</p>
+  <p>Documento histórico de referencia · Séptimo Concilio Ecuménico</p>
+  <p style="margin-top:8px;">Fuentes primarias: Mansi XIII · PG 94 · Acta Conciliorum Oecumenicorum II/3</p>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('active');
+  }
+  function closeNav() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('active');
+  }
+
+  // Tab switching para las sesiones
+  const tabs = document.querySelectorAll('.sesion-tab');
+  const contents = document.querySelectorAll('.sesion-content');
+
+  function switchTab(idx) {
+    tabs.forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+      contents[i].classList.toggle('active', i === idx);
+    });
+  }
+
+  // Resaltar sección activa en sidebar
+  const sections = document.querySelectorAll('section[id], div[id="hero"]');
+  const navLinks = document.querySelectorAll('#sidebar a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === '#' + id) {
+            link.style.color = '#F5C518';
+            link.style.borderLeftColor = '#F5C518';
+          } else {
+            link.style.color = '';
+            link.style.borderLeftColor = '';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('section, #hero').forEach(el => observer.observe(el));
+
+  // Cerrar sidebar al cambiar tamaño a pantalla grande
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeNav();
+  });
+</script>
+</body>
+</html>

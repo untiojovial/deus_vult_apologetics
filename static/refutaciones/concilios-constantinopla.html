@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concilios de Constantinopla I, II y III — Historia Completa</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@300;400;600&display=swap');
+
+  :root {
+    --negro: #0a0a0a;
+    --negro-panel: #1a1a1a;
+    --negro-card: #222222;
+    --amarillo-oro: #F5C518;
+    --amarillo-tenue: #c9a227;
+    --amarillo-brillante: #ffe566;
+    --blanco: #ffffff;
+    --blanco-hueso: #f5f5f0;
+    --blanco-gris: #e0e0d8;
+    --gris-texto: #b0b0a0;
+    --borde: #2a2a2a;
+    --borde-oro: rgba(245,197,24,0.3);
+    --cp1-color: #F5C518;
+    --cp2-color: #E8A020;
+    --cp3-color: #D4881A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--negro); color: var(--blanco-hueso); font-family: 'EB Garamond', Georgia, serif; font-size: 17px; line-height: 1.8; }
+
+  /* ── NAV ── */
+  #nav-toggle {
+    position: fixed; top: 18px; left: 18px; z-index: 999;
+    background: var(--amarillo-oro); color: var(--negro); border: none;
+    padding: 10px 16px; font-family: 'Oswald', sans-serif; font-size: 14px;
+    font-weight: 600; cursor: pointer; border-radius: 3px; letter-spacing: 1px;
+    box-shadow: 0 2px 12px rgba(245,197,24,0.4); transition: background 0.2s;
+  }
+  #nav-toggle:hover { background: var(--amarillo-brillante); }
+  #sidebar {
+    position: fixed; top: 0; left: -360px; width: 360px; height: 100vh;
+    background: var(--negro-panel); border-right: 2px solid var(--amarillo-oro);
+    z-index: 998; overflow-y: auto; transition: left 0.35s cubic-bezier(.4,0,.2,1);
+    padding: 68px 0 30px;
+  }
+  #sidebar.open { left: 0; }
+  #sidebar h3 {
+    font-family: 'Cinzel', serif; color: var(--amarillo-oro); font-size: 10px;
+    letter-spacing: 3px; text-transform: uppercase; padding: 0 24px 10px;
+    border-bottom: 1px solid var(--borde-oro); margin-bottom: 6px;
+  }
+  .nav-lbl {
+    display: block; font-family: 'Cinzel', serif; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase; padding: 12px 24px 5px;
+  }
+  .nav-cp1 { color: var(--cp1-color); border-left: 3px solid var(--cp1-color); }
+  .nav-cp2 { color: var(--cp2-color); border-left: 3px solid var(--cp2-color); }
+  .nav-cp3 { color: var(--cp3-color); border-left: 3px solid var(--cp3-color); }
+  #sidebar ul { list-style: none; }
+  #sidebar ul li a {
+    display: block; padding: 8px 24px; color: var(--blanco-gris); text-decoration: none;
+    font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 300;
+    letter-spacing: 0.5px; border-left: 3px solid transparent; transition: all 0.2s;
+  }
+  #sidebar ul li a:hover { color: var(--amarillo-oro); background: rgba(245,197,24,0.07); border-left-color: var(--amarillo-oro); }
+  #sidebar ul li.sub a { padding-left: 40px; font-size: 12px; }
+  #overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 997; }
+  #overlay.active { display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 80px 40px;
+    background: radial-gradient(ellipse at 20% 0%, rgba(245,197,24,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(212,136,26,0.08) 0%, transparent 50%),
+                var(--negro);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: 'Κ'; position: absolute; font-family: 'Cinzel', serif;
+    font-size: 600px; color: rgba(245,197,24,0.025);
+    top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
+  }
+  .hero-eyebrow { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 5px; color: var(--amarillo-tenue); text-transform: uppercase; margin-bottom: 20px; }
+  .hero-trio { display: flex; gap: 50px; align-items: center; flex-wrap: wrap; justify-content: center; margin-bottom: 36px; }
+  .hero-c { text-align: center; }
+  .hero-c h1 { font-family: 'Cinzel', serif; font-size: clamp(24px, 3.8vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 4px; }
+  .hero-c.cp1 h1 { color: var(--cp1-color); }
+  .hero-c.cp2 h1 { color: var(--cp2-color); }
+  .hero-c.cp3 h1 { color: var(--cp3-color); }
+  .hero-c .yr { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; color: var(--gris-texto); text-transform: uppercase; }
+  .hero-sep { font-family: 'Cinzel', serif; font-size: 36px; color: rgba(255,255,255,0.07); font-weight: 900; }
+  .hero-sub { font-family: 'EB Garamond', serif; font-size: clamp(15px, 2vw, 21px); color: var(--blanco-gris); font-style: italic; max-width: 800px; line-height: 1.9; margin-bottom: 46px; }
+  .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; justify-content: center; }
+  .hero-stat { text-align: center; padding: 14px 24px; border: 1px solid var(--borde-oro); background: rgba(245,197,24,0.04); }
+  .hero-stat .num { font-family: 'Cinzel', serif; font-size: 30px; font-weight: 900; color: var(--amarillo-oro); display: block; }
+  .hero-stat .lbl { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; color: var(--gris-texto); text-transform: uppercase; }
+
+  /* ── CABECERA DE CONCILIO ── */
+  .ch-wrap { max-width: 980px; margin: 0 auto; padding: 56px 40px 24px; display: flex; align-items: center; gap: 28px; }
+  .ch-bar { width: 6px; height: 80px; flex-shrink: 0; }
+  .ch-bar.cp1 { background: var(--cp1-color); }
+  .ch-bar.cp2 { background: var(--cp2-color); }
+  .ch-bar.cp3 { background: var(--cp3-color); }
+  .ch-num { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 4px; }
+  .ch-num.cp1 { color: var(--cp1-color); }
+  .ch-num.cp2 { color: var(--cp2-color); }
+  .ch-num.cp3 { color: var(--cp3-color); }
+  .ch-title { font-family: 'Cinzel', serif; font-size: clamp(24px, 3.8vw, 50px); font-weight: 900; color: var(--blanco); line-height: 1.1; }
+  .ch-sub { font-family: 'EB Garamond', serif; font-size: 17px; color: var(--gris-texto); font-style: italic; margin-top: 5px; }
+
+  /* ── SECCIONES ── */
+  section { max-width: 980px; margin: 0 auto; padding: 56px 40px; }
+  .section-divider { border: none; border-top: 1px solid var(--borde-oro); margin: 0 auto; max-width: 980px; }
+  .section-divider-thick { border: none; border-top: 3px solid var(--amarillo-oro); margin: 0 auto; max-width: 980px; }
+
+  h2 { font-family: 'Cinzel', serif; font-size: clamp(20px, 2.8vw, 36px); font-weight: 700; color: var(--blanco); margin-bottom: 8px; line-height: 1.2; }
+  h2 .h2-num { color: var(--amarillo-oro); font-size: 0.45em; letter-spacing: 3px; display: block; font-family: 'Oswald', sans-serif; font-weight: 300; margin-bottom: 4px; text-transform: uppercase; }
+  h3 { font-family: 'Cinzel', serif; font-size: clamp(15px, 1.8vw, 21px); color: var(--amarillo-oro); margin: 32px 0 12px; font-weight: 700; border-left: 3px solid var(--amarillo-oro); padding-left: 14px; }
+  h4 { font-family: 'Oswald', sans-serif; font-size: 14px; color: var(--amarillo-tenue); letter-spacing: 1px; text-transform: uppercase; margin: 20px 0 8px; }
+  p { margin-bottom: 16px; color: var(--blanco-gris); }
+
+  /* ── CITA ── */
+  .quote { background: var(--negro-card); border-left: 4px solid var(--amarillo-oro); padding: 20px 26px; margin: 22px 0; border-radius: 0 4px 4px 0; position: relative; }
+  .quote::before { content: '\201C'; font-family: 'Cinzel', serif; font-size: 72px; color: rgba(245,197,24,0.12); position: absolute; top: -8px; left: 8px; line-height: 1; }
+  .quote-text { font-style: italic; color: var(--blanco-hueso); font-size: 16px; line-height: 1.85; margin-bottom: 10px; }
+  .quote-source { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 1.5px; color: var(--amarillo-tenue); text-transform: uppercase; }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; margin: 20px 0; }
+  .card { background: var(--negro-card); border: 1px solid var(--borde); padding: 20px; border-top: 3px solid var(--amarillo-oro); transition: transform 0.2s; }
+  .card:hover { transform: translateY(-2px); }
+  .card-name { font-family: 'Cinzel', serif; font-size: 14px; color: var(--blanco); margin-bottom: 4px; font-weight: 700; }
+  .card-role { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; color: var(--amarillo-tenue); text-transform: uppercase; margin-bottom: 8px; }
+  .card-desc { font-size: 13.5px; color: var(--gris-texto); line-height: 1.7; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding: 8px 0; margin: 20px 0; }
+  .timeline::before { content: ''; position: absolute; left: 26px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--amarillo-oro), transparent); }
+  .tl-item { display: flex; gap: 26px; margin-bottom: 28px; padding-left: 64px; position: relative; }
+  .tl-dot { position: absolute; left: 16px; top: 4px; width: 20px; height: 20px; background: var(--amarillo-oro); border-radius: 50%; border: 3px solid var(--negro); box-shadow: 0 0 0 2px var(--amarillo-oro); }
+  .tl-content { flex: 1; }
+  .tl-year { font-family: 'Cinzel', serif; font-size: 12px; color: var(--amarillo-oro); font-weight: 700; margin-bottom: 3px; }
+  .tl-title { font-family: 'Oswald', sans-serif; font-size: 15px; color: var(--blanco); font-weight: 600; margin-bottom: 4px; }
+  .tl-body { font-size: 14px; color: var(--gris-texto); }
+
+  /* ── TABLA ── */
+  .table-wrap { overflow-x: auto; margin: 18px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th { background: var(--amarillo-oro); color: var(--negro); font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 11px 13px; text-align: left; font-size: 11px; }
+  tbody tr { border-bottom: 1px solid var(--borde); }
+  tbody tr:hover { background: rgba(245,197,24,0.05); }
+  tbody td { padding: 10px 13px; color: var(--blanco-gris); vertical-align: top; }
+  tbody td:first-child { color: var(--amarillo-tenue); font-family: 'Oswald', sans-serif; font-size: 12px; }
+
+  /* ── HIGHLIGHT ── */
+  .highlight { background: linear-gradient(135deg, rgba(245,197,24,0.08), rgba(245,197,24,0.03)); border: 1px solid var(--borde-oro); padding: 24px 28px; margin: 22px 0; border-radius: 4px; }
+  .highlight.danger { background: linear-gradient(135deg, rgba(200,50,50,0.1), rgba(200,50,50,0.04)); border-color: rgba(200,80,80,0.4); }
+  .highlight.success { background: linear-gradient(135deg, rgba(50,180,100,0.08), rgba(50,180,100,0.03)); border-color: rgba(50,180,100,0.3); }
+  .highlight-title { font-family: 'Cinzel', serif; font-size: 12px; color: var(--amarillo-oro); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; font-weight: 700; }
+  .highlight.danger .highlight-title { color: #e06060; }
+  .highlight.success .highlight-title { color: #50c878; }
+
+  /* ── HEREJÍA CARDS ── */
+  .heresy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; margin: 20px 0; }
+  .heresy-card { background: var(--negro-panel); border: 1px solid var(--borde); border-left: 4px solid; padding: 16px 18px; }
+  .heresy-card.bad { border-left-color: #cc4444; }
+  .heresy-card.good { border-left-color: #50c878; }
+  .heresy-card.neutral { border-left-color: var(--amarillo-oro); }
+  .heresy-name { font-family: 'Cinzel', serif; color: var(--blanco); font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .heresy-label { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .heresy-card.bad .heresy-label { color: #cc4444; }
+  .heresy-card.good .heresy-label { color: #50c878; }
+  .heresy-card.neutral .heresy-label { color: var(--amarillo-tenue); }
+  .heresy-desc { font-size: 13.5px; color: var(--gris-texto); line-height: 1.7; }
+
+  /* ── TABS ── */
+  .sesion-tabs { display: flex; gap: 5px; flex-wrap: wrap; border-bottom: 2px solid var(--borde-oro); margin-bottom: 0; }
+  .sesion-tab { background: var(--negro-card); color: var(--gris-texto); border: 1px solid var(--borde); border-bottom: none; padding: 8px 14px; font-family: 'Oswald', sans-serif; font-size: 12px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; }
+  .sesion-tab:hover, .sesion-tab.active { background: var(--amarillo-oro); color: var(--negro); border-color: var(--amarillo-oro); font-weight: 600; }
+  .sesion-content { display: none; background: var(--negro-card); border: 1px solid var(--borde-oro); border-top: none; padding: 22px; }
+  .sesion-content.active { display: block; }
+
+  /* ── DOGMA BOX ── */
+  .dogma-box { border: 2px solid var(--amarillo-oro); padding: 32px 36px; margin: 28px 0; background: rgba(245,197,24,0.04); position: relative; }
+  .dogma-box::before { content: 'DEFINITIO FIDEI'; position: absolute; top: -13px; left: 26px; background: var(--negro); padding: 0 10px; font-family: 'Cinzel', serif; font-size: 10px; color: var(--amarillo-oro); letter-spacing: 3px; }
+  .dogma-text { font-size: 16.5px; line-height: 1.95; color: var(--blanco-hueso); font-style: italic; }
+
+  /* ── PERSONA ── */
+  .persona-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin: 18px 0; }
+  .persona-card { background: var(--negro-panel); border: 1px solid var(--borde); border-left: 4px solid var(--amarillo-oro); padding: 16px 18px; }
+  .persona-name { font-family: 'Cinzel', serif; color: var(--blanco); font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .persona-dates { font-family: 'Oswald', sans-serif; font-size: 10px; color: var(--amarillo-tenue); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 7px; }
+  .persona-quote { font-style: italic; font-size: 13.5px; color: var(--blanco-gris); line-height: 1.7; margin-bottom: 6px; border-left: 2px solid rgba(245,197,24,0.3); padding-left: 10px; }
+  .persona-ref { font-family: 'Oswald', sans-serif; font-size: 10px; color: var(--gris-texto); }
+
+  .lead { font-size: 18px; color: var(--blanco-gris); line-height: 1.9; font-style: italic; margin-bottom: 26px; border-left: 3px solid var(--amarillo-oro); padding-left: 18px; }
+  .gold { color: var(--amarillo-oro); }
+
+  footer { background: var(--negro-panel); border-top: 2px solid var(--amarillo-oro); text-align: center; padding: 46px 40px; }
+  footer p { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--gris-texto); text-transform: uppercase; }
+
+  @media (max-width: 640px) {
+    section { padding: 36px 18px; }
+    #sidebar { width: 88vw; }
+    .hero-trio { gap: 24px; }
+    .ch-wrap { padding: 36px 18px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<button id="nav-toggle" onclick="toggleNav()">☰ ÍNDICE</button>
+<div id="overlay" onclick="closeNav()"></div>
+
+<nav id="sidebar">
+  <h3>Constantinopla I · II · III</h3>
+
+  <span class="nav-lbl nav-cp1">✦ Constantinopla I (381)</span>
+  <ul>
+    <li><a href="#hero" onclick="closeNav()">Inicio</a></li>
+    <li><a href="#cp1-contexto" onclick="closeNav()">I. Contexto — El Mundo en 381</a></li>
+    <li class="sub"><a href="#arrianismo" onclick="closeNav()">El arrianismo post-Nicea</a></li>
+    <li class="sub"><a href="#pneumatomacos" onclick="closeNav()">Los Pneumatómacos</a></li>
+    <li><a href="#cp1-convocatoria" onclick="closeNav()">II. La Convocatoria</a></li>
+    <li><a href="#cp1-participantes" onclick="closeNav()">III. Participantes</a></li>
+    <li class="sub"><a href="#gregorio-naz" onclick="closeNav()">Gregorio Nacianceno</a></li>
+    <li><a href="#cp1-sesiones" onclick="closeNav()">IV. Las Sesiones</a></li>
+    <li><a href="#cp1-debate" onclick="closeNav()">V. El Debate Teológico</a></li>
+    <li class="sub"><a href="#credo-cp1" onclick="closeNav()">El Credo Niceno-Constantinopolitano</a></li>
+    <li class="sub"><a href="#filioque" onclick="closeNav()">El Espíritu Santo y el Filioque</a></li>
+    <li><a href="#cp1-despues" onclick="closeNav()">VI. Después de CP I</a></li>
+    <li><a href="#cp1-repercusiones" onclick="closeNav()">VII. Repercusiones</a></li>
+  </ul>
+
+  <span class="nav-lbl nav-cp2">✦ Constantinopla II (553)</span>
+  <ul>
+    <li><a href="#cp2-contexto" onclick="closeNav()">VIII. Contexto — Los Tres Capítulos</a></li>
+    <li class="sub"><a href="#justiniano" onclick="closeNav()">Justiniano y la política religiosa</a></li>
+    <li><a href="#cp2-convocatoria" onclick="closeNav()">IX. La Convocatoria</a></li>
+    <li><a href="#cp2-participantes" onclick="closeNav()">X. Participantes</a></li>
+    <li><a href="#cp2-sesiones" onclick="closeNav()">XI. Las Sesiones</a></li>
+    <li><a href="#cp2-debate" onclick="closeNav()">XII. El Debate Teológico</a></li>
+    <li class="sub"><a href="#tres-capitulos" onclick="closeNav()">Los Tres Capítulos</a></li>
+    <li><a href="#cp2-despues" onclick="closeNav()">XIII. Después de CP II</a></li>
+    <li><a href="#cp2-repercusiones" onclick="closeNav()">XIV. Repercusiones</a></li>
+  </ul>
+
+  <span class="nav-lbl nav-cp3">✦ Constantinopla III (680–681)</span>
+  <ul>
+    <li><a href="#cp3-contexto" onclick="closeNav()">XV. Contexto — El Monoteletismo</a></li>
+    <li class="sub"><a href="#sergio" onclick="closeNav()">Sergio y el Psephos</a></li>
+    <li class="sub"><a href="#papa-honorio" onclick="closeNav()">El caso del Papa Honorio</a></li>
+    <li><a href="#cp3-convocatoria" onclick="closeNav()">XVI. La Convocatoria</a></li>
+    <li><a href="#cp3-participantes" onclick="closeNav()">XVII. Participantes</a></li>
+    <li class="sub"><a href="#maximus" onclick="closeNav()">Máximo el Confesor</a></li>
+    <li><a href="#cp3-sesiones" onclick="closeNav()">XVIII. Las Sesiones</a></li>
+    <li><a href="#cp3-debate" onclick="closeNav()">XIX. El Debate — Dos Voluntades</a></li>
+    <li><a href="#cp3-definicion" onclick="closeNav()">XX. La Definición Dogmática</a></li>
+    <li><a href="#cp3-honorio" onclick="XXI. Honorio Condenado" onclick="closeNav()">XXI. Honorio y la Infalibilidad</a></li>
+    <li><a href="#cp3-despues" onclick="closeNav()">XXII. Después de CP III</a></li>
+    <li><a href="#cp3-repercusiones" onclick="closeNav()">XXIII. Repercusiones</a></li>
+    <li><a href="#fuentes" onclick="closeNav()">XXIV. Fuentes</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<div id="hero" class="hero">
+  <div class="hero-eyebrow">Segundo · Quinto · Sexto Concilios Ecuménicos · Trinitaria y Cristología</div>
+  <div class="hero-trio">
+    <div class="hero-c cp1"><h1>Constantinopla I</h1><div class="yr">381 d.C. · II Concilio</div></div>
+    <div class="hero-sep">·</div>
+    <div class="hero-c cp2"><h1>Constantinopla II</h1><div class="yr">553 d.C. · V Concilio</div></div>
+    <div class="hero-sep">·</div>
+    <div class="hero-c cp3"><h1>Constantinopla III</h1><div class="yr">680–681 d.C. · VI Concilio</div></div>
+  </div>
+  <p class="hero-sub">
+    Tres concilios celebrados en la capital del Imperio Romano de Oriente a lo largo de tres siglos.
+    El primero completó Nicea condenando el arrianismo residual y definiendo la divinidad del Espíritu Santo.
+    El segundo intentó reconciliar a los miafisitas condenando escritos del pasado.
+    El tercero cerró la última gran herejía cristológica definiendo que Cristo tiene dos voluntades,
+    y condenó a un papa por hereje. Juntos forman el arco doctrinal que va del arrianismo al monoteletismo.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">381</span><span class="lbl">CP I</span></div>
+    <div class="hero-stat"><span class="num">II</span><span class="lbl">Concilio Ecum.</span></div>
+    <div class="hero-stat"><span class="num">150</span><span class="lbl">Obispos en CP I</span></div>
+    <div class="hero-stat"><span class="num">553</span><span class="lbl">CP II</span></div>
+    <div class="hero-stat"><span class="num">V</span><span class="lbl">Concilio Ecum.</span></div>
+    <div class="hero-stat"><span class="num">165</span><span class="lbl">Obispos en CP II</span></div>
+    <div class="hero-stat"><span class="num">680</span><span class="lbl">CP III</span></div>
+    <div class="hero-stat"><span class="num">VI</span><span class="lbl">Concilio Ecum.</span></div>
+    <div class="hero-stat"><span class="num">170+</span><span class="lbl">Obispos en CP III</span></div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PARTE I — CONSTANTINOPLA I (381)
+════════════════════════════════════════════════════════ -->
+<hr class="section-divider-thick">
+<div class="ch-wrap">
+  <div class="ch-bar cp1"></div>
+  <div>
+    <div class="ch-num cp1">Segundo Concilio Ecuménico</div>
+    <div class="ch-title">Concilio de Constantinopla I</div>
+    <div class="ch-sub">Mayo – Julio de 381 · Constantinopla</div>
+  </div>
+</div>
+
+<!-- I. CONTEXTO CP I -->
+<hr class="section-divider">
+<section id="cp1-contexto">
+  <h2><span class="h2-num">I · Contexto Histórico</span>El Mundo Cristiano en el 381</h2>
+  <p class="lead">El Concilio de Nicea (325) había condenado el arrianismo, pero no lo había extinguido. Durante más de cincuenta años, el Imperio Romano fue escenario de una guerra teológica sin cuartel en la que el partido arriano controló la sede de Constantinopla, exilió a los obispos nicenos y llegó a contar con emperadores defensores. El concilio de 381 fue el punto de inflexión definitivo.</p>
+  <p>El arrianismo enseñaba que el Hijo de Dios era una criatura —aunque la más excelsa de todas— creada por el Padre antes del tiempo. La fórmula nicena <em>homoousios</em> («consustancial»), que afirmaba que el Hijo era de la misma sustancia que el Padre, había sido la respuesta, pero su formulación filosófica dividió incluso al campo ortodoxo entre los que la aceptaban y los que preferían fórmulas más ambiguas.</p>
+
+  <h3 id="arrianismo">El Arrianismo Post-Nicea: Medio Siglo de Crisis (325–379)</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">325</div>
+      <div class="tl-title">Nicea condena el arrianismo — Arrio exiliado</div>
+      <div class="tl-body">El Credo de Nicea define al Hijo como <em>homoousios</em> al Padre. Pero la victoria es frágil: muchos obispos firmaron sin convicción y la lucha política apenas comenzaba.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">336–361</div>
+      <div class="tl-title">El Imperio bajo emperadores proarrianos</div>
+      <div class="tl-body">Constancio II (r. 337–361) era arriano convencido. Exilió al gran Atanasio de Alejandría cinco veces. Bajo su reinado, los concilios de Arles (353) y Milán (355) condenaron a los defensores de Nicea. Hilario de Poitiers fue desterrado a Frigia. La ortodoxia nicena parecía derrotada.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">360–380</div>
+      <div class="tl-title">Fragmentación: homousianos, homoiusianos, eunomianos, pneumatómacos</div>
+      <div class="tl-body">El «partido arriano» se fragmentó en facciones. Los <em>homoianos</em> (el Hijo es «semejante» al Padre, fórmula vaga). Los <em>anomeos</em> o eunomianos (el Hijo es radicalmente diferente al Padre). Los <em>homoiusianos</em> o semiarrianos (el Hijo es de sustancia semejante). Los <em>pneumatómacos</em> (aceptaban la divinidad del Hijo pero negaban la del Espíritu).</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">379</div>
+      <div class="tl-title">Teodosio I llega al trono — El viento cambia</div>
+      <div class="tl-body">El español Teodosio I (r. 379–395), convencidamente niceno, es nombrado coemperador de Oriente. Su primer gran edicto, <em>Cunctos populos</em> (febrero de 380), declara la fe nicena como única religión legítima del Imperio. Luego convoca el concilio general.</div>
+    </div></div>
+  </div>
+
+  <h3 id="pneumatomacos">Los Pneumatómacos — La Nueva Herejía</h3>
+  <p>Mientras el debate sobre el Hijo parecía resolverse en favor del <em>homoousios</em>, emergió una nueva cuestión: ¿cuál es la naturaleza del Espíritu Santo? Los <span class="gold">pneumatómacos</span> («combatientes contra el Espíritu», también llamados <em>macedonianos</em> por su supuesta vinculación al obispo Macedonio I de Constantinopla) aceptaban la divinidad del Hijo pero negaban que el Espíritu Santo fuera plenamente Dios. Lo reducían a una criatura intermedia, un poder o una fuerza al servicio del Padre y el Hijo.</p>
+  <p>La respuesta teológica a los pneumatómacos fue obra principalmente de los <span class="gold">Tres Capadocios</span>: Basilio de Cesarea, su hermano Gregorio de Nisa y su amigo Gregorio Nacianceno. Sus obras sobre el Espíritu Santo —especialmente el tratado <em>De Spiritu Sancto</em> de Basilio (375)— proporcionaron al concilio de 381 la teología que necesitaba.</p>
+
+  <div class="quote">
+    <p class="quote-text">«El Espíritu es llamado Espíritu de Dios, Espíritu de Cristo, Espíritu de adopción [...]. Si Dios es llamado Espíritu, y también lo es el Espíritu Santo, ¿cómo no será Dios el que se llama Espíritu de Dios? [...] ¿Acaso no es evidente que el Espíritu Santo no es ajeno a la divinidad?»</p>
+    <div class="quote-source">Basilio de Cesarea, De Spiritu Sancto, XVIII, 44–46 — PG 32, 148–152. Obra fundamental para CP I.</div>
+  </div>
+</section>
+
+<!-- II. CONVOCATORIA CP I -->
+<hr class="section-divider">
+<section id="cp1-convocatoria">
+  <h2><span class="h2-num">II · La Convocatoria</span>Teodosio I y el Contexto de la Asamblea</h2>
+  <p>El Concilio de Constantinopla I fue convocado en <span class="gold">mayo de 381</span> por el emperador <span class="gold">Teodosio I</span>, apenas dos años después de su ascensión al trono. La sede era Constantinopla, la «nueva Roma», ciudad que había ganado enorme peso político pero cuya sede episcopal era todavía joven e irrelevante eclesiásticamente frente a las antiguas sedes de Roma, Alejandría y Antioquía.</p>
+  <p>El concilio fue inicialmente un concilio <em>oriental</em>: no se invitó a los obispos occidentales y no asistió ningún representante del papa Dámaso I de Roma. Esta circunstancia afectó a su reconocimiento como concilio ecuménico, que solo se consolidó décadas después. El papa Dámaso I y el concilio romano reconocieron sus definiciones pero nunca ratificaron formalmente sus actas.</p>
+  <div class="highlight">
+    <div class="highlight-title">⚠ Un Concilio sin Representación Occidental</div>
+    <p>A diferencia de Nicea (325), donde el papa había enviado legados, Constantinopla I fue convocado sin consultar a Roma y sin invitar a obispos occidentales. Esta anomalía explica por qué su reconocimiento como «ecuménico» tardó: en Oriente se le reconoció de inmediato, pero en Occidente solo fue reconocido gradualmente en los siglos V y VI. El Concilio de Calcedonia (451) fue el primero en citarlo explícitamente como ecuménico.</p>
+  </div>
+</section>
+
+<!-- III. PARTICIPANTES CP I -->
+<hr class="section-divider">
+<section id="cp1-participantes">
+  <h2><span class="h2-num">III · Los Participantes</span>Los 150 Obispos de Oriente</h2>
+  <p>Asistieron aproximadamente <span class="gold">150 obispos</span>, todos orientales. La presidencia inicial correspondió a <span class="gold">Melecio de Antioquía</span>, el obispo más respetado del Oriente niceno. Su muerte durante el concilio precipitó una crisis de liderazgo que desembocó en el protagonismo efímero de Gregorio Nacianceno y luego en el ascenso de Nectario.</p>
+
+  <h3 id="gregorio-naz">Gregorio Nacianceno — La Figura Trágica del Concilio</h3>
+  <p><span class="gold">Gregorio de Nacianzo</span> (329–390) era el más brillante teólogo de los Capadocios y el mayor predicador de su época. Había sido llamado a Constantinopla en 379 para restaurar la comunidad nicena en una ciudad dominada por el arrianismo. Sus célebres <em>Discursos Teológicos</em> (<em>Orationes Theologicae</em>), pronunciados allí en 380, son la cima de la teología trinitaria griega del siglo IV.</p>
+  <p>Cuando Melecio murió, Gregorio fue elegido presidente del concilio y luego obispo de Constantinopla. Pero su carácter retirado y su horror a la intriga política lo pusieron en conflicto permanente con los obispos más agresivos. Al cabo de pocas semanas, acosado por disputas canónicas y por el agotamiento, pidió ser relevado de sus cargos, pronunció un famoso discurso de despedida —la <em>Oratio XLII</em>— y abandonó Constantinopla para retirarse a Nacianzo, donde murió en paz en 390.</p>
+
+  <div class="quote">
+    <p class="quote-text">«Me alegra partir de este tumulto y de esta escena de guerra [...]. No he recibido nada agradable de los obispos sino trabajos, disputas y persecuciones. [...] Deseo alejarme de toda sede episcopal, como me alejaría de una roca peligrosa o de la furia del mar.»</p>
+    <div class="quote-source">Gregorio de Nacianzo, Oratio XLII (Discurso de despedida del concilio) — PG 36, 457–492.</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Melecio de Antioquía</div>
+      <div class="card-role">Presidente inicial — muerto durante el concilio</div>
+      <div class="card-desc">El obispo más respetado del Oriente niceno. Presidió las primeras sesiones. Su muerte imprevista fue un golpe para el concilio y desató un conflicto sobre su sucesor en Antioquía que Roma y Alejandría no aceptaron de buen grado.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Gregorio Nacianceno</div>
+      <div class="card-role">Obispo de Constantinopla — Presidente interino</div>
+      <div class="card-desc">El gran teólogo del Espíritu Santo. Presidió el concilio brevemente. Sus Discursos Teológicos (pronunciados antes del concilio) son el trasfondo doctrinal de toda la asamblea. Dimitió agotado por las intrigas.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Gregorio de Nisa</div>
+      <div class="card-role">Hermano de Basilio — Teólogo clave</div>
+      <div class="card-desc">Pronunció el panegírico de Melecio en el concilio. Su profundidad especulativa sobre la Trinidad —especialmente la <em>epéktasis</em> y la distinción entre esencia (ousia) y energías— fue fundamental para la teología oriental posterior.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Nectario de Constantinopla</div>
+      <div class="card-role">Sucesor de Gregorio — Presidente final</div>
+      <div class="card-desc">Laico elegido obispo de Constantinopla durante el concilio, una elección que escandalizó a Roma. Presidió las sesiones finales y la promulgación de los cánones. Su elección prefigura el poder creciente de la sede constantinopolitana.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Teodosio I</div>
+      <div class="card-role">Emperador de Oriente (379–395)</div>
+      <div class="card-desc">Convocó y financió el concilio. Tras su clausura promulgó el edicto <em>Episcopis tradi</em> (julio 381) que entregaba todas las iglesias del Imperio a los obispos en comunión con las definiciones del concilio. El arrianismo dejó de ser legal.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Timoteo de Alejandría</div>
+      <div class="card-role">Patriarca de Alejandría</div>
+      <div class="card-desc">Representaba la poderosa sede alejandrina. Apoyó el rechazo de Máximo el Cínico —rival de Gregorio para la sede de Constantinopla— y supervisó la definición sobre el Espíritu desde la perspectiva atanasiana.</div>
+    </div>
+  </div>
+</section>
+
+<!-- IV. SESIONES CP I -->
+<hr class="section-divider">
+<section id="cp1-sesiones">
+  <h2><span class="h2-num">IV · Las Sesiones</span>Desarrollo del Concilio</h2>
+  <p class="lead">Las actas del Concilio de Constantinopla I no se conservaron completas —a diferencia de Nicea II o Calcedonia— por lo que la reconstrucción de sus sesiones se basa en fuentes narrativas: la correspondencia de Gregorio Nacianceno, la <em>Historia Eclesiástica</em> de Sócrates Escolástico y la de Sozomeno.</p>
+
+  <div class="sesion-tabs" id="tabs-cp1">
+    <button class="sesion-tab active" onclick="switchTab('cp1',0)">Mayo — Apertura</button>
+    <button class="sesion-tab" onclick="switchTab('cp1',1)">Muerte de Melecio</button>
+    <button class="sesion-tab" onclick="switchTab('cp1',2)">Crisis de Gregorio</button>
+    <button class="sesion-tab" onclick="switchTab('cp1',3)">Nectario y Cierre</button>
+    <button class="sesion-tab" onclick="switchTab('cp1',4)">Cánones</button>
+  </div>
+  <div class="sesion-content active" data-group="cp1">
+    <h4>Mayo de 381 — Apertura bajo presidencia de Melecio</h4>
+    <p>El concilio abre con Melecio de Antioquía como presidente indiscutible. Las primeras sesiones se dedicaron a establecer el quórum, recibir las credenciales de los obispos y tratar la cuestión del <em>Tomos</em> de Antioquía —el acuerdo doctrinal que debía regularizar la situación del partido niceno de aquella ciudad, dividido entre los seguidores de Melecio y los del obispo Paulino, apoyado por Roma y Alejandría.</p>
+  </div>
+  <div class="sesion-content" data-group="cp1">
+    <h4>Muerte de Melecio — Crisis de Sucesión en Antioquía</h4>
+    <p>A pocas semanas de iniciado el concilio, Melecio murió inesperadamente. Gregorio Nacianceno asumió la presidencia. Se desató inmediatamente la cuestión del sucesor en Antioquía: Gregorio propuso, en un gesto de reconciliación hacia Roma y Alejandría, que se reconociera al obispo Paulino —el candidato occidental— para así cerrar el cisma antioqueno. Su propuesta fue rechazada por la mayoría oriental con vehemencia. Flaviano fue elegido obispo de Antioquía, con lo que el cisma continuó otros años.</p>
+  </div>
+  <div class="sesion-content" data-group="cp1">
+    <h4>La Crisis de Gregorio y su Dimisión</h4>
+    <p>Gregorio, agotado por los conflictos y enfermo, solicitó al concilio ser relevado de su cargo en la sede de Constantinopla. Los obispos que querían deshacerse de él —cansados de su intransigencia canónica— aceptaron sin mucho pesar. Su famosa <em>Oratio XLII</em> es el discurso de despedida, una mezcla de amargura, dignidad y alivio. Fue el mayor teólogo del concilio y el que menos poder disfrutó en él.</p>
+  </div>
+  <div class="sesion-content" data-group="cp1">
+    <h4>Nectario — Elección y Cierre del Concilio</h4>
+    <p>La elección de <strong>Nectario</strong> como obispo de Constantinopla fue una sorpresa: era un funcionario imperial, senador de Tarso, todavía no bautizado. Recibió el bautismo, todas las órdenes sagradas en pocos días, y fue instalado como obispo. Presidió las sesiones finales del concilio. La decisión de elegir un laico pagó dividendos políticos pero escandalizó a los obispos más exigentes.</p>
+  </div>
+  <div class="sesion-content" data-group="cp1">
+    <h4>Los Cuatro Cánones — El Legado Disciplinar</h4>
+    <p>El concilio adoptó cuatro cánones disciplinares de enorme importancia histórica:</p>
+    <p><strong>Canon 1:</strong> Confirmación del Credo de Nicea y condena de todas las herejías: eunomianos, arrianos, semiarrianos/pneumatómacos, sabelianos, marcelianos, fotoinianos y apolinarianos.</p>
+    <p><strong>Canon 2:</strong> Los obispos no deben inmiscuirse en las diócesis ajenas. Define las circunscripciones de los cinco grandes patriarcados.</p>
+    <p><strong>Canon 3:</strong> «El obispo de Constantinopla tendrá el primado de honor después del obispo de Roma, porque Constantinopla es la nueva Roma.» Este canon fue el más controvertido y no fue aceptado por Roma.</p>
+    <p><strong>Canon 4:</strong> Condena la ordenación de Máximo el Cínico como obispo de Constantinopla, realizada por obispos egipcios.</p>
+  </div>
+</section>
+
+<!-- V. DEBATE TEOLÓGICO CP I -->
+<hr class="section-divider">
+<section id="cp1-debate">
+  <h2><span class="h2-num">V · El Debate Teológico</span>El Espíritu Santo, el Credo y el Filioque</h2>
+
+  <h3 id="credo-cp1">El Credo Niceno-Constantinopolitano — El Texto que Recitamos Hoy</h3>
+  <p>El resultado doctrinal más importante de Constantinopla I fue la promulgación —o revisión— del Credo que hoy se recita en todas las liturgias eucarísticas del mundo cristiano: el llamado <span class="gold">Credo Niceno-Constantinopolitano</span>. La relación exacta entre este credo y el de Nicea (325) ha sido objeto de debate erudito durante siglos.</p>
+  <p>Lo cierto es que el Credo de 381 amplía significativamente la sección sobre el Espíritu Santo, que en el credo de Nicea era brevísima («y en el Espíritu Santo»), añadiendo la definición teológica completa:</p>
+
+  <div class="dogma-box">
+    <p class="dogma-text">«[Creemos] en el Espíritu Santo, Señor y dador de vida, que procede del Padre, que con el Padre y el Hijo recibe una misma adoración y gloria, que habló por los profetas.»</p>
+    <p style="margin-top:14px;font-family:'Oswald',sans-serif;font-size:11px;color:var(--amarillo-tenue);letter-spacing:2px;text-transform:uppercase;">Credo Niceno-Constantinopolitano, sección pneumatológica — Denzinger 150</p>
+  </div>
+
+  <p>Nótese lo que el Credo <em>no dice</em> explícitamente: no llama al Espíritu Santo «Dios» ni «consustancial» (<em>homoousios</em>). Esta omisión fue deliberada: Basilio de Cesarea había argumentado que llamar al Espíritu Santo «Dios» en el Credo escandalizaría a los semiarrianos todavía recuperables, mientras que la expresión «con el Padre y el Hijo recibe una misma adoración y gloria» implicaba la misma realidad con menor fricción. Sus adversarios lo llamaron «sifofonía» (susurrador), pero la estrategia pastoral triunfó.</p>
+
+  <h3 id="filioque">El Filioque — La Semilla de un Cisma Futuro</h3>
+  <p>El Credo de 381 dice que el Espíritu Santo «procede del Padre» (<em>ek tou Patros ekporeuomenon</em>). En los siglos siguientes, la Iglesia occidental añadió la cláusula <span class="gold">Filioque</span> («y del Hijo»), de modo que el Espíritu procedería «del Padre <em>y del Hijo</em>». Esta adición, introducida primero en España (Concilio de Toledo, 589) y luego generalizada en el Imperio Franco, fue uno de los factores del Gran Cisma de 1054.</p>
+
+  <div class="heresy-grid">
+    <div class="heresy-card neutral">
+      <div class="heresy-name">Postura Occidental (con Filioque)</div>
+      <div class="heresy-label">Tradición latina</div>
+      <div class="heresy-desc">El Espíritu procede del Padre <em>y del Hijo</em> como de un único principio. Fundamentado en Agustín de Hipona (<em>De Trinitate</em>): el Espíritu es el amor que une al Padre y al Hijo. Texto del Credo modificado sin convocatoria de concilio ecuménico.</div>
+    </div>
+    <div class="heresy-card neutral">
+      <div class="heresy-name">Postura Oriental (sin Filioque)</div>
+      <div class="heresy-label">Tradición griega</div>
+      <div class="heresy-desc">El Espíritu procede solo del Padre como única fuente (ἀρχή) en la Trinidad. Basada en Juan 15:26. Modificar el Credo sin concilio ecuménico es inaceptable. El Filioque subordina al Espíritu al Hijo y altera el equilibrio trinitario.</div>
+    </div>
+  </div>
+
+  <p>El debate teológico sobre las herejías condenadas en Constantinopla I puede sintetizarse así:</p>
+
+  <div class="heresy-grid">
+    <div class="heresy-card bad">
+      <div class="heresy-name">Arrianismo estricto (eunomianos)</div>
+      <div class="heresy-label">⚠ Condenado</div>
+      <div class="heresy-desc">El Hijo es radicalmente diferente (<em>anomoios</em>) al Padre: es la primera y más perfecta creación, pero criatura al fin. Eunomio afirmaba conocer la esencia de Dios (ingénito) y deducir de ella la inferioridad del Hijo.</div>
+    </div>
+    <div class="heresy-card bad">
+      <div class="heresy-name">Semiarrianismo (homoiusianos)</div>
+      <div class="heresy-label">⚠ Condenado en su versión pneumatómaca</div>
+      <div class="heresy-desc">El Hijo es de sustancia «semejante» al Padre (no idéntica). Los pneumatómacos aceptaban la divinidad del Hijo pero rechazaban la del Espíritu. Macedonio I de Constantinopla es su figura más asociada, aunque los vínculos históricos son complejos.</div>
+    </div>
+    <div class="heresy-card bad">
+      <div class="heresy-name">Apolinarismo</div>
+      <div class="heresy-label">⚠ Condenado</div>
+      <div class="heresy-desc">Apolinar de Laodicea enseñaba que en Cristo el Logos ocupaba el lugar del alma racional humana: un solo ser con naturaleza divina completa pero humanidad incompleta. Condenado en Constantinopla I y reafirmado luego en Éfeso y Calcedonia.</div>
+    </div>
+    <div class="heresy-card bad">
+      <div class="heresy-name">Sabelianismo / Modalismo</div>
+      <div class="heresy-label">⚠ Condenado</div>
+      <div class="heresy-desc">Sabello enseñaba que Padre, Hijo y Espíritu son tres modos o manifestaciones de un único Dios, no tres Personas distintas. El error opuesto al arrianismo: colapsa la Trinidad en un único sujeto que actúa de tres maneras.</div>
+    </div>
+    <div class="heresy-card good">
+      <div class="heresy-name">Fe Niceno-Constantinopolitana</div>
+      <div class="heresy-label">✓ Definida y promulgada</div>
+      <div class="heresy-desc">Un solo Dios en tres Personas distintas y consustanciales. El Hijo es <em>homoousios</em> al Padre. El Espíritu Santo es Señor y dador de vida, adorado y glorificado junto al Padre y al Hijo. La Trinidad no es ni triteísmo ni modalismo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VI. DESPUÉS DE CP I -->
+<hr class="section-divider">
+<section id="cp1-despues">
+  <h2><span class="h2-num">VI · Después de Constantinopla I</span>El Arrianismo Fuera del Imperio</h2>
+  <p>Tras el concilio, Teodosio I aplicó con rigor los edictos que entregaban todas las iglesias nicenas a los obispos ortodoxos. En el Imperio Romano, el arrianismo como fuerza política fue liquidado en pocos años. Pero su historia no terminó: los <span class="gold">pueblos germanos</span> —visigodos, ostrogodos, burgundios, vándalos, lombardos— habían sido evangelizados por misioneros arrianos (principalmente el obispo Ulfilas, 311–383, que tradujo la Biblia al gótico) y mantuvieron el arrianismo como religión de su aristocracia guerrera durante siglos.</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">381–395</div>
+      <div class="tl-title">Teodosio aplica la legislación anticonciliar</div>
+      <div class="tl-body">Los edictos <em>Episcopis tradi</em> (381) y <em>Nullus haereticis</em> (383) ilegalizan el culto arriano y confiscan las basílicas. El arrianismo pierde su base institucional en el Imperio.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">410–600</div>
+      <div class="tl-title">El arrianismo germánico</div>
+      <div class="tl-body">Visigodos (hasta 589), ostrogodos, vándalos, burgundios y lombardos mantienen el arrianismo. El rey ostrogodo Teodorico el Grande domina Italia (493–526) siendo arriano pero respetando a los católicos. La conversión de los visigodos al catolicismo (Concilio III de Toledo, 589) marca el ocaso del arrianismo germánico.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">451</div>
+      <div class="tl-title">Calcedonia reconoce explícitamente a CP I como ecuménico</div>
+      <div class="tl-body">El Concilio de Calcedonia es el primero en citar a Constantinopla I como concilio ecuménico válido, ratificando sus definiciones sobre el Espíritu Santo y su Canon 3 sobre el honor de la sede de Constantinopla.</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- VII. REPERCUSIONES CP I -->
+<hr class="section-divider">
+<section id="cp1-repercusiones">
+  <h2><span class="h2-num">VII · Repercusiones</span>El Legado Permanente de Constantinopla I</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">📿 El Credo que Recitamos</div>
+      <div class="card-role">Impacto litúrgico universal</div>
+      <div class="card-desc">El Credo Niceno-Constantinopolitano es el único texto doctrinal aceptado por católicos, ortodoxos orientales, anglicanos, luteranos, reformados y la mayoría de las iglesias protestantes. Es el mayor punto de encuentro del cristianismo dividido. Se recita en todas las Misas desde el siglo VI (Oriente) y XI (Occidente).</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🕊 Doctrina del Espíritu Santo</div>
+      <div class="card-role">Impacto dogmático</div>
+      <div class="card-desc">La definición de que el Espíritu Santo es «Señor y dador de vida» adorado con el Padre y el Hijo completó la doctrina trinitaria iniciada en Nicea. La pneumatología cristiana —la teología del Espíritu— tiene su fundamento dogmático en las formulaciones de CP I.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🏛 Canon 3 — Semilla del Cisma</div>
+      <div class="card-role">Impacto eclesiológico</div>
+      <div class="card-desc">El Canon 3 otorgó a Constantinopla el primado de honor tras Roma. Roma nunca lo aceptó. Calcedonia (451) amplió ese honor con el Canon 28, que Roma tampoco aceptó. Esta tensión atraviesa toda la historia de las relaciones entre Roma y Constantinopla hasta el Cisma de 1054.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">📜 Los Capadocios y la Teología Trinitaria</div>
+      <div class="card-role">Impacto intelectual</div>
+      <div class="card-desc">El vocabulario trinitario que CP I ratificó —una ousia (esencia), tres hypóstasis (personas), las relaciones de origen, la distinción entre esencia y energías— fue elaborado por los Capadocios y sigue siendo el lenguaje de toda la teología trinitaria posterior, tanto oriental como occidental.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PARTE II — CONSTANTINOPLA II (553)
+════════════════════════════════════════════════════════ -->
+<hr class="section-divider-thick">
+<div class="ch-wrap">
+  <div class="ch-bar cp2"></div>
+  <div>
+    <div class="ch-num cp2">Quinto Concilio Ecuménico</div>
+    <div class="ch-title">Concilio de Constantinopla II</div>
+    <div class="ch-sub">5 de mayo – 2 de junio de 553 · Constantinopla</div>
+  </div>
+</div>
+
+<!-- VIII. CONTEXTO CP II -->
+<hr class="section-divider">
+<section id="cp2-contexto">
+  <h2><span class="h2-num">VIII · Contexto</span>Entre Calcedonia y la Reconciliación Imposible</h2>
+  <p class="lead">El Concilio de Calcedonia (451) había definido que Cristo tiene dos naturalezas completas en una sola Persona. Pero la mitad del Oriente cristiano —Egipto, Siria, partes de Palestina y Armenia— no lo aceptó. El sueño de un Imperio cristiano unido se alejaba. El Concilio de Constantinopla II (553) fue el intento más ambicioso —y más problemático— de tender un puente teológico entre calcedonenses y miafisitas sin traicionar a ninguno.</p>
+
+  <h3 id="justiniano">El Emperador Justiniano I (527–565): Teólogo en el Trono</h3>
+  <p><span class="gold">Justiniano I</span> no fue solo el mayor legislador de la Antigüedad tardía (<em>Corpus Iuris Civilis</em>) ni solo el reconquistador del Mediterráneo occidental. Fue también un teólogo compulsivo que intervino en todas las controversias religiosas de su tiempo con una energía que sus contemporáneos encontraban admirables o aterrorizantes según su posición.</p>
+  <p>Su esposa <span class="gold">Teodora</span>, de origen humilde y pasado controvertido, era fervientemente miafisita y ejerció una influencia contrarrestante sobre la política religiosa. El palacio imperial fue durante décadas un microcosmos de la controversia teológica: el emperador calcedonense y la emperatriz miafisita debatiendo con los mejores teólogos del momento.</p>
+  <p>La gran apuesta de Justiniano fue la condena de los llamados <span class="gold">«Tres Capítulos»</span>: los escritos de tres teólogos muertos —Teodoro de Mopsuestia, Teodoreto de Ciro (en sus escritos contra Cirilo) e Ibas de Edesa— que los miafisitas señalaban como la raíz doctrinal del nestorianismo y cuya condena Calcedonia había implícitamente rechazado al rehabilitar a Teodoreto e Ibas.</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">529</div>
+      <div class="tl-title">Justiniano cierra la Academia de Atenas</div>
+      <div class="tl-body">El último reducto del neoplatonismo pagano es clausurado. Justiniano declara el Imperio oficialmente cristiano en todos los planos. Su proyecto es una <em>symphonia</em> entre el poder imperial y la autoridad eclesiástica.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">543–544</div>
+      <div class="tl-title">Justiniano publica su edicto condenando los «Tres Capítulos»</div>
+      <div class="tl-body">El edicto imperial condena los escritos de Teodoro de Mopsuestia, los escritos anti-cirilianos de Teodoreto, y la carta de Ibas de Edesa al persa Mari. El objetivo es mostrar a los miafisitas que Calcedonia no era nestoriana. La reacción en Occidente es de alarma: ¿se estaba traicionando Calcedonia?</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">545–547</div>
+      <div class="tl-title">El Papa Vigilio: presionado y resistente</div>
+      <div class="tl-body">El papa Vigilio (r. 537–555), instalado en su cargo con ayuda de Teodora, se niega a condenar los Tres Capítulos. Justiniano lo hace trasladar por la fuerza a Constantinopla. Vigilio busca asilo en una iglesia. Es literalmente arrastrado por los soldados imperiales. Su calvario dura años.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">548</div>
+      <div class="tl-title">El <em>Iudicatum</em> de Vigilio — Primera capitulación</div>
+      <div class="tl-body">Bajo presión, Vigilio emite el <em>Iudicatum</em> condenando provisionalmente los Tres Capítulos. El episcopado occidental, especialmente el africano, estalla en protestas y lo excomulga. Vigilio retira el documento. La situación es un caos completo.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">551</div>
+      <div class="tl-title">Justiniano publica una nueva condena unilateral</div>
+      <div class="tl-body">Cansado de negociar, Justiniano publica su propia confesión de fe condenando los Tres Capítulos y llama a sus autores nestorianos. Vigilio huye al altar de la iglesia de San Pedro encadenado a las columnas. La escena es grotesca.</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- IX. CONVOCATORIA CP II -->
+<hr class="section-divider">
+<section id="cp2-convocatoria">
+  <h2><span class="h2-num">IX · La Convocatoria</span>Justiniano Fuerza el Concilio</h2>
+  <p>El Concilio de Constantinopla II fue convocado por <span class="gold">Justiniano I</span> en mayo de 553. La convocatoria fue excepcional: el papa Vigilio, aún en Constantinopla bajo custodia imperial, se negó a participar. El concilio se celebró <em>sin él</em>. Vigilio emitió su propio documento doctrinal paralelo —el <em>Constitutum</em>— rechazando la condena retroactiva de personas muertas.</p>
+  <p>El concilio lo presidió el patriarca <span class="gold">Eutiquio de Constantinopla</span>, leal a Justiniano. Asistieron 165 obispos, casi todos orientales. Los obispos occidentales brillaron por su ausencia: solo nueve participaron, y de forma subordinada.</p>
+
+  <div class="highlight danger">
+    <div class="highlight-title">⚠ Un Papa Ausente y Amenazado</div>
+    <p>Vigilio emitió su <em>Constitutum</em> el 14 de mayo de 553, rechazando la condena de los Tres Capítulos en términos firmes. Justiniano ordenó borrar el nombre del papa de todos los dípticos (las listas de personas conmemoradas en la liturgia). Vigilio fue virtualmente excomulgado por el emperador. Solo meses después, cuando el concilio ya había terminado, Vigilio cedió y ratificó sus decretos. Murió de regreso a Roma en 555, agotado y humillado.</p>
+  </div>
+</section>
+
+<!-- X. PARTICIPANTES CP II -->
+<hr class="section-divider">
+<section id="cp2-participantes">
+  <h2><span class="h2-num">X · Los Participantes</span>Figuras del Concilio</h2>
+  <div class="persona-grid">
+    <div class="persona-card">
+      <div class="persona-name">Justiniano I</div>
+      <div class="persona-dates">Emperador 527–565</div>
+      <div class="persona-quote">Motor y arquitecto del concilio. Publicó los documentos dogmáticos, presionó al papa, y vio el concilio como la solución política a la división religiosa del Imperio. Su proyecto de reunificación con los miafisitas fracasó de todas formas.</div>
+      <div class="persona-ref">Codex Justinianus · Novellae · Edictos teológicos</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Papa Vigilio</div>
+      <div class="persona-dates">Romano Pontífice 537–555</div>
+      <div class="persona-quote">La figura más trágica del concilio. Amenazado, humillado, arrastrado físicamente. Su resistencia inicial y su capitulación final ilustran la tensión entre la independencia doctrinal del papado y la aplastante presión imperial.</div>
+      <div class="persona-ref">El caso Vigilio es el más citado en debates sobre infalibilidad papal</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Eutiquio de Constantinopla</div>
+      <div class="persona-dates">Patriarca 552–565 y 577–582</div>
+      <div class="persona-quote">Presidió el concilio por designación imperial. Posteriormente él mismo caería en desgracia con Justiniano por su postura sobre la incorruptibilidad del cuerpo de Cristo, siendo depuesto y exiliado. La política teológica de Justiniano no conocía lealtades duraderas.</div>
+      <div class="persona-ref">ACO IV,1 — Actas de CP II</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Teodora (†548)</div>
+      <div class="persona-dates">Emperatriz co-regente</div>
+      <div class="persona-quote">Había muerto en 548, antes del concilio, pero su influencia miafisita en la política de Justiniano fue la razón de fondo de todo el proyecto. Protegió a monjes y obispos miafisitas en el mismo palacio imperial, creando una situación surrealista.</div>
+      <div class="persona-ref">Procopio, Historia Secreta; Juan de Éfeso, Historia Eclesiástica</div>
+    </div>
+  </div>
+</section>
+
+<!-- XI. SESIONES CP II -->
+<hr class="section-divider">
+<section id="cp2-sesiones">
+  <h2><span class="h2-num">XI · Las Sesiones</span>Ocho Sesiones, Cinco Semanas</h2>
+  <p class="lead">El concilio duró del 5 de mayo al 2 de junio de 553. Sus ocho sesiones se conservan íntegramente en las actas, aunque en una transmisión textual compleja (griego y latín, con algunas interpolaciones sospechosas detectadas por la crítica moderna).</p>
+
+  <div class="sesion-tabs" id="tabs-cp2">
+    <button class="sesion-tab active" onclick="switchTab('cp2',0)">Ses. I–II</button>
+    <button class="sesion-tab" onclick="switchTab('cp2',1)">Ses. III–V</button>
+    <button class="sesion-tab" onclick="switchTab('cp2',2)">Ses. VI–VII</button>
+    <button class="sesion-tab" onclick="switchTab('cp2',3)">Ses. VIII — Final</button>
+  </div>
+  <div class="sesion-content active" data-group="cp2">
+    <h4>Sesiones I–II — 5 y 8 de mayo de 553</h4>
+    <p>La primera sesión estableció el quórum y leyó la correspondencia entre Justiniano y el papa Vigilio, que se negaba a asistir. Se leyó también la profesión de fe de los patriarcas orientales y se constató la ausencia papal. El concilio decidió continuar sin Vigilio. En la segunda sesión se inició la lectura de los testimonios patrísticos sobre la orthodoxia de Calcedonia y la necesidad de condenar los Tres Capítulos.</p>
+  </div>
+  <div class="sesion-content" data-group="cp2">
+    <h4>Sesiones III–V — 12 al 17 de mayo</h4>
+    <p>Las sesiones centrales se dedicaron al examen de los escritos de <strong>Teodoro de Mopsuestia</strong>. Se leyeron extensos pasajes de sus comentarios bíblicos y obras teológicas que el concilio juzgó de inspiración nestoriana: la separación entre el hombre Jesús y el Logos divino, el rechazo del término <em>Theotokos</em>, la interpretación de la unión como una mera «inhabitación» de Dios en el hombre. El concilio concluyó que Teodoro era el padre intelectual del nestorianismo de Nestorio.</p>
+  </div>
+  <div class="sesion-content" data-group="cp2">
+    <h4>Sesiones VI–VII — 19 y 26 de mayo</h4>
+    <p>La sexta sesión examinó los escritos de <strong>Teodoreto de Ciro</strong> contra Cirilo de Alejandría —los mismos que Calcedonia había implícitamente perdonado al rehabilitar a Teodoreto. Se condenaron específicamente sus obras anticirilinas, no su persona (que ya había muerto ca. 460). La séptima sesión hizo lo propio con la <strong>Carta de Ibas de Edesa</strong> al persa Mari, que Calcedonia (451) había considerado ortodoxa. El concilio la juzgó nestoriana.</p>
+  </div>
+  <div class="sesion-content" data-group="cp2">
+    <h4>Sesión VIII — 2 de junio de 553 · Los Catorce Anatemas</h4>
+    <p>La sesión final promulgó los <strong>catorce anatemas</strong> dogmáticos del concilio. Además de condenar los Tres Capítulos, el concilio también condenó el <em>origenismo</em> —la teología especulativa de Orígenes sobre la preexistencia de las almas, la apocatástasis universal y la espiritualización final de la materia— aunque la relación entre esta condena y el concilio propiamente dicho es debatida por los especialistas. Algunos documentos anti-origenistas podrían pertenecer a un sínodo local anterior (543).</p>
+  </div>
+</section>
+
+<!-- XII. DEBATE CP II -->
+<hr class="section-divider">
+<section id="cp2-debate">
+  <h2><span class="h2-num">XII · El Debate Teológico</span>¿Se Puede Condenar a los Muertos?</h2>
+
+  <h3 id="tres-capitulos">Los Tres Capítulos — La Cuestión Central</h3>
+  <p>El debate doctrinal de Constantinopla II giró en torno a una pregunta canónica y teológica de primer orden: ¿puede un concilio condenar los escritos de personas que murieron en comunión con la Iglesia y que otro concilio (Calcedonia) había ya tratado y en buena medida absuelto?</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>«Capítulo» condenado</th><th>Persona</th><th>Argumento para la condena</th><th>Argumento contra la condena</th></tr></thead>
+      <tbody>
+        <tr><td>Primer Capítulo</td><td>Teodoro de Mopsuestia (350–428)</td><td>Sus escritos separan al Logos divino del hombre Jesús; rechazó el <em>Theotokos</em>; maestro intelectual de Nestorio.</td><td>Murió en comunión con la Iglesia. Ningún concilio lo había condenado en vida. Condenar a un muerto viola el derecho de defensa.</td></tr>
+        <tr><td>Segundo Capítulo</td><td>Escritos anti-cirilianos de Teodoreto de Ciro (393–460)</td><td>Sus obras contra los anatemas de Cirilo de Alejandría defendieron implícitamente a Nestorio.</td><td>Calcedonia rehabilitó a Teodoreto en 451 (Sesión VIII). Condenar ahora sus escritos contradice Calcedonia.</td></tr>
+        <tr><td>Tercer Capítulo</td><td>Carta de Ibas de Edesa al persa Mari</td><td>La carta llama a Cirilo hereje, defiende a Nestorio, rechaza el <em>Theotokos</em> antes de Éfeso.</td><td>Calcedonia leyó la carta y la consideró ortodoxa (451, Ses. X–XI). Su condena ahora anularía Calcedonia.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>La defensa que el papa Vigilio hacía de los Tres Capítulos era canónica, no teológica: no defendía el contenido de esos escritos sino el principio de que un concilio no puede condenar retroactivamente a quien otro concilio había absuelto. Justiniano respondía que lo que se condenaba eran los escritos, no las personas (ya muertas), y que si esos escritos eran nestorianos debían ser condenados independientemente de quién los hubiera escrito.</p>
+
+  <div class="highlight">
+    <div class="highlight-title">📌 Los Catorce Anatemas de Constantinopla II</div>
+    <p><strong>Anatemas 1–3:</strong> Condenación de la teología de Teodoro de Mopsuestia y de quien defienda su cristología (distinción de «dos hijos», rechazo del <em>Theotokos</em>, Cristo como mero hombre inspirado).</p>
+    <p><strong>Anatemas 4–11:</strong> Defensa de la cristología calcedoniense formulada en términos cirilianos: la unión hipostática, la comunicación de idiomas, la condena del nestorianismo y del eutiquianismo.</p>
+    <p><strong>Anatemas 12–13:</strong> Condena de los escritos anti-cirilianos de Teodoreto y de la Carta de Ibas.</p>
+    <p><strong>Anatema 14:</strong> Condena de quien defienda los Tres Capítulos o los errores de Teodoro.</p>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«Si alguno defiende al impío Teodoro de Mopsuestia, que dijo que el Verbo de Dios es uno y que Cristo es otro, que nació de una mujer, fue crucificado, murió, fue sepultado [...] y que el Verbo de Dios no se hizo hombre sino que habitó en el hombre a la manera en que habita en un profeta: sea anatema.»</p>
+    <div class="quote-source">Concilio de Constantinopla II, Anatema I — ACO IV,1 p. 214. Denzinger 421.</div>
+  </div>
+</section>
+
+<!-- XIII. DESPUÉS CP II -->
+<hr class="section-divider">
+<section id="cp2-despues">
+  <h2><span class="h2-num">XIII · Después de Constantinopla II</span>El Fracaso del Proyecto de Reunificación</h2>
+  <p>El Concilio de Constantinopla II consiguió exactamente lo contrario de lo que pretendía. En lugar de atraer a los miafisitas hacia la comunión calcedonense, produjo un nuevo cisma en Occidente: los obispos del norte de Italia y partes de África rechazaron el concilio y se separaron de Roma durante décadas (<span class="gold">Cisma de los Tres Capítulos</span>, que en algunas regiones duró hasta el siglo VII).</p>
+  <p>Los miafisitas no regresaron a la comunión calcedonense. La política de Justiniano de construir un puente teológico entre las tradiciones mediante la condena de escritos del pasado fue un fracaso político. Lo que sí logró el concilio fue una formulación teológica más precisa de la herencia cirileana dentro del marco calcedoniense.</p>
+</section>
+
+<!-- XIV. REPERCUSIONES CP II -->
+<hr class="section-divider">
+<section id="cp2-repercusiones">
+  <h2><span class="h2-num">XIV · Repercusiones</span>El Legado Ambiguo de Constantinopla II</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">⚠ El Cisma de los Tres Capítulos</div>
+      <div class="card-role">Consecuencia inmediata</div>
+      <div class="card-desc">Los obispos del norte de Italia (Milán, Aquileya, Grado), de Dalmacia y del África proconsular rechazaron el concilio. El <em>Schisma Trium Capitulorum</em> duró hasta ca. 700 en algunas áreas. Roma tuvo que navegar entre la fidelidad al concilio y la presión de los occidentales disidentes.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">📚 Condena del Origenismo</div>
+      <div class="card-role">Impacto teológico</div>
+      <div class="card-desc">La condena del origenismo especulativo (preexistencia de almas, apocatástasis universal, espiritualización de la resurrección) cerró definitivamente la entrada de estas doctrinas en la teología ortodoxa. La teología espiritual de Orígenes siguió siendo influyente, pero sus posiciones más especulativas quedaron descartadas.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🏛 El Caso Vigilio y el Papado</div>
+      <div class="card-role">Impacto eclesiológico</div>
+      <div class="card-desc">El humillante tratamiento de Vigilio por parte de Justiniano fue un hito en las relaciones entre el papado y el poder imperial. La imagen del papa siendo arrastrado a la fuerza de una iglesia es uno de los episodios más perturbadores de la historia cristiana. Su capitulación final fue siempre una herida en la doctrina de la infalibilidad papal.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">⛪ Niocalcedonismo — La Síntesis Cirilo-Calcedonia</div>
+      <div class="card-role">Impacto dogmático a largo plazo</div>
+      <div class="card-desc">El intento de Justiniano de leer Calcedonia a través de Cirilo produjo una síntesis teológica que los especialistas llaman «neocalcedonismo»: la afirmación de que las dos naturalezas de Cristo no son un punto de partida sino un resultado de análisis, siendo la unidad hipostática la realidad primaria. Esta síntesis influyó en Constantinopla III y en toda la teología ortodoxa posterior.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PARTE III — CONSTANTINOPLA III (680–681)
+════════════════════════════════════════════════════════ -->
+<hr class="section-divider-thick">
+<div class="ch-wrap">
+  <div class="ch-bar cp3"></div>
+  <div>
+    <div class="ch-num cp3">Sexto Concilio Ecuménico</div>
+    <div class="ch-title">Concilio de Constantinopla III</div>
+    <div class="ch-sub">7 de noviembre de 680 – 16 de septiembre de 681 · Constantinopla · 18 sesiones</div>
+  </div>
+</div>
+
+<!-- XV. CONTEXTO CP III -->
+<hr class="section-divider">
+<section id="cp3-contexto">
+  <h2><span class="h2-num">XV · Contexto</span>El Monoteletismo: la Última Gran Herejía Cristológica</h2>
+  <p class="lead">Si Calcedonia (451) había definido las dos naturalezas de Cristo, quedaba pendiente una pregunta derivada: ¿tenía Cristo una sola voluntad o dos voluntades? Esta cuestión, que a primera vista puede parecer escolástica, desencadenó la última gran controversia cristológica de la Antigüedad y produjo un concilio que condenó a un papa por hereje.</p>
+
+  <h3 id="sergio">El Origen del Monoteletismo: Sergio de Constantinopla y el Psephos</h3>
+  <p>El <span class="gold">monoteletismo</span> (del griego <em>mono</em> = uno, <em>thélema</em> = voluntad) era la doctrina de que Cristo, aunque tuviera dos naturalezas, poseía una sola voluntad. Nació como un intento de compromiso político para reconciliar a los miafisitas: si Cristo tenía una sola voluntad operando, los miafisitas podían aceptarlo sin tener que decir explícitamente «dos naturalezas».</p>
+  <p>El artífice fue el patriarca <span class="gold">Sergio I de Constantinopla</span> (r. 610–638), un teólogo hábil que en 634 propuso al papa <span class="gold">Honorio I</span> la fórmula de «una sola voluntad en Cristo». La respuesta de Honorio —o más bien su falta de respuesta clara— se convertiría en el acontecimiento más debatido de la historia del papado.</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">622–628</div>
+      <div class="tl-title">Las guerras perso-bizantinas devastan el Oriente cristiano</div>
+      <div class="tl-body">Los persas conquistan Siria, Palestina y Egipto (622–629). El emperador Heraclio los reconquista pero el Imperio queda exhausto. La urgencia de la unidad religiosa ante la amenaza externa es el trasfondo político del monoteletismo.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">633</div>
+      <div class="tl-title">Ciro de Alejandría y la Unión de los Nueve Capítulos</div>
+      <div class="tl-body">El obispo Ciro (no confundir con Cirilo del siglo V) reúne en Alejandría a calcedonenses y miafisitas en torno a una fórmula de «una sola operación» (monoenergismo). Miles de miafisitas se reúnen con Roma. Parece un milagro de unión.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">634</div>
+      <div class="tl-title">Sergio escribe al papa Honorio I — La carta fatídica</div>
+      <div class="tl-body">Sergio consulta al papa si es correcto hablar de «una sola voluntad» en Cristo. Honorio responde con dos cartas que no condenan la fórmula, dicen que en Cristo hay «una sola voluntad» y que no deben hacerse disputas sobre el asunto. Esta respuesta descuidada costará cara.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">638</div>
+      <div class="tl-title">El <em>Ekthesis</em> — El Monoteletismo como política imperial</div>
+      <div class="tl-body">El emperador Heraclio publica el <em>Ekthesis</em> (Exposición de la fe), redactado por Sergio, que ordena hablar de «una sola voluntad» y prohíbe la discusión sobre si Cristo tiene una o dos operaciones. La formula se convierte en dogma imperial. Los papas Severino y Juan IV la rechazan.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">648</div>
+      <div class="tl-title">El <em>Typos</em> del emperador Constante II</div>
+      <div class="tl-body">Constante II reemplaza el <em>Ekthesis</em> con el <em>Typos</em>: en lugar de imponer el monoteletismo, prohíbe cualquier discusión sobre voluntades. Táctica de silencio. El papa Martín I convoca el Sínodo de Letrán (649) que condena el monoteletismo y el <em>Typos</em>. Constante II lo arresta.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">649</div>
+      <div class="tl-title">Sínodo de Letrán — El papa Martín I condena el monoteletismo</div>
+      <div class="tl-body">El gran sínodo occidental, organizado por el papa Martín I con la ayuda intelectual del monje <strong>Máximo el Confesor</strong>, condena el <em>Ekthesis</em>, el <em>Typos</em> y el monoteletismo con 20 cánones. Es la primera condena explícita de la herejía por parte de Roma. Martín I es arrestado por el emperador y muere mártir en el exilio (655).</div>
+    </div></div>
+  </div>
+
+  <h3 id="papa-honorio">El Caso del Papa Honorio I — El Escándalo de la Historia</h3>
+  <p>El caso del papa <span class="gold">Honorio I</span> (r. 625–638) es uno de los más complejos y debatidos de la historia del papado y del dogma de la infalibilidad pontificia. Sus dos cartas al patriarca Sergio de Constantinopla (634) afirmaban que en Cristo hay «una sola voluntad» y pedían silencio sobre el debate. Estas cartas fueron utilizadas por los monoteletas para justificar su doctrina.</p>
+
+  <div class="highlight danger">
+    <div class="highlight-title">⚠ Lo que Dijo Honorio — y lo que No Dijo</div>
+    <p><strong>Texto de Honorio (Ep. I ad Sergium):</strong> «Confesamos una sola voluntad de nuestro Señor Jesucristo.» — PL 80, 470C.</p>
+    <p><strong>¿Qué quiso decir?</strong> Honorio probablemente entendía que Cristo no tenía conflicto entre su voluntad humana y la divina (lo cual es teológicamente correcto). Pero su formulación adoptó sin cuestionarla la fórmula monoteleta de Sergio sin percibir su problema.</p>
+    <p><strong>¿Fue una declaración ex cátedra?</strong> Honorio respondía a una carta privada sobre un debate teológico. No pronunciaba una definición solemne de fe para toda la Iglesia. Esta distinción fue decisiva para los teólogos que intentaron reconciliar la condena de Honorio con el dogma de la infalibilidad definido en el Concilio Vaticano I (1870).</p>
+  </div>
+
+  <h3 id="maximus">Máximo el Confesor (580–662) — El Gran Mártir del Diotelismo</h3>
+  <p><span class="gold">Máximo el Confesor</span> es la figura intelectual más importante en la lucha contra el monoteletismo. Monje, teólogo y místico, elaboró la defensa más rigorosa y profunda de las dos voluntades de Cristo. Su argumento central era que si Cristo no tenía voluntad humana, no podía salvar la voluntad humana:</p>
+
+  <div class="quote">
+    <p class="quote-text">«Lo que no es asumido no es sanado; lo que está unido a Dios, eso mismo es salvado. Si la mitad de Adán cayó, entonces lo asumido y lo salvado es también la mitad. Pero si toda la naturaleza cayó, entonces es necesario que esté unida a la naturaleza del que nació, y así toda ella sea salvada.»</p>
+    <div class="quote-source">Máximo el Confesor, <em>Opuscula theologica et polemica</em>, 14 — PG 91, 157A. Aplicación del principio de Gregorio Nacianceno a las voluntades.</div>
+  </div>
+
+  <p>Máximo fue arrestado en 653, sometido a proceso por traición al estado (el monoteletismo era política imperial), torturado, mutilado —le cortaron la lengua y la mano derecha para que no pudiera hablar ni escribir— y exiliado al Cáucaso, donde murió en 662. El concilio de 681 lo rehabilitó y proclamó santo. Es uno de los más grandes mártires de la fe ortodoxa clásica.</p>
+</section>
+
+<!-- XVI. CONVOCATORIA CP III -->
+<hr class="section-divider">
+<section id="cp3-convocatoria">
+  <h2><span class="h2-num">XVI · La Convocatoria</span>Constantino IV y la Paz con Roma</h2>
+  <p>El Concilio de Constantinopla III fue convocado por el <span class="gold">emperador Constantino IV Pogonato</span> (r. 668–685) en noviembre de 680. A diferencia de sus predecesores, Constantino IV no tenía agenda teológica propia: quería sinceramente resolver la controversia y restaurar la comunión con Roma, que llevaba décadas rota por el monoteletismo imperial.</p>
+  <p>El papa <span class="gold">Agatón I</span> (r. 678–681) respondió positivamente y envió tres legados con una carta doctrinal —el equivalente papal al <em>Tomus</em> de León I— que sería el documento doctrinal central del concilio. El papa murió antes de que el concilio terminara; su sucesor León II ratificó las actas.</p>
+  <p>El concilio se reunió en el <span class="gold">Trullos</span> del Palacio Imperial (sala abovedada, de ahí el nombre), por lo que a veces se llama «Concilio en Trullo», aunque esta designación se aplica más propiamente al concilio disciplinar de 692 (<em>Quinisexto</em>).</p>
+</section>
+
+<!-- XVII. PARTICIPANTES CP III -->
+<hr class="section-divider">
+<section id="cp3-participantes">
+  <h2><span class="h2-num">XVII · Los Participantes</span>El Concilio Más Largo de la Historia Antigua</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Constantino IV Pogonato</div>
+      <div class="card-role">Emperador (668–685)</div>
+      <div class="card-desc">Presidió personalmente las primeras y últimas sesiones. A diferencia de Justiniano o Constante II, no intentó imponer una postura teológica sino moderar el debate. Su reinado fue el que restauró la comunión entre Constantinopla y Roma.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Papa Agatón I</div>
+      <div class="card-role">Romano Pontífice (678–681)</div>
+      <div class="card-desc">Envió legados y una carta doctrinal de enorme precisión teológica. Murió en enero de 681, antes de la clausura del concilio. El concilio reconoció explícitamente su carta como expresión de la fe apostólica, continuando la tradición del <em>Tomus</em> de León I en Calcedonia.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Jorge I de Constantinopla</div>
+      <div class="card-role">Patriarca (679–686)</div>
+      <div class="card-desc">Presidió las sesiones teológicas. Aceptó la condena de sus predecesores monoteletas (incluido Sergio) y suscribió la definición dioteleta. Su colaboración fue esencial para el éxito del concilio.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Legados del papa Agatón</div>
+      <div class="card-role">Presbítero Juan, diáconos Pedro y Constantino</div>
+      <div class="card-desc">Llevaron la carta doctrinal de Agatón. Mantuvieron en todo momento la posición romana de las dos voluntades y participaron activamente en el debate teológico. El presbítero Juan presidió las sesiones junto al patriarca.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Macario de Antioquía</div>
+      <div class="card-role">Patriarca — Defendió el monoteletismo</div>
+      <div class="card-desc">Fue el único patriarca que defendió abiertamente el monoteletismo en el concilio. Presentó un florilegio de textos patrísticos supuestamente favorables a «una sola voluntad». El concilio demostró que muchos de esos textos eran falsificaciones. Fue depuesto y exiliado.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Teodoro de Melitene et al.</div>
+      <div class="card-role">Obispos monoteletas</div>
+      <div class="card-desc">Pequeño grupo que apoyó a Macario. Al depurar su florilegio patrístico, el concilio encontró citas falsificadas, textos mutilados y atribuciones inventadas. El escándalo de las falsificaciones pesó enormemente en la condena del monoteletismo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- XVIII. SESIONES CP III -->
+<hr class="section-divider">
+<section id="cp3-sesiones">
+  <h2><span class="h2-num">XVIII · Las Dieciocho Sesiones</span>Diez Meses de Deliberación</h2>
+  <p class="lead">El Concilio de Constantinopla III fue el más largo de la historia conciliar antigua: duró diez meses (noviembre 680 – septiembre 681) y celebró dieciocho sesiones. Fue también el más meticuloso en la verificación de fuentes patrísticas, descubriendo falsificaciones en el florilegio monoteleta.</p>
+
+  <div class="sesion-tabs" id="tabs-cp3">
+    <button class="sesion-tab active" onclick="switchTab('cp3',0)">Ses. I–III</button>
+    <button class="sesion-tab" onclick="switchTab('cp3',1)">Ses. IV–IX</button>
+    <button class="sesion-tab" onclick="switchTab('cp3',2)">Ses. X–XIII</button>
+    <button class="sesion-tab" onclick="switchTab('cp3',3)">Ses. XIV–XVI</button>
+    <button class="sesion-tab" onclick="switchTab('cp3',4)">Ses. XVII–XVIII</button>
+  </div>
+  <div class="sesion-content active" data-group="cp3">
+    <h4>Sesiones I–III — Noviembre–Diciembre 680</h4>
+    <p>Las primeras sesiones establecieron el marco del concilio. Se leyó la carta del papa Agatón y fue aclamada. Se estableció el procedimiento: lectura de las actas de concilios anteriores, presentación de florilegos patrísticos por ambos bandos, verificación cruzada de las citas, debate.</p>
+    <p>El patriarca Macario de Antioquía presentó en la segunda sesión su postura monoteleta. El concilio acordó no pronunciarse hasta haber examinado exhaustivamente las fuentes patrísticas de ambas partes. Esta escrupulosidad documental distingue a CP III de todos los concilios anteriores.</p>
+  </div>
+  <div class="sesion-content" data-group="cp3">
+    <h4>Sesiones IV–IX — Enero–Marzo 681</h4>
+    <p>Las sesiones centrales fueron el corazón del trabajo doctrinal. Se leyeron y cotejaron centenares de citas patrísticas. Los legados papales presentaron un florilegio de textos que apoyaban las dos voluntades: León I, Atanasio, Basilio, Gregorio Nacianceno, Gregorio de Nisa, Ambrosio, Agustín, Cirilo, Sofronio de Jerusalén, Juan de Damasco.</p>
+    <p>El patriarca Macario presentó su florilegio en favor de «una sola voluntad». El concilio procedió a verificar cada cita contra los manuscritos disponibles en la biblioteca imperial. El resultado fue devastador para los monoteletas.</p>
+  </div>
+  <div class="sesion-content" data-group="cp3">
+    <h4>Sesiones X–XIII — Abril–Mayo 681 · El Escándalo de las Falsificaciones</h4>
+    <p>Las sesiones del segundo trimestre descubrieron que el florilegio de Macario estaba plagado de manipulaciones. Los escribas comprobarion los manuscritos uno por uno:</p>
+    <p>— Textos atribuidos a Atanasio, Cirilo y Gregorio que no existían en sus obras.</p>
+    <p>— Pasajes auténticos mutilados para que parecieran decir lo contrario de su significado original.</p>
+    <p>— Una falsificación particularmente grave: un texto pseudo-atanasiano que afirmaba «una sola voluntad» insertado en manuscritos auténticos.</p>
+    <p>Macario no supo defender sus fuentes. El concilio lo depuso en la décimo tercera sesión.</p>
+  </div>
+  <div class="sesion-content" data-group="cp3">
+    <h4>Sesiones XIV–XVI — Junio–Julio 681 · La Redacción del Horos</h4>
+    <p>Tras la deposición de Macario, el concilio procedió a redactar su definición dogmática. El debate sobre el lenguaje preciso fue intenso: ¿cómo formular las dos voluntades sin caer en el nestorianismo (dos sujetos con dos voluntades separadas)?</p>
+    <p>La solución fue una formulación paralela a la de Calcedonia: Cristo tiene dos voluntades naturales (<em>theleémata physika</em>) y dos operaciones naturales (<em>energeíai physikai</em>), sin contradicción entre ellas, porque la voluntad humana de Cristo se subordina libremente a la voluntad divina. La humanidad de Cristo no es autónoma respecto de su divinidad.</p>
+  </div>
+  <div class="sesion-content" data-group="cp3">
+    <h4>Sesiones XVII–XVIII — Septiembre 681 · Condenas y Cierre</h4>
+    <p>Las sesiones finales fueron las más dramáticas. Se aprobó el Horos dogmático. Se promulgó la lista de condenados por el monoteletismo, que incluyó:</p>
+    <p>— Sergio I de Constantinopla, Ciro de Alejandría, Pirro, Pedro y Pablo de Constantinopla (patriarcas monoteletas sucesivos).</p>
+    <p>— El papa <strong>Honorio I de Roma</strong>, condenado por haber «confirmado el espíritu malvado de Sergio con su epístola».</p>
+    <p>La condena de Honorio fue promulgada en la sesión XVIII y suscrita por los legados papales. El papa León II la ratificó posteriormente. El concilio se clausuró en septiembre de 681 con la aclamación de Constantino IV.</p>
+  </div>
+</section>
+
+<!-- XIX. DEBATE CP III -->
+<hr class="section-divider">
+<section id="cp3-debate">
+  <h2><span class="h2-num">XIX · El Debate Teológico</span>¿Una o Dos Voluntades en Cristo?</h2>
+
+  <div class="heresy-grid">
+    <div class="heresy-card bad">
+      <div class="heresy-name">Monoteletismo</div>
+      <div class="heresy-label">⚠ Condenado en CP III</div>
+      <div class="heresy-desc">Cristo tiene dos naturalezas pero <strong>una sola voluntad</strong>. La voluntad humana es absorbida o anulada por la voluntad divina. Sostenido por Sergio, Ciro, los emperadores Heraclio y Constante II, y —de forma ambigua— por el papa Honorio.</div>
+    </div>
+    <div class="heresy-card bad">
+      <div class="heresy-name">Monoenergismo</div>
+      <div class="heresy-label">⚠ Condenado (versión previa)</div>
+      <div class="heresy-desc">Cristo actúa con <strong>una sola operación</strong> (energía). Formulación de Ciro de Alejandría (633) como paso previo al monoteletismo. Condenado también como equivalente al monoteletismo.</div>
+    </div>
+    <div class="heresy-card good">
+      <div class="heresy-name">Diotelismo — Ortodoxia</div>
+      <div class="heresy-label">✓ Definido en CP III</div>
+      <div class="heresy-desc">Cristo tiene <strong>dos voluntades naturales</strong> y <strong>dos operaciones naturales</strong>: la divina y la humana, sin contradicción entre ellas. La voluntad humana se subordina libremente a la divina. Defendido por Máximo el Confesor, el Sínodo de Letrán (649) y el papa Agatón.</div>
+    </div>
+  </div>
+
+  <h4>El Argumento Soteriológico Central</h4>
+  <p>El argumento más poderoso del diotelismo no era filosófico sino soteriológico, y lo formuló con insuperable precisión Máximo el Confesor: si Cristo no tenía voluntad humana, no asumió la voluntad humana, y por tanto no la redimió. La salvación del hombre —que pecó por un acto de voluntad— exige que Cristo asuma y sane esa misma voluntad.</p>
+
+  <div class="quote">
+    <p class="quote-text">«El Señor sufrió el hambre y la sed y la fatiga y todo lo demás que pertenece a la naturaleza humana, y tenía miedo de la muerte como hombre. Pues si hay algo que se haya convertido en objeto de la voluntad humana por motivo del placer, y que Cristo no haya asumido por su salvífica encarnación, ciertamente no ha sido salvado.»</p>
+    <div class="quote-source">Máximo el Confesor, Disputatio cum Pyrrho — PG 91, 308A. Texto leído en el Concilio de Constantinopla III.</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Argumento Monoteleta</th><th>Respuesta Dioteleta (CP III)</th></tr></thead>
+      <tbody>
+        <tr><td>Dos voluntades implican dos sujetos → nestorianismo</td><td>Las voluntades son naturales, no personales. El sujeto único tiene dos voluntades como tiene dos naturalezas, sin dividirse.</td></tr>
+        <tr><td>La voluntad humana de Cristo contradecía a la divina (Getsemaní)</td><td>Getsemaní muestra exactamente la voluntad humana subordinándose a la divina: «No se haga mi voluntad sino la tuya» (Lc 22:42). Esto prueba que había voluntad humana real, no que hubiera conflicto insalvable.</td></tr>
+        <tr><td>Los Padres hablan de «una sola voluntad» (florilegio de Macario)</td><td>El concilio demostró que esas citas eran falsas o sacadas de contexto. Los Padres auténticos hablan de armonía de voluntades, no de una sola.</td></tr>
+        <tr><td>Una sola voluntad preserva la unidad de Cristo</td><td>La unidad de Cristo es la de la Persona (hipóstasis), no requiere una sola naturaleza ni una sola voluntad. Ya Calcedonia definió dos naturalezas sin dividir a Cristo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- XX. DEFINICIÓN CP III -->
+<hr class="section-divider">
+<section id="cp3-definicion">
+  <h2><span class="h2-num">XX · La Definición Dogmática</span>El Horos de Constantinopla III</h2>
+
+  <div class="dogma-box">
+    <p class="dogma-text">«Proclamamos igualmente en Él, según la enseñanza de los santos Padres, dos voluntades naturales y dos operaciones naturales, inseparablemente, inmutablemente, indivisiblemente, sin mezcla, según la propiedad de cada una de las dos naturalezas. Y las dos voluntades naturales no están en oposición mutua —¡lejos de nosotros tal impiedad, como dijeron los herejes!—, sino que la voluntad humana sigue y no resiste ni se opone, sino más bien se subordina a la voluntad divina y todopoderosa.»</p>
+    <p style="margin-top:14px;font-family:'Oswald',sans-serif;font-size:11px;color:var(--amarillo-tenue);letter-spacing:2px;text-transform:uppercase;">Concilio de Constantinopla III, Horos — ACO ser. II, vol. II,1 p. 778. Denzinger 556–559.</p>
+  </div>
+
+  <p>El Horos de CP III es deliberadamente paralelo al de Calcedonia: toma los mismos cuatro adverbios negativos («inseparablemente, inmutablemente, indivisiblemente, sin mezcla») y los aplica ahora a las voluntades en lugar de a las naturalezas. Es la culminación lógica de la teología calcedoniense.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Afirmación del Horos</th><th>Herejía que excluye</th><th>Significado positivo</th></tr></thead>
+      <tbody>
+        <tr><td>Dos voluntades naturales</td><td>Monoteletismo (una sola voluntad)</td><td>La humanidad de Cristo incluye la capacidad volitiva humana real</td></tr>
+        <tr><td>Dos operaciones naturales</td><td>Monoenergismo</td><td>Las dos naturalezas operan con sus propias energías, sin fusión</td></tr>
+        <tr><td>Inseparablemente e indivisiblemente</td><td>Nestorianismo (dos sujetos separados)</td><td>El sujeto que quiere es uno solo: el Hijo eterno encarnado</td></tr>
+        <tr><td>Sin mezcla e inmutablemente</td><td>Monofisismo y monoteletismo</td><td>Las voluntades no se funden: cada una conserva su modo propio</td></tr>
+        <tr><td>La voluntad humana se subordina a la divina</td><td>Cualquier autonomía conflictiva</td><td>La humanidad perfecta no se opone a Dios sino que lo abraza libremente</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- XXI. EL CASO HONORIO -->
+<hr class="section-divider">
+<section id="cp3-honorio">
+  <h2><span class="h2-num">XXI · El Caso Honorio</span>Un Papa Condenado por Hereje</h2>
+  <p class="lead">Uno de los hechos más extraordinarios de la historia conciliar es que el Concilio de Constantinopla III condenó formalmente al papa Honorio I (†638) por haber favorecido el monoteletismo. La condena fue ratificada por el papa León II. Este hecho ha sido debatido durante siglos en relación con el dogma de la infalibilidad pontificia.</p>
+
+  <div class="highlight danger">
+    <div class="highlight-title">📜 Texto de la Condena de Honorio — CP III, Sesión XVIII</div>
+    <p>«Y con ellos [los patriarcas monoteletas] decidimos también expulsar y anatematizar a <strong>Honorio, que fue papa de la Vieja Roma</strong>, porque hemos encontrado por su carta a Sergio que en todo siguió su opinión y confirmó sus impías doctrinas.»</p>
+    <p style="margin-top:10px;font-family:'Oswald',sans-serif;font-size:11px;color:#e06060;letter-spacing:1px;">ACO ser. II, vol. II,2 p. 834. Denzinger 552.</p>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«[Honorio] no iluminó como convenía a una mente apostólica esta Iglesia con la doctrina de la tradición apostólica, sino que permitió que la mente inmaculada se manchara por la profana traición.»</p>
+    <div class="quote-source">Papa León II, Carta a los obispos hispanos ratificando CP III — PL 96, 408B. 683 d.C.</div>
+  </div>
+
+  <h3>¿Cómo Reconciliar Esto con la Infalibilidad Papal?</h3>
+  <p>El Concilio Vaticano I (1870) definió la infalibilidad papal cuando el papa habla <em>ex cathedra</em> —«en el ejercicio de su oficio de pastor y doctor de todos los cristianos [...] define una doctrina sobre fe o costumbres que deba ser sostenida por la Iglesia universal». Los teólogos que respondieron al argumento de Honorio distinguieron varios puntos:</p>
+
+  <div class="persona-grid">
+    <div class="persona-card">
+      <div class="persona-name">Argumento 1: No fue declaración ex cátedra</div>
+      <div class="persona-dates">Respuesta teológica clásica</div>
+      <div class="persona-quote">Honorio respondía a una carta privada de Sergio, no pronunciaba una definición solemne de fe para toda la Iglesia. El papa León II, al ratificar la condena, la matizó: Honorio no fue condenado por enseñar la herejía formalmente sino por «negligencia» en suprimirla.</div>
+      <div class="persona-ref">Cf. Denzinger 563 — Carta de León II a Constantino IV</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Argumento 2: La condena es de «negligencia», no de herejía formal</div>
+      <div class="persona-dates">Distinción de León II</div>
+      <div class="persona-quote">El papa León II al ratificar la condena escribió que Honorio «no iluminó esta iglesia apostólica con doctrina de tradición apostólica, sino que consintió profanar su pureza inmaculada». Es condena por omisión y silencio, no por definición herética positiva.</div>
+      <div class="persona-ref">PL 96, 408B — Epístola a los obispos de España</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Argumento 3: El caso prueba que el papa se equivocó, no que definió heréticamente</div>
+      <div class="persona-dates">Teólogos modernos</div>
+      <div class="persona-quote">La infalibilidad papal no implica impecabilidad ni infabilidad en cartas privadas o gestión pastoral. Honorio se equivocó en una carta privada, algo que la definición vaticana no excluye. Lo que no puede ocurrir, según el Vaticano I, es una definición solemne de fe que sea herética.</div>
+      <div class="persona-ref">Cf. Klaus Schatz, <em>Papal Primacy</em>, 1996, pp. 100–104.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-name">Postura crítica — Historiadores</div>
+      <div class="persona-dates">Historiografía moderna</div>
+      <div class="persona-quote">Autores como Henry Chadwick y Brian Tierney señalan que el caso de Honorio es el ejemplo más nítido de un papa enseñando doctrina errónea y siendo condenado por ello por un concilio ecuménico. Lo que está en debate es si aquello fue una «definición» en el sentido técnico del Vaticano I.</div>
+      <div class="persona-ref">Chadwick, <em>The Early Church</em>, 1993, p. 205.</div>
+    </div>
+  </div>
+</section>
+
+<!-- XXII. DESPUÉS DE CP III -->
+<hr class="section-divider">
+<section id="cp3-despues">
+  <h2><span class="h2-num">XXII · Después de Constantinopla III</span>La Paz y el Quinisexto</h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">681–683</div>
+      <div class="tl-title">Ratificación papal y clausura del cisma monoteleta</div>
+      <div class="tl-body">El papa León II ratifica el concilio con tres cartas: al emperador Constantino IV, al rey visigodo Ervigio y a los obispos hispanos. En la carta a los hispanos condena explícitamente a Honorio. La Iglesia monoteleta de Siria y Líbano (maronitas) gradualmente se fue reconciliando con Roma en los siglos siguientes, aunque el proceso fue largo.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">692</div>
+      <div class="tl-title">El Concilio Quinisexto («en Trullo»)</div>
+      <div class="tl-body">Convocado por Justiniano II para complementar los cánones disciplinares que faltaban a CP II y CP III, este concilio adoptó 102 cánones. Su Canon 36 repite el Canon 3 de CP I y el Canon 28 de Calcedonia sobre el honor de Constantinopla. Roma rechazó muchos de sus cánones (sobre celibato clerical, ayunos, imágenes). Nunca fue reconocido como ecuménico en Occidente.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">787</div>
+      <div class="tl-title">Nicea II ratifica los seis concilios ecuménicos anteriores</div>
+      <div class="tl-body">El Concilio de Nicea II (787) confirma explícitamente los seis concilios ecuménicos anteriores, incluido CP III, como fundamentos de la fe ortodoxa. La serie completa queda fijada: Nicea I (325), CP I (381), Éfeso (431), Calcedonia (451), CP II (553), CP III (680–681).</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">Siglo VII–hoy</div>
+      <div class="tl-title">La Iglesia Maronita — Monoteleta que vuelve a Roma</div>
+      <div class="tl-body">La Iglesia Maronita del Líbano, de origen monoteleta, inició su reconciliación con Roma en los siglos VII–VIII y completó la unión en el período de las Cruzadas. Hoy es la mayor iglesia oriental católica de Oriente Medio, con unos cuatro millones de fieles.</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- XXIII. REPERCUSIONES CP III -->
+<hr class="section-divider">
+<section id="cp3-repercusiones">
+  <h2><span class="h2-num">XXIII · Repercusiones</span>El Legado de Constantinopla III</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">✝ Cierre de la Cristología Clásica</div>
+      <div class="card-role">Impacto dogmático</div>
+      <div class="card-desc">CP III completó el edificio dogmático sobre Cristo: una Persona (CP I y Éfeso), dos naturalezas (Calcedonia), dos voluntades (CP III). La cadena Nicea → CP I → Éfeso → Calcedonia → CP III → Nicea II cubre la totalidad de la doctrina sobre la Trinidad y la Encarnación.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🕊 San Máximo el Confesor — Mártir Rehabilitado</div>
+      <div class="card-role">Impacto en la santidad</div>
+      <div class="card-desc">La rehabilitación y canonización de Máximo el Confesor por CP III fue un acto de justicia histórica. Sus obras —los <em>Opuscula theologica</em>, las <em>Ambigua</em>, el <em>Diálogo con Pirro</em>— se convirtieron en la teología de referencia del diotelismo y siguen siendo lecturas fundamentales en la teología ortodoxa.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">📜 El Caso Honorio y la Infalibilidad</div>
+      <div class="card-role">Impacto en la eclesiología</div>
+      <div class="card-desc">La condena de Honorio fue argumento permanente en el debate sobre la infalibilidad papal hasta el Concilio Vaticano I (1870) y más allá. Figuras como Bossuet (galicano), Lord Acton (liberal católico) y los obispos del Concilio Vaticano I que votaron contra la infalibilidad citaron el caso como evidencia histórica de la falibilidad papal.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">⛪ La Iglesia Maronita</div>
+      <div class="card-role">Consecuencia a largo plazo</div>
+      <div class="card-desc">El cisma monoteleta que CP III no resolvió de inmediato fue resuelto gradualmente en los siglos siguientes. Los maronitas del Líbano, herederos de la tradición monoteleta siríaca, se reunieron con Roma y forman hoy una de las iglesias orientales más importantes del mundo.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">📚 La Metodología Documental</div>
+      <div class="card-role">Impacto en el método conciliar</div>
+      <div class="card-desc">CP III fue el primer concilio que realizó una verificación sistemática de los manuscritos patrísticos citados, descubriendo falsificaciones en el florilegio monoteleta. Esta metodología crítico-textual, avant la lettre, anticipa la crítica histórica moderna de las fuentes.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">🔄 Getsemaní como Clave Teológica</div>
+      <div class="card-role">Impacto bíblico-teológico</div>
+      <div class="card-desc">La definición de las dos voluntades hizo de la oración de Getsemaní («no mi voluntad sino la tuya») uno de los textos bíblicos más importantes de la cristología. Ya no es un texto «problemático» que los monoteletas intentaban explicar: es la prueba evangélica más directa de que Cristo tenía voluntad humana real.</div>
+    </div>
+  </div>
+</section>
+
+<!-- XXIV. FUENTES -->
+<hr class="section-divider">
+<section id="fuentes">
+  <h2><span class="h2-num">XXIV · Fuentes y Bibliografía</span></h2>
+
+  <h3>Fuentes Primarias — Constantinopla I (381)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuente</th><th>Contenido</th><th>Localización</th></tr></thead>
+      <tbody>
+        <tr><td>Cánones de CP I</td><td>4 cánones disciplinares y dogmáticos</td><td>Mansi III, col. 557–600. Denzinger 151–180. ACO, Conc. CP I.</td></tr>
+        <tr><td>Basilio, <em>De Spiritu Sancto</em></td><td>Tratado fundacional sobre el Espíritu Santo</td><td>PG 32, 67–218. SC 17bis (Pruche, 1968). Trad. española: BAC.</td></tr>
+        <tr><td>Gregorio Nacianceno, <em>Orationes Theologicae</em> (Or. 27–31)</td><td>Los cinco Discursos Teológicos, fundamento del concilio</td><td>PG 36, 9–172. SC 250 (Gallay, 1978). Trad. inglesa: NPNF2 vol. 7.</td></tr>
+        <tr><td>Gregorio Nacianceno, <em>Oratio XLII</em></td><td>Discurso de despedida del concilio</td><td>PG 36, 457–492.</td></tr>
+        <tr><td>Gregorio de Nisa, <em>Ad Ablabium</em></td><td>Sobre la Trinidad y la distinción ousia/hypostasis</td><td>PG 45, 115–136. Ed. crítica: GNO III,1 (Müller, 1958).</td></tr>
+        <tr><td>Sócrates Escolástico, <em>HE</em> V</td><td>Narración del concilio</td><td>PG 67, 559–842. Trad. inglesa: NPNF2 vol. 2.</td></tr>
+        <tr><td>Sozomeno, <em>HE</em> VII</td><td>Narración paralela del concilio</td><td>PG 67, 1389–1630. Trad. inglesa: NPNF2 vol. 2.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Fuentes Primarias — Constantinopla II (553)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuente</th><th>Contenido</th><th>Localización</th></tr></thead>
+      <tbody>
+        <tr><td>Actas de CP II</td><td>8 sesiones completas</td><td>ACO IV,1 (Straub, 1971). Mansi IX. Denzinger 421–438.</td></tr>
+        <tr><td>Edicto de Justiniano sobre los Tres Capítulos (544)</td><td>Documento detonante del concilio</td><td>ACO III (Schwartz, 1940), pp. 189–214.</td></tr>
+        <tr><td>Papa Vigilio, <em>Iudicatum</em> y <em>Constitutum</em></td><td>Los documentos del papa en conflicto</td><td>ACO IV,1 pp. 17–31 (Constitutum). PL 69, 67–114.</td></tr>
+        <tr><td>Catorce Anatemas de CP II</td><td>Definición dogmática</td><td>Denzinger 421–438. Mansi IX, col. 379–396.</td></tr>
+        <tr><td>Evagrio Escolástico, <em>HE</em> IV</td><td>Narración del período</td><td>PG 86, 2480–2796. TTH 33 (Whitby, 2000).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Fuentes Primarias — Constantinopla III (680–681)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuente</th><th>Contenido</th><th>Localización</th></tr></thead>
+      <tbody>
+        <tr><td>Actas de CP III</td><td>18 sesiones completas</td><td>ACO ser. II, vol. II,1–2 (Riedinger, 1990–1992). Mansi XI. Denzinger 550–559.</td></tr>
+        <tr><td>Horos de CP III</td><td>Definición dogmática sobre dos voluntades</td><td>Denzinger 556–559. ACO ser. II, vol. II,2 pp. 774–780.</td></tr>
+        <tr><td>Papa Agatón, <em>Epistula ad Constantinum IV</em></td><td>Carta doctrinal papal — el «Tomus» de CP III</td><td>PL 87, 1161–1214. Mansi XI, col. 235–292.</td></tr>
+        <tr><td>Papa Honorio I, cartas a Sergio</td><td>Las cartas condenadas por el concilio</td><td>PL 80, 470–474 (Ep. I y II ad Sergium).</td></tr>
+        <tr><td>Papa León II, ratificación de CP III</td><td>Condena de Honorio con matización</td><td>PL 96, 399–410. Denzinger 561–563.</td></tr>
+        <tr><td>Máximo el Confesor, <em>Disputatio cum Pyrrho</em></td><td>Debate con el patriarca monoteleta Pirro</td><td>PG 91, 288–354. Trad. inglesa: St. Tikhon's Seminary Press, 2014.</td></tr>
+        <tr><td>Máximo el Confesor, <em>Opuscula theologica et polemica</em></td><td>Tratados antiteleticos</td><td>PG 91, 9–285. Ed. crítica parcial: CCG 23 (Janssens, 2002).</td></tr>
+        <tr><td>Sofronio de Jerusalén, <em>Epistula synodica</em></td><td>Primera condena del monoteletismo (634)</td><td>PG 87,3, 3147–3200. Mansi XI, col. 461–510.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Bibliografía Científica Moderna</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Autor</th><th>Obra</th><th>Editorial / Año</th></tr></thead>
+      <tbody>
+        <tr><td>Hanson, R.P.C.</td><td><em>The Search for the Christian Doctrine of God</em></td><td>T&amp;T Clark, 1988 (Arrianismo y CP I)</td></tr>
+        <tr><td>Ayres, Lewis</td><td><em>Nicaea and its Legacy</em></td><td>Oxford University Press, 2004</td></tr>
+        <tr><td>Beeley, Christopher A.</td><td><em>Gregory of Nazianzus on the Trinity and the Knowledge of God</em></td><td>Oxford University Press, 2008</td></tr>
+        <tr><td>DelCogliano, Mark (ed.)</td><td><em>Works on the Spirit: Athanasius and Didymus</em></td><td>SVS Press, 2011</td></tr>
+        <tr><td>Price, Richard (ed.)</td><td><em>The Acts of Constantinople II (553)</em> (2 vols.)</td><td>TTH 61, Liverpool UP, 2009</td></tr>
+        <tr><td>Grillmeier, Aloys</td><td><em>Christ in Christian Tradition</em>, vol. II/2 (CP II)</td><td>Westminster John Knox, 1995</td></tr>
+        <tr><td>Evans, David B.</td><td><em>Leontius of Byzantium: An Origenist Christology</em></td><td>Dumbarton Oaks, 1970</td></tr>
+        <tr><td>Price, Richard (ed.)</td><td><em>The Acts of the Lateran Synod of 649</em></td><td>TTH 61, Liverpool UP, 2014</td></tr>
+        <tr><td>Price, Richard (ed.)</td><td><em>The Acts of Constantinople III (680–681)</em> (2 vols.)</td><td>TTH 65, Liverpool UP, 2018</td></tr>
+        <tr><td>Jankowiak, M. &amp; Booth, P.</td><td>«A New Date-List of Maximus the Confessor»</td><td>En: Allen &amp; Neil (eds.), <em>The Oxford Handbook of Maximus the Confessor</em>, OUP, 2015</td></tr>
+        <tr><td>Allen, Pauline &amp; Neil, Bronwen</td><td><em>Maximus the Confessor and His Companions</em></td><td>Oxford University Press, 2002</td></tr>
+        <tr><td>Schatz, Klaus</td><td><em>Papal Primacy: From its Origins to the Present</em></td><td>Liturgical Press, 1996</td></tr>
+        <tr><td>Ekonomou, Andrew J.</td><td><em>Byzantine Rome and the Greek Popes</em></td><td>Lexington Books, 2007</td></tr>
+        <tr><td>Meyendorff, John</td><td><em>Imperial Unity and Christian Divisions</em></td><td>SVS Press, 1989</td></tr>
+        <tr><td>Hovorun, Cyril</td><td><em>Will, Action and Freedom: Christological Controversies in the Seventh Century</em></td><td>Brill, 2008</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-title">✦ Conclusión: Los Tres Concilios en Perspectiva</div>
+    <p><strong>Constantinopla I (381)</strong> completó Nicea: definió la divinidad del Espíritu Santo y entregó a la Iglesia el Credo que se recita en todo el mundo. Condenó el arrianismo residual y el pneumatomaquismo. Fue el concilio de los Capadocios.</p>
+    <p><strong>Constantinopla II (553)</strong> fue el concilio más políticamente turbulento: un papa humillado y arrastrado, escritos de teólogos muertos condenados retroactivamente, falsificaciones descubiertas. Su resultado teológico fue una síntesis cirileano-calcedoniense (neocalcedonismo) y la condena del origenismo especulativo. Un concilio con más sombras que luces en su proceso pero con un resultado doctrinal legítimo.</p>
+    <p><strong>Constantinopla III (680–681)</strong> cerró el edificio cristológico añadiendo la definición de las dos voluntades como complemento necesario de las dos naturalezas de Calcedonia. Condenó a un papa por hereje —hecho sin precedente— y rehabilitó a Máximo el Confesor, el mártir intelectual de la ortodoxia.</p>
+    <p>Los tres concilios, junto a los demás seis ecuménicos, forman el marco doctrinal dentro del cual la cristología y la teología trinitaria del cristianismo clásico quedaron definitivamente articuladas.</p>
+  </div>
+</section>
+
+<footer>
+  <p style="font-family:'Cinzel',serif;font-size:15px;color:#F5C518;letter-spacing:3px;margin-bottom:10px;">✦ CONSTANTINOPLA I (381) · II (553) · III (680–681) ✦</p>
+  <p>Segundo, Quinto y Sexto Concilios Ecuménicos · Trinitaria y Cristología Clásica</p>
+  <p style="margin-top:6px;">Fuentes: ACO · Mansi · PG · Denzinger · Price (TTH) · Hanson · Grillmeier</p>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('active');
+  }
+  function closeNav() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('active');
+  }
+
+  // Sistema de tabs genérico por grupo
+  function switchTab(group, idx) {
+    const tabs = document.querySelectorAll(`#tabs-${group} .sesion-tab`);
+    const contents = document.querySelectorAll(`#tabs-${group} ~ .sesion-content[data-group="${group}"]`);
+    tabs.forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+      if (contents[i]) contents[i].classList.toggle('active', i === idx);
+    });
+  }
+
+  // Highlight navegación activa
+  const navLinks = document.querySelectorAll('#sidebar a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === '#' + id) {
+            link.style.color = '#F5C518';
+            link.style.borderLeftColor = '#F5C518';
+          } else {
+            link.style.color = '';
+            link.style.borderLeftColor = '';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('section[id], div[id]').forEach(el => {
+    if (el.id) observer.observe(el);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeNav();
+  });
+</script>
+</body>
+</html>

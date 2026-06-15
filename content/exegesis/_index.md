@@ -15,3 +15,5 @@ Aqui trabajamos pasajes complejos con rigor, claridad y fidelidad al texto sagra
 
 - [100 Contradicciones Biblicas Resueltas (Dossier)](/exegesis/contradicciones-biblicas-dossier/)
 - [Jeremias 8:8 Refutacion (Dossier)](/exegesis/jeremias-88-refutacion-dossier/)
+- [Mateo 28:19 — Autenticidad (Dossier)](/exegesis/mateo-28-19-autenticidad-dossier/)
+- [Isaías 53 (Dossier)](/exegesis/isaias-53-dossier/)
