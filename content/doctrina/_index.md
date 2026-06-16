@@ -14,3 +14,4 @@ Aqui se desarrollaran los contenidos esenciales de la fe cristiana de forma orde
 ## Dossiers integrados
 
 - [Angel del Senor Yahve (Dossier)](/doctrina/angel-del-senor-yahve-dossier/)
+- [Jesus, Hijo de Dios (Dossier)](/doctrina/jesus-hijo-de-dios-dossier/)

@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier Apologético · Juan 1:1</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+:root {
+  --ink:       #1a1207;
+  --parchment: #f6efdf;
+  --aged:      #ece2cb;
+  --deep:      #0f1a2e;
+  --gold:      #8b7414;
+  --gold-lt:   #c4a228;
+  --crimson:   #7a1b1b;
+  --navy:      #1a2d4a;
+  --rule:      #7a9ab4;
+  --rule-lt:   #b8cfe0;
+  --margin:    #3a4a5a;
+  --nav-bg:    #0a1220;
+  --nav-w:     265px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--deep);
+  font-family: 'EB Garamond', Georgia, serif;
+  color: var(--ink);
+}
+
+/* ═══ HAMBURGER ═══ */
+#toc-btn {
+  position: fixed;
+  top: 16px; left: 16px;
+  z-index: 400;
+  background: var(--nav-bg);
+  border: 1px solid var(--rule);
+  color: var(--rule-lt);
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 8px 13px 8px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.55);
+  transition: background 0.15s;
+  user-select: none;
+  line-height: 1;
+}
+#toc-btn:hover { background: #141f33; }
+.hbars { display: flex; flex-direction: column; gap: 4px; }
+.hbars span {
+  display: block; width: 17px; height: 1.5px;
+  background: var(--rule-lt);
+  transition: transform 0.22s, opacity 0.22s;
+  transform-origin: center;
+}
+#toc-btn.is-open .hbars span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+#toc-btn.is-open .hbars span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#toc-btn.is-open .hbars span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+/* ═══ OVERLAY ═══ */
+#toc-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+#toc-overlay.is-open { opacity: 1; pointer-events: all; }
+
+/* ═══ SIDEBAR ═══ */
+#toc-panel {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--nav-w);
+  background: var(--nav-bg);
+  border-right: 2px solid var(--rule);
+  z-index: 350;
+  overflow-y: auto;
+  padding: 0 0 48px;
+  transform: translateX(calc(-1 * var(--nav-w) - 8px));
+  transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+  box-shadow: 6px 0 30px rgba(0,0,0,0.6);
+}
+#toc-panel.is-open { transform: translateX(0); }
+#toc-panel::-webkit-scrollbar { width: 3px; }
+#toc-panel::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+.toc-spacer { height: 60px; }
+.toc-title {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 4px;
+  color: var(--rule-lt);
+  text-transform: uppercase;
+  padding: 0 18px 12px;
+  border-bottom: 1px solid rgba(122,154,180,0.2);
+  margin-bottom: 4px;
+}
+.toc-group {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  color: var(--rule);
+  text-transform: uppercase;
+  padding: 13px 18px 3px;
+}
+#toc-panel a {
+  display: block;
+  padding: 7px 14px 7px 22px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11.5px;
+  color: rgba(184,207,224,0.7);
+  text-decoration: none;
+  line-height: 1.35;
+  border-left: 3px solid transparent;
+  transition: background 0.13s, color 0.13s, border-color 0.13s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#toc-panel a:hover {
+  color: var(--rule-lt);
+  background: rgba(122,154,180,0.08);
+  border-left-color: rgba(122,154,180,0.4);
+}
+#toc-panel a.active {
+  color: #d4e8f4;
+  background: rgba(122,154,180,0.13);
+  border-left-color: var(--rule-lt);
+}
+
+/* ═══ MAIN ═══ */
+#main {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--parchment);
+  min-height: 100vh;
+  box-shadow: 0 0 60px rgba(0,0,0,0.6);
+}
+
+/* ── COVER ── */
+.cover {
+  background: #080e1c;
+  padding: 64px 56px 54px;
+  text-align: center;
+  position: relative;
+  border-bottom: 6px double var(--rule);
+}
+.cover::before {
+  content: '';
+  position: absolute; inset: 12px;
+  border: 1px solid rgba(122,154,180,0.25);
+  pointer-events: none;
+}
+.cover-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: var(--rule-lt);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.cover-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #e8f0f8;
+  line-height: 1.16;
+  margin-bottom: 12px;
+}
+.cover-sub {
+  font-style: italic;
+  color: var(--rule);
+  font-size: 1.08rem;
+  margin-bottom: 32px;
+}
+.cover-verse {
+  display: inline-block;
+  font-style: italic;
+  color: rgba(232,240,248,0.85);
+  font-size: .95rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 10px 28px;
+  line-height: 1.75;
+}
+.gr-lg {
+  display: block;
+  font-size: 1.75rem;
+  color: var(--rule-lt);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  font-style: normal;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 48px 56px 44px;
+  border-bottom: 1px solid var(--rule-lt);
+}
+section:last-child { border-bottom: none; }
+
+.sec-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: var(--navy);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--rule-lt);
+}
+h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: #1a2d4a;
+  margin: 24px 0 10px;
+}
+p { line-height: 1.78; margin-bottom: 14px; font-size: 1.01rem; }
+p:last-child { margin-bottom: 0; }
+
+/* ── BLOCKQUOTE ── */
+blockquote {
+  margin: 20px 0;
+  padding: 16px 20px 16px 30px;
+  background: var(--aged);
+  border-left: 4px solid var(--rule);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: #1a2a3a;
+  position: relative;
+}
+blockquote::before {
+  content: '\201C';
+  font-size: 3rem;
+  color: var(--rule-lt);
+  position: absolute;
+  top: -4px; left: 7px;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+.src {
+  display: block;
+  font-style: normal;
+  font-size: .78rem;
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--navy);
+  margin-top: 8px;
+  letter-spacing: .4px;
+}
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .92rem; }
+thead tr { background: var(--navy); color: var(--aged); }
+thead th {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  text-align: left;
+}
+tbody tr:nth-child(odd)  { background: var(--parchment); }
+tbody tr:nth-child(even) { background: var(--aged); }
+td { padding: 9px 12px; line-height: 1.5; vertical-align: top; }
+td:first-child { font-family: 'Cinzel', serif; font-size: .82rem; color: var(--navy); font-weight: 600; }
+
+/* ── CARD ── */
+.card {
+  background: var(--aged);
+  border: 1px solid var(--rule-lt);
+  padding: 18px 22px;
+  margin: 18px 0;
+}
+.card-lbl {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--navy);
+  color: var(--aged);
+  padding: 24px 28px;
+  margin: 24px 0 0;
+  border-left: 5px solid var(--rule-lt);
+}
+.verdict-lbl {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: var(--rule-lt);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.verdict p { color: var(--aged); margin-bottom: 10px; }
+.verdict p:last-child { margin-bottom: 0; }
+.verdict .gr, .verdict em, .verdict i { color: #a8cce0; }
+.verdict .la { color: #c4d8a0; }
+.verdict strong { color: #e8f0f8; }
+
+/* ── OBJECTION ── */
+.obj { margin: 22px 0; }
+.obj-q {
+  background: #e8eef5;
+  border-left: 4px solid var(--navy);
+  padding: 12px 18px;
+  font-style: italic;
+  color: var(--navy);
+  font-size: .97rem;
+  line-height: 1.6;
+}
+.obj-q::before { content: '✦ Objeción: '; font-style: normal; font-weight: 700; }
+.obj-r {
+  background: var(--aged);
+  border-left: 4px solid var(--rule);
+  padding: 12px 18px;
+  line-height: 1.72;
+  font-size: .97rem;
+  color: var(--ink);
+}
+.obj-r::before { content: '→ Respuesta: '; font-weight: 700; color: var(--navy); }
+
+/* ── SCHOLAR GRID ── */
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin: 18px 0; }
+.sc { background: var(--aged); border: 1px solid var(--rule-lt); padding: 14px 16px; }
+.sc-name {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.sc p { font-size: .88rem; line-height: 1.56; margin: 0; }
+
+/* ── INLINE LANG ── */
+.gr { font-style: italic; color: #1a3a5a; font-size: 1.05em; }
+.la { font-style: italic; color: #3a4a1a; }
+.he { direction: rtl; font-size: 1.18rem; color: var(--crimson); font-weight: 600; display: inline-block; line-height: 1.7; }
+strong { font-weight: 700; color: #0f1a2e; }
+
+/* ── HIGHLIGHT ── */
+.hl {
+  border: 1.5px solid var(--rule);
+  padding: 14px 20px;
+  margin: 16px 0;
+  background: #eef3f8;
+  font-size: .96rem;
+  line-height: 1.72;
+}
+
+/* ── FOOTNOTE ── */
+.footnote {
+  border-top: 1px solid var(--rule-lt);
+  margin-top: 32px;
+  padding-top: 14px;
+  font-size: .79rem;
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--margin);
+  line-height: 1.65;
+}
+
+@media (max-width: 680px) {
+  .cover { padding: 40px 22px 32px; }
+  .cover-title { font-size: 1.45rem; }
+  section { padding: 32px 20px 28px; }
+  .sg { grid-template-columns: 1fr; }
+  h2 { font-size: 1.08rem; }
+  #main { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ BOTÓN ═══ -->
+<button id="toc-btn" aria-controls="toc-panel" aria-expanded="false" aria-label="Abrir índice">
+  <span class="hbars" aria-hidden="true"><span></span><span></span><span></span></span>
+  Índice
+</button>
+
+<!-- ═══ OVERLAY ═══ -->
+<div id="toc-overlay" aria-hidden="true"></div>
+
+<!-- ═══ SIDEBAR ═══ -->
+<nav id="toc-panel" aria-label="Índice de contenidos">
+  <div class="toc-spacer"></div>
+  <div class="toc-title">Contenido</div>
+
+  <div class="toc-group">El Texto</div>
+  <a href="#texto">I. El texto griego</a>
+  <a href="#estructura">II. Estructura del Prólogo</a>
+
+  <div class="toc-group">Trasfondo del Logos</div>
+  <a href="#heraclito">III. Heráclito y los presocráticos</a>
+  <a href="#estoicos">IV. Los estoicos</a>
+  <a href="#filon">V. Filón de Alejandría</a>
+  <a href="#at">VI. Trasfondo veterotestamentario</a>
+
+  <div class="toc-group">Análisis Gramatical</div>
+  <a href="#gramatica">VII. El artículo y θεός</a>
+  <a href="#colwell">VIII. La Regla de Colwell</a>
+  <a href="#harner">IX. Harner: lectura cualitativa</a>
+  <a href="#wallace">X. Wallace: síntesis académica</a>
+
+  <div class="toc-group">Contexto Joánico</div>
+  <a href="#prologo">XI. El Prólogo como unidad</a>
+  <a href="#juan114">XII. Juan 1:14 y 1:18</a>
+  <a href="#tomas">XIII. Confesión de Tomás</a>
+
+  <div class="toc-group">Tradición</div>
+  <a href="#padres">XIV. Padres de la Iglesia</a>
+  <a href="#comentaristas">XV. Comentaristas modernos</a>
+
+  <div class="toc-group">Defensa</div>
+  <a href="#objeciones">XVI. Objeciones y respuestas</a>
+  <a href="#conclusion">Conclusión</a>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<div id="main">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Dossier Apologético · Cristología Joánica</div>
+  <h1 class="cover-title">Juan 1:1<br>«Y el Verbo era Dios»</h1>
+  <p class="cover-sub">Defensa exegética, gramatical, filosófica y patrística de la lectura trinitaria</p>
+  <div class="cover-verse">
+    <span class="gr-lg">Ἐν ἀρχῇ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν, καὶ θεὸς ἦν ὁ λόγος</span>
+    <em>«En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios»</em><br>
+    <span style="font-size:.78rem;color:var(--rule);">Juan 1:1 — Novum Testamentum Graece (NA28)</span>
+  </div>
+</div>
+
+<!-- I -->
+<section id="texto">
+  <div class="sec-label">Sección I</div>
+  <h2>El Texto Griego Original</h2>
+
+  <div class="card">
+    <div class="card-lbl">Juan 1:1 — Texto griego (NA28) con transliteración</div>
+    <p style="font-size:1.45rem;line-height:2.2;color:#0f1a2e;text-align:center;">
+      <span class="gr" style="font-size:1.45rem;">Ἐν ἀρχῇ ἦν <strong>ὁ λόγος</strong>,<br>
+      καὶ <strong>ὁ λόγος</strong> ἦν <strong>πρὸς τὸν θεόν</strong>,<br>
+      καὶ <strong style="color:var(--crimson);">θεὸς ἦν ὁ λόγος</strong></span>
+    </p>
+    <p style="margin-top:14px;font-style:italic;color:var(--margin);text-align:center;font-size:.9rem;">
+      <em>En archē ēn ho lógos, kaì ho lógos ēn pròs tòn theón, kaì theòs ēn ho lógos</em>
+    </p>
+  </div>
+
+  <p>El versículo contiene tres cláusulas paralelas de creciente densidad teológica. La primera afirma la <strong>preexistencia eterna</strong> del Logos («en el principio era»). La segunda afirma su <strong>relación personal</strong> con Dios Padre («era con Dios» — <span class="gr">πρὸς τὸν θεόν</span>, literalmente «hacia» o «cara a cara con» Dios, implicando distinción de personas). La tercera —la más debatida— afirma su <strong>naturaleza divina</strong>: <span class="gr">θεὸς ἦν ὁ λόγος</span>, «el Verbo era Dios».</p>
+
+  <p>Las tres cláusulas juntas establecen una tensión teológica que solo el dogma trinitario resuelve coherentemente: el Logos es Dios (tercera cláusula) y a la vez es distinguible de «Dios» en el sentido del Padre (segunda cláusula). La ausencia del artículo en <span class="gr">θεός</span> de la tercera cláusula —frente a <span class="gr">τὸν θεόν</span> de la segunda— es el núcleo gramatical del debate, y es precisamente donde la exégesis trinitaria es más sólida.</p>
+</section>
+
+<!-- II -->
+<section id="estructura">
+  <div class="sec-label">Sección II</div>
+  <h2>Estructura del Prólogo Joánico (1:1–18)</h2>
+
+  <p>Juan 1:1–18 forma una unidad literaria quiástica estudiada en detalle por la crítica literaria moderna. Su arquitectura no es accidental:</p>
+
+  <table>
+    <thead><tr><th>Vv.</th><th>Contenido</th><th>Tema central</th></tr></thead>
+    <tbody>
+      <tr><td>1–2</td><td>El Logos en la eternidad con Dios</td><td>Preexistencia y relación</td></tr>
+      <tr><td>3</td><td>Creación por el Logos</td><td>Agencia creadora</td></tr>
+      <tr><td>4–5</td><td>Vida y luz en el Logos</td><td>Logos como fuente de vida</td></tr>
+      <tr><td>6–8</td><td>Juan el Bautista como testigo</td><td>Testimonio histórico</td></tr>
+      <tr><td>9–11</td><td>El Logos en el mundo, rechazado</td><td>Encarnación y rechazo</td></tr>
+      <tr><td>12–13</td><td>Los que lo reciben: hijos de Dios</td><td>Adopción filial</td></tr>
+      <tr><td>14</td><td><strong>«El Verbo se hizo carne»</strong></td><td>Encarnación plena</td></tr>
+      <tr><td>15</td><td>Testimonio de Juan Bautista</td><td>Preexistencia confirmada</td></tr>
+      <tr><td>16–17</td><td>Gracia y verdad por Jesucristo</td><td>Contraste Ley / Gracia</td></tr>
+      <tr><td>18</td><td><strong>«Dios unigénito»</strong></td><td>Revelación del Padre</td></tr>
+    </tbody>
+  </table>
+
+  <p>El Prólogo abre y cierra con afirmaciones de la divinidad del Logos (v. 1: <span class="gr">θεὸς ἦν ὁ λόγος</span>; v. 18: <span class="gr">μονογενὴς θεός</span>, «Dios unigénito»). Esta inclusión quiástica demuestra que la afirmación de divinidad en 1:1c no es una anomalía textual sino el fundamento y la clave de bóveda de toda la unidad literaria.</p>
+</section>
+
+<!-- III -->
+<section id="heraclito">
+  <div class="sec-label">Sección III</div>
+  <h2>Heráclito y los Presocráticos: El Logos como Principio Cósmico</h2>
+
+  <p>El término <span class="gr">λόγος</span> tenía una historia filosófica de siglos antes de Juan. Para comprender el impacto de Juan 1:1 en sus lectores helenísticos, es imprescindible conocer ese trasfondo.</p>
+
+  <h3>Heráclito de Éfeso (c. 540–480 a.C.)</h3>
+  <p>Heráclito fue el primer filósofo en elevar el <span class="gr">λόγος</span> a principio cósmico universal. En sus fragmentos conservados (especialmente el DK 22 B1 y B2) el Logos es:</p>
+
+  <div class="card">
+    <div class="card-lbl">Heráclito — Fragmentos DK 22 B1 y B2</div>
+    <p>«De este Logos que existe siempre los hombres resultan ignorantes… pues aunque todo ocurre conforme a este Logos, parecen no tener ninguna experiencia de él.»<br><br>
+    «Por eso es necesario seguir lo que es común [a todos]; y aunque el Logos es común [a todos], la mayoría vive como si tuviera una inteligencia propia.»</p>
+    <p style="margin-top:10px;font-style:italic;color:var(--margin);font-size:.88rem;">— Heráclito, fr. B1 y B2 (Diels-Kranz), citados en Sexto Empírico, <em>Adversus Mathematicos</em> VII.132</p>
+  </div>
+
+  <p>Para Heráclito el Logos es: (1) <strong>eterno</strong> («siempre existe»); (2) <strong>universal</strong> (común a todos); (3) <strong>principio ordenador</strong> del cosmos en constante flujo; (4) <strong>racionalmente cognoscible</strong> aunque ignorado por la mayoría. No es una persona, sino una fuerza impersonal.</p>
+
+  <p><strong>La ruptura joánica:</strong> Juan toma esta categoría filosófica —el Logos como principio eterno y ordenador— y la transforma radicalmente: el Logos no es una fuerza impersonal sino una Persona (<span class="gr">αὐτός</span>, «él», en v. 2), que «vino» al mundo (v. 11), que «se hizo carne» (v. 14). El evangelista emplea el vocabulario filosófico familiar para su audiencia y lo llena de contenido teológico que lo supera radicalmente.</p>
+</section>
+
+<!-- IV -->
+<section id="estoicos">
+  <div class="sec-label">Sección IV</div>
+  <h2>Los Estoicos: El Logos como Alma del Cosmos</h2>
+
+  <p>Los estoicos (Zenón de Citio, Crisipo, siglos IV–III a.C.) desarrollaron el concepto heraclíteo del Logos hasta convertirlo en el principio central de su cosmología:</p>
+
+  <table>
+    <thead><tr><th>Aspecto</th><th>Logos estoico</th><th>Logos joánico</th></tr></thead>
+    <tbody>
+      <tr><td>Naturaleza</td><td>Principio racional impersonal, «alma del mundo»</td><td>Persona divina distinta del Padre</td></tr>
+      <tr><td>Función</td><td>Ordena y penetra el cosmos material</td><td>Creó el cosmos («sin él nada fue hecho»)</td></tr>
+      <tr><td>Relación con Dios</td><td>Identificado con Zeus / la divinidad cósmica</td><td>Distinto del Padre y a la vez θεός</td></tr>
+      <tr><td>Encarnación</td><td>Imposible e inconcebible</td><td>«El Verbo se hizo carne» (1:14)</td></tr>
+      <tr><td>Eternidad</td><td>Co-eterno con el cosmos</td><td>Anterior al cosmos («en el principio era»)</td></tr>
+    </tbody>
+  </table>
+
+  <p>Los estoicos introdujeron también el concepto de <span class="gr">λόγος σπερματικός</span> (<em>logos spermatikós</em>, «logos seminal»): el principio racional como semilla divina en cada ser humano. Justino Mártir (s. II) utilizará precisamente esta categoría estoica para explicar cómo todos los hombres que vivieron según la razón participaban parcialmente del Logos-Cristo antes de la Encarnación (<em>1 Apología</em> 46.1–4).</p>
+</section>
+
+<!-- V -->
+<section id="filon">
+  <div class="sec-label">Sección V</div>
+  <h2>Filón de Alejandría: El Puente Decisivo</h2>
+
+  <p>Filón de Alejandría (c. 20 a.C. – 50 d.C.) es el antecedente más próximo y significativo al Logos joánico. Filósofo judío helenístico, contemporáneo de Jesús y anterior a la redacción del Evangelio de Juan, desarrolló una teología del Logos que sintetiza el pensamiento griego con la revelación bíblica.</p>
+
+  <h3>El Logos en Filón: características verificadas</h3>
+
+  <div class="card">
+    <div class="card-lbl">Filón — Citas verificadas de sus tratados</div>
+    <p><strong>1. El Logos como «primogénito de Dios»:</strong><br>
+    «El Logos del Dios eterno es el más antiguo de los seres y el más cercano a Él, sin mezcla de tiempo, el primogénito de las cosas que son.» (<em>De Agricultura</em> 51)</p>
+    <p style="margin-top:10px;"><strong>2. El Logos como intermediario creador:</strong><br>
+    «Dios creó el mundo usando el Logos como instrumento.» (<em>De Cherubim</em> 127)</p>
+    <p style="margin-top:10px;"><strong>3. El Logos como «segundo Dios»:</strong><br>
+    «El Logos de Dios… es llamado no sin razón segundo Dios [<span class="gr">δεύτερος θεός</span>].» (<em>Quaestiones in Genesim</em> II.62)</p>
+    <p style="margin-top:10px;"><strong>4. El Logos como «imagen de Dios»:</strong><br>
+    «El Logos más antiguo es la imagen de Dios.» (<em>De Confusione Linguarum</em> 147)</p>
+  </div>
+
+  <h3>Paralelismos y diferencias con Juan 1:1</h3>
+
+  <table>
+    <thead><tr><th>Concepto</th><th>Filón</th><th>Juan 1:1</th></tr></thead>
+    <tbody>
+      <tr><td>Logos eterno</td><td>«El más antiguo de los seres»</td><td>«En el principio era el Logos»</td></tr>
+      <tr><td>Logos y Dios</td><td>«Segundo Dios» — distinto del Padre</td><td>«Era con Dios» — distinción personal</td></tr>
+      <tr><td>Logos creador</td><td>Instrumento de la creación</td><td>«Sin él nada fue hecho» (v. 3)</td></tr>
+      <tr><td>Naturaleza divina</td><td><span class="gr">θεός</span> sin artículo para el Logos</td><td><span class="gr">θεὸς ἦν ὁ λόγος</span> — mismo uso gramatical</td></tr>
+      <tr><td>Encarnación</td><td>Imposible — el Logos permanece incorpóreo</td><td>«El Verbo se hizo carne» (v. 14) — ruptura radical</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Significado del paralelismo con Filón</div>
+    <p>Filón usa exactamente el mismo sintagma gramatical que Juan: <span class="gr">θεός</span> sin artículo aplicado al Logos. Si el argumento anti-trinitario fuera que el <span class="gr">θεός</span> anartro de Jn 1:1c solo puede significar «un dios» o «divino», el mismo argumento debería aplicarse a Filón — pero ningún estudioso serio sostiene que Filón enseñe que el Logos es meramente «un dios» de segunda categoría. La gramática anártroa que se usa para atacar a Juan confirma en su paralelo más próximo exactamente la lectura opuesta: naturaleza divina plena con distinción personal.</p>
+  </div>
+</section>
+
+<!-- VI -->
+<section id="at">
+  <div class="sec-label">Sección VI</div>
+  <h2>Trasfondo Veterotestamentario: Palabra, Sabiduría y Memrá</h2>
+
+  <h3>La «Palabra de Dios» en el AT</h3>
+  <p>La «Palabra» (<span class="he">דָּבָר</span>, <em>dabar</em>) como agente activo de Dios es un tema consistente en el Antiguo Testamento: «Por la Palabra de YHWH fueron hechos los cielos» (Sal 33:6); «Él envió su Palabra y los sanó» (Sal 107:20). La Palabra no es meramente lenguaje sino poder creador y salvífico.</p>
+
+  <h3>La Sabiduría personificada (Prov 8:22–31)</h3>
+  <p>Proverbios 8 presenta la Sabiduría (<span class="he">חָכְמָה</span>, <em>ḥokmah</em>) como un ser personal preexistente junto a Dios desde antes de la creación: «El Señor me poseía al principio de su obra… antes de la creación de la tierra estaba yo.» La Sabiduría estaba con Dios como «artesana» en la creación (Prov 8:30). Juan estructura deliberadamente su Prólogo con ecos de este texto.</p>
+
+  <h3>El Memrá targúmico</h3>
+  <p>En los Targumes (traducciones arameas del AT), el término <em>Memrá</em> (מֵימְרָא, «Palabra») funcionaba como sustituto reverencial del nombre divino en contextos de acción directa de Dios. Por ejemplo, el Targum de Onkelos traduce Gén 3:8 «oyeron la voz del Señor Dios» como «oyeron la voz del <em>Memrá</em> del Señor». El <em>Memrá</em> es YHWH en acción reveladora. Juan recoge esta tradición y la lleva a su culminación: el <em>Memrá</em> no es solo una perífrasis reverencial sino una Persona que se encarna.</p>
+</section>
+
+<!-- VII -->
+<section id="gramatica">
+  <div class="sec-label">Sección VII</div>
+  <h2>El Artículo Griego y θεός: La Clave Gramatical</h2>
+
+  <p>El debate gramatical sobre Juan 1:1c gira en torno a una sola pregunta: ¿qué significa la ausencia del artículo definido ante <span class="gr">θεός</span> en la tercera cláusula?</p>
+
+  <div class="card">
+    <div class="card-lbl">Las tres posibilidades gramaticales para un sustantivo anartro</div>
+    <table style="margin:0;">
+      <thead><tr><th>Lectura</th><th>Significado</th><th>Ejemplo</th><th>¿Aplica aquí?</th></tr></thead>
+      <tbody>
+        <tr><td>Definida</td><td>«el Dios» — identificación con una persona específica</td><td>«El perro ladra»</td><td>Problemática: confundiría Logos con el Padre</td></tr>
+        <tr><td>Indefinida</td><td>«un dios» — uno de una clase de dioses</td><td>«Hay un perro»</td><td>No justificada por el contexto joánico monoteísta</td></tr>
+        <tr><td>Cualitativa</td><td>«de naturaleza divina» — comparte la esencia de θεός</td><td>«Es médico»</td><td><strong>La más respaldada por gramáticos</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>El griego koiné no posee artículo indefinido. La ausencia del artículo definido ante un sustantivo predicativo <em>no lo convierte automáticamente en indefinido</em>. El predicado nominativo anartro preverbal es una construcción con una función primariamente cualitativa en griego helenístico: predica la naturaleza o esencia del sujeto.</p>
+
+  <h3>Por qué Juan omite el artículo en la tercera cláusula</h3>
+  <p>Si Juan hubiera escrito <span class="gr">καὶ <strong>ὁ</strong> θεὸς ἦν ὁ λόγος</span> («y el Dios era el Logos»), habría afirmado que el Logos y el Padre son idénticos — lo que teológicamente se llama sabelianismo o modalismo. La ausencia del artículo permite afirmar que el Logos comparte la naturaleza de Dios sin ser numéricamente idéntico al Padre mencionado en la segunda cláusula. Como observa C. K. Barrett, «la ausencia del artículo indica que el Verbo es Dios, pero no el único ser del que esto es verdad; si se hubiera escrito <span class="gr">ὁ θεός</span>, habría implicado que ningún ser divino existe fuera de la segunda persona de la Trinidad.»</p>
+</section>
+
+<!-- VIII -->
+<section id="colwell">
+  <div class="sec-label">Sección VIII</div>
+  <h2>La Regla de Colwell: Aplicación Correcta y Límites</h2>
+
+  <p>En 1933, Ernest Cadman Colwell publicó en el <em>Journal of Biblical Literature</em> (vol. 52) un estudio estadístico sobre el artículo griego en el NT que generó la llamada «Regla de Colwell»:</p>
+
+  <blockquote>
+    «Los predicados nominativos definidos que preceden al verbo generalmente carecen del artículo.»
+    <span class="src">— E. C. Colwell, «A Definite Rule for the Use of the Article in the Greek New Testament», <em>JBL</em> 52 (1933), p. 20</span>
+  </blockquote>
+
+  <h3>Lo que Colwell dijo — y lo que no dijo</h3>
+
+  <div class="card">
+    <div class="card-lbl">Precisión sobre la Regla de Colwell</div>
+    <p><strong>Lo que Colwell afirmó:</strong> los predicados nominativos <em>definidos</em> que preceden al verbo tienden a carecer del artículo. Es una observación estadística sobre predicados ya identificados como definidos.</p>
+    <p style="margin-top:10px;"><strong>Lo que Colwell NO afirmó:</strong> que todo predicado nominativo anartro preverbal sea definido. Esta inversión lógica (conocida como «abuso del converso de Colwell») es una falacia. Daniel B. Wallace lo señala con precisión: «No se puede usar la regla de Colwell para deducir si el predicado es definido o no. Muchos eruditos han malentendido la regla.» (<em>Greek Grammar Beyond the Basics</em>, p. 257)</p>
+    <p style="margin-top:10px;"><strong>Aplicación correcta a Jn 1:1c:</strong> el propio Colwell declaró que el contexto de Juan 1:1c no demanda lectura indefinida. Su regla, aplicada con sus propias restricciones, es compatible con una lectura cualitativa o definida, no con «un dios».</p>
+  </div>
+
+  <blockquote>
+    «Los predicados nominativos que preceden al verbo no pueden considerarse indefinidos o cualitativos simplemente porque carecen del artículo; solo podrían considerarse indefinidos o cualitativos si el contexto lo exige, y en el caso de Juan 1:1c, esto no ocurre.»
+    <span class="src">— E. C. Colwell, <em>JBL</em> 52 (1933), p. 20</span>
+  </blockquote>
+</section>
+
+<!-- IX -->
+<section id="harner">
+  <div class="sec-label">Sección IX</div>
+  <h2>Philip Harner: La Lectura Cualitativa</h2>
+
+  <p>En 1973, Philip B. Harner publicó en el <em>Journal of Biblical Literature</em> (vol. 92, nº 1) el estudio más influyente sobre los predicados nominativos cualitativos en el NT, con especial atención a Juan 1:1c.</p>
+
+  <blockquote>
+    «Tal vez la cláusula podría traducirse "el Verbo tenía la misma naturaleza que Dios." Esta sería una manera de representar el pensamiento de Juan, que es, según lo entiendo, que ho logos, no menos que ho theos, tenía la naturaleza de theos.»
+    <span class="src">— Philip B. Harner, «Qualitative Anarthrous Predicate Nouns: Mark 15:39 and John 1:1», <em>JBL</em> 92.1 (1973), p. 87</span>
+  </blockquote>
+
+  <p>Harner demostró estadísticamente que los predicados nominativos anartros preverbales en el NT y en la LXX expresan primariamente la <em>cualidad o naturaleza</em> del sujeto, no su identidad específica ni su pertenencia indefinida a una clase. Su análisis de construcciones paralelas en el propio Evangelio de Juan (4:24: <span class="gr">πνεῦμα ὁ θεός</span>, «Dios es espíritu»; 1 Jn 4:8: <span class="gr">ὁ θεὸς ἀγάπη ἐστίν</span>, «Dios es amor») confirma que el predicado anartro predica naturaleza, no clasificación en una categoría numéricamente indefinida.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Consecuencia teológica de la lectura cualitativa</div>
+    <p>La lectura cualitativa no diluye la afirmación de divinidad — la precisa. Decir que el Logos tiene la naturaleza de <span class="gr">θεός</span> es decir que comparte plenamente la esencia divina, sin ser numéricamente idéntico al Padre. Esto es exactamente lo que el Concilio de Nicea expresó con el término <span class="gr">ὁμοούσιος</span> (<em>homoousios</em>, «de la misma sustancia»). La lectura cualitativa de Harner y el credo niceno apuntan en la misma dirección.</p>
+  </div>
+</section>
+
+<!-- X -->
+<section id="wallace">
+  <div class="sec-label">Sección X</div>
+  <h2>Daniel Wallace: Síntesis Académica</h2>
+
+  <p>Daniel B. Wallace, en su obra de referencia <em>Greek Grammar Beyond the Basics: An Exegetical Syntax of the New Testament</em> (Zondervan, 1996), ofrece la síntesis académica más detallada del debate gramatical en torno a Juan 1:1c.</p>
+
+  <blockquote>
+    «La construcción que el evangelista eligió para expresar esta idea era la manera más precisa que podría haber tenido de afirmar que el Verbo era Dios y sin embargo era distinto del Padre.»
+    <span class="src">— Daniel B. Wallace, <em>Greek Grammar Beyond the Basics</em>, Zondervan, 1996, p. 269</span>
+  </blockquote>
+
+  <p>Wallace distingue tres posibilidades para el <span class="gr">θεός</span> de Jn 1:1c y aplica criterios gramaticales rigurosos para determinar cuál es la más probable:</p>
+
+  <table>
+    <thead><tr><th>Opción</th><th>Formulación</th><th>Evaluación de Wallace</th></tr></thead>
+    <tbody>
+      <tr><td>Definida</td><td>«el Logos era el Dios» (= el Padre)</td><td>Contradice la segunda cláusula. Sabelianismo. Rechazada.</td></tr>
+      <tr><td>Indefinida</td><td>«el Logos era un dios»</td><td>Contradice el monoteísmo joánico y el contexto literario. Rechazada.</td></tr>
+      <tr><td>Cualitativa</td><td>«el Logos era de naturaleza divina»</td><td><strong>La más respaldada gramaticalmente.</strong> Afirma plena divinidad con distinción personal.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Wallace también señala que la lectura indefinida («un dios») no tiene apoyo en los predicados nominativos preverbales anartros del NT: en ese contexto gramatical, la lectura indefinida es la <em>menos</em> probable de las tres. La misma construcción en Juan 4:24 (<span class="gr">πνεῦμα ὁ θεός</span>) nadie la traduce como «Dios es un espíritu».</p>
+</section>
+
+<!-- XI -->
+<section id="prologo">
+  <div class="sec-label">Sección XI</div>
+  <h2>El Prólogo como Unidad: El Contexto Literario Inmediato</h2>
+
+  <p>Ningún análisis de Juan 1:1c puede abstraerse del Prólogo como unidad. Varios elementos del contexto inmediato confirman la lectura de plena divinidad:</p>
+
+  <h3>V. 3: Agencia creadora exclusiva</h3>
+  <p>«Todas las cosas fueron hechas por medio de él, y sin él no fue hecho nada de lo que ha sido hecho» (<span class="gr">πάντα δι᾽ αὐτοῦ ἐγένετο, καὶ χωρὶς αὐτοῦ ἐγένετο οὐδὲ ἕν</span>). Si el Logos fuera una creatura —aunque superior— no podría ser el agente por quien fue hecha <em>toda</em> cosa. La agencia creadora universal es atributo exclusivo de Dios en el Antiguo Testamento (Gén 1:1; Is 44:24: «Yo, YHWH, que hago <em>todo</em>»).</p>
+
+  <h3>V. 4–5: Vida y luz</h3>
+  <p>«En él estaba la vida, y la vida era la luz de los hombres.» El Logos es fuente de vida — en el AT, YHWH es la fuente de la vida (Sal 36:9; Jer 2:13). Atribuir esto al Logos implica igualdad de naturaleza.</p>
+
+  <h3>V. 2: La recapitulación deliberada</h3>
+  <p>Inmediatamente después de afirmar «el Verbo era Dios», Juan escribe: «Este era en el principio con Dios» (<span class="gr">οὗτος ἦν ἐν ἀρχῇ πρὸς τὸν θεόν</span>). El pronombre <span class="gr">οὗτος</span> («este», «él») recapitula las tres cláusulas y confirma que el Logos que «era Dios» es también el que «estaba con Dios» — distinción y unidad en el mismo aliento.</p>
+</section>
+
+<!-- XII -->
+<section id="juan114">
+  <div class="sec-label">Sección XII</div>
+  <h2>Juan 1:14 y 1:18: El Marco de la Unidad</h2>
+
+  <h3>Juan 1:14 — «El Verbo se hizo carne»</h3>
+  <blockquote>
+    <span class="gr">Καὶ ὁ λόγος σὰρξ ἐγένετο καὶ ἐσκήνωσεν ἐν ἡμῖν, καὶ ἐθεασάμεθα τὴν δόξαν αὐτοῦ, δόξαν ὡς μονογενοῦς παρὰ πατρός</span><br>
+    «Y el Verbo se hizo carne y habitó entre nosotros, y vimos su gloria, gloria como del Unigénito del Padre»
+    <span class="src">— Juan 1:14</span>
+  </blockquote>
+  <p>Si el Logos fuera meramente «un dios» o un ser divino secundario, su encarnación no tendría la misma relevancia soteriológica. El término <span class="gr">ἐσκήνωσεν</span> («habitó», literalmente «puso su tabernáculo») es un eco deliberado de la <em>shekinah</em>, la presencia divina en el Tabernáculo y el Templo (Éx 25:8; 40:34). Juan afirma que la presencia divina que habitó el Templo ahora habita en la carne de Jesús.</p>
+
+  <h3>Juan 1:18 — <span class="gr">μονογενὴς θεός</span></h3>
+  <p>Los mejores manuscritos del NT (P66, P75, Codex Sinaiticus, Codex Vaticanus) leen en v. 18: <span class="gr">μονογενὴς θεός</span> — «Dios unigénito» o «el único Dios [que es] Hijo» — en lugar de la variante secundaria <span class="gr">ὁ μονογενὴς υἱός</span> («el Hijo unigénito»). El versículo cierra el Prólogo llamando a Jesús <span class="gr">θεός</span> en su título, espejando el <span class="gr">θεὸς ἦν ὁ λόγος</span> del v. 1. La inclusión quiástica es teológicamente intencionada.</p>
+</section>
+
+<!-- XIII -->
+<section id="tomas">
+  <div class="sec-label">Sección XIII</div>
+  <h2>La Confesión de Tomás: Clave de Bóveda del Evangelio</h2>
+
+  <blockquote>
+    <span class="gr">ἀπεκρίθη Θωμᾶς καὶ εἶπεν αὐτῷ· Ὁ κύριός μου καὶ ὁ θεός μου.</span><br>
+    «Respondió Tomás y le dijo: "¡El Señor mío y el Dios mío!"»
+    <span class="src">— Juan 20:28</span>
+  </blockquote>
+
+  <p>El Evangelio de Juan cierra con la confesión de Tomás dirigida directamente a Jesús resucitado: <span class="gr">ὁ κύριός μου καὶ ὁ θεός μου</span> — «mi Señor y mi Dios». Esta confesión usa <span class="gr">θεός</span> <em>con artículo</em> y en vocativo directo, la forma gramaticalmente más enfática posible de aplicar el título divino a Jesús. Jesús no corrige a Tomás ni rechaza la confesión como una blasfemia — la ratifica: «Porque me has visto, has creído» (v. 29).</p>
+
+  <p>El Prólogo (1:1: <span class="gr">θεὸς ἦν ὁ λόγος</span>) y el epílogo del Evangelio (20:28: <span class="gr">ὁ θεός μου</span>) forman una inclusión arquitectónica deliberada: el Evangelio abre y cierra con la plena afirmación de la divinidad del Logos encarnado. Esta estructura es imposible de explicar si Juan pretendiera enseñar que Jesús es meramente «un dios».</p>
+</section>
+
+<!-- XIV -->
+<section id="padres">
+  <div class="sec-label">Sección XIV</div>
+  <h2>Padres de la Iglesia: Recepción Histórica Verificada</h2>
+
+  <div class="sg">
+    <div class="sc">
+      <div class="sc-name">Ignacio de Antioquía (m. c. 110 d.C.)</div>
+      <p>Discípulo directo de los apóstoles, llama a Jesucristo «nuestro Dios» (<span class="gr">ὁ θεὸς ἡμῶν</span>) repetidamente. En su <em>Epístola a los Efesios</em> (Pról.): «Jesucristo nuestro Dios.» Su proximidad a Juan hace que su testimonio sea de primerísimo orden sobre cómo se leía el Prólogo en la generación apostólica.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Justino Mártir (c. 100–165 d.C.)</div>
+      <p>Primer apologeta que desarrolla explícitamente la teología del Logos joánico. El Logos es el «poder racional» de Dios (<em>1 Apol.</em> 60.7), «otro Dios y Señor» distinto del Padre pero de naturaleza divina (<em>Diálogo con Trifón</em> 56.11; 61.1). Identifica el Logos de Juan con el Jesús histórico.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Ireneo de Lyon (c. 130–202 d.C.)</div>
+      <p>Cita Juan 1:1–14 extensamente en su <em>Adversus Haereses</em> (I.8.5; III.11.1) para refutar a los gnósticos que negaban la unidad del Logos con el Jesús histórico. Para Ireneo, el Logos que «era Dios» se encarnó plenamente en Jesús — la enseñanza de Juan es anti-doceta y anti-gnóstica.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Clemente de Alejandría (c. 150–215 d.C.)</div>
+      <p>En el <em>Protréptico</em> (I.6) identifica el Logos joánico con Cristo como Dios pleno y maestro de toda la humanidad. Recoge el concepto del <span class="gr">λόγος σπερματικός</span> estoico y lo aplica a Cristo: «El Logos de Dios se hizo hombre para que puedas aprender de un hombre cómo el hombre puede llegar a ser Dios.»</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Tertuliano (c. 160–220 d.C.)</div>
+      <p>Usa Juan 1:1 explícitamente en el desarrollo de la doctrina trinitaria. En su <em>Adversus Praxean</em> (c. 13): «Si el mismo Juan en el Evangelio dice que si él [el Verbo] era según Juan Dios, entonces tienes dos: uno que habla para que sea, y otro que lo hace.» (<em>Adv. Prax.</em> 13)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Orígenes (c. 185–253 d.C.)</div>
+      <p>En su <em>Comentario sobre Juan</em> (II.2) señala la distinción gramatical entre <span class="gr">ὁ θεός</span> (con artículo, el Padre) y <span class="gr">θεός</span> (sin artículo, el Logos): «El "Dios" (sin artículo) es el Logos, que comparte la divinidad pero en quien la plenitud de la divinidad reside primariamente en el Padre.» Orígenes vio en la distinción articular el fundamento de la relación entre el Padre y el Hijo.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Atanasio de Alejandría (c. 296–373 d.C.)</div>
+      <p>Campeón de la ortodoxia nicena. Usa Juan 1:1 como texto central en su defensa del <span class="gr">ὁμοούσιος</span>. En <em>De Incarnatione</em> (54): solo quien es verdaderamente Dios puede restaurar la imagen divina en el hombre — la soteriología exige la plena divinidad del Logos.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Agustín de Hipona (354–430 d.C.)</div>
+      <p>En sus <em>Tractatus in Evangelium Iohannis</em> (I.16–17) comenta Juan 1:1 extensamente. La distinción entre <span class="gr">ὁ θεός</span> y <span class="gr">θεός</span> en las dos últimas cláusulas la lee como distinción de personas dentro de la unidad de sustancia. Define el Logos como la <em>ratio</em> (razón) eterna de Dios, co-igual al Padre en esencia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- XV -->
+<section id="comentaristas">
+  <div class="sec-label">Sección XV</div>
+  <h2>Consenso de Comentaristas Académicos Modernos</h2>
+
+  <div class="sg">
+    <div class="sc">
+      <div class="sc-name">C. K. Barrett</div>
+      <p>«La ausencia del artículo indica que el Verbo es Dios, pero no el único ser del que esto es verdad; si se hubiera escrito <span class="gr">ὁ θεός</span>, habría implicado que ningún ser divino existe fuera de la segunda persona de la Trinidad.» (<em>The Gospel According to St. John</em>, 2ª ed., p. 156)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Leon Morris</div>
+      <p>«Juan está aquí afirmando que el Verbo comparte la naturaleza divina… La gramática no permite "un dios": el predicado nominativo sin artículo preverbal predica naturaleza, no clasificación.» (<em>The Gospel According to John</em>, NICNT, p. 69)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Henry Alford</div>
+      <p>«<span class="gr">θεός</span> debe entenderse como Dios en sustancia y esencia — no <span class="gr">ὁ θεός</span>, el Padre en persona.» (<em>The Greek Testament</em>, vol. 1, ad loc.)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Donald Guthrie</div>
+      <p>«La ausencia del artículo ante <span class="gr">θεός</span> ha inducido a error a algunos, pero esto es gramaticalmente indefendible ya que <span class="gr">θεός</span> es un predicado.» (<em>New Testament Theology</em>, IVP, 1981, p. 327)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Murray J. Harris</div>
+      <p>Dedica un estudio monográfico a los usos de <span class="gr">θεός</span> en referencia a Jesús en el NT. Concluye que Juan 1:1c expresa «plena divinidad con distinción personal», siendo la lectura cualitativa la más respaldada por la evidencia gramatical e histórica. (<em>Jesus as God</em>, Baker, 1992)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Herman Ridderbos</div>
+      <p>«El prólogo afirma que el Logos compartía la naturaleza divina de Dios… La traducción "un dios" es inadecuada tanto gramaticalmente como en el contexto del monoteísmo judío del NT.» (<em>The Gospel of John</em>, Eerdmans, 1997, p. 24)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">Raymond E. Brown</div>
+      <p>Aunque moderado en sus posiciones teológicas, Brown concluye: «La traducción más obvia de <span class="gr">θεὸς ἦν ὁ λόγος</span> es "el Verbo era Dios"… la lectura cualitativa no debilita la afirmación.» (<em>The Gospel According to John I–XII</em>, Anchor Bible, 1966, p. 5)</p>
+    </div>
+    <div class="sc">
+      <div class="sc-name">D. A. Carson</div>
+      <p>«El Logos comparte plenamente la naturaleza de Dios. La estructura gramatical excluye tanto el sabelianismo (si hubiera artículo) como el politeísmo (si la lectura indefinida fuera correcta).» (<em>The Gospel According to John</em>, Pillar, 1991, p. 117)</p>
+    </div>
+  </div>
+</section>
+
+<!-- XVI -->
+<section id="objeciones">
+  <div class="sec-label">Sección XVI</div>
+  <h2>Objeciones y Respuestas Sistemáticas</h2>
+
+  <div class="obj">
+    <div class="obj-q">El artículo griego hace la diferencia: <span class="gr">ὁ θεός</span> (con artículo) es «Dios», <span class="gr">θεός</span> (sin artículo) es «un dios». Por tanto la traducción correcta es «el Verbo era un dios».</div>
+    <div class="obj-r">Esta objeción aplica incorrectamente la función del artículo griego. El griego koiné no tiene artículo indefinido. La ausencia del artículo ante un predicado nominativo preverbal no lo convierte en indefinido — en ese contexto gramatical específico, la función primaria es cualitativa (predica naturaleza). El propio Juan usa <span class="gr">πνεῦμα ὁ θεός</span> (Jn 4:24, «Dios es espíritu») y nadie traduce «Dios es un espíritu». La misma construcción en el mismo evangelio confirma la función cualitativa del predicado anartro.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">La Regla de Colwell no es válida y ha sido refutada, por lo que no puede usarse para defender la lectura definida.</div>
+    <div class="obj-r">Esta objeción es parcialmente correcta sobre Colwell pero falla en la conclusión. Colwell describió una tendencia estadística, no una regla infalible, y es verdad que su regla no puede usarse para deducir definiteness. Pero la refutación de la lectura definida via Colwell no favorece la lectura indefinida — favorece la lectura cualitativa de Harner y Wallace, que es exactamente la que sostiene la teología trinitaria. La crítica correcta de Colwell no lleva a «un dios»; lleva a «de naturaleza divina».</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Orígenes usó el texto para defender cierta subordinación del Logos al Padre — eso muestra que Juan 1:1 no enseña igualdad de naturaleza.</div>
+    <div class="obj-r">Orígenes observó la distinción gramatical entre <span class="gr">ὁ θεός</span> y <span class="gr">θεός</span> para señalar distinción personal entre el Padre y el Hijo, no inferioridad ontológica. Su teología posterior derivó en tensiones que el Concilio de Nicea clarificó. Pero el propio Orígenes afirmó que el Logos es plenamente divino en naturaleza — su distinción es de hipóstasis (persona), no de <span class="gr">οὐσία</span> (esencia). La tradición trinitaria post-nicena clarificó los términos que Orígenes usaba ambiguamente; no contradijo su lectura de Juan 1:1 como afirmación de plena divinidad.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">El concepto de Logos venía de la filosofía griega y fue importado al Evangelio por influencia helenística tardía — no es teología apostólica original.</div>
+    <div class="obj-r">Esta objeción invierte la dirección de la influencia. Juan no toma el concepto de Logos de Heráclito o los estoicos y lo aplica a Jesús — toma el término familiar a sus lectores y lo llena de un contenido radicalmente diferente: el Logos joánico es personal (no impersonal), se encarna (lo que el Logos griego no puede hacer), crea desde afuera del cosmos (no es el «alma del mundo»), y es identificado con el Mesías judío. Juan usa la categoría para subvertirla y superarla. El trasfondo veterotestamentario (Palabra, Sabiduría, Memrá) es igualmente decisivo, y ese trasfondo es completamente judío.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Filón ya llamó al Logos «segundo dios» sin ser trinitario — por tanto Juan 1:1 puede leerse sin implicaciones trinitarias.</div>
+    <div class="obj-r">Que Filón use el concepto de Logos con rasgos que anticipa el vocabulario joánico no significa que Juan enseñe lo mismo que Filón. La diferencia crucial es la Encarnación (1:14): para Filón, la encarnación del Logos es imposible e inconcebible. Juan afirma precisamente eso. Además, Filón usa <span class="gr">θεός</span> anartro para el Logos exactamente como Juan — y los antitrinitarios que citan a Filón para defender «un dios» tendrían que aceptar que Filón tampoco enseñó que el Logos fuera un ser inferior, sino de naturaleza divina plena (aunque subordinado en función). En cualquier caso, Juan y Filón son autores distintos; la semejanza terminológica no identifica sus teologías.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">La doctrina trinitaria fue inventada en Nicea (325 d.C.) — no existía en los primeros siglos ni en el NT.</div>
+    <div class="obj-r">Esta objeción confunde la codificación terminológica con la teología de fondo. El Concilio de Nicea no inventó la doctrina de la divinidad de Cristo — clarificó y fijó terminológicamente lo que ya enseñaban Ignacio (m. 110), Justino (165), Ireneo (202), Tertuliano (c. 215) y Orígenes (c. 253). El término <span class="gr">ὁμοούσιος</span> es nuevo en 325, pero la convicción de que Cristo es Dios pleno es anterior a todos estos autores y está en Juan 1:1 (c. 90–100 d.C.), en Jn 20:28 (confesión de Tomás), en Flp 2:6 («siendo de naturaleza divina»), en Col 1:15–19 («la plenitud de la divinidad habita en él»), y en Heb 1:1–3 («resplandor de la gloria de Dios»).</div>
+  </div>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section id="conclusion">
+  <div class="sec-label">Conclusión</div>
+  <h2>Síntesis Probatoria</h2>
+
+  <table>
+    <thead><tr><th>Nivel de análisis</th><th>Evidencia</th><th>Veredicto</th></tr></thead>
+    <tbody>
+      <tr><td>Texto griego</td><td>Tres cláusulas paralelas: preexistencia, relación y naturaleza</td><td>Distinción personal + unidad de naturaleza</td></tr>
+      <tr><td>Trasfondo griego</td><td>Heráclito / estoicos: Logos impersonal, eterno, ordenador</td><td>Juan lo supera: personal, encarnado, creador trascendente</td></tr>
+      <tr><td>Filón</td><td>Usa <span class="gr">θεός</span> anartro para el Logos como «segundo dios»</td><td>Confirma que el anartro no implica divinidad inferior</td></tr>
+      <tr><td>Gramática articular</td><td>Predicado nominativo anartro preverbal = función cualitativa</td><td>«De naturaleza divina» — plena divinidad con distinción personal</td></tr>
+      <tr><td>Regla de Colwell</td><td>Observación estadística, no deducción de definiteness</td><td>Compatible con lectura cualitativa; excluye «un dios»</td></tr>
+      <tr><td>Harner / Wallace</td><td>Lectura cualitativa es la más respaldada estadísticamente</td><td>Plena divinidad sin sabelianismo</td></tr>
+      <tr><td>Prólogo como unidad</td><td>Inclusión 1:1 / 20:28; agencia creadora exclusiva v. 3; shekinah v. 14</td><td>Lectura de divinidad plena es exigida por la unidad literaria</td></tr>
+      <tr><td>Patrística</td><td>Ignacio, Justino, Ireneo, Tertuliano, Atanasio, Agustín</td><td>Unanimidad: «el Logos era Dios» = divinidad plena</td></tr>
+      <tr><td>Academia moderna</td><td>Barrett, Morris, Brown, Carson, Wallace, Harris, Ridderbos</td><td>Consenso: plena divinidad con distinción personal</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Veredicto Final</div>
+    <p>Juan 1:1c — <span class="gr">θεὸς ἦν ὁ λόγος</span> — afirma la plena naturaleza divina del Logos con distinción personal respecto al Padre. La ausencia del artículo ante <span class="gr">θεός</span> no introduce indefinición; predica naturaleza — el uso gramatical más preciso disponible en griego para afirmar «el Logos comparte la misma esencia de Dios sin ser numéricamente idéntico al Padre».</p>
+    <p>La lectura «el Verbo era un dios» carece de respaldo en la gramática griega del predicado nominativo anartro preverbal, en el monoteísmo de Juan, en el paralelo de Filón, en el contexto literario del Prólogo, en la confesión de Tomás, y en dos milenios de exégesis patrística y académica.</p>
+    <p>Juan toma el vocabulario filosófico del Logos —familiar a griegos por Heráclito y los estoicos, y a judíos por Filón y la literatura sapiencial— y lo llena de un contenido que lo supera radicalmente: el Logos no es un principio impersonal ni un ser divino secundario, sino el «Dios unigénito» (<span class="gr">μονογενὴς θεός</span>, Jn 1:18) que se encarna en la historia humana.</p>
+  </div>
+
+  <div class="footnote">
+    <strong>Fuentes primarias verificadas:</strong>
+    NA28 (Novum Testamentum Graece, Deutsche Bibelgesellschaft);
+    Heráclito, fr. B1–B2 (Diels-Kranz), citados en Sexto Empírico, <em>Adv. Math.</em> VII.132;
+    Filón de Alejandría, <em>De Agricultura</em> 51; <em>De Cherubim</em> 127; <em>Quaestiones in Genesim</em> II.62; <em>De Confusione Linguarum</em> 147;
+    E. C. Colwell, «A Definite Rule for the Use of the Article in the Greek New Testament», <em>JBL</em> 52 (1933);
+    Philip B. Harner, «Qualitative Anarthrous Predicate Nouns: Mark 15:39 and John 1:1», <em>JBL</em> 92.1 (1973);
+    Daniel B. Wallace, <em>Greek Grammar Beyond the Basics</em>, Zondervan, 1996;
+    Murray J. Harris, <em>Jesus as God</em>, Baker, 1992;
+    C. K. Barrett, <em>The Gospel According to St. John</em>, 2ª ed., Westminster, 1978;
+    Leon Morris, <em>The Gospel According to John</em>, NICNT, Eerdmans, 1995;
+    Raymond E. Brown, <em>The Gospel According to John I–XII</em>, Anchor Bible, Doubleday, 1966;
+    D. A. Carson, <em>The Gospel According to John</em>, Pillar, Eerdmans, 1991;
+    Ignacio de Antioquía, <em>Epístola a los Efesios</em> (Pról.);
+    Justino Mártir, <em>1 Apología</em> 46.1–6; <em>Diálogo con Trifón</em> 56.11; 61.1;
+    Ireneo, <em>Adversus Haereses</em> I.8.5; III.11.1;
+    Tertuliano, <em>Adversus Praxean</em> 13;
+    Orígenes, <em>Comentario sobre Juan</em> II.2;
+    Atanasio, <em>De Incarnatione</em> 54;
+    Agustín, <em>Tractatus in Evangelium Iohannis</em> I.16–17.
+  </div>
+</section>
+
+</div><!-- /#main -->
+
+<script>
+(function () {
+  var btn     = document.getElementById('toc-btn');
+  var panel   = document.getElementById('toc-panel');
+  var overlay = document.getElementById('toc-overlay');
+
+  function open() {
+    panel.classList.add('is-open');
+    overlay.classList.add('is-open');
+    btn.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    panel.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    btn.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', function () {
+    panel.classList.contains('is-open') ? close() : open();
+  });
+  overlay.addEventListener('click', close);
+  panel.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', close);
+  });
+
+  var links = panel.querySelectorAll('a');
+  var secs  = document.querySelectorAll('section[id]');
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          var active = panel.querySelector('a[href="#' + e.target.id + '"]');
+          if (active) {
+            active.classList.add('active');
+            active.scrollIntoView({ block: 'nearest' });
+          }
+        }
+      });
+    }, { rootMargin: '0px 0px -55% 0px', threshold: 0 });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+}());
+</script>
+</body>
+</html>

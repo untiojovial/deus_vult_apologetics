@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Génesis a la luz de la fe católica: de la Creación al Diluvio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070705;
+    --bg-alt:#0d0d0a;
+    --card:#131310;
+    --card-2:#17170f;
+    --border:rgba(212,175,55,0.22);
+    --border-soft:rgba(212,175,55,0.10);
+    --gold:#c9a227;
+    --gold-bright:#ecc659;
+    --gold-soft:rgba(212,175,55,0.10);
+    --white:#f4efe3;
+    --white-dim:#b9b6ab;
+    --maxw:880px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--white-dim);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold);color:#0a0a08;}
+
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--card-2);border:1px solid var(--border);border-radius:6px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+
+  a{color:var(--gold-bright);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  strong{color:var(--white);font-weight:600;}
+  em{color:var(--white);}
+
+  #progressBar{
+    position:fixed;top:0;left:0;height:3px;width:0%;
+    background:linear-gradient(90deg,var(--gold),var(--gold-bright));
+    z-index:200;transition:width .12s linear;
+  }
+
+  .skip-link{
+    position:absolute;left:-999px;top:0;background:var(--gold);color:#000;
+    padding:.5rem 1rem;z-index:300;font-weight:600;
+  }
+  .skip-link:focus{left:0;}
+
+  /* Sidebar */
+  .sidebar{
+    position:fixed;top:0;left:0;height:100vh;width:300px;
+    background:var(--bg-alt);border-right:1px solid var(--border);
+    overflow-y:auto;padding:2.2rem 1.4rem 3rem;z-index:100;
+  }
+  .brand{display:flex;flex-direction:column;gap:.35rem;padding:0 .6rem;}
+  .brand .mark{width:42px;height:42px;display:flex;align-items:center;justify-content:center;}
+  .brand h1{
+    font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--white);
+    font-weight:600;letter-spacing:.02em;margin-top:.6rem;
+  }
+  .brand p{font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;margin-top:.2rem;}
+
+  .toc-title{
+    margin:2.2rem 0 .8rem;padding:0 .6rem;font-size:.72rem;color:var(--gold);
+    text-transform:uppercase;letter-spacing:.22em;font-weight:600;
+  }
+  .toc-list{list-style:none;display:flex;flex-direction:column;gap:.15rem;}
+  .toc-list a{
+    display:flex;gap:.75rem;align-items:baseline;padding:.6rem .7rem;
+    border-radius:6px;color:var(--white-dim);font-size:.88rem;
+    border-left:2px solid transparent;transition:background .15s,color .15s,border-color .15s;
+  }
+  .toc-list a .num{
+    font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:700;
+    font-size:.85rem;min-width:1.8rem;
+  }
+  .toc-list a:hover{background:var(--gold-soft);color:var(--white);text-decoration:none;}
+  .toc-list a.active{
+    background:var(--gold-soft);color:var(--gold-bright);font-weight:600;
+    border-left-color:var(--gold);
+  }
+  .toc-list a.active .num{color:var(--gold-bright);}
+
+  .sidebar-foot{
+    margin-top:2.4rem;padding:1rem .7rem 0;border-top:1px solid var(--border-soft);
+    font-size:.72rem;color:var(--white-dim);line-height:1.6;
+  }
+
+  #menuToggle{
+    display:none;position:fixed;top:1rem;left:1rem;z-index:150;
+    width:46px;height:46px;border-radius:50%;border:1px solid var(--border);
+    background:var(--card);color:var(--gold-bright);font-size:1.2rem;
+    align-items:center;justify-content:center;cursor:pointer;
+  }
+
+  /* Layout */
+  main{margin-left:300px;}
+  .section{
+    max-width:var(--maxw);margin:0 auto;padding:5.5rem 2.6rem 0;
+    scroll-margin-top:1.5rem;
+  }
+  .section:last-of-type{padding-bottom:2rem;}
+
+  .eyebrow{
+    display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;
+    font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;
+  }
+  .eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+  h2{
+    font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);
+    font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.25;margin-bottom:1.4rem;
+  }
+  h3{
+    font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);
+    font-size:clamp(1.15rem,2.5vw,1.45rem);margin:2rem 0 .8rem;
+  }
+  h4{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:1.05rem;margin-bottom:.5rem;}
+  p{margin-bottom:1.15rem;font-size:1.02rem;}
+  ul, ol{margin:0 0 1.15rem 1.4rem;}
+  li{margin-bottom:.5rem;}
+
+  /* Hero */
+  .hero{padding:5rem 2.6rem 3rem;max-width:var(--maxw);margin:0 auto;position:relative;}
+  .hero-rosette{position:absolute;top:1rem;right:1.5rem;opacity:.45;}
+  @media (prefers-reduced-motion:no-preference){
+    .hero-rosette .spin{animation:spin 70s linear infinite;transform-origin:50% 50%;}
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero h1{
+    font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);
+    font-size:clamp(2.2rem,6.5vw,3.6rem);line-height:1.15;max-width:700px;
+  }
+  .hero h1 span{color:var(--gold-bright);}
+  .hero .lede{margin-top:1.4rem;font-size:1.12rem;color:var(--white-dim);max-width:660px;}
+  .pills{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.8rem;}
+  .pill{border:1px solid var(--border);border-radius:999px;padding:.4rem 1.1rem;font-size:.78rem;color:var(--gold-bright);letter-spacing:.06em;background:var(--gold-soft);}
+
+  /* Callouts */
+  .callout{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:1.3rem 1.5rem;margin:1.6rem 0 2.2rem;}
+  .callout-title{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-weight:600;font-size:1.05rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
+  .callout p:last-child{margin-bottom:0;}
+  .callout.note{border-left:3px solid var(--gold);}
+
+  /* Verse cards */
+  .verse-card{border:1px solid var(--gold);border-radius:6px;padding:2.4rem 2rem;margin:2rem 0;text-align:center;background:linear-gradient(180deg,rgba(212,175,55,0.07),transparent 70%);position:relative;}
+  .verse-card::before,.verse-card::after{content:'';position:absolute;width:14px;height:14px;border:1px solid var(--gold);opacity:.6;}
+  .verse-card::before{top:8px;left:8px;border-right:none;border-bottom:none;}
+  .verse-card::after{bottom:8px;right:8px;border-left:none;border-top:none;}
+  .verse-hebrew{font-family:'Frank Ruhl Libre',serif;direction:rtl;font-size:clamp(1.2rem,3.4vw,1.9rem);color:var(--gold-bright);line-height:1.9;margin-bottom:1.2rem;}
+  .verse-translation{font-style:italic;color:var(--white);font-size:1.04rem;max-width:580px;margin:0 auto;}
+  .verse-ref{margin-top:1rem;font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;}
+
+  /* Lectura grid (espectro de interpretaciones) */
+  .lectura-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.6rem 0;}
+  .lectura{border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.3rem;background:var(--card);}
+  .lectura .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:.15rem .55rem;margin-bottom:.7rem;}
+  .lectura p{font-size:.93rem;margin-bottom:0;}
+
+  /* Escala / espectro visual */
+  .scale-wrap{margin:1.8rem 0 2.2rem;}
+  .scale-labels{display:flex;justify-content:space-between;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.7rem;}
+  .scale-track{position:relative;height:6px;border-radius:999px;background:linear-gradient(90deg,var(--card-2),var(--gold-soft));border:1px solid var(--border);}
+  .scale-marker{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:var(--gold-bright);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--gold);transform:translate(-50%,-50%);}
+  .scale-caption{margin-top:.7rem;font-size:.84rem;color:var(--white-dim);text-align:center;}
+  .scale-caption strong{color:var(--gold-bright);}
+
+  /* Cajas de autoridad */
+  .box{border-left:3px solid var(--gold);background:var(--card);border-radius:0 8px 8px 0;padding:1.15rem 1.4rem;margin:1rem 0;}
+  .box.alt{border-left-color:var(--white);}
+  .box-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.55rem;flex-wrap:wrap;}
+  .tag{font-family:'Cormorant Garamond',serif;font-weight:700;color:#0a0a08;background:var(--gold);padding:.18rem .65rem;border-radius:4px;font-size:.8rem;letter-spacing:.04em;white-space:nowrap;}
+  .tag.white{background:var(--white);}
+  .tag.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold-bright);}
+  .box p{margin-bottom:0;font-size:.98rem;}
+  .box p + p{margin-top:.6rem;}
+  .box .label{color:var(--gold-bright);font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;}
+
+  /* Padres de la Iglesia */
+  .padre-card{border-left:3px solid var(--white);background:var(--card);border-radius:0 8px 8px 0;padding:1.05rem 1.3rem;margin:.9rem 0;}
+  .padre-card .name{color:var(--white);font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.08rem;}
+  .padre-card .work{color:var(--gold);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.45rem;display:block;}
+  .padre-card p{font-size:.95rem;margin-bottom:0;}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin:1.6rem 0;}
+
+  /* Timeline magisterial */
+  .timeline{display:flex;flex-direction:column;gap:1.1rem;margin:1.8rem 0;border-left:2px solid var(--border);padding-left:1.5rem;}
+  .timeline-item{position:relative;}
+  .timeline-item::before{content:'';position:absolute;left:-1.62rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--gold);}
+  .timeline-item .year{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.05rem;}
+  .timeline-item p{margin:.25rem 0 0;font-size:.94rem;}
+
+  /* Dividers */
+  .divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3.2rem 0;opacity:.55;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border));}
+  .divider::after{background:linear-gradient(to left,transparent,var(--border));}
+  .divider svg{flex:0 0 auto;}
+
+  /* Tables */
+  .table-wrap{overflow-x:auto;margin:1.8rem 0;border:1px solid var(--border);border-radius:8px;}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:640px;}
+  th,td{padding:.9rem 1.05rem;border-bottom:1px solid var(--border-soft);text-align:left;vertical-align:top;}
+  th{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-size:1rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--gold);background:var(--bg-alt);position:sticky;top:0;}
+  tbody tr:hover{background:rgba(212,175,55,0.04);}
+  tbody tr:last-child td{border-bottom:none;}
+  td.flag{color:var(--gold-bright);font-weight:600;white-space:nowrap;}
+
+  /* Footer */
+  footer{border-top:1px solid var(--border);margin-top:4rem;padding:2.4rem 2.6rem 3rem;max-width:var(--maxw);margin-left:auto;margin-right:auto;text-align:center;font-size:.85rem;color:var(--white-dim);}
+  footer .mark-small{margin:0 auto 1rem;opacity:.6;}
+
+  /* Back to top */
+  #backToTop{position:fixed;bottom:1.6rem;right:1.6rem;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:var(--card);color:var(--gold-bright);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:120;}
+  #backToTop.visible{opacity:1;pointer-events:auto;}
+  #backToTop:hover{transform:translateY(-3px);}
+
+  a:focus-visible, button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px;}
+
+  @media (max-width:980px){
+    .sidebar{transform:translateX(-100%);transition:transform .28s ease;box-shadow:20px 0 40px rgba(0,0,0,.5);}
+    .sidebar.open{transform:translateX(0);}
+    main{margin-left:0;}
+    #menuToggle{display:flex;}
+    .hero,.section{padding-left:1.4rem;padding-right:1.4rem;}
+    .hero{padding-top:4.6rem;}
+    .hero-rosette{display:none;}
+  }
+  @media (max-width:560px){
+    .verse-card{padding:1.8rem 1.1rem;}
+    .verse-hebrew{line-height:1.7;}
+  }
+
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="progressBar" aria-hidden="true"></div>
+<button id="menuToggle" aria-label="Abrir índice de navegación" aria-expanded="false">☰</button>
+
+<!-- ============ SIDEBAR / ÍNDICE ============ -->
+<nav class="sidebar" id="sidebar" aria-label="Índice del documento">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">
+      <svg width="42" height="42" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1.1">
+          <rect x="15" y="15" width="30" height="30"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+          <circle cx="30" cy="30" r="22"/>
+        </g>
+      </svg>
+    </div>
+    <h1>Génesis y la fe católica</h1>
+    <p>Lectura capítulo a capítulo</p>
+  </div>
+
+  <div class="toc-title">Índice interactivo</div>
+  <ul class="toc-list">
+    <li><a href="#inicio"><span class="num">00</span><span>Apertura</span></a></li>
+    <li><a href="#marco-general"><span class="num">01</span><span>Cómo lee la Iglesia el Génesis</span></a></li>
+    <li><a href="#genesis-1"><span class="num">02</span><span>Génesis 1 — Los días de la creación</span></a></li>
+    <li><a href="#genesis-2-3"><span class="num">03</span><span>Génesis 2-3 — Edén y la Caída</span></a></li>
+    <li><a href="#adan-eva"><span class="num">04</span><span>¿Existieron Adán y Eva?</span></a></li>
+    <li><a href="#evolucion"><span class="num">05</span><span>Fe y evolución</span></a></li>
+    <li><a href="#preadamicas"><span class="num">06</span><span>¿Razas preadánicas?</span></a></li>
+    <li><a href="#genesis-4-5"><span class="num">07</span><span>Génesis 4-5 — Caín, Set y matrimonios</span></a></li>
+    <li><a href="#nefilim"><span class="num">08</span><span>Génesis 6 — Los Nefilim</span></a></li>
+    <li><a href="#diluvio"><span class="num">09</span><span>El Diluvio (Gn 6-9)</span></a></li>
+    <li><a href="#babel"><span class="num">10</span><span>Génesis 10-11 — Las naciones y Babel</span></a></li>
+    <li><a href="#padres"><span class="num">11</span><span>Padres de la Iglesia y síntesis</span></a></li>
+  </ul>
+
+  <div class="sidebar-foot">
+    Repaso teológico de Génesis 1-11 desde la fe católica: Magisterio, Catecismo y Padres de la Iglesia, con el espectro legítimo de interpretaciones.
+  </div>
+</nav>
+
+<!-- ============ CONTENIDO ============ -->
+<main id="contenido">
+
+  <!-- HERO -->
+  <header class="hero" id="inicio">
+    <div class="hero-rosette" aria-hidden="true">
+      <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+        <g class="spin">
+          <g stroke="var(--gold)" stroke-width="0.8">
+            <rect x="40" y="40" width="120" height="120"/>
+            <rect x="40" y="40" width="120" height="120" transform="rotate(45 100 100)"/>
+            <circle cx="100" cy="100" r="85"/>
+            <circle cx="100" cy="100" r="60"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="eyebrow">Apertura</div>
+    <h1>Génesis 1-11: <span>lo que de verdad enseña la Iglesia</span> y lo que es debate abierto</h1>
+    <p class="lede">
+      "Mosaico" es la palabra correcta para describir cómo el catolicismo lee los primeros once capítulos del
+      Génesis: ni un reportaje científico-cronológico al estilo moderno, ni una leyenda sin más sin ningún
+      anclaje histórico. Este documento recorre el texto capítulo por capítulo —los seis días, el Edén, Caín
+      y Set, los Nefilim, el Diluvio, las naciones y Babel— distinguiendo en cada parada lo que es
+      <strong>de fe</strong>, lo que es <strong>posición mayoritaria</strong> de los teólogos y exégetas, y lo
+      que es <strong>opinión libre</strong> permitida dentro de la ortodoxia.
+    </p>
+    <p class="lede">
+      Se abordan de frente las preguntas más frecuentes: ¿son los días literales o figurados?, ¿existieron
+      Adán y Eva?, ¿hay lugar para "razas preadánicas"?, ¿quiénes eran los Nefilim?, ¿se casaron entre hermanos
+      los hijos de Adán?, ¿fue el Diluvio universal?, y ¿es la evolución compatible con la fe católica? —con
+      apoyo del Catecismo, los documentos del Magisterio y los Padres de la Iglesia.
+    </p>
+    <div class="pills">
+      <span class="pill">Magisterio</span>
+      <span class="pill">Catecismo</span>
+      <span class="pill">Padres de la Iglesia</span>
+      <span class="pill">Adán y Eva</span>
+      <span class="pill">Evolución</span>
+      <span class="pill">Nefilim</span>
+      <span class="pill">Diluvio</span>
+    </div>
+  </header>
+
+  <!-- 01 — MARCO GENERAL -->
+  <section class="section" id="marco-general">
+    <div class="eyebrow">01 · Marco hermenéutico</div>
+    <h2>Cómo lee la Iglesia el Génesis: ni fábula, ni manual de ciencia</h2>
+    <p>
+      La Iglesia Católica no se sitúa en ninguno de los dos extremos habituales del debate público. No lee
+      Génesis 1-11 como si fuera un reportaje cronológico-científico al estilo de un libro de texto moderno
+      (el "literalismo fundamentalista"), pero tampoco lo reduce a pura leyenda sin ningún anclaje en la
+      realidad (el "mitologismo"). Sostiene, en cambio, una posición intermedia: estos capítulos pertenecen a
+      un género literario propio —la <em>"historia de los orígenes"</em>— que transmite verdades reales sobre
+      Dios, el mundo y el hombre a través de un lenguaje narrativo, simbólico y figurado, propio de la
+      literatura del Cercano Oriente Antiguo.
+    </p>
+
+    <h3>Tres documentos clave del Magisterio</h3>
+    <p>
+      <strong>Providentissimus Deus</strong> (León XIII, 1893) reconoció que, al hablar de fenómenos naturales,
+      la Biblia a veces usa "lenguaje según las apariencias" —de la misma manera que hoy decimos "el sol sale"
+      sin pretender enseñar astronomía—. Esto no compromete la inerrancia bíblica en materia de fe y moral,
+      pero sí advierte contra leer cada frase como si fuera una afirmación técnica.
+    </p>
+    <p>
+      <strong>Divino Afflante Spiritu</strong> (Pío XII, 1943) animó a los exégetas católicos a estudiar los
+      <em>géneros literarios</em> antiguos para descubrir qué pretendía afirmar realmente el autor sagrado —una
+      clave decisiva para Génesis 1-11, escrito en un género que ningún lector antiguo habría confundido con
+      una crónica moderna.
+    </p>
+    <p>
+      El <strong>decreto de la Pontificia Comisión Bíblica de 1909</strong> sobre el carácter histórico de los
+      tres primeros capítulos del Génesis exige sostener, como hechos históricos reales, algunos puntos
+      concretos: la creación de todas las cosas por Dios al principio del tiempo, la creación peculiar del
+      hombre, la formación de la mujer a partir del hombre, la unidad del género humano, la felicidad y
+      justicia originales de los primeros padres en el paraíso, el precepto divino y su transgresión por
+      instigación del demonio bajo forma de serpiente, y la pérdida de la inocencia original como consecuencia.
+      Más allá de estos puntos, el decreto deja abierto el debate sobre la forma literaria de los relatos.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">El Catecismo lo resume</div>
+      <p>
+        El Catecismo de la Iglesia Católica (CCC 289-290) explica que el relato de los orígenes "usa un lenguaje
+        figurado", pero afirma "acontecimientos verdaderos, ciertos y reales" en el inicio de la historia del
+        hombre. Esta doble afirmación —lenguaje figurado <em>y</em> acontecimientos reales— es la clave de todo
+        lo que sigue en este documento: prácticamente cada controversia sobre Génesis 1-11 surge de no respetar
+        uno de los dos lados de esta fórmula.
+      </p>
+    </div>
+
+    <h3>El espectro católico de lecturas</h3>
+    <p>
+      A lo largo de este documento aparecerá, repetidas veces, un mismo eje: desde una lectura
+      <strong>histórico-literal</strong> (los hechos sucedieron exactamente como se narran, con detalles
+      cronológicos y materiales precisos) hasta una lectura <strong>histórico-figurativa</strong> (los hechos
+      centrales son reales, pero están narrados con imágenes, números y estructuras simbólicas propias del
+      género). En ningún caso el espectro católico llega hasta el "puro simbolismo sin referente histórico":
+      ese extremo queda fuera de la ortodoxia, porque vaciaría de realidad la caída original y el plan de
+      salvación que de ella se sigue.
+    </p>
+
+    <div class="scale-wrap">
+      <div class="scale-labels"><span>Histórico-literal</span><span>Histórico-figurativo</span><span>Puro símbolo (fuera de la ortodoxia)</span></div>
+      <div class="scale-track"><div class="scale-marker" style="left:38%"></div></div>
+      <div class="scale-caption">El catolicismo se mueve entre el primer y el segundo tercio del espectro; el tercer tercio queda excluido.</div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 02 — GÉNESIS 1 -->
+  <section class="section" id="genesis-1">
+    <div class="eyebrow">02 · Génesis 1</div>
+    <h2>Los siete días: ¿24 horas, eras geológicas o marco literario?</h2>
+    <p>
+      Génesis 1 narra la creación organizada en seis "días" seguidos de un séptimo día de descanso, con un
+      patrón que se repite: Dios habla, la cosa existe, Dios la valora como "buena". Es, formalmente, uno de
+      los textos más estructurados y rítmicos de toda la Biblia —un dato que, para muchos exégetas, ya apunta
+      hacia una composición deliberadamente literaria más que hacia un registro cronológico bruto.
+    </p>
+
+    <div class="verse-card">
+      <div class="verse-hebrew">בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ</div>
+      <div class="verse-translation">"En el principio, Dios creó el cielo y la tierra." <em>(versión aproximada)</em></div>
+      <div class="verse-ref">Génesis 1:1</div>
+    </div>
+
+    <h3>Tres lecturas, todas dentro de la ortodoxia</h3>
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">Lectura A</span>
+        <h4>Literal-histórica (24 horas)</h4>
+        <p>
+          Seis días solares consecutivos, hace miles de años. Fue la lectura más extendida durante siglos.
+          Hoy es minoritaria entre los teólogos católicos y suele asociarse más con corrientes "creacionistas
+          de tierra joven" de origen protestante que con la exégesis católica contemporánea —aunque sigue
+          siendo una opinión que algún católico individual podría sostener sin caer en herejía.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Lectura B</span>
+        <h4>Día-era (concordismo)</h4>
+        <p>
+          Cada "día" representa una larga era geológica, en un intento de armonizar el relato con la edad del
+          universo y la tierra. Fue popular en la apologética católica de los siglos XIX-XX, aunque hoy se
+          considera más una estrategia conciliadora que una exégesis del texto en sus propios términos.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Lectura C</span>
+        <h4>Marco literario (la más extendida hoy)</h4>
+        <p>
+          La estructura de "siete días" es un recurso literario que organiza la creación temáticamente: los
+          días 1-3 forman los grandes "ámbitos" (luz/tinieblas, cielo/mar, tierra), y los días 4-6 los "llenan"
+          con sus habitantes (astros, animales, hombre), culminando en el reposo del séptimo día —un patrón
+          que evoca la inauguración de un templo. Es la lectura predominante entre biblistas católicos hoy.
+        </p>
+      </div>
+    </div>
+
+    <h3>Lo que dicen los Padres</h3>
+    <div class="padre-card">
+      <span class="work">San Agustín · De Genesi ad litteram / Confesiones, libros XI-XIII</span>
+      <span class="name">Cautela ante la literalidad de "día"</span>
+      <p>
+        San Agustín advirtió que el sol —el astro que mide nuestros días— no es creado hasta el "cuarto día"
+        del relato, por lo que "día" no puede significar exactamente lo mismo en toda la narración. Sin negar
+        la historicidad de la creación, defendió una lectura más profunda del término "día" en este contexto.
+      </p>
+    </div>
+    <div class="padre-card">
+      <span class="work">San Basilio de Cesarea · Hexaemeron</span>
+      <span class="name">Una secuencia con propósito moral</span>
+      <p>
+        San Basilio sí defendió una secuencia más histórica de seis días, pero su interés principal no era
+        cronológico sino doctrinal y moral: cada "día" es ocasión para contemplar la sabiduría, el poder y la
+        bondad de Dios reflejados en lo creado.
+      </p>
+    </div>
+    <div class="padre-card">
+      <span class="work">Epístola de Bernabé (Padres Apostólicos, s. I-II), cap. 15</span>
+      <span class="name">"Seis días" como seis mil años</span>
+      <p>
+        Entre los escritos de los llamados Padres Apostólicos, la Epístola de Bernabé propone una lectura
+        explícitamente no literal-cronológica: los "seis días" de la creación corresponderían a seis mil años
+        de la historia del mundo, tras los cuales llegaría un "séptimo/octavo día" de descanso definitivo —en
+        sintonía con la idea, también presente en 2 Pedro 3:8, de que "para el Señor, un día es como mil años".
+        Es un testimonio temprano de que la no-literalidad cronológica de los "días" no es una invención
+        moderna para esquivar la ciencia, sino una posibilidad exegética presente desde los primeros siglos.
+      </p>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">Lo que es de fe vs. lo que es debate</div>
+      <p>
+        <strong>De fe:</strong> Dios creó todo lo que existe de la nada (<em>ex nihilo</em>), libremente, sin
+        necesidad ni lucha previa contra ninguna materia o caos preexistente; todo lo creado es bueno; el ser
+        humano ocupa un lugar singular como imagen de Dios. <strong>Abierto:</strong> la duración exacta y la
+        literalidad cronológica de los "seis días".
+      </p>
+    </div>
+
+    <div class="scale-wrap">
+      <div class="scale-labels"><span>24 horas literales</span><span>Día-era</span><span>Marco literario</span></div>
+      <div class="scale-track"><div class="scale-marker" style="left:78%"></div></div>
+      <div class="scale-caption">Posición predominante hoy entre exégetas católicos: <strong>marco literario</strong>, sin que esto sea una definición dogmática.</div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 03 — GÉNESIS 2-3 -->
+  <section class="section" id="genesis-2-3">
+    <div class="eyebrow">03 · Génesis 2-3</div>
+    <h2>El Edén, la Caída y el primer anuncio del Evangelio</h2>
+    <p>
+      Génesis 2 ofrece un segundo relato de la creación, centrado en el hombre: formado del "polvo de la
+      tierra" y animado por el "soplo de vida" de Dios (el alma), colocado en un jardín, encargado de
+      cuidarlo y nombrar a los animales, y completado por la mujer, formada "de su costado", para que sean
+      "una sola carne". Génesis 3 narra la tentación de la serpiente, la desobediencia de la primera pareja,
+      y sus consecuencias: vergüenza, ruptura con Dios, dolor, trabajo penoso, mortalidad y expulsión del
+      jardín.
+    </p>
+
+    <div class="verse-card">
+      <div class="verse-translation">
+        "Pondré enemistad entre ti [la serpiente] y la mujer, entre tu descendencia y su descendencia: ella
+        te aplastará la cabeza." <em>(versión aproximada)</em>
+      </div>
+      <div class="verse-ref">Génesis 3:15 — el "Protoevangelio"</div>
+    </div>
+
+    <p>
+      Este versículo —llamado tradicionalmente el <strong>"Protoevangelio"</strong>, el primer anuncio del
+      Evangelio— es leído por la tradición católica como la primera promesa mesiánica de toda la Escritura:
+      la "descendencia" que vencerá al mal se identifica con Cristo, y la "mujer" se asocia, en un sentido
+      pleno, con María como "nueva Eva".
+    </p>
+
+    <h3>El pecado original: transmisión, no imitación</h3>
+    <div class="box">
+      <div class="box-head"><span class="tag">CCC 396-409 · Concilio de Trento, Sesión V (1546)</span></div>
+      <p>
+        El pecado de Adán no afecta a sus descendientes porque cada uno lo "imite", sino porque se
+        <strong>transmite por generación</strong>: pertenecer a la familia humana descendiente de Adán implica
+        nacer privado del don original de gracia y de los dones que acompañaban ese estado (justicia original,
+        armonía interior, inmortalidad corporal). Es una doctrina sobre la condición de toda la familia humana,
+        no un juicio sobre la culpa personal de cada individuo por algo que él mismo hizo.
+      </p>
+    </div>
+
+    <h3>¿Qué tipo de relato es Génesis 2-3?</h3>
+    <p>
+      La mayoría de los exégetas católicos sostiene que el relato del Edén usa <strong>imágenes simbólicas</strong>
+      —un jardín, dos árboles, una serpiente que habla— para transmitir una <strong>verdad histórica real</strong>:
+      que hubo, en el origen de la humanidad, una caída real desde un estado original de amistad con Dios. El
+      CCC 390 lo expresa con precisión: el relato "usa un lenguaje figurado", pero describe "un acontecimiento
+      primordial, un hecho que tuvo lugar al comienzo de la historia del hombre". De nuevo aparece la doble
+      clave: figura <em>y</em> realidad histórica a la vez, no una en lugar de la otra.
+    </p>
+
+    <div class="padre-card">
+      <span class="work">San Ireneo de Lyon · Contra las herejías, Libro V</span>
+      <span class="name">Cristo, el nuevo Adán</span>
+      <p>
+        San Ireneo desarrolló la teología de la <em>"recapitulación"</em>: Cristo, como "nuevo Adán", retoma y
+        restaura desde el principio lo que el primer Adán perdió, recorriendo en sentido inverso el camino de
+        la caída. Esta lectura presupone, precisamente, la realidad histórica de "lo que el primer Adán perdió".
+      </p>
+    </div>
+    <div class="padre-card">
+      <span class="work">San Agustín · La Ciudad de Dios, Libros XIII-XIV</span>
+      <span class="name">La caída, la concupiscencia y sus consecuencias</span>
+      <p>
+        San Agustín dedica una extensa reflexión a las consecuencias de la caída —la pérdida de la armonía
+        original entre cuerpo y alma, entre el hombre y la creación, y entre los seres humanos entre sí—,
+        sentando las bases de buena parte de la teología occidental posterior sobre el pecado original.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 04 — ADÁN Y EVA -->
+  <section class="section" id="adan-eva">
+    <div class="eyebrow">04 · La pregunta clave</div>
+    <h2>¿Existieron Adán y Eva como personas históricas?</h2>
+    <p>
+      La respuesta corta es <strong>sí, en el sentido relevante para la fe</strong>: la Iglesia sostiene como
+      verdad de fe que hubo un "acontecimiento primigenio" real —una caída real de "nuestros primeros padres"—
+      y no un mito sin ningún referente en la historia. La pregunta verdaderamente debatida no es "¿hubo un
+      Adán?", sino: <em>¿qué forma biológica e histórica concreta tuvo ese "Adán"?</em>
+    </p>
+
+    <h3>Monogenismo y poligenismo</h3>
+    <p>
+      <strong>Monogenismo:</strong> toda la humanidad desciende de un único origen (una pareja, o al menos un
+      único "acontecimiento" original). <strong>Poligenismo:</strong> la especie humana habría surgido de
+      múltiples líneas o poblaciones independientes entre sí.
+    </p>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Humani Generis · Pío XII, 1950</span></div>
+      <p>
+        Esta encíclica marcó un hito: permitió que los católicos investigasen, como hipótesis científica
+        legítima, el origen del cuerpo humano a partir de materia viva preexistente —pero exigió sostener, sin
+        excepción, que el <strong>alma espiritual es creada directa e inmediatamente por Dios</strong>, no
+        producto de la evolución.
+      </p>
+      <p>
+        Respecto al poligenismo, la encíclica señaló que no resultaba evidente cómo conciliarlo con la doctrina
+        revelada del pecado original tal como la entendía entonces la Iglesia —un pecado cometido por un único
+        Adán y transmitido por generación a toda la humanidad—. No fue una condena dogmática del poligenismo
+        como herejía en sí mismo, sino la constatación de una dificultad teológica entonces sin resolver, que
+        dejó la puerta abierta a la reflexión teológica posterior.
+      </p>
+    </div>
+
+    <h3>"Adán y Eva" frente a la genética de poblaciones</h3>
+    <p>
+      Conviene no confundir al "Adán" teológico con conceptos de la genética de poblaciones como la
+      <em>"Eva mitocondrial"</em> o el <em>"Adán del cromosoma Y"</em>. Estos términos describen los
+      ancestros comunes más recientes de ciertas líneas genéticas dentro de una población —no implican que
+      esa persona fuera la única mujer u hombre vivo en su época—. Son conceptos estadísticos que responden a
+      preguntas distintas de las que plantea la teología, y aplicarlos directamente como "prueba" o
+      "refutación" de Adán y Eva suele ser un malentendido de lo que cada disciplina afirma.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">Síntesis</div>
+      <p>
+        <strong>De fe:</strong> hubo un acontecimiento real de caída en los orígenes de la humanidad, con
+        consecuencias para toda la familia humana; "Adán y Eva" son los nombres que la tradición da a "nuestros
+        primeros padres" en ese sentido. <strong>En discusión teológica:</strong> la forma biológica precisa de
+        ese origen —¿una pareja literal y exclusiva?, ¿una pareja "representativa" dentro de una población más
+        amplia, elevada por Dios a un estatus espiritual nuevo?—. Tras Humani Generis no existe una definición
+        posterior que zanje estos detalles, y diversos teólogos siguen explorando modelos de armonización.
+      </p>
+    </div>
+
+    <div class="scale-wrap">
+      <div class="scale-labels"><span>Pareja literal única</span><span>Pareja representativa de una población</span></div>
+      <div class="scale-track"><div class="scale-marker" style="left:50%"></div></div>
+      <div class="scale-caption">Debate teológico abierto, sin pronunciamiento magisterial posterior que lo resuelva del todo.</div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 05 — EVOLUCIÓN -->
+  <section class="section" id="evolucion">
+    <div class="eyebrow">05 · Fe y ciencia</div>
+    <h2>¿Creen los católicos en la evolución?</h2>
+    <p>
+      Sí. La Iglesia Católica no se opone a la teoría de la evolución biológica como explicación del origen del
+      cuerpo humano a partir de formas de vida anteriores —siempre que se sostenga, al mismo tiempo, que el
+      alma espiritual e inmortal de cada persona es creada directamente por Dios, y no un producto de procesos
+      evolutivos. Esta es, en esencia, la postura conocida como "evolución teísta", y representa la línea
+      seguida por el Magisterio desde mediados del siglo XX.
+    </p>
+
+    <h3>Una línea de tiempo magisterial</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="year">1893 — Providentissimus Deus</span>
+        <p>León XIII sienta principios generales sobre la inerrancia bíblica y el lenguaje fenomenológico de la Escritura.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1909 — Decreto de la Pontificia Comisión Bíblica</span>
+        <p>Fija los puntos históricos que deben sostenerse sobre Génesis 1-3, dejando abierta la cuestión del género literario de los detalles narrativos.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1950 — Humani Generis</span>
+        <p>Pío XII abre la puerta a investigar la evolución del cuerpo humano como hipótesis científica seria, exigiendo a la vez la creación directa del alma por Dios.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1996 — Mensaje de Juan Pablo II a la Academia Pontificia de Ciencias</span>
+        <p>Reconoce que la convergencia de evidencias provenientes de campos científicos independientes da a la teoría de la evolución un peso que va más allá de una simple hipótesis aislada, mientras insiste en el "salto ontológico" hacia lo espiritual, que la sola ciencia natural no puede explicar.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">2014 — Papa Francisco, Academia Pontificia de Ciencias</span>
+        <p>Reafirma que el Big Bang y la evolución biológica no son incompatibles con la doctrina cristiana de la creación: Dios no actúa "como un mago con varita mágica", sino como creador de seres que él mismo dota de leyes propias de desarrollo.</p>
+      </div>
+    </div>
+
+    <h3>El "salto ontológico"</h3>
+    <p>
+      La enseñanza distintiva del catolicismo no es, en el fondo, "evolución sí o no", sino dónde se sitúa la
+      <strong>discontinuidad</strong>: el cuerpo humano puede tener un origen evolutivo, en continuidad
+      biológica con otras formas de vida —esto puede investigarse científicamente—. Pero la persona humana,
+      dotada de alma espiritual, razón, libertad y capacidad de relación personal con Dios, representa un
+      "salto" que la biología, por sí sola, no explica ni puede explicar. Ese salto se atribuye a la acción
+      creadora directa de Dios (CCC 366; CCC 283, 301-308 sobre la acción divina a través de "causas segundas").
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">¿Y el creacionismo estricto?</div>
+      <p>
+        Algunos católicos sostienen posiciones "creacionistas" más estrictas (rechazo de la evolución biológica,
+        tierra joven). Son posiciones permitidas como opinión personal —no son herejía— pero no representan la
+        enseñanza actual del Magisterio ni la posición mayoritaria entre los teólogos y científicos católicos.
+      </p>
+    </div>
+
+    <div class="scale-wrap">
+      <div class="scale-labels"><span>Creacionismo estricto</span><span>Evolución teísta</span><span>Evolución sin Dios</span></div>
+      <div class="scale-track"><div class="scale-marker" style="left:50%"></div></div>
+      <div class="scale-caption">La <strong>evolución teísta</strong> —cuerpo evolucionado, alma creada directamente— es la posición del Magisterio desde Pío XII.</div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 06 — RAZAS PREADÁNICAS -->
+  <section class="section" id="preadamicas">
+    <div class="eyebrow">06 · Pregunta frecuente</div>
+    <h2>¿Hay lugar para "razas preadánicas" en la fe católica?</h2>
+    <p>
+      El término "razas preadánicas" tiene un origen concreto: ciertas corrientes protestantes del siglo XIX
+      propusieron la llamada <em>"teoría del intervalo"</em> (<em>Gap Theory</em>), que imagina una creación
+      anterior, destruida por algún cataclismo, entre Génesis 1:1 y 1:2, para "encajar" los hallazgos fósiles
+      sin tocar una lectura de tierra joven para Adán. <strong>Esta teoría no forma parte de la tradición
+      católica</strong> y no aparece en los documentos del Magisterio.
+    </p>
+
+    <h3>El marco propio del catolicismo: cuerpo y alma</h3>
+    <p>
+      Sin necesidad de recurrir a esa teoría, el catolicismo ofrece un marco distinto para los hallazgos
+      paleoantropológicos —homínidos cuya existencia, según la ciencia, antecede en mucho a cualquier datación
+      tradicional de "Adán"—. La clave es la misma distinción de la sección anterior: la
+      <strong>evolución biológica</strong> de las formas de vida (incluido el cuerpo humano) puede investigarse
+      científicamente, mientras que la <strong>infusión del alma racional</strong> es un acto directo de Dios
+      en un momento determinado.
+    </p>
+    <p>
+      Bajo este marco —propuesto y desarrollado por diversos teólogos y filósofos de inspiración tomista, y
+      compatible con Humani Generis— podrían haber existido poblaciones de homínidos biológicamente similares
+      al ser humano moderno <strong>antes</strong> del momento en que Dios creó e infundió la primera alma
+      espiritual, es decir, antes de que existiera el primer ser humano en el sentido teológico pleno: imagen
+      de Dios, capaz de relación moral y espiritual con su Creador. En ese marco, esas poblaciones anteriores no
+      serían "razas humanas preadánicas con alma", sino antepasados o parientes biológicos sin la dimensión
+      espiritual que define a "Adán" en sentido teológico. "Adán" marcaría así el comienzo de la humanidad en
+      sentido pleno —no necesariamente el primer organismo con anatomía de <em>Homo sapiens</em>.
+    </p>
+
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">No católico</span>
+        <h4>Teoría del intervalo (Gap Theory)</h4>
+        <p>
+          Una creación anterior, fallida o destruida, "borrada" antes de la creación de Adán en Génesis 1:2.
+          Es un recurso de origen protestante para reconciliar el registro fósil con una tierra joven; no tiene
+          respaldo en la tradición católica ni en el Magisterio.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Marco compatible</span>
+        <h4>Evolución corporal + infusión del alma</h4>
+        <p>
+          Poblaciones de homínidos biológicamente humanos (o muy similares) existen como resultado de procesos
+          evolutivos guiados por la providencia divina; "Adán" marca el momento de la creación directa del
+          alma racional —el inicio de la humanidad en sentido teológico pleno—. Compatible con Humani Generis
+          y con el lenguaje del "salto ontológico" de Juan Pablo II.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">Lo que es de fe vs. lo que es propuesta teológica</div>
+      <p>
+        <strong>De fe:</strong> el alma espiritual no es producto de la evolución, sino creación directa de
+        Dios; hubo un "Adán" —un comienzo real de la humanidad en sentido pleno, con una caída real.
+        <strong>Propuesta teológica de armonización, no definición dogmática:</strong> el marco
+        "evolución corporal + infusión del alma" como forma de situar los hallazgos paleoantropológicos. La
+        Iglesia no ha emitido un veredicto detallado sobre paleoantropología.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 07 — GÉNESIS 4-5 -->
+  <section class="section" id="genesis-4-5">
+    <div class="eyebrow">07 · Génesis 4-5</div>
+    <h2>Caín, Abel, Set... y la pregunta incómoda sobre los matrimonios</h2>
+    <p>
+      Génesis 4 narra el conflicto entre Caín y Abel —el primer fratricidio—, la condena y marca de Caín, y su
+      descendencia (constructores de ciudades, pastores, herreros, músicos). Génesis 4:25 introduce a Set,
+      nacido "en lugar de" Abel, cabeza de la línea genealógica que Génesis 5 desarrolla hasta Noé. Génesis 5
+      menciona, de paso, que Adán "tuvo hijos e hijas" además de Set —sin dar más detalles sobre ellos ni sobre
+      sus matrimonios.
+    </p>
+
+    <h3>La pregunta lógica</h3>
+    <p>
+      Si toda la humanidad desciende de una sola pareja —como sostiene el monogenismo (sección 04)— entonces,
+      por pura lógica, las primeras generaciones tuvieron que reproducirse entre hermanos o parientes muy
+      cercanos: no había nadie más con quien hacerlo. El texto no lo narra explícitamente, pero es una
+      consecuencia necesaria de sus propias premisas.
+    </p>
+
+    <div class="padre-card">
+      <span class="work">San Agustín · La Ciudad de Dios, Libro XV, cap. 16</span>
+      <span class="name">Necesidad en el origen, prohibición después</span>
+      <p>
+        San Agustín aborda esta cuestión de frente. Su argumento, resumido: al principio de la humanidad, dado
+        que no existía ninguna otra posibilidad para que la especie se multiplicara, el matrimonio entre
+        hermanos no constituía pecado, sino una necesidad impuesta por las circunstancias del momento. Una vez
+        que la población creció lo suficiente como para que existieran otras opciones, esas uniones se
+        volvieron innecesarias y pasaron a estar prohibidas —tanto por la repugnancia natural que con el tiempo
+        se desarrolla hacia ellas, como por una razón social: el matrimonio fuera del círculo familiar inmediato
+        sirve para extender los lazos de afecto y parentesco a un círculo social más amplio, en lugar de
+        concentrar varios vínculos de parentesco en las mismas personas.
+      </p>
+    </div>
+
+    <h3>¿Esto es "relativismo moral"?</h3>
+    <p>
+      No, en el sentido habitual de la palabra. No se trata de que "lo que es pecado dependa sin más de la
+      época". Se trata, más bien, de cómo la <strong>ley natural</strong> se aplica a unas circunstancias
+      radicalmente distintas —la única generación humana que, literalmente, no tenía otra opción— y de cómo la
+      <strong>ley positiva</strong> (divina, y más tarde mosaica) precisa después una norma para las
+      circunstancias ordinarias de la humanidad ya numerosa. La prohibición del incesto se codifica
+      explícitamente más adelante (cf. Levítico 18), una vez que la necesidad original había desaparecido por
+      completo.
+    </p>
+    <p>
+      Esta lógica —algo permitido o no sancionado en unas circunstancias originales irrepetibles, y luego
+      prohibido cuando esas circunstancias cesan— tiene un eco estructural (aunque no idéntico) en cómo Cristo
+      explica la tolerancia veterotestamentaria hacia la poligamia o el divorcio: "por la dureza de su corazón...
+      pero al principio no fue así" (Mt 19:8). En ambos casos, la Escritura reconoce que las "circunstancias del
+      principio" no son sin más la norma para todos los tiempos posteriores.
+    </p>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 08 — NEFILIM -->
+  <section class="section" id="nefilim">
+    <div class="eyebrow">08 · Génesis 6</div>
+    <h2>Los Nefilim: ¿ángeles caídos, gigantes, o algo más?</h2>
+    <p>
+      Génesis 6:1-4 es uno de los pasajes más enigmáticos de toda la Biblia: los "hijos de Dios" ven que las
+      "hijas de los hombres" son hermosas y toman mujeres entre ellas; de esas uniones nacen los
+      <strong>Nefilim</strong>, descritos como "hombres famosos" o "poderosos de la antigüedad". A continuación,
+      Dios limita la vida humana a 120 años, y el versículo siguiente (6:5) afirma que "la maldad del hombre
+      era grande en la tierra" —el detonante que lleva al Diluvio.
+    </p>
+
+    <h3>Dos grandes tradiciones interpretativas</h3>
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">Lectura angélica</span>
+        <h4>Los "Vigilantes"</h4>
+        <p>
+          "Hijos de Dios" = ángeles caídos que tomaron forma humana y se unieron a mujeres, originando una raza
+          híbrida de gigantes. Esta lectura aparece desarrollada en el Libro de Enoc (influyente en el judaísmo
+          del Segundo Templo, pero no canónico para los católicos) y deja huella en algunos escritores
+          cristianos tempranos —ciertos pasajes de San Justino Mártir parecen reflejarla—. Se ha relacionado
+          también con 2 Pedro 2:4 y Judas 6, que mencionan "ángeles que pecaron", aunque la interpretación
+          exacta de esos versículos también se discute.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Lectura setita / agustiniana</span>
+        <h4>La línea piadosa y la impía</h4>
+        <p>
+          "Hijos de Dios" = descendientes de Set (la línea piadosa); "hijas de los hombres" = descendientes de
+          Caín (la línea impía). Su mezcla representa la corrupción progresiva de la línea piadosa, explicando
+          la "gran maldad" de 6:5. Defendida por San Agustín (Ciudad de Dios XV) y San Juan Crisóstomo, en parte
+          como reacción a la lectura angélica: los ángeles son espíritus puros, sin cuerpo material para
+          "procrear" en sentido biológico, y aceptar lo contrario rozaba ideas que la Iglesia rechazaba en
+          otros contextos.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      Bajo cada lectura, "Nefilim" se entiende de forma distinta: <strong>gigantes literales</strong> de origen
+      angélico-humano (lectura angélica), o bien <strong>hombres poderosos, tiranos o "héroes" de gran
+      renombre</strong> —no necesariamente de estatura física descomunal— nacidos de la mezcla de las dos
+      líneas familiares (lectura setita).
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">Estado actual de la cuestión</div>
+      <p>
+        La Iglesia no ha definido dogmáticamente cuál interpretación es correcta: sigue siendo un tema de
+        exégesis abierta. La mayoría de los biblistas católicos de hoy lee Génesis 6:1-4 ante todo como un
+        <strong>puente narrativo</strong> dentro del género de "historia de los orígenes": su función es
+        explicar cómo la maldad humana llegó a tal punto que Dios decide el Diluvio, sin que el debate
+        angélico/setita sea imprescindible para captar ese mensaje central.
+      </p>
+    </div>
+
+    <p>
+      <strong>Sobre la canonicidad:</strong> el Libro de Enoc no forma parte del canon bíblico católico —aunque
+      la Epístola de Judas cita una tradición asociada a él—. Es útil como contexto histórico para entender
+      cómo se leía este pasaje en tiempos del Segundo Templo, pero no es una fuente doctrinal para los
+      católicos.
+    </p>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 09 — DILUVIO -->
+  <section class="section" id="diluvio">
+    <div class="eyebrow">09 · Génesis 6-9</div>
+    <h2>El Diluvio: juicio, misericordia y bautismo</h2>
+    <p>
+      Tras la sentencia sobre la maldad humana, Dios encarga a Noé construir un arca, embarcar a su familia y
+      a los animales, y sobrevivir a un diluvio que cubre "todas las altas montañas" durante una serie de
+      días y meses detallados con precisión narrativa. Al final, Noé ofrece un sacrificio, y Dios establece con
+      él —y con "toda carne"— la primera alianza explícita de la Biblia, con el arco iris como señal.
+    </p>
+
+    <h3>¿Universal o regional?</h3>
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">Lectura A</span>
+        <h4>Diluvio universal literal</h4>
+        <p>
+          Cubrió toda la tierra, todas las montañas, y extinguió toda vida terrestre fuera del arca. Fue la
+          lectura tradicional durante gran parte de la historia de la Iglesia. En tiempos modernos, algunos
+          intentos "catastrofistas" (geología del diluvio) han buscado evidencia geológica global de un evento
+          reciente de este tipo; hoy es una posición minoritaria, más asociada a corrientes "creacionistas" de
+          origen protestante que a la exégesis católica contemporánea.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Lectura B</span>
+        <h4>Evento regional, narración universalizada</h4>
+        <p>
+          Muchos biblistas católicos de hoy leen el relato como la versión bíblica —reformulada en clave
+          monoteísta— de tradiciones diluvianas muy difundidas en el Cercano Oriente Antiguo (p. ej., el relato
+          de Atrahasis o el diluvio de Gilgamesh, con notables paralelos estructurales), que probablemente
+          reflejan memorias de inundaciones catastróficas reales y localizadas, narradas con alcance
+          "universal" para transmitir verdades teológicas universales: el pecado generalizado, el juicio de
+          Dios, su misericordia hacia los justos y una alianza con toda la creación.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">Lo que es de fe</div>
+      <p>
+        Lo que la Iglesia sostiene como verdad teológica es la <strong>realidad</strong> del juicio divino sobre
+        el pecado, la salvación de un "resto" justo por la misericordia de Dios, y el establecimiento de una
+        alianza universal con la creación —no necesariamente la extensión geográfica o geológica exacta del
+        acontecimiento.
+      </p>
+    </div>
+
+    <h3>La tipología bautismal en los Padres</h3>
+    <p>
+      San Pedro ya ofrece la clave de lectura en el Nuevo Testamento (1 Pe 3:20-21): las aguas que destruyen a
+      los impíos son las mismas que salvan a Noé y su familia dentro del arca, prefigurando el Bautismo. Los
+      Padres desarrollan ampliamente esta tipología:
+    </p>
+    <div class="padre-card">
+      <span class="work">Tertuliano, San Cipriano, San Ambrosio, San Agustín — tradición común</span>
+      <span class="name">Arca = Iglesia; Diluvio = Bautismo</span>
+      <p>
+        El agua que destruye también salva a los que están "dentro" —en el arca, como en la Iglesia—. El
+        número de salvados (Noé y siete familiares, según el cómputo de 1 Pe 3:20) se lee simbólicamente en
+        clave del "octavo día": el día de la Resurrección, más allá del ciclo de los siete días de la primera
+        creación, es decir, el día de la nueva creación inaugurada en Cristo.
+      </p>
+    </div>
+
+    <div class="scale-wrap">
+      <div class="scale-labels"><span>Diluvio global literal</span><span>Evento regional, narración teológica universal</span></div>
+      <div class="scale-track"><div class="scale-marker" style="left:68%"></div></div>
+      <div class="scale-caption">El alcance geográfico no es de fe; la lectura regional con sentido teológico universal es hoy predominante.</div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 10 — BABEL -->
+  <section class="section" id="babel">
+    <div class="eyebrow">10 · Génesis 10-11</div>
+    <h2>La Tabla de las Naciones y la Torre de Babel</h2>
+    <p>
+      Génesis 10 —la llamada "Tabla de las Naciones"— enumera a los descendientes de Sem, Cam y Jafet, los
+      hijos de Noé, trazando el origen de los distintos pueblos conocidos por el autor sagrado. No pretende ser
+      una etnografía exhaustiva en sentido moderno, sino un mapa teológico-literario que afirma algo central:
+      <strong>todas las naciones comparten un único origen</strong>, y por tanto una misma dignidad fundamental.
+    </p>
+    <p>
+      Génesis 11 narra el episodio de la Torre de Babel: la humanidad, unida en un solo lugar y una sola
+      lengua, intenta "hacerse un nombre" construyendo una torre que llegue al cielo —un acto de
+      autoafirmación frente a Dios—; como respuesta, Dios confunde las lenguas y dispersa a los pueblos. La
+      mayoría de los exégetas católicos lee este relato como una <strong>etiología teológica</strong>: una
+      narración que explica "por qué el mundo es como es" —por qué hay tantas lenguas y los pueblos están
+      dispersos— más que el reportaje de un evento arquitectónico puntual.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">Un eco patrístico: Babel y Pentecostés</div>
+      <p>
+        Varios Padres conectan Babel con Pentecostés (Hch 2) como una suerte de "reversión": en Babel, la
+        confusión de lenguas dispersa a la humanidad por su orgullo; en Pentecostés, el Espíritu Santo permite
+        que personas de muchas lenguas distintas se entiendan entre sí, anunciando la reunión de la humanidad
+        dispersa en la Iglesia.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30" transform="rotate(0 30 30)"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 11 — PADRES Y SÍNTESIS -->
+  <section class="section" id="padres">
+    <div class="eyebrow">11 · Voces y síntesis</div>
+    <h2>Padres de la Iglesia y el espectro católico, de un vistazo</h2>
+    <p>
+      Una aclaración previa: los <strong>Padres Apostólicos</strong> en sentido estricto (Clemente de Roma,
+      Ignacio de Antioquía, Policarpo, la Didajé, la Epístola de Bernabé, el Pastor de Hermas) son textos muy
+      tempranos —finales del siglo I y siglo II— y, salvo excepciones como la lectura de los "seis días" en
+      Bernabé ya citada, no desarrollan una exégesis sistemática de Génesis 1-11 comparable a la de los Padres
+      posteriores. La riqueza exegética más amplia llega con los grandes Padres de los siglos III al V.
+    </p>
+
+    <div class="cards-grid">
+      <div class="padre-card">
+        <span class="work">s. II</span>
+        <span class="name">San Justino Mártir</span>
+        <p>Apologista temprano; algunos de sus escritos reflejan ecos de la tradición angélica sobre Génesis 6.</p>
+      </div>
+      <div class="padre-card">
+        <span class="work">s. II</span>
+        <span class="name">San Ireneo de Lyon</span>
+        <p>Teología de la recapitulación: Cristo como "nuevo Adán" que restaura lo que el primero perdió.</p>
+      </div>
+      <div class="padre-card">
+        <span class="work">s. III</span>
+        <span class="name">Orígenes</span>
+        <p>Exégesis fuertemente alegórica y espiritual, con menor interés en la literalidad histórica de los detalles narrativos.</p>
+      </div>
+      <div class="padre-card">
+        <span class="work">s. IV</span>
+        <span class="name">San Basilio de Cesarea</span>
+        <p>Hexaemeron: los seis días leídos de forma más histórica, al servicio de una reflexión moral y doctrinal.</p>
+      </div>
+      <div class="padre-card">
+        <span class="work">s. IV</span>
+        <span class="name">San Ambrosio de Milán</span>
+        <p>Hexameron, influido por San Basilio, con un marcado tono moral-alegórico.</p>
+      </div>
+      <div class="padre-card">
+        <span class="work">s. IV</span>
+        <span class="name">San Juan Crisóstomo</span>
+        <p>Homilías sobre el Génesis en la tradición exegética antioquena, más histórico-literal; defiende la lectura setita de Génesis 6.</p>
+      </div>
+      <div class="padre-card">
+        <span class="work">s. IV-V</span>
+        <span class="name">San Agustín de Hipona</span>
+        <p>La voz más influyente para la tradición latina: cauteloso con la literalidad de los "días" (De Genesi ad litteram), y referencia central sobre la caída, Caín y Set, los matrimonios entre hermanos, la lectura setita de los Nefilim y la tipología bautismal del Diluvio (La Ciudad de Dios).</p>
+      </div>
+    </div>
+
+    <h3>Tabla de síntesis: el espectro católico</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Tema</th><th>De fe (vinculante)</th><th>Posición mayoritaria hoy</th><th>Opinión minoritaria permitida</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="flag">Días de la creación</td>
+            <td>Creación libre, de la nada, todo es bueno</td>
+            <td>Marco literario / no cronológico</td>
+            <td>24 horas literales; día-era</td>
+          </tr>
+          <tr>
+            <td class="flag">Adán y Eva</td>
+            <td>Caída histórica real de "nuestros primeros padres"</td>
+            <td>Acontecimiento real; forma biológica abierta</td>
+            <td>Pareja literal exclusiva, sin más matices</td>
+          </tr>
+          <tr>
+            <td class="flag">Evolución</td>
+            <td>Alma creada directamente por Dios</td>
+            <td>Evolución teísta (cuerpo evolucionado)</td>
+            <td>Creacionismo estricto (no evolución)</td>
+          </tr>
+          <tr>
+            <td class="flag">Razas preadánicas</td>
+            <td>"Adán" = inicio real de la humanidad plena</td>
+            <td>Homínidos previos sin alma; "Adán" = infusión del alma</td>
+            <td>—(la Gap Theory no es católica)</td>
+          </tr>
+          <tr>
+            <td class="flag">Matrimonios entre hijos de Adán</td>
+            <td>Unidad de origen de la familia humana</td>
+            <td>Necesidad original, luego prohibición (Agustín)</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td class="flag">Nefilim (Gn 6)</td>
+            <td>—(no hay definición dogmática)</td>
+            <td>Puente narrativo hacia el Diluvio (setita o angélica)</td>
+            <td>Lectura angélica literal de gigantes híbridos</td>
+          </tr>
+          <tr>
+            <td class="flag">El Diluvio</td>
+            <td>Juicio, misericordia y alianza divina reales</td>
+            <td>Evento regional con narración universalizada</td>
+            <td>Diluvio global literal</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">Una nota final</div>
+      <p>
+        El hilo común de todo este recorrido es la fórmula del Catecismo citada al principio: "lenguaje
+        figurado" y "acontecimientos reales" a la vez. La Iglesia distingue con cuidado entre lo que pertenece
+        al núcleo revelado —Dios creador, la caída original, la dignidad del hombre como imagen de Dios, el
+        juicio y la misericordia divinos, la promesa de salvación— y los detalles de forma, número y
+        cronología, donde existe un espacio legítimo y antiguo —ya presente en los propios Padres de la
+        Iglesia— para la diversidad de lecturas. Como recordaba San Agustín en otro contexto, la Escritura no
+        pretende enseñarnos astronomía o geología, sino el camino hacia Dios.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mark-small" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+          <circle cx="30" cy="30" r="22"/>
+        </g>
+      </svg>
+    </div>
+    <p>Repaso teológico de Génesis 1-11 desde la fe católica — Magisterio, Catecismo y Padres de la Iglesia, con el espectro legítimo de interpretaciones.</p>
+  </footer>
+
+</main>
+
+<button id="backToTop" aria-label="Volver arriba">↑</button>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const menuToggle = document.getElementById('menuToggle');
+  menuToggle.addEventListener('click', () => {
+    const open = sidebar.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open);
+    menuToggle.textContent = open ? '✕' : '☰';
+  });
+
+  document.querySelectorAll('.toc-list a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 980) {
+        sidebar.classList.remove('open');
+        menuToggle.textContent = '☰';
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  const progressBar = document.getElementById('progressBar');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = (isFinite(scrolled) ? scrolled : 0) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  const sections = document.querySelectorAll('main .section, main .hero');
+  const links = document.querySelectorAll('.toc-list a');
+  const linkMap = {};
+  links.forEach(l => linkMap[l.getAttribute('href').slice(1)] = l);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        if (linkMap[id]) linkMap[id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  const backToTop = document.getElementById('backToTop');
+  document.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 600);
+  }, {passive:true});
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>

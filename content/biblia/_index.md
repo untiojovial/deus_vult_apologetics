@@ -16,3 +16,5 @@ Aqui trabajamos pasajes complejos con metodo: contexto, genero, lenguaje y tradi
 - [Mateo 28:19 - Autenticidad (Dossier)](/biblia/mateo-28-19-autenticidad-dossier/)
 - [Isaias 53 (Dossier)](/biblia/isaias-53-dossier/)
 - [Patristica NT (Dossier)](/biblia/patristica-nt-dossier/)
+- [Genesis Catolico (Dossier)](/biblia/genesis-catolico-dossier/)
+- [Juan 11 (Dossier)](/biblia/jn11-dossier/)

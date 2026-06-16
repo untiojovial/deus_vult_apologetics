@@ -21,3 +21,5 @@ No para acumular datos sin fin, sino para verificar afirmaciones con metodo.
 - [Concilios de Éfeso y Calcedonia (Dossier)](/historia/concilios-efeso-calcedonia-dossier/)
 - [Concilios de Constantinopla I, II y III (Dossier)](/historia/concilios-constantinopla-dossier/)
 - [Muhammad ibn Abdallah (Dossier)](/historia/muhammad-historia-dossier/)
+- [Autoria de los Evangelios (Dossier)](/historia/autoria-evangelios-dossier/)
+- [Crucifixion de Cristo - Testimonios Historicos (Dossier)](/historia/crucifixion-dossier/)

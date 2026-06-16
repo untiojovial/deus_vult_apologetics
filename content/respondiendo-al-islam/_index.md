@@ -15,3 +15,6 @@ aliases:
 - [Canon Biblia vs Quran (Dossier)](/respondiendo-al-islam/canon-biblia-quran-dossier/)
 - [Matrimonio Aisha (Dossier)](/respondiendo-al-islam/matrimonio-aisha-dossier/)
 - [Juicio Islámico (Dossier)](/respondiendo-al-islam/juicio-islamico-dossier/)
+- [Fue Jesus Musulman (Dossier)](/respondiendo-al-islam/fue-jesus-musulman-dossier/)
+- [Dilema Apostolico (Dossier)](/respondiendo-al-islam/dilema-apostolico-dossier/)
+- [Surah 4:82 - Falacia (Dossier)](/respondiendo-al-islam/surah-4-82-falacia-dossier/)

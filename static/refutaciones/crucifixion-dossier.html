@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier Apologético · La Crucifixión de Cristo: Testimonios Históricos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+:root {
+  --ink:       #1a1207;
+  --parchment: #f5eedd;
+  --aged:      #e8dcc4;
+  --deep:      #1a0a00;
+  --gold:      #8b6914;
+  --gold-lt:   #c49a28;
+  --crimson:   #7a1b1b;
+  --blood:     #5a0a0a;
+  --rule:      #c4a96a;
+  --rule-lt:   #d8c080;
+  --margin:    #5a4a2a;
+  --nav-bg:    #110800;
+  --nav-w:     268px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--deep);
+  font-family: 'EB Garamond', Georgia, serif;
+  color: var(--ink);
+}
+
+/* ═══ HAMBURGER ═══ */
+#toc-btn {
+  position: fixed;
+  top: 16px; left: 16px;
+  z-index: 400;
+  background: var(--nav-bg);
+  border: 1px solid var(--gold);
+  color: var(--gold-lt);
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 8px 13px 8px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.6);
+  transition: background 0.15s;
+  user-select: none;
+  line-height: 1;
+}
+#toc-btn:hover { background: #1f1000; }
+.hbars { display: flex; flex-direction: column; gap: 4px; }
+.hbars span {
+  display: block; width: 17px; height: 1.5px;
+  background: var(--gold-lt);
+  transition: transform 0.22s, opacity 0.22s;
+  transform-origin: center;
+}
+#toc-btn.is-open .hbars span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+#toc-btn.is-open .hbars span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#toc-btn.is-open .hbars span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+/* ═══ OVERLAY ═══ */
+#toc-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.52);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+#toc-overlay.is-open { opacity: 1; pointer-events: all; }
+
+/* ═══ SIDEBAR ═══ */
+#toc-panel {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--nav-w);
+  background: var(--nav-bg);
+  border-right: 2px solid var(--gold);
+  z-index: 350;
+  overflow-y: auto;
+  padding: 0 0 48px;
+  transform: translateX(calc(-1 * var(--nav-w) - 8px));
+  transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+  box-shadow: 6px 0 30px rgba(0,0,0,0.7);
+}
+#toc-panel.is-open { transform: translateX(0); }
+#toc-panel::-webkit-scrollbar { width: 3px; }
+#toc-panel::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+.toc-spacer { height: 60px; }
+.toc-title {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 4px;
+  color: var(--gold-lt);
+  text-transform: uppercase;
+  padding: 0 18px 12px;
+  border-bottom: 1px solid rgba(196,169,106,0.2);
+  margin-bottom: 4px;
+}
+.toc-group {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  padding: 13px 18px 3px;
+}
+#toc-panel a {
+  display: block;
+  padding: 7px 14px 7px 22px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11.5px;
+  color: rgba(220,200,155,0.72);
+  text-decoration: none;
+  line-height: 1.35;
+  border-left: 3px solid transparent;
+  transition: background 0.13s, color 0.13s, border-color 0.13s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#toc-panel a:hover {
+  color: var(--gold-lt);
+  background: rgba(196,169,106,0.08);
+  border-left-color: rgba(196,169,106,0.4);
+}
+#toc-panel a.active {
+  color: var(--gold-lt);
+  background: rgba(196,169,106,0.13);
+  border-left-color: var(--gold-lt);
+}
+
+/* ═══ MAIN ═══ */
+#main {
+  max-width: 880px;
+  margin: 0 auto;
+  background: var(--parchment);
+  min-height: 100vh;
+  box-shadow: 0 0 70px rgba(0,0,0,0.7);
+}
+
+/* ── COVER ── */
+.cover {
+  background: #0a0400;
+  padding: 68px 56px 56px;
+  text-align: center;
+  position: relative;
+  border-bottom: 6px double var(--gold);
+}
+.cover::before {
+  content: '';
+  position: absolute; inset: 12px;
+  border: 1px solid rgba(196,169,106,0.25);
+  pointer-events: none;
+}
+.cover-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: var(--gold-lt);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.cover-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #f0e4c0;
+  line-height: 1.14;
+  margin-bottom: 12px;
+}
+.cover-sub {
+  font-style: italic;
+  color: var(--rule);
+  font-size: 1.08rem;
+  margin-bottom: 32px;
+}
+.cover-verse {
+  display: inline-block;
+  font-style: italic;
+  color: rgba(240,228,192,0.88);
+  font-size: .93rem;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding: 10px 28px;
+  line-height: 1.75;
+}
+.ar-lg {
+  display: block;
+  direction: rtl;
+  font-size: 1.7rem;
+  color: var(--gold-lt);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  font-style: normal;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 48px 58px 44px;
+  border-bottom: 1px solid var(--rule);
+}
+section:last-child { border-bottom: none; }
+
+.sec-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: var(--blood);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--blood);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--rule);
+}
+h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #3d1a00;
+  margin: 24px 0 10px;
+}
+p { line-height: 1.78; margin-bottom: 14px; font-size: 1.01rem; }
+p:last-child { margin-bottom: 0; }
+
+/* ── BLOCKQUOTE ── */
+blockquote {
+  margin: 20px 0;
+  padding: 16px 20px 16px 30px;
+  background: var(--aged);
+  border-left: 4px solid var(--gold);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: #2a1a00;
+  position: relative;
+}
+blockquote::before {
+  content: '\201C';
+  font-size: 3rem;
+  color: var(--rule);
+  position: absolute;
+  top: -4px; left: 7px;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+.src {
+  display: block;
+  font-style: normal;
+  font-size: .77rem;
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--blood);
+  margin-top: 8px;
+  letter-spacing: .4px;
+}
+
+/* ── LATIN BLOCK ── */
+.la-block {
+  background: #f0e6d0;
+  border: 1px solid var(--rule);
+  padding: 14px 20px;
+  margin: 12px 0 6px;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #2a1a00;
+  line-height: 1.8;
+}
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .92rem; }
+thead tr { background: var(--blood); color: var(--aged); }
+thead th {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  text-align: left;
+}
+tbody tr:nth-child(odd)  { background: var(--parchment); }
+tbody tr:nth-child(even) { background: var(--aged); }
+td { padding: 9px 12px; line-height: 1.5; vertical-align: top; }
+td:first-child { font-family: 'Cinzel', serif; font-size: .82rem; color: var(--blood); font-weight: 600; }
+
+/* ── CARD ── */
+.card {
+  background: var(--aged);
+  border: 1px solid var(--rule);
+  padding: 18px 22px;
+  margin: 18px 0;
+}
+.card-lbl {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 10px;
+}
+
+/* ── VERDICT ── */
+.verdict {
+  background: var(--blood);
+  color: var(--aged);
+  padding: 24px 28px;
+  margin: 24px 0 0;
+  border-left: 5px solid var(--gold-lt);
+}
+.verdict-lbl {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: var(--gold-lt);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.verdict p { color: var(--aged); margin-bottom: 10px; }
+.verdict p:last-child { margin-bottom: 0; }
+.verdict em, .verdict i { color: #e8c88a; }
+.verdict .la, .verdict .gr, .verdict .ar { color: #d8b870; }
+.verdict strong { color: #f8ead8; }
+
+/* ── OBJECTION ── */
+.obj { margin: 22px 0; }
+.obj-q {
+  background: #f0e8d8;
+  border-left: 4px solid var(--blood);
+  padding: 12px 18px;
+  font-style: italic;
+  color: var(--blood);
+  font-size: .97rem;
+  line-height: 1.6;
+}
+.obj-q::before { content: '✦ Argumento islámico: '; font-style: normal; font-weight: 700; }
+.obj-r {
+  background: var(--aged);
+  border-left: 4px solid var(--gold);
+  padding: 12px 18px;
+  line-height: 1.72;
+  font-size: .97rem;
+  color: var(--ink);
+}
+.obj-r::before { content: '→ Refutación: '; font-weight: 700; color: var(--gold); }
+
+/* ── SYLLOGISM ── */
+.syllogism {
+  background: var(--aged);
+  border: 1.5px solid var(--gold);
+  padding: 20px 26px;
+  margin: 22px 0;
+}
+.syllogism-title {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.syllogism p { margin-bottom: 6px; font-size: .97rem; }
+.syllogism .conclusion { 
+  font-weight: 700; 
+  border-top: 1px solid var(--rule); 
+  padding-top: 8px; 
+  margin-top: 8px; 
+  color: var(--blood);
+}
+
+/* ── WITNESS GRID ── */
+.wg { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; }
+.wc { background: var(--aged); border: 1px solid var(--rule); padding: 14px 16px; }
+.wc-name {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 4px;
+}
+.wc-date {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.wc p { font-size: .88rem; line-height: 1.56; margin: 0; }
+
+/* ── INLINE LANG ── */
+.la { font-style: italic; color: #3a2a00; }
+.gr { font-style: italic; color: #1a2a10; }
+.ar { direction: rtl; font-size: 1.15rem; display: inline-block; line-height: 1.7; color: var(--blood); }
+.he { direction: rtl; font-size: 1.12rem; color: var(--crimson); font-weight: 600; display: inline-block; line-height: 1.7; }
+strong { font-weight: 700; color: #2a1000; }
+
+/* ── HL ── */
+.hl {
+  border: 1.5px solid var(--gold);
+  padding: 14px 20px;
+  margin: 16px 0;
+  background: #f5ead0;
+  font-size: .96rem;
+  line-height: 1.72;
+}
+
+/* ── FOOTNOTE ── */
+.footnote {
+  border-top: 1px solid var(--rule);
+  margin-top: 32px;
+  padding-top: 14px;
+  font-size: .79rem;
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--margin);
+  line-height: 1.65;
+}
+
+@media (max-width: 680px) {
+  .cover { padding: 40px 22px 32px; }
+  .cover-title { font-size: 1.4rem; }
+  section { padding: 32px 20px 28px; }
+  .wg { grid-template-columns: 1fr; }
+  h2 { font-size: 1.08rem; }
+  #main { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ BOTÓN ═══ -->
+<button id="toc-btn" aria-controls="toc-panel" aria-expanded="false" aria-label="Abrir índice">
+  <span class="hbars" aria-hidden="true"><span></span><span></span><span></span></span>
+  Índice
+</button>
+<div id="toc-overlay" aria-hidden="true"></div>
+
+<!-- ═══ SIDEBAR ═══ -->
+<nav id="toc-panel" aria-label="Índice">
+  <div class="toc-spacer"></div>
+  <div class="toc-title">Contenido</div>
+
+  <div class="toc-group">Introducción</div>
+  <a href="#quran">I. La posición islámica</a>
+  <a href="#metodologia">II. Metodología histórica</a>
+
+  <div class="toc-group">Fuentes Paulinas y NT</div>
+  <a href="#pablo">III. Pablo de Tarso (c. 35 d.C.)</a>
+  <a href="#evangelios">IV. Los Evangelios</a>
+  <a href="#credos">V. Credo del NT</a>
+
+  <div class="toc-group">Fuentes Romanas</div>
+  <a href="#tacito">VI. Tácito — Anales XV.44</a>
+  <a href="#plinio">VII. Plinio el Joven — Ep. X.96</a>
+  <a href="#luciano">VIII. Luciano de Samósata</a>
+
+  <div class="toc-group">Fuentes Judías</div>
+  <a href="#josefo">IX. Flavio Josefo — Ant. 20.9.1</a>
+  <a href="#talmud">X. Tradición talmúdica</a>
+
+  <div class="toc-group">Fuentes Siríacas y Paganas</div>
+  <a href="#mara">XI. Mara bar Serapión</a>
+  <a href="#celsus">XII. Celso el Filósofo</a>
+
+  <div class="toc-group">Arqueología</div>
+  <a href="#arqueologia">XIII. Evidencia arqueológica</a>
+
+  <div class="toc-group">Consenso Académico</div>
+  <a href="#consenso">XIV. Consenso historiográfico</a>
+
+  <div class="toc-group">Silogismos</div>
+  <a href="#silogismos">XV. Silogismos contra Q 4:157</a>
+  <a href="#objeciones">XVI. Objeciones y refutaciones</a>
+  <a href="#objeciones" style="padding-left:32px;font-size:10.5px;">↳ Ilusión divina: el Dilema Apostólico</a>
+  <a href="#objeciones" style="padding-left:32px;font-size:10.5px;">↳ El sustituto: ¿Judas u otro?</a>
+  <a href="#conclusion">Conclusión</a>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<div id="main">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Dossier Apologético · Historia y Cristología</div>
+  <h1 class="cover-title">La Crucifixión de Cristo:<br>Testimonios Históricos</h1>
+  <p class="cover-sub">Fuentes romanas, judías, siríacas, paganas y neotestamentarias en confrontación con la negación islámica</p>
+  <div class="cover-verse">
+    <span class="ar-lg">وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَٰكِن شُبِّهَ لَهُمْ</span>
+    <em>«Y no lo mataron ni lo crucificaron, sino que se les hizo parecer así»</em><br>
+    <span style="font-size:.78rem;color:var(--rule);">Corán 4:157 — La afirmación que toda la evidencia histórica antigua refuta</span>
+  </div>
+</div>
+
+<!-- I -->
+<section id="quran">
+  <div class="sec-label">Sección I</div>
+  <h2>La Posición Islámica: Corán 4:157–158</h2>
+
+  <p>El Corán, revelado según la tradición islámica al Profeta Mahoma entre 610 y 632 d.C. — es decir, más de <strong>seiscientos años después de los eventos</strong> en cuestión — afirma en la sura An-Nisāʾ:</p>
+
+  <div class="card">
+    <div class="card-lbl">Corán 4:157–158 — Texto árabe y traducción</div>
+    <p style="direction:rtl;font-size:1.3rem;line-height:2.1;color:var(--blood);text-align:right;">
+      وَقَوْلِهِمْ إِنَّا قَتَلْنَا الْمَسِيحَ عِيسَى ابْنَ مَرْيَمَ رَسُولَ اللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَٰكِن شُبِّهَ لَهُمْ ۚ وَإِنَّ الَّذِينَ اخْتَلَفُوا فِيهِ لَفِي شَكٍّ مِّنْهُ ۚ مَا لَهُم بِهِ مِنْ عِلْمٍ إِلَّا اتِّبَاعَ الظَّنِّ ۚ وَمَا قَتَلُوهُ يَقِينًا
+    </p>
+    <p style="margin-top:14px;font-style:italic;color:#2a1a00;line-height:1.75;">"Y por decir: 'Matamos al Mesías, Jesús hijo de María, el Mensajero de Alá.' No lo mataron ni lo crucificaron, sino que se les hizo parecer así. Los que discrepan sobre él están llenos de dudas al respecto; no tienen conocimiento de él, solo siguen suposiciones. Ciertamente no lo mataron."<br>
+    <span style="font-style:normal;font-size:.8rem;color:var(--blood);">— Corán 4:157 (traducción Sahih International)</span></p>
+  </div>
+
+  <p>La doctrina estándar del Islam derivada de este versículo afirma que: (1) Jesús no fue crucificado; (2) alguien que se le parecía (<em>shabah</em>) fue crucificado en su lugar; (3) Jesús fue elevado vivo al cielo por Alá. Esta posición pone al Islam en contradicción directa no solo con el cristianismo, sino con el consenso de la historiografía secular antigua. Lo que sigue es el inventario exhaustivo y verificado de ese testimonio histórico.</p>
+</section>
+
+<!-- II -->
+<section id="metodologia">
+  <div class="sec-label">Sección II</div>
+  <h2>Metodología: Criterios Historiográficos</h2>
+
+  <p>La historia antigua evalúa la fiabilidad de un testimonio según criterios académicos estándar. Aplicamos los mismos criterios a las fuentes sobre la crucifixión:</p>
+
+  <table>
+    <thead><tr><th>Criterio</th><th>Descripción</th><th>Aplicación al caso</th></tr></thead>
+    <tbody>
+      <tr><td>Proximidad temporal</td><td>¿Qué tan cercano al evento es el testimonio?</td><td>El credo de Pablo data de 3–5 años post-crucifixión</td></tr>
+      <tr><td>Independencia de fuentes</td><td>¿Son las fuentes independientes entre sí?</td><td>Romana, judía, siríaca, pagana y cristiana — todas independientes</td></tr>
+      <tr><td>Criterio de embarazo</td><td>¿El autor incluye datos que le resultan incómodos?</td><td>Tácito y Josefo mencionan la crucifixión sin simpatía</td></tr>
+      <tr><td>Criterio de múltiple atestación</td><td>¿Aparece en múltiples fuentes independientes?</td><td>Sí: al menos seis tradiciones independientes</td></tr>
+      <tr><td>Coherencia contextual</td><td>¿Encaja en el contexto histórico conocido?</td><td>La crucifixión romana en Palestina bajo Pilato es históricamente ordinaria</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Nota metodológica</div>
+    <p>El presente dossier cita <em>únicamente</em> fuentes que han podido verificarse directamente. Las citas en latín, griego y siríaco se reproducen del texto original o de ediciones críticas académicas estándar. Cuando existe debate académico sobre la autenticidad de un pasaje, se señala explícitamente.</p>
+  </div>
+</section>
+
+<!-- III -->
+<section id="pablo">
+  <div class="sec-label">Sección III · Fuente Cristiana Primitiva</div>
+  <h2>Pablo de Tarso: El Credo Más Antiguo (c. 35 d.C.)</h2>
+
+  <p>Pablo de Tarso es el único autor del Nuevo Testamento que proporciona una fuente datable con certeza. Su Primera Carta a los Corintios fue escrita alrededor de 54–55 d.C., y en el capítulo 15 transmite un credo pre-paulino que los especialistas identifican como formulación litúrgica anterior a Pablo:</p>
+
+  <div class="card">
+    <div class="card-lbl">1 Corintios 15:3–5 — El credo (texto griego y traducción)</div>
+    <p style="font-size:1.12rem;color:#1a2a10;line-height:1.95;" class="gr">
+      παρέδωκα γὰρ ὑμῖν ἐν πρώτοις, ὃ καὶ παρέλαβον, ὅτι Χριστὸς ἀπέθανεν ὑπὲρ τῶν ἁμαρτιῶν ἡμῶν κατὰ τὰς γραφάς, καὶ ὅτι ἐτάφη, καὶ ὅτι ἐγήγερται τῇ ἡμέρᾳ τῇ τρίτῃ κατὰ τὰς γραφάς, καὶ ὅτι ὤφθη Κηφᾷ, εἶτα τοῖς δώδεκα·
+    </p>
+    <p style="margin-top:12px;font-style:italic;color:#2a1a00;line-height:1.75;">«Porque os transmití en primer lugar lo que también recibí: que Cristo <strong>murió</strong> por nuestros pecados según las Escrituras, que fue <strong>sepultado</strong>, que resucitó al tercer día según las Escrituras, y que apareció a Cefas y luego a los doce.»<br>
+    <span style="font-style:normal;font-size:.8rem;color:var(--blood);">— 1 Corintios 15:3–5 (NA28)</span></p>
+  </div>
+
+  <h3>Por qué este credo es evidencia histórica excepcional</h3>
+
+  <p><strong>1. Datación del credo, no de la carta.</strong> El propio texto revela que Pablo <em>transmite</em> (<span class="gr">παρέδωκα</span>, <em>paredōka</em>) lo que él mismo <em>recibió</em> (<span class="gr">παρέλαβον</span>, <em>parelabon</em>). Estos dos verbos son el vocabulario técnico de la transmisión oral rabínica de tradición sagrada. El credo es anterior a la carta. La mayoría de especialistas —incluido Bart Ehrman, que no es cristiano— lo fecha entre 32 y 38 d.C., es decir, entre dos y ocho años después de la crucifixión.</p>
+
+  <p><strong>2. Pablo conoció a testigos directos.</strong> En Gálatas 1:18-19, Pablo narra que tres años después de su conversión (c. 33–36 d.C.) viajó a Jerusalén y estuvo quince días con Pedro y también vio a Santiago, el hermano de Jesús. Este es el contexto biográfico en el que recibió el credo.</p>
+
+  <p><strong>3. Semitismos en el credo.</strong> Los especialistas han identificado en el texto original helenismos que traducen literalmente construcciones arameas («murió por nuestros pecados», «según las Escrituras» con la preposición típica del arameo), lo que sugiere un credo formulado originalmente en arameo en Jerusalén y posteriormente traducido al griego. Esto lleva el origen del credo a la comunidad de Jerusalén en los años inmediatamente posteriores a la crucifixión.</p>
+
+  <blockquote>
+    «En 1 Corintios 15:3, Pablo usa las palabras "recibí" y "transmití", que en griego son paralelas a los términos técnicos hebreos <em>qibbel</em> y <em>masar</em>, utilizados por los rabinos para la transmisión de tradición sagrada. Esto indica que Pablo está transmitiendo material que recibió de los apóstoles.»
+    <span class="src">— James D. G. Dunn, <em>Jesus Remembered</em>, Eerdmans, 2003, p. 855</span>
+  </blockquote>
+
+  <blockquote>
+    «La tradición que Pablo transmite en 1 Cor 15:3ss puede ser considerada como la declaración de testigos oculares… Es difícil imaginar que este credo fuera otro que una formulación primitiva de la iglesia de Jerusalén.»
+    <span class="src">— Pinchas Lapide (erudito judío ortodoxo), <em>The Resurrection of Jesus: A Jewish Perspective</em>, Augsburg, 1983, p. 97</span>
+  </blockquote>
+
+  <p><strong>La muerte de Cristo es el primer artículo del credo.</strong> El credo no menciona el modo exacto de la muerte, pero el Evangelio de Marcos (el más antiguo, c. 65–70 d.C.) y todos los demás evangelistas son unánimes: fue crucifixión. Pablo también lo afirma explícitamente en múltiples lugares: <span class="gr">Ἰησοῦν Χριστὸν καὶ τοῦτον ἐσταυρωμένον</span> («Jesucristo, y a este crucificado», 1 Cor 2:2).</p>
+</section>
+
+<!-- IV -->
+<section id="evangelios">
+  <div class="sec-label">Sección IV · Fuentes Evangélicas</div>
+  <h2>Los Evangelios: Cuatro Testimonios Independientes</h2>
+
+  <p>Los cuatro evangelios canónicos —Marcos (c. 65–70 d.C.), Mateo (c. 80–85 d.C.), Lucas (c. 80–85 d.C.) y Juan (c. 90–95 d.C.)— son unánimes en la crucifixión y recogen distintas tradiciones independientes que convergen en los mismos hechos centrales:</p>
+
+  <table>
+    <thead><tr><th>Evangelio</th><th>Fecha aprox.</th><th>Texto clave sobre crucifixión</th><th>Peculiaridad</th></tr></thead>
+    <tbody>
+      <tr><td>Marcos 15:24–25</td><td>c. 65–70 d.C.</td><td>«Y lo crucificaron» (<span class="gr">καὶ σταυροῦσιν αὐτόν</span>)</td><td>Más antiguo; fuente de Mateo y Lucas</td></tr>
+      <tr><td>Mateo 27:35</td><td>c. 80–85 d.C.</td><td>«Y después de crucificarle…»</td><td>Añade el cumplimiento del Salmo 22</td></tr>
+      <tr><td>Lucas 23:33</td><td>c. 80–85 d.C.</td><td>«Cuando llegaron al lugar llamado La Calavera, le crucificaron»</td><td>Fuente independiente de Marcos (L)</td></tr>
+      <tr><td>Juan 19:18</td><td>c. 90–95 d.C.</td><td>«Donde le crucificaron, y con él a otros dos»</td><td>Tradición joánica independiente; detalle del costado (19:34)</td></tr>
+    </tbody>
+  </table>
+
+  <p>El criterio académico de <strong>múltiple atestación independiente</strong> es uno de los más sólidos en historiografía. Los estudiosos identifican al menos cuatro fuentes literarias distintas en los evangelios: Marcos, Q (fuente compartida por Mateo y Lucas), L (material exclusivo de Lucas) y J (tradición joánica). Todas atestiguan la crucifixión.</p>
+</section>
+
+<!-- V -->
+<section id="credos">
+  <div class="sec-label">Sección V · Credos del Nuevo Testamento</div>
+  <h2>Credos Pre-Canónicos: La Muerte en la Liturgia Primitiva</h2>
+
+  <p>Además de 1 Cor 15:3–5, el NT contiene otros fragmentos que los especialistas identifican como credos o himnos litúrgicos anteriores a los textos que los contienen:</p>
+
+  <div class="card">
+    <div class="card-lbl">Filipenses 2:8 — Himno pre-paulino</div>
+    <p style="font-size:1.05rem;font-style:italic;color:#2a1a00;line-height:1.8;">«Y hallándose en condición de hombre, se humilló a sí mismo, haciéndose obediente hasta la muerte, <strong>y muerte de cruz</strong>.» (<span class="gr">θανάτου δὲ σταυροῦ</span>)</p>
+    <p style="font-size:.8rem;color:var(--blood);margin-top:6px;">— Flp 2:8. El himno cristológico de 2:6–11 es identificado por la crítica como pre-paulino (Ernst Käsemann, Ralph Martin)</p>
+  </div>
+
+  <div class="card">
+    <div class="card-lbl">Gálatas 3:1 — Lenguaje visual de la crucifixión</div>
+    <p style="font-size:1.05rem;font-style:italic;color:#2a1a00;line-height:1.8;">«¡Gálatas insensatos! ¿Quién os ha hechizado a vosotros, ante cuyos ojos Jesucristo fue presentado con claridad como crucificado?» (<span class="gr">οἷς κατ᾽ ὀφθαλμοὺς Ἰησοῦς Χριστὸς προεγράφη ἐσταυρωμένος</span>)</p>
+    <p style="font-size:.8rem;color:var(--blood);margin-top:6px;">— Pablo escribe c. 48–55 d.C. La crucifixión es presuposición conocida por la comunidad</p>
+  </div>
+
+  <p>La carta a los Gálatas es fechada por la casi totalidad de los especialistas entre 48 y 55 d.C. Pablo presupone que sus lectores en Galacia (Asia Menor) conocen la crucifixión como un hecho público y vivido, no como doctrina nueva. Si la crucifixión hubiera sido una narración inventada o una confusión de identidades, Pablo —que persiguió a los cristianos antes de convertirse y conoció a testigos directos— habría sido el primero en saberlo.</p>
+</section>
+
+<!-- VI -->
+<section id="tacito">
+  <div class="sec-label">Sección VI · Fuente Romana Pagana</div>
+  <h2>Tácito — <em>Anales</em> XV.44 (c. 116 d.C.)</h2>
+
+  <p>Publio Cornelio Tácito (c. 56–120 d.C.) es uno de los historiadores más rigurosos y fiables de la antigüedad clásica. Su obra <em>Anales</em>, que narra los reinados de los emperadores desde Tiberio hasta Nerón, contiene el siguiente pasaje:</p>
+
+  <div class="la-block">
+    «<em>auctor nominis eius Christus Tiberio imperitante per procuratorem Pontium Pilatum supplicio adfectus erat; repressaque in praesens exitiabilis superstitio rursum erumpebat, non modo per Iudaeam, originem eius mali, sed per urbem etiam, quo cuncta undique atrocia aut pudenda confluunt celebranturque.</em>»
+  </div>
+
+  <blockquote>
+    «El fundador de este nombre, Cristo, había sido ejecutado con la pena capital durante el reinado de Tiberio por el procurador Poncio Pilato; y la perniciosa superstición, aunque suprimida por el momento, de nuevo irrumpía no solo en Judea, el origen de ese mal, sino también en la ciudad [Roma], donde todas las cosas horribles y vergonzosas de todas partes confluyen y se celebran.»
+    <span class="src">— Tácito, <em>Annales</em> XV.44.3 (traducción del latín original; texto del códice Mediceo II, Biblioteca Medicea Laurenziana)</span>
+  </blockquote>
+
+  <h3>Análisis y valor del testimonio</h3>
+
+  <p><strong>Autenticidad.</strong> La inmensa mayoría de los clasicistas considera auténtico este pasaje. El texto está preservado en el Códice Mediceo II (siglo XI), único manuscrito superviviente de los libros XI–XVI de los <em>Anales</em>. El estilo, vocabulario y actitud hostil hacia los cristianos son perfectamente taciteos. El argumento de interpolación cristiana propuesto por Richard Carrier (<em>Vigiliae Christianae</em> 68, 2014) no ha ganado aceptación mayoritaria entre clasicistas: ningún cristiano habría inventado una descripción tan negativa («perniciosa superstición», «males horribles y vergonzosos»).</p>
+
+  <p><strong>Lo que Tácito afirma:</strong> (1) Cristo fue ejecutado durante el reinado de Tiberio (14–37 d.C.); (2) fue ejecutado por el procurador Poncio Pilato; (3) la «superstición» cristiana surgió en Judea y se extendió a Roma. Tácito era un senador romano de alto rango, hostil al cristianismo, con acceso a archivos imperiales. No tiene ningún motivo para afirmar la ejecución de Cristo si no fuera un hecho conocido.</p>
+
+  <p><strong>El término <span class="la">supplicio adfectus</span>.</strong> Esta expresión latina (<em>supplicio adficere</em>) designa la aplicación de la pena capital en su sentido más riguroso. Para un romano, en este contexto provincial, la pena capital aplicada por un procurador a un líder judío era la crucifixión — el modo estándar de ejecución romana para no ciudadanos convictos de sedición. Tácito no usa el término <span class="la">crucifixus</span> pero la fórmula equivale a ello en el contexto histórico.</p>
+</section>
+
+<!-- VII -->
+<section id="plinio">
+  <div class="sec-label">Sección VII · Fuente Romana Pagana</div>
+  <h2>Plinio el Joven — <em>Epistulae</em> X.96 (c. 111–113 d.C.)</h2>
+
+  <p>Cayo Plinio Cecilio Segundo (61/62 – c. 112 d.C.), gobernador romano de Bitinia-Ponto, escribió al Emperador Trajano solicitando instrucciones sobre cómo tratar a los cristianos. La carta es de autenticidad no disputada:</p>
+
+  <div class="la-block">
+    «<em>…affirmabant autem hanc fuisse summam vel culpae suae vel erroris, quod essent soliti stato die ante lucem convenire, carmenque Christo quasi deo dicere secum invicem…</em>»
+  </div>
+
+  <blockquote>
+    «Afirmaban que esto había sido la suma de su culpa o error: que solían reunirse en un día fijo antes del amanecer y cantar antifónicamente un himno a Cristo como si fuera un dios [<em>Christo quasi deo</em>], y obligarse con juramento — no a cometer crimen alguno, sino a no robar, no cometer latrocinio ni adulterio, no faltar a su palabra, no negar un depósito cuando se les reclamara.»
+    <span class="src">— Plinio el Joven, <em>Epistulae</em> X.96.7 (texto de Plinio, <em>Epistularum Libri Decem</em>, ed. R. A. B. Mynors, Oxford 1963)</span>
+  </blockquote>
+
+  <h3>Relevancia para la crucifixión</h3>
+
+  <p>Plinio no menciona la crucifixión explícitamente, pero su carta demuestra varios hechos cruciales:</p>
+
+  <p><strong>1.</strong> Hacia 111–113 d.C. hay comunidades cristianas establecidas en Bitinia-Ponto que adoran a Cristo «como si fuera un dios» — lo que presupone la existencia y muerte de Cristo como hecho histórico conocido.</p>
+
+  <p><strong>2.</strong> Los ex-cristianos que abjuraron estaban dispuestos a «maldecir a Cristo» (<span class="la">male dicerent Christo</span>), prueba de que Cristo era una persona histórica real para sus contemporáneos, no un ser mítico.</p>
+
+  <p><strong>3.</strong> La carta es independiente de cualquier fuente cristiana y refleja el conocimiento que Roma tenía de la existencia de Cristo. Un gobernador romano que investiga a los cristianos en una provincia del Asia Menor entre 111 y 113 d.C. confirma la existencia y muerte de Cristo como punto de partida no cuestionado.</p>
+</section>
+
+<!-- VIII -->
+<section id="luciano">
+  <div class="sec-label">Sección VIII · Fuente Griega Pagana</div>
+  <h2>Luciano de Samósata — <em>De Morte Peregrini</em> §11–13 (c. 165 d.C.)</h2>
+
+  <p>Luciano de Samósata (c. 115–200 d.C.) fue un satírico sirio-griego, pagano y hostil al cristianismo. En su obra <em>Sobre la Muerte de Peregrino</em>, al describir a un ex-cristiano que abusó de la generosidad de las comunidades cristianas, escribe:</p>
+
+  <blockquote>
+    «Además, su primer legislador los persuadió de que una vez que transgredieran negando los dioses griegos, serían todos hermanos los unos de los otros después de haberlo transgredido, adorando a <strong>ese sofista crucificado</strong> y viviendo bajo sus leyes.»
+    <span class="src">— Luciano, <em>De Morte Peregrini</em> §13 (traducción de A. M. Harmon, Loeb Classical Library, vol. 302, 1936, p. 15)</span>
+  </blockquote>
+
+  <blockquote>
+    «El hombre que fue <strong>crucificado en Palestina</strong> porque introdujo este nuevo culto en el mundo.»
+    <span class="src">— Luciano, <em>De Morte Peregrini</em> §11 (misma edición Loeb)</span>
+  </blockquote>
+
+  <h3>Análisis del testimonio</h3>
+
+  <p>Luciano llama a Jesús «sofista crucificado» (<span class="gr">ἀνεσκολοπισμένος σοφιστής</span>). El término griego usado para la crucifixión, <span class="gr">ἀνεσκολοπίσθη</span> (<em>anaskolopisthē</em>), deriva de <span class="gr">σκόλοψ</span> (estaca, madero), el término técnico para la crucifixión en griego helenístico. Luciano:</p>
+
+  <p>— Era pagano y no tenía ningún motivo para afirmar la crucifixión si no fuera un hecho conocido.<br>
+  — Era satírico: su descripción burlona («sofista crucificado») presupone que sus lectores conocen el hecho.<br>
+  — Localiza la crucifixión en Palestina, coherente con todos los demás testimonios.<br>
+  — Escribe para una audiencia culta griega que debía reconocer la referencia.</p>
+</section>
+
+<!-- IX -->
+<section id="josefo">
+  <div class="sec-label">Sección IX · Fuente Judía</div>
+  <h2>Flavio Josefo — <em>Antigüedades</em> 20.9.1 (c. 93–94 d.C.)</h2>
+
+  <p>Flavio Josefo (37 – c. 100 d.C.) fue un historiador judío del siglo I que escribió en griego. Hay dos pasajes que mencionan a Jesús. El segundo — <em>Antigüedades</em> 20.9.1 — es considerado auténtico por la gran mayoría de los especialistas:</p>
+
+  <div class="card">
+    <div class="card-lbl">Flavio Josefo, <em>Antiquitates Iudaicae</em> 20.200 — Texto griego</div>
+    <p style="font-size:1.1rem;color:#1a2a10;line-height:1.9;" class="gr">
+      ἀδελφὸν Ἰησοῦ τοῦ λεγομένου Χριστοῦ, Ἰάκωβος ὄνομα αὐτῷ
+    </p>
+    <p style="margin-top:10px;font-style:italic;color:#2a1a00;line-height:1.75;">«…el hermano de Jesús, llamado Cristo, cuyo nombre era Santiago [Jacobo]…»<br>
+    <span style="font-style:normal;font-size:.8rem;color:var(--blood);">— Josefo, <em>Ant.</em> 20.200; texto griego del Codex Ambrosianus F 128</span></p>
+  </div>
+
+  <h3>Autenticidad y valor</h3>
+
+  <p>Este pasaje, a diferencia del más famoso <em>Testimonium Flavianum</em> (Ant. 18.63–64, cuya autenticidad en su forma actual es disputada), es aceptado como auténtico por la gran mayoría de los especialistas. El testimonio de la Oxford University Press (John P. Meier, <em>A Marginal Jew</em>; Robert Van Voorst, <em>Jesus Outside the New Testament</em>) es unánime en su autenticidad. Las razones:</p>
+
+  <p>— Se encuentra en los tres principales manuscritos griegos de las <em>Antigüedades</em> libro 20.<br>
+  — Es citado por Eusebio de Cesarea (c. 313 d.C.) con acceso directo a los manuscritos.<br>
+  — Un interpolador cristiano habría utilizado títulos cristológicos más explícitos.<br>
+  — Josefo habla de Jesús con la fórmula <span class="gr">τοῦ λεγομένου Χριστοῦ</span> («llamado Cristo»), sin afirmar su mesianismo — precisamente la cautela de un judío no cristiano.</p>
+
+  <p>Este pasaje confirma: (1) la existencia histórica de Jesús; (2) que era conocido como «el Cristo» o «llamado Cristo»; (3) que tenía un hermano llamado Santiago. Santiago fue martirizado en c. 62 d.C. — es decir, décadas después de la crucifixión de Jesús, y su propio martirio implica que él también creía que su hermano había muerto y resucitado.</p>
+
+  <h3>El Testimonium Flavianum (Ant. 18.63–64): Uso cauto</h3>
+  <p>El famoso <em>Testimonium</em> de Ant. 18 («Era Jesús un hombre sabio, si es que se le puede llamar hombre») existe en una versión que la mayoría de especialistas considera interpolada en su forma actual por un copista cristiano. Sin embargo, numerosos académicos (John P. Meier, Louis Feldman, Graham Stanton) sostienen que hay un texto original auténtico subyacente, parcialmente modificado. Dado el debate, el presente dossier no lo cita como prueba primaria.</p>
+</section>
+
+<!-- X -->
+<section id="talmud">
+  <div class="sec-label">Sección X · Fuente Judía</div>
+  <h2>La Tradición Talmúdica: Testimonio Rabínico (s. II–V d.C.)</h2>
+
+  <p>El Talmud babilónico contiene varias referencias a Jesús que, aunque tardías en su redacción final, reflejan tradiciones anteriores. La más relevante para nuestros propósitos es:</p>
+
+  <div class="card">
+    <div class="card-lbl">Talmud babilónico, Sanedrín 43a — Texto arameo y traducción</div>
+    <p style="direction:rtl;font-size:1.2rem;line-height:2;color:var(--blood);">בְּעֶרֶב פֶּסַח תְּלָאוּהוּ לְיֵשׁוּ הַנּוֹצְרִי</p>
+    <p style="margin-top:10px;font-style:italic;color:#2a1a00;line-height:1.75;">«En la víspera de la Pascua colgaron [ejecutaron] a Jesús el Nazareno.»<br>
+    <span style="font-style:normal;font-size:.8rem;color:var(--blood);">— Talmud babilónico, Sanedrín 43a (edición Vilna; el verbo hebreo תלה, <em>talah</em>, «colgar», se usaba para la crucifixión)</span></p>
+  </div>
+
+  <h3>Importancia del testimonio talmúdico</h3>
+
+  <p>Los rabinos del Talmud eran <strong>adversarios del cristianismo</strong>, no sus defensores. Su intención era refutar las afirmaciones cristianas, no confirmarlas. Sin embargo, ni el Talmud ni ningún texto rabínico antiguo niega la ejecución de Jesús. Intentan explicarla como una muerte merecida («fue colgado porque practicó hechicería y llevó a Israel al error»), pero no niegan que ocurrió. Este es un caso perfecto del <strong>criterio de embarazo</strong>: un adversario que podría beneficiarse de negar el hecho, en cambio lo confirma implícitamente.</p>
+
+  <p>El verbo arameo-hebreo <span class="he">תָּלָה</span> (<em>talah</em>, «colgar») era usado en la literatura rabínica para designar la ejecución por crucifixión, en referencia a Deuteronomio 21:22–23 («el que es colgado en un madero»), un texto que Pablo cita en Gálatas 3:13 en referencia a la crucifixión de Jesús.</p>
+</section>
+
+<!-- XI -->
+<section id="mara">
+  <div class="sec-label">Sección XI · Fuente Siríaca Pagana</div>
+  <h2>Mara bar Serapión: La Carta Siríaca (c. 73–200 d.C.)</h2>
+
+  <p>Mara bar Serapión fue un filósofo estoico de la provincia romana de Siria que escribió una carta en siríaco (arameo occidental) a su hijo. La carta data después de 73 d.C. (la mayoría de especialistas la sitúa en el siglo I o II) y fue publicada por William Cureton en su <em>Spicilegium Syriacum</em> (1855):</p>
+
+  <blockquote>
+    «¿Qué ventaja obtuvieron los atenienses matando a Sócrates? La hambruna y la peste les sobrevino como castigo por su crimen. ¿O los habitantes de Samos quemando a Pitágoras? En un instante fue cubierta su tierra de arena. ¿O los judíos matando a <strong>su rey sabio</strong>? Precisamente después fue quitado su reino. Dios justamente se vengó de la sabiduría de estos tres hombres. Los atenienses murieron de hambre; los de Samos fueron cubiertos por el mar; los judíos, desolados y conducidos desde su propia tierra, viven en completa dispersión. Pero Sócrates no está muerto gracias a Platón; ni Pitágoras, gracias a la estatua de Hera; ni el <strong>rey sabio</strong>, gracias a las nuevas leyes que estableció.»
+    <span class="src">— Mara bar Serapión, <em>Epístola a su hijo Serapión</em> (traducción del siríaco; texto en W. Cureton, <em>Spicilegium Syriacum</em>, Londres, 1855, pp. 70–76)</span>
+  </blockquote>
+
+  <h3>Análisis</h3>
+
+  <p>Mara no nombra a Jesús explícitamente. Sin embargo, los criterios de identificación son sólidos: (1) el «rey sabio de los judíos» fue ejecutado por los propios judíos; (2) su muerte precedió inmediatamente a la destrucción del reino judío (70 d.C.); (3) su legado perduró en sus enseñanzas (<em>nuevas leyes</em>); (4) el título «rey de los judíos» (INRI) es el que los cuatro evangelios reportan en el titulus crucis. El estudioso Robert Van Voorst (<em>Jesus Outside the New Testament</em>, Eerdmans, 2000, pp. 53–56) concluye que hay pocas dudas de que la referencia es a Jesús.</p>
+
+  <p>La carta proviene de un contexto siríaco pagano y no cristiano. Mara ve la destrucción de Jerusalén como consecuencia del rechazo al «rey sabio» — una perspectiva que no es teológicamente cristiana, sino la de un filósofo estoico que aplica su cosmología de la justicia cósmica.</p>
+</section>
+
+<!-- XII -->
+<section id="celsus">
+  <div class="sec-label">Sección XII · Fuente Pagana Griega</div>
+  <h2>Celso el Filósofo — <em>Λόγος Ἀληθής</em> (c. 177–180 d.C.)</h2>
+
+  <p>Celso fue un filósofo platónico y el primer polemista pagano serio contra el cristianismo. Su obra <em>Alethes Logos</em> («Discurso Verdadero», c. 177–180 d.C.) no ha sobrevivido directamente, pero es ampliamente reconstruible a través de la refutación de Orígenes en su <em>Contra Celsum</em> (c. 248 d.C.).</p>
+
+  <blockquote>
+    «[Jesús] fue llevado encadenado y sufrió el castigo supremo, aunque solo el más desdichado de los hombres lo creen [un] dios.»
+    <span class="src">— Celso, citado en Orígenes, <em>Contra Celsum</em> II.9 (texto griego en Sources Chrétiennes, ed. M. Borret, vol. 132, 1967)</span>
+  </blockquote>
+
+  <blockquote>
+    «¿No os inventasteis acerca de él que nació de una virgen y fue crucificado y resucitó?»
+    <span class="src">— Celso, citado en Orígenes, <em>Contra Celsum</em> I.28</span>
+  </blockquote>
+
+  <h3>Valor del testimonio</h3>
+
+  <p>Celso era el mayor enemigo intelectual del cristianismo en el siglo II. Su estrategia apologética no fue negar la existencia o la muerte de Jesús — hubiera sido la táctica más simple si hubiera tenido alguna evidencia en su contra. En cambio, atacó la interpretación cristiana de esos hechos: la crucifixión fue la muerte deshonrosa de un criminal, no la de un dios. La crucifixión como hecho era, para Celso, un punto de ataque contra el cristianismo, no un punto de defensa.</p>
+</section>
+
+<!-- XIII -->
+<section id="arqueologia">
+  <div class="sec-label">Sección XIII · Evidencia Arqueológica</div>
+  <h2>Evidencia Arqueológica: La Realidad de la Crucifixión</h2>
+
+  <h3>Yehohanan ben Hagkol: el crucificado de Giv'at ha-Mivtar (1968)</h3>
+
+  <p>En 1968, durante excavaciones arqueológicas en Giv'at ha-Mivtar (norte de Jerusalén), se descubrió un ossuary (osario) del siglo I d.C. que contenía los restos de un hombre llamado Yehohanan ben Hagkol. Sus restos presentaban evidencia directa de crucifixión: un clavo de hierro de 11,5 cm atravesaba aún el calcáneo (hueso del talón), con fragmentos de madera de olivo adheridos. El estudio fue publicado por Vassilios Tzaferis en el <em>Israel Exploration Journal</em> (20.1–2, 1970) y confirmado en reanálisis posteriores.</p>
+
+  <p>Este hallazgo demuestra arqueológicamente que: (1) la crucifixión se practicaba en Judea en el siglo I; (2) se usaban clavos a través de los pies; (3) podían enterrarse en osarios familiares. El paralelo con la narrativa de Juan 19:31–37 (el soldado que comprueba la muerte y el enterramiento en un sepulcro nuevo) es históricamente coherente.</p>
+
+  <h3>La inscripción de Poncio Pilato</h3>
+
+  <p>En 1961 se descubrió en Cesarea Marítima una inscripción latina (conocida como <em>Pilate Stone</em>) que menciona a «<span class="la">Pontius Pilatus, Praefectus Iudaeae</span>» (Poncio Pilato, Prefecto de Judea). El título que aparece es <em>praefectus</em>, no <em>procurator</em> (como dice Tácito), lo que en realidad confirma la historicidad de Tácito con una pequeña corrección de título que solo un funcionario contemporáneo habría distinguido. La inscripción está expuesta en el Museo de Israel (Jerusalén).</p>
+</section>
+
+<!-- XIV -->
+<section id="consenso">
+  <div class="sec-label">Sección XIV · Historiografía Académica</div>
+  <h2>Consenso Historiográfico: Lo que Dicen los Especialistas</h2>
+
+  <div class="wg">
+    <div class="wc">
+      <div class="wc-name">John P. Meier</div>
+      <div class="wc-date">Universidad de Notre Dame</div>
+      <p>«La muerte de Jesús por crucifixión bajo Poncio Pilato es tan segura como cualquier hecho histórico puede serlo, porque confirmada por los testimonios tanto hostiles como favorables y cumple los criterios básicos de historicidad.» (<em>A Marginal Jew</em>, vol. 1, Doubleday, 1991, p. 177)</p>
+    </div>
+    <div class="wc">
+      <div class="wc-name">Bart D. Ehrman</div>
+      <div class="wc-date">Universidad de Carolina del Norte (agnóstico)</div>
+      <p>«La crucifixión de Jesús por los romanos es uno de los hechos más seguros que tenemos sobre él, atestiguado por todos nuestros evangelios, por Pablo, por Tácito, por Josefo y otros.» (<em>Did Jesus Exist?</em>, HarperOne, 2012, p. 163)</p>
+    </div>
+    <div class="wc">
+      <div class="wc-name">E. P. Sanders</div>
+      <div class="wc-date">Universidad de Duke</div>
+      <p>«La crucifixión de Jesús bajo Poncio Pilato es uno de los hechos más seguros sobre Jesús.» (<em>The Historical Figure of Jesus</em>, Penguin, 1993, p. 10)</p>
+    </div>
+    <div class="wc">
+      <div class="wc-name">John Dominic Crossan</div>
+      <div class="wc-date">Universidad DePaul (perspectiva crítica)</div>
+      <p>«Que fue crucificado es tan seguro como cualquier cosa histórica puede serlo, dado que tanto los amigos como los enemigos de Jesús lo sabían.» (<em>Jesus: A Revolutionary Biography</em>, HarperSanFrancisco, 1994, p. 145)</p>
+    </div>
+    <div class="wc">
+      <div class="wc-name">James D. G. Dunn</div>
+      <div class="wc-date">Universidad de Durham</div>
+      <p>«La muerte de Jesús bajo Pilato está entre los hechos históricos más seguros sobre Jesús, atestiguada por múltiples fuentes independientes.» (<em>Jesus Remembered</em>, Eerdmans, 2003)</p>
+    </div>
+    <div class="wc">
+      <div class="wc-name">Robert Van Voorst</div>
+      <div class="wc-date">Seminario Teológico Occidental</div>
+      <p>«La muerte de Jesús bajo Pilato es confirmada por Tácito, Josefo, Plinio y Luciano, fuentes todas independientes entre sí y del NT.» (<em>Jesus Outside the New Testament</em>, Eerdmans, 2000)</p>
+    </div>
+  </div>
+
+  <p>El consenso historiográfico sobre la crucifixión trasciende la fe religiosa de los investigadores. Ehrman es agnóstico, Crossan es crítico del dogma cristiano, Meier es católico, Sanders es protestante. Todos convergen en el mismo punto: la crucifixión de Jesús bajo Pilato es un hecho histórico tan bien atestiguado como cualquier otro del mundo antiguo.</p>
+</section>
+
+<!-- XV -->
+<section id="silogismos">
+  <div class="sec-label">Sección XV · Argumentación Formal</div>
+  <h2>Silogismos contra la Negación Coránica (Q 4:157)</h2>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo I — Del argumento de testimonio múltiple independiente</div>
+    <p><strong>Premisa mayor:</strong> Un hecho histórico atestiguado por múltiples fuentes independientes, hostiles entre sí, provenientes de tradiciones distintas (romana, judía, siríaca, griega, cristiana) constituye un hecho históricamente establecido según los criterios estándar de la historiografía.</p>
+    <p><strong>Premisa menor:</strong> La crucifixión de Cristo bajo Poncio Pilato está atestiguada por al menos seis fuentes independientes y culturalmente hostiles: Pablo (c. 35 d.C.), los cuatro evangelistas (c. 65–95 d.C.), Tácito (c. 116 d.C.), Plinio el Joven (c. 112 d.C.), Josefo (c. 93 d.C.), Luciano (c. 165 d.C.) y Mara bar Serapión (c. 73–200 d.C.).</p>
+    <p class="conclusion">∴ Conclusión: La crucifixión de Cristo bajo Poncio Pilato es un hecho históricamente establecido.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo II — Del argumento de credibilidad de las fuentes hostiles</div>
+    <p><strong>Premisa mayor:</strong> Una fuente que confirma un hecho que le es ideológicamente inconveniente o desfavorable tiene mayor credibilidad que una que lo confirma por razones de sesgo propio.</p>
+    <p><strong>Premisa menor:</strong> Tácito (que llama al cristianismo «perniciosa superstición»), Josefo (judío no cristiano), Luciano (que llama a Jesús «sofista crucificado» burlescamente), Celso (que atacaba el cristianismo) y el Talmud (rabinos adversarios del movimiento cristiano) confirman todos la existencia y muerte de Jesús sin simpatía alguna hacia el cristianismo.</p>
+    <p class="conclusion">∴ Conclusión: Los testimonios hostiles son la categoría más fiable de evidencia histórica sobre la crucifixión — y todos confirman el hecho.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo III — Del argumento cronológico contra el Corán</div>
+    <p><strong>Premisa mayor:</strong> Cuando existe contradicción entre una fuente contemporánea a los hechos y una fuente posterior de siglos, la fuente contemporánea tiene mayor peso histórico, salvo que pueda demostrarse que la fuente posterior accedió a información desconocida para las fuentes contemporáneas.</p>
+    <p><strong>Premisa menor:</strong> El Corán (622–632 d.C.) niega la crucifixión aproximadamente 600 años después de los hechos, sin citar ninguna fuente histórica, arqueológica o testimonial en apoyo de su negación; mientras que las fuentes contemporáneas o cercanas al evento (Pablo, evangelistas, Tácito, Josefo, Luciano) afirman unánimemente la crucifixión y no hay ninguna fuente del siglo I o II que la niegue.</p>
+    <p class="conclusion">∴ Conclusión: La negación coránica carece de fundamento histórico y contradice el principio básico de prioridad de las fuentes contemporáneas.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo IV — Del argumento epistemológico interno del Corán</div>
+    <p><strong>Premisa mayor:</strong> El Corán afirma en 4:157 que «los que difieren al respecto están llenos de dudas» y que solo siguen «suposiciones sin conocimiento» (<span class="ar" style="font-size:.95rem;">مَا لَهُم بِهِ مِنْ عِلْمٍ إِلَّا اتِّبَاعَ الظَّنِّ</span>). Pero también afirma ser la fuente correcta de conocimiento sobre el evento.</p>
+    <p><strong>Premisa menor:</strong> Si los testigos presenciales de la crucifixión, los contemporáneos, los historiadores romanos con acceso a archivos imperiales y los adversarios judíos que tendrían todo el interés en negar cualquier dignidad a Jesús son todos descartados como mera «suposición», el Corán no proporciona ninguna evidencia histórica alternativa — solo la afirmación revelada.</p>
+    <p class="conclusion">∴ Conclusión: La negación coránica opera como una afirmación puramente dogmática sin respaldo epistemológico histórico, lo que la hace irrefutable por definición pero también históricamente vacía de contenido probatorio.</p>
+  </div>
+</section>
+
+<!-- XVI -->
+<section id="objeciones">
+  <div class="sec-label">Sección XVI</div>
+  <h2>Argumentos Islámicos y Refutaciones</h2>
+
+  <div class="obj">
+    <div class="obj-q">El Corán es revelación divina y Alá tiene conocimiento de lo que ocurrió realmente, por encima de los testigos humanos.</div>
+    <div class="obj-r">Este argumento presupone lo que pretende probar (petición de principio). En debate histórico, la afirmación de inspiración divina no es evidencia histórica — es una afirmación teológica que requiere justificación independiente. Cualquier texto puede afirmar ser revelación divina; la historiografía evalúa evidencia, no autoridad auto-proclamada. Además, si el criterio es la autoridad revelada, el NT es anterior al Corán en más de cinco siglos, y los evangelistas afirman también hablar con autoridad apostólica sobre lo que presenciaron o recibieron de testigos.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Los evangelios fueron corrompidos (<em>tahrif</em>), por lo que su testimonio sobre la crucifixión no es fiable.</div>
+    <div class="obj-r">El Corán no afirma que los Evangelios fueran corrompidos antes de Mahoma — en realidad los llama «guía y luz» (<span class="ar" style="font-size:.95rem;">هُدًى وَنُورًا</span>, Corán 5:46) y ordena a los cristianos juzgar por lo que en ellos hay (5:47). Los manuscritos evangélicos más antiguos (papiros del siglo II–III) contienen las narraciones de la pasión intactas, y son anteriores a Mahoma. Además, Tácito, Josefo y Luciano no son fuentes evangélicas — son fuentes paganas y judías independientes. La teoría de corrupción no afecta a estos testimonios no cristianos.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">El término <span class="ar" style="font-size:.95rem;">شُبِّهَ لَهُمْ</span> (<em>shubbiha lahum</em>) en Q 4:157 simplemente significa que Dios causó confusión entre los testigos — no que no haya habido crucifixión en absoluto.</div>
+    <div class="obj-r">Esta es en realidad la lectura minoritaria pero académicamente respetable dentro del islamismo (G. Badawi, Gabriel Said Reynolds, algunos ismaelitas). Si se acepta esta interpretación, la negación islámica de la crucifixión colapsa: el versículo solo negaría que los judíos fueron los responsables (argumento anti-judío en contexto de polémica coránica), no el hecho histórico en sí. Irónicamente, esta interpretación concede la crucifixión histórica. El problema es que la exégesis islámica mayoritaria (<em>tafsīr</em> clásico) sí ha leído el versículo como negación del hecho histórico.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Algunos grupos gnósticos primitivos también negaron la crucifixión — lo que muestra que no era un hecho universalmente aceptado.</div>
+    <div class="obj-r">Los gnósticos (Basílides, docetas) negaron la crucifixión física de Cristo por razones teológicas: su dualismo les llevaba a sostener que el cuerpo de Cristo era una apariencia (<em>docetismo</em>). Esto confirma que la crucifixión era un hecho históricamente establecido que los gnósticos se vieron obligados a negar teológicamente. Nadie niega un hecho que no ocurrió — lo ignora simplemente. La existencia de negaciones gnósticas es evidencia paradójica de que la crucifixión era un hecho conocido y políticamente embarazoso para ciertas teologías.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Jesús sobrevivió a la crucifixión y escapó — la teoría del «desvanecimiento».</div>
+    <div class="obj-r">Esta teoría (propuesta en tiempos modernos por algunos, y mencionada en el s. XIX) enfrenta problemas históricos insuperables: (1) la confirmación de la muerte por el centurión romano y la lanza en el costado (Juan 19:34); (2) los romanos eran expertos en crucifixiones y verificaban la muerte; (3) Pablo recibió el credo de la muerte y sepultura de testigos directos 3–5 años después de los hechos; (4) ninguna fuente antigua — ni cristiana, ni judía, ni pagana — menciona la supervivencia de Jesús; (5) los discípulos que proclamaron la resurrección habrían sabido si simplemente se había «desmayado». Esta teoría fue demolida ya en el siglo XIX por el liberal David Friedrich Strauss, que no era cristiano.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q"><span class="ar" style="font-size:.95rem;">شُبِّهَ لَهُمْ</span> (<em>shubbiha lahum</em>) significa que Dios hizo que alguien pareciera Jesús ante los testigos — una ilusión divina (<em>tawهîm</em>). No es que haya habido error humano, sino que Dios alteró milagrosamente la percepción de los presentes. Por tanto no puede esperarse testimonio histórico contra ello.</div>
+    <div class="obj-r">
+      Esta versión del argumento, que eleva <em>shubbiha lahum</em> a intervención divina sobrenatural directa sobre los sentidos de todos los presentes, es la más sofisticada pero también la más problemática, por cuatro razones:<br><br>
+      <strong>1. El «Dilema Apostólico».</strong> Si Dios hizo aparecer crucificado a un sustituto con la apariencia de Jesús, entonces Dios engañó no solo a los romanos y judíos hostiles, sino también a los apóstoles, a María, a las mujeres junto a la cruz (Jn 19:25–27) y a todos los discípulos. Estos testigos cercanos fueron los que fundaron el movimiento cristiano <em>precisamente</em> sobre la base de que habían visto morir y resucitar a Jesús. Si Dios los engañó deliberadamente con una ilusión, Dios sería el autor directo del «error» cristiano de adorar a Cristo como muerto-y-resucitado. Esto crea un dilema teológico insolucionable: o Dios engañó intencionalmente a los que debían haber sabido la verdad, haciéndose responsable de siglos de shirk (asociación), o la ilusión no fue tan perfecta como se afirma.<br><br>
+      <strong>2. El problema del consentimiento del sustituto.</strong> Ninguna tradición islámica clásica ha dado una respuesta coherente sobre quién fue el sustituto y si consintió. Si fue Judas (como sostiene el Evangelio de Bernabé y algunos exégetas medievales), la pregunta es por qué Dios lo condena a morir en cruz en lugar de Jesús — siendo Judas ya un traidor, esto podría parecer justo, pero las palabras del crucificado en los evangelios («Dios mío, por qué me has abandonado», Mc 15:34 — eco del Salmo 22) serían entonces las palabras de Judas, lo que es teológicamente incoherente en cualquier marco.<br><br>
+      <strong>3. La ilusión perfecta refuta el propio argumento del Islam.</strong> Si la ilusión fue tan perfecta que engañó a todos los presentes —romanos, judíos, apóstoles, madre de Jesús, discípulos amados—, entonces el Islam está afirmando que no es posible ningún conocimiento histórico fiable sobre eventos que Dios decida oscurecer. Pero si ese es el principio, se aplica reflexivamente: ¿cómo saber que el Corán mismo no es una ilusión divina enviada para probar a los creyentes? El argumento destruye toda epistemología histórica, incluida la que usaría el Islam para establecer sus propios hechos fundacionales.<br><br>
+      <strong>4. El término árabe <em>shubbiha lahum</em> no implica necesariamente ilusión sobrenatural.</strong> La raíz <span class="ar" style="font-size:.95rem;">شبه</span> (<em>sh-b-h</em>) significa «semejanza, parecido, similitud». El versículo puede leerse como «se les hizo semejante» en el sentido de «lo confundieron con otro» — una confusión humana, no una ilusión divina. El <em>tafsīr</em> clásico (Tabari, Ibn Kathir) adopta la lectura de sustitución, no de ilusión perceptiva universal. La versión de «ilusión sobrenatural total» es más tardía y filosóficamente más desesperada.
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Fue un sustituto quien murió en la cruz — ya sea Judas Iscariote (según el Evangelio de Bernabé y ciertos exégetas islámicos) u otro discípulo al que Dios hizo parecer Jesús. No hubo engaño a los apóstoles porque ellos también huyeron y no vieron nada.</div>
+    <div class="obj-r">
+      La teoría del sustituto específico —especialmente la identificación con Judas— enfrenta un conjunto de dificultades históricas, textuales y lógicas que la hacen indefendible:<br><br>
+      <strong>1. El Evangelio de Bernabé no es una fuente del siglo I.</strong> Es el texto islámico más citado para la teoría de Judas como sustituto. Sin embargo, los especialistas son unánimes: el Evangelio de Bernabé es un texto medieval tardío, compuesto con toda probabilidad en el siglo XIV–XVI d.C. en contexto morisco o islámico, no una fuente antigua. Contiene anacronismos flagrantes: usa vocabulario feudal medieval europeo, menciona barriles de vino (tecnología medieval, no del s. I palestino), y cita a Dante Alighieri implícitamente. Ningún manuscrito del «Evangelio de Bernabé» precede al siglo XVI. No es fuente histórica sobre la crucifixión.<br><br>
+      <strong>2. Los testigos presenciales no «huyeron todos».</strong> Juan 19:25–27 narra explícitamente que junto a la cruz estaban María madre de Jesús, su hermana, María Magdalena y el discípulo amado. Lucas 23:49 menciona «todos sus conocidos y las mujeres que le habían seguido desde Galilea» observando desde lejos. Estos no son los discípulos masculinos que huyeron en Getsemaní — son testigos distintos, entre ellos la madre de Jesús, que habría reconocido a su propio hijo sin ninguna posibilidad de confusión.<br><br>
+      <strong>3. El problema de la identificación materna.</strong> Si el sustituto tenía la apariencia exacta de Jesús, María —que lo había conocido desde su nacimiento— fue engañada sobre la muerte de su propio hijo. Esto convierte a Dios en el responsable del duelo falso de una madre inocente durante el resto de su vida, y al Islam en la única tradición que niega la compasión divina hacia María en el momento de máximo dolor.<br><br>
+      <strong>4. El credo de Pablo elimina la teoría del sustituto.</strong> Pablo afirma haber recibido el credo («Cristo murió… fue sepultado… apareció a Cefas y luego a los doce») de los propios apóstoles, incluyendo a Pedro y a Santiago hermano de Jesús (Gál 1:18–19), entre 35 y 38 d.C. Si hubiera habido un sustituto, Pedro —que estuvo en el huerto, siguió a Jesús hasta el patio del sumo sacerdote (Mc 14:54) y era el líder del grupo— lo habría sabido. El credo transmitido por Pablo a comunidades paganas en Grecia y Asia Menor entre 48 y 55 d.C. presupone que los apóstoles mismos, los más cercanos a Jesús, afirmaban su muerte. Si la teoría del sustituto fuera correcta, la fuente del engaño habría tenido que incluir a los propios apóstoles — lo cual nos devuelve al Dilema Apostólico anterior.
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section id="conclusion">
+  <div class="sec-label">Conclusión</div>
+  <h2>Síntesis del Caso Histórico</h2>
+
+  <table>
+    <thead><tr><th>Fuente</th><th>Tipo</th><th>Fecha</th><th>Testimonio sobre crucifixión</th></tr></thead>
+    <tbody>
+      <tr><td>Credo de 1 Cor 15:3</td><td>Cristiana primitiva</td><td>c. 35 d.C.</td><td>«Cristo murió» — más antiguo documento sobre el hecho</td></tr>
+      <tr><td>Marcos / Q / L / J</td><td>Evangélica (4 tradiciones)</td><td>c. 65–95 d.C.</td><td>Crucifixión unánime en cuatro tradiciones independientes</td></tr>
+      <tr><td>Flm 2:8; Gál 3:1,13</td><td>Pablo (cristiana)</td><td>c. 48–55 d.C.</td><td>«Muerte de cruz» — «fue presentado como crucificado»</td></tr>
+      <tr><td>Tácito, <em>Ann.</em> XV.44</td><td>Romana pagana hostil</td><td>c. 116 d.C.</td><td><em>supplicio adfectus</em> por Pilato bajo Tiberio</td></tr>
+      <tr><td>Plinio, <em>Ep.</em> X.96</td><td>Romana pagana hostil</td><td>c. 111–113 d.C.</td><td>Cristo adorado como dios — existencia y muerte presupuestas</td></tr>
+      <tr><td>Josefo, <em>Ant.</em> 20.200</td><td>Judía no cristiana</td><td>c. 93–94 d.C.</td><td>«Jesús llamado Cristo» — hermano de Santiago</td></tr>
+      <tr><td>Talmud, Sanedrín 43a</td><td>Judía rabínica hostil</td><td>Tradición s. II</td><td>«Colgaron a Jesús el Nazareno» en víspera de Pascua</td></tr>
+      <tr><td>Luciano, <em>Peregr.</em> §11,13</td><td>Griega pagana hostil</td><td>c. 165 d.C.</td><td>«Sofista crucificado» en Palestina</td></tr>
+      <tr><td>Mara bar Serapión</td><td>Siríaca pagana</td><td>c. 73–200 d.C.</td><td>Ejecución del «rey sabio» de los judíos</td></tr>
+      <tr><td>Celso / Orígenes</td><td>Pagana hostil</td><td>c. 177–248 d.C.</td><td>Crucifixión presupuesta en ataque al cristianismo</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Veredicto Histórico</div>
+    <p>La crucifixión de Jesucristo bajo Poncio Pilato durante el reinado del Emperador Tiberio es uno de los hechos mejor atestiguados del mundo antiguo. Ninguna fuente del siglo I o II niega que ocurrió. Las únicas negaciones proceden de: (a) gnósticos que la niegan por razones teológicas duales, no históricas; (b) el Corán, que la niega 600 años después sin citar ninguna fuente histórica, arqueológica o testimonial en su apoyo.</p>
+    <p>La posición historiográfica de consenso —que trasciende confesiones religiosas e incluye a académicos agnósticos, judíos, protestantes y católicos— es unánime: la crucifixión de Jesús es un hecho histórico. El Corán, al negarla en Q 4:157, no está corrigiendo la historia con información más precisa — está contradiciendo la historia con afirmación dogmática sin base testimonial.</p>
+    <p>El Islam pide que se rechace el testimonio convergente de romanos, judíos, siríacos, griegos y cristianos — todos independientes entre sí — en favor de una afirmación sin fuente histórica alguna, revelada seis siglos después de los hechos. Este es el núcleo del problema epistemológico que la doctrina islámica de la crucifixión no ha podido resolver.</p>
+  </div>
+
+  <div class="footnote">
+    <strong>Fuentes primarias verificadas:</strong>
+    Tácito, <em>Annales</em> XV.44 (Codex Mediceus II; ed. C. D. Fisher, Oxford 1906);
+    Plinio el Joven, <em>Epistulae</em> X.96 (ed. R. A. B. Mynors, Oxford 1963; texto en Perseus Tufts);
+    Flavio Josefo, <em>Antiquitates Iudaicae</em> 20.200 (ed. Benedikt Niese, Berlín 1892; texto en Codex Ambrosianus F 128);
+    Luciano de Samósata, <em>De Morte Peregrini</em> §11, 13 (trad. A. M. Harmon, Loeb Classical Library vol. 302, Cambridge MA 1936);
+    Mara bar Serapión, <em>Epístola</em> (ed. y trad. W. Cureton, <em>Spicilegium Syriacum</em>, Londres 1855, pp. 70–76);
+    Talmud babilónico, Sanedrín 43a (edición Vilna; trad. M. Jastrow);
+    1 Corintios 15:3–5; Filipenses 2:8; Gálatas 3:1, 13 (NA28, Deutsche Bibelgesellschaft);
+    Orígenes, <em>Contra Celsum</em> I.28; II.9 (Sources Chrétiennes vol. 132, ed. M. Borret, Paris 1967);
+    John P. Meier, <em>A Marginal Jew</em>, vol. 1, Doubleday, 1991;
+    Bart D. Ehrman, <em>Did Jesus Exist?</em>, HarperOne, 2012;
+    Robert Van Voorst, <em>Jesus Outside the New Testament</em>, Eerdmans, 2000;
+    E. P. Sanders, <em>The Historical Figure of Jesus</em>, Penguin, 1993;
+    James D. G. Dunn, <em>Jesus Remembered</em>, Eerdmans, 2003;
+    Vassilios Tzaferis, «Crucifixion — The Archaeological Evidence», <em>Biblical Archaeology Review</em> 11.1 (1985).
+  </div>
+</section>
+
+</div><!-- /#main -->
+
+<script>
+(function () {
+  var btn     = document.getElementById('toc-btn');
+  var panel   = document.getElementById('toc-panel');
+  var overlay = document.getElementById('toc-overlay');
+
+  function open() {
+    panel.classList.add('is-open');
+    overlay.classList.add('is-open');
+    btn.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    panel.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    btn.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', function () {
+    panel.classList.contains('is-open') ? close() : open();
+  });
+  overlay.addEventListener('click', close);
+  panel.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', close);
+  });
+
+  var links = panel.querySelectorAll('a');
+  var secs  = document.querySelectorAll('section[id]');
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          var active = panel.querySelector('a[href="#' + e.target.id + '"]');
+          if (active) {
+            active.classList.add('active');
+            active.scrollIntoView({ block: 'nearest' });
+          }
+        }
+      });
+    }, { rootMargin: '0px 0px -55% 0px', threshold: 0 });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+}());
+</script>
+</body>
+</html>

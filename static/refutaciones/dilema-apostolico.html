@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Dilema Apostólico — Refutación Histórica y Teológica del Islam</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@300;400;600&display=swap');
+
+  :root {
+    --negro: #0a0a0a;
+    --negro-panel: #1a1a1a;
+    --negro-card: #1e1e1e;
+    --amarillo-oro: #F5C518;
+    --amarillo-tenue: #c9a227;
+    --amarillo-brillante: #ffe566;
+    --blanco: #ffffff;
+    --blanco-hueso: #f5f5f0;
+    --blanco-gris: #e0e0d8;
+    --gris-texto: #b0b0a0;
+    --borde: #2a2a2a;
+    --borde-oro: rgba(245,197,24,0.3);
+    --rojo: #cc4444;
+    --rojo-tenue: rgba(204,68,68,0.12);
+    --verde: #50c878;
+    --verde-tenue: rgba(80,200,120,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--negro); color: var(--blanco-hueso); font-family: 'EB Garamond', Georgia, serif; font-size: 17px; line-height: 1.85; }
+
+  /* ── NAV ── */
+  #nav-toggle {
+    position: fixed; top: 18px; left: 18px; z-index: 999;
+    background: var(--amarillo-oro); color: var(--negro); border: none;
+    padding: 10px 16px; font-family: 'Oswald', sans-serif; font-size: 14px;
+    font-weight: 600; cursor: pointer; border-radius: 3px; letter-spacing: 1px;
+    box-shadow: 0 2px 14px rgba(245,197,24,0.45); transition: background 0.2s;
+  }
+  #nav-toggle:hover { background: var(--amarillo-brillante); }
+
+  #sidebar {
+    position: fixed; top: 0; left: -360px; width: 360px; height: 100vh;
+    background: var(--negro-panel); border-right: 2px solid var(--amarillo-oro);
+    z-index: 998; overflow-y: auto; transition: left 0.35s cubic-bezier(.4,0,.2,1);
+    padding: 68px 0 30px;
+  }
+  #sidebar.open { left: 0; }
+  #sidebar h3 { font-family: 'Cinzel', serif; color: var(--amarillo-oro); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; padding: 0 24px 10px; border-bottom: 1px solid var(--borde-oro); margin-bottom: 6px; }
+  #sidebar ul { list-style: none; }
+  #sidebar ul li a { display: block; padding: 8px 24px; color: var(--blanco-gris); text-decoration: none; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 300; letter-spacing: 0.5px; border-left: 3px solid transparent; transition: all 0.2s; }
+  #sidebar ul li a:hover { color: var(--amarillo-oro); background: rgba(245,197,24,0.07); border-left-color: var(--amarillo-oro); }
+  #sidebar ul li.sub a { padding-left: 40px; font-size: 12px; }
+  #sidebar ul li.subsub a { padding-left: 56px; font-size: 11px; color: var(--gris-texto); }
+  #overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 997; }
+  #overlay.active { display: block; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 80px 40px;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(245,197,24,0.14) 0%, transparent 55%),
+      radial-gradient(ellipse at 20% 110%, rgba(204,68,68,0.06) 0%, transparent 50%),
+      var(--negro);
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: 'Τρίλημμα';
+    position: absolute; font-family: 'Cinzel', serif; font-size: clamp(60px,10vw,130px);
+    color: rgba(245,197,24,0.04); top: 50%; left: 50%;
+    transform: translate(-50%,-50%); pointer-events: none; white-space: nowrap;
+    letter-spacing: 8px;
+  }
+  .hero-eyebrow { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 5px; color: var(--amarillo-tenue); text-transform: uppercase; margin-bottom: 22px; }
+  #hero h1 { font-family: 'Cinzel', serif; font-size: clamp(34px,6vw,78px); font-weight: 900; color: var(--blanco); line-height: 1.08; max-width: 920px; margin-bottom: 14px; }
+  #hero h1 span { color: var(--amarillo-oro); }
+  .hero-sub { font-family: 'Cinzel', serif; font-size: clamp(15px,2.2vw,24px); color: var(--amarillo-tenue); margin-bottom: 30px; font-weight: 400; font-style: italic; }
+  .hero-desc { max-width: 720px; color: var(--blanco-gris); font-size: 18px; line-height: 1.95; margin-bottom: 50px; }
+
+  .trilema-display {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 2px;
+    max-width: 860px; width: 100%; margin-bottom: 50px;
+  }
+  .tri-box {
+    background: var(--negro-card); padding: 28px 22px; text-align: center;
+    border-top: 3px solid var(--amarillo-oro); position: relative;
+  }
+  .tri-box::after {
+    content: ''; position: absolute; top: 50%; right: -1px;
+    width: 2px; height: 40%; background: var(--borde-oro);
+    transform: translateY(-50%);
+  }
+  .tri-box:last-child::after { display: none; }
+  .tri-num { font-family: 'Cinzel', serif; font-size: 42px; font-weight: 900; color: var(--amarillo-oro); line-height: 1; margin-bottom: 10px; opacity: 0.8; }
+  .tri-label { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--amarillo-tenue); text-transform: uppercase; margin-bottom: 10px; }
+  .tri-text { font-size: 14px; color: var(--gris-texto); line-height: 1.65; }
+
+  .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; justify-content: center; }
+  .hero-stat { text-align: center; padding: 14px 24px; border: 1px solid var(--borde-oro); background: rgba(245,197,24,0.04); }
+  .hero-stat .num { font-family: 'Cinzel', serif; font-size: 30px; font-weight: 900; color: var(--amarillo-oro); display: block; }
+  .hero-stat .lbl { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; color: var(--gris-texto); text-transform: uppercase; }
+
+  /* ── SECCIONES ── */
+  section { max-width: 980px; margin: 0 auto; padding: 60px 40px; }
+  .section-divider { border: none; border-top: 1px solid var(--borde-oro); margin: 0 auto; max-width: 980px; }
+  .section-divider-thick { border: none; border-top: 3px solid var(--amarillo-oro); margin: 0 auto; max-width: 980px; }
+
+  h2 { font-family: 'Cinzel', serif; font-size: clamp(22px,3vw,38px); font-weight: 700; color: var(--blanco); margin-bottom: 10px; line-height: 1.15; }
+  h2 .h2-num { color: var(--amarillo-oro); font-size: 0.44em; letter-spacing: 3px; display: block; font-family: 'Oswald', sans-serif; font-weight: 300; margin-bottom: 4px; text-transform: uppercase; }
+  h3 { font-family: 'Cinzel', serif; font-size: clamp(16px,1.9vw,22px); color: var(--amarillo-oro); margin: 34px 0 13px; font-weight: 700; border-left: 3px solid var(--amarillo-oro); padding-left: 15px; }
+  h4 { font-family: 'Oswald', sans-serif; font-size: 14px; color: var(--amarillo-tenue); letter-spacing: 1px; text-transform: uppercase; margin: 22px 0 9px; }
+  p { margin-bottom: 17px; color: var(--blanco-gris); }
+
+  /* ── PREMISA BOX ── */
+  .premisa {
+    border: 2px solid var(--amarillo-oro); padding: 30px 36px; margin: 28px 0;
+    background: rgba(245,197,24,0.04); position: relative;
+  }
+  .premisa::before {
+    position: absolute; top: -14px; left: 24px; background: var(--negro);
+    padding: 0 12px; font-family: 'Cinzel', serif; font-size: 11px;
+    color: var(--amarillo-oro); letter-spacing: 3px; font-weight: 700;
+  }
+  .premisa.p1::before { content: 'PREMISA I — EL ENGAÑO SUFRIDO'; }
+  .premisa.p2::before { content: 'PREMISA II — EL ENGAÑO PERPETRADO'; }
+  .premisa.p3::before { content: 'PREMISA III — LA VERDAD APOSTÓLICA'; }
+  .premisa.piv::before { content: 'PREMISA IV — EL SILENCIO DE LA HISTORIA'; }
+  .premisa.pv::before { content: 'PREMISA V — LA TRAMPA CORÁNICA'; }
+  .premisa.pvi::before { content: 'PREMISA VI — EL KERIGMA PRIMITIVO'; }
+  .premisa-text { font-size: 17px; line-height: 1.95; color: var(--blanco-hueso); }
+  .premisa-text strong { color: var(--amarillo-oro); }
+
+  /* ── SILOGISMO ── */
+  .silogismo {
+    background: var(--negro-panel); border: 1px solid var(--borde-oro);
+    padding: 28px 32px; margin: 26px 0; border-radius: 2px;
+  }
+  .silogismo-title { font-family: 'Cinzel', serif; font-size: 11px; color: var(--amarillo-tenue); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; border-bottom: 1px solid var(--borde-oro); padding-bottom: 10px; }
+  .silogismo-line { display: flex; gap: 16px; margin-bottom: 12px; align-items: flex-start; }
+  .sil-tag { font-family: 'Oswald', sans-serif; font-size: 11px; color: var(--amarillo-oro); font-weight: 600; letter-spacing: 1px; min-width: 36px; margin-top: 2px; flex-shrink: 0; }
+  .sil-text { font-size: 15.5px; color: var(--blanco-gris); line-height: 1.7; }
+  .silogismo-conclusion {
+    margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--borde-oro);
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .sil-tag.conc { color: var(--amarillo-brillante); font-size: 12px; }
+  .sil-text.conc { color: var(--amarillo-brillante); font-weight: 600; font-size: 16px; }
+
+  /* ── CITA ── */
+  .quote { background: var(--negro-card); border-left: 4px solid var(--amarillo-oro); padding: 22px 28px; margin: 24px 0; border-radius: 0 4px 4px 0; position: relative; }
+  .quote::before { content: '\201C'; font-family: 'Cinzel', serif; font-size: 78px; color: rgba(245,197,24,0.12); position: absolute; top: -8px; left: 8px; line-height: 1; }
+  .quote-text { font-style: italic; color: var(--blanco-hueso); font-size: 16px; line-height: 1.85; margin-bottom: 10px; }
+  .quote-source { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 1.5px; color: var(--amarillo-tenue); text-transform: uppercase; }
+  .quote.quran { border-left-color: #7a9e7e; }
+  .quote.quran::before { color: rgba(122,158,126,0.15); }
+  .quote.quran .quote-source { color: #7a9e7e; }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); gap: 16px; margin: 20px 0; }
+  .card { background: var(--negro-card); border: 1px solid var(--borde); padding: 22px; border-top: 3px solid var(--amarillo-oro); transition: transform 0.2s; }
+  .card:hover { transform: translateY(-2px); }
+  .card-name { font-family: 'Cinzel', serif; font-size: 14px; color: var(--blanco); margin-bottom: 4px; font-weight: 700; }
+  .card-role { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; color: var(--amarillo-tenue); text-transform: uppercase; margin-bottom: 9px; }
+  .card-desc { font-size: 13.5px; color: var(--gris-texto); line-height: 1.7; }
+
+  /* ── TABLA ── */
+  .table-wrap { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th { background: var(--amarillo-oro); color: var(--negro); font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 12px 14px; text-align: left; font-size: 11px; }
+  tbody tr { border-bottom: 1px solid var(--borde); }
+  tbody tr:hover { background: rgba(245,197,24,0.05); }
+  tbody td { padding: 11px 14px; color: var(--blanco-gris); vertical-align: top; }
+  tbody td:first-child { color: var(--amarillo-tenue); font-family: 'Oswald', sans-serif; font-size: 12px; }
+
+  /* ── HIGHLIGHT ── */
+  .highlight { background: linear-gradient(135deg,rgba(245,197,24,0.08),rgba(245,197,24,0.03)); border: 1px solid var(--borde-oro); padding: 24px 28px; margin: 22px 0; border-radius: 3px; }
+  .highlight.danger { background: var(--rojo-tenue); border-color: rgba(204,68,68,0.4); }
+  .highlight.success { background: var(--verde-tenue); border-color: rgba(80,200,120,0.3); }
+  .highlight-title { font-family: 'Cinzel', serif; font-size: 12px; color: var(--amarillo-oro); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; font-weight: 700; }
+  .highlight.danger .highlight-title { color: var(--rojo); }
+  .highlight.success .highlight-title { color: var(--verde); }
+
+  /* ── DILEMA VISUAL ── */
+  .dilema-visual {
+    display: grid; grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0; margin: 30px 0; align-items: stretch;
+  }
+  .dv-box { background: var(--negro-card); border: 1px solid var(--borde); padding: 24px 18px; text-align: center; }
+  .dv-label { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700; color: var(--amarillo-oro); margin-bottom: 8px; }
+  .dv-text { font-size: 13px; color: var(--gris-texto); line-height: 1.6; }
+  .dv-result { font-family: 'Oswald', sans-serif; font-size: 11px; color: var(--rojo); letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; font-weight: 600; }
+  .dv-arrow { display: flex; align-items: center; justify-content: center; padding: 0 12px; color: var(--amarillo-tenue); font-size: 22px; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding: 8px 0; margin: 20px 0; }
+  .timeline::before { content: ''; position: absolute; left: 26px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom,var(--amarillo-oro),transparent); }
+  .tl-item { display: flex; gap: 26px; margin-bottom: 28px; padding-left: 64px; position: relative; }
+  .tl-dot { position: absolute; left: 16px; top: 4px; width: 20px; height: 20px; background: var(--amarillo-oro); border-radius: 50%; border: 3px solid var(--negro); box-shadow: 0 0 0 2px var(--amarillo-oro); }
+  .tl-content { flex: 1; }
+  .tl-year { font-family: 'Cinzel', serif; font-size: 12px; color: var(--amarillo-oro); font-weight: 700; margin-bottom: 3px; letter-spacing: 1px; }
+  .tl-title { font-family: 'Oswald', sans-serif; font-size: 15px; color: var(--blanco); font-weight: 600; margin-bottom: 5px; }
+  .tl-body { font-size: 14px; color: var(--gris-texto); }
+
+  /* ── LEAD ── */
+  .lead { font-size: 19px; color: var(--blanco-gris); line-height: 1.9; font-style: italic; margin-bottom: 28px; border-left: 3px solid var(--amarillo-oro); padding-left: 20px; }
+
+  /* ── RESPUESTA ISLÁMICA ── */
+  .objecion-bloque { background: var(--negro-panel); border: 1px solid var(--borde); border-left: 4px solid var(--rojo); padding: 20px 24px; margin: 10px 0 6px; }
+  .objecion-label { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; color: var(--rojo); text-transform: uppercase; margin-bottom: 6px; }
+  .objecion-text { font-size: 14.5px; color: var(--blanco-gris); font-style: italic; }
+  .respuesta-bloque { background: var(--negro-card); border: 1px solid var(--borde); border-left: 4px solid var(--verde); padding: 20px 24px; margin: 6px 0 22px; }
+  .respuesta-label { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; color: var(--verde); text-transform: uppercase; margin-bottom: 6px; }
+  .respuesta-text { font-size: 14.5px; color: var(--blanco-gris); }
+
+  .gold { color: var(--amarillo-oro); }
+  .rojo { color: var(--rojo); }
+  .verde { color: var(--verde); }
+
+  footer { background: var(--negro-panel); border-top: 2px solid var(--amarillo-oro); text-align: center; padding: 46px 40px; }
+  footer p { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--gris-texto); text-transform: uppercase; }
+
+  @media (max-width: 680px) {
+    section { padding: 40px 18px; }
+    #sidebar { width: 88vw; }
+    .trilema-display { grid-template-columns: 1fr; }
+    .tri-box::after { display: none; }
+    .dilema-visual { grid-template-columns: 1fr; }
+    .dv-arrow { transform: rotate(90deg); padding: 8px 0; }
+  }
+</style>
+</head>
+<body>
+
+<button id="nav-toggle" onclick="toggleNav()">☰ ÍNDICE</button>
+<div id="overlay" onclick="closeNav()"></div>
+
+<nav id="sidebar">
+  <h3>El Dilema Apostólico</h3>
+  <ul>
+    <li><a href="#hero" onclick="closeNav()">✦ Presentación del Argumento</a></li>
+    <li><a href="#fundamentos" onclick="closeNav()">I. Fundamentos — Al-Hawariyyun</a></li>
+    <li class="sub"><a href="#coran-apostoles" onclick="closeNav()">El Corán sobre los apóstoles</a></li>
+    <li class="sub"><a href="#lo-que-sostuvieron" onclick="closeNav()">Lo que los apóstoles sostuvieron</a></li>
+    <li><a href="#estructura" onclick="closeNav()">II. Estructura del Trilema</a></li>
+    <li class="sub"><a href="#premisa1" onclick="closeNav()">Premisa I — Engañados</a></li>
+    <li class="sub"><a href="#premisa2" onclick="closeNav()">Premisa II — Engañadores</a></li>
+    <li class="sub"><a href="#premisa3" onclick="closeNav()">Premisa III — Verídicos</a></li>
+    <li><a href="#extension" onclick="closeNav()">III. Las Premisas Extendidas</a></li>
+    <li class="sub"><a href="#premisa4" onclick="closeNav()">Premisa IV — El Silencio</a></li>
+    <li class="sub"><a href="#premisa5" onclick="closeNav()">Premisa V — La Trampa Coránica</a></li>
+    <li class="sub"><a href="#premisa6" onclick="closeNav()">Premisa VI — El Kerigma</a></li>
+    <li><a href="#historico" onclick="closeNav()">IV. El Argumento Histórico</a></li>
+    <li class="sub"><a href="#kerigma-primitivo" onclick="closeNav()">El kerigma primitivo</a></li>
+    <li class="sub"><a href="#pablo" onclick="closeNav()">Pablo de Tarso — Testigo clave</a></li>
+    <li class="sub"><a href="#martirio" onclick="closeNav()">El precio del testimonio</a></li>
+    <li><a href="#critico" onclick="closeNav()">V. El Argumento Crítico-Textual</a></li>
+    <li class="sub"><a href="#datacion" onclick="closeNav()">Datación de fuentes</a></li>
+    <li class="sub"><a href="#criterios" onclick="closeNav()">Criterios de historicidad</a></li>
+    <li><a href="#coranico" onclick="closeNav()">VI. El Dilema desde el Corán</a></li>
+    <li class="sub"><a href="#sura-61" onclick="closeNav()">Sura 61 — Los aliados</a></li>
+    <li class="sub"><a href="#contradiccion" onclick="closeNav()">La contradicción interna</a></li>
+    <li><a href="#sura355" onclick="closeNav()">VI-B. Sura 3:55 — La Bomba de Relojería</a></li>
+    <li class="sub"><a href="#ibn-kathir-355" onclick="closeNav()">Tafsir Ibn Kathir — Se delata</a></li>
+    <li class="sub"><a href="#ibn-kathir-355" onclick="closeNav()">Conspiración de Constantino</a></li>
+    <li class="sub"><a href="#ibn-kathir-355" onclick="closeNav()">Los tres grupos inexistentes</a></li>
+    <li><a href="#objeciones" onclick="closeNav()">VII. Objeciones Islámicas y Respuestas</a></li>
+    <li class="sub"><a href="#tahrif" onclick="closeNav()">El taḥrīf — La corrupción</a></li>
+    <li class="sub"><a href="#sustitucion" onclick="closeNav()">La teoría de la sustitución</a></li>
+    <li class="sub"><a href="#paulinismo" onclick="closeNav()">El argumento paulino</a></li>
+    <li><a href="#sura12103" onclick="closeNav()">VII-B. Sura 12:103 — El Escudo Roto</a></li>
+    <li class="sub"><a href="#sura12103" onclick="closeNav()">5 fallos del argumento numérico</a></li>
+    <li class="sub"><a href="#sura12103" onclick="closeNav()">Tres silogismos de respuesta</a></li>
+    <li><a href="#silogismo-final" onclick="closeNav()">VIII. Silogismo de Cierre</a></li>
+    <li><a href="#fuentes" onclick="closeNav()">IX. Fuentes</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section id="hero" style="max-width:100%;padding:0;">
+<div id="hero">
+  <div class="hero-eyebrow">Apologética Cristiana · Análisis Histórico-Teológico · Islam y Cristología</div>
+  <h1>El <span>Dilema</span> Apostólico</h1>
+  <div class="hero-sub">Un Trilema Lógico Insuperable sobre la Validez Histórica del Islam</div>
+  <p class="hero-desc">
+    El Corán designa a los discípulos de Jesús como <em>Al-Hawariyyun</em>: hombres elegidos,
+    verídicos, leales absolutos al mensaje de Dios. Pero esos mismos hombres proclamaron
+    la crucifixión y la resurrección de Cristo desde el primer día. El Islam no puede
+    tenerlo de las dos maneras: o sus testigos fundacionales son fiables, o no lo son.
+    En cualquier caso, el edificio islámico colapsa.
+  </p>
+
+  <div class="trilema-display">
+    <div class="tri-box">
+      <div class="tri-num">I</div>
+      <div class="tri-label">Engañados</div>
+      <div class="tri-text">Si los apóstoles fueron víctimas de un error sobre su maestro, el Islam carece de testigos fundacionales fiables.</div>
+    </div>
+    <div class="tri-box">
+      <div class="tri-num">II</div>
+      <div class="tri-label">Engañadores</div>
+      <div class="tri-text">Si los apóstoles mintieron conscientemente, el Corán los llama verídicos en falso y se contradice a sí mismo.</div>
+    </div>
+    <div class="tri-box">
+      <div class="tri-num">III</div>
+      <div class="tri-label">Verídicos</div>
+      <div class="tri-text">Si los apóstoles dijeron la verdad sobre la muerte y resurrección de Cristo, el Islam queda históricamente refutado.</div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">3</span><span class="lbl">Cuernos del Dilema</span></div>
+    <div class="hero-stat"><span class="num">30+</span><span class="lbl">Años — Pablo y los Doce</span></div>
+    <div class="hero-stat"><span class="num">600</span><span class="lbl">Años antes que el Corán</span></div>
+    <div class="hero-stat"><span class="num">0</span><span class="lbl">Fuentes islámicas del siglo I</span></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════ I. FUNDAMENTOS ═══════ -->
+<hr class="section-divider">
+<section id="fundamentos">
+  <h2><span class="h2-num">I · Los Fundamentos del Argumento</span>Al-Hawariyyun en el Corán</h2>
+
+  <p class="lead">Todo el peso del Dilema Apostólico descansa sobre un hecho que el propio Islam no puede negar sin demoler sus propias Escrituras: el Corán habla de los discípulos de Jesús en términos de elogio sin reservas. Eso convierte su testimonio histórico en una fuente que el Islam está obligado a tomar en serio.</p>
+
+  <h3 id="coran-apostoles">Lo que el Corán Dice sobre los Apóstoles de Jesús</h3>
+
+  <p>El término árabe <span class="gold">Al-Hawariyyun</span> (الحواريون) aparece en el Corán en cinco ocasiones. En todos los casos, los discípulos de Jesús son presentados como modelo de fe, fidelidad y compromiso con el mensaje de Dios. No existe en el Corán ninguna acusación contra ellos.</p>
+
+  <div class="quote quran">
+    <p class="quote-text">«Y cuando Jesús percibió la incredulidad de ellos, dijo: "¿Quiénes son mis auxiliares en el camino de Alá?" Los apóstoles respondieron: "Nosotros somos los auxiliares de Alá. Creemos en Alá y atestigua que somos musulmanes."»</p>
+    <div class="quote-source">Sura 3:52 (Al-Imran) — Los apóstoles se declaran musulmanes y auxiliares de Alá</div>
+  </div>
+
+  <div class="quote quran">
+    <p class="quote-text">«¡Oh creyentes! Sed auxiliares de Alá, como cuando Jesús, hijo de María, dijo a los apóstoles: "¿Quiénes son mis auxiliares en el camino de Alá?" Y los apóstoles dijeron: "Nosotros somos los auxiliares de Alá."»</p>
+    <div class="quote-source">Sura 61:14 (As-Saff) — Los apóstoles como modelo para los creyentes musulmanes</div>
+  </div>
+
+  <div class="quote quran">
+    <p class="quote-text">«Y cuando inspiré a los apóstoles: "Creed en Mí y en Mi Enviado", dijeron: "Creemos. Atestigua que nos entregamos."»</p>
+    <div class="quote-source">Sura 5:111 (Al-Maida) — Alá inspira directamente a los apóstoles y ellos obedecen</div>
+  </div>
+
+  <h3 id="lo-que-sostuvieron">Lo que los Apóstoles Sostuvieron — El Testimonio Histórico</h3>
+
+  <p>El contenido del testimonio apostólico está establecido con una certeza histórica inusual para la Antigüedad. Los apóstoles proclamaron, desde las semanas inmediatamente posteriores a la muerte de Jesús, un mensaje cuyo núcleo es incompatible con la doctrina islámica:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Lo que los apóstoles proclamaron</th><th>Lo que el Islam enseña</th><th>Compatibilidad</th></tr></thead>
+      <tbody>
+        <tr><td>Cristo fue crucificado y murió en la cruz</td><td>Jesús no fue crucificado (Sura 4:157)</td><td style="color:var(--rojo);font-family:'Oswald',sans-serif;font-size:12px;">✗ CONTRADICCIÓN DIRECTA</td></tr>
+        <tr><td>Cristo resucitó corporalmente al tercer día</td><td>El Islam no enseña la resurrección de Cristo</td><td style="color:var(--rojo);font-family:'Oswald',sans-serif;font-size:12px;">✗ CONTRADICCIÓN DIRECTA</td></tr>
+        <tr><td>Cristo es el Hijo de Dios e Hijo del Hombre</td><td>Jesús fue solo un profeta humano (Sura 5:75)</td><td style="color:var(--rojo);font-family:'Oswald',sans-serif;font-size:12px;">✗ CONTRADICCIÓN DIRECTA</td></tr>
+        <tr><td>Cristo es el Señor (Kyrios) equiparado a YHWH</td><td>La equiparación de Jesús con Dios es shirk (politeísmo)</td><td style="color:var(--rojo);font-family:'Oswald',sans-serif;font-size:12px;">✗ CONTRADICCIÓN DIRECTA</td></tr>
+        <tr><td>La salvación viene solo por Cristo resucitado</td><td>La salvación es por sumisión a Alá y obediencia a Mahoma</td><td style="color:var(--rojo);font-family:'Oswald',sans-serif;font-size:12px;">✗ CONTRADICCIÓN DIRECTA</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>El Corán elogia a los hombres que proclamaron exactamente estas cosas. Esta es la contradicción que el Islam no puede resolver.</p>
+</section>
+
+<!-- ═══════ II. ESTRUCTURA DEL TRILEMA ═══════ -->
+<hr class="section-divider">
+<section id="estructura">
+  <h2><span class="h2-num">II · Estructura del Trilema</span>Las Tres Premisas y su Desarrollo</h2>
+
+  <p class="lead">El Dilema Apostólico es, en realidad, un <em>trilema</em> exhaustivo y disyuntivo: sus tres ramas cubren todas las posibilidades lógicas. No existe una cuarta opción. Cada rama destruye un pilar esencial del Islam.</p>
+
+  <h3 id="premisa1">Premisa I — Los Apóstoles Fueron Engañados</h3>
+
+  <div class="premisa p1">
+    <p class="premisa-text">Si los discípulos de Jesús —hombres que convivieron con él durante años, que lo vieron morir, que después proclamaron haberlo visto resucitado— <strong>se equivocaron genuinamente</strong> sobre la naturaleza y el destino de su maestro, entonces el Islam hereda un problema insuperable: sus propios «auxiliares de Alá» (<em>Ansar Allah</em>) fueron víctimas de un error colosal sobre el evento más importante de la historia de la salvación. ¿Cómo pueden ser simultáneamente modelos de fe y testigos radicalmente equivocados sobre el objeto de esa fe?</p>
+  </div>
+
+  <p>Esta rama del trilema impone al Islam una carga probatoria extraordinaria: debe explicar <em>cómo</em> hombres que convivieron físicamente con Jesús durante años, que lo vieron sufrir, que comprobaron su muerte (o debería haberla comprobado), y que luego proclamaron su resurrección con tal convicción que murieron por ello, pudieron estar <em>todos</em> equivocados en el punto central.</p>
+
+  <div class="silogismo">
+    <div class="silogismo-title">Silogismo de la Premisa I</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">El Corán designa a los apóstoles como hombres inspirados directamente por Alá (Sura 5:111) y como modelo de fe para los creyentes (Sura 61:14).</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">Hombres inspirados directamente por Alá no pueden ser radicalmente engañados sobre el destino de su propio maestro sin que esa inspiración divina sea ineficaz.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">Los apóstoles proclamaron unánimemente que Jesús fue crucificado y resucitó, lo cual el Islam niega.</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">O la inspiración divina sobre los apóstoles fue ineficaz —lo que destruye la credibilidad del relato coránico— o los apóstoles no estaban equivocados.</span>
+    </div>
+  </div>
+
+  <h3 id="premisa2">Premisa II — Los Apóstoles Fueron Engañadores</h3>
+
+  <div class="premisa p2">
+    <p class="premisa-text">Si los discípulos de Jesús <strong>inventaron deliberadamente</strong> la crucifixión, la resurrección y la divinidad de Cristo, entonces el Corán alaba como «auxiliares de Alá», «musulmanes» e «inspirados por Dios» a un grupo de conspiradores que perpetraron el fraude religioso más exitoso de la historia humana. La contradicción es fatal: el Islam enaltece la integridad moral de sus propios falsificadores.</p>
+  </div>
+
+  <p>Esta rama ha sido la favorita de ciertos apologistas islámicos que, sin decirlo explícitamente, insinúan que Pablo de Tarso o un grupo de discípulos «helenistas» habrían deformado el mensaje original de Jesús. Pero esta estrategia genera más problemas de los que resuelve:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>El argumento de la conspiración</th><th>Por qué falla</th></tr></thead>
+      <tbody>
+        <tr><td>Los apóstoles inventaron la resurrección</td><td>Habrían necesitado persuadir a más de 500 personas que afirmaban haberla presenciado (1 Cor 15:6), incluyendo a escépticos como Tomás y a enemigos como Santiago el hermano de Jesús.</td></tr>
+        <tr><td>Pablo corrompió el mensaje original</td><td>Pablo recibió el kerigma de los Doce y ellos lo aprobaron (Gál 2:1–10). El kerigma de 1 Cor 15:3–7 —anterior a Pablo— ya incluye la muerte y resurrección. La corrupción habría tenido que ser <em>anterior</em> a Pablo.</td></tr>
+        <tr><td>El evangelio griego deformó el arameo original</td><td>Los crédos y fórmulas más antiguas (Filipenses 2:6–11, Romanos 1:3–4, 1 Cor 15:3–7) son ya plenamente cristológicos, y son anteriores a los evangelios. La cristología no fue una adición tardía: es el núcleo más antiguo.</td></tr>
+        <tr><td>Los apóstoles muertos no podían corregir el error</td><td>El apóstol Juan vivió hasta ca. 100 d.C. y no corrigió nada. Santiago, hermano de Jesús (escéptico durante el ministerio de Jesús, Jn 7:5), lideró la iglesia de Jerusalén proclamando a su hermano resucitado hasta ser martirizado en 62 d.C.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="silogismo">
+    <div class="silogismo-title">Silogismo de la Premisa II</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">El Corán describe a los apóstoles como siddiqun (verídicos) y como Ansar Allah (auxiliares de Alá), sin ninguna acusación de falsedad contra ellos.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">Si los apóstoles inventaron la crucifixión y la resurrección, son mentirosos y conspiradores religiosos, no hombres verídicos.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">El Corán no puede simultáneamente llamarlos verídicos y que hayan sido los mayores falsificadores religiosos de la historia.</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">Si los apóstoles mintieron, el Corán los elogia en falso, destruyendo la fiabilidad del juicio moral del texto sagrado islámico.</span>
+    </div>
+  </div>
+
+  <h3 id="premisa3">Premisa III — Los Apóstoles Dijeron la Verdad</h3>
+
+  <div class="premisa p3">
+    <p class="premisa-text">Si los apóstoles <strong>no engañaron ni fueron engañados</strong> —si su testimonio sobre la muerte y la resurrección de Cristo es históricamente fiable— entonces el Islam queda refutado por la historia. El núcleo del kerigma cristiano primitivo es incompatible con el núcleo del dogma islámico, y ese kerigma tiene una antigüedad documentada de al menos <strong>600 años antes del Corán</strong>.</p>
+  </div>
+
+  <div class="silogismo">
+    <div class="silogismo-title">Silogismo de la Premisa III — La más devastadora</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">Si los apóstoles no engañaron (Premisa II falsa) ni fueron engañados (Premisa I falsa), su testimonio sobre la crucifixión y resurrección es históricamente fiable.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">Un testimonio históricamente fiable de la crucifixión y resurrección de Cristo hace verdaderas proposiciones que el Islam declara falsas (Sura 4:157).</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">Una religión no puede ser verdadera si sus afirmaciones históricas centrales son contradichas por el testimonio fiable de sus propios profetas reconocidos.</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">El Islam, al no tener salida por las Premisas I ni II, queda históricamente refutado por la Premisa III.</span>
+    </div>
+  </div>
+
+  <div class="dilema-visual">
+    <div class="dv-box">
+      <div class="dv-label">Premisa I</div>
+      <div class="dv-text">Apóstoles engañados</div>
+      <div class="dv-result">✗ La inspiración coránica sobre ellos fue ineficaz</div>
+    </div>
+    <div class="dv-arrow">→</div>
+    <div class="dv-box">
+      <div class="dv-label">Premisa II</div>
+      <div class="dv-text">Apóstoles engañadores</div>
+      <div class="dv-result">✗ El Corán elogia falsificadores</div>
+    </div>
+    <div class="dv-arrow">→</div>
+    <div class="dv-box">
+      <div class="dv-label">Premisa III</div>
+      <div class="dv-text">Apóstoles verídicos</div>
+      <div class="dv-result">✗ El Islam queda históricamente refutado</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ III. PREMISAS EXTENDIDAS ═══════ -->
+<hr class="section-divider">
+<section id="extension">
+  <h2><span class="h2-num">III · Las Premisas Extendidas</span>Tres Argumentos Adicionales que Cierran el Dilema</h2>
+
+  <p class="lead">El trilema clásico tiene tres cuernos. Pero hay tres argumentos adicionales que refuerzan el cierre lógico desde ángulos independientes: el silencio histórico, la trampa interna del Corán, y la irreversibilidad del kerigma primitivo.</p>
+
+  <h3 id="premisa4">Premisa IV — El Silencio de la Historia</h3>
+
+  <div class="premisa piv">
+    <p class="premisa-text">Si el verdadero mensaje de Jesús era islámico —la sumisión a Alá, el rechazo de su divinidad y la negación de su crucifixión— <strong>no existe ningún registro histórico de una comunidad que lo hubiera preservado</strong> en el siglo I. El Islam requiere que la verdad haya existido, haya sido conocida, y luego haya sido suprimida sin dejar rastro. Esta exigencia es históricamente monstruosa.</p>
+  </div>
+
+  <p>La historia del siglo I d.C. en Judea y el Mediterráneo está documentada con una densidad inusual para la Antigüedad. Contamos con Josefo, Tácito, Plinio el Joven, los evangelios, las cartas paulinas, las cartas de Ignacio de Antioquía, la Didajé, el Pastor de Hermas, Clemente de Roma, y decenas de fuentes más. Ninguna de ellas registra:</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Una comunidad «islámica» primitiva</div>
+      <div class="card-role">Ausencia histórica total</div>
+      <div class="card-desc">No existe ninguna fuente del siglo I que mencione una comunidad de seguidores de Jesús que negara su crucifixión, rechazara su divinidad y lo venerara solo como profeta enviado por Alá. Cero fuentes. Cero arqueología. Cero epigrafía.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Una controversia sobre la crucifixión</div>
+      <div class="card-role">Ausencia de debate</div>
+      <div class="card-desc">En el siglo I, nadie discute si Jesús fue o no crucificado. Los adversarios del cristianismo (judíos, romanos, gnósticos) discuten la interpretación del evento, pero no el evento mismo. La negación de la crucifixión no aparece hasta siglos después.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Una versión «verdadera» suprimida</div>
+      <div class="card-role">El silencio de los supresores</div>
+      <div class="card-desc">Si los apóstoles falsificaron el mensaje de Jesús, los mismos judíos del siglo I —que tenían todo el interés en desmentirlos— habrían conservado y propagado la versión verdadera. Los archivos rabínicos del período no contienen ninguna versión «islámica» del mensaje de Jesús.</div>
+    </div>
+  </div>
+
+  <div class="silogismo">
+    <div class="silogismo-title">Silogismo de la Premisa IV — El Argumento del Silencio</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">Si el mensaje original de Jesús era islámico, debería existir evidencia histórica de una comunidad que lo preservara antes de su supuesta corrupción.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">No existe ninguna evidencia histórica, arqueológica, epigráfica ni literaria de tal comunidad en los siglos I–VI d.C.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">La ausencia total de evidencia para un evento histórico de tal magnitud, en un período razonablemente bien documentado, constituye evidencia positiva de que el evento no ocurrió.</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">El mensaje islámico atribuido a Jesús no tiene ningún anclaje histórico en el mundo del siglo I. Es una proyección retroactiva del siglo VII, no una preservación de la verdad original.</span>
+    </div>
+  </div>
+
+  <h3 id="premisa5">Premisa V — La Trampa Coránica</h3>
+
+  <div class="premisa pv">
+    <p class="premisa-text">El Corán afirma dos cosas que se destruyen mutuamente: (a) que los apóstoles de Jesús eran hombres verídicos inspirados por Alá, y (b) que el mensaje que proclamaron <strong>era falso</strong>. Esta no es una tensión que pueda resolverse apelando a la corrupción textual posterior: las cartas de Pablo —que contienen el kerigma de la crucifixión y resurrección— fueron escritas <em>antes</em> de que existiera ningún evangelio, mientras los apóstoles que el Corán alaba estaban aún vivos.</p>
+  </div>
+
+  <div class="highlight danger">
+    <div class="highlight-title">⚠ La Cronología que el Islam no Puede Esquivar</div>
+    <p>La Primera Carta a los Corintios —que contiene en 15:3–7 el kerigma más antiguo documentado de la muerte y resurrección de Cristo— fue escrita ca. <strong>53–54 d.C.</strong>, solo veinte años después de la crucifixión. Pablo recibió ese kerigma en ca. <strong>35–36 d.C.</strong>, probablemente tres años después de la muerte de Jesús, directamente de Pedro y Santiago (Gál 1:18–19). Los apóstoles a quienes el Corán llama verídicos ya proclamaban la crucifixión y resurrección <strong>en vida de los testigos oculares</strong>, sin ninguna posibilidad de que el mensaje hubiera sido corrompido todavía.</p>
+  </div>
+
+  <h3 id="premisa6">Premisa VI — La Irreversibilidad del Kerigma</h3>
+
+  <div class="premisa pvi">
+    <p class="premisa-text">El kerigma cristiano primitivo —muerte por nuestros pecados, sepultura, resurrección al tercer día, apariciones verificables— es presentado por Pablo como tradición <em>recibida</em> (<em>paredoka... parelabon</em>, 1 Cor 15:3) de una fuente anterior a él mismo. Esta cadena de transmisión oral formal, equivalente a la <em>isnad</em> hadítica que el Islam valora, <strong>señala directamente a los apóstoles</strong> como origen y garantes del contenido. Si el Islam acepta las cadenas de transmisión como criterio de autenticidad, debe aceptar que la cadena apostólica del kerigma es anterior, más corta y mejor verificable que cualquier hadiz del siglo IX.</p>
+  </div>
+
+  <div class="silogismo">
+    <div class="silogismo-title">Silogismo de la Premisa VI — El Kerigma como Hadiz</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">El Islam considera las cadenas de transmisión (isnad) como el criterio primario de autenticidad de un relato religioso.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">El kerigma de 1 Cor 15:3–7 tiene una cadena de transmisión de 2–3 personas: Pablo ← Pedro/Santiago ← Jesús resucitado. Data de 35–36 d.C. Su isnad tiene 20 años de antigüedad, testigos identificados por nombre y verificables.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">Los hadices más importantes del Islam tienen cadenas de 200–300 años de transmisión oral antes de ser compilados por Bujari (m. 870) y Muslim (m. 875).</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">Aplicando los propios criterios islámicos de autenticidad de transmisión, el kerigma apostólico tiene una cadena de transmisión incomparablemente más corta, más verificable y más cercana a los eventos que cualquier hadiz del corpus sunní.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ IV. EL ARGUMENTO HISTÓRICO ═══════ -->
+<hr class="section-divider">
+<section id="historico">
+  <h2><span class="h2-num">IV · El Argumento Histórico</span>Lo que la Historia Establece con Certeza</h2>
+
+  <p class="lead">El Dilema Apostólico no es solo un argumento teológico interno. Tiene un sustento histórico independiente que los académicos no creyentes reconocen con la misma claridad que los apologistas cristianos.</p>
+
+  <h3 id="kerigma-primitivo">El Kerigma Primitivo — La Fuente más Antigua</h3>
+
+  <p>El pasaje más importante de toda la apologética cristiana frente al Islam no está en los evangelios sino en una carta paulina escrita antes de que existiera ningún evangelio:</p>
+
+  <div class="quote">
+    <p class="quote-text">«Os transmití, en primer lugar, lo que yo mismo recibí: que Cristo murió por nuestros pecados, según las Escrituras; que fue sepultado; que resucitó al tercer día, según las Escrituras; que se apareció a Pedro, y luego a los Doce; después se apareció a más de quinientos hermanos a la vez, de los cuales la mayoría viven todavía, aunque algunos ya murieron; después se apareció a Santiago, luego a todos los apóstoles; y por último, como a un aborto, se me apareció también a mí.»</p>
+    <div class="quote-source">1 Corintios 15:3–8 — Pablo de Tarso, ca. 53–54 d.C. El kerigma que recibió ca. 35–36 d.C. de los propios apóstoles.</div>
+  </div>
+
+  <p>Este texto tiene propiedades que los historiadores modernos —incluyendo escépticos como Gerd Lüdemann, Bart Ehrman y Paula Fredriksen— reconocen unánimemente:</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Antigüedad excepcional</div>
+      <div class="card-role">Criterio histórico</div>
+      <div class="card-desc">El kerigma fue transmitido a Pablo ca. 35–36 d.C., 3–5 años después de la crucifixión. No hay ningún intervalo de tiempo suficiente para que la leyenda se hubiera formado o el mensaje se hubiera corrompido.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Criterio de verificabilidad</div>
+      <div class="card-role">Criterio histórico</div>
+      <div class="card-desc">Pablo menciona a 500 testigos de quienes «la mayoría viven todavía» —una invitación abierta a la verificación por parte de sus lectores contemporáneos. Nadie que mintiera incluiría ese tipo de desafío empírico.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Criterio de múltiple atestación</div>
+      <div class="card-role">Criterio histórico</div>
+      <div class="card-desc">La resurrección de Cristo está atestada en fuentes independientes: Pablo (35 d.C.), Marcos (ca. 65–70), Mateo (ca. 80–85), Lucas-Hechos (ca. 80–90), Juan (ca. 90–100), y fuentes pre-evangélicas como Q y el material especial de Lucas.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Criterio de dificultad</div>
+      <div class="card-role">Criterio histórico</div>
+      <div class="card-desc">Un relato inventado no habría incluido elementos embarazosos: las mujeres como primeras testigos (cuyo testimonio era jurídicamente inválido en la cultura judía del siglo I), o la huida y negación de Pedro. Estos elementos se conservaron precisamente porque eran reales.</div>
+    </div>
+  </div>
+
+  <h3 id="pablo">Pablo de Tarso — El Testigo más Incómodo para el Islam</h3>
+
+  <p><span class="gold">Pablo de Tarso</span> es el argumento histórico más devastador que el Islam debe enfrentar. Su caso tiene propiedades únicas que lo hacen prácticamente irrefutable:</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">ca. 33–35 d.C.</div>
+      <div class="tl-title">Saulo perseguía a la Iglesia — Adversario declarado</div>
+      <div class="tl-body">Pablo (entonces Saulo) no era un creyente crédulo que aceptó una historia bonita. Era un fariseo instruido, perseguidor activo de los cristianos, presente en el martirio de Esteban. Su conversión no puede explicarse por predisposición favorable.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">ca. 35–36 d.C.</div>
+      <div class="tl-title">Conversión en el camino de Damasco</div>
+      <div class="tl-body">Pablo relata su encuentro con el Cristo resucitado (Gál 1:11–16; 1 Cor 15:8). Inmediatamente después viaja a Arabia y Damasco durante tres años antes de visitar a Pedro y Santiago en Jerusalén. Este período de retiro independiente hace imposible que recibiera una «versión corrompida» de otros creyentes.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">ca. 38–49 d.C.</div>
+      <div class="tl-title">Pablo verifica su evangelio con los Doce</div>
+      <div class="tl-body">En Gál 2:1–10, Pablo relata que presentó su evangelio a los líderes de Jerusalén —Pedro, Santiago y Juan— «para ver si corría o había corrido en vano». Ellos aprobaron su mensaje sin añadir nada. El evangelio de Pablo era el mismo que el de los Doce.</div>
+    </div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content">
+      <div class="tl-year">ca. 55–68 d.C.</div>
+      <div class="tl-title">Pablo muere mártir en Roma</div>
+      <div class="tl-body">Pablo fue ejecutado bajo Nerón, ca. 64–68 d.C. Murió por lo que proclamaba. Un hombre que hubiera inventado o corrompido un mensaje podría haber salvado su vida retractándose. No lo hizo. La coherencia entre su vida y su muerte es el sello de la autenticidad del testigo.</div>
+    </div></div>
+  </div>
+
+  <h3 id="martirio">El Precio del Testimonio — El Argumento del Martirio</h3>
+
+  <p>El argumento más simple y más poderoso del Dilema Apostólico es el de la consecuencia existencial del testimonio. Los apóstoles no solo proclamaron la resurrección de Cristo: pagaron por esa proclamación con sus vidas.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Apóstol</th><th>Destino según las fuentes</th><th>Relevancia apologética</th></tr></thead>
+      <tbody>
+        <tr><td>Santiago hijo de Zebedeo</td><td>Decapitado por Herodes Agripa I (44 d.C.) — Hch 12:2. Única muerte apostólica en el NT.</td><td>Primera muerte apostólica documentada. Murió dentro de 14 años de la crucifixión.</td></tr>
+        <tr><td>Santiago hermano de Jesús</td><td>Lapidado en Jerusalén (62 d.C.) — Josefo, <em>Ant.</em> XX, 9,1. Escéptico durante el ministerio de Jesús (Jn 7:5).</td><td>Un escéptico que se convirtió y murió por la resurrección de su hermano. Imposible explicar por fraude.</td></tr>
+        <tr><td>Pedro</td><td>Crucificado invertido en Roma bajo Nerón (ca. 64–68) — Clemente de Roma; confirmado por arqueología vaticana.</td><td>Jefe de los apóstoles, primer testigo de la resurrección (1 Cor 15:5). Murió por lo que él mismo había visto.</td></tr>
+        <tr><td>Pablo</td><td>Decapitado en Roma bajo Nerón (ca. 64–68) — Clemente de Roma; Eusebio.</td><td>Ex perseguidor convertido. No murió por creencias heredadas sino por una experiencia personal que verificó con los Doce.</td></tr>
+        <tr><td>Esteban (protomártir)</td><td>Lapidado en Jerusalén (ca. 33–36 d.C.) — Hch 7:54–60.</td><td>El primer mártir murió proclamando «veo a Jesús a la diestra de Dios». Muerte contemporánea a la crucifixión.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight success">
+    <div class="highlight-title">✓ El Argumento del Martirio — Por qué es Decisivo</div>
+    <p>Los hombres mienten para obtener beneficios: poder, dinero, fama, seguridad. Nadie muere voluntariamente por lo que sabe que es mentira. Los apóstoles no obtuvieron ninguno de estos beneficios: fueron perseguidos, encarcelados, torturados y ejecutados. El único bien que los motivó fue la convicción de que Cristo había resucitado y de que esta verdad valía más que su vida.</p>
+    <p>Objeción estándar: «Muchos mártires mueren por creencias falsas.» Correcto — pero mueren por creencias que <em>creen</em> verdaderas. El caso apostólico es diferente: los apóstoles no habrían muerto por lo que <em>sabían</em> que era falso si ellos mismos hubieran inventado la resurrección. Un conspirador puede morir por una mentira que otros le transmitieron; no muere por una mentira que él mismo fabricó.</p>
+  </div>
+</section>
+
+<!-- ═══════ V. CRÍTICO-TEXTUAL ═══════ -->
+<hr class="section-divider">
+<section id="critico">
+  <h2><span class="h2-num">V · El Argumento Crítico-Textual</span>Lo que la Ciencia Histórica Establece</h2>
+
+  <h3 id="datacion">La Datación de las Fuentes — Un Cuadro Comparativo</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuente</th><th>Fecha de composición</th><th>Distancia del evento</th><th>Contenido relevante</th></tr></thead>
+      <tbody>
+        <tr><td>Kerigma de 1 Cor 15:3–7 (recibido por Pablo)</td><td>ca. 35–36 d.C.</td><td>3–5 años</td><td>Muerte, sepultura, resurrección, apariciones verificables</td></tr>
+        <tr><td>Carta a los Gálatas</td><td>ca. 48–55 d.C.</td><td>15–25 años</td><td>Evangelio confirmado por Pedro, Santiago y Juan (Doce)</td></tr>
+        <tr><td>Primera Carta a los Corintios</td><td>ca. 53–54 d.C.</td><td>20–25 años</td><td>Lista completa de testigos de la resurrección; 500 contemporáneos</td></tr>
+        <tr><td>Evangelio de Marcos</td><td>ca. 65–70 d.C.</td><td>35–40 años</td><td>Pasión, muerte, tumba vacía, apariciones</td></tr>
+        <tr><td>Evangelio de Mateo</td><td>ca. 80–85 d.C.</td><td>50–55 años</td><td>Mismo contenido, expansión de la narrativa de la resurrección</td></tr>
+        <tr><td>Evangelio de Lucas / Hechos</td><td>ca. 80–90 d.C.</td><td>50–60 años</td><td>Historicidad enfatizada; menciona a testigos específicos vivos</td></tr>
+        <tr><td>Sura 4:157 (negación de la crucifixión)</td><td>ca. 627–632 d.C.</td><td>600 años</td><td>«No lo mataron ni lo crucificaron, sino que así les pareció»</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight danger">
+    <div class="highlight-title">⚠ El Problema Insuperable de la Distancia Temporal</div>
+    <p>La afirmación coránica de que Cristo no fue crucificado aparece en un texto compuesto <strong>600 años después del evento</strong>, sin ninguna fuente intermedia que lo apoye. En términos de metodología histórica, esto equivale a que alguien en 2025 afirmara que la Revolución Francesa no ocurrió, sin ningún texto del siglo XVIII que lo respaldara, apoyándose únicamente en una revelación privada. Ningún historiador —creyente o no— consideraría ese relato más fiable que los documentos contemporáneos.</p>
+  </div>
+
+  <h3 id="criterios">Los Criterios de Historicidad Aplicados</h3>
+
+  <p>Los criterios metodológicos que los historiadores críticos aplican para evaluar la historicidad de los relatos antiguos producen, en el caso del kerigma apostólico, resultados abrumadoramente positivos:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Criterio de historicidad</th><th>Resultado para el kerigma apostólico</th><th>Resultado para la negación coránica</th></tr></thead>
+      <tbody>
+        <tr><td>Antigüedad de las fuentes</td><td>✅ 3–5 años del evento (kerigma paulino)</td><td>❌ 600 años del evento (Sura 4:157)</td></tr>
+        <tr><td>Múltiple atestación independiente</td><td>✅ Pablo, Marcos, Mateo, Lucas, Juan, fuentes pre-evangélicas</td><td>❌ Solo el Corán; ninguna fuente del siglo I apoya la negación</td></tr>
+        <tr><td>Coherencia con fuentes externas</td><td>✅ Tácito (Ann. XV,44) confirma la ejecución de Cristo bajo Pilato</td><td>❌ Sin apoyo en ninguna fuente no islámica del período</td></tr>
+        <tr><td>Criterio de dificultad (embarazo)</td><td>✅ Elementos embarazosos conservados (mujeres testigos, huida de Pedro)</td><td>❌ La negación de la crucifixión elimina el elemento más vergonzoso del kerigma</td></tr>
+        <tr><td>Criterio de efecto</td><td>✅ La explosión del movimiento cristiano requiere un evento real de magnitud</td><td>❌ Ningún efecto histórico conocido produjo el relato islámico en el siglo I</td></tr>
+        <tr><td>Atestigüación por adversarios</td><td>✅ Judíos del siglo I nunca negaron la crucifixión; debatían su significado</td><td>❌ Ningún adversario contemporáneo de los apóstoles negó la crucifixión</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════ VI. EL DILEMA DESDE EL CORÁN ═══════ -->
+<hr class="section-divider">
+<section id="coranico">
+  <h2><span class="h2-num">VI · El Dilema desde el Interior del Corán</span>El Islam Atrapado en Sus Propias Escrituras</h2>
+
+  <h3 id="sura-61">Sura 61:14 — El Versículo que Cierra la Trampa</h3>
+
+  <p>Hay un versículo coránico que, con irremediable ironía, hace que el Dilema Apostólico sea un dilema interno del Islam antes incluso de recurrir a fuentes externas:</p>
+
+  <div class="quote quran">
+    <p class="quote-text">«¡Oh creyentes! Sed auxiliares de Alá, como cuando Jesús, hijo de María, dijo a los apóstoles: "¿Quiénes son mis auxiliares en el camino de Alá?" Los apóstoles respondieron: "Nosotros somos los auxiliares de Alá." Una facción de los Hijos de Israel creyó, y otra rechazó. Apoyamos a los creyentes contra sus enemigos, y llegaron a ser los triunfantes.»</p>
+    <div class="quote-source">Sura 61:14 (As-Saff) — «El Rango»</div>
+  </div>
+
+  <p>Este versículo instruye a los musulmanes del siglo VII a imitar a los apóstoles de Jesús. Pero esos apóstoles proclamaban la crucifixión y la resurrección. El Corán está invitando a los fieles a imitar a quienes, según el propio Islam, propagaban una falsedad. La instrucción es incoherente desde la perspectiva islámica.</p>
+
+  <h3 id="contradiccion">La Contradicción Interna del Relato Islámico de Jesús</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Lo que el Corán afirma sobre los apóstoles</th><th>Lo que implica sobre su testimonio</th><th>El problema para el Islam</th></tr></thead>
+      <tbody>
+        <tr><td>«Inspiré a los apóstoles» (5:111)</td><td>Su conocimiento de Jesús viene de Alá directamente</td><td>¿Por qué Alá los inspiró para proclamar la crucifixión que Alá mismo niega?</td></tr>
+        <tr><td>«Son los auxiliares de Alá» (61:14)</td><td>Actúan en nombre y con la bendición de Alá</td><td>¿Los auxiliares de Alá pueden propagar durante siglos la mayor mentira sobre su profeta?</td></tr>
+        <tr><td>«Atestigua que nos entregamos» (3:52)</td><td>Son musulmanes verdaderos, sometidos a Alá</td><td>Musulmanes verdaderos proclamaron la crucifixión y divinidad de Cristo: incompatible con el Islam</td></tr>
+        <tr><td>«Llegaron a ser los triunfantes» (61:14)</td><td>El proyecto de los apóstoles triunfó con la bendición de Alá</td><td>El proyecto que triunfó fue el cristianismo, no el Islam. ¿Alá bendijo el triunfo del error?</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════ VI-B. SURA 3:55 Y EL TAFSIR DE IBN KATHIR ═══════ -->
+<hr class="section-divider">
+<section id="sura355">
+  <h2><span class="h2-num">VI-B · La Bomba de Relojería Coránica</span>Sura 3:55 y el Tafsir de Ibn Kathir</h2>
+
+  <p class="lead">Existe un versículo coránico que no solo refuerza el Dilema Apostólico sino que lo convierte en una contradicción <em>permanente y verificable históricamente</em> hasta el fin del mundo según el propio Islam. Y los mayores exégetas islámicos medievales, al intentar explicarlo, produjeron un relato que destruye cualquier defensa coherente.</p>
+
+  <h3>El Texto del Versículo — Sura 3:55</h3>
+
+  <div class="quote quran">
+    <p class="quote-text">«Y cuando Alá dijo: "¡Jesús! Te tomaré y te elevaré hacia Mí, y te purificaré de los que no creen, y pondré a los que te siguen por encima de los que rechazan la fe <strong>hasta el Día de la Resurrección</strong>. Luego, todos volveréis a Mí y juzgaré entre vosotros sobre aquello en lo que discrepabais."»</p>
+    <div class="quote-source">Sura 3:55 (Al-Imran) — Árabe: وَجَاعِلُ الَّذِينَ اتَّبَعُوكَ فَوْقَ الَّذِينَ كَفَرُوا إِلَىٰ يَوْمِ الْقِيَامَةِ</div>
+  </div>
+
+  <p>La promesa es clara y sin ambigüedad temporal: <span class="gold">«fawqa alladhina kafaru ilā yawmi l-qiyāma»</span> — los seguidores de Jesús estarán <em>por encima</em> de los incrédulos <strong>hasta el Día de la Resurrección</strong>. No hasta la llegada del Islam. No hasta el siglo VII. Hasta el fin de los tiempos.</p>
+
+  <p>Esto crea una pregunta que el Islam no puede responder con facilidad: <em>¿quiénes son esos seguidores que han estado por encima de los incrédulos de forma ininterrumpida desde el siglo I hasta hoy?</em> La única comunidad que ha seguido a Jesús de forma continua y verificable desde el siglo I es la Iglesia cristiana —la misma que proclama su crucifixión y resurrección.</p>
+
+  <div class="silogismo">
+    <div class="silogismo-title">El Silogismo de la Supremacía Permanente (Sura 3:55)</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">Alá prometió que los seguidores de Jesús estarán por encima de los incrédulos hasta el Día de la Resurrección (Sura 3:55).</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">La única comunidad que ha seguido a Jesús de forma continua y documentada desde el siglo I hasta el presente son los cristianos, quienes proclaman su crucifixión, resurrección y divinidad.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">No existe registro histórico de ninguna otra comunidad de seguidores de Jesús entre el siglo I y el siglo VII que no fueran estos mismos cristianos trinitarios.</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">O bien Alá prometió supremacía permanente a los seguidores de una doctrina que el Islam declara falsa (el cristianismo trinitario), o bien la promesa de 3:55 se refiere a quienes proclamaban la crucifixión y la resurrección —lo cual refuta la Sura 4:157 desde el interior del propio Corán.</span>
+    </div>
+  </div>
+
+  <h3 id="ibn-kathir-355">El Tafsir de Ibn Kathir sobre 3:55 — El Exégeta que Se Delata a Sí Mismo</h3>
+
+  <p><span class="gold">Ibn Kathir</span> (1300–1373), uno de los exégetas más autorizados de la tradición sunní, elaboró sobre este versículo un comentario que, leído con atención crítica, resulta enormemente revelador. Su razonamiento en el tafsir de 3:55 atraviesa varias fases que conviene examinar una por una:</p>
+
+  <h4>Fase 1 — Ibn Kathir reconoce que los seguidores de Jesús se dividieron en sectas</h4>
+
+  <div class="quote">
+    <p class="quote-text">«Esto es lo que ocurrió. Cuando Alá elevó a Isa al cielo, sus seguidores se dividieron en sectas y grupos. Algunos creyeron en lo que Alá envió a Isa como: siervo de Alá, Su Mensajero, e hijo de Su sierva. Sin embargo, algunos fueron al extremo sobre Isa, creyendo que era el Hijo de Alá. Algunos dijeron que Isa era Alá mismo, mientras que otros dijeron que era uno de una Trinidad.»</p>
+    <div class="quote-source">Ibn Kathir, Tafsir de Sura 3:55 — Fuente: QuranX.com / TafsirIbnKathir completo</div>
+  </div>
+
+  <p>Aquí Ibn Kathir admite sin quererlo algo crucial: <em>todos</em> los grupos en que se dividieron los seguidores de Jesús inmediatamente tras su ascensión —incluyendo el grupo que él llama «correcto» (los que creían que era profeta y siervo de Dios)— desaparecieron sin dejar rastro histórico, mientras que los trinitarios y los que afirmaban la divinidad de Cristo prevalecieron. Si el grupo «verdadero» prevaleció según la promesa de 3:55, ¿dónde está?</p>
+
+  <h4>Fase 2 — La Conspiración de Constantino</h4>
+
+  <div class="quote">
+    <p class="quote-text">«Los cristianos permanecieron así hasta el siglo III d.C., cuando un rey griego llamado Constantino se hizo cristiano con el propósito de destruir el cristianismo. Constantino era un filósofo, o simplemente un ignorante. Constantino cambió la religión de Isa añadiendo a ella y borrando de ella. Estableció los rituales del cristianismo y el llamado Gran Acuerdo, que es en realidad la Gran Traición.»</p>
+    <div class="quote-source">Ibn Kathir, Tafsir de Sura 3:55 — Fuente: QuranX.com</div>
+  </div>
+
+  <div class="highlight danger">
+    <div class="highlight-title">⚠ El Problema Histórico de la Teoría de Constantino en Ibn Kathir</div>
+    <p>La afirmación de Ibn Kathir de que Constantino I «se hizo cristiano para destruir el cristianismo» es un relato de conspiración medieval sin ningún fundamento en las fuentes históricas. Los problemas son múltiples e insuperables:</p>
+    <p><strong>1. La cristología trinitaria es anterior a Constantino.</strong> Ignacio de Antioquía (m. ca. 107 d.C.) llamaba a Cristo «nuestro Dios» en sus cartas, dos siglos antes de Constantino. Ireneo de Lyon (ca. 180 d.C.), Tertuliano (ca. 200 d.C.), Orígenes (ca. 230 d.C.) y Clemente de Alejandría (ca. 200 d.C.) desarrollaron la teología trinitaria generaciones antes de que Constantino naciera. Si Constantino «introdujo» la Trinidad, ¿quién escribió esos textos?</p>
+    <p><strong>2. El Concilio de Nicea (325) no «inventó» la divinidad de Cristo.</strong> Nicea fue convocado precisamente para <em>refutar</em> el arrianismo —la postura de que Cristo era una criatura inferior al Padre. La postura que Nicea condenó (el arrianismo) se parece más a la cristología islámica que la postura que afirmó (el homoousios). Si Constantino quería destruir el Islam avant la lettre, lo hizo condenando exactamente la postura que el Islam sostendría siglos después.</p>
+    <p><strong>3. Constantino no presidió el Concilio de Nicea como árbitro teológico.</strong> Era el anfitrión político. La definición teológica la elaboraron los obispos. Constantino no era teólogo y no impuso personalmente ningún credo.</p>
+    <p><strong>4. El argumento de Ibn Kathir es post hoc y circular.</strong> Primero Alá promete supremacía a los seguidores de Jesús. Luego los seguidores «verdaderos» de Jesús desaparecen. Para salvar la promesa, Ibn Kathir inventa una conspiración romana sin evidencia. Luego transfiere la promesa a los musulmanes. Este movimiento argumental es exactamente lo que los lógicos llaman una «hipótesis ad hoc»: añadir un supuesto no verificable para salvar una predicción que ha fallado.</p>
+  </div>
+
+  <h4>Fase 3 — La Invención de los Tres Grupos y la Solución «Musulmana»</h4>
+
+  <p>Habiendo destruido la continuidad de los «verdaderos» seguidores de Jesús con la conspiración de Constantino, Ibn Kathir debe ahora redirigir la promesa de 3:55 hacia los musulmanes. Su razonamiento en el tafsir completo puede reconstruirse así:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Grupo según Ibn Kathir</th><th>Descripción</th><th>Problema histórico</th></tr></thead>
+      <tbody>
+        <tr><td>«Los verdaderos seguidores» de Jesús</td><td>Creían que era profeta y siervo de Alá. Serían los «proto-musulmanes».</td><td>No existe ninguna fuente histórica del siglo I–VI que documente esta comunidad. Cero evidencia arqueológica, epigráfica o literaria.</td></tr>
+        <tr><td>Los Jacobitas (miafisitas)</td><td>Afirmaban una sola naturaleza en Cristo. Ibn Kathir los equipara como hereje.</td><td>Los jacobitas son los seguidores de Severio de Antioquía (m. 538), un grupo cristiano que afirmaba la divinidad de Cristo. No son «proto-musulmanes».</td></tr>
+        <tr><td>Los Nestorianos</td><td>Afirmaban dos naturalezas distintas. También herejes según Ibn Kathir.</td><td>Los nestorianos siguen la teología de Teodoro de Mopsuestia. Creían en la Trinidad. No negaban la crucifixión. No son «proto-musulmanes».</td></tr>
+        <tr><td>Los musulmanes (desde el siglo VII)</td><td>Ibn Kathir los presenta como los «verdaderos seguidores» de Jesús que reciben la promesa de 3:55.</td><td>El Islam no existía hasta el siglo VII. La promesa de 3:55 se refiere al período inmediatamente posterior a la ascensión de Jesús, no a 600 años después.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote">
+    <p class="quote-text">«Por lo tanto, los musulmanes son los verdaderos creyentes en Isa. Los musulmanes entonces adquirieron Ash-Sham [Siria-Palestina] de los cristianos, causando que evacuaran hacia Asia Menor, hacia su ciudad fortificada en Constantinopla. Los musulmanes estarán por encima de ellos hasta el Día de la Resurrección.»</p>
+    <div class="quote-source">Ibn Kathir, Tafsir de Sura 3:55 (sección final) — Fuente: QuranX.com / Honey for the Heart</div>
+  </div>
+
+  <div class="highlight danger">
+    <div class="highlight-title">⚠ El Salto Lógico Fatal de Ibn Kathir</div>
+    <p>Ibn Kathir transfiere la promesa de 3:55 de «los seguidores de Jesús en el siglo I» a «los musulmanes del siglo VII» mediante un razonamiento circular que puede descomponerse así:</p>
+    <p><strong>Paso 1:</strong> Los verdaderos seguidores de Jesús debían ser superiores hasta el Juicio Final (3:55).</p>
+    <p><strong>Paso 2:</strong> Los seguidores «verdaderos» (proto-musulmanes) fueron destruidos por Constantino y reemplazados por trinitarios.</p>
+    <p><strong>Paso 3:</strong> Por lo tanto, la promesa se transfirió a los musulmanes, que son los «verdaderos» herederos de Jesús.</p>
+    <p>El problema es que <strong>el Paso 2 no tiene ninguna evidencia histórica</strong>. Es una afirmación ad hoc sin fuentes. Nadie antes del siglo VII negó la crucifixión de Cristo. Ningún grupo entre el siglo I y el VII mantuvo que Cristo no había sido crucificado. La transferencia de la promesa a los musulmanes requiere inventar una historia que no ocurrió.</p>
+  </div>
+
+  <h3>El Doble Golpe: Sura 3:55 + Sura 61:14 Juntas</h3>
+
+  <p>Leídas juntas, las dos suras producen una contradicción interna del Corán que ningún tafsir ha podido resolver satisfactoriamente:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Versículo</th><th>Lo que promete</th><th>A quién</th><th>Problema para el Islam</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Sura 3:55</strong></td>
+          <td>Supremacía <em>hasta el Día de la Resurrección</em></td>
+          <td>«Los que siguen a Jesús» (alladhīna attaba'ūka)</td>
+          <td>Los únicos que han seguido a Jesús de forma continua desde el siglo I son los cristianos trinitarios. La promesa se cumplió para ellos, no para los musulmanes.</td>
+        </tr>
+        <tr>
+          <td><strong>Sura 61:14</strong></td>
+          <td>Los apóstoles como modelo para los creyentes. «Llegaron a ser los triunfantes»</td>
+          <td>Los apóstoles de Jesús (Al-Hawariyyun)</td>
+          <td>Los apóstoles «triunfantes» proclamaban la crucifixión y la resurrección. El Islam invita a imitar a hombres cuyo mensaje central rechaza.</td>
+        </tr>
+        <tr>
+          <td><strong>Sura 4:157</strong></td>
+          <td>Jesús no fue crucificado («así les pareció»)</td>
+          <td>Doctrina islámica sobre la muerte de Cristo</td>
+          <td>Contradice directamente el testimonio de los «seguidores de Jesús» elogiados en 3:55 y 61:14, que fueron los primeros en proclamar la crucifixión.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="silogismo">
+    <div class="silogismo-title">El Trilema Coránico Interno — Solo con el Texto del Corán</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">Sura 3:55 promete supremacía permanente hasta el Juicio Final a «los que siguen a Jesús».</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">Los únicos seguidores continuos de Jesús desde el siglo I son los cristianos, que proclaman su crucifixión, resurrección y divinidad.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">Sura 4:157 niega la crucifixión de Cristo, que es el núcleo del mensaje de esos mismos seguidores a quienes 3:55 promete supremacía.</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">El Corán promete supremacía eterna a los seguidores de un mensaje que él mismo declara falso. Esta contradicción interna no puede resolverse sin distorsionar el significado natural del texto árabe o sin inventar grupos históricos inexistentes, como hace Ibn Kathir con su conspiración de Constantino.</span>
+    </div>
+  </div>
+
+  <h3>La Crítica Historiográfica a Ibn Kathir</h3>
+
+  <p>El relato de Ibn Kathir sobre 3:55 ha sido sometido a crítica por historiadores tanto occidentales como por pensadores árabes modernos. Los puntos de fallo son claros:</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-name">Fallo 1 — Anacronismo</div>
+      <div class="card-role">Crítica histórica</div>
+      <div class="card-desc">Ibn Kathir escribe en el siglo XIV. Su relato sobre Constantino (siglo IV) y los grupos cristológicos del siglo V no está respaldado por fuentes primarias del período. Es una reconstrucción medieval de un período que los exégetas islámicos no podían estudiar con rigor histórico.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Fallo 2 — Inversión de la promesa</div>
+      <div class="card-role">Crítica lógica</div>
+      <div class="card-desc">Ibn Kathir convierte una promesa a los «seguidores de Jesús del siglo I» en una promesa a los «musulmanes del siglo VII». No hay ninguna base en el texto árabe de 3:55 para esta transferencia. El versículo dice «los que te siguen» dirigiéndose directamente a Jesús en el siglo I, no a una comunidad futura de 600 años después.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Fallo 3 — La promesa ya se cumplió para los cristianos</div>
+      <div class="card-role">Crítica empírica</div>
+      <div class="card-desc">Si la promesa de 3:55 es «supremacía hasta el Día del Juicio», los cristianos han cumplido ese criterio de forma verificable: el cristianismo es la religión con mayor número de seguidores en el mundo (ca. 2.400 millones), presente en todos los continentes, de forma ininterrumpida desde el siglo I. Esto es exactamente lo que 3:55 prometió.</div>
+    </div>
+    <div class="card">
+      <div class="card-name">Fallo 4 — Los «proto-musulmanes» son invisibles</div>
+      <div class="card-role">Crítica arqueológica</div>
+      <div class="card-desc">El grupo de «verdaderos seguidores de Jesús» que Ibn Kathir postula para el período siglo I–VII no ha dejado ningún rastro: ni textos, ni inscripciones, ni sitios arqueológicos, ni menciones en fuentes enemigas. Para una comunidad que supuestamente existió durante 600 años, su invisibilidad total es extraordinaria.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ VII. OBJECIONES ISLÁMICAS Y RESPUESTAS ═══════ -->
+<hr class="section-divider">
+<section id="objeciones">
+  <h2><span class="h2-num">VII · Objeciones Islámicas y sus Respuestas</span>Cerrando Todas las Salidas</h2>
+
+  <p class="lead">El apologista islámico tiene tres recursos principales para esquivar el Dilema Apostólico. Los tres pueden ser refutados con precisión histórica y lógica.</p>
+
+  <h3 id="tahrif">Primera Salida: El Taḥrīf — La Corrupción de los Textos</h3>
+
+  <div class="objecion-bloque">
+    <div class="objecion-label">⚠ Objeción islámica</div>
+    <p class="objecion-text">«Los textos que hablan de la crucifixión y resurrección han sido corrompidos (taḥrīf) por los copistas cristianos. El mensaje original de los apóstoles era islámico, pero fue alterado.»</p>
+  </div>
+  <div class="respuesta-bloque">
+    <div class="respuesta-label">✓ Respuesta apologética</div>
+    <p class="respuesta-text"><strong>1. El kerigma de 1 Cor 15:3–7 precede a cualquier posible corrupción.</strong> Pablo recibió ese kerigma ca. 35–36 d.C. de los propios apóstoles. Si la corrupción ocurrió antes de Pablo, ocurrió en los mismos años de la crucifixión, lo cual es históricamente absurdo.</p>
+    <p class="respuesta-text"><strong>2. El taḥrīf del Nuevo Testamento no está respaldado por ningún manuscrito.</strong> Poseemos más de 5.800 manuscritos griegos del NT, más miles en latín, copto, siríaco, armenio, georgiano y etíope. Ninguno, en ninguna lengua ni región, contiene una versión que niegue la crucifixión o la divinidad de Cristo. Si hubo una corrupción sistemática y global, no dejó absolutamente ningún rastro textual.</p>
+    <p class="respuesta-text"><strong>3. El propio Corán presenta el taḥrīf de forma ambigua.</strong> Las suras 2:75, 3:78 y 5:13 hablan de judíos que «distorsionan las palabras de su lugar» (yaḥrrifūna l-kalim 'an mawāḍi'ih), pero los exégetas islámicos clásicos debatieron si esto se refería a interpretación errónea o alteración textual literal. La afirmación de corrupción textual masiva del NT es una elaboración tardía de la apologética islámica medieval, no una doctrina coránica clara.</p>
+  </div>
+
+  <h3 id="sustitucion">Segunda Salida: La Teoría de la Sustitución</h3>
+
+  <div class="objecion-bloque">
+    <div class="objecion-label">⚠ Objeción islámica</div>
+    <p class="objecion-text">«Alá sustituyó a Jesús en la cruz por otro hombre —Simón de Cirene, Judas, o un doble— y los apóstoles fueron engañados visualmente por Alá mismo.»</p>
+  </div>
+  <div class="respuesta-bloque">
+    <div class="respuesta-label">✓ Respuesta apologética</div>
+    <p class="respuesta-text"><strong>1. Implica que Alá es el engañador (makkara).</strong> La Sura 3:54 dice «Alá es el mejor de los que planean» (wa-Allahu khayru l-makireen), donde el término árabe makara implica planear con astucia o engañar. Si Alá creó una ilusión de crucifixión para todos los testigos, incluyendo los propios apóstoles que el Corán llama verídicos, Alá engañó a sus propios aliados. Esto destruye la posibilidad de cualquier conocimiento religioso fiable.</p>
+    <p class="respuesta-text"><strong>2. El sustituto habría protestado ser inocente.</strong> Ninguna fuente histórica —romana, judía ni cristiana— menciona a un condenado que protestara ser Jesús durante la crucifixión. Un inocente crucificado en lugar de otro habría generado un escándalo documentable.</p>
+    <p class="respuesta-text"><strong>3. La teoría deja a los apóstoles como testigos de un simulacro.</strong> Si los apóstoles vieron crucificar a un doble y resucitar a nadie, toda su proclamación es un error de buena fe. Volvemos a la Premisa I: los auxiliares de Alá fueron víctimas de una ilusión creada por el propio Alá. Esto no absuelve al Islam; lo condena.</p>
+  </div>
+
+  <h3 id="paulinismo">Tercera Salida: El Argumento Paulino</h3>
+
+  <div class="objecion-bloque">
+    <div class="objecion-label">⚠ Objeción islámica</div>
+    <p class="objecion-text">«Pablo de Tarso fue quien corrompió el mensaje original de Jesús, introduciendo la teología de la muerte expiatoria, la resurrección y la divinidad de Cristo, que los apóstoles originales no enseñaban.»</p>
+  </div>
+  <div class="respuesta-bloque">
+    <div class="respuesta-label">✓ Respuesta apologética</div>
+    <p class="respuesta-text"><strong>1. El kerigma de 1 Cor 15:3–7 es pre-paulino.</strong> El propio Pablo lo presenta como tradición <em>recibida</em> (parelabon), no como su propia invención. Los académicos más escépticos —Gerd Lüdemann, Bart Ehrman, James Crossley— reconocen que este kerigma data de los primeros años de la comunidad cristiana, antes de que Pablo jugara ningún papel.</p>
+    <p class="respuesta-text"><strong>2. Pablo verificó su evangelio con los Doce y fue aprobado.</strong> En Gálatas 2:1–10, Pablo relata que presentó su evangelio a Pedro, Santiago y Juan «para ver si corría en vano» —y ellos lo aprobaron sin añadir nada. Si Pablo hubiera corrompido el mensaje, los Doce habrían sido los primeros en corregirlo.</p>
+    <p class="respuesta-text"><strong>3. Los evangelios sinópticos son independientes de Pablo y enseñan lo mismo.</strong> Marcos —anterior o contemporáneo a las cartas paulinas— y las fuentes Q, L y M son independientes de Pablo y contienen la misma cristología de muerte y resurrección. Si Pablo corrompió el mensaje, corru mpió de forma simultánea e independiente a todos los autores del NT.</p>
+    <p class="respuesta-text"><strong>4. Los adversarios de Pablo en la Iglesia primitiva no impugnan la resurrección.</strong> Pablo tuvo numerosos adversarios en las iglesias (los «superapóstoles» de 2 Cor, los judaizantes de Gálatas). Ninguno de ellos negó la resurrección. Todos aceptaban el kerigma central; disputaban otras cuestiones (circuncisión, observancia de la Ley). Si Pablo hubiera inventado la resurrección, sus adversarios internos habrían sido los primeros en denunciarlo.</p>
+  </div>
+</section>
+
+<!-- ═══════ VII-B. LA OBJECIÓN DE SURA 12:103 ═══════ -->
+<hr class="section-divider">
+<section id="sura12103">
+  <h2><span class="h2-num">VII-B · La Objeción de Sura 12:103</span>«La Mayoría No Creerá» — Devuelta Contra el Islam</h2>
+
+  <p class="lead">El apologista islámico, acorralado por la promesa de supremacía permanente de Sura 3:55 que históricamente se ha cumplido solo en los cristianos, recurre a Sura 12:103 como escudo. El argumento islámico suena así: «Los seguidores de Jesús no pueden ser los cristianos porque 12:103 dice que la mayoría de la humanidad no creerá, y los cristianos son mayoría.» El problema es que este argumento destruye más de lo que pretende salvar.</p>
+
+  <h3>El Texto de Sura 12:103 — El Arma que se Vuelve</h3>
+
+  <div class="quote quran">
+    <p class="quote-text">«Y la mayoría de los hombres, aunque lo desees ardientemente, no son creyentes.»</p>
+    <div class="quote-source">Sura 12:103 (Yūsuf) — Árabe: وَمَا أَكْثَرُ النَّاسِ وَلَوْ حَرَصْتَ بِمُؤْمِنِينَ · Sahih International: «And most of the people, although you strive for it, are not believers.»</div>
+  </div>
+
+  <h3>El Argumento Islámico que se Intenta Construir</h3>
+
+  <div class="objecion-bloque">
+    <div class="objecion-label">⚠ Objeción islámica sobre 3:55</div>
+    <p class="objecion-text">«La promesa de Sura 3:55 de que los seguidores de Jesús estarán "por encima" hasta el Día del Juicio no puede referirse a los cristianos porque: (a) Sura 12:103 establece que la mayoría de los hombres nunca será creyente, y los cristianos son la religión mayoritaria del mundo; (b) por tanto, los "seguidores de Jesús" de 3:55 deben ser un grupo reducido y verdadero —los proto-musulmanes o los propios musulmanes— no la masa de los cristianos.»</p>
+  </div>
+
+  <h3>Por Qué Este Argumento Falla en Cinco Niveles</h3>
+
+  <div class="respuesta-bloque">
+    <div class="respuesta-label">✓ Respuesta 1 — Contexto del versículo: Ibn Kathir lo confirma</div>
+    <p class="respuesta-text">El propio <strong>tafsir de Ibn Kathir sobre 12:103</strong> es explícito sobre a quiénes se dirige el versículo: <em>«la mayoría de las personas, es decir, el pueblo de La Meca, sin importar cuánto lo desees, no creerán.»</em> El versículo era una consolación a Mahoma por el rechazo de los quraishíes de La Meca, no una ley teológica universal sobre la composición numérica del grupo verdadero de ningún profeta. Aplicarlo a Sura 3:55 como clave hermenéutica es leer un versículo mecano sobre La Meca como si fuera un principio cosmológico sobre los seguidores de Jesús. Es un salto interpretativo sin fundamento en ningún tafsir clásico.</p>
+  </div>
+
+  <div class="respuesta-bloque">
+    <div class="respuesta-label">✓ Respuesta 2 — El argumento numérico destruye el Islam mismo</div>
+    <p class="respuesta-text">Si «los verdaderos seguidores de Jesús deben ser minoría porque 12:103 dice que la mayoría no creerá», el mismo razonamiento aplicado al Islam es devastador. <strong>El Islam tiene ca. 1.900 millones de seguidores</strong> —aproximadamente el 24% de la humanidad— y en muchos países y regiones históricas ha sido la religión mayoritaria durante siglos. ¿Significa que el Islam también es falso porque sus seguidores son demasiado numerosos para ser los «creyentes verdaderos» de 12:103? Si la mayoría no cree, ¿debería el Islam preocuparse de que sus propios éxitos demográficos lo descalifiquen? El argumento es un arma de doble filo que corta la mano que la empuña.</p>
+  </div>
+
+  <div class="respuesta-bloque">
+    <div class="respuesta-label">✓ Respuesta 3 — 3:55 no habla de mayoría numérica sino de supremacía</div>
+    <p class="respuesta-text">El término árabe de Sura 3:55 es <strong>«fawqa»</strong> (فَوْقَ) — «por encima de», «superior a». No dice «en mayoría», no dice «más numerosos», no dice «estadísticamente dominantes». Dice <em>superiores</em> —en dignidad, en influencia, en presencia histórica permanente. Que los seguidores de Jesús (los cristianos) sean la comunidad religiosa más extendida del mundo cumple perfectamente el significado de «fawqa» sin necesidad de que sean el 100% de la humanidad. La objeción numérica introduce una condición que el texto árabe no contiene.</p>
+  </div>
+
+  <div class="respuesta-bloque">
+    <div class="respuesta-label">✓ Respuesta 4 — La promesa de 3:55 ya se cumplió en los primeros siglos</div>
+    <p class="respuesta-text">En el siglo I, los «seguidores de Jesús» (los apóstoles y la primera comunidad cristiana) eran una minoría insignificante en el Imperio Romano —centenares de personas en un Imperio de 60 millones. Sin embargo, ya cumplían la promesa de «supremacía» al propagar el kerigma con una eficacia histórica sin precedentes: en 300 años, sin ejércitos ni poder político, la fe en Cristo resucitado se convirtió en la religión del Imperio. Eso es exactamente «fawqa alladhina kafaru» —estar por encima de los que no creen— sin que se requiera nunca ser numéricamente mayoritarios en toda la humanidad.</p>
+  </div>
+
+  <div class="respuesta-bloque">
+    <div class="respuesta-label">✓ Respuesta 5 — La evasión produce una promesa vacía</div>
+    <p class="respuesta-text">Si se acepta el argumento islámico de que la promesa de 3:55 se aplica a un grupo tan indefinido y numéricamente pequeño que resulta históricamente invisible antes del siglo VII, la promesa coránica se convierte en una afirmación vacía e inverificable. ¿Cuándo se cumplió? ¿Dónde? ¿Quiénes fueron estos «verdaderos seguidores» superiores durante los siglos I–VII? Si la respuesta es «no los podemos identificar porque fueron suprimidos por Constantino», entonces Alá prometió la supremacía permanente de un grupo que fue aniquilado en menos de tres siglos. Eso no es una promesa divina: es un fracaso divino. Y el Islam no puede asumir eso sin destruir la omnipotencia de Alá.</p>
+  </div>
+
+  <h3>El Silogismo de la Trampa Numérica — Devuelta al Islam</h3>
+
+  <div class="silogismo">
+    <div class="silogismo-title">Silogismo: Si 12:103 implica que los verdaderos creyentes son minoría...</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">El argumento islámico afirma: «Los verdaderos seguidores de Jesús (3:55) deben ser minoría porque 12:103 establece que la mayoría no cree.»</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">Si ser numéricamente mayoritario descalifica a un grupo de ser los «verdaderos creyentes», entonces el Islam —con 1.900 millones de seguidores y siglos de dominio político-cultural sobre regiones enteras— también quedaría descalificado por el mismo criterio en los territorios donde fue mayoritario.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">El apologista islámico no aplica este criterio al Islam mismo, lo que revela que el argumento es ad hoc: se aplica solo cuando conviene para atacar al cristiano, no como principio teológico universal.</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">El argumento numérico basado en 12:103 es inconsistente y selectivo. Si se aplica universalmente, refuta al Islam tanto como al cristianismo. Si no se aplica universalmente, es una falacia ad hoc sin valor apologético.</span>
+    </div>
+  </div>
+
+  <h3>El Silogismo del Contexto — 12:103 Habla del Pueblo de La Meca</h3>
+
+  <div class="silogismo">
+    <div class="silogismo-title">Silogismo: El contexto histórico destruye la interpretación islámica</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">El tafsir de Ibn Kathir sobre 12:103 afirma explícitamente que el versículo se refiere «al pueblo de La Meca» en el contexto de la misión de Mahoma, como consolación ante su rechazo.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">Un versículo dirigido al pueblo de La Meca en el siglo VII para consolar a Mahoma no puede ser elevado a principio hermenéutico universal que determine quiénes son los «verdaderos seguidores» de Jesús en el siglo I.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">Aplicar 12:103 como clave interpretativa de 3:55 viola el principio exegético básico de que cada versículo debe entenderse primero en su contexto (sabab al-nuzul — ocasión de la revelación).</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">El uso de 12:103 para neutralizar 3:55 carece de apoyo en el contexto coránico, en la propia exégesis de Ibn Kathir y en cualquier principio hermenéutico islámico reconocido. Es una interpolación apologética desesperada, no una exégesis.</span>
+    </div>
+  </div>
+
+  <h3>El Silogismo de la Promesa Vacía — El Dilema Final</h3>
+
+  <div class="silogismo">
+    <div class="silogismo-title">Silogismo: Si 3:55 no se cumplió en los cristianos, la promesa falló</div>
+    <div class="silogismo-line"><span class="sil-tag">P1</span><span class="sil-text">Sura 3:55 promete supremacía permanente «hasta el Día de la Resurrección» a los seguidores de Jesús. Esta es una promesa divina incondicional en el texto.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">Si los únicos candidatos históricamente verificables —los cristianos— quedan excluidos mediante 12:103, entonces los «verdaderos seguidores» (proto-musulmanes) fueron exterminados por Constantino y desaparecieron sin dejar rastro durante 600 años.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">Una promesa divina de «supremacía hasta el Día de la Resurrección» que se incumplió durante 600 años, sin dejar rastro histórico de sus beneficiarios, es o bien falsa o bien evidencia de que Alá no pudo proteger a sus «verdaderos» seguidores.</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">El Islam se enfrenta a un dilema insoluble: o la promesa de 3:55 se cumplió en los cristianos —que proclaman la crucifixión y resurrección—, o no se cumplió durante 600 años —lo que implica que Alá falló en proteger a sus propios elegidos. Ninguna de las dos opciones es aceptable para el teísmo islámico.</span>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-title">✦ La Tabla Comparativa: 3:55 vs 12:103 — Dos Versículos Incompatibles como Argumento</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criterio</th><th>Sura 3:55</th><th>Sura 12:103</th></tr></thead>
+        <tbody>
+          <tr><td>Contexto histórico</td><td>Alá habla a Jesús en el siglo I sobre sus seguidores futuros</td><td>Alá consuela a Mahoma por el rechazo del pueblo de La Meca (siglo VII)</td></tr>
+          <tr><td>Destinatario</td><td>Los seguidores de Jesús (alladhīna attaba'ūka)</td><td>Mahoma y su audiencia mecana inmediata</td></tr>
+          <tr><td>Contenido de la promesa</td><td>Supremacía (fawqa) permanente hasta el Juicio Final</td><td>Constatación de que la mayoría no creerá</td></tr>
+          <tr><td>¿Contiene criterio numérico?</td><td>No. «Fawqa» = superior, no «mayoritario»</td><td>Sí, pero referido al pueblo de La Meca, no a los seguidores de ningún profeta en particular</td></tr>
+          <tr><td>¿Se puede usar para interpretar 3:55?</td><td>—</td><td>No. Contextos históricos, destinatarios y contenidos son completamente distintos</td></tr>
+          <tr><td>Quién cumple 3:55 históricamente</td><td>Los cristianos — presencia continua y verificable desde el siglo I hasta hoy</td><td>No aplica como criterio hermenéutico para 3:55</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="highlight danger">
+    <div class="highlight-title">⚠ El Problema que Ningún Tafsir Resuelve</div>
+    <p>Ningún exégeta clásico del Islam —ni Ibn Kathir, ni al-Tabari, ni al-Zamakhshari, ni al-Qurtubi— usa Sura 12:103 como clave hermenéutica para limitar la promesa de Sura 3:55. El argumento que usa Sura 12:103 para excluir a los cristianos de 3:55 es una construcción apologética moderna, no una exégesis islámica clásica. Cuando el apologista islámico contemporáneo inventa este argumento, está haciendo exactamente lo que acusa a los cristianos de hacer: interpretar el texto sagrado de forma conveniente para evadir una contradicción.</p>
+  </div>
+</section>
+
+<!-- ═══════ VIII. SILOGISMO FINAL ═══════ -->
+<hr class="section-divider">
+<section id="silogismo-final">
+  <h2><span class="h2-num">VIII · El Silogismo de Cierre</span>La Refutación Completa</h2>
+
+  <p class="lead">Reuniendo todos los argumentos, el Dilema Apostólico puede formularse en su forma más concisa y exhaustiva. Es un argumento de disyunción exhaustiva: sus premisas cubren todas las posibilidades lógicas y cada una refuta el Islam desde un ángulo diferente.</p>
+
+  <div class="silogismo">
+    <div class="silogismo-title">El Trilema Apostólico — Formulación Completa</div>
+    <div class="silogismo-line"><span class="sil-tag">D1</span><span class="sil-text">Los apóstoles de Jesús o (a) fueron engañados sobre su maestro, o (b) engañaron a otros sobre él, o (c) dijeron la verdad sobre él. No existe una cuarta posibilidad.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P1a</span><span class="sil-text">Si (a): Alá inspiró y elogió como verídicos a hombres que estaban radicalmente equivocados sobre el evento central de la historia de la salvación. La inspiración divina sobre ellos fue ineficaz. El Corán alaba sin reservas a testigos incompetentes.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P1b</span><span class="sil-text">Si (b): Alá inspiró y llamó «auxiliares de Alá» y «musulmanes» a los mayores falsificadores religiosos de la historia. El juicio moral del Corán sobre personas concretas es radicalmente errado.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P1c</span><span class="sil-text">Si (c): El testimonio apostólico sobre la crucifixión y resurrección de Cristo es históricamente fiable, lo cual hace falsas proposiciones centrales del Islam (Sura 4:157; Sura 5:75).</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P2</span><span class="sil-text">El kerigma apostólico (crucifixión, muerte, resurrección) está documentado con una antigüedad de 600 años antes del Corán, en fuentes que satisfacen todos los criterios de historicidad crítica, sin ninguna fuente rival contemporánea que apoye la versión islámica.</span></div>
+    <div class="silogismo-line"><span class="sil-tag">P3</span><span class="sil-text">Las tres salidas islámicas (taḥrīf, sustitución, paulinismo) son históricamente insostenibles y generan contradicciones internas con el propio texto coránico.</span></div>
+    <div class="silogismo-conclusion">
+      <span class="sil-tag conc">∴</span>
+      <span class="sil-text conc">El Islam no tiene ninguna salida coherente del Dilema Apostólico: o su texto sagrado elogia a testigos incompetentes o a falsificadores, o los testimonios que el propio Corán avala refutan históricamente sus afirmaciones centrales. En cualquier caso, la validez histórica y teológica del Islam queda comprometida de forma irremediable.</span>
+    </div>
+  </div>
+
+  <div class="highlight success">
+    <div class="highlight-title">✦ La Convergencia de Cuatro Argumentos Independientes</div>
+    <p>La fuerza del Dilema Apostólico no reside en un único argumento sino en la convergencia de cuatro líneas argumentales independientes que apuntan a la misma conclusión:</p>
+    <p><strong>1. El argumento lógico-interno:</strong> El Corán no puede simultáneamente elogiar a los apóstoles como verídicos e inspirados y afirmar que lo que proclamaron era falso.</p>
+    <p><strong>2. El argumento histórico:</strong> El kerigma de la crucifixión y resurrección está documentado con una antigüedad, una densidad de atestación y una coherencia con las fuentes externas que ninguna afirmación coránica sobre Jesús puede igualar.</p>
+    <p><strong>3. El argumento testimonial:</strong> Los apóstoles murieron por su testimonio. Un conspirador no muere por una mentira que él mismo fabricó. Un engañado de buena fe no puede ser elogiado por el Corán como auxiliar de Alá.</p>
+    <p><strong>4. El argumento del silencio:</strong> No existe en la historia del siglo I ninguna comunidad, ningún texto, ningún documento que preserve una versión islámica del mensaje de Jesús. El silencio histórico sobre la «verdad islámica» antes del Corán es evidencia positiva de su inexistencia anterior.</p>
+  </div>
+</section>
+
+<!-- ═══════ IX. FUENTES ═══════ -->
+<hr class="section-divider">
+<section id="fuentes">
+  <h2><span class="h2-num">IX · Fuentes y Bibliografía</span></h2>
+
+  <h3>Fuentes Primarias Citadas</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fuente</th><th>Relevancia</th><th>Localización</th></tr></thead>
+      <tbody>
+        <tr><td>1 Corintios 15:3–8</td><td>Kerigma más antiguo documentado — ca. 35–36 d.C.</td><td>NT griego: NA28. Trad. española: Biblia de Jerusalén.</td></tr>
+        <tr><td>Gálatas 1:11–2:10</td><td>Pablo verifica su evangelio con los Doce</td><td>NT griego: NA28.</td></tr>
+        <tr><td>Hechos 1–5</td><td>Kerigma apostólico primitivo en Jerusalén</td><td>NT griego: NA28.</td></tr>
+        <tr><td>Corán, Sura 3:52; 4:157; 5:75; 5:111; 61:14</td><td>Los textos coránicos sobre los apóstoles y la crucifixión</td><td>Edición Azhar; trad. española: Julio Cortés (Herder).</td></tr>
+        <tr><td>Tácito, <em>Annales</em> XV, 44</td><td>Confirmación romana de la ejecución de Cristo bajo Pilato</td><td>Ed. Teubner; trad. española: Gredos.</td></tr>
+        <tr><td>Josefo, <em>Antigüedades</em> XX, 9,1</td><td>Muerte de Santiago hermano de Jesús (62 d.C.)</td><td>Ed. Niese; trad. española: CLIE.</td></tr>
+        <tr><td>Josefo, <em>Testimonium Flavianum</em> (<em>Ant.</em> XVIII, 3,3)</td><td>Referencia a Jesús (con partes discutidas)</td><td>Versión árabe de Agapio considerada más próxima al original.</td></tr>
+        <tr><td>Plinio el Joven, <em>Ep.</em> X, 96</td><td>Descripción del culto cristiano ca. 112 d.C.; «Cristo como Dios»</td><td>Ed. Teubner; trad. española: Gredos.</td></tr>
+        <tr><td>Clemente de Roma, <em>Epístola a los Corintios</em></td><td>Muertes de Pedro y Pablo como testigos</td><td>PG 1, 200–328. SC 167.</td></tr>
+        <tr><td>Ignacio de Antioquía, <em>Cartas</em></td><td>Kerigma completo ca. 107 d.C., en vida de testigos oculares de segunda generación</td><td>PG 5, 625–888. SC 10bis.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Bibliografía Académica — Estudios sobre el Kerigma Primitivo y la Historicidad</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Autor</th><th>Obra</th><th>Editorial / Año</th></tr></thead>
+      <tbody>
+        <tr><td>Hurtado, Larry W.</td><td><em>Lord Jesus Christ: Devotion to Jesus in Earliest Christianity</em></td><td>Eerdmans, 2003</td></tr>
+        <tr><td>Bauckham, Richard</td><td><em>Jesus and the Eyewitnesses: The Gospels as Eyewitness Testimony</em></td><td>Eerdmans, 2006</td></tr>
+        <tr><td>Habermas, Gary &amp; Licona, Michael</td><td><em>The Case for the Resurrection of Jesus</em></td><td>Kregel, 2004</td></tr>
+        <tr><td>Wright, N.T.</td><td><em>The Resurrection of the Son of God</em></td><td>Fortress Press, 2003</td></tr>
+        <tr><td>Ehrman, Bart D.</td><td><em>Did Jesus Exist? The Historical Argument for Jesus of Nazareth</em></td><td>HarperOne, 2012</td></tr>
+        <tr><td>Lüdemann, Gerd</td><td><em>The Resurrection of Jesus: History, Experience, Theology</em></td><td>Fortress Press, 1994</td></tr>
+        <tr><td>Fredriksen, Paula</td><td><em>Jesus of Nazareth, King of the Jews</em></td><td>Knopf, 1999</td></tr>
+        <tr><td>Crossan, John Dominic</td><td><em>The Historical Jesus: The Life of a Mediterranean Jewish Peasant</em></td><td>HarperCollins, 1991</td></tr>
+        <tr><td>Bockmuehl, Markus</td><td><em>The Cambridge Companion to Jesus</em></td><td>Cambridge University Press, 2001</td></tr>
+        <tr><td>Karabell, Zachary</td><td><em>People of the Book: The Forgotten History of Islam and the West</em></td><td>Murray, 2007</td></tr>
+        <tr><td>Swinburne, Richard</td><td><em>The Resurrection of God Incarnate</em></td><td>Oxford University Press, 2003</td></tr>
+        <tr><td>McGrath, Alister</td><td><em>The Dawkins Delusion? Atheist Fundamentalism and the Denial of the Divine</em></td><td>IVP, 2007</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Bibliografía de Apologética Cristiana frente al Islam</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Autor</th><th>Obra</th><th>Editorial / Año</th></tr></thead>
+      <tbody>
+        <tr><td>Wood, David &amp; Licona, Michael</td><td><em>The Qur'an and the Bible: Side by Side</em></td><td>Acts17Press, 2018</td></tr>
+        <tr><td>Geisler, Norman &amp; Saleeb, Abdul</td><td><em>Answering Islam: The Crescent in Light of the Cross</em></td><td>Baker Books, 2002</td></tr>
+        <tr><td>Spencer, Robert</td><td><em>Did Muhammad Exist? An Inquiry into Islam's Obscure Origins</em></td><td>ISI Books, 2012</td></tr>
+        <tr><td>Contra, Khalil</td><td><em>Engaging with the Qur'an</em></td><td>Biblica, 2011</td></tr>
+        <tr><td>Williams, Joseph</td><td><em>Answering the Challenge of Islam</em></td><td>Emmaus Road, 2016</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight">
+    <div class="highlight-title">✦ Conclusión del Documento</div>
+    <p>El Dilema Apostólico no es un argumento de fe: es un argumento de coherencia lógica e histórica. No pide al interlocutor islámico que acepte la resurrección como milagro; le pide que explique por qué los hombres a quienes su propio libro sagrado llama «auxiliares de Alá», «verídicos» e «inspirados directamente por Dios» proclamaron, desde el primer día y hasta la muerte, exactamente lo que el Islam niega.</p>
+    <p>La única respuesta coherente al Dilema Apostólico es la que los apóstoles dieron ellos mismos: que Cristo murió, fue sepultado y resucitó al tercer día. Todo lo demás conduce, por uno u otro camino, a la contradicción interna del texto coránico o a la refutación histórica del Islam.</p>
+  </div>
+</section>
+
+<footer>
+  <p style="font-family:'Cinzel',serif;font-size:15px;color:#F5C518;letter-spacing:3px;margin-bottom:10px;">✦ EL DILEMA APOSTÓLICO — AL-HAWARIYYUN ✦</p>
+  <p>Apologética Cristiana · Análisis Histórico-Teológico · Islam y Cristología del Siglo I</p>
+  <p style="margin-top:6px;">Fuentes: 1 Cor 15:3–8 · Corán (Cortés) · Hurtado · Bauckham · Wright · Habermas</p>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('active');
+  }
+  function closeNav() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('active');
+  }
+  const navLinks = document.querySelectorAll('#sidebar a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === '#' + id) {
+            link.style.color = '#F5C518';
+            link.style.borderLeftColor = '#F5C518';
+          } else {
+            link.style.color = '';
+            link.style.borderLeftColor = '';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('section[id]').forEach(el => observer.observe(el));
+  window.addEventListener('resize', () => { if (window.innerWidth > 900) closeNav(); });
+</script>
+</body>
+</html>

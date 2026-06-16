@@ -16,3 +16,4 @@ Aqui trabajamos pasajes complejos con rigor, claridad y fidelidad al texto sagra
 - [100 Contradicciones Biblicas Resueltas (Dossier)](/exegesis/contradicciones-biblicas-dossier/)
 - [Jeremias 8:8 Refutacion (Dossier)](/exegesis/jeremias-88-refutacion-dossier/)
 - [Defensa de Deuteronomio 22:28 (Dossier)](/exegesis/defensa-deut-22-28-dossier/)
+- [Semilla de Mostaza - Refutacion (Dossier)](/exegesis/semilla-mostaza-refutacion-dossier/)
