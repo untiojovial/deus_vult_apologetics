@@ -23,3 +23,4 @@ No para acumular datos sin fin, sino para verificar afirmaciones con metodo.
 - [Muhammad ibn Abdallah (Dossier)](/historia/muhammad-historia-dossier/)
 - [Autoria de los Evangelios (Dossier)](/historia/autoria-evangelios-dossier/)
 - [Crucifixion de Cristo - Testimonios Historicos (Dossier)](/historia/crucifixion-dossier/)
+- [Las Lenguas de Jesus (Dossier)](/historia/lenguas-de-jesus-dossier/)

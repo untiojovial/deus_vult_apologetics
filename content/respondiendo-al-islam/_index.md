@@ -18,3 +18,6 @@ aliases:
 - [Fue Jesus Musulman (Dossier)](/respondiendo-al-islam/fue-jesus-musulman-dossier/)
 - [Dilema Apostolico (Dossier)](/respondiendo-al-islam/dilema-apostolico-dossier/)
 - [Surah 4:82 - Falacia (Dossier)](/respondiendo-al-islam/surah-4-82-falacia-dossier/)
+- [Tawhid y Omnipotencia (Dossier)](/respondiendo-al-islam/tawhid-omnipotencia-dossier/)
+- [Isaias 42 y el Siervo de Yahve (Dossier)](/respondiendo-al-islam/isaias-42-siervo-dossier/)
+- [La Edad de Rebeca (Dossier)](/respondiendo-al-islam/rebeca-edad-dossier/)

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las lenguas de Jesús · Arameo, hebreo y griego en la Palestina del siglo I</title>
+<meta name="description" content="Ensayo histórico-académico sobre las lenguas de Jesús de Nazaret: arameo, hebreo y, especialmente, griego. Helenización de Palestina, la Decápolis, Séforis y el debate Porter-Casey.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=Inter:wght@400;500;600;700&family=Gentium+Plus:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink:#0a0a0b;
+  --ink-2:#141316;
+  --ink-3:#1c1a1d;
+  --gold:#caa23a;
+  --gold-bright:#e9c563;
+  --gold-dim:#8a6f29;
+  --parchment:#f3ecda;
+  --parchment-dim:#bdb39b;
+  --parchment-faint:#857c69;
+  --max:780px;
+  --side:300px;
+  --radius:2px;
+  --serif-body: 'Source Serif 4', Georgia, serif;
+  --serif-head: 'Spectral', Georgia, serif;
+  --display: 'Cinzel', serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --ancient: 'Gentium Plus', 'Source Serif 4', serif;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--parchment);
+  font-family:var(--serif-body);
+  font-size:17px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:var(--gold-bright); text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline:2px solid var(--gold-bright);
+  outline-offset:3px;
+}
+::selection{ background:var(--gold-dim); color:var(--ink); }
+
+h1,h2,h3,h4{ font-family:var(--serif-head); color:var(--parchment); margin:0; font-weight:600; }
+
+.lang-he{ font-family:var(--ancient); direction:rtl; unicode-bidi:embed; }
+.lang-el{ font-family:var(--ancient); }
+.lang-la{ font-family:var(--ancient); letter-spacing:0.03em; }
+.lang-arc{ font-family:var(--ancient); font-style:italic; color:var(--gold-bright); }
+
+.skip-link{
+  position:absolute; left:-999px; top:0;
+  background:var(--gold-bright); color:var(--ink); padding:10px 16px; z-index:200;
+}
+.skip-link:focus{ left:10px; top:10px; }
+
+/* ============ PROGRESS BAR ============ */
+#progressBar{
+  position:fixed; top:0; left:0; height:3px; width:0%;
+  background:linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+  z-index:300; transition:width .08s linear;
+}
+
+/* ============ NAV TOGGLE (mobile) ============ */
+#navToggle{
+  position:fixed; top:14px; left:14px; z-index:250;
+  width:44px; height:44px; border-radius:50%;
+  background:var(--ink-2); border:1px solid var(--gold-dim);
+  color:var(--gold-bright); font-size:18px; cursor:pointer;
+  display:none; align-items:center; justify-content:center;
+}
+#navOverlay{
+  position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:190;
+  opacity:0; visibility:hidden; transition:opacity .25s ease;
+}
+#navOverlay.is-open{ opacity:1; visibility:visible; }
+
+/* ============ SIDEBAR / ÍNDICE ============ */
+#sidebar{
+  position:fixed; top:0; left:0; width:var(--side); height:100vh;
+  background:var(--ink-2); border-right:1px solid #2a2620;
+  overflow-y:auto; z-index:200;
+  padding:28px 0 40px;
+  scrollbar-width:thin; scrollbar-color:var(--gold-dim) var(--ink-2);
+}
+.brand{
+  padding:0 26px 22px; margin-bottom:10px; border-bottom:1px solid #2a2620;
+}
+.brand .mark{
+  font-family:var(--display); font-size:13px; letter-spacing:.22em;
+  color:var(--gold-bright);
+}
+.brand .mark-sub{
+  display:block; margin-top:6px; font-family:var(--sans); font-size:11px;
+  letter-spacing:.08em; color:var(--parchment-faint); text-transform:uppercase;
+}
+.indice-label{
+  font-family:var(--sans); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--parchment-faint); padding:18px 26px 8px;
+}
+.nav-list{ list-style:none; margin:0; padding:0; }
+.nav-list li{ margin:0; }
+.nav-link{
+  display:flex; gap:10px; align-items:baseline;
+  padding:9px 26px; font-family:var(--sans); font-size:13.5px; color:var(--parchment-dim);
+  border-left:3px solid transparent; line-height:1.4;
+}
+.nav-link .num{
+  font-family:var(--display); font-size:11px; color:var(--gold-dim); flex:0 0 auto; min-width:18px;
+}
+.nav-link:hover{ color:var(--parchment); text-decoration:none; background:rgba(202,162,58,.06); }
+.nav-link.is-active{
+  color:var(--gold-bright); border-left-color:var(--gold-bright); background:rgba(202,162,58,.09);
+}
+.nav-foot{
+  padding:20px 26px 0; margin-top:16px; border-top:1px solid #2a2620;
+  font-family:var(--sans); font-size:11.5px; color:var(--parchment-faint); line-height:1.6;
+}
+
+/* ============ LAYOUT ============ */
+main{ margin-left:var(--side); }
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:90px 24px 70px; position:relative;
+  background:
+    radial-gradient(ellipse 900px 500px at 50% -10%, rgba(202,162,58,.10), transparent 60%),
+    var(--ink);
+}
+.hero .eyebrow{
+  font-family:var(--sans); letter-spacing:.22em; text-transform:uppercase; font-size:12px;
+  color:var(--gold-dim); margin-bottom:22px;
+}
+.hero h1{
+  font-family:var(--display); font-weight:900; font-size:clamp(2.2rem, 6vw, 4.1rem);
+  letter-spacing:.04em; color:var(--parchment); line-height:1.08; text-shadow:0 0 40px rgba(202,162,58,.18);
+}
+.hero .subtitle{
+  font-family:var(--serif-head); font-style:italic; font-weight:500; font-size:clamp(1.05rem,2.2vw,1.35rem);
+  color:var(--gold-bright); max-width:680px; margin:20px auto 0; line-height:1.5;
+}
+
+/* ---- placa trilingüe (signature element) ---- */
+.titulus{
+  margin:56px auto 28px; max-width:560px; width:100%;
+  background:linear-gradient(160deg,#161513,#0c0b0a);
+  border:1px solid var(--gold-dim);
+  box-shadow:0 0 0 1px rgba(202,162,58,.08) inset, 0 30px 60px -20px rgba(0,0,0,.7);
+  padding:34px 26px; border-radius:3px; position:relative;
+}
+.titulus::before, .titulus::after{
+  content:"✦"; position:absolute; color:var(--gold-dim); font-size:13px;
+  top:10px;
+}
+.titulus::before{ left:14px; }
+.titulus::after{ right:14px; }
+.titulus-line{
+  display:block; text-align:center; color:var(--gold-bright);
+  text-shadow:0 1px 0 rgba(0,0,0,.6), 0 0 18px rgba(233,197,99,.25);
+  margin:0; padding:7px 0;
+}
+.titulus-line.he{ font-size:1.7rem; letter-spacing:.04em; }
+.titulus-line.el{ font-size:1.15rem; letter-spacing:.06em; }
+.titulus-line.la{ font-size:1.1rem; letter-spacing:.14em; text-transform:uppercase; }
+.titulus-divider{ border:none; border-top:1px solid rgba(202,162,58,.22); margin:4px auto; width:60%; }
+.titulus-cap{
+  margin-top:16px; font-family:var(--sans); font-size:11.5px; color:var(--parchment-faint);
+  line-height:1.6; text-align:center;
+}
+
+.hero-meta{
+  display:flex; gap:18px; flex-wrap:wrap; justify-content:center; margin-top:8px;
+  font-family:var(--sans); font-size:12px; color:var(--parchment-faint); letter-spacing:.03em;
+}
+.hero-meta span{ display:flex; align-items:center; gap:6px; }
+.hero-meta b{ color:var(--gold-dim); }
+
+.cta{
+  margin-top:34px; display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--sans); font-weight:600; letter-spacing:.04em; font-size:14px;
+  color:var(--ink); background:linear-gradient(180deg,var(--gold-bright),var(--gold));
+  padding:14px 28px; border-radius:30px; box-shadow:0 12px 30px -10px rgba(202,162,58,.5);
+}
+.cta:hover{ text-decoration:none; filter:brightness(1.06); }
+
+/* ============ SECTIONS ============ */
+section.chapter{ padding:86px 0 8px; border-top:1px solid #211f1c; }
+section.chapter:first-of-type{ border-top:none; }
+.eyebrow-num{
+  font-family:var(--display); font-size:14px; letter-spacing:.3em; color:var(--gold-dim);
+  display:block; margin-bottom:14px;
+}
+.chapter h2{
+  font-size:clamp(1.5rem,3.4vw,2.05rem); line-height:1.2; max-width:680px;
+  font-weight:700;
+}
+.chapter .lede{
+  font-family:var(--serif-head); font-style:italic; color:var(--parchment-dim); font-size:1.12rem;
+  margin-top:16px; max-width:660px; line-height:1.6;
+}
+.chapter h3{
+  font-size:1.18rem; margin-top:42px; margin-bottom:6px; color:var(--gold-bright); font-weight:600;
+}
+.chapter p{ margin:18px 0 0; max-width:680px; color:var(--parchment); }
+.chapter p.small-note{ font-family:var(--sans); font-size:13.5px; color:var(--parchment-faint); line-height:1.65; }
+.chapter ul, .chapter ol{ margin:18px 0 0; padding-left:22px; max-width:660px; }
+.chapter li{ margin:8px 0; }
+.chapter strong{ color:var(--gold-bright); font-weight:600; }
+
+.reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+/* ---- quote plaque ---- */
+.plaque{
+  margin:30px 0 26px; max-width:660px; border:1px solid var(--gold-dim);
+  background:linear-gradient(180deg, rgba(202,162,58,.05), transparent);
+  padding:22px 26px 18px; position:relative;
+}
+.plaque::before{ content:"✦"; position:absolute; top:-10px; left:18px; background:var(--ink); padding:0 6px; color:var(--gold-dim); font-size:13px;}
+.plaque p{
+  font-family:var(--ancient); font-style:italic; font-size:1.16rem; color:var(--parchment);
+  margin:0; line-height:1.55;
+}
+.plaque cite{
+  display:block; margin-top:14px; font-family:var(--sans); font-style:normal; font-size:12px;
+  letter-spacing:.04em; color:var(--gold-dim); text-transform:uppercase;
+}
+
+/* ---- ancient word chip ---- */
+.term{
+  display:inline-block; background:rgba(202,162,58,.10); border:1px solid var(--gold-dim);
+  padding:1px 8px; border-radius:3px; font-family:var(--ancient); font-style:normal; color:var(--gold-bright);
+  font-size:.96em;
+}
+
+/* ---- bilingual word card grid ---- */
+.word-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:24px 0 0; max-width:680px; }
+.word-card{ border:1px solid #2a2620; padding:14px 16px; background:var(--ink-2); }
+.word-card .orig{ font-family:var(--ancient); font-size:1.15rem; color:var(--gold-bright); }
+.word-card .gloss{ font-family:var(--sans); font-size:12.5px; color:var(--parchment-dim); margin-top:6px; line-height:1.5; }
+.word-card .ref{ font-family:var(--sans); font-size:11px; color:var(--parchment-faint); margin-top:6px; }
+@media (max-width:560px){ .word-grid{ grid-template-columns:1fr; } }
+
+/* ---- decapolis chip list ---- */
+.chip-row{ display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 0; max-width:680px; }
+.chip{
+  font-family:var(--sans); font-size:12.5px; color:var(--parchment); background:var(--ink-2);
+  border:1px solid #2a2620; padding:6px 12px; border-radius:30px;
+}
+.chip b{ color:var(--gold-bright); }
+
+/* ---- caution / nuance box ---- */
+.nuance{
+  margin:26px 0 0; max-width:660px; border-left:3px solid var(--gold-dim);
+  padding:4px 0 4px 18px;
+}
+.nuance .nuance-label{
+  font-family:var(--sans); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold-dim); display:block; margin-bottom:6px;
+}
+.nuance p{ color:var(--parchment-dim); font-size:.97rem; }
+
+/* ---- debate cards ---- */
+.debate-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:26px 0 0; max-width:680px; }
+.debate-card{ background:var(--ink-2); border:1px solid #2a2620; padding:20px; }
+.debate-card h4{ font-family:var(--sans); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px; }
+.debate-card p{ margin:0; font-size:.95rem; color:var(--parchment); }
+@media (max-width:560px){ .debate-grid{ grid-template-columns:1fr; } }
+
+/* ============ SYLLOGISM ============ */
+.syllogism{
+  margin:40px 0 10px; max-width:700px; border:1px solid var(--gold-dim); padding:8px;
+  background:var(--ink-2);
+}
+.premise{
+  padding:22px 24px; border-bottom:1px solid #2a2620;
+}
+.premise:last-of-type{ border-bottom:none; }
+.premise .ptag{
+  font-family:var(--display); font-size:12px; letter-spacing:.18em; color:var(--gold-dim); display:block; margin-bottom:8px;
+}
+.premise p{ margin:0; font-size:1rem; line-height:1.6; color:var(--parchment); }
+.conclusion{
+  margin:8px; padding:28px 24px; background:linear-gradient(180deg,var(--gold-bright),var(--gold));
+  color:var(--ink);
+}
+.conclusion .ptag{ font-family:var(--display); font-size:12px; letter-spacing:.18em; color:#3b2e0c; display:block; margin-bottom:10px; }
+.conclusion p{ margin:0; font-size:1.08rem; line-height:1.6; font-weight:500; }
+.conclusion p + p{ margin-top:12px; font-size:.88rem; font-style:italic; opacity:.85; }
+
+/* ============ GLOSSARY ============ */
+details.gloss{
+  border:1px solid #2a2620; margin:14px 0 0; max-width:680px; background:var(--ink-2);
+}
+details.gloss summary{
+  cursor:pointer; padding:14px 18px; font-family:var(--sans); font-weight:600; font-size:14px;
+  color:var(--parchment); list-style:none; display:flex; justify-content:space-between; align-items:center;
+}
+details.gloss summary::-webkit-details-marker{ display:none; }
+details.gloss summary::after{ content:"+"; color:var(--gold-bright); font-size:18px; }
+details.gloss[open] summary::after{ content:"–"; }
+details.gloss .gloss-body{ padding:0 18px 18px; font-size:.95rem; color:var(--parchment-dim); }
+
+/* ============ BIBLIOGRAFÍA ============ */
+.biblio-list{ list-style:none; padding:0; margin:24px 0 0; max-width:680px; }
+.biblio-list li{
+  font-family:var(--sans); font-size:13.5px; color:var(--parchment-dim); line-height:1.6;
+  padding:10px 0; border-bottom:1px solid #211f1c; padding-left:0;
+}
+.biblio-list li em{ color:var(--parchment); }
+
+/* ============ FOOTER ============ */
+footer{
+  margin-top:80px; padding:40px 0 60px; border-top:1px solid #211f1c;
+  font-family:var(--sans); font-size:12px; color:var(--parchment-faint); text-align:center;
+}
+
+/* ============ BACK TO TOP ============ */
+#backTop{
+  position:fixed; bottom:24px; right:24px; width:46px; height:46px; border-radius:50%;
+  background:var(--ink-2); border:1px solid var(--gold-dim); color:var(--gold-bright);
+  display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px;
+  opacity:0; visibility:hidden; transform:translateY(10px); transition:all .25s ease; z-index:150;
+}
+#backTop.is-visible{ opacity:1; visibility:visible; transform:translateY(0); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:880px){
+  :root{ --side:280px; }
+  #navToggle{ display:flex; }
+  #sidebar{ transform:translateX(-100%); transition:transform .28s ease; }
+  #sidebar.is-open{ transform:translateX(0); }
+  main{ margin-left:0; }
+  .wrap{ padding:0 20px; }
+  .word-grid{ grid-template-columns:1fr; }
+}
+@media (max-width:480px){
+  body{ font-size:16px; }
+  .hero{ padding-top:110px; }
+}
+</style>
+</head>
+<body>
+
+<a href="#contenido" class="skip-link">Saltar al contenido</a>
+<div id="progressBar"></div>
+
+<button id="navToggle" aria-label="Abrir índice" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div id="navOverlay"></div>
+
+<aside id="sidebar" aria-label="Índice del documento">
+  <div class="brand">
+    <span class="mark">ΙΗΣΟΥΣ · ישוע · IESVS</span>
+    <span class="mark-sub">Las lenguas de Jesús</span>
+  </div>
+  <div class="indice-label">Índice</div>
+  <ul class="nav-list">
+    <li><a class="nav-link" href="#intro"><span class="num">I</span><span>El mosaico lingüístico</span></a></li>
+    <li><a class="nav-link" href="#arameo"><span class="num">II</span><span>El arameo materno</span></a></li>
+    <li><a class="nav-link" href="#hebreo"><span class="num">III</span><span>El hebreo sagrado</span></a></li>
+    <li><a class="nav-link" href="#helenizacion"><span class="num">IV</span><span>Alejandro y la helenización</span></a></li>
+    <li><a class="nav-link" href="#galilea"><span class="num">V</span><span>Galilea, Decápolis y Séforis</span></a></li>
+    <li><a class="nav-link" href="#evangelios"><span class="num">VI</span><span>El griego en los Evangelios</span></a></li>
+    <li><a class="nav-link" href="#debate"><span class="num">VII</span><span>Dalman, Porter y Casey</span></a></li>
+    <li><a class="nav-link" href="#sintesis"><span class="num">VIII</span><span>Síntesis: judío trilingüe</span></a></li>
+    <li><a class="nav-link" href="#silogismo"><span class="num">IX</span><span>El silogismo final</span></a></li>
+    <li><a class="nav-link" href="#fuentes"><span class="num">X</span><span>Fuentes y glosario</span></a></li>
+  </ul>
+  <div class="nav-foot">
+    Ensayo histórico-filológico.<br>Bibliografía verificada y cotejada tres veces.
+  </div>
+</aside>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <span class="eyebrow">Filología histórica · Crítica neotestamentaria</span>
+  <h1>LAS LENGUAS<br>DE JESÚS</h1>
+  <p class="subtitle">Arameo, hebreo y griego en la Palestina del siglo I:<br>el caso académico a favor del griego</p>
+
+  <div class="titulus">
+    <span class="titulus-line he lang-he">ישוע הנצרי מלך היהודים</span>
+    <hr class="titulus-divider">
+    <span class="titulus-line el lang-el">ΙΗΣΟΥΣ Ο ΝΑΖΩΡΑΙΟΣ Ο ΒΑΣΙΛΕΥΣ ΤΩΝ ΙΟΥΔΑΙΩΝ</span>
+    <hr class="titulus-divider">
+    <span class="titulus-line la lang-la">IESVS NAZARENVS REX IVDÆORVM</span>
+    <p class="titulus-cap">Reconstrucción del letrero colocado sobre la cruz, redactado —según el testimonio del cuarto evangelio— en hebreo, griego y latín (Jn 19,19-20). El detalle más directo, en todo el Nuevo Testamento, de que el griego formaba parte del paisaje lingüístico inmediato de Jesús.</p>
+  </div>
+
+  <div class="hero-meta">
+    <span><b>10</b> secciones</span>
+    <span><b>~28</b> min de lectura</span>
+    <span><b>3×</b> citas verificadas</span>
+  </div>
+  <a href="#intro" class="cta">Comenzar la lectura ↓</a>
+</section>
+
+<div id="contenido" class="wrap">
+
+<!-- ============ I. INTRO ============ -->
+<section class="chapter reveal" id="intro">
+  <span class="eyebrow-num">I.</span>
+  <h2>El mosaico lingüístico de Palestina en el siglo I</h2>
+  <p class="lede">Jesús de Nazaret no vivió en un mundo monolingüe. Vivió en una de las regiones más lingüísticamente estratificadas del Mediterráneo antiguo, donde al menos tres lenguas convivían con funciones sociales distintas y, en ciertos contextos, una cuarta —el latín— se reservaba para la administración romana más estricta.</p>
+
+  <p>La pregunta «¿qué lengua hablaba Jesús?» no es una curiosidad menor ni un debate marginal: ha generado, desde los trabajos pioneros del semitista alemán Gustaf Dalman a comienzos del siglo XX, una bibliografía académica extensa y todavía activa, que en las últimas tres décadas ha vivido un giro notable a raíz de los trabajos de Stanley E. Porter y la réplica de Maurice Casey. Este ensayo no pretende zanjar esa discusión, sino reconstruir, con el mayor rigor posible, la evidencia textual, arqueológica e histórica disponible para cada una de las tres lenguas —arameo, hebreo y griego— prestando una atención deliberadamente mayor al griego, por ser el caso menos conocido por el público general y, paradójicamente, el mejor documentado en ciertos episodios concretos de los Evangelios.</p>
+
+  <p>El método que se sigue aquí es el propio de la historia social del lenguaje: distinguir entre <strong>lengua materna o vernácula</strong> (la del hogar y la calle), <strong>lengua litúrgica o erudita</strong> (la de la Escritura y el debate rabínico) y <strong>lengua franca</strong> (la del comercio, la administración y el contacto intercultural). Como se mostrará, todo indica que Jesús se movió con soltura en registros correspondientes a las tres categorías —arameo, hebreo y griego, respectivamente— lo cual no era excepcional, sino más bien representativo de un judío galileo instruido de su época.</p>
+
+  <p class="small-note">Nota metodológica: este es un ejercicio de historia y filología, no de teología. Las conclusiones se formulan en términos de probabilidad histórica razonable, como exige el método histórico-crítico, y no como certezas absolutas.</p>
+</section>
+
+<!-- ============ II. ARAMEO ============ -->
+<section class="chapter reveal" id="arameo">
+  <span class="eyebrow-num">II.</span>
+  <h2>El arameo: la lengua materna</h2>
+  <p class="lede">Sobre esto no hay controversia real: el arameo fue, con altísima probabilidad, la lengua materna de Jesús y el vehículo cotidiano de su predicación.</p>
+
+  <p>El arameo se había convertido en la lengua vernácula dominante de Judea y Galilea desde el cautiverio babilónico (siglo VI a.C.), desplazando progresivamente al hebreo como idioma de uso diario en todas las clases sociales, especialmente en el campo. Nazaret y Cafarnaún, las localidades galileas donde los Evangelios sitúan la infancia y el ministerio de Jesús, eran comunidades de habla aramea. Además, el arameo galileo poseía rasgos dialectales propios, distinguibles del arameo de Jerusalén: el propio Pedro es reconocido en el patio del sumo sacerdote por su forma de hablar, un detalle de verosimilitud histórica difícil de inventar (Mateo 26:73).</p>
+
+  <h3>Las huellas directas en los Evangelios</h3>
+  <p>El testimonio más elocuente procede de las palabras arameas que los evangelistas, sobre todo Marcos, conservaron sin traducir —y luego tradujeron para sus lectores de habla griega—, precisamente porque pertenecían a la memoria más íntima y literal de lo que Jesús dijo.</p>
+
+  <div class="word-grid">
+    <div class="word-card">
+      <div class="orig lang-arc">Talithá qum</div>
+      <div class="gloss">«Niña, levántate», dicho a la hija de Jairo.</div>
+      <div class="ref">Marcos 5:41</div>
+    </div>
+    <div class="word-card">
+      <div class="orig lang-arc">Effatá</div>
+      <div class="gloss">«Sé abierto», al sanar a un sordomudo.</div>
+      <div class="ref">Marcos 7:34</div>
+    </div>
+    <div class="word-card">
+      <div class="orig lang-arc">Eloí, Eloí, lemá sabactani</div>
+      <div class="gloss">«Dios mío, ¿por qué me has abandonado?», cita del Salmo 22 en la cruz.</div>
+      <div class="ref">Marcos 15:34 · Mateo 27:46</div>
+    </div>
+    <div class="word-card">
+      <div class="orig lang-arc">Abbá</div>
+      <div class="gloss">Vocativo íntimo, «Padre», en la oración de Getsemaní.</div>
+      <div class="ref">Marcos 14:36</div>
+    </div>
+  </div>
+  <p class="small-note">El término <span class="term lang-arc">Abbá</span> es especialmente significativo: comunidades cristianas que ya predicaban en griego —como la de Pablo— conservaron esta palabra aramea sin traducir incluso en sus cartas griegas (Romanos 8:15; Gálatas 4:6), señal de que el modo de dirigirse a Dios que Jesús empleó marcó tan hondamente a sus primeros seguidores que ni siquiera al cambiar de lengua quisieron sustituirlo. Lo mismo ocurre con <span class="term lang-arc">Maranatá</span> («Ven, Señor»), fórmula aramea litúrgica que Pablo cita intacta en una carta dirigida a una comunidad de habla griega (1 Corintios 16:22).</p>
+
+  <p>Esta evidencia textual respalda la posición que durante más de un siglo ha sido mayoritaria entre semitistas y especialistas en los orígenes del cristianismo —Julius Wellhausen, Paul Joüon, Matthew Black, Max Wilcox, Louis Feldman, Charles Torrey y, más recientemente, Joseph Fitzmyer y Maurice Casey— según la cual el arameo fue, sin lugar a duda razonable, la lengua en que Jesús pensó, oró y enseñó de manera predominante. Casey, el especialista contemporáneo más identificado con la reconstrucción de un sustrato arameo bajo el texto griego de los Evangelios, resumió el motivo metodológico de esa prioridad:</p>
+
+  <div class="plaque">
+    <p>«...reconstruct his sayings, and the earliest accounts of his doings, in their original Aramaic.»</p>
+    <cite>Maurice Casey · <em>Aramaic Sources of Mark's Gospel</em>, Cambridge University Press, 1998, p. 1</cite>
+  </div>
+
+  <p>Nada de lo que sigue en este ensayo pretende desplazar esta conclusión. El arameo es la base; el griego, como se argumentará, es el añadido que la historiografía reciente ha vuelto a tomar en serio.</p>
+</section>
+
+<!-- ============ III. HEBREO ============ -->
+<section class="chapter reveal" id="hebreo">
+  <span class="eyebrow-num">III.</span>
+  <h2>El hebreo: la lengua sagrada y litúrgica</h2>
+  <p class="lede">Para el siglo I, el hebreo ya no era la lengua que se hablaba en el mercado de Nazaret, pero seguía siendo, de forma indiscutida, la lengua de la autoridad escrituraria, la liturgia sinagogal y el debate erudito.</p>
+
+  <p>Conviene distinguir dos preguntas que con frecuencia se confunden: si el hebreo seguía hablándose como vernáculo en algún sector de la población judía del siglo I —debate todavía abierto, en el que autores como Randall Buth y R. Steven Notley defienden una presencia oral mayor de la tradicionalmente asumida— y si Jesús dominaba el hebreo como lengua de la Escritura y la enseñanza formal. Sobre la segunda pregunta, la evidencia es notablemente más sólida.</p>
+
+  <h3>El episodio de la sinagoga de Nazaret</h3>
+  <p>El dato más elocuente es el relato de Lucas 4:16-20: Jesús entra en la sinagoga de Nazaret, se le entrega el rollo del profeta Isaías, lo despliega y lee públicamente. En el judaísmo del Segundo Templo, la lectura sinagogal de la Torá y los profetas se realizaba directamente sobre el texto hebreo del rollo; sólo después un intérprete o <span class="term">meturgemán</span> la traducía oralmente al arameo para la congregación. Que los Evangelios presenten a Jesús leyendo él mismo —no simplemente escuchando la traducción— implica, como ha señalado la literatura especializada sobre la sinagoga de la época, una alfabetización hebrea funcional, no meramente una comprensión pasiva del idioma.</p>
+
+  <p>A esto se suman sus repetidos debates escriturarios con escribas y fariseos sobre cuestiones finas de la Ley mosaica y los textos proféticos —debates que, incluso cuando se desarrollaban conversacionalmente en arameo, presuponían un dominio del registro hebreo en el que esos mismos textos habían sido compuestos, discutidos y transmitidos en las escuelas rabínicas. El propio título con que se le designa repetidamente, <span class="term">rabbí</span> o «maestro», remite a esa formación escrituraria.</p>
+
+  <div class="nuance">
+    <span class="nuance-label">Matiz necesario</span>
+    <p>El descubrimiento de los manuscritos de Qumrán confirmó que el hebreo no era, en el siglo I, una lengua «muerta» reservada a la liturgia: seguía empleándose para la composición original de textos religiosos y legales, lo cual hace más plausible —no menos— que un maestro itinerante con autoridad escrituraria como Jesús lo dominara activamente y no sólo de forma pasiva o memorística.</p>
+  </div>
+
+  <p>En síntesis, el hebreo funcionó para Jesús como la lengua de la autoridad bíblica y la disputa erudita: un registro que, a juzgar por el episodio de Nazaret y sus debates con los fariseos, manejaba con soltura, aunque casi con seguridad no fuera la lengua de su conversación cotidiana con sus discípulos galileos.</p>
+</section>
+
+<!-- ============ IV. HELENIZACIÓN ============ -->
+<section class="chapter reveal" id="helenizacion">
+  <span class="eyebrow-num">IV.</span>
+  <h2>El griego (I): Alejandro Magno y la helenización de Palestina</h2>
+  <p class="lede">Para entender por qué el griego es un candidato serio —no una curiosidad exótica— en la lista de lenguas de Jesús, hay que remontarse tres siglos antes de su nacimiento.</p>
+
+  <p>La conquista del Próximo Oriente por Alejandro Magno en el 332 a.C. inaugura un periodo de control político helenístico —primero ptolemaico, luego seléucida— que se prolonga hasta la conquista romana de Pompeyo en el 63 a.C., y que transforma el griego koiné en la lengua franca administrativa y comercial de todo el Mediterráneo oriental. Esa helenización no fue un fenómeno superficial limitado a las élites urbanas: el historiador alemán Martin Hengel, en su obra de referencia <em>Judaism and Hellenism</em>, documentó con un detalle exhaustivo cómo la influencia griega penetró incluso en los sectores judíos más comprometidos con la identidad nacional.</p>
+
+  <p>El ejemplo más elocuente que aporta Hengel es el del propio sumo sacerdote Jasón, quien en el 175 a.C. construyó un gimnasio de estilo griego junto al Templo de Jerusalén; y, más revelador todavía, el hecho de que incluso los partidarios de Judas Macabeo —el líder del levantamiento <em>contra</em> la imposición helenizante— necesitaron dominar el griego para conducir las embajadas y negociaciones diplomáticas con Roma y Esparta que narran los libros de los Macabeos. Hengel advirtió, además, contra la distinción demasiado limpia entre un «judaísmo helenístico» de la diáspora occidental y un «judaísmo arameo-hebreo» exclusivamente palestino: para el siglo I, sostuvo, ambos mundos se solapaban considerablemente, y el hebraísmo rabínico de Palestina —pese a haberse transmitido casi enteramente en hebreo y arameo— deja traslucir, en sus propias palabras, un sustrato helenístico más profundo de lo que su lengua de transmisión sugiere.</p>
+
+  <h3>Una salvedad sobre la alfabetización</h3>
+  <p>Conviene no idealizar el alcance de esta helenización: como recuerda Stanley Porter en su respuesta a Maurice Casey, no más del veinte o treinta por ciento de los varones de una comunidad helenística típica sabían leer y escribir, y ese porcentaje era todavía menor en las zonas rurales. La alfabetización —y con ella, el acceso pleno al griego escrito— estaba fuertemente correlacionada con la vida urbana y el comercio. Este dato no debilita el argumento a favor del griego de Jesús: lo precisa. Jesús, que según los Evangelios sabía leer (cf. Lucas 4:16), pertenecía ya, por esa sola razón, a una minoría alfabetizada cuyo perfil social coincide, estadísticamente, con el de quienes con mayor probabilidad habían tenido contacto funcional con el griego.</p>
+</section>
+
+<!-- ============ V. GALILEA / DECAPOLIS / SEFORIS ============ -->
+<section class="chapter reveal" id="galilea">
+  <span class="eyebrow-num">V.</span>
+  <h2>El griego (II): Galilea, la Decápolis y Séforis</h2>
+  <p class="lede">Si la helenización de Palestina es el telón de fondo, Galilea —la región natal de Jesús— es el primer plano: una franja de territorio literalmente rodeada de ciudades griegas.</p>
+
+  <p>Ya el profeta Isaías llamó a esta región «Galilea de los gentiles» (Isaías 9:1), expresión que Mateo retoma explícitamente al situar el comienzo del ministerio de Jesús (Mateo 4:15). Esa etiqueta no era retórica: al este y al sureste de Galilea se extendía la <strong>Decápolis</strong>, una liga de diez ciudades de fundación o refundación helenística que, tras la conquista romana de Siria por Pompeyo, conservaron amplia autonomía cívica bajo administración griega.</p>
+
+  <div class="chip-row">
+    <span class="chip"><b>Damasco</b></span>
+    <span class="chip"><b>Filadelfia</b> (Amán)</span>
+    <span class="chip"><b>Rafana</b></span>
+    <span class="chip"><b>Escitópolis</b> (Bet-Seán)</span>
+    <span class="chip"><b>Gadara</b></span>
+    <span class="chip"><b>Hipos</b></span>
+    <span class="chip"><b>Dión</b></span>
+    <span class="chip"><b>Pela</b></span>
+    <span class="chip"><b>Gerasa</b> (Jerash)</span>
+    <span class="chip"><b>Cánata</b></span>
+  </div>
+  <p class="small-note">Listado según Plinio el Viejo, <em>Historia Natural</em> V.16.74. La arqueología de Gerasa, Gadara y Escitópolis —calles porticadas, teatros, templos— confirma un urbanismo plenamente helenístico-romano a pocas horas de camino de cualquier aldea galilea.</p>
+
+  <p>Los Evangelios sitúan a Jesús reiteradamente en contacto con este territorio: cruza el mar de Galilea y entra «en la región de los gerasenos» para sanar al endemoniado (Marcos 5:1-20); más adelante «atravesó la Decápolis» de regreso de Tiro y Sidón (Marcos 7:31); y multitudes procedentes de la Decápolis figuran entre quienes lo siguen en Galilea (Mateo 4:25). Ningún evangelio registra un sermón suyo dentro de una de estas ciudades, pero su presencia documentada en su territorio lo sitúa, geográficamente, en el corredor más helenizado de todo el Levante meridional.</p>
+
+  <h3>Séforis: la ciudad a una hora de camino</h3>
+  <p>Más decisivo aún es el caso de Séforis, situada a apenas seis kilómetros —una hora de camino— de Nazaret. Cuando Jesús era niño, Herodes Antipas emprendió allí una reconstrucción urbana de gran escala que se prolongó durante buena parte de su infancia y juventud (4 a.C.–39 d.C.), convirtiendo la ciudad en lo que el historiador judío Flavio Josefo llamó «el ornamento de Galilea». El término griego que los Evangelios aplican al oficio de Jesús y de su padre, <span class="term">tekton</span> (Mateo 13:55; Marcos 6:3), no designa estrictamente a un carpintero de muebles, sino a un constructor u oficial de obra capaz de trabajar tanto la madera como la piedra.</p>
+
+  <p>Numerosos historiadores consideran razonable inferir —aunque ningún evangelio lo afirme de modo explícito— que Jesús y José encontraran trabajo regular en esta única gran obra cercana, antes que en la propia Nazaret, una aldea de menos de trescientos habitantes con escasísima actividad económica propia. Si esta inferencia es correcta, el oficio de Jesús lo habría puesto en contacto cotidiano, durante años, con capataces, proveedores y administradores de una ciudad reconstruida en estilo grecorromano, exactamente el tipo de bilingüismo artesanal documentado en todo el Oriente helenizado.</p>
+
+  <div class="nuance">
+    <span class="nuance-label">El contrapeso necesario: Mark Chancey</span>
+    <p>No toda la historiografía reciente comparte un retrato tan helenizado de Galilea. El estudio arqueológico de Mark A. Chancey, <em>The Myth of a Gentile Galilee</em>, concluye que la población galilea del siglo I era abrumadoramente judía, y advierte contra la imagen —común en cierta bibliografía anterior— de una Galilea «gentil» o étnicamente mixta. Esta corrección es importante, pero no contradice el argumento lingüístico aquí expuesto: que la población fuera mayoritariamente judía no excluye que muchos de esos judíos —especialmente artesanos, comerciantes y quienes trataban con las ciudades helenísticas vecinas— manejaran el griego con fines prácticos sin dejar de ser, religiosa y étnicamente, judíos galileos.</p>
+  </div>
+
+  <h3>La huella en la piedra: epigrafía funeraria</h3>
+  <p>La arqueología epigráfica añade un dato cuantitativo difícil de soslayar. Según el catálogo de osarios judíos compilado por L. Y. Rahmani, de los 897 osarios documentados en las colecciones del Estado de Israel, 233 portan inscripción, y aproximadamente un tercio de esas inscripciones está en griego —solo o combinado con hebreo— pese a tratarse, en su inmensa mayoría, de sepulturas de familias judías de Jerusalén. A escala más amplia, un inventario de unas 1.600 inscripciones funerarias judías conservadas entre Palestina y la diáspora, abarcando los periodos helenístico y romano-bizantino, confirma que el griego fue, contra lo que podría esperarse, la lengua epigráfica predominante incluso para enterramientos estrictamente judíos. El propio recinto del Templo de Jerusalén exhibía una advertencia bilingüe en griego y latín prohibiendo el acceso a los no judíos —ejemplares de la cual se conservan hoy en el Museo Arqueológico de Estambul y en el Museo Rockefeller de Jerusalén—, prueba material de que incluso el espacio más sagrado del judaísmo se comunicaba, en parte, en griego.</p>
+
+  <p class="small-note">Dato adicional poco resaltado: dos de los Doce llevaban nombres griegos sin más —Andrés (<span class="lang-el">Ἀνδρέας</span>) y Felipe (<span class="lang-el">Φίλιππος</span>)— dentro del círculo más íntimo de pescadores galileos de Jesús.</p>
+</section>
+
+<!-- ============ VI. EVANGELIOS ============ -->
+<section class="chapter reveal" id="evangelios">
+  <span class="eyebrow-num">VI.</span>
+  <h2>El griego (III): la evidencia textual directa en los Evangelios</h2>
+  <p class="lede">Más allá del contexto histórico, los propios Evangelios registran al menos cinco episodios en los que Jesús se comunica —sin que se mencione intérprete alguno— con interlocutores que no compartían el arameo.</p>
+
+  <h3>1. El proceso ante Pilato</h3>
+  <p>Poncio Pilato, prefecto romano de Judea, no tenía motivo alguno para conocer el arameo. En la práctica administrativa del Imperio en sus provincias orientales, el griego koiné —no el latín, reservado mayormente al uso militar y jurídico interno de Roma— era la lengua habitual de comunicación entre los gobernadores y la población provincial. El interrogatorio narrado en Juan 18:33-38, sin mención de intérprete, resulta así mucho más verosímil en griego que en cualquier otra lengua.</p>
+
+  <h3>2. El centurión de Cafarnaún</h3>
+  <p>El diálogo directo entre Jesús y un oficial militar romano (Mateo 8:5-13; Lucas 7:1-10) presenta la misma dificultad y la misma solución más probable: un oficial romano destacado en Galilea se habría dirigido a un civil judío en griego, la lengua común de la administración militar en el Oriente helenizado.</p>
+
+  <h3>3. La mujer «griega» sirofenicia</h3>
+  <p>Este es, quizá, el dato más citado por Stanley Porter. Marcos identifica explícitamente a la mujer que suplica por su hija como <span class="lang-el">Ἑλληνίς, Συροφοινίκισσα τῷ γένει</span> —«griega, sirofenicia de nacimiento»— (Marcos 7:26). El diálogo que sigue incluye un juego retórico sobre la palabra griega <span class="term lang-el">κυνάριον</span> («perrillos»), un matiz que se lee con mayor naturalidad como un intercambio bilingüe directo que como una glosa añadida después por el narrador.</p>
+
+  <h3>4. Los griegos que buscan a Jesús</h3>
+  <p>En Jerusalén, durante una fiesta de Pascua, «unos griegos» (<span class="lang-el">Ἕλληνες</span>) que habían subido a adorar se acercan no a Pedro ni a Santiago, sino específicamente a Felipe —quien a su vez recurre a Andrés—, los dos discípulos de nombre helénico, para pedir audiencia con Jesús (Juan 12:20-22). El detalle sugiere una comunidad que ya funcionaba, internamente, como puente hacia un público de habla griega.</p>
+
+  <h3>5. El juego de palabras de Cesarea de Filipo</h3>
+  <p>En Mateo 16:18, Jesús da a Simón el nuevo nombre de <em>Petros</em> y anuncia que edificará su Iglesia sobre esta <em>petra</em> —un juego de palabras que funciona con elegancia en griego. Algunos autores, Porter entre ellos, lo han leído como evidencia de que Jesús pensaba y jugaba con las palabras en griego.</p>
+  <div class="nuance">
+    <span class="nuance-label">Honestidad académica</span>
+    <p>Este ejemplo exige cautela: el término arameo subyacente, <span class="lang-arc">kepha</span> («roca»), habría producido un juego de palabras igualmente funcional —aunque menos preciso léxicamente— en arameo, ya que la misma palabra serviría tanto para el nombre como para la roca. Por sí solo, este episodio es sugerente, no decisivo.</p>
+  </div>
+
+  <h3>El letrero de la cruz: la prueba más explícita</h3>
+  <p>El dato textual más directo de todos es el que abre este ensayo: el letrero clavado sobre la cruz, redactado —según Juan 19:19-20— en hebreo, latín y griego. Sea cual fuere el orden exacto de las lenguas en el madero original, el testimonio múltiple de que el título se escribió en tres idiomas es la confirmación textual más explícita, en todo el Nuevo Testamento, de que el griego operaba como una de las lenguas públicas del entorno inmediato de Jesús hasta el último momento de su vida —un microcosmos perfecto del trilingüismo que este ensayo ha intentado documentar.</p>
+</section>
+
+<!-- ============ VII. DEBATE ============ -->
+<section class="chapter reveal" id="debate">
+  <span class="eyebrow-num">VII.</span>
+  <h2>El estado de la cuestión académica: Dalman, Porter y Casey</h2>
+  <p class="lede">La discusión moderna sobre el griego de Jesús no nace en el siglo XXI: tiene un siglo de historia, con un giro decisivo en las últimas tres décadas.</p>
+
+  <p>La fórmula clásica del semitista alemán Gustaf Dalman, a comienzos del siglo XX, sostenía que Jesús probablemente conocía algo de hebreo y muy probablemente hablaba algo de griego, pero que <em>enseñó</em> en arameo. Esta posición, relativamente moderada, fue durante décadas la posición de referencia, respaldada por figuras como Wellhausen, Joüon, Bardy, Black, Wilcox, Feldman, Torrey y, con matices, el propio Fitzmyer.</p>
+
+  <p>El giro lo protagonizó Stanley E. Porter (McMaster Divinity College), quien en su artículo de 1993 en el <em>Tyndale Bulletin</em> —ampliado después en una réplica explícita a Maurice Casey en el año 2000— sostuvo una tesis más audaz: que la evidencia acumulada no solo hace plausible, sino:</p>
+
+  <div class="plaque">
+    <p>«...virtually certain that he used Greek at various times...»</p>
+    <cite>Stanley E. Porter · «Did Jesus Ever Teach in Greek?», <em>Tyndale Bulletin</em> 44.2 (1993), p. 235</cite>
+  </div>
+
+  <p>En su respuesta directa a Casey, Porter precisó el alcance de su tesis con una fórmula que resume bien el argumento trilingüe de todo este ensayo:</p>
+
+  <div class="plaque">
+    <p>«...speaking Aramaic to be sure, and Greek to be almost as sure...»</p>
+    <cite>Stanley E. Porter · «Jesus and the Use of Greek: A Response to Maurice Casey», <em>Bulletin of Biblical Research</em> 10.1 (2000), pp. 71-87</cite>
+  </div>
+
+  <div class="debate-grid">
+    <div class="debate-card">
+      <h4>La posición de Porter</h4>
+      <p>El griego no fue un recurso ocasional de emergencia, sino una competencia real, adquirida en el contexto de una Galilea profundamente helenizada, que Jesús pudo emplear —y, en su lectura más fuerte, incluso enseñar— en episodios concretos como el proceso ante Pilato o el diálogo en Cesarea de Filipo.</p>
+    </div>
+    <div class="debate-card">
+      <h4>La posición de Casey</h4>
+      <p>Maurice Casey (Universidad de Nottingham), el especialista contemporáneo más identificado con la reconstrucción del sustrato arameo, insistió en que recuperar al Jesús histórico exige priorizar metodológicamente ese sustrato: el griego de los Evangelios sería, en su mayor parte, una capa de traducción posterior, y tratar el griego como medio habitual de enseñanza arriesga el anacronismo.</p>
+    </div>
+  </div>
+
+  <p>¿Dónde ha quedado realmente el debate? Prácticamente ningún especialista serio niega hoy que Jesús conociera algo de griego; la discusión que Porter reabrió no era sobre si tuvo contacto con la lengua, sino sobre la <em>frecuencia</em> y el <em>registro</em> de ese contacto —griego ocasional de mercado frente a la posición más audaz de Porter, que defiende una competencia suficiente para la enseñanza pública en determinadas circunstancias.</p>
+</section>
+
+<!-- ============ VIII. SINTESIS ============ -->
+<section class="chapter reveal" id="sintesis">
+  <span class="eyebrow-num">VIII.</span>
+  <h2>Síntesis histórica: un judío galileo trilingüe</h2>
+  <p class="lede">Cuatro líneas de evidencia independientes —geografía, oficio, formación religiosa y contacto social documentado— convergen en el mismo retrato.</p>
+
+  <p>Geográficamente, Jesús creció en la frontera misma entre la Galilea judía y el cinturón helenístico de la Decápolis, a una hora de camino de una ciudad —Séforis— en plena reconstrucción grecorromana durante toda su infancia. Profesionalmente, su oficio de <em>tekton</em> lo situaba, con alta probabilidad, en el comercio cotidiano de una obra dirigida según parámetros administrativos helenísticos. Religiosamente, su alfabetización hebrea y su autoridad en el debate escriturario lo acreditan como un maestro formado en el registro culto de su tradición. Socialmente, los Evangelios lo muestran conversando sin intérprete con un prefecto romano, un centurión, una mujer que el propio texto llama «griega» y peregrinos identificados como «griegos».</p>
+
+  <p>Ninguno de estos datos, aislado, sería concluyente. Juntos, dibujan exactamente el perfil que la sociolingüística esperaría de un judío galileo instruido del siglo I: el arameo como lengua materna y vehículo de sus palabras más íntimas —<span class="term lang-arc">Talithá qum</span>, <span class="term lang-arc">Abbá</span>—; el hebreo como registro de la autoridad escrituraria; y el griego como el puente funcional que los textos lo muestran cruzando, sin fricción aparente, cada vez que su interlocutor no compartía su lengua materna.</p>
+</section>
+
+<!-- ============ IX. SILOGISMO ============ -->
+<section class="chapter reveal" id="silogismo">
+  <span class="eyebrow-num">IX.</span>
+  <h2>El silogismo final</h2>
+  <p class="lede">Toda la evidencia anterior puede condensarse en una estructura argumentativa formal de tres premisas y una conclusión.</p>
+
+  <div class="syllogism">
+    <div class="premise">
+      <span class="ptag">Premisa histórico-arqueológica</span>
+      <p>La Galilea del siglo I —y en particular su franja fronteriza con la Decápolis y el eje urbano de Séforis— era una región donde el griego koiné funcionaba como lengua de administración, comercio y vida cívica, conforme demuestran la epigrafía funeraria, la inscripción bilingüe del Templo y la documentada helenización de Palestina desde Alejandro Magno.</p>
+    </div>
+    <div class="premise">
+      <span class="ptag">Premisa textual</span>
+      <p>Los Evangelios registran a Jesús comunicándose, sin intérprete mencionado, con interlocutores que no compartían el arameo —Pilato, el centurión de Cafarnaún, la mujer llamada «griega» en Marcos 7:26, los peregrinos griegos de Juan 12:20-22—, y el letrero colocado sobre su cruz se redactó, según testimonio explícito, en hebreo, griego y latín.</p>
+    </div>
+    <div class="premise">
+      <span class="ptag">Premisa social y biográfica</span>
+      <p>Como <em>tekton</em> de Nazaret, a poco más de una hora a pie de una Séforis en plena reconstrucción helenístico-romana durante su juventud, Jesús perteneció a un oficio artesanal cuyo sustento dependía, con toda probabilidad, del trato cotidiano con clientes, contratistas y una administración de habla griega.</p>
+    </div>
+    <div class="conclusion">
+      <span class="ptag">Conclusión</span>
+      <p>Por tanto, resulta históricamente razonable concluir que Jesús de Nazaret, además de su arameo materno y de su hebreo litúrgico-escriturario, poseyó una competencia funcional —y probablemente más que rudimentaria— en griego koiné: fue, en suma, un judío galileo trilingüe, representativo del tipo de multilingüismo que la propia historiografía documenta como característico de su tiempo y de su lugar de origen.</p>
+      <p>Esta conclusión se formula en los términos de probabilidad propios del método histórico-crítico, no como una certeza absoluta, y en nada disminuye el amplio consenso académico sobre la primacía del arameo como su lengua vernácula principal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ X. FUENTES ============ -->
+<section class="chapter reveal" id="fuentes">
+  <span class="eyebrow-num">X.</span>
+  <h2>Fuentes académicas y glosario</h2>
+  <p class="lede">Bibliografía cotejada y verificada antes de su inclusión, organizada alfabéticamente por autor.</p>
+
+  <ul class="biblio-list">
+    <li>Barr, James. «Which Language Did Jesus Speak? Some Remarks of a Semitist». <em>Bulletin of the John Rylands University Library of Manchester</em> 53 (1970): 9-29.</li>
+    <li>Casey, Maurice. <em>Aramaic Sources of Mark's Gospel</em>. Cambridge: Cambridge University Press, 1998.</li>
+    <li>Casey, Maurice. «In Which Language Did Jesus Teach?». <em>Expository Times</em> 108.11 (1997): 326-328.</li>
+    <li>Chancey, Mark A. <em>The Myth of a Gentile Galilee</em>. Cambridge: Cambridge University Press, 2002.</li>
+    <li>Fitzmyer, Joseph A. «The Languages of Palestine in the First Century A.D.». En <em>A Wandering Aramean: Collected Aramaic Essays</em>. Missoula, MT: Scholars Press, 1979, 29-56.</li>
+    <li>Fitzmyer, Joseph A. «Did Jesus Speak Greek?». <em>Biblical Archaeology Review</em> 18.5 (1992): 58-63, 76-77.</li>
+    <li>Hengel, Martin. <em>Judaism and Hellenism: Studies in Their Encounter in Palestine during the Early Hellenistic Period</em>. Philadelphia: Fortress Press, 1974.</li>
+    <li>Hengel, Martin. <em>The «Hellenization» of Judaea in the First Century after Christ</em>. London: SCM Press, 1989.</li>
+    <li>Josefo, Flavio. <em>Antigüedades judías</em> y <em>Guerra de los judíos</em> (passim, sobre Séforis y la Decápolis).</li>
+    <li>Porter, Stanley E. «Did Jesus Ever Teach in Greek?». <em>Tyndale Bulletin</em> 44.2 (1993): 199-235.</li>
+    <li>Porter, Stanley E. «Jesus and the Use of Greek: A Response to Maurice Casey». <em>Bulletin of Biblical Research</em> 10.1 (2000): 71-87.</li>
+    <li>Rahmani, L. Y. <em>A Catalogue of Jewish Ossuaries in the Collections of the State of Israel</em>. Jerusalem: Israel Antiquities Authority, 1994.</li>
+  </ul>
+
+  <h3 style="margin-top:50px;">Glosario rápido</h3>
+
+  <details class="gloss">
+    <summary>Koiné</summary>
+    <div class="gloss-body">El griego «común» helenístico, simplificado respecto al griego clásico ático, que se convirtió en la lengua franca del Mediterráneo oriental tras las conquistas de Alejandro Magno y en la que se redactó todo el Nuevo Testamento.</div>
+  </details>
+  <details class="gloss">
+    <summary>Tekton</summary>
+    <div class="gloss-body">Término griego aplicado a Jesús y a José en Mateo 13:55 y Marcos 6:3, habitualmente traducido como «carpintero», pero que designa de modo más preciso a un constructor u oficial de obra capaz de trabajar piedra y madera.</div>
+  </details>
+  <details class="gloss">
+    <summary>Decápolis</summary>
+    <div class="gloss-body">Liga informal de diez ciudades de carácter griego situadas al este y sureste de Galilea, de fundación o refundación helenística, que conservaron amplia autonomía cívica bajo administración romana.</div>
+  </details>
+  <details class="gloss">
+    <summary>Targum / Meturgemán</summary>
+    <div class="gloss-body">El <em>targum</em> es la traducción aramea, oral o escrita, de un texto hebreo bíblico; el <em>meturgemán</em> es la persona encargada de pronunciarla en voz alta inmediatamente después de la lectura hebrea en la sinagoga.</div>
+  </details>
+  <details class="gloss">
+    <summary>Titulus crucis</summary>
+    <div class="gloss-body">Nombre latino con el que se conoce el letrero colocado sobre la cruz de Jesús, que según Juan 19:19-20 estaba redactado en hebreo, latín y griego.</div>
+  </details>
+  <details class="gloss">
+    <summary>Helenización</summary>
+    <div class="gloss-body">Proceso histórico de difusión de la lengua, las instituciones y la cultura griegas por el Mediterráneo oriental y Oriente Próximo a partir de las conquistas de Alejandro Magno (siglo IV a.C.).</div>
+  </details>
+  <details class="gloss">
+    <summary>Ostraca</summary>
+    <div class="gloss-body">Fragmentos de cerámica reutilizados como soporte de escritura informal —recibos, cartas breves, listas—, una fuente epigráfica habitual para reconstruir los usos lingüísticos cotidianos del mundo antiguo.</div>
+  </details>
+
+</div>
+
+<footer>
+  Ensayo de historia y filología sobre las lenguas de Jesús de Nazaret · Elaborado a partir de fuentes académicas citadas y verificadas · Las traducciones del griego, hebreo y latín al español son propias.
+</footer>
+
+</main>
+
+<button id="backTop" aria-label="Volver arriba">↑</button>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Mobile nav ---- */
+  var navToggle = document.getElementById('navToggle');
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('navOverlay');
+  function closeNav(){
+    sidebar.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded','false');
+  }
+  function openNav(){
+    sidebar.classList.add('is-open');
+    overlay.classList.add('is-open');
+    navToggle.setAttribute('aria-expanded','true');
+  }
+  navToggle.addEventListener('click', function(){
+    sidebar.classList.contains('is-open') ? closeNav() : openNav();
+  });
+  overlay.addEventListener('click', closeNav);
+  document.querySelectorAll('.nav-link').forEach(function(link){
+    link.addEventListener('click', closeNav);
+  });
+
+  /* ---- Progress bar ---- */
+  var progressBar = document.getElementById('progressBar');
+  function updateProgress(){
+    var doc = document.documentElement;
+    var scrollTop = doc.scrollTop || document.body.scrollTop;
+    var scrollHeight = doc.scrollHeight - doc.clientHeight;
+    var pct = scrollHeight > 0 ? (scrollTop/scrollHeight)*100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  /* ---- Back to top ---- */
+  var backTop = document.getElementById('backTop');
+  function toggleBackTop(){
+    if (window.scrollY > 800) backTop.classList.add('is-visible');
+    else backTop.classList.remove('is-visible');
+  }
+  window.addEventListener('scroll', toggleBackTop, {passive:true});
+  backTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
+  });
+  toggleBackTop();
+
+  /* ---- Scrollspy ---- */
+  var sections = document.querySelectorAll('main section.chapter[id]');
+  var navLinks = document.querySelectorAll('.nav-link');
+  var linkMap = {};
+  navLinks.forEach(function(l){ linkMap[l.getAttribute('href').slice(1)] = l; });
+  if ('IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var link = linkMap[entry.target.id];
+        if(!link) return;
+        if(entry.isIntersecting){
+          navLinks.forEach(function(l){ l.classList.remove('is-active'); l.removeAttribute('aria-current'); });
+          link.classList.add('is-active');
+          link.setAttribute('aria-current','true');
+        }
+      });
+    }, {rootMargin: '-35% 0px -55% 0px', threshold: 0});
+    sections.forEach(function(s){ spy.observe(s); });
+
+    /* ---- Reveal on scroll ---- */
+    if(!reduceMotion){
+      var revealEls = document.querySelectorAll('.reveal');
+      var reveal = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('is-visible');
+            reveal.unobserve(entry.target);
+          }
+        });
+      }, {threshold: 0.1});
+      revealEls.forEach(function(el){ reveal.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+    }
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
+
+</body>
+</html>

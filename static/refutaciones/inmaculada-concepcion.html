@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Inmaculada Concepción — Defensa Teológica y Filosófica</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0A0A0A;
+    --negro-suave: #161616;
+    --gris-borde: #2A2A2A;
+    --amarillo: #D4A82C;
+    --amarillo-claro: #E8C667;
+    --amarillo-tenue: #8C7022;
+    --blanco: #FAFAF8;
+    --blanco-suave: #C9C7C0;
+    --gris-texto: #9A9890;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--blanco);
+    color: var(--negro);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  #cielo-estrellado { display: none; }
+
+  /* ═══════════════════════════════════════
+     BARRA DE PROGRESO
+  ═══════════════════════════════════════ */
+  #barra-progreso {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--amarillo);
+    z-index: 1000;
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  /* ═══════════════════════════════════════
+     HÉROE
+  ═══════════════════════════════════════ */
+  #hero {
+    position: relative;
+    z-index: 1;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--negro);
+    border-bottom: 3px solid var(--amarillo);
+  }
+
+  .mandorla { display: none; }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  #hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(32px, 6vw, 64px);
+    font-weight: 700;
+    color: var(--blanco);
+    line-height: 1.2;
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+  }
+
+  #hero h1 span {
+    color: var(--amarillo);
+    display: block;
+    font-size: 0.85em;
+    margin-top: 4px;
+  }
+
+  .hero-subtitulo {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(15px, 2vw, 19px);
+    font-style: italic;
+    color: var(--blanco-suave);
+    max-width: 640px;
+    margin: 0 auto 44px;
+    line-height: 1.7;
+  }
+
+  .hero-latin {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--amarillo);
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    border-top: 1px solid var(--gris-borde);
+    border-bottom: 1px solid var(--gris-borde);
+    padding: 16px 30px;
+    display: inline-block;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--amarillo-tenue);
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+
+  /* ═══════════════════════════════════════
+     NAVEGACIÓN / ÍNDICE LATERAL INTERACTIVO
+  ═══════════════════════════════════════ */
+  #nav-flotante {
+    position: fixed;
+    right: 24px;
+    top: 24px;
+    bottom: 24px;
+    z-index: 900;
+    background: var(--negro);
+    border: 1px solid var(--gris-borde);
+    border-radius: 6px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+  }
+
+  #nav-flotante.oculto {
+    transform: translateX(calc(100% + 24px));
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #nav-flotante.colapsado {
+    width: 54px;
+  }
+  #nav-flotante.colapsado .nav-buscador-wrap,
+  #nav-flotante.colapsado .nav-progreso-texto,
+  #nav-flotante.colapsado #nav-lista,
+  #nav-flotante.colapsado .nav-titulo {
+    display: none;
+  }
+  #nav-flotante.colapsado .nav-cabecera { justify-content: center; padding: 14px 0; }
+  #nav-flotante.colapsado #nav-colapsar { transform: rotate(180deg); }
+
+  #nav-toggle {
+    position: fixed;
+    right: 16px;
+    top: 16px;
+    z-index: 1000;
+    background: var(--negro);
+    border: 1px solid var(--amarillo-tenue);
+    color: var(--amarillo);
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 3px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    display: none;
+  }
+  #nav-toggle:hover { background: var(--amarillo); color: var(--negro); border-color: var(--amarillo); }
+  #nav-toggle.visible { display: block; }
+
+  .nav-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px 12px;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  .nav-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+  }
+
+  #nav-colapsar {
+    background: none;
+    border: 1px solid var(--gris-borde);
+    color: var(--blanco-suave);
+    width: 26px;
+    height: 26px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  #nav-colapsar:hover { border-color: var(--amarillo); color: var(--amarillo); }
+
+  .nav-buscador-wrap {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gris-borde);
+    position: relative;
+  }
+
+  #nav-buscador {
+    width: 100%;
+    background: var(--negro-suave);
+    border: 1px solid var(--gris-borde);
+    color: var(--blanco);
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    padding: 8px 10px;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #nav-buscador:focus { border-color: var(--amarillo-tenue); }
+  #nav-buscador::placeholder { color: var(--gris-texto); }
+
+  #nav-buscador-contador {
+    display: block;
+    font-family: 'EB Garamond', serif;
+    font-size: 11.5px;
+    font-style: italic;
+    color: var(--gris-texto);
+    margin-top: 6px;
+    min-height: 14px;
+  }
+
+  .nav-progreso-texto {
+    padding: 10px 18px;
+    font-family: 'Cinzel', serif;
+    font-size: 9.5px;
+    letter-spacing: 1px;
+    color: var(--gris-texto);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  #nav-progreso-pct, #nav-seccion-actual { color: var(--amarillo); }
+
+  #nav-lista {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 0 16px;
+  }
+
+  .nav-grupo {
+    border-bottom: 1px solid var(--gris-borde);
+  }
+  .nav-grupo:last-child { border-bottom: none; }
+
+  .nav-grupo summary {
+    font-family: 'Cinzel', serif;
+    font-size: 11.5px;
+    letter-spacing: 1px;
+    color: var(--blanco-suave);
+    text-transform: uppercase;
+    padding: 11px 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    user-select: none;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-grupo summary::-webkit-details-marker { display: none; }
+
+  .nav-grupo summary:hover { color: var(--amarillo-claro); background: rgba(212,168,44,0.05); }
+
+  .nav-grupo summary::after {
+    content: '+';
+    margin-left: auto;
+    color: var(--gris-texto);
+    font-size: 13px;
+    font-family: Georgia, serif;
+  }
+  .nav-grupo[open] summary::after { content: '−'; }
+
+  .nav-grupo.activo summary { color: var(--amarillo); }
+
+  .nav-num {
+    color: var(--amarillo-tenue);
+    font-size: 11px;
+    min-width: 16px;
+  }
+  .nav-grupo.activo .nav-num { color: var(--amarillo); }
+
+  .nav-item {
+    display: block;
+    padding: 7px 18px 7px 30px;
+    color: var(--gris-texto);
+    text-decoration: none;
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    line-height: 1.4;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-item:hover, .nav-item.activo {
+    color: var(--amarillo-claro);
+    border-left-color: var(--amarillo);
+    background: rgba(212,168,44,0.07);
+  }
+
+  .nav-item.sub {
+    padding-left: 42px;
+    font-size: 12.5px;
+  }
+  .nav-item.sub:hover, .nav-item.sub.activo { padding-left: 44px; }
+
+  .nav-item mark, .nav-grupo summary mark {
+    background: var(--amarillo);
+    color: var(--negro);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  .nav-item.oculto-busqueda { display: none; }
+  .nav-grupo.oculto-busqueda { display: none; }
+
+  #nav-lista::-webkit-scrollbar { width: 4px; }
+  #nav-lista::-webkit-scrollbar-track { background: var(--negro); }
+  #nav-lista::-webkit-scrollbar-thumb { background: var(--amarillo-tenue); border-radius: 2px; }
+
+  /* ═══════════════════════════════════════
+     CONTENIDO PRINCIPAL
+  ═══════════════════════════════════════ */
+  #contenido {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 30px 100px;
+  }
+
+  @media (min-width: 1300px) {
+    #contenido { margin: 0 auto 0 max(auto, calc((100vw - 800px - 348px) / 2)); }
+  }
+
+  /* ═══════════════════════════════════════
+     SECCIONES
+  ═══════════════════════════════════════ */
+  .seccion {
+    margin: 70px 0;
+  }
+
+  .seccion-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--negro);
+  }
+
+  .seccion-numero {
+    font-family: 'Cinzel', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--amarillo);
+    line-height: 1;
+    min-width: 56px;
+  }
+
+  .seccion-titulo-wrap { flex: 1; }
+
+  .seccion-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .seccion h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(21px, 3.6vw, 32px);
+    font-weight: 700;
+    color: var(--negro);
+    line-height: 1.25;
+  }
+
+  .seccion h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(16px, 2.6vw, 21px);
+    font-weight: 600;
+    color: var(--negro);
+    margin: 42px 0 18px;
+    padding-left: 14px;
+    border-left: 3px solid var(--amarillo);
+  }
+
+  .seccion h4 {
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--negro);
+    margin: 28px 0 12px;
+    font-style: italic;
+  }
+
+  .seccion p {
+    margin-bottom: 19px;
+    color: var(--negro);
+    font-size: 17.5px;
+  }
+
+  /* ═══════════════════════════════════════
+     CITAS BÍBLICAS
+  ═══════════════════════════════════════ */
+  .cita-biblica {
+    background: var(--negro-suave);
+    border-left: 4px solid var(--amarillo);
+    border-radius: 0 4px 4px 0;
+    padding: 22px 26px;
+    margin: 28px 0;
+  }
+
+  .cita-biblica .cita-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--blanco);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  .cita-biblica .cita-ref {
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     CITAS PATRÍSTICAS
+  ═══════════════════════════════════════ */
+  .cita-patristica {
+    background: var(--blanco);
+    border: 1px solid var(--negro);
+    border-left: 4px solid var(--negro);
+    border-radius: 0 4px 4px 0;
+    padding: 26px 30px;
+    margin: 28px 0;
+  }
+
+  .padre-nombre {
+    font-family: 'Cinzel', serif;
+    font-size: 11.5px;
+    letter-spacing: 2.5px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .cita-patristica .cita-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: 18.5px;
+    font-style: italic;
+    color: var(--negro);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .cita-patristica .cita-fuente {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: var(--gris-texto);
+    font-style: italic;
+  }
+
+  /* ═══════════════════════════════════════
+     SILOGISMOS
+  ═══════════════════════════════════════ */
+  .silogismo {
+    background: var(--blanco);
+    border: 1px solid var(--negro);
+    border-top: 3px solid var(--amarillo);
+    border-radius: 0 0 4px 4px;
+    padding: 26px 30px;
+    margin: 28px 0;
+  }
+
+  .silogismo-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 3px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  .premisa {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+
+  .premisa-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9.5px;
+    letter-spacing: 1.5px;
+    color: var(--amarillo-tenue);
+    min-width: 70px;
+    padding-top: 3px;
+    text-transform: uppercase;
+  }
+
+  .premisa-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: 16.5px;
+    color: var(--negro);
+    line-height: 1.6;
+  }
+
+  .conclusion {
+    display: flex;
+    gap: 16px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--negro);
+    align-items: flex-start;
+  }
+
+  .conclusion-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9.5px;
+    letter-spacing: 1.5px;
+    color: var(--negro);
+    min-width: 70px;
+    padding-top: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .conclusion-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: 17.5px;
+    color: var(--negro);
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .silogismo-nota {
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--gris-texto);
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gris-borde);
+  }
+
+  /* ═══════════════════════════════════════
+     CUADROS INFO
+  ═══════════════════════════════════════ */
+  .cuadro-info {
+    background: var(--negro-suave);
+    border: 1px solid var(--gris-borde);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin: 22px 0;
+  }
+
+  .cuadro-info h5 {
+    font-family: 'Cinzel', serif;
+    font-size: 11.5px;
+    letter-spacing: 2px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+    margin-bottom: 13px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  .cuadro-info p {
+    color: var(--blanco-suave);
+    font-size: 15.5px;
+  }
+
+  /* ═══════════════════════════════════════
+     PADRE DE LA IGLESIA — TARJETA
+  ═══════════════════════════════════════ */
+  .padre-card {
+    background: var(--blanco);
+    border: 1px solid var(--negro);
+    border-radius: 4px;
+    padding: 26px;
+    margin: 26px 0;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .padre-icono {
+    width: 60px;
+    height: 60px;
+    background: var(--negro);
+    border: 1px solid var(--amarillo);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+    color: var(--amarillo);
+  }
+
+  .padre-info h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--negro);
+    margin: 0 0 4px;
+    font-style: normal;
+  }
+
+  .padre-info .padre-datos {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: var(--gris-texto);
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  .padre-info p {
+    font-size: 15.5px;
+    color: var(--negro);
+    margin-bottom: 0;
+  }
+
+  /* ═══════════════════════════════════════
+     DECORADORES
+  ═══════════════════════════════════════ */
+  .ornamento {
+    text-align: center;
+    color: var(--amarillo-tenue);
+    font-size: 18px;
+    margin: 46px 0;
+    letter-spacing: 16px;
+  }
+
+  .separador {
+    border: none;
+    border-top: 1px solid var(--gris-borde);
+    margin: 56px 0;
+    position: relative;
+  }
+
+  .separador::before {
+    content: '◆';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--blanco);
+    padding: 0 16px;
+    color: var(--amarillo);
+    font-size: 11px;
+  }
+
+  /* ═══════════════════════════════════════
+     DEFINICIÓN DOGMÁTICA
+  ═══════════════════════════════════════ */
+  .dogma-box {
+    background: var(--negro);
+    border: 1px solid var(--amarillo);
+    border-radius: 4px;
+    padding: 34px 38px;
+    margin: 38px 0;
+    text-align: center;
+  }
+
+  .dogma-box .dogma-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .dogma-box .dogma-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(17px, 2.2vw, 23px);
+    font-style: italic;
+    color: var(--blanco);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .dogma-box .dogma-pie {
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    color: var(--amarillo-tenue);
+  }
+
+  /* ═══════════════════════════════════════
+     TIMELINE
+  ═══════════════════════════════════════ */
+  .timeline { position: relative; padding-left: 36px; margin: 28px 0; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--gris-borde);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 26px;
+    padding: 18px 22px;
+    background: var(--negro-suave);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -31px;
+    top: 22px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--amarillo);
+    border: 2px solid var(--blanco);
+  }
+
+  .timeline-anio {
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    color: var(--amarillo);
+    margin-bottom: 8px;
+  }
+
+  .timeline-item h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 14.5px;
+    color: var(--blanco);
+    margin: 0 0 8px;
+    font-style: normal;
+  }
+
+  .timeline-item p {
+    font-size: 14.5px;
+    margin-bottom: 0;
+    color: var(--blanco-suave);
+  }
+
+  /* ═══════════════════════════════════════
+     GRILLA DE ARGUMENTOS
+  ═══════════════════════════════════════ */
+  .grilla-argumentos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin: 28px 0;
+  }
+
+  .arg-card {
+    background: var(--blanco);
+    border: 1px solid var(--negro);
+    border-top: 3px solid var(--amarillo);
+    border-radius: 0 0 4px 4px;
+    padding: 20px;
+  }
+
+  .arg-card-icono { display: none; }
+
+  .arg-card h5 {
+    font-family: 'Cinzel', serif;
+    font-size: 12.5px;
+    letter-spacing: 0.5px;
+    color: var(--negro);
+    margin-bottom: 10px;
+  }
+
+  .arg-card p {
+    font-size: 14.5px;
+    color: var(--gris-texto);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* ═══════════════════════════════════════
+     NOTAS AL MARGEN
+  ═══════════════════════════════════════ */
+  .nota-margen {
+    float: right;
+    width: 200px;
+    margin: 0 0 20px 24px;
+    padding: 16px;
+    background: var(--negro-suave);
+    border-radius: 4px;
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--blanco-suave);
+    line-height: 1.6;
+    clear: right;
+  }
+
+  /* ═══════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════ */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--negro);
+    border-top: 3px solid var(--amarillo);
+    text-align: center;
+    padding: 56px 30px;
+    margin-top: 70px;
+  }
+
+  .footer-simbolo {
+    font-size: 36px;
+    color: var(--amarillo);
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  footer p {
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--blanco-suave);
+    margin-bottom: 8px;
+  }
+
+  footer .footer-latin {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════ */
+  @media (max-width: 1100px) {
+    #nav-flotante {
+      top: 0; right: 0; bottom: 0;
+      border-radius: 0;
+      border-top: none; border-bottom: none; border-right: none;
+      width: 300px;
+      transform: translateX(100%);
+      opacity: 1;
+    }
+    #nav-flotante.visible { transform: translateX(0); }
+    #nav-flotante.oculto { transform: translateX(100%); pointer-events: none; }
+    #nav-toggle.visible { display: block; }
+  }
+
+  @media (max-width: 768px) {
+    #contenido { padding: 0 18px 60px; }
+    .nota-margen { float: none; width: 100%; margin: 0 0 20px; }
+    .padre-card { grid-template-columns: 1fr; }
+    .padre-icono { width: 50px; height: 50px; font-size: 22px; }
+    .dogma-box { padding: 24px 20px; }
+    #nav-flotante { width: 86vw; max-width: 320px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Barra de progreso -->
+<div id="barra-progreso"></div>
+
+<!-- Toggle del índice (móvil) -->
+<button id="nav-toggle" onclick="toggleNav()">☰ ÍNDICE</button>
+
+<!-- Navegación flotante interactiva -->
+<aside id="nav-flotante">
+  <div class="nav-cabecera">
+    <div class="nav-titulo">Índice</div>
+    <button id="nav-colapsar" onclick="toggleColapso()" title="Contraer índice" aria-label="Contraer índice">«</button>
+  </div>
+
+  <div class="nav-buscador-wrap">
+    <input id="nav-buscador" type="text" placeholder="Buscar en el índice…" autocomplete="off">
+    <span id="nav-buscador-contador"></span>
+  </div>
+
+  <div class="nav-progreso-texto">
+    <span id="nav-progreso-pct">0%</span> leído · sección <span id="nav-seccion-actual">—</span>
+  </div>
+
+  <nav id="nav-lista">
+
+    <details class="nav-grupo" data-grupo="introduccion" open>
+      <summary><span class="nav-num">I</span> Introducción</summary>
+      <a class="nav-item" href="#introduccion">Introducción al Privilegio Mariano</a>
+      <a class="nav-item sub" href="#definicion-dogma">Definición del Dogma</a>
+      <a class="nav-item sub" href="#historia-doctrina">Historia de la Doctrina</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="fundamentos-biblicos">
+      <summary><span class="nav-num">II</span> Fundamentos Bíblicos</summary>
+      <a class="nav-item" href="#fundamentos-biblicos">Los Fundamentos Bíblicos</a>
+      <a class="nav-item sub" href="#protoevangelio">El Protoevangelio</a>
+      <a class="nav-item sub" href="#salutacion-angelica">La Salutación Angélica</a>
+      <a class="nav-item sub" href="#arca-alianza">El Arca de la Alianza</a>
+      <a class="nav-item sub" href="#sabiduria-biblica">Sabiduría Bíblica</a>
+      <a class="nav-item sub" href="#cantico-cantares">El Cantar de los Cantares</a>
+      <a class="nav-item sub" href="#judith-ester">Judith y Ester</a>
+      <a class="nav-item sub" href="#apocalipsis">Apocalipsis 12</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="padres-iglesia">
+      <summary><span class="nav-num">III</span> Padres de la Iglesia</summary>
+      <a class="nav-item" href="#padres-iglesia">El Testimonio Patrístico</a>
+      <a class="nav-item sub" href="#san-justino">San Justino Mártir</a>
+      <a class="nav-item sub" href="#san-ireneo">San Ireneo de Lyon</a>
+      <a class="nav-item sub" href="#tertuliano">Tertuliano y el Contexto</a>
+      <a class="nav-item sub" href="#san-efren">San Efrén de Siria</a>
+      <a class="nav-item sub" href="#san-ambrosio">San Ambrosio de Milán</a>
+      <a class="nav-item sub" href="#san-agustin">San Agustín de Hipona</a>
+      <a class="nav-item sub" href="#san-proclo">San Proclo de Constantinopla</a>
+      <a class="nav-item sub" href="#san-pedro-crisol">San Pedro Crisólogo</a>
+      <a class="nav-item sub" href="#san-sofronio">San Sofronio de Jerusalén</a>
+      <a class="nav-item sub" href="#san-andres-creta">San Andrés de Creta</a>
+      <a class="nav-item sub" href="#san-juan-damasceno">San Juan Damasceno</a>
+      <a class="nav-item sub" href="#san-anselmo">San Anselmo de Canterbury</a>
+      <a class="nav-item sub" href="#san-bernardo">San Bernardo de Claraval</a>
+      <a class="nav-item sub" href="#duns-escoto">Duns Escoto</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="silogismos">
+      <summary><span class="nav-num">IV</span> Silogismos Filosóficos</summary>
+      <a class="nav-item" href="#silogismos">Argumentación Filosófico-Teológica</a>
+      <a class="nav-item sub" href="#sil-potencia-conveniencia">Potuit, Decuit, Ergo Fecit</a>
+      <a class="nav-item sub" href="#sil-redencion">Redención Preservativa</a>
+      <a class="nav-item sub" href="#sil-maternidad">Dignidad de la Maternidad Divina</a>
+      <a class="nav-item sub" href="#sil-nueva-eva">La Nueva Eva</a>
+      <a class="nav-item sub" href="#sil-gracia">Plenitud de Gracia</a>
+      <a class="nav-item sub" href="#sil-arca">El Arca y la Santidad</a>
+      <a class="nav-item sub" href="#sil-mediacion">Mediación y Pureza</a>
+      <a class="nav-item sub" href="#sil-pecado-original">Naturaleza del Pecado Original</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="teologia-escolastica">
+      <summary><span class="nav-num">V</span> Teología Escolástica</summary>
+      <a class="nav-item" href="#teologia-escolastica">El Gran Debate Escolástico</a>
+      <a class="nav-item sub" href="#debate-medieval">El Gran Debate Medieval</a>
+      <a class="nav-item sub" href="#principio-escoto">El Principio de Escoto</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="liturgia-tradicion">
+      <summary><span class="nav-num">VI</span> Liturgia y Tradición</summary>
+      <a class="nav-item" href="#liturgia-tradicion">Liturgia y Tradición Viva</a>
+      <a class="nav-item sub" href="#fiestas-antiguas">Fiestas Antiguas</a>
+      <a class="nav-item sub" href="#himnos-oraciones">Himnos y Oraciones</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="definicion-pio-ix">
+      <summary><span class="nav-num">VII</span> Definición Dogmática</summary>
+      <a class="nav-item" href="#definicion-pio-ix">La Definición Dogmática de Pío IX</a>
+      <a class="nav-item sub" href="#ineffabilis-deus">Ineffabilis Deus (1854)</a>
+      <a class="nav-item sub" href="#lourdes">Confirmación en Lourdes</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="objeciones">
+      <summary><span class="nav-num">VIII</span> Objeciones y Respuestas</summary>
+      <a class="nav-item" href="#objeciones">Objeciones Principales</a>
+      <a class="nav-item sub" href="#obj-escritura">Objeciones Escriturísticas</a>
+      <a class="nav-item sub" href="#obj-agustin">La Cuestión Agustiniana</a>
+      <a class="nav-item sub" href="#obj-tomas">Objeción Tomista</a>
+      <a class="nav-item sub" href="#obj-purificacion">La Purificación en el Templo</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="conclusion">
+      <summary><span class="nav-num">IX</span> Conclusión</summary>
+      <a class="nav-item" href="#conclusion">Síntesis Final</a>
+    </details>
+
+  </nav>
+</aside>
+
+<!-- HÉROE -->
+<section id="hero">
+  <p class="hero-eyebrow">Defensa Teológica, Patrística y Filosófica</p>
+  <h1>La Inmaculada<span>Concepción</span></h1>
+  <p class="hero-subtitulo">Una exposición completa de las pruebas bíblicas, el testimonio de los Padres de la Iglesia y la demostración filosófica del privilegio singular de la Virgen María</p>
+  <div class="hero-latin">Tota pulchra es, Maria, et macula originalis non est in te</div>
+  <div class="scroll-hint">DESCENDER</div>
+</section>
+
+<!-- CONTENIDO -->
+<main id="contenido">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN I — INTRODUCCIÓN
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="introduccion">
+    <div class="seccion-header">
+      <div class="seccion-numero">I</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Prolegómenos</div>
+        <h2>Introducción al Privilegio Mariano</h2>
+      </div>
+    </div>
+
+    <p>La Inmaculada Concepción de la Santísima Virgen María constituye uno de los dogmas más sublimes y profundos de la fe católica. Este privilegio singular, por el cual María fue preservada del pecado original en el primer instante de su concepción, no es un invento medieval ni una piadosa exageración, sino la floración de una semilla plantada en las mismas páginas de la Sagrada Escritura, regada por el testimonio constante de los Padres de la Iglesia y cultivada durante siglos por la reflexión teológica y el sensus fidelium del pueblo cristiano.</p>
+
+    <p>Entender este dogma requiere comprender no sólo su contenido formal, sino también la lógica interna que lo sustenta. La Iglesia no proclama dogmas arbitrariamente: cada definición dogmática responde a una convergencia de testimonios escriturísticos, patrísticos, litúrgicos y teológicos que, a lo largo de los siglos, han ido clarificándose con mayor precisión. La Inmaculada Concepción es un ejemplo paradigmático de este proceso de desarrollo de la doctrina que Newman llamaría, en el siglo XIX, "desarrollo del dogma cristiano".</p>
+
+    <div id="definicion-dogma"></div>
+    <h3>Definición Precisa del Dogma</h3>
+
+    <div class="dogma-box">
+      <p class="dogma-eyebrow">Definición Dogmática — Pío IX — 8 de Diciembre de 1854</p>
+      <p class="dogma-texto">"Declaramos, pronunciamos y definimos que la doctrina que sostiene que la beatísima Virgen María fue preservada inmune de toda mancha de culpa original en el primer instante de su concepción, por singular gracia y privilegio de Dios omnipotente, en atención a los méritos de Cristo Jesús Salvador del género humano, está revelada por Dios y, por tanto, debe ser firme y constantemente creída por todos los fieles."</p>
+      <p class="dogma-pie">— Bula Ineffabilis Deus · Pío IX · 8 de diciembre de 1854</p>
+    </div>
+
+    <p>Tres elementos esenciales componen esta definición: <strong style="color:var(--dorado-claro)">primero</strong>, la preservación de toda mancha de pecado original; <strong style="color:var(--dorado-claro)">segundo</strong>, que esta preservación ocurrió en el primer instante de su concepción; <strong style="color:var(--dorado-claro)">tercero</strong>, que esta gracia fue concedida en virtud de los méritos futuros de Cristo Redentor. Este tercer punto es capital: María no fue redimida de modo curativo (liberada del pecado ya contraído) sino de modo preservativo (preservada de contraerlo), pero en ambos casos la fuente es la misma: la sangre de Cristo.</p>
+
+    <div id="historia-doctrina"></div>
+    <h3>Desarrollo Histórico de la Doctrina</h3>
+
+    <p>La historia de este dogma es también la historia de cómo la Iglesia, guiada por el Espíritu Santo, reflexiona progresivamente sobre las verdades contenidas en la Revelación. No siempre fue formulado con la precisión técnica que hoy conocemos, pero su sustancia estaba presente desde los primeros siglos en forma de intuiciones teológicas, expresiones litúrgicas y comparaciones tipológicas.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLO II D.C.</div>
+        <h4>Los primeros Padres y el paralelismo Eva-María</h4>
+        <p>San Justino Mártir e Ireneo de Lyon establecen la tipología de la "nueva Eva", fundamento implícito del privilegio mariano.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLO IV-V</div>
+        <h4>Epifanio, Ambrosio y el título de "toda santa"</h4>
+        <p>Se desarrolla el título <em>Theotókos</em> (Madre de Dios) en el Concilio de Éfeso (431), que implica una santidad singular para quien porta a Dios en su seno.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLO VII-VIII</div>
+        <h4>Fiestas litúrgicas en Oriente</h4>
+        <p>La Iglesia Oriental celebra la "Concepción de Ana", reconociendo la singularidad del nacimiento de María, preludio de la Inmaculada Concepción.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLOS XII-XIV</div>
+        <h4>El gran debate escolástico</h4>
+        <p>Dominicos (Bernardo, Tomás) y Franciscanos (Escoto) debaten la compatibilidad de la Inmaculada Concepción con la universalidad de la Redención. Duns Escoto resuelve la cuestión con el argumento de la redención preservativa.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">1854</div>
+        <h4>Definición dogmática — Pío IX</h4>
+        <p>Tras consultar a todos los obispos del mundo, Pío IX define solemnemente el dogma en la Basílica de San Pedro, con la bula <em>Ineffabilis Deus</em>.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">1858</div>
+        <h4>Confirmación en Lourdes</h4>
+        <p>La Virgen se aparece a Bernardette Soubirous y al ser preguntada por su nombre responde: "Soy la Inmaculada Concepción", confirmando el dogma apenas cuatro años después de su definición.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN II — FUNDAMENTOS BÍBLICOS
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="fundamentos-biblicos">
+    <div class="seccion-header">
+      <div class="seccion-numero">II</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Sagrada Escritura</div>
+        <h2>Los Fundamentos Bíblicos</h2>
+      </div>
+    </div>
+
+    <p>La Sagrada Escritura no enuncia el dogma de la Inmaculada Concepción en términos técnicos y explícitos —como tampoco enuncia explícitamente el dogma de la Trinidad o la divinidad del Espíritu Santo—, pero contiene los gérmenes de esta verdad que la Tradición y el Magisterio han ido explicitando con el paso de los siglos. Los textos que siguen no son alegorizaciones arbitrarias, sino el fruto de una lectura tipológica que los propios autores del Nuevo Testamento inauguraron y los Padres de la Iglesia continuaron.</p>
+
+    <div id="protoevangelio"></div>
+    <h3>El Protoevangelio (Génesis 3,15)</h3>
+
+    <p>El primer texto que la Tradición ha considerado fundamento escriturístico de la Inmaculada Concepción es el llamado "Protoevangelio", la primera promesa de salvación después de la caída de Adán y Eva.</p>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Pondré enemistad entre ti y la mujer, entre tu linaje y el suyo; él te aplastará la cabeza y tú le acecharás el talón."</p>
+      <p class="cita-ref">Génesis 3, 15 — Versión Vulgata Latina: <em>"Inimicitias ponam inter te et mulierem"</em></p>
+    </div>
+
+    <p>Este texto es decisivo por varias razones. La Vulgata Latina, traducción de San Jerónimo utilizada oficialmente por la Iglesia durante siglos, traduce el pronombre como femenino: <em>"ipsa conteret caput tuum"</em> — "ella te aplastará la cabeza". Aunque la cuestión textual es más compleja (el hebreo usa un pronombre masculino que puede referirse a la descendencia de la mujer), el contenido teológico apunta con claridad a una enemistad absoluta y total entre la mujer y la serpiente. Esta enemistad radical, como señalarán los teólogos, sería incompatible con que María hubiera estado, aunque fuera momentáneamente, bajo el dominio del diablo a través del pecado original.</p>
+
+    <p>El argumento es el siguiente: si existe enemistad <em>total</em> entre María y Satanás, y el pecado original implica que el hombre queda bajo el dominio del pecado y del diablo, entonces María nunca pudo haber estado sujeta a dicho dominio. La enemistad es, por tanto, la enemistad de la gracia y la santidad contra el príncipe de las tinieblas, enemistad que exige la preservación del pecado original en el primer instante de la concepción de María.</p>
+
+    <div id="salutacion-angelica"></div>
+    <h3>La Salutación Angélica (Lucas 1,28)</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Y entrando el ángel donde ella estaba, dijo: '¡Alégrate, llena de gracia, el Señor es contigo!'"</p>
+      <p class="cita-ref">Lucas 1, 28 — Griego: <em>Χαῖρε, κεχαριτωμένη</em> (Chaíre, kecharitōménē)</p>
+    </div>
+
+    <p>La palabra griega <em>kecharitōménē</em> es un participio perfecto pasivo del verbo <em>charitóō</em>, que significa "llenar de gracia" o "hacer agraciado en grado sumo". El participio perfecto en griego indica una acción completada en el pasado cuyos efectos perduran en el presente. Por tanto, la expresión no significa simplemente "la que en este momento recibe gracia" sino "la que ya está perfectamente llena de gracia, y permanece así".</p>
+
+    <p>El ángel Gabriel no la saluda por su nombre — Miriam — sino por este título singular: <em>Kecharitōménē</em>. Esto es sumamente significativo en la cultura semita: el nombre que el ángel usa es una denominación que define la esencia de la persona. María es, constitutivamente, la "perfectamente agraciada". Esta plenitud de gracia implica ausencia de cualquier mácula, pues la gracia y el pecado son ontológicamente incompatibles.</p>
+
+    <div class="cuadro-info">
+      <h5>Análisis Gramatical del Término Clave</h5>
+      <p><strong style="color:var(--dorado-claro)">Kecharitōménē (κεχαριτωμένη):</strong></p>
+      <p>— Tiempo: Perfecto (acción pasada con efecto presente permanente)<br>
+      — Voz: Pasiva (la gracia la llena desde afuera, de Dios)<br>
+      — Modo: Participio (estado de ser, no evento puntual)<br>
+      — Raíz: <em>charis</em> (gracia divina) + sufijo intensivo<br>
+      — Traducción literal: "la que ha sido y permanece perfectamente llena de la gracia divina"</p>
+    </div>
+
+    <p>San Jerónimo tradujo este término al latín como <em>"gratia plena"</em> — llena de gracia —, expresión que ha pasado al Ave María. Ningún otro ser humano en las Escrituras recibe esta denominación. La plenitud de gracia que el ángel proclama es la misma que la teología defenderá como ausencia de pecado original.</p>
+
+    <div id="arca-alianza"></div>
+    <h3>El Arca de la Alianza como Tipo de María</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"El Señor, tu Dios, está en medio de ti; guerrero victorioso que viene a salvarte. Se alegra y se regocija contigo; te renueva con su amor, lanza gritos de alegría por ti."</p>
+      <p class="cita-ref">Sofonías 3, 17</p>
+    </div>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"¿A quién irá el arca del Señor desde aquí? ¿Cómo va a venir a mi casa el arca del Señor?"</p>
+      <p class="cita-ref">2 Samuel 6, 9 — Las palabras de David ante el Arca, paralelas a las de Elisabet ante María en Lucas 1, 43</p>
+    </div>
+
+    <p>La paralela entre el Arca de la Alianza del Antiguo Testamento y la Virgen María es uno de los argumentos tipológicos más ricos. El Arca contenía la Ley de Dios (las tablas de piedra), el maná del desierto y la vara de Aarón. María contuvo al Dios hecho carne, la Palabra eterna, el Maná vivo (cf. Juan 6,35) y el Sumo Sacerdote eterno. Si el Arca era sagrada e intocable hasta el punto de que Uzza murió al extender la mano para sostenerla (2 Sam 6,6-7), cuánto más santo debía ser el vaso que contendría al mismo Dios encarnado.</p>
+
+    <p>La Ley prescribía que el Arca fuera construida con maderas de acacia incorruptibles, recubiertas de oro por dentro y por fuera (Éxodo 25,10-11). La incorruptibilidad del material apuntaba tipológicamente a la incorrupción espiritual de quien sería el verdadero Arca de la Nueva Alianza.</p>
+
+    <div id="sabiduria-biblica"></div>
+    <h3>Los Libros Sapienciales</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"El Señor me creó al principio de sus obras, antes de sus obras más antiguas. Desde la eternidad fui establecida, desde el principio, antes de que existiera la tierra."</p>
+      <p class="cita-ref">Proverbios 8, 22-23</p>
+    </div>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Salí de la boca del Altísimo, y como niebla cubrí la tierra [...] Antes de los siglos, desde el principio, me creó, y por los siglos no dejará de ser."</p>
+      <p class="cita-ref">Eclesiástico (Sirácida) 24, 3.9</p>
+    </div>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Ella es un reflejo de la luz eterna, espejo sin mancha de la actividad de Dios e imagen de su bondad."</p>
+      <p class="cita-ref">Sabiduría 7, 26</p>
+    </div>
+
+    <p>Aunque estos textos se refieren directamente a la Sabiduría divina personificada, la liturgia y los Padres de la Iglesia los han aplicado tipológicamente a María, quien entre todos los seres creados es el reflejo más perfecto de la Sabiduría de Dios. El título de "espejo sin mancha" (<em>speculum sine macula</em>) ha sido recogido en la tradición mariana precisamente por señalar la ausencia de toda imperfección moral y espiritual.</p>
+
+    <div id="cantico-cantares"></div>
+    <h3>El Cantar de los Cantares</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"¿Quién es ésta que sube del desierto como columna de humo, entre perfumes de mirra e incienso y de todos los polvos del mercader?"</p>
+      <p class="cita-ref">Cantar de los Cantares 3, 6</p>
+    </div>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"¡Qué hermosa eres, amada mía, qué hermosa eres! Tus ojos son como palomas detrás de tu velo [...] Toda hermosa eres, amada mía; no hay mácula en ti."</p>
+      <p class="cita-ref">Cantar de los Cantares 4, 1.7 — Vulgata: <em>Tota pulchra es, amica mea, et macula non est in te</em></p>
+    </div>
+
+    <p>El versículo 4,7 del Cantar de los Cantares ha sido aplicado a María desde los primeros siglos de la Iglesia: <em>"Tota pulchra es, amica mea, et macula non est in te"</em> — "Toda hermosa eres, amiga mía, y no hay mácula en ti". Este versículo se convirtió, en la liturgia de la Inmaculada Concepción, en una de las antífonas más características, y constituye una de las expresiones más directas de la doctrina antes de su definición dogmática formal.</p>
+
+    <div id="judith-ester"></div>
+    <h3>Judith y Ester: Figuras Tipológicas</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Tú eres la exaltación de Jerusalén, tú eres la gran gloria de Israel, tú eres el gran orgullo de nuestra nación."</p>
+      <p class="cita-ref">Judith 15, 9</p>
+    </div>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Dios te ha favorecido. Tendrás la vida. Esta ley no vale para ti."</p>
+      <p class="cita-ref">Ester 15, 13 (versión griega)</p>
+    </div>
+
+    <p>Judith y Ester son figuras del Antiguo Testamento que la tradición patrística y medieval interpretó como tipos de la Virgen María. Judith — cuyo nombre significa "la Judía", representante del pueblo elegido — es presentada como una mujer de virtud heroica que vence al enemigo de Israel, paralelo a la mujer del Génesis 3,15 que aplasta la cabeza de la serpiente. La exaltación que recibe de los ancianos del pueblo ("tú eres la gloria de Israel, tú eres el gran orgullo de nuestra nación") anticipa el <em>Magnificat</em> de Lucas 1.</p>
+
+    <div id="apocalipsis"></div>
+    <h3>La Mujer del Apocalipsis (Ap 12,1)</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Apareció en el cielo una gran señal: una mujer vestida de sol, con la luna bajo sus pies, y una corona de doce estrellas en su cabeza."</p>
+      <p class="cita-ref">Apocalipsis 12, 1</p>
+    </div>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"El dragón se paró delante de la mujer que estaba a punto de dar a luz, para devorar a su hijo en cuanto naciera."</p>
+      <p class="cita-ref">Apocalipsis 12, 4</p>
+    </div>
+
+    <p>La visión de Apocalipsis 12 presenta una mujer cósmica, vestida de luz solar, que da a luz al Mesías y es perseguida por el dragón. Aunque este texto tiene una dimensión eclesial (la mujer es también el Pueblo de Dios), la tradición ha visto en ella a María, especialmente a María glorificada. El simbolismo es revelador para la doctrina de la Inmaculada: la mujer está "vestida de sol" — enteramente envuelta en la luz divina, sin sombra alguna de pecado —, tiene la "luna bajo sus pies" — domina lo cambiante y lo corruptible — y lleva una "corona de doce estrellas" — signo de su señorío sobre toda la creación.</p>
+
+    <p>La oposición entre la mujer y el dragón retoma el tema del Génesis 3,15: la enemistad total. Y si hay enemistad total entre María y el poder del mal (simbolizado por el dragón), no pudo haber en ella, ni siquiera en el primer instante de su existencia, ninguna sujeción al pecado original que es obra del diablo.</p>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN III — PADRES DE LA IGLESIA
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="padres-iglesia">
+    <div class="seccion-header">
+      <div class="seccion-numero">III</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Tradición Patrística</div>
+        <h2>El Testimonio de los Padres de la Iglesia</h2>
+      </div>
+    </div>
+
+    <p>Los Padres de la Iglesia son aquellos escritores y teólogos de los primeros siglos del Cristianismo cuya doctrina, en cuanto refleja la fe viva de la comunidad cristiana, tiene un valor normativo especial en la teología católica. Su testimonio, especialmente cuando es unánime o mayoritario, constituye una prueba de que una doctrina pertenece a la Tradición Apostólica. En el caso de la Inmaculada Concepción, el testimonio patrístico presenta la santidad singular de María con una constancia y profundidad que constituye la semilla de la definición dogmática posterior.</p>
+
+    <div id="san-justino"></div>
+    <h3>San Justino Mártir (c. 100-165 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">✝</div>
+      <div class="padre-info">
+        <h4>San Justino Mártir</h4>
+        <p class="padre-datos">Filósofo y mártir cristiano · Palestina/Roma · c. 100-165 d.C.</p>
+        <p>Primer apologeta cristiano que establece formalmente el paralelo Eva-María, fundamento implícito de la doctrina de la Inmaculada Concepción. Su razonamiento sienta las bases para toda la mariología posterior.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Justino Mártir</p>
+      <p class="cita-texto">"Cristo nació de una virgen, así como los pecadores de sus fines. Así como Eva, siendo virgen e incorrupta, concibió la palabra de la serpiente y trajo el pecado y la muerte, así también la Virgen María recibió la fe y la alegría cuando el ángel Gabriel le anunció la buena nueva de que el Espíritu Santo vendría sobre ella..."</p>
+      <p class="cita-fuente">— <em>Diálogo con Trifón</em>, cap. 100</p>
+    </div>
+
+    <p>Justino establece aquí el paralelismo antitético Eva-María: lo que Eva desobedeció, María lo obedeció; lo que Eva contaminó con su desobediencia, María lo purificó con su fe y obediencia. Este paralelismo, aunque no afirma explícitamente la Inmaculada Concepción, implica que María fue una "nueva Eva" inmune a la desobediencia y al pecado desde el principio, tal como Eva fue inmune antes de su caída.</p>
+
+    <div id="san-ireneo"></div>
+    <h3>San Ireneo de Lyon (c. 130-202 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">⛪</div>
+      <div class="padre-info">
+        <h4>San Ireneo de Lyon</h4>
+        <p class="padre-datos">Obispo, teólogo y Padre de la Iglesia · Esmirna/Lyon · c. 130-202 d.C.</p>
+        <p>Discípulo de San Policarpo, quien a su vez fue discípulo del apóstol Juan. Su proximidad a la fuente apostólica da un peso especial a su testimonio. Desarrolla con gran profundidad el paralelo Eva-María.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Ireneo de Lyon</p>
+      <p class="cita-texto">"Al igual que Eva fue seducida por la palabra de un ángel apartándose de Dios, transgrediendo su palabra, del mismo modo María recibió la buena noticia por la palabra de un ángel, para llevar a Dios obedeciendo a su Palabra. Y como aquella se dejó seducir para desobedecer a Dios, ésta se dejó convencer para obedecer a Dios; así la Virgen María se convirtió en abogada de la virgen Eva."</p>
+      <p class="cita-fuente">— <em>Adversus Haereses</em>, III, 22, 4</p>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Ireneo de Lyon</p>
+      <p class="cita-texto">"Lo que Eva ató con su incredulidad, María lo desató con su fe."</p>
+      <p class="cita-fuente">— <em>Adversus Haereses</em>, III, 22, 4</p>
+    </div>
+
+    <p>Ireneo hace explícita la recapitulación: si Eva fue el instrumento de la caída, María es el instrumento de la redención. Para que este paralelismo sea perfecto, María debe corresponder a Eva no sólo en su virginidad física sino en su integridad moral: así como Eva fue creada sin pecado, María debe estar libre de pecado para ser la "nueva Eva" que deshaga el daño de la antigua.</p>
+
+    <div id="tertuliano"></div>
+    <h3>Tertuliano y el Contexto de la Disputa</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">📜</div>
+      <div class="padre-info">
+        <h4>Tertuliano de Cartago</h4>
+        <p class="padre-datos">Apologeta y escritor cristiano · Cartago · c. 160-220 d.C.</p>
+        <p>Aunque Tertuliano no afirmó la Inmaculada Concepción —y más tarde apostató al montanismo—, su uso del paralelo Eva-María en sus escritos ortodoxos muestra la universalidad de esta intuición teológica en el periodo primitivo.</p>
+      </div>
+    </div>
+
+    <p>Tertuliano es un caso interesante porque ilustra que la doctrina de la Inmaculada Concepción no dependía de teólogos individuales sino que era una intuición difundida en toda la Iglesia. Aunque sus propias opiniones sobre María no siempre fueron ortodoxas, incluso en sus escritos hallamos el reconocimiento de María como la nueva Eva, contrapuesta a la primera madre de la humanidad.</p>
+
+    <div id="san-efren"></div>
+    <h3>San Efrén de Siria (c. 306-373 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🎵</div>
+      <div class="padre-info">
+        <h4>San Efrén de Siria</h4>
+        <p class="padre-datos">Diácono, poeta y Doctor de la Iglesia · Siria/Edesa · c. 306-373 d.C.</p>
+        <p>Llamado "la cítara del Espíritu Santo", es uno de los testimoniantes más expresivos de la santidad única de María en el pensamiento cristiano oriental. Sus himnos y poemas contienen afirmaciones mariológicas de gran riqueza.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Efrén de Siria</p>
+      <p class="cita-texto">"Tú y tu Madre solos sois completamente hermosos en todo; porque en Ti, Señor, no hay mancha, ni en tu Madre ninguna mancha."</p>
+      <p class="cita-fuente">— <em>Nisibene Hymns</em>, 27, 8</p>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Efrén de Siria</p>
+      <p class="cita-texto">"Señora, tú eres inmaculada, completamente ajena al pecado, purísima entre todas las puras. Ninguna mancha se aloja en ti, ni en el alma ni en el cuerpo."</p>
+      <p class="cita-fuente">— <em>Himno a la Theotókos</em></p>
+    </div>
+
+    <p>La afirmación de Efrén es extraordinariamente directa: pone en paralelo la impecabilidad de Cristo y la pureza de María, afirmando que en la Madre, igual que en el Hijo, "no hay mancha". Esto va más allá de la simple ausencia de pecados actuales: en el contexto teológico de la época, la "mancha" (<em>macula</em>) incluía el estado de pecado heredado de Adán.</p>
+
+    <div id="san-ambrosio"></div>
+    <h3>San Ambrosio de Milán (c. 340-397 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🏛</div>
+      <div class="padre-info">
+        <h4>San Ambrosio de Milán</h4>
+        <p class="padre-datos">Obispo y Doctor de la Iglesia · Tréveris/Milán · c. 340-397 d.C.</p>
+        <p>Uno de los cuatro grandes Doctores de la Iglesia latina. Su mariología es rica y constituye un puente entre la tradición oriental y occidental. Maestro de San Agustín, su influencia en la teología occidental es inmensa.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Ambrosio de Milán</p>
+      <p class="cita-texto">"Vino el Señor a liberarnos del pecado. ¿Y queremos que naciese del pecado? ¿Queremos que Él mismo estuviese unido al pecado? No, fue digno que María fuese libre del pecado, para no contaminar al mismo Cristo."</p>
+      <p class="cita-fuente">— <em>Expositio in Lucam</em>, II, 17</p>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Ambrosio de Milán</p>
+      <p class="cita-texto">"María es una virgen no sólo en el cuerpo sino también en el espíritu... virgen libre de todo engaño... estaba llena de Dios; ¿había algún lugar para el pecado?"</p>
+      <p class="cita-fuente">— <em>De Virginibus</em>, II, 2, 15</p>
+    </div>
+
+    <p>Ambrosio introduce un argumento de grandísima potencia: la conveniencia. Para que Cristo no estuviese en modo alguno unido al pecado, era conveniente que su Madre estuviese libre de él. La santidad de Cristo exige la santidad de su Madre. Si Cristo es "el Hijo del Altísimo" (Lc 1,32), el recipiente que lo contuvo debía ser proporcionalmente puro.</p>
+
+    <div id="san-agustin"></div>
+    <h3>San Agustín de Hipona (354-430 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">❤️</div>
+      <div class="padre-info">
+        <h4>San Agustín de Hipona</h4>
+        <p class="padre-datos">Obispo y Doctor de la Iglesia · Tagaste/Hipona · 354-430 d.C.</p>
+        <p>El más influyente de los Padres latinos. En cuanto a la Inmaculada Concepción, su pensamiento es complejo: aunque formuló la doctrina del pecado original de modo que parecía incluir a María, él mismo hizo una excepción explícita y honorífica para ella.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Agustín de Hipona</p>
+      <p class="cita-texto">"Exceptuando a la santa Virgen María, acerca de quien, por el honor del Señor, no quiero que se plantee ninguna cuestión cuando se trata del pecado: porque, ¿cómo vamos a saber qué gracia más abundante le fue concedida para vencer al pecado en todos sus aspectos, que a Ella que mereció concebir y dar a luz a Aquél que es cierto que no tuvo ningún pecado?"</p>
+      <p class="cita-fuente">— <em>De Natura et Gratia</em>, 36, 42</p>
+    </div>
+
+    <p>Este texto es capital y ha sido citado reiteradamente en la historia de la controversia. Agustín, que sostuvo la universalidad del pecado original con toda firmeza, hace sin embargo una excepción explícita para María: por el honor de Cristo, no debe plantearse si María pecó o no, porque la gracia que le fue concedida para vencer el pecado es inconmensurable. Los teólogos posteriores interpretaron esta excepción agustiniana como una apertura hacia la Inmaculada Concepción: si María recibió gracia suficiente para vencer el pecado "en todos sus aspectos", ¿no implica esto que recibió también la gracia de no contraer el pecado original?</p>
+
+    <div id="san-proclo"></div>
+    <h3>San Proclo de Constantinopla (c. 390-446 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">👑</div>
+      <div class="padre-info">
+        <h4>San Proclo de Constantinopla</h4>
+        <p class="padre-datos">Patriarca de Constantinopla · c. 390-446 d.C.</p>
+        <p>Alumno aventajado de San Juan Crisóstomo. Sus homilías marianas son joyas de la elocuencia y la teología oriental. Fue un ardiente defensor del título de <em>Theotókos</em> en el período previo al Concilio de Éfeso.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Proclo de Constantinopla</p>
+      <p class="cita-texto">"¡Oh prodigio! El Dios del cielo es visto en la tierra. ¡Oh misterio nuevo! Dios entra en el vientre de una virgen; pero esta virgen no se hace vientre impuro, sino templo santo. ¡Oh milagro portentoso! Dios sale del vientre de una virgen, y sin embargo la virgen permanece tal como era. ¡Oh milagro incomprensible! La que lleva al Señor, llena de gracia, que ningún pecado tocó jamás, que fue todo para todos."</p>
+      <p class="cita-fuente">— <em>Homilia I De laudibus S. Mariae</em></p>
+    </div>
+
+    <p>Proclo describe a María como "templo santo" que "ningún pecado tocó jamás". La expresión es amplísima: no sólo en el tiempo de la Anunciación, sino en toda su vida, y por la lógica de su argumento desde el mismo inicio de su existencia, María estuvo libre de todo pecado. El templo de Dios no puede ser simultáneamente morada del pecado.</p>
+
+    <div id="san-pedro-crisol"></div>
+    <h3>San Pedro Crisólogo (c. 380-450 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🕊</div>
+      <div class="padre-info">
+        <h4>San Pedro Crisólogo</h4>
+        <p class="padre-datos">Arzobispo de Rávena y Doctor de la Iglesia · Imola/Rávena · c. 380-450 d.C.</p>
+        <p>Conocido como el "Doctor magnífico", famoso por la concisión y la densidad teológica de sus sermones. Su testimonio mariano es parte esencial de la corriente patrística occidental.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Pedro Crisólogo</p>
+      <p class="cita-texto">"¡Virgen, ten fe! Es conveniente que seas santa, es conveniente que seas sin mancha, es conveniente que te consagres totalmente a Dios, es conveniente que seas el templo del Altísimo, es conveniente que seas la morada del Rey celestial."</p>
+      <p class="cita-fuente">— <em>Sermo</em> 140</p>
+    </div>
+
+    <div id="san-sofronio"></div>
+    <h3>San Sofronio de Jerusalén (c. 560-638 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🌺</div>
+      <div class="padre-info">
+        <h4>San Sofronio de Jerusalén</h4>
+        <p class="padre-datos">Patriarca de Jerusalén · c. 560-638 d.C.</p>
+        <p>Uno de los últimos grandes Padres de la Iglesia antes del Islam. Sus escritos marianos son de gran riqueza teológica y constituyen un puente entre la tradición patrística clásica y la mariología medieval.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Sofronio de Jerusalén</p>
+      <p class="cita-texto">"Entre todas las mujeres no hay ninguna como tú, Señora; eres la primera entre todas, la más santa de todas, más pura que el sol, más alta que los querubines y serafines. En ti no hubo jamás mácula alguna, en ti no hubo jamás pecado alguno."</p>
+      <p class="cita-fuente">— <em>Oratio II in SS. Deiparam</em></p>
+    </div>
+
+    <div id="san-andres-creta"></div>
+    <h3>San Andrés de Creta (c. 660-740 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🏔</div>
+      <div class="padre-info">
+        <h4>San Andrés de Creta</h4>
+        <p class="padre-datos">Arzobispo de Gortina y Doctor de la Iglesia · Damasco/Creta · c. 660-740 d.C.</p>
+        <p>Insigne poeta teológico, autor del famoso <em>Gran Canon</em>. Sus homilías marianas, especialmente las dedicadas a la Natividad de María, son extraordinariamente ricas en contenido doctrinal.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Andrés de Creta</p>
+      <p class="cita-texto">"Así pues, la Santísima Virgen es el templo vivo de Dios, que el mismo Dios se costruyó y consagró para Sí mismo y que dedicó al Espíritu Santo [...] Su vida sobrepuja a todos los que han vivido y a todos cuantos vivirán; en la excelencia y grandeza de sus virtudes no tiene par ni igual entre los seres humanos."</p>
+      <p class="cita-fuente">— <em>Homilia IV in Nativitatem Mariae</em></p>
+    </div>
+
+    <div id="san-juan-damasceno"></div>
+    <h3>San Juan Damasceno (c. 676-749 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🌟</div>
+      <div class="padre-info">
+        <h4>San Juan Damasceno</h4>
+        <p class="padre-datos">Padre y Doctor de la Iglesia · Damasco/Mar Saba · c. 676-749 d.C.</p>
+        <p>Último gran Padre de la Iglesia oriental, síntesis de toda la tradición patrística griega. Su <em>De Fide Orthodoxa</em> es la primera síntesis sistemática de la teología cristiana oriental. Sus homilías marianas están entre las más bellas de la historia de la predicación cristiana.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Juan Damasceno</p>
+      <p class="cita-texto">"Es necesario que la Madre del Rey, que es el Creador y Señor de todo, sea elegida entre todos los seres como el vaso más puro y el más sagrado de todos... Abierta a la gracia antes del nacimiento, fue formada como vaso digno de recibirla."</p>
+      <p class="cita-fuente">— <em>Homilia I in Nativitatem</em></p>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Juan Damasceno</p>
+      <p class="cita-texto">"¡Oh hija inmaculada! ¡Oh madre sin mancha! ¡Virgen santa! Todos los epítetos de santidad confluyen en ti. ¡Tú que superaste todos los límites de la naturaleza, tú eres más alta que todo lo creado!"</p>
+      <p class="cita-fuente">— <em>Homilia II in Dormitionem</em></p>
+    </div>
+
+    <div id="san-anselmo"></div>
+    <h3>San Anselmo de Canterbury (1033-1109)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🔬</div>
+      <div class="padre-info">
+        <h4>San Anselmo de Canterbury</h4>
+        <p class="padre-datos">Arzobispo y Doctor de la Iglesia · Aosta/Canterbury · 1033-1109</p>
+        <p>Padre de la Escolástica, conocido por su argumento ontológico de la existencia de Dios. Sus reflexiones sobre la santidad de María representan el paso de la intuición patrística a la argumentación escolástica rigurosa.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Anselmo de Canterbury</p>
+      <p class="cita-texto">"Convenía que aquella Virgen brillase con una pureza tal que, exceptuando a Dios, no pueda concebirse una pureza mayor. Dios había determinado dar a su Hijo la naturaleza humana de una virgen, y no podía elegir una virgen a quien no hubiese preparado para esto santificándola desde antes de los siglos."</p>
+      <p class="cita-fuente">— <em>De Conceptu Virginali</em>, cap. 18</p>
+    </div>
+
+    <p>Anselmo formula aquí el famoso principio de la <em>conveniencia suprema</em>: la pureza de María debe ser máxima, pues es la pureza de quien fue la Madre de Dios. No se trata de una pureza adquirida gradualmente sino de una pureza plena desde el principio, proporcional a la misión que Dios le había asignado.</p>
+
+    <div id="san-bernardo"></div>
+    <h3>San Bernardo de Claraval (1090-1153)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🌹</div>
+      <div class="padre-info">
+        <h4>San Bernardo de Claraval</h4>
+        <p class="padre-datos">Abad y Doctor de la Iglesia · Borgoña/Claraval · 1090-1153</p>
+        <p>El "Doctor Melifluo", el gran promotor del amor a María en la Edad Media. Paradójicamente, Bernardo dudó de la Inmaculada Concepción en cuanto a su modo, pero sus argumentos fueron contestados magistralmente por los teólogos posteriores, y él mismo proclamó la santidad sin igual de María.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Bernardo de Claraval</p>
+      <p class="cita-texto">"María es aquella vara de la raíz de Jesé, de la cual brotó la flor, Cristo. Ella es el templo de Dios, el santuario del Espíritu Santo [...] Hija de Adán, ciertamente, pero sin mancha de Adán; tierra virginal, que jamás fue maldita."</p>
+      <p class="cita-fuente">— <em>In Laudibus Virginis Matris</em>, Hom. II, 3</p>
+    </div>
+
+    <p>Es importante contextualizar a Bernardo: su resistencia a la fiesta litúrgica de la Inmaculada Concepción no era una negación de la pureza de María, sino una duda sobre el modo técnico en que dicha pureza se realizó. Él mismo reconoce que María fue "tierra virginal jamás maldita", lo que los defensores del dogma interpretaron como una afirmación implícita de la Inmaculada Concepción.</p>
+
+    <div id="duns-escoto"></div>
+    <h3>El Beato Juan Duns Escoto (c. 1266-1308)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🌙</div>
+      <div class="padre-info">
+        <h4>Beato Juan Duns Escoto</h4>
+        <p class="padre-datos">Fraile Menor, Doctor Sutil · Escocia/París/Colonia · c. 1266-1308</p>
+        <p>"El Doctor Sutil", el más importante defensor escolástico de la Inmaculada Concepción. Su argumento de la "redención preservativa" resolvió la aparente contradicción entre la universalidad de la Redención y el privilegio mariano, allanando el camino para la definición dogmática.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">Beato Juan Duns Escoto</p>
+      <p class="cita-texto">"La perfección de la Mediación de Cristo exige que hubiera alguien para quien mediase de la manera más perfecta posible. La redención más perfecta consiste no en liberar a alguien del pecado una vez contraído, sino en preservarlo de tal manera que no lo contraiga en absoluto."</p>
+      <p class="cita-fuente">— <em>Reportatio Parisiensis</em>, III, d. 3, q. 1</p>
+    </div>
+
+    <p>Escoto resolvió el problema más agudo que planteaba la Inmaculada Concepción: ¿cómo puede María estar libre del pecado original si Cristo es el único redentor de todos los hombres? La respuesta de Escoto es de una brillantez filosófica y teológica incomparable: ser preservado del pecado antes de contraerlo es una forma <em>más perfecta</em> de redención que ser liberado de él después de haberlo contraído. Cristo no redimió menos a María por preservarla: la redimió más perfectamente.</p>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN IV — SILOGISMOS FILOSÓFICOS
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="silogismos">
+    <div class="seccion-header">
+      <div class="seccion-numero">IV</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Razón y Fe</div>
+        <h2>Argumentación Filosófico-Teológica</h2>
+      </div>
+    </div>
+
+    <p>La teología no es irrazional. Aunque la Inmaculada Concepción es un misterio de la fe que supera la capacidad de la razón para descubrirlo por sí sola, una vez revelado puede ser examinado con rigor filosófico y encontrado no sólo coherente sino exigido por la lógica interna de la Encarnación. Los silogismos que siguen son argumentos filosófico-teológicos que demuestran la razonabilidad, la conveniencia y, en algunos casos, la necesidad del privilegio mariano.</p>
+
+    <div id="sil-potencia-conveniencia"></div>
+    <h3>I. El Principio Escotista: Potuit, Decuit, Ergo Fecit</h3>
+
+    <p>El argumento más clásico y celebrado en favor de la Inmaculada Concepción es el principio formulado por Duns Escoto y repetido por toda la tradición teológica franciscana: <em>Potuit, Decuit, Ergo Fecit</em> — "Pudo hacerlo, era conveniente que lo hiciera, luego lo hizo".</p>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo I — Argumento de la Conveniencia Suprema</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">Dios omnipotente puede hacer todo lo que no implica contradicción lógica (<em>Potuit</em>). Preservar a un ser humano del pecado original no implica ninguna contradicción: está dentro del poder divino.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">Era sumamente conveniente (<em>Decuit</em>) que la Madre del Hijo de Dios fuese preservada de toda mancha de pecado original, pues: (a) la dignidad de la Maternidad Divina exige la máxima santidad posible; (b) el honor del Hijo se refleja en la dignidad de la Madre; (c) sería incongruente que el Dios-hombre habitase un tabernáculo manchado por el enemigo de Dios.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">Cuando Dios puede hacer algo sumamente conveniente para la mayor gloria de Dios y el bien de los hombres, y no hay razón suficiente para no hacerlo, lo hace (<em>Ergo Fecit</em>).</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, Dios preservó a la Virgen María de toda mancha de pecado original: es decir, realizó la Inmaculada Concepción.</span>
+      </div>
+      <p class="silogismo-nota">Este argumento no prueba la Inmaculada Concepción como una verdad matemáticamente necesaria, sino como una verdad <em>convenientísima</em> que Dios, siendo perfectamente bueno y omnipotente, no dejó de realizar. La refutación sólo es posible probando que la conveniencia no existe o que hay razones superiores en contra, y los teólogos que objetaron no lograron establecer tales razones.</p>
+    </div>
+
+    <div id="sil-redencion"></div>
+    <h3>II. La Redención Preservativa: El Argumento Central</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo II — Universalidad de la Redención y Privilegio Mariano</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">Cristo es el único mediador y redentor de todos los seres humanos sin excepción (1 Tim 2,5; Hch 4,12). Si María fuese excluida de esta mediación, Cristo no sería el redentor universal.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">La redención puede realizarse de dos modos: <em>liberativo</em> (liberando del pecado ya contraído) o <em>preservativo</em> (preservando de contraer el pecado). Ambos modos proceden de los mismos méritos de Cristo.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">La redención preservativa es ontológicamente más perfecta que la liberativa: así como es mejor para un médico prevenir que su paciente enferme que curarlo una vez enfermo, mejor es para el Redentor preservar del pecado que liberar de él.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">Cristo, siendo el Redentor más perfecto posible, realiza la redención en su modo más perfecto para quien le sea más íntimamente unida.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 5</span>
+        <span class="premisa-texto">María es la persona más íntimamente unida a Cristo por la relación de maternidad divina: ninguna criatura está más cercana al Redentor que su propia Madre.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, Cristo aplicó a María la redención en su modo más perfecto: la redención preservativa, preservándola del pecado original desde el primer instante de su concepción. Así, la Inmaculada Concepción no niega la universalidad de la Redención, sino que la confirma y la eleva.</span>
+      </div>
+    </div>
+
+    <div id="sil-maternidad"></div>
+    <h3>III. La Dignidad de la Maternidad Divina</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo III — Proporcionalidad entre Misión y Gracia</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">Dios, en su providencia, proporciona a cada persona los dones y gracias necesarios para cumplir la misión que le ha encomendado. Esta es una verdad teológica universal confirmada por la Escritura (Rm 8,30; 1 Cor 12,4-7).</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">La misión de María —ser Madre de Dios— es la misión más sublime jamás confiada a una criatura. La Maternidad Divina (<em>Theotókos</em>) es una dignidad que supera infinitamente cualquier otra dignidad creada, incluyendo la de los ángeles y los profetas.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">La mayor misión exige la mayor gracia. Si la misión de María supera en dignidad a todas las demás, la gracia que la dispone para esa misión debe también superar todas las demás gracias concedidas a criaturas.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">La mayor gracia posible para un ser humano en su origen es la preservación del pecado original, que es el obstáculo radical a la comunión plena con Dios.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, siendo la maternidad divina la misión más sublime posible, Dios dotó a María de la gracia más perfecta posible: la Inmaculada Concepción. Esto no es un privilegio arbitrario, sino la consecuencia lógica de la proporcionalidad entre misión y gracia.</span>
+      </div>
+    </div>
+
+    <div id="sil-nueva-eva"></div>
+    <h3>IV. El Argumento de la Nueva Eva</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo IV — La Perfección de la Tipología</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">La Escritura y los Padres presentan a María como la "nueva Eva", en paralelo con Cristo como el "nuevo Adán" (1 Cor 15,45-47; Rm 5,12-21). Este paralelismo no es decorativo, sino estructural para comprender la Redención.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">El paralelismo entre Cristo y Adán implica una <em>recapitulación</em>: Cristo no es simplemente un Adán mejorado, sino el Adán perfecto, que revierte completamente lo que Adán deshizo. La comparación funciona precisamente porque los paralelos son perfectos.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">Adán fue creado sin pecado original (su pecado fue personal y posterior). Para que María sea verdaderamente la "nueva Eva" que corresponde al "nuevo Adán", debe corresponder a Eva en su estado de inocencia original, es decir, debe ser también creada sin pecado original.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">Si María hubiese nacido con pecado original, sería paralela a Eva <em>después de la caída</em>, no a Eva en su inocencia primigenia, lo cual destruiría la tipología: el antídoto (María) estaría en la misma condición que el veneno (Eva caída).</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, la coherencia interna de la tipología Eva-María, profundamente enraizada en la Escritura y en los Padres, exige que María fuese concebida sin pecado original, al modo de Eva antes de la caída, para constituir un antídoto verdadero y no simplemente una versión más culpable de la misma culpa.</span>
+      </div>
+    </div>
+
+    <div id="sil-gracia"></div>
+    <h3>V. El Argumento de la Plenitud de Gracia</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo V — Análisis de Lc 1,28</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">El ángel Gabriel saluda a María con el título único <em>kecharitōménē</em> (perfectamente llena de gracia), título que no se aplica a ningún otro ser humano en toda la Escritura.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">El participio perfecto pasivo <em>kecharitōménē</em> indica un estado de gracia plena que existía <em>antes</em> del momento en que el ángel habla, y que permanece estable en el presente. No se refiere a una gracia que el ángel trae o anuncia, sino a una gracia ya poseída.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">La gracia y el pecado son ontológicamente incompatibles: donde hay plenitud de gracia, no puede haber ninguna mancha de pecado. Un vaso lleno hasta el borde de un líquido no puede contener al mismo tiempo otro líquido contrario.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">La plenitud de gracia es una característica estable e integral de María desde antes de la Anunciación. Esta plenitud no fue adquirida por ella sino infundida por Dios (<em>kecharitōménē</em> es voz pasiva: Dios es el agente).</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, si María estaba perfectamente llena de gracia antes de la Anunciación, y la gracia excluye el pecado, entonces no había en ella ninguna mancha de pecado —incluyendo el pecado original— desde el momento en que Dios la constituyó en este estado de plenitud, es decir, desde el primer instante de su concepción.</span>
+      </div>
+    </div>
+
+    <div id="sil-arca"></div>
+    <h3>VI. El Argumento del Arca como Santuario</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo VI — La Santidad del Contenedor y el Contenido</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">El principio metafísico de la proporción ontológica establece que el contenedor debe ser proporcionado al contenido. Los vasos sagrados en el Templo eran consagrados y purificados precisamente porque contendrían o tocarían lo sagrado.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">El Arca de la Alianza, que contenía símbolos de Dios, fue construida con materiales incorruptibles y debía ser tratada con reverencia absoluta; tocarla sin la debida santidad era causa de muerte (cf. 2 Sam 6,6-7 — caso de Uzza).</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">María contuvo en su seno no un símbolo de Dios sino al Dios mismo en persona: al Verbo eterno hecho carne. La proporción entre el contenedor y el contenido exige que quien contiene a Dios mismo sea proporcional a esta presencia, es decir, sea santo en grado supremo.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">El pecado original es precisamente la condición de ausencia de gracia santificante, es decir, de ausencia de la santidad sobrenatural. Si María hubiese tenido pecado original en algún instante, su naturaleza habría estado, en ese instante, en estado de ausencia de gracia, incompatible con ser el tabernáculo de Dios.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, para ser el verdadero Arca de la Nueva Alianza —el tabernáculo viviente del Verbo eterno— María debía ser santa desde el primer instante de su existencia, sin jamás haber estado en el estado de ausencia de gracia que es el pecado original.</span>
+      </div>
+    </div>
+
+    <div id="sil-mediacion"></div>
+    <h3>VII. El Argumento de la Mediación y la Cooperación</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo VII — Cooperación Activa en la Redención</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">María no fue una madre pasiva en la obra de la Redención: dio su consentimiento libre y activo a la Encarnación del Verbo ("Hágase en mí según tu palabra" — Lc 1,38) y estuvo presente al pie de la Cruz (Jn 19,25-27).</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">Para cooperar activa y libremente con la gracia de Dios en la obra redentora, es necesario estar en estado de gracia. Quien está en pecado —sea original o actual— está bajo el poder del diablo, y la cooperación libre con Dios en la Redención requiere estar fuera de ese dominio.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">Si María hubiese tenido el pecado original aunque fuera momentáneamente, su naturaleza humana habría comenzado bajo el dominio del pecado, y su recuperación posterior de la gracia —por válida que fuese— no sería equivalente a haber sido constituida desde el principio en estado de gracia.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, para que la cooperación de María en la Redención fuese verdaderamente libre, activa y no comprometida en ningún momento por el dominio del pecado, era necesario que nunca hubiera estado bajo el poder del pecado original: la Inmaculada Concepción es la condición de posibilidad de la cooperación mariana en la obra redentora.</span>
+      </div>
+    </div>
+
+    <div id="sil-pecado-original"></div>
+    <h3>VIII. Argumento desde la Naturaleza del Pecado Original</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo VIII — Análisis Metafísico del Pecado Original</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">El pecado original, según la teología católica (Concilio de Trento, Sess. V), no es un acto personal sino un estado heredado: la privación de la justicia original y de la gracia santificante, transmitida por generación desde Adán a toda su descendencia.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">Este estado se contrae en el momento mismo de la animación del cuerpo, es decir, en el instante en que el alma es creada e infundida por Dios en el cuerpo. El pecado original es una característica del alma en cuanto unida al cuerpo humano.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">Dios, que crea directamente cada alma individual, puede crear un alma sin que esté sujeta al pecado original, si así lo decide soberanamente. El pecado original no es una necesidad metafísica intrínseca al alma humana, sino consecuencia de un pecado histórico que Dios habría podido neutralizar en cualquier momento particular.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">Dios tenía un motivo absolutamente suficiente para neutralizar el pecado original en la concepción de María: hacer que el alma de su Madre no conociese jamás, ni siquiera por un instante, la privación de la gracia y la sujeción al diablo.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, Dios, que puede crear almas exentas del pecado original, y tenía motivo suficientísimo para hacerlo en el caso de su Madre, creó el alma de María libre de toda mancha de pecado original desde el primer instante de su concepción. No hay contradicción lógica en este privilegio; sólo hay la manifestación de la omnipotencia y la providencia divinas.</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN V — TEOLOGÍA ESCOLÁSTICA
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="teologia-escolastica">
+    <div class="seccion-header">
+      <div class="seccion-numero">V</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Escolástica Medieval</div>
+        <h2>El Gran Debate Escolástico</h2>
+      </div>
+    </div>
+
+    <div id="debate-medieval"></div>
+    <h3>La Controversia de los Siglos XII-XIV</h3>
+
+    <p>El debate escolástico sobre la Inmaculada Concepción es uno de los más fascinantes de la historia de la teología, pues enfrentó a dos escuelas teológicas eminentes y dotó a la doctrina de la precisión conceptual necesaria para su eventual definición dogmática. El debate, lejos de dañar la doctrina, la fortaleció al obligar a sus defensores a formularla con mayor rigor.</p>
+
+    <p>La dificultad central que planteaban los adversarios de la Inmaculada Concepción —entre ellos Alejandro de Hales, Alberto Magno y, en parte, Santo Tomás de Aquino— era la siguiente: la Escritura (Rom 5,12) y la Tradición enseñan que <em>todos</em> los hombres contrajeron el pecado original por su generación de Adán. Si María es hija de Adán y se propagó por generación humana normal, también ella debió contraer el pecado original. Si se afirma que no lo contrajo, parece que se le niega la Redención por Cristo, convirtiéndola en una excepción a la universalidad de la obra redentora.</p>
+
+    <div class="grilla-argumentos">
+      <div class="arg-card">
+        <div class="arg-card-icono">⚔️</div>
+        <h5>La Objeción Tomista</h5>
+        <p>Santo Tomás argumentó que si María no tuvo pecado original, no necesitó ser redimida por Cristo, lo que contradice 1 Tim 2,5. Concedió, sin embargo, que fue santificada en el seno materno (como Juan el Bautista) pero <em>después</em> de haber contraído el pecado original.</p>
+      </div>
+      <div class="arg-card">
+        <div class="arg-card-icono">🛡️</div>
+        <h5>La Solución Escotista</h5>
+        <p>Duns Escoto respondió que la redención preservativa es <em>más perfecta</em> que la liberativa. Cristo redimió a María con mayor perfección que a los demás: no librándola del pecado sino evitando que lo contrajera. La deuda moral estuvo presente, pero fue cancelada antes de ser pagada.</p>
+      </div>
+      <div class="arg-card">
+        <div class="arg-card-icono">⚖️</div>
+        <h5>La Deuda Moral</h5>
+        <p>Escoto introdujo la distinción entre <em>debitum peccati</em> (la deuda o sujeción posible al pecado, que María tuvo) y el pecado mismo (que no contrajo). Gracias a los méritos futuros de Cristo, la deuda fue cancelada antes de hacerse efectiva.</p>
+      </div>
+      <div class="arg-card">
+        <div class="arg-card-icono">🏛️</div>
+        <h5>El Concilio de Basilea</h5>
+        <p>En 1439, el Concilio de Basilea declaró la Inmaculada Concepción como doctrina "piadosa, consonante a la fe, a la razón y a la Escritura". Aunque el Concilio resultó cismático en otras materias, esta declaración reflejó el creciente consenso teológico.</p>
+      </div>
+      <div class="arg-card">
+        <div class="arg-card-icono">📖</div>
+        <h5>Sixtus IV (1476)</h5>
+        <p>El Papa Sixto IV aprobó el Oficio de la Inmaculada Concepción y prohibió que se acusara de herejía a quienes la defendieran, dando respaldo pontificio explícito a la doctrina.</p>
+      </div>
+      <div class="arg-card">
+        <div class="arg-card-icono">🌊</div>
+        <h5>Trento y la Excepción</h5>
+        <p>El Concilio de Trento (1546), al definir el pecado original, añadió expresamente que no tenía intención de incluir a la "bienaventurada e inmaculada Virgen María" en su decreto, dejando intacta la cuestión para resolución posterior.</p>
+      </div>
+    </div>
+
+    <div id="principio-escoto"></div>
+    <h3>El Principio Filosófico de Escoto: Redención Anticipada</h3>
+
+    <p>El genio de Duns Escoto consistió en distinguir con precisión filosófica entre lo que llamamos la <em>necessitas consequentis</em> (necesidad absoluta, propia de lo que no puede ser de otro modo) y la <em>necessitas consequentiae</em> (necesidad hipotética, relativa a un supuesto). El pecado original no es metafísicamente necesario en todo ser humano con necesidad absoluta; es necesario sólo en la hipótesis de que Dios no intervenga con su gracia preventiva. Y Dios puede intervenir.</p>
+
+    <p>Escoto usó el siguiente ejemplo: imaginemos a un deudor que debe caer en un foso. Si un benefactor llega a tiempo y evita la caída, ha hecho algo mejor por él que si le hubiese rescatado del fondo del foso. El benefactor es igualmente, o más que igualmente, su salvador en ambos casos. Así Cristo: lo que hace por los demás hombres es sacarlos del foso del pecado; lo que hace por María es evitar que caiga en él. En ambos casos, Cristo es el único salvador.</p>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">Beato Juan Duns Escoto — Ilustración del Principio</p>
+      <p class="cita-texto">"Cristo fue el mejor redentor posible para María. Pero el mejor redentor es el que preserva del pecado, no el que libera del pecado. Luego Cristo preservó a María del pecado original. Y en esto consistió su redención más perfecta: que la Madre del Redentor nunca necesitó ser liberada porque nunca cayó."</p>
+      <p class="cita-fuente">— Paráfrasis del argumento de <em>In III Sent.</em>, d. 3, q. 1</p>
+    </div>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN VI — LITURGIA Y TRADICIÓN
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="liturgia-tradicion">
+    <div class="seccion-header">
+      <div class="seccion-numero">VI</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Lex Orandi, Lex Credendi</div>
+        <h2>Liturgia y Tradición Viva</h2>
+      </div>
+    </div>
+
+    <p>Un principio fundamental de la teología católica es el <em>lex orandi, lex credendi</em>: la ley del orar es la ley del creer. Lo que la Iglesia celebra en su liturgia expresa lo que cree en su fe. La historia de la liturgia mariana es, por tanto, un argumento independiente y poderoso en favor de la Inmaculada Concepción.</p>
+
+    <div id="fiestas-antiguas"></div>
+    <h3>Las Fiestas Litúrgicas</h3>
+
+    <p>La fiesta de la "Concepción de María" se celebró en Oriente al menos desde el siglo VII. La Iglesia de Nápoles la celebraba ya en el siglo IX, y desde el siglo XI comenzó a extenderse por Occidente. La Universidad de Oxford adoptó esta fiesta en el siglo XII, y los Franciscanos —defensores escolásticos del dogma— la promovieron activamente en toda Europa.</p>
+
+    <p>La mera existencia de una fiesta litúrgica dedicada a la <em>Concepción</em> de María —y no sólo a su Natividad— implica que la Iglesia reconocía algo singular en ese primer instante de su existencia. Si María hubiera tenido pecado original en su concepción, como cualquier otro ser humano, no habría razón para celebrar litúrgicamente ese momento (pues la Iglesia no celebra el instante de la concepción de ningún otro santo).</p>
+
+    <div id="himnos-oraciones"></div>
+    <h3>Himnos, Antífonas y Oraciones Marianas</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Tota pulchra es, Maria, et macula originalis non est in te. Vestimentum tuum candidum quasi nix, et facies tua sicut sol. Tu gloria Hierusalem, tu laetitia Israel, tu honorificentia populi nostri."</p>
+      <p class="cita-ref">Antífona litúrgica de la fiesta de la Inmaculada Concepción</p>
+    </div>
+
+    <p>Esta antífona — "Toda hermosa eres, María, y la mancha original no está en ti" — fue cantada en las liturgias de la Inmaculada Concepción durante siglos antes de la definición dogmática. Introduce explícitamente la expresión "mancha original" (<em>macula originalis</em>), afirmando su ausencia en María. El hecho de que esta expresión haya sido utilizada en la liturgia oficial de la Iglesia durante varios siglos constituye uno de los argumentos más fuertes del <em>sensus fidelium</em> en favor del dogma.</p>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Sub tuum praesidium confugimus, Sancta Dei Genitrix; nostras deprecationes ne despicias in necessitatibus nostris, sed a periculis cunctis libera nos semper, Virgo gloriosa et benedicta."</p>
+      <p class="cita-ref">Sub tuum praesidium — Primera oración mariana conocida, s. III-IV, papiro griego de Egipto</p>
+    </div>
+
+    <p>La antiquísima oración <em>Sub tuum praesidium</em> — "Bajo tu amparo nos acogemos, Santa Madre de Dios" — es la oración mariana más antigua que se conserva, datada de los siglos III-IV en un papiro griego del Egipto cristiano. El título <em>Theotókos</em> — Madre de Dios — que utiliza implica ya la dignidad singular de María, que los Padres explotaron como argumento para su santidad única.</p>
+
+    <div class="ornamento">✦ ✦ ✦</div>
+
+    <h3>El Sensus Fidelium como Argumento Teológico</h3>
+
+    <p>La devoción popular a la Inmaculada Concepción —que se extendió masivamente por toda la Iglesia medieval y moderna, a pesar de las resistencias de algunos teólogos— es en sí misma un argumento teológico relevante. El Concilio Vaticano II (Lumen Gentium, 12) reconoció que el conjunto de los fieles, ungidos por el Espíritu Santo, puede discernir infaliblemente la verdad de fe cuando manifiesta un consenso universal. El pueblo cristiano, que sentía instintivamente que María no podía haber tenido pecado original, estaba guiado por el Espíritu hacia la verdad que los teólogos tardaron más tiempo en formular.</p>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN VII — DEFINICIÓN DOGMÁTICA
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="definicion-pio-ix">
+    <div class="seccion-header">
+      <div class="seccion-numero">VII</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">8 de diciembre de 1854</div>
+        <h2>La Definición Dogmática de Pío IX</h2>
+      </div>
+    </div>
+
+    <div id="ineffabilis-deus"></div>
+    <h3>La Bula Ineffabilis Deus</h3>
+
+    <p>El proceso que llevó a la definición dogmática fue extraordinariamente meticuloso y pastoral. El Papa Pío IX, antes de proclamar el dogma, consultó en 1849 a todos los obispos del mundo mediante la encíclica <em>Ubi Primum</em>, preguntando si era oportuna la definición dogmática y cuál era la devoción de su clero y su pueblo hacia la Inmaculada Concepción. Las respuestas, masivamente positivas, llegaron de todos los rincones del mundo.</p>
+
+    <p>El 8 de diciembre de 1854, en la Basílica de San Pedro, ante una inmensa muchedumbre de cardenales, obispos y fieles, Pío IX proclamó solemnemente la bula <em>Ineffabilis Deus</em>. El nombre de la bula — "El inefable Dios" — señalaba que sólo la potencia y la sabiduría infinitas de Dios podían concebir y realizar un privilegio tan sublime.</p>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">Pío IX — Bula Ineffabilis Deus (Fragmento)</p>
+      <p class="cita-texto">"Y ninguna otra cosa los Padres e insignes escritores de la Iglesia han hecho sino florear con mayor brillo y magnificencia el honor de la Virgen, ya que entendían que esta santidad de la que es dotada desde el principio de su vida, está de acuerdo con la singular previsión del Hijo de Dios y con la dignidad más excelsa de la Madre de Dios."</p>
+      <p class="cita-fuente">— Bula <em>Ineffabilis Deus</em>, 1854</p>
+    </div>
+
+    <p>La bula es notable no sólo por su contenido doctrinal sino por su método: convoca a la totalidad de la Tradición — Escritura, Padres, liturgia, devoción del pueblo — para mostrar que el dogma no era una novedad sino la explicitación de lo que siempre se había creído implícitamente. Pío IX afirmó que los Padres de la Iglesia "nunca cesaron de elogiar a la Santísima Virgen como aquella que, sola de entre todos, nunca estuvo sujeta a la maldición" y que "vencieron completamente al pecado".</p>
+
+    <div id="lourdes"></div>
+    <h3>La Confirmación Sobrenatural de Lourdes (1858)</h3>
+
+    <p>Cuatro años después de la definición dogmática, el 25 de marzo de 1858 — festividad de la Anunciación —, la Virgen se apareció por última vez a la joven pastora Bernardette Soubirous en Lourdes, Francia. Bernardette, que había insistido repetidamente en preguntar el nombre de la señora que se le aparecía en la gruta de Massabielle, recibió finalmente la respuesta en lengua occitana:</p>
+
+    <div class="dogma-box">
+      <p class="dogma-eyebrow">Lourdes, 25 de marzo de 1858 — La Revelación del Nombre</p>
+      <p class="dogma-texto">"Que soy era Immaculada Councepciou"<br><span style="font-size:0.7em;opacity:0.7">(En dialecto gascón: "Yo soy la Inmaculada Concepción")</span></p>
+      <p class="dogma-pie">— Las palabras de la Virgen a Santa Bernardette Soubirous</p>
+    </div>
+
+    <p>La coincidencia es teológicamente asombrosa: la Virgen no dijo "soy inmaculada" sino "soy <em>la Inmaculada Concepción</em>". Este término técnico y dogmático, que había sido definido apenas cuatro años antes, era desconocido por Bernardette, una niña analfabeta de 14 años sin instrucción teológica. Cuando Bernardette repitió estas palabras al sacerdote Peyramale, él mismo quedó sobrecogido: la Señora se había identificado no con una cualidad suya sino con el misterio de su origen, indicando que su misma esencia es el no haber sido concebida en el pecado.</p>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN VIII — OBJECIONES Y RESPUESTAS
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="objeciones">
+    <div class="seccion-header">
+      <div class="seccion-numero">VIII</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Apologética</div>
+        <h2>Objeciones Principales y sus Respuestas</h2>
+      </div>
+    </div>
+
+    <p>La honestidad intelectual exige examinar las principales objeciones que se han levantado contra la doctrina de la Inmaculada Concepción. Estas objeciones no son triviales: provienen de algunos de los teólogos más brillantes de la historia. Responderlas con precisión no sólo fortalece la doctrina sino que ilustra la profundidad de la elaboración teológica que ésta ha requerido.</p>
+
+    <div id="obj-escritura"></div>
+    <h3>Objeción I: La Universalidad del Pecado en la Escritura</h3>
+
+    <p><strong style="color:var(--dorado-claro)">Objeción:</strong> San Pablo escribe en Romanos 5,12: "Por tanto, como el pecado entró en el mundo por un hombre, y por el pecado la muerte, así la muerte se extendió a todos los hombres, por cuanto todos pecaron". Si <em>todos</em> pecaron en Adán, María no puede ser excluida sin contradecir a San Pablo.</p>
+
+    <p><strong style="color:var(--dorado-claro)">Respuesta:</strong> El texto de Romanos 5,12 afirma la universalidad de la sujeción al pecado original como consecuencia de la caída de Adán. Esta universalidad tiene un carácter <em>de iure</em> (por derecho, por la condición natural heredada de Adán) y no excluye que Dios, soberanamente, intervenga para preservar a una persona particular. Así como Dios creó a Adán y Eva sin pecado original —sin por ello contradecir la universalidad de la gracia divina—, puede preservar a María. Además, como señala Escoto, María sí estuvo sujeta a la ley del pecado original en cuanto al <em>debitum</em> (deuda moral), pero fue preservada de contratar la <em>culpa</em> (el estado actual de pecado). La universalidad se refiere a la condición natural, no excluye la excepción por gracia divina.</p>
+
+    <div id="obj-agustin"></div>
+    <h3>Objeción II: La Posición de San Agustín</h3>
+
+    <p><strong style="color:var(--dorado-claro)">Objeción:</strong> San Agustín, la autoridad teológica más grande de la Iglesia latina, formuló la doctrina del pecado original de manera que incluía a todos los nacidos por generación normal. Aunque hizo su famosa excepción "por el honor del Señor", no afirmó explícitamente la Inmaculada Concepción. Si Agustín no la afirmó, ¿cómo puede ser un dogma de fe?</p>
+
+    <p><strong style="color:var(--dorado-claro)">Respuesta:</strong> La objeción confunde el desarrollo de la doctrina con su sustancia. Los dogmas pueden estar contenidos <em>implícitamente</em> en la Revelación y en la Tradición sin que todos los Padres los hayan formulado explícitamente. El mismo Agustín no formuló explícitamente la doble procesión del Espíritu Santo con la precisión del Concilio de Florencia, y sin embargo ese dogma es válido. Además, la excepción que el mismo Agustín hace en el <em>De Natura et Gratia</em> es, precisamente, el reconocimiento de que para María rige una regla diferente en lo que respecta al pecado. La "gracia más abundante" que él atribuye a María para "vencer al pecado en todos sus aspectos" es exactamente lo que la teología posterior identificó con la Inmaculada Concepción.</p>
+
+    <div id="obj-tomas"></div>
+    <h3>Objeción III: La Objeción de Santo Tomás de Aquino</h3>
+
+    <p><strong style="color:var(--dorado-claro)">Objeción:</strong> Santo Tomás de Aquino, el Doctor Común de la Iglesia, sostuvo que María contrajo el pecado original, aunque fue santificada en el seno materno. Si el Doctor Común negó la Inmaculada Concepción, ¿cómo puede ser definida como dogma?</p>
+
+    <p><strong style="color:var(--dorado-claro)">Respuesta:</strong> Este caso es quizás el más delicado. Debe notarse que el magisterio de la Iglesia no ata el dogma a la opinión de ningún teólogo individual, por ilustre que sea. Los dogmas son definidos por la autoridad infalible del Papa, en unión con los obispos, no por el consenso de los teólogos. Segundo, la dificultad de Tomás residía principalmente en que no vio cómo era posible que María estuviese exenta del pecado original sin eximirla de la Redención. La solución de Escoto —que María fue redimida de manera más perfecta— resuelve precisamente la dificultad tomista, y fue aceptada por la Iglesia. Tercero, algunos tomistas posteriores han sostenido que si Tomás hubiera conocido el argumento de la redención preservativa, habría cambiado de opinión, dado que su principio fundamental (la omnipotencia divina puede hacer todo lo que no implique contradicción) es perfectamente compatible con la Inmaculada Concepción.</p>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Refutación del Argumento Contra la Universalidad de la Redención</p>
+      <div class="premisa">
+        <span class="premisa-label">Objeción</span>
+        <span class="premisa-texto">Si María no tuvo pecado original, no necesitó ser redimida por Cristo, lo que contradice la universalidad de su mediación (1 Tim 2,5).</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Distinción</span>
+        <span class="premisa-texto">Hay que distinguir dos modos de redención: (a) liberación del pecado ya contraído; (b) preservación del pecado para que no sea contraído. En ambos casos, la causa eficiente de la redención es única: los méritos de Cristo.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Aplicación</span>
+        <span class="premisa-texto">María fue redimida por Cristo según el modo (b). Cristo aplica sus méritos anticipadamente a María, preservándola de que el pecado original se haga efectivo en ella. La fuente de su pureza es Cristo; no es "autónomamente" pura.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, la Inmaculada Concepción no contradice la universalidad de la mediación de Cristo sino que la confirma: incluso la máxima santidad en una criatura procede íntegramente de Cristo. María es el ejemplo más excelso de la eficacia redentora de Jesús.</span>
+      </div>
+    </div>
+
+    <div id="obj-purificacion"></div>
+    <h3>Objeción IV: El Rito de la Purificación en el Templo</h3>
+
+    <p><strong style="color:var(--dorado-claro)">Objeción:</strong> El Evangelio narra que, cuarenta días después del nacimiento de Jesús, María se presentó en el Templo para cumplir el rito de la purificación prescrito en Levítico 12,1-8, y ofreció el sacrificio correspondiente (Lc 2,22-24). Esta ley se aplicaba a la mujer que, por haber dado a luz, quedaba "impura" y requería expiación. Si María se sometió a un rito de purificación de la impureza, parece seguirse que ella misma reconoció no estar exenta de mancha; y si necesitó ser purificada, no pudo haber sido inmaculada desde su concepción. Más aún, si decidió libremente cumplir este precepto de la Ley sin necesitarlo realmente, podría objetarse lo contrario: que mintió o actuó con simulación religiosa, lo cual sería en sí mismo una falta moral.</p>
+
+    <p><strong style="color:var(--dorado-claro)">Respuesta:</strong> La objeción descansa sobre una confusión fundamental entre dos clases de impureza que la propia Ley mosaica distinguía con toda claridad: la impureza <em>ritual o legal</em> (hebreo <em>tum'á</em>) y la impureza <em>moral</em> (el pecado). El precepto de Levítico 12 no juzga ningún pecado de la madre; regula una condición cúltica ligada a la pérdida de sangre del parto, de la misma naturaleza que las prescripciones sobre la impureza menstrual (Lv 15,19-30) o el contacto con un cadáver (Nm 19,11-13). Tocar un cadáver no es pecado, y sin embargo exigía purificación ritual; análogamente, dar a luz no es pecado —es la bendición primera de Dios al hombre (Gn 1,28)— y sin embargo exigía un rito de reincorporación al culto público. La Ley purifica la condición corporal vinculada al parto, no el alma de la madre.</p>
+
+    <p>Esta distinción no es una solución <em>ad hoc</em> de los apologistas marianos: es la lectura que la Iglesia ha dado siempre al episodio paralelo de la circuncisión de Jesús (Lc 2,21). Cristo, "que no conoció pecado" (2 Cor 5,21) y en quien "no había pecado" (1 Jn 3,5), fue sin embargo circuncidado al octavo día y, según esta misma escena de Lucas 2,22-24, fue "presentado" o "rescatado" en el Templo conforme a la ley del primogénito (Ex 13,2.12). Nadie concluye de aquí que Cristo tuviera pecado o impureza moral que expiar: se reconoce, con toda naturalidad, que el Verbo encarnado se sometió libremente a observancias rituales que no necesitaba intrínsecamente, "para cumplir toda justicia" (cf. Mt 3,15, dicho por Cristo en ocasión análoga, su bautismo). La misma lógica, aplicada coherentemente, vale para su Madre.</p>
+
+    <p>Por lo demás, conviene precisar que la Ley de Levítico 12 no exigía la <em>creencia subjetiva</em> de la madre en su propia impureza moral como condición para cumplir el rito; exigía la observancia objetiva de la norma cúltica una vez verificado el hecho biológico del parto. María, en cuanto verdadera mujer hebrea que dio a luz un hijo varón según la naturaleza, entraba <em>de hecho</em> dentro del supuesto que la Ley regulaba, con independencia de su estado de gracia interior. La Ley no preguntaba "¿pecaste?" sino "¿pariste?" — y la respuesta a esa segunda pregunta era, evidentemente, afirmativa. Sometiéndose al precepto, María no confiesa pecado alguno: confiesa, sencillamente, su verdadera maternidad humana y su humilde obediencia a la Ley de Moisés, exactamente como Cristo se sometió a la circuncisión sin que ello implicase reconocer en sí mismo el pecado que la circuncisión simbólicamente purgaba (cf. Col 2,11-13).</p>
+
+    <p>Tampoco hay aquí simulación ni falsedad religiosa, como insinúa la segunda parte de la objeción. La virtud de la religión no consiste sólo en cumplir lo estrictamente necesario, sino en honrar a Dios con la observancia exterior debida a su condición y a su pueblo; lo mismo vale para cualquier sacerdote levítico que se purificaba ritualmente sin estar en pecado mortal, o para el justo que ofrecía sacrificios de acción de gracias sin culpa que expiar (cf. Lv 7,11-15). La humildad de María — que, siendo la <em>Theotókos</em>, no reclamó excepción ni privilegio visible ante el pueblo, sino que se mezcló entre las demás madres de Israel cumpliendo el rito común — ha sido vista por la Tradición precisamente como un acto de virtud, no como un indicio de pecado. San Buenaventura y los autores franciscanos posteriores a Escoto subrayaron este punto: la Inmaculada no se purificó <em>porque</em> lo necesitara, sino para no singularizarse exteriormente y para enseñar, con su ejemplo, la sujeción de toda la criatura a la Ley divina hasta su perfecto cumplimiento en Cristo.</p>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Refutación del Argumento desde la Purificación Ritual</p>
+      <div class="premisa">
+        <span class="premisa-label">Objeción</span>
+        <span class="premisa-texto">María cumplió el rito de purificación de Levítico 12 tras el parto; por tanto, reconoció estar manchada, lo cual contradice la Inmaculada Concepción.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Distinción</span>
+        <span class="premisa-texto">La Ley mosaica distingue tajantemente impureza ritual (cúltica, ligada a fenómenos corporales: parto, menstruación, contacto con cadáveres, ciertas enfermedades de la piel) de impureza moral (el pecado). Ambas usan a veces el mismo término hebreo, pero son categorías teológicamente distintas: la primera no implica culpa subjetiva alguna.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Caso paralelo</span>
+        <span class="premisa-texto">Cristo, sin pecado ni mancha alguna (2 Cor 5,21; 1 Jn 3,5), fue sometido a la circuncisión y a la ley del rescate del primogénito en ese mismo episodio (Lc 2,21-24), observancias rituales que no necesitaba para sí, "para cumplir toda justicia" (cf. Mt 3,15).</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Aplicación</span>
+        <span class="premisa-texto">Si la sujeción de Cristo a un rito vinculado a la purificación legal no prueba pecado en Él, la sujeción de María al rito paralelo de Levítico 12 tampoco prueba pecado en ella. La premisa oculta de la objeción —que cumplir un rito de purificación equivale necesariamente a confesar pecado moral— es falsa, como demuestra el caso de Cristo mismo.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Motivo positivo</span>
+        <span class="premisa-texto">María, verdadera madre según la carne, caía objetivamente bajo el supuesto biológico que la Ley regulaba (el parto), con independencia de su estado interior de gracia. Su obediencia es, por tanto, acto de humildad y sujeción a la Ley, no reconocimiento de culpa; y de ningún modo constituye una transgresión o ruptura de la Ley, sino su cumplimiento más perfecto.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, la Purificación en el Templo no es prueba de que María tuviese pecado original ni de que rompiera la Ley; es, antes bien, testimonio de su humildad y de su perfecta obediencia a la Ley de Moisés, en perfecta analogía con la sujeción de Cristo impecable a la circuncisión y a la presentación ritual del primogénito.</span>
+      </div>
+      <p class="silogismo-nota">Esta es, en sustancia, la respuesta clásica de la teología católica, recogida ya por San Buenaventura y los comentaristas franciscanos medievales, y mantenida sin variación hasta hoy: la diferencia entre impureza levítica (categoría ceremonial) e impureza moral (categoría de gracia) es la clave que disuelve la aparente contradicción, del mismo modo que la circuncisión de Cristo nunca ha sido entendida por la Iglesia como confesión de pecado en Él.</p>
+    </div>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN IX — CONCLUSIÓN
+  ══════════════════════════════════════════════════════ -->
+
+  <section class="seccion" id="conclusion">
+    <div class="seccion-header">
+      <div class="seccion-numero">IX</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Síntesis Final</div>
+        <h2>Conclusión: La Coherencia de un Misterio</h2>
+      </div>
+    </div>
+
+    <p>Al término de esta exposición, emerge con claridad la coherencia interna y la profundidad de la doctrina de la Inmaculada Concepción. Lejos de ser una invención tardía o una exageración piadosa, este privilegio se revela como una verdad enraizada en la Escritura, confirmada por la Tradición patrística, elaborada con rigor por la teología escolástica, expresada por la oración litúrgica de la Iglesia, y finalmente definida con autoridad infalible por el Magisterio Pontificio.</p>
+
+    <p>La Inmaculada Concepción no es un privilegio aislado, sino el nodo central de toda la mariología: es la condición de posibilidad de la Maternidad Divina, el fundamento de la cooperación de María en la Redención, el presupuesto de su papel como nueva Eva, la explicación de la "plenitud de gracia" proclamada por el ángel, y la consecuencia de la enemistad total con el diablo anunciada en el Génesis. Quitar este privilegio sería como quitar la piedra angular de un arco: todo el edificio mariológico se derrumbaría.</p>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Bienaventurada tú entre las mujeres, y bendito el fruto de tu vientre."</p>
+      <p class="cita-ref">Lucas 1, 42 — Las palabras de Elisabet a María</p>
+    </div>
+
+    <p>La bienaventuranza que Elisabet proclama no es simplemente una felicitación: es el reconocimiento de que María pertenece a una categoría singular de santidad que la distingue de "entre las mujeres", es decir, del género humano caído. "Bienaventurada <em>tú</em> entre las mujeres" implica que en ella hay algo que en las demás mujeres no hay: esa santidad desde el origen que es precisamente la Inmaculada Concepción.</p>
+
+    <p>Los silogismos filosóficos que hemos desarrollado no son ejercicios abstractos: son la articulación racional de una intuición de fe que la Iglesia ha sostenido desde los primeros siglos. La razón, iluminada por la fe, puede contemplar este misterio y encontrar en él no una contradicción sino una armonía perfecta: la armonía entre la omnipotencia divina que puede preservar a su Madre del pecado, la conveniencia que exige que lo haga, y la gratuidad de la gracia que lo realiza por los méritos de Cristo Redentor.</p>
+
+    <div class="dogma-box">
+      <p class="dogma-eyebrow">Súplica Final — Sub tuum praesidium</p>
+      <p class="dogma-texto">"Oh María, concebida sin pecado original, rogad por nosotros que recurrimos a Vos."</p>
+      <p class="dogma-pie">— Jaculatoria aprobada por Pío IX en ocasión de la definición dogmática</p>
+    </div>
+
+    <p>En última instancia, la Inmaculada Concepción es un testimonio de la misericordia de Dios: que en María, el Creador comenzó desde el primer instante lo que en todos los demás redimidos se realiza gradualmente. María es la primicia de la Redención, la "ciudad de Dios" sin pecado que presagia la Jerusalén celestial donde todos los redimidos serán finalmente libres de toda mancha. Contemplarla no disminuye a Cristo: lo glorifica, mostrando hasta qué extremos puede llegar la gracia de su sangre redentora.</p>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"El Poderoso ha hecho grandes cosas en mí: ¡Santo es su nombre!"</p>
+      <p class="cita-ref">Lucas 1, 49 — El Magnificat de María</p>
+    </div>
+
+    <p>Las "grandes cosas" que el Poderoso hizo en María son precisamente el contenido de este tratado: la preservación del pecado original, la plenitud de gracia, la dignidad de Madre de Dios. Y María misma, en su cántico, reconoce que todo viene de Dios: <em>"Ha hecho grandes cosas en mí"</em> — no por sus propios méritos, sino por la iniciativa soberana de Dios que, desde antes de los siglos, la eligió para ser el vaso más puro de su plan de salvación.</p>
+
+    <div class="ornamento">✦ ✦ ✦</div>
+
+    <h3>Bibliografía Patrística y Teológica de Referencia</h3>
+
+    <div class="cuadro-info">
+      <h5>Fuentes Patrísticas</h5>
+      <p>San Justino, <em>Dialogus cum Tryphone</em> (c. 155) · San Ireneo, <em>Adversus Haereses</em> (c. 180) · San Efrén, <em>Hymni de Nativitate</em> (c. 350) · San Ambrosio, <em>De Virginibus; Expositio in Lucam</em> (c. 377-386) · San Agustín, <em>De Natura et Gratia</em> (415) · San Proclo, <em>Homiliae in Mariam</em> (c. 430-440) · San Pedro Crisólogo, <em>Sermones</em> (c. 440) · San Sofronio, <em>Orationes in SS. Deiparam</em> (c. 630) · San Andrés de Creta, <em>Homiliae in Nativitatem B.V.M.</em> (c. 710) · San Juan Damasceno, <em>De Fide Orthodoxa; Homiliae Mariales</em> (c. 743)</p>
+    </div>
+
+    <div class="cuadro-info">
+      <h5>Fuentes Escolásticas y Modernas</h5>
+      <p>San Anselmo, <em>De Conceptu Virginali et Originali Peccato</em> (1098) · San Bernardo, <em>In Laudibus Virginis Matris</em> (c. 1135) · Alejandro de Hales, <em>Summa Theologica</em> (c. 1245) · Santo Tomás de Aquino, <em>Summa Theologica</em>, III, q. 27 (c. 1272) · Duns Escoto, <em>Reportatio Parisiensis</em> III (c. 1302-1305) · Bula <em>Ineffabilis Deus</em>, Pío IX (1854) · Concilio Vaticano II, <em>Lumen Gentium</em>, cap. VIII (1964)</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-simbolo">✠</span>
+  <p>Ave María, gratia plena, Dominus tecum</p>
+  <p>Benedicta tu in mulieribus, et benedictus fructus ventris tui, Iesus</p>
+  <p>Sancta Maria, Mater Dei, ora pro nobis peccatoribus</p>
+  <p>Nunc et in hora mortis nostrae. Amen.</p>
+  <br>
+  <p class="footer-latin">Concepta sine labe originali · 8 Decembris 1854</p>
+</footer>
+
+<script>
+  // ═══════════════════════════════════════
+  // BARRA DE PROGRESO + PORCENTAJE EN EL ÍNDICE
+  // ═══════════════════════════════════════
+  const barra = document.getElementById('barra-progreso');
+  const pctEl = document.getElementById('nav-progreso-pct');
+
+  function actualizarProgreso() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min(100, Math.round(scrollTop / docHeight * 100)) : 0;
+    barra.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
+  }
+  window.addEventListener('scroll', actualizarProgreso, { passive: true });
+  actualizarProgreso();
+
+  // ═══════════════════════════════════════
+  // TOGGLE / COLAPSO DEL ÍNDICE
+  // ═══════════════════════════════════════
+  const navFlotante = document.getElementById('nav-flotante');
+  const navToggleBtn = document.getElementById('nav-toggle');
+  const navColapsarBtn = document.getElementById('nav-colapsar');
+  const esEstrecho = () => window.innerWidth <= 1100;
+
+  function actualizarToggleBtn() {
+    if (!navToggleBtn) return;
+    navToggleBtn.classList.toggle('visible', esEstrecho());
+    const abierto = navFlotante.classList.contains('visible');
+    navToggleBtn.textContent = abierto ? '✕ CERRAR' : '☰ ÍNDICE';
+  }
+
+  function toggleNav() {
+    navFlotante.classList.toggle('visible');
+    navFlotante.classList.remove('oculto');
+    actualizarToggleBtn();
+  }
+  window.toggleNav = toggleNav;
+
+  function toggleColapso() {
+    navFlotante.classList.toggle('colapsado');
+    navColapsarBtn.textContent = navFlotante.classList.contains('colapsado') ? '»' : '«';
+    navColapsarBtn.title = navFlotante.classList.contains('colapsado') ? 'Expandir índice' : 'Contraer índice';
+  }
+  window.toggleColapso = toggleColapso;
+
+  function aplicarModoResponsive() {
+    if (esEstrecho()) {
+      navFlotante.classList.remove('colapsado');
+      navFlotante.classList.remove('visible');
+    } else {
+      navFlotante.classList.remove('visible');
+      navFlotante.classList.remove('oculto');
+    }
+    actualizarToggleBtn();
+  }
+  aplicarModoResponsive();
+  window.addEventListener('resize', aplicarModoResponsive);
+
+  // Cerrar el drawer móvil al elegir un destino
+  navFlotante.addEventListener('click', (e) => {
+    if (e.target.matches('.nav-item') && esEstrecho()) {
+      navFlotante.classList.remove('visible');
+      actualizarToggleBtn();
+    }
+  });
+
+  // ═══════════════════════════════════════
+  // BUSCADOR EN VIVO DEL ÍNDICE
+  // ═══════════════════════════════════════
+  const buscador = document.getElementById('nav-buscador');
+  const contadorBusqueda = document.getElementById('nav-buscador-contador');
+  const grupos = document.querySelectorAll('.nav-grupo');
+
+  function quitarAcentos(s) {
+    return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  function resaltar(el, termino) {
+    const original = el.dataset.textoOriginal || el.textContent;
+    el.dataset.textoOriginal = original;
+    if (!termino) { el.innerHTML = original; return; }
+    const re = new RegExp('(' + termino.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+    const normalizado = quitarAcentos(original.toLowerCase());
+    const idx = quitarAcentos(termino.toLowerCase());
+    if (normalizado.includes(idx)) {
+      el.innerHTML = original.replace(re, '<mark>$1</mark>');
+    } else {
+      el.innerHTML = original;
+    }
+  }
+
+  buscador.addEventListener('input', () => {
+    const termino = buscador.value.trim();
+    const terminoNorm = quitarAcentos(termino.toLowerCase());
+    let totalCoincidencias = 0;
+
+    grupos.forEach(grupo => {
+      const summary = grupo.querySelector('summary');
+      const items = grupo.querySelectorAll('.nav-item');
+      let grupoTieneCoincidencia = false;
+
+      items.forEach(item => {
+        const texto = item.dataset.textoOriginal || item.textContent;
+        item.dataset.textoOriginal = texto;
+        const coincide = !terminoNorm || quitarAcentos(texto.toLowerCase()).includes(terminoNorm);
+        item.classList.toggle('oculto-busqueda', !coincide);
+        if (coincide && terminoNorm) {
+          resaltar(item, termino);
+          grupoTieneCoincidencia = true;
+          totalCoincidencias++;
+        } else {
+          item.innerHTML = texto;
+        }
+      });
+
+      const summaryTexto = summary.dataset.textoOriginal || summary.textContent;
+      summary.dataset.textoOriginal = summaryTexto;
+      const summaryCoincide = !terminoNorm || quitarAcentos(summaryTexto.toLowerCase()).includes(terminoNorm);
+
+      grupo.classList.toggle('oculto-busqueda', terminoNorm && !grupoTieneCoincidencia && !summaryCoincide);
+
+      if (terminoNorm) {
+        if (grupoTieneCoincidencia || summaryCoincide) grupo.open = true;
+      }
+    });
+
+    if (terminoNorm) {
+      contadorBusqueda.textContent = totalCoincidencias === 1
+        ? '1 resultado'
+        : totalCoincidencias + ' resultados';
+    } else {
+      contadorBusqueda.textContent = '';
+      grupos.forEach(g => g.classList.remove('oculto-busqueda'));
+    }
+  });
+
+  // ═══════════════════════════════════════
+  // NAVEGACIÓN ACTIVA EN SCROLL + APERTURA AUTOMÁTICA
+  // ═══════════════════════════════════════
+  const navItems = document.querySelectorAll('.nav-item[href^="#"]');
+  const seccionActualEl = document.getElementById('nav-seccion-actual');
+  const allTargets = Array.from(navItems)
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  const ioNav = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = '#' + e.target.id;
+
+        navItems.forEach(a => {
+          a.classList.toggle('activo', a.getAttribute('href') === id);
+        });
+
+        grupos.forEach(g => g.classList.remove('activo'));
+        const itemActivo = document.querySelector('.nav-item.activo');
+        if (itemActivo) {
+          const grupoPadre = itemActivo.closest('.nav-grupo');
+          if (grupoPadre) {
+            grupoPadre.classList.add('activo');
+            if (!buscador.value.trim()) grupoPadre.open = true;
+            if (seccionActualEl) {
+              const numero = grupoPadre.querySelector('.nav-num')?.textContent || '';
+              seccionActualEl.textContent = numero;
+            }
+          }
+        }
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-20% 0px -60% 0px' });
+
+  allTargets.forEach(t => ioNav.observe(t));
+</script>
+</body>
+</html>
