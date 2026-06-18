@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier Apologético · El Paráclito de Juan 14–16: ¿Espíritu Santo o Mahoma?</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+:root {
+  --ink:      #0f1a10;
+  --parchment:#f4f0e4;
+  --aged:     #e6dfca;
+  --deep:     #080f08;
+  --emerald:  #1a3a1a;
+  --gold:     #7a8b14;
+  --gold-lt:  #b0c228;
+  --crimson:  #7a1b1b;
+  --rule:     #6a9a6a;
+  --rule-lt:  #a8c8a0;
+  --margin:   #3a4a2a;
+  --nav-bg:   #060e06;
+  --nav-w:    268px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--deep);font-family:'EB Garamond',Georgia,serif;color:var(--ink)}
+
+/* ═══ HAMBURGER ═══ */
+#toc-btn{
+  position:fixed;top:16px;left:16px;z-index:400;
+  background:var(--nav-bg);border:1px solid var(--gold);color:var(--gold-lt);
+  font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;
+  padding:8px 13px 8px 10px;cursor:pointer;display:flex;align-items:center;gap:9px;
+  box-shadow:0 2px 14px rgba(0,0,0,0.6);transition:background 0.15s;user-select:none;line-height:1;
+}
+#toc-btn:hover{background:#0d180d}
+.hbars{display:flex;flex-direction:column;gap:4px}
+.hbars span{display:block;width:17px;height:1.5px;background:var(--gold-lt);transition:transform 0.22s,opacity 0.22s;transform-origin:center}
+#toc-btn.is-open .hbars span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+#toc-btn.is-open .hbars span:nth-child(2){opacity:0;transform:scaleX(0)}
+#toc-btn.is-open .hbars span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+/* ═══ OVERLAY ═══ */
+#toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.52);z-index:300;opacity:0;pointer-events:none;transition:opacity 0.25s}
+#toc-overlay.is-open{opacity:1;pointer-events:all}
+
+/* ═══ SIDEBAR ═══ */
+#toc-panel{
+  position:fixed;top:0;left:0;bottom:0;width:var(--nav-w);
+  background:var(--nav-bg);border-right:2px solid var(--gold);z-index:350;
+  overflow-y:auto;padding:0 0 48px;
+  transform:translateX(calc(-1 * var(--nav-w) - 8px));
+  transition:transform 0.28s cubic-bezier(.4,0,.2,1);
+  box-shadow:6px 0 30px rgba(0,0,0,0.7)
+}
+#toc-panel.is-open{transform:translateX(0)}
+#toc-panel::-webkit-scrollbar{width:3px}
+#toc-panel::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+.toc-spacer{height:60px}
+.toc-title{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:4px;color:var(--gold-lt);text-transform:uppercase;padding:0 18px 12px;border-bottom:1px solid rgba(110,155,80,0.2);margin-bottom:4px}
+.toc-group{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;padding:13px 18px 3px}
+#toc-panel a{display:block;padding:7px 14px 7px 22px;font-family:'Source Sans 3',sans-serif;font-size:11.5px;color:rgba(180,210,160,0.72);text-decoration:none;line-height:1.35;border-left:3px solid transparent;transition:background 0.13s,color 0.13s,border-color 0.13s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#toc-panel a:hover{color:var(--gold-lt);background:rgba(110,155,80,0.08);border-left-color:rgba(110,155,80,0.4)}
+#toc-panel a.active{color:var(--gold-lt);background:rgba(110,155,80,0.13);border-left-color:var(--gold-lt)}
+
+/* ═══ MAIN ═══ */
+#main{max-width:880px;margin:0 auto;background:var(--parchment);min-height:100vh;box-shadow:0 0 70px rgba(0,0,0,0.7)}
+
+/* ── COVER ── */
+.cover{background:#030a03;padding:68px 56px 56px;text-align:center;position:relative;border-bottom:6px double var(--gold)}
+.cover::before{content:'';position:absolute;inset:12px;border:1px solid rgba(110,155,80,0.22);pointer-events:none}
+.cover-eyebrow{font-family:'Cinzel',serif;font-size:9px;letter-spacing:5px;color:var(--gold-lt);text-transform:uppercase;margin-bottom:20px}
+.cover-title{font-family:'Cinzel',serif;font-size:2.15rem;font-weight:700;color:#e8f4e0;line-height:1.14;margin-bottom:12px}
+.cover-sub{font-style:italic;color:var(--rule);font-size:1.08rem;margin-bottom:32px}
+.cover-verse{display:inline-block;font-style:italic;color:rgba(232,244,224,0.88);font-size:.93rem;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);padding:10px 28px;line-height:1.75}
+.gr-lg{display:block;font-size:1.7rem;color:var(--gold-lt);margin-bottom:8px;letter-spacing:1px;font-style:normal}
+
+/* ── SECTIONS ── */
+section{padding:48px 58px 44px;border-bottom:1px solid var(--rule-lt)}
+section:last-child{border-bottom:none}
+.sec-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:var(--emerald);text-transform:uppercase;margin-bottom:6px}
+h2{font-family:'Cinzel',serif;font-size:1.28rem;font-weight:600;color:var(--emerald);margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--rule-lt)}
+h3{font-family:'EB Garamond',serif;font-size:1.08rem;font-weight:700;color:#1a3a1a;margin:24px 0 10px}
+p{line-height:1.78;margin-bottom:14px;font-size:1.01rem}
+p:last-child{margin-bottom:0}
+
+/* ── BLOCKQUOTE ── */
+blockquote{margin:20px 0;padding:16px 20px 16px 30px;background:var(--aged);border-left:4px solid var(--gold);font-style:italic;font-size:1rem;line-height:1.72;color:#1a2a0a;position:relative}
+blockquote::before{content:'\201C';font-size:3rem;color:var(--rule-lt);position:absolute;top:-4px;left:7px;line-height:1;font-family:Georgia,serif}
+.src{display:block;font-style:normal;font-size:.77rem;font-family:'Source Sans 3',sans-serif;color:var(--emerald);margin-top:8px;letter-spacing:.4px}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.92rem}
+thead tr{background:var(--emerald);color:var(--aged)}
+thead th{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;padding:10px 12px;text-align:left}
+tbody tr:nth-child(odd){background:var(--parchment)}
+tbody tr:nth-child(even){background:var(--aged)}
+td{padding:9px 12px;line-height:1.5;vertical-align:top}
+td:first-child{font-family:'Cinzel',serif;font-size:.82rem;color:var(--emerald);font-weight:600}
+
+/* ── CARD ── */
+.card{background:var(--aged);border:1px solid var(--rule-lt);padding:18px 22px;margin:18px 0}
+.card-lbl{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--emerald);margin-bottom:10px}
+
+/* ── VERDICT ── */
+.verdict{background:var(--emerald);color:var(--aged);padding:24px 28px;margin:24px 0 0;border-left:5px solid var(--gold-lt)}
+.verdict-lbl{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:var(--gold-lt);text-transform:uppercase;margin-bottom:10px}
+.verdict p{color:var(--aged);margin-bottom:10px}
+.verdict p:last-child{margin-bottom:0}
+.verdict em,.verdict i{color:#c8e0a0}
+.verdict .gr,.verdict .la,.verdict .ar{color:#b8d890}
+.verdict strong{color:#e8f8d0}
+
+/* ── OBJECTION ── */
+.obj{margin:22px 0}
+.obj-q{background:#edf0e0;border-left:4px solid var(--emerald);padding:12px 18px;font-style:italic;color:var(--emerald);font-size:.97rem;line-height:1.6}
+.obj-q::before{content:'✦ Argumento islámico: ';font-style:normal;font-weight:700}
+.obj-r{background:var(--aged);border-left:4px solid var(--gold);padding:12px 18px;line-height:1.72;font-size:.97rem;color:var(--ink)}
+.obj-r::before{content:'→ Refutación: ';font-weight:700;color:var(--gold)}
+
+/* ── SYLLOGISM ── */
+.syllogism{background:var(--aged);border:1.5px solid var(--gold);padding:20px 26px;margin:22px 0}
+.syllogism-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.syllogism p{margin-bottom:6px;font-size:.97rem}
+.syllogism .conclusion{font-weight:700;border-top:1px solid var(--rule-lt);padding-top:8px;margin-top:8px;color:var(--crimson)}
+
+/* ── COND GRID ── */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:18px 0}
+.cc{background:var(--aged);border:1px solid var(--rule-lt);padding:14px 16px}
+.cc-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--emerald);margin-bottom:6px}
+.cc p{font-size:.88rem;line-height:1.56;margin:0}
+.cc.fail{border-left:4px solid var(--crimson)}
+.cc.pass{border-left:4px solid #3a8a3a}
+
+/* ── INLINE ── */
+.gr{font-style:italic;color:#1a3a10;font-size:1.04em}
+.la{font-style:italic;color:#3a3a10}
+.ar{direction:rtl;font-size:1.12rem;display:inline-block;line-height:1.7;color:var(--crimson)}
+.he{direction:rtl;font-size:1.12rem;color:var(--crimson);font-weight:600;display:inline-block;line-height:1.7}
+strong{font-weight:700;color:#0f1a08}
+
+.hl{border:1.5px solid var(--gold);padding:14px 20px;margin:16px 0;background:#f0f4e0;font-size:.96rem;line-height:1.72}
+
+.footnote{border-top:1px solid var(--rule-lt);margin-top:32px;padding-top:14px;font-size:.79rem;font-family:'Source Sans 3',sans-serif;color:var(--margin);line-height:1.65}
+
+/* fail badge */
+.badge-fail{display:inline-block;background:var(--crimson);color:#f8e8e8;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;margin-left:8px;vertical-align:middle}
+.badge-pass{display:inline-block;background:#1a6a1a;color:#e8f8e8;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;margin-left:8px;vertical-align:middle}
+
+@media(max-width:680px){
+  .cover{padding:40px 22px 32px}.cover-title{font-size:1.4rem}
+  section{padding:32px 20px 28px}.cg{grid-template-columns:1fr}
+  h2{font-size:1.08rem}#main{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<button id="toc-btn" aria-controls="toc-panel" aria-expanded="false" aria-label="Abrir índice">
+  <span class="hbars" aria-hidden="true"><span></span><span></span><span></span></span>
+  Índice
+</button>
+<div id="toc-overlay" aria-hidden="true"></div>
+
+<nav id="toc-panel" aria-label="Índice">
+  <div class="toc-spacer"></div>
+  <div class="toc-title">Contenido</div>
+
+  <div class="toc-group">El Texto</div>
+  <a href="#texto">I. Juan 14–16: el texto griego</a>
+  <a href="#condiciones">II. Las 8 condiciones del Paráclito</a>
+
+  <div class="toc-group">La Tesis Islámica</div>
+  <a href="#tesis">III. La tesis: periklytos = Ahmad</a>
+  <a href="#quran61">IV. Corán 61:6 y su trasfondo</a>
+  <a href="#hadiths">V. Hadices: ¿dónde están las profecías?</a>
+
+  <div class="toc-group">Refutación Textual</div>
+  <a href="#manuscritos">VI. Los manuscritos griegos</a>
+  <a href="#lexicon">VII. Léxico: parakletos vs. periklytos</a>
+  <a href="#internas">VIII. Condiciones internas del texto</a>
+
+  <div class="toc-group">Historia Comparada</div>
+  <a href="#montano">IX. Montano: el Paráclito encarnado</a>
+  <a href="#eusebio">X. Eusebio de Cesarea: los textos</a>
+  <a href="#otros">XI. Otros autoidentificados</a>
+  <a href="#pablo">XII. Marcionitas: Pablo como Paráclito</a>
+  <a href="#origen">XIII. Orígenes y la pneumatología ortodoxa</a>
+
+  <div class="toc-group">Juan 20 y el ES</div>
+  <a href="#juan20">XIV. Juan 20:22: el ES ya vino</a>
+
+  <div class="toc-group">Silogismos</div>
+  <a href="#silogismos">XV. Silogismos formales</a>
+  <a href="#objeciones">XVI. Objeciones y refutaciones</a>
+  <a href="#objeciones" style="padding-left:32px;font-size:10.5px;">↳ «Santo» añadido (Metzger / Syrus Sin.)</a>
+  <a href="#objeciones" style="padding-left:32px;font-size:10.5px;">↳ Brown y los académicos escépticos</a>
+  <a href="#objeciones" style="padding-left:32px;font-size:10.5px;">↳ Moisés en la Asunción de Moisés</a>
+  <a href="#objeciones" style="padding-left:32px;font-size:10.5px;">↳ Marcionitas y Pablo</a>
+  <a href="#objeciones" style="padding-left:32px;font-size:10.5px;">↳ Jn 16:13: «no hablará por sí mismo»</a>
+  <a href="#objeciones" style="padding-left:32px;font-size:10.5px;">↳ El ES ya estaba con Jesús (Lc 4:1)</a>
+  <a href="#objeciones" style="padding-left:32px;font-size:10.5px;">↳ «Espíritu» para humanos (1 Jn 4:1)</a>
+  <a href="#conclusion">Conclusión</a>
+</nav>
+
+<div id="main">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Dossier Apologético · Exégesis Joánica y Apologética Islámica</div>
+  <h1 class="cover-title">El Paráclito de Juan 14–16:<br>¿Espíritu Santo o Mahoma?</h1>
+  <p class="cover-sub">Refutación exegética, textual, histórica y lógica de la identificación islámica</p>
+  <div class="cover-verse">
+    <span class="gr-lg">κἀγὼ ἐρωτήσω τὸν πατέρα καὶ ἄλλον παράκλητον δώσει ὑμῖν ἵνα μεθ᾽ ὑμῶν εἰς τὸν αἰῶνα ᾖ</span>
+    <em>«Yo rogaré al Padre, y os dará otro Paráclito, para que esté con vosotros para siempre»</em><br>
+    <span style="font-size:.78rem;color:var(--rule);">Juan 14:16 (NA28) — El versículo que el Islam reclama para Mahoma</span>
+  </div>
+</div>
+
+<!-- I -->
+<section id="texto">
+  <div class="sec-label">Sección I</div>
+  <h2>Juan 14–16: El Texto Griego del Paráclito</h2>
+
+  <p>Las promesas del Paráclito aparecen en cuatro pasajes del Discurso de Despedida de Jesús (Juan 13–17). Los reproducimos con el texto griego original:</p>
+
+  <div class="card">
+    <div class="card-lbl">Los cuatro textos del Paráclito — NA28</div>
+    <p><strong>Juan 14:16–17:</strong><br>
+    <span class="gr">κἀγὼ ἐρωτήσω τὸν πατέρα καὶ ἄλλον <strong>παράκλητον</strong> δώσει ὑμῖν ἵνα μεθ᾽ ὑμῶν εἰς τὸν αἰῶνα ᾖ, τὸ πνεῦμα τῆς ἀληθείας, ὃ ὁ κόσμος οὐ δύναται λαβεῖν, ὅτι οὐ θεωρεῖ αὐτὸ οὐδὲ γινώσκει· ὑμεῖς γινώσκετε αὐτό, ὅτι παρ᾽ ὑμῖν μένει καὶ ἐν ὑμῖν ἔσται.</span><br>
+    <em>«Yo rogaré al Padre, y os dará otro Paráclito, para que esté con vosotros para siempre, el Espíritu de verdad, al que el mundo no puede recibir, porque no le ve ni le conoce; vosotros le conocéis, porque mora con vosotros y estará en vosotros.»</em></p>
+
+    <p style="margin-top:14px;"><strong>Juan 14:26:</strong><br>
+    <span class="gr">ὁ δὲ <strong>παράκλητος</strong>, τὸ πνεῦμα τὸ ἅγιον ὃ πέμψει ὁ πατὴρ ἐν τῷ ὀνόματί μου, ἐκεῖνος ὑμᾶς διδάξει πάντα καὶ ὑπομνήσει ὑμᾶς πάντα ἃ εἶπον ὑμῖν ἐγώ.</span><br>
+    <em>«Pero el Paráclito, el Espíritu Santo que el Padre enviará en mi nombre, él os enseñará todas las cosas y os recordará todo lo que yo os he dicho.»</em></p>
+
+    <p style="margin-top:14px;"><strong>Juan 15:26:</strong><br>
+    <span class="gr">Ὅταν ἔλθῃ ὁ <strong>παράκλητος</strong> ὃν ἐγὼ πέμψω ὑμῖν παρὰ τοῦ πατρός, τὸ πνεῦμα τῆς ἀληθείας ὃ παρὰ τοῦ πατρὸς ἐκπορεύεται, ἐκεῖνος μαρτυρήσει περὶ ἐμοῦ·</span><br>
+    <em>«Cuando venga el Paráclito, al que yo os enviaré de parte del Padre, el Espíritu de verdad que procede del Padre, él dará testimonio de mí.»</em></p>
+
+    <p style="margin-top:14px;"><strong>Juan 16:7–8, 13:</strong><br>
+    <span class="gr">συμφέρει ὑμῖν ἵνα ἐγὼ ἀπέλθω. ἐὰν γὰρ μὴ ἀπέλθω, ὁ <strong>παράκλητος</strong> οὐ μὴ ἔλθῃ πρὸς ὑμᾶς· ἐὰν δὲ πορευθῶ, πέμψω αὐτὸν πρὸς ὑμᾶς… ὅταν δὲ ἔλθῃ ἐκεῖνος, τὸ πνεῦμα τῆς ἀληθείας, ὁδηγήσει ὑμᾶς εἰς τὴν ἀλήθειαν πάσαν·</span><br>
+    <em>«Os conviene que yo me vaya, porque si no me fuera, el Paráclito no vendría a vosotros; pero si me voy, os lo enviaré... Pero cuando venga él, el Espíritu de verdad, os guiará a toda la verdad.»</em></p>
+  </div>
+</section>
+
+<!-- II -->
+<section id="condiciones">
+  <div class="sec-label">Sección II</div>
+  <h2>Las 8 Condiciones del Paráclito según el Propio Texto</h2>
+
+  <p>El texto de Juan es extraordinariamente preciso. El Paráclito queda definido por ocho características que el propio texto establece con claridad. Cada una de ellas cierra la identificación con Mahoma desde dentro del texto joánico:</p>
+
+  <table>
+    <thead><tr><th>#</th><th>Condición (texto)</th><th>Referencia</th><th>Mahoma</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Es «<strong>otro</strong> Paráclito» — distinto de Jesús pero de la misma naturaleza (<span class="gr">ἄλλον παράκλητον</span>)</td><td>Jn 14:16</td><td><span class="badge-fail">Falla</span> Mahoma no se presenta como «otro Jesús»</td></tr>
+      <tr><td>2</td><td><strong>Estará con vosotros para siempre</strong> (<span class="gr">εἰς τὸν αἰῶνα</span>)</td><td>Jn 14:16</td><td><span class="badge-fail">Falla</span> Mahoma vivió y murió; no está «para siempre» con nadie</td></tr>
+      <tr><td>3</td><td>Es el <strong>Espíritu Santo</strong> explícitamente (<span class="gr">τὸ πνεῦμα τὸ ἅγιον</span>)</td><td>Jn 14:26</td><td><span class="badge-fail">Falla</span> Mahoma es un ser humano de carne y hueso, no un espíritu</td></tr>
+      <tr><td>4</td><td>Es el <strong>Espíritu de verdad</strong> (<span class="gr">τὸ πνεῦμα τῆς ἀληθείας</span>)</td><td>Jn 14:17; 15:26; 16:13</td><td><span class="badge-fail">Falla</span> Es un título pneumatológico, no profético</td></tr>
+      <tr><td>5</td><td>El mundo <strong>no puede recibirlo</strong> porque no lo ve ni lo conoce (<span class="gr">ὁ κόσμος οὐ δύναται λαβεῖν</span>)</td><td>Jn 14:17</td><td><span class="badge-fail">Falla</span> Mahoma fue perfectamente visible, recibido por millones</td></tr>
+      <tr><td>6</td><td><strong>Mora en vosotros</strong> y estará <strong>en vosotros</strong> (<span class="gr">ἐν ὑμῖν ἔσται</span>)</td><td>Jn 14:17</td><td><span class="badge-fail">Falla</span> Imposible para una persona física; describe inhabitación espiritual</td></tr>
+      <tr><td>7</td><td><strong>Os recordará</strong> todo lo que Jesús dijo (<span class="gr">ὑπομνήσει ὑμᾶς πάντα</span>)</td><td>Jn 14:26</td><td><span class="badge-fail">Falla</span> Mahoma no recordó nada a los discípulos de Jesús; los discípulos ya habían muerto siglos antes</td></tr>
+      <tr><td>8</td><td>El Padre lo enviará <strong>en el nombre de Jesús</strong> (<span class="gr">ἐν τῷ ὀνόματί μου</span>)</td><td>Jn 14:26</td><td><span class="badge-fail">Falla</span> Mahoma no fue enviado en nombre de Jesús; su misión no está referida a Jesús</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Resultado de la verificación interna</div>
+    <p>Mahoma no cumple ninguna de las ocho condiciones que el propio texto joánico establece para el Paráclito. El texto no solo no lo favorece — lo excluye activamente. La condición 3 sola (<em>«el Espíritu Santo»</em>) es suficiente para cerrar definitivamente la identificación: el Espíritu Santo no puede ser un ser humano.</p>
+  </div>
+</section>
+
+<!-- III -->
+<section id="tesis">
+  <div class="sec-label">Sección III</div>
+  <h2>La Tesis Islámica: <em>Periklytos</em> = Ahmad</h2>
+
+  <p>La argumentación islámica estándar sobre el Paráclito opera en dos variantes principales:</p>
+
+  <h3>Variante A: Sustitución léxica (<em>parakletos</em> → <em>periklytos</em>)</h3>
+  <p>El argumento afirma que el texto griego original de Juan no contenía <span class="gr">παράκλητος</span> (<em>parákletos</em>, «abogado, consolador») sino <span class="gr">περικλυτός</span> (<em>periklytos</em>, «el muy alabado, el glorioso»), y que este término griego es la traducción exacta del nombre árabe <em>Ahmad</em> (أحمد, «el más alabado»). El Corán en 61:6 presenta a Jesús anunciando a un mensajero cuyo nombre es <em>Ahmad</em>, nombre que el Islam identifica con Mahoma.</p>
+
+  <h3>Variante B: <em>Parakletos</em> como <em>Ahmad</em> en siríaco</h3>
+  <p>Una segunda variante, presente en el exégeta coránico temprano Muqātil b. Sulaymān (m. 767 d.C.), afirma que <em>Ahmad</em> «significa Paráclito en siríaco» (<em>fāraqlītā</em> en su transcripción). Esta variante prescinde de la sustitución léxica y afirma una equivalencia semántica directa entre el Paráclito siríaco-griego y el nombre Ahmad.</p>
+
+  <h3>La fuente islámica clásica: Ibn Isḥāq</h3>
+  <p>Ibn Isḥāq (m. 767 d.C.), el biógrafo más antiguo de Mahoma, en la <em>Sīra</em> (recogida por Ibn Hishām) interpreta que el <em>Munḥamanna</em> siríaco mencionado por fuentes judeocristianas corresponde tanto a <em>Perikletos</em> griego como a <em>Ahmad</em> árabe. Como señala el islamólogo Alfred Guillaume, Ibn Isḥāq sugería que los «eruditos cristianos cambiaron <em>periklytos</em> por <em>parakletos</em>» en un momento posterior.</p>
+</section>
+
+<!-- IV -->
+<section id="quran61">
+  <div class="sec-label">Sección IV</div>
+  <h2>Corán 61:6 y su Trasfondo Histórico</h2>
+
+  <div class="card">
+    <div class="card-lbl">Corán 61:6 — Texto árabe y traducción</div>
+    <p style="direction:rtl;font-size:1.28rem;line-height:2.1;color:var(--crimson);text-align:right;">وَإِذْ قَالَ عِيسَى ابْنُ مَرْيَمَ يَا بَنِي إِسْرَائِيلَ إِنِّي رَسُولُ اللَّهِ إِلَيْكُم مُّصَدِّقًا لِّمَا بَيْنَ يَدَيَّ مِنَ التَّوْرَاةِ وَمُبَشِّرًا بِرَسُولٍ يَأْتِي مِن بَعْدِي اسْمُهُ أَحْمَدُ</p>
+    <p style="margin-top:12px;font-style:italic;color:#1a2a0a;line-height:1.75;">«Y cuando Jesús, hijo de María, dijo: "Oh hijos de Israel, soy el mensajero de Alá para vosotros, confirmando lo que vino antes de mí de la Torah, y anunciando las buenas nuevas de un mensajero que vendrá después de mí cuyo nombre será Ahmad."»<br>
+    <span style="font-style:normal;font-size:.8rem;color:var(--emerald);">— Corán 61:6 (traducción Sahih International)</span></p>
+  </div>
+
+  <h3>Análisis histórico de la identificación Ahmad = Paráclito</h3>
+
+  <p>El islamólogo W. Montgomery Watt (Encyclopaedia of Islam) observa que el desarrollo de <em>Ahmad</em> como nombre identificado con el Paráclito ocurrió en el contexto de las polémicas cristiano-musulmanas del siglo VII–VIII, no antes. Es decir, la ecuación <em>Ahmad = Paráclito</em> es un desarrollo apologético posterior al Corán, elaborado por exégetas como Ibn Isḥāq y Muqātil b. Sulaymān para dar sustento a la afirmación coránica de que Jesús anunció a Mahoma.</p>
+
+  <p>El problema central es que el Corán afirma que Jesús anunció a <em>Ahmad</em> por nombre — pero ningún manuscrito griego, siríaco, copto, latín ni armenio del Evangelio de Juan contiene ni <em>Ahmad</em> ni <em>periklytos</em> en esos versículos. El argumento islámico requiere postular una corrupción textual que ninguna evidencia manuscrita apoya.</p>
+</section>
+
+<!-- V -->
+<section id="hadiths">
+  <div class="sec-label">Sección V</div>
+  <h2>Hadices: ¿Dónde Están las Profecías «Muy Reconocibles»?</h2>
+
+  <p>El propio Mahoma afirmó estar anunciado en los Evangelios de forma «muy reconocible». El Corán en 7:157 dice:</p>
+
+  <blockquote>
+    <span class="ar">الَّذِينَ يَتَّبِعُونَ الرَّسُولَ النَّبِيَّ الْأُمِّيَّ الَّذِي يَجِدُونَهُ مَكْتُوبًا عِندَهُمْ فِي التَّوْرَاةِ وَالْإِنجِيلِ</span><br>
+    «Los que siguen al Mensajero, el Profeta iletrado, a quien encuentran escrito entre ellos en la Torah y el Evangelio.»
+    <span class="src">— Corán 7:157</span>
+  </blockquote>
+
+  <p>El hadiz más relevante sobre esto es el de ʿAṭāʾ ibn Yasār, que se dirigió a ʿAbd Allāh ibn ʿAmr para preguntarle sobre la descripción de Mahoma en la Torah:</p>
+
+  <blockquote>
+    «Sí, por Alá, él está descrito en la Torah con algunas de las características mencionadas en el Corán: "Oh Profeta, verdaderamente te enviamos como testigo, portador de buenas nuevas y advertidor…"»
+    <span class="src">— Hadiz relatado por ʿAṭāʾ ibn Yasār, vía ʿAbd Allāh ibn ʿAmr; recogido en Sahih al-Bujari (kitāb al-buyūʿ, libro de ventas, nº 2125; también en al-Tirmidhī). El hadiz cita Isaías 42 como fuente, no Juan.</span>
+  </blockquote>
+
+  <h3>El problema central: ningún hadiz sahīh identifica el Paráclito con Mahoma</h3>
+
+  <p>Una búsqueda exhaustiva de las colecciones canónicas de hadiz — Sahih al-Bujari (más de 7.500 hadices), Sahih Muslim, Sunan Abu Dawud, Jāmiʿ al-Tirmidhī, Sunan al-Nasāʾī — no arroja ningún hadiz con cadena de transmisión (<em>isnād</em>) auténtica en el que Mahoma cite explícitamente Juan 14:16 o los pasajes del Paráclito como profecías de sí mismo.</p>
+
+  <p>Las profecías que Mahoma afirmaba encontrar en los Evangelios, según los hadices, son descripciones físicas y de carácter (como la del hadiz de ʿAbd Allāh ibn ʿAmr, que cita Isaías 42), no identificaciones textuales del término <em>parákletos</em>. La ecuación explícita <em>parakletos = Ahmad</em> aparece por primera vez en fuentes externas al hadiz canónico: Ibn Isḥāq (m. 767 d.C.) y Muqātil b. Sulaymān (m. 767 d.C.), más de ciento treinta años después de la muerte de Mahoma.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Dilema epistémico para el apologeta islámico</div>
+    <p>Si las profecías de Mahoma en el Injīl eran «muy reconocibles» (Corán 7:157), ¿por qué ningún compañero del Profeta (<em>sahābī</em>) transmitió un hadiz en el que Mahoma citara Juan 14:16 explícitamente? ¿Por qué tuvo que esperar ciento treinta años a que un exégeta posterior construyera la ecuación léxica? El silencio del hadiz canónico sobre el Paráclito como profecía de Mahoma es, en términos históricos, ensordecedor.</p>
+  </div>
+</section>
+
+<!-- VI -->
+<section id="manuscritos">
+  <div class="sec-label">Sección VI</div>
+  <h2>Los Manuscritos Griegos: Ninguno Dice «Periklytos»</h2>
+
+  <p>La tesis de sustitución (<em>parakletos</em> → <em>periklytos</em>) requiere demostrar que el texto original de Juan 14:16 contenía <span class="gr">περικλυτός</span>. Esta demostración es textualmente imposible:</p>
+
+  <table>
+    <thead><tr><th>Manuscrito / Versión</th><th>Fecha</th><th>Lectura en Jn 14:16</th></tr></thead>
+    <tbody>
+      <tr><td>P66 (Papiro Bodmer II)</td><td>c. 200 d.C.</td><td><span class="gr">παράκλητον</span></td></tr>
+      <tr><td>P75 (Papiro Bodmer XIV-XV)</td><td>c. 175–225 d.C.</td><td><span class="gr">παράκλητον</span></td></tr>
+      <tr><td>Codex Sinaiticus (א)</td><td>c. 330–360 d.C.</td><td><span class="gr">παράκλητον</span></td></tr>
+      <tr><td>Codex Vaticanus (B)</td><td>c. 300–325 d.C.</td><td><span class="gr">παράκλητον</span></td></tr>
+      <tr><td>Codex Alexandrinus (A)</td><td>c. 400–440 d.C.</td><td><span class="gr">παράκλητον</span></td></tr>
+      <tr><td>Vetus Latina (ms. Vercellensis)</td><td>s. IV d.C.</td><td><span class="la">Paracletum</span></td></tr>
+      <tr><td>Vulgata de Jerónimo</td><td>c. 382–405 d.C.</td><td><span class="la">Paraclitum</span></td></tr>
+      <tr><td>Peshitta siríaca</td><td>c. s. II–IV d.C.</td><td><em>Paracleṭa</em> (transcripción del griego)</td></tr>
+      <tr><td>Versión copta sahídica</td><td>c. s. III d.C.</td><td>Transcripción del griego παράκλητος</td></tr>
+    </tbody>
+  </table>
+
+  <p>No existe ningún manuscrito griego, latino, siríaco, copto, armenio, georgiano ni etíope de Juan 14:16 que lea <span class="gr">περικλυτός</span> en lugar de <span class="gr">παράκλητος</span>. El aparato crítico del Novum Testamentum Graece (NA28), que coteja miles de manuscritos, no registra esta variante en ningún lugar. La variante <em>periklytos</em> es una conjetura académicamente sin soporte textual.</p>
+</section>
+
+<!-- VII -->
+<section id="lexicon">
+  <div class="sec-label">Sección VII</div>
+  <h2>Léxico Griego: <em>Parakletos</em> vs. <em>Periklytos</em></h2>
+
+  <div class="card">
+    <div class="card-lbl">Comparación semántica y morfológica</div>
+    <table style="margin:0">
+      <thead><tr><th>Término</th><th>Raíz</th><th>Campo semántico</th><th>Uso en el NT</th></tr></thead>
+      <tbody>
+        <tr><td><span class="gr">παράκλητος</span></td><td><span class="gr">παρα-καλέω</span> (llamar al lado)</td><td>Abogado, defensor, consolador, intercesor</td><td>Jn 14:16,26; 15:26; 16:7; 1 Jn 2:1</td></tr>
+        <tr><td><span class="gr">περικλυτός</span></td><td><span class="gr">περι-κλύω</span> (ser famoso en torno)</td><td>Muy alabado, glorioso, célebre</td><td>No aparece en el NT</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Las dos palabras son fonéticamente distintas (<em>pa-rá-kli-tos</em> vs. <em>pe-rí-kli-tos</em>), morfológicamente distintas (raíces diferentes) y semánticamente distintas. No son variantes gráficas de la misma palabra — son vocablos diferentes. Un copista distraído no confundiría las dos: tienen distinta primera sílaba, distinta acentuación y distintas connotaciones.</p>
+
+  <p>Además, el término <span class="gr">παράκλητος</span> aparece ya en 1 Juan 2:1 aplicado a Jesucristo resucitado (<em>«tenemos un Paráclito ante el Padre, Jesucristo el justo»</em>). Si el Paráclito de Juan 14 fuera Mahoma, entonces 1 Juan 2:1 diría que tenemos a Mahoma ante el Padre intercediendo por nosotros — lo cual es teológicamente absurdo incluso desde el Islam.</p>
+</section>
+
+<!-- VIII -->
+<section id="internas">
+  <div class="sec-label">Sección VIII</div>
+  <h2>Condiciones Internas: El Texto que se Autoexcluye</h2>
+
+  <p>Además de las ocho condiciones de la Sección II, hay tres elementos del texto que cierran de forma irreversible la identificación con cualquier ser humano:</p>
+
+  <h3>1. «Otro Paráclito» — <span class="gr">ἄλλον παράκλητον</span></h3>
+  <p>El griego usa <span class="gr">ἄλλος</span> («otro del mismo tipo») en lugar de <span class="gr">ἕτερος</span> («otro de tipo diferente»). Esto implica que el Paráclito venidero pertenece a la misma categoría que el Jesús que habla — es decir, divino o espiritual. No es un ser humano de categoría diferente.</p>
+
+  <h3>2. «El mundo no puede recibirlo» — <span class="gr">ὁ κόσμος οὐ δύναται λαβεῖν</span></h3>
+  <p>Esta cláusula es la más destructiva para la tesis islámica. Mahoma fue recibido por millones de personas en todo el mundo árabe. El texto dice que el Paráclito es invisible e irreconocible para el mundo. Aplicar esto a Mahoma requiere ignorar o invertir el sentido natural del texto.</p>
+
+  <h3>3. «Estará en vosotros» — <span class="gr">ἐν ὑμῖν ἔσται</span></h3>
+  <p>La preposición <span class="gr">ἐν</span> con dativo de persona describe inhabitación interior, no presencia externa. Un ser humano físico no puede estar <em>dentro</em> de otras personas. Esta condición describe exclusivamente una realidad espiritual o divina.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Conclusión textual interna</div>
+    <p>El texto de Juan 14–16 no solo no menciona a Mahoma — está construido de tal manera que excluye activamente a cualquier ser humano. Las condiciones de invisibilidad al mundo, de inhabitación interior, de permanencia eterna y de identidad explícita con el Espíritu Santo forman un conjunto que solo puede referirse a una realidad no corporal. El texto es su propio refutador de la tesis islámica.</p>
+  </div>
+</section>
+
+<!-- IX -->
+<section id="montano">
+  <div class="sec-label">Sección IX</div>
+  <h2>Montano: El Paráclito de Carne y Hueso (c. 157–172 d.C.)</h2>
+
+  <p>Mahoma no fue el primero en reclamar ser el Paráclito prometido por Jesús. Siglos antes, en la segunda mitad del siglo II d.C., un personaje llamado Montano hizo exactamente la misma reclamación — con considerablemente más proximidad histórica al texto joánico.</p>
+
+  <h3>¿Quién fue Montano?</h3>
+  <p>Montano fue un antiguo sacerdote pagano convertido al cristianismo en Frigia (actual Turquía central). Aproximadamente entre 157 y 172 d.C. comenzó a profetizar en un estado de éxtasis, acompañado de dos mujeres, Priscila y Maximila, que también profetizaban. El movimiento montanista se extendió rápidamente por Asia Menor, el norte de África y Roma, atrayendo incluso a Tertuliano (c. 207 d.C.).</p>
+
+  <h3>La proclamación: «Yo soy el Paráclito»</h3>
+  <p>Los oráculos de Montano conservados en fuentes patrísticas incluyen afirmaciones en primera persona que identifican al Espíritu Santo hablando a través de él — y en algunos casos identificándose directamente con el Paráclito:</p>
+
+  <blockquote>
+    «Yo soy el Padre, la Palabra y el Paráclito.»
+    <span class="src">— Oráculo de Montano, citado en Dídimo el Ciego, <em>De Trinitate</em> III.41.1 (PG 39, 984)</span>
+  </blockquote>
+
+  <blockquote>
+    «Ni ángel, ni enviado, sino yo, el Señor Dios Padre, he venido.»
+    <span class="src">— Oráculo de Montano, citado en Epifanio de Salamis, <em>Panarion</em> 48.11.1 (GCS 31, p. 234)</span>
+  </blockquote>
+
+  <p>La comunidad montanista, aunque nunca afirmó que Montano <em>fuera</em> el Paráclito en el sentido de ser personalmente ese ser divino, sí proclamaba que el Paráclito hablaba <em>a través</em> de Montano de manera plena y definitiva — la «era del Paráclito» que completaba la revelación de Jesús.</p>
+</section>
+
+<!-- X -->
+<section id="eusebio">
+  <div class="sec-label">Sección X</div>
+  <h2>Eusebio de Cesarea: Los Textos Verificados</h2>
+
+  <p>Eusebio de Cesarea (c. 260–339 d.C.), en su <em>Historia Ecclesiastica</em>, dedica los capítulos 14–17 del Libro V a la herejía montanista. Los textos son verificables en New Advent (CCEL) y en la edición crítica de Kirsopp Lake (Loeb Classical Library, 1926):</p>
+
+  <blockquote>
+    «Algunos, como reptiles venenosos, se arrastraban por Asia y Frigia, jactándose de que <strong>Montano era el Paráclito</strong>, y las mujeres que le seguían, Priscila y Maximila, eran profetisas de Montano.»
+    <span class="src">— Eusebio, <em>Historia Ecclesiastica</em> V.14 (trad. Arthur C. McGiffert, NPNF Series II, vol. 1; texto griego: Eus. Hist. Eccl. V.14.1, ed. Kirsopp Lake, LCL 153)</span>
+  </blockquote>
+
+  <blockquote>
+    «Un tal Montano, en Ardabo, una aldea de Frigia en Misia, cuando Grato era procónsul de Asia, en la abundancia de su presunción espiritual se volvió poseído, y de repente fue arrebatado en un espíritu y comenzó a hablar y decir cosas extrañas, profetizando de una manera contraria a la costumbre de la Iglesia desde los tiempos del principio, tal como ha sido transmitida y guardada por sucesión.»
+    <span class="src">— Eusebio, <em>Hist. Eccl.</em> V.16.7, citando un texto anónimo anti-montanista (atribuido por algunos a Asterio Urbano); ed. Lake, LCL 153, p. 469</span>
+  </blockquote>
+
+  <blockquote>
+    «¿Acaso no habla el falso profeta en éxtasis, al que le sigue la confianza e insolencia irresistible, empezando por la ignorancia voluntaria y terminando en locura involuntaria?»
+    <span class="src">— Eusebio, <em>Hist. Eccl.</em> V.17.2–3 (el anónimo anti-montanista describiendo el estado de los profetas montanistas)</span>
+  </blockquote>
+
+  <h3>Lo que Eusebio aporta al debate sobre el Paráclito</h3>
+  <p>Eusebio documenta que la reclamación de ser el Paráclito —o su vehículo definitivo— fue hecha por Montano en Asia Menor entre 157 y 172 d.C., es decir, aproximadamente <strong>450 años antes de Mahoma</strong>. La Iglesia universal rechazó esta reclamación en los sínodos de Asia Menor (c. 177 d.C.), en Roma bajo Eleuterio y Víctor I, y en África del Norte. La razón del rechazo fue exactamente la misma que aplica a Mahoma: el Paráclito de Juan 14 es el Espíritu Santo, no una persona humana.</p>
+</section>
+
+<!-- XI -->
+<section id="otros">
+  <div class="sec-label">Sección XI</div>
+  <h2>Otros que se Identificaron con el Paráclito</h2>
+
+  <div class="cg">
+    <div class="cc">
+      <div class="cc-title">Priscila y Maximila</div>
+      <p>Las dos profetisas montanistas que acompañaban a Montano. Eusebio (<em>Hist. Eccl.</em> V.16–17) las describe como proclamando revelaciones finales en nombre del Paráclito. Maximila afirmó: «Después de mí no habrá más profeta, sino el fin.» (citada en Eusebio V.16.19)</p>
+    </div>
+    <div class="cc">
+      <div class="cc-title">Mani (c. 216–274 d.C.)</div>
+      <p>Fundador del maniqueísmo. Se proclamó el «Sello de los Profetas» y el «Apóstol de Jesucristo», identificándose con el Paráclito prometido. El maniqueísmo tuvo presencia desde Persia hasta China. Mahoma adoptaría el título «Sello de los Profetas» más tarde.</p>
+    </div>
+    <div class="cc">
+      <div class="cc-title">Mahoma (570–632 d.C.)</div>
+      <p>Afirmó ser el cumplimiento de Juan 14:16 vía la identificación <em>periklytos = Ahmad</em>. Como se documenta en este dossier, la reclamación es textualmente insostenible y aparece elaborada en las fuentes islámicas 130 años después de su muerte.</p>
+    </div>
+    <div class="cc">
+      <div class="cc-title">El patrón repetido</div>
+      <p>La historia muestra un patrón consistente: los fundadores de nuevos movimientos religiosos que buscan enraizarse en la tradición judeocristiana tienden a reclamar ser el cumplimiento del Paráclito. Montano es el precedente más claro. Que Mahoma haga la misma reclamación 450 años después no le otorga credibilidad — sino que lo inserta en una tradición de reclamaciones rechazadas.</p>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-lbl">El argumento comparativo</div>
+    <p>Si la reclamación de ser el Paráclito fuera suficiente para establecer la identidad, Montano tendría más credenciales que Mahoma: (a) vivió 450 años antes, más cerca del texto joánico; (b) su movimiento se originó en la misma región geográfica (Asia Menor) donde se escribió el Evangelio de Juan; (c) su reclamación fue rechazada por las comunidades que habían conocido la tradición joánica de primera mano. La pregunta es: ¿por qué creerle a Mahoma y no a Montano? Ambos hacen la misma reclamación con igual falta de base textual.</p>
+  </div>
+</section>
+
+<!-- XII -->
+<section id="pablo">
+  <div class="sec-label">Sección XII</div>
+  <h2>¿Pablo de Tarso como Paráclito? Los Marcionitas, no Discípulos de Orígenes</h2>
+
+  <p>Una variante curiosa de la interpretación del Paráclito identifica a Pablo de Tarso con el prometido de Juan 14. Este argumento suele atribuirse a «discípulos de Orígenes», pero hay una corrección textual importante que hacer.</p>
+
+  <h3>La fuente exacta: Henry Barclay Swete (1912)</h3>
+  <p>La fuente que documenta esta interpretación es Henry Barclay Swete, <em>The Holy Spirit in the Ancient Church: A Study of Christian Teaching in the Age of the Fathers</em> (Macmillan, Londres, 1912), pp. 65–66:</p>
+
+  <blockquote>
+    «Marcion's devotion to St Paul would have led him to emphasise the work of the Holy Spirit, on which the great Epistles of St Paul to the Galatians and Romans so strongly insist. But on the Holy Spirit he seems to have been almost wholly silent. Neither the Conception nor the Baptism found a place in his 'Gospel', which began with the preaching at Capernaum (Luke iv. 31). How Marcion himself understood the promise of the Paraclete, we do not know; according to Tertullian, he did not admit the authority of the fourth Gospel. Origen, however, tells us that some of his disciples who did, maintained that the "other Paraclete" was to be identified with the Apostle Paul.»
+    <span class="src">— Henry Barclay Swete, <em>The Holy Spirit in the Ancient Church</em>, Macmillan, Londres, 1912, pp. 65–66</span>
+  </blockquote>
+
+  <h3>La corrección es importante</h3>
+  <p>Swete cita a Orígenes como <em>fuente del dato</em>, no como quien sostiene esa interpretación. Lo que Orígenes reporta es que <strong>ciertos discípulos de Marción</strong> —los marcionitas— que sí aceptaban el Evangelio de Juan (a diferencia del propio Marción, que lo rechazaba), mantenían que el «otro Paráclito» era Pablo. Son <strong>marcionitas</strong>, no discípulos de Orígenes. Una lectura cuidadosa de la sintaxis de Swete aclara esto sin ambigüedad.</p>
+
+  <h3>Implicaciones apologéticas</h3>
+  <p>Incluso corregida la atribución, la interpretación marcionita de Pablo como Paráclito refuta al Islam en vez de ayudarlo: (1) Los marcionitas eran herejes condenados por toda la Iglesia; (2) el propio Marción rechazaba el Evangelio de Juan que contiene la promesa; (3) la interpretación no tiene ninguna continuidad en ninguna tradición posterior; (4) si la minoría herética que identifica al Paráclito con un ser humano apunta a Pablo, no hay nadie en el mundo cristiano antiguo que apunte a Mahoma —que no aparece en ninguna fuente cristiana como candidato al Paráclito hasta el siglo VII.</p>
+</section>
+
+<!-- XIII -->
+<section id="origen">
+  <div class="sec-label">Sección XIII</div>
+  <h2>Orígenes: La Interpretación Pneumatológica Ortodoxa</h2>
+
+  <p>El propio Orígenes, en sus textos verificados, identifica el Paráclito con el Espíritu Santo, no con ninguna persona histórica. En su <em>Comentario sobre Juan</em> (II.6) y en el <em>Peri Archon</em> (I.3.1–4) desarrolla una pneumatología en la que el Paráclito es la tercera persona de la Trinidad:</p>
+
+  <blockquote>
+    «El Espíritu Santo es el que ha hablado en los profetas, y quien fue prometido por el Salvador a sus discípulos bajo el nombre de Paráclito, siendo enviado a aquellos que merecen ser llenados de sus dones.»
+    <span class="src">— Orígenes, <em>De Principiis</em> (Peri Archon) I.3.4 (trad. G. W. Butterworth, Koetschau ed.; PG 11, 149)</span>
+  </blockquote>
+
+  <p>La tradición origenista, leída en sus fuentes primarias verificables, es inequívocamente pneumatológica: el Paráclito es el Espíritu Santo divino, no un profeta futuro. Cualquier afirmación de que «discípulos de Orígenes» identificaron al Paráclito con Pablo o con Mahoma necesita proporcionar la fuente primaria exacta antes de poder ser tomada en serio apologéticamente.</p>
+</section>
+
+<!-- XIV -->
+<section id="juan20">
+  <div class="sec-label">Sección XIV</div>
+  <h2>Juan 20:22: El Espíritu Santo ya fue Dado por Jesús Resucitado</h2>
+
+  <p>Este argumento es quizás el más definitivo de todos, porque cierra el debate desde dentro del mismo Evangelio de Juan:</p>
+
+  <div class="card">
+    <div class="card-lbl">Juan 20:22 — Texto griego y traducción</div>
+    <p style="font-size:1.15rem;color:#1a2a0a;line-height:1.9;" class="gr">καὶ τοῦτο εἰπὼν ἐνεφύσησεν καὶ λέγει αὐτοῖς· λάβετε πνεῦμα ἅγιον·</p>
+    <p style="margin-top:10px;font-style:italic;color:#1a2a0a;">«Y habiendo dicho esto, sopló sobre ellos y les dijo: "Recibid el Espíritu Santo."»<br>
+    <span style="font-style:normal;font-size:.8rem;color:var(--emerald);">— Juan 20:22 (NA28)</span></p>
+  </div>
+
+  <p>En Juan 20:22, el Jesús resucitado sopla sobre sus discípulos y les entrega el Espíritu Santo, cumpliendo la promesa de Juan 14–16 en el mismo Evangelio. El verbo <span class="gr">ἐνεφύσησεν</span> (<em>enephysēsen</em>, «sopló») es un eco deliberado de Génesis 2:7 LXX (<span class="gr">ἐνεφύσησεν εἰς τὸ πρόσωπον αὐτοῦ πνοὴν ζωῆς</span>), donde Dios sopla el aliento de vida en Adán. Juan está presentando la nueva creación: el Espíritu Santo es entregado por el Jesús resucitado a sus discípulos presentes — no prometido para seiscientos años después.</p>
+
+  <h3>El argumento del ya-cumplimiento</h3>
+  <p>El relato de Hechos 2 (Pentecostés) complementa a Juan 20:22: el Espíritu Santo desciende sobre los apóstoles cincuenta días después de la resurrección, en cumplimiento explícito de la promesa del Paráclito. Pedro cita esta venida del Espíritu en Hechos 2:33 como el cumplimiento de la promesa: «Exaltado a la diestra de Dios, y habiendo recibido del Padre la promesa del Espíritu Santo, ha derramado esto que vosotros veis y oís.»</p>
+
+  <p>Si el Paráclito ya vino en el Pentecostés (Hechos 2, c. 30 d.C.) y fue recibido por los discípulos de Jesús presentes, ¿cómo puede ser Mahoma (c. 622 d.C.) el mismo Paráclito? La identificación requiere ignorar el cumplimiento explícito narrado en el propio NT, narrado por autores que vivieron el evento.</p>
+</section>
+
+<!-- XV -->
+<section id="silogismos">
+  <div class="sec-label">Sección XV</div>
+  <h2>Silogismos Formales</h2>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo I — De la definición textual del Paráclito</div>
+    <p><strong>Premisa mayor:</strong> El Paráclito de Juan 14:26 es explícitamente identificado por Jesús como «el Espíritu Santo» (<span class="gr">τὸ πνεῦμα τὸ ἅγιον</span>), una realidad no corporal que mora en el interior de las personas (<span class="gr">ἐν ὑμῖν ἔσται</span>) y que el mundo no puede ver ni recibir (<span class="gr">ὁ κόσμος οὐ δύναται λαβεῖν</span>).</p>
+    <p><strong>Premisa menor:</strong> Mahoma fue un ser humano corporal, visible y recibido por millones de personas en el mundo.</p>
+    <p class="conclusion">∴ Conclusión: Mahoma no puede ser el Paráclito de Juan 14:26 por definición textual del propio texto que el Islam cita.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo II — Del argumento manuscrito</div>
+    <p><strong>Premisa mayor:</strong> Si el texto original de Juan 14:16 contenía <span class="gr">περικλυτός</span> (<em>periklytos</em>) en lugar de <span class="gr">παράκλητος</span> (<em>parakletos</em>), algún manuscrito o versión antigua debería conservar esa lectura.</p>
+    <p><strong>Premisa menor:</strong> No existe ningún manuscrito griego, siríaco, latino, copto, armenio ni de ninguna otra tradición textual que lea <span class="gr">περικλυτός</span> en Juan 14:16. Los manuscritos más antiguos (P66, c. 200 d.C.; P75, c. 175–225 d.C.) leen <span class="gr">παράκλητος</span>.</p>
+    <p class="conclusion">∴ Conclusión: El texto original de Juan 14:16 no contenía <em>periklytos</em>. La tesis de sustitución carece de evidencia textual.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo III — Del argumento del ya-cumplimiento</div>
+    <p><strong>Premisa mayor:</strong> Si el Paráclito prometido en Juan 14–16 fue enviado a los discípulos de Jesús (como describe Juan 20:22 y Hechos 2), entonces el Paráclito ya vino antes del año 100 d.C.</p>
+    <p><strong>Premisa menor:</strong> Juan 20:22 narra que Jesús resucitado sopló sobre sus discípulos y les entregó el Espíritu Santo, y Hechos 2 describe el descenso del Espíritu en Pentecostés, referido explícitamente por Pedro como el cumplimiento de la promesa (Hch 2:33).</p>
+    <p class="conclusion">∴ Conclusión: La promesa del Paráclito fue cumplida en el siglo I. Mahoma, nacido en 570 d.C., no puede ser el cumplimiento de una promesa ya cumplida 540 años antes.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo IV — Del argumento comparativo de Montano</div>
+    <p><strong>Premisa mayor:</strong> Si la reclamación de ser el Paráclito prometido en Juan 14 fuera suficiente para establecer la identidad, el primer reclamante con más proximidad histórica al texto tendría mayor credibilidad que un reclamante posterior.</p>
+    <p><strong>Premisa menor:</strong> Montano (c. 157–172 d.C.) reclamó ser el Paráclito o su vehículo definitivo, 450 años antes de Mahoma, en la misma región geográfica donde se escribió el Evangelio de Juan, en una comunidad que conocía el texto joánico de primera mano — y fue rechazado por la Iglesia universal por las mismas razones textuales que aplican a Mahoma.</p>
+    <p class="conclusion">∴ Conclusión: Si el Islam rechaza a Montano como Paráclito (como debe hacerlo), necesita un criterio que también excluya a Mahoma. Ese criterio — que el Paráclito es el Espíritu Santo, no un ser humano — excluye a ambos igualmente.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo V — Del dilema epistémico del hadiz</div>
+    <p><strong>Premisa mayor:</strong> Si Mahoma era la profecía «muy reconocible» del Injīl (Corán 7:157) y el Paráclito prometido, los compañeros del Profeta (<em>sahāba</em>) habrían transmitido hadices en los que Mahoma citara Juan 14:16 como profecía de sí mismo.</p>
+    <p><strong>Premisa menor:</strong> Ningún hadiz con cadena de transmisión sahīh en Bujari, Muslim, Abu Dawud, Tirmidhī o Nasāʾī muestra a Mahoma citando el Paráclito de Juan 14. La identificación <em>parakletos = Ahmad</em> aparece por primera vez en Ibn Isḥāq (m. 767 d.C.), 135 años después de la muerte de Mahoma.</p>
+    <p class="conclusion">∴ Conclusión: La identificación de Mahoma con el Paráclito no proviene de Mahoma mismo —al menos no en las fuentes islámicas canónicas— sino de un desarrollo apologético posterior. Una profecía «muy reconocible» que no es reconocida ni citada por el propio profetizado no es muy reconocible.</p>
+  </div>
+</section>
+
+<!-- XVI -->
+<section id="objeciones">
+  <div class="sec-label">Sección XVI</div>
+  <h2>Objeciones y Refutaciones</h2>
+
+  <!-- OBJ 1 -->
+  <div class="obj">
+    <div class="obj-q">El texto de Juan fue corrompido: los copistas cambiaron <em>periklytos</em> por <em>parakletos</em> para ocultar la profecía de Mahoma.</div>
+    <div class="obj-r">Esta objeción requiere postular una conspiración que afectó a todos los manuscritos de todas las tradiciones textuales —griego, siríaco, latín, copto, armenio, georgiano, etíope— sin dejar un solo testimonio del supuesto original. Los manuscritos más antiguos (P66, P75, c. 175–225 d.C.) preceden al Islam por más de cuatro siglos. Además, el Corán llama a los Evangelios «guía y luz» (5:46) y ordena juzgar por ellos (5:47): si estaban corrompidos cuando llegó el Islam, esa orden sería absurda.</div>
+  </div>
+
+  <!-- OBJ 2: "Santo" está añadido — Metzger, Codex Siriaco Sinaítico -->
+  <div class="obj">
+    <div class="obj-q">La palabra «Santo» en Juan 14:26 está añadida por copistas posteriores. Bruce Metzger reconoce que los escribas tenían tendencia a añadir «Santo» (<em>A Textual Commentary on the Greek NT</em>, p. 218), y el Codex Syriac Sinaiticus omite τὸ ἅγιον. Por tanto, el texto original solo dice «el Espíritu», que puede ser un ser humano.</div>
+    <div class="obj-r">
+      Este argumento requiere varias precisiones cuidadosas:<br><br>
+      <strong>1. Lo que Metzger dice exactamente.</strong> Metzger en su <em>Textual Commentary</em> (p. 218) observa que la tendencia de los escribas a añadir «Santo» era «natural y extendida» — pero lo dice en referencia general a pasajes donde hay debate textual. En Juan 14:26, sin embargo, el propio Metzger, como miembro del comité editorial del NA/UBS, incluyó <span class="gr">τὸ πνεῦμα τὸ ἅγιον</span> como texto preferido. Metzger no afirma en ningún lugar de su <em>Commentary</em> que «Santo» esté añadido específicamente en Juan 14:26. La cita se usa fuera de contexto: describe una tendencia general, no un veredicto sobre este versículo en particular.<br><br>
+      <strong>2. El Codex Syriac Sinaiticus omite τὸ ἅγιον — pero eso no prueba la tesis islámica.</strong> Es cierto que el manuscrito siríaco Sinaiticus (Syrus Sinaiticus, ss. IV–V) en Juan 14:26 lee «el Espíritu, el Consolador» sin «Santo». Pero: (a) es un único manuscrito siríaco tardío frente a P66, P75, Sinaiticus griego (א), Vaticanus (B) y Alejandrinüs (A), que todos incluyen τὸ ἅγιον; (b) la crítica textual da peso a la antigüedad y diversidad de atestación, no a una lectura aislada; (c) incluso sin «Santo», el texto sigue diciendo «el Espíritu» (<span class="gr">τὸ πνεῦμα</span>) — no «el profeta», no «el mensajero», no «Ahmad». Un ser humano no es «el Espíritu».<br><br>
+      <strong>3. La concesión argumentativa no ayuda al Islam.</strong> La propia apologética islámica suele conceder en este punto que «si no dice Santo, daría igual» — y tiene razón. Si el texto dijera solo «el Espíritu», seguiría siendo una entidad invisible al mundo (<span class="gr">ὁ κόσμος οὐ δύναται λαβεῖν</span>), que mora en el interior de los creyentes (<span class="gr">ἐν ὑμῖν ἔσται</span>) y que estará con ellos para siempre (<span class="gr">εἰς τὸν αἰῶνα</span>). Ninguna de esas condiciones es compatible con un ser humano.<br><br>
+      <strong>4. Raymond E. Brown sobre la omisión.</strong> Brown en su <em>Gospel According to John</em> (Anchor Bible, Appendix V) observa que la omisión de τὸ ἅγιον en algunos manuscritos «puede haber sido hecha inocentemente por un copista para armonizar con otros pasajes joánicos» — es decir, la dirección de la alteración es más probable en sentido de <em>omisión</em> que de <em>adición</em>. El texto más difícil (con «Santo», que no aparece en el resto del Evangelio de Juan) es más probable que sea original precisamente porque es lectio difficilior.
+    </div>
+  </div>
+
+  <!-- OBJ 3: Raymond E. Brown cita académicos que dudan -->
+  <div class="obj">
+    <div class="obj-q">Raymond E. Brown cita académicos como Spitta, Delafose, Windisch, Sasse, Bultmann y Botz que han dudado de que el Paráclito sea el Espíritu Santo, sugiriendo que era una figura salvífica independiente que fue identificada con el ES posteriormente.</div>
+    <div class="obj-r">
+      Esta objeción usa correctamente a Raymond E. Brown (<em>The Gospel According to John I–XII</em>, Anchor Bible, Appendix V, pp. 1135–1137). Hay que ser precisos sobre lo que esos académicos afirman y lo que no:<br><br>
+      <strong>1. Lo que esos académicos realmente argumentan.</strong> Spitta, Windisch, Bultmann y otros sostienen que las promesas del Paráclito en Juan 14–16 provienen de una fuente literaria anterior (un «himno al Paráclito» o fuente joánica primitiva) donde el Paráclito era una figura independiente —posiblemente angelical o profética— que el evangelista final identificó con el Espíritu Santo. Es una hipótesis de <em>historia de la redacción</em>, no una afirmación de que el Paráclito sea Mahoma. Ninguno de esos académicos sugiere que el Paráclito sea un profeta árabe del siglo VII.<br><br>
+      <strong>2. El propio Brown rechaza la tesis.</strong> Tras citar a esos académicos, el propio Brown concluye: «La tradición cristiana ha identificado esta figura como el Espíritu Santo, y los académicos mencionados han dudado si esa identificación es fiel a la imagen original. Para comprobar esta afirmación comenzaremos aislando bajo cuatro epígrafes la información que Juan da en los pasajes del Paráclito, manteniendo la imagen resultante distinta de lo que el NT dice sobre el Espíritu Santo.» Brown finalmente concluye que los pasajes del Paráclito son perfectamente coherentes con la pneumatología joánica. El argumento islámico usa la cita de Brown para oponer académicos al texto — pero Brown mismo no apoya la conclusión que el Islam extrae.<br><br>
+      <strong>3. La hipótesis de «figura salvífica independiente» no favorece a Mahoma.</strong> Incluso si el Paráclito fuera originalmente una figura angelical o profética pre-joánica, sigue siendo una figura espiritual (<em>no humana corporal</em>) invisible al mundo, que mora interiormente en los creyentes y que permanece eternamente. Un profeta árabe del siglo VII no encaja en esa descripción original ni en la joánica.
+    </div>
+  </div>
+
+  <!-- OBJ 4: Moisés llamado "holy spirit" en la Asunción de Moisés -->
+  <div class="obj">
+    <div class="obj-q">Moisés es llamado «holy spirit» en el apócrifo <em>Asunción de Moisés</em> (11:9-14) — esto demuestra que el término «Espíritu Santo» podía aplicarse a seres humanos en el contexto judío del siglo I, por lo que no es absurdo que el Paráclito sea un ser humano.</div>
+    <div class="obj-r">
+      Esta objeción requiere examinar con precisión el texto apócrifo citado:<br><br>
+      <strong>1. El texto exacto de la Asunción de Moisés.</strong> El único manuscrito superviviente es una traducción latina del siglo VI del Ambrosianus C 73 (Biblioteca Ambrosiana, Milán). El texto de AssMos 11:9-14 en la edición de R. H. Charles (<em>The Assumption of Moses</em>, 1897, p. 125) dice: <em>«…there is no longer among them that sacred spirit (<strong>spiritus sanctus</strong>) who was worthy of the Lord, manifold and incomprehensible master of the word, faithful in all things, the Divine prophet throughout the earth, the most perfect teacher in the world… Moses the great messenger…»</em><br><br>
+      <strong>2. Qué está pasando realmente en ese texto.</strong> El texto es un lamento en boca de Josué ante la muerte de Moisés. La frase «ya no hay entre vosotros ese espíritu sagrado» <em>no identifica a Moisés como "el Espíritu Santo"</em> en sentido ontológico. Describe a Moisés como alguien que <em>portaba</em> o <em>era movido por</em> el espíritu sagrado — exactamente como el AT describe a jueces, profetas y reyes como personas sobre quienes «venía el Espíritu» (Nm 11:17; Is 61:1). Esta es la fuente del argumento: la Encyclopaedia Britannica y algunos académicos (como los citados en William J. Deane, <em>Pseudepigrapha</em>) señalan que el autor de AssMos presenta a Moisés como poseedor de una relación espiritual única — pero eso no equivale a <em>ser</em> el Espíritu Santo.<br><br>
+      <strong>3. La diferencia gramatical es decisiva.</strong> «Moisés tenía el espíritu sagrado» (descripción de un profeta poseído por el Espíritu) ≠ «Moisés era el Espíritu Santo» (identificación ontológica). Juan 14:26 no dice que el Paráclito <em>tenga</em> el Espíritu Santo — dice que el Paráclito <em>es</em> el Espíritu Santo (<span class="gr">τὸ πνεῦμα τὸ ἅγιον</span> en aposición directa con <span class="gr">ὁ παράκλητος</span>). Son categorías radicalmente distintas.<br><br>
+      <strong>4. El apócrifo no es fuente exegética para Juan.</strong> La Asunción de Moisés es un texto judío-palestino del siglo I que Juan no cita ni referencia en ningún lugar. Usar su vocabulario para redefinir el significado de la aposición gramatical de Juan 14:26 es metodológicamente indefendible. Los apócrifos se interpretan a la luz de los textos canónicos, no al revés.
+    </div>
+  </div>
+
+  <!-- OBJ 5: Marcionitas (corregido: no discípulos de Orígenes) identificaron Paráclito con Pablo -->
+  <div class="obj">
+    <div class="obj-q">Ciertos <strong>marcionitas</strong> —no discípulos de Orígenes— identificaron al Paráclito con Pablo de Tarso. Esto demuestra que en la iglesia antigua el Paráclito no era identificado universalmente con el Espíritu Santo, sino que podía ser un ser humano.</div>
+    <div class="obj-r">
+      La fuente que documenta esta interpretación es Henry Barclay Swete (<em>The Holy Spirit in the Ancient Church</em>, Macmillan, Londres, 1912, pp. 65–66). El texto de Swete señala que los seguidores de Marción —los <strong>marcionitas</strong>— tenían cierta devoción a Pablo, y que algunos de ellos podrían haber entendido la «promesa del Paráclito» como cumplida en los escritos y misión de Pablo. La corrección es importante: <em>no son discípulos de Orígenes</em> sino de Marción.<br><br>
+      Dicho eso, el argumento tiene problemas insuperables:<br><br>
+      <strong>1. El marcionismo es una herejía explícitamente rechazada.</strong> Los marcionitas rechazaban el AT en su totalidad, sostenían que el Dios del AT era distinto del de Cristo, y mutilaban el NT eliminando pasajes que no les convenían (rechazaron a los doce apóstoles y aceptaron solo a Pablo). La Iglesia los condenó como herejes. Si la tesis islámica apela a los marcionitas como testigos de una interpretación «alternativa», está apelando precisamente al grupo que alteraba los textos según sus preferencias — una fuente con el menor valor textual imaginable.<br><br>
+      <strong>2. Los marcionitas tampoco afirmaban que Pablo fuera el Paráclito en sentido personal.</strong> Swete señala que la devoción marcionita a Pablo no llegaba a la identificación explícita de Pablo con el Paráclito como persona — sino que veían en su misión el «cumplimiento» de esa promesa. Es una posición diferente de «Pablo es el Paráclito».<br><br>
+      <strong>3. El mismo argumento se vuelve contra el Islam.</strong> Si el hecho de que algunos heterodoxos identificaran al Paráclito con Pablo prueba que la identificación con el ES no era universal, ese mismo argumento también prueba que la identificación con Mahoma no existe en ninguna fuente cristiana antigua, heterodoxa u ortodoxa, de los primeros seis siglos. Nadie en el mundo cristiano antiguo —ni ortodoxos ni herejes— anticipó a Mahoma como el Paráclito.<br><br>
+      <strong>4. La regla de la mayoría aplica con fuerza aplastante.</strong> Frente a un grupo herético minoritario (los marcionitas) que interpretaba la promesa del Paráclito en clave paulina, la <em>totalidad</em> de la tradición ortodoxa —Justino, Ireneo, Tertuliano, Orígenes, Atanasio, Agustín, todos los concilios— identificó al Paráclito con el Espíritu Santo. La posición de los marcionitas sobre Pablo no deja huella en ninguna tradición bíblica o exegética posterior.
+    </div>
+  </div>
+
+  <!-- OBJ 6: El ES era omnisciente pero el Paráclito "no hablará por sí mismo" -->
+  <div class="obj">
+    <div class="obj-q">Los trinitarios afirman que el Espíritu Santo es omnisciente, pero Jesús dice en Juan 16:13 que el Paráclito «no hablará por sí mismo sino lo que oiga» — lo que implica limitación de conocimiento, incompatible con un ser omnisciente. Esto encaja mejor con un profeta humano que recibe revelación.</div>
+    <div class="obj-r">
+      Este argumento malinterpreta la naturaleza de las relaciones trinitarias. Juan 16:13 dice en griego: <span class="gr">οὐ γὰρ λαλήσει ἀφ᾽ ἑαυτοῦ, ἀλλ᾽ ὅσα ἀκούσει λαλήσει</span> — «no hablará de sí mismo, sino que hablará lo que oiga».<br><br>
+      <strong>1. La frase describe la relación trinitaria, no una limitación epistémica.</strong> La misma fórmula aparece referida al propio Jesús en Juan 5:19 («el Hijo no puede hacer nada por sí mismo, sino lo que ve hacer al Padre») y Juan 8:28 («no hago nada por mí mismo, sino que digo lo que el Padre me enseñó»). Nadie concluye de esos versículos que Jesús sea ignorante o limitado en conocimiento — la fórmula describe dependencia relacional dentro de la Trinidad, no deficiencia epistémica.<br><br>
+      <strong>2. Si el argumento valiera, refutaría también a Mahoma.</strong> Si «no hablará por sí mismo sino lo que oiga» implica que el Paráclito es un receptor pasivo de revelación, entonces Mahoma —que afirmaba recibir revelación de Alá a través del ángel Jibrīl— tampoco hablaría «por sí mismo». El argumento no discrimina entre el ES y Mahoma en absoluto.<br><br>
+      <strong>3. El sujeto de Jn 16:13 ya ha sido identificado en Jn 14:26.</strong> El sujeto que «no hablará por sí mismo» es el mismo que en 14:26 fue llamado «el Espíritu Santo». No es posible usar 16:13 para abrir la identidad del Paráclito después de que 14:26 la ha cerrado explícitamente.
+    </div>
+  </div>
+
+  <!-- OBJ 7: El ES ya estaba con Jesús, contradicción con Jn 16:7 -->
+  <div class="obj">
+    <div class="obj-q">Juan 16:7 dice que el Paráclito no vendrá a menos que Jesús se vaya — pero los evangelios dicen que el Espíritu Santo ya estaba con Jesús (Lc 4:1: «Jesús, lleno del Espíritu Santo»). Esto es una contradicción: el ES ya estaba con ellos, por lo que el Paráclito prometido tiene que ser alguien distinto del ES.</div>
+    <div class="obj-r">
+      El argumento presupone que la presencia del Espíritu en la vida de Jesús y la misión del Paráclito prometida en Juan 14–16 son la misma cosa. No lo son, y el propio Evangelio de Juan lo aclara explícitamente:<br><br>
+      <strong>1. Juan 7:39 distingue los dos modos de presencia.</strong> El evangelista explica: «El Espíritu no había sido dado aún, porque Jesús aún no había sido glorificado» (<span class="gr">οὔπω γὰρ ἦν πνεῦμα, ὅτι Ἰησοῦς οὐδέπω ἐδοξάσθη</span>). Esto no niega la existencia del ES —que actuó en los profetas del AT y en Jesús— sino que distingue la nueva misión del Espíritu que depende de la glorificación del Hijo. La «venida» prometida en Jn 16:7 es una nueva fase de la actuación del Espíritu, no el comienzo absoluto de su existencia.<br><br>
+      <strong>2. El argumento de Lucas 4:1 no crea ninguna contradicción.</strong> Lucas dice que Jesús estaba «lleno del Espíritu Santo» — el ES actuaba <em>sobre</em> Jesús y <em>a través</em> de Jesús. La promesa de Juan 14–16 es que el ES actuará <em>dentro</em> de los discípulos (<span class="gr">ἐν ὑμῖν ἔσται</span>) tras la glorificación del Hijo. Son dos relaciones distintas del mismo Espíritu con distintos sujetos en distintos momentos de la historia de la salvación.<br><br>
+      <strong>3. Juan 20:22 confirma que el cumplimiento ocurrió en el siglo I.</strong> Jesús resucitado sopla el ES sobre los discípulos justo después de la crucifixión-glorificación: el «si no me voy, no vendrá» de 16:7 se cumple exactamente cuando Jesús «se fue» y regresó glorificado. El cumplimiento está datado dentro del mismo Evangelio de Juan, sin ningún hueco de 600 años para un profeta árabe.
+    </div>
+  </div>
+
+  <!-- OBJ 8: "Espíritu" se usa para humanos en la Biblia -->
+  <div class="obj">
+    <div class="obj-q">La Biblia usa el término «espíritu» para seres humanos (ej. 1 Jn 4:1: «no creáis a todo espíritu»), por lo tanto no es absurdo que el Paráclito, llamado «el Espíritu», sea un ser humano.</div>
+    <div class="obj-r">
+      El argumento comete una falacia de equivocación clásica: usa el mismo término en dos sentidos radicalmente distintos para conectar una conclusión ilegítima.<br><br>
+      <strong>1. El uso de «espíritu» en 1 Jn 4:1 es completamente diferente.</strong> «No creáis a todo espíritu» usa <span class="gr">πνεῦμα</span> en sentido de «fuerza espiritual» o «influencia sobrenatural» que opera <em>a través</em> de un profeta —no identifica a ningún ser humano con «el Espíritu» como persona divina. Los «espíritus» de 1 Jn 4 son entidades que hablan por boca de profetas; el Paráclito de Juan 14 es la entidad que enseñará, morará en los creyentes y estará con ellos para siempre.<br><br>
+      <strong>2. La aposición de Juan 14:26 es gramaticalmente cerrada.</strong> <span class="gr">ὁ δὲ παράκλητος, τὸ πνεῦμα τὸ ἅγιον</span> — el artículo definido ante <span class="gr">τὸ πνεῦμα τὸ ἅγιον</span> en función de aposición directa con <span class="gr">ὁ παράκλητος</span> no predica que el Paráclito «tenga espíritu» ni que «actúe como un espíritu» — dice que <em>es</em> el Espíritu Santo. La única manera de que un ser humano sea «el Espíritu Santo» en este sentido gramatical es que sea una entidad no corporal.<br><br>
+      <strong>3. El mismo texto que permite «probar los espíritus» excluye la identificación islámica.</strong> 1 Juan 4:2 da el criterio de discernimiento: «Todo espíritu que confiesa que Jesucristo ha venido en carne es de Dios.» Mahoma negó la crucifixión y la filiación divina de Jesús — es decir, no supera el propio test de 1 Juan 4 para ser un espíritu de Dios.
+    </div>
+  </div>
+
+  <!-- OBJ 9: El Paráclito es descrito como "Espíritu de verdad" en sentido funcional -->
+  <div class="obj">
+    <div class="obj-q">El Paráclito es descrito como el «Espíritu de verdad» — y Mahoma trajo la verdad definitiva del Islam, así que puede ser «espíritu de verdad» en sentido funcional.</div>
+    <div class="obj-r">El argumento comete una falacia de equivocación. El «Espíritu de verdad» de Juan 14:17 es identificado explícitamente como el Espíritu Santo en Juan 14:26. Además el texto dice que el mundo «no puede recibirlo» y que morará «en vosotros» — condiciones de inhabitación espiritual, no de proclamación profética externa. «Espíritu de verdad» en Juan es un título trinitario, no una descripción funcional de cualquier mensajero veraz.</div>
+  </div>
+
+  <!-- OBJ 10: Juan 16:7 y la condición de la partida -->
+  <div class="obj">
+    <div class="obj-q">Juan 16:7 dice «si no me voy, el Paráclito no vendrá» — esto prueba que el Paráclito no estuvo presente con Jesús, y no puede ser el Espíritu Santo que ya estaba en el AT.</div>
+    <div class="obj-r">El argumento confunde la presencia del Espíritu en el AT con la misión específica prometida en el Discurso de Despedida. Juan 7:39 lo aclara: «el Espíritu no había sido dado aún, porque Jesús aún no había sido glorificado». La «venida» de Jn 16:7 es una nueva fase de la actuación del Espíritu dependiente de la glorificación del Hijo —no el comienzo absoluto de su existencia. Juan 20:22 y Hechos 2 documentan el cumplimiento exacto dentro del mismo siglo I. No hay ninguna necesidad de un profeta 600 años después.</div>
+  </div>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section id="conclusion">
+  <div class="sec-label">Conclusión</div>
+  <h2>Síntesis: El Paráclito no puede ser Mahoma</h2>
+
+  <table>
+    <thead><tr><th>Nivel de análisis</th><th>Evidencia</th><th>Veredicto</th></tr></thead>
+    <tbody>
+      <tr><td>Texto griego</td><td>Jn 14:26 llama al Paráclito «el Espíritu Santo» explícitamente</td><td>Excluye a cualquier ser humano</td></tr>
+      <tr><td>Condición 5</td><td>«El mundo no puede recibirlo» — Mahoma fue recibido por millones</td><td>Contradicción directa</td></tr>
+      <tr><td>Condición 6</td><td>«Estará en vosotros» — inhabitación interior imposible para un humano</td><td>Excluye a cualquier persona física</td></tr>
+      <tr><td>Manuscritos</td><td>Ninguno (P66, P75, א, B) lee <em>periklytos</em></td><td>La sustitución léxica es una conjetura sin base</td></tr>
+      <tr><td>Léxico griego</td><td><em>Parakletos</em> y <em>periklytos</em> son palabras diferentes con raíces distintas</td><td>No son variantes de la misma palabra</td></tr>
+      <tr><td>Juan 20:22</td><td>Jesús sopla el Espíritu Santo sobre los discípulos presentes</td><td>El Paráclito ya vino en el siglo I</td></tr>
+      <tr><td>Hechos 2</td><td>Pedro declara cumplida la promesa del Espíritu en Pentecostés</td><td>Cumplimiento explícito 540 años antes de Mahoma</td></tr>
+      <tr><td>Montano (c. 157 d.C.)</td><td>Hizo la misma reclamación 450 años antes, rechazada con los mismos argumentos</td><td>La reclamación islámica es históricamente tardía y no original</td></tr>
+      <tr><td>Hadiz canónico</td><td>Ningún hadiz sahīh muestra a Mahoma citando Jn 14:16</td><td>La identificación es un desarrollo apologético posterior (c. 767 d.C.)</td></tr>
+      <tr><td>Silogismo formal</td><td>El Paráclito = Espíritu Santo (texto) + Mahoma = ser humano → Mahoma ≠ Paráclito</td><td>Refutación lógicamente válida</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Veredicto Final</div>
+    <p>El Paráclito de Juan 14–16 no puede ser Mahoma por razones que el propio texto joánico establece con una precisión que ninguna reinterpretación puede superar: es el Espíritu Santo, es invisible al mundo, mora en el interior de los creyentes, está con ellos para siempre, y ya vino en el siglo I según el relato del propio Evangelio de Juan (20:22) y de Hechos 2.</p>
+    <p>La tesis islámica requiere: (a) postular una variante textual (<em>periklytos</em>) que ningún manuscrito apoya; (b) ignorar siete de las ocho condiciones del Paráclito; (c) descartar el cumplimiento explícito de Juan 20:22 y Hechos 2; (d) hacer que Mahoma cumpla lo que el texto dice que el mundo no puede percibir — cuando fue uno de los seres humanos más perceptibles de la historia.</p>
+    <p>Montano, Mani y otros reclamaron antes que Mahoma ser el Paráclito o su cumplimiento. Todos fueron rechazados con exactamente el mismo criterio textual. La reclamación islámica es más tardía, menos documentada en las propias fuentes islámicas canónicas, y textualmente tan insostenible como las anteriores. Si el Corán afirma que las profecías de Mahoma en el Injīl son «muy reconocibles» — y no hay ni un manuscrito del Injīl que contenga su nombre, y ningún compañero del Profeta transmitió un hadiz sahīh citando Juan 14:16 — la pregunta legítima es: ¿dónde están?</p>
+  </div>
+
+  <div class="footnote">
+    <strong>Fuentes primarias verificadas:</strong>
+    NA28 (Novum Testamentum Graece, Deutsche Bibelgesellschaft 2012);
+    P66 y P75 (Biblioteca Bodmer; facsímiles en Papyrus Bodmer II, Genève 1956);
+    Codex Sinaiticus (British Library; codexsinaiticus.org);
+    Codex Syrus Sinaiticus (Sinai Ms. Syr. 30; ed. Agnes Smith Lewis, Cambridge UP, 1910);
+    Bruce M. Metzger, <em>A Textual Commentary on the Greek New Testament</em>, 2ª ed., Deutsche Bibelgesellschaft/UBS, 1994, p. 218;
+    Raymond E. Brown, <em>The Gospel According to John I–XII</em>, Anchor Bible, Doubleday, 1966, Appendix V (pp. 1135–1137);
+    Henry Barclay Swete, <em>The Holy Spirit in the Ancient Church</em>, Macmillan, Londres, 1912, pp. 65–66;
+    Asunción de Moisés 11:9-14 (único ms.: Ambrosianus C 73, Biblioteca Ambrosiana, Milán; ed. R. H. Charles, <em>The Assumption of Moses</em>, Black, Londres, 1897, p. 125; ed. crítica: Johannes Tromp, <em>The Assumption of Moses: A Critical Edition</em>, Brill, 1993);
+    Eusebio de Cesarea, <em>Historia Ecclesiastica</em> V.14–17 (ed. Kirsopp Lake, LCL 153, Harvard UP, 1926; New Advent online);
+    Orígenes, <em>De Principiis</em> I.3.4 (PG 11; trad. G. W. Butterworth, SPCK, 1936);
+    Epifanio de Salamis, <em>Panarion</em> 48.11.1 (GCS 31, ed. K. Holl, Berlín 1922);
+    Dídimo el Ciego, <em>De Trinitate</em> III.41.1 (PG 39);
+    Corán 61:6; 7:157; 5:46–47 (Sahih International, 2004);
+    Ibn Isḥāq, <em>Sīrat Rasūl Allāh</em> (recogida por Ibn Hishām; trad. Alfred Guillaume, Oxford UP, 1955);
+    Muqātil b. Sulaymān (m. 767 d.C.), <em>Tafsīr</em> ad Q. 61:6 (ed. ʿAbd Allāh Maḥmūd Shiḥāta, El Cairo, 1984);
+    W. Montgomery Watt, artículo «Aḥmad», <em>Encyclopaedia of Islam</em>, 2ª ed., Brill;
+    D. A. Carson, <em>The Gospel According to John</em>, Pillar, Eerdmans, 1991, pp. 499–500;
+    Gary Burge, <em>The Anointed Community</em>, Eerdmans, 1987.
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('toc-btn');
+  var panel=document.getElementById('toc-panel');
+  var overlay=document.getElementById('toc-overlay');
+  function open(){panel.classList.add('is-open');overlay.classList.add('is-open');btn.classList.add('is-open');btn.setAttribute('aria-expanded','true')}
+  function close(){panel.classList.remove('is-open');overlay.classList.remove('is-open');btn.classList.remove('is-open');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){panel.classList.contains('is-open')?close():open()});
+  overlay.addEventListener('click',close);
+  panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
+  var links=panel.querySelectorAll('a');
+  var secs=document.querySelectorAll('section[id]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(l){l.classList.remove('active')});
+          var active=panel.querySelector('a[href="#'+e.target.id+'"]');
+          if(active){active.classList.add('active');active.scrollIntoView({block:'nearest'})}
+        }
+      });
+    },{rootMargin:'0px 0px -55% 0px',threshold:0});
+    secs.forEach(function(s){io.observe(s)});
+  }
+}());
+</script>
+</body>
+</html>

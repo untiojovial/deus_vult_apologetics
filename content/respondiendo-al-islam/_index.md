@@ -21,3 +21,5 @@ aliases:
 - [Tawhid y Omnipotencia (Dossier)](/respondiendo-al-islam/tawhid-omnipotencia-dossier/)
 - [Isaias 42 y el Siervo de Yahve (Dossier)](/respondiendo-al-islam/isaias-42-siervo-dossier/)
 - [La Edad de Rebeca (Dossier)](/respondiendo-al-islam/rebeca-edad-dossier/)
+- [Edad de Maria (Dossier)](/respondiendo-al-islam/edad-maria-dossier/)
+- [El Paraclito de Juan 14-16 (Dossier)](/respondiendo-al-islam/paracleto-dossier/)
