@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Reino en Daniel — Refutación del Islam y Defensa del Cristianismo</title>
+<style>
+  :root{
+    --black:#0a0a0a;
+    --dark:#111111;
+    --panel:#181818;
+    --card:#1c1c1c;
+    --gold:#d4a017;
+    --gold-light:#f0c040;
+    --gold-dim:#8a6610;
+    --white:#f5f5f0;
+    --white-soft:#d8d4c8;
+    --white-dim:#9a9488;
+    --border:#2a2a1a;
+    --border-gold:rgba(212,160,23,.35);
+    --red:#9b2020;
+    --red-dim:#5a1010;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:Georgia,'Times New Roman',serif;
+    color:var(--white); background:var(--black); line-height:1.7;
+  }
+
+  /* ── Progress bar ── */
+  #progress{
+    position:fixed;top:0;left:0;height:3px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light));
+    width:0%;z-index:2000;transition:width .08s linear;
+  }
+
+  /* ── Layout ── */
+  .layout{display:flex;min-height:100vh;}
+  main{flex:1;max-width:1020px;margin:0 auto;transition:margin-left .25s ease;}
+
+  /* ── TOC toggle ── */
+  #tocToggle{
+    position:fixed;top:14px;left:14px;z-index:1001;
+    width:44px;height:44px;border-radius:8px;border:1.5px solid var(--gold-dim);
+    cursor:pointer;background:var(--panel);color:var(--gold);
+    font-size:19px;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.5);transition:left .25s ease,background .15s;
+  }
+  #tocToggle:hover{background:var(--card);border-color:var(--gold);}
+
+  /* ── TOC panel ── */
+  nav#toc{
+    width:320px;flex-shrink:0;background:var(--panel);
+    position:fixed;top:0;left:0;height:100vh;overflow-y:auto;
+    padding:68px 14px 28px;z-index:999;
+    transform:translateX(-100%);transition:transform .25s ease;
+    box-shadow:4px 0 30px rgba(0,0,0,.6);
+    border-right:1px solid var(--border-gold);
+  }
+  nav#toc.open{transform:translateX(0);}
+  body.toc-open main{margin-left:320px;}
+  body.toc-open #tocToggle{left:334px;}
+
+  #tocSearch{
+    width:100%;padding:9px 12px;border-radius:6px;
+    border:1px solid var(--border-gold);
+    background:rgba(255,255,255,.04);color:var(--white);font-size:13px;
+    font-family:Helvetica,Arial,sans-serif;margin-bottom:14px;outline:none;
+  }
+  #tocSearch::placeholder{color:var(--white-dim);}
+  #tocSearch:focus{border-color:var(--gold);background:rgba(212,160,23,.07);}
+
+  nav#toc h2{
+    font-family:Helvetica,Arial,sans-serif;font-size:10px;
+    letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);
+    margin:0 0 10px;opacity:.8;
+  }
+  nav#toc ul{list-style:none;padding:0;margin:0;}
+  nav#toc li{margin:0;}
+  nav#toc a{
+    display:block;color:var(--white-soft);text-decoration:none;font-size:12.5px;
+    font-family:Helvetica,Arial,sans-serif;
+    padding:6px 10px;border-radius:5px;
+    transition:background .12s,color .12s;
+    border-left:3px solid transparent;line-height:1.35;
+  }
+  nav#toc a.lvl3{font-size:11.5px;color:var(--white-dim);padding-left:14px;}
+  nav#toc a:hover{background:rgba(212,160,23,.1);color:var(--gold-light);}
+  nav#toc a.active{
+    background:rgba(212,160,23,.15);color:var(--gold-light);
+    border-left-color:var(--gold);
+  }
+
+  /* Groups */
+  nav#toc .group{margin-bottom:2px;}
+  nav#toc .group-head{
+    display:flex;align-items:center;justify-content:space-between;gap:6px;
+    cursor:pointer;padding:7px 10px;border-radius:5px;
+    font-family:Helvetica,Arial,sans-serif;font-size:13px;font-weight:bold;
+    color:var(--white-soft);transition:background .12s;user-select:none;
+  }
+  nav#toc .group-head:hover{background:rgba(255,255,255,.05);color:var(--white);}
+  nav#toc .group-head .chev{font-size:9px;color:var(--gold);transition:transform .2s;flex-shrink:0;}
+  nav#toc .group.open>.group-head .chev{transform:rotate(90deg);}
+  nav#toc .group-body{
+    max-height:0;overflow:hidden;transition:max-height .25s ease;
+    padding-left:6px;border-left:2px solid rgba(212,160,23,.15);margin-left:12px;
+  }
+  nav#toc .group.open>.group-body{max-height:1600px;}
+  nav#toc.searching .group-body{max-height:1600px !important;}
+  nav#toc.searching li.no-match{display:none;}
+  nav#toc.searching .group:not(.has-match){display:none;}
+
+  #tocOverlay{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:998;
+  }
+  body.toc-open #tocOverlay{display:block;}
+
+  /* ── COVER ── */
+  .cover{
+    text-align:center;padding:100px 48px 70px;
+    background:linear-gradient(170deg,#0d0d00 0%,#0a0a0a 60%,#110a00 100%);
+    border-bottom:1px solid var(--border-gold);
+    position:relative;overflow:hidden;
+  }
+  .cover::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 70% 55% at 50% 40%,rgba(212,160,23,.07),transparent);
+    pointer-events:none;
+  }
+  .cover-eyebrow{
+    font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:3px;
+    text-transform:uppercase;color:var(--gold-dim);margin:0 0 18px;
+  }
+  .cover h1{
+    font-size:40px;color:var(--gold-light);margin:0 0 6px;line-height:1.15;
+    text-shadow:0 0 40px rgba(212,160,23,.3);
+  }
+  .cover h1.sub{font-size:23px;color:var(--white-soft);margin:0 0 24px;font-weight:normal;}
+  .cover-rule{
+    width:80px;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:0 auto 22px;
+  }
+  .cover-tag{color:var(--white-dim);font-style:italic;font-size:15px;margin:0 0 8px;}
+  .cover-meta{color:var(--white-dim);font-size:12px;margin-top:36px;font-family:Helvetica,Arial,sans-serif;letter-spacing:.5px;}
+
+  /* ── Page content ── */
+  .page{padding:52px 60px;}
+
+  /* ── Section headings ── */
+  h1.section{
+    background:var(--panel);color:var(--gold-light);
+    font-family:Helvetica,Arial,sans-serif;font-size:17px;
+    padding:13px 20px;border-radius:6px;margin:0 0 18px;
+    border-left:4px solid var(--gold);letter-spacing:.4px;
+  }
+  h2.sub{
+    color:var(--gold);font-size:15px;margin:30px 0 12px;
+    border-bottom:1px solid var(--border-gold);padding-bottom:5px;
+    font-family:Helvetica,Arial,sans-serif;
+  }
+  h3.sub3{color:var(--white-soft);font-size:13.5px;margin:18px 0 8px;font-family:Helvetica,Arial,sans-serif;letter-spacing:.3px;}
+
+  p{text-align:justify;margin:0 0 14px;font-size:15px;color:var(--white-soft);}
+  p b{color:var(--gold-light);}
+  em,i{color:var(--white-dim);}
+
+  hr.gold{border:none;border-top:1px solid var(--border-gold);margin:28px 0;}
+
+  /* ── Def cards ── */
+  .defgrid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:12px;margin:14px 0 24px;
+  }
+  .defcard{
+    background:var(--card);border:1px solid var(--border-gold);border-radius:8px;
+    padding:13px 15px;border-top:3px solid var(--gold-dim);
+  }
+  .defcard .term{
+    font-family:Helvetica,Arial,sans-serif;font-weight:bold;color:var(--gold-light);
+    font-size:13px;margin:0 0 6px;display:flex;align-items:center;gap:6px;
+  }
+  .defcard .term::before{content:"§";color:var(--gold-dim);font-size:12px;}
+  .defcard .def{font-size:13px;text-align:justify;margin:0;color:var(--white-soft);}
+
+  /* ── Kingdom timeline table ── */
+  table.timeline{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:13px;}
+  table.timeline th{
+    background:var(--panel);color:var(--gold-light);padding:9px 11px;text-align:left;
+    font-family:Helvetica,Arial,sans-serif;font-size:12px;border-bottom:2px solid var(--gold-dim);
+  }
+  table.timeline td{
+    padding:9px 11px;border-bottom:1px solid var(--border);vertical-align:top;
+    color:var(--white-soft);
+  }
+  table.timeline tr:hover td{background:rgba(212,160,23,.04);}
+  table.timeline .num{color:var(--gold);font-weight:bold;text-align:center;}
+
+  /* ── Syllogism boxes ── */
+  .syllogism{
+    background:var(--card);border:1px solid var(--border-gold);border-radius:8px;
+    padding:16px 20px;margin:18px 0;
+  }
+  .syllogism .label{
+    font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:11.5px;
+    color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;
+  }
+  .syllogism .premise{color:var(--white-soft);font-size:14px;margin:5px 0;}
+  .syllogism .premise b{color:var(--gold-light);}
+  .syllogism hr{border:none;border-top:1px solid var(--gold-dim);margin:10px 0;opacity:.6;}
+  .syllogism .conclusion{color:var(--gold-light);font-weight:bold;font-size:14.5px;margin:6px 0;}
+  .syllogism .nota{color:var(--white-dim);font-style:italic;font-size:12.5px;margin-top:8px;}
+
+  /* ── Master syllogism ── */
+  .master-syl{
+    background:linear-gradient(145deg,#1a1400,#111100);
+    border:2px solid var(--gold);border-radius:10px;
+    padding:28px 32px;margin:28px 0;
+    box-shadow:0 0 40px rgba(212,160,23,.15);
+  }
+  .master-syl .master-title{
+    font-family:Helvetica,Arial,sans-serif;font-size:13px;font-weight:bold;
+    color:var(--gold-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;
+    text-align:center;
+  }
+  .master-syl .chain{
+    counter-reset:premise;
+  }
+  .master-syl .mp{
+    display:flex;gap:12px;align-items:baseline;margin:10px 0;
+    font-size:14.5px;color:var(--white-soft);
+  }
+  .master-syl .mp-num{
+    flex-shrink:0;width:52px;font-family:Helvetica,Arial,sans-serif;
+    font-size:11.5px;color:var(--gold-dim);font-weight:bold;text-align:right;
+  }
+  .master-syl hr{border:none;border-top:2px solid var(--gold);margin:18px 0;opacity:.5;}
+  .master-syl .qed{
+    font-size:16.5px;color:var(--gold-light);font-weight:bold;
+    border-left:4px solid var(--gold);padding-left:14px;margin-top:10px;line-height:1.5;
+  }
+
+  /* ── Highlight / quote box ── */
+  .highlight{
+    background:var(--card);border:1px solid var(--border-gold);border-radius:7px;
+    padding:16px 22px;margin:16px 0;font-size:14.5px;color:var(--white-soft);
+  }
+  .highlight.gold{border-color:var(--gold);background:rgba(212,160,23,.06);}
+  .highlight.red{border-color:var(--red);background:rgba(155,32,32,.07);}
+
+  /* verse box */
+  .verse{
+    background:rgba(212,160,23,.06);border-left:4px solid var(--gold);
+    padding:12px 18px;margin:12px 0;border-radius:0 6px 6px 0;
+    font-style:italic;color:var(--white-soft);font-size:14.5px;
+  }
+  .verse cite{display:block;font-style:normal;font-size:12px;color:var(--gold-dim);margin-top:6px;font-family:Helvetica,Arial,sans-serif;}
+
+  /* ── Line blocks (synthesis map) ── */
+  .lineblock{
+    background:var(--card);border:1px solid var(--border-gold);border-radius:6px;
+    padding:14px 18px;margin:14px 0;border-top:4px solid var(--gold-dim);
+  }
+  .lineblock h4{
+    font-family:Helvetica,Arial,sans-serif;color:var(--black);background:var(--gold);
+    display:inline-block;padding:4px 12px;border-radius:3px;margin:0 0 8px;font-size:13px;
+  }
+  .lineblock ul{margin:6px 0 0;padding-left:20px;font-size:13.5px;color:var(--white-soft);}
+  .lineblock li{margin-bottom:7px;text-align:justify;}
+
+  /* ── Objections ── */
+  .obj{color:var(--red);font-style:italic;margin:18px 0 5px;font-size:15px;}
+  .resp{color:var(--white-soft);margin:0 0 16px;font-size:14.5px;padding-left:16px;border-left:3px solid var(--gold-dim);}
+  .resp b{color:var(--gold-light);}
+
+  /* conclusion items */
+  .conc-item{margin-bottom:12px;font-size:15px;color:var(--white-soft);}
+  .conc-item b{color:var(--gold-light);}
+
+  .final{text-align:center;color:var(--white-dim);font-style:italic;font-size:13px;margin-top:32px;}
+
+  section{scroll-margin-top:24px;}
+  h2.sub{scroll-margin-top:24px;}
+
+  @media(max-width:860px){
+    body.toc-open main{margin-left:0;}
+    body.toc-open #tocToggle{left:14px;}
+    nav#toc{width:88%;max-width:340px;}
+    .page{padding:30px 22px;}
+    .defgrid{grid-template-columns:1fr;}
+    .master-syl{padding:18px 16px;}
+    .cover h1{font-size:28px;}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<button id="tocToggle" title="Índice (M)">☰</button>
+<div id="tocOverlay"></div>
+<div class="layout">
+
+<!-- ══════════════════ ÍNDICE ══════════════════ -->
+<nav id="toc">
+  <h2>Índice de contenidos</h2>
+  <input type="text" id="tocSearch" placeholder="Buscar… (ej. 'cuarta bestia')">
+  <ul>
+    <li><a href="#portada">Portada</a></li>
+    <li><a href="#intro">Introducción y método</a></li>
+    <li><a href="#defs">Glosario de términos</a></li>
+
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>I. Daniel 2 — La Estatua</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a href="#dan2-texto">Texto y estructura</a></li>
+          <li><a href="#dan2-reinos">Los cuatro reinos</a></li>
+          <li><a href="#dan2-piedra">La Piedra y el Reino eterno</a></li>
+          <li><a href="#dan2-islam">Por qué no es el Islam</a></li>
+          <li><a href="#dan2-cristo">Por qué es el Cristianismo</a></li>
+          <li><a class="lvl3" href="#sil-dan2-1">Silogismo 1 — Cronología excluye Islam</a></li>
+          <li><a class="lvl3" href="#sil-dan2-2">Silogismo 2 — La Piedra no es conquista militar</a></li>
+        </ul></div>
+      </div>
+    </li>
+
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>II. Daniel 7 — Las Cuatro Bestias</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a href="#dan7-texto">Texto y visión</a></li>
+          <li><a href="#dan7-bestias">Identidad de las bestias</a></li>
+          <li><a href="#dan7-hm">El Hijo del Hombre</a></li>
+          <li><a href="#dan7-islam">El Islam no es la Cuarta Bestia</a></li>
+          <li><a href="#dan7-reino">El Reino de los Santos</a></li>
+          <li><a class="lvl3" href="#sil-dan7-1">Silogismo 3 — La Cuarta Bestia no es árabe</a></li>
+          <li><a class="lvl3" href="#sil-dan7-2">Silogismo 4 — El Hijo del Hombre es preexistente</a></li>
+        </ul></div>
+      </div>
+    </li>
+
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>III. Daniel 9 — Las 70 Semanas</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a href="#dan9-texto">El oráculo de las 70 semanas</a></li>
+          <li><a href="#dan9-calculo">Cálculo cronológico</a></li>
+          <li><a href="#dan9-mesias">El Mesías cortado</a></li>
+          <li><a href="#dan9-islam">Islam no puede cumplir Dan 9</a></li>
+          <li><a href="#dan9-cristo">Cumplimiento en Jesús de Nazaret</a></li>
+          <li><a class="lvl3" href="#sil-dan9-1">Silogismo 5 — El Mesías antes del 70 d.C.</a></li>
+          <li><a class="lvl3" href="#sil-dan9-2">Silogismo 6 — Muerte expiatoria excluye Mahoma</a></li>
+        </ul></div>
+      </div>
+    </li>
+
+    <li>
+      <div class="group">
+        <div class="group-head"><span>IV. Textos paralelos y convergentes</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a href="#paralelos-at">AT: Isaías, Salmos, Miqueas</a></li>
+          <li><a href="#paralelos-enoch">1 Enoc — El Hijo del Hombre</a></li>
+          <li><a href="#paralelos-4esdras">4 Esdras y Apocalipsis de Baruc</a></li>
+          <li><a href="#paralelos-apo">Apocalipsis de Juan</a></li>
+          <li><a class="lvl3" href="#sil-par-1">Silogismo 7 — Convergencia de fuentes</a></li>
+        </ul></div>
+      </div>
+    </li>
+
+    <li>
+      <div class="group">
+        <div class="group-head"><span>V. Objeciones y respuestas</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a href="#obj1">Obj. 1 — El Crist. no acabó con Roma</a></li>
+          <li><a href="#obj2">Obj. 2 — Las semanas no cuadran</a></li>
+          <li><a href="#obj3">Obj. 3 — El Islam también venció imperios</a></li>
+          <li><a href="#obj4">Obj. 4 — Dan fue escrito en el s. II a.C.</a></li>
+          <li><a href="#obj5">Obj. 5 — El reino espiritual es evasión</a></li>
+          <li><a href="#obj6">Obj. 6 — Mahoma como profeta davídico</a></li>
+        </ul></div>
+      </div>
+    </li>
+
+    <li><a href="#sintesis">VI. Síntesis: Mapa de la refutación</a></li>
+    <li><a href="#silogismo-maestro">VII. Silogismo Maestro</a></li>
+    <li><a href="#conclusion">VIII. Conclusión</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════ CONTENIDO ══════════════════ -->
+<main>
+
+<!-- PORTADA -->
+<section id="portada" class="cover">
+  <p class="cover-eyebrow">Apologética profética comparada</p>
+  <h1>EL REINO EN DANIEL</h1>
+  <h1 class="sub">Capítulos 2, 7 y 9: Por qué no puede ser el Islam<br>y por qué sí lo es el Cristianismo</h1>
+  <div class="cover-rule"></div>
+  <p class="cover-tag">Con textos paralelos de 1 Enoc, 4 Esdras, Apocalipsis de Baruc y el Apocalipsis de Juan</p>
+  <p class="cover-tag">Análisis silogístico con refutación de objeciones y Silogismo Maestro final</p>
+  <p class="cover-meta">Tratado de apologética profética · Edición técnica extensa</p>
+</section>
+
+<div class="page">
+
+<!-- INTRODUCCIÓN -->
+<section id="intro">
+  <h1 class="section">INTRODUCCIÓN Y MÉTODO</h1>
+  <p>El libro de Daniel ocupa un lugar singular en la historia de la profecía escrita: es el único texto del Antiguo Testamento que ofrece un <b>mapa cronológico de secuencias imperiales</b> culminando en el establecimiento de un reino divino eterno. Tres capítulos articulan este mapa con precisión suficiente para ser sometidos a verificación histórica: el capítulo 2 (la estatua de metales), el capítulo 7 (las cuatro bestias y el Hijo del Hombre) y el capítulo 9 (las setenta semanas de años).</p>
+  <p>Tanto el Islam como el Cristianismo reivindican a los profetas hebreos como parte de su herencia revelacional. La pregunta no es, por tanto, si Daniel es autoridad — ambas tradiciones lo aceptan implícitamente — sino si el cumplimiento histórico que Daniel describe encaja en la figura de Jesús de Nazaret o en la de Muhammad ibn Abdallah.</p>
+  <p>Este tratado demuestra mediante análisis silogístico que: <b>(a)</b> los criterios internos de los textos de Daniel excluyen lógicamente al Islam como cumplimiento de las profecías del reino; <b>(b)</b> los mismos criterios encajan con precisión en el Jesús histórico del primer siglo; y <b>(c)</b> una red de textos paralelos del Antiguo Testamento, los apocalipsis del Segundo Templo (1 Enoc, 4 Esdras, Apocalipsis de Baruc) y el Apocalipsis de Juan convergen en el mismo nodo histórico.</p>
+  <hr class="gold">
+</section>
+
+<!-- GLOSARIO -->
+<section id="defs">
+  <h1 class="section">GLOSARIO DE TÉRMINOS FUNDAMENTALES</h1>
+  <div class="defgrid">
+    <div class="defcard"><p class="term">Reino (malkut / basileia)</p><p class="def">Dominio soberano efectivo de un rey sobre un pueblo y territorio. En Daniel, el malkut divino es universal y eterno, no simplemente político: abarca toda la humanidad y no tiene sucesor ni fin (Dan 7:14, 27).</p></div>
+    <div class="defcard"><p class="term">Hijo del Hombre (bar enash)</p><p class="def">Figura celestial presentada ante el Anciano de Días en Dan 7:13-14 que recibe dominio, gloria y reino eternos. En contraste con las bestias que suben del mar (símbolo de caos), él desciende de las nubes del cielo, señal de origen divino. Es la figura central que 1 Enoc identifica con el Mesías preexistente.</p></div>
+    <div class="defcard"><p class="term">Semana de años (shabu'a)</p><p class="def">Unidad temporal de Dan 9:24-27: un grupo de siete años (cf. el año sabático de Lev 25). Las "setenta semanas" = 490 años. La controversia exegética se centra en el punto de inicio y en qué evento marca el "ungido" o Mesías del v. 25-26.</p></div>
+    <div class="defcard"><p class="term">Piedra no labrada por manos</p><p class="def">Elemento de Dan 2:34-35 que golpea los pies de la estatua y la destruye completamente, para luego crecer hasta llenar toda la tierra. La ausencia de "manos" humanas indica origen divino, no conquista política. Es el único elemento de la visión que no tiene equivalente en ningún reino histórico conocido.</p></div>
+    <div class="defcard"><p class="term">Cuarta Bestia</p><p class="def">El cuarto y último imperio en Dan 7:7-8, descrito como "espantoso, terrible y extremadamente fuerte", diferente de todas las anteriores, con dientes de hierro y pies de bronce, con diez cuernos. Paralelo al cuarto metal (hierro) de la estatua en Dan 2. La identificación histórica estándar es Roma.</p></div>
+    <div class="defcard"><p class="term">Mesías (mashiach)</p><p class="def">Literalmente "ungido"; en Dan 9:25-26 aparece dos veces: el "príncipe ungido" al final de las primeras 7 semanas, y el "ungido" que es "cortado" (karet) al final de las 69 semanas. La muerte del ungido es elemento esencial del oráculo, sin equivalente en ningún fundador islámico.</p></div>
+    <div class="defcard"><p class="term">Karet (cortado)</p><p class="def">Término hebreo para muerte violenta, frecuentemente usada para la pena de exclusión o muerte (Gén 17:14; Éx 31:14). En Dan 9:26 el Mesías es "cortado y no tendrá nada/para sí" — indica muerte sin establecimiento de reino inmediato, lo cual es biográficamente contradictorio con Mahoma, quien murió como gobernante de Arabia.</p></div>
+    <div class="defcard"><p class="term">Anciano de Días (Atiq Yomin)</p><p class="def">Figura divina del trono en Dan 7:9-10, vestida de blanco, con cabello como lana, rodeada de millones de ángeles. El juicio procede de este trono. La escena es el único texto veterotestamentario que muestra dos figuras divinas distinguibles ante un trono celestial, anticipando la teología del Logos.</p></div>
+    <div class="defcard"><p class="term">Abominación desoladora</p><p class="def">Evento mencionado en Dan 9:27 y 11:31 asociado con la devastación del templo. Jesús lo cita en Mt 24:15 refiriéndolo a la destrucción de Jerusalén (70 d.C. bajo Tito), lo que ancla el cumplimiento de las 70 semanas en el primer siglo.</p></div>
+  </div>
+  <hr class="gold">
+</section>
+
+<!-- SECCIÓN I: DANIEL 2 -->
+<section id="dan2-texto">
+  <h1 class="section">I. DANIEL 2 — LA ESTATUA DE LOS CUATRO METALES</h1>
+  <h2 class="sub">1.1 Texto y estructura de la visión</h2>
+  <p>En el año segundo de Nabucodonosor (c. 603 a.C.), el rey tiene un sueño que perturba su espíritu. Daniel, tras orar, recibe la revelación del sueño y su interpretación. La imagen que Nabucodonosor vio era una estatua colosal de cuatro metales distintos, rematada con una escena de destrucción sobrenatural:</p>
+
+  <div class="verse">
+    «Tú, oh rey, veías: he aquí una gran imagen. Esta imagen, que era muy grande y cuyo esplendor era extraordinario, estaba en pie delante de ti, y su aspecto era terrible. La cabeza de esta imagen era de oro fino; su pecho y sus brazos, de plata; su vientre y sus muslos, de bronce; sus piernas, de hierro; sus pies, en parte de hierro y en parte de barro cocido.»
+    <cite>Daniel 2:31-33</cite>
+  </div>
+  <div class="verse">
+    «Estabas mirando, cuando una piedra fue cortada, no con mano, e hirió a la imagen en sus pies de hierro y de barro cocido, y los desmenuzó… y la piedra que hirió a la imagen se hizo una gran montaña y llenó toda la tierra.»
+    <cite>Daniel 2:34-35</cite>
+  </div>
+</section>
+
+<section id="dan2-reinos">
+  <h2 class="sub">1.2 Los cuatro reinos: identificación consensual</h2>
+  <table class="timeline">
+    <tr><th class="num">#</th><th>Metal</th><th>Reino identificado</th><th>Período aprox.</th><th>Base exegética</th></tr>
+    <tr><td class="num">1</td><td>Oro (cabeza)</td><td>Babilonia / Nabucodonosor</td><td>626-539 a.C.</td><td>Dan 2:38: «Tú eres aquella cabeza de oro»</td></tr>
+    <tr><td class="num">2</td><td>Plata (pecho/brazos)</td><td>Imperio Medo-Persa</td><td>539-331 a.C.</td><td>Dan 5:28 nombra a Persia; Dan 8:20 confirma</td></tr>
+    <tr><td class="num">3</td><td>Bronce (vientre/muslos)</td><td>Imperio Griego (Alejandro)</td><td>331-63 a.C.</td><td>Dan 8:21: «el macho cabrío es el rey de Grecia»</td></tr>
+    <tr><td class="num">4</td><td>Hierro + barro (piernas/pies)</td><td>Imperio Romano</td><td>63 a.C. – 476 d.C.</td><td>Consenso entre Padre de la Iglesia y exégesis moderna</td></tr>
+    <tr><td class="num">∞</td><td>Piedra no labrada</td><td>Reino de Dios eterno</td><td>«En los días de esos reyes»</td><td>Dan 2:44-45: «un reino que jamás será destruido»</td></tr>
+  </table>
+  <p>El texto es explícito en que la sucesión es <b>secuencial y exhaustiva</b>: cuatro reinos y no más, seguidos del reino eterno. No hay espacio estructural para un quinto reino humano antes del establecimiento del reino divino.</p>
+</section>
+
+<section id="dan2-piedra">
+  <h2 class="sub">1.3 La Piedra y el Reino Eterno</h2>
+  <div class="verse">
+    «Y en los días de estos reyes, el Dios del cielo levantará un reino que jamás será destruido, ni será el reino dejado a otro pueblo; desmenuzará y consumirá a todos estos reinos, pero él permanecerá para siempre, de la manera que viste que del monte fue cortada una piedra, no con mano, la cual desmenuzó el hierro, el bronce, el barro, la plata y el oro.»
+    <cite>Daniel 2:44-45</cite>
+  </div>
+  <p>Tres características estructurales del Reino-Piedra son exegéticamente determinantes:</p>
+  <p><b>Primera:</b> Es establecido «en los días de estos reyes» — durante la cuarta secuencia, la romana, no después de su colapso total. La Piedra golpea la estatua mientras existe, no cuando ya ha desaparecido.</p>
+  <p><b>Segunda:</b> Su origen es divino, no humano: «cortada no con mano». La conquista por fuerza humana está explícitamente excluida como mecanismo de establecimiento.</p>
+  <p><b>Tercera:</b> Su crecimiento es universal y pacífico en su resultado final: «llenó toda la tierra» — no por aniquilación bélica sino como montaña que crece hasta cubrir todo. La imagen es de expansión orgánica, no de yihad.</p>
+</section>
+
+<section id="dan2-islam">
+  <h2 class="sub">1.4 Por qué el Islam no puede ser la Piedra ni el Reino eterno</h2>
+  <p>El Islam surge en el siglo VII d.C., aproximadamente <b>600 años después del colapso del Imperio Romano de Occidente</b> (476 d.C.) y varios siglos después de que la cuarta secuencia imperial hubiera terminado. El problema es cronológico, estructural e iconológico:</p>
+
+  <div class="highlight red">
+    <p style="margin:0;"><b>Problema 1 — Cronología:</b> La Piedra golpea la estatua mientras sus pies de hierro y barro existen. El Islam surge cuando la cuarta bestia ya no existe como unidad imperial coherente. No puede ser la Piedra porque llega cuando ya no hay estatua que golpear.</p>
+  </div>
+  <div class="highlight red" style="margin-top:10px;">
+    <p style="margin:0;"><b>Problema 2 — Iconología:</b> La Piedra es «no labrada por manos» — origen no humano, expansión no militar. El Islam se expande mediante conquista militar (futuhat) explícita y con ejércitos humanos organizados. La iconología se invierte.</p>
+  </div>
+  <div class="highlight red" style="margin-top:10px;">
+    <p style="margin:0;"><b>Problema 3 — El Islam no destruyó Roma desde dentro:</b> Roma (Bizancio) cayó ante el Islam en 1453 d.C. — casi un milenio después del inicio del Islam, y solo una parte del Imperio Romano. La Piedra destruye toda la estatua simultáneamente y luego crece. El Islam no destruyó la estatua: fue un quinto elemento histórico que no figura en la visión.</p>
+  </div>
+
+  <div class="syllogism" id="sil-dan2-1">
+    <div class="label">Silogismo 1 — La cronología excluye al Islam como cumplimiento de la Piedra</div>
+    <p class="premise"><b>P.M.:</b> Según Daniel 2:44, el Reino-Piedra es establecido «en los días de estos reyes», es decir, durante el período de vigencia de los cuatro reinos identificados (el último siendo Roma, 63 a.C.–476 d.C.).</p>
+    <p class="premise"><b>P.m.:</b> El Islam surge con Muhammad en el 610 d.C., al menos 134 años después del colapso del Imperio Romano de Occidente (476 d.C.) y siglos después de que Roma como unidad imperial dejara de existir.</p>
+    <hr>
+    <p class="conclusion">∴ El Islam no fue establecido «en los días de estos reyes» y por tanto no puede ser el cumplimiento de la Piedra en Daniel 2. La cronología lo excluye lógicamente.</p>
+    <p class="nota"><i>Nota:</i> El adversario puede apelar al Imperio Romano de Oriente (Bizancio). Sin embargo, Bizancio no había sido la potencia dominante del mundo mediterráneo desde siglos antes del Islam, y el texto habla del establecimiento del reino divino durante la cuarta secuencia, no en su estertor.</p>
+  </div>
+
+  <div class="syllogism" id="sil-dan2-2">
+    <div class="label">Silogismo 2 — La Piedra no es una conquista militar; el Islam sí lo es</div>
+    <p class="premise"><b>P.M.:</b> La Piedra de Daniel 2:34 es «cortada no con mano» — expresión que en el lenguaje hebreo y arameo indica ausencia de agencia humana directa, especialmente bélica (cf. la misma expresión en Dan 8:25 y Job 34:20).</p>
+    <p class="premise"><b>P.m.:</b> El Islam se estableció y expandió mediante conquista militar explícitamente ordenada y celebrada en los textos fundacionales islámicos (Corán 2:216, 9:5, 9:29; los relatos de las futuhat), siendo el ejército el instrumento primario de su expansión territorial.</p>
+    <hr>
+    <p class="conclusion">∴ El mecanismo de expansión del Islam es exactamente lo que la iconología de la Piedra excluye: manos humanas. El Islam no cumple el criterio cualitativo de la Piedra, independientemente del criterio cronológico.</p>
+  </div>
+</section>
+
+<section id="dan2-cristo">
+  <h2 class="sub">1.5 Por qué el Cristianismo cumple la profecía de la Piedra</h2>
+  <p>La Iglesia primitiva, incluyendo a Pablo (Ro 9:33; 1 Co 10:4), Pedro (1 Pe 2:6-8) y el propio Jesús (Mt 21:42-44), identificó explícitamente a Cristo con la Piedra de Daniel. Esta identificación no es arbitraria sino que responde a criterios estructurales precisos:</p>
+  <p><b>Criterio temporal:</b> Jesús nació y ministró durante el dominio romano — dentro exactamente de los «días de esos reyes». El reino anunciado (basileia tou theou) comienza durante el Imperio Romano, «en los días de estos reyes».</p>
+  <p><b>Criterio de origen:</b> La Encarnación (concepción virginal, Lc 1:35) es presentada como intervención divina directa sin agencia humana masculina — «no labrada por manos». La analogía es teológicamente exacta.</p>
+  <p><b>Criterio de expansión:</b> El Cristianismo se expandió sin ejércitos durante sus primeros tres siglos, bajo persecución romana, creciendo desde una comunidad de 120 personas hasta transformar el Imperio Romano — exactamente como la Piedra que crece hasta llenar la tierra sin destrucción militar inmediata.</p>
+
+  <div class="verse">
+    «¿Nunca leísteis en las Escrituras: La piedra que desecharon los edificadores, esa fue hecha cabeza del ángulo? Por eso os digo que el reino de Dios os será quitado y será dado a nación que produzca los frutos de él. Y el que caiga sobre esta piedra será quebrantado; pero sobre quien ella caiga, le aplastará.»
+    <cite>Mateo 21:42-44 — Jesús citando Sal 118:22, dentro del contexto de Dan 2</cite>
+  </div>
+</section>
+
+<!-- SECCIÓN II: DANIEL 7 -->
+<section id="dan7-texto">
+  <h1 class="section">II. DANIEL 7 — LAS CUATRO BESTIAS Y EL HIJO DEL HOMBRE</h1>
+  <h2 class="sub">2.1 Texto y estructura de la visión</h2>
+  <p>El capítulo 7, contemporáneo del reinado de Belsasar (c. 553 a.C.), es el paralelo visional del capítulo 2 pero con iconología invertida: donde el capítulo 2 ve metales preciosos (perspectiva humana que valora el poder), el capítulo 7 ve bestias marinas (perspectiva divina que ve a los imperios humanos como monstruos depredadores).</p>
+
+  <div class="verse">
+    «Cuatro vientos del cielo combatían en el gran mar. Y cuatro bestias grandes, diferentes la una de la otra, subían del mar… La primera era como un león… otra segunda bestia, semejante a un oso… otra, que era como un leopardo… una cuarta bestia, espantosa y terrible y en gran manera fuerte… y tenía diez cuernos.»
+    <cite>Daniel 7:2-7</cite>
+  </div>
+  <div class="verse">
+    «Seguía yo mirando… y he aquí con las nubes del cielo venía uno como un hijo de hombre, que vino hasta el Anciano de días, y le hicieron acercarse delante de él. Y le fue dado dominio, gloria y reino, para que todos los pueblos, naciones y lenguas le sirvieran; su dominio es dominio eterno, que nunca pasará, y su reino uno que no será destruido.»
+    <cite>Daniel 7:13-14</cite>
+  </div>
+</section>
+
+<section id="dan7-bestias">
+  <h2 class="sub">2.2 Identidad de las cuatro bestias</h2>
+  <table class="timeline">
+    <tr><th class="num">#</th><th>Bestia</th><th>Imperio identificado</th><th>Características diagnósticas</th></tr>
+    <tr><td class="num">1</td><td>León con alas de águila</td><td>Babilonia</td><td>El león era símbolo oficial de Babilonia; las alas de águila indican velocidad de conquista. Dan 7:4 describe humanización posterior: Nabucodonosor (Dan 4).</td></tr>
+    <tr><td class="num">2</td><td>Oso con tres costillas</td><td>Media-Persia</td><td>El oso es más lento y pesado: Persia era conocida por sus masivas pero lentas formaciones. Las tres costillas = Lidia, Babilonia y Egipto.</td></tr>
+    <tr><td class="num">3</td><td>Leopardo con 4 alas y 4 cabezas</td><td>Grecia (Alejandro)</td><td>Las 4 alas = velocidad extrema de Alejandro. Las 4 cabezas = los cuatro reinos diadocos tras su muerte (Casiandro, Lisímaco, Seleuco, Ptolomeo).</td></tr>
+    <tr><td class="num">4</td><td>Bestia sin nombre con 10 cuernos</td><td>Roma</td><td>Diferente de todas: hierro aplastante, diez cuernos (= sucesores/fases romanas), y un cuerno pequeño que habla con arrogancia. El más desarrollado en la visión.</td></tr>
+  </table>
+</section>
+
+<section id="dan7-hm">
+  <h2 class="sub">2.3 El Hijo del Hombre: figura sin paralelo en el Islam</h2>
+  <p>La figura del «Hijo del Hombre» en Daniel 7:13-14 tiene características que la exégesis judía del Segundo Templo ya identificaba como mesiánicas y, en algunos casos, divinas:</p>
+  <p><b>Viene con las nubes del cielo</b> — no sube de la tierra o del mar como las bestias. Este movimiento descendente es señal de origen celestial. En el AT, «ir en las nubes» es prerrogativa exclusiva de YHWH (Sal 104:3; Nah 1:3; Is 19:1).</p>
+  <p><b>Se acerca al Anciano de Días</b> — hay dos figuras divinas distintas en la escena del trono, lo cual es teológicamente extraordinario en el monoteísmo hebreo del período persa. El Hijo del Hombre no es el Anciano: son distinguibles.</p>
+  <p><b>Recibe dominio eterno y universal</b> — «todos los pueblos, naciones y lenguas le sirvieran». Esta predicación universal no tiene paralelo en ningún profeta islámico: Mahoma es explícitamente humano, mensajero pero no portador de dominio eterno personal.</p>
+  <p>El Islam no puede cumplir esta figura porque Mahoma: (a) no viene en las nubes, (b) no recibe dominio eterno personal, (c) no es presentado ante un Anciano de Días, y (d) muere sin establecer un reino eterno sino un califato político temporal que colapsa.</p>
+</section>
+
+<section id="dan7-islam">
+  <h2 class="sub">2.4 El Islam no puede ser la Cuarta Bestia ni el cuerno pequeño</h2>
+  <p>Algunos apologistas islámicos han intentado identificar al Islam con el «reino de los santos» del v. 27. Otros, inversamente, han sugerido que Roma incluye la extensión cristiana occidental y que el Islam es el destructor de la Cuarta Bestia. Ambas lecturas fallan:</p>
+  <div class="highlight red">
+    <p style="margin:0 0 8px;"><b>Fallo de la identificación islámica con el «reino de los santos»:</b> El reino de los santos (v. 27) no destruye a las bestias por conquista: es dado «al pueblo de los santos del Altísimo» tras el juicio del Anciano de Días (v. 22), no establecido por yihad. Además, el Islam no es «el pueblo» descrito en Daniel — Daniel se refiere consistentemente al pueblo de Israel y no a un pueblo árabe.</p>
+  </div>
+  <div class="highlight red" style="margin-top:10px;">
+    <p style="margin:0;"><b>Fallo temporal:</b> La Cuarta Bestia es destruida en el juicio final (v. 11), no absorbida históricamente. El Islam conquistó partes del territorio romano pero no destruyó «Roma» en el sentido en que el texto lo requiere: el juicio del v. 9-12 es escatológico, no político.</p>
+  </div>
+
+  <div class="syllogism" id="sil-dan7-1">
+    <div class="label">Silogismo 3 — La Cuarta Bestia y su destructor no corresponden al Islam</div>
+    <p class="premise"><b>P.M.:</b> La Cuarta Bestia de Daniel 7 (identificable con Roma) es destruida en el tribunal celestial del Anciano de Días (v. 9-12), no por conquista militar humana, y el reino resultante es dado a «los santos del Altísimo» por decreto divino (v. 22, 27).</p>
+    <p class="premise"><b>P.m.:</b> El Islam se expande por conquista militar humana y no deriva su legitimidad de un decreto del Anciano de Días, sino de la revelación a un mensajero humano.</p>
+    <hr>
+    <p class="conclusion">∴ El mecanismo por el que el Islam establece su dominio es estructuralmente incompatible con el mecanismo descrito en Dan 7, donde el dominio es otorgado por decreto celestial tras juicio, no ganado por espada.</p>
+  </div>
+
+  <div class="syllogism" id="sil-dan7-2">
+    <div class="label">Silogismo 4 — El Hijo del Hombre es una figura preexistente y de rango divino; Mahoma no lo es</div>
+    <p class="premise"><b>P.M.:</b> El Hijo del Hombre en Dan 7:13-14 viene «con las nubes del cielo» (indicador de origen o modo de existencia celestial en el AT), es presentado ante el Anciano de Días (distinguiéndolo de éste), y recibe dominio eterno personal y universal sobre todos los pueblos y naciones.</p>
+    <p class="premise"><b>P.m.:</b> Mahoma: (a) no viene de las nubes sino que nace en La Meca (c. 570 d.C.); (b) no tiene dominio personal eterno — el Islam enseña explícitamente que Mahoma murió y no resucitó (Corán 3:144); (c) el Islam rechaza cualquier predicación de rango divino para Mahoma.</p>
+    <hr>
+    <p class="conclusion">∴ El Hijo del Hombre de Daniel 7 no puede ser Mahoma: los atributos de origen celestial, distinción del Anciano de Días y dominio eterno personal son incompatibles con la cristología/profetología islámica de Mahoma.</p>
+    <p class="nota"><i>Nota:</i> Jesús, en cambio, usa explícitamente el título «Hijo del Hombre» 80+ veces en los Evangelios y lo aplica a sí mismo en el contexto judicial de Dan 7 ante el Sumo Sacerdote (Mc 14:61-62), afirmando que le verán «venir en las nubes del cielo» — cita directa de Dan 7:13.</p>
+  </div>
+</section>
+
+<section id="dan7-reino">
+  <h2 class="sub">2.5 El Reino de los Santos y la Iglesia</h2>
+  <p>Daniel 7:27 describe el desenlace de la visión: el reino es dado al «pueblo de los santos del Altísimo». Esto no puede referirse al Islam por tres razones adicionales:</p>
+  <p><b>Primera:</b> En el contexto de Daniel, «santos del Altísimo» (qaddishei elyonin) se refiere al pueblo de la alianza — Israel y, en extensión teológica del NT, la comunidad mesiánica. No hay ninguna hermenéutica que conecte este grupo con la umma árabe del siglo VII.</p>
+  <p><b>Segunda:</b> El reino de los santos es eterno y universal (v. 14, 27). El califato islámico fue temporal: el califato de los Compañeros duró 30 años, el Omeya fue derrocado, el Abasida destruido por los mongoles. Ninguno cumplió la permanencia eternay el dominio universal sin fin.</p>
+  <p><b>Tercera:</b> El reino comienza no por iniciativa humana sino como don del juicio del Anciano de Días. La Iglesia primitiva interpretó esto como el don del Espíritu Santo en Pentecostés (Hch 2) y la entronización de Cristo a la derecha del Padre — exactamente el escenario del Hijo del Hombre ante el Anciano de Días.</p>
+</section>
+
+<!-- SECCIÓN III: DANIEL 9 -->
+<section id="dan9-texto">
+  <h1 class="section">III. DANIEL 9 — LAS SETENTA SEMANAS</h1>
+  <h2 class="sub">3.1 El oráculo de las setenta semanas</h2>
+  <p>Daniel 9 contiene la profecía más cronológicamente específica del AT. El capítulo abre con Daniel meditando la profecía de Jeremías sobre los setenta años de cautividad. El ángel Gabriel le revela entonces un oráculo sobre «setenta semanas» (shabu'im shivim) — 70×7 = 490 años — que determinan el destino de «tu pueblo» y «tu santa ciudad» (Jerusalén):</p>
+
+  <div class="verse">
+    «Setenta semanas están determinadas sobre tu pueblo y sobre tu santa ciudad, para terminar la prevaricación, y poner fin al pecado, y expiar la iniquidad, para traer la justicia perdurable, y sellar la visión y la profecía, y ungir al Santo de los santos.»
+    <cite>Daniel 9:24</cite>
+  </div>
+  <div class="verse">
+    «Sabe, pues, y entiende, que desde la salida de la orden para restaurar y edificar a Jerusalén hasta el Mesías Príncipe, habrá siete semanas, y sesenta y dos semanas; se volverá a edificar la plaza y el muro en tiempos angustiosos. Y después de las sesenta y dos semanas se quitará la vida al Mesías, mas no por sí; y el pueblo de un príncipe que ha de venir destruirá la ciudad y el santuario.»
+    <cite>Daniel 9:25-26</cite>
+  </div>
+</section>
+
+<section id="dan9-calculo">
+  <h2 class="sub">3.2 Cálculo cronológico</h2>
+  <p>El punto de inicio es el decreto para «restaurar y edificar a Jerusalén». Los candidatos históricos son:</p>
+
+  <table class="timeline">
+    <tr><th>Decreto</th><th>Fecha</th><th>Referencia</th><th>Aplicabilidad</th></tr>
+    <tr><td>Decreto de Ciro</td><td>538 a.C.</td><td>Esd 1:1-4</td><td>Solo autoriza el templo, no la ciudad</td></tr>
+    <tr><td>Decreto de Darío</td><td>520 a.C.</td><td>Esd 6:6-12</td><td>Confirma decreto de Ciro, no crea uno nuevo</td></tr>
+    <tr><td>Decreto de Artajerjes a Esdras</td><td>458 a.C.</td><td>Esd 7:11-26</td><td>Restaura la administración, no la muralla</td></tr>
+    <tr><td><b>Decreto de Artajerjes a Nehemías</b></td><td><b>445/444 a.C.</b></td><td><b>Neh 2:1-8</b></td><td><b>Única orden que menciona específicamente la ciudad y sus muros</b></td></tr>
+  </table>
+
+  <p>Partiendo del decreto a Nehemías (445/444 a.C.) y aplicando las 69 semanas × 7 años = 483 años, usando el año profético de 360 días (173.880 días): la fecha calculada cae en torno al <b>32-33 d.C.</b> — exactamente la entrada triunfal de Jesús en Jerusalén o su crucifixión, según el cómputo que se use. Sir Robert Anderson (1894), calculando meticulosamente, llegó al 6 de abril del 32 d.C. — el día de la entrada triunfal de Jesús.</p>
+
+  <div class="highlight gold">
+    <p style="margin:0;"><b>Resumen del cálculo:</b> 445 a.C. + 483 años (años proféticos de 360 días convertidos a solares) = aprox. 32-33 d.C. La convergencia con la cronología de Jesús es de ±1 año dentro del margen de error del calendario antiguo.</p>
+  </div>
+</section>
+
+<section id="dan9-mesias">
+  <h2 class="sub">3.3 El Mesías «cortado» — evento sin equivalente islámico</h2>
+  <p>El elemento más determinante del oráculo es Daniel 9:26: el Mesías (mashiach) es «cortado» (karet) tras las 62 semanas, «y no por sí mismo». Esta fórmula contiene tres predicaciones que son hermenéuticamente cruciales:</p>
+
+  <p><b>Primera — karet (cortado):</b> El término hebreo implica muerte violenta, exclusión o corte súbito. No es una metáfora de retirada política; es muerte.</p>
+  <p><b>Segunda — «y no por sí mismo» (v'eyn lo):</b> La traducción más natural es «sin tener nada para sí» — el Mesías muere sin heredar o poseer el reino inmediatamente. Esto contrasta directamente con Mahoma, que murió habiendo unificado Arabia bajo su dominio político y religioso.</p>
+  <p><b>Tercera — inmediatamente después viene la destrucción de la ciudad:</b> «El pueblo de un príncipe que ha de venir destruirá la ciudad y el santuario» (v. 26b). Roma destruyó Jerusalén en el 70 d.C. bajo Tito. Esto fija el cumplimiento de las 69 semanas en el período anterior al 70 d.C., excluyendo cualquier figura del siglo VII.</p>
+
+  <div class="verse">
+    «Porque el Hijo del Hombre no vino para ser servido, sino para servir, y para dar su vida en rescate por muchos.»
+    <cite>Marcos 10:45 — Jesús combinando Dan 7:13 (Hijo del Hombre) con Is 53 (siervo sufriente)</cite>
+  </div>
+</section>
+
+<section id="dan9-islam">
+  <h2 class="sub">3.4 El Islam es incapaz de cumplir Daniel 9</h2>
+  <p>El oráculo de las 70 semanas excluye al Islam por tres razones que operan en niveles distintos:</p>
+  <div class="highlight red">
+    <p style="margin:0 0 8px;"><b>Razón 1 — Cronológica:</b> Las 69 semanas terminan aproximadamente en el 32-33 d.C. El Islam surge en el 610 d.C. — aproximadamente 580 años después del momento en que el Mesías debía ser «cortado». No hay ninguna manipulación matemática que haga coincidir a Mahoma con el final de las 69 semanas.</p>
+  </div>
+  <div class="highlight red" style="margin-top:10px;">
+    <p style="margin:0 0 8px;"><b>Razón 2 — Biográfica:</b> El Mesías del v. 26 muere violentamente y «sin tener nada para sí» — sin reino establecido en ese momento. Mahoma murió como gobernante consolidado de toda Arabia, habiendo establecido un estado teocrático. El perfil es biográficamente inverso.</p>
+  </div>
+  <div class="highlight red" style="margin-top:10px;">
+    <p style="margin:0;"><b>Razón 3 — Estructural:</b> El oráculo tiene seis objetivos en el v. 24 (terminar transgresión, acabar pecado, expiar iniquidad, traer justicia eterna, sellar visión y profecía, ungir el Santo de los santos). El Islam no cumple la expiación de la iniquidad (kafara) en el sentido sacrificial que el texto requiere — el Islam rechaza explícitamente la expiación sustitutoria.</p>
+  </div>
+
+  <div class="syllogism" id="sil-dan9-1">
+    <div class="label">Silogismo 5 — El Mesías de Daniel 9 debe aparecer antes del 70 d.C.</div>
+    <p class="premise"><b>P.M.:</b> Según Daniel 9:26, el Mesías es «cortado» y luego «el pueblo de un príncipe que ha de venir destruirá la ciudad y el santuario» — indicando que la muerte del Mesías precede a la destrucción de Jerusalén.</p>
+    <p class="premise"><b>P.m.:</b> Jerusalén y su templo fueron destruidos por el ejército romano de Tito en el año 70 d.C. Por tanto, el Mesías debió ser «cortado» antes del 70 d.C.</p>
+    <hr>
+    <p class="conclusion">∴ El cumplimiento del Mesías en Daniel 9 debió ocurrir antes del 70 d.C. Mahoma (570-632 d.C.) nace aproximadamente 500 años después de este límite temporal y no puede ser el cumplimiento del oráculo.</p>
+    <p class="nota"><i>Nota:</i> Jesús muere en el 30-33 d.C., dentro del período requerido. Juan el Bautista proclama en el mismo período que «el reino de los cielos se ha acercado» — cumpliendo el anuncio de Dan 9:24.</p>
+  </div>
+
+  <div class="syllogism" id="sil-dan9-2">
+    <div class="label">Silogismo 6 — La muerte expiatoria excluye a Mahoma</div>
+    <p class="premise"><b>P.M.:</b> El oráculo de Dan 9:24 incluye como objetivo de las 70 semanas «expiar la iniquidad» (ulekhapper avon) — una expiación sacrificial que debe ser cumplida por o a través del Mesías cortado.</p>
+    <p class="premise"><b>P.m.:</b> El Islam rechaza explícitamente la expiación sustitutoria: «Ningún cargador de cargas cargará las cargas de otro» (Corán 6:164; 35:18; 39:7). Mahoma no murió como sacrificio expiatorio ni enseñó que su muerte tuviera función expiatoria alguna.</p>
+    <hr>
+    <p class="conclusion">∴ Mahoma no cumple el objetivo expiatorio de Daniel 9:24, que es parte constitutiva del oráculo. No puede ser el cumplimiento sin redefinir el oráculo de forma que lo vacíe de contenido.</p>
+  </div>
+</section>
+
+<section id="dan9-cristo">
+  <h2 class="sub">3.5 Cumplimiento en Jesús de Nazaret</h2>
+  <p>Jesús cumple los seis objetivos de Daniel 9:24 de forma estructurada:</p>
+  <table class="timeline">
+    <tr><th>Objetivo de Dan 9:24</th><th>Cumplimiento en Cristo</th><th>Texto NT</th></tr>
+    <tr><td>Terminar la prevaricación</td><td>Cristo porta el pecado del mundo</td><td>Is 53:5-6; 1 Pe 2:24</td></tr>
+    <tr><td>Acabar con el pecado</td><td>Su sacrificio es «una vez para siempre»</td><td>Heb 9:26-28; 10:12</td></tr>
+    <tr><td>Expiar la iniquidad</td><td>Muerte sustitutoria: «él fue herido por nuestras transgresiones»</td><td>Is 53:5; Ro 3:25</td></tr>
+    <tr><td>Traer justicia eterna</td><td>Justificación por fe, imputación de justicia de Cristo</td><td>Ro 3:21-26; 2 Co 5:21</td></tr>
+    <tr><td>Sellar visión y profecía</td><td>Cristo como «cumplimiento de la ley y los profetas»</td><td>Mt 5:17; Lc 24:44</td></tr>
+    <tr><td>Ungir el Santo de los santos</td><td>Dedicación del templo espiritual / Cristo como Sumo Sacerdote</td><td>Heb 9:11-12; 10:19-22</td></tr>
+  </table>
+</section>
+
+<!-- SECCIÓN IV: TEXTOS PARALELOS -->
+<section id="paralelos-at">
+  <h1 class="section">IV. TEXTOS PARALELOS Y CONVERGENTES</h1>
+  <h2 class="sub">4.1 Antiguo Testamento: Isaías, Salmos, Miqueas</h2>
+  <p>La visión de Daniel no está aislada. Una red de textos veterotestamentarios apuntan al mismo nodo histórico con características compatibles:</p>
+
+  <div class="verse">
+    «Por tanto, el Señor mismo os dará señal: He aquí que la virgen concebirá, y dará a luz un hijo, y llamará su nombre Emanuel.»
+    <cite>Isaías 7:14 — nacimiento sobrenatural del portador de la señal divina</cite>
+  </div>
+  <div class="verse">
+    «Porque un niño nos es nacido, hijo nos es dado, y el principado sobre su hombro; y se llamará su nombre Admirable, Consejero, Dios fuerte, Padre eterno, Príncipe de paz. Lo dilatado de su imperio y la paz no tendrán límite, sobre el trono de David y sobre su reino.»
+    <cite>Isaías 9:6-7 — el portador del dominio eterno con títulos divinos, sentado en el trono davídico</cite>
+  </div>
+  <div class="verse">
+    «Pero tú, Belén Efrata, pequeña para estar entre las familias de Judá, de ti me saldrá el que será Señor en Israel; y sus salidas son desde el principio, desde los días de la eternidad.»
+    <cite>Miqueas 5:2 — el Mesías tiene un origen que es «desde los días de la eternidad» (mi-qedem, mime olam)</cite>
+  </div>
+  <div class="verse">
+    «Jehová dijo a mi Señor: Siéntate a mi diestra, hasta que ponga a tus enemigos por estrado de tus pies.»
+    <cite>Salmo 110:1 — dos «Señores» distinguibles (Adoni y Adonai), el segundo sentado a la diestra del primero: exactamente la escena de Dan 7:13-14</cite>
+  </div>
+
+  <p>Nótese que Salmo 110:1 y Daniel 7:13-14 comparten un esquema teológicamente extraordinario: en ambos textos se distinguen visualmente dos figuras divinas — el Anciano de Días y el Hijo del Hombre en Daniel; el Señor (<i>Adonai</i>) y «mi Señor» (<i>Adoni</i>) en el Salmo — sin que la distinción implique diferencia de naturaleza o rango ontológico, sino de <b>relación de origen y modo de presentación</b>. La distinción es <i>personal</i>, no <i>sustancial</i>: exactamente lo que la teología trinitaria posterior formulará como distinción de Personas dentro de la única esencia divina. Afirmar que el Hijo del Hombre es «inferior» al Anciano porque es <i>presentado ante</i> él sería cometer el error arriano: confundir la relación de origen (el Hijo procede del Padre; el Hijo del Hombre se acerca al Anciano — <i>generatio, no subordinatio essendi</i>) con una jerarquía de ser. Tomás lo expresa con precisión: «en Dios hay igualdad esencial y distinción relacional; las Personas se distinguen solo por sus relaciones de origen, no por grado de divinidad» (<i>ST</i> I, q.42, a.1-4). El Hijo del Hombre que recibe dominio eterno no lo recibe como algo ajeno a su naturaleza, sino como expresión de la única soberanía divina que el Padre comunica al Hijo en la generación eterna — y que en el plano histórico se manifiesta en la exaltación del Cristo encarnado (Fil 2:9-11). Jesús cita Sal 110:1 precisamente para mostrar que el Mesías no es meramente davídico-humano: si David llama «Señor» (<i>Adoni</i>) a su propio descendiente, la filiación en cuestión trasciende la genealogía (Mt 22:44-45). Pablo usa el mismo versículo como eje de la entronización de Cristo resucitado (1 Co 15:25), y la Epístola a los Hebreos lo cita siete veces para articular la sumo-sacerdocio celestial del Hijo — precisamente porque el paralelismo estructural con Dan 7:13-14 es explícito y deliberado en la cristología apostólica.</p>
+</section>
+
+<section id="paralelos-enoch">
+  <h2 class="sub">4.2 El Libro de 1 Enoc — El Hijo del Hombre preexistente</h2>
+  <p>El Libro de las Parábolas de 1 Enoc (caps. 37-71), fechado por la mayoría de los especialistas en el siglo I a.C., desarrolla la figura del «Hijo del Hombre» de Daniel 7 con una densidad teológica extraordinaria:</p>
+
+  <div class="verse">
+    «En aquel lugar vi la Fuente de la justicia, inagotable; y en su derredor había muchas Fuentes de sabiduría, y de ellas bebían todos los sedientos, y se llenaban de sabiduría, y habitaban con los justos, los santos y los elegidos. Y en esa hora fue nombrado ese Hijo del Hombre ante el Señor de los Espíritus, y su nombre ante el Anciano de Cabeza.»
+    <cite>1 Enoc 48:1-2</cite>
+  </div>
+  <div class="verse">
+    «Antes de que fueran creados el sol y las constelaciones, antes de que las estrellas del cielo fueran formadas, su nombre fue nombrado en presencia del Señor de los Espíritus. Él será el báculo de los justos y la luz de las gentes, y la esperanza de los que están turbados.»
+    <cite>1 Enoc 48:3-4</cite>
+  </div>
+
+  <p>Las parábolas de 1 Enoc identifican al Hijo del Hombre como un ser celestial preexistente, su nombre dado antes de la creación — lo cual anticipa precisamente la cristología joánica del Logos preexistente (Jn 1:1-14). La existencia de este texto en el siglo I a.C. demuestra que la identificación del Hijo del Hombre de Daniel 7 con una figura preexistente divina no es una innovación cristiana sino una expectativa ya presente en el judaísmo del Segundo Templo.</p>
+  <p><b>Relevancia anti-islámica:</b> 1 Enoc excluye explícitamente a cualquier profeta nacido en el siglo VII d.C. como cumplimiento de esta figura: su nombre era «nombrado antes de que el sol y las constelaciones fueran creados». Esto requiere preexistencia personal — categoría que el Islam niega para Mahoma.</p>
+</section>
+
+<section id="paralelos-4esdras">
+  <h2 class="sub">4.3 Cuarto Libro de Esdras y Apocalipsis de Baruc 2</h2>
+  <p>El 4 Esdras (c. 90-100 d.C.), texto judío tardío no canónico pero de enorme influencia, desarrolla el tema de los cuatro reinos de Daniel en su visión del águila (caps. 11-12) y del Hombre del Mar (cap. 13):</p>
+
+  <div class="verse">
+    «He aquí, un hombre que subía del corazón del mar… Y vi que reunió para sí una multitud innumerable de hombres… y habló muchas cosas con ellos, todo lo cual yo no entendí, pero que hizo que la multitud que estaba reunida huyera de su rostro y se disolviera, como la cera se derrite ante el fuego.»
+    <cite>4 Esdras 13:3-4 — la figura mesiánica que destruye con su palabra, no con la espada</cite>
+  </div>
+
+  <p>El «hombre del mar» en 4 Esdras es explícitamente identificado con el Hijo del Hombre de Daniel en el v. 32, y su destrucción de los enemigos es mediante la «ley» — su palabra —, no mediante armas. Esto es teológicamente coherente con la caracterización de Cristo en Ap 19:15 («de su boca salía una espada aguda») y en 2 Tes 2:8.</p>
+  <p>El Apocalipsis Siríaco de Baruc 2 (c. 100 d.C.) presenta una secuencia imperial análoga a Daniel y la concluye con un «Mesías que se revela» como culmen de la historia — igualmente antes del siglo VII y sin conexión con el Islam.</p>
+</section>
+
+<section id="paralelos-apo">
+  <h2 class="sub">4.4 El Apocalipsis de Juan: convergencia total</h2>
+  <p>El Apocalipsis de Juan (c. 95-96 d.C.) es la recepción canónica más completa de Daniel. Sus paralelos con Daniel son estructurales y deliberados:</p>
+
+  <table class="timeline">
+    <tr><th>Elemento de Daniel</th><th>Paralelo en Apocalipsis</th><th>Referencias</th></tr>
+    <tr><td>Cuatro bestias (Dan 7)</td><td>La Bestia compuesta de Ap 13 sintetiza las cuatro bestias de Daniel en una sola</td><td>Ap 13:1-2</td></tr>
+    <tr><td>Anciano de Días (Dan 7:9)</td><td>«Anciano» en Ap 4:2-3; el trono y los 24 ancianos</td><td>Ap 4-5</td></tr>
+    <tr><td>Hijo del Hombre (Dan 7:13)</td><td>El Cordero que toma el rollo sellado; Cristo «que viene en las nubes»</td><td>Ap 1:7; 5:7; 14:14</td></tr>
+    <tr><td>Piedra no labrada (Dan 2)</td><td>«La piedra de tropiezo» y la Nueva Jerusalén que desciende del cielo</td><td>Ap 21:2</td></tr>
+    <tr><td>70ª semana (Dan 9:27)</td><td>La «hora de prueba» de 42 meses = 3½ años = mitad de una semana</td><td>Ap 11:2; 13:5</td></tr>
+    <tr><td>Destrucción del santuario (Dan 9:26)</td><td>Medición del templo y el atrio exterior «entregado a los gentiles»</td><td>Ap 11:1-2</td></tr>
+  </table>
+
+  <p>La convergencia es total: el Apocalipsis trata a Daniel como texto base y lo cumple en Cristo. No hay espacio hermenéutico para insertar a Muhammad en esta red intertextual — el Apocalipsis fue escrito aproximadamente 500 años antes de la existencia del Islam y su red de cumplimientos está perfectamente cerrada en Cristo.</p>
+
+  <div class="syllogism" id="sil-par-1">
+    <div class="label">Silogismo 7 — La convergencia de fuentes excluye cualquier cumplimiento posterior al siglo I</div>
+    <p class="premise"><b>P.M.:</b> Si múltiples textos independientes (AT: Daniel, Isaías, Sal 110; Segundo Templo: 1 Enoc, 4 Esdras; NT: Apocalipsis) describen un mismo conjunto de características (origen celestial, muerte y exaltación, dominio eterno universal, tiempo pre-70 d.C.) y todas estas características convergen en un único candidato histórico, entonces ese candidato es el cumplimiento más parsimonioso.</p>
+    <p class="premise"><b>P.m.:</b> Jesús de Nazaret (c. 6 a.C. – c. 30-33 d.C.) es el único candidato histórico que satisface simultáneamente: (a) cronología pre-70 d.C., (b) muerte violenta sin reino político inmediato, (c) reivindicación explícita del título «Hijo del Hombre» de Dan 7, (d) atribución de preexistencia celestial (Jn 1; Fil 2; Col 1), (e) establecimiento de una comunidad que se expande universalmente sin ejércitos durante sus primeros siglos.</p>
+    <hr>
+    <p class="conclusion">∴ La convergencia de todas las fuentes en Jesús de Nazaret es la explicación más parsimoniosa y históricamente robusta. Cualquier alternativa (y en particular Mahoma) requiere ignorar o reinterpretar la mayoría de los criterios de cada texto.</p>
+  </div>
+</section>
+
+<!-- SECCIÓN V: OBJECIONES -->
+<section id="sec5">
+  <h1 class="section">V. OBJECIONES PREVISIBLES Y RESPUESTAS</h1>
+
+  <h3 id="obj1" class="sub3">Objeción 1 — «El Cristianismo no acabó con Roma; Roma siguió existiendo siglos después de Cristo»</h3>
+  <p class="obj">«Si la Piedra destruye toda la estatua, y Roma duró hasta el 476 d.C. o incluso 1453 d.C. (Bizancio), ¿cómo puede haber comenzado el Reino en el siglo I?»</p>
+  <p class="resp resp"><b>Respuesta:</b> Esta objeción malinterpreta el mecanismo de la Piedra. Daniel 2:35 dice que la Piedra golpeó los pies de la estatua y luego la estatua fue desmenuzada y «se llevó el viento sin dejar rastro alguno». Pero después dice que «la piedra que hirió a la imagen se hizo una gran montaña y llenó toda la tierra». El crecimiento de la Piedra y la desaparición de la estatua son <b>procesos, no eventos instantáneos</b>. El texto no dice que Roma desaparezca al momento en que aparece la Piedra — dice que el proceso del reino divino comienza entonces y culmina en dominación total. El Cristianismo <i>comenzó</i> bajo Roma, sobrevivió a Roma, y cuando Roma colapsa en 476 d.C., el Cristianismo es ya la religión dominante de lo que era Roma. La Piedra no destruyó Roma militarmente: la sobrevivió y la absorbió. La metáfora de la montaña que crece es perfectamente coherente con una expansión gradual de siglos.</p>
+
+  <h3 id="obj2" class="sub3">Objeción 2 — «Los cálculos de las 70 semanas no cuadran con precisión»</h3>
+  <p class="obj">«Existen múltiples formas de calcular las 70 semanas y ninguna da un resultado exacto al 32 d.C.»</p>
+  <p class="resp"><b>Respuesta:</b> El argumento no requiere precisión al día: requiere que el margen de plausibilidad excluya al Islam y se solape con la vida de Jesús. Incluso con los márgenes de error más generosos en la identificación del decreto de inicio (±10 años) y la conversión de años proféticos a solares (±2%), el resultado oscila entre el 25 d.C. y el 40 d.C. — perfectamente solapado con la vida y ministerio de Jesús (c. 27-33 d.C.) y absolutamente incompatible con cualquier figura del siglo VII. Además, la destrucción de Jerusalén en el 70 d.C. como marcador temporal adicional (v. 26b) actúa como límite superior: ningún cumplimiento es admisible después del 70 d.C., lo que excluye definitivamente al Islam.</p>
+
+  <h3 id="obj3" class="sub3">Objeción 3 — «El Islam también venció imperios; el califato abásida fue universal»</h3>
+  <p class="obj">«El Islam conquistó más territorio que Roma, más rápidamente; ¿no es eso más parecido a la Piedra que llena la tierra?»</p>
+  <p class="resp"><b>Respuesta:</b> La objeción confunde velocidad de conquista con el criterio específico de la Piedra, que es <b>origen no-humano y expansión no-militar</b>. El texto dice explícitamente «no con mano» — la expansión por ejércitos humanos es precisamente lo que excluye. Además, el califato islámico jamás «llenó toda la tierra»: nunca controló Europa occidental, Asia oriental, el África subsahariana o América. El Cristianismo, en cambio, tiene presencia en todos los continentes y países del mundo — algo que ningún califato islámico logró. Si el criterio es universalidad geográfica efectiva, el Cristianismo gana por órdenes de magnitud.</p>
+
+  <h3 id="obj4" class="sub3">Objeción 4 — «Daniel fue escrito en el siglo II a.C., después de los eventos; no es profecía»</h3>
+  <p class="obj">«La hipótesis del Deutero-Daniel sitúa el texto durante el reinado de Antíoco IV Epífanes (c. 167 a.C.), siendo una profecía ex eventu, no genuina.»</p>
+  <p class="resp"><b>Respuesta:</b> Incluso concediendo la hipótesis del Deutero-Daniel (que muchos especialistas conservadores rechazan con evidencia textual y arqueológica sólida, incluyendo los manuscritos de Qumrán que contienen Daniel sin variantes significativas), el problema para el Islam permanece: si Daniel fue escrito en el 167 a.C., las profecías sobre los reinos post-griegos y el Mesías siguen siendo genuinamente predictivas respecto al siglo I d.C. (200 años después) y al siglo VII d.C. (800 años después). La hipótesis del Deutero-Daniel no salva al Islam — solo mueve el origen del texto, sin eliminar su contenido predictivo respecto a ambas candidaturas.</p>
+
+  <h3 id="obj5" class="sub3">Objeción 5 — «El reino espiritual es una evasión; Daniel habla de un reino político real»</h3>
+  <p class="obj">«El reino de la Piedra debe ser un reino político-terrenal que destrona a Roma. El Cristianismo propone un 'reino espiritual' que es una evasión del cumplimiento literal.»</p>
+  <p class="resp"><b>Respuesta:</b> Esta objeción asume que «político» y «eterno» son compatibles, pero la historia refuta esto: ningún reino político humano es eterno. Daniel mismo dice que el Reino-Piedra «jamás será destruido» y «no será dado a otro pueblo» — criterios que ningún estado político cumple. El califato islámico fue destruido por los mongoles en 1258 d.C. El propio texto de Daniel establece el estándar de «eternidad» que hace imposible un cumplimiento puramente político. Además, la Iglesia como institución histórica ha demostrado ser la realidad más persistente en la historia humana: sobrevivió la caída de Roma, el feudalismo medieval, la Revolución Francesa, el nazismo y el comunismo. Si hay que elegir entre el califato islámico (destruido en 1258) y la Iglesia Católica/Cristiana (aún presente y global), el criterio de «jamás destruido» favorece incomparablemente al Cristianismo.</p>
+
+  <h3 id="obj6" class="sub3">Objeción 6 — «Mahoma podría ser el profeta davídico anunciado; el Islam es el cumplimiento de las promesas a Ismael»</h3>
+  <p class="obj">«Daniel habla del pueblo de Dios y las promesas a Abraham incluyen a Ismael; el Islam hereda la tradición profética.»</p>
+  <p class="resp"><b>Respuesta:</b> El argumento es doble. <b>Primero</b>: Daniel no habla en ningún punto de Ismael, Arabia o ninguna figura árabe. El contexto es consistentemente Babilonia-Persia-Grecia-Roma e Israel. Introducir a Ismael requiere forzar el texto más allá de cualquier exégesis razonable. <b>Segundo</b>: aunque Abraham recibe promesas respecto a Ismael (Gén 17:20), esas promesas son de multiplicidad nacional y bendición, no de ser el portador del reino eterno descrito en Daniel. El pacto del reino eterno en el AT pasa por Isaac, Jacob, Judá y David (Gén 17:21; 2 Sam 7:12-16) — línea de la que Ismael está explícitamente excluido (Gén 17:21: «pero mi pacto lo estableceré con Isaac»). El argumento ismaelita para Daniel es exegéticamente insostenible.</p>
+</section>
+
+<!-- SECCIÓN VI: SÍNTESIS -->
+<section id="sintesis">
+  <h1 class="section">VI. SÍNTESIS — MAPA DE LA REFUTACIÓN</h1>
+  <p>Las tres líneas argumentales operan de forma independiente, y cada una es suficiente por sí sola para refutar la candidatura islámica:</p>
+
+  <div class="lineblock">
+    <h4>LÍNEA 1 — CRONOLOGÍA (Excluye el Islam por temporalidad)</h4>
+    <ul>
+      <li>Dan 2: la Piedra golpea la estatua <i>mientras existe</i> Roma. El Islam surge 134 años después de la caída de Roma occidental.</li>
+      <li>Dan 9: el Mesías es «cortado» antes de la destrucción del templo (70 d.C.). Mahoma nace ~540 años después.</li>
+      <li>Textos paralelos (1 Enoc, 4 Esdras, Ap) están todos escritos antes del Islam y con redes de cumplimiento internas que no dejan espacio para una figura del siglo VII.</li>
+    </ul>
+  </div>
+
+  <div class="lineblock">
+    <h4>LÍNEA 2 — CUALIDAD (Excluye el Islam por características incompatibles)</h4>
+    <ul>
+      <li>La Piedra es «no labrada por manos» — expansión no militar. El Islam se expande por conquista armada.</li>
+      <li>El Hijo del Hombre viene «con las nubes» (origen celestial/divino). Mahoma es explícitamente humano y mortal.</li>
+      <li>El Mesías de Dan 9 muere violentamente «sin tener nada para sí». Mahoma muere como gobernante consolidado de Arabia.</li>
+      <li>Dan 9:24 requiere expiación. El Islam rechaza la expiación sustitutoria.</li>
+    </ul>
+  </div>
+
+  <div class="lineblock">
+    <h4>LÍNEA 3 — CONVERGENCIA POSITIVA (El Cristianismo cumple todos los criterios)</h4>
+    <ul>
+      <li>Jesús actúa «en los días de estos reyes» — bajo Roma, exactamente en el período requerido.</li>
+      <li>Nace por concepción sobrenatural («no labrada por manos»), es origen celestial (Jn 1; Fil 2).</li>
+      <li>Muere crucificado sin reino político inmediato (karet, «no por sí mismo»), antes del 70 d.C.</li>
+      <li>Se autoidentifica como el Hijo del Hombre de Dan 7 en Mc 14:62.</li>
+      <li>Su comunidad se expande universalmente sin ejércitos en sus primeros tres siglos.</li>
+      <li>La red de textos paralelos (Is, Sal 110, Miq, 1 Enoc, Ap) converge en su persona.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SILOGISMO MAESTRO -->
+<section id="silogismo-maestro">
+  <h1 class="section">VII. SILOGISMO MAESTRO</h1>
+  <p>Recogiendo todas las premisas establecidas por los silogismos previos, el argumento culmina en la siguiente cadena demostrativa:</p>
+
+  <div class="master-syl">
+    <div class="master-title">∴ SILOGISMO MAESTRO — EL REINO DE DANIEL Y LA ÚNICA CANDIDATURA POSIBLE</div>
+    <div class="chain">
+      <div class="mp"><span class="mp-num">P. 1</span><span>El profeta Daniel establece que el reino divino eterno será establecido <i>durante el período de los cuatro reinos imperiales</i>, el último de los cuales es históricamente identificable con Roma (63 a.C. – 476 d.C.). [Dan 2:44: «en los días de estos reyes»]</span></div>
+      <div class="mp"><span class="mp-num">P. 2</span><span>El Mesías de Daniel 9 debe ser «cortado» violentamente <i>antes</i> de la destrucción de Jerusalén por Roma, lo que fija el límite superior en el 70 d.C. [Dan 9:26: «después de las 62 semanas será cortado… y el pueblo de un príncipe destruirá la ciudad»]</span></div>
+      <div class="mp"><span class="mp-num">P. 3</span><span>El Hijo del Hombre de Daniel 7 tiene origen celestial (viene «con las nubes»), es distinguible del Anciano de Días, y recibe dominio eterno y universal personal. [Dan 7:13-14]</span></div>
+      <div class="mp"><span class="mp-num">P. 4</span><span>El origen del reino en Daniel 2 es explícitamente no-humano («no labrada por manos»): su mecanismo de establecimiento excluye la conquista militar. [Dan 2:34]</span></div>
+      <div class="mp"><span class="mp-num">P. 5</span><span>Los seis objetivos del oráculo de Dan 9:24 incluyen «expiar la iniquidad» — una función sacrificial/expiatoria que el cumplidor debe ejecutar. [Dan 9:24]</span></div>
+      <div class="mp"><span class="mp-num">P. 6</span><span>Una red convergente de textos (Is 9:6; Sal 110:1; Miq 5:2; 1 Enoc 48:1-4; 4 Esd 13; Ap 5; 14:14) describe al mismo personaje con atributos de preexistencia, nacimiento sobrenatural, muerte y exaltación celestial, con todos los textos redactados antes del siglo VII d.C.</span></div>
+      <div class="mp"><span class="mp-num">P. 7</span><span>Muhammad ibn Abdallah (c. 570-632 d.C.) no satisface ninguna de las premisas anteriores: (a) nace siglos después del período romano; (b) nace ~540 años después del límite del 70 d.C.; (c) es biográficamente humano y mortal sin preexistencia personal según el Islam mismo; (d) establece su dominio por conquista militar; (e) el Islam rechaza la expiación sustitutoria explícitamente; (f) no está incluido en ninguna de las redes textuales de los textos paralelos, todos anteriores al Islam.</span></div>
+      <div class="mp"><span class="mp-num">P. 8</span><span>Jesús de Nazaret (c. 6 a.C. – c. 30-33 d.C.) satisface todas las premisas anteriores: (a) nació y ministró bajo Roma, dentro del período requerido; (b) murió crucificado en el 30-33 d.C., antes del 70 d.C.; (c) se atribuye explícitamente el título «Hijo del Hombre» de Dan 7 y la venida en las nubes (Mc 14:61-62); (d) su origen es descrito como sobrenatural sin agencia masculina humana (Lc 1:35); (e) su muerte es presentada como expiación sustitutoria en todos los estratos del NT; (f) su figura es el nodo de convergencia de todas las redes textuales identificadas.</span></div>
+      <hr>
+      <p class="qed">∴ De las premisas 1-8 se sigue necesariamente: <b>el Islam no puede ser el cumplimiento de las profecías del reino en Daniel 2, 7 y 9</b>, porque falla todos los criterios cronológicos, cualitativos y estructurales que los textos establecen. <b>Jesús de Nazaret es el único candidato histórico que satisface simultáneamente todos los criterios</b> establecidos por Daniel y la red de textos convergentes, tanto en su dimensión temporal (pre-70 d.C., bajo Roma), como cualitativa (origen divino, muerte expiatoria, expansión no-militar) y universal (dominio eterno sobre todos los pueblos). La única forma de rechazar esta conclusión es rechazar los criterios de los textos — lo cual equivale a abandonar a Daniel como fuente autoritativa, concesión que el islam mismo no puede hacer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section id="conclusion">
+  <h1 class="section">VIII. CONCLUSIÓN</h1>
+  <p>El libro de Daniel ofrece un mapa profético de cuatro reinos imperiales seguido del establecimiento de un reino divino eterno. Los tres capítulos analizados (2, 7, 9) operan con criterios que son verificables históricamente, no meramente alegóricos. Esos criterios son:</p>
+
+  <div class="conc-item"><b>1. Temporal:</b> El cumplimiento debe ocurrir durante el período romano y, para el Mesías de Dan 9, antes del 70 d.C. Esto excluye definitivamente al Islam y ubica el cumplimiento en el siglo I d.C.</div>
+  <div class="conc-item"><b>2. Ontológico:</b> El portador del reino (la Piedra, el Hijo del Hombre) tiene origen divino o sobrenatural, no humano. El Islam afirma que Mahoma es un ser puramente humano, lo que lo descalifica para esta función.</div>
+  <div class="conc-item"><b>3. Funcional-Expiatorio:</b> El Mesías de Dan 9 cumple una función expiatoria al ser «cortado». El Islam rechaza explícitamente la expiación sustitutoria, excluyéndose a sí mismo del cumplimiento.</div>
+  <div class="conc-item"><b>4. Mecanismo de expansión:</b> El reino crece «no por manos» — sin conquista militar. El Islam se funda y expande mediante conquista armada, lo que es iconológicamente incompatible con la Piedra.</div>
+  <div class="conc-item"><b>5. Convergencia textual:</b> Una red de textos independientes (AT, literatura del Segundo Templo, Apocalipsis canónico), todos anteriores al Islam, converge en una figura con las mismas características: preexistencia, nacimiento sobrenatural, muerte y exaltación, universalidad de dominio. Jesús es el único nodo de esa convergencia antes del siglo VII.</div>
+
+  <div class="highlight gold">
+    La apologética profética basada en Daniel no es un argumento secundario: es uno de los más robustos de toda la apologética cristiana comparada. Su fuerza reside en que no depende de un único texto ni de un único criterio, sino de la convergencia de múltiples parámetros independientes — cronológico, cualitativo, funcional, textual — todos los cuales apuntan en la misma dirección y todos los cuales el Islam no puede satisfacer sin abandonar su propio marco teológico.
+  </div>
+
+  <hr class="gold">
+  <p class="final"><i>«Su dominio es dominio eterno, que nunca pasará, y su reino uno que no será destruido.»</i><br>Daniel 7:14</p>
+  <p class="final" style="margin-top:10px;"><i>Finis coronat opus.</i> — Tratado de apologética profética comparada.</p>
+</section>
+
+</div><!-- /.page -->
+</main>
+</div><!-- /.layout -->
+
+<script>
+  const toc = document.getElementById('toc');
+  const tocToggle = document.getElementById('tocToggle');
+  const tocOverlay = document.getElementById('tocOverlay');
+  const tocSearch = document.getElementById('tocSearch');
+  const body = document.body;
+  const progress = document.getElementById('progress');
+
+  function openToc(){ toc.classList.add('open'); body.classList.add('toc-open'); }
+  function closeToc(){ toc.classList.remove('open'); body.classList.remove('toc-open'); }
+  tocToggle.addEventListener('click', () => toc.classList.contains('open') ? closeToc() : openToc());
+  tocOverlay.addEventListener('click', closeToc);
+  document.addEventListener('keydown', e => {
+    if (e.key.toLowerCase() === 'm' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) {
+      toc.classList.contains('open') ? closeToc() : openToc();
+    }
+    if (e.key === 'Escape') closeToc();
+  });
+  if (window.innerWidth > 860) openToc();
+
+  // Collapsible groups
+  document.querySelectorAll('#toc .group').forEach(g => {
+    if (g.dataset.default === 'open') g.classList.add('open');
+    g.querySelector(':scope > .group-head').addEventListener('click', () => g.classList.toggle('open'));
+  });
+
+  // Progress bar + scroll-spy
+  const links = Array.from(document.querySelectorAll('#toc a'));
+  const anchors = links.map(l => { try { return document.querySelector(l.getAttribute('href')); } catch(e){ return null; }}).filter(Boolean);
+
+  function onScroll(){
+    const h = document.documentElement;
+    progress.style.width = (h.scrollHeight - h.clientHeight > 0 ? h.scrollTop / (h.scrollHeight - h.clientHeight) * 100 : 0) + '%';
+    let current = anchors[0];
+    anchors.forEach(s => { if (s.offsetTop <= window.scrollY + 150) current = s; });
+    links.forEach(l => l.classList.remove('active'));
+    if (!current) return;
+    const active = document.querySelector(`#toc a[href="#${current.id}"]`);
+    if (active){
+      active.classList.add('active');
+      let g = active.closest('.group');
+      while(g){ g.classList.add('open'); g = g.parentElement?.closest('.group'); }
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Smooth scroll + mobile close
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(link.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.innerWidth <= 860) closeToc();
+    });
+  });
+
+  // Live search
+  tocSearch.addEventListener('input', () => {
+    const q = tocSearch.value.trim().toLowerCase();
+    if (!q){
+      toc.classList.remove('searching');
+      document.querySelectorAll('#toc li').forEach(li => li.classList.remove('no-match'));
+      document.querySelectorAll('#toc .group').forEach(g => g.classList.remove('has-match'));
+      return;
+    }
+    toc.classList.add('searching');
+    document.querySelectorAll('#toc li').forEach(li => {
+      const a = li.querySelector(':scope > a');
+      if (!a) return;
+      const match = a.textContent.toLowerCase().includes(q);
+      li.classList.toggle('no-match', !match);
+      if (match){
+        let g = li.closest('.group');
+        while(g){ g.classList.add('has-match'); g = g.parentElement?.closest('.group'); }
+      }
+    });
+    document.querySelectorAll('#toc .group').forEach(g => {
+      if (!g.querySelector('.group-body li > a:not(.no-match ~ a)')) {
+        const hasV = Array.from(g.querySelectorAll('.group-body li > a'))
+          .some(a => !a.closest('li').classList.contains('no-match'));
+        if (!hasV && !g.classList.contains('has-match')) g.classList.add('no-match-group');
+      }
+    });
+  });
+</script>
+</body>
+</html>

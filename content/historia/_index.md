@@ -24,3 +24,4 @@ No para acumular datos sin fin, sino para verificar afirmaciones con metodo.
 - [Autoria de los Evangelios (Dossier)](/historia/autoria-evangelios-dossier/)
 - [Crucifixion de Cristo - Testimonios Historicos (Dossier)](/historia/crucifixion-dossier/)
 - [Las Lenguas de Jesus (Dossier)](/historia/lenguas-de-jesus-dossier/)
+- [Metodo Historico (Dossier)](/historia/metodo-historico-dossier/)

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier · El Método Histórico-Crítico: Alcance, Límites y Petición de Principio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+:root {
+  --ink:      #f0e8c8;
+  --parchment:#0f0f0f;
+  --aged:     #1a1a1a;
+  --deep:     #050505;
+  --gold:     #c8a828;
+  --gold-lt:  #e8c840;
+  --gold-dk:  #8a7010;
+  --white:    #f8f4e8;
+  --rule:     #5a4a10;
+  --rule-lt:  #8a7820;
+  --margin:   #a09060;
+  --nav-bg:   #080808;
+  --nav-w:    268px;
+  --crimson:  #c84040;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--deep);font-family:'EB Garamond',Georgia,serif;color:var(--ink)}
+
+/* ═══ HAMBURGER ═══ */
+#toc-btn{
+  position:fixed;top:16px;left:16px;z-index:400;
+  background:var(--nav-bg);border:1px solid var(--gold);color:var(--gold-lt);
+  font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;
+  padding:8px 13px 8px 10px;cursor:pointer;display:flex;align-items:center;gap:9px;
+  box-shadow:0 2px 14px rgba(0,0,0,0.8);transition:background 0.15s;user-select:none;line-height:1;
+}
+#toc-btn:hover{background:#111}
+.hbars{display:flex;flex-direction:column;gap:4px}
+.hbars span{display:block;width:17px;height:1.5px;background:var(--gold-lt);transition:transform 0.22s,opacity 0.22s;transform-origin:center}
+#toc-btn.is-open .hbars span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+#toc-btn.is-open .hbars span:nth-child(2){opacity:0;transform:scaleX(0)}
+#toc-btn.is-open .hbars span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+/* ═══ OVERLAY ═══ */
+#toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:300;opacity:0;pointer-events:none;transition:opacity 0.25s}
+#toc-overlay.is-open{opacity:1;pointer-events:all}
+
+/* ═══ SIDEBAR ═══ */
+#toc-panel{
+  position:fixed;top:0;left:0;bottom:0;width:var(--nav-w);
+  background:var(--nav-bg);border-right:2px solid var(--gold-dk);z-index:350;
+  overflow-y:auto;padding:0 0 48px;
+  transform:translateX(calc(-1 * var(--nav-w) - 8px));
+  transition:transform 0.28s cubic-bezier(.4,0,.2,1);
+  box-shadow:6px 0 30px rgba(0,0,0,0.9);
+}
+#toc-panel.is-open{transform:translateX(0)}
+#toc-panel::-webkit-scrollbar{width:3px}
+#toc-panel::-webkit-scrollbar-thumb{background:var(--gold-dk);border-radius:2px}
+.toc-spacer{height:60px}
+.toc-title{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:4px;color:var(--gold-lt);text-transform:uppercase;padding:0 18px 12px;border-bottom:1px solid rgba(200,168,40,0.2);margin-bottom:4px}
+.toc-group{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;padding:13px 18px 3px}
+#toc-panel a{display:block;padding:7px 14px 7px 22px;font-family:'Source Sans 3',sans-serif;font-size:11.5px;color:rgba(200,170,100,0.72);text-decoration:none;line-height:1.35;border-left:3px solid transparent;transition:background 0.13s,color 0.13s,border-color 0.13s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#toc-panel a:hover{color:var(--gold-lt);background:rgba(200,168,40,0.07);border-left-color:rgba(200,168,40,0.4)}
+#toc-panel a.active{color:var(--gold-lt);background:rgba(200,168,40,0.12);border-left-color:var(--gold-lt)}
+
+/* ═══ MAIN ═══ */
+#main{max-width:880px;margin:0 auto;background:var(--parchment);min-height:100vh;box-shadow:0 0 80px rgba(0,0,0,0.9)}
+
+/* ── COVER ── */
+.cover{background:#000;padding:68px 56px 56px;text-align:center;position:relative;border-bottom:6px double var(--gold)}
+.cover::before{content:'';position:absolute;inset:12px;border:1px solid rgba(200,168,40,0.2);pointer-events:none}
+.cover-eyebrow{font-family:'Cinzel',serif;font-size:9px;letter-spacing:5px;color:var(--gold-lt);text-transform:uppercase;margin-bottom:20px}
+.cover-title{font-family:'Cinzel',serif;font-size:2.15rem;font-weight:700;color:var(--white);line-height:1.14;margin-bottom:12px}
+.cover-sub{font-style:italic;color:var(--gold);font-size:1.08rem;margin-bottom:32px}
+.cover-verse{display:inline-block;font-style:italic;color:rgba(248,244,232,0.85);font-size:.93rem;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);padding:10px 28px;line-height:1.75}
+
+/* ── SECTIONS ── */
+section{padding:48px 58px 44px;border-bottom:1px solid var(--rule)}
+section:last-child{border-bottom:none}
+.sec-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:var(--gold-dk);text-transform:uppercase;margin-bottom:6px}
+h2{font-family:'Cinzel',serif;font-size:1.28rem;font-weight:600;color:var(--gold-lt);margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--rule)}
+h3{font-family:'EB Garamond',serif;font-size:1.08rem;font-weight:700;color:var(--gold);margin:24px 0 10px}
+p{line-height:1.78;margin-bottom:14px;font-size:1.01rem;color:var(--ink)}
+p:last-child{margin-bottom:0}
+
+/* ── BLOCKQUOTE ── */
+blockquote{margin:20px 0;padding:16px 20px 16px 30px;background:var(--aged);border-left:4px solid var(--gold);font-style:italic;font-size:1rem;line-height:1.72;color:#d8c890;position:relative}
+blockquote::before{content:'\201C';font-size:3rem;color:var(--rule-lt);position:absolute;top:-4px;left:7px;line-height:1;font-family:Georgia,serif}
+.src{display:block;font-style:normal;font-size:.77rem;font-family:'Source Sans 3',sans-serif;color:var(--gold);margin-top:8px;letter-spacing:.4px}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.92rem}
+thead tr{background:#000;color:var(--gold-lt)}
+thead th{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;padding:10px 12px;text-align:left}
+tbody tr:nth-child(odd){background:var(--parchment)}
+tbody tr:nth-child(even){background:var(--aged)}
+td{padding:9px 12px;line-height:1.5;vertical-align:top;color:var(--ink)}
+td:first-child{font-family:'Cinzel',serif;font-size:.82rem;color:var(--gold);font-weight:600}
+
+/* ── CARD ── */
+.card{background:var(--aged);border:1px solid var(--rule);padding:18px 22px;margin:18px 0}
+.card-lbl{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+
+/* ── VERDICT ── */
+.verdict{background:#000;color:var(--ink);padding:24px 28px;margin:24px 0 0;border-left:5px solid var(--gold-lt)}
+.verdict-lbl{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:var(--gold-lt);text-transform:uppercase;margin-bottom:10px}
+.verdict p{color:var(--ink);margin-bottom:10px}
+.verdict p:last-child{margin-bottom:0}
+.verdict em,.verdict i{color:var(--gold)}
+.verdict strong{color:var(--white)}
+
+/* ── NOTE BOX ── */
+.note{background:var(--aged);border:1px solid var(--gold-dk);padding:16px 20px;margin:16px 0;font-size:.95rem;color:var(--ink);line-height:1.72}
+.note-lbl{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+
+/* ── SYLLOGISM ── */
+.syllogism{background:var(--aged);border:1.5px solid var(--gold);padding:20px 26px;margin:22px 0}
+.syllogism-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.syllogism p{margin-bottom:6px;font-size:.97rem;color:var(--ink)}
+.syllogism .conclusion{font-weight:700;border-top:1px solid var(--rule);padding-top:8px;margin-top:8px;color:var(--gold-lt)}
+
+/* ── COMPARE GRID ── */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.cc{background:var(--aged);border:1px solid var(--rule);padding:14px 16px}
+.cc-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.cc p{font-size:.88rem;line-height:1.56;margin:0;color:var(--ink)}
+.cc.nat{border-left:4px solid var(--gold-dk)}
+.cc.the{border-left:4px solid #4a8a4a}
+
+/* ── INLINE ── */
+.gr{font-style:italic;color:#90b870;font-size:1.04em}
+.la{font-style:italic;color:#a0a060}
+strong{font-weight:700;color:var(--white)}
+
+.hl{border:1.5px solid var(--gold-dk);padding:14px 20px;margin:16px 0;background:var(--aged);font-size:.96rem;line-height:1.72;color:var(--ink)}
+
+.footnote{border-top:1px solid var(--rule);margin-top:32px;padding-top:14px;font-size:.79rem;font-family:'Source Sans 3',sans-serif;color:var(--margin);line-height:1.65}
+
+@media(max-width:680px){
+  .cover{padding:40px 22px 32px}.cover-title{font-size:1.4rem}
+  section{padding:32px 20px 28px}.cg{grid-template-columns:1fr}
+  h2{font-size:1.08rem}#main{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<button id="toc-btn" aria-controls="toc-panel" aria-expanded="false" aria-label="Abrir índice">
+  <span class="hbars" aria-hidden="true"><span></span><span></span><span></span></span>
+  Índice
+</button>
+<div id="toc-overlay" aria-hidden="true"></div>
+
+<nav id="toc-panel" aria-label="Índice">
+  <div class="toc-spacer"></div>
+  <div class="toc-title">Contenido</div>
+
+  <div class="toc-group">Qué es</div>
+  <a href="#definicion">I. Definición y origen histórico</a>
+  <a href="#origen">II. Raíces protestantes e ilustradas</a>
+  <a href="#criterios">III. Los criterios del método</a>
+  <a href="#troeltsch">IV. Los principios de Troeltsch</a>
+  <a href="#herramientas">V. Herramientas del método</a>
+
+  <div class="toc-group">Utilidad y Valor</div>
+  <a href="#utilidad">VI. Utilidad e importancia genuina</a>
+  <a href="#logros">VII. Logros verificables</a>
+
+  <div class="toc-group">Límites y Crítica</div>
+  <a href="#limites">VIII. Límites epistemológicos</a>
+  <a href="#naturalismo">IX. El naturalismo metodológico</a>
+  <a href="#peticion">X. Petición de principio</a>
+  <a href="#plantinga">XI. Plantinga y la HBC</a>
+
+  <div class="toc-group">El Caso Paradigmático</div>
+  <a href="#resurreccion">XII. La Resurrección: dos marcos</a>
+  <a href="#comparacion">XIII. Tabla comparativa</a>
+
+  <div class="toc-group">Silogismos</div>
+  <a href="#silogismos">XIV. Silogismos formales</a>
+  <a href="#conclusion">Conclusión</a>
+</nav>
+
+<div id="main">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Dossier Epistemológico · Filosofía de la Historia</div>
+  <h1 class="cover-title">El Método Histórico-Crítico:<br>Alcance, Límites y Petición de Principio</h1>
+  <p class="cover-sub">Una evaluación honesta de las ciencias bíblicas, su utilidad y sus presuposiciones filosóficas</p>
+  <div class="cover-verse">
+    <em>«El historiador que niega la resurrección de Jesús debido a su asunción de naturalismo metodológico comete el mismo error que el biólogo que piensa que el proceso evolutivo no tiene dirección debido a su asunción de naturalismo ontológico o metodológico. En ninguno de los dos casos existe propiamente un conflicto entre ciencia y religión: el conflicto es entre la religión y ciertas asunciones filosóficas.»</em><br>
+    <span style="font-size:.78rem;color:var(--gold);">— William Lane Craig, revisando a Alvin Plantinga, <em>Reasonable Faith</em></span>
+  </div>
+</div>
+
+<!-- I -->
+<section id="definicion">
+  <div class="sec-label">Sección I</div>
+  <h2>Definición y Naturaleza del Método Histórico-Crítico</h2>
+
+  <p>El <strong>método histórico-crítico</strong> (en alemán, <em>historisch-kritische Methode</em>) es el conjunto de técnicas y principios metodológicos empleados por la historiografía académica para analizar textos del pasado —en particular, la Biblia— con el objetivo de determinar su composición, autoría, fuentes, transmisión y significado original. En su forma más amplia, se aplica a cualquier documento antiguo; en su forma específicamente bíblica, se conoce como «crítica bíblica» (<em>Bibelkritik</em>) o «altas críticas» (<em>Higher Criticism</em>).</p>
+
+  <p>El método opera sobre la base de que los textos bíblicos son documentos históricos que deben ser estudiados con las mismas herramientas con las que se estudian otros documentos de la antigüedad: análisis lingüístico, crítica de fuentes, arqueología, comparación literaria y contextualización histórica. Esta premisa metodológica es en parte su fortaleza y en parte su límite más importante, como se analizará en detalle.</p>
+
+  <div class="card">
+    <div class="card-lbl">Definición académica estándar</div>
+    <p>«La crítica histórica es un enfoque académico para interpretar textos antiguos —principalmente la Biblia— examinando su composición, autoría, fuentes y transmisión a través de la lente de evidencia histórica, lingüística y cultural para discernir sus significados y contextos originales probables. El método emplea herramientas como la crítica textual, la crítica de fuentes y la crítica de formas, priorizando datos empíricos sobre presuposiciones dogmáticas.»</p>
+    <p style="font-size:.8rem;color:var(--gold);margin-top:6px;">— Formulación estándar en historiografía académica (cf. Edgar Krentz, <em>The Historical-Critical Method</em>, Fortress Press, 1975)</p>
+  </div>
+</section>
+
+<!-- II -->
+<section id="origen">
+  <div class="sec-label">Sección II</div>
+  <h2>Raíces Protestantes, Ilustradas y Deístas</h2>
+
+  <p>El método histórico-crítico no surgió en el vacío intelectual. Sus raíces son identificables con precisión histórica, y esa genealogía es epistemológicamente relevante porque revela las presuposiciones filosóficas que lo acompañaron desde su nacimiento.</p>
+
+  <h3>Los orígenes: Spinoza, el racionalismo y el deísmo inglés</h3>
+  <p>El primer gran impulsor del análisis crítico de la Biblia como documento puramente histórico fue <strong>Baruch Spinoza</strong> (1632–1677), que en su <em>Tractatus Theologico-Politicus</em> (1670) argumentó que la Biblia debía estudiarse con los mismos métodos que cualquier otro libro antiguo, sin presuponer su inspiración divina. Spinoza era panteísta: su rechazo del Dios personal bíblico era el motor filosófico de su hermenéutica.</p>
+
+  <p>Paralelamente, el <strong>deísmo inglés</strong> —representado por Matthew Tindal (1657–1733), que sostenía que Jesús enseñó una religión natural sin dogmas y que la Iglesia la corrompió— proporcionó el marco ideológico en el que la crítica bíblica prosperaría. La historiadora Henning Graf Reventlow ha documentado los «fuertes vínculos directos» entre el deísmo inglés y el desarrollo de la crítica bíblica alemana.</p>
+
+  <h3>La escuela alemana protestante</h3>
+  <p>La forma académica rigurosa del método se desarrolló en Alemania en el siglo XVIII–XIX, fundamentalmente en contexto <strong>protestante</strong>. Los filólogos alemanes —en su mayoría pastores o teólogos protestantes— aplicaron las herramientas de la erudición clásica a los textos bíblicos:</p>
+
+  <table>
+    <thead><tr><th>Figura</th><th>Fechas</th><th>Contribución clave</th><th>Contexto confesional</th></tr></thead>
+    <tbody>
+      <tr><td>Johann Salomo Semler</td><td>1725–1791</td><td>«Padre de la investigación histórico-crítica»; separó verdades eternas de elementos históricos</td><td>Protestante (luterano)</td></tr>
+      <tr><td>Johann Gottfried Eichhorn</td><td>1752–1827</td><td>Aplicó crítica de fuentes al AT; acuñó «crítica superior»</td><td>Protestante (luterano)</td></tr>
+      <tr><td>Friedrich Schleiermacher</td><td>1768–1834</td><td>Hermenéutica moderna; importancia del contexto histórico-autorial</td><td>Protestante (reformado)</td></tr>
+      <tr><td>Ferdinand Christian Baur</td><td>1792–1860</td><td>Escuela de Tubinga; aplicó dialéctica hegeliana al NT</td><td>Protestante (luterano)</td></tr>
+      <tr><td>Julius Wellhausen</td><td>1844–1918</td><td>Hipótesis documentaria del Pentateuco (JEDP)</td><td>Protestante (luterano)</td></tr>
+      <tr><td>Rudolf Bultmann</td><td>1884–1976</td><td>Desmitologización; crítica de formas</td><td>Protestante (luterano)</td></tr>
+    </tbody>
+  </table>
+
+  <p>El historiador James A. Herrick observa que, aunque la mayoría de los académicos concuerda en que la crítica bíblica surgió de la Ilustración alemana, hay «fuertes vínculos directos» con el deísmo inglés, que Reventlow vincula con la cosmovisión humanista. Esta genealogía no invalida el método per se, pero revela que nació dentro de un marco filosófico ya comprometido con el naturalismo y el escepticismo hacia lo sobrenatural.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Implicación epistemológica</div>
+    <p>El método histórico-crítico no surgió como una herramienta filosóficamente neutral desarrollada por creyentes que querían entender mejor su fe. Surgió en gran medida de filósofos (Spinoza) y teólogos liberales que <em>ya habían rechazado previamente</em> la cosmovisión sobrenatural, y que construyeron un método consistente con esa presuposición. Esto no significa que el método carezca de valor —tiene valor real e importante— pero significa que sus presuposiciones filosóficas no son neutrales y deben ser sometidas a análisis crítico.</p>
+  </div>
+</section>
+
+<!-- III -->
+<section id="criterios">
+  <div class="sec-label">Sección III</div>
+  <h2>Los Criterios del Método Histórico</h2>
+
+  <p>La historiografía moderna evalúa la fiabilidad de un testimonio histórico mediante criterios que, en su formulación «blanda» o platitudinaria, son perfectamente aceptables para cualquier estudioso, independientemente de sus convicciones filosóficas:</p>
+
+  <table>
+    <thead><tr><th>Criterio</th><th>Descripción</th><th>Valor genuino</th></tr></thead>
+    <tbody>
+      <tr><td>Atestación múltiple</td><td>Un hecho confirmado por múltiples fuentes independientes es más fiable</td><td>Alto — identifica hechos robustos</td></tr>
+      <tr><td>Criterio de embarazo</td><td>Un dato que incomoda al autor o su comunidad tiene más probabilidad de ser auténtico</td><td>Alto — filtra apologética</td></tr>
+      <tr><td>Coherencia contextual</td><td>Un dato coherente con el contexto histórico-cultural es más plausible</td><td>Alto — ancla en la realidad</td></tr>
+      <tr><td>Criterio de discontinuidad</td><td>Material sin paralelo en el judaísmo o el cristianismo primitivo es atribuible al personaje histórico</td><td>Moderado — excesivamente restrictivo</td></tr>
+      <tr><td>Proximidad temporal</td><td>Las fuentes más cercanas al evento tienen mayor peso</td><td>Alto — standard historiográfico</td></tr>
+      <tr><td>Lectio difficilior</td><td>La lectura más difícil de un texto es generalmente la más antigua</td><td>Alto — en crítica textual</td></tr>
+    </tbody>
+  </table>
+
+  <p>Estos criterios, en su versión neutra, son herramientas legítimas y valiosas. El problema no está en los criterios en sí sino en el <em>marco filosófico de fondo</em> en el que se aplican, que convierte criterios metodológicos en criterios ontológicos tácitos.</p>
+</section>
+
+<!-- IV -->
+<section id="troeltsch">
+  <div class="sec-label">Sección IV</div>
+  <h2>Los Tres Principios de Troeltsch: El Corazón del Problema</h2>
+
+  <p><strong>Ernst Troeltsch</strong> (1865–1923) fue el teólogo e historiador alemán que en 1898 formuló los tres principios sobre los que, según él, descansaba toda la investigación histórica crítica. Estos principios revelan con claridad el problema filosófico de fondo:</p>
+
+  <div class="card">
+    <div class="card-lbl">Ernst Troeltsch — Los tres principios (formulación clásica, 1898)</div>
+    <p><strong>1. Principio de crítica (o duda metodológica):</strong> Los juicios sobre el pasado no pueden alcanzar certeza absoluta sino solo grados relativos de probabilidad y están siempre abiertos a revisión.</p>
+    <p style="margin-top:10px;"><strong>2. Principio de analogía:</strong> El conocimiento histórico es posible porque todos los eventos son similares en principio. Debemos asumir que las leyes de la naturaleza en tiempos bíblicos eran las mismas que ahora. Troeltsch llamó a esto «el poder omnipotente de la analogía».</p>
+    <p style="margin-top:10px;"><strong>3. Principio de correlación:</strong> Los fenómenos de la vida histórica del hombre están tan interrelacionados e interdependientes que ningún cambio radical puede ocurrir en un punto del nexo histórico sin producir cambios en todo lo que le rodea inmediatamente. La explicación histórica toma necesariamente la forma de entender un evento en términos de sus antecedentes y consecuentes naturales.</p>
+    <p style="margin-top:10px;font-size:.8rem;color:var(--gold);">— Ernst Troeltsch, «Über historische und dogmatische Methode in der Theologie», <em>Gesammelte Schriften</em>, vol. 2, Tübingen, 1913 (citado en Alvin Plantinga, <em>Warranted Christian Belief</em>, Oxford UP, 2000, cap. 12)</p>
+  </div>
+
+  <h3>La interpretación platitudinaria vs. la interpretación no-platitudinaria</h3>
+  <p>El filósofo Alvin Plantinga hace una distinción fundamental en su análisis de Troeltsch (<em>Warranted Christian Belief</em>, Oxford UP, 2000): los principios de Troeltsch tienen una <strong>interpretación platitudinaria</strong> (banal, que ningún creyente rechazaría) y una <strong>interpretación no-platitudinaria</strong> (que es la que realmente opera en la comunidad de crítica bíblica histórica):</p>
+
+  <div class="cg">
+    <div class="cc nat">
+      <div class="cc-title">Interpretación platitudinaria (aceptable)</div>
+      <p><em>Analogía:</em> Los procesos físicos ordinarios operaban entonces como ahora. El agua hervía a 100°C; los muertos no resucitan <em>ordinariamente</em>.<br><br>
+      <em>Correlación:</em> Los eventos históricos tienen causas y consecuencias identificables en el contexto humano ordinario.</p>
+    </div>
+    <div class="cc the">
+      <div class="cc-title">Interpretación no-platitudinaria (problemática)</div>
+      <p><em>Analogía:</em> Los eventos del pasado deben ser <em>idénticos en tipo</em> a lo que conocemos ahora. Por tanto, los milagros son <em>a priori</em> imposibles o improbabilísimos.<br><br>
+      <em>Correlación:</em> <em>Ningún</em> evento puede estar fuera del nexo de causas y efectos naturales — lo que excluye por definición la acción divina directa.</p>
+    </div>
+  </div>
+
+  <blockquote>
+    «Troeltsch y Collins no significan realmente que el historiador crítico deba creer en leyes naturales; quizás podrían decir lo mismo afirmando que las mismas generalizaciones empíricas o regularidades físicas que se dan ahora se daban en el pasado. Pero en la comunidad de HBC [Historical Biblical Criticism], esos principios se entienden de tal manera que excluyen la acción divina directa en el mundo.»
+    <span class="src">— Alvin Plantinga, <em>Warranted Christian Belief</em>, Oxford University Press, 2000, cap. 12 (texto verificado en CCEL)</span>
+  </blockquote>
+
+  <p>La distinción de Plantinga es decisiva: la versión platitudinaria de los principios de Troeltsch es trivialmente verdadera y no excluye los milagros. La versión no-platitudinaria, que es la que realmente opera en la práctica de la crítica bíblica histórica, <em>sí</em> los excluye — pero esa exclusión no es una consecuencia del método histórico en sí, sino de una presuposición filosófica adicional: el naturalismo.</p>
+</section>
+
+<!-- V -->
+<section id="herramientas">
+  <div class="sec-label">Sección V</div>
+  <h2>Las Herramientas del Método: Descripción Técnica</h2>
+
+  <table>
+    <thead><tr><th>Herramienta</th><th>Descripción</th><th>Aplicación bíblica</th></tr></thead>
+    <tbody>
+      <tr><td>Crítica textual</td><td>Establecer el texto original a partir de manuscritos</td><td>NA28; BHS; aparato crítico del NT y AT</td></tr>
+      <tr><td>Crítica de fuentes</td><td>Identificar fuentes literarias subyacentes</td><td>Hipótesis JEDP (Pentateuco); teoría de los dos documentos (Q y Marcos)</td></tr>
+      <tr><td>Crítica de formas</td><td>Clasificar las unidades literarias por género y tradición oral</td><td>Bultmann: identificar capas de tradición en los evangelios</td></tr>
+      <tr><td>Crítica de redacción</td><td>Estudiar cómo los editores finales moldearon el material</td><td>Diferencias entre Marcos, Mateo y Lucas</td></tr>
+      <tr><td>Crítica histórica</td><td>Determinar qué eventos son históricamente verificables</td><td>«Jesús histórico» vs. «Cristo de la fe»</td></tr>
+      <tr><td>Crítica social/sociológica</td><td>Contextualizar los textos en su entorno sociocultural</td><td>Estudios de Wayne Meeks sobre las comunidades paulinas</td></tr>
+      <tr><td>Arqueología bíblica</td><td>Contrastar los textos con evidencia material</td><td>Descubrimientos en Megido, Qumrán, Cesarea</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- VI -->
+<section id="utilidad">
+  <div class="sec-label">Sección VI</div>
+  <h2>Utilidad e Importancia Genuina del Método</h2>
+
+  <p>Una evaluación honesta del método histórico-crítico exige reconocer sus contribuciones reales e importantes. Sería epistemológicamente deshonesto criticarlo sin reconocer lo que ha aportado:</p>
+
+  <h3>1. Recuperación de contextos históricos genuinos</h3>
+  <p>El método ha permitido comprender los textos bíblicos en su contexto histórico-cultural original. Saber que Pablo escribe a comunidades en el contexto del Imperio Romano del siglo I, que el Evangelio de Juan utiliza vocabulario del mundo helenístico, o que el Deutero-Isaías refleja el contexto del exilio babilónico, enriquece —no empobrece— la comprensión teológica del texto.</p>
+
+  <h3>2. Establecimiento del texto crítico</h3>
+  <p>La crítica textual —probablemente la subdisciplina más técnica e indispensable— ha permitido establecer los textos del NT y AT con un nivel de fiabilidad sin precedentes en la literatura antigua. El NA28 y la BHS son monumentos de la erudición crítica que benefician a creyentes y no creyentes por igual.</p>
+
+  <h3>3. Desmantelamiento de interpolaciones y errores</h3>
+  <p>El método ha identificado interpolaciones tardías (como el <em>Comma Johanneum</em> de 1 Jn 5:7-8, o el pasaje de la mujer adúltera en Jn 7:53–8:11) que habían sido incorporadas al texto sin pertenecer al original. Esto es una contribución a la honestidad textual que cualquier creyente serio debe agradecer.</p>
+
+  <h3>4. Establecimiento de hechos históricos robustos</h3>
+  <p>El método ha proporcionado una base historiográfica sólida para hechos como la existencia histórica de Jesús, la crucifixión bajo Pilato, la antigüedad de los credos paulinos, y la continuidad entre el Jesús histórico y el Cristo del kerygma. Académicos tan escépticos como Bart Ehrman reconocen estos hechos como históricamente establecidos.</p>
+
+  <h3>5. Protección contra el fundamentalismo ingenuo</h3>
+  <p>El análisis histórico-crítico ha obligado a la teología a abandonar lecturas excesivamente literalistas o anacrónicas que no hacen justicia ni al texto ni a su contexto. Este efecto disciplinador tiene valor real.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Reconocimiento honesto</div>
+    <p>El método histórico-crítico es una herramienta valiosa, legítima e indispensable para el estudio riguroso de los textos bíblicos en sus dimensiones literarias, lingüísticas e históricas. La crítica que se desarrolla en este dossier no es una crítica a la herramienta en sí, sino a la <em>filosofía de fondo</em> que en su práctica cotidiana convierte un método epistemológico en una afirmación ontológica tácita sobre la naturaleza de la realidad.</p>
+  </div>
+</section>
+
+<!-- VII -->
+<section id="logros">
+  <div class="sec-label">Sección VII</div>
+  <h2>Logros Historiográficos Verificables</h2>
+
+  <div class="cg">
+    <div class="cc">
+      <div class="cc-title">Crítica textual del NT</div>
+      <p>El NT es el documento de la antigüedad con mayor número de manuscritos (más de 5.800 en griego). La crítica textual ha establecido un texto con más del 99% de fiabilidad en su contenido sustancial.</p>
+    </div>
+    <div class="cc">
+      <div class="cc-title">Datación de los credos</div>
+      <p>El análisis del credo de 1 Cor 15:3-8 lo data a 3-5 años de la crucifixión, eliminando el mito de que el kerygma fue una invención tardía.</p>
+    </div>
+    <div class="cc">
+      <div class="cc-title">Qumrán y el AT</div>
+      <p>Los rollos del Mar Muerto (1947) confirmaron la fiabilidad de la transmisión del AT durante 1.000 años y arrojaron luz crucial sobre el judaísmo del siglo I.</p>
+    </div>
+    <div class="cc">
+      <div class="cc-title">Contexto del Jesús histórico</div>
+      <p>Académicos de todo el espectro ideológico (Meier, Sanders, Crossan, Ehrman) han establecido un núcleo de hechos históricos sobre Jesús que ninguna interpretación responsable puede ignorar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIII -->
+<section id="limites">
+  <div class="sec-label">Sección VIII</div>
+  <h2>Límites Epistemológicos del Método</h2>
+
+  <p>Todo método tiene límites inherentes. Los del método histórico-crítico son los siguientes:</p>
+
+  <h3>1. No puede pronunciarse sobre lo sobrenatural por definición</h3>
+  <p>El método histórico opera con evidencia empírica, documentos, arqueología y analogías con eventos conocidos. Por definición, <em>no está diseñado para pronunciarse sobre la existencia o actuación de Dios</em>. Un método que solo mide temperatura no puede decir nada sobre la belleza de una sinfonía — no porque la belleza no exista, sino porque ese no es su instrumento de medición.</p>
+
+  <h3>2. Opera con probabilidades, nunca con certezas</h3>
+  <p>El principio de crítica de Troeltsch reconoce que la historia opera con probabilidades. Ninguna conclusión histórica tiene el estatus de certeza lógica. La frase «históricamente improbable» no equivale a «no ocurrió» — equivale a «no tenemos suficientes paralelos documentados para asignarle alta probabilidad dentro del marco naturalista».</p>
+
+  <h3>3. Depende de presuposiciones filosóficas no verificadas históricamente</h3>
+  <p>El principio de analogía de Troeltsch presupone que «los eventos del pasado deben ser similares a los del presente». Pero esta uniformidad es una presuposición filosófica (tomada del empirismo humeano), no una conclusión derivada del análisis histórico. Si Dios existe y actúa en la historia, el principio de analogía falla en exactamente esos puntos de acción divina.</p>
+
+  <h3>4. Es incapaz de refutar hechos que no encajan en su marco</h3>
+  <p>Si un evento ocurrió pero no tiene analogías en la experiencia ordinaria (porque es, por definición, único), el método lo clasificará como «no establecido históricamente» o «improbable» — no porque no haya ocurrido, sino porque su marco categorial no tiene donde ubicarlo. Esto es una limitación del método, no una refutación del evento.</p>
+
+  <h3>5. Los propios críticos bíblicos discrepan radicalmente entre sí</h3>
+  <p>Si el método fuera tan objetivo y neutro como pretende, cabría esperar convergencia en los resultados. En cambio, la historia de las ciencias bíblicas muestra disensión radical: Bultmann y Jeremias, Crossan y Wright, la Jesus Seminar y sus críticos llegan a conclusiones opuestas aplicando las mismas herramientas. Esto indica que las presuposiciones filosóficas del investigador determinan las conclusiones tanto como los datos.</p>
+</section>
+
+<!-- IX -->
+<section id="naturalismo">
+  <div class="sec-label">Sección IX</div>
+  <h2>El Naturalismo Metodológico y sus Implicaciones</h2>
+
+  <p>El concepto clave que subyace al problema filosófico del método histórico-crítico es el <strong>naturalismo metodológico</strong>: la decisión de proceder en la investigación histórica <em>como si</em> no existieran agentes sobrenaturales, independientemente de si existen o no en realidad.</p>
+
+  <h3>¿Qué es el naturalismo metodológico?</h3>
+  <p>El naturalismo metodológico (NM) es la regla que dice: «En mi investigación, solo invocaré causas naturales.» Es distinto del naturalismo ontológico (NO), que afirma: «Solo existen causas naturales.» En principio, el NM no requiere comprometerse con el NO.</p>
+
+  <div class="card">
+    <div class="card-lbl">Distinción crucial: naturalismo metodológico vs. ontológico</div>
+    <table style="margin:0">
+      <thead><tr><th>Tipo</th><th>Afirmación</th><th>Estatus</th></tr></thead>
+      <tbody>
+        <tr><td>Naturalismo metodológico (NM)</td><td>«Procedo como si solo hubiera causas naturales»</td><td>Regla de método — discutible en su alcance</td></tr>
+        <tr><td>Naturalismo ontológico (NO)</td><td>«Solo existen causas naturales; Dios no existe»</td><td>Afirmación filosófica — no derivada del método</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>El problema es que en la práctica de la crítica bíblica histórica (HBC), el NM tiende a deslizarse hacia el NO. Cuando un historiador dice «la resurrección de Jesús no puede establecerse históricamente», esa afirmación tiene dos lecturas posibles:</p>
+
+  <div class="hl">
+    <strong>Lectura débil (legítima):</strong> «Dentro del marco del naturalismo metodológico, no tenemos herramientas para establecer si la resurrección ocurrió, porque ese marco excluye por definición los eventos sobrenaturales de su campo de análisis.»<br><br>
+    <strong>Lectura fuerte (ilegítima, pero frecuente):</strong> «La resurrección no ocurrió, porque el método histórico no puede establecerla.»
+  </div>
+
+  <p>La lectura fuerte convierte una limitación metodológica en una conclusión ontológica. Este salto es precisamente la petición de principio que se analiza en la sección siguiente.</p>
+</section>
+
+<!-- X -->
+<section id="peticion">
+  <div class="sec-label">Sección X</div>
+  <h2>La Petición de Principio: El Núcleo del Problema</h2>
+
+  <p>Una <strong>petición de principio</strong> (<em>petitio principii</em>) es una falacia lógica en la que la conclusión está ya contenida en las premisas — es decir, se asume lo que se pretende demostrar. El método histórico-crítico, tal como se practica en la comunidad académica hegemónica, incurre en esta falacia cuando pretende pronunciarse sobre lo sobrenatural.</p>
+
+  <h3>La estructura de la petición de principio</h3>
+
+  <div class="syllogism">
+    <div class="syllogism-title">La petición de principio del método histórico aplicado a milagros</div>
+    <p><strong>Premisa 1 (filosófica, no histórica):</strong> El método histórico solo puede establecer hechos que tengan causas y analogías naturales (principio de correlación + analogía de Troeltsch).</p>
+    <p><strong>Premisa 2 (filosófica, no histórica):</strong> Los milagros, por definición, no tienen causas naturales.</p>
+    <p><strong>Premisa 3 (conclusión presentada como premisa):</strong> Por tanto, los milagros no pueden ocurrir en la historia tal como la estudia el método histórico.</p>
+    <p><strong>Conclusión presentada como resultado empírico:</strong> «Históricamente, la resurrección de Jesús no ocurrió» (o «no puede establecerse»).</p>
+    <p class="conclusion">→ La falacia: la conclusión no deriva del análisis histórico, sino de las presuposiciones filosóficas que se introdujeron en las premisas 1 y 2. El método <em>asume</em> el naturalismo y luego <em>concluye</em> el naturalismo.</p>
+  </div>
+
+  <h3>El punto de David Law</h3>
+  <p>El académico David Law ha argumentado que esta crítica es un «hombre de paja», sosteniendo que el método solo elimina el naturalismo teológico como <em>presuposición</em>, no como <em>conclusión</em>. Law afirma que el método permite llegar a conclusiones teológicas, solo exige no partir de ellas.</p>
+
+  <p>La réplica a Law es la siguiente: en la práctica de la HBC dominante, el naturalismo no actúa solo como una presuposición que se abandona cuando los datos lo exigen — actúa como un <em>filtro definitivo</em> que clasifica automáticamente como «no histórico» cualquier evento con características sobrenaturales. Cuando Bultmann dice que «un hombre moderno no puede creer en milagros», no está describiendo una conclusión derivada del análisis — está expresando una presuposición filosófica que determina de antemano el resultado.</p>
+
+  <blockquote>
+    «El naturalismo metodológico, tal como lo practica la comunidad de crítica bíblica histórica, no es una regla metodológica neutral — es una presuposición filosófica que predetermina el resultado en cuestiones de acción divina. No es distinto del investigador que entra a examinar si hay luz en una habitación con los ojos vendados y concluye que no hay luz.»
+    <span class="src">— Paráfrasis de la argumentación de Alvin Plantinga, <em>Warranted Christian Belief</em>, Oxford UP, 2000, caps. 12–14</span>
+  </blockquote>
+</section>
+
+<!-- XI -->
+<section id="plantinga">
+  <div class="sec-label">Sección XI</div>
+  <h2>Plantinga y la Crítica a las «HBC»</h2>
+
+  <p>El filósofo analítico <strong>Alvin Plantinga</strong> (nacido 1932), uno de los filósofos de la religión más importantes del siglo XX, dedicó una parte sustancial de su obra <em>Warranted Christian Belief</em> (Oxford University Press, 2000) a criticar filosóficamente el naturalismo de la crítica bíblica histórica. Sus argumentos son los más rigurosos disponibles en la literatura filosófica sobre este tema.</p>
+
+  <h3>El argumento de Plantinga: la «base epistémica»</h3>
+  <p>Plantinga sostiene que el creyente cristiano y el historiador naturalista no parten de la misma base epistémica. El creyente tiene acceso a información adicional —la experiencia del Espíritu Santo, la revelación, la fe— que forma parte legítima de su base epistémica. Las conclusiones de la HBC solo son «derrotadores» (<em>defeaters</em>) para las creencias del creyente si se acepta previamente que la base epistémica naturalista es la única válida — lo cual es precisamente lo que está en cuestión.</p>
+
+  <blockquote>
+    «Los principios de Troeltsch tienen interpretaciones platitudinarias; pero estas no son, de hecho, las interpretaciones que se les da en la comunidad de HBC. Dentro de esa comunidad, esos principios se entienden de tal manera que excluyen la acción divina directa en el mundo.»
+    <span class="src">— Alvin Plantinga, <em>Warranted Christian Belief</em>, Oxford University Press, 2000 (texto verificado en CCEL, ccel.org)</span>
+  </blockquote>
+
+  <blockquote>
+    «hay conflicto superficial pero concordia profunda entre la ciencia y la religión teísta, pero concordia superficial y conflicto profundo entre la ciencia y el naturalismo.»
+    <span class="src">— Alvin Plantinga, <em>Where the Conflict Really Lies: Science, Religion, and Naturalism</em>, Oxford UP, 2011, p. ix</span>
+  </blockquote>
+
+  <h3>El argumento de la base epistémica diferencial</h3>
+  <p>Si Dios existe y ha actuado en la historia, entonces la «base epistémica» del creyente —que incluye información sobre esa acción divina— es más amplia que la del investigador naturalista. Las conclusiones de la HBC, que solo son válidas dentro de la base epistémica naturalista, no son «derrotadores» de las creencias del creyente que opera con una base más amplia. Como señala William Lane Craig en su revisión de Plantinga: «El historiador que niega la resurrección de Jesús debido a su asunción de naturalismo metodológico comete el mismo error que el biólogo que piensa que el proceso evolutivo es no dirigido debido a su asunción de naturalismo ontológico o metodológico. En ninguno de los casos hay un conflicto entre ciencia y religión: el conflicto es entre religión y ciertas asunciones filosóficas.»</p>
+</section>
+
+<!-- XII -->
+<section id="resurreccion">
+  <div class="sec-label">Sección XII</div>
+  <h2>El Caso Paradigmático: La Resurrección de Cristo</h2>
+
+  <p>La resurrección de Jesucristo es el caso más ilustrativo para demostrar cómo el marco filosófico de fondo del investigador determina la conclusión, con independencia parcial de los datos históricos.</p>
+
+  <h3>Los hechos históricos de base — acordados por académicos de todo el espectro</h3>
+
+  <p>Existe un núcleo de hechos sobre los que hay consenso historiográfico amplio, incluyendo a académicos agnósticos y escépticos:</p>
+
+  <div class="card">
+    <div class="card-lbl">Hechos de base con consenso académico amplio</div>
+    <p><strong>H1.</strong> Jesús murió por crucifixión bajo Poncio Pilato (c. 30 d.C.) — Tácito, Josefo, credos paulinos, los cuatro evangelistas.</p>
+    <p style="margin-top:8px;"><strong>H2.</strong> La tumba fue encontrada vacía el domingo siguiente por sus discípulas — atestado por múltiples fuentes independientes, incluyendo la polémica judía (Mt 28:13 refleja un debate donde los adversarios no niegan la tumba vacía, sino que ofrecen otra explicación).</p>
+    <p style="margin-top:8px;"><strong>H3.</strong> Los discípulos proclamaron haber tenido experiencias de apariciones post-mortem de Jesús — el credo de 1 Cor 15:3-8 (c. 35 d.C.) enumera apariciones a Pedro, los Doce, 500 personas, Santiago y Pablo.</p>
+    <p style="margin-top:8px;"><strong>H4.</strong> El movimiento cristiano surgió en Jerusalén pocas semanas después de la crucifixión, proclamando la resurrección corporal — en el mismo lugar donde la crucifixión era públicamente conocida.</p>
+    <p style="margin-top:8px;"><strong>H5.</strong> Perseguidores del movimiento como Pablo y escépticos como Santiago se convirtieron a raíz de lo que describieron como apariciones del Resucitado.</p>
+    <p style="margin-top:8px;font-size:.8rem;color:var(--gold);">Consenso documentado en: E. P. Sanders, <em>The Historical Figure of Jesus</em>, Penguin, 1993; Bart Ehrman, <em>Did Jesus Exist?</em>, HarperOne, 2012; N. T. Wright, <em>The Resurrection of the Son of God</em>, Fortress Press, 2003.</p>
+  </div>
+
+  <h3>Cómo se explican los mismos hechos desde marcos distintos</h3>
+
+  <div class="cg">
+    <div class="cc nat">
+      <div class="cc-title">Marco naturalista</div>
+      <p><strong>Presuposición:</strong> Los muertos no resucitan. Los eventos sobrenaturales no ocurren.<br><br>
+      <strong>Explicación de H1-H5:</strong> Los discípulos tuvieron alucinaciones colectivas de duelo; o robaron el cuerpo y mintieron; o la tumba vacía es un relato legendario tardío; o Jesús no murió realmente (teoría del desmayo).<br><br>
+      <strong>Estatus epistémico:</strong> Todas estas hipótesis alternativas tienen problemas históricos serios documentados por los propios académicos críticos. Pero dentro del marco naturalista, alguna debe ser verdad.</p>
+    </div>
+    <div class="cc the">
+      <div class="cc-title">Marco teísta</div>
+      <p><strong>Presuposición:</strong> Dios existe y puede actuar en la historia.<br><br>
+      <strong>Explicación de H1-H5:</strong> La resurrección corporal de Jesús explica todos los hechos de base de manera directa, coherente y sin necesidad de hipótesis ad hoc.<br><br>
+      <strong>Estatus epistémico:</strong> La resurrección es la explicación más parsimoniosa de la totalidad de los datos si no se excluye a priori la posibilidad de acción divina.</p>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-lbl">La implicación filosófica</div>
+    <p>El debate no es un debate entre «los datos» y «la fe». Es un debate entre dos marcos interpretativos filosóficos distintos que evalúan los mismos datos de manera diferente. El historiador naturalista no tiene acceso a más datos — tiene una presuposición filosófica distinta. Si esa presuposición es falsa (si Dios existe y actuó en la resurrección de Jesús), entonces la conclusión naturalista es errónea no por incompetencia historiográfica sino por una premisa filosófica equivocada.</p>
+  </div>
+</section>
+
+<!-- XIII -->
+<section id="comparacion">
+  <div class="sec-label">Sección XIII</div>
+  <h2>Tabla Comparativa: Método Histórico-Crítico</h2>
+
+  <table>
+    <thead><tr><th>Dimensión</th><th>Valor / Fortaleza</th><th>Límite / Problema</th></tr></thead>
+    <tbody>
+      <tr><td>Crítica textual</td><td>Establece texto original con alta fiabilidad</td><td>No pronuncia sobre inspiración o verdad teológica</td></tr>
+      <tr><td>Crítica de fuentes</td><td>Identifica capas literarias y tradiciones</td><td>Resultados frecuentemente especulativos y disputados</td></tr>
+      <tr><td>Crítica de formas</td><td>Clasifica géneros y tradiciones orales</td><td>Presupone escasa fiabilidad oral; campo studies lo cuestionan</td></tr>
+      <tr><td>Principio de analogía</td><td>Versión platitudinaria: físicamente correcto</td><td>Versión fuerte: excluye a priori lo sobrenatural</td></tr>
+      <tr><td>Principio de correlación</td><td>Útil para causalidad histórica ordinaria</td><td>Convierte el naturalismo causal en metafísica tácita</td></tr>
+      <tr><td>Principio de crítica</td><td>Promueve revisabilidad y humildad epistémica</td><td>En la práctica, se aplica asimétricamente (muy escéptico con lo sobrenatural, menos con hipótesis naturalistas)</td></tr>
+      <tr><td>Establecimiento de hechos históricos</td><td>Cruces, existencia de Jesús, credos paulinos</td><td>No puede establecer ni descartar hechos con componente sobrenatural</td></tr>
+      <tr><td>Orígenes filosóficos</td><td>Ilustración: promoción de la razón crítica</td><td>Nació comprometido con el naturalismo filosófico de Spinoza, Hume y el deísmo inglés</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- XIV -->
+<section id="silogismos">
+  <div class="sec-label">Sección XIV</div>
+  <h2>Silogismos Formales</h2>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo I — El método no puede descartar lo sobrenatural</div>
+    <p><strong>Premisa mayor:</strong> Un método que solo analiza evidencia empírica y analogías con lo naturalmente conocido solo puede pronunciarse sobre eventos dentro de ese rango de análisis.</p>
+    <p><strong>Premisa menor:</strong> El método histórico-crítico es un método que solo analiza evidencia empírica y analogías con lo naturalmente conocido.</p>
+    <p class="conclusion">∴ Conclusión: El método histórico-crítico no puede pronunciarse sobre la ocurrencia o no-ocurrencia de eventos sobrenaturales. Su silencio o su clasificación de «improbable» no equivale a una refutación.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo II — La petición de principio en la resurrección</div>
+    <p><strong>Premisa mayor:</strong> Si la premisa filosófica de una argumentación ya contiene la conclusión, el argumento comete petición de principio.</p>
+    <p><strong>Premisa menor:</strong> El método histórico-crítico, al aplicar el principio de analogía de Troeltsch en su versión fuerte, presupone que los muertos no resucitan (naturalismo) y concluye que Jesús no resucitó. La conclusión (Jesús no resucitó) está ya contenida en la premisa (los muertos no resucitan).</p>
+    <p class="conclusion">∴ Conclusión: El argumento «el método histórico no puede establecer la resurrección, por tanto no ocurrió» comete petición de principio al asumir el naturalismo como premisa y presentarlo como conclusión histórica.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo III — El cambio de marco y sus consecuencias</div>
+    <p><strong>Premisa mayor:</strong> Si las conclusiones de un método dependen de sus presuposiciones filosóficas de fondo, entonces cambiar esas presuposiciones puede cambiar legítimamente las conclusiones, incluso manteniendo los mismos datos.</p>
+    <p><strong>Premisa menor:</strong> Las conclusiones del método histórico-crítico sobre los milagros dependen de la presuposición naturalista (principio de analogía fuerte). Si se demuestra que Dios existe y actúa en la historia, esa presuposición es falsa.</p>
+    <p class="conclusion">∴ Conclusión: La demostración de la existencia de Dios cambia legítimamente la evaluación histórica de los milagros sin cambiar ningún dato histórico. El debate no es sobre los datos, sino sobre el marco filosófico.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo IV — El método histórico-crítico no es filosóficamente neutral</div>
+    <p><strong>Premisa mayor:</strong> Un método que surgió históricamente de filósofos comprometidos con el naturalismo (Spinoza, Hume, deísmo inglés) y que aplica principios (Troeltsch) que en su versión práctica excluyen la acción divina directa no es filosóficamente neutral.</p>
+    <p><strong>Premisa menor:</strong> El método histórico-crítico surgió de ese contexto y aplica esos principios en ese sentido en la práctica dominante de la HBC.</p>
+    <p class="conclusion">∴ Conclusión: El método histórico-crítico no es filosóficamente neutro. Presentarlo como tal es una afirmación filosófica no demostrada que requiere justificación independiente.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo V — Utilidad limitada pero real</div>
+    <p><strong>Premisa mayor:</strong> Una herramienta puede ser válida y útil dentro de su rango de aplicación y a la vez inadecuada para pronunciarse sobre cuestiones fuera de ese rango.</p>
+    <p><strong>Premisa menor:</strong> El método histórico-crítico es válido y útil para establecer hechos históricos ordinarios (existencia de Jesús, crucifixión, datación de textos, contexto cultural) pero inadecuado para pronunciarse sobre la ocurrencia de eventos sobrenaturales.</p>
+    <p class="conclusion">∴ Conclusión: El método histórico-crítico es una herramienta legítima con alcance limitado. La posición epistemológica correcta es usarlo dentro de su rango y reconocer sus límites fuera de él — no generalizarlo a afirmaciones ontológicas sobre la naturaleza de la realidad.</p>
+  </div>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section id="conclusion">
+  <div class="sec-label">Conclusión</div>
+  <h2>Síntesis: Alcance y Límites del Método Histórico-Crítico</h2>
+
+  <table>
+    <thead><tr><th>Dimensión</th><th>Evaluación</th></tr></thead>
+    <tbody>
+      <tr><td>Utilidad en crítica textual</td><td>Alta — indispensable para establecer el texto original</td></tr>
+      <tr><td>Utilidad en contextualización histórica</td><td>Alta — enriquece la comprensión literaria y cultural</td></tr>
+      <tr><td>Neutralidad filosófica</td><td>Baja — surgió de un contexto naturalista y opera con presuposiciones no neutrales</td></tr>
+      <tr><td>Capacidad de pronunciarse sobre milagros</td><td>Nula por definición — fuera de su rango de análisis</td></tr>
+      <tr><td>Riesgo de petición de principio</td><td>Alto — cuando pretende establecer que los milagros no ocurrieron</td></tr>
+      <tr><td>Valor como una herramienta entre otras</td><td>Alto — siempre que se reconozcan sus límites y presuposiciones</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Veredicto Final</div>
+    <p>El método histórico-crítico es una herramienta valiosa, legítima e importante para el estudio riguroso de los textos bíblicos. Sus contribuciones a la crítica textual, la contextualización histórica y el establecimiento de hechos históricamente verificables son reales e irreemplazables.</p>
+    <p>Sin embargo, el método no es filosóficamente neutral. Nació en el contexto del naturalismo ilustrado, fue sistematizado por pensadores ya comprometidos con la exclusión de lo sobrenatural, y opera en la práctica de la HBC dominante con principios (especialmente el de analogía de Troeltsch en su versión fuerte) que asumen el naturalismo como premisa y lo presentan como conclusión histórica. Esta es una petición de principio.</p>
+    <p>El caso paradigmático es la Resurrección de Cristo: los mismos datos históricos de base (tumba vacía, apariciones, surgimiento del movimiento, conversión de Pablo y Santiago) admiten dos explicaciones radicalmente distintas según el marco filosófico del investigador. El naturalista necesita hipótesis ad hoc cada vez más complicadas; el teísta tiene una explicación directa y parsimoniosa. El debate no es sobre los datos — es sobre si Dios existe y actúa en la historia. Si esa pregunta tiene respuesta afirmativa, las conclusiones del método histórico-crítico sobre los milagros necesitan revisión completa.</p>
+    <p>La posición epistemológicamente honesta es: usar el método dentro de su rango genuino, reconocer sus límites con humildad, y no presentar como resultado de la investigación histórica lo que en realidad es una presuposición filosófica traída desde fuera.</p>
+  </div>
+
+  <div class="footnote">
+    <strong>Fuentes verificadas:</strong>
+    Ernst Troeltsch, «Über historische und dogmatische Methode in der Theologie», <em>Gesammelte Schriften</em>, vol. 2, Mohr, Tübingen, 1913;
+    Alvin Plantinga, <em>Warranted Christian Belief</em>, Oxford University Press, 2000 (caps. 12–14; texto verificado en CCEL ccel.org);
+    Alvin Plantinga, <em>Where the Conflict Really Lies: Science, Religion, and Naturalism</em>, Oxford UP, 2011;
+    Edgar Krentz, <em>The Historical-Critical Method</em>, Fortress Press, 1975;
+    Rudolf Bultmann, «New Testament and Mythology», en <em>Kerygma and Myth</em>, ed. H. W. Bartsch, SPCK, 1953;
+    N. T. Wright, <em>The Resurrection of the Son of God</em>, Fortress Press, 2003;
+    E. P. Sanders, <em>The Historical Figure of Jesus</em>, Penguin, 1993;
+    Bart D. Ehrman, <em>Did Jesus Exist?</em>, HarperOne, 2012;
+    James D. G. Dunn, <em>Jesus Remembered</em>, Eerdmans, 2003;
+    Wikipedia, «Historical criticism» (verificado junio 2026); «Biblical criticism» (verificado junio 2026);
+    Henning Graf Reventlow, <em>The Authority of the Bible and the Rise of the Modern World</em>, Fortress Press, 1985;
+    William Lane Craig, reseña de Plantinga, <em>Reasonable Faith</em>, reasonablefaith.org (verificado).
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('toc-btn');
+  var panel=document.getElementById('toc-panel');
+  var overlay=document.getElementById('toc-overlay');
+  function open(){panel.classList.add('is-open');overlay.classList.add('is-open');btn.classList.add('is-open');btn.setAttribute('aria-expanded','true')}
+  function close(){panel.classList.remove('is-open');overlay.classList.remove('is-open');btn.classList.remove('is-open');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){panel.classList.contains('is-open')?close():open()});
+  overlay.addEventListener('click',close);
+  panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
+  var links=panel.querySelectorAll('a');
+  var secs=document.querySelectorAll('section[id]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(l){l.classList.remove('active')});
+          var active=panel.querySelector('a[href="#'+e.target.id+'"]');
+          if(active){active.classList.add('active');active.scrollIntoView({block:'nearest'})}
+        }
+      });
+    },{rootMargin:'0px 0px -55% 0px',threshold:0});
+    secs.forEach(function(s){io.observe(s)});
+  }
+}());
+</script>
+</body>
+</html>

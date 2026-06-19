@@ -17,3 +17,5 @@ Aqui trabajamos pasajes complejos con rigor, claridad y fidelidad al texto sagra
 - [Jeremias 8:8 Refutacion (Dossier)](/exegesis/jeremias-88-refutacion-dossier/)
 - [Defensa de Deuteronomio 22:28 (Dossier)](/exegesis/defensa-deut-22-28-dossier/)
 - [Semilla de Mostaza - Refutacion (Dossier)](/exegesis/semilla-mostaza-refutacion-dossier/)
+- [La Divinidad de Cristo en Q (Dossier)](/exegesis/divinidad-cristo-q-dossier/)
+- [Mateo 7:21-23 - Kyrie Kyrie (Dossier)](/exegesis/mateo-7-kyrie-dossier/)

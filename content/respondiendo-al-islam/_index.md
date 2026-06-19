@@ -23,3 +23,4 @@ aliases:
 - [La Edad de Rebeca (Dossier)](/respondiendo-al-islam/rebeca-edad-dossier/)
 - [Edad de Maria (Dossier)](/respondiendo-al-islam/edad-maria-dossier/)
 - [El Paraclito de Juan 14-16 (Dossier)](/respondiendo-al-islam/paracleto-dossier/)
+- [Daniel y el Quinto Reino (Dossier)](/respondiendo-al-islam/daniel-quinto-reino-dossier/)
