@@ -16,3 +16,4 @@ Aqui se desarrollaran los contenidos esenciales de la fe cristiana de forma orde
 - [Angel del Senor Yahve (Dossier)](/doctrina/angel-del-senor-yahve-dossier/)
 - [Jesus, Hijo de Dios (Dossier)](/doctrina/jesus-hijo-de-dios-dossier/)
 - [La Inmaculada Concepcion (Dossier)](/doctrina/inmaculada-concepcion-dossier/)
+- [El Bautismo en la Iglesia Catolica (Dossier)](/doctrina/bautismo-dossier/)

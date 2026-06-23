@@ -25,3 +25,4 @@ No para acumular datos sin fin, sino para verificar afirmaciones con metodo.
 - [Crucifixion de Cristo - Testimonios Historicos (Dossier)](/historia/crucifixion-dossier/)
 - [Las Lenguas de Jesus (Dossier)](/historia/lenguas-de-jesus-dossier/)
 - [Metodo Historico (Dossier)](/historia/metodo-historico-dossier/)
+- [Testimonios Historicos de las Muertes de los Apostoles (Dossier)](/historia/muerte-historica-apostoles-dossier/)

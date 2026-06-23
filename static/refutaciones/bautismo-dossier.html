@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier · El Bautismo en la Iglesia Católica: Naturaleza, Necesidad y Casos Límite</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+:root {
+  --ink:     #f0e8c8;
+  --bg:      #0f0f0f;
+  --aged:    #1a1a1a;
+  --deep:    #050505;
+  --gold:    #c8a828;
+  --gold-lt: #e8c840;
+  --gold-dk: #8a7010;
+  --white:   #f8f4e8;
+  --rule:    #5a4a10;
+  --rule-lt: #8a7820;
+  --margin:  #a09060;
+  --nav-bg:  #080808;
+  --nav-w:   268px;
+  --blue:    #1a3a5a;
+  --blue-lt: #4a7aaa;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--deep);font-family:'EB Garamond',Georgia,serif;color:var(--ink)}
+
+#toc-btn{position:fixed;top:16px;left:16px;z-index:400;background:var(--nav-bg);border:1px solid var(--gold);color:var(--gold-lt);font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;padding:8px 13px 8px 10px;cursor:pointer;display:flex;align-items:center;gap:9px;box-shadow:0 2px 14px rgba(0,0,0,0.8);transition:background 0.15s;user-select:none;line-height:1}
+#toc-btn:hover{background:#111}
+.hbars{display:flex;flex-direction:column;gap:4px}
+.hbars span{display:block;width:17px;height:1.5px;background:var(--gold-lt);transition:transform 0.22s,opacity 0.22s;transform-origin:center}
+#toc-btn.is-open .hbars span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+#toc-btn.is-open .hbars span:nth-child(2){opacity:0;transform:scaleX(0)}
+#toc-btn.is-open .hbars span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+#toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:300;opacity:0;pointer-events:none;transition:opacity 0.25s}
+#toc-overlay.is-open{opacity:1;pointer-events:all}
+
+#toc-panel{position:fixed;top:0;left:0;bottom:0;width:var(--nav-w);background:var(--nav-bg);border-right:2px solid var(--gold-dk);z-index:350;overflow-y:auto;padding:0 0 48px;transform:translateX(calc(-1 * var(--nav-w) - 8px));transition:transform 0.28s cubic-bezier(.4,0,.2,1);box-shadow:6px 0 30px rgba(0,0,0,0.9)}
+#toc-panel.is-open{transform:translateX(0)}
+#toc-panel::-webkit-scrollbar{width:3px}
+#toc-panel::-webkit-scrollbar-thumb{background:var(--gold-dk);border-radius:2px}
+.toc-spacer{height:60px}
+.toc-title{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:4px;color:var(--gold-lt);text-transform:uppercase;padding:0 18px 12px;border-bottom:1px solid rgba(200,168,40,0.2);margin-bottom:4px}
+.toc-group{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;padding:13px 18px 3px}
+#toc-panel a{display:block;padding:7px 14px 7px 22px;font-family:'Source Sans 3',sans-serif;font-size:11px;color:rgba(200,170,100,0.72);text-decoration:none;line-height:1.35;border-left:3px solid transparent;transition:background 0.13s,color 0.13s,border-color 0.13s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#toc-panel a:hover{color:var(--gold-lt);background:rgba(200,168,40,0.07);border-left-color:rgba(200,168,40,0.4)}
+#toc-panel a.active{color:var(--gold-lt);background:rgba(200,168,40,0.12);border-left-color:var(--gold-lt)}
+
+#main{max-width:900px;margin:0 auto;background:var(--bg);min-height:100vh;box-shadow:0 0 80px rgba(0,0,0,0.9)}
+
+.cover{background:#000;padding:68px 56px 56px;text-align:center;position:relative;border-bottom:6px double var(--gold)}
+.cover::before{content:'';position:absolute;inset:12px;border:1px solid rgba(200,168,40,0.2);pointer-events:none}
+.cover-eyebrow{font-family:'Cinzel',serif;font-size:9px;letter-spacing:5px;color:var(--gold-lt);text-transform:uppercase;margin-bottom:20px}
+.cover-title{font-family:'Cinzel',serif;font-size:2.0rem;font-weight:700;color:var(--white);line-height:1.14;margin-bottom:12px}
+.cover-sub{font-style:italic;color:var(--gold);font-size:1.05rem;margin-bottom:28px}
+.cover-verse{display:inline-block;font-style:italic;color:rgba(248,244,232,0.85);font-size:.92rem;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);padding:10px 28px;line-height:1.75}
+.gr-lg{display:block;font-size:1.55rem;color:var(--gold-lt);margin-bottom:8px;font-style:normal;letter-spacing:.5px}
+
+section{padding:46px 56px 42px;border-bottom:1px solid var(--rule)}
+section:last-child{border-bottom:none}
+.sec-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:var(--gold-dk);text-transform:uppercase;margin-bottom:6px}
+h2{font-family:'Cinzel',serif;font-size:1.25rem;font-weight:600;color:var(--gold-lt);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--rule)}
+h3{font-family:'EB Garamond',serif;font-size:1.07rem;font-weight:700;color:var(--gold);margin:22px 0 9px}
+p{line-height:1.78;margin-bottom:13px;font-size:1rem;color:var(--ink)}
+p:last-child{margin-bottom:0}
+
+blockquote{margin:16px 0;padding:14px 18px 14px 28px;background:var(--aged);border-left:4px solid var(--gold);font-style:italic;font-size:.97rem;line-height:1.72;color:#d8c890;position:relative}
+blockquote::before{content:'\201C';font-size:2.8rem;color:var(--rule-lt);position:absolute;top:-4px;left:6px;line-height:1;font-family:Georgia,serif}
+.src{display:block;font-style:normal;font-size:.76rem;font-family:'Source Sans 3',sans-serif;color:var(--gold);margin-top:7px;letter-spacing:.4px}
+
+/* CCC box — styled distinctly */
+.ccc-box{background:#0a1a0a;border:1px solid #2a4a2a;border-left:5px solid #4a8a4a;padding:18px 22px;margin:18px 0}
+.ccc-lbl{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:#6aaa6a;margin-bottom:10px}
+.ccc-box p{color:#c0d8c0;font-size:.95rem;line-height:1.72;margin-bottom:8px}
+.ccc-box p:last-child{margin-bottom:0}
+.ccc-num{color:#4aaa4a;font-weight:700;font-family:'Cinzel',serif;font-size:.82rem}
+
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.91rem}
+thead tr{background:#000;color:var(--gold-lt)}
+thead th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:9px 11px;text-align:left}
+tbody tr:nth-child(odd){background:var(--bg)}
+tbody tr:nth-child(even){background:var(--aged)}
+td{padding:9px 11px;line-height:1.5;vertical-align:top;color:var(--ink)}
+td:first-child{font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold);font-weight:600}
+
+.card{background:var(--aged);border:1px solid var(--rule);padding:18px 22px;margin:18px 0}
+.card-lbl{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+
+.verdict{background:#000;color:var(--ink);padding:22px 26px;margin:22px 0 0;border-left:5px solid var(--gold-lt)}
+.verdict-lbl{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:var(--gold-lt);text-transform:uppercase;margin-bottom:10px}
+.verdict p{color:var(--ink);margin-bottom:10px}
+.verdict p:last-child{margin-bottom:0}
+.verdict em{color:var(--gold)}
+.verdict strong{color:var(--white)}
+
+/* Father grid */
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.pc{background:var(--aged);border:1px solid var(--rule);padding:14px 16px}
+.pc-name{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-lt);margin-bottom:3px}
+.pc-date{font-family:'Source Sans 3',sans-serif;font-size:10px;color:var(--margin);margin-bottom:8px;letter-spacing:.5px}
+.pc p{font-size:.87rem;line-height:1.54;margin:0;color:var(--ink)}
+.pc-ref{font-size:.74rem;color:var(--gold);display:block;margin-top:6px;font-family:'Source Sans 3',sans-serif}
+
+/* Case cards */
+.case-card{border:1.5px solid var(--gold-dk);margin:20px 0;overflow:hidden}
+.case-header{background:#0a0800;padding:12px 20px;display:flex;align-items:center;gap:14px}
+.case-num{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--gold-lt);min-width:28px}
+.case-title{font-family:'Cinzel',serif;font-size:.9rem;color:var(--white);letter-spacing:.5px}
+.case-tag{font-family:'Source Sans 3',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;margin-left:auto}
+.tag-yes{background:#1a4a1a;color:#80d880}
+.tag-no{background:#4a1a1a;color:#d88080}
+.tag-hope{background:#1a1a4a;color:#8080d8}
+.tag-open{background:#3a3a0a;color:#d8d860}
+.case-body{background:var(--aged);padding:16px 20px}
+.case-body p{font-size:.93rem;margin-bottom:10px;color:var(--ink)}
+
+strong{font-weight:700;color:var(--white)}
+.gr{font-style:italic;color:#80b060}
+.la{font-style:italic;color:#a0a060}
+
+.hl{border:1.5px solid var(--gold-dk);padding:14px 20px;margin:16px 0;background:var(--aged);font-size:.96rem;line-height:1.72;color:var(--ink)}
+
+.footnote{border-top:1px solid var(--rule);margin-top:30px;padding-top:13px;font-size:.78rem;font-family:'Source Sans 3',sans-serif;color:var(--margin);line-height:1.65}
+
+@media(max-width:680px){
+  .cover{padding:38px 20px 30px}.cover-title{font-size:1.35rem}
+  section{padding:28px 18px 26px}.pg{grid-template-columns:1fr}
+  h2{font-size:1.06rem}#main{max-width:100%}
+  .case-header{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<button id="toc-btn" aria-controls="toc-panel" aria-expanded="false">
+  <span class="hbars"><span></span><span></span><span></span></span>Índice
+</button>
+<div id="toc-overlay"></div>
+
+<nav id="toc-panel">
+  <div class="toc-spacer"></div>
+  <div class="toc-title">Contenido</div>
+
+  <div class="toc-group">El Sacramento</div>
+  <a href="#que-es">I. ¿Qué es el bautismo?</a>
+  <a href="#fundamento">II. Fundamento bíblico</a>
+  <a href="#efectos">III. Efectos teológicos</a>
+
+  <div class="toc-group">La Necesidad</div>
+  <a href="#necesidad">IV. ¿Es necesario para salvarse?</a>
+  <a href="#tres-bautismos">V. Los tres tipos de bautismo</a>
+  <a href="#dios-no-atado">VI. «Dios no está atado…»</a>
+
+  <div class="toc-group">Casos Límite</div>
+  <a href="#ignorancia">VII. Los que nunca conocieron el Evangelio</a>
+  <a href="#bebes">VIII. Bebés que mueren sin bautizar</a>
+  <a href="#limbo">IX. El Limbo: historia y abandono</a>
+  <a href="#itc2007">X. Documento ITC 2007</a>
+
+  <div class="toc-group">Padres de la Iglesia</div>
+  <a href="#padres-favor">XI. Padres: necesidad del bautismo</a>
+  <a href="#padres-apertura">XII. Padres: aperturas y matices</a>
+
+  <div class="toc-group">Concilios y Magisterio</div>
+  <a href="#concilios">XIII. Concilios y documentos clave</a>
+
+  <div class="toc-group">Síntesis</div>
+  <a href="#resumen">XIV. Casos en tabla</a>
+  <a href="#tension">XV. La tensión teológica</a>
+  <a href="#conclusion">Conclusión</a>
+</nav>
+
+<div id="main">
+
+<div class="cover">
+  <div class="cover-eyebrow">Dossier Teológico · Sacramentología Católica</div>
+  <h1 class="cover-title">El Bautismo en la Iglesia Católica:<br>Naturaleza, Necesidad y Casos Límite</h1>
+  <p class="cover-sub">¿Qué ocurre con quienes mueren sin bautizarse? ¿Con los bebés? ¿Con los no evangelizados?</p>
+  <div class="cover-verse">
+    <span class="gr-lg">ἐὰν μή τις γεννηθῇ ἐξ ὕδατος καὶ πνεύματος, οὐ δύναται εἰσελθεῖν εἰς τὴν βασιλείαν τοῦ θεοῦ</span>
+    <em>«Si alguno no naciere de agua y del Espíritu, no puede entrar en el reino de Dios»</em><br>
+    <span style="font-size:.78rem;color:var(--gold);">Juan 3:5 — El texto central del debate bautismal</span>
+  </div>
+</div>
+
+<!-- I -->
+<section id="que-es">
+  <div class="sec-label">Sección I</div>
+  <h2>¿Qué es el Bautismo? Definición Teológica</h2>
+
+  <p>El bautismo es el primero de los siete sacramentos de la Iglesia Católica y el fundamento de toda la vida cristiana. Según el <em>Catecismo de la Iglesia Católica</em> (CCC 1213), el bautismo es «la base de toda la vida cristiana, el pórtico de la vida en el Espíritu y la puerta que abre el acceso a los otros sacramentos».</p>
+
+  <div class="ccc-box">
+    <div class="ccc-lbl">Catecismo de la Iglesia Católica — Definición</div>
+    <p><span class="ccc-num">CCC 1213:</span> «El santo bautismo es el fundamento de toda la vida cristiana, el pórtico de la vida en el Espíritu (<em>vitae spiritualis ianua</em>) y la puerta que abre el acceso a los otros sacramentos. Por el Bautismo somos liberados del pecado y regenerados como hijos de Dios, llegamos a ser miembros de Cristo y somos incorporados a la Iglesia y hechos partícipes de su misión.»</p>
+    <p><span class="ccc-num">CCC 1214:</span> «Este sacramento se llama Bautismo (<em>Baptismus</em>) a causa del rito central mediante el cual se celebra: bautizar (del griego <span class="gr">βαπτίζειν</span>) significa "sumergir", "zambullir"; la "inmersión" en el agua simboliza el acto de sepultar al catecúmeno en la muerte de Cristo, de donde surge por la resurrección con él como "nueva criatura" (2 Cor 5,17).»</p>
+  </div>
+
+  <p>El término griego <span class="gr">βαπτίζω</span> (<em>baptizō</em>) significa literalmente «sumergir», «zambullir». El rito implica simbólicamente una muerte (al pecado, al mundo anterior) y un renacimiento (en Cristo, como hijo de Dios). Esta doble dimensión — muerte/resurrección — es el núcleo teológico del sacramento.</p>
+</section>
+
+<!-- II -->
+<section id="fundamento">
+  <div class="sec-label">Sección II</div>
+  <h2>Fundamento Bíblico</h2>
+
+  <h3>El mandato de Jesús</h3>
+  <blockquote>
+    «Por tanto, id y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre y del Hijo y del Espíritu Santo.»
+    <span class="src">— Mateo 28:19 (NA28)</span>
+  </blockquote>
+
+  <blockquote>
+    «El que creyere y fuere bautizado, será salvo; mas el que no creyere, será condenado.»
+    <span class="src">— Marcos 16:16 (NA28)</span>
+  </blockquote>
+
+  <h3>El diálogo con Nicodemo: Juan 3:5</h3>
+  <blockquote>
+    «Si alguno no naciere de agua y del Espíritu, no puede entrar en el reino de Dios.» (<span class="gr">ἐὰν μή τις γεννηθῇ ἐξ ὕδατος καὶ πνεύματος, οὐ δύναται εἰσελθεῖν εἰς τὴν βασιλείαν τοῦ θεοῦ</span>)
+    <span class="src">— Juan 3:5 (NA28) — El texto más citado en la tradición patrística sobre la necesidad del bautismo</span>
+  </blockquote>
+
+  <h3>Hechos 2:38 — El bautismo en Pentecostés</h3>
+  <blockquote>
+    «Pedro les dijo: Arrepentíos y bautícese cada uno de vosotros en el nombre de Jesucristo para perdón de los pecados; y recibiréis el don del Espíritu Santo.»
+    <span class="src">— Hechos 2:38 (NA28)</span>
+  </blockquote>
+
+  <h3>Romanos 6:3–4 — Unión con Cristo en la muerte y resurrección</h3>
+  <blockquote>
+    «¿O no sabéis que todos los que hemos sido bautizados en Cristo Jesús, hemos sido bautizados en su muerte? Porque somos sepultados juntamente con él para muerte por el bautismo, a fin de que como Cristo resucitó de los muertos por la gloria del Padre, así también nosotros andemos en vida nueva.»
+    <span class="src">— Romanos 6:3–4 (NA28)</span>
+  </blockquote>
+
+  <h3>Tipología bautismal en el AT</h3>
+  <p>La Iglesia reconoce prefiguraciones del bautismo en el Antiguo Testamento: el diluvio de Noé como imagen de salvación a través del agua (1 Pe 3:20–21), el paso del Mar Rojo como tipo del bautismo (1 Cor 10:2), y la circuncisión como anticipación del sello de la alianza que el bautismo cumple y supera (Col 2:11–12).</p>
+</section>
+
+<!-- III -->
+<section id="efectos">
+  <div class="sec-label">Sección III</div>
+  <h2>Efectos Teológicos del Bautismo</h2>
+
+  <table>
+    <thead><tr><th>Efecto</th><th>Descripción teológica</th><th>Referencia CCC</th></tr></thead>
+    <tbody>
+      <tr><td>Perdón de pecados</td><td>Remisión del pecado original y de todos los pecados personales cometidos antes del bautismo, así como de toda pena debida por ellos</td><td>CCC 1263</td></tr>
+      <tr><td>Nueva criatura</td><td>El bautizado nace de nuevo como hijo adoptivo de Dios, heredero del reino eterno</td><td>CCC 1265</td></tr>
+      <tr><td>Incorporación a Cristo</td><td>El bautizado es «cristificado»: configurado ontológicamente con Cristo como Cabeza del Cuerpo</td><td>CCC 1266</td></tr>
+      <tr><td>Incorporación a la Iglesia</td><td>El bautizado pasa a ser miembro del Cuerpo de Cristo que es la Iglesia</td><td>CCC 1267–1269</td></tr>
+      <tr><td>El carácter sacramental</td><td>Sello espiritual indeleble que marca permanentemente al bautizado como perteneciente a Cristo; no puede repetirse ni borrarse</td><td>CCC 1272–1274</td></tr>
+      <tr><td>Don del Espíritu Santo</td><td>El bautizado recibe el Espíritu Santo, que inicia la vida de la gracia santificante</td><td>CCC 1262, 1265</td></tr>
+    </tbody>
+  </table>
+
+  <p>El carácter sacramental es de especial relevancia teológica: el CCC 1272 señala que «ningún pecado puede borrar esta marca, aunque el pecado impida que el bautismo produzca frutos de salvación». El bautismo, una vez recibido válidamente, tiene efectos permanentes e irreversibles en el ser del bautizado, independientemente de su fe posterior.</p>
+</section>
+
+<!-- IV -->
+<section id="necesidad">
+  <div class="sec-label">Sección IV</div>
+  <h2>¿Es el Bautismo Necesario para Salvarse?</h2>
+
+  <p>Esta es la pregunta más importante del dossier, y la respuesta del Magisterio católico es matizada y precisa:</p>
+
+  <div class="ccc-box">
+    <div class="ccc-lbl">CCC 1257 — La necesidad del bautismo (texto oficial verificado en vatican.va)</div>
+    <p><span class="ccc-num">CCC 1257:</span> «El Señor mismo afirma que el Bautismo es necesario para la salvación. Por ello mandó a sus discípulos que anunciaran el Evangelio a todas las naciones y bautizaran. El Bautismo es necesario para la salvación de aquellos a quienes el Evangelio ha sido proclamado y han tenido la posibilidad de pedir este sacramento. La Iglesia no conoce actualmente otro medio que asegure la entrada en la bienaventuranza eterna, aparte del Bautismo. Se preocupa, pues, de no descuidar la misión que ha recibido del Señor de hacer "renacer del agua y del Espíritu" a todos los que pueden ser bautizados. Pero <strong>Dios ha vinculado la salvación al sacramento del Bautismo, pero él mismo no está atado por sus sacramentos</strong> (<em>Deus autem sacramentis suis ipse non alligatur</em>).»</p>
+  </div>
+
+  <p>La fórmula final — «Dios ha vinculado la salvación al bautismo, pero Él no está atado por sus sacramentos» — es el eje hermenéutico de toda la teología bautismal católica sobre los casos límite. Enuncia a la vez la regla general (el bautismo es la vía ordinaria y necesaria) y la reserva de soberanía divina (Dios puede salvar por vías que desconocemos).</p>
+
+  <div class="hl">
+    <strong>La distinción técnica:</strong> El Magisterio distingue entre la <em>necessitas praecepti</em> (necesidad de precepto: Dios ha mandado el bautismo y los hombres están obligados a recibirlo) y la <em>necessitas medii</em> (necesidad de medio: el bautismo es el medio ordinario instituido por Dios). La primera es absoluta para quien tiene acceso al evangelio; la segunda tiene excepciones en los casos en que la recepción sacramental es imposible.
+  </div>
+</section>
+
+<!-- V -->
+<section id="tres-bautismos">
+  <div class="sec-label">Sección V</div>
+  <h2>Los Tres Tipos de Bautismo</h2>
+
+  <p>La tradición teológica católica, recogida en el CCC, reconoce tres formas en las que puede cumplirse la realidad del bautismo:</p>
+
+  <div class="case-card">
+    <div class="case-header">
+      <span class="case-num">1</span>
+      <span class="case-title">Bautismo de Agua (<em>Baptismus flaminis</em>)</span>
+      <span class="case-tag tag-yes">Forma ordinaria</span>
+    </div>
+    <div class="case-body">
+      <p>El sacramento propiamente dicho: inmersión o infusión de agua con la fórmula trinitaria («en el nombre del Padre, del Hijo y del Espíritu Santo»). Es la forma ordinaria, obligatoria y plenamente eficaz instituida por Cristo. CCC 1239–1245 describe el rito detalladamente.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header">
+      <span class="case-num">2</span>
+      <span class="case-title">Bautismo de Sangre (<em>Baptismus sanguinis</em>)</span>
+      <span class="case-tag tag-yes">Forma extraordinaria</span>
+    </div>
+    <div class="case-body">
+      <p><strong>CCC 1258:</strong> «La Iglesia siempre ha tenido la convicción de que los que padecen la muerte a causa de la fe, sin haber recibido el Bautismo, son bautizados por su muerte con Cristo y por Cristo. Este Bautismo de sangre, como el Bautismo de deseo, produce los frutos del Bautismo sin ser un sacramento.»</p>
+      <p>El martirio — morir por la fe en Cristo — suple sacramentalmente al bautismo de agua. Este principio está en la tradición desde Cipriano de Cartago y Agustín de Hipona. El catecúmeno que muere en el martirio antes de recibir el bautismo de agua es considerado bautizado por la Iglesia.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header">
+      <span class="case-num">3</span>
+      <span class="case-title">Bautismo de Deseo (<em>Baptismus flaminis</em>)</span>
+      <span class="case-tag tag-hope">Forma excepcional</span>
+    </div>
+    <div class="case-body">
+      <p><strong>CCC 1259:</strong> «Para los catecúmenos que mueren antes de su Bautismo, su deseo explícito de recibirlo, unido al arrepentimiento de sus pecados y a la caridad, les asegura la salvación que no han podido recibir por el sacramento.»</p>
+      <p><strong>CCC 1260:</strong> «"Puesto que Cristo murió por todos y la vocación última del hombre es efectivamente una, es decir, divina, debemos mantener que el Espíritu Santo ofrece a todos la posibilidad de que, en la forma de sólo Dios conocida, se asocien a este misterio pascual." Todo hombre que, ignorando el Evangelio de Cristo y su Iglesia, busca la verdad y hace la voluntad de Dios según su entender, puede ser salvo. Se puede suponer que estas personas habrían deseado explícitamente el Bautismo si hubieran conocido su necesidad.»</p>
+    </div>
+  </div>
+</section>
+
+<!-- VI -->
+<section id="dios-no-atado">
+  <div class="sec-label">Sección VI</div>
+  <h2>«Dios No Está Atado por Sus Sacramentos»</h2>
+
+  <p>La fórmula del CCC 1257 — <span class="la">Deus autem sacramentis suis ipse non alligatur</span> («Dios mismo no está atado por sus sacramentos») — es una de las afirmaciones más importantes de toda la doctrina sacramental católica. Establece la distinción entre la <em>vía ordinaria</em> de salvación (los sacramentos, institución de Cristo para la Iglesia) y la <em>soberanía absoluta</em> de Dios, que no puede ser limitada por sus propias instituciones.</p>
+
+  <p>Esta fórmula no es una relativización del bautismo. La Iglesia sigue enseñando que el bautismo es necesario y urgente para todos los que pueden recibirlo. Lo que la fórmula establece es que la misericordia y la omnipotencia divinas no están encadenadas a un mecanismo sacramental de tal modo que Dios no pueda actuar fuera de él cuando las circunstancias lo exigen.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Implicación teológica</div>
+    <p>La Iglesia enseña lo que sabe con certeza: el bautismo es el medio ordinario instituido por Cristo para la salvación. Lo que no sabe con certeza — y no pretende saberlo — es qué ocurre exactamente con quienes, por razones ajenas a su voluntad, no pudieron recibirlo. En esos casos, la doctrina renuncia a la certeza y apela a la misericordia divina. Esta humildad epistemológica es teológicamente correcta: la Iglesia administra los sacramentos, no la soberanía de Dios.</p>
+  </div>
+</section>
+
+<!-- VII -->
+<section id="ignorancia">
+  <div class="sec-label">Sección VII</div>
+  <h2>Los que Nunca Conocieron el Evangelio</h2>
+
+  <p>¿Qué ocurre con las personas que nacieron y murieron en culturas que nunca tuvieron acceso al anuncio cristiano? Esta pregunta, que cobra especial relevancia en el contexto de los grandes imperios pre-colombinos, las civilizaciones asiáticas o las poblaciones africanas anteriores a la evangelización, es abordada por el Magisterio con precisión:</p>
+
+  <div class="ccc-box">
+    <div class="ccc-lbl">CCC 1260 — Los ignorantes del Evangelio (texto verificado)</div>
+    <p><span class="ccc-num">CCC 1260:</span> «Todo hombre que, ignorando el Evangelio de Cristo y su Iglesia, busca la verdad y hace la voluntad de Dios según su entender, <strong>puede ser salvo</strong>. Se puede suponer que estas personas habrían deseado explícitamente el Bautismo si hubieran conocido su necesidad.»</p>
+  </div>
+
+  <p>El CCC cita aquí el numeral 22 de la constitución pastoral del Vaticano II <em>Gaudium et Spes</em> (1965): «Puesto que Cristo murió por todos y la vocación última del hombre es efectivamente una, es decir, divina, debemos mantener que el Espíritu Santo ofrece a todos la posibilidad de que, en la forma de sólo Dios conocida, se asocien a este misterio pascual.»</p>
+
+  <h3>Condiciones para esta posibilidad de salvación</h3>
+  <p>El CCC no enseña el universalismo ni afirma que cualquier persona que no haya conocido el Evangelio se salva automáticamente. Las condiciones que el texto establece son:</p>
+
+  <div class="card">
+    <div class="card-lbl">Condiciones del CCC 1260</div>
+    <p><strong>1. Ignorancia invencible:</strong> No haber conocido el Evangelio ni la Iglesia por razones que estén fuera del control de la persona.</p>
+    <p style="margin-top:8px;"><strong>2. Búsqueda sincera de la verdad:</strong> Orientar la propia vida hacia lo que la conciencia reconoce como verdadero y bueno.</p>
+    <p style="margin-top:8px;"><strong>3. Hacer la voluntad de Dios «según su entender»:</strong> Vivir moralmente de acuerdo con la ley natural inscrita en la conciencia (cf. Rm 2:14–15: «los gentiles que no tienen ley hacen por naturaleza lo que es de la ley»).</p>
+    <p style="margin-top:8px;"><strong>4. El bautismo virtual:</strong> La Iglesia supone que tales personas «habrían deseado explícitamente el Bautismo si hubieran conocido su necesidad» — lo que equivale a un bautismo de deseo implícito.</p>
+  </div>
+
+  <p>Esta posición es coherente con la enseñanza del Vaticano II en <em>Lumen Gentium</em> 16 (1964): «Los que sin culpa suya no conocen el Evangelio de Cristo y su Iglesia, pero buscan a Dios con sincero corazón e intentan, bajo el influjo de la gracia, cumplir con obras su voluntad, conocida mediante el juicio de la conciencia, pueden conseguir la salvación eterna.»</p>
+
+  <h3>Lo que la doctrina NO enseña</h3>
+  <div class="hl">
+    La doctrina no enseña: (a) que todas las religiones sean caminos igualmente válidos de salvación; (b) que la evangelización sea innecesaria o prescindible; (c) que la ignorancia del Evangelio sea por sí misma suficiente para la salvación. La ignorancia invencible elimina la culpabilidad pero no cambia la realidad objetiva: la mediación de Cristo y el bautismo siguen siendo la vía ordinaria y plena de salvación que la Iglesia está llamada a proclamar.
+  </div>
+</section>
+
+<!-- VIII -->
+<section id="bebes">
+  <div class="sec-label">Sección VIII</div>
+  <h2>Bebés que Mueren Sin Bautizarse</h2>
+
+  <p>El caso de los bebés que mueren sin haber sido bautizados es el más teológicamente delicado de todos, y el que ha generado mayor controversia a lo largo de la historia. Aquí la dificultad es que las condiciones del «bautismo de deseo» (voluntad, arrepentimiento, búsqueda de la verdad) no pueden cumplirse en quienes aún no tienen uso de razón.</p>
+
+  <div class="ccc-box">
+    <div class="ccc-lbl">CCC 1261 — Los niños fallecidos sin bautismo (texto oficial verificado)</div>
+    <p><span class="ccc-num">CCC 1261:</span> «Por lo que se refiere a los niños muertos sin Bautismo, la Iglesia sólo puede encomendarlos a la misericordia de Dios, como lo hace en el rito de sus exequias. En efecto, la gran misericordia de Dios que quiere que todos los hombres se salven (cf. 1 Tm 2,4) y la ternura de Jesús para con los niños, que le hizo decir: "Dejad que los niños vengan a mí, no se lo impidáis" (Mc 10,14), nos permiten confiar en que haya un camino de salvación para los niños que han muerto sin Bautismo. Tanto más urgente es la llamada de la Iglesia para que no se impida venir a los pequeños a Cristo mediante el don del Bautismo.»</p>
+  </div>
+
+  <h3>Lo que dice y lo que no dice el Magisterio</h3>
+
+  <table>
+    <thead><tr><th>El Magisterio dice</th><th>El Magisterio no dice</th></tr></thead>
+    <tbody>
+      <tr><td>La Iglesia encomienda a estos niños a la misericordia de Dios</td><td>Que están condenados</td></tr>
+      <tr><td>La misericordia de Dios «nos permite confiar en que haya un camino de salvación»</td><td>Que están definitivamente salvados</td></tr>
+      <tr><td>El bautismo es urgente y no debe omitirse cuando es posible</td><td>Que da igual bautizarlos o no</td></tr>
+      <tr><td>Hay «razones teológicas y litúrgicas para esperar» su salvación (ITC 2007)</td><td>Que existe certeza de salvación</td></tr>
+    </tbody>
+  </table>
+
+  <p>La postura magisterial es de humildad epistémica: la Iglesia no sabe con certeza qué ocurre con estos niños. No los condena, no los salva explícitamente, sino que los confía a Dios cuya misericordia excede toda comprensión humana. Esta postura ha evolucionado históricamente desde una posición más severa (Agustín) hacia una esperanza más explícita (CCC 1261; ITC 2007).</p>
+</section>
+
+<!-- IX -->
+<section id="limbo">
+  <div class="sec-label">Sección IX</div>
+  <h2>El Limbo: Historia Teológica y Abandono Progresivo</h2>
+
+  <p>Durante siglos, la teología escolástica propuso la hipótesis del <em>limbus infantium</em> («limbo de los niños») como solución al problema de los bebés fallecidos sin bautismo. Comprender su historia es esencial para entender la evolución doctrinal.</p>
+
+  <h3>Origen y formulación</h3>
+  <p>La hipótesis del limbo surgió como mediación entre dos posiciones extremas. Por un lado, Agustín de Hipona (354–430 d.C.) enseñó que los niños sin bautismo iban al infierno, aunque con la «pena más leve» (<em>mitissima poena</em>). Por otro, el pelagianismo sostenía que los niños sin bautismo podían entrar en un «paraíso natural». Los escolásticos medievales, especialmente Pedro Lombardo y Tomás de Aquino, desarrollaron el concepto de limbo como solución intermedia: un estado de felicidad natural sin visión beatífica, sin dolor pero sin el bien supremo de la comunión con Dios.</p>
+
+  <blockquote>
+    «Los niños que mueren con solo el pecado original son separados de la visión de Dios, pero no sufren ninguna pena sensible; su separación es simplemente la privación de la gloria que se les debería si hubieran nacido en gracia.»
+    <span class="src">— Tomás de Aquino, <em>Summa Theologiae</em>, Suplemento, q. 69, a. 6 (paráfrasis verificada; la doctrina del limbo aparece desarrollada en distintos lugares de la Summa)</span>
+  </blockquote>
+
+  <h3>Estatus teológico del limbo</h3>
+  <p>Es fundamental señalar que el limbo <strong>nunca fue dogma definido</strong> de la Iglesia Católica. Era una hipótesis teológica, la <em>sentencia communior</em> (opinión más común) entre los escolásticos medievales, pero no una verdad de fe de obligatorio asentimiento. El Concilio de Trento (1547) no definió el destino específico de los niños fallecidos sin bautismo, aunque afirmó la necesidad del bautismo para la remisión del pecado original.</p>
+
+  <h3>El abandono progresivo</h3>
+  <p>El CCC de 1992 omite completamente el término «limbo». No lo condena explícitamente, pero tampoco lo propone. En su lugar, el CCC 1261 habla de «confiar» a la misericordia de Dios y de «esperar que haya un camino de salvación» — lenguaje de esperanza, no de certeza en ningún sentido.</p>
+</section>
+
+<!-- X -->
+<section id="itc2007">
+  <div class="sec-label">Sección X</div>
+  <h2>Documento de la Comisión Teológica Internacional (2007)</h2>
+
+  <p>En 2007, el Papa Benedicto XVI aprobó la publicación del documento de la Comisión Teológica Internacional (ITC) titulado: <strong>«La esperanza de salvación para los niños que mueren sin bautismo»</strong> (<em>The Hope of Salvation for Infants Who Die without Being Baptised</em>, 19 de abril de 2007; disponible en vatican.va).</p>
+
+  <h3>Conclusiones verificadas del documento ITC 2007</h3>
+
+  <div class="ccc-box">
+    <div class="ccc-lbl">ITC 2007 — Conclusiones principales (resumen verificado en vatican.va)</div>
+    <p><strong>1.</strong> «La Iglesia no posee conocimiento seguro sobre la salvación de los niños que mueren sin el bautismo» — humildad epistémica explícita.</p>
+    <p style="margin-top:8px;"><strong>2.</strong> La hipótesis del limbo «reflejaba una visión indebidamente restringida de la salvación» — evaluación crítica de la hipótesis medieval.</p>
+    <p style="margin-top:8px;"><strong>3.</strong> «Existen razones teológicas y litúrgicas para <strong>esperar</strong> que los niños que mueren sin bautismo puedan ser salvados» — esperanza fundada, no certeza.</p>
+    <p style="margin-top:8px;"><strong>4.</strong> «La misericordia de Dios, que quiere que todos los hombres sean salvos, y la ternura de Jesús con los niños nos dan fundamentos para <strong>confiar</strong> en la salvación de los niños que mueren sin bautismo» — confianza, no garantía.</p>
+    <p style="margin-top:8px;"><strong>5.</strong> El documento no cambia la enseñanza sobre la necesidad del bautismo ni elimina la urgencia de bautizar a los niños.</p>
+  </div>
+
+  <p>El documento no cambia el dogma. Afirma que el limbo nunca fue enseñanza oficial de la Iglesia (era solo una hipótesis teológica tolerable) y que existen razones teológicas sólidas para esperar en la salvación de estos niños. La palabra clave es «esperar» (<em>hope</em>): no certeza, no definición dogmática, sino esperanza teológicamente fundada.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Posición magisterial actual verificada</div>
+    <p>La posición oficial de la Iglesia Católica en 2025 sobre los bebés fallecidos sin bautismo es: <strong>esperanza fundada en la misericordia de Dios</strong>, sin certeza definitoria en ningún sentido (ni condenación ni salvación afirmada con certeza). El limbo no es dogma ni jamás lo fue. El CCC y el ITC 2007 apuntan en la dirección de la esperanza.</p>
+  </div>
+</section>
+
+<!-- XI -->
+<section id="padres-favor">
+  <div class="sec-label">Sección XI</div>
+  <h2>Padres de la Iglesia: La Necesidad del Bautismo</h2>
+
+  <div class="pg">
+    <div class="pc">
+      <div class="pc-name">Tertuliano</div>
+      <div class="pc-date">c. 160–225 d.C.</div>
+      <p>«Cuando se establece el precepto de que sin el bautismo la salvación no es alcanzable por nadie (principalmente a causa de aquella declaración del Señor que dice: "Si uno no nace del agua, no tiene vida"), surgen inmediatamente dudas escrupulosas de algunos…»</p>
+      <span class="pc-ref">— <em>De Baptismo</em> XII (CCEL; ANF vol. 3; New Advent; texto verificado)</span>
+    </div>
+    <div class="pc">
+      <div class="pc-name">San Cipriano de Cartago</div>
+      <div class="pc-date">c. 200–258 d.C.</div>
+      <p>«Nadie puede tener a Dios como Padre que no tiene a la Iglesia como madre» — el bautismo como puerta de la Iglesia. Cipriano fue el primero en desarrollar la tradición del «bautismo de sangre» para los mártires no bautizados.</p>
+      <span class="pc-ref">— <em>De Catholicae Ecclesiae Unitate</em> 6 (PL 4; ANF vol. 5; texto verificado en New Advent)</span>
+    </div>
+    <div class="pc">
+      <div class="pc-name">San Agustín de Hipona</div>
+      <div class="pc-date">354–430 d.C.</div>
+      <p>Enseñó la posición más severa: los niños sin bautismo, aunque muertos con solo el pecado original, van al infierno con la «pena más leve» (<em>mitissima poena</em>). Esta posición está hoy superada por el Magisterio posterior pero refleja la seriedad agustiniana sobre el pecado original.</p>
+      <span class="pc-ref">— <em>De Anima et eius Origine</em> I.9; <em>Contra Iulianum</em> V.44 (PL 44; NPNF Series I; posición documentada)</span>
+    </div>
+    <div class="pc">
+      <div class="pc-name">San Juan Crisóstomo</div>
+      <div class="pc-date">c. 347–407 d.C.</div>
+      <p>«Si mueres sin bautismo, aunque tengas miles de buenas obras, no entrarás al reino de los cielos» — afirmación de la necesidad absoluta para los que tienen acceso al sacramento.</p>
+      <span class="pc-ref">— <em>Homilías sobre Juan</em> 25.2 (PG 59; NPNF Series I vol. 14; texto verificado)</span>
+    </div>
+  </div>
+</section>
+
+<!-- XII -->
+<section id="padres-apertura">
+  <div class="sec-label">Sección XII</div>
+  <h2>Padres de la Iglesia: Aperturas y Matices</h2>
+
+  <div class="pg">
+    <div class="pc">
+      <div class="pc-name">San Justino Mártir</div>
+      <div class="pc-date">c. 100–165 d.C.</div>
+      <p>Desarrolló la doctrina del <em>Logos spermatikós</em> («semilla del Logos»): los que vivieron antes de Cristo o sin conocerlo pero siguieron la razón participaban parcialmente del Logos-Cristo. Sócrates y Heráclito, para Justino, vivieron «con el Logos». Es la base patrística del concepto de «bautismo de deseo implícito».</p>
+      <span class="pc-ref">— <em>1 Apología</em> 46.1–4; <em>2 Apología</em> 13 (ANF vol. 1; texto verificado en New Advent)</span>
+    </div>
+    <div class="pc">
+      <div class="pc-name">Clemente de Alejandría</div>
+      <div class="pc-date">c. 150–215 d.C.</div>
+      <p>Desarrolló la idea de que los filósofos griegos que siguieron la razón participaban de una «alianza» con Dios anterior a Cristo. «La filosofía fue dada a los griegos como la Ley a los judíos, como preparación para el Evangelio.»</p>
+      <span class="pc-ref">— <em>Stromateis</em> I.5.28; VI.8.67 (ANF vol. 2; PG 8; texto verificado en New Advent)</span>
+    </div>
+    <div class="pc">
+      <div class="pc-name">San Ambrosio de Milán</div>
+      <div class="pc-date">c. 339–397 d.C.</div>
+      <p>Al predicar el funeral del Emperador Valentiniano II, que murió catecúmeno antes de recibir el bautismo, Ambrosio lo presentó como salvado por su deseo de bautismo: «Lo que no pudo recibir por los misterios, lo recibió por su piedad.» Primera formulación patrística clara del «bautismo de deseo».</p>
+      <span class="pc-ref">— <em>De Obitu Valentiniani</em> 51–53 (PL 16; NPNF Series II vol. 10; texto verificado)</span>
+    </div>
+    <div class="pc">
+      <div class="pc-name">San Gregorio de Nacianzo</div>
+      <div class="pc-date">c. 329–390 d.C.</div>
+      <p>Abordó el caso de los niños sin bautismo de forma más esperanzadora que Agustín: no los condena explícitamente al infierno sino que los sitúa en una condición de «ni glorificados ni castigados por el Juez». Es un precedente del concepto medieval de limbo pero desde una perspectiva más benévola.</p>
+      <span class="pc-ref">— <em>Oratio</em> 40.23 (<em>Sobre el Santo Bautismo</em>; PG 36; NPNF Series II vol. 7; texto verificado)</span>
+    </div>
+  </div>
+</section>
+
+<!-- XIII -->
+<section id="concilios">
+  <div class="sec-label">Sección XIII</div>
+  <h2>Concilios y Documentos Magisteriales Clave</h2>
+
+  <table>
+    <thead><tr><th>Documento</th><th>Año</th><th>Enseñanza principal sobre el bautismo</th></tr></thead>
+    <tbody>
+      <tr><td>Concilio de Cartago</td><td>418 d.C.</td><td>Condenó al pelagianismo que negaba la necesidad del bautismo para los niños; afirmó la realidad del pecado original</td></tr>
+      <tr><td>Concilio de Florencia</td><td>1438–1445</td><td><em>Exsultate Deo</em>: El bautismo es la «puerta de la vida espiritual» (<em>vitae spiritualis ianua</em>); necesario para todos</td></tr>
+      <tr><td>Concilio de Trento</td><td>1547</td><td><em>Sessio VII</em>: El bautismo es necesario para la remisión del pecado original; no definió el destino de los niños sin bautismo</td></tr>
+      <tr><td>Vaticano II — <em>Lumen Gentium</em> 16</td><td>1964</td><td>Los que sin culpa ignoran el Evangelio pero buscan a Dios de corazón sincero pueden obtener la salvación eterna</td></tr>
+      <tr><td>Vaticano II — <em>Gaudium et Spes</em> 22</td><td>1965</td><td>El Espíritu Santo ofrece a todos la posibilidad de asociarse, «en la forma de solo Dios conocida», al misterio pascual</td></tr>
+      <tr><td>Catecismo de la Iglesia Católica</td><td>1992</td><td>CCC 1257–1261: síntesis magisterial completa; tres tipos de bautismo; encomienda los niños sin bautismo a la misericordia de Dios</td></tr>
+      <tr><td>ITC — <em>The Hope of Salvation for Infants…</em></td><td>2007</td><td>Abandona el limbo como hipótesis teológica; propone «esperanza fundada» en la salvación de los niños fallecidos sin bautismo</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- XIV -->
+<section id="resumen">
+  <div class="sec-label">Sección XIV</div>
+  <h2>Casos Límite en Tabla Comparativa</h2>
+
+  <div class="case-card">
+    <div class="case-header">
+      <span class="case-num">A</span>
+      <span class="case-title">Adulto bautizado con fe y vida cristiana</span>
+      <span class="case-tag tag-yes">Salvación ordinaria</span>
+    </div>
+    <div class="case-body">
+      <p>El caso pleno y ordinario de la doctrina. El bautismo de agua válido, recibido con fe, borra el pecado original y personal, incorpora a la Iglesia y da acceso a los demás sacramentos. La Iglesia enseña con certeza que este es el camino que Cristo instituyó.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header">
+      <span class="case-num">B</span>
+      <span class="case-title">Catecúmeno que muere antes de recibir el bautismo</span>
+      <span class="case-tag tag-yes">Salvado por deseo explícito</span>
+    </div>
+    <div class="case-body">
+      <p><strong>CCC 1259:</strong> Su deseo explícito del bautismo, el arrepentimiento de los pecados y la caridad le aseguran la salvación. Esta enseñanza está en la tradición desde San Ambrosio (funeral de Valentiniano II, c. 392 d.C.).</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header">
+      <span class="case-num">C</span>
+      <span class="case-title">Mártir no bautizado que muere por la fe en Cristo</span>
+      <span class="case-tag tag-yes">Salvado por bautismo de sangre</span>
+    </div>
+    <div class="case-body">
+      <p><strong>CCC 1258:</strong> «Aquellos que padecen la muerte a causa de la fe, sin haber recibido el Bautismo, son bautizados por su muerte con Cristo y por Cristo.» La Iglesia los venera como mártires. Tradición sólida desde Cipriano y Agustín.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header">
+      <span class="case-num">D</span>
+      <span class="case-title">Persona que nunca conoció el Evangelio — busca la verdad sinceramente</span>
+      <span class="case-tag tag-hope">Puede ser salvo</span>
+    </div>
+    <div class="case-body">
+      <p><strong>CCC 1260:</strong> «Todo hombre que, ignorando el Evangelio de Cristo y su Iglesia, busca la verdad y hace la voluntad de Dios según su entender, puede ser salvo.» Condiciones: ignorancia invencible, búsqueda sincera de la verdad, cumplimiento de la ley natural. El Espíritu Santo ofrece a todos la posibilidad de salvación «en la forma de solo Dios conocida» (GS 22).</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header">
+      <span class="case-num">E</span>
+      <span class="case-title">Bebé o niño que muere antes de tener uso de razón sin haber sido bautizado</span>
+      <span class="case-tag tag-open">Esperanza — no certeza</span>
+    </div>
+    <div class="case-body">
+      <p><strong>CCC 1261:</strong> La Iglesia «sólo puede encomendarlos a la misericordia de Dios». La misericordia divina y la ternura de Jesús hacia los niños «nos permiten confiar en que haya un camino de salvación». El ITC 2007 añade que existen «razones teológicas y litúrgicas para esperar» su salvación. El limbo no es dogma. La Iglesia no condena a estos niños pero tampoco garantiza su salvación con certeza definitoria.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header">
+      <span class="case-num">F</span>
+      <span class="case-title">Persona que conoció el Evangelio, rechazó el bautismo deliberadamente y murió sin él</span>
+      <span class="case-tag tag-no">En peligro de condenación</span>
+    </div>
+    <div class="case-body">
+      <p>El caso más grave. <strong>CCC 1257:</strong> «El Bautismo es necesario para la salvación de aquellos a quienes el Evangelio ha sido proclamado y han tenido la posibilidad de pedir este sacramento.» El rechazo deliberado del bautismo cuando se tiene acceso a él implica el rechazo de la vía de salvación instituida por Cristo. La Iglesia enseña que esto pone en peligro la salvación, aunque el juicio sobre cada caso concreto pertenece a Dios.</p>
+    </div>
+  </div>
+</section>
+
+<!-- XV -->
+<section id="tension">
+  <div class="sec-label">Sección XV</div>
+  <h2>La Tensión Teológica: Necesidad y Misericordia</h2>
+
+  <p>La doctrina católica sobre el bautismo mantiene en tensión creativa dos verdades que, superficialmente, pueden parecer contradictorias:</p>
+
+  <div class="card">
+    <div class="card-lbl">La tensión teológica central</div>
+    <p><strong>Polo 1 — Necesidad del bautismo:</strong> «Si alguno no naciere de agua y del Espíritu, no puede entrar en el reino de Dios» (Jn 3:5). El bautismo es el medio ordinario instituido por Cristo; nadie puede prescindir arbitrariamente de él; la Iglesia tiene la misión urgente de bautizar a todos.</p>
+    <p style="margin-top:10px;"><strong>Polo 2 — Soberanía misericordiosa de Dios:</strong> «Dios quiere que todos los hombres se salven» (1 Tm 2:4). «Dios no está atado por sus sacramentos» (CCC 1257). La misericordia divina excede cualquier fórmula sacramental. El Espíritu actúa «en la forma de solo Dios conocida».</p>
+    <p style="margin-top:10px;"><strong>La resolución magisterial:</strong> La tensión no se resuelve eliminando ninguno de los dos polos. El bautismo sigue siendo necesario y urgente. Y la misericordia de Dios sigue siendo soberana e insondable para los casos en que el bautismo es imposible. La Iglesia enseña ambas verdades sin reducir la una a la otra.</p>
+  </div>
+
+  <h3>El principio de «jerarquía de verdades»</h3>
+  <p>El ITC 2007 aplica el principio de «jerarquía de verdades» (introducido por el Vaticano II en <em>Unitatis Redintegratio</em> 11): no todas las verdades de fe tienen el mismo peso o centralidad. La voluntad salvífica universal de Dios (1 Tm 2:4), la mediación única de Cristo (1 Tm 2:5) y la necesidad del bautismo son verdades de distinta densidad dogmática. La voluntad salvífica universal es el horizonte en el que se sitúan las demás afirmaciones.</p>
+
+  <h3>Implicaciones prácticas</h3>
+  <p>Estas enseñanzas tienen consecuencias pastorales directas:</p>
+  <p><strong>1. La urgencia del bautismo no disminuye.</strong> El hecho de que Dios pueda salvar por vías extraordinarias no justifica la indiferencia hacia el bautismo. La Iglesia llama a bautizar a los niños lo antes posible (CCC 1261: «tanto más urgente es la llamada de la Iglesia»).</p>
+  <p><strong>2. La esperanza para los bebés fallecidos sin bautismo es teológicamente fundada</strong>, no es mera sentimentalidad. El ITC 2007 la basa en la voluntad salvífica universal de Dios, en la lógica del misterio pascual y en la acción soberana del Espíritu.</p>
+  <p><strong>3. La misión evangelizadora tiene sentido incluso si los no evangelizados pueden salvarse.</strong> Que alguien «pueda» salvarse en ignorancia invencible no equivale a que esa sea la vía plena y perfecta. El encuentro explícito con Cristo y la Iglesia es la plenitud de la salvación; la vía de la ignorancia invencible es una posibilidad extraordinaria, no una alternativa equivalente.</p>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section id="conclusion">
+  <div class="sec-label">Conclusión</div>
+  <h2>Síntesis Doctrinal</h2>
+
+  <table>
+    <thead><tr><th>Pregunta</th><th>Respuesta magisterial</th><th>Grado de certeza</th></tr></thead>
+    <tbody>
+      <tr><td>¿Qué es el bautismo?</td><td>Sacramento de regeneración y puerta de la vida cristiana</td><td>Dogma definido</td></tr>
+      <tr><td>¿Es necesario para salvarse?</td><td>Sí, como vía ordinaria; Dios no está atado a sus sacramentos</td><td>Dogma con matiz soberanía divina</td></tr>
+      <tr><td>¿Tres tipos de bautismo?</td><td>Agua, Sangre, Deseo — los tres producen frutos de salvación</td><td>Enseñanza definida (CCC 1258–1260)</td></tr>
+      <tr><td>¿Pueden salvarse los no evangelizados?</td><td>Sí, si buscan sinceramente la verdad y hacen la voluntad de Dios</td><td>Enseñanza del Magisterio (CCC 1260; LG 16)</td></tr>
+      <tr><td>¿Qué pasa con bebés sin bautismo?</td><td>La Iglesia los confía a la misericordia de Dios; hay esperanza</td><td>Esperanza fundada, no certeza dogmática</td></tr>
+      <tr><td>¿Existe el limbo?</td><td>Era hipótesis teológica, nunca dogma; ITC 2007 lo abandona</td><td>No es dogma; enseñanza actual: esperanza</td></tr>
+      <tr><td>¿Debemos bautizar a los niños?</td><td>Sí, con urgencia — la esperanza no elimina la obligación</td><td>Obligación clara</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Veredicto Final</div>
+    <p>La doctrina católica sobre el bautismo puede resumirse en tres proposiciones complementarias:</p>
+    <p><strong>1. El bautismo de agua es necesario.</strong> Cristo lo instituyó, la Iglesia lo proclama, y quienes tienen acceso a él están obligados a recibirlo. No es una formalidad opcional sino el acto fundante de la vida cristiana por el que se borra el pecado original, se recibe el Espíritu y se entra en el Cuerpo de Cristo.</p>
+    <p><strong>2. Dios no está atado por sus sacramentos.</strong> La misericordia divina excede cualquier mecanismo sacramental. El bautismo de sangre (martirio), el bautismo de deseo (catecúmenos y quienes buscan sinceramente a Dios sin conocer el Evangelio) y la esperanza para los niños fallecidos sin bautismo muestran que la soberanía divina trasciende los límites visibles de la Iglesia sacramental.</p>
+    <p><strong>3. La incertidumbre es honesta y respetuosa.</strong> Para los bebés fallecidos sin bautismo, la Iglesia no afirma su condena ni garantiza su salvación con certeza. Los confía a Dios con esperanza. Esta humildad epistemológica no es debilidad teológica sino integridad: la Iglesia no pretende administrar los decretos de Dios, sino solo sus sacramentos.</p>
+  </div>
+
+  <div class="footnote">
+    <strong>Fuentes primarias verificadas:</strong>
+    Catecismo de la Iglesia Católica, CCC 1213–1274 (vatican.va; USCCB edition; texto completo verificado);
+    Vaticano II, <em>Lumen Gentium</em> 16 (1964; vatican.va);
+    Vaticano II, <em>Gaudium et Spes</em> 22 (1965; vatican.va);
+    Comisión Teológica Internacional, <em>The Hope of Salvation for Infants Who Die without Being Baptised</em> (19 abril 2007; vatican.va; texto completo verificado);
+    Tertuliano, <em>De Baptismo</em> XII (CCEL; ANF vol. 3; New Advent; ccel.org; texto verificado);
+    San Ambrosio de Milán, <em>De Obitu Valentiniani</em> 51–53 (PL 16; NPNF Series II vol. 10; texto verificado);
+    San Gregorio de Nacianzo, <em>Oratio</em> 40.23 (PG 36; NPNF Series II vol. 7; texto verificado);
+    San Justino Mártir, <em>1 Apología</em> 46.1–4; <em>2 Apología</em> 13 (ANF vol. 1; New Advent; texto verificado);
+    Clemente de Alejandría, <em>Stromateis</em> I.5.28 (ANF vol. 2; New Advent; texto verificado);
+    San Juan Crisóstomo, <em>Homilías sobre Juan</em> 25.2 (PG 59; NPNF Series I vol. 14; texto verificado);
+    Agustín de Hipona, <em>De Anima et eius Origine</em> I.9 (PL 44; NPNF; posición documentada en literatura secundaria);
+    Concilio de Florencia, <em>Exsultate Deo</em> (1439; DH 1314);
+    Concilio de Trento, <em>Sessio VII, Canon 2</em> (1547; DH 1602).
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('toc-btn');
+  var panel=document.getElementById('toc-panel');
+  var overlay=document.getElementById('toc-overlay');
+  function open(){panel.classList.add('is-open');overlay.classList.add('is-open');btn.classList.add('is-open');btn.setAttribute('aria-expanded','true')}
+  function close(){panel.classList.remove('is-open');overlay.classList.remove('is-open');btn.classList.remove('is-open');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){panel.classList.contains('is-open')?close():open()});
+  overlay.addEventListener('click',close);
+  panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
+  var links=panel.querySelectorAll('a');
+  var secs=document.querySelectorAll('section[id]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(l){l.classList.remove('active')});
+          var active=panel.querySelector('a[href="#'+e.target.id+'"]');
+          if(active){active.classList.add('active');active.scrollIntoView({block:'nearest'})}
+        }
+      });
+    },{rootMargin:'0px 0px -55% 0px',threshold:0});
+    secs.forEach(function(s){io.observe(s)});
+  }
+}());
+</script>
+</body>
+</html>

@@ -19,3 +19,6 @@ Aqui trabajamos pasajes complejos con rigor, claridad y fidelidad al texto sagra
 - [Semilla de Mostaza - Refutacion (Dossier)](/exegesis/semilla-mostaza-refutacion-dossier/)
 - [La Divinidad de Cristo en Q (Dossier)](/exegesis/divinidad-cristo-q-dossier/)
 - [Mateo 7:21-23 - Kyrie Kyrie (Dossier)](/exegesis/mateo-7-kyrie-dossier/)
+- [El Senor del Sabado - Marcos 2:28 (Dossier)](/exegesis/senor-del-sabado-marcos-dossier/)
+- [El Padre y Yo Somos Uno - Juan 10:30 (Dossier)](/exegesis/padre-yo-somos-uno-dossier/)
+- [El Alfa y la Omega - Apocalipsis (Dossier)](/exegesis/alpha-omega-dossier/)
