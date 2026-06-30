@@ -1,6 +1,6 @@
 ---
 title: "פֶּרֶא אָדָם — Análisis Filológico de Génesis 16:12 (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "pere-adam-genesis-16-dossier"
 url: "/biblia/pere-adam-genesis-16-dossier/"

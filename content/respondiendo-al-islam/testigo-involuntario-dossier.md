@@ -1,6 +1,6 @@
 ---
 title: "El Testigo Involuntario — Abu Dawud 4002 y Q18:86 (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "testigo-involuntario-dossier"
 url: "/respondiendo-al-islam/testigo-involuntario-dossier/"

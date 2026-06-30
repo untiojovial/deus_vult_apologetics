@@ -1,6 +1,6 @@
 ---
 title: "Hadices Médicos y Problemas Científicos en la Sunnah (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "hadices-medicos-dossier"
 url: "/respondiendo-al-islam/hadices-medicos-dossier/"

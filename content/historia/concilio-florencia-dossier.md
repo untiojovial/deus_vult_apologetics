@@ -1,6 +1,6 @@
 ---
 title: "El Concilio de Florencia (1431-1445) — Historia, Teología y Repercusiones (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "concilio-florencia-dossier"
 url: "/historia/concilio-florencia-dossier/"

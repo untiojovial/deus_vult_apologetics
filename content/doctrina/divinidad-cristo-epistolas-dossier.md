@@ -1,6 +1,6 @@
 ---
 title: "La Divinidad de Cristo en las Epístolas Católicas (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "divinidad-cristo-epistolas-dossier"
 url: "/doctrina/divinidad-cristo-epistolas-dossier/"

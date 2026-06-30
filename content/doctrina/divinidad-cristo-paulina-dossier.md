@@ -1,6 +1,6 @@
 ---
 title: "El Cristo de Pablo — Divinidad y Trinidad en el Corpus Paulino (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "divinidad-cristo-paulina-dossier"
 url: "/doctrina/divinidad-cristo-paulina-dossier/"

@@ -1,6 +1,6 @@
 ---
 title: "Marcos 10:18 — ¿Negación o Afirmación Implícita de la Divinidad? (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "marcos-10-18-dossier"
 url: "/exegesis/marcos-10-18-dossier/"

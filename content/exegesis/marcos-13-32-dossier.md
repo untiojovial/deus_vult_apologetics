@@ -1,6 +1,6 @@
 ---
 title: "Marcos 13:32 — ¿Ignorancia o No-Revelación? (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "marcos-13-32-dossier"
 url: "/exegesis/marcos-13-32-dossier/"

@@ -1,6 +1,6 @@
 ---
 title: "El Mito del Sincretismo Pagano — Respuesta Histórica Católica (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "sincretismo-pagano-dossier"
 url: "/historia/sincretismo-pagano-dossier/"

@@ -1,6 +1,6 @@
 ---
 title: "Divinidad de Cristo y del Espíritu Santo en Hechos (Dossier)"
-date: 2026-06-30T12:00:00-05:00
+date: 2026-06-15T12:00:00-05:00
 draft: false
 slug: "divinidad-cristo-hechos-dossier"
 url: "/doctrina/divinidad-cristo-hechos-dossier/"
