@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hebreo Bíblico — Introducción + Días 1–10</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+:root {
+  --sand:#f7f2e8;
+  --clay:#c2873a;
+  --clay-l:#fdf3e3;
+  --ink:#1c1409;
+  --ink2:#4a3520;
+  --crimson:#8b1a2a;
+  --crimson-l:#fce8eb;
+  --olive:#3a5a2a;
+  --olive-l:#e6f0e1;
+  --stone:#6b5a45;
+  --night:#1a1209;
+  --night2:#2c1f10;
+  --bdr:#d4bc96;
+  --wht:#fff;
+  --gold:#c9973a;
+  --gold-l:#fdf3e3;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--sand);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;min-height:100vh}
+
+/* HEADER */
+header{
+  background:linear-gradient(160deg,var(--night) 0%,var(--night2) 50%,#3a1a05 100%);
+  color:#f7f2e8;
+  padding:28px 16px 22px;
+  text-align:center;
+  border-bottom:3px solid var(--clay);
+  position:relative;
+  overflow:hidden;
+}
+header::before{
+  content:'בְּרֵאשִׁית';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Frank Ruhl Libre',serif;
+  font-size:9rem;
+  color:rgba(255,255,255,.03);
+  pointer-events:none;
+  white-space:nowrap;
+}
+header h1{font-family:'Frank Ruhl Libre',serif;font-size:2rem;letter-spacing:.01em;margin-bottom:4px;position:relative}
+header .heb-title{font-family:'Frank Ruhl Libre',serif;font-size:1.6rem;color:var(--clay);direction:rtl;margin-bottom:6px;position:relative}
+header .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;color:#d4bc96;position:relative}
+header .badges{margin-top:10px;position:relative}
+.badge-heb{display:inline-block;background:var(--clay);color:var(--night);border-radius:12px;font-size:11px;font-weight:700;padding:2px 10px;margin:0 3px;letter-spacing:.05em}
+
+/* NAV */
+.lesson-nav{display:flex;overflow-x:auto;background:#ede5d5;border-bottom:2px solid var(--bdr);gap:2px;padding:4px 4px 0;scrollbar-width:none}
+.lesson-nav::-webkit-scrollbar{display:none}
+.lnav-btn{flex-shrink:0;padding:9px 14px;border:none;background:transparent;font-size:12px;font-weight:700;color:var(--ink2);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:4px 4px 0 0}
+.lnav-btn.active{color:var(--crimson);border-bottom-color:var(--crimson);background:var(--sand)}
+.lnav-btn:hover:not(.active){background:#e0d5c0}
+
+/* INNER TABS */
+.inner-tabs{display:flex;border-bottom:1px solid var(--bdr);background:#f0e8d8;overflow-x:auto;scrollbar-width:none}
+.inner-tabs::-webkit-scrollbar{display:none}
+.itab{padding:8px 14px;font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.itab.active{color:var(--crimson);border-bottom-color:var(--crimson);background:var(--sand)}
+
+/* PANELS */
+.lesson-panel{display:none;padding:16px;max-width:720px;margin:0 auto}
+.lesson-panel.active{display:block}
+.itab-panel{display:none}
+.itab-panel.active{display:block}
+
+/* CARDS */
+.card{background:var(--wht);border:1px solid var(--bdr);border-radius:8px;padding:16px;margin-bottom:14px}
+.card h3{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--crimson);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+
+/* TIPS */
+.tip{background:var(--clay-l);border-left:4px solid var(--clay);border-radius:0 6px 6px 0;padding:10px 13px;margin:8px 0;font-size:13px}
+.tip strong{color:var(--clay)}
+.tip-red{background:var(--crimson-l);border-left-color:var(--crimson)}
+.tip-red strong{color:var(--crimson)}
+.tip-olive{background:var(--olive-l);border-left-color:var(--olive)}
+.tip-olive strong{color:var(--olive)}
+
+/* HEBREW TEXT */
+.heb{font-family:'Frank Ruhl Libre',serif;direction:rtl;font-size:1.4rem;color:var(--crimson);display:inline-block}
+.heb-lg{font-size:2.2rem}
+.heb-xl{font-size:2.8rem}
+
+/* ALEPH-BET GRID */
+.alpha-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:7px;margin-top:8px}
+.ltr-card{background:var(--sand);border:1px solid var(--bdr);border-radius:6px;padding:10px 6px;text-align:center;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.ltr-card:hover{transform:translateY(-2px);box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.ltr-card.on{background:var(--clay-l);border-color:var(--clay)}
+.ltr-big{font-family:'Frank Ruhl Libre',serif;font-size:2.2rem;color:var(--crimson);display:block;line-height:1.2;direction:rtl}
+.ltr-name{font-size:10px;font-weight:700;color:var(--clay);text-transform:uppercase;letter-spacing:.05em}
+.ltr-trans{font-size:11px;color:var(--ink2);margin-top:1px}
+.ltr-num{font-size:10px;color:#aaa;margin-top:1px}
+.ltr-ex{font-size:10px;color:#888;font-style:italic;margin-top:3px;display:none;direction:rtl}
+.ltr-card.on .ltr-ex{display:block}
+
+/* TABLES */
+.gtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.gtable th{background:var(--crimson);color:#fff;padding:7px 10px;text-align:left;font-weight:600}
+.gtable td{padding:6px 10px;border-bottom:1px solid #e8d8c0}
+.gtable tr:nth-child(even) td{background:#fdf7f0}
+.gtable .hcell{font-family:'Frank Ruhl Libre',serif;font-size:1.3rem;color:var(--crimson);direction:rtl;text-align:right}
+.gtable .hl{background:#fff8e1!important;font-weight:700}
+.rtl-col{direction:rtl;text-align:right}
+
+/* PARADIGM */
+.paradigm{display:grid;gap:5px;margin-top:8px}
+.para-row{display:grid;grid-template-columns:110px 1fr 1fr;gap:4px;align-items:center;font-size:13px}
+.para-lbl{font-weight:600;color:var(--ink2);font-size:12px}
+.para-heb{font-family:'Frank Ruhl Libre',serif;font-size:1.2rem;color:var(--crimson);direction:rtl;text-align:right}
+.para-esp{color:var(--ink2);font-size:13px}
+.para-head{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#aaa;padding-bottom:2px;border-bottom:1px solid var(--bdr)}
+
+/* VOCAB */
+.vlist{list-style:none}
+.vitem{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #e8d8c0;cursor:pointer}
+.vheb{font-family:'Frank Ruhl Libre',serif;font-size:1.4rem;color:var(--crimson);min-width:90px;flex-shrink:0;direction:rtl;text-align:right}
+.vtrans{font-size:13px;font-weight:600}
+.vhint{font-size:11px;color:#888;font-style:italic;margin-top:1px}
+.vmore{font-size:11px;color:var(--clay)}
+
+/* QUIZ */
+.qcard{background:var(--wht);border:2px solid var(--bdr);border-radius:10px;padding:18px;margin-bottom:12px;text-align:center}
+.qbig{font-family:'Frank Ruhl Libre',serif;font-size:2.6rem;color:var(--crimson);margin-bottom:14px;line-height:1.2;direction:rtl}
+.qbig-latin{font-family:'EB Garamond',serif;font-size:1.5rem;color:var(--crimson);margin-bottom:14px;font-style:italic}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qbtn{background:var(--sand);border:2px solid var(--bdr);border-radius:7px;padding:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--ink);font-family:'Inter',sans-serif}
+.qbtn:hover{border-color:var(--crimson);color:var(--crimson)}
+.qbtn.ok{background:var(--olive-l);border-color:var(--olive);color:var(--olive)}
+.qbtn.no{background:var(--crimson-l);border-color:var(--crimson);color:var(--crimson)}
+.qfb{margin-top:10px;font-size:13px;font-weight:600;min-height:18px}
+.qscore{text-align:center;padding:20px;font-weight:700;color:var(--crimson);font-size:1.1rem}
+
+/* VERSE BLOCK */
+.vblock{background:linear-gradient(160deg,var(--night) 0%,var(--night2) 60%,#3a1a05 100%);color:#f7f2e8;border-radius:10px;padding:22px 16px;text-align:center;margin-bottom:14px}
+.vblock-heb{font-family:'Frank Ruhl Libre',serif;font-size:1.6rem;line-height:2;color:var(--clay);direction:rtl;margin-bottom:10px}
+.vblock-trans{font-size:12px;color:#c8b896;font-style:italic;font-family:'EB Garamond',serif}
+.vwords{text-align:right;margin-top:14px;direction:rtl}
+.vrow{display:flex;justify-content:space-between;flex-direction:row-reverse;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:12px}
+.vwh{font-family:'Frank Ruhl Libre',serif;font-size:1.05rem;color:var(--clay)}
+.vwe{color:#c8b896;text-align:left}
+
+/* PROGRESS */
+.prog-bar{height:5px;background:#ddd;border-radius:3px;margin:6px 0 3px}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--clay),var(--crimson));border-radius:3px;transition:width .5s}
+.prog-lbl{font-size:11px;color:#aaa}
+.note{font-size:11px;color:#999;text-align:center;margin-top:6px;font-style:italic}
+p{font-size:14px;margin-bottom:8px}
+
+/* INTRO PAGE */
+.intro-hero{background:linear-gradient(160deg,var(--night) 0%,var(--night2) 60%,#3a1a05 100%);border-radius:10px;padding:24px 18px;text-align:center;margin-bottom:16px;color:#f7f2e8}
+.intro-hero .big-heb{font-family:'Frank Ruhl Libre',serif;font-size:3.5rem;color:var(--clay);direction:rtl;line-height:1.3;margin-bottom:8px}
+.intro-hero p{color:#c8b896;font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;margin:0}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.feature-box{background:var(--sand);border:1px solid var(--bdr);border-radius:7px;padding:12px;text-align:center}
+.feature-icon{font-size:1.5rem;margin-bottom:4px}
+.feature-title{font-weight:700;font-size:13px;color:var(--crimson)}
+.feature-desc{font-size:11px;color:var(--stone);margin-top:2px}
+.diff-list{list-style:none;padding:0}
+.diff-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #e8d8c0;font-size:13px}
+.diff-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.conj-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.conj-box{background:var(--sand);border:1px solid var(--bdr);border-radius:6px;padding:10px 12px}
+.conj-box h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--clay);margin-bottom:6px}
+.conj-line{display:flex;justify-content:space-between;font-size:13px;padding:2px 0;border-bottom:1px solid #e8d8c0}
+.conj-heb{font-family:'Frank Ruhl Libre',serif;font-size:1.1rem;color:var(--crimson);direction:rtl}
+.conj-esp{color:var(--ink2);font-size:12px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="heb-title">עִבְרִית בִּבְלִית</div>
+  <h1>Hebreo Bíblico</h1>
+  <div class="sub">Introducción completa + Días 1–10 · Lo esencial del Antiguo Testamento</div>
+  <div class="badges">
+    <span class="badge-heb">📜 22 LETRAS</span>
+    <span class="badge-heb">RTL DERECHA→IZQUIERDA</span>
+    <span class="badge-heb">SIN VOCALES ORIGINALMENTE</span>
+  </div>
+</header>
+
+<div class="lesson-nav" id="lnav"></div>
+<div id="lessons-container"></div>
+
+<script>
+const LESSONS = [
+// ── INTRODUCCIÓN ──────────────────────────────────────────────
+{
+  day:0, title:"Introducción al Hebreo Bíblico", subtitle:"¿Qué es, por qué estudiarlo, y en qué se diferencia del griego?",
+  isIntro:true,
+  tips:[
+    {t:'<strong>El hebreo bíblico</strong> es la lengua del Antiguo Testamento (con algunas secciones en arameo: Esdras 4-7, Daniel 2-7 y versículos sueltos). Aproximadamente el 77% de la Biblia fue escrito originalmente en hebreo.'},
+    {t:'<strong>No es el mismo que el hebreo moderno.</strong> El hebreo bíblico (o clásico) abarca textos del siglo XII a.C. (cántico de Débora, Jc 5) hasta el siglo II a.C. El hebreo moderno del Estado de Israel es una lengua revivida con vocabulario y pronunciación modernos.'},
+    {t:'<strong>El sistema de escritura:</strong> 22 consonantes, sin vocales originalmente. El sistema de puntos vocálicos (nikkud) fue añadido por los masoretas entre los siglos VI y X d.C. para preservar la pronunciación tradicional. Las Biblias académicas lo incluyen; los rollos del Mar Muerto no lo tienen.'},
+    {t:'<strong>Por qué estudiarlo:</strong> la Septuaginta (traducción griega del AT que citan Jesús y el NT) no captura toda la riqueza del hebreo. Los juegos de palabras, la poesía, el quiasmo, los significados de los nombres propios, la teología del texto — todo depende del hebreo original.'},
+  ],
+  features:[
+    {icon:'📖',title:'77% de la Biblia',desc:'El AT en hebreo (+ algo de arameo)'},
+    {icon:'➡️',title:'Derecha a izquierda',desc:'Se lee y escribe al revés del español'},
+    {icon:'🔤',title:'22 consonantes',desc:'Sin letras: las vocales son puntos bajo/sobre ellas'},
+    {icon:'⚡',title:'Raíces de 3 letras',desc:'Casi toda la morfología sale de raíces triconsonánticas'},
+  ],
+  diffs:[
+    {icon:'🔁',t:'<strong>Dirección:</strong> el hebreo se escribe y lee de derecha a izquierda. La primera página de una Biblia hebrea es lo que para nosotros sería la última.'},
+    {icon:'🔤',t:'<strong>Consonantes y vocales separadas:</strong> en griego, las vocales son letras plenas (α, ε, η, ι, ο, υ, ω). En hebreo, las vocales son signos diacríticos (puntos) añadidos bajo o sobre las consonantes.'},
+    {icon:'🌱',t:'<strong>Raíces triconsonánticas:</strong> casi todas las palabras hebreas derivan de una raíz de 3 consonantes. קדשׁ (q-d-sh) da: קָדוֹשׁ (santo), קֹדֶשׁ (santidad), מִקְדָּשׁ (santuario), הִקְדִּישׁ (santificar). Aprender una raíz es aprender docenas de palabras.'},
+    {icon:'⏰',t:'<strong>Sistema verbal diferente:</strong> el hebreo no tiene "tiempos" en el sentido español. Tiene dos estados: qatal (acción completada) y yiqtol (acción incompleta/futura). El contexto determina si es pasado, presente o futuro.'},
+    {icon:'🎭',t:'<strong>Género gramatical:</strong> como el español, todo sustantivo tiene género masculino o femenino. Los plurales femeninos terminan en ‑וֹת (-ot), los masculinos en ‑ִים (-im).'},
+    {icon:'📜',t:'<strong>Sin mayúsculas:</strong> el hebreo no distingue mayúsculas de minúsculas. Un nombre propio y un sustantivo común tienen exactamente el mismo aspecto gráfico.'},
+  ],
+  vocab:[
+    {g:'תּוֹרָה',    t:'Torá, ley, instrucción',          h:'Gn 1:1 — contexto: los primeros 5 libros',     f:'Raíz: י-ר-ה (yarah) = enseñar, instruir'},
+    {g:'בְּרֵאשִׁית',t:'en el principio',                  h:'Gn 1:1 — la primera palabra de la Biblia',     f:'ב (en) + רֵאשִׁית (principio/cabeza)'},
+    {g:'שָׁלוֹם',   t:'paz, bienestar, integridad',       h:'Nm 6:26 — "וְיָשֵׂם לְךָ שָׁלוֹם"',            f:'Saludo y despedida en hebreo hasta hoy'},
+    {g:'אָמֵן',     t:'amén, verdaderamente, así sea',    h:'Dt 27:15 — fórmula de confirmación',           f:'Raíz: א-מ-נ (aman) = ser fiel, firme'},
+    {g:'הַלְלוּיָהּ',t:'alabad al Señor (hallelu-Yah)',    h:'Sal 104:35 — primera aparición en el AT',      f:'הַלְלוּ (alabad) + יָהּ (abreviatura de YHWH)'},
+    {g:'יהוה',      t:'YHWH — el nombre divino',          h:'Gn 2:4 — primer uso del Tetragrama',           f:'Probablemente relacionado con hayah = ser'},
+    {g:'אֱלֹהִים',  t:'Dios (plural de majestad)',         h:'Gn 1:1 — "בְּרֵאשִׁית בָּרָא אֱלֹהִים"',        f:'Plural con verbo singular: énfasis de grandeza'},
+    {g:'בָּרָא',    t:'crear (de la nada)',               h:'Gn 1:1 — solo Dios como sujeto en el AT',     f:'Raíz: ב-ר-א — solo divino como sujeto'},
+  ],
+  quiz:[
+    {q:'¿En qué dirección se lee el hebreo?', opts:['izquierda → derecha','derecha → izquierda','arriba → abajo','depende del texto'], ans:1},
+    {q:'¿Cuántas consonantes tiene el alef-bet hebreo?', opts:['22','24','26','28'], ans:0},
+    {q:'El sistema de puntos vocálicos fue añadido por...', opts:['Moisés','los LXX','los masoretas (s. VI-X d.C.)','los rabinos del s. I'], ans:2},
+    {q:'Una raíz triconsonántica hebrea tiene...', opts:['2 consonantes','3 consonantes','4 consonantes','varía'], ans:1},
+    {q:'El plural masculino en hebreo termina en...', opts:['-ot','-im','-ah','-el'], ans:1},
+    {q:'אֱלֹהִים es gramaticalmente...', opts:['singular','dual','plural','indeclinable'], ans:2},
+    {q:'בְּרֵאשִׁית es...', opts:['la última palabra de Gn 1:1','el nombre de Dios en Gn 1','la primera palabra de la Biblia','el verbo de Gn 1:1'], ans:2},
+    {q:'La Torá en hebreo significa...', opts:['ley sagrada e inmutable','instrucción/enseñanza','mandamiento','alianza'], ans:1},
+  ],
+  verse:{heb:'בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ', esp:'"En el principio creó Dios los cielos y la tierra" — Génesis 1:1',
+    words:[['בְּרֵאשִׁית','en el principio (ב + רֵאשִׁית)'],['בָּרָא','creó (qatal 3ª masc. sg.)'],['אֱלֹהִים','Dios (sujeto — nom. plural de majestad)'],['אֵת','partícula de objeto directo (intraducible)'],['הַשָּׁמַיִם','los cielos (ha + shamayim, dual)'],['וְאֵת','y (את con waw conjuntivo)'],['הָאָרֶץ','la tierra (ha + aretz)']],
+    insight:'אֵת es la partícula del objeto directo definido en hebreo — no tiene traducción al español pero su presencia indica que lo que sigue es el objeto directo del verbo. Siete palabras en hebreo que contienen toda la teología de la creación: origen (בְּרֵאשִׁית), acción creadora exclusivamente divina (בָּרָא solo tiene a Dios como sujeto), el nombre del creador (אֱלֹהִים), y el alcance total de la creación (שָׁמַיִם וָאָרֶץ = merismo = todo).'
+  }
+},
+// ── DÍA 1 ────────────────────────────────────────────────────
+{
+  day:1, title:"El Alef-Bet (א–י)", subtitle:"Las primeras 10 letras del alfabeto hebreo",
+  letters:[
+    {h:'א',name:'Álef',  trans:'(silenciosa)',  num:'1',  ex:'אֱלֹהִים = Dios'},
+    {h:'בּ/ב',name:'Bet',trans:'b / v',         num:'2',  ex:'בְּרֵאשִׁית = principio'},
+    {h:'גּ/ג',name:'Guímel',trans:'g',          num:'3',  ex:'גּוֹי = nación'},
+    {h:'דּ/ד',name:'Dálet',trans:'d',           num:'4',  ex:'דָּבָר = palabra'},
+    {h:'ה',name:'He',    trans:'h (aspirada)',   num:'5',  ex:'הַיּוֹם = hoy'},
+    {h:'ו',name:'Vav',   trans:'v / w',          num:'6',  ex:'וְ = y (conjunción)'},
+    {h:'ז',name:'Zayin', trans:'z',              num:'7',  ex:'זָהָב = oro'},
+    {h:'ח',name:'Jet',   trans:'j fuerte',       num:'8',  ex:'חֶסֶד = amor leal'},
+    {h:'ט',name:'Tet',   trans:'t enfática',     num:'9',  ex:'טוֹב = bueno'},
+    {h:'י',name:'Yod',   trans:'y (consonante)', num:'10', ex:'יהוה = YHWH'},
+  ],
+  tips:[
+    {t:'<strong>Álef (א)</strong> es la primera letra pero es silenciosa: representa una oclusión glotal. Su sonido lo da la vocal que lleva. En posición inicial de palabra siempre hay que leer la vocal, no la letra.'},
+    {t:'<strong>Dagesh (el punto interior):</strong> bet con dagesh = בּ = "b"; bet sin dagesh = ב = "v". Lo mismo con gimel, dalet, kaf, pe y tav. Son las 6 letras BeGaDKeFaT que cambian de sonido según tengan o no dagesh.'},
+    {t:'<strong>Vav (ו)</strong> es una de las letras más importantes: como prefijo, significa "y" (וְ). Como letra, puede ser consonante (v/w) o letra matris lectionis que indica la vocal "o" u "u".'},
+    {t:'<strong>Yod (י)</strong> es la letra más pequeña del alef-bet (de ahí Mt 5:18: "ni una jota..."). Puede ser consonante (y) o letra matris lectionis que indica la vocal "i".'},
+  ],
+  vocab:[
+    {g:'דָּבָר',  t:'palabra, cosa, asunto',      h:'Gn 1:3 — "וַיֹּאמֶר אֱלֹהִים" — Dios habló',  f:'Raíz ד-ב-ר: hablar. 1.440 veces en el AT'},
+    {g:'טוֹב',   t:'bueno, hermoso, agradable',   h:'Gn 1:4 — "כִּי טוֹב" — que era bueno',        f:'Repetido 7 veces en Gn 1 — la bondad de la creación'},
+    {g:'חֶסֶד',  t:'amor leal, misericordia, bondad pactual',h:'Sal 136 — cada versículo: "כִּי לְעוֹלָם חַסְדּוֹ"', f:'La palabra más rica teológicamente del AT'},
+    {g:'זָהָב',  t:'oro',                          h:'Gn 2:12 — el oro del Edén',                   f:'Raíz ז-ה-ב — 389 veces en el AT'},
+    {g:'יוֹם',   t:'día',                          h:'Gn 1:5 — "יוֹם אֶחָד" — día uno',             f:'2.301 veces en el AT'},
+    {g:'אֶרֶץ',  t:'tierra, país, suelo',          h:'Gn 1:1 — "הָאָרֶץ"',                          f:'2.504 veces — la segunda más frecuente del AT'},
+    {g:'בֵּית',  t:'casa, hogar, familia',          h:'Gn 7:1 — "בֵּיתְךָ" — tu casa',               f:'Raíz ב-י-ת — 2.048 veces en el AT'},
+    {g:'הַיּוֹם', t:'hoy, este día (ha + yom)',     h:'Dt 26:3 — "הִגַּדְתִּי הַיּוֹם"',              f:'El "hoy" de la urgencia bíblica'},
+  ],
+  quiz:[
+    {q:'¿Qué letra es silenciosa y representa una oclusión glotal?', opts:['א','ב','ג','ד'], ans:0},
+    {q:'Bet con dagesh (בּ) suena como...', opts:['v','b','g','d'], ans:1},
+    {q:'Vav (ו) como prefijo significa...', opts:['el/la','en','y','de'], ans:2},
+    {q:'¿Cuál es el valor numérico de yod (י)?', opts:['1','6','9','10'], ans:3},
+    {q:'חֶסֶד significa...', opts:['ley','amor leal/misericordia','paz','gloria'], ans:1},
+    {q:'טוֹב en Génesis 1 se repite...', opts:['3 veces','5 veces','7 veces','10 veces'], ans:2},
+    {q:'יוֹם significa...', opts:['noche','día','año','mes'], ans:1},
+    {q:'¿Qué letra es la más pequeña del alef-bet (la "jota" de Mt 5:18)?', opts:['א','ו','י','ה'], ans:2},
+  ],
+  verse:{heb:'כִּי לְעוֹלָם חַסְדּוֹ', esp:'"Porque para siempre es su amor leal" — Salmo 136 (estribillo)',
+    words:[['כִּי','porque, pues'],['לְעוֹלָם','para siempre (ל + עוֹלָם = eternidad/antigüedad)'],['חַסְדּוֹ','su חֶסֶד (amor leal) — sufijo וֹ = "su" masc.']],
+    insight:'חֶסֶד (jesed) es la palabra teológicamente más rica del AT. No tiene traducción perfecta: es amor, lealtad, fidelidad, misericordia y bondad todo en uno — específicamente dentro de una relación de alianza. Las traducciones dicen "misericordia", "amor", "bondad" — pero ninguna captura el todo. Solo el hebreo tiene esta palabra.'
+  }
+},
+// ── DÍA 2 ────────────────────────────────────────────────────
+{
+  day:2, title:"El Alef-Bet (כ–ת) y las letras finales", subtitle:"Las 12 letras restantes + las 5 formas finales",
+  letters:[
+    {h:'כּ/ך',name:'Kaf',   trans:'k / j (fin: ך)',  num:'20', ex:'כֹּהֵן = sacerdote'},
+    {h:'ל',   name:'Lámed', trans:'l',               num:'30', ex:'לֵב = corazón'},
+    {h:'מ/ם', name:'Mem',   trans:'m (fin: ם)',      num:'40', ex:'מֶלֶךְ = rey'},
+    {h:'נ/ן', name:'Nun',   trans:'n (fin: ן)',      num:'50', ex:'נֶפֶשׁ = alma'},
+    {h:'ס',   name:'Sámej', trans:'s',               num:'60', ex:'סֵפֶר = libro'},
+    {h:'ע',   name:'Áyin',  trans:'(silenciosa/gutural)',num:'70',ex:'עַם = pueblo'},
+    {h:'פּ/ף', name:'Pe',   trans:'p / f (fin: ף)', num:'80', ex:'פֶּה = boca'},
+    {h:'צ/ץ', name:'Tsade', trans:'ts (fin: ץ)',     num:'90', ex:'צַדִּיק = justo'},
+    {h:'ק',   name:'Qof',   trans:'q (gutural)',     num:'100',ex:'קוֹל = voz'},
+    {h:'ר',   name:'Resh',  trans:'r',               num:'200',ex:'רוּחַ = espíritu/viento'},
+    {h:'שׁ/שׂ',name:'Shin/Sin',trans:'sh / s',      num:'300',ex:'שָׁלוֹם = paz'},
+    {h:'ת',   name:'Tav',   trans:'t',               num:'400',ex:'תּוֹרָה = Torá'},
+  ],
+  tips:[
+    {t:'<strong>Las 5 letras finales:</strong> kaf (ך), mem (ם), nun (ן), pe (ף) y tsade (ץ) tienen una forma especial cuando van al final de una palabra. Es fundamental reconocerlas: בֶּן (hijo) → בָּנִים (hijos) — la nun final cambia a forma normal en el interior.'},
+    {t:'<strong>Áyin (ע)</strong> como álef, es silenciosa en el hebreo moderno, pero en el bíblico representaba una consonante faríngea profunda. En el texto, no suena pero afecta al dagesh y a las vocales contiguas.'},
+    {t:'<strong>Shin y Sin (שׁ/שׂ):</strong> la misma letra, distinto punto. Con el punto a la derecha (שׁ) = "sh". Con el punto a la izquierda (שׂ) = "s". Visualmente casi idénticas — hay que mirar bien el punto.'},
+    {t:'<strong>Las letras tienen valor numérico</strong> (gematría): álef=1, bet=2... yod=10, kaf=20, etc. Los hebreos escribían números con letras. Por eso ז (zayin=7) puede simbolizar el séptimo día, etc.'},
+  ],
+  vocab:[
+    {g:'מֶלֶךְ',  t:'rey',                    h:'1 S 8:5 — "שִׂים לָנוּ מֶלֶךְ" — pon sobre nosotros un rey', f:'2.523 veces en el AT — la institución monárquica'},
+    {g:'נֶפֶשׁ',  t:'alma, ser viviente, vida, garganta',h:'Gn 2:7 — "נֶפֶשׁ חַיָּה" — ser viviente',f:'755 veces — no es el alma platónica sino el ser completo'},
+    {g:'לֵב',    t:'corazón (centro del ser, voluntad, mente)',h:'Dt 6:5 — "בְּכָל לְבָבְךָ"',    f:'El corazón hebreo es la sede de la voluntad, no sentimientos'},
+    {g:'רוּחַ',  t:'espíritu, viento, aliento',h:'Gn 1:2 — "רוּחַ אֱלֹהִים מְרַחֶפֶת"',           f:'El viento/espíritu sobre las aguas — 387 veces'},
+    {g:'קוֹל',   t:'voz, sonido',             h:'Gn 3:8 — "וַיִּשְׁמְעוּ אֶת קוֹל יהוה"',          f:'"oyeron la voz de YHWH"'},
+    {g:'צַדִּיק', t:'justo, recto',            h:'Gn 6:9 — "נֹחַ אִישׁ צַדִּיק"',                  f:'Noé era justo — raíz צ-ד-ק (tsedek)'},
+    {g:'עַם',    t:'pueblo, nación, familia', h:'Éx 3:7 — "עַמִּי" — mi pueblo',                f:'1.869 veces — el pueblo de Dios'},
+    {g:'סֵפֶר',  t:'libro, rollo, carta',     h:'Éx 17:14 — "כְּתֹב זֹאת זִכָּרוֹן בַּסֵּפֶר"',    f:'Raíz ס-פ-ר (saphar) = contar, escribir'},
+  ],
+  quiz:[
+    {q:'¿Cuántas letras tienen forma final especial?', opts:['3','4','5','6'], ans:2},
+    {q:'שׁ (punto derecho) suena como...', opts:['s','sh','ts','k'], ans:1},
+    {q:'שׂ (punto izquierdo) suena como...', opts:['sh','ts','s','z'], ans:2},
+    {q:'נֶפֶשׁ es mejor traducida como...', opts:['alma inmortal platónica','ser viviente completo / vida','fantasma','mente'], ans:1},
+    {q:'לֵב (corazón) en hebreo es sede de...', opts:['solo los sentimientos','solo los amores','la voluntad y la mente','la memoria'], ans:2},
+    {q:'רוּחַ puede significar...', opts:['solo espíritu','solo viento','espíritu/viento/aliento (los tres)','alma'], ans:2},
+    {q:'עַם significa...', opts:['tierra','pueblo','rey','sacerdote'], ans:1},
+    {q:'¿Qué letra tiene valor numérico 400?', opts:['שׁ','ר','ק','ת'], ans:3},
+  ],
+  verse:{heb:'וַיִּבְרָא אֱלֹהִים אֶת הָאָדָם בְּצַלְמוֹ', esp:'"Y creó Dios al hombre a su imagen" — Génesis 1:27',
+    words:[['וַיִּבְרָא','y creó (waw + yiqtol invertido — narrative past)'],['אֱלֹהִים','Dios (sujeto)'],['אֶת','partícula de objeto directo'],['הָאָדָם','el hombre/la humanidad (ha + adam)'],['בְּצַלְמוֹ','a su imagen (ב + צֶלֶם + וֹ sufijo "su")']],
+    insight:'צֶלֶם (tselem, imagen) y דְּמוּת (demut, semejanza) en Gn 1:26-27 no son sinónimos exactos. צֶלֶם se refiere a representación concreta (ícono/estatua) — el rey ponía su imagen/estatua en los territorios que dominaba. El texto dice que el ser humano ES la imagen-estatua de Dios en su creación. Una afirmación de majestad y responsabilidad que se pierde en "a imagen y semejanza".'
+  }
+},
+// ── DÍA 3 ────────────────────────────────────────────────────
+{
+  day:3, title:"Las vocales: el sistema de nikkud", subtitle:"Los puntos masoréticos que dan sonido a las consonantes",
+  letters:[
+    {h:'אָ',name:'Qamats',   trans:'a larga (ah)',    num:'—',  ex:'אָב = padre'},
+    {h:'אַ',name:'Pátaj',    trans:'a breve (a)',     num:'—',  ex:'אַרְץ = tierra'},
+    {h:'אֵ',name:'Tsere',    trans:'e larga (ey)',    num:'—',  ex:'בֵּן = hijo'},
+    {h:'אֶ',name:'Segol',    trans:'e breve (eh)',    num:'—',  ex:'מֶלֶךְ = rey'},
+    {h:'אִ',name:'Jireq',    trans:'i (ee)',          num:'—',  ex:'אִישׁ = hombre'},
+    {h:'אֹ',name:'Jolam',    trans:'o larga (oh)',    num:'—',  ex:'תּוֹרָה = Torá'},
+    {h:'אוּ',name:'Shuruq',  trans:'u larga (oo)',    num:'—',  ex:'רוּחַ = espíritu'},
+    {h:'אֻ',name:'Qibbuts',  trans:'u breve (u)',     num:'—',  ex:'אֻמָּה = nación'},
+    {h:'אְ',name:'Shevá',    trans:'e brevísima o Ø', num:'—',  ex:'בְּרֵאשִׁית (b)'},
+    {h:'אֲ',name:'Jataf-Pátaj',trans:'a muy breve',  num:'—',  ex:'אֲנִי = yo'},
+  ],
+  tips:[
+    {t:'<strong>Las vocales van debajo (o sobre) la consonante a la que pertenecen.</strong> Se leen junto con la consonante: בָּ = "ba" (bet + qamats). Las letras se leen de derecha a izquierda, pero dentro de cada sílaba la consonante precede a la vocal.'},
+    {t:'<strong>El shevá (אְ)</strong> es el signo vocal más confuso: puede ser "vocal" (e brevísima) o "mudo" (sin sonido). La regla general: al inicio de palabra es vocal; en final de sílaba cerrada es mudo. En palabras compuestas casi siempre aparece.'},
+    {t:'<strong>Las matres lectionis</strong> — literalmente "madres de lectura" — son las consonantes ו y י que funcionan como indicadores de vocal larga antes de que existiera el nikkud. ב + ו = בּוֹ = "bo" (en él). Son el sistema de vocalización más antiguo.'},
+    {t:'<strong>Qamats y pátaj</strong> se parecen visualmente: qamats (ָ) tiene un pequeño palo vertical a la derecha; pátaj (ַ) es solo una línea horizontal. Esta distinción afecta a la longitud vocálica pero en koiné la diferencia se ha neutralizado en pronunciación moderna.'},
+  ],
+  vocab:[
+    {g:'אָב',   t:'padre',                        h:'Gn 2:24 — "אָבִיו וְאִמּוֹ"',                  f:'Raíz א-ב — 1.191 veces en el AT'},
+    {g:'אֵם',   t:'madre',                        h:'Gn 2:24 — "יַעֲזָב אִישׁ אֶת אָבִיו וְאֶת אִמּוֹ"',f:'Compara con árabe: um'},
+    {g:'בֵּן',  t:'hijo',                         h:'Gn 4:17 — "וַתֵּלֶד אֶת חֲנוֹךְ"',            f:'4.941 veces — bene Israel = hijos de Israel'},
+    {g:'בַּת',  t:'hija',                         h:'Gn 5:4',                                       f:'Misma raíz que בַּיִת (casa)'},
+    {g:'אִישׁ', t:'hombre, marido, varón',         h:'Gn 2:23 — "לְזֹאת יִקָּרֵא אִשָּׁה כִּי מֵאִישׁ"',f:'El juego de palabras con אִשָּׁה (mujer) se pierde en traducción'},
+    {g:'אִשָּׁה',t:'mujer, esposa',               h:'Gn 2:22 — "וַיִּבֶן יהוה... לְאִשָּׁה"',        f:'Gn 2:23: ish / ishah — el juego fonético hebreo'},
+    {g:'אֲנִי / אָנֹכִי',t:'yo (pronombres personales)',h:'Éx 3:6 — "אָנֹכִי אֱלֹהֵי אָבִיךָ"',    f:'אָנֹכִי es más enfático y solemne'},
+    {g:'אַתָּה', t:'tú (masc.)',                   h:'Gn 3:11 — "אַתָּה"',                           f:'אַתְּ = forma femenina'},
+  ],
+  quiz:[
+    {q:'אָ (qamats) suena como...', opts:['i','e breve','a larga','u'], ans:2},
+    {q:'אְ (shevá) puede ser vocal o...', opts:['consonante','mudo','acento','diptongo'], ans:1},
+    {q:'¿Qué consonantes son matres lectionis para vocales largas?', opts:['א y ה','ב y כ','ו y י','מ y נ'], ans:2},
+    {q:'בֵּן significa...', opts:['padre','madre','hijo','hija'], ans:2},
+    {q:'El juego de palabras אִישׁ / אִשָּׁה en Gn 2:23 se pierde porque...', opts:['las palabras son distintas en español','el hebreo usa raíces diferentes','en español hombre/mujer no suenan parecido','es un error de traducción'], ans:2},
+    {q:'אָנֹכִי vs אֲנִי: el primero es...', opts:['más coloquial','más enfático y solemne','forma plural','forma femenina'], ans:1},
+    {q:'אֵם significa...', opts:['padre','hijo','madre','mujer'], ans:2},
+    {q:'Las vocales hebreas se leen...', opts:['antes de la consonante','después de la consonante (con ella)','independientemente','de izquierda a derecha'], ans:1},
+  ],
+  verse:{heb:'עַל כֵּן יַעֲזָב אִישׁ אֶת אָבִיו וְאֶת אִמּוֹ וְדָבַק בְּאִשְׁתּוֹ', esp:'"Por tanto el hombre dejará a su padre y a su madre y se unirá a su esposa" — Génesis 2:24',
+    words:[['עַל כֵּן','por tanto, por eso'],['יַעֲזָב','dejará (yiqtol 3ª masc. sg. de עזב)'],['אִישׁ','el hombre, varón (sin artículo — genérico)'],['אֶת אָבִיו','a su padre (את + ab + sufijo וֹ)'],['וְאֶת אִמּוֹ','y a su madre (waw + את + em + וֹ)'],['וְדָבַק','y se pegará/unirá (raíz דבק = pegar, adherir)'],['בְּאִשְׁתּוֹ','a su esposa (ב + ishah + sufijo)']],
+    insight:'דָּבַק (davak) = pegarse, adherirse. La misma raíz que Rut usa cuando se niega a separarse de Noemí (Rt 1:14). En el contexto del matrimonio no es solo "vivir con" sino una unión de adhesión profunda e inseparable. Jesús cita este versículo en Mt 19:5 desde la LXX; Pablo lo usa en 1 Co 6:16-17 con alcance espiritual.'
+  }
+},
+// ── DÍA 4 ────────────────────────────────────────────────────
+{
+  day:4, title:"El artículo y las preposiciones inseparables", subtitle:"ה, בְּ, לְ, כְּ, מִ — las partículas que se fusionan con la palabra",
+  tips:[
+    {t:'<strong>El artículo definido en hebreo</strong> es הַ (ha-) con dagesh en la consonante siguiente. No existe artículo indefinido: "un rey" = מֶלֶךְ; "el rey" = הַמֶּלֶךְ. La adición del artículo también dagestea la siguiente consonante.'},
+    {t:'<strong>Las 4 preposiciones inseparables</strong> se fusionan con la palabra siguiente (nunca van separadas): בְּ (en, con, por), לְ (a, para, hacia), כְּ (como, según), מִ/מִן (de, desde). Se escriben literalmente pegadas a la primera letra de la palabra.'},
+    {t:'<strong>Regla de combinación con el artículo:</strong> cuando una preposición inseparable precede a una palabra con artículo (הַ), el הַ desaparece pero su vocal se transfiere a la preposición: בְּ + הַמֶּלֶךְ = בַּמֶּלֶךְ ("en el rey"). Esto confunde a los principiantes — busca la vocal alargada.'},
+    {t:'<strong>El waw conjuntivo (וְ)</strong> = "y". También es inseparable, se escribe pegado a la siguiente palabra. Su vocal cambia según la palabra que le siga: וְ es la forma básica, pero ante letra con shevá se convierte en וּ, etc.'},
+  ],
+  extra:{type:'table', title:'Las preposiciones inseparables + artículo',
+    headers:['Preposición','Solo','Con artículo (הַ)','Ejemplo','Significado'],
+    rows:[
+      ['בְּ (en, con)','בְּמֶלֶךְ','בַּמֶּלֶךְ','בְּרֵאשִׁית','en el principio'],
+      ['לְ (a, para)','לְמֶלֶךְ','לַמֶּלֶךְ','לְדָוִד','para/a David'],
+      ['כְּ (como)','כְּמֶלֶךְ','כַּמֶּלֶךְ','כַּשֶּׁמֶשׁ','como el sol'],
+      ['מִ/מִן (de)','מִמֶּלֶךְ','מֵהַמֶּלֶךְ','מִבֵּית לֶחֶם','de Belén'],
+    ]
+  },
+  vocab:[
+    {g:'הַמֶּלֶךְ', t:'el rey (ha + melek)',           h:'1 S 8:7 — rechazaron al rey',           f:'El artículo הַ siempre dagestea la siguiente consonante'},
+    {g:'בְּיוֹם',   t:'en el día de (be + yom)',       h:'Gn 2:4 — "בְּיוֹם עֲשׂוֹת יהוה"',        f:'Preposición inseparable + sustantivo'},
+    {g:'לְעוֹלָם',  t:'para siempre (le + olam)',      h:'Sal 136 — "כִּי לְעוֹלָם חַסְדּוֹ"',      f:'לְ + עוֹלָם = eternidad'},
+    {g:'מִצְרַיִם', t:'Egipto',                       h:'Gn 12:10',                               f:'Literalmente "los dos estrechos" — dual'},
+    {g:'כַּשֶּׁמֶשׁ',t:'como el sol (ke + shemesh)',   h:'Sal 72:5',                               f:'כְּ + הַשֶּׁמֶשׁ — el artículo se absorbe'},
+    {g:'בְּיִשְׂרָאֵל',t:'en Israel',                  h:'Jc 5:2',                                 f:'ב inseparable + nombre propio (sin cambio)'},
+    {g:'לְדָוִד',   t:'para/de David',                h:'Sal 3:1 — encabezado del salmo',          f:'לְ puede indicar dedicación (salmo de/para)'},
+    {g:'מֵאֱלֹהִים',t:'de parte de Dios (min + Elohim)',h:'Gn 41:32',                              f:'מִן ante א toma la forma מֵ (sin dagesh)'},
+  ],
+  quiz:[
+    {q:'El artículo definido hebreo es...', opts:['אֶת','הַ (ha-)','לְ','אֲשֶׁר'], ans:1},
+    {q:'בְּ + הַמֶּלֶךְ = ...', opts:['בְּהַמֶּלֶךְ','בַּמֶּלֶךְ','בָּמֶּלֶךְ','בִּמֶּלֶךְ'], ans:1},
+    {q:'לְעוֹלָם significa...', opts:['en el mundo','para siempre','del eterno','hacia la eternidad'], ans:1},
+    {q:'El waw conjuntivo (וְ) significa...', opts:['pero','y','en','no'], ans:1},
+    {q:'¿Cuántas preposiciones inseparables hay?', opts:['2','3','4','5'], ans:2},
+    {q:'מִן (min) ante vocal toma la forma...', opts:['מַ','מִ','מֵ','מָ'], ans:2},
+    {q:'כְּ significa...', opts:['en','para','como/según','de'], ans:2},
+    {q:'בְּרֵאשִׁית: el בְּ inicial es...', opts:['parte del nombre','preposición inseparable (en)','artículo','negación'], ans:1},
+  ],
+  verse:{heb:'שְׁמַע יִשְׂרָאֵל יהוה אֱלֹהֵינוּ יהוה אֶחָד', esp:'"Escucha, Israel: YHWH es nuestro Dios, YHWH es uno" — Deuteronomio 6:4',
+    words:[['שְׁמַע','escucha (imperativo qal de שׁמע)'],['יִשְׂרָאֵל','Israel (vocativo — sin preposición)'],['יהוה','YHWH (el nombre divino — no se pronuncia)'],['אֱלֹהֵינוּ','nuestro Dios (Elohim + נוּ sufijo "nuestro")'],['יהוה','YHWH (repetición enfática)'],['אֶחָד','uno, único (adjetivo/número cardinal)']],
+    insight:'El Shemá. אֶחָד (ejad) no es solo el número 1 sino "unicidad integral" — contrasta con יָחִיד (yajid, "único/solitario"). Algunos rabinos ven en אֶחָד una unidad compuesta (como Gn 2:24 "serán una sola carne" usa el mismo אֶחָד). La teología de este versículo depende enteramente del hebreo: no hay verbos — "YHWH nuestro Dios YHWH uno" — la cópula es implícita, lo que hace la declaración aún más directa y categórica.'
+  }
+},
+// ── DÍA 5 ────────────────────────────────────────────────────
+{
+  day:5, title:"Los sustantivos: género, número y sufijos posesivos", subtitle:"Masculinos, femeninos, plurales y cómo decir 'mi', 'tu', 'su'",
+  tips:[
+    {t:'<strong>Género:</strong> todo sustantivo hebreo es masculino o femenino. Los femeninos generalmente terminan en ‑ָה (-ah) o ‑ֶת (-et), pero hay muchas excepciones. La regla práctica: aprende el género con la palabra.'},
+    {t:'<strong>Plurales:</strong> masc. → ‑ִים (-im): מֶלֶךְ → מְלָכִים (reyes). Fem. → ‑וֹת (-ot): תּוֹרָה → תּוֹרוֹת. Atención: algunos masc. toman ‑וֹת y algunos fem. toman ‑ִים (ej: אָב "padre" → אָבוֹת "padres").'},
+    {t:'<strong>Los sufijos posesivos</strong> se añaden directamente al final del sustantivo (como en latín o árabe). No existe "mi" o "tu" como palabra separada: דְּבַר + ִי = דְּבָרִי "mi palabra"; + ְךָ = דְּבָרְךָ "tu palabra"; + וֹ = דְּבָרוֹ "su palabra".'},
+    {t:'<strong>Estado constructo:</strong> cuando un sustantivo "posee" a otro, el primero toma una forma especial llamada constructo. מֶלֶךְ יִשְׂרָאֵל = "el rey de Israel" (literalmente "rey Israel"). El primer sustantivo pierde el artículo y a veces cambia de forma.'},
+  ],
+  extra:{type:'table', title:'Sufijos posesivos básicos sobre דָּבָר (palabra)',
+    headers:['Persona','Sufijo','Forma','Significado'],
+    rows:[
+      ['1ª sg.','ִי','דְּבָרִי','mi palabra'],
+      ['2ª masc. sg.','ְךָ','דְּבָרְךָ','tu palabra'],
+      ['2ª fem. sg.','ֵךְ','דְּבָרֵךְ','tu palabra (fem.)'],
+      ['3ª masc. sg.','וֹ','דְּבָרוֹ','su palabra (de él)'],
+      ['3ª fem. sg.','ָהּ','דְּבָרָהּ','su palabra (de ella)'],
+      ['1ª pl.','נוּ','דְּבָרֵנוּ','nuestra palabra'],
+      ['2ª masc. pl.','כֶם','דִּבְרְכֶם','vuestra palabra'],
+      ['3ª masc. pl.','ָם','דִּבְרָם','su palabra (de ellos)'],
+    ]
+  },
+  vocab:[
+    {g:'תּוֹרָתִי', t:'mi torá/enseñanza (Torah + ִי)',   h:'Sal 1:2 — "בְּתוֹרַת יהוה"',             f:'El estado constructo: תּוֹרַת (torát)'},
+    {g:'עַמִּי',   t:'mi pueblo (am + ִי)',               h:'Éx 3:7 — "רָאֹה רָאִיתִי אֶת עֳנִי עַמִּי"',f:'"He visto la aflicción de mi pueblo"'},
+    {g:'מַלְכוּת', t:'reino, reinado',                   h:'Dn 2:44',                                 f:'Raíz מ-ל-כ: rey → reino → reinar'},
+    {g:'בְּנֵי יִשְׂרָאֵל',t:'hijos de Israel (estado constructo)',h:'Éx 1:1',                       f:'בְּנֵי es el constructo de בָּנִים (hijos)'},
+    {g:'בֵּית לֶחֶם',t:'Belén (casa + pan — estado constructo)',h:'Rt 1:1',                          f:'בֵּית (constructo de בַּיִת) + לֶחֶם (pan)'},
+    {g:'דְּבַר יהוה',t:'la palabra de YHWH (estado constructo)',h:'Is 1:10',                         f:'דְּבַר = constructo de דָּבָר'},
+    {g:'אֱלֹהֵינוּ',t:'nuestro Dios (Elohim + נוּ)',     h:'Dt 6:4',                                 f:'El sufijo posesivo 1ª pl. sobre nombre divino'},
+    {g:'אֶרֶץ יִשְׂרָאֵל',t:'tierra de Israel (estado constructo)',h:'Ez 40:2',                      f:'El estado constructo une los dos sustantivos'},
+  ],
+  quiz:[
+    {q:'El plural masculino hebreo termina en...', opts:['‑ָה','-ot','-im','-el'], ans:2},
+    {q:'El plural femenino hebreo termina en...', opts:['-im','-ot','-ah','-ay'], ans:1},
+    {q:'"Mi palabra" en hebreo = דָּבָר + ...', opts:['וֹ','נוּ','ִי','ָם'], ans:2},
+    {q:'בֵּית לֶחֶם literalmente significa...', opts:['ciudad de pan','casa de pan','tierra de pan','lugar de pan'], ans:1},
+    {q:'En el estado constructo, el primer sustantivo...', opts:['toma artículo','pierde el artículo y cambia forma','toma sufijo posesivo','va al final'], ans:1},
+    {q:'אֱלֹהֵינוּ = Elohim + sufijo...', opts:['ִי (mi)','ְךָ (tu)','נוּ (nuestro)','וֹ (su)'], ans:2},
+    {q:'בְּנֵי יִשְׂרָאֵל es un...', opts:['nombre propio compuesto','estado constructo (hijos de Israel)','frase verbal','frase prepositional'], ans:1},
+    {q:'El estado constructo expresa...', opts:['tiempo verbal','posesión / relación entre dos sustantivos','negación','pregunta'], ans:1},
+  ],
+  verse:{heb:'יהוה רֹעִי לֹא אֶחְסָר', esp:'"YHWH es mi pastor, nada me falta" — Salmo 23:1',
+    words:[['יהוה','YHWH (sujeto — el pastor)'],['רֹעִי','mi pastor (רֹעֶה + ִי sufijo 1ª sg.)'],['לֹא','no (negación)'],['אֶחְסָר','me faltará/me falta (yiqtol 1ª sg. de חסר = faltar)']],
+    insight:'רֹעִי = "mi pastor" — sufijo ִי de 1ª persona sobre el participio רֹעֶה (pastor). El salmo no dice "YHWH es un pastor" sino "YHWH es MI pastor" — la posesión personal que el sufijo hebreo expresa en una sola palabra. En español necesitamos "es mi" (dos palabras); en hebreo rⁱo (una sola). La gramática del sufijo es la gramática de la intimidad.'
+  }
+},
+// ── DÍA 6 ────────────────────────────────────────────────────
+{
+  day:6, title:"El verbo hebreo: qatal (pasado completado)", subtitle:"El sistema verbal hebreo es radicalmente diferente al español",
+  tips:[
+    {t:'<strong>El hebreo no tiene "tiempos" en sentido español.</strong> Tiene dos "aspectos": qatal (acción vista como completada) y yiqtol (acción vista como incompleta). El contexto determina si es pasado, presente o futuro. Qatal se traduce generalmente como pasado en narrativa.'},
+    {t:'<strong>El qatal se forma</strong> añadiendo sufijos a la raíz verbal. La raíz de 3 consonantes es la base: כ-ת-ב (k-t-b) = escribir. Las desinencias identifican persona, género y número: כָּתַב (él escribió), כָּתְבָה (ella escribió), כָּתַבְתָּ (tú escribiste, masc.).'},
+    {t:'<strong>El verbo en hebreo concuerda en género</strong> con el sujeto. Si el sujeto es femenino, el verbo toma desinencia femenina. Esta concordancia de género en el verbo es una de las grandes diferencias con el español.'},
+    {t:'<strong>El sujeto puede estar implícito</strong> en la desinencia verbal: כָּתַבְתִּי ya significa "yo escribí" sin necesidad de añadir "yo" (אֲנִי). Cuando se añade el pronombre, es para énfasis — igual que en griego.'},
+  ],
+  extra:{type:'conj', title:'Qatal de כָּתַב (escribir) — paradigma completo',
+    cols:[
+      {title:'Singular', rows:[['כָּתַבְתִּי','yo escribí (1ª sg.)'],['כָּתַבְתָּ','tú escribiste (2ª m.s.)'],['כָּתַבְתְּ','tú escribiste (2ª f.s.)'],['כָּתַב','él escribió (3ª m.s.)'],['כָּתְבָה','ella escribió (3ª f.s.)']]},
+      {title:'Plural', rows:[['כָּתַבְנוּ','nosotros escribimos'],['כְּתַבְתֶּם','vosotros escribisteis (m.)'],['כְּתַבְתֶּן','vosotras escribisteis (f.)'],['כָּתְבוּ','ellos escribieron'],['כָּתְבוּ','ellas escribieron']]},
+    ]
+  },
+  vocab:[
+    {g:'כָּתַב',  t:'escribir',                  h:'Éx 17:14 — "כְּתֹב זֹאת זִכָּרוֹן"',           f:'Raíz כ-ת-ב — 222 veces en el AT'},
+    {g:'שָׁמַר',  t:'guardar, cuidar, observar', h:'Gn 2:15 — "לְעָבְדָהּ וּלְשָׁמְרָהּ"',          f:'Raíz שׁ-מ-ר — 468 veces en el AT'},
+    {g:'שָׁמַע',  t:'oír, escuchar, obedecer',   h:'Gn 3:10 — "אֶת קֹלְךָ שָׁמַעְתִּי"',           f:'El shemá de Dt 6:4 — oír implica obedecer'},
+    {g:'אָמַר',   t:'decir, hablar',              h:'Gn 1:3 — "וַיֹּאמֶר אֱלֹהִים"',               f:'5.301 veces — el verbo más frecuente del AT'},
+    {g:'רָאָה',   t:'ver, percibir',              h:'Gn 1:4 — "וַיַּרְא אֱלֹהִים כִּי טוֹב"',       f:'Raíz ר-א-ה — 1.311 veces en el AT'},
+    {g:'נָתַן',   t:'dar, poner, entregar',       h:'Gn 1:17 — "וַיִּתֵּן אֹתָם אֱלֹהִים"',        f:'2.014 veces — el verbo del don divino'},
+    {g:'הָלַךְ',  t:'caminar, ir',               h:'Gn 3:8 — "מִתְהַלֵּךְ בַּגָּן"',               f:'Raíz ה-ל-כ — 1.552 veces en el AT'},
+    {g:'יָדַע',   t:'conocer (por experiencia)', h:'Gn 4:1 — "וְהָאָדָם יָדַע אֶת חַוָּה"',        f:'Conocimiento relacional, no solo intelectual'},
+  ],
+  quiz:[
+    {q:'El qatal hebreo expresa...', opts:['acción futura incierta','acción incompleta','acción vista como completada','mandato'], ans:2},
+    {q:'כָּתַב significa...', opts:['leer','escribir','hablar','escuchar'], ans:1},
+    {q:'"Ella escribió" en qatal es...', opts:['כָּתַב','כָּתַבְתָּ','כָּתְבָה','כָּתַבְנוּ'], ans:2},
+    {q:'שָׁמַע en hebreo implica...', opts:['solo percibir sonido','oír y obedecer','hablar en voz alta','ver'], ans:1},
+    {q:'אָמַר aparece en el AT aproximadamente...', opts:['500 veces','1.311 veces','5.301 veces','222 veces'], ans:2},
+    {q:'En hebreo el verbo concuerda en género con el sujeto: ¿verdad o falso?', opts:['Verdad','Falso','Solo en plural','Solo en singular'], ans:0},
+    {q:'יָדַע implica un conocimiento...', opts:['solo intelectual/abstracto','relacional y experiencial','solo divino','solo negativo'], ans:1},
+    {q:'"Nosotros escribimos" en qatal es...', opts:['כָּתְבוּ','כָּתַבְתָּ','כָּתַבְנוּ','כָּתַב'], ans:2},
+  ],
+  verse:{heb:'בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ', esp:'"En el principio creó Dios los cielos y la tierra" — Génesis 1:1',
+    words:[['בָּרָא','creó (qatal 3ª masc. sg. de ברא)'],['אֱלֹהִים','Dios (sujeto — viene DESPUÉS del verbo: orden V-S-O en hebreo)'],['אֵת','partícula de objeto directo definido'],['הַשָּׁמַיִם','los cielos (artículo + dual)'],['וְאֵת הָאָרֶץ','y la tierra (waw + את + artículo)']],
+    insight:'בָּרָא es qatal 3ª persona masculino singular — "él creó". El sujeto אֱלֹהִים viene después del verbo: el hebreo bíblico tiene orden normal V-S-O (verbo primero). El español invierte: "Dios creó". Esta diferencia de orden es sistemática en la narrativa hebrea y tiene implicaciones para la exégesis: lo que se pone primero en hebreo es lo enfático, no el sujeto gramatical.'
+  }
+},
+// ── DÍA 7 ────────────────────────────────────────────────────
+{
+  day:7, title:"El yiqtol y el waw consecutivo", subtitle:"El tiempo del futuro/incompleto y la narrativa bíblica",
+  tips:[
+    {t:'<strong>El yiqtol</strong> (también llamado imperfecto) expresa una acción vista como incompleta, en proceso, o futura. Prefija a la raíz verbal: יִכְתֹּב = "él escribirá / él escribe / que él escriba". El contexto determina la traducción.'},
+    {t:'<strong>El waw consecutivo con yiqtol</strong> (וַיִּ-) es la construcción narrativa más frecuente del AT. Cuando וְ (waw) se añade al yiqtol con dagesh reforzante, el resultado es un pasado narrativo: וַיֹּאמֶר = "y dijo". Es la columna vertebral de toda la narración bíblica.'},
+    {t:'<strong>De Génesis a Reyes</strong>, cada escena narrativa está construida con esta fórmula: וַיְהִי... וַיֹּאמֶר... וַיַּרְא... וַיַּעַשׂ... ("y fue... y dijo... y vio... y hizo..."). Reconocer וַיּ- como marcador narrativo te desbloquea la lectura de toda la narrativa hebrea.'},
+    {t:'<strong>El yiqtol cohortativo</strong> (1ª persona + ָה final) expresa deseo o intención: אֶכְתְּבָה = "¡déjame escribir!" / "quiero escribir". El jussivo (3ª persona con forma corta) es el equivalente para mandatos: יְהִי אוֹר = "¡que haya luz!".'},
+  ],
+  extra:{type:'table', title:'Yiqtol de כָּתַב — paradigma básico',
+    headers:['Persona','Forma yiqtol','Significado'],
+    rows:[
+      ['1ª sg.','אֶכְתֹּב','(yo) escribiré / escribo'],
+      ['2ª masc. sg.','תִּכְתֹּב','(tú, m.) escribirás'],
+      ['2ª fem. sg.','תִּכְתְּבִי','(tú, f.) escribirás'],
+      ['3ª masc. sg.','יִכְתֹּב','(él) escribirá'],
+      ['3ª fem. sg.','תִּכְתֹּב','(ella) escribirá'],
+      ['1ª pl.','נִכְתֹּב','(nosotros) escribiremos'],
+      ['3ª masc. pl.','יִכְתְּבוּ','(ellos) escribirán'],
+    ]
+  },
+  vocab:[
+    {g:'וַיֹּאמֶר', t:'y dijo (waw consec. + yiqtol de אמר)',h:'La frase más frecuente del AT',    f:'Aparece más de 2.000 veces en el AT'},
+    {g:'וַיְהִי',   t:'y fue / y sucedió (waw consec. + היה)',h:'Gn 1:3 etc.',                     f:'Fórmula de inicio narrativo'},
+    {g:'וַיַּרְא',  t:'y vio (waw consec. + yiqtol de ראה)', h:'Gn 1:4',                          f:'"Y vio Dios que era bueno"'},
+    {g:'יְהִי אוֹר',t:'¡haya luz! (jussivo de היה)',          h:'Gn 1:3',                          f:'El jussivo 3ª sg.: mandato o deseo'},
+    {g:'יְבָרֶכְךָ',t:'te bendiga (jussivo 3ª sg. de ברך)',  h:'Nm 6:24 — bendición sacerdotal',  f:'La bendición más antigua conservada del AT'},
+    {g:'אֶשְׁמְרָה',t:'¡déjame guardar! (cohortativo)',        h:'Sal 119:44',                      f:'Cohortativo 1ª sg.: deseo o intención'},
+    {g:'וַיַּעַשׂ',  t:'e hizo (waw consec. + yiqtol de עשׂה)',h:'Gn 1:7',                         f:'עשׂה = hacer, crear (ser humano como sujeto)'},
+    {g:'לֹא יִהְיֶה',t:'no habrá / no debe haber',           h:'Éx 20:3 — primer mandamiento',    f:'לֹא + yiqtol = prohibición permanente'},
+  ],
+  quiz:[
+    {q:'El yiqtol expresa acción...', opts:['completada','vista como incompleta/futura','pasada simple','imperativa'], ans:1},
+    {q:'וַיֹּאמֶר es...', opts:['qatal 3ª sg.','yiqtol + waw consecutivo (pasado narrativo)','imperativo','participio'], ans:1},
+    {q:'יְהִי אוֹר en Gn 1:3 es un...', opts:['qatal','yiqtol normal','jussivo (mandato/deseo 3ª sg.)','cohortativo'], ans:2},
+    {q:'El waw consecutivo ante yiqtol crea...', opts:['futuro enfático','pasado narrativo','negación','pregunta'], ans:1},
+    {q:'לֹא + yiqtol expresa...', opts:['pasado negado','prohibición permanente','pregunta retórica','futuro positivo'], ans:1},
+    {q:'El cohortativo es la forma de 1ª persona que expresa...', opts:['mandato a otro','deseo o intención del hablante','negación','pasado'], ans:1},
+    {q:'וַיְהִי es la fórmula de...', opts:['fin narrativo','inicio narrativo','bendición','juicio'], ans:1},
+    {q:'וַיַּרְא אֱלֹהִים כִּי טוֹב: el verbo וַיַּרְא es...', opts:['qatal','waw consec. + yiqtol de ראה','imperativo','participio'], ans:1},
+  ],
+  verse:{heb:'וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי אוֹר', esp:'"Y dijo Dios: ¡haya luz! Y hubo luz" — Génesis 1:3',
+    words:[['וַיֹּאמֶר','y dijo (waw consec. + yiqtol — acto narrativo)'],['אֱלֹהִים','Dios (sujeto)'],['יְהִי','¡haya! (jussivo de היה — mandato creativo)'],['אוֹר','luz (sustantivo masc. sg.)'],['וַיְהִי','y hubo (waw consec. + yiqtol — resultado inmediato)'],['אוֹר','luz (repetición — la obediencia instantánea de la creación)']],
+    insight:'Seis palabras hebreas que crean la luz. יְהִי es el jussivo: no un mandato a alguien que podría desobedecer, sino la palabra creadora divina que al pronunciarse se cumple. La misma palabra que crea es la que nombra: el hebreo no separa el nombre de la cosa. La repetición de אוֹר (luz) al final no es redundancia — es el eco narrativo de la obediencia total de la creación al mandato divino.'
+  }
+},
+// ── DÍA 8 ────────────────────────────────────────────────────
+{
+  day:8, title:"Los pronombres y los adjetivos", subtitle:"Los pronombres personales independientes y la concordancia adjetival",
+  tips:[
+    {t:'<strong>Los pronombres personales independientes</strong> en hebreo, como en griego, solo se usan para énfasis. Normalmente el sujeto está incorporado en el verbo. Cuando aparece אֲנִי o אָנֹכִי (yo), הוּא (él), הִיא (ella), hay un énfasis especial.'},
+    {t:'<strong>Los pronombres de 3ª persona</strong> (הוּא, הִיא) también funcionan como cópula — verbo "ser": אֱלֹהִים הוּא = "Él (es) Dios". El hebreo bíblico no tiene verbo "ser" en el presente: se expresa con pronombres o simplemente con yuxtaposición.'},
+    {t:'<strong>Los adjetivos concuerdan</strong> en género y número con el sustantivo que modifican: מֶלֶךְ טוֹב (un rey bueno, masc. sg.), מַלְכָּה טוֹבָה (una reina buena, fem. sg.), מְלָכִים טוֹבִים (reyes buenos, masc. pl.).'},
+    {t:'<strong>Adjetivo atributivo vs. predicativo:</strong> con artículo el adjetivo es atributivo (הַמֶּלֶךְ הַטּוֹב = "el rey bueno"); sin artículo puede ser predicativo (הַמֶּלֶךְ טוֹב = "el rey es bueno"). Esta diferencia es fundamental para leer el AT.'},
+  ],
+  extra:{type:'table', title:'Pronombres personales independientes en hebreo',
+    headers:['Persona','Masc.','Fem.','Significado'],
+    rows:[
+      ['1ª sg.','אֲנִי / אָנֹכִי','אֲנִי / אָנֹכִי','yo'],
+      ['2ª sg.','אַתָּה','אַתְּ','tú'],
+      ['3ª sg.','הוּא','הִיא','él / ella'],
+      ['1ª pl.','אֲנַחְנוּ','אֲנַחְנוּ','nosotros/as'],
+      ['2ª pl.','אַתֶּם','אַתֶּן','vosotros / vosotras'],
+      ['3ª pl.','הֵם / הֵמָּה','הֵן / הֵנָּה','ellos / ellas'],
+    ]
+  },
+  vocab:[
+    {g:'הוּא',     t:'él / ese / eso (pronombre 3ª masc.)',h:'Gn 2:14 — "הוּא הַחֹנֵךְ עַל פְּנֵי"', f:'También funciona como cópula: "él ES"'},
+    {g:'הִיא',     t:'ella / esa (pronombre 3ª fem.)',    h:'Gn 3:20 — "כִּי הִוא הָיְתָה אֵם"',   f:'Escritura antigua: הִוא en Torá'},
+    {g:'טוֹב / טוֹבָה',t:'bueno / buena (adj.)',         h:'Gn 1:4,10,12,18,21,25,31',            f:'7 veces en Gn 1 — el sello de la bondad de la creación'},
+    {g:'גָּדוֹל',  t:'grande, mayor',                    h:'Gn 1:16 — "שְׁנֵי הַמְּאֹרֹת הַגְּדֹלִים"',f:'גְּדֹלִים = plural masc.'},
+    {g:'קָדוֹשׁ',  t:'santo, apartado',                  h:'Is 6:3 — "קָדוֹשׁ קָדוֹשׁ קָדוֹשׁ"',    f:'Triple repetición = superlativo: "el más santo"'},
+    {g:'חָדָשׁ',   t:'nuevo, fresco',                   h:'Is 43:19 — "הִנְנִי עֹשֶׂה חֲדָשָׁה"',   f:'"He aquí hago algo nuevo" — promesa de restauración'},
+    {g:'עָנָו',    t:'humilde, manso',                   h:'Nm 12:3 — "הָאִישׁ מֹשֶׁה עָנָו מְאֹד"', f:'"Moisés era un hombre muy humilde"'},
+    {g:'רַב',      t:'muchos, grande, numeroso',          h:'Gn 6:5 — "רַבָּה רָעַת הָאָדָם"',       f:'"la maldad del hombre era mucha" — רַבָּה (fem.)'},
+  ],
+  quiz:[
+    {q:'הוּא puede funcionar como...', opts:['solo pronombre','solo cópula (ser)','pronombre y cópula','negación'], ans:2},
+    {q:'"El rey bueno" (atributivo) en hebreo es...', opts:['הַמֶּלֶךְ טוֹב','הַמֶּלֶךְ הַטּוֹב','מֶלֶךְ הַטּוֹב','מֶלֶךְ טוֹב'], ans:1},
+    {q:'"El rey es bueno" (predicativo) en hebreo es...', opts:['הַמֶּלֶךְ הַטּוֹב','הַמֶּלֶךְ טוֹב','הַטּוֹב מֶלֶךְ','מֶלֶךְ טוֹב'], ans:1},
+    {q:'קָדוֹשׁ קָדוֹשׁ קָדוֹשׁ (Is 6:3) expresa...', opts:['tres ángeles distintos','el superlativo hebreo: el más santo','una trinidad de santidades','repetición litúrgica sin más'], ans:1},
+    {q:'Los adjetivos en hebreo concuerdan con el sustantivo en...', opts:['solo género','solo número','género y número','género, número y caso'], ans:2},
+    {q:'אַתָּה es...', opts:['yo','tú (masc.)','él','nosotros'], ans:1},
+    {q:'הֵם / הֵמָּה son...', opts:['ellas','él (enfático)','ellos','nosotros'], ans:2},
+    {q:'אָנֹכִי vs אֲנִי: אָנֹכִי es...', opts:['forma femenina','más coloquial','más solemne y enfático','forma plural'], ans:2},
+  ],
+  verse:{heb:'קָדוֹשׁ קָדוֹשׁ קָדוֹשׁ יהוה צְבָאוֹת מְלֹא כָל הָאָרֶץ כְּבוֹדוֹ', esp:'"Santo, santo, santo, YHWH de los ejércitos; toda la tierra está llena de su gloria" — Isaías 6:3',
+    words:[['קָדוֹשׁ x3','santo (triple repetición = superlativo hebreo: el absoluta y totalmente santo)'],['יהוה צְבָאוֹת','YHWH de los ejércitos (estado constructo)'],['מְלֹא','plenitud de (constructo de מָלֵא)'],['כָל הָאָרֶץ','toda la tierra (כָּל + artículo)'],['כְּבוֹדוֹ','su gloria (כָּבוֹד + sufijo וֹ masc. sg.)']],
+    insight:'El hebreo no tiene grado superlativo como el español ("el más santo"). Lo expresa por repetición: טוֹב טוֹב = muy bueno; קָדוֹשׁ קָדוֹשׁ קָדוֹשׁ = el más-que-más-que-más santo, la santidad absoluta y total. Solo en Isaías 6 y Apocalipsis 4:8 encontramos la triple repetición. El hebreo dice algo que el español no puede: la santidad de Dios supera cualquier superlativo posible.'
+  }
+},
+// ── DÍA 9 ────────────────────────────────────────────────────
+{
+  day:9, title:"La poesía hebrea: paralelismo y quiasmo", subtitle:"Las estructuras literarias que dan forma a los Salmos y los Profetas",
+  tips:[
+    {t:'<strong>La poesía hebrea no rima</strong> (generalmente) ni tiene metro silábico fijo. Su estructura es el paralelismo: la repetición o contraste de ideas en líneas paralelas. Robert Lowth (1753) identificó los tres tipos básicos que siguen siendo el estándar académico.'},
+    {t:'<strong>Paralelismo sinónimo:</strong> la segunda línea repite la idea de la primera con palabras distintas. Sal 24:1: "De YHWH es la tierra y su plenitud / el mundo habitado y los que en él moran." Dos dichos, una verdad.'},
+    {t:'<strong>Paralelismo antitético:</strong> la segunda línea contrasta con la primera. Pr 10:1: "Un hijo sabio alegra al padre / pero un hijo necio es tristeza de su madre." La estructura de Proverbios casi entera es antitética.'},
+    {t:'<strong>El quiasmo</strong> es la estructura en espejo A-B-C-B\'-A\': el centro (C) es el punto teológico culminante. Génesis 1-2 tiene estructura quiástica. Juan 1:1-18 también (influido por el pensamiento semítico). Reconocer el quiasmo es encontrar el corazón del texto.'},
+  ],
+  extra:{type:'table', title:'Los tres tipos de paralelismo hebreo',
+    headers:['Tipo','Relación A/B','Ejemplo','Efecto literario'],
+    rows:[
+      ['Sinónimo','B repite A con otras palabras','Sal 19:1: "Los cielos cuentan la gloria de Dios / y la expansión anuncia la obra de sus manos"','Amplificación, confirmación'],
+      ['Antitético','B contrasta con A','Pr 10:1: "El hijo sabio alegra al padre / el hijo necio es tristeza de su madre"','Contraste moral, instrucción'],
+      ['Sintético','B completa o desarrolla A','Sal 23:1-2: "YHWH es mi pastor / en lugares de delicados pastos me hará descansar"','Progresión, desarrollo'],
+      ['Quiasmo','A-B-C-B\'-A\'','Sal 1:2 / Gn 9:6 / Is 55:8-9','El centro (C) es el punto teológico clave'],
+    ]
+  },
+  vocab:[
+    {g:'כָּבוֹד',   t:'gloria, peso, honor',              h:'Is 6:3 — "מְלֹא כָל הָאָרֶץ כְּבוֹדוֹ"',  f:'כבד = pesar — la gloria tiene peso real'},
+    {g:'מִשְׁפָּט',  t:'juicio, justicia, derecho',        h:'Am 5:24 — "כַּמַּיִם יִגַּל מִשְׁפָּט"',   f:'"Corra el juicio como las aguas" — Amós'},
+    {g:'צְדָקָה',   t:'justicia, rectitud, equidad',       h:'Am 5:24 — par frecuente con מִשְׁפָּט',    f:'מִשְׁפָּט + צְדָקָה = el par profético del AT'},
+    {g:'חָכְמָה',   t:'sabiduría (práctica, no teórica)',  h:'Pr 1:7 — "רֵאשִׁית חָכְמָה יִרְאַת יהוה"',f:'La sabiduría hebrea es ética y práctica'},
+    {g:'אֱמֶת',    t:'verdad, fidelidad, confiabilidad',  h:'Sal 31:6 — "אֵל אֱמֶת"',                  f:'Raíz א-מ-נ: la misma de amén'},
+    {g:'תְּהִלָּה', t:'alabanza, salmo de alabanza',       h:'Sal 22:26 — "מֵאִתְּךָ תְהִלָּתִי"',      f:'תְּהִלִּים = Salmos (plural)'},
+    {g:'בֶּטַח',    t:'confianza, seguridad',              h:'Sal 4:9 — "לָבֶטַח אֵשְׁכְּבָה"',          f:'"me acostaré y dormiré en seguridad"'},
+    {g:'צִיּוֹן',   t:'Sión, el monte santo',              h:'Sal 2:6 — "עַל הַר צִיּוֹן קָדְשִׁי"',    f:'Símbolo de la presencia divina y el reinado de Dios'},
+  ],
+  quiz:[
+    {q:'La poesía hebrea se estructura principalmente mediante...', opts:['rima final','metro silábico','paralelismo de ideas','acrosticón'], ans:2},
+    {q:'Paralelismo antitético: la segunda línea...', opts:['repite la primera','contrasta con la primera','desarrolla la primera','ignora la primera'], ans:1},
+    {q:'En el quiasmo (A-B-C-B\'-A\'), el punto teológico clave es...', opts:['A (el inicio)','A\' (el final)','C (el centro)','B (el primer paralelo)'], ans:2},
+    {q:'כָּבוֹד (gloria) en hebreo literalmente significa...', opts:['luz brillante','peso / honor','viento','fuego'], ans:1},
+    {q:'מִשְׁפָּט y צְדָקָה son el par profético del AT que significa...', opts:['amor y verdad','juicio/justicia y rectitud/equidad','gloria y honor','paz y sabiduría'], ans:1},
+    {q:'רֵאשִׁית חָכְמָה יִרְאַת יהוה (Pr 1:7): el comienzo de la sabiduría es...', opts:['el estudio de la Torá','el temor de YHWH','la obediencia al rey','la oración continua'], ans:1},
+    {q:'Los Salmos en hebreo se llaman...', opts:['מִשְׁלֵי','שִׁירִים','תְּהִלִּים','חָכְמוֹת'], ans:2},
+    {q:'La sabiduría hebrea (חָכְמָה) es primariamente...', opts:['filosófica y abstracta','ética y práctica','mística y contemplativa','apocalíptica'], ans:1},
+  ],
+  verse:{heb:'כַּמַּיִם יִגַּל מִשְׁפָּט וּצְדָקָה כְּנַחַל אֵיתָן', esp:'"Que fluya el derecho como las aguas, y la justicia como arroyo perenne" — Amós 5:24',
+    words:[['כַּמַּיִם','como las aguas (כְּ + מַיִם)'],['יִגַּל','que fluya / corra (yiqtol jussivo de גלל)'],['מִשְׁפָּט','el derecho, la justicia (sujeto)'],['וּצְדָקָה','y la rectitud (waw + tsedaqah)'],['כְּנַחַל','como un arroyo (כְּ + nahal)'],['אֵיתָן','perenne, permanente, inagotable']],
+    insight:'Paralelismo sinónimo perfecto: משׁפט / צדקה son el par; כמים / כנחל son el par. La imagen no es estática sino cinética — agua que fluye. Amós no pide momentos de justicia sino un torrente permanente. אֵיתָן (perenne) cualifica al arroyo: no el wadi que solo fluye en invierno (los derechos ocasionales y convenientes) sino la fuente que nunca se seca. Un texto poético que contiene una exigencia ética total.'
+  }
+},
+// ── DÍA 10 ────────────────────────────────────────────────────
+{
+  day:10, title:"Repaso + lectura: Salmo 23 completo", subtitle:"Todo lo aprendido en 10 días aplicado al Salmo más famoso del AT",
+  tips:[
+    {t:'<strong>El Salmo 23</strong> contiene: estado constructo (pastos de = נְאוֹת דֶּשֶׁא), yiqtol narrativo, sufijos posesivos en cada versículo, adjetivos predicativos, la partícula כִּי, el waw consecutivo y vocabulario de los 10 días.'},
+    {t:'<strong>Estructura del Salmo 23:</strong> vv.1-3 metáfora del pastor; vv.4 el valle oscuro; vv.5-6 metáfora del huésped. Es un quiasmo: el punto central (v.4 "aunque camine por el valle de sombra de muerte") es el momento de máxima tensión, flanqueado por imágenes de paz.'},
+    {t:'<strong>גֵּיא צַלְמָוֶת</strong> (guei tsalmavet): literalmente "valle de sombra de muerte" — pero muchos estudiosos lo leen como שַׁלְמָוֶת (shalmavet) = "oscuridad profunda". Ambas lecturas son gramaticalmente posibles. El hebreo es aquí deliberadamente ambiguo.'},
+    {t:'<strong>Pronombres que cambian:</strong> en los vv.1-3 el pastor es "él" (3ª persona); en el v.4 cambia a "tú" (2ª persona). Es el momento de mayor intimidad y peligro: cuando más oscuro está, el salmista habla directamente a Dios.'},
+  ],
+  extra:{type:'table', title:'Salmo 23 completo — análisis versículo a versículo',
+    headers:['Vers.','Texto hebreo (clave)','Análisis gramatical','Nota exegética'],
+    rows:[
+      ['v.1','יהוה רֹעִי לֹא אֶחְסָר','רֹעִי = participio + sufijo ִי (mi pastor); לֹא + yiqtol','Sin verbo "ser" — yuxtaposición nominal'],
+      ['v.2','יַרְבִּיצֵנִי / יְנַהֲלֵנִי','yiqtol Pi\'el con sufijo 1ª sg. (me...)','Pi\'el = intensivo: "me hace reposar del todo"'],
+      ['v.3','יְשׁוֹבֵב נַפְשִׁי','יְשׁוֹבֵב = yiqtol Pi\'el de שׁוב','שׁוב = volver; Pi\'el = restaurar, devolver'},
+      ['v.4','גֵּיא צַלְמָוֶת / עִמְּךָ','Cambio de 3ª a 2ª persona; עִמְּךָ = "contigo" ( עִם + ְךָ)','El momento más íntimo del salmo: de "él" a "tú"'],
+      ['v.5','תַּעֲרֹךְ לְפָנַי שֻׁלְחָן','yiqtol 2ª sg. (tú preparas); לְפָנַי = "ante mí"','Cambio de imagen: del pastor al anfitrión'],
+      ['v.6','אַךְ טוֹב וָחֶסֶד','אַךְ = ciertamente; טוֹב וָחֶסֶד = bondad y חֶסֶד','חֶסֶד en el clímax — la palabra más rica del AT'],
+    ]
+  },
+  vocab:[
+    {g:'רֹעֶה',    t:'pastor (participio de רעה)',         h:'Sal 23:1',                              f:'También: "apacentar" — participio como sustantivo'},
+    {g:'נַחַל',    t:'arroyo, torrente',                  h:'Sal 23:2 — "מֵי מְנֻחוֹת"',             f:'Aguas de reposo / tranquilidad'},
+    {g:'שׁוּב',    t:'volver, regresar, restaurar',       h:'Sal 23:3 — "יְשׁוֹבֵב נַפְשִׁי"',        f:'El Pi\'el: "restaura mi alma"'},
+    {g:'צַלְמָוֶת',t:'sombra de muerte / oscuridad profunda',h:'Sal 23:4',                           f:'Posible combinación de צֵל (sombra) + מָוֶת (muerte)'},
+    {g:'שֵׁבֶט',   t:'vara, cetro, tribu',               h:'Sal 23:4 — "שִׁבְטְךָ וּמִשְׁעַנְתֶּךָ"', f:'Vara de pastor = herramienta de guía y protección'},
+    {g:'מִשְׁעֶנֶת',t:'cayado, bastón de apoyo',          h:'Sal 23:4',                              f:'La diferencia: vara (disciplina) vs. cayado (apoyo)'},
+    {g:'שֶׁמֶן',   t:'aceite, azeite',                   h:'Sal 23:5 — "דִּשַּׁנְתָּ בַשֶּׁמֶן רֹאשִׁי"',f:'"ungiste con aceite mi cabeza" — hospitalidad'},
+    {g:'וְשַׁבְתִּי', t:'y habitaré / y volveré',          h:'Sal 23:6 — "לְאֹרֶךְ יָמִים"',          f:'Doble lectura: שׁוב (volver) o ישׁב (habitar)'},
+  ],
+  quiz:[
+    {q:'En el Sal 23, ¿cuándo cambia el pronombre de 3ª a 2ª persona?', opts:['v.2','v.3','v.4','v.5'], ans:2},
+    {q:'רֹעִי en Sal 23:1 es...', opts:['adjetivo','participio + sufijo ִי (mi pastor)','verbo qatal','nombre propio'], ans:1},
+    {q:'גֵּיא צַלְמָוֶת puede leerse como...', opts:['solo "valle de muerte"','solo "oscuridad profunda"','"valle de sombra de muerte" o "oscuridad profunda"','ninguna de las dos'], ans:2},
+    {q:'El Pi\'el (יְשׁוֹבֵב) en v.3 expresa...', opts:['pasado simple','acción intensa/causativa (restaura del todo)','futuro','negación'], ans:1},
+    {q:'עִמְּךָ (v.4) significa...', opts:['sin ti','lejos de ti','contigo','hacia ti'], ans:2},
+    {q:'אַךְ טוֹב וָחֶסֶד: אַךְ significa...', opts:['quizás','nunca','ciertamente/solo','siempre que'], ans:2},
+    {q:'El salmo termina con la promesa de habitar en...', opts:['el valle','la ciudad','la casa de YHWH','el monte Sinaí'], ans:2},
+    {q:'שֵׁבֶט (vara) y מִשְׁעֶנֶת (cayado) son respectivamente símbolos de...', opts:['fuerza y debilidad','guía/disciplina y apoyo','autoridad y esclavitud','dos pastores distintos'], ans:1},
+  ],
+  verse:{heb:'גַּם כִּי אֵלֵךְ בְּגֵיא צַלְמָוֶת לֹא אִירָא רָע כִּי אַתָּה עִמָּדִי', esp:'"Aunque ande en el valle de sombra de muerte, no temeré mal alguno, porque tú estás conmigo" — Salmo 23:4',
+    words:[['גַּם כִּי','aunque, aun cuando (concesivo)'],['אֵלֵךְ','ande / camine (yiqtol 1ª sg. de הלך)'],['בְּגֵיא צַלְמָוֶת','en el valle de sombra de muerte (ב + estado constructo)'],['לֹא אִירָא','no temeré (לֹא + yiqtol de ירא)'],['רָע','mal, cosa mala (objeto directo)'],['כִּי אַתָּה','porque TÚ (אַתָּה explícito = énfasis máximo)'],['עִמָּדִי','conmigo (עִם + ִי sufijo 1ª sg.)']],
+    insight:'אַתָּה: el pronombre de 2ª persona explícito en el clímax del salmo. El pastor que antes era "él" (הוּא) se convierte en "TÚ" — la gramática hace visible el momento de intimidad extrema: en el oscuro valle, el salmista ya no habla sobre Dios sino directamente a él. El sufijo עִמָּדִי ("conmigo") condensa toda la teología: la presencia divina no elimina el valle, pero lo transforma.'
+  }
+}
+];
+
+// ── BUILD UI ─────────────────────────────────────────────────
+const lnav = document.getElementById('lnav');
+const container = document.getElementById('lessons-container');
+
+LESSONS.forEach((lesson, idx) => {
+  const btn = document.createElement('button');
+  btn.className = 'lnav-btn' + (idx === 0 ? ' active' : '');
+  btn.textContent = lesson.day === 0 ? 'Intro' : `Día ${lesson.day}`;
+  btn.onclick = () => showLesson(idx);
+  lnav.appendChild(btn);
+  const panel = document.createElement('div');
+  panel.className = 'lesson-panel' + (idx === 0 ? ' active' : '');
+  panel.id = `lesson-${idx}`;
+  panel.innerHTML = buildLesson(lesson, idx);
+  container.appendChild(panel);
+});
+
+function showLesson(idx) {
+  document.querySelectorAll('.lnav-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  document.querySelectorAll('.lesson-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  initQuiz(idx);
+}
+
+function showInnerTab(lIdx, tabName) {
+  const panel = document.getElementById(`lesson-${lIdx}`);
+  panel.querySelectorAll('.itab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
+  panel.querySelectorAll('.itab-panel').forEach(p => p.classList.toggle('active', p.dataset.tab === tabName));
+}
+
+function buildLesson(lesson, idx) {
+  const tabKeys = ['leccion','vocab','quiz','verse'];
+  const tabLabels = ['📖 Lección','📚 Vocabulario','✏️ Práctica','✝️ Texto'];
+  const pct = lesson.day === 0 ? 0 : (lesson.day/30*100).toFixed(1);
+  const progLabel = lesson.day === 0 ? 'Introducción' : `Día ${lesson.day} de 30`;
+
+  let html = `
+  <div style="text-align:center;margin-bottom:14px;">
+    <div style="font-family:'EB Garamond',serif;font-size:1.5rem;color:var(--crimson);">${lesson.day === 0 ? 'Introducción' : `Día ${lesson.day}`} — ${lesson.title}</div>
+    <div style="font-size:12px;color:#888;margin-top:2px;">${lesson.subtitle}</div>
+    <div class="prog-bar" style="max-width:300px;margin:8px auto 3px;"><div class="prog-fill" style="width:${pct}%"></div></div>
+    <div class="prog-lbl">${progLabel}</div>
+  </div>
+  <div class="inner-tabs">
+    ${tabLabels.map((t,i)=>`<div class="itab${i===0?' active':''}" data-tab="${tabKeys[i]}" onclick="showInnerTab(${idx},'${tabKeys[i]}')">${t}</div>`).join('')}
+  </div>`;
+
+  // LECCIÓN TAB
+  html += `<div class="itab-panel active" data-tab="leccion">`;
+
+  // Intro page special
+  if (lesson.isIntro) {
+    html += `<div class="intro-hero"><div class="big-heb">עִבְרִית בִּבְלִית</div><p>La lengua del pueblo de Dios — el idioma de Moisés, David, Isaías y los Profetas</p></div>`;
+    html += `<div class="card"><h3><span>✨</span> ¿Por qué estudiar hebreo bíblico?</h3>`;
+    lesson.tips.forEach(t => { html += `<div class="tip">${t.t}</div>`; });
+    html += `</div>`;
+    html += `<div class="card"><h3><span>⚡</span> Características principales</h3><div class="feature-grid">`;
+    lesson.features.forEach(f => { html += `<div class="feature-box"><div class="feature-icon">${f.icon}</div><div class="feature-title">${f.title}</div><div class="feature-desc">${f.desc}</div></div>`; });
+    html += `</div></div>`;
+    html += `<div class="card"><h3><span>🔀</span> Diferencias clave con el griego</h3><ul class="diff-list">`;
+    lesson.diffs.forEach(d => { html += `<li class="diff-item"><span class="diff-icon">${d.icon}</span><span>${d.t}</span></li>`; });
+    html += `</ul></div>`;
+  } else {
+    // Tips
+    if (lesson.tips && lesson.tips.length) {
+      html += `<div class="card"><h3><span>💡</span> Claves del día</h3>`;
+      lesson.tips.forEach(t => { html += `<div class="tip">${t.t}</div>`; });
+      html += `</div>`;
+    }
+    // Letters grid
+    if (lesson.letters && lesson.letters.length) {
+      html += `<div class="card"><h3><span>🔤</span> Las letras de hoy — toca para ver ejemplo bíblico</h3><div class="alpha-grid">`;
+      lesson.letters.forEach(lt => {
+        html += `<div class="ltr-card" onclick="this.classList.toggle('on')">
+          <span class="ltr-big">${lt.h}</span>
+          <div class="ltr-name">${lt.name}</div>
+          <div class="ltr-trans">${lt.trans}</div>
+          <div class="ltr-num">valor: ${lt.num}</div>
+          <div class="ltr-ex">${lt.ex}</div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    }
+    // Extra content (table or conj)
+    if (lesson.extra) {
+      const e = lesson.extra;
+      if (e.type === 'table') {
+        html += `<div class="card"><h3><span>📊</span> ${e.title}</h3>
+        <table class="gtable"><thead><tr>${e.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+        e.rows.forEach(r => { html += `<tr>${r.map((c,ci)=>`<td${ci===0?' style="font-weight:600"':''}>${c}</td>`).join('')}</tr>`; });
+        html += `</tbody></table></div>`;
+      } else if (e.type === 'conj') {
+        html += `<div class="card"><h3><span>📊</span> ${e.title}</h3><div class="conj-grid">`;
+        e.cols.forEach(col => {
+          html += `<div class="conj-box"><h4>${col.title}</h4>`;
+          col.rows.forEach(r => { html += `<div class="conj-line"><span class="conj-heb">${r[0]}</span><span class="conj-esp">${r[1]}</span></div>`; });
+          html += `</div>`;
+        });
+        html += `</div></div>`;
+      }
+    }
+  }
+  html += `</div>`; // end leccion
+
+  // VOCAB TAB
+  html += `<div class="itab-panel" data-tab="vocab"><div class="card"><h3><span>📚</span> Vocabulario del día</h3>
+  <p style="font-size:12px;color:#888;margin-bottom:8px;">Toca cada palabra para ver más información.</p><ul class="vlist">`;
+  lesson.vocab.forEach(v => {
+    html += `<li class="vitem" onclick="toggleVocab(this)">
+      <div class="vheb">${v.g}</div>
+      <div><div class="vtrans">${v.t}</div>
+      <div class="vhint" style="display:none;">${v.h} — <em>${v.f}</em></div>
+      <div class="vmore">↓ más info</div></div></li>`;
+  });
+  html += `</ul></div></div>`;
+
+  // QUIZ TAB
+  html += `<div class="itab-panel" data-tab="quiz"><div class="card"><h3><span>✏️</span> Práctica — ${lesson.day === 0 ? 'Introducción' : `Día ${lesson.day}`}</h3>
+  <div id="quiz-${idx}"></div><div id="score-${idx}" class="qscore" style="display:none;"></div></div></div>`;
+
+  // VERSE TAB
+  const v = lesson.verse;
+  html += `<div class="itab-panel" data-tab="verse">
+  <div class="vblock">
+    <div class="vblock-heb">${v.heb}</div>
+    <div class="vblock-trans">${v.esp}</div>
+    <div class="vwords">`;
+  v.words.forEach(w => { html += `<div class="vrow"><span class="vwh">${w[0]}</span><span class="vwe">${w[1]}</span></div>`; });
+  html += `</div></div>
+  <div class="card"><h3><span>🔍</span> El detalle que las traducciones pierden</h3><p>${v.insight}</p></div>
+  </div>`;
+
+  return html;
+}
+
+// QUIZ ENGINE
+const quizState = {};
+function initQuiz(idx) {
+  if (quizState[idx]) return;
+  quizState[idx] = { pos:0, score:0, data:[...LESSONS[idx].quiz].sort(()=>Math.random()-.5) };
+  renderQuiz(idx);
+}
+function renderQuiz(idx) {
+  const el = document.getElementById(`quiz-${idx}`);
+  const sc = document.getElementById(`score-${idx}`);
+  const s = quizState[idx];
+  if (!s) return;
+  if (s.pos >= s.data.length) {
+    el.style.display='none'; sc.style.display='block';
+    const pct = Math.round(s.score/s.data.length*100);
+    sc.innerHTML = `${pct>=75?'🎉':'📖'} <strong>${s.score}/${s.data.length}</strong> correctas (${pct}%)<br>
+    <span style="font-size:13px;color:#888;">${pct>=75?'¡Excelente! Sigue adelante en hebreo.':'El hebreo es exigente — revisa y repite.'}</span>
+    <br><button class="qbtn" style="margin-top:10px;" onclick="resetQuiz(${idx})">↺ Repetir</button>`;
+    return;
+  }
+  const q = s.data[s.pos];
+  const isHeb = q.q.match(/[\u05D0-\u05FF]/);
+  html2 = `<div class="qcard">
+    <div style="font-size:11px;color:#aaa;margin-bottom:6px;">${s.pos+1} / ${s.data.length}</div>
+    <div class="${isHeb?'qbig':'qbig-latin'}">${q.q}</div>
+    <div class="qgrid">${q.opts.map((o,i)=>`<button class="qbtn" onclick="checkQ(${idx},this,${i},${q.ans})">${o}</button>`).join('')}</div>
+    <div class="qfb" id="qfb-${idx}"></div>
+  </div>`;
+  el.innerHTML = html2;
+}
+function checkQ(idx, btn, chosen, correct) {
+  const s = quizState[idx];
+  btn.parentElement.querySelectorAll('.qbtn').forEach(b => b.disabled=true);
+  const fb = document.getElementById(`qfb-${idx}`);
+  if (chosen===correct) { btn.classList.add('ok'); fb.style.color='var(--olive)'; fb.textContent='✓ ¡Correcto!'; s.score++; }
+  else { btn.classList.add('no'); btn.parentElement.querySelectorAll('.qbtn')[correct].classList.add('ok'); fb.style.color='var(--crimson)'; fb.textContent=`✗ Era: ${s.data[s.pos].opts[correct]}`; }
+  setTimeout(()=>{ s.pos++; renderQuiz(idx); }, 1300);
+}
+function resetQuiz(idx) {
+  quizState[idx] = { pos:0, score:0, data:[...LESSONS[idx].quiz].sort(()=>Math.random()-.5) };
+  document.getElementById(`quiz-${idx}`).style.display='block';
+  document.getElementById(`score-${idx}`).style.display='none';
+  renderQuiz(idx);
+}
+function toggleVocab(el) {
+  const h=el.querySelector('.vhint'), m=el.querySelector('.vmore');
+  if (h.style.display==='none'){ h.style.display='block'; m.style.display='none'; }
+  else { h.style.display='none'; m.style.display='block'; }
+}
+let html2 = '';
+initQuiz(0);
+</script>
+</body>
+</html>

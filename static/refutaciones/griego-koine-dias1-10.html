@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Griego Koiné — 10 Lecciones</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap');
+:root {
+  --parch:#f5f0e8; --ink:#1a1209; --ink2:#3d2f1a; --gold:#b8860b; --gold-l:#e8d5a0;
+  --azure:#1e3a5f; --azure-l:#dce8f5; --red:#8b1a1a; --grn:#1a4a2e; --grn-l:#d4edda;
+  --bdr:#c8b89a; --wht:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--parch);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;min-height:100vh}
+
+/* HEADER */
+header{background:var(--azure);color:#f5f0e8;padding:22px 16px 18px;text-align:center;border-bottom:3px solid var(--gold)}
+header h1{font-family:'EB Garamond',serif;font-size:1.9rem;letter-spacing:.02em;margin-bottom:2px}
+header .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;color:var(--gold-l);opacity:.9}
+
+/* LESSON NAV */
+.lesson-nav{display:flex;overflow-x:auto;background:#ede8df;border-bottom:2px solid var(--bdr);gap:2px;padding:4px 4px 0;scrollbar-width:none}
+.lesson-nav::-webkit-scrollbar{display:none}
+.lnav-btn{flex-shrink:0;padding:9px 14px;border:none;background:transparent;font-size:12px;font-weight:700;color:var(--ink2);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:4px 4px 0 0}
+.lnav-btn.active{color:var(--azure);border-bottom-color:var(--azure);background:var(--parch)}
+.lnav-btn.done{color:var(--grn)}
+.lnav-btn:hover:not(.active){background:#e0d9ce}
+
+/* INNER TABS */
+.inner-tabs{display:flex;border-bottom:1px solid var(--bdr);background:#f0ebe1;overflow-x:auto;scrollbar-width:none}
+.inner-tabs::-webkit-scrollbar{display:none}
+.itab{padding:8px 14px;font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.itab.active{color:var(--azure);border-bottom-color:var(--azure);background:var(--parch)}
+
+/* CONTENT */
+.lesson-panel{display:none;padding:16px;max-width:720px;margin:0 auto}
+.lesson-panel.active{display:block}
+.itab-panel{display:none}
+.itab-panel.active{display:block}
+
+/* CARDS */
+.card{background:var(--wht);border:1px solid var(--bdr);border-radius:8px;padding:16px;margin-bottom:14px}
+.card h3{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--azure);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+
+/* ALPHABET GRID */
+.alpha-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:7px;margin-top:6px}
+.ltr-card{background:var(--parch);border:1px solid var(--bdr);border-radius:6px;padding:9px 6px;text-align:center;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.ltr-card:hover{transform:translateY(-2px);box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.ltr-card.on{background:var(--azure-l);border-color:var(--azure)}
+.ltr-big{font-family:'EB Garamond',serif;font-size:2rem;color:var(--azure);display:block;line-height:1.2}
+.ltr-name{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.ltr-snd{font-size:11px;color:var(--ink2);margin-top:1px}
+.ltr-ex{font-size:10px;color:#666;font-style:italic;margin-top:3px;display:none}
+.ltr-card.on .ltr-ex{display:block}
+
+/* TIP BOX */
+.tip{background:var(--azure-l);border-left:4px solid var(--azure);border-radius:0 6px 6px 0;padding:10px 13px;margin:8px 0;font-size:13px}
+.tip strong{color:var(--azure)}
+.tip-gold{background:#fdf8ec;border-left-color:var(--gold)}
+.tip-gold strong{color:var(--gold)}
+
+/* VOCAB */
+.vlist{list-style:none}
+.vitem{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #ede5d5;cursor:pointer}
+.vgrk{font-family:'EB Garamond',serif;font-size:1.25rem;color:var(--azure);min-width:130px;flex-shrink:0}
+.vtrans{font-size:13px;font-weight:600}
+.vhint{font-size:11px;color:#888;font-style:italic;margin-top:1px}
+.vmore{font-size:11px;color:var(--gold)}
+
+/* GRAMMAR TABLE */
+.gtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.gtable th{background:var(--azure);color:#fff;padding:7px 10px;text-align:left;font-weight:600}
+.gtable td{padding:6px 10px;border-bottom:1px solid #e8ddc8}
+.gtable tr:nth-child(even) td{background:#f9f5ee}
+.gtable .grk{font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--azure)}
+.gtable .hl{background:#fff8e1!important;font-weight:700}
+
+/* QUIZ */
+.qcard{background:var(--wht);border:2px solid var(--bdr);border-radius:10px;padding:18px;margin-bottom:12px;text-align:center}
+.qbig{font-family:'EB Garamond',serif;font-size:2.4rem;color:var(--azure);margin-bottom:14px;line-height:1.2}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qbtn{background:var(--parch);border:2px solid var(--bdr);border-radius:7px;padding:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--ink);font-family:'Inter',sans-serif}
+.qbtn:hover{border-color:var(--azure);color:var(--azure)}
+.qbtn.ok{background:var(--grn-l);border-color:var(--grn);color:var(--grn)}
+.qbtn.no{background:#fde8e8;border-color:var(--red);color:var(--red)}
+.qfb{margin-top:10px;font-size:13px;font-weight:600;min-height:18px}
+.qscore{text-align:center;padding:20px;font-weight:700;color:var(--azure);font-size:1.1rem}
+
+/* VERSE */
+.vblock{background:linear-gradient(135deg,var(--azure) 0%,#0d2240 100%);color:#f5f0e8;border-radius:10px;padding:20px 16px;text-align:center;margin-bottom:14px}
+.vgrk-big{font-family:'EB Garamond',serif;font-size:1.35rem;line-height:1.9;margin-bottom:10px;color:var(--gold-l)}
+.vtrans-small{font-size:12px;color:#c8d8e8;font-style:italic}
+.vwords{text-align:left;margin-top:12px}
+.vrow{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:12px}
+.vwg{font-family:'EB Garamond',serif;font-size:1rem;color:var(--gold-l)}
+.vws{color:#c8d8e8}
+
+/* PARADIGM */
+.paradigm{display:grid;gap:6px;margin-top:8px}
+.para-row{display:grid;grid-template-columns:90px 1fr 1fr;gap:4px;align-items:center;font-size:13px}
+.para-lbl{font-weight:600;color:var(--ink2);font-size:12px}
+.para-grk{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--azure)}
+.para-esp{color:var(--ink2)}
+.para-head{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#aaa;padding-bottom:2px;border-bottom:1px solid var(--bdr)}
+
+/* PROGRESS */
+.prog-bar{height:5px;background:#ddd;border-radius:3px;margin:6px 0 3px}
+.prog-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .5s}
+.prog-lbl{font-size:11px;color:#aaa}
+
+/* BADGE */
+.badge{display:inline-block;background:var(--gold);color:#fff;border-radius:10px;font-size:10px;font-weight:700;padding:1px 7px;margin-left:5px;vertical-align:middle}
+.badge-grn{background:var(--grn)}
+
+/* MISC */
+.note{font-size:11px;color:#999;text-align:center;margin-top:6px;font-style:italic}
+hr{border:none;border-top:1px solid var(--bdr);margin:12px 0}
+p{font-size:14px;margin-bottom:8px}
+ul.plain{padding-left:18px;font-size:14px;line-height:2.1}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="sub">Ἡ Ἑλληνικὴ Γλῶσσα — Semanas 1 y 2</div>
+  <h1>Griego Koiné Bíblico</h1>
+  <div class="sub">10 Lecciones completas · Días 1–10</div>
+</header>
+
+<!-- LESSON NAV -->
+<div class="lesson-nav" id="lnav"></div>
+
+<!-- LESSONS CONTAINER -->
+<div id="lessons-container"></div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const LESSONS = [
+{
+  day:1, title:"El alfabeto (α–κ)", subtitle:"Primeras 10 letras + vocales",
+  letters:[
+    {u:'Α',l:'α',name:'Alfa',  snd:'a (casa)',          ex:'ἀρχή = principio'},
+    {u:'Β',l:'β',name:'Beta',  snd:'v (uva)',            ex:'βίβλος = libro'},
+    {u:'Γ',l:'γ',name:'Gamma', snd:'g / ng ante γκχ',   ex:'γῆ = tierra'},
+    {u:'Δ',l:'δ',name:'Delta', snd:'d (dedo)',           ex:'διδαχή = enseñanza'},
+    {u:'Ε',l:'ε',name:'Épsilon',snd:'e breve (perro)',  ex:'ἐκκλησία = iglesia'},
+    {u:'Ζ',l:'ζ',name:'Zeta',  snd:'dz / z',            ex:'ζωή = vida'},
+    {u:'Η',l:'η',name:'Eta',   snd:'e larga',           ex:'ἡμέρα = día'},
+    {u:'Θ',l:'θ',name:'Theta', snd:'th inglés (think)', ex:'θεός = Dios'},
+    {u:'Ι',l:'ι',name:'Iota',  snd:'i (sin)',           ex:'Ἰησοῦς = Jesús'},
+    {u:'Κ',l:'κ',name:'Kappa', snd:'k (casa)',          ex:'καρδία = corazón'},
+  ],
+  tips:[
+    {t:'<strong>Η vs Ε:</strong> ambas son "e", pero η es larga y ε es breve. En la pronunciación moderna suenan igual; en la erasmiana se distinguen.'},
+    {t:'<strong>Γ especial:</strong> antes de γ, κ, χ, ξ suena "ng": ἄγγελος = "ánghelos".'},
+    {t:'<strong>Θ:</strong> nunca es "t" sola. Es la "th" de "think" en inglés, o la "z" castellana de "zapato".'},
+  ],
+  vocab:[
+    {g:'ἀρχή',   t:'principio, comienzo', h:'Jn 1:1 — "Ἐν ἀρχῇ ἦν ὁ Λόγος"', f:'Aparece 55 veces en el NT'},
+    {g:'βίβλος', t:'libro, rollo',         h:'Mt 1:1 — "Βίβλος γενέσεως"',       f:'Raíz de "Biblia"'},
+    {g:'γῆ',     t:'tierra',               h:'Mc 4:31 — "ἐπὶ τῆς γῆς"',          f:'Raíz de "geografía"'},
+    {g:'ζωή',    t:'vida',                 h:'Jn 3:16 — "ζωὴν αἰώνιον"',         f:'250 veces en el NT'},
+    {g:'θεός',   t:'Dios',                 h:'Jn 1:1 — "Θεὸς ἦν ὁ Λόγος"',      f:'La más frecuente: 1317 veces'},
+    {g:'καρδία', t:'corazón',              h:'Mt 5:8 — "καθαροὶ τῇ καρδίᾳ"',     f:'Raíz de "cardiólogo"'},
+    {g:'γῆ',     t:'tierra / suelo',       h:'Mt 5:5 — "κληρονομήσουσιν τὴν γῆν"',f:'También "país, región"'},
+    {g:'ἡμέρα',  t:'día',                  h:'Mt 6:34',                            f:'389 veces en el NT'},
+  ],
+  quiz:[
+    {q:'Α α', opts:['Alfa','Beta','Eta','Iota'],  ans:0},
+    {q:'Θ θ', opts:['Eta','Zeta','Theta','Beta'], ans:2},
+    {q:'Γ γ', opts:['Delta','Kappa','Gamma','Épsilon'], ans:2},
+    {q:'Η η', opts:['Iota','Eta','Alfa','Épsilon'],ans:1},
+    {q:'Κ κ', opts:['Kappa','Zeta','Beta','Gamma'],ans:0},
+    {q:'Ε ε', opts:['Alfa','Eta','Épsilon','Iota'],ans:2},
+    {q:'Β β', opts:['Beta','Delta','Gamma','Alfa'],ans:0},
+    {q:'Δ δ', opts:['Gamma','Delta','Zeta','Kappa'],ans:1},
+  ],
+  verse:{grk:'Ἐν ἀρχῇ ἦν ὁ Λόγος', esp:'"En el principio era el Verbo" — Juan 1:1',
+    words:[['Ἐν','en (prep.)'],['ἀρχῇ','principio (dativo)'],['ἦν','era (imperf. εἰμί)'],['ὁ','el (artículo)'],['Λόγος','Verbo (nominativo)']],
+    insight:'El artículo ὁ antes de Λόγος lo marca como el sujeto. Sin ese artículo todo el versículo cambiaría de sentido.'
+  }
+},
+{
+  day:2, title:"El alfabeto (λ–υ)", subtitle:"Letras 11–20: consonantes esenciales",
+  letters:[
+    {u:'Λ',l:'λ',name:'Lambda',snd:'l (luna)',          ex:'λόγος = palabra'},
+    {u:'Μ',l:'μ',name:'Mi',    snd:'m (mesa)',           ex:'μαθητής = discípulo'},
+    {u:'Ν',l:'ν',name:'Ni',    snd:'n (noche)',          ex:'νόμος = ley'},
+    {u:'Ξ',l:'ξ',name:'Xi',   snd:'ks (extra)',          ex:'ξύλον = madera, cruz'},
+    {u:'Ο',l:'ο',name:'Ómicron',snd:'o breve (sol)',     ex:'ὁδός = camino'},
+    {u:'Π',l:'π',name:'Pi',    snd:'p (pan)',            ex:'πνεῦμα = espíritu'},
+    {u:'Ρ',l:'ρ',name:'Ro',    snd:'r (vibrante)',       ex:'ῥῆμα = palabra dicha'},
+    {u:'Σ',l:'σ/ς',name:'Sigma',snd:'s (sol)',          ex:'σάρξ = carne'},
+    {u:'Τ',l:'τ',name:'Tau',   snd:'t (tren)',           ex:'τέκνον = hijo'},
+    {u:'Υ',l:'υ',name:'Ípsilon',snd:'u / i (fr. lune)',  ex:'υἱός = hijo (de Dios)'},
+  ],
+  tips:[
+    {t:'<strong>Sigma tiene dos formas:</strong> σ al inicio o medio de palabra, ς al final. Ej: σωτηρία (salvación) → termina en ς cuando va al final.'},
+    {t:'<strong>Ο vs Ω:</strong> ómicron es "o breve", omega (día 3) es "o larga". Como ε/η.'},
+    {t:'<strong>Ρ inicial</strong> siempre lleva espíritu áspero: ῥ = "rh". Por eso "ῥῆμα" en español se transcribe "rema".'},
+  ],
+  vocab:[
+    {g:'λόγος',    t:'palabra, Verbo, razón',    h:'Jn 1:1',    f:'330 veces — muy frecuente'},
+    {g:'νόμος',    t:'ley',                       h:'Ro 3:28',   f:'194 veces — clave en Pablo'},
+    {g:'ὁδός',     t:'camino',                    h:'Jn 14:6',   f:'Jesús: "εγώ εἰμι ἡ ὁδός"'},
+    {g:'πνεῦμα',   t:'espíritu, viento, aliento', h:'Jn 3:8',    f:'379 veces en el NT'},
+    {g:'σάρξ',     t:'carne',                     h:'Jn 1:14',   f:'"el Verbo se hizo carne"'},
+    {g:'τέκνον',   t:'hijo, niño',                h:'Jn 1:12',   f:'Diferente a υἱός: más afectivo'},
+    {g:'υἱός',     t:'hijo',                      h:'Jn 3:16',   f:'υἱὸς τοῦ θεοῦ = Hijo de Dios'},
+    {g:'μαθητής',  t:'discípulo',                 h:'Mt 5:1',    f:'Raíz de "matemáticas"'},
+  ],
+  quiz:[
+    {q:'Λ λ', opts:['Mi','Lambda','Ni','Pi'],      ans:1},
+    {q:'Σ σ/ς', opts:['Tau','Ro','Sigma','Xi'],    ans:2},
+    {q:'Π π', opts:['Ro','Pi','Mi','Lambda'],       ans:1},
+    {q:'Ο ο', opts:['Ómicron','Ípsilon','Ni','Tau'],ans:0},
+    {q:'Υ υ', opts:['Ómicron','Sigma','Ípsilon','Lambda'],ans:2},
+    {q:'Ν ν', opts:['Mi','Lambda','Xi','Ni'],       ans:3},
+    {q:'Τ τ', opts:['Sigma','Tau','Ro','Pi'],       ans:1},
+    {q:'Ξ ξ', opts:['Xi','Mi','Ni','Tau'],          ans:0},
+  ],
+  verse:{grk:'ὁ Λόγος σὰρξ ἐγένετο', esp:'"El Verbo se hizo carne" — Juan 1:14',
+    words:[['ὁ','el'],['Λόγος','Verbo (sujeto)'],['σάρξ','carne (predicado)'],['ἐγένετο','se hizo / llegó a ser (aoristo)']],
+    insight:'σάρξ sin artículo enfatiza la cualidad: no solo tomó un cuerpo, asumió la condición humana completa.'
+  }
+},
+{
+  day:3, title:"El alfabeto completo (φ–ω) y diptongos", subtitle:"Letras finales + combinaciones de vocales",
+  letters:[
+    {u:'Φ',l:'φ',name:'Fi',    snd:'f (foto)',           ex:'φῶς = luz'},
+    {u:'Χ',l:'χ',name:'Ji',    snd:'j española (jamón)', ex:'χάρις = gracia'},
+    {u:'Ψ',l:'ψ',name:'Psi',   snd:'ps (eclipse)',       ex:'ψυχή = alma'},
+    {u:'Ω',l:'ω',name:'Omega', snd:'o larga',            ex:'ὥρα = hora'},
+  ],
+  tips:[
+    {t:'<strong>Los 7 diptongos:</strong> αι (ái), ει (ei), οι (oi), αυ (af/av), ευ (ef/ev), ου (u), υι (ui)'},
+    {t:'<strong>ου</strong> es el más frecuente: suena como "u" española. Ej: Ἰησοῦς = "Iesús", οὐρανός = "uranós" (cielo).'},
+    {t:'<strong>Χ jamás es "ch"</strong> como en "chocolate". Es siempre la "j" o "jota": χάρις = "járis", Χριστός = "Jristós".'},
+    {t:'<strong>Ψ y Ξ</strong> son sonidos dobles: ψ = ps, ξ = ks. Ψαλμός = "psalmos" (salmo).'},
+  ],
+  vocab:[
+    {g:'φῶς',    t:'luz',           h:'Jn 1:4-5 — "τὸ φῶς τῶν ἀνθρώπων"', f:'73 veces en el NT'},
+    {g:'χάρις',  t:'gracia',        h:'Jn 1:17 — "χάρις καὶ ἀλήθεια"',     f:'155 veces — central en Pablo'},
+    {g:'ψυχή',   t:'alma, vida',    h:'Mt 16:26',                             f:'Raíz de "psicología"'},
+    {g:'ὥρα',    t:'hora, momento', h:'Jn 2:4 — "οὔπω ἥκει ἡ ὥρα μου"',    f:'"Aún no ha llegado mi hora"'},
+    {g:'οὐρανός',t:'cielo',         h:'Mt 6:9 — "ὁ ἐν τοῖς οὐρανοῖς"',     f:'273 veces en el NT'},
+    {g:'εἰρήνη', t:'paz',           h:'Jn 14:27 — "εἰρήνην ἀφίημι ὑμῖν"',  f:'Saludo hebreo שלום'},
+    {g:'Χριστός',t:'Cristo, Ungido',h:'Mt 1:1',                              f:'De χρίω = ungir'},
+    {g:'ψαλμός', t:'salmo, canto',  h:'Lc 20:42',                            f:'Raíz de "salmo"'},
+  ],
+  quiz:[
+    {q:'Φ φ', opts:['Ji','Fi','Psi','Omega'],     ans:1},
+    {q:'Ω ω', opts:['Omega','Ómicron','Eta','Alfa'],ans:0},
+    {q:'Χ χ', opts:['Fi','Psi','Ji','Omega'],     ans:2},
+    {q:'Ψ ψ', opts:['Fi','Omega','Ji','Psi'],     ans:3},
+    {q:'ου',  opts:['ai','u larga','o+i','eu'],   ans:1},
+    {q:'αι',  opts:['au','ai','ei','oi'],          ans:1},
+    {q:'εὐ',  opts:['eu','ou','ei','oi'],          ans:0},
+    {q:'ψ',   opts:['ks','ps','ts','fs'],          ans:1},
+  ],
+  verse:{grk:'ἐγώ εἰμι τὸ φῶς τοῦ κόσμου', esp:'"Yo soy la luz del mundo" — Juan 8:12',
+    words:[['ἐγώ','yo'],['εἰμι','soy (presente de εἰμί)'],['τὸ','la (artículo neutro)'],['φῶς','luz'],['τοῦ','del'],['κόσμου','mundo (genitivo)']],
+    insight:'ἐγώ εἰμι ("yo soy") resuena con el nombre divino del Éxodo 3:14 (LXX: ἐγώ εἰμι ὁ ὤν). Juan lo usa 7 veces con esta fórmula.'
+  }
+},
+{
+  day:4, title:"Acentos y espíritus", subtitle:"Los signos diacríticos del griego",
+  letters:[],
+  tips:[
+    {t:'<strong>3 acentos:</strong> agudo (ά) = sílaba alta; grave (ὰ) = agudo que baja ante otra palabra; circunflejo (ᾶ) = larga con tono alto-bajo.'},
+    {t:'<strong>Espíritu suave (᾿):</strong> sobre vocal inicial = sin aspiración. Ej: ἀρχή.'},
+    {t:'<strong>Espíritu áspero (῾):</strong> sobre vocal inicial = añade "h". Ej: ἡμέρα = "hēméra", ὁδός = "hodós".'},
+    {t:'<strong>Iota suscrita (ᾳ ῃ ῳ):</strong> iota pequeña bajo vocal larga. No se pronuncia en koiné pero indica el caso dativo en declinaciones.'},
+    {t:'<strong>Regla práctica:</strong> para leer el NT no necesitas dominar todos los acentos, pero el espíritu áspero (῾) te indica si hay "h" al inicio.'},
+  ],
+  vocab:[
+    {g:'ἁμαρτία', t:'pecado',          h:'Ro 3:23 — "πάντες ἥμαρτον"',       f:'Lleva espíritu áspero: hamarTÍa'},
+    {g:'ἁγιος',   t:'santo',           h:'1 Pe 1:16 — "ἅγιοι ἔσεσθε"',       f:'Espíritu áspero: hágios'},
+    {g:'εὐαγγέλιον',t:'evangelio, buena noticia',h:'Mc 1:1',                 f:'eu (bueno) + ángelos (mensaje)'},
+    {g:'ἀλήθεια', t:'verdad',          h:'Jn 14:6',                           f:'a- privativo + λήθη (olvido)'},
+    {g:'πίστις',  t:'fe, fidelidad',   h:'Hab 2:4 / Ro 1:17',                f:'154 veces en el NT'},
+    {g:'ἐλπίς',   t:'esperanza',       h:'Ro 8:24',                           f:'53 veces en el NT'},
+    {g:'ἀγάπη',   t:'amor (agápico)',  h:'1 Co 13:13',                        f:'El amor que elige y da'},
+    {g:'εἰρήνη',  t:'paz',             h:'Jn 14:27',                          f:'Espíritu suave: eirḗnē'},
+  ],
+  quiz:[
+    {q:'ἀ — ¿qué espíritu lleva?', opts:['Áspero','Suave','Circunflejo','Ninguno'], ans:1},
+    {q:'ἁ — ¿qué espíritu lleva?', opts:['Suave','Ninguno','Áspero','Agudo'], ans:2},
+    {q:'ά — ¿qué acento lleva?', opts:['Grave','Agudo','Circunflejo','Espíritu'], ans:1},
+    {q:'ᾶ — ¿qué acento lleva?', opts:['Agudo','Grave','Circunflejo','Suave'], ans:2},
+    {q:'ἁμαρτία empieza con...', opts:['h (áspero)','vocal sola','m','z'], ans:0},
+    {q:'ᾳ contiene...', opts:['iota suscrita','diptongo αι','omega','eta'], ans:0},
+    {q:'ὁδός — "hodós" por...', opts:['acento agudo','espíritu áspero','iota suscrita','circunflejo'], ans:1},
+    {q:'ἀλήθεια empieza con...', opts:['h aspirada','vocal sin h','doble vocal','consonante'], ans:1},
+  ],
+  verse:{grk:'ἡ ἀλήθεια ἐλευθερώσει ὑμᾶς', esp:'"La verdad os hará libres" — Juan 8:32',
+    words:[['ἡ','la (artículo fem.)'],['ἀλήθεια','verdad (espíritu suave)'],['ἐλευθερώσει','hará libres (futuro)'],['ὑμᾶς','a vosotros (acusativo)']],
+    insight:'ἀλήθεια = "no-ocultamiento": α privativo + λήθη (olvido). La verdad en griego es literalmente "lo que no está oculto".'
+  }
+},
+{
+  day:5, title:"Repaso + lectura: Juan 1:1-3", subtitle:"Leer el texto griego con todo lo aprendido",
+  letters:[],
+  tips:[
+    {t:'<strong>Lee en voz alta</strong> el texto completo. La pronunciación activa la memoria auditiva y acelera el aprendizaje.'},
+    {t:'<strong>No memorices palabras aisladas.</strong> El contexto bíblico es el mejor ancla: cada palabra que aprendes aparece en un versículo que ya conoces.'},
+    {t:'<strong>Herramienta útil:</strong> Blue Letter Bible (blueletterbible.org) — en cualquier versículo puedes ver el interlineal griego con parseo de cada palabra.'},
+  ],
+  vocab:[
+    {g:'εἰμί',    t:'ser, estar (yo soy)',        h:'Jn 1:1 — "ἦν ὁ Λόγος"',          f:'Verbo más irregular del griego'},
+    {g:'ἐν',      t:'en, dentro de',              h:'Jn 1:1 — "Ἐν ἀρχῇ"',             f:'Preposición + dativo siempre'},
+    {g:'πρός',    t:'hacia, con, junto a',        h:'Jn 1:1 — "πρὸς τὸν Θεόν"',       f:'Preposición + acusativo'},
+    {g:'πᾶς',     t:'todo, cada, todos',          h:'Jn 1:3 — "πάντα δι᾿ αὐτοῦ"',     f:'170 veces en el NT'},
+    {g:'διά',     t:'por medio de, a través de',  h:'Jn 1:3',                           f:'+ genitivo = agente; + acusativo = causa'},
+    {g:'οὐδέ',    t:'ni, tampoco',                h:'Jn 1:3 — "χωρὶς αὐτοῦ ἐγένετο οὐδὲ ἕν"', f:'Negación compuesta'},
+    {g:'γίνομαι', t:'llegar a ser, hacerse',      h:'Jn 1:3.14',                        f:'Diferente a εἰμί: devenir'},
+    {g:'χωρίς',   t:'sin, aparte de',             h:'Jn 1:3',                           f:'Preposición + genitivo'},
+  ],
+  quiz:[
+    {q:'Ἐν ἀρχῇ ἦν... ¿qué sigue?', opts:['ὁ κόσμος','ὁ Λόγος','ὁ Θεός','ἡ ζωή'], ans:1},
+    {q:'ἦν es forma de...', opts:['γίνομαι','λύω','εἰμί','πιστεύω'], ans:2},
+    {q:'πρός + ¿qué caso?', opts:['Dativo','Nominativo','Acusativo','Genitivo'], ans:2},
+    {q:'πᾶς significa...', opts:['nada','todo','siempre','uno'], ans:1},
+    {q:'διά + genitivo = ...', opts:['causa','lugar','agente','tiempo'], ans:2},
+    {q:'γίνομαι = ...', opts:['ser (permanente)','llegar a ser','hacer','decir'], ans:1},
+    {q:'χωρίς significa...', opts:['con','sin','dentro','antes'], ans:1},
+    {q:'¿Cuántas letras tiene el alfabeto griego?', opts:['24','26','22','28'], ans:0},
+  ],
+  verse:{grk:'Πάντα δι᾿ αὐτοῦ ἐγένετο, καὶ χωρὶς αὐτοῦ ἐγένετο οὐδὲ ἕν', esp:'"Todas las cosas fueron hechas por medio de él, y sin él nada fue hecho" — Juan 1:3',
+    words:[['Πάντα','todas las cosas (neutro pl.)'],['δι᾿','por medio de (elision de διά)'],['αὐτοῦ','él (genitivo)'],['ἐγένετο','fue hecho (aoristo)'],['χωρὶς','sin'],['οὐδὲ ἕν','ni una sola cosa']],
+    insight:'οὐδὲ ἕν es una doble negación enfática: "ni siquiera una". Refuerza la agencia creadora total del Logos.'
+  }
+},
+{
+  day:6, title:"Vocabulario de alta frecuencia", subtitle:"Las 30 palabras más comunes del Nuevo Testamento",
+  letters:[],
+  tips:[
+    {t:'<strong>Solo 30 palabras</strong> cubren más del 50% de las palabras del NT. Aprenderlas es el mayor retorno de inversión posible.'},
+    {t:'<strong>El artículo ὁ/ἡ/τό</strong> aparece 19.870 veces. Cuando lo domines (lección 8), ya "lees" una de cada 6 palabras.'},
+    {t:'<strong>Método recomendado:</strong> asocia cada palabra a UN versículo que ya sabes. Esa imagen mental es más fuerte que cualquier flashcard.'},
+  ],
+  vocab:[
+    {g:'ὁ / ἡ / τό',  t:'el / la / lo (artículo)',   h:'Aparece 19.870 veces',      f:'La forma más frecuente del NT'},
+    {g:'καί',          t:'y, también, incluso',         h:'Jn 1:1',                    f:'9.153 veces'},
+    {g:'αὐτός',        t:'él, ella, ello; mismo',       h:'Jn 1:3',                    f:'5.597 veces'},
+    {g:'δέ',           t:'pero, y (continuación)',       h:'Mt 1:2 y siguientes',       f:'2.792 veces'},
+    {g:'ἐν',           t:'en',                          h:'Jn 1:1',                    f:'2.752 veces'},
+    {g:'εἰμί',         t:'ser, estar',                  h:'Jn 1:1 "ἦν"',              f:'2.462 veces (todas sus formas)'},
+    {g:'λέγω',         t:'decir, hablar',               h:'Mt 3:2 y cientos más',      f:'2.354 veces — verbo narración'},
+    {g:'εἰς',          t:'en, hacia, para (acusativo)', h:'Jn 1:18',                   f:'1.768 veces'},
+    {g:'οὐ / οὐκ / οὐχ',t:'no (negación indicativo)',  h:'Jn 1:20 "οὐκ εἰμί"',       f:'1.606 veces'},
+    {g:'ὅτι',          t:'que, porque',                 h:'Jn 3:16',                   f:'1.296 veces'},
+  ],
+  quiz:[
+    {q:'καί significa...', opts:['pero','y/también','en','no'], ans:1},
+    {q:'ὅτι significa...', opts:['todo','que/porque','hacia','él'], ans:1},
+    {q:'αὐτός significa...', opts:['yo','tú','él/mismo','este'], ans:2},
+    {q:'οὐ es...', opts:['pregunta','negación','afirmación','artículo'], ans:1},
+    {q:'εἰς + ¿qué caso?', opts:['Dativo','Genitivo','Nominativo','Acusativo'], ans:3},
+    {q:'δέ significa...', opts:['porque','en','pero/y','no'], ans:2},
+    {q:'λέγω = ...', opts:['ir','decir','ver','creer'], ans:1},
+    {q:'¿Cuántas veces aparece καί?', opts:['1.296','9.153','2.752','5.597'], ans:1},
+  ],
+  verse:{grk:'οὕτως γὰρ ἠγάπησεν ὁ θεὸς τὸν κόσμον', esp:'"Porque de tal manera amó Dios al mundo" — Juan 3:16',
+    words:[['οὕτως','de esta manera, así'],['γάρ','porque, pues'],['ἠγάπησεν','amó (aoristo de ἀγαπάω)'],['ὁ θεός','Dios (sujeto con artículo)'],['τὸν κόσμον','el mundo (acusativo = objeto)']],
+    insight:'El aoristo ἠγάπησεν expresa un acto concreto y puntual de amor, no solo un estado. "Amó" de una vez, decisivamente, en la cruz.'
+  }
+},
+{
+  day:7, title:"Repaso semana 1 — Quiz general", subtitle:"Consolida todo el alfabeto y vocabulario base",
+  letters:[],
+  tips:[
+    {t:'<strong>Hoy es día de repaso.</strong> No hay contenido nuevo. La neurociencia del aprendizaje muestra que el espacio entre estudio y repaso consolida la memoria mejor que estudiar más.'},
+    {t:'<strong>Escribe el alfabeto completo de memoria</strong> (24 letras) antes de hacer el quiz. Si lo logras: excelente. Si no, repasa las letras que fallan.'},
+    {t:'<strong>Alfabeto completo:</strong> Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω'},
+  ],
+  vocab:[
+    {g:'πιστεύω',  t:'creer, confiar en',         h:'Jn 3:16 — "πιστεύων εἰς αὐτόν"', f:'98 veces solo en Juan'},
+    {g:'ἀκούω',    t:'oír, escuchar',              h:'Jn 10:27',                         f:'437 veces en el NT'},
+    {g:'βλέπω',    t:'ver, mirar',                 h:'Mc 8:23',                          f:'132 veces en el NT'},
+    {g:'γινώσκω',  t:'conocer, saber (por experiencia)', h:'Jn 17:3',                   f:'222 veces en el NT'},
+    {g:'ἔχω',      t:'tener, poseer',              h:'Jn 3:16 — "ζωὴν αἰώνιον ἔχῃ"',  f:'708 veces — muy frecuente'},
+    {g:'ἔρχομαι',  t:'venir, ir',                  h:'Jn 1:9',                           f:'636 veces en el NT'},
+    {g:'εὑρίσκω',  t:'encontrar, hallar',          h:'Jn 1:41',                          f:'176 veces en el NT'},
+    {g:'οἶδα',     t:'saber (conocimiento inmediato)', h:'Jn 3:11',                      f:'Diferente a γινώσκω'},
+  ],
+  quiz:[
+    {q:'Ψ ψ = ...', opts:['fi','ji','psi','xi'], ans:2},
+    {q:'ξ suena como...', opts:['ts','ks','fs','ps'], ans:1},
+    {q:'πιστεύω = ...', opts:['oír','ver','creer','tener'], ans:2},
+    {q:'ἔχω = ...', opts:['ir','tener','conocer','decir'], ans:1},
+    {q:'¿Qué vocal es larga?', opts:['ε','ο','η','ι'], ans:2},
+    {q:'γινώσκω = ...', opts:['conocer','amar','ver','hacer'], ans:0},
+    {q:'αὐ suena como...', opts:['ai','au (af/av)','ei','oi'], ans:1},
+    {q:'¿Letras en el alfabeto griego?', opts:['22','24','26','28'], ans:1},
+    {q:'ἀκούω = ...', opts:['hablar','escribir','oír','leer'], ans:2},
+    {q:'ου suena como...', opts:['oi','ai','u','ei'], ans:2},
+  ],
+  verse:{grk:'Ἐγώ εἰμι ἡ ὁδὸς καὶ ἡ ἀλήθεια καὶ ἡ ζωή', esp:'"Yo soy el camino, la verdad y la vida" — Juan 14:6',
+    words:[['Ἐγώ','yo (pronombre enfático)'],['εἰμι','soy'],['ἡ ὁδός','el camino (fem.)'],['ἡ ἀλήθεια','la verdad'],['ἡ ζωή','la vida']],
+    insight:'Los tres sustantivos llevan artículo definido ἡ (fem.), lo cual indica identidad específica: Jesús no dice "soy un camino" sino "soy el camino" — exclusividad absoluta.'
+  }
+},
+{
+  day:8, title:"Los casos griegos y la 2ª declinación", subtitle:"Cómo funciona la gramática sin orden fijo de palabras",
+  letters:[],
+  tips:[
+    {t:'<strong>El griego no depende del orden de las palabras</strong> sino de las terminaciones (casos). "El hijo ama al padre" y "Al padre ama el hijo" tienen igual significado si las terminaciones son correctas.'},
+    {t:'<strong>5 casos:</strong> Nominativo (sujeto), Genitivo (posesión/"de"), Dativo (objeto indirecto/"a/en"), Acusativo (objeto directo), Vocativo (llamado directo).'},
+    {t:'<strong>La 2ª declinación</strong> (masculinos en -ος, neutros en -ον) es la más frecuente en el NT. Dominarla te permite leer la mayoría de los sustantivos.'},
+  ],
+  vocab:[
+    {g:'λόγος, -ου',  t:'palabra (masc. 2ª decl.)',    h:'Jn 1:1',        f:'Paradigma de la 2ª declinación'},
+    {g:'κόσμος, -ου', t:'mundo (masc. 2ª decl.)',       h:'Jn 3:16',       f:'186 veces en el NT'},
+    {g:'ἄνθρωπος,-ου',t:'hombre, ser humano',           h:'Jn 1:6',        f:'550 veces en el NT'},
+    {g:'ἀδελφός,-οῦ', t:'hermano',                      h:'Mt 4:18',       f:'343 veces en el NT'},
+    {g:'ἔργον, -ου',  t:'obra, trabajo (neutro)',        h:'Jn 6:29',       f:'Los neutros en -ον'},
+    {g:'τέκνον,-ου',  t:'hijo, niño (neutro)',           h:'Jn 1:12',       f:'Paradigma neutro'},
+    {g:'δοῦλος,-ου',  t:'siervo, esclavo',              h:'Mt 20:27',       f:'124 veces en el NT'},
+    {g:'νόμος, -ου',  t:'ley',                          h:'Ro 3:28',       f:'194 veces en el NT'},
+  ],
+  quiz:[
+    {q:'λόγου — ¿qué caso?', opts:['Nominativo','Genitivo','Dativo','Acusativo'], ans:1},
+    {q:'λόγῳ — ¿qué caso?', opts:['Nominativo','Genitivo','Dativo','Acusativo'], ans:2},
+    {q:'λόγον — ¿qué caso?', opts:['Nominativo','Genitivo','Dativo','Acusativo'], ans:3},
+    {q:'El sujeto de la oración = caso...', opts:['Dativo','Acusativo','Genitivo','Nominativo'], ans:3},
+    {q:'τοῦ θεοῦ = "de Dios" → caso...', opts:['Acusativo','Dativo','Genitivo','Vocativo'], ans:2},
+    {q:'2ª declinación masc. termina en...', opts:['-α','-ος','-η','-ις'], ans:1},
+    {q:'Los neutros en 2ª declinación terminan en...', opts:['-ος','-η','-ον','-ις'], ans:2},
+    {q:'τέκνον = ...', opts:['siervo','padre','hijo/niño','ley'], ans:2},
+  ],
+  verse:{grk:'ὁ Θεὸς ἠγάπησεν τὸν κόσμον', esp:'"Dios amó al mundo" — Juan 3:16',
+    words:[['ὁ Θεός','Dios — nominativo (sujeto)'],['ἠγάπησεν','amó (verbo)'],['τὸν κόσμον','el mundo — acusativo (objeto directo)']],
+    insight:'Observa: ὁ marca el nominativo (sujeto), τόν marca el acusativo (objeto). Sin esas terminaciones no sabrías quién ama a quién. El orden de palabras es secundario.'
+  }
+},
+{
+  day:9, title:"La 1ª declinación y el artículo", subtitle:"Los femeninos en -η y -α + la declinación del artículo",
+  letters:[],
+  tips:[
+    {t:'<strong>La 1ª declinación</strong> es mayoritariamente femenina. Termina en -η (ἀρχή) o en -α pura (καρδία). El genitivo singular siempre termina en -ης o -ας.'},
+    {t:'<strong>El artículo ὁ/ἡ/τό</strong> es el mejor indicador de caso y género. Aprendérselo de memoria es la llave maestra de la gramática griega.'},
+    {t:'<strong>Truco:</strong> el artículo y el sustantivo siempre concuerdan en género, número y caso. Si ves ἡ, el sustantivo es femenino nominativo singular.'},
+  ],
+  vocab:[
+    {g:'ἀρχή, -ῆς',   t:'principio, autoridad (1ª decl.)', h:'Jn 1:1',       f:'Paradigma en -η'},
+    {g:'καρδία,-ας',   t:'corazón',                          h:'Mt 5:8',       f:'Paradigma en -α'},
+    {g:'δόξα, -ης',    t:'gloria',                           h:'Jn 1:14',      f:'166 veces en el NT'},
+    {g:'ἐκκλησία,-ας', t:'iglesia, asamblea',                h:'Mt 16:18',     f:'114 veces en el NT'},
+    {g:'ἀγάπη, -ης',   t:'amor agápico',                    h:'1 Co 13:13',   f:'116 veces en el NT'},
+    {g:'ἁμαρτία,-ας',  t:'pecado',                          h:'Jn 1:29',      f:'173 veces en el NT'},
+    {g:'βασιλεία,-ας', t:'reino',                            h:'Mt 6:10',      f:'162 veces en el NT'},
+    {g:'ψυχή, -ῆς',    t:'alma, vida',                      h:'Mt 16:26',     f:'Raíz: "psicología"'},
+  ],
+  quiz:[
+    {q:'ἀρχῆς — ¿qué caso?', opts:['Nominativo','Genitivo','Dativo','Acusativo'], ans:1},
+    {q:'ἀρχῇ — ¿qué caso?', opts:['Nominativo','Genitivo','Dativo','Acusativo'], ans:2},
+    {q:'ἡ καρδία = ...', opts:['nom. masc.','nom. fem.','dat. fem.','gen. fem.'], ans:1},
+    {q:'τῆς ἀγάπης = "del amor" → caso...', opts:['Dativo','Acusativo','Genitivo','Nominativo'], ans:2},
+    {q:'βασιλεία significa...', opts:['rey','reino','real','reinar'], ans:1},
+    {q:'1ª declinación termina en...', opts:['-ος / -ον','-η / -α','-ις','-υς'], ans:1},
+    {q:'ἁμαρτία = ...', opts:['gracia','fe','pecado','amor'], ans:2},
+    {q:'δόξα = ...', opts:['paz','gloria','verdad','luz'], ans:1},
+  ],
+  verse:{grk:'ἡ χάρις καὶ ἡ ἀλήθεια διὰ Ἰησοῦ Χριστοῦ ἐγένετο', esp:'"La gracia y la verdad vinieron por medio de Jesucristo" — Juan 1:17',
+    words:[['ἡ χάρις','la gracia (fem., nom.)'],['ἡ ἀλήθεια','la verdad (1ª decl., nom.)'],['διά','por medio de (prep.)'],['Ἰησοῦ Χριστοῦ','de Jesucristo (genitivo)'],['ἐγένετο','vino a ser (aoristo)']],
+    insight:'χάρις es de la 3ª declinación (irregular) pero ἀλήθεια es 1ª declinación perfecta. Ambas con artículo ἡ → femenino nominativo.'
+  }
+},
+{
+  day:10, title:"El presente de indicativo activo", subtitle:"El sistema verbal griego: tu primer paradigma verbal",
+  letters:[],
+  tips:[
+    {t:'<strong>El verbo griego</strong> codifica en su forma: persona (1ª/2ª/3ª), número (sg/pl), tiempo (presente/aoristo/futuro...), modo (indicativo/subjuntivo...) y voz (activa/media/pasiva).'},
+    {t:'<strong>Presente de indicativo activo:</strong> acción continua o habitual vista desde la perspectiva del hablante. Es el tiempo más sencillo y el punto de partida.'},
+    {t:'<strong>El lexema:</strong> la raíz del verbo sin terminación. λύ- es el lexema de λύω (desatar). A esa raíz se le añaden las desinencias personales.'},
+  ],
+  vocab:[
+    {g:'λύω',       t:'desatar, liberar',         h:'Mt 16:19 — "ὃ ἐὰν λύσῃς"',    f:'Verbo modelo de la conjugación'},
+    {g:'πιστεύω',   t:'creer, confiar en',        h:'Jn 3:16 — "πιστεύων"',         f:'El verbo central del evangelio de Juan'},
+    {g:'ἀγαπάω',    t:'amar (amor elegido)',      h:'Jn 3:16 — "ἠγάπησεν"',         f:'143 veces en el NT'},
+    {g:'γράφω',     t:'escribir',                 h:'Jn 20:30',                       f:'Raíz: "grafía", "geografía"'},
+    {g:'βλέπω',     t:'ver, mirar',               h:'Mt 5:28',                        f:'132 veces en el NT'},
+    {g:'ἀκούω',     t:'oír, escuchar',            h:'Jn 10:27 — "τὰ πρόβατά μου τῆς φωνῆς μου ἀκούουσιν"', f:'437 veces en el NT'},
+    {g:'λαμβάνω',   t:'tomar, recibir',           h:'Jn 1:12',                        f:'258 veces en el NT'},
+    {g:'ἔχω',       t:'tener',                    h:'Jn 3:16 — "ζωὴν αἰώνιον ἔχῃ"', f:'708 veces en el NT'},
+  ],
+  quiz:[
+    {q:'λύεις = ...', opts:['yo desato','tú desatas','él desata','nosotros desatamos'], ans:1},
+    {q:'λύομεν = ...', opts:['ellos desatan','vosotros desatáis','nosotros desatamos','yo desato'], ans:2},
+    {q:'λύει = ...', opts:['yo desato','tú desatas','él/ella desata','vosotros desatáis'], ans:2},
+    {q:'λύουσι = ...', opts:['vosotros desatáis','nosotros desatamos','tú desatas','ellos desatan'], ans:3},
+    {q:'λύετε = ...', opts:['vosotros desatáis','nosotros desatamos','yo desato','ellos desatan'], ans:0},
+    {q:'λύω = ...', opts:['tú desatas','él desata','yo desato','nosotros desatamos'], ans:2},
+    {q:'γράφω significa...', opts:['ver','oír','escribir','amar'], ans:2},
+    {q:'ἀκούω significa...', opts:['tomar','ver','creer','oír'], ans:3},
+    {q:'λαμβάνω = ...', opts:['desatar','recibir','conocer','escribir'], ans:1},
+    {q:'¿Cuántas formas tiene el presente indicativo activo?', opts:['4','5','6','8'], ans:2},
+  ],
+  verse:{grk:'τὰ πρόβατά μου τῆς φωνῆς μου ἀκούουσιν', esp:'"Mis ovejas oyen mi voz" — Juan 10:27',
+    words:[['τὰ πρόβατά','las ovejas (neutro plural, nominativo)'],['μου','mía / de mí (genitivo pronombre)'],['τῆς φωνῆς','de la voz (genitivo, 1ª decl.)'],['μου','de mí'],['ἀκούουσιν','oyen (presente ind. activo 3ª pl.)']],
+    insight:'ἀκούουσιν: ἀκού- (raíz) + -ουσι(ν) (desinencia 3ª plural). Ya puedes parsear un verbo real del NT. ¡Eso es griego koiné!'
+  }
+}
+];
+
+// ============================================================
+// PARADIGM DATA (day 10 special)
+// ============================================================
+const PARADIGM_LUOW = [
+  {lbl:'1ª sg.',  grk:'λύω',    esp:'yo desato'},
+  {lbl:'2ª sg.',  grk:'λύεις',  esp:'tú desatas'},
+  {lbl:'3ª sg.',  grk:'λύει',   esp:'él/ella desata'},
+  {lbl:'1ª pl.',  grk:'λύομεν', esp:'nosotros desatamos'},
+  {lbl:'2ª pl.',  grk:'λύετε',  esp:'vosotros desatáis'},
+  {lbl:'3ª pl.',  grk:'λύουσι(ν)',esp:'ellos desatan'},
+];
+
+const ART_TABLE = [
+  {caso:'Nominativo', ms:'ὁ',  mn:'τό',  fs:'ἡ',  mp:'οἱ',  np:'τά',  fp:'αἱ'},
+  {caso:'Genitivo',   ms:'τοῦ',mn:'τοῦ', fs:'τῆς',mp:'τῶν', np:'τῶν', fp:'τῶν'},
+  {caso:'Dativo',     ms:'τῷ', mn:'τῷ',  fs:'τῇ', mp:'τοῖς',np:'τοῖς',fp:'ταῖς'},
+  {caso:'Acusativo',  ms:'τόν',mn:'τό',  fs:'τήν',mp:'τούς',np:'τά',  fp:'τάς'},
+];
+
+// ============================================================
+// BUILD UI
+// ============================================================
+const lnav = document.getElementById('lnav');
+const container = document.getElementById('lessons-container');
+
+LESSONS.forEach((lesson, idx) => {
+  // Nav button
+  const btn = document.createElement('button');
+  btn.className = 'lnav-btn' + (idx === 0 ? ' active' : '');
+  btn.textContent = `Día ${lesson.day}`;
+  btn.onclick = () => showLesson(idx);
+  lnav.appendChild(btn);
+
+  // Panel
+  const panel = document.createElement('div');
+  panel.className = 'lesson-panel' + (idx === 0 ? ' active' : '');
+  panel.id = `lesson-${idx}`;
+  panel.innerHTML = buildLesson(lesson, idx);
+  container.appendChild(panel);
+});
+
+function showLesson(idx) {
+  document.querySelectorAll('.lnav-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  document.querySelectorAll('.lesson-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  // init quiz for this lesson
+  initQuiz(idx);
+}
+
+function showInnerTab(lessonIdx, tabName) {
+  const panel = document.getElementById(`lesson-${lessonIdx}`);
+  panel.querySelectorAll('.itab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
+  panel.querySelectorAll('.itab-panel').forEach(p => p.classList.toggle('active', p.dataset.tab === tabName));
+}
+
+function buildLesson(lesson, idx) {
+  const tabs = ['📖 Lección','📚 Vocabulario','✏️ Práctica','✝️ Versículo'];
+  const tabKeys = ['leccion','vocab','quiz','verse'];
+  
+  let html = `
+  <div style="text-align:center;margin-bottom:14px;">
+    <div style="font-family:'EB Garamond',serif;font-size:1.5rem;color:var(--azure);">Día ${lesson.day} — ${lesson.title}</div>
+    <div style="font-size:12px;color:#888;margin-top:2px;">${lesson.subtitle}</div>
+    <div class="prog-bar" style="max-width:300px;margin:8px auto 3px;"><div class="prog-fill" style="width:${(lesson.day/30*100).toFixed(1)}%"></div></div>
+    <div class="prog-lbl">Día ${lesson.day} de 30</div>
+  </div>
+  <div class="inner-tabs">
+    ${tabs.map((t,i)=>`<div class="itab${i===0?' active':''}" data-tab="${tabKeys[i]}" onclick="showInnerTab(${idx},'${tabKeys[i]}')">${t}</div>`).join('')}
+  </div>`;
+
+  // LECCION tab
+  html += `<div class="itab-panel active" data-tab="leccion">`;
+
+  if (lesson.letters && lesson.letters.length > 0) {
+    html += `<div class="card"><h3><span>🔤</span> Las letras de hoy</h3>
+    <p style="font-size:12px;color:#888;margin-bottom:8px;">Toca cada tarjeta para ver un ejemplo bíblico.</p>
+    <div class="alpha-grid">`;
+    lesson.letters.forEach((lt,li) => {
+      html += `<div class="ltr-card" onclick="this.classList.toggle('on')">
+        <span class="ltr-big">${lt.u} ${lt.l}</span>
+        <div class="ltr-name">${lt.name}</div>
+        <div class="ltr-snd">${lt.snd}</div>
+        <div class="ltr-ex">${lt.ex}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  if (lesson.tips && lesson.tips.length > 0) {
+    html += `<div class="card"><h3><span>💡</span> Claves del día</h3>`;
+    lesson.tips.forEach(tip => {
+      html += `<div class="tip">${tip.t}</div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Special content for day 8 (cases table)
+  if (lesson.day === 8) {
+    html += `<div class="card"><h3><span>📊</span> Declinación de λόγος (2ª declinación masc.)</h3>
+    <table class="gtable"><thead><tr><th>Caso</th><th>Singular</th><th>Plural</th><th>Función</th></tr></thead><tbody>
+    <tr><td>Nominativo</td><td class="grk">λόγος</td><td class="grk">λόγοι</td><td>sujeto</td></tr>
+    <tr><td>Genitivo</td><td class="grk">λόγου</td><td class="grk">λόγων</td><td>"de"</td></tr>
+    <tr><td>Dativo</td><td class="grk">λόγῳ</td><td class="grk">λόγοις</td><td>"a / en"</td></tr>
+    <tr><td>Acusativo</td><td class="grk">λόγον</td><td class="grk">λόγους</td><td>objeto directo</td></tr>
+    <tr><td>Vocativo</td><td class="grk">λόγε</td><td class="grk">λόγοι</td><td>llamado directo</td></tr>
+    </tbody></table></div>`;
+  }
+
+  // Special content for day 9 (article table)
+  if (lesson.day === 9) {
+    html += `<div class="card"><h3><span>📊</span> El artículo definido — ὁ / ἡ / τό</h3>
+    <table class="gtable"><thead><tr><th>Caso</th><th>Masc.sg</th><th>Neut.sg</th><th>Fem.sg</th><th>Masc.pl</th><th>Neut.pl</th><th>Fem.pl</th></tr></thead><tbody>`;
+    ART_TABLE.forEach(row => {
+      html += `<tr><td><strong>${row.caso}</strong></td><td class="grk">${row.ms}</td><td class="grk">${row.mn}</td><td class="grk">${row.fs}</td><td class="grk">${row.mp}</td><td class="grk">${row.np}</td><td class="grk">${row.fp}</td></tr>`;
+    });
+    html += `</tbody></table><div class="note">Aprende esta tabla. Es la clave de toda la gramática nominal griega.</div></div>`;
+
+    html += `<div class="card"><h3><span>📊</span> 1ª declinación — ἀρχή</h3>
+    <table class="gtable"><thead><tr><th>Caso</th><th>Singular</th><th>Plural</th></tr></thead><tbody>
+    <tr><td>Nominativo</td><td class="grk">ἀρχή</td><td class="grk">ἀρχαί</td></tr>
+    <tr><td>Genitivo</td><td class="grk">ἀρχῆς</td><td class="grk">ἀρχῶν</td></tr>
+    <tr><td>Dativo</td><td class="grk">ἀρχῇ</td><td class="grk">ἀρχαῖς</td></tr>
+    <tr><td>Acusativo</td><td class="grk">ἀρχήν</td><td class="grk">ἀρχάς</td></tr>
+    </tbody></table></div>`;
+  }
+
+  // Special content for day 10 (verb paradigm)
+  if (lesson.day === 10) {
+    html += `<div class="card"><h3><span>📊</span> Presente indicativo activo — λύω (desatar)</h3>
+    <div class="paradigm">
+    <div class="para-row"><div class="para-lbl para-head">Persona</div><div class="para-grk para-head">Griego</div><div class="para-esp para-head">Español</div></div>`;
+    PARADIGM_LUOW.forEach(r => {
+      html += `<div class="para-row"><div class="para-lbl">${r.lbl}</div><div class="para-grk">${r.grk}</div><div class="para-esp">${r.esp}</div></div>`;
+    });
+    html += `</div>
+    <div class="tip" style="margin-top:12px;"><strong>Desinencias:</strong> -ω, -εις, -ει, -ομεν, -ετε, -ουσι(ν) — memoriza esta secuencia. Sirve para TODOS los verbos regulares en presente.</div>
+    </div>`;
+  }
+
+  // Day 4 special: diacritics visual
+  if (lesson.day === 4) {
+    html += `<div class="card"><h3><span>📊</span> Los signos diacríticos en resumen</h3>
+    <table class="gtable"><thead><tr><th>Signo</th><th>Nombre</th><th>Ejemplo</th><th>Efecto</th></tr></thead><tbody>
+    <tr><td class="grk" style="font-size:1.3rem;">ά</td><td>Agudo</td><td class="grk">ἀρχή</td><td>tono alto en esa sílaba</td></tr>
+    <tr><td class="grk" style="font-size:1.3rem;">ὰ</td><td>Grave</td><td class="grk">τὸν κόσμον</td><td>agudo que baja ante otra palabra</td></tr>
+    <tr><td class="grk" style="font-size:1.3rem;">ᾶ</td><td>Circunflejo</td><td class="grk">ἀρχῆς</td><td>sílaba larga con tono alto-bajo</td></tr>
+    <tr><td class="grk" style="font-size:1.3rem;">᾿</td><td>Espíritu suave</td><td class="grk">ἀρχή</td><td>sin aspiración inicial</td></tr>
+    <tr><td class="grk" style="font-size:1.3rem;">῾</td><td>Espíritu áspero</td><td class="grk">ἡμέρα</td><td>aspiración "h" inicial</td></tr>
+    <tr><td class="grk" style="font-size:1.3rem;">ᾳ</td><td>Iota suscrita</td><td class="grk">ἀρχῇ</td><td>marca el dativo en 1ª/2ª declin.</td></tr>
+    </tbody></table></div>`;
+  }
+
+  // Day 6: frequency table
+  if (lesson.day === 6) {
+    html += `<div class="card"><h3><span>📊</span> Top 10 palabras del NT por frecuencia</h3>
+    <table class="gtable"><thead><tr><th>Palabra</th><th>Significado</th><th>Veces</th></tr></thead><tbody>
+    <tr><td class="grk">ὁ / ἡ / τό</td><td>el / la / lo</td><td>19.870</td></tr>
+    <tr><td class="grk">καί</td><td>y, también</td><td>9.153</td></tr>
+    <tr><td class="grk">αὐτός</td><td>él, mismo</td><td>5.597</td></tr>
+    <tr><td class="grk">δέ</td><td>pero, y</td><td>2.792</td></tr>
+    <tr><td class="grk">ἐν</td><td>en</td><td>2.752</td></tr>
+    <tr><td class="grk">εἰμί</td><td>ser, estar</td><td>2.462</td></tr>
+    <tr><td class="grk">λέγω</td><td>decir</td><td>2.354</td></tr>
+    <tr><td class="grk">εἰς</td><td>hacia, en</td><td>1.768</td></tr>
+    <tr><td class="grk">οὐ</td><td>no</td><td>1.606</td></tr>
+    <tr><td class="grk">ὅτι</td><td>que, porque</td><td>1.296</td></tr>
+    </tbody></table></div>`;
+  }
+
+  html += `</div>`; // end leccion panel
+
+  // VOCAB tab
+  html += `<div class="itab-panel" data-tab="vocab"><div class="card"><h3><span>📚</span> Vocabulario del día</h3>
+  <p style="font-size:12px;color:#888;margin-bottom:8px;">Toca cada palabra para ver más información.</p>
+  <ul class="vlist">`;
+  lesson.vocab.forEach((v,vi) => {
+    html += `<li class="vitem" onclick="toggleVocab(this)">
+      <div class="vgrk">${v.g}</div>
+      <div>
+        <div class="vtrans">${v.t}</div>
+        <div class="vhint" style="display:none;">${v.h} — <em>${v.f}</em></div>
+        <div class="vmore">↓ más info</div>
+      </div>
+    </li>`;
+  });
+  html += `</ul></div></div>`;
+
+  // QUIZ tab
+  html += `<div class="itab-panel" data-tab="quiz">
+    <div class="card"><h3><span>✏️</span> Práctica — Día ${lesson.day}</h3>
+    <div id="quiz-${idx}"></div>
+    <div id="score-${idx}" class="qscore" style="display:none;"></div>
+    </div>
+  </div>`;
+
+  // VERSE tab
+  const v = lesson.verse;
+  html += `<div class="itab-panel" data-tab="verse">
+  <div class="vblock">
+    <div class="vgrk-big">${v.grk}</div>
+    <div class="vtrans-small">${v.esp}</div>
+    <div class="vwords">`;
+  v.words.forEach(w => {
+    html += `<div class="vrow"><span class="vwg">${w[0]}</span><span class="vws">${w[1]}</span></div>`;
+  });
+  html += `</div></div>
+  <div class="card"><h3><span>🔍</span> El detalle que las traducciones pierden</h3>
+  <p>${v.insight}</p>
+  </div></div>`;
+
+  return html;
+}
+
+// ============================================================
+// QUIZ ENGINE
+// ============================================================
+const quizState = {};
+
+function initQuiz(idx) {
+  if (quizState[idx]) return; // already init
+  quizState[idx] = { pos: 0, score: 0, data: [...LESSONS[idx].quiz].sort(() => Math.random()-0.5) };
+  renderQuiz(idx);
+}
+
+function renderQuiz(idx) {
+  const container = document.getElementById(`quiz-${idx}`);
+  const scoreEl = document.getElementById(`score-${idx}`);
+  const state = quizState[idx];
+  if (!state) return;
+  if (state.pos >= state.data.length) {
+    container.style.display = 'none';
+    scoreEl.style.display = 'block';
+    const pct = Math.round(state.score/state.data.length*100);
+    scoreEl.innerHTML = `${pct >= 80 ? '🎉' : '📖'} <strong>${state.score}/${state.data.length}</strong> correctas (${pct}%)<br>
+    <span style="font-size:13px;color:#888;">${pct>=80?'¡Excelente! Listo para el siguiente día.':'Repasa las letras que fallaste antes de continuar.'}</span>
+    <br><button class="qbtn" style="margin-top:10px;" onclick="resetQuiz(${idx})">↺ Repetir</button>`;
+    return;
+  }
+  const q = state.data[state.pos];
+  const optHtml = q.opts.map((o,i) => `<button class="qbtn" onclick="checkQ(${idx},this,${i},${q.ans})">${o}</button>`).join('');
+  container.innerHTML = `
+    <div class="qcard">
+      <div style="font-size:11px;color:#aaa;margin-bottom:6px;">${state.pos+1} / ${state.data.length}</div>
+      <div class="qbig">${q.q}</div>
+      <div class="qgrid">${optHtml}</div>
+      <div class="qfb" id="qfb-${idx}"></div>
+    </div>`;
+}
+
+function checkQ(idx, btn, chosen, correct) {
+  const state = quizState[idx];
+  const btns = btn.parentElement.querySelectorAll('.qbtn');
+  btns.forEach(b => b.disabled = true);
+  const fb = document.getElementById(`qfb-${idx}`);
+  if (chosen === correct) {
+    btn.classList.add('ok');
+    fb.style.color = 'var(--grn)';
+    fb.textContent = '✓ ¡Correcto!';
+    state.score++;
+  } else {
+    btn.classList.add('no');
+    btns[correct].classList.add('ok');
+    fb.style.color = 'var(--red)';
+    fb.textContent = `✗ Era: ${state.data[state.pos].opts[correct]}`;
+  }
+  setTimeout(() => { state.pos++; renderQuiz(idx); }, 1300);
+}
+
+function resetQuiz(idx) {
+  quizState[idx] = { pos:0, score:0, data:[...LESSONS[idx].quiz].sort(()=>Math.random()-.5) };
+  document.getElementById(`quiz-${idx}`).style.display = 'block';
+  document.getElementById(`score-${idx}`).style.display = 'none';
+  renderQuiz(idx);
+}
+
+function toggleVocab(el) {
+  const h = el.querySelector('.vhint');
+  const m = el.querySelector('.vmore');
+  if (h.style.display === 'none') { h.style.display='block'; m.style.display='none'; }
+  else { h.style.display='none'; m.style.display='block'; }
+}
+
+// Init first lesson quiz
+initQuiz(0);
+</script>
+</body>
+</html>

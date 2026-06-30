@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Griego Koiné — Días 21–30</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap');
+:root {
+  --parch:#f5f0e8; --ink:#1a1209; --ink2:#3d2f1a; --gold:#b8860b; --gold-l:#e8d5a0;
+  --azure:#1e3a5f; --azure-l:#dce8f5; --red:#8b1a1a; --grn:#1a4a2e; --grn-l:#d4edda;
+  --bdr:#c8b89a; --wht:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--parch);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;min-height:100vh}
+header{background:var(--azure);color:#f5f0e8;padding:22px 16px 18px;text-align:center;border-bottom:3px solid var(--gold)}
+header h1{font-family:'EB Garamond',serif;font-size:1.9rem;letter-spacing:.02em;margin-bottom:2px}
+header .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;color:var(--gold-l);opacity:.9}
+.lesson-nav{display:flex;overflow-x:auto;background:#ede8df;border-bottom:2px solid var(--bdr);gap:2px;padding:4px 4px 0;scrollbar-width:none}
+.lesson-nav::-webkit-scrollbar{display:none}
+.lnav-btn{flex-shrink:0;padding:9px 14px;border:none;background:transparent;font-size:12px;font-weight:700;color:var(--ink2);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:4px 4px 0 0}
+.lnav-btn.active{color:var(--azure);border-bottom-color:var(--azure);background:var(--parch)}
+.lnav-btn:hover:not(.active){background:#e0d9ce}
+.inner-tabs{display:flex;border-bottom:1px solid var(--bdr);background:#f0ebe1;overflow-x:auto;scrollbar-width:none}
+.inner-tabs::-webkit-scrollbar{display:none}
+.itab{padding:8px 14px;font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.itab.active{color:var(--azure);border-bottom-color:var(--azure);background:var(--parch)}
+.lesson-panel{display:none;padding:16px;max-width:720px;margin:0 auto}
+.lesson-panel.active{display:block}
+.itab-panel{display:none}
+.itab-panel.active{display:block}
+.card{background:var(--wht);border:1px solid var(--bdr);border-radius:8px;padding:16px;margin-bottom:14px}
+.card h3{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--azure);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.tip{background:var(--azure-l);border-left:4px solid var(--azure);border-radius:0 6px 6px 0;padding:10px 13px;margin:8px 0;font-size:13px}
+.tip strong{color:var(--azure)}
+.tip-gold{background:#fdf8ec;border-left-color:var(--gold)}
+.tip-gold strong{color:var(--gold)}
+.tip-grn{background:var(--grn-l);border-left-color:var(--grn)}
+.tip-grn strong{color:var(--grn)}
+.vlist{list-style:none}
+.vitem{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #ede5d5;cursor:pointer}
+.vgrk{font-family:'EB Garamond',serif;font-size:1.25rem;color:var(--azure);min-width:140px;flex-shrink:0}
+.vtrans{font-size:13px;font-weight:600}
+.vhint{font-size:11px;color:#888;font-style:italic;margin-top:1px}
+.vmore{font-size:11px;color:var(--gold)}
+.gtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.gtable th{background:var(--azure);color:#fff;padding:7px 10px;text-align:left;font-weight:600}
+.gtable td{padding:6px 10px;border-bottom:1px solid #e8ddc8}
+.gtable tr:nth-child(even) td{background:#f9f5ee}
+.gtable .grk{font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--azure)}
+.gtable .hl{background:#fff8e1!important;font-weight:700}
+.qcard{background:var(--wht);border:2px solid var(--bdr);border-radius:10px;padding:18px;margin-bottom:12px;text-align:center}
+.qbig{font-family:'EB Garamond',serif;font-size:1.9rem;color:var(--azure);margin-bottom:14px;line-height:1.4}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qbtn{background:var(--parch);border:2px solid var(--bdr);border-radius:7px;padding:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--ink);font-family:'Inter',sans-serif}
+.qbtn:hover{border-color:var(--azure);color:var(--azure)}
+.qbtn.ok{background:var(--grn-l);border-color:var(--grn);color:var(--grn)}
+.qbtn.no{background:#fde8e8;border-color:var(--red);color:var(--red)}
+.qfb{margin-top:10px;font-size:13px;font-weight:600;min-height:18px}
+.qscore{text-align:center;padding:20px;font-weight:700;color:var(--azure);font-size:1.1rem}
+.vblock{background:linear-gradient(135deg,var(--azure) 0%,#0d2240 100%);color:#f5f0e8;border-radius:10px;padding:20px 16px;text-align:center;margin-bottom:14px}
+.vgrk-big{font-family:'EB Garamond',serif;font-size:1.3rem;line-height:1.9;margin-bottom:10px;color:var(--gold-l)}
+.vtrans-small{font-size:12px;color:#c8d8e8;font-style:italic}
+.vwords{text-align:left;margin-top:12px}
+.vrow{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:12px}
+.vwg{font-family:'EB Garamond',serif;font-size:1rem;color:var(--gold-l)}
+.vws{color:#c8d8e8}
+.paradigm{display:grid;gap:5px;margin-top:8px}
+.para-row{display:grid;grid-template-columns:90px 1fr 1fr;gap:4px;align-items:center;font-size:13px}
+.para-lbl{font-weight:600;color:var(--ink2);font-size:12px}
+.para-grk{font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--azure)}
+.para-esp{color:var(--ink2);font-size:13px}
+.para-head{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#aaa;padding-bottom:2px;border-bottom:1px solid var(--bdr)}
+.prog-bar{height:5px;background:#ddd;border-radius:3px;margin:6px 0 3px}
+.prog-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .5s}
+.prog-lbl{font-size:11px;color:#aaa}
+.note{font-size:11px;color:#999;text-align:center;margin-top:6px;font-style:italic}
+p{font-size:14px;margin-bottom:8px}
+.conj-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.conj-box{background:var(--parch);border:1px solid var(--bdr);border-radius:6px;padding:10px 12px}
+.conj-box h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);margin-bottom:6px}
+.conj-line{display:flex;justify-content:space-between;font-size:13px;padding:2px 0;border-bottom:1px solid #e8ddc8}
+.conj-line .cg{font-family:'EB Garamond',serif;font-size:1.05rem;color:var(--azure)}
+.conj-line .ce{color:var(--ink2);font-size:12px}
+.finish-banner{background:linear-gradient(135deg,#b8860b,#8b6508);color:#fff;border-radius:10px;padding:22px 18px;text-align:center;margin-bottom:16px}
+.finish-banner h2{font-family:'EB Garamond',serif;font-size:1.8rem;margin-bottom:6px}
+.finish-banner p{color:#ffe8a0;font-size:14px;margin:0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="sub">Ἡ Ἑλληνικὴ Γλῶσσα — Semanas 3 y 4</div>
+  <h1>Griego Koiné Bíblico</h1>
+  <div class="sub">Días 21–30 · Síntesis, lectura libre y herramientas</div>
+</header>
+
+<div class="lesson-nav" id="lnav"></div>
+<div id="lessons-container"></div>
+
+<script>
+const LESSONS = [
+// ── DÍA 21 ──────────────────────────────────────────────────
+{
+  day:21, title:"El modo subjuntivo", subtitle:"La gramática de la posibilidad, el propósito y la exhortación",
+  tips:[
+    {t:'<strong>El modo indicativo</strong> afirma hechos. El <strong>subjuntivo</strong> expresa posibilidad, propósito, exhortación o condición. En el NT aparece unas 1.858 veces, por lo que es imposible leer el texto griego sin reconocerlo.'},
+    {t:'<strong>Cómo se forma:</strong> en el presente, las desinencias del indicativo cambian sus vocales breves (ο/ε) por largas (ω/η): λύω → λύω (igual en 1ª sg.), λύεις → λύῃς, λύει → λύῃ, etc. En el aoristo, augmento desaparece y se añade -σ-: λύσω, λύσῃς, λύσῃ...'},
+    {t:'<strong>Cuatro usos principales:</strong> (1) ἵνα + subj. = propósito; (2) ἐάν + subj. = condición eventual; (3) μή + subj. = negación no-factual; (4) subj. exhortativo 1ª pl. = "¡Vayamos!" / "¡Creamos!"'},
+    {t:'<strong>La diferencia de tiempos en subjuntivo</strong> no es cronológica sino de aspecto: presente subj. = acción continua; aoristo subj. = acción puntual.'},
+  ],
+  extra:{type:'conj', title:'Subjuntivo presente activo — λύω',
+    cols:[
+      {title:'Presente subjuntivo', rows:[['λύω','(que) yo desate'],['λύῃς','(que) tú desates'],['λύῃ','(que) él desate'],['λύωμεν','(que) desatemos'],['λύητε','(que) desatéis'],['λύωσι(ν)','(que) desaten']]},
+      {title:'Aoristo subjuntivo', rows:[['λύσω','(que) yo desate (puntual)'],['λύσῃς','(que) tú desates'],['λύσῃ','(que) él desate'],['λύσωμεν','(que) desatemos'],['λύσητε','(que) desatéis'],['λύσωσι(ν)','(que) desaten']]},
+    ]
+  },
+  vocab:[
+    {g:'ἵνα ζήσωμεν',  t:'para que vivamos (subj. 1ª pl.)',   h:'1 Jn 4:9',   f:'Propósito de la misión del Hijo'},
+    {g:'ἐάν τις',      t:'si alguien (condición eventual)',    h:'Jn 3:3',     f:'"ἐὰν μή τις γεννηθῇ"'},
+    {g:'μὴ κρίνετε',   t:'no juzguéis (imp. negativo)',       h:'Mt 7:1',     f:'μή + imperativo = prohibición'},
+    {g:'πιστεύσητε',   t:'creáis (aor. subj. 2ª pl.)',        h:'Jn 20:31',   f:'"para que creáis que Jesús es el Cristo"'},
+    {g:'γεννηθῇ',      t:'nazca (aor. subj. pas. 3ª sg.)',    h:'Jn 3:3',     f:'"si alguien no nace de nuevo"'},
+    {g:'ἁγιασθήτω',    t:'santifícese (aor. subj. imp.)',     h:'Mt 6:9',     f:'"Santificado sea tu nombre"'},
+    {g:'ἐλθέτω',       t:'venga (aor. subj. imp. 3ª sg.)',    h:'Mt 6:10',    f:'"Venga tu reino"'},
+    {g:'γένηται',      t:'hágase (aor. subj. 3ª sg.)',        h:'Mt 6:10',    f:'"Hágase tu voluntad"'},
+  ],
+  quiz:[
+    {q:'λύῃ es modo...', opts:['indicativo','subjuntivo','imperativo','infinitivo'], ans:1},
+    {q:'ἵνα + verbo exige modo...', opts:['indicativo','participio','subjuntivo','infinitivo'], ans:2},
+    {q:'ἐάν = ...', opts:['cuando (seguro)','si (eventual)','para que','porque'], ans:1},
+    {q:'El subj. exhortativo usa la...', opts:['1ª sg.','2ª sg.','1ª pl.','3ª pl.'], ans:2},
+    {q:'γεννηθῇ es aoristo subjuntivo...', opts:['activo','medio','pasivo','deponente'], ans:2},
+    {q:'La diferencia pres. vs aor. subj. es de...', opts:['tiempo cronológico','aspecto (continuo vs puntual)','persona','número'], ans:1},
+    {q:'μή + subjuntivo expresa...', opts:['pregunta','negación no-factual','afirmación','propósito'], ans:1},
+    {q:'ἐλθέτω = ...', opts:['él vino','él viene','¡venga! (subj. imp.)','él vendrá'], ans:2},
+  ],
+  verse:{grk:'ἐλθέτω ἡ βασιλεία σου· γενηθήτω τὸ θέλημά σου', esp:'"Venga tu reino, hágase tu voluntad" — Mateo 6:10',
+    words:[['ἐλθέτω','venga (aor. subj. imp. 3ª sg. de ἔρχομαι)'],['ἡ βασιλεία','el reino (nom. fem.)'],['σου','tuyo/de ti (gen.)'],['γενηθήτω','hágase (aor. subj. pas. imp. 3ª sg.)'],['τὸ θέλημα','la voluntad (nom. neutro)'],['σου','tuya']],
+    insight:'El Padrenuestro usa subjuntivos imperativos: no "que por favor venga" sino una petición directa y segura. El modo subjuntivo con sentido imperativo es una de las construcciones más frecuentes en la oración bíblica.'
+  }
+},
+// ── DÍA 22 ──────────────────────────────────────────────────
+{
+  day:22, title:"El modo imperativo", subtitle:"Mandatos, prohibiciones y súplicas en el NT",
+  tips:[
+    {t:'<strong>El imperativo griego</strong> da órdenes, prohibiciones o súplicas. Tiene formas para 2ª y 3ª persona, singular y plural. La 1ª persona usa el subjuntivo exhortativo ("hagamos").'},
+    {t:'<strong>Presente imperativo</strong> = acción continua o repetida: "sigue creyendo", "haced siempre esto". <strong>Aoristo imperativo</strong> = acción puntual: "arrepiéntete", "ven aquí". El aspecto importa.'},
+    {t:'<strong>Prohibición:</strong> μή + presente imperativo = "deja de hacer" (acción en curso); μή + aoristo subjuntivo = "nunca empieces a hacer". Esta distinción es teológicamente relevante en pasajes como Juan 20:17.'},
+  ],
+  extra:{type:'table', title:'Imperativo presente y aoristo activo — λύω',
+    headers:['Persona','Presente (continuo)','Aoristo (puntual)','Significado aor.'],
+    rows:[
+      ['2ª sg.','λῦε','λῦσον','¡desata!'],
+      ['3ª sg.','λυέτω','λυσάτω','¡que él desate!'],
+      ['2ª pl.','λύετε','λύσατε','¡desatad!'],
+      ['3ª pl.','λυέτωσαν','λυσάτωσαν','¡que ellos desaten!'],
+    ]
+  },
+  vocab:[
+    {g:'ἀκολούθει μοι',  t:'sígueme (pres. imp. — acción continua)',  h:'Mc 2:14',   f:'"Sigue siguiéndome" — llamado de Leví'},
+    {g:'μετανοεῖτε',     t:'arrepentíos (pres. imp. 2ª pl.)',         h:'Mc 1:15',   f:'Acción continua pedida'},
+    {g:'πίστευε',        t:'cree (pres. imp. 2ª sg.)',                h:'Jn 14:1',   f:'"No se turbe vuestro corazón; creed"'},
+    {g:'μὴ φοβοῦ',       t:'no temas (pres. imp. — deja de temer)',   h:'Lc 1:30',   f:'Gabriel a María: "deja de estar asustada"'},
+    {g:'ἄφες',           t:'perdona / deja (aor. imp. 2ª sg.)',       h:'Mt 6:12',   f:'"Perdónanos nuestras deudas"'},
+    {g:'ἐγέρθητι',       t:'levántate (aor. imp. pas. 2ª sg.)',       h:'Mc 5:41',   f:'"Talitha koum" — niña, levántate'},
+    {g:'δεῦτε',          t:'venid (adverbio con fuerza imperativa)',   h:'Mt 4:19',   f:'"Venid en pos de mí"'},
+    {g:'ζητεῖτε',        t:'buscad (pres. imp. 2ª pl.)',              h:'Mt 6:33',   f:'"Buscad primero el reino"'},
+  ],
+  quiz:[
+    {q:'λῦσον es imperativo...', opts:['presente','aoristo','futuro','perfecto'], ans:1},
+    {q:'μή + presente imp. = ...', opts:['nunca empieces','deja de hacer','¡haz!','para que hagas'], ans:1},
+    {q:'μή + aoristo subj. = ...', opts:['deja de hacer','nunca empieces a hacer','haz continuamente','porque hace'], ans:1},
+    {q:'ἀκολούθει = ...', opts:['siguió','sigue siguiéndome (continuo)','seguirá','haberlo seguido'], ans:1},
+    {q:'μὴ φοβοῦ significa...', opts:['nunca temas','deja de temer (en curso)','temerás','teme'], ans:1},
+    {q:'El imperativo tiene formas para...', opts:['1ª y 2ª persona','2ª y 3ª persona','todas las personas','solo 2ª persona'], ans:1},
+    {q:'ζητεῖτε πρῶτον = ...', opts:['buscasteis primero','buscad primero (continuo)','buscaréis primero','habéis buscado'], ans:1},
+    {q:'ἐγέρθητι es imperativo...', opts:['activo','medio','pasivo','deponente'], ans:2},
+  ],
+  verse:{grk:'ζητεῖτε δὲ πρῶτον τὴν βασιλείαν τοῦ θεοῦ', esp:'"Buscad primero el reino de Dios" — Mateo 6:33',
+    words:[['ζητεῖτε','buscad (pres. imp. 2ª pl. — acción continua y prioritaria)'],['δέ','pero/y (contraste con la ansiedad del v.31)'],['πρῶτον','primero (adverbio de prioridad)'],['τὴν βασιλείαν','el reino (acusativo — objeto directo)'],['τοῦ θεοῦ','de Dios (genitivo)']],
+    insight:'ζητεῖτε es presente imperativo: no "buscad el reino una vez" sino "vivid buscando el reino continuamente". El aspecto del presente da al mandato su carácter de orientación vital permanente.'
+  }
+},
+// ── DÍA 23 ──────────────────────────────────────────────────
+{
+  day:23, title:"El perfecto de indicativo", subtitle:"El tiempo del efecto permanente: lo que fue y sigue siendo",
+  tips:[
+    {t:'<strong>El perfecto griego</strong> describe una acción pasada cuyos efectos persisten en el presente. Es el tiempo teológicamente más rico del NT: "está escrito", "ha sido resucitado", "has creído".'},
+    {t:'<strong>Se forma con reduplicación:</strong> la primera consonante de la raíz se duplica con ε: λύω → λέλυκα; γράφω → γέγραφα; πιστεύω → πεπίστευκα. Si la raíz empieza por vocal, esa vocal se alarga.'},
+    {t:'<strong>γέγραπται</strong> ("está escrito") aparece 65 veces en el NT. Cada vez que Jesús o Pablo citan el AT, usan este perfecto: el texto fue escrito en el pasado y su autoridad permanece ahora.'},
+    {t:'<strong>Perfecto pasivo</strong> es especialmente frecuente: πεπλήρωται (se ha cumplido), γεγραμμένον (lo que ha sido escrito), τετέλεσται (ha sido consumado).'},
+  ],
+  extra:{type:'paradigm', title:'Perfecto indicativo activo — λέλυκα',
+    rows:[
+      {lbl:'1ª sg.',  grk:'λέλυκα',    esp:'yo he desatado'},
+      {lbl:'2ª sg.',  grk:'λέλυκας',   esp:'tú has desatado'},
+      {lbl:'3ª sg.',  grk:'λέλυκε(ν)', esp:'él ha desatado'},
+      {lbl:'1ª pl.',  grk:'λελύκαμεν', esp:'nosotros hemos desatado'},
+      {lbl:'2ª pl.',  grk:'λελύκατε',  esp:'vosotros habéis desatado'},
+      {lbl:'3ª pl.',  grk:'λελύκασι',  esp:'ellos han desatado'},
+    ],
+    note:'Reduplicación λε- + raíz λυ- + sufijo de perfecto -κ- + desinencias -α/-ας/-ε...'
+  },
+  vocab:[
+    {g:'γέγραπται',    t:'está escrito (perf. pas. de γράφω)',     h:'Mt 4:4 — citando Dt 8:3',         f:'65 veces en el NT — la autoridad escritural'},
+    {g:'τετέλεσται',   t:'consumado es (perf. pas. de τελέω)',     h:'Jn 19:30',                         f:'La última palabra de Jesús en la cruz'},
+    {g:'πεπίστευκα',   t:'he creído (perf. activo de πιστεύω)',    h:'2 Ti 1:12',                        f:'"Sé en quién he creído"'},
+    {g:'ἐγήγερται',    t:'ha sido resucitado (perf. pas.)',        h:'1 Co 15:4',                        f:'El corazón del kerigma apostólico'},
+    {g:'γέγονεν',      t:'ha sucedido / ha llegado a ser',         h:'Jn 1:3',                           f:'Perfecto de γίνομαι'},
+    {g:'ἀπέσταλκεν',   t:'ha enviado (perf. activo de ἀποστέλλω)', h:'Jn 3:17',                         f:'La misión presente del Hijo'},
+    {g:'πεπλήρωται',   t:'se ha cumplido (perf. pas.)',            h:'Mc 1:15',                          f:'El tiempo se ha cumplido y el efecto dura'},
+    {g:'ἑώρακα',       t:'he visto (perf. de ὁράω)',               h:'Jn 20:18 — "ἑώρακα τὸν κύριον"', f:'María Magdalena — visión permanente'},
+  ],
+  quiz:[
+    {q:'γέγραπται es tiempo...', opts:['aoristo','imperfecto','perfecto','pluscuamperfecto'], ans:2},
+    {q:'El perfecto se forma con...', opts:['augmento','reduplicación','sigma + augmento','solo desinencias nuevas'], ans:1},
+    {q:'τετέλεσται significa...', opts:['se terminará','se estaba terminando','ha sido consumado','terminó'], ans:2},
+    {q:'ἐγήγερται = ...', opts:['resucitó','resucitará','ha sido resucitado','resucitaba'], ans:2},
+    {q:'λέλυκα: la reduplicación es...', opts:['λε-','λυ-','-κ-','-α'], ans:0},
+    {q:'El efecto del perfecto es...', opts:['solo pasado','solo presente','acción pasada con resultado presente','futuro próximo'], ans:2},
+    {q:'γέγραπται aparece en el NT...', opts:['12 veces','65 veces','200 veces','8 veces'], ans:1},
+    {q:'ἑώρακα = ...', opts:['vi','veía','he visto','veré'], ans:2},
+  ],
+  verse:{grk:'τετέλεσται', esp:'"Consumado es" — Juan 19:30',
+    words:[['τετέλεσται','perfecto pasivo indicativo 3ª sg. de τελέω'],['τελέω','completar, llevar a cabo, cumplir'],['τε-','reduplicación del perfecto'],['τελε-','raíz verbal'],['σται','desinencia pasiva de perfecto 3ª sg.']],
+    insight:'Una sola palabra griega que Jesús pronunció desde la cruz. No "ha terminado" en el sentido de "se acabó", sino "ha sido llevado a perfección/cumplimiento". El perfecto indica que la obra sigue válida y activa. Ese es el evangelio en una sola palabra.'
+  }
+},
+// ── DÍA 24 ──────────────────────────────────────────────────
+{
+  day:24, title:"La 3ª declinación", subtitle:"Los sustantivos irregulares más importantes del NT",
+  tips:[
+    {t:'<strong>La 3ª declinación</strong> agrupa sustantivos con raíces en consonante. Sus desinencias son distintas a las de 1ª y 2ª. Para reconocerlos, la clave es el genitivo singular, que siempre revela la raíz verdadera.'},
+    {t:'<strong>Cómo aprender la 3ª declinación:</strong> no memorices todas las subclases. Aprende los sustantivos individuales con su genitivo: σάρξ, σαρκός (carne); χάρις, χάριτος (gracia); πίστις, πίστεως (fe).'},
+    {t:'<strong>Los neutros en -μα</strong> (πνεῦμα, ὄνομα, αἷμα, σῶμα, θέλημα) son cruciales en el NT. Su genitivo añade -τος: πνεῦμα → πνεύματος. Son todos 3ª declinación.'},
+  ],
+  extra:{type:'table', title:'Tres paradigmas clave de la 3ª declinación',
+    headers:['Caso','πίστις (fe, f.)','χάρις (gracia, f.)','πνεῦμα (espíritu, n.)'],
+    rows:[
+      ['Nominativo sg.','πίστις','χάρις','πνεῦμα'],
+      ['Genitivo sg.','πίστεως','χάριτος','πνεύματος'],
+      ['Dativo sg.','πίστει','χάριτι','πνεύματι'],
+      ['Acusativo sg.','πίστιν','χάριτα','πνεῦμα'],
+      ['Nominativo pl.','πίστεις','χάριτες','πνεύματα'],
+      ['Genitivo pl.','πίστεων','χαρίτων','πνευμάτων'],
+    ]
+  },
+  vocab:[
+    {g:'πίστις, -εως',   t:'fe, fidelidad (3ª decl., fem.)',    h:'Ro 1:17',    f:'243 veces en el NT'},
+    {g:'χάρις, -ιτος',   t:'gracia (3ª decl., fem.)',           h:'Jn 1:17',    f:'155 veces en el NT'},
+    {g:'πνεῦμα, -ατος',  t:'espíritu, viento (3ª decl., neut.)',h:'Jn 3:8',     f:'379 veces en el NT'},
+    {g:'σάρξ, σαρκός',   t:'carne (3ª decl., fem.)',            h:'Jn 1:14',    f:'147 veces en el NT'},
+    {g:'σῶμα, -ατος',    t:'cuerpo (3ª decl., neut.)',          h:'Ro 12:1',    f:'142 veces en el NT'},
+    {g:'ὄνομα, -ατος',   t:'nombre (3ª decl., neut.)',          h:'Mt 6:9',     f:'228 veces en el NT'},
+    {g:'αἷμα, -ατος',    t:'sangre (3ª decl., neut.)',          h:'Jn 1:13',    f:'97 veces en el NT'},
+    {g:'θέλημα, -ατος',  t:'voluntad (3ª decl., neut.)',        h:'Mt 6:10',    f:'62 veces en el NT'},
+  ],
+  quiz:[
+    {q:'πίστεως es caso...', opts:['nominativo','dativo','acusativo','genitivo'], ans:3},
+    {q:'πνεύματι es caso...', opts:['nominativo','genitivo','dativo','acusativo'], ans:2},
+    {q:'Los neutros en -μα tienen genitivo en...', opts:['-ου','-ης','-τος','-εως'], ans:2},
+    {q:'χάριτος es genitivo de...', opts:['χαρά','χάρτης','χάρις','χαρίζομαι'], ans:2},
+    {q:'σάρξ, σαρκός: la raíz verdadera es...', opts:['σάρξ-','σαρκ-','σαρ-','σάρ-'], ans:1},
+    {q:'ὄνομα, -ατος significa...', opts:['número','nombre','ley','noche'], ans:1},
+    {q:'La clave para reconocer la 3ª declinación es...', opts:['el nominativo','el genitivo singular','el acusativo','el artículo'], ans:1},
+    {q:'αἷμα = ...', opts:['alma','carne','sangre','espíritu'], ans:2},
+  ],
+  verse:{grk:'Πνεῦμα ὁ θεός, καὶ τοὺς προσκυνοῦντας αὐτὸν ἐν πνεύματι καὶ ἀληθείᾳ δεῖ προσκυνεῖν', esp:'"Dios es espíritu, y los que le adoran, en espíritu y en verdad es necesario que adoren" — Juan 4:24',
+    words:[['Πνεῦμα','espíritu (3ª decl., nom. — predicado sin artículo)'],['ὁ θεός','Dios (sujeto con artículo)'],['τοὺς προσκυνοῦντας','los que adoran (part. sust. acusativo)'],['ἐν πνεύματι','en espíritu (3ª decl., dativo con ἐν)'],['ἀληθείᾳ','verdad (1ª decl., dativo)'],['δεῖ προσκυνεῖν','es necesario adorar (impersonal + infinitivo)']],
+    insight:'Πνεῦμα sin artículo como predicado describe la naturaleza divina, no la identidad: "Dios es de naturaleza espiritual". El dativo ἐν πνεύματι usa la 3ª declinación que acabas de aprender. Todo encaja.'
+  }
+},
+// ── DÍA 25 ──────────────────────────────────────────────────
+{
+  day:25, title:"Los verbos deponentes y la voz media", subtitle:"Verbos que parecen pasivos pero son activos",
+  tips:[
+    {t:'<strong>Los verbos deponentes</strong> tienen forma pasiva/media pero significado activo. Son muy frecuentes en el NT y confunden a los principiantes. La regla es: si el lexicario da el verbo con terminación -ομαι, es deponente.'},
+    {t:'<strong>Ejemplos clave:</strong> ἔρχομαι (vengo), γίνομαι (llego a ser), ἀποκρίνομαι (respondo), πορεύομαι (voy, camino), εὐαγγελίζομαι (anuncio el evangelio), δέχομαι (recibo).'},
+    {t:'<strong>La voz media genuina</strong> expresa que el sujeto actúa en su propio interés o sobre sí mismo. Ej: λούομαι = "me lavo (a mí mismo)"; προσεύχομαι = "oro" (acción que afecta al sujeto).'},
+    {t:'<strong>Deponentes deponem:</strong> algunos verbos son deponentes solo en ciertos tiempos. ἔρχομαι (presente deponente) tiene aoristo fuerte ἦλθον (no deponente). Hay que aprenderlos como vocabulario.'},
+  ],
+  extra:{type:'table', title:'Los 10 verbos deponentes más frecuentes del NT',
+    headers:['Verbo','Aoristo','Significado','Frecuencia'],
+    rows:[
+      ['ἔρχομαι','ἦλθον','venir, ir','636 veces'],
+      ['γίνομαι','ἐγενόμην','llegar a ser, suceder','669 veces'],
+      ['ἀποκρίνομαι','ἀπεκρινάμην','responder','231 veces'],
+      ['πορεύομαι','ἐπορεύθην','ir, caminar','153 veces'],
+      ['προσεύχομαι','προσηυξάμην','orar','85 veces'],
+      ['δέχομαι','ἐδεξάμην','recibir, aceptar','56 veces'],
+      ['εὐαγγελίζομαι','εὐηγγελισάμην','anunciar el evangelio','54 veces'],
+      ['ἀσπάζομαι','ἠσπασάμην','saludar','59 veces'],
+      ['ἐργάζομαι','ἠργασάμην','trabajar, obrar','41 veces'],
+      ['ἀρνέομαι','ἠρνησάμην','negar, rechazar','33 veces'],
+    ]
+  },
+  vocab:[
+    {g:'προσεύχομαι',     t:'orar (deponente)',                  h:'Mt 6:6',    f:'85 veces — el verbo de la oración'},
+    {g:'ἀποκρίνομαι',     t:'responder (deponente)',             h:'Jn 1:21',   f:'231 veces en el NT'},
+    {g:'πορεύομαι',       t:'ir, caminar (deponente)',           h:'Jn 14:2',   f:'"Voy a prepararos lugar"'},
+    {g:'εὐαγγελίζομαι',   t:'anunciar el evangelio (dep.)',      h:'Lc 4:18',   f:'54 veces — el verbo misionero'},
+    {g:'ἐργάζομαι',       t:'trabajar, obrar (deponente)',       h:'Jn 6:29',   f:'"Esta es la obra de Dios"'},
+    {g:'δέχομαι',         t:'recibir, aceptar (deponente)',      h:'Jn 1:12',   f:'Diferente a λαμβάνω: más personal'},
+    {g:'ἀρνέομαι',        t:'negar (deponente)',                 h:'Mt 26:70',  f:'Pedro niega a Jesús — tres veces'},
+    {g:'ἀσπάζομαι',       t:'saludar (deponente)',               h:'Ro 16:3',   f:'59 veces — los saludos de Pablo'},
+  ],
+  quiz:[
+    {q:'Un verbo deponente tiene forma _____ pero significado _____', opts:['activa / pasiva','pasiva-media / activo','media / pasivo','activa / medio'], ans:1},
+    {q:'ἔρχομαι: ¿cómo reconoces que es deponente?', opts:['termina en -ω','termina en -ομαι','tiene augmento','lleva artículo'], ans:1},
+    {q:'ἦλθον es aoristo de...', opts:['γίνομαι','πορεύομαι','ἔρχομαι','δέχομαι'], ans:2},
+    {q:'προσεύχομαι = ...', opts:['predico','enseño','oro','voy'], ans:2},
+    {q:'εὐαγγελίζομαι significa...', opts:['leer el evangelio','escribir el evangelio','anunciar el evangelio','traducir el evangelio'], ans:2},
+    {q:'La voz media genuina indica que el sujeto actúa...', opts:['sobre otro','sobre sí mismo / en propio interés','de manera pasiva','en el pasado'], ans:1},
+    {q:'ἀρνέομαι = ...', opts:['afirmar','confesar','negar','recibir'], ans:2},
+    {q:'γίνομαι aparece en el NT...', opts:['200 veces','669 veces','100 veces','1.200 veces'], ans:1},
+  ],
+  verse:{grk:'σὺ δὲ ὅταν προσεύχῃ, εἴσελθε εἰς τὸ ταμεῖόν σου', esp:'"Pero tú, cuando ores, entra en tu cuarto" — Mateo 6:6',
+    words:[['σύ','tú (pronombre enfático — contraste con los hipócritas)'],['ὅταν','cuando (+ subj. = acción eventual repetida)'],['προσεύχῃ','ores (pres. subj. de προσεύχομαι — deponente)'],['εἴσελθε','entra (aoristo imp. de εἰσέρχομαι — deponente)'],['εἰς τὸ ταμεῖόν','en tu cuarto (εἰς + acusativo)'],['σου','tuyo']],
+    insight:'προσεύχῃ es subjuntivo de un verbo deponente: tiene forma pasiva (-ῃ de la media) pero significa "ores" (activo). Si no conoces los deponentes, leerías "seas orado" — lo opuesto al sentido. Conocer los deponentes es leer el texto correctamente.'
+  }
+},
+// ── DÍA 26 ──────────────────────────────────────────────────
+{
+  day:26, title:"Lectura guiada: Marcos 4:26-32", subtitle:"La parábola del grano de mostaza en el original griego",
+  tips:[
+    {t:'<strong>Hoy lees el texto</strong> que originó esta conversación: Marcos 4:31, el grano de mostaza. Ya tienes todas las herramientas para analizarlo en griego.'},
+    {t:'<strong>Recuerda Marcos 4:31:</strong> "ὡς κόκκῳ σινάπεως, ὃς ὅταν σπαρῇ ἐπὶ τῆς γῆς, μικρότερον ὂν πάντων τῶν σπερμάτων τῶν ἐπὶ τῆς γῆς" — nota μικρότερον (comparativo) en lugar de superlativo, y ὂν (participio de εἰμί).'},
+    {t:'<strong>Estrategia de lectura lenta:</strong> una oración a la vez. Identifica el verbo, luego el sujeto, luego el objeto, luego los modificadores. No te preocupes por cada palabra; el léxico es tu aliado.'},
+  ],
+  extra:{type:'table', title:'Marcos 4:31 — análisis palabra por palabra',
+    headers:['Palabra','Análisis','Significado'],
+    rows:[
+      ['ὡς','conjunción comparativa','como, tal como'],
+      ['κόκκῳ','dat. sg. masc. de κόκκος (2ª decl.)','a un grano (dativo de comparación)'],
+      ['σινάπεως','gen. sg. de σίναπι (3ª decl.)','de mostaza'],
+      ['ὅς','pron. relativo nom. sg. masc.','el cual, que'],
+      ['ὅταν','conj. temporal + subj.','cuando (acción eventual)'],
+      ['σπαρῇ','aor. subj. pas. 3ª sg. de σπείρω','sea sembrado'],
+      ['ἐπί','preposición + genitivo','sobre, en'],
+      ['τῆς γῆς','gen. sg. de γῆ (1ª decl.)','de la tierra'],
+      ['μικρότερον','comparativo neutro de μικρός','más pequeño (que) / el más pequeño'],
+      ['ὄν','part. pres. de εἰμί, nom. neutro','siendo, por ser'],
+      ['πάντων τῶν σπερμάτων','gen. pl. neutro — genitivo de comparación','de todas las semillas'],
+    ]
+  },
+  vocab:[
+    {g:'κόκκος, -ου',   t:'grano, semilla',                   h:'Mc 4:31',   f:'Diminutivo de tamaño — clave en la parábola'},
+    {g:'σίναπι, -εως',  t:'mostaza (planta)',                  h:'Mc 4:31',   f:'3ª declinación — el genitivo revela la raíz'},
+    {g:'σπείρω',        t:'sembrar',                          h:'Mc 4:31',   f:'Aoristo: ἔσπειρα — imagen agrícola central'},
+    {g:'μικρός, -ά, -όν',t:'pequeño',                        h:'Mc 4:31',   f:'μικρότερον = comparativo: "más pequeño"'},
+    {g:'σπέρμα, -ατος', t:'semilla (3ª decl. neutro)',         h:'Mc 4:31',   f:'Raíz de "esperma" — genitivo: σπέρματος'},
+    {g:'κλάδος, -ου',   t:'rama',                             h:'Mc 4:32',   f:'Las ramas donde anidan las aves'},
+    {g:'σκιά, -ᾶς',     t:'sombra',                          h:'Mc 4:32',   f:'La sombra del árbol = protección del reino'},
+    {g:'λάχανον, -ου',  t:'planta, hortaliza',                h:'Mc 4:32',   f:'"más grande que todas las hortalizas"'},
+  ],
+  quiz:[
+    {q:'κόκκῳ en Mc 4:31 es caso...', opts:['nominativo','acusativo','dativo','genitivo'], ans:2},
+    {q:'σπαρῇ es aoristo subjuntivo...', opts:['activo','medio','pasivo','deponente'], ans:2},
+    {q:'μικρότερον es...', opts:['superlativo','comparativo','positivo','adverbio'], ans:1},
+    {q:'ὄν es participio de...', opts:['λύω','ἔρχομαι','εἰμί','γίνομαι'], ans:2},
+    {q:'σπέρματος es genitivo de...', opts:['σπέρμα','σπείρω','σπερμάτων','σπέρματα'], ans:0},
+    {q:'τῆς γῆς es caso...', opts:['dativo','acusativo','nominativo','genitivo'], ans:3},
+    {q:'ὅταν va siempre con modo...', opts:['indicativo','imperativo','subjuntivo','infinitivo'], ans:2},
+    {q:'Según el análisis, μικρότερον puede leerse como...', opts:['solo superlativo absoluto','solo comparativo','comparativo o superlativo relativo','ninguna de las dos'], ans:2},
+  ],
+  verse:{grk:'ὡς κόκκῳ σινάπεως... μικρότερον ὂν πάντων τῶν σπερμάτων τῶν ἐπὶ τῆς γῆς', esp:'"Como a un grano de mostaza... por ser más pequeño que todas las semillas de la tierra" — Marcos 4:31',
+    words:[['ὡς κόκκῳ','como a un grano (dativo comparativo)'],['σινάπεως','de mostaza (3ª decl. gen.)'],['μικρότερον','más pequeño (comparativo — o "el más pequeño", superlativo relativo)'],['ὄν','siendo (part. pres. de εἰμί — concuerda con κόκκῳ)'],['πάντων τῶν σπερμάτων','de todas las semillas (genitivo de comparación)'],['τῶν ἐπὶ τῆς γῆς','las que están en la tierra (cláusula relativa con artículo)']],
+    insight:'Y así llegamos al versículo que originó este curso. μικρότερον es comparativo, no superlativo estricto. Combinado con el participio ὄν y el genitivo de comparación πάντων, puede leerse "siendo el más pequeño de todas" o "siendo más pequeño que todas" — y ambas lecturas son gramaticalmente válidas. Ahora lo sabes desde el griego, no desde la traducción.'
+  }
+},
+// ── DÍA 27 ──────────────────────────────────────────────────
+{
+  day:27, title:"Vocabulario acumulado: las 120 palabras esenciales", subtitle:"Repaso completo del léxico de alta frecuencia",
+  tips:[
+    {t:'<strong>Con 120 palabras</strong> del NT (las de mayor frecuencia) comprendes aproximadamente el 80% de todas las palabras del texto del NT por pura frecuencia de aparición. Este día es de consolidación.'},
+    {t:'<strong>Categorías:</strong> sustantivos teológicos (θεός, Χριστός, πνεῦμα, ζωή), verbos narrativos (λέγω, ἔρχομαι, γίνομαι), artículos y pronombres, preposiciones y conjunciones. Cada categoría tiene su lógica propia.'},
+    {t:'<strong>Método de repaso:</strong> para cada palabra, visualiza inmediatamente el versículo asociado. La palabra no vive aislada — vive en su contexto bíblico. Esa imagen es más duradera que cualquier flashcard.'},
+  ],
+  extra:{type:'table', title:'Vocabulario de alta frecuencia — categorías',
+    headers:['Categoría','Ejemplos','Frecuencia total aprox.'],
+    rows:[
+      ['Artículo','ὁ / ἡ / τό','19.870 ocurrencias'],
+      ['Conjunciones','καί, δέ, γάρ, ἀλλά, ὅτι, ἵνα','~16.000 ocurrencias'],
+      ['Pronombres','αὐτός, ἐγώ, σύ, ἡμεῖς, ὅς','~9.000 ocurrencias'],
+      ['Preposiciones','ἐν, εἰς, ἐκ, πρός, διά, κατά','~9.500 ocurrencias'],
+      ['Verbos esenciales','εἰμί, λέγω, γίνομαι, ἔρχομαι, ἔχω','~11.000 ocurrencias'],
+      ['Sust. teológicos','θεός, κύριος, Χριστός, πνεῦμα, ζωή','~5.500 ocurrencias'],
+      ['Verbos de acción','πιστεύω, ἀγαπάω, ἀκούω, βλέπω, γινώσκω','~2.800 ocurrencias'],
+      ['Partículas','οὖν, μέν, ἄρα, ἤδη, νῦν, τότε','~2.200 ocurrencias'],
+    ]
+  },
+  vocab:[
+    {g:'κύριος, -ου',   t:'Señor, amo, dueño',               h:'Lc 1:43',    f:'717 veces — el título más frecuente para Jesús'},
+    {g:'ἀλήθεια, -ας',  t:'verdad (1ª decl.)',                h:'Jn 14:6',    f:'109 veces en el NT'},
+    {g:'ἁμαρτωλός,-οῦ', t:'pecador (sustantivo/adjetivo)',    h:'Lc 15:2',    f:'"Este a los pecadores recibe"'},
+    {g:'δικαιοσύνη,-ης', t:'justicia, rectitud',              h:'Ro 1:17',    f:'92 veces — central en Pablo'},
+    {g:'ἐντολή, -ῆς',   t:'mandamiento, orden',              h:'Jn 13:34',   f:'"Un mandamiento nuevo os doy"'},
+    {g:'μαρτυρία, -ας',  t:'testimonio',                      h:'Jn 1:7',     f:'37 veces — clave en el evangelio de Juan'},
+    {g:'σωτηρία, -ας',   t:'salvación',                       h:'Lc 1:77',    f:'46 veces en el NT'},
+    {g:'παράκλητος,-ου', t:'Paráclito, consolador, abogado',  h:'Jn 14:16',   f:'"Enviaré otro Paráclito"'},
+  ],
+  quiz:[
+    {q:'κύριος = ...', opts:['Dios','Señor/amo','siervo','profeta'], ans:1},
+    {q:'δικαιοσύνη = ...', opts:['fe','amor','justicia','esperanza'], ans:2},
+    {q:'παράκλητος en Juan 14:16 es...', opts:['ángel','adversario','consolador/abogado','sumo sacerdote'], ans:2},
+    {q:'σωτηρία = ...', opts:['redención','salvación','perdón','gracia'], ans:1},
+    {q:'ἐντολή = ...', opts:['promesa','mandamiento','pregunta','relato'], ans:1},
+    {q:'μαρτυρία = ...', opts:['mártir','muerte','testimonio','milagro'], ans:2},
+    {q:'120 palabras cubren aprox. ___% del NT por frecuencia', opts:['30%','50%','80%','95%'], ans:2},
+    {q:'ἁμαρτωλός = ...', opts:['sacerdote','escriba','fariseo','pecador'], ans:3},
+  ],
+  verse:{grk:'ἐγώ εἰμι ἡ ὁδὸς καὶ ἡ ἀλήθεια καὶ ἡ ζωή', esp:'"Yo soy el camino, la verdad y la vida" — Juan 14:6',
+    words:[['ἐγώ εἰμι','yo soy (pronombre enfático + cópula)'],['ἡ ὁδός','el camino (1ª decl. fem. con art.)'],['ἡ ἀλήθεια','la verdad (1ª decl. fem.)'],['ἡ ζωή','la vida (1ª decl. fem.)']],
+    insight:'Los tres sustantivos son de 1ª declinación femenina con artículo definido. Ese artículo definido ἡ es crucial: no "un camino" sino "el camino". Las 120 palabras esenciales aparecen todas aquí: ἐγώ, εἰμι, ὁ/ἡ, καί. Ya las conoces todas.'
+  }
+},
+// ── DÍA 28 ──────────────────────────────────────────────────
+{
+  day:28, title:"Lectura guiada: Juan 1:1-14", subtitle:"El prólogo completo del cuarto evangelio",
+  tips:[
+    {t:'<strong>Juan 1:1-14</strong> es el texto más denso teológica y gramaticalmente del NT. Contiene: imperfecto (ἦν), aoristo (ἐγένετο), perfecto implícito, participios sustantivados, pronombres, preposiciones, y 3ª declinación.'},
+    {t:'<strong>La estructura del prólogo</strong> es quiástica: A (el Logos con Dios) → B (creación) → C (vida y luz) → D (Juan Bautista) → C᾿ (luz rechazada) → B᾿ (nueva creación) → A᾿ (el Logos encarnado). Reconocer la estructura ayuda a leer el griego.'},
+    {t:'<strong>Palabras clave que ya conoces:</strong> ἀρχή, Λόγος, θεός, ζωή, φῶς, σκοτία, κόσμος, ἴδιοι, ἔλαβον, τέκνα, πιστεύουσιν, σάρξ, δόξα, χάρις, ἀλήθεια. ¡Son casi todo el vocabulario del prólogo!'},
+  ],
+  extra:{type:'table', title:'Juan 1:1-14 — estructura y verbos clave',
+    headers:['Versículo','Texto griego (clave)','Análisis verbal','Teología'],
+    rows:[
+      ['1:1a','Ἐν ἀρχῇ ἦν ὁ Λόγος','ἦν = imperf. de εἰμί','Existencia eterna del Logos'],
+      ['1:1b','ὁ Λόγος ἦν πρὸς τὸν Θεόν','ἦν = imperf.','Distinción dentro de la divinidad'],
+      ['1:1c','Θεὸς ἦν ὁ Λόγος','ἦν — Θεός sin art.','Naturaleza divina del Logos'],
+      ['1:3','πάντα δι᾿ αὐτοῦ ἐγένετο','ἐγένετο = aoristo','Creación mediada por el Logos'],
+      ['1:4','ἐν αὐτῷ ζωὴ ἦν','ἦν = imperf.','El Logos fuente de vida'],
+      ['1:9','ἦν τὸ φῶς τὸ ἀληθινόν','ἦν + part. ἐρχόμενον','La luz verdadera viene al mundo'],
+      ['1:11','εἰς τὰ ἴδια ἦλθεν, οἱ δὲ ἴδιοι οὐ παρέλαβον','ἦλθεν / παρέλαβον: aoristos','El rechazo — el mayor δέ del evangelio'],
+      ['1:14','ὁ Λόγος σὰρξ ἐγένετο','ἐγένετο = aoristo','El clímax: la encarnación'],
+    ]
+  },
+  vocab:[
+    {g:'σκοτία, -ας',    t:'oscuridad, tinieblas',             h:'Jn 1:5',    f:'Opuesta a φῶς — el gran conflicto'},
+    {g:'κατέλαβεν',      t:'comprendió / venció (aoristo)',    h:'Jn 1:5',    f:'Ambigüedad deliberada en griego'},
+    {g:'μαρτυρία',       t:'testimonio',                       h:'Jn 1:7',    f:'La función de Juan Bautista'},
+    {g:'ἀληθινός,-ή,-όν',t:'verdadero, genuino',               h:'Jn 1:9',    f:'Diferente a ἀληθής (verdadero/veraz)'},
+    {g:'ἐξουσία, -ας',   t:'autoridad, derecho, poder',        h:'Jn 1:12',   f:'"Les dio autoridad/derecho de ser hijos"'},
+    {g:'μονογενής,-ές',   t:'unigénito, único en su clase',     h:'Jn 1:14',   f:'El Hijo como único de su especie'},
+    {g:'πλήρης,-ες',     t:'lleno, pleno (3ª decl. adj.)',     h:'Jn 1:14',   f:'"lleno de gracia y de verdad"'},
+    {g:'ἐσκήνωσεν',      t:'habitó (aoristo de σκηνόω)',       h:'Jn 1:14',   f:'Puso su tienda — eco del tabernáculo'},
+  ],
+  quiz:[
+    {q:'En Jn 1:1 ἦν aparece...', opts:['1 vez','2 veces','3 veces','4 veces'], ans:2},
+    {q:'ἐγένετο en Jn 1:3 y 1:14 es tiempo...', opts:['imperfecto','presente','aoristo','futuro'], ans:2},
+    {q:'Jn 1:11 tiene dos aoristos: ἦλθεν y...', opts:['ἔλαβεν','παρέλαβεν','εἶπεν','ἤκουσεν'], ans:1},
+    {q:'σκοτία = ...', opts:['luz','vida','tinieblas','agua'], ans:2},
+    {q:'ἐξουσία en Jn 1:12 significa...', opts:['gracia','autoridad/derecho','amor','gloria'], ans:1},
+    {q:'ἐσκήνωσεν evoca en el AT...', opts:['el templo de Salomón','el tabernáculo del Éxodo','el arca de Noé','el jardín del Edén'], ans:1},
+    {q:'πλήρης pertenece a la...', opts:['1ª declinación','2ª declinación','3ª declinación','ninguna'], ans:2},
+    {q:'La estructura del prólogo de Juan es...', opts:['cronológica','alegórica','quiástica','silogística'], ans:2},
+  ],
+  verse:{grk:'Καὶ ὁ Λόγος σὰρξ ἐγένετο καὶ ἐσκήνωσεν ἐν ἡμῖν, καὶ ἐθεασάμεθα τὴν δόξαν αὐτοῦ', esp:'"Y el Verbo se hizo carne y habitó entre nosotros, y vimos su gloria" — Juan 1:14',
+    words:[['ὁ Λόγος','el Verbo (sujeto — nominativo)'],['σάρξ','carne (predicado sin artículo — naturaleza)'],['ἐγένετο','se hizo (aoristo — acto puntual: la encarnación)'],['ἐσκήνωσεν','habitó/puso su tienda (aoristo de σκηνόω)'],['ἐν ἡμῖν','entre nosotros (dativo)'],['ἐθεασάμεθα','vimos / contemplamos (aor. deponente 1ª pl.)'],['τὴν δόξαν','la gloria (acusativo)'],['αὐτοῦ','de él (genitivo)']],
+    insight:'ἐθεασάμεθα es un deponente (forma media/pasiva, significado activo): "nosotros mismos contemplamos". El evangelista no dice "alguien vio" sino "nosotros, testigos oculares, contemplamos". La gramática es la garantía del testimonio.'
+  }
+},
+// ── DÍA 29 ──────────────────────────────────────────────────
+{
+  day:29, title:"Herramientas digitales para el estudio del griego", subtitle:"Cómo seguir aprendiendo con los mejores recursos",
+  tips:[
+    {t:'<strong>Blue Letter Bible (blueletterbible.org)</strong> — gratuito. En cualquier versículo haz clic en la "G" azul y verás el interlineal griego con número Strong, parseo gramatical y todas las ocurrencias de la palabra en el NT.'},
+    {t:'<strong>Logos Bible Software</strong> — el más completo y el más caro. Tiene el morphological Greek NT con parseo automático, léxicos completos (BDAG, Liddell-Scott), y comentarios académicos. La versión básica es gratuita.'},
+    {t:'<strong>Accordance Bible Software</strong> — alternativa a Logos, muy popular en círculos académicos. Excelente en Mac. También tiene versión gratuita básica.'},
+    {t:'<strong>Bible Hub (biblehub.com/interlinear)</strong> — gratuito. Interlineal con parseo. Ideal para consulta rápida desde el móvil. Para cada palabra muestra: forma léxica, transliteración, parseo y Strong.'},
+    {t:'<strong>Anki (ankiweb.net)</strong> — el mejor sistema de flashcards con repetición espaciada. Descarga el mazo "Greek NT Vocabulary" y estudia 10 palabras al día. En un año tendrás 300+ palabras del NT consolidadas.'},
+  ],
+  extra:{type:'table', title:'Guía de recursos por nivel y necesidad',
+    headers:['Recurso','Coste','Mejor para','Plataforma'],
+    rows:[
+      ['Blue Letter Bible','Gratuito','Parseo rápido, concordancias','Web / App'],
+      ['Bible Hub Interlinear','Gratuito','Lectura interlineal versículo a versículo','Web / App'],
+      ['Anki + mazo NT griego','Gratuito','Vocabulario con repetición espaciada','App / Web'],
+      ['Logos Basic','Gratuito','Léxicos, comentarios, búsqueda avanzada','Desktop / App'],
+      ['Accordance','Básico gratis','Análisis académico, Mac preferido','Desktop / App'],
+      ['Mounce Basics of Biblical Greek','Libro ~30€','El manual estándar universitario','Libro + Web'],
+      ['The Lexham Greek-English Interlinear NT','Gratuito en Logos','Lectura continua del NT','Desktop'],
+      ['YouVersion + interlineal','Gratuito','Lectura devocional con referencia griega','App móvil'],
+    ]
+  },
+  vocab:[
+    {g:'λεξικόν',      t:'léxico, diccionario',               h:'BDAG es el léxico estándar del NT griego', f:'Del griego: λέξις (palabra) + -ικόν'},
+    {g:'ἑρμηνεία',     t:'interpretación, traducción',        h:'1 Co 12:10 — "don de interpretación"',    f:'Raíz de "hermenéutica"'},
+    {g:'κανών, -όνος',  t:'canon, regla, norma',               h:'Ga 6:16',                                  f:'Raíz de "canon bíblico"'},
+    {g:'κριτικός',     t:'crítico, que juzga y discierne',    h:'Heb 4:12 — "κριτικὸς ἐνθυμήσεων"',       f:'Raíz de "crítica textual"'},
+    {g:'παπύρος',      t:'papiro',                            h:'Los MSS más antiguos del NT',              f:'El material de escritura del NT'},
+    {g:'κώδιξ',        t:'códice (libro encuadernado)',        h:'Vaticanus, Sinaiticus, Alexandrinus',     f:'El formato que reemplazó al rollo'},
+    {g:'ἀντίγραφον',   t:'copia, manuscrito',                 h:'Los 5.800 mss griegos del NT',            f:'De ἀντί (contra/copia) + γράφω'},
+    {g:'κριτικὴ ἔκδοσις',t:'edición crítica',                h:'NA28 / UBS5 — el texto griego estándar',  f:'Nestle-Aland 28ª edición'},
+  ],
+  quiz:[
+    {q:'¿Qué herramienta gratuita muestra el parseo de cada palabra del NT?', opts:['Wikipedia','Blue Letter Bible','Google Translate','DeepL'], ans:1},
+    {q:'Anki sirve para...', opts:['leer el NT en voz alta','flashcards con repetición espaciada','búsqueda de concordancias','análisis textual'], ans:1},
+    {q:'NA28 / UBS5 son...', opts:['léxicos del NT','ediciones críticas del texto griego','software de estudio','comentarios bíblicos'], ans:1},
+    {q:'BDAG es...', opts:['un software','una Biblia','el léxico estándar del NT griego','una concordancia'], ans:2},
+    {q:'El Códice Vaticanus es un...', opts:['papiro','pergamino','códice','rollo'], ans:2},
+    {q:'ἑρμηνεία es raíz de...', opts:['etimología','hermenéutica','herramienta','herejía'], ans:1},
+    {q:'Bible Hub Interlinear está disponible en...', opts:['solo desktop','solo app','web y app, gratuito','solo de pago'], ans:2},
+    {q:'κανών significa originalmente...', opts:['libro','regla/norma','verdad','colección'], ans:1},
+  ],
+  verse:{grk:'πᾶσα γραφὴ θεόπνευστος καὶ ὠφέλιμος πρὸς διδασκαλίαν', esp:'"Toda Escritura es inspirada por Dios y útil para enseñar" — 2 Timoteo 3:16',
+    words:[['πᾶσα γραφή','toda Escritura (fem. nom.)'],['θεόπνευστος','inspirada por Dios (θεός + πνεῦμα + -τος)'],['καί','y'],['ὠφέλιμος','útil, provechosa'],['πρός','para (+ acusativo)'],['διδασκαλίαν','enseñanza (acusativo)']],
+    insight:'θεόπνευστος: una sola palabra compuesta que solo aparece aquí en todo el NT. θεός (Dios) + πνεῦμα (espíritu/aliento) + sufijo verbal -τος = "soplada por Dios". Todo el vocabulario que aprendiste en 29 días está dentro de esta única palabra teológica.'
+  }
+},
+// ── DÍA 30 ──────────────────────────────────────────────────
+{
+  day:30, title:"Evaluación final y próximos pasos", subtitle:"Lectura libre de Juan 1:1-14 · Celebra el logro",
+  tips:[
+    {t:'<strong>¡Felicidades!</strong> En 30 días has aprendido el alfabeto griego completo, los tres sistemas de declinación, cinco tiempos verbales (presente, imperfecto, aoristo, futuro, perfecto), los modos indicativo, subjuntivo e imperativo, los participios, los pronombres, las preposiciones y los verbos deponentes.'},
+    {t:'<strong>¿Qué puedes hacer ahora?</strong> Leer el NT griego con un léxico abierto y un interlineal al lado. Identificar tiempos, casos y modos. Entender debates exegéticos que dependen del griego. Usar Blue Letter Bible con fluidez.'},
+    {t:'<strong>Próximos pasos recomendados:</strong> (1) Mounce "Basics of Biblical Greek" — el manual universitario estándar para profundizar. (2) Leer Juan completo en griego, un párrafo al día, con léxico. (3) Anki: 10 palabras nuevas al día. En 6 meses tendrás 300+ palabras memorizadas.'},
+    {t:'<strong>La meta nunca fue saber todo el griego.</strong> La meta fue abrir la puerta. Ya está abierta. Cada versículo que leas en griego a partir de hoy será una inversión que se acumula. El texto bíblico te lo devolverá con creces.'},
+  ],
+  extra:{type:'table', title:'Lo que dominaste en 30 días — resumen',
+    headers:['Área','Contenido dominado','Aplicación directa'],
+    rows:[
+      ['Alfabeto','24 letras, diptongos, diacríticos','Leer cualquier texto griego en voz alta'],
+      ['Declinación','1ª, 2ª y 3ª declinación — 5 casos','Identificar sujeto, objeto, genitivo en cualquier oración'],
+      ['Artículo','ὁ/ἡ/τό en todos los casos','La llave de toda la gramática nominal'],
+      ['Verbos — tiempos','Presente, Imperfecto, Aoristo, Futuro, Perfecto','Narración, descripción, promesa, resultado permanente'],
+      ['Verbos — modos','Indicativo, Subjuntivo, Imperativo','Hechos, posibilidad, mandatos'],
+      ['Participios','Presente activo sustantivado y atributivo','ὁ πιστεύων, ὁ ἐρχόμενος'],
+      ['Pronombres','ἐγώ, σύ, αὐτός + declinaciones','Sujetos y objetos del discurso'],
+      ['Preposiciones','8 preposiciones clave + casos','ἐν Χριστῷ, εἰς αὐτόν, διὰ πίστεως'],
+      ['Vocabulario','~120 palabras de alta frecuencia','~80% cobertura del NT por frecuencia'],
+      ['Lectura','Juan 1, 3, 4; Marcos 1, 4; Romanos 1, 8','Análisis gramatical de textos reales'],
+    ]
+  },
+  vocab:[
+    {g:'τελέω',         t:'completar, consumar, cumplir',     h:'Jn 19:30 — τετέλεσται',              f:'El verbo del logro — para ti también hoy'},
+    {g:'προκόπτω',      t:'progresar, avanzar',               h:'Ga 1:14 — "προέκοπτον ἐν τῷ Ἰουδαϊσμῷ"', f:'Sigue avanzando'},
+    {g:'ὑπομονή, -ῆς',  t:'perseverancia, paciencia activa',  h:'Heb 12:1 — "δι᾿ ὑπομονῆς"',          f:'La virtud del estudiante de griego'},
+    {g:'παιδεία, -ας',  t:'educación, formación, disciplina', h:'2 Ti 3:16',                            f:'Lo que has practicado estos 30 días'},
+    {g:'ἀνακαίνωσις,-εως',t:'renovación (3ª decl.)',          h:'Ro 12:2 — "ἀνακαινώσει τοῦ νοός"',   f:'"Renovación de la mente" — tu mente griega'},
+    {g:'νοῦς, νοός',    t:'mente, entendimiento',             h:'Ro 12:2',                              f:'La mente que ahora lee griego'},
+    {g:'σοφία, -ας',    t:'sabiduría',                        h:'1 Co 1:24 — "Χριστὸν θεοῦ σοφίαν"',  f:'El griego es camino hacia ella'},
+    {g:'χαίρετε',       t:'¡alegraos! ¡estad gozosos! (imp.)',h:'Fil 4:4 — "Χαίρετε ἐν κυρίῳ πάντοτε"',f:'La palabra de despedida más bella'},
+  ],
+  quiz:[
+    {q:'τετέλεσται (Jn 19:30) es tiempo...', opts:['aoristo','presente','futuro','perfecto'], ans:3},
+    {q:'ὑπομονή significa...', opts:['fe','esperanza','perseverancia','amor'], ans:2},
+    {q:'¿Cuántos casos tiene la gramática griega?', opts:['3','4','5','6'], ans:2},
+    {q:'120 palabras cubren aprox. ___% del NT por frecuencia', opts:['40%','60%','80%','95%'], ans:2},
+    {q:'γέγραπται es perfecto de...', opts:['γίνομαι','γράφω','γινώσκω','γεννάω'], ans:1},
+    {q:'El participio ὁ πιστεύων significa...', opts:['haberlo creído','el que cree','creyó','creerá'], ans:1},
+    {q:'χαίρετε es un...', opts:['subjuntivo','participio','imperativo','infinitivo'], ans:2},
+    {q:'ἀνακαίνωσις τοῦ νοός (Ro 12:2) = ...', opts:['fe de la mente','renovación de la mente','conocimiento de la mente','amor de la mente'], ans:1},
+    {q:'El manual universitario estándar de griego bíblico es de...', opts:['Blass-Debrunner','Wallace','Mounce','Porter'], ans:2},
+    {q:'Después de estos 30 días, el paso 1 recomendado es...', opts:['aprender hebreo','leer Juan completo con léxico','memorizar toda la morfología','estudiar latín primero'], ans:1},
+  ],
+  verse:{grk:'Χαίρετε ἐν κυρίῳ πάντοτε· πάλιν ἐρῶ, χαίρετε', esp:'"Alegraos en el Señor siempre; de nuevo digo: ¡alegraos!" — Filipenses 4:4',
+    words:[['Χαίρετε','¡alegraos! (pres. imp. 2ª pl. — acción continua)'],['ἐν κυρίῳ','en el Señor (ἐν + dativo)'],['πάντοτε','siempre (adverbio)'],['πάλιν','de nuevo, otra vez'],['ἐρῶ','diré (futuro de λέγω — irregular)'],['χαίρετε','¡alegraos! (repetido con énfasis)']],
+    insight:'Pablo repite el imperativo χαίρετε dos veces — y la segunda vez lo anuncia con un futuro: "diré de nuevo". El griego captura la insistencia gozosa que ninguna traducción termina de transmitir del todo. Ahora tú lo lees como Pablo lo escribió. Χαίρετε — ¡alegraos! Has terminado los 30 días.'
+  }
+}
+];
+
+// ── BUILD UI ─────────────────────────────────────────────────
+const lnav = document.getElementById('lnav');
+const container = document.getElementById('lessons-container');
+
+LESSONS.forEach((lesson, idx) => {
+  const btn = document.createElement('button');
+  btn.className = 'lnav-btn' + (idx === 0 ? ' active' : '');
+  btn.textContent = `Día ${lesson.day}`;
+  btn.onclick = () => showLesson(idx);
+  lnav.appendChild(btn);
+  const panel = document.createElement('div');
+  panel.className = 'lesson-panel' + (idx === 0 ? ' active' : '');
+  panel.id = `lesson-${idx}`;
+  panel.innerHTML = buildLesson(lesson, idx);
+  container.appendChild(panel);
+});
+
+function showLesson(idx) {
+  document.querySelectorAll('.lnav-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  document.querySelectorAll('.lesson-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  initQuiz(idx);
+}
+
+function showInnerTab(lIdx, tabName) {
+  const panel = document.getElementById(`lesson-${lIdx}`);
+  panel.querySelectorAll('.itab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
+  panel.querySelectorAll('.itab-panel').forEach(p => p.classList.toggle('active', p.dataset.tab === tabName));
+}
+
+function buildLesson(lesson, idx) {
+  const tabKeys = ['leccion','vocab','quiz','verse'];
+  const tabLabels = ['📖 Lección','📚 Vocabulario','✏️ Práctica','✝️ Versículo'];
+
+  let html = `
+  <div style="text-align:center;margin-bottom:14px;">
+    <div style="font-family:'EB Garamond',serif;font-size:1.5rem;color:var(--azure);">Día ${lesson.day} — ${lesson.title}</div>
+    <div style="font-size:12px;color:#888;margin-top:2px;">${lesson.subtitle}</div>
+    <div class="prog-bar" style="max-width:300px;margin:8px auto 3px;"><div class="prog-fill" style="width:${(lesson.day/30*100).toFixed(1)}%"></div></div>
+    <div class="prog-lbl">Día ${lesson.day} de 30${lesson.day===30?' — ¡Último día! 🎉':''}</div>
+  </div>
+  <div class="inner-tabs">
+    ${tabLabels.map((t,i)=>`<div class="itab${i===0?' active':''}" data-tab="${tabKeys[i]}" onclick="showInnerTab(${idx},'${tabKeys[i]}')">${t}</div>`).join('')}
+  </div>`;
+
+  // LECCIÓN
+  html += `<div class="itab-panel active" data-tab="leccion">`;
+
+  if (lesson.day === 30) {
+    html += `<div class="finish-banner"><h2>🏆 ¡30 días completados!</h2><p>Has recorrido el camino del alfabeto hasta la lectura libre del Nuevo Testamento en griego koiné. Eso es un logro real.</p></div>`;
+  }
+
+  if (lesson.tips && lesson.tips.length) {
+    html += `<div class="card"><h3><span>💡</span> Claves del día</h3>`;
+    lesson.tips.forEach(t => { html += `<div class="tip">${t.t}</div>`; });
+    html += `</div>`;
+  }
+
+  if (lesson.extra) {
+    const e = lesson.extra;
+    if (e.type === 'paradigm') {
+      html += `<div class="card"><h3><span>📊</span> ${e.title}</h3><div class="paradigm">
+      <div class="para-row"><div class="para-lbl para-head">Persona</div><div class="para-grk para-head">Griego</div><div class="para-esp para-head">Español</div></div>`;
+      e.rows.forEach(r => { html += `<div class="para-row"><div class="para-lbl">${r.lbl}</div><div class="para-grk">${r.grk}</div><div class="para-esp">${r.esp}</div></div>`; });
+      html += `</div>`;
+      if (e.note) html += `<div class="tip tip-gold" style="margin-top:10px;"><strong>Nota:</strong> ${e.note}</div>`;
+      html += `</div>`;
+    } else if (e.type === 'table') {
+      html += `<div class="card"><h3><span>📊</span> ${e.title}</h3>
+      <table class="gtable"><thead><tr>${e.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+      e.rows.forEach(r => { html += `<tr>${r.map((c,ci)=>`<td${ci===0?' style="font-weight:600"':''}>${c}</td>`).join('')}</tr>`; });
+      html += `</tbody></table></div>`;
+    } else if (e.type === 'conj') {
+      html += `<div class="card"><h3><span>📊</span> ${e.title}</h3><div class="conj-grid">`;
+      e.cols.forEach(col => {
+        html += `<div class="conj-box"><h4>${col.title}</h4>`;
+        col.rows.forEach(r => { html += `<div class="conj-line"><span class="cg">${r[0]}</span><span class="ce">${r[1]}</span></div>`; });
+        html += `</div>`;
+      });
+      html += `</div></div>`;
+    }
+  }
+  html += `</div>`;
+
+  // VOCAB
+  html += `<div class="itab-panel" data-tab="vocab"><div class="card"><h3><span>📚</span> Vocabulario del día</h3>
+  <p style="font-size:12px;color:#888;margin-bottom:8px;">Toca cada palabra para ver más información.</p><ul class="vlist">`;
+  lesson.vocab.forEach(v => {
+    html += `<li class="vitem" onclick="toggleVocab(this)">
+      <div class="vgrk">${v.g}</div>
+      <div><div class="vtrans">${v.t}</div>
+      <div class="vhint" style="display:none;">${v.h} — <em>${v.f}</em></div>
+      <div class="vmore">↓ más info</div></div></li>`;
+  });
+  html += `</ul></div></div>`;
+
+  // QUIZ
+  html += `<div class="itab-panel" data-tab="quiz"><div class="card"><h3><span>✏️</span> Práctica — Día ${lesson.day}</h3>
+  <div id="quiz-${idx}"></div><div id="score-${idx}" class="qscore" style="display:none;"></div></div></div>`;
+
+  // VERSE
+  const v = lesson.verse;
+  html += `<div class="itab-panel" data-tab="verse">
+  <div class="vblock">
+    <div class="vgrk-big">${v.grk}</div>
+    <div class="vtrans-small">${v.esp}</div>
+    <div class="vwords">`;
+  v.words.forEach(w => { html += `<div class="vrow"><span class="vwg">${w[0]}</span><span class="vws">${w[1]}</span></div>`; });
+  html += `</div></div>
+  <div class="card"><h3><span>🔍</span> El detalle que las traducciones pierden</h3><p>${v.insight}</p></div>
+  </div>`;
+
+  return html;
+}
+
+// ── QUIZ ENGINE ──────────────────────────────────────────────
+const quizState = {};
+function initQuiz(idx) {
+  if (quizState[idx]) return;
+  quizState[idx] = { pos:0, score:0, data:[...LESSONS[idx].quiz].sort(()=>Math.random()-.5) };
+  renderQuiz(idx);
+}
+function renderQuiz(idx) {
+  const el = document.getElementById(`quiz-${idx}`);
+  const sc = document.getElementById(`score-${idx}`);
+  const s = quizState[idx];
+  if (!s) return;
+  if (s.pos >= s.data.length) {
+    el.style.display='none'; sc.style.display='block';
+    const pct = Math.round(s.score/s.data.length*100);
+    const isLast = LESSONS[idx].day === 30;
+    sc.innerHTML = `${pct>=80?'🎉':'📖'} <strong>${s.score}/${s.data.length}</strong> correctas (${pct}%)<br>
+    <span style="font-size:13px;color:#888;">${isLast ? '¡Has completado los 30 días! Χαίρετε 🏆' : pct>=80?'¡Excelente! Sigue adelante.':'Repasa los conceptos antes del siguiente día.'}</span>
+    <br><button class="qbtn" style="margin-top:10px;" onclick="resetQuiz(${idx})">↺ Repetir</button>`;
+    return;
+  }
+  const q = s.data[s.pos];
+  el.innerHTML = `<div class="qcard">
+    <div style="font-size:11px;color:#aaa;margin-bottom:6px;">${s.pos+1} / ${s.data.length}</div>
+    <div class="qbig">${q.q}</div>
+    <div class="qgrid">${q.opts.map((o,i)=>`<button class="qbtn" onclick="checkQ(${idx},this,${i},${q.ans})">${o}</button>`).join('')}</div>
+    <div class="qfb" id="qfb-${idx}"></div>
+  </div>`;
+}
+function checkQ(idx, btn, chosen, correct) {
+  const s = quizState[idx];
+  btn.parentElement.querySelectorAll('.qbtn').forEach(b => b.disabled=true);
+  const fb = document.getElementById(`qfb-${idx}`);
+  if (chosen===correct) { btn.classList.add('ok'); fb.style.color='var(--grn)'; fb.textContent='✓ ¡Correcto!'; s.score++; }
+  else { btn.classList.add('no'); btn.parentElement.querySelectorAll('.qbtn')[correct].classList.add('ok'); fb.style.color='var(--red)'; fb.textContent=`✗ Era: ${s.data[s.pos].opts[correct]}`; }
+  setTimeout(()=>{ s.pos++; renderQuiz(idx); }, 1300);
+}
+function resetQuiz(idx) {
+  quizState[idx] = { pos:0, score:0, data:[...LESSONS[idx].quiz].sort(()=>Math.random()-.5) };
+  document.getElementById(`quiz-${idx}`).style.display='block';
+  document.getElementById(`score-${idx}`).style.display='none';
+  renderQuiz(idx);
+}
+function toggleVocab(el) {
+  const h=el.querySelector('.vhint'), m=el.querySelector('.vmore');
+  if (h.style.display==='none'){ h.style.display='block'; m.style.display='none'; }
+  else { h.style.display='none'; m.style.display='block'; }
+}
+initQuiz(0);
+</script>
+</body>
+</html>

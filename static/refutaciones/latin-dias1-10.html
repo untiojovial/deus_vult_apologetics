@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latín — Introducción + Días 1–10</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap');
+:root{--marble:#f8f5f0;--ink:#1a1410;--ink2:#3d2e1e;--gold:#8b6914;--gold-l:#fdf6e3;--red:#8b1a1a;--red-l:#fae8e8;--blue:#1a2a5e;--blue-l:#e8ecf8;--olive:#3a4a1a;--olive-l:#e8eed8;--stone:#6b5a45;--night:#120e08;--bdr:#c8b88a;--wht:#fff;--purple:#4a1a6b;--purple-l:#f0e8f8;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--marble);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;min-height:100vh}
+header{background:linear-gradient(160deg,#120e08 0%,#1e1a08 50%,#1a0808 100%);color:#f8f5f0;padding:24px 16px 20px;text-align:center;border-bottom:3px solid var(--gold);position:relative;overflow:hidden}
+header::before{content:'SPQR';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'EB Garamond',serif;font-size:10rem;color:rgba(255,255,255,.03);pointer-events:none;white-space:nowrap;font-weight:700}
+header h1{font-family:'EB Garamond',serif;font-size:2rem;letter-spacing:.04em;margin-bottom:4px;position:relative}
+header .lat-title{font-family:'EB Garamond',serif;font-size:1.5rem;font-style:italic;color:var(--gold);margin-bottom:6px;position:relative}
+header .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;color:#c8b870;position:relative}
+header .badges{margin-top:8px;position:relative}
+.badge-lat{display:inline-block;background:var(--gold);color:var(--night);border-radius:12px;font-size:11px;font-weight:700;padding:2px 10px;margin:0 3px}
+.lesson-nav{display:flex;overflow-x:auto;background:#ede5d0;border-bottom:2px solid var(--bdr);gap:2px;padding:4px 4px 0;scrollbar-width:none}
+.lesson-nav::-webkit-scrollbar{display:none}
+.lnav-btn{flex-shrink:0;padding:9px 14px;border:none;background:transparent;font-size:12px;font-weight:700;color:var(--ink2);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:4px 4px 0 0}
+.lnav-btn.active{color:var(--red);border-bottom-color:var(--red);background:var(--marble)}
+.lnav-btn:hover:not(.active){background:#e0d5b8}
+.inner-tabs{display:flex;border-bottom:1px solid var(--bdr);background:#f0e8d8;overflow-x:auto;scrollbar-width:none}
+.inner-tabs::-webkit-scrollbar{display:none}
+.itab{padding:8px 14px;font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.itab.active{color:var(--red);border-bottom-color:var(--red);background:var(--marble)}
+.lesson-panel{display:none;padding:16px;max-width:720px;margin:0 auto}
+.lesson-panel.active{display:block}
+.itab-panel{display:none}
+.itab-panel.active{display:block}
+.card{background:var(--wht);border:1px solid var(--bdr);border-radius:8px;padding:16px;margin-bottom:14px}
+.card h3{font-family:'EB Garamond',serif;font-size:1.2rem;color:var(--red);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.tip{background:var(--gold-l);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;padding:10px 13px;margin:8px 0;font-size:13px}
+.tip strong{color:var(--gold)}
+.tip-red{background:var(--red-l);border-left-color:var(--red)}
+.tip-red strong{color:var(--red)}
+.tip-blue{background:var(--blue-l);border-left-color:var(--blue)}
+.tip-blue strong{color:var(--blue)}
+.tip-olive{background:var(--olive-l);border-left-color:var(--olive)}
+.tip-olive strong{color:var(--olive)}
+.gtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.gtable th{background:var(--red);color:#fff;padding:7px 10px;text-align:left;font-weight:600}
+.gtable td{padding:6px 10px;border-bottom:1px solid #e8d8b8}
+.gtable tr:nth-child(even) td{background:#fdf8f0}
+.vlist{list-style:none}
+.vitem{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #e8d8b8;cursor:pointer}
+.vlat{font-family:'EB Garamond',serif;font-size:1.2rem;color:var(--red);font-style:italic;min-width:140px;flex-shrink:0}
+.vtrans{font-size:13px;font-weight:600}
+.vhint{font-size:11px;color:#888;font-style:italic;margin-top:1px}
+.vmore{font-size:11px;color:var(--gold)}
+.qcard{background:var(--wht);border:2px solid var(--bdr);border-radius:10px;padding:18px;margin-bottom:12px;text-align:center}
+.qbig{font-family:'EB Garamond',serif;font-size:1.7rem;color:var(--red);font-style:italic;margin-bottom:14px;line-height:1.4}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qbtn{background:var(--marble);border:2px solid var(--bdr);border-radius:7px;padding:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--ink);font-family:'Inter',sans-serif}
+.qbtn:hover{border-color:var(--red);color:var(--red)}
+.qbtn.ok{background:var(--olive-l);border-color:var(--olive);color:var(--olive)}
+.qbtn.no{background:var(--red-l);border-color:var(--red);color:var(--red)}
+.qfb{margin-top:10px;font-size:13px;font-weight:600;min-height:18px}
+.qscore{text-align:center;padding:20px;font-weight:700;color:var(--red);font-size:1.1rem}
+.vblock{background:linear-gradient(160deg,#120e08 0%,#1e1a08 50%,#1a0808 100%);color:#f8f5f0;border-radius:10px;padding:22px 16px;text-align:center;margin-bottom:14px}
+.vblock-lat{font-family:'EB Garamond',serif;font-size:1.4rem;font-style:italic;line-height:1.9;color:var(--gold);margin-bottom:10px}
+.vblock-trans{font-size:12px;color:#c8b870;font-style:italic;font-family:'EB Garamond',serif}
+.vwords{text-align:left;margin-top:12px}
+.vrow{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:12px}
+.vwl{font-family:'EB Garamond',serif;font-size:1.05rem;color:var(--gold);font-style:italic}
+.vwe{color:#c8b870;text-align:right}
+.intro-hero{background:linear-gradient(160deg,#120e08 0%,#1e1a08 50%,#1a0808 100%);border-radius:10px;padding:24px 18px;text-align:center;margin-bottom:16px;color:#f8f5f0}
+.intro-hero .big-lat{font-family:'EB Garamond',serif;font-size:2.8rem;font-style:italic;color:var(--gold);line-height:1.3;margin-bottom:8px}
+.intro-hero p{color:#c8b870;font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;margin:0}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.feature-box{background:var(--marble);border:1px solid var(--bdr);border-radius:7px;padding:12px;text-align:center}
+.feature-icon{font-size:1.5rem;margin-bottom:4px}
+.feature-title{font-weight:700;font-size:13px;color:var(--red)}
+.feature-desc{font-size:11px;color:var(--stone);margin-top:2px}
+.diff-list{list-style:none;padding:0}
+.diff-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #e8d8b8;font-size:13px}
+.diff-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.paradigm{display:grid;gap:5px;margin-top:8px}
+.para-row{display:grid;grid-template-columns:100px 1fr 1fr;gap:4px;align-items:center;font-size:13px}
+.para-lbl{font-weight:600;color:var(--ink2);font-size:12px}
+.para-lat{font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--red);font-style:italic}
+.para-esp{color:var(--ink2);font-size:13px}
+.para-head{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#aaa;padding-bottom:2px;border-bottom:1px solid var(--bdr)}
+.conj-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.conj-box{background:var(--marble);border:1px solid var(--bdr);border-radius:6px;padding:10px 12px}
+.conj-box h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);margin-bottom:6px}
+.conj-line{display:flex;justify-content:space-between;font-size:13px;padding:3px 0;border-bottom:1px solid #e8d8b8}
+.conj-lat{font-family:'EB Garamond',serif;font-size:1.05rem;color:var(--red);font-style:italic}
+.conj-esp{color:var(--ink2);font-size:12px}
+.prog-bar{height:5px;background:#ddd;border-radius:3px;margin:6px 0 3px}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--red));border-radius:3px;transition:width .5s}
+.prog-lbl{font-size:11px;color:#aaa}
+p{font-size:14px;margin-bottom:8px}
+.note{font-size:11px;color:#999;text-align:center;margin-top:6px;font-style:italic}
+</style>
+</head>
+<body>
+<header>
+  <div class="lat-title">Lingua Latina · Introductio + Dies I–X</div>
+  <h1>Latín Clásico y Eclesiástico</h1>
+  <div class="sub">Introducción + Días 1–10 · La lengua de Roma, la Iglesia y la teología occidental</div>
+  <div class="badges">
+    <span class="badge-lat">🏛️ 5 DECLINACIONES</span>
+    <span class="badge-lat">4 CONJUGACIONES</span>
+    <span class="badge-lat">6 CASOS</span>
+  </div>
+</header>
+<div class="lesson-nav" id="lnav"></div>
+<div id="lessons-container"></div>
+<script>
+const LESSONS = [
+{day:0,title:"Introducción al Latín",subtitle:"La lengua de Roma, la Iglesia, la ciencia y la filosofía occidental",isIntro:true,
+tips:[
+{t:'<strong>El latín</strong> es la lengua madre del español, portugués, francés, italiano y rumano. Se estima que el 60% del vocabulario español viene del latín. Estudiar latín es estudiar la raíz de tu propia lengua.'},
+{t:'<strong>El latín eclesiástico</strong> fue la lengua de la Iglesia desde el siglo III hasta el XX. La Vulgata de Jerónimo (s. IV), los escritos de Agustín, Tomás de Aquino y todo el pensamiento medieval está en latín. Para la teología histórica, el latín es indispensable.'},
+{t:'<strong>El latín clásico</strong> (Cicerón, Virgilio, César) y el latín eclesiástico comparten la gramática pero difieren en vocabulario y estilo. Este curso enseña la gramática clásica con aplicaciones eclesiásticas.'},
+{t:'<strong>Para el estudio bíblico:</strong> la Vulgata fue la Biblia de Occidente durante 1.000 años. Los Padres de la Iglesia escribieron en latín. Los Concilios tienen sus actas en latín. La teología usa términos latinos intraducibles.'},
+],
+features:[
+{icon:'🏛️',title:'Lengua madre del español',desc:'60% del vocabulario español es latino'},
+{icon:'📜',title:'1.000 años de teología',desc:'Agustín, Tomás, Anselmo, los Concilios'},
+{icon:'🔤',title:'5 declinaciones · 6 casos',desc:'Las terminaciones hacen la función sintáctica'},
+{icon:'⚡',title:'Sin artículo definido',desc:'Rosa puede ser "la rosa" o "una rosa"'},
+],
+diffs:[
+{icon:'🔤',t:'<strong>Sin artículo:</strong> el latín no tiene "el/la/un/una". La función del artículo la hace el contexto o la terminación. <em>Rosa</em> puede ser "la rosa", "una rosa" o "rosa" en sentido general.'},
+{icon:'📊',t:'<strong>Casos gramaticales:</strong> el latín tiene 6 casos (nominativo, genitivo, dativo, acusativo, vocativo, ablativo) que determinan la función de cada sustantivo mediante sus terminaciones.'},
+{icon:'🔄',t:'<strong>Orden de palabras SOV:</strong> el latín tiende al orden Sujeto-Objeto-Verbo. <em>Caesar Gallos vicit</em> = "César a los galos venció".'},
+{icon:'🌿',t:'<strong>Géneros:</strong> masculino, femenino y neutro. El neutro es frecuente — <em>verbum</em>, <em>gaudium</em>, <em>regnum</em>.'},
+{icon:'⏰',t:'<strong>Sistema verbal rico:</strong> 6 tiempos, 3 modos (indicativo, subjuntivo, imperativo), 2 voces (activa y pasiva).'},
+{icon:'🎵',t:'<strong>Pronunciación eclesiástica:</strong> <em>c</em> ante e/i = "ch"; <em>ae</em> = "e"; <em>gn</em> = "ñ"; <em>ti</em> + vocal = "tsi". Esta es la tradición litúrgica.'},
+],
+vocab:[
+{g:'Deus, Dei',t:'Dios (masc., 2ª decl.)',h:'Deus caritas est — 1 Jn 4:8',f:'Genitivo Dei → "deidad"'},
+{g:'verbum, -i',t:'palabra, Verbo (neut., 2ª)',h:'In principio erat Verbum — Jn 1:1',f:'→ verbo, verbal, proverbio'},
+{g:'lux, lucis',t:'luz (fem., 3ª decl.)',h:'Lux mundi — Jn 8:12',f:'→ lucero, lúcido, translúcido'},
+{g:'vita, -ae',t:'vida (fem., 1ª decl.)',h:'Ego sum via veritas et vita — Jn 14:6',f:'→ vital, vitamina'},
+{g:'pax, pacis',t:'paz (fem., 3ª decl.)',h:'Pax vobiscum — saludo litúrgico',f:'→ pacífico, pacto'},
+{g:'amor, amoris',t:'amor (masc., 3ª decl.)',h:'Deus amor est',f:'→ amar, amable, enamorado'},
+{g:'gratia, -ae',t:'gracia (fem., 1ª decl.)',h:'Gratia et pax vobis — Ro 1:7',f:'→ gracia, gracias, gratuito'},
+{g:'gloria, -ae',t:'gloria (fem., 1ª decl.)',h:'Gloria in excelsis Deo',f:'→ gloria, glorioso'},
+],
+quiz:[
+{q:'¿Cuántos casos tiene el latín?',opts:['4','5','6','7'],ans:2},
+{q:'¿Cuántas declinaciones nominales tiene el latín?',opts:['3','4','5','6'],ans:2},
+{q:'El orden típico de la oración latina es...',opts:['SVO','VSO','SOV (sujeto-objeto-verbo)','OVS'],ans:2},
+{q:'El latín tiene artículo definido como el español?',opts:['Sí','Solo eclesiástico','No — no existe','Solo plural'],ans:2},
+{q:'verbum es género...',opts:['masculino','femenino','neutro','no tiene'],ans:2},
+{q:'La pronunciación eclesiástica de "c" ante "e" es...',opts:['k','ch (italiano)','s','th'],ans:1},
+{q:'gratia da en español...',opts:['gracia, gracias, gratuito','grave, graduado','granero','gradual'],ans:0},
+{q:'"Deus caritas est" significa...',opts:['Dios ama','Dios es amor','Dios tiene amor','Dios da amor'],ans:1},
+],
+verse:{lat:'In principio erat Verbum, et Verbum erat apud Deum, et Deus erat Verbum.',esp:'"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios" — Juan 1:1 (Vulgata)',
+words:[['In principio','en el principio (in + ablativo)'],['erat','era (imperfecto de esse)'],['Verbum','el Verbo (nominativo neutro)'],['apud Deum','junto a Dios (apud + acusativo)'],['Deus','Dios (nominativo, predicado)']],
+insight:'La Vulgata traduce Λόγος como Verbum — palabra Y razón. <em>apud Deum</em> usa <em>apud</em> (junto a, en presencia de) con acusativo, transmitiendo distinción y comunión simultáneas. Juan 1:1 en latín ha sido el texto más comentado de la filosofía y teología occidental durante 1.600 años.'}
+},
+{day:1,title:"El alfabeto y la pronunciación",subtitle:"26 letras, dos tradiciones y las reglas de acento",
+tips:[
+{t:'<strong>El alfabeto latino</strong> tiene 23 letras clásicas (sin j, w, y propias). La pronunciación eclesiástica (italiana) es la que usaremos: c ante e/i = "ch", g ante e/i = suave, ae = "e", gn = "ñ", ti+vocal = "tsi".'},
+{t:'<strong>La regla del acento:</strong> en palabras de dos sílabas, siempre en la primera. En palabras de tres o más: si la penúltima es larga (vocal larga o cerrada por dos consonantes), el acento cae en ella; si es breve, en la antepenúltima.'},
+{t:'<strong>Las vocales</strong> pueden ser largas (ā, ē, ī, ō, ū) o breves. En latín eclesiástico la distinción práctica se ha neutralizado. Lo que sí importa es el acento de la palabra.'},
+{t:'<strong>Pronuciacíon especial:</strong> h es muda; v puede leerse como "v" (eclesiástica) o "w" (clásica); x = "ks"; z (en préstamos griegos) = "dz/z".'},
+],
+extra:{type:'table',title:'Letras con pronunciación especial en latín eclesiástico',
+headers:['Letra/grupo','Pronunciación ecles.','Ejemplo','Cognado español'],
+rows:[
+['C ante e/i/ae','ch (italiano)','caelum → "chélum"','cielo'],
+['C ante a/o/u','k','cantus → "kántus"','canto'],
+['G ante e/i','g suave','genus → "yénus"','género'],
+['GN','ñ','agnus → "áñus"','agnóstico'],
+['TI + vocal','tsi','natio → "nátsio"','nación'],
+['AE','e','caelum → "chélum"','cielo'],
+['H','muda','homo → "ómo"','hombre'],
+['X','ks','pax → "paks"','paz'],
+]},
+vocab:[
+{g:'sanctus,-a,-um',t:'santo, sagrado',h:'Sanctus, Sanctus, Sanctus — Trisagion',f:'→ santo, santuario, santificar'},
+{g:'terra,-ae',t:'tierra, país (1ª decl.)',h:'Gloria in excelsis Deo et in terra pax',f:'→ terreno, Mediterráneo'},
+{g:'caelum,-i',t:'cielo (2ª decl. neut.)',h:'Pater noster qui es in caelis',f:'→ celeste, celestial'},
+{g:'aqua,-ae',t:'agua (1ª decl.)',h:'Aqua vitae — agua de vida',f:'→ acuático, acuario'},
+{g:'homo, hominis',t:'ser humano (3ª decl.)',h:'Ecce homo — Jn 19:5',f:'→ hombre, humano, humanidad'},
+{g:'rex, regis',t:'rey (3ª decl.)',h:'Rex regum — Rey de reyes',f:'→ rey, regal, regente'},
+{g:'nomen, nominis',t:'nombre (3ª decl. neut.)',h:'In nomine Patris...',f:'→ nombre, nominal, nominar'},
+{g:'mors, mortis',t:'muerte (3ª decl.)',h:'Mors et vita duello — Secuencia pascual',f:'→ mortal, inmortal'},
+],
+quiz:[
+{q:'"C" en latín eclesiástico ante "e" se pronuncia...',opts:['k','ch (italiano)','s','th'],ans:1},
+{q:'"gn" en latín eclesiástico suena como...',opts:['gn','g+n','ñ (agnus=áñus)','ng'],ans:2},
+{q:'"ti" antes de vocal en latín eclesiástico suena como...',opts:['ti','chi','tsi','si'],ans:2},
+{q:'La letra "h" en latín es...',opts:['aspirada fuerte','completamente muda','como en español','como j'],ans:1},
+{q:'El acento en palabras de dos sílabas va en...',opts:['la última','la primera','depende de la vocal','el nominativo'],ans:1},
+{q:'"ae" en latín eclesiástico suena como...',opts:['ai','ae (dos vocales)','e','a'],ans:2},
+{q:'sanctus → "santo" ilustra que el latín...',opts:['no influye en español','es raíz directa del vocabulario español','solo influyó en francés','es diferente al medieval'],ans:1},
+{q:'El alfabeto latino clásico tiene...',opts:['23 letras','24','25','26'],ans:0},
+],
+verse:{lat:'Gloria in excelsis Deo et in terra pax hominibus bonae voluntatis.',esp:'"Gloria a Dios en las alturas y en la tierra paz a los hombres de buena voluntad" — Lucas 2:14 (Vulgata)',
+words:[['Gloria','gloria (nominativo fem.)'],['in excelsis','en las alturas (in + ablativo plural)'],['Deo','a Dios (dativo)'],['in terra','en la tierra (in + ablativo)'],['pax','paz (nominativo)'],['hominibus','a los hombres (dativo plural)'],['bonae voluntatis','de buena voluntad (genitivo)']],
+insight:'<em>bonae voluntatis</em> — genitivo: "de buena voluntad". La Vulgata convierte esto en mérito humano; el griego εὐδοκία coloca la iniciativa en Dios ("en quienes Él se complace"). Esta divergencia teológica depende enteramente de la elección de traducción — un ejemplo perfecto de por qué la crítica textual de la Vulgata importa.'}
+},
+{day:2,title:"La primera declinación: los femeninos en -a",subtitle:"Rosa, rosae — el paradigma más sencillo del latín",
+tips:[
+{t:'<strong>La primera declinación</strong> agrupa principalmente sustantivos femeninos terminados en -a. <em>Rosa, terra, vita, gratia, gloria</em> — todas son primera declinación. Se identifica por el genitivo singular en -ae.'},
+{t:'<strong>Los 6 casos:</strong> Nominativo (sujeto), Genitivo ("de"), Dativo (objeto indirecto), Acusativo (objeto directo), Vocativo (llamado directo), Ablativo (circunstancias: con, en, por, desde).'},
+{t:'<strong>Masculinos de la 1ª declinación:</strong> algunos profesiones masculinas siguen la 1ª: <em>nauta</em> (marinero), <em>poeta</em> (poeta), <em>propheta</em> (profeta). Masculinos gramaticalmente pero con terminaciones de -a.'},
+{t:'<strong>En el diccionario</strong> un sustantivo de 1ª decl. aparece como: <em>rosa, -ae</em> — nominativo y genitivo singular. Eso es suficiente para identificar la declinación.'},
+],
+extra:{type:'paradigm',title:'Primera declinación — Rosa, Rosae (la rosa)',
+rows:[
+{lbl:'Nom. sg.',lat:'rosa',esp:'la rosa (sujeto)'},
+{lbl:'Gen. sg.',lat:'rosae',esp:'de la rosa'},
+{lbl:'Dat. sg.',lat:'rosae',esp:'a/para la rosa'},
+{lbl:'Acus. sg.',lat:'rosam',esp:'la rosa (objeto)'},
+{lbl:'Voc. sg.',lat:'rosa',esp:'¡oh rosa!'},
+{lbl:'Abl. sg.',lat:'rosā',esp:'con/en/de la rosa'},
+{lbl:'Nom. pl.',lat:'rosae',esp:'las rosas'},
+{lbl:'Gen. pl.',lat:'rosarum',esp:'de las rosas'},
+{lbl:'Dat. pl.',lat:'rosis',esp:'a/para las rosas'},
+{lbl:'Acus. pl.',lat:'rosas',esp:'las rosas (objeto)'},
+{lbl:'Voc. pl.',lat:'rosae',esp:'¡oh rosas!'},
+{lbl:'Abl. pl.',lat:'rosis',esp:'con/en/de las rosas'},
+],note:'El dativo y ablativo plural coinciden (rosis). El genitivo plural -arum es la marca más característica.'},
+vocab:[
+{g:'aqua, aquae',t:'agua (1ª decl., fem.)',h:'Aqua vitae; Jn 4:14 — aquam vivam',f:'→ acuático, acuario'},
+{g:'terra, terrae',t:'tierra (1ª decl., fem.)',h:'Et in terra pax — Lc 2:14',f:'→ terreno, Mediterráneo'},
+{g:'vita, vitae',t:'vida (1ª decl., fem.)',h:'Ego sum via veritas et vita — Jn 14:6',f:'→ vital, vitamina'},
+{g:'gratia, gratiae',t:'gracia (1ª decl., fem.)',h:'Gratia et pax — Ro 1:7',f:'→ gracia, gracias, gratuito'},
+{g:'gloria, gloriae',t:'gloria (1ª decl., fem.)',h:'Gloria Dei',f:'→ gloria, glorioso'},
+{g:'anima, animae',t:'alma, aliento (1ª decl.)',h:'Anima mea — Sal 42',f:'→ animado, animal'},
+{g:'ecclesia, -ae',t:'iglesia (1ª decl.)',h:'Del griego ekklesia — Mt 16:18',f:'→ iglesia, eclesiástico'},
+{g:'propheta, -ae',t:'profeta (masc. 1ª decl.)',h:'In nomine prophetae — Mt 10:41',f:'Masculino pero 1ª declinación'},
+],
+quiz:[
+{q:'La 1ª declinación se identifica por el genitivo singular en...',opts:['-i','-is','-ae','-us'],ans:2},
+{q:'"rosam" es caso...',opts:['nominativo','genitivo','dativo','acusativo'],ans:3},
+{q:'"rosarum" es...',opts:['nominativo plural','genitivo plural','dativo plural','acusativo plural'],ans:1},
+{q:'"rosis" puede ser...',opts:['nom. o gen.','gen. o acus.','dativo o ablativo plural','solo ablativo'],ans:2},
+{q:'propheta (profeta) es de género...',opts:['femenino','neutro','masculino pero 1ª declinación','indeterminado'],ans:2},
+{q:'"gratiae" puede ser genitivo singular o...',opts:['acusativo singular','nominativo plural','ablativo plural','vocativo singular'],ans:1},
+{q:'anima → "alma" da en español...',opts:['animar, animal, animado','ánimo solo','solo términos médicos','anual'],ans:0},
+{q:'La 1ª declinación tiene principalmente sustantivos de género...',opts:['masculino','femenino','neutro','mixto'],ans:1},
+],
+verse:{lat:'Anima mea sitivit ad Deum fontem vivum.',esp:'"Mi alma tiene sed de Dios, del Dios vivo" — Salmo 41:3 (42 TM) Vulgata',
+words:[['Anima mea','mi alma (nominativo 1ª decl. + posesivo)'],['sitivit','tuvo sed (perfecto de sitio)'],['ad Deum','hacia Dios (ad + acusativo)'],['fontem vivum','fuente viva (acusativo + adj. concordado)']],
+insight:'<em>Anima mea</em>: nominativo de 1ª declinación con posesivo <em>mea</em>. Agustín abre las <em>Confessiones</em> ("inquietum est cor nostrum donec requiescat in te") con eco de este salmo. Leer las <em>Confessiones</em> en latín es el primer gran proyecto del latinista eclesiástico.'}
+},
+{day:3,title:"La segunda declinación: masculinos en -us y neutros en -um",subtitle:"Dominus, Verbum — la declinación más frecuente del vocabulario teológico",
+tips:[
+{t:'<strong>La segunda declinación</strong> agrupa masculinos en -us/-er y neutros en -um. Es la más frecuente en el vocabulario teológico: <em>Dominus</em> (Señor), <em>Deus</em> (Dios), <em>Filius</em> (Hijo), <em>Verbum</em> (Verbo), <em>regnum</em> (reino).'},
+{t:'<strong>La marca de la 2ª declinación:</strong> el genitivo singular termina en -i. En el diccionario: <em>dominus, -i</em> (masc.) o <em>verbum, -i</em> (neutro).'},
+{t:'<strong>Regla de oro de los neutros:</strong> nominativo, acusativo y vocativo son siempre idénticos. El plural de los neutros termina en -a (no confundir con la 1ª declinación).'},
+{t:'<strong>Deus</strong> es irregular: el vocativo es <em>Deus</em> (no *Dee). <em>Dominus</em> tiene vocativo regular <em>Domine</em> — de ahí el "Domine" de la liturgia.'},
+],
+extra:{type:'table',title:'2ª declinación — Dominus (masc.) y Verbum (neutro)',
+headers:['Caso','Dominus','Significado','Verbum','Significado'],
+rows:[
+['Nom. sg.','dominus','el Señor','verbum','la Palabra'],
+['Gen. sg.','domini','del Señor','verbi','de la Palabra'],
+['Dat. sg.','domino','al Señor','verbo','a la Palabra'],
+['Acus. sg.','dominum','al Señor (obj.)','verbum','la Palabra (obj.)'],
+['Voc. sg.','Domine','¡Señor!','verbum','¡Palabra!'],
+['Abl. sg.','domino','con/del Señor','verbo','con/de la Palabra'],
+['Nom. pl.','domini','los señores','verba','las palabras'],
+['Gen. pl.','dominorum','de los señores','verborum','de las palabras'],
+['Dat./Abl. pl.','dominis','a/con los señores','verbis','a/con las palabras'],
+['Acus. pl.','dominos','a los señores','verba','las palabras (obj.)'],
+]},
+vocab:[
+{g:'Dominus,-i',t:'Señor (masc., 2ª)',h:'Dominus vobiscum',f:'→ don, dueño, dominar'},
+{g:'Deus,-i',t:'Dios (masc., 2ª, irreg.)',h:'Deus caritas est',f:'Voc. Deus (no *Dee)'},
+{g:'Filius,-ii',t:'hijo (masc., 2ª)',h:'Filius Dei — Mt 16:16',f:'→ filial, afiliar'},
+{g:'verbum,-i',t:'palabra/Verbo (neut., 2ª)',h:'In principio erat Verbum',f:'→ verbo, verbal, proverbio'},
+{g:'regnum,-i',t:'reino (neutro, 2ª)',h:'Regnum Dei',f:'→ reino, regente'},
+{g:'caelum,-i',t:'cielo (neutro, 2ª)',h:'Pater in caelis',f:'→ celeste, celestial'},
+{g:'evangelium,-ii',t:'evangelio (neutro, 2ª)',h:'Del griego euangelion',f:'Préstamo griego'},
+{g:'mysterium,-ii',t:'misterio (neutro, 2ª)',h:'Mysterium fidei',f:'Del griego mysterion'},
+],
+quiz:[
+{q:'La 2ª declinación se identifica por el genitivo en...',opts:['-ae','-i','-is','-us'],ans:1},
+{q:'"domini" puede ser genitivo singular o...',opts:['nominativo plural','acusativo plural','dativo singular','ablativo singular'],ans:0},
+{q:'El vocativo de Dominus es...',opts:['Dominus','Dominam','Domine','Domini'],ans:2},
+{q:'En los neutros, nominativo y acusativo son...',opts:['distintos','idénticos','el acusativo añade -m','solo en plural'],ans:1},
+{q:'"verba" es nom./acus. ...',opts:['singular neutro','plural neutro','plural fem. 1ª decl.','genitivo sg.'],ans:1},
+{q:'regnum es de género...',opts:['masculino','femenino','neutro','variable'],ans:2},
+{q:'"In nomine Patris et Filii" — Filii es caso...',opts:['nominativo','genitivo (del Hijo)','dativo','acusativo'],ans:1},
+{q:'evangelium sigue la _____ declinación',opts:['1ª','2ª (neutro en -um)','3ª','no se declina'],ans:1},
+],
+verse:{lat:'Regnum Dei intra vos est.',esp:'"El reino de Dios está dentro de vosotros / entre vosotros" — Lucas 17:21 (Vulgata)',
+words:[['Regnum','reino (nominativo neutro, sujeto)'],['Dei','de Dios (genitivo de Deus)'],['intra vos','dentro de / entre vosotros (prep. + acusativo)'],['est','es/está (presente de esse)']],
+insight:'<em>intra vos</em>: preposición con acusativo — "dentro de, en el interior de". La ambigüedad griega ἐντὸς ὑμῶν entre "dentro de vosotros" (reino interior) y "entre vosotros" (reino ya presente) es también la del latín <em>intra</em>. Dos palabras latinas que han generado siglos de debate teológico.'}
+},
+{day:4,title:"El verbo latino: presente de indicativo activo",subtitle:"Las cuatro conjugaciones — el núcleo del sistema verbal",
+tips:[
+{t:'<strong>El latín tiene cuatro conjugaciones</strong> identificadas por la vocal temática del infinitivo: 1ª (-āre): <em>amare</em>; 2ª (-ēre): <em>monere</em>; 3ª (-ere): <em>legere</em>; 4ª (-īre): <em>audire</em>.'},
+{t:'<strong>Las desinencias personales del presente activo</strong> son prácticamente iguales en todas: -o/-m (1ª sg.), -s (2ª sg.), -t (3ª sg.), -mus (1ª pl.), -tis (2ª pl.), -nt (3ª pl.). Lo que varía es la vocal temática.'},
+{t:'<strong>El verbo sum (ser/estar)</strong> es completamente irregular pero esencial. Sus formas: sum, es, est, sumus, estis, sunt. Memorízalo de inmediato.'},
+{t:'<strong>La 1ª persona del singular</strong> en presente termina en -o: <em>amo, moneo, lego, audio</em>. Esta -o es la desinencia más característica del presente.'},
+],
+extra:{type:'conj',title:'Las 4 conjugaciones — Presente de Indicativo Activo',
+cols:[
+{title:'1ª — amare',rows:[['amo','yo amo'],['amas','tú amas'],['amat','él/ella ama'],['amamus','nosotros amamos'],['amatis','vosotros amáis'],['amant','ellos aman']]},
+{title:'2ª — monere',rows:[['moneo','yo advierto'],['mones','tú adviertes'],['monet','él advierte'],['monemus','advertimos'],['monetis','advertís'],['monent','advierten']]},
+{title:'3ª — legere',rows:[['lego','yo leo'],['legis','tú lees'],['legit','él lee'],['legimus','leemos'],['legitis','leéis'],['legunt','leen']]},
+{title:'4ª — audire',rows:[['audio','yo oigo'],['audis','tú oyes'],['audit','él oye'],['audimus','oímos'],['auditis','oís'],['audiunt','oyen']]},
+]},
+vocab:[
+{g:'amare (amo)',t:'amar (1ª conj.)',h:'Diligite inimicos vestros',f:'amo, amas, amat...'},
+{g:'esse (sum)',t:'ser/estar (irreg.)',h:'Deus caritas est',f:'sum, es, est, sumus, estis, sunt'},
+{g:'credere (credo)',t:'creer (3ª conj.)',h:'Credo in unum Deum',f:'→ credo, credencial'},
+{g:'dicere (dico)',t:'decir (3ª conj.)',h:'Dico vobis',f:'→ dicción, dictar'},
+{g:'venire (venio)',t:'venir (4ª conj.)',h:'Veni Creator Spiritus',f:'→ adviento, venida'},
+{g:'videre (video)',t:'ver (2ª conj.)',h:'Ecce homo — Jn 19:5',f:'→ visión, vídeo'},
+{g:'dare (do)',t:'dar (1ª, irregular)',h:'Date et dabitur vobis',f:'do, das, dat, damus, datis, dant'},
+{g:'laudare (laudo)',t:'alabar (1ª conj.)',h:'Laudate Dominum',f:'→ laudar, loa'},
+],
+quiz:[
+{q:'"amat" es de la conjugación...',opts:['2ª','1ª','3ª','4ª'],ans:1},
+{q:'"legunt" es persona y número...',opts:['2ª pl.','3ª pl.','1ª pl.','3ª sg.'],ans:1},
+{q:'"auditis" significa...',opts:['ellos oyen','nosotros oímos','vosotros oís','tú oyes'],ans:2},
+{q:'Las desinencias -mus, -tis, -nt corresponden al...',opts:['singular','plural','ambas','dual'],ans:1},
+{q:'"est" es forma de...',opts:['amare','monere','esse','legere'],ans:2},
+{q:'La conjugación se identifica por...',opts:['el nominativo','la vocal temática del infinitivo','el acusativo','el genitivo'],ans:1},
+{q:'"Credo" es 1ª sg. presente de la conjugación...',opts:['1ª','2ª','3ª','4ª'],ans:2},
+{q:'"Laudate" es imperativo de...',opts:['laudant','laudatis','laudate (2ª pl. imp.)','laudamus'],ans:2},
+],
+verse:{lat:'Credo in unum Deum, Patrem omnipotentem, Factorem caeli et terrae.',esp:'"Creo en un solo Dios, Padre todopoderoso, Creador del cielo y de la tierra" — Credo Niceno',
+words:[['Credo','creo (1ª sg. pres. de credere)'],['in unum Deum','en un solo Dios (in + acusativo)'],['Patrem omnipotentem','Padre todopoderoso (acusativo)'],['Factorem','Creador (acusativo 3ª decl.)'],['caeli et terrae','del cielo y de la tierra (gen.)']],
+insight:'<em>Credo</em> — primera persona singular. El Credo se recita en comunidad pero en primera persona: cada individuo hace su propia confesión. <em>Factorem caeli et terrae</em>: genitivo de <em>caelum</em> (2ª decl.) y <em>terra</em> (1ª decl.) juntos — dos declinaciones distintas en una frase.'}
+},
+{day:5,title:"La tercera declinación",subtitle:"La más rica y frecuente — la clave del vocabulario teológico",
+tips:[
+{t:'<strong>La tercera declinación</strong> es la más amplia. Agrupa sustantivos con nominativos muy diferentes: <em>homo</em>, <em>pax</em>, <em>lux</em>, <em>rex</em>, <em>nomen</em>. La clave es el <strong>genitivo singular en -is</strong>.'},
+{t:'<strong>La raíz verdadera</strong> se obtiene quitando -is del genitivo: <em>pax, pacis</em> → raíz <em>pac-</em>; <em>homo, hominis</em> → raíz <em>homin-</em>. Conocer la raíz permite construir todas las formas.'},
+{t:'<strong>Los neutros de 3ª declinación</strong> tienen nominativo = acusativo = vocativo y el plural en -a: <em>nomen</em> → <em>nomina</em>; <em>corpus</em> → <em>corpora</em>; <em>tempus</em> → <em>tempora</em>.'},
+{t:'<strong>Sustantivos esenciales para la teología:</strong> <em>fides</em> (fe), <em>homo</em> (hombre), <em>pax</em> (paz), <em>lux</em> (luz), <em>rex</em> (rey), <em>corpus</em> (cuerpo), <em>mors</em> (muerte).'},
+],
+extra:{type:'table',title:'3ª declinación — Pax (paz) y Nomen (nombre)',
+headers:['Caso','Pax (fem.)','Significado','Nomen (neutro)','Significado'],
+rows:[
+['Nom. sg.','pax','la paz','nomen','el nombre'],
+['Gen. sg.','pacis','de la paz','nominis','del nombre'],
+['Dat. sg.','paci','a la paz','nomini','al nombre'],
+['Acus. sg.','pacem','la paz (obj.)','nomen','el nombre (obj.)'],
+['Voc. sg.','pax','¡oh paz!','nomen','¡oh nombre!'],
+['Abl. sg.','pace','con/de la paz','nomine','con/del nombre'],
+['Nom. pl.','paces','las paces','nomina','los nombres'],
+['Gen. pl.','pacium','de las paces','nominum','de los nombres'],
+['Dat./Abl. pl.','pacibus','a/con las paces','nominibus','a/con los nombres'],
+['Acus. pl.','paces','las paces (obj.)','nomina','los nombres (obj.)'],
+]},
+vocab:[
+{g:'pax, pacis',t:'paz (fem., 3ª decl.)',h:'Pax vobiscum / Pax Domini',f:'→ pacífico, pacto'},
+{g:'lux, lucis',t:'luz (fem., 3ª decl.)',h:'Lux mundi — Jn 8:12',f:'→ lucero, lúcido'},
+{g:'rex, regis',t:'rey (masc., 3ª decl.)',h:'Rex regum',f:'→ rey, regal, regente'},
+{g:'homo, hominis',t:'ser humano (3ª decl.)',h:'Ecce homo — Jn 19:5',f:'→ hombre, humano'},
+{g:'corpus, corporis',t:'cuerpo (neutro, 3ª)',h:'Corpus Christi',f:'→ corporal, incorporar'},
+{g:'nomen, nominis',t:'nombre (neutro, 3ª)',h:'In nomine Patris...',f:'→ nombre, nominal'},
+{g:'mors, mortis',t:'muerte (fem., 3ª)',h:'Mors et vita duello',f:'→ mortal, inmortal'},
+{g:'fides, fidei',t:'fe (fem., 5ª decl.)',h:'Fides spes caritas — 1 Co 13',f:'→ fiel, fidelidad'},
+],
+quiz:[
+{q:'La 3ª declinación se identifica por el genitivo en...',opts:['-ae','-i','-is','-us'],ans:2},
+{q:'"nominis" es...',opts:['nominativo sg.','genitivo singular de nomen','acusativo','ablativo'],ans:1},
+{q:'El plural de corpus es...',opts:['corpus','corpora','corporis','corpori'],ans:1},
+{q:'"pace" (ablativo de pax) se traduce como...',opts:['la paz (sujeto)','de la paz','con/en paz','¡oh paz!'],ans:2},
+{q:'"Ecce homo" — homo es caso...',opts:['genitivo','acusativo','nominativo','dativo'],ans:2},
+{q:'La raíz de rex, regis es...',opts:['rex-','re-','reg-','regi-'],ans:2},
+{q:'"In nomine" usa el caso...',opts:['nominativo','genitivo','acusativo','ablativo'],ans:3},
+{q:'Los neutros de 3ª declinación tienen el plural en...',opts:['-i','-ae','-a','-es'],ans:2},
+],
+verse:{lat:'Omnia possum in eo qui me confortat.',esp:'"Todo lo puedo en aquel que me fortalece" — Filipenses 4:13 (Vulgata)',
+words:[['Omnia','todas las cosas (acusativo neutro pl.)'],['possum','puedo (1ª sg. de posse)'],['in eo','en aquel/en él (in + ablativo)'],['qui me confortat','que me fortalece (relativa: qui + pres.)']],
+insight:'<em>Omnia</em> es el acusativo neutro plural de <em>omnis</em>. <em>Possum</em> = <em>pot-</em> (poder) + <em>sum</em> — "soy capaz". El versículo más citado en el deporte descansa sobre la 3ª declinación y el compuesto de <em>esse</em>. La gramática latina es más fuerte que cualquier traducción: no "puedo hacer cosas" sino "soy-capaz-de todo".'}
+},
+{day:6,title:"Adjetivos, pronombres y concordancia",subtitle:"La ley fundamental del latín: género, número y caso",
+tips:[
+{t:'<strong>La ley de concordancia:</strong> el adjetivo concuerda con el sustantivo en género, número y caso — pero NO necesariamente en declinación. Un adjetivo de 1ª/2ª puede modificar un sustantivo de 3ª.'},
+{t:'<strong>Los adjetivos de 1ª/2ª declinación</strong> tienen formas masc. en 2ª (bonus), fem. en 1ª (bona) y neutras en 2ª (bonum). <em>vir bonus / femina bona / verbum bonum</em>.'},
+{t:'<strong>El pronombre relativo qui/quae/quod</strong> (que, quien) concuerda en género y número con su antecedente pero toma el caso de su propia cláusula. <em>Pater qui es in caelis</em>.'},
+{t:'<strong>Los pronombres personales:</strong> ego (yo), tu (tú), nos (nosotros), vos (vosotros). La 3ª persona usa demostrativos: is/ea/id (él/ella/ello).'},
+],
+extra:{type:'table',title:'Adjetivo bonus,-a,-um (bueno) — concordancia',
+headers:['Caso','Masc.','Fem.','Neutro'],
+rows:[
+['Nom. sg.','bonus','bona','bonum'],
+['Gen. sg.','boni','bonae','boni'],
+['Dat. sg.','bono','bonae','bono'],
+['Acus. sg.','bonum','bonam','bonum'],
+['Abl. sg.','bono','bona','bono'],
+['Nom. pl.','boni','bonae','bona'],
+['Gen. pl.','bonorum','bonarum','bonorum'],
+['Dat./Abl. pl.','bonis','bonis','bonis'],
+['Acus. pl.','bonos','bonas','bona'],
+]},
+vocab:[
+{g:'bonus,-a,-um',t:'bueno, recto',h:'Bonum est; Summum Bonum',f:'→ bueno, bonito, bonificar'},
+{g:'magnus,-a,-um',t:'grande',h:'Magnus Dominus',f:'→ magno, magnifico'},
+{g:'sanctus,-a,-um',t:'santo, sagrado',h:'Spiritus Sanctus',f:'→ santo, santuario'},
+{g:'novus,-a,-um',t:'nuevo',h:'Novum Testamentum',f:'→ nuevo, novedad, novato'},
+{g:'omnis,-e',t:'todo, cada (3ª decl. adj.)',h:'Omnia possum',f:'→ omnipotente, omnisciente'},
+{g:'qui, quae, quod',t:'que, quien (relativo)',h:'Pater noster qui es in caelis',f:'El relativo más frecuente'},
+{g:'ego',t:'yo (pronombre)',h:'Ego sum via — Jn 14:6',f:'→ "ego" en español moderno'},
+{g:'noster, nostra, nostrum',t:'nuestro/a',h:'Pater noster',f:'Adjetivo posesivo'},
+],
+quiz:[
+{q:'"bonus" en ablativo singular femenino es...',opts:['bona','bonae','bono','bonam'],ans:0},
+{q:'Un adjetivo concuerda en género, número y...',opts:['conjugación','declinación','caso','posición'],ans:2},
+{q:'"Spiritus Sanctus" — Sanctus concuerda en...',opts:['solo caso','solo género','género, número y caso','declinación idéntica'],ans:2},
+{q:'"qui" toma su caso de...',opts:['su antecedente','su propia cláusula','el verbo principal','el adjetivo'],ans:1},
+{q:'"Pater noster" — noster es caso...',opts:['genitivo','dativo','nominativo (con Pater)','acusativo'],ans:2},
+{q:'"omnis" es adjetivo de la...',opts:['1ª','2ª','3ª','4ª'],ans:2},
+{q:'"bonorum" puede ser gen. pl. de género...',opts:['solo masc.','masc. o neutro','femenino','variable'],ans:1},
+{q:'"magnus" → "magno" ilustra que...',opts:['no hay cognados','los adjetivos dan palabras españolas directas','son todos irregulares','cambian de significado'],ans:1},
+],
+verse:{lat:'Pater noster qui es in caelis, sanctificetur nomen tuum.',esp:'"Padre nuestro que estás en los cielos, santificado sea tu nombre" — Mateo 6:9 (Vulgata)',
+words:[['Pater noster','Padre nuestro (nominativo/vocativo)'],['qui es','que estás (relativo + pres. esse)'],['in caelis','en los cielos (in + ablativo plural)'],['sanctificetur','sea santificado (subj. pasivo jussivo)'],['nomen tuum','tu nombre (nom. neutro 3ª + posesivo)']],
+insight:'<em>sanctificetur</em>: presente de subjuntivo pasivo — modo subjuntivo de voluntad/deseo. El Padrenuestro es un compendio de gramática: vocativo (Pater), relativo (qui), ablativo (caelis), subjuntivo de petición (sanctificetur), nominativo neutro (nomen).'}
+},
+{day:7,title:"Imperfecto y perfecto de indicativo activo",subtitle:"Los dos tiempos del pasado: duración vs. acción completada",
+tips:[
+{t:'<strong>El imperfecto</strong> describe acción continua, repetida o habitual en el pasado. Se forma añadiendo <em>-ba-</em> entre la raíz y las desinencias: <em>amabam, amabas, amabat...</em> La -ba- es la marca inconfundible.'},
+{t:'<strong>El perfecto activo</strong> describe una acción ya concluida. Desinencias propias: -i, -isti, -it, -imus, -istis, -erunt. La 1ª sg. siempre en -i: <em>amavi, dixi, vidi, fui</em>.'},
+{t:'<strong>El tema de perfecto</strong> varía: alargamiento de vocal (lego→legi), reduplicación (do→dedi), -v- (amo→amavi), -s- (dico→dixi), forma propia (fero→tuli).'},
+{t:'<strong>La distinción imperfecto/perfecto</strong> es análoga al griego imperfecto/aoristo: el imperfecto pinta el fondo; el perfecto narra los eventos puntuales.'},
+],
+extra:{type:'conj',title:'Imperfecto y Perfecto de amare',
+cols:[
+{title:'Imperfecto',rows:[['amabam','yo amaba'],['amabas','tú amabas'],['amabat','él amaba'],['amabamus','amábamos'],['amabatis','amabais'],['amabant','amaban']]},
+{title:'Perfecto',rows:[['amavi','yo amé/he amado'],['amavisti','tú amaste'],['amavit','él/ella amó'],['amavimus','amamos'],['amavistis','amasteis'],['amaverunt','amaron']]},
+]},
+vocab:[
+{g:'amavi',t:'amé/he amado (perf. de amare)',h:'Dilexi te charitate perpetua — Jr 31:3',f:'Base de todos los perfectos en -v-'},
+{g:'vidi',t:'vi (perfecto de videre)',h:'Veni, vidi, vici — Julio César',f:'Perf. con -v- de vid-'},
+{g:'dixi',t:'dije (perfecto de dicere)',h:'Dixi — lo he dicho',f:'Perfecto con -x-'},
+{g:'fuit',t:'fue (perfecto de esse)',h:'Hoc fuit — esto fue',f:'sum → fui, fuisti, fuit...'},
+{g:'venit',t:'vino (perfecto de venire)',h:'Venit lux in mundum — Jn 1:9',f:'Presente y perfecto son iguales (homofonía)'},
+{g:'fecit',t:'hizo (perfecto de facere)',h:'Omnia per ipsum facta sunt',f:'facio → feci, fecisti, fecit'},
+{g:'misit',t:'envió (perfecto de mittere)',h:'Deus Filium suum misit',f:'mittere → misi, misit'},
+{g:'resurrexit',t:'resucitó (perfecto de resurgere)',h:'Resurrexit sicut dixit — Mt 28:6',f:'El perfecto de la Pascua'},
+],
+quiz:[
+{q:'La marca del imperfecto es...',opts:['-v-','-ba-','-era-','-is-'],ans:1},
+{q:'"amabat" significa...',opts:['él ama','él amó','él amaba','él amará'],ans:2},
+{q:'Las desinencias del perfecto 1ª sg. terminan en...',opts:['-o','-m','-i','-s'],ans:2},
+{q:'"amaverunt" es...',opts:['imperf. 3ª pl.','perfecto 3ª pl.','presente','futuro'],ans:1},
+{q:'"Resurrexit" significa...',opts:['resucita','resucitaba','resucitó/ha resucitado','resucitará'],ans:2},
+{q:'"fuit" es perfecto de...',opts:['facere','esse','venire','ferre'],ans:1},
+{q:'El imperfecto describe acción...',opts:['puntual','continua o habitual en el pasado','futura','hipotética'],ans:1},
+{q:'"veni, vidi, vici" usa tres...',opts:['presentes','imperfectos','perfectos','futuros'],ans:2},
+],
+verse:{lat:'Surrexit, non est hic; ecce locus ubi posuerunt eum.',esp:'"Ha resucitado, no está aquí; he aquí el lugar donde le pusieron" — Marcos 16:6 (Vulgata)',
+words:[['Surrexit','ha resucitado (perfecto de surgere)'],['non est','no está (presente negativo de esse)'],['hic','aquí (adverbio)'],['ecce','he aquí (presentativo)'],['locus','el lugar (nominativo)'],['ubi posuerunt eum','donde le pusieron (rel. + perf. 3ª pl.)']],
+insight:'<em>Surrexit</em> — perfecto: acción completada con resultado presente. El ángel no dice "resucitó ayer y ya pasó" sino "ha resucitado y el efecto permanece". Eso explica "no está aquí" — consecuencia presente del perfecto pasado. El tiempo verbal es la teología.'}
+},
+{day:8,title:"Las preposiciones latinas",subtitle:"El mapa de las relaciones espaciales y lógicas",
+tips:[
+{t:'<strong>Las preposiciones latinas</strong> rigen siempre acusativo o ablativo — nunca genitivo, dativo o nominativo. Memorizar el caso de cada preposición es obligatorio.'},
+{t:'<strong>Preposiciones + acusativo</strong> (movimiento/dirección): <em>ad</em> (hacia), <em>in</em> (hacia dentro), <em>per</em> (a través de), <em>ante</em> (antes de), <em>post</em> (después de), <em>inter</em> (entre), <em>propter</em> (a causa de).'},
+{t:'<strong>Preposiciones + ablativo</strong> (lugar estático/origen): <em>in</em> (en), <em>cum</em> (con), <em>ex/e</em> (de/fuera de), <em>de</em> (de/sobre), <em>ab/a</em> (por/desde), <em>sine</em> (sin), <em>pro</em> (en favor de).'},
+{t:'<strong>In</strong> rige los dos casos: + acusativo = movimiento hacia; + ablativo = lugar donde está. <em>In mundum</em> (hacia el mundo) vs. <em>in mundo</em> (en el mundo).'},
+],
+extra:{type:'table',title:'Preposiciones latinas más frecuentes del NT',
+headers:['Prep.','Caso','Significado','Ejemplo'],
+rows:[
+['ad','Acus.','hacia, a','ad Deum'],
+['in + acus.','Acus.','hacia dentro (movimiento)','in mundum venit'],
+['in + abl.','Abl.','en (lugar estático)','in principio'],
+['per','Acus.','por medio de','per ipsum'],
+['ex / e','Abl.','de, fuera de','ex Deo'],
+['cum','Abl.','con','cum Deo'],
+['sine','Abl.','sin','sine lege'],
+['pro','Abl.','en favor de','pro nobis'],
+['ante','Acus.','antes de','ante mundum'],
+['propter','Acus.','a causa de','propter nos'],
+]},
+vocab:[
+{g:'per (+ acus.)',t:'por medio de, a través',h:'Omnia per ipsum — Jn 1:3',f:'→ prefijo "per-" en compuestos'},
+{g:'cum (+ abl.)',t:'con (compañía)',h:'Cum Deo / Vobiscum',f:'Enclítica: mecum, tecum, nobiscum'},
+{g:'in (+ acus./abl.)',t:'hacia/en (doble función)',h:'In principio; in mundum',f:'El caso determina el significado'},
+{g:'ex / e (+ abl.)',t:'de, fuera de, desde',h:'Ex Patre Filioque procedit',f:'→ "ex-" en prefijos'},
+{g:'pro (+ abl.)',t:'en favor de, en lugar de',h:'Pro nobis — Ro 5:8',f:'→ "pro" en español'},
+{g:'sine (+ abl.)',t:'sin',h:'Sine ira et studio — Tácito',f:'→ "sin" (influjo indirecto)'},
+{g:'propter (+ acus.)',t:'a causa de, por razón de',h:'Propter nos homines — Credo',f:'"por nosotros los hombres"'},
+{g:'inter (+ acus.)',t:'entre, en medio de',h:'Inter oves locum praesta',f:'→ "inter-" internacional'},
+],
+quiz:[
+{q:'"in" + acusativo expresa...',opts:['lugar estático','movimiento hacia','origen','instrumento'],ans:1},
+{q:'"in" + ablativo expresa...',opts:['movimiento','lugar estático','finalidad','agente'],ans:1},
+{q:'"cum" siempre rige...',opts:['acusativo','genitivo','ablativo','dativo'],ans:2},
+{q:'"Omnia per ipsum" — per rige...',opts:['ablativo','genitivo','acusativo','dativo'],ans:2},
+{q:'"pro nobis" significa...',opts:['por nosotros (favor)','entre nosotros','sin nosotros','ante nosotros'],ans:0},
+{q:'"ex Deo" significa...',opts:['hacia Dios','con Dios','de Dios','en Dios'],ans:2},
+{q:'"mecum" es la forma enclítica de...',opts:['me in','me ante','cum me','me post'],ans:2},
+{q:'"propter nos" en el Credo significa...',opts:['entre nosotros','sin nosotros','a causa de nosotros','antes que nosotros'],ans:2},
+],
+verse:{lat:'Omnia per ipsum facta sunt, et sine ipso factum est nihil quod factum est.',esp:'"Todas las cosas por medio de él fueron hechas, y sin él nada fue hecho" — Juan 1:3 (Vulgata)',
+words:[['Omnia','todas las cosas (nom. neutro pl.)'],['per ipsum','por medio de él (per + acus.)'],['facta sunt','fueron hechas (perf. pasivo)'],['sine ipso','sin él (sine + ablativo)'],['nihil','nada'],['quod factum est','que fue hecho (relativo neutro)']],
+insight:'Dos preposiciones en contraste: <em>per ipsum</em> (por medio de él — acusativo) y <em>sine ipso</em> (sin él — ablativo). La preposición cambia de caso y de significado. <em>nihil</em> — "nada" — palabra que Agustín y Tomás comentan infinitamente. El latín de Juan 1:3 es la base de toda la teología de la creación en el pensamiento cristiano occidental.'}
+},
+{day:9,title:"El modo subjuntivo",subtitle:"El modo del potencial — el más importante de la teología latina",
+tips:[
+{t:'<strong>El modo subjuntivo</strong> se usa en latín en muchos más contextos que en español: propósito (ut/ne), consecuencia, deseo, duda y oraciones indirectas. Es el corazón de la sintaxis latina compleja.'},
+{t:'<strong>El subjuntivo presente</strong> se forma: 1ª conj. añade -e- entre raíz y desinencias (<em>amet</em>); 2ª, 3ª y 4ª añaden -a- (<em>moneat, legat, audiat</em>). Truco: "iAMES" — la 1ª usa -e-, las demás -a-.'},
+{t:'<strong>Ut + subjuntivo</strong> = propósito ("para que") o resultado ("de modo que"). <em>Venit ut salvaret</em> = "vino para que salvara". <em>Ne + subjuntivo</em> = propósito negativo ("para que no").'},
+{t:'<strong>El subjuntivo jussivo</strong> (3ª persona sin conector) expresa mandatos: <em>fiat lux</em> = "hágase la luz"; <em>veniat regnum tuum</em> = "venga tu reino". El Padrenuestro y la liturgia están llenos de estos.'},
+],
+extra:{type:'table',title:'Subjuntivo presente — los 4 usos principales',
+headers:['Uso','Construcción','Ejemplo','Traducción'],
+rows:[
+['Propósito','ut + subj.','Venit ut mundum salvaret','Vino para salvar el mundo'],
+['Propósito neg.','ne + subj.','Orate ne intretis in tent.','Orad para no entrar en tentación'],
+['Jussivo (3ª)','subj. solo','Fiat lux / Veniat regnum','¡Hágase la luz! / ¡Venga tu reino!'],
+['Deseo','utinam + subj.','Utinam veniret!','¡Ojalá viniera!'],
+['Duda','num/an + subj.','Nescio an verum sit','No sé si sea verdad'],
+['Ind. que','subj. en indir.','Dixit se venturum esse','Dijo que vendría'],
+]},
+vocab:[
+{g:'fiat',t:'"hágase" (subj. jussivo de fieri)',h:'Fiat lux — Gn 1:3',f:'→ "fiat" como sustantivo español (decreto)'},
+{g:'veniat',t:'"venga" (subj. 3ª sg. de venire)',h:'Veniat regnum tuum',f:'Raíz de veni — aquí es subjuntivo'},
+{g:'sanctificetur',t:'"sea santificado" (subj. pas.)',h:'Sanctificetur nomen tuum',f:'Pres. pasivo de subjuntivo'},
+{g:'dimittere (dimitto)',t:'perdonar, enviar (3ª conj.)',h:'Dimitte nobis debita nostra',f:'→ "dimitir", "dimisión"'},
+{g:'ut + subj.',t:'"para que" (propósito)',h:'Ut vitam habeant — Jn 10:10',f:'La construcción de propósito más frecuente'},
+{g:'ne + subj.',t:'"para que no"',h:'Ne intretis in tentationem',f:'"Para que no entréis"'},
+{g:'utinam',t:'¡ojalá! (partícula de deseo)',h:'Utinam hodie vocem eius audiatis',f:'Introduce el subjuntivo de deseo'},
+{g:'liberare (libero)',t:'librar, liberar (1ª conj.)',h:'Libera nos a malo — Mt 6:13',f:'→ "liberar", "libre", "libertad"'},
+],
+quiz:[
+{q:'"fiat" es subjuntivo de...',opts:['facere','esse','fieri (ser hecho)','stare'],ans:2},
+{q:'El subj. presente de la 1ª conjugación añade...',opts:['-a-','-e-','-desinencias distintas','-ba-'],ans:1},
+{q:'"ut + subjuntivo" expresa...',opts:['condición','propósito/resultado','tiempo','agente'],ans:1},
+{q:'"ne intretis" significa...',opts:['que entréis','para que no entréis','cuando entréis','si entréis'],ans:1},
+{q:'"Fiat lux" usa el subjuntivo...',opts:['deseo utinam','jussivo (mandato 3ª persona)','propósito ut','duda'],ans:1},
+{q:'"Veniat regnum tuum" — veniat es modo...',opts:['indicativo','subjuntivo jussivo','imperativo','infinitivo'],ans:1},
+{q:'El subjuntivo en latín se usa más que en español porque...',opts:['el latín es más antiguo','lo usa en propósito, consecuencia, indirecto y más','el español lo simplificó','son idénticos'],ans:1},
+{q:'"utinam" introduce...',opts:['propósito','resultado','deseo del hablante','duda'],ans:2},
+],
+verse:{lat:'Pater noster qui es in caelis: sanctificetur nomen tuum, adveniat regnum tuum, fiat voluntas tua sicut in caelo et in terra.',esp:'"Padre nuestro que estás en los cielos: santificado sea tu nombre, venga tu reino, hágase tu voluntad así en el cielo como en la tierra" — Mateo 6:9-10',
+words:[['sanctificetur','sea santificado (subj. pas. jussivo 3ª sg.)'],['nomen tuum','tu nombre (nom. neutro + posesivo)'],['adveniat','venga (subj. jussivo de advenire)'],['regnum tuum','tu reino (nom. neutro)'],['fiat','hágase (subj. jussivo de fieri)'],['voluntas tua','tu voluntad (nom. 3ª decl.)'],['sicut in caelo et in terra','así en el cielo como en la tierra']],
+insight:'Tres subjuntivos jussivos: <em>sanctificetur, adveniat, fiat</em>. El modo subjuntivo en latín tiene la capacidad única de expresar entre la oración y el deseo, entre el imperativo y la súplica. El Padrenuestro es la síntesis del subjuntivo como modo de la oración cristiana.'}
+},
+{day:10,title:"Repaso: el Prólogo de Juan en la Vulgata",subtitle:"Juan 1:1-14 — análisis gramatical completo",
+tips:[
+{t:'<strong>Juan 1:1-14</strong> en la Vulgata contiene todo lo que has aprendido en 10 días. El vocabulario es sencillo; la teología, profundísima. Casi todo el prólogo está en vocabulario de los días 1-9.'},
+{t:'<strong>Vocabulario que ya conoces:</strong> <em>principium</em> (2ª decl.), <em>Verbum</em> (2ª decl. neutro), <em>Deus</em> (2ª decl.), <em>vita</em> (1ª decl.), <em>lux</em> (3ª decl.), <em>homo</em> (3ª decl.), <em>nomen</em> (3ª decl.).'},
+{t:'<strong>Construcciones que ya conoces:</strong> <em>erat</em> (imperfecto de esse), <em>facta sunt</em> (perfecto pasivo), <em>per ipsum</em> (per + acusativo), <em>in mundum venit</em> (in + acusativo de movimiento).'},
+{t:'<strong>La elección de Verbum:</strong> Jerónimo eligió <em>Verbum</em> sobre <em>Sermo</em> porque <em>Verbum</em> captura mejor la doble dimensión del Λόγος griego: palabra pronunciada Y razón ordenadora. Esta elección ha moldeado 1.600 años de teología occidental.'},
+],
+extra:{type:'table',title:'Juan 1:1-14 Vulgata — análisis por versículo',
+headers:['Vers.','Texto latino','Análisis','Teología'],
+rows:[
+['1:1a','In principio erat Verbum','erat = imperf.; in + abl.','Existencia eterna — no fue creado'],
+['1:1b','Verbum erat apud Deum','apud + acusativo','Distinción dentro de la divinidad'],
+['1:1c','et Deus erat Verbum','Deus predicado sin artículo','Naturaleza divina del Verbum'],
+['1:3','Omnia per ipsum facta sunt','facta sunt = perf. pas.; per + acus.','Creación mediada'],
+['1:4','in ipso vita erat','in + ablativo; vita 1ª decl.','El Logos fuente de vida'],
+['1:9','Erat lux vera','erat imperf.; vera adj.','La luz permanente y verdadera'],
+['1:11','in propria venit... non receperunt','dos perfectos','El rechazo — el gran δέ del prólogo'],
+['1:14','Verbum caro factum est','PPP + esse perf.','La encarnación — el clímax'],
+]},
+vocab:[
+{g:'erat',t:'era / estaba (imperf. de esse)',h:'In principio erat Verbum',f:'La forma más teológicamente cargada del latín'},
+{g:'apud (+ acus.)',t:'junto a, con, en presencia de',h:'Verbum erat apud Deum — Jn 1:1',f:'No simple cum — proximidad íntima'},
+{g:'caro, carnis',t:'carne (fem., 3ª decl.)',h:'Verbum caro factum est',f:'→ carnal, carnívoro, encarnación'},
+{g:'plenus,-a,-um',t:'lleno, pleno (adj.)',h:'plenum gratiae et veritatis',f:'→ pleno, plenitud, plenario'},
+{g:'recipere (recipio)',t:'recibir (3ª conj.)',h:'non receperunt — no lo recibieron',f:'→ recibir, recepción, receptor'},
+{g:'nasci (nascor)',t:'nacer (deponente)',h:'ex Deo nati sunt',f:'→ natal, natividad'},
+{g:'vidimus',t:'"vimos" (perf. 1ª pl. de videre)',h:'Et vidimus gloriam eius — Jn 1:14',f:'Testimonio ocular — primera persona plural'},
+{g:'habitare (habito)',t:'habitar, morar (1ª conj.)',h:'et habitavit in nobis — Jn 1:14',f:'→ habitar, habitación, hábitat'},
+],
+quiz:[
+{q:'"erat" es tiempo...',opts:['presente','futuro','imperfecto','perfecto'],ans:2},
+{q:'"apud Deum" usa caso...',opts:['ablativo','genitivo','dativo','acusativo'],ans:3},
+{q:'"Verbum caro factum est" — factum est es...',opts:['pres. pasivo','fut. activo','perfecto pasivo','imperfecto'],ans:2},
+{q:'"caro" en "Verbum caro factum" es caso...',opts:['genitivo','nominativo (predicado)','acusativo','dativo'],ans:1},
+{q:'"per ipsum" rige caso...',opts:['ablativo','genitivo','dativo','acusativo'],ans:3},
+{q:'Jerónimo traduce Λόγος como Verbum porque...',opts:['era la única opción','Verbum captura razón + palabra pronunciada','Sermo era pagano','siguió la LXX'],ans:1},
+{q:'"plenum gratiae et veritatis" — ambos son caso...',opts:['nominativo','dativo','genitivo','acusativo'],ans:2},
+{q:'"non receperunt" es tiempo...',opts:['imperfecto','presente','futuro','perfecto'],ans:3},
+],
+verse:{lat:'Et Verbum caro factum est et habitavit in nobis, et vidimus gloriam eius, gloriam quasi unigeniti a Patre, plenum gratiae et veritatis.',esp:'"Y el Verbo se hizo carne y habitó entre nosotros, y vimos su gloria, gloria como del unigénito del Padre, lleno de gracia y de verdad" — Juan 1:14 (Vulgata)',
+words:[['Et Verbum caro factum est','y el Verbo fue hecho carne (perf. pasivo)'],['et habitavit in nobis','y habitó en nosotros (in + ablativo)'],['et vidimus gloriam eius','y vimos su gloria (perf. 1ª pl. + gen.)'],['gloriam quasi unigeniti','gloria como del unigénito (quasi + gen.)'],['a Patre','del Padre (a + ablativo de origen)'],['plenum gratiae et veritatis','lleno de gracia y de verdad (gen.)']],
+insight:'<em>factum est</em>: perfecto pasivo — el acto puntual de la encarnación. <em>habitavit</em>: perfecto — en el latín de la Vulgata evoca el tabernáculo (σκηνόω). <em>vidimus</em>: perfecto 1ª pl. — "nosotros vimos" — el testimonio ocular. Tres perfectos consecutivos afirman tres hechos pasados con consecuencias permanentes. El latín de Juan 1:14 es teología en morfología.'}
+}
+];
+
+const lnav=document.getElementById('lnav');
+const container=document.getElementById('lessons-container');
+LESSONS.forEach((lesson,idx)=>{
+  const btn=document.createElement('button');
+  btn.className='lnav-btn'+(idx===0?' active':'');
+  btn.textContent=lesson.day===0?'Intro':`Día ${lesson.day}`;
+  btn.onclick=()=>showLesson(idx);
+  lnav.appendChild(btn);
+  const panel=document.createElement('div');
+  panel.className='lesson-panel'+(idx===0?' active':'');
+  panel.id=`lesson-${idx}`;
+  panel.innerHTML=buildLesson(lesson,idx);
+  container.appendChild(panel);
+});
+function showLesson(idx){
+  document.querySelectorAll('.lnav-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+  document.querySelectorAll('.lesson-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+  initQuiz(idx);
+}
+function showInnerTab(lIdx,tabName){
+  const panel=document.getElementById(`lesson-${lIdx}`);
+  panel.querySelectorAll('.itab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tabName));
+  panel.querySelectorAll('.itab-panel').forEach(p=>p.classList.toggle('active',p.dataset.tab===tabName));
+}
+function buildLesson(lesson,idx){
+  const tabKeys=['leccion','vocab','quiz','verse'];
+  const tabLabels=['📖 Lección','📚 Vocabulario','✏️ Práctica','📜 Texto'];
+  const pct=lesson.day===0?0:(lesson.day/30*100).toFixed(1);
+  const progLabel=lesson.day===0?'Introducción':`Día ${lesson.day} de 30`;
+  let html=`<div style="text-align:center;margin-bottom:14px;">
+    <div style="font-family:'EB Garamond',serif;font-size:1.5rem;color:var(--red);font-style:italic;">${lesson.day===0?'Introductio':`Dies ${lesson.day}`} — ${lesson.title}</div>
+    <div style="font-size:12px;color:#888;margin-top:2px;">${lesson.subtitle}</div>
+    <div class="prog-bar" style="max-width:300px;margin:8px auto 3px;"><div class="prog-fill" style="width:${pct}%"></div></div>
+    <div class="prog-lbl">${progLabel}</div>
+  </div>
+  <div class="inner-tabs">
+    ${tabLabels.map((t,i)=>`<div class="itab${i===0?' active':''}" data-tab="${tabKeys[i]}" onclick="showInnerTab(${idx},'${tabKeys[i]}')">${t}</div>`).join('')}
+  </div>`;
+  html+=`<div class="itab-panel active" data-tab="leccion">`;
+  if(lesson.isIntro){
+    html+=`<div class="intro-hero"><div class="big-lat">Lingua Latina</div><p>La lengua de Roma, Virgilio, Agustín, Tomás de Aquino y la Vulgata de Jerónimo</p></div>`;
+    html+=`<div class="card"><h3><span>✨</span> ¿Por qué estudiar latín?</h3>`;
+    lesson.tips.forEach(t=>{html+=`<div class="tip">${t.t}</div>`;});
+    html+=`</div>`;
+    html+=`<div class="card"><h3><span>⚡</span> Características del latín</h3><div class="feature-grid">`;
+    lesson.features.forEach(f=>{html+=`<div class="feature-box"><div class="feature-icon">${f.icon}</div><div class="feature-title">${f.title}</div><div class="feature-desc">${f.desc}</div></div>`;});
+    html+=`</div></div>`;
+    html+=`<div class="card"><h3><span>🔀</span> Diferencias con el español</h3><ul class="diff-list">`;
+    lesson.diffs.forEach(d=>{html+=`<li class="diff-item"><span class="diff-icon">${d.icon}</span><span>${d.t}</span></li>`;});
+    html+=`</ul></div>`;
+  } else {
+    if(lesson.tips){html+=`<div class="card"><h3><span>💡</span> Claves del día</h3>`;lesson.tips.forEach(t=>{html+=`<div class="tip">${t.t}</div>`;});html+=`</div>`;}
+    if(lesson.extra){
+      const e=lesson.extra;
+      if(e.type==='table'){
+        html+=`<div class="card"><h3><span>📊</span> ${e.title}</h3><table class="gtable"><thead><tr>${e.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+        e.rows.forEach(r=>{html+=`<tr>${r.map((c,ci)=>`<td${ci===0?' style="font-weight:600"':''}>${c}</td>`).join('')}</tr>`;});
+        html+=`</tbody></table></div>`;
+      }else if(e.type==='paradigm'){
+        html+=`<div class="card"><h3><span>📊</span> ${e.title}</h3><div class="paradigm"><div class="para-row"><div class="para-lbl para-head">Caso</div><div class="para-lat para-head">Latino</div><div class="para-esp para-head">Español</div></div>`;
+        e.rows.forEach(r=>{html+=`<div class="para-row"><div class="para-lbl">${r.lbl}</div><div class="para-lat">${r.lat}</div><div class="para-esp">${r.esp}</div></div>`;});
+        html+=`</div>`;
+        if(e.note)html+=`<div class="tip tip-olive" style="margin-top:10px;"><strong>Nota:</strong> ${e.note}</div>`;
+        html+=`</div>`;
+      }else if(e.type==='conj'){
+        html+=`<div class="card"><h3><span>📊</span> ${e.title}</h3><div class="conj-grid">`;
+        e.cols.forEach(col=>{
+          html+=`<div class="conj-box"><h4>${col.title}</h4>`;
+          col.rows.forEach(r=>{html+=`<div class="conj-line"><span class="conj-lat">${r[0]}</span><span class="conj-esp">${r[1]}</span></div>`;});
+          html+=`</div>`;
+        });
+        html+=`</div></div>`;
+      }
+    }
+  }
+  html+=`</div>`;
+  html+=`<div class="itab-panel" data-tab="vocab"><div class="card"><h3><span>📚</span> Vocabulario del día</h3><p style="font-size:12px;color:#888;margin-bottom:8px;">Toca cada entrada para ver más.</p><ul class="vlist">`;
+  lesson.vocab.forEach(v=>{
+    html+=`<li class="vitem" onclick="toggleVocab(this)"><div class="vlat">${v.g}</div><div><div class="vtrans">${v.t}</div><div class="vhint" style="display:none;">${v.h} — <em>${v.f}</em></div><div class="vmore">↓ más info</div></div></li>`;
+  });
+  html+=`</ul></div></div>`;
+  html+=`<div class="itab-panel" data-tab="quiz"><div class="card"><h3><span>✏️</span> Práctica — ${lesson.day===0?'Introductio':`Dies ${lesson.day}`}</h3><div id="quiz-${idx}"></div><div id="score-${idx}" class="qscore" style="display:none;"></div></div></div>`;
+  const v=lesson.verse;
+  html+=`<div class="itab-panel" data-tab="verse"><div class="vblock"><div class="vblock-lat">${v.lat}</div><div class="vblock-trans">${v.esp}</div><div class="vwords">`;
+  v.words.forEach(w=>{html+=`<div class="vrow"><span class="vwl">${w[0]}</span><span class="vwe">${w[1]}</span></div>`;});
+  html+=`</div></div><div class="card"><h3><span>🔍</span> El detalle que las traducciones pierden</h3><p>${v.insight}</p></div></div>`;
+  return html;
+}
+const quizState={};
+function initQuiz(idx){
+  if(quizState[idx])return;
+  quizState[idx]={pos:0,score:0,data:[...LESSONS[idx].quiz].sort(()=>Math.random()-.5)};
+  renderQuiz(idx);
+}
+function renderQuiz(idx){
+  const el=document.getElementById(`quiz-${idx}`);
+  const sc=document.getElementById(`score-${idx}`);
+  const s=quizState[idx];
+  if(!s)return;
+  if(s.pos>=s.data.length){
+    el.style.display='none';sc.style.display='block';
+    const pct=Math.round(s.score/s.data.length*100);
+    sc.innerHTML=`${pct>=75?'🎉':'📖'} <strong>${s.score}/${s.data.length}</strong> correctas (${pct}%)<br><span style="font-size:13px;color:#888;">${pct>=75?'Optime! Adelante.':'Perseverantia vincit — repasa.'}</span><br><button class="qbtn" style="margin-top:10px;" onclick="resetQuiz(${idx})">↺ Repetir</button>`;
+    return;
+  }
+  const q=s.data[s.pos];
+  el.innerHTML=`<div class="qcard"><div style="font-size:11px;color:#aaa;margin-bottom:6px;">${s.pos+1} / ${s.data.length}</div><div class="qbig">${q.q}</div><div class="qgrid">${q.opts.map((o,i)=>`<button class="qbtn" onclick="checkQ(${idx},this,${i},${q.ans})">${o}</button>`).join('')}</div><div class="qfb" id="qfb-${idx}"></div></div>`;
+}
+function checkQ(idx,btn,chosen,correct){
+  const s=quizState[idx];
+  btn.parentElement.querySelectorAll('.qbtn').forEach(b=>b.disabled=true);
+  const fb=document.getElementById(`qfb-${idx}`);
+  if(chosen===correct){btn.classList.add('ok');fb.style.color='var(--olive)';fb.textContent='✓ Recte!';s.score++;}
+  else{btn.classList.add('no');btn.parentElement.querySelectorAll('.qbtn')[correct].classList.add('ok');fb.style.color='var(--red)';fb.textContent=`✗ Erat: ${s.data[s.pos].opts[correct]}`;}
+  setTimeout(()=>{s.pos++;renderQuiz(idx);},1300);
+}
+function resetQuiz(idx){
+  quizState[idx]={pos:0,score:0,data:[...LESSONS[idx].quiz].sort(()=>Math.random()-.5)};
+  document.getElementById(`quiz-${idx}`).style.display='block';
+  document.getElementById(`score-${idx}`).style.display='none';
+  renderQuiz(idx);
+}
+function toggleVocab(el){
+  const h=el.querySelector('.vhint'),m=el.querySelector('.vmore');
+  if(h.style.display==='none'){h.style.display='block';m.style.display='none';}
+  else{h.style.display='none';m.style.display='block';}
+}
+initQuiz(0);
+</script>
+</body>
+</html>
