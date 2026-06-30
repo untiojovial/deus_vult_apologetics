@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Tríada Trascendental — Van Til · Tomás de Aquino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080808;--surf:#111;--surf2:#181818;--surf3:#202020;
+  --gold:#F5C518;--gdim:rgba(245,197,24,.12);--gmid:rgba(245,197,24,.32);
+  --wh:#EFEFEF;--mu:#888;--mu2:#555;
+  --sw:272px;
+  --ff:'Playfair Display',Georgia,serif;
+  --fb:'Inter',system-ui,sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --r:6px;--tr:.22s ease;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--wh);font-family:var(--fb);font-size:15px;line-height:1.7;display:flex;min-height:100vh}
+
+/* SIDEBAR */
+#sb{width:var(--sw);min-width:var(--sw);height:100vh;position:sticky;top:0;overflow-y:auto;
+  background:var(--surf);border-right:1px solid #1e1e1e;display:flex;flex-direction:column;z-index:100;
+  scrollbar-width:thin;scrollbar-color:var(--mu2) transparent}
+#sb::-webkit-scrollbar{width:4px}
+#sb::-webkit-scrollbar-thumb{background:var(--mu2);border-radius:2px}
+.sb-logo{padding:22px 20px 16px;border-bottom:1px solid #1e1e1e;
+  font-family:var(--ff);font-size:12px;line-height:1.4;color:var(--gold);
+  letter-spacing:.06em;text-transform:uppercase}
+.sb-logo span{display:block;font-size:10px;color:var(--mu);font-family:var(--fb);
+  font-weight:300;letter-spacing:.04em;margin-top:3px;text-transform:none}
+.sb-nav{padding:10px 0 40px}
+.sbp{margin-bottom:2px}
+.sbp-btn{width:100%;display:flex;align-items:center;gap:8px;padding:8px 18px;
+  background:none;border:none;cursor:pointer;font-family:var(--fb);font-size:11px;
+  font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;
+  text-align:left;transition:color var(--tr)}
+.sbp-btn:hover,.sbp-btn.act{color:var(--gold)}
+.sbp-btn .ch{margin-left:auto;font-size:9px;transition:transform .2s}
+.sbp.open .ch{transform:rotate(90deg)}
+.sb-sub{display:none;padding:0 0 4px}
+.sbp.open .sb-sub{display:block}
+.sb-sub a{display:block;padding:5px 18px 5px 34px;font-size:11.5px;color:var(--mu);
+  text-decoration:none;border-left:2px solid transparent;
+  transition:color var(--tr),border-color var(--tr);line-height:1.4}
+.sb-sub a:hover{color:var(--wh)}
+.sb-sub a.act{color:var(--gold);border-left-color:var(--gold);padding-left:30px}
+
+/* MAIN */
+#main{flex:1;min-width:0;padding:0 0 100px}
+#prog{position:fixed;top:0;left:var(--sw);right:0;height:2px;background:var(--gold);
+  transform-origin:left;transform:scaleX(0);z-index:300;transition:transform .1s linear}
+
+/* HERO */
+#portada{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:80px 64px 60px;position:relative;overflow:hidden;border-bottom:1px solid #1e1e1e}
+.hbg{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 80% 50%,rgba(245,197,24,.045) 0%,transparent 70%)}
+.ey{font-family:var(--fm);font-size:11px;color:var(--gold);letter-spacing:.2em;
+  text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.ey::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+h1.ht{font-family:var(--ff);font-size:clamp(36px,5vw,62px);line-height:1.08;font-weight:900;
+  background:linear-gradient(135deg,var(--wh) 60%,var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  max-width:820px;margin-bottom:18px}
+.hs{font-size:16px;color:var(--mu);max-width:640px;margin-bottom:40px;line-height:1.6;font-weight:300}
+.hm{display:flex;gap:14px;flex-wrap:wrap}
+.hb{display:flex;align-items:center;gap:8px;background:var(--gdim);border:1px solid var(--gmid);
+  border-radius:40px;padding:6px 16px;font-size:11.5px;font-weight:500;color:var(--gold);letter-spacing:.04em}
+.hb::before{content:'◆';font-size:8px}
+
+/* SECTION SEPARATORS */
+.ps{padding:58px 64px 48px;border:solid #1a1a1a;border-width:1px 0;
+  background:linear-gradient(180deg,var(--surf) 0%,var(--bg) 100%);
+  position:relative;overflow:hidden;margin-top:12px}
+.ps .pn{font-family:var(--ff);font-size:clamp(70px,12vw,130px);font-weight:900;
+  color:rgba(245,197,24,.07);position:absolute;right:40px;top:50%;
+  transform:translateY(-50%);line-height:1;pointer-events:none;user-select:none}
+.ps .pl{font-family:var(--fm);font-size:11px;color:var(--gold);letter-spacing:.2em;
+  text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.ps .pl::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.ps .pt{font-family:var(--ff);font-size:clamp(22px,3.5vw,34px);font-weight:700;
+  color:var(--wh);max-width:680px;line-height:1.2}
+.ps .psub{margin-top:10px;font-size:12px;color:var(--mu);font-family:var(--fm);letter-spacing:.05em}
+
+/* SECTIONS */
+.sec{padding:48px 64px;border-bottom:1px solid #141414}
+.stit{font-family:var(--ff);font-size:clamp(18px,2.5vw,25px);font-weight:700;
+  color:var(--wh);margin-bottom:14px;line-height:1.3}
+.snum{font-family:var(--fm);font-size:12px;color:var(--gold);display:block;
+  margin-bottom:6px;letter-spacing:.1em}
+.si{color:var(--mu);font-size:14.5px;max-width:780px;margin-bottom:28px;line-height:1.75}
+.si strong{color:var(--wh);font-weight:600}
+
+/* SYLLOGISMS */
+.sy{background:var(--surf2);border-left:3px solid var(--gold);
+  border-radius:0 var(--r) var(--r) 0;margin-bottom:18px;overflow:hidden;
+  transition:border-color var(--tr)}
+.sy:hover{border-left-color:#ddd}
+.syh{padding:11px 20px 9px;background:rgba(245,197,24,.06);
+  font-family:var(--fm);font-size:10.5px;font-weight:600;color:var(--gold);
+  letter-spacing:.08em;border-bottom:1px solid #252525;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;user-select:none}
+.syt{font-size:9px;color:var(--mu);transition:transform .2s;font-family:var(--fb)}
+.sy.col .syt{transform:rotate(-90deg)}
+.syb{padding:16px 22px 18px}
+.sy.col .syb{display:none}
+.pr{display:flex;gap:13px;margin-bottom:10px;align-items:flex-start}
+.pr:last-of-type{margin-bottom:13px}
+.pl{font-family:var(--fm);font-size:9.5px;font-weight:600;color:var(--gold);
+  background:var(--gdim);border:1px solid var(--gmid);border-radius:3px;
+  padding:2px 6px;white-space:nowrap;margin-top:2px;flex-shrink:0}
+.pt{font-size:13.5px;color:#ccc;line-height:1.65}
+.cr{display:flex;gap:13px;align-items:flex-start;padding-top:13px;
+  border-top:1px solid #2a2a2a;margin-top:3px}
+.cl{font-family:var(--fm);font-size:9.5px;font-weight:600;color:#000;
+  background:var(--gold);border-radius:3px;padding:2px 6px;
+  white-space:nowrap;margin-top:2px;flex-shrink:0}
+.ct{font-size:13.5px;color:var(--gold);font-style:italic;line-height:1.65;font-weight:500}
+
+/* NOTES */
+.nt{background:rgba(245,197,24,.05);border:1px solid rgba(245,197,24,.18);
+  border-radius:var(--r);padding:15px 20px;margin:18px 0;
+  font-size:13px;color:#bbb;line-height:1.7;font-style:italic}
+.nt::before{content:'NOTA';display:block;font-family:var(--fm);font-size:9px;
+  font-weight:600;color:var(--gold);letter-spacing:.15em;margin-bottom:7px;font-style:normal}
+
+/* PRED CARDS */
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}
+.pc{background:var(--surf2);border-radius:var(--r);padding:20px;border-top:3px solid var(--gold)}
+.pcl{font-family:var(--ff);font-size:30px;font-weight:900;color:var(--gold);opacity:.3;margin-bottom:5px;line-height:1}
+.pcn{font-family:var(--ff);font-size:14px;font-weight:700;color:var(--gold);margin-bottom:9px}
+.pcd{font-size:13px;color:var(--mu);line-height:1.6}
+
+/* TABLE */
+.tw{overflow-x:auto;margin:22px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:var(--gold)}
+thead th{padding:11px 15px;text-align:left;font-family:var(--fm);font-size:10px;
+  font-weight:600;color:#000;letter-spacing:.1em;text-transform:uppercase}
+tbody tr{border-bottom:1px solid #1e1e1e;transition:background .15s}
+tbody tr:hover{background:var(--surf2)}
+tbody tr:nth-child(even){background:var(--surf)}
+td{padding:11px 15px;vertical-align:top;line-height:1.5}
+td:first-child{font-family:var(--fm);font-size:10.5px;font-weight:600;color:var(--gold);white-space:nowrap}
+td:last-child{font-family:var(--fm);font-size:10px;color:var(--mu);white-space:nowrap}
+
+/* DILEMA */
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0}
+.dc{border-radius:var(--r);padding:22px}
+.dc.red{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.25)}
+.dc.amb{background:rgba(245,197,24,.07);border:1px solid rgba(245,197,24,.25)}
+.dct{font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:13px}
+.dct.red{color:#f87171}.dct.amb{color:var(--gold)}
+.di{display:flex;gap:10px;margin-bottom:9px;font-size:13px;color:#ccc;line-height:1.55}
+.dil{font-family:var(--fm);font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px}
+.dil.red{color:#f87171}.dil.amb{color:var(--gold)}
+.dc-c{margin-top:15px;padding-top:13px;border-top:1px solid #2e2e2e;
+  font-size:13px;font-style:italic;font-weight:500}
+.dc-c.red{color:#f87171}.dc-c.amb{color:var(--gold)}
+.dm-c{background:var(--surf2);border-radius:var(--r);padding:26px 28px;
+  border:2px solid var(--gold);margin-top:18px}
+.dm-c h3{font-family:var(--ff);font-size:16px;color:var(--gold);margin-bottom:11px}
+.dm-c p{font-size:13.5px;color:#ccc;line-height:1.75;font-style:italic}
+
+/* PREMISAS */
+.pmc{display:flex;gap:16px;background:var(--surf2);border-radius:var(--r);
+  padding:16px 20px;margin-bottom:11px;border-left:3px solid var(--gold)}
+.pml{font-family:var(--fm);font-size:10px;font-weight:700;color:var(--gold);
+  background:var(--gdim);border:1px solid var(--gmid);border-radius:3px;
+  padding:3px 8px;white-space:nowrap;align-self:flex-start;margin-top:1px;
+  flex-shrink:0;letter-spacing:.05em}
+.pmb{font-size:13.5px;color:#ccc;line-height:1.65}
+.pmb strong{color:var(--wh);font-weight:600}
+
+/* 2-COL */
+.tcol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.tcard{background:var(--surf2);border-radius:var(--r);padding:20px}
+.tcard-t{font-family:var(--ff);font-size:14px;font-weight:700;color:var(--gold);margin-bottom:9px}
+.tcard p{font-size:13px;color:var(--mu);line-height:1.65}
+
+/* TRILEMA */
+.trig{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:22px 0}
+.trc{background:var(--surf2);border-radius:var(--r);padding:17px;border-top:3px solid}
+.trc.c1{border-top-color:#ef4444}.trc.c2{border-top-color:#f59e0b}.trc.c3{border-top-color:var(--gold)}
+.trn{font-family:var(--fm);font-size:10px;font-weight:600;margin-bottom:8px;letter-spacing:.1em}
+.trc.c1 .trn{color:#ef4444}.trc.c2 .trn{color:#f59e0b}.trc.c3 .trn{color:var(--gold)}
+.trc p{font-size:12.5px;color:var(--mu);line-height:1.6}
+
+/* EPÍLOGO */
+.epc{background:var(--surf2);border-radius:var(--r);padding:20px 22px;
+  margin-bottom:13px;border-left:3px solid rgba(245,197,24,.4)}
+.ept{font-family:var(--ff);font-size:14px;font-weight:700;color:var(--gold);margin-bottom:9px}
+.epc p{font-size:13.5px;color:#bbb;line-height:1.72}
+.col{text-align:center;padding:38px 64px 18px;font-family:var(--fm);
+  font-size:11px;color:var(--mu2);font-style:italic;letter-spacing:.06em;
+  border-top:1px solid #1a1a1a;margin-top:38px}
+
+/* SUBSECTION */
+.sst{font-family:var(--ff);font-size:19px;font-weight:700;color:var(--wh);
+  margin:34px 0 14px;padding-bottom:8px;border-bottom:1px solid #222;
+  display:flex;align-items:center;gap:11px}
+.sst::before{content:'';display:block;width:4px;height:19px;background:var(--gold);
+  border-radius:2px;flex-shrink:0}
+
+/* MOBILE */
+#sbt{display:none;position:fixed;bottom:22px;right:22px;z-index:200;
+  width:48px;height:48px;border-radius:50%;background:var(--gold);border:none;
+  cursor:pointer;color:#000;font-size:20px;
+  box-shadow:0 4px 20px rgba(245,197,24,.4);align-items:center;justify-content:center}
+
+@media(max-width:900px){
+  body{flex-direction:column}
+  #sb{width:100%;min-width:unset;height:auto;position:fixed;top:0;left:0;right:0;
+    z-index:200;transform:translateY(-100%);transition:transform .3s ease;max-height:80vh;overflow-y:auto}
+  #sb.open{transform:translateY(0)}
+  #sbt{display:flex}
+  .sec,.ps{padding:34px 22px}
+  #portada{padding:60px 22px 40px}
+  .pg,.dg,.tcol,.trig{grid-template-columns:1fr}
+  #prog{left:0}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<nav id="sb">
+<div class="sb-logo">La Tríada Trascendental<span>Van Til · Tomás de Aquino · Tawhīd</span></div>
+<div class="sb-nav">
+
+<div class="sbp open"><button class="sbp-btn" onclick="tp(this)">Portada & Preámbulo <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#portada">Portada</a>
+<a href="#preambulo">Preámbulo metodológico</a>
+</div></div>
+<div class="sbp"><button class="sbp-btn" onclick="tp(this)">Parte I — Método trascendental <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#t1t2">T.1–T.2 · Forma y datum irrecusable</a>
+<a href="#t3">T.3 · Fundamento necesario</a>
+<a href="#t4t5">T.4–T.5 · Esencia, existencia, participación</a>
+<a href="#t6">T.6 · Ipsum Esse Subsistens</a>
+</div></div>
+<div class="sbp"><button class="sbp-btn" onclick="tp(this)">Parte II — La Tríada <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#ii1">II.1 · Los tres predicados</a>
+<a href="#ii2">II.2 · Unidad (U.1–U.3)</a>
+<a href="#ii3">II.3 · Pluralidad (P.1–P.4)</a>
+<a href="#ii4">II.4 · Relación (R.1–R.4)</a>
+<a href="#ii5">II.5 · Tríada (TRI.1–TRI.4)</a>
+</div></div>
+<div class="sbp"><button class="sbp-btn" onclick="tp(this)">Parte III — PRS & PCP <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#iii1">III.1 · PRS.1–PRS.3</a>
+<a href="#iii2">III.2 · PCP.1–PCP.5</a>
+</div></div>
+<div class="sbp"><button class="sbp-btn" onclick="tp(this)">Parte IV — Trinidad <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#iv1">TR.1–TR.4 · Solución única</a>
+</div></div>
+<div class="sbp"><button class="sbp-btn" onclick="tp(this)">Parte V — Colapso Tawhīd <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#v1">V.1 · Formulación del tawhīd</a>
+<a href="#v2">V.2 · Colapso I: Pluralidad (C.1–C.3)</a>
+<a href="#v3">V.3 · Colapso II: Relación (C.4–C.6)</a>
+<a href="#v4">V.4 · Colapso III: Conocimiento (C.7–C.9)</a>
+</div></div>
+<div class="sbp"><button class="sbp-btn" onclick="tp(this)">Parte VI — Objeción Atributos <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#vi1">VI.1 · Formulación de la objeción</a>
+<a href="#vi2a">VI.2a · Cuerno I (OBJ.1–OBJ.3)</a>
+<a href="#vi2b">VI.2b · Cuerno II (OBJ.4–OBJ.5)</a>
+<a href="#vi2c">VI.2c · Solución tomista: distinctio rationis ratiocinatae (SOL.1–SOL.3)</a>
+<a href="#vi3">VI.3 · Caso específico (ESP.1–ESP.3)</a>
+</div></div>
+<div class="sbp"><button class="sbp-btn" onclick="tp(this)">Parte VII — Colapso Epistémico <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#vii1">VII.1 · VT.1–VT.3</a>
+<a href="#vii2">VII.2 · VT.4–VT.5</a>
+<a href="#vii3">VII.3 · VT.6–VT.7</a>
+</div></div>
+<div class="sbp"><button class="sbp-btn" onclick="tp(this)">Parte VIII — Síntesis & Dilema <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#viii1">VIII.1 · Premisas maestras</a>
+<a href="#viiitabla">VIII.1 · Tabla 7 colapsos</a>
+<a href="#viiidm">VIII.2 · Dilema Maestro</a>
+</div></div>
+<div class="sbp"><button class="sbp-btn" onclick="tp(this)">Epílogo <span class="ch">▶</span></button><div class="sb-sub">
+<a href="#epilogo">Reflexiones finales</a>
+</div></div>
+</div></nav><main id="main">
+<section id="portada">
+<div class="hbg"></div>
+<div class="ey">Apologética filosófica</div>
+<h1 class="ht">La Tríada Trascendental</h1>
+<p class="hs">Unidad, Pluralidad y Relación como condición de posibilidad de la realidad, y el colapso del Tawhīd islámico. Un caso de metafísica trascendental desde la síntesis <strong style="color:var(--wh)">Van Til – Tomás de Aquino</strong>.</p>
+<div class="hm">
+  <div class="hb">53 silogismos</div>
+  <div class="hb">7 colapsos estructurales</div>
+  <div class="hb">1 dilema maestro</div>
+  <div class="hb">Metafísica · Apologética · Teología comparada</div>
+</div>
+</section>
+<section id="preambulo" class="sec">
+<div class="stit"><span class="snum">PREÁMBULO METODOLÓGICO</span>Síntesis Van Til – Tomás de Aquino</div>
+<p class="si">El presente argumento opera en la intersección de dos tradiciones apologéticas complementarias. La síntesis no es ecléctica sino orgánica: <strong>Van Til pregunta</strong>, <strong>Aquino responde</strong>.</p>
+<div class="tcol">
+  <div class="tcard"><div class="tcard-t">Cornelius Van Til — Método trascendental</div>
+  <p>Pregunta por las condiciones de posibilidad de toda afirmación racional. El argumento exige que el interlocutor demuestre la coherencia interna de su cosmovisión. Si no puede, su posición se derrumba desde dentro.</p></div>
+  <div class="tcard"><div class="tcard-t">Tomás de Aquino — Metafísica del ser</div>
+  <p>Proporciona el andamiaje ontológico con precisión técnica insuperable: acto y potencia, esencia y existencia, analogía del ser, <em>simplicitas Dei</em>, participación en el <em>esse</em>, causalidad proporcional.</p></div>
+</div>
+<div class="nt" style="margin-top:20px">Frente a la teología del Qur'ān, esta síntesis genera un dilema destructivo: o el tawhīd islámico puede dar cuenta de la estructura trascendental de la realidad (unidad, pluralidad y relación), o no puede. Si puede, necesita importar categorías ajenas a su propio sistema. Si no puede, colapsa como cosmovisión. <strong style="color:var(--gold);font-style:normal">No hay tercera opción.</strong></div>
+</section>
+<div class="ps" id="partei"><div class="pn">I</div><div class="pl">Parte I</div><div class="pt">Establecimiento del Método Trascendental</div><div class="psub">Silogismos T.1 – T.6 · Argumento trascendental y analogía del ser</div></div>
+<section id="t1t2" class="sec"><div class="stit"><span class="snum">I.1</span>El Método Trascendental y su Forma Lógica</div>
+<p class="si">El argumento trascendental (TA) no es un argumento cosmológico ni ontológico en sentido clásico, aunque los incorpora. X puede ser el conocimiento, la lógica, la causalidad, la moral o la estructura misma de la realidad en tanto que inteligible.</p>
+<div class="sy"><div class="syh" onclick="ts(this)">T.1 · FORMA DEL ARGUMENTO TRASCENDENTAL <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Para que X sea posible, debe darse la condición C.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">X es posible (o actual).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">Luego, C se da necesariamente.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">T.2 · LA INTELIGIBILIDAD COMO DATUM IRRECUSABLE <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Todo interlocutor que formula una objeción asume implícitamente que su objeción es inteligible.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Negar la inteligibilidad de la realidad es autorreferentemente suicida: es una afirmación inteligible de que nada es inteligible.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">La inteligibilidad de la realidad no puede ser negada sin refutarse a uno mismo.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La inteligibilidad de la realidad es un datum trascendental irrecusable.</span></div>
+</div></div>
+</section>
+<section id="t3" class="sec"><div class="stit"><span class="snum">I.1 cont.</span>El Fundamento de la Inteligibilidad No Puede Ser Contingente</div>
+<div class="sy"><div class="syh" onclick="ts(this)">T.3 · EL FUNDAMENTO ES NECESARIO, NO CONTINGENTE <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Todo lo contingente podría no haber existido.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Si el fundamento de la inteligibilidad fuera contingente, la inteligibilidad podría no haberse dado.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Pero la inteligibilidad es irrecusable (T.2-C).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Lo irrecusable no puede depender de lo contingente para su existencia.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El fundamento de la inteligibilidad es necesario, no contingente. Este fundamento necesario es lo que tanto Van Til como Aquino denominan, en sus respectivos vocabularios, Dios.</span></div>
+</div></div>
+<div class="nt">T.3 cierra el argumento trascendental introductorio. A partir de aquí, el argumento toma forma metafísica tomista para identificar la naturaleza de ese fundamento necesario.</div>
+</section>
+<section id="t4t5" class="sec"><div class="stit"><span class="snum">I.2</span>Distinción Real Esencia/Existencia y Principio de Participación</div>
+<div class="sy"><div class="syh" onclick="ts(this)">T.4 · DISTINCIÓN REAL DE ESENCIA Y EXISTENCIA EN LOS ENTES FINITOS <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">En todo ente finito, el <em>qué es</em> (essentia) puede ser concebido independientemente del <em>que es</em> (esse).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Lo que puede ser concebido separadamente tiene una distinción real o al menos formal.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">La esencia del ente finito no incluye necesariamente su existencia (un hombre puede no existir).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">En el ente finito hay distinción real entre esencia y existencia.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">T.5 · PARTICIPACIÓN: EL ESSE DEL ENTE FINITO ES RECIBIDO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">En el ente finito, la existencia no se identifica con la esencia.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Lo que no se identifica con su propiedad la recibe de otro.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">El ente finito no es su propio ser; lo tiene de otro.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">Todo ente finito participa del esse en virtud de una causa que es su propio ser (ipsum esse subsistens).</span></div>
+</div></div>
+</section>
+<section id="t6" class="sec"><div class="stit"><span class="snum">I.2 cont.</span>Dios Como Ipsum Esse Subsistens</div>
+<div class="sy"><div class="syh" onclick="ts(this)">T.6 · DIOS COMO IPSUM ESSE SUBSISTENS <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La cadena de participación no puede ser infinita sin razón suficiente del conjunto (argumento de la regresión).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Debe haber un ente cuya esencia sea su existencia, de modo que no reciba el ser de otro.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Tal ente no está compuesto de esencia y existencia, sino que es pura actualidad (actus purus).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">Existe un Ipsum Esse Subsistens que es la causa primera de todo ser participado.</span></div>
+</div></div>
+<div class="nt">Estos tres silogismos (T.4–T.6) constituyen el trasfondo ontológico que hará posible el argumento trascendental sobre la tríada. Sin la distinción esencia/existencia y el principio de participación, el Principio de Causalidad Proporcional (PCP) no puede operar con rigor.</div>
+</section>
+<div class="ps" id="parteii"><div class="pn">II</div><div class="pl">Parte II</div><div class="pt">Análisis Trascendental de la Estructura de la Realidad</div><div class="psub">U.1–U.3 · P.1–P.4 · R.1–R.4 · TRI.1–TRI.4</div></div>
+<section id="ii1" class="sec"><div class="stit"><span class="snum">II.1</span>Los Tres Predicados Estructurales Irrecusables de la Realidad</div>
+<p class="si">La realidad empírica —y cualquier posible realidad coherentemente concebible— exhibe tres predicados que no pueden ser eliminados sin destruir la inteligibilidad misma. Demostraremos que son: (1) reales, (2) irreductibles entre sí, (3) mutuamente necesarios, y (4) exigen una causa primera que los contenga eminentemente.</p>
+<div class="pg">
+<div class="pc"><div class="pcl">A</div><div class="pcn">UNIDAD</div><div class="pcd">Cada ente es uno consigo mismo (<em>unum</em> como trascendental del ser). Sin unidad no hay identidad; sin identidad no hay predicación ni conocimiento.</div></div>
+<div class="pc"><div class="pcl">B</div><div class="pcn">PLURALIDAD</div><div class="pcd">Existen múltiples entes irreductibles entre sí. Negar la pluralidad es performativamente contradictorio: la negación misma introduce distinción.</div></div>
+<div class="pc"><div class="pcl">C</div><div class="pcn">RELACIÓN</div><div class="pcd">Los entes están relacionados entre sí de modo cognoscible y causalmente estructurado. Sin relación no hay causalidad, ciencia ni conocimiento posibles.</div></div>
+</div>
+</section>
+<section id="ii2" class="sec"><div class="stit"><span class="snum">II.2</span>Demostración de la UNIDAD Como Condición Trascendental</div>
+<div class="sy"><div class="syh" onclick="ts(this)">U.1 · EL SER Y LO UNO SE CONVIERTEN (ens et unum convertuntur) <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Todo lo que es, en tanto que es, es uno consigo mismo (principio de identidad: A=A).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Lo que no es uno consigo mismo no puede ser distinguido de otra cosa ni de la nada.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Lo que no puede ser distinguido no puede ser conocido ni enunciado.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La unidad (unum) es un predicado trascendental del ser: todo ente, en tanto ente, es uno.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">U.2 · LA UNIDAD NO ES MERA AUSENCIA DE PLURALIDAD SINO PREDICADO POSITIVO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si la unidad fuera solo negación de pluralidad, su contenido sería vacío.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Un predicado de contenido vacío no puede ser causa de nada.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Pero la unidad de cada ente es causalmente relevante (la unidad del ADN de un organismo causa su desarrollo específico, no el de otro).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La unidad es un predicado positivo, no meramente negativo.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">U.3 · LA UNIDAD MÁXIMA EXIGE AUSENCIA DE COMPOSICIÓN (Simplicitas Divina) <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La unidad de un ente es mayor cuanto menos composición tiene.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">La mayor unidad posible es la de un ente que no tenga partes reales de ningún tipo.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Un ente sin partes reales de ningún tipo es absolutamente simple.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El ente de máxima unidad es absolutamente simple (simplicitas per essentiam).</span></div>
+</div></div>
+<div class="nt">Este es el principio tomista de la <em>simplicitas Dei</em>. La simplicidad divina no es pobreza ontológica sino la plenitud del ser sin límite alguno. Resulta crucial en la Parte VI al evaluar la objeción islámica.</div>
+</section>
+<section id="ii3" class="sec"><div class="stit"><span class="snum">II.3</span>Demostración de la PLURALIDAD Como Condición Trascendental</div>
+<div class="sy"><div class="syh" onclick="ts(this)">P.1 · LA PLURALIDAD ES IRREDUCIBLEMENTE REAL <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si solo existiera un ente absolutamente simple y sin partes, sin ningún otro ente, no habría predicación posible (no habría sujeto y predicado distintos).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Toda afirmación —incluida la afirmación monista «solo existe uno»— requiere distinguir entre el sujeto que afirma y el objeto afirmado, entre el acto y el contenido, entre el conocimiento y lo conocido.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Esta distinción presupone pluralidad irreducible.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La pluralidad es una condición trascendental irrecusable de toda afirmación, incluida la afirmación de que «todo es uno».</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">P.2 · EL MONISMO ABSOLUTO ES PERFORMATIVAMENTE CONTRADICTORIO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El monismo absoluto afirma que solo existe una realidad sin divisiones reales.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Pero esta afirmación establece una distinción entre «el que afirma» y «lo afirmado», entre «la afirmación verdadera» y «la afirmación falsa» (que sería la pluralidad).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Toda distinción implica pluralidad.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El monismo absoluto es performativamente contradictorio: se destruye al enunciarse.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">P.3 · LA PLURALIDAD NO PUEDE SER ILUSORIA SIN COLAPSO EPISTEMOLÓGICO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si la pluralidad fuera ilusoria, el conocimiento de «la ilusión» y el conocimiento de «la realidad monista» serían distintos tipos de conocimiento.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Esta distinción epistémica es en sí misma una forma de pluralidad.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">No se puede escapar de la pluralidad ni siquiera al negarla.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La pluralidad es una condición inescapable de toda cosmovisión coherente.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">P.4 · LA PLURALIDAD REQUIERE UNA CAUSA QUE LA FUNDE SIN DISOLVERLA <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La pluralidad real de los entes es un hecho que requiere explicación causal (Principio de Razón Suficiente).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">La causa de la pluralidad no puede ser algo absolutamente sin pluralidad interna de ningún tipo, porque entonces la causa y el efecto serían heterogéneos de modo absoluto, violando la causalidad proporcional.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">La heterogeneidad absoluta entre causa y efecto viola el PRS: no hay razón suficiente por la que un polo absolutamente simple produzca algo plural.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La causa primera de la pluralidad debe contener la pluralidad de modo eminente o formal.</span></div>
+</div></div>
+</section>
+<section id="ii4" class="sec"><div class="stit"><span class="snum">II.4</span>Demostración de la RELACIÓN Como Condición Trascendental</div>
+<div class="sy"><div class="syh" onclick="ts(this)">R.1 · LA RELACIÓN ES IRREDUCTIBLE A UNIDAD Y PLURALIDAD <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Puede concebirse una mera lista de entes plurales sin ninguna relación entre ellos (atomismo radical).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">En tal lista, no habría predicación posible («A es B» implica una relación entre A y B).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">No habría causalidad (causa y efecto son términos de una relación).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">No habría conocimiento (el conocimiento es una relación entre el cognoscente y lo conocido).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La relación es una condición trascendental irreductible a la mera pluralidad.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">R.2 · LA RELACIÓN PRESUPONE LOS DOS TÉRMINOS Y EL VÍNCULO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Toda relación requiere: (a) un término a quo, (b) un término ad quem, y (c) el fundamento de la relación.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Si falta cualquiera de los tres, no hay relación sino solo un ente aislado.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">La existencia de relaciones reales en el mundo implica que estos tres componentes existen de modo real.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La realidad relacionada implica pluralidad real (al menos dos términos) y fundamento real del vínculo.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">R.3 · LAS RELACIONES CAUSALES PRESUPONEN SIMILITUD PROPORCIONAL ENTRE CAUSA Y EFECTO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Toda relación causal es tal que la causa contiene eminentemente o formalmente lo que produce en el efecto.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Si la causa no contuviera de ningún modo la perfección del efecto, el efecto surgiría de la nada (ex nihilo nihil fit en sentido causal).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Las relaciones causales son relaciones de similitud proporcional entre causa y efecto.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La causa primera debe contener eminentemente las relaciones que hacen posible la realidad relacionada.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">R.4 · EL AISLACIONISMO DIVINO ES CAUSALMENTE INCOMPETENTE <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si Dios no tuviera ningún tipo de relación interna (ninguna distinción intradivina real o cuasi-real), su «relacionarse» con el mundo sería un acto absolutamente heterogéneo a su naturaleza.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Un acto absolutamente heterogéneo a la naturaleza del agente viola el principio de que el agente actúa según lo que es (agere sequitur esse).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Un Dios absolutamente sin relaciones internas no puede ser causa proporcional de un mundo de relaciones.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El aislacionismo divino (un Dios sin ninguna distinción intradivina) es causalmente incompetente para producir un mundo relacionado.</span></div>
+</div></div>
+</section>
+<section id="ii5" class="sec"><div class="stit"><span class="snum">II.5</span>La Tríada Inseparable: Mutua Necesidad de los Tres Trascendentales</div>
+<p class="si">Los tres predicados trascendentales son mutuamente necesarios: ninguno puede darse sin los otros dos.</p>
+<div class="sy"><div class="syh" onclick="ts(this)">TRI.1 · UNIDAD SIN PLURALIDAD ES MONISMO VACÍO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Una unidad absoluta sin ninguna pluralidad interna ni externa no puede relacionarse, conocerse a sí misma ni ser conocida.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Un Dios absolutamente uno sin distinción alguna no puede tener conocimiento (pues el conocimiento implica el cognoscente, el acto de conocer y el objeto, es decir, distinción interna).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Un Dios sin conocimiento no puede ser causa inteligente de nada.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La unidad absoluta sin pluralidad alguna colapsa la inteligencia divina y, con ella, la creación inteligible.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">TRI.2 · PLURALIDAD SIN UNIDAD ES CAOS SIN INTELIGIBILIDAD <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Una pluralidad sin ningún principio de unidad es un caos sin forma, donde ningún ente es distinguible de otro de modo estable.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Sin unidad, no hay identidad; sin identidad, no hay predicación; sin predicación, no hay conocimiento.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La pluralidad sin unidad colapsa igualmente la inteligibilidad.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">TRI.3 · RELACIÓN SIN LOS OTROS DOS ES UN PUENTE SIN ORILLAS <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La relación requiere términos entre los que se da; los términos deben ser unos consigo mismos (unidad) y distintos entre sí (pluralidad).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Una relación sin términos propios no es una relación sino una ficción abstracta.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La relación sin unidad y pluralidad es conceptualmente vacía.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">TRI.4 · LOS TRES TRASCENDENTALES SON CO-ORIGINARIOS Y MUTUAMENTE FUNDANTES <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La unidad, la pluralidad y la relación son mutuamente necesarias: ninguna puede darse sin las otras dos (TRI.1–TRI.3).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Son co-originarias: no puede haber secuencia temporal o lógica entre ellas donde una preceda a las otras.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Son fundantes: cualquier realidad inteligible debe exhibirlas.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La tríada unidad-pluralidad-relación es la estructura trascendental de toda realidad inteligible.</span></div>
+</div></div>
+<div class="nt">TRI.4 es la premisa mayor de todo el argumento. Todo lo que sigue —PRS, PCP, colapso del tawhīd, dilema de los atributos, colapso epistemológico— se sigue de esta conclusión.</div>
+</section>
+<div class="ps" id="parteiii"><div class="pn">III</div><div class="pl">Parte III</div><div class="pt">Principio de Razón Suficiente y Causalidad Proporcional</div><div class="psub">PRS.1–PRS.3 · PCP.1–PCP.5</div></div>
+<section id="iii1" class="sec"><div class="stit"><span class="snum">III.1</span>El Principio de Razón Suficiente Aplicado a la Tríada</div>
+<div class="sy"><div class="syh" onclick="ts(this)">PRS.1 · FORMULACIÓN DEL PRINCIPIO DE RAZÓN SUFICIENTE (PRS) <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Todo lo que existe o sucede tiene una razón suficiente de su existencia o acontecimiento.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">La razón suficiente es aquello que, si se da, explica completamente por qué algo es así y no de otro modo.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Sin PRS, cualquier cosa podría surgir de cualquier cosa o de nada, y ninguna explicación sería posible.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El PRS es una condición trascendental del conocimiento y la explicación.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">PRS.2 · LA TRÍADA EXIGE RAZÓN SUFICIENTE EN LA CAUSA PRIMERA <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La realidad exhibe la tríada unidad-pluralidad-relación (TRI.4).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Esta tríada es contingente en los entes finitos (podrían no existir).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Por PRS, la tríada en los entes finitos tiene su razón suficiente en algo.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Esa razón no puede ser otro ente finito (regresión infinita) ni la nada.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La razón suficiente de la tríada trascendental en los entes finitos es la Causa Primera.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">PRS.3 · LA REGRESIÓN INFINITA NO CONSTITUYE RAZÓN SUFICIENTE <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Una serie infinita de causas finitas no explica por qué existe la serie como tal.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Explicar cada eslabón por el eslabón anterior no explica la existencia del conjunto.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">El PRS exige explicación del conjunto, no solo de sus partes.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La regresión infinita viola el PRS y debe ser rechazada como explicación última.</span></div>
+</div></div>
+</section>
+<section id="iii2" class="sec"><div class="stit"><span class="snum">III.2</span>El Principio de Causalidad Proporcional (PCP)</div>
+<div class="nt"><strong style='color:var(--gold);font-style:normal'>Nota técnica:</strong> «Formalmente» = la causa tiene la misma cualidad que el efecto (el fuego calienta porque es caliente). «Eminentemente» = la causa tiene una perfección de orden superior que incluye la perfección inferior del efecto de modo excelente (Dios conoce sin recibir <em>species</em> inteligibles porque su conocimiento es de orden superior al humano).</div>
+<div class="sy"><div class="syh" onclick="ts(this)">PCP.1 · FORMULACIÓN DEL PRINCIPIO DE CAUSALIDAD PROPORCIONAL <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La causa debe contener eminentemente o formalmente la perfección que produce en el efecto.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Lo que no está de ningún modo en la causa no puede ser producido por ella (ex nihilo nihil fit en sentido causal).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">«De ningún modo en la causa» incluye tanto la ausencia formal como la ausencia eminente.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">Toda perfección real en el efecto está contenida de algún modo (formal o eminentemente) en la causa.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">PCP.2 · LA CAUSA PRIMERA DEBE CONTENER EMINENTEMENTE LA UNIDAD <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Los entes finitos tienen unidad (predicado trascendental establecido en U.1–U.3).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Por PCP, la Causa Primera debe contener eminentemente la unidad.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Eminentemente la unidad significa unidad de orden superior: unidad sin composición, sin partes, sin divisibilidad.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La Causa Primera es absolutamente simple en cuanto a su ser (simplicitas per essentiam).</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">PCP.3 · LA CAUSA PRIMERA DEBE CONTENER EMINENTEMENTE LA PLURALIDAD <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Los entes finitos tienen pluralidad real entre sí.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Por PCP, esta pluralidad tiene que tener su fundamento eminente en la Causa Primera.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">«Eminentemente la pluralidad» no significa que la Causa Primera sea compuesta de partes externas entre sí (eso sería pluralidad formal, no eminente).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Significa que la Causa Primera tiene en sí misma una distinción real que es el fundamento de toda pluralidad creada, pero que no rompe su absoluta unidad de ser.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La Causa Primera contiene una distinción real intradivina que no es composición de partes ni viola la simplicidad, sino que la supera eminentemente.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">PCP.4 · LA CAUSA PRIMERA DEBE CONTENER EMINENTEMENTE LA RELACIÓN <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Los entes finitos están relacionados entre sí de modo real y cognoscible.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Por PCP, la Causa Primera debe contener eminentemente la relación.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">«Eminentemente la relación» significa que en la Causa Primera hay relaciones que son subsistentes: no accidentales, no externas, sino constitutivas del ser mismo de la Causa Primera.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Una relación subsistente es aquella cuyo ser es ser-en-relación, no ser-primero-y-luego-relacionarse.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La Causa Primera contiene relaciones subsistentes intradivinas.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">PCP.5 · SÍNTESIS: LA CAUSA PRIMERA ES UNA, DISTINTA Y RELACIONADA SUBSISTENTEMENTE <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La Causa Primera debe contener eminentemente unidad, pluralidad y relación (PCP.2–PCP.4).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">La unidad eminente es absoluta simplicidad de ser.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">La pluralidad eminente es distinción real intradivina sin composición.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">La relación eminente es relación subsistente constitutiva del ser divino.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La Causa Primera es un ser absolutamente uno en su esencia, con distinciones reales internas que son relaciones subsistentes.</span></div>
+</div></div>
+</section>
+<div class="ps" id="parteiv"><div class="pn">IV</div><div class="pl">Parte IV</div><div class="pt">La Doctrina Trinitaria Como Única Solución al Problema Trascendental</div><div class="psub">TR.1–TR.4 · La Trinidad y los tres trascendentales</div></div>
+<section id="iv1" class="sec"><div class="stit"><span class="snum">IV.1</span>La Trinidad Satisface Exactamente las Condiciones Trascendentales</div>
+<div class="sy"><div class="syh" onclick="ts(this)">TR.1 · LA DOCTRINA TRINITARIA SATISFACE LAS TRES CONDICIONES TRASCENDENTALES <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La doctrina trinitaria afirma: una sola esencia divina (unidad absoluta), tres personas realmente distintas (distinción real = pluralidad eminente), y las personas se constituyen por sus relaciones mutuas de origen (relaciones subsistentes = relación eminente).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Esto corresponde exactamente con lo exigido por PCP.5.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La doctrina trinitaria es la solución candidata que satisface las condiciones trascendentales.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">TR.2 · LAS PERSONAS TRINITARIAS SON RELACIONES SUBSISTENTES — STh I, q. 29, a. 4 <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Las personas divinas se distinguen entre sí solo por sus relaciones de origen: la Paternidad, la Filiación, la Espiración activa y la Procesión.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Estas relaciones no son accidentes en Dios (en Dios no hay accidentes por la simplicidad divina).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Luego, estas relaciones son subsistentes: son las personas mismas.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Las personas son realmente distintas entre sí (distinción real por la relación de oposición), pero idénticas en esencia.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La Trinidad satisface el requisito de relaciones subsistentes intradivinas sin violar la unidad de esencia.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">TR.3 · LA TRINIDAD ES LA ÚNICA SOLUCIÓN AL PROBLEMA DE LO UNO Y LO MÚLTIPLE <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El problema filosófico clásico de lo uno y lo múltiple exige una causa primera que sea a la vez origen de la unidad y de la pluralidad de los entes.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Un Dios absolutamente uno sin distinción alguna no puede ser origen proporcional de la pluralidad (PCP.3).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Un Dios con distinción real pero sin unidad de esencia sería politeísmo (múltiples dioses, no uno).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Solo un Dios que sea uno en esencia y múltiple en personas realmente distintas satisface ambas condiciones.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La Trinidad es la única estructura metafísica que resuelve coherentemente el problema de lo uno y lo múltiple en la Causa Primera.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">TR.4 · LA TRINIDAD ES CONDICIÓN DE POSIBILIDAD DEL AMOR ETERNO EN DIOS <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El amor auténtico requiere un amante, un amado y el acto de amor.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Si Dios fuera absolutamente uno sin distinción, el «amor» de Dios sería solo amor a sí mismo, lo cual es narcisismo ontológico, no amor en sentido pleno.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">En la Trinidad, el Padre ama al Hijo con amor eterno; el amor mutuo es el Espíritu Santo.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Así, el amor divino es antecedente a toda creación y no depende de ella.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">Solo el Dios trinitario puede ser esencialmente amor (1 Juan 4:8) sin que el amor sea un accidente sobrevenido por la creación.</span></div>
+</div></div>
+</section>
+<div class="ps" id="partev"><div class="pn">V</div><div class="pl">Parte V</div><div class="pt">Aplicación al Tawhīd Islámico y Sus Colapsos Estructurales</div><div class="psub">C.1–C.9 · Tres colapsos: pluralidad, relación, conocimiento</div></div>
+<section id="v1" class="sec"><div class="stit"><span class="snum">V.1</span>Formulación Técnica del Tawhīd Islámico</div>
+<p class="si">El tawhīd islámico es la doctrina de la unicidad absoluta de Allāh. En su formulación teológica más rigurosa (escuela ashʿarī y kalām de los mutakallimūn), implica tres dimensiones:</p>
+<div class="pg" style="margin-top:8px">
+<div class="pc"><div class="pcn" style="font-family:var(--fm);font-size:12px">Tawhīd al-dhāt</div><div class="pcd">Unicidad de la esencia: no hay multiplicidad de ningún tipo en la esencia de Allāh.</div></div>
+<div class="pc"><div class="pcn" style="font-family:var(--fm);font-size:12px">Tawhīd al-ṣifāt</div><div class="pcd">Unicidad de los atributos: los atributos de Allāh son idénticos a su esencia o son meros nombres sin realidad objetiva.</div></div>
+<div class="pc"><div class="pcn" style="font-family:var(--fm);font-size:12px">Tawhīd al-afʿāl</div><div class="pcd">Unicidad de los actos: todo acto procede únicamente de Allāh.</div></div>
+</div>
+<div class="nt">La forma extrema del tawhīd (muʿtazilismo) niega toda distinción real en la esencia divina. La forma moderada (ahl al-sunna wa-l-jamāʿa) admite los atributos como «ni idénticos ni distintos» a la esencia: solución filosóficamente inestable que analizaremos en la Parte VI.</div>
+</section>
+<section id="v2" class="sec"><div class="stit"><span class="snum">V.2</span>Primer Colapso: El Tawhīd y el Problema de la Pluralidad Eminente</div>
+<div class="sy"><div class="syh" onclick="ts(this)">C.1 · EL TAWHĪD PROHÍBE LA PLURALIDAD EMINENTE EN ALLĀH <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El tawhīd afirma que no hay ninguna distinción real en la esencia de Allāh.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">La pluralidad eminente requiere distinción real intradivina (PCP.3).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">El tawhīd prohíbe (P1) lo que la pluralidad eminente requiere (P2).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd islámico es estructuralmente incompatible con el requisito de pluralidad eminente en la Causa Primera.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">C.2 · SIN PLURALIDAD EMINENTE EN ALLĀH, LA CREACIÓN PLURAL ES INEXPLICABLE <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La realidad creada es irreduciblemente plural (TRI.4, P.1–P.4).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Por PCP, la Causa Primera debe contener eminentemente esta pluralidad (PCP.3).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">El tawhīd prohíbe tal pluralidad eminente en Allāh (C.1).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Sin razón suficiente en la Causa, el efecto carece de fundamento (viola el PRS).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd islámico no puede proporcionar razón suficiente de la pluralidad real del mundo creado.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">C.3 · EL TAWHĪD COLAPSA EN MONISMO O EN VOLUNTAD ARBITRARIA <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si Allāh no tiene pluralidad eminente en sí mismo, la pluralidad del mundo proviene de: (a) la nada (ex nihilo nihil fit → absurdo), o (b) una acción absolutamente libre pero arbitraria de Allāh, sin fundamento en su naturaleza.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">La opción (a) viola el PRS y el PCP.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">La opción (b) hace de la pluralidad un accidente contingente de la voluntad divina, sin fundamento en el ser divino.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Lo que carece de fundamento en el ser divino es metafísicamente bruto: no hay explicación última.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd produce un mundo plural metafísicamente bruto, sin razón suficiente intradivina.</span></div>
+</div></div>
+</section>
+<section id="v3" class="sec"><div class="stit"><span class="snum">V.3</span>Segundo Colapso: El Tawhīd y las Relaciones Eminentes</div>
+<div class="sy"><div class="syh" onclick="ts(this)">C.4 · ALLĀH SIN RELACIONES INTERNAS NO PUEDE SER CAUSA DEL MUNDO RELACIONADO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El mundo creado está constituido por relaciones reales: causalidad, similitud, diferencia, orden, jerarquía, amor.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Por PCP, la Causa Primera debe contener eminentemente estas relaciones (PCP.4).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">El tawhīd prohíbe cualquier relación interna en Allāh (las relaciones implican dos términos, lo cual sería shirk o asociación de algo con Allāh).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Sin relaciones eminentes en Allāh, el mundo relacionado carece de fundamento proporcional en la Causa.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El Allāh del tawhīd no puede ser causa proporcional del mundo de relaciones.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">C.5 · EL PROBLEMA ESPECÍFICO DE LA RELACIÓN CREADOR-CREATURA EN EL ISLAM <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La relación entre Allāh y el mundo es una relación real (la dependencia del mundo respecto de Allāh es real).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Toda relación real requiere que al menos uno de los términos sea realmente cambiado o determinado por la relación.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Si Allāh es absolutamente simple sin distinción alguna, la relación creador-creatura no puede ser real en Allāh (lo cambiaría o compondría).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Pero si la relación es solo real en la creatura y no en Allāh, Allāh no es genuinamente la causa de una relación real.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd produce una paradoja: o Allāh está realmente relacionado con el mundo (y hay composición en Allāh), o no lo está (y Allāh no es genuinamente causa del mundo relacionado).</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">C.6 · EL OCCASIONALISMO ASHʿARĪ DESTRUYE LA RAZÓN SUFICIENTE DE LOS EVENTOS <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El occasionalismo afirma que no hay causalidad real entre creaturas: Allāh causa directamente cada evento.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Si no hay causalidad real entre creaturas, no hay estructura causal estable del mundo.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Sin estructura causal estable, la ciencia (conocimiento de causas) es imposible.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">La ciencia es posible (datum irrecusable: la física, la química, la biología existen y funcionan con éxito predictivo).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">Por modus tollens, el occasionalismo es falso, y con él la estrategia ashʿarī de resolver el problema de las relaciones en el tawhīd.</span></div>
+</div></div>
+<div class="nt">El occasionalismo (al-Ghazālī y los ashāʿira) no resuelve el problema sino que lo disuelve al precio de hacer imposible la ciencia. Una cosmovisión que niega la posibilidad del conocimiento científico para preservar su teología se autodestruye epistémicamente desde dentro.</div>
+</section>
+<section id="v4" class="sec"><div class="stit"><span class="snum">V.4</span>Tercer Colapso: El Conocimiento Divino en el Tawhīd</div>
+<div class="sy"><div class="syh" onclick="ts(this)">C.7 · EL CONOCIMIENTO DIVINO REQUIERE DISTINCIÓN ENTRE COGNOSCENTE, ACTO Y OBJETO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El conocimiento es una relación entre: (a) el cognoscente, (b) el acto de conocer, y (c) el objeto conocido.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">En el conocimiento divino eterno, estas tres dimensiones no pueden ser cronológicamente distintas (Dios no aprende).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Pero deben ser al menos formalmente o virtualmente distintas para que haya genuino conocimiento y no solo una identidad tautológica.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">El tawhīd niega toda distinción formal o virtual en Allāh.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd hace imposible explicar el conocimiento divino como genuino conocimiento.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">C.8 · EL QUR'ĀN ATRIBUYE A ALLĀH ʿILM: CONTRADICCIÓN INTERNA IRRECUSABLE <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El Qur'ān afirma repetidamente que Allāh es al-ʿAlīm (el Omnisciente) y describe su conocimiento como abarcando todo: Q. 2:29; Q. 6:101; Q. 64:11.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">El conocimiento genuino requiere distinción entre cognoscente, acto y objeto (C.7-P1).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">El tawhīd niega toda distinción en Allāh (V.1).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Los predicados P2 y P3 son contradictorios si se aplican al mismo sujeto.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El Qur'ān afirma el conocimiento divino y simultáneamente sostiene un tawhīd que lo hace imposible: contradicción interna.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">C.9 · EL DILEMA DEL CONOCIMIENTO DE LOS PARTICULARES (Ibn Rushd/Averroes) <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El Qur'ān afirma que Allāh conoce cada hoja que cae, cada secreto del corazón (Q. 6:59; Q. 57:4).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">El conocimiento de particulares contingentes implica que el objeto del conocimiento es distinto del cognoscente.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">En Allāh, si el conocimiento es idéntico a su esencia, y los particulares contingentes son distintos de Allāh, entonces el conocimiento de Allāh cambia cuando los particulares cambian, lo cual violaría la inmutabilidad divina.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Si el conocimiento de Allāh no cambia, ¿cómo conoce los particulares contingentes que cambian?</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd produce el dilema de Ibn Rushd/Averroes: o Allāh conoce solo universales (y no los particulares del Qur'ān), o cambia con el mundo (y no es inmutable). No hay salida dentro del marco del tawhīd estricto.</span></div>
+</div></div>
+<div class="nt">Este dilema fue identificado por los propios Ibn Rushd y al-Ghazālī, quienes se acusaron mutuamente de impiedad. Que los máximos intelectos del kalām hayan llegado a este callejón sin salida no es accidental: es estructuralmente ineludible dado el tawhīd.</div>
+</section>
+<div class="ps" id="partevi"><div class="pn">VI</div><div class="pl">Parte VI</div><div class="pt">La Objeción de los Atributos Distintos y Su Respuesta</div><div class="psub">OBJ.1–OBJ.5 · ESP.1–ESP.3 · SOL.1–SOL.3 · El trilema del atributismo</div></div>
+<section id="vi1" class="sec"><div class="stit"><span class="snum">VI.1</span>Formulación Precisa de la Objeción Atributista</div>
+<div class="nt" style="border-color:rgba(245,197,24,.4);font-style:normal;color:var(--wh)"><strong style="color:var(--gold)">Objeción del interlocutor islámico:</strong><br><span style="font-style:italic;color:#bbb">«No es necesario admitir la Trinidad para tener pluralidad eminente en Allāh. Simplemente afirmamos que los atributos divinos (ʿilm, qudra, irāda, etc.) son realmente distintos entre sí en Allāh, aunque todos pertenezcan a una única esencia. Así, la omnisciencia no es la omnipotencia, la voluntad no es el conocimiento, y esta distinción real de atributos proporciona la pluralidad eminente que el argumento exige, sin necesidad de recurrir a personas trinitarias.»</span></div>
+<p class="si"><div class="nt" style="border-color:rgba(100,150,255,.3)"><strong style="color:#93c5fd;font-style:normal">PRECISIÓN TERMINOLÓGICA (corrección al documento):</strong> En el escolasticismo se distinguen tres tipos de distinción: (1) <em>distinctio realis</em>, entre cosas separables en la realidad; (2) <em>distinctio rationis ratiocinantis</em>, puramente lógica sin fundamento en la cosa; y (3) <em>distinctio rationis ratiocinatae</em>, producida por el intelecto pero con fundamento en la riqueza objetiva de la realidad misma. Esta tercera es la que Aquino aplica a los atributos divinos (cf. STh I, q. 13, a. 4; De Potentia, q. 7, a. 6). La llamada «distinción formal» (<em>distinctio formalis a parte rei</em>) es propia de <strong style="color:#93c5fd;font-style:normal">Duns Escoto</strong>, no de Aquino, y fue rechazada por los tomistas. Asimismo, «distinción virtual» no es un término técnico propio de Aquino sino de ciertos comentaristas tardíos; el término preciso es <em>distinctio rationis ratiocinatae</em>.</div>
+Esta posición se aproxima al <strong>atributismo realista</strong> (ahl al-sunna contra el muʿtazilismo). La respuesta tiene tres cuernos exhaustivos:</p>
+<div class="trig"><div class="trc c1"><div class="trn">CUERNO I</div><p>Si los atributos son realmente distintos → composición en Allāh → viola el tawhīd (OBJ.1–OBJ.3)</p></div><div class="trc c2"><div class="trn">CUERNO II</div><p>Si los atributos son idénticos → nominalismo muʿtazilī → vacuidad semántica del Qur'ān (OBJ.4–OBJ.5)</p></div><div class="trc c3"><div class="trn">CUERNO III</div><p>Si son virtualmente distintos → necesita andamiaje tomista → que exige la Trinidad (SOL.1–SOL.3)</p></div></div>
+</section>
+<section id="vi2a" class="sec"><div class="stit"><span class="snum">VI.2 — Cuerno I</span>Atributos Realmente Distintos → Composición en Allāh</div>
+<div class="sy"><div class="syh" onclick="ts(this)">OBJ.1 · LOS ATRIBUTOS REALMENTE DISTINTOS IMPLICAN COMPOSICIÓN REAL EN ALLĀH <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si la omnisciencia y la omnipotencia son realmente distintas en Allāh, hay en Allāh al menos dos componentes reales distintos.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Toda composición de componentes realmente distintos implica que el compuesto depende de sus componentes para ser lo que es.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Lo que depende de componentes para ser lo que es no es absolutamente simple ni autosubsistente en el pleno sentido.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">El tawhīd exige absoluta simplicidad y autosubsistencia en Allāh.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El atributismo realista viola el tawhīd propio de la teología islámica: introduce composición real en Allāh.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">OBJ.2 · LA COMPOSICIÓN EN ALLĀH PRODUCE DEPENDENCIA Y CONTINGENCIA <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Todo compuesto depende de sus componentes: el compuesto podría en principio carecer de algún componente.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Un ser del que pueden predicarse componentes contingentemente unidos no es necesariamente el que es.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Allāh debe ser necesariamente el que es (wājib al-wujūd, existencia necesaria).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La composición real en Allāh contradice su existencia necesaria y lo convierte en un ser contingentemente compuesto: el comienzo filosófico del politeísmo funcional.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">OBJ.3 · EL POLITEÍSMO FUNCIONAL DEL ATRIBUTISMO REALISTA <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si la omnisciencia es realmente distinta de la omnipotencia en Allāh, ¿qué unifica ambos atributos en «Allāh»?</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Si la respuesta es «la esencia de Allāh», entonces la esencia es algo distinto de los atributos que los unifica: tercer elemento real.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Si la esencia es los atributos (identidad formal), no hay distinción real sino solo nominal: regresamos al muʿtazilismo.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Si la esencia no es los atributos, la esencia de Allāh tiene varios atributos como sus propiedades reales: composición.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El atributismo realista lleva inevitablemente a composición, o regresa al nominalismo muʿtazilī que niega la realidad de los atributos.</span></div>
+</div></div>
+</section>
+<section id="vi2b" class="sec"><div class="stit"><span class="snum">VI.2 — Cuerno II</span>Atributos Idénticos → Nominalismo Muʿtazilī → Vaciedad</div>
+<div class="sy"><div class="syh" onclick="ts(this)">OBJ.4 · EL NOMINALISMO MUʿTAZILĪ VACÍA LOS PREDICADOS DIVINOS DEL QUR'ĀN <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si la omnisciencia, la omnipotencia y la voluntad son idénticas en Allāh sin ninguna distinción, entonces decir «Allāh conoce» es exactamente lo mismo que decir «Allāh puede» o «Allāh quiere».</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Si tres predicados son exactamente lo mismo, son un solo predicado disfrazado de tres nombres.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Las oraciones del Qur'ān que describen a Allāh como conocedor, poderoso y queriente serían tautológicas: dirían lo mismo tres veces sin añadir información.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El nominalismo muʿtazilī vacía de contenido informativo los predicados divinos del Qur'ān, haciendo al libro sagrado filosóficamente trivial en sus afirmaciones sobre Allāh.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">OBJ.5 · SIN DISTINCIÓN ALGUNA, LOS ATRIBUTOS NO SON RAZÓN SUFICIENTE DE EFECTOS DISTINTOS <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El PCP exige que la causa contenga eminentemente lo que produce en el efecto.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Si omnisciencia y omnipotencia son absolutamente idénticas en Allāh, no pueden ser razones suficientes proporcionales de efectos distintos (un conocimiento y un poder son realidades distintas en el mundo).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Una causa absolutamente indiferenciada no puede ser razón suficiente de efectos diferenciados (viola el PRS).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">Un Allāh con atributos absolutamente idénticos no puede ser causa proporcional de una realidad diversificada en sus modos de ser.</span></div>
+</div></div>
+</section>
+<section id="vi2c" class="sec"><div class="stit"><span class="snum">VI.2 — Cuerno III</span>La Solución Tomista: <em>Distinctio Rationis Ratiocinatae</em> con Identidad Real de Esencia</div>
+<div class="sy"><div class="syh" onclick="ts(this)">SOL.1 · LA <em>DISTINCTIO RATIONIS RATIOCINATAE</em> TOMISTA COMO TERCERA VÍA <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Aquino distingue entre: (a) distinción real (dos cosas realmente separables), (b) distinción de razón pura (solo en el intelecto sin fundamento in re), y (c) distinción de razón con fundamento in re —distinctio rationis ratiocinatae— (fundada en la riqueza objetiva del ser, producida por el intelecto que capta bajo diferentes razones una misma realidad simple, sin composición real).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">En Dios, los atributos se distinguen virtualmente: la razón que denominamos «omnisciencia» capta un aspecto real del Ipsum Esse Subsistens que la razón que denominamos «omnipotencia» no capta de modo equivalente. El intelecto forma dos conceptos distintos con fundamento en la infinita riqueza objetiva del ser divino, pero sin que en Dios haya multiplicidad real.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Esta distinción no implica composición real porque el fundamento de ambas razones es el único y simplicísimo ser divino que los contiene eminentemente superando a ambos.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La distinctio rationis ratiocinatae tomista evita los dos cuernos: no hay composición real en Dios (contra OBJ.1) ni vacuidad nominalista que anule los atributos (contra OBJ.4).</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">SOL.2 · LA <em>DISTINCTIO RATIONIS RATIOCINATAE</em> ES POSIBLE PORQUE DIOS ES PLENITUD DE SER <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">En Aquino, Dios es Ipsum Esse Subsistens: la plenitud absoluta del ser sin limitación.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">La plenitud absoluta del ser contiene de modo supereminente todas las perfecciones posibles, sin que ninguna de ellas limite o excluya a las demás.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">El intelecto humano capta estas perfecciones sucesivamente y con nombres distintos porque su capacidad es finita.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Pero la razón de esta multiplicidad de nombres está fundada in re en la superabundancia del ser divino, no en una composición real.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La distinctio rationis ratiocinatae tiene fundamento in re en la plenitud del ser divino: el intelecto multiplica los conceptos porque la riqueza del objeto los fundamenta, pero sin generar composición real en Dios.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">SOL.3 · EL ISLAM NO TIENE LOS RECURSOS PARA HACER ESTA DISTINCIÓN SIN IMPORTAR LA TRINIDAD <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La distinción virtual tomista requiere que la causa sea una plenitud de ser que supere todas sus perfecciones atribuidas.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Esto requiere que la causa sea Ipsum Esse Subsistens, es decir, identificación de esencia y ser.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">La teología islámica rechaza la distinción real entre esencia y ser en Allāh, pero no tiene el andamiaje metafísico para articularlo con la distinctio rationis ratiocinatae de los atributos.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Sin el andamiaje del esse tomista y la participación, la teología islámica oscila entre el nominalismo muʿtazilī (que vacía los atributos) y el atributismo realista (que compone a Allāh).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El Islam no dispone de los recursos filosóficos para resolver el dilema: sin el esse tomista y la participación no puede articular una distinctio rationis ratiocinatae de los atributos; y ese andamiaje, llevado hasta sus consecuencias, exige la Trinidad para completarse.</span></div>
+</div></div>
+</section>
+<section id="vi3" class="sec"><div class="stit"><span class="snum">VI.3</span>La Omnipotencia vs. la Omnisciencia: El Caso Específico (ESP.1–ESP.3)</div>
+<div class="sy"><div class="syh" onclick="ts(this)">ESP.1 · ¿POR QUÉ COEXISTEN LA OMNIPOTENCIA Y LA OMNISCIENCIA EN ALLĀH? <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si la omnipotencia y la omnisciencia son realmente distintas en Allāh, su coexistencia en Allāh requiere razón suficiente.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">La razón no puede ser externa a Allāh (nada es externo a Allāh que lo determine).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">La razón no puede ser la mera voluntad de Allāh de tener ambos (eso sería circular: la voluntad sería un tercer atributo que los une, regresión al infinito).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">La razón debe ser la naturaleza misma de Allāh.</span></div>
+<div class="pr"><span class="pl">P5</span><span class="pt">Pero si la naturaleza de Allāh es la razón de que coexistan, la naturaleza de Allāh contiene en sí misma el fundamento de esta distinción: hay una distinctio rationis ratiocinatae en la naturaleza divina —distinción de razón con fundamento en la riqueza objetiva del ser divino—, que es exactamente lo que el tawhīd estricto niega.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La coexistencia de omnipotencia y omnisciencia como atributos distintos en Allāh exige una distinctio rationis ratiocinatae en la naturaleza divina: exactamente lo que el tawhīd estricto niega.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">ESP.2 · OMNIPOTENCIA E OMNISCIENCIA EXIGEN RELACIÓN INTERNA SUBSISTENTE <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El poder (omnipotencia) sin guía del conocimiento es fuerza ciega sin dirección inteligente.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">El conocimiento (omnisciencia) sin poder es contemplación impotente.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Para que Allāh sea creador inteligente y poderoso, la omnisciencia y la omnipotencia deben estar internamente relacionadas en Allāh: el poder debe ser intrínsecamente inteligente y el conocimiento intrínsecamente eficaz.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Esta relación interna entre omnisciencia y omnipotencia es una forma de relación subsistente en Dios.</span></div>
+<div class="pr"><span class="pl">P5</span><span class="pt">El tawhīd prohíbe relaciones subsistentes en Allāh.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd hace imposible la unidad interna entre omnisciencia y omnipotencia, produciendo un Dios con facultades desarticuladas que no pueden cooperar internamente.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">ESP.3 · EL DILEMA FINAL DE LA DISTINCIÓN ATRIBUTIVA <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si la omnisciencia y la omnipotencia son absolutamente idénticas en Allāh → nominalismo muʿtazilī → vacuidad semántica del Qur'ān (OBJ.4).</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Si son realmente distintas sin unidad interna relacional → politeísmo funcional de atributos → composición → contingencia → viola wājib al-wujūd (OBJ.2).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Si se distinguen mediante distinctio rationis ratiocinatae con unidad de esencia y relación interna → se necesita el andamiaje tomista del esse → que a su vez exige la Trinidad para contener eminentemente las tres condiciones trascendentales (TR.3, PCP.5).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">En cualquiera de los tres cuernos, el tawhīd islámico colapsa o debe importar categorías que lo llevan a la estructura trinitaria.</span></div>
+</div></div>
+<div class="nt">ESP.3 es el corazón del argumento apologético en la Parte VI. Los tres cuernos son exhaustivos: no hay cuarta opción disponible para el teólogo islámico que quiera ser filosóficamente coherente. El Islam debe elegir entre incoherencia, vaciedad, o importar la distinctio rationis ratiocinatae tomista —que presupone el esse y conduce a la Trinidad—.</div>
+</section>
+<div class="ps" id="partevii"><div class="pn">VII</div><div class="pl">Parte VII</div><div class="pt">El Colapso Epistemológico del Qur'ān: El Dilema Van Tiliano</div><div class="psub">VT.1–VT.7 · Método Van Til aplicado al presuposicionalismo islámico</div></div>
+<section id="vii1" class="sec"><div class="stit"><span class="snum">VII.1</span>El Método de Van Til y el Presuposicionalismo Islámico</div>
+<p class="si">Van Til enseñó que toda cosmovisión debe ser evaluada en términos de sus presuposiciones últimas: ¿pueden estas presuposiciones dar cuenta coherente de la experiencia racional, moral y física?</p>
+<div class="sy"><div class="syh" onclick="ts(this)">VT.1 · LA PRESUPOSICIÓN DEL TAWHĪD DEBE JUSTIFICAR LA RACIONALIDAD <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Toda cosmovisión debe justificar desde sus propias presuposiciones la posibilidad del conocimiento racional.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">El conocimiento racional requiere las tres condiciones trascendentales (unidad, pluralidad, relación) en su fundamento último (TRI.4, PRS.2).</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">El tawhīd islámico no puede proporcionar estas tres condiciones en Allāh (C.1–C.9).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd islámico no puede justificar desde sus propias presuposiciones la posibilidad del conocimiento racional.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">VT.2 · EL PRESUPOSICIONALISMO ISLÁMICO VIVE PRESTADO DE CATEGORÍAS AJENAS <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Los teólogos islámicos medievales que desarrollaron el kalām (al-Ashʿarī, al-Māturīdī, al-Ghazālī) utilizaron masivamente categorías aristotélicas y neoplatónicas para articular el tawhīd.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Estas categorías (acto/potencia, esencia/existencia, relación, predicación) implican una estructura de la realidad que presupone los tres trascendentales.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Al utilizar estas categorías, los mutakallimūn implícitamente presuponen una estructura de la realidad incompatible con el tawhīd estricto.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El kalām islámico vive prestado de una metafísica que sus propias presuposiciones teológicas no pueden justificar.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">VT.3 · EL QUR'ĀN NO PUEDE JUSTIFICAR LA LÓGICA QUE USA PARA ARGUMENTAR <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">El Qur'ān usa argumentos lógicos para establecer la unicidad de Allāh. Por ejemplo, Q. 21:22: «Si hubiera dioses además de Allāh, ambos [los cielos y la tierra] se habrían corrompido».</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Este argumento usa lógica (modus tollens implícito), causalidad y unidad de orden.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">La lógica, la causalidad y el orden presuponen las tres condiciones trascendentales (TRI.4).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">El tawhīd no puede justificar estas tres condiciones en Allāh (C.1–C.9).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El Qur'ān usa argumentos que presuponen una estructura metafísica que su propio contenido teológico no puede justificar: el libro se corta la rama en la que está sentado.</span></div>
+</div></div>
+<div class="nt">Este es el argumento Van Tiliano en su forma más aguda: las presuposiciones del tawhīd no pueden justificar las herramientas —lógica, causalidad, orden— que el Islam mismo usa para defender sus posiciones. El Islam necesita «robar» de la metafísica trinitaria para poder argumentar en absoluto.</div>
+</section>
+<section id="vii2" class="sec"><div class="stit"><span class="snum">VII.2</span>El Dilema de la Creación ex Nihilo en el Islam</div>
+<div class="sy"><div class="syh" onclick="ts(this)">VT.4 · LA CREACIÓN EX NIHILO REQUIERE UNA RELACIÓN REAL ENTRE ALLĀH Y EL MUNDO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">La creación ex nihilo significa que Allāh produce el mundo sin materia preexistente, solo por su voluntad y poder.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Este acto implica: (a) Allāh antes de la creación (sin el mundo), (b) el mundo después de la creación (existente), y (c) la relación causal entre Allāh y el mundo.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Esta distinción temporal-causal implica al menos una distinción lógica en Allāh entre «Allāh-como-creador» y «Allāh-antes-de-crear».</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Toda distinción en Allāh viola el tawhīd (V.1).</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">La creación ex nihilo implica una distinción en Allāh que el tawhīd prohíbe.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">VT.5 · LA VOLUNTAD CREADORA DE ALLĀH INTRODUCE TEMPORALIDAD O ETERNIDAD DEL MUNDO <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si Allāh decidió crear el mundo en un momento temporal (alternativa islámica estándar), entonces Allāh tiene estados: «antes de decidir crear» y «después de decidir crear».</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Estos estados son distintos: composición diacrónica en Allāh.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Si la voluntad creadora de Allāh es eterna e idéntica a su esencia, entonces la creación también sería eterna (no habría inicio temporal).</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Pero el Islam afirma explícitamente la creación temporal del mundo.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El Islam enfrenta un dilema irresoluble: o Allāh cambia (composición diacrónica), o el mundo es eterno (violando la creación temporal qur'ānica). Al-Ghazālī atacó a los falāsifa por esto pero no resolvió el problema.</span></div>
+</div></div>
+</section>
+<section id="vii3" class="sec"><div class="stit"><span class="snum">VII.3</span>El Colapso Moral: Voluntarismo y Destrucción de la Ética Objetiva</div>
+<div class="sy"><div class="syh" onclick="ts(this)">VT.6 · EL VOLUNTARISMO ISLÁMICO ES CONSECUENCIA DEL TAWHĪD Y DESTRUYE LA MORAL OBJETIVA <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si omnisciencia y omnipotencia son absolutamente idénticas en Allāh, no hay distinción entre «lo que Allāh quiere» y «lo que Allāh sabe que es bueno».</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Esto produce el voluntarismo: lo bueno es bueno porque Allāh lo quiere, no porque sea intrínsecamente bueno.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">El voluntarismo hace imposible la moral objetiva: si Allāh decidiera mañana que la crueldad es buena, lo sería.</span></div>
+<div class="pr"><span class="pl">P4</span><span class="pt">Numerosos teólogos islámicos (especialmente ashāʿira) afirmaron explícitamente este voluntarismo.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd, al imposibilitar la distinción real entre los atributos divinos, lleva inevitablemente al voluntarismo moral, que destruye la ética objetiva.</span></div>
+</div></div>
+<div class="sy"><div class="syh" onclick="ts(this)">VT.7 · SIN INTELIGENCIA RELACIONADA A LA VOLUNTAD, LOS MANDATOS DEL QUR'ĀN SON ARBITRARIOS <span class="syt">▼</span></div><div class="syb">
+<div class="pr"><span class="pl">P1</span><span class="pt">Si la voluntad de Allāh no está intrínsecamente relacionada con su inteligencia (porque ambas son idénticas o porque no hay relaciones subsistentes en Allāh), los mandatos del Qur'ān son órdenes de poder puro.</span></div>
+<div class="pr"><span class="pl">P2</span><span class="pt">Las órdenes de poder puro sin fundamento inteligente son arbitrarias.</span></div>
+<div class="pr"><span class="pl">P3</span><span class="pt">Lo arbitrario no puede ser la base de una moral universal y objetiva.</span></div>
+<div class="cr"><span class="cl">∴ C</span><span class="ct">El tawhīd islámico no puede fundamentar la objetividad de los mandatos morales del Qur'ān.</span></div>
+</div></div>
+</section>
+<div class="ps" id="parteviii"><div class="pn">VIII</div><div class="pl">Parte VIII</div><div class="pt">Síntesis, Tabla de Colapsos y Dilema Maestro</div><div class="psub">PMT · PMM · CP · PAI · CN · Los siete colapsos · El dilema definitivo</div></div>
+<section id="viii1" class="sec"><div class="stit"><span class="snum">VIII.1</span>El Mapa Completo del Argumento — Cinco Premisas Maestras</div>
+<div class="pmc"><div class="pml">PMT</div><div class="pmb"><strong>Premisa Mayor Trascendental:</strong> Toda realidad inteligible exhibe y requiere tres condiciones estructurales co-originarias: unidad, pluralidad y relación. <span style="color:var(--gold)">(TRI.4)</span></div></div>
+<div class="pmc"><div class="pml">PMM</div><div class="pmb"><strong>Premisa Media Metafísica:</strong> Por el Principio de Razón Suficiente y el Principio de Causalidad Proporcional, la Causa Primera debe contener eminentemente estas tres condiciones. <span style="color:var(--gold)">(PRS.2, PCP.5)</span></div></div>
+<div class="pmc"><div class="pml">CP</div><div class="pmb"><strong>Conclusión Positiva:</strong> La única estructura que satisface estas tres condiciones eminentes en la Causa Primera es la de un ser uno en esencia, con distinciones reales internas que son relaciones subsistentes: la Trinidad cristiana. <span style="color:var(--gold)">(TR.3)</span></div></div>
+<div class="pmc"><div class="pml">PAI</div><div class="pmb"><strong>Premisa Aplicativa Islámica:</strong> El tawhīd islámico prohíbe toda distinción real y toda relación subsistente en Allāh. <span style="color:var(--gold)">(V.1)</span></div></div>
+<div class="pmc"><div class="pml">CN</div><div class="pmb"><strong>Conclusión Negativa:</strong> El tawhīd islámico no puede proporcionar fundamento trascendental para la realidad inteligible, generando siete colapsos estructurales. <span style="color:var(--gold)">(C.1–C.9, VT.1–VT.7)</span></div></div>
+</section>
+<section id="viiitabla" class="sec"><div class="stit"><span class="snum">VIII.1</span>Tabla de los Siete Colapsos Estructurales del Tawhīd</div>
+<div class="tw"><table><thead><tr><th>Colapso</th><th>Descripción</th><th>Silogismos</th></tr></thead><tbody>
+<tr><td>1. Pluralidad</td><td>No hay fundamento de la pluralidad real en Allāh. El mundo plural carece de razón suficiente intradivina.</td><td>C.1–C.3</td></tr>
+<tr><td>2. Relación</td><td>Allāh no puede ser causa proporcional del mundo relacionado. El occasionalismo destruye la ciencia.</td><td>C.4–C.6</td></tr>
+<tr><td>3. Conocimiento</td><td>El tawhīd imposibilita el conocimiento genuino en Allāh. Dilema de Ibn Rushd sin solución.</td><td>C.7–C.9</td></tr>
+<tr><td>4. Atributos</td><td>Distinción real → composición; identidad absoluta → vacuidad semántica; virtual → exige la Trinidad.</td><td>OBJ.1–ESP.3</td></tr>
+<tr><td>5. Creación</td><td>La creación ex nihilo implica composición diacrónica en Allāh o eternidad del mundo.</td><td>VT.4–VT.5</td></tr>
+<tr><td>6. Moral</td><td>El voluntarismo islámico destruye la ética objetiva. Los mandatos del Qur'ān son órdenes arbitrarias.</td><td>VT.6–VT.7</td></tr>
+<tr><td>7. Epistemología</td><td>El Qur'ān usa lógica y causalidad cuyo fundamento trascendental el tawhīd no puede justificar.</td><td>VT.1–VT.3</td></tr>
+</tbody></table></div>
+</section>
+<section id="viiidm" class="sec"><div class="stit"><span class="snum">VIII.2</span>El Dilema Maestro</div>
+<div class="dg">
+<div class="dc red"><div class="dct red">PRIMER CUERNO — Si el tawhīd islámico es correcto</div><p style="font-size:13px;color:#aaa;margin-bottom:11px">Si Allāh no tiene distinción real alguna, ni relaciones subsistentes, ni pluralidad eminente. En tal caso:</p><div class="di"><span class="dil red">(a)</span><span>El PCP no se satisface: la causa no contiene eminentemente lo que produce.</span></div><div class="di"><span class="dil red">(b)</span><span>El PRS no se satisface: no hay razón suficiente intradivina para la pluralidad y relación del mundo.</span></div><div class="di"><span class="dil red">(c)</span><span>El conocimiento divino genuino colapsa.</span></div><div class="di"><span class="dil red">(d)</span><span>La moral objetiva colapsa en voluntarismo arbitrario.</span></div><div class="di"><span class="dil red">(e)</span><span>La inteligibilidad del mundo queda sin fundamento trascendental.</span></div><div class="dc-c red">∴ El Islam no puede justificar la racionalidad del mundo que intenta describir.</div></div>
+<div class="dc amb"><div class="dct amb">SEGUNDO CUERNO — Si el tawhīd es revisado</div><p style="font-size:13px;color:#aaa;margin-bottom:11px">Si admite distinción real de atributos o relaciones internas en Allāh:</p><div class="di"><span class="dil amb">(a)</span><span>Se viola el tawhīd mismo: hay composición en Allāh.</span></div><div class="di"><span class="dil amb">(b)</span><span>Se acerca estructuralmente a la doctrina trinitaria.</span></div><div class="di"><span class="dil amb">(c)</span><span>Cualquier intento de consistencia filosófica requiere los recursos metafísicos tomistas, que a su vez requieren la Trinidad para completarse.</span></div><div class="dc-c amb">∴ El Islam revisado deja de ser Islam y se aproxima estructuralmente al cristianismo trinitario.</div></div>
+</div>
+<div class="dm-c"><h3>Conclusión del Dilema Maestro</h3><p>No hay posición intermedia consistente para el Islam. O acepta las consecuencias del tawhīd estricto (y colapsa filosóficamente en los siete puntos demostrados) o revisa el tawhīd (y se aproxima estructuralmente al cristianismo trinitario). En cualquiera de los dos cuernos, la cosmovisión islámica no puede sostenerse filosóficamente sin importar las categorías de la metafísica trinitaria.</p></div>
+</section>
+<div class="ps" id="parte-epilogo"><div class="pn">Epílogo</div><div class="pl">Reflexiones finales</div><div class="pt">Sobre la Naturaleza de Este Argumento</div><div class="psub"></div></div>
+<section id="epilogo" class="sec"><div class="stit"><span class="snum"></span></div>
+<div class="epc"><div class="ept">Alcance del argumento</div><p>Este argumento no pretende que un musulmán aceptará inmediatamente la Trinidad. El argumento es trascendental: muestra que la Trinidad es la única presuposición coherente para la inteligibilidad del mundo. Reconocer la coherencia de una posición es distinto de la conversión personal, que implica también fe, gracia y voluntad.</p></div>
+<div class="epc"><div class="ept">Carácter del argumento</div><p>El argumento no es un ataque ad hominem al Islam ni a los musulmanes. Es una evaluación filosófica de la coherencia interna de una cosmovisión. Los grandes mutakallimūn —al-Ashʿarī, al-Ghazālī, Ibn Rushd— eran pensadores de enorme talla intelectual.</p></div>
+<div class="epc"><div class="ept">Lo que el colapso revela</div><p>Precisamente porque eran grandes pensadores, son los que más claramente vieron las tensiones internas que aquí se sistematizan. El hecho de que no las pudieran resolver no es una deshonra: es señal de que el problema es genuinamente irresoluble dentro de los límites del tawhīd.</p></div>
+<div class="epc"><div class="ept">El origen de la tríada</div><p>La tríada trascendental —unidad, pluralidad, relación— no fue inventada por los apologistas cristianos. Fue encontrada en la estructura de la realidad misma. Cuando esa estructura pregunta por su fundamento, la respuesta que emerge de la metafísica rigurosa no es un monosílabo: es un nombre que incluye en sí mismo la tríada entera.</p></div>
+<div class="col">Argumentum conscriptum in forma scholastica, ad usum apologeticum,<br>cum reverentia erga omnes philosophos qui veritatem quaesiverunt.</div>
+</section>
+</main>
+<button id="sbt" onclick="tsb()" title="Menú">☰</button>
+<script>
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  const pct=d.scrollTop/(d.scrollHeight-d.clientHeight);
+  document.getElementById('prog').style.transform='scaleX('+pct+')';
+},{passive:true});
+
+function tp(btn){
+  const part=btn.closest('.sbp');
+  const was=part.classList.contains('open');
+  document.querySelectorAll('.sbp').forEach(p=>{p.classList.remove('open');p.querySelector('.sbp-btn').classList.remove('act');});
+  if(!was){part.classList.add('open');btn.classList.add('act');}
+}
+
+function ts(h){h.closest('.sy').classList.toggle('col');}
+function tsb(){document.getElementById('sb').classList.toggle('open');}
+
+const sections=document.querySelectorAll('section[id],.ps[id]');
+const links=document.querySelectorAll('.sb-sub a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      links.forEach(l=>{l.classList.remove('act');if(l.getAttribute('href')==='#'+id)l.classList.add('act');});
+    }
+  });
+},{threshold:0.15,rootMargin:'-60px 0px -60% 0px'});
+sections.forEach(s=>obs.observe(s));
+
+links.forEach(link=>{
+  link.addEventListener('click',function(){
+    const part=this.closest('.sbp');
+    document.querySelectorAll('.sbp').forEach(p=>{p.classList.remove('open');p.querySelector('.sbp-btn').classList.remove('act');});
+    part.classList.add('open');part.querySelector('.sbp-btn').classList.add('act');
+    if(window.innerWidth<=900)document.getElementById('sb').classList.remove('open');
+  });
+});
+</script>
+</body></html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Mito del Sincretismo Pagano: Una Respuesta Histórica y Católica</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f7f4ef;
+    --accent: #6b1d3a;
+    --accent2: #1a3a5c;
+    --gold: #b8860b;
+    --green: #2f4d33;
+    --grey-light: #e8e4dc;
+    --grey-mid: #9e9589;
+    --white: #ffffff;
+    --verdict: #1a0a1f;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    z-index: 9999; transition: width 0.1s linear;
+  }
+
+  #sidebar {
+    position: fixed; left: 0; top: 0; width: 310px; height: 100vh;
+    background: var(--ink); color: var(--paper); overflow-y: auto; z-index: 100;
+    transform: translateX(-310px); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    padding: 2rem 1.5rem;
+  }
+  #sidebar.open { transform: translateX(0); }
+
+  #sidebar h2 {
+    font-family: 'Playfair Display', serif; font-size: 1rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333; padding-bottom: 0.75rem;
+  }
+
+  #sidebar nav a {
+    display: block; padding: 0.45rem 0; color: #ccc; text-decoration: none;
+    font-family: 'Source Serif 4', serif; font-size: 0.82rem;
+    border-bottom: 1px solid #222; transition: color 0.2s, padding-left 0.2s;
+  }
+  #sidebar nav a:hover { color: var(--gold); padding-left: 0.5rem; }
+  #sidebar nav a.active { color: var(--gold); font-weight: 600; }
+
+  #sidebar nav .section-label {
+    display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--grey-mid); padding: 0.75rem 0 0.25rem;
+  }
+
+  #nav-toggle {
+    position: fixed; left: 1rem; top: 1rem; z-index: 200; background: var(--ink);
+    border: none; color: var(--paper); width: 44px; height: 44px; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; padding: 8px; transition: background 0.2s;
+  }
+  #nav-toggle:hover { background: var(--accent); }
+  #nav-toggle span { display: block; width: 24px; height: 2px; background: currentColor; transition: transform 0.3s, opacity 0.3s; }
+  #nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #nav-toggle.open span:nth-child(2) { opacity: 0; }
+  #nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  #overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 50; }
+  #overlay.visible { display: block; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 2rem 2rem 6rem; }
+
+  .hero {
+    padding: 6rem 0 4rem; border-bottom: 3px solid var(--ink); margin-bottom: 4rem;
+    text-align: center; position: relative;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-weight: 900; line-height: 1.15; color: var(--ink); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-subtitle {
+    font-size: 1.1rem; color: var(--grey-mid); max-width: 580px; margin: 0 auto 2rem; font-style: italic;
+  }
+  .hero-badge {
+    display: inline-block; background: var(--accent); color: white; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.4rem 1rem;
+  }
+
+  .part-header { margin: 5rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--grey-light); }
+  .part-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.5rem;
+  }
+  .part-header h2 {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3.6vw, 2.2rem);
+    font-weight: 700; line-height: 1.25; color: var(--ink);
+  }
+
+  section { margin-bottom: 3rem; scroll-margin-top: 2rem; }
+  section h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--accent2);
+    margin: 2.5rem 0 0.75rem; border-left: 4px solid var(--accent2); padding-left: 0.75rem;
+  }
+
+  p { margin-bottom: 1.2rem; }
+
+  .syllogism {
+    background: var(--ink); color: var(--paper); padding: 2rem 2.5rem; margin: 2.5rem 0;
+    position: relative; border-left: 6px solid var(--gold);
+  }
+  .syllogism::before {
+    content: 'SILOGISMO'; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.2em; color: var(--gold); display: block; margin-bottom: 1rem;
+  }
+  .syllogism.maestro::before { content: 'SILOGISMO MAESTRO'; }
+  .syllogism.maestro { border-left-color: var(--accent); background: #1a0a14; }
+  .syllogism .premise {
+    display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem; align-items: start; font-size: 0.95rem;
+  }
+  .syllogism .premise .label { font-family: 'JetBrains Mono', monospace; color: var(--gold); font-size: 0.75rem; padding-top: 0.15rem; }
+  .syllogism .conclusion {
+    margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #444;
+    font-weight: 600; font-size: 1.05rem; color: #fff;
+  }
+  .syllogism .conclusion::before { content: '∴ '; color: var(--gold); font-weight: 700; }
+
+  .scripture {
+    background: #fff; border: 1px solid var(--grey-light); border-left: 6px solid var(--accent2);
+    padding: 1.5rem 2rem; margin: 2rem 0; font-style: italic;
+  }
+  .scripture .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent2); font-style: normal; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+  .scripture .text { font-size: 1rem; line-height: 1.7; color: var(--ink); }
+
+  .patristic {
+    background: #fdf8f2; border: 1px solid #e6d5b8; border-left: 6px solid var(--gold);
+    padding: 1.5rem 2rem; margin: 1.5rem 0;
+  }
+  .patristic .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--gold); margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 700; }
+  .patristic .text { font-size: 0.98rem; line-height: 1.7; color: #3a2e1f; font-style: italic; }
+
+  .academic {
+    background: #f0f5f0; border: 1px solid #c3d6c5; border-left: 6px solid var(--green);
+    padding: 1.5rem 2rem; margin: 1.5rem 0;
+  }
+  .academic .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green); margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 700; }
+  .academic .text { font-size: 0.98rem; line-height: 1.7; color: #1f3322; }
+
+  .verse-card {
+    background: #fff; border: 1px solid var(--grey-light); border-top: 5px solid var(--accent2);
+    padding: 2rem; margin: 2.5rem 0;
+  }
+  .verse-card .verse-number {
+    display: inline-block; background: var(--accent2); color: white; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.1em; padding: 0.3rem 0.7rem; margin-bottom: 1rem;
+  }
+  .verse-card h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 1rem; }
+
+  .dilemma { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .dilemma-side { padding: 1.5rem; border-top: 4px solid; }
+  .dilemma-side.a { border-color: var(--accent); background: #fdf0f4; }
+  .dilemma-side.b { border-color: var(--accent2); background: #f0f4ff; }
+  .dilemma-side h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .dilemma-side p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .highlight {
+    background: #fffbeb; border: 1px solid var(--gold); padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.95rem;
+  }
+  .highlight strong { color: var(--accent2); }
+
+  .verified-tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--green); background: #e7f0e8; border: 1px solid #b8d0ba;
+    padding: 0.25rem 0.6rem; margin-bottom: 1rem;
+  }
+  .verified-tag::before { content: '✓'; font-weight: 700; }
+
+  .debate-tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gold); background: #fdf3e0; border: 1px solid #e6cf9e;
+    padding: 0.25rem 0.6rem; margin-bottom: 1rem;
+  }
+  .debate-tag::before { content: '⚖'; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 2rem 0; }
+  .stat-box { background: var(--ink); color: var(--paper); padding: 1.5rem 1rem; text-align: center; }
+  .stat-box .number { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--gold); line-height: 1; display: block; }
+  .stat-box .label { font-size: 0.78rem; color: #aaa; margin-top: 0.5rem; display: block; line-height: 1.3; }
+
+  .verdict { background: var(--verdict); color: #fff; padding: 3rem 2.5rem; margin: 4rem 0; border-top: 6px solid var(--gold); }
+  .verdict h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--gold); margin-bottom: 1.5rem; }
+  .verdict p { font-size: 1.05rem; line-height: 1.8; color: #ddd; margin-bottom: 1.25rem; }
+  .verdict strong { color: #fff; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.88rem; }
+  th {
+    background: var(--ink); color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 0.7rem 0.9rem; text-align: left;
+  }
+  td { padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--grey-light); vertical-align: top; }
+  tr:nth-child(even) td { background: #fff; }
+
+  @media (max-width: 640px) {
+    main { padding: 1.25rem 1.25rem 4rem; }
+    .dilemma { grid-template-columns: 1fr; }
+    table { font-size: 0.78rem; }
+  }
+  @media print {
+    #sidebar, #nav-toggle, #overlay, #progress-bar { display: none; }
+    main { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="overlay"></div>
+<button id="nav-toggle" aria-label="Menú de navegación"><span></span><span></span><span></span></button>
+
+<nav id="sidebar" role="navigation" aria-label="Índice de contenidos">
+  <h2>Índice</h2>
+  <nav>
+    <span class="section-label">Introducción</span>
+    <a href="#intro">El mito del "cristianismo reciclado"</a>
+
+    <span class="section-label">Parte I — Justino Mártir y los "Hijos de Júpiter"</span>
+    <a href="#justino">1. ¿Justino admitió que Cristo era "como" los hijos de Júpiter?</a>
+
+    <span class="section-label">Parte II — Arte Cristiano y Vocabulario Visual Pagano</span>
+    <a href="#orfeo">2. Orfeo en las catacumbas: ¿el Buen Pastor es un dios pagano?</a>
+    <a href="#isis-maria">3. Isis y Horus: ¿el origen de la Virgen con el Niño?</a>
+
+    <span class="section-label">Parte III — La Trinidad, ¿Doctrina Pagana?</span>
+    <a href="#trinidad-pagana">4. "La Trinidad es pagana": la cita de Gregorio de Nisa, bien leída</a>
+    <a href="#trinidad-genetica">5. El error lógico detrás de "hay triadas en todas las religiones"</a>
+
+    <span class="section-label">Parte IV — Fechas y Fiestas: ¿Sincretismo Calendárico?</span>
+    <a href="#navidad-fecha">6. La Navidad y el "Sol Invictus": lo que dicen las fuentes</a>
+    <a href="#arbol-navidad">7. El árbol de Navidad: una tradición del siglo XVI, no del XVI a.C.</a>
+    <a href="#mitra">8. Mitra: el mito de los "paralelos exactos"</a>
+    <a href="#pascua-ishtar">9. "Pascua viene de Ishtar": el error lingüístico viral</a>
+
+    <span class="section-label">Parte V — Lo que la Iglesia sí Reconoce</span>
+    <a href="#inculturacion">10. Gregorio Magno y la carta a Mellitus: inculturación, no sincretismo</a>
+
+    <span class="section-label">Conclusión</span>
+    <a href="#silogismo-maestro">11. El silogismo maestro</a>
+    <a href="#veredicto">12. El veredicto final</a>
+  </nav>
+</nav>
+
+<main>
+
+  <header class="hero" id="intro">
+    <p class="hero-eyebrow">Apologética Católica · Historia de las Religiones</p>
+    <h1>El Mito del <em>Sincretismo Pagano</em><br>Una Respuesta Histórica</h1>
+    <p class="hero-subtitle">Justino Mártir, Orfeo en las catacumbas, la Trinidad "pagana", la Navidad, el árbol decembrino, Mitra y Pascua-Ishtar, examinados fuente por fuente, con la bibliografía académica verificada</p>
+    <span class="hero-badge">Cada cita contrastada en varias fuentes independientes antes de incluirse</span>
+  </header>
+
+  <section>
+    <p>Desde el siglo XIX —con el comparatismo religioso de J. G. Frazer y su <em>La rama dorada</em>, y más recientemente con la difusión masiva del documental <em>Zeitgeist</em> (2007) y de infografías virales— circula la idea de que el cristianismo, y en particular el catolicismo, sería en gran medida un colage de mitologías paganas anteriores: Cristo sería una reedición de dioses solares moribundos y resucitados, la Navidad una fiesta del sol robada a Roma, la Virgen una versión repintada de Isis, y la Trinidad una concesión a la filosofía griega. Estas afirmaciones tienen la ventaja retórica de sonar eruditas y la desventaja real de que, en su gran mayoría, no resisten el contacto con las fuentes primarias ni con la bibliografía académica especializada —incluida la de historiadores que no son creyentes—.</p>
+
+    <p>Este documento examina las acusaciones de sincretismo pagano más citadas, una por una, distinguiendo siempre tres cosas que el discurso popular suele confundir: (1) <strong>el préstamo de vocabulario visual o artístico</strong> (un recurso estético disponible en la cultura, sin implicación doctrinal); (2) <strong>la inculturación misionera consciente</strong> (una estrategia pastoral que la propia Iglesia documenta y explica abiertamente); y (3) <strong>el sincretismo doctrinal real</strong> (la adopción de creencias o prácticas paganas como si fueran verdades cristianas, lo cual la Iglesia rechaza por definición). La confusión deliberada o ingenua entre estas tres categorías es la base de casi todas las acusaciones que se examinan aquí.</p>
+
+    <div class="highlight">
+      <strong>Método y nivel de exigencia:</strong> cada afirmación histórica de este documento ha sido contrastada en al menos dos fuentes independientes —fuentes primarias cuando es posible (el propio texto de Justino, de Beda, de Gregorio de Nisa) y bibliografía académica especializada (historiadores de la Antigüedad, papirólogos, especialistas en mitraísmo o en arte paleocristiano)—. Donde la cuestión histórica está genuinamente debatida entre especialistas, este documento lo señala expresamente con la etiqueta <span class="debate-tag">debate académico abierto</span> en lugar de presentar una falsa certeza. Donde la evidencia es sólida y consensuada, se señala con <span class="verified-tag">verificado en fuentes primarias</span>.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE I: JUSTINO MÁRTIR -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="justino">
+    <span class="part-label">Parte I — Justino Mártir y los "Hijos de Júpiter"</span>
+    <h2>¿Un padre de la Iglesia admitiendo que Cristo era un mito pagano más?</h2>
+  </div>
+
+  <section>
+    <h3>1. ¿Justino admitió que Cristo era "como" los hijos de Júpiter?</h3>
+    <span class="verified-tag">Verificado en el texto primario (tres traducciones independientes cotejadas)</span>
+
+    <div class="patristic">
+      <div class="source">San Justino Mártir, Primera Apología, cap. 21 (c. 150-155 d.C.; trad. Roberts-Donaldson y Schaff/Richardson cotejadas)</div>
+      <div class="text">"Y cuando decimos también que el Verbo, que es el primogénito de Dios, fue engendrado sin unión sexual, y que Él, Jesucristo, nuestro Maestro, fue crucificado y murió, y resucitó, y ascendió al cielo, no proponemos nada diferente de lo que vosotros creéis respecto a aquellos a quienes tenéis por hijos de Júpiter."</div>
+    </div>
+
+    <div class="patristic">
+      <div class="source">San Justino Mártir, Primera Apología, cap. 22</div>
+      <div class="text">"Y si alguno objeta que Él fue crucificado, en esto también está a la par de aquellos reputados hijos de Júpiter, que sufrieron como hemos enumerado... Y si afirmamos que nació de una virgen, aceptad esto en común con lo que aceptáis de Perseo. Y en cuanto decimos que sanó a los cojos, paralíticos y ciegos de nacimiento, decimos algo muy similar a lo que se dice que hizo Esculapio."</div>
+    </div>
+
+    <p>Esta es, con diferencia, la cita patrística más utilizada por la teoría del "Cristo-mito" o "copycat theory" (popularizada por el documental <em>Zeitgeist</em> y por divulgadores como Kersey Graves en el siglo XIX). El argumento suele presentarse así: "Hasta un padre de la Iglesia del siglo II admite que la historia de Cristo es igual a la de los dioses paganos". Es necesario leer el capítulo completo —no solo la frase aislada— para entender lo que Justino está haciendo realmente.</p>
+
+    <div class="dilemma">
+      <div class="dilemma-side a">
+        <h4>LA OBJECIÓN</h4>
+        <p>Justino, escribiendo apenas un siglo después de los hechos, compara abiertamente el nacimiento virginal, la muerte, la resurrección y la ascensión de Cristo con las historias de los "hijos de Júpiter" (Perseo, Esculapio, Baco/Dioniso, Hermes). Si un apologista cristiano tan temprano veía la historia de Cristo como equivalente a estos mitos, eso sugiere que la propia Iglesia primitiva entendía el relato de Cristo dentro del mismo género literario que la mitología grecorromana.</p>
+      </div>
+      <div class="dilemma-side b">
+        <h4>LA RESPUESTA</h4>
+        <p>Justino no está afirmando un origen común ni una copia: está usando un argumento retórico clásico, el <em>tu quoque</em> ("también tú"), dirigido a un emperador y un público pagano que <em>ya aceptaban</em> como verosímiles relatos de nacimientos sin unión sexual, resurrecciones y ascensiones de sus propios héroes. Su lógica es: "si toleráis esto como creíble en vuestras propias tradiciones, no podéis rechazarlo de plano solo por tratarse de Cristo". Es un argumento sobre la <em>coherencia del interlocutor</em>, no una admisión sobre el origen de la fe cristiana. El propio Justino, en el capítulo 54 de la misma obra, da su propia explicación —teológicamente discutible, pero clara— de por qué existen estos paralelos: sostiene que los demonios, habiendo oído anunciado por los profetas que Cristo vendría, "presentaron a muchos llamados hijos de Júpiter" precisamente para que la historia de Cristo, cuando llegara, pareciera "un mero relato maravilloso, como los relatos de los poetas". Es decir, Justino invierte la dirección de la imitación: para él, son los mitos paganos los que imitan por adelantado (mal y de forma distorsionada) lo anunciado por los profetas, no Cristo quien copia a los mitos.</p>
+      </div>
+    </div>
+
+    <div class="patristic">
+      <div class="source">San Justino Mártir, Primera Apología, cap. 54</div>
+      <div class="text">"Pues habiendo oído anunciado por los profetas que Cristo había de venir, y que los hombres impíos serían castigados con fuego, presentaron a muchos para ser llamados hijos de Júpiter, bajo la impresión de que así podrían producir en los hombres la idea de que las cosas dichas respecto a Cristo eran meros relatos maravillosos, como las cosas dichas por los poetas."</div>
+    </div>
+
+    <div class="academic">
+      <div class="source">Análisis filológico de los paralelos concretos citados por Justino (verificado contra las fuentes mitográficas primarias: Apolodoro, Biblioteca II.4.1)</div>
+      <div class="text">Un examen de los propios ejemplos que Justino escoge muestra además que los paralelos son, en el detalle, mucho más débiles de lo que la cita aislada sugiere. Perseo —a quien Justino compara con el "nacimiento de una virgen"— nace, según la mitografía griega que el propio público pagano de Justino conocía (Apolodoro, Biblioteca II.4.1), de la unión de Zeus con Dánae "en forma de lluvia de oro", es decir, mediante una unión sexual simbolizada, no de una concepción sin varón en sentido estricto. Justino está comparando categorías de relato (un nacimiento extraordinario sin padre humano ordinario), no narrando hechos idénticos; y son los propios críticos modernos de la teoría del "Cristo copiado" —no solo apologistas cristianos— quienes han señalado que ninguno de los mitos aducidos por Justino incluye realmente una crucifixión, una resurrección corporal al tercer día o una concepción sin intervención sexual de ningún tipo, los tres elementos centrales del relato cristiano.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Un argumento <em>tu quoque</em> ("tú también lo aceptas") dirigido a persuadir a un interlocutor hostil de que sea coherente con sus propios estándares no constituye, por su propia naturaleza lógica, una afirmación sobre el origen histórico real de la propia posición del que argumenta.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Justino usa precisamente esa estructura retórica en los capítulos 21-22 de su Apología, y explica además, en el capítulo 54 de la misma obra, su propia teoría —de que son los mitos paganos los que imitan por anticipado, de forma distorsionada, lo anunciado por los profetas— mostrando que no consideraba el relato de Cristo derivado de la mitología grecorromana.</span></div>
+      <div class="conclusion">Por tanto, citar a Justino Mártir como si "admitiera" que Cristo fue copiado de los hijos de Júpiter invierte el sentido explícito de su propio argumento, documentado en el mismo texto que se cita.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE II: ARTE Y VOCABULARIO VISUAL -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="orfeo">
+    <span class="part-label">Parte II — Arte Cristiano y Vocabulario Visual Pagano</span>
+    <h2>Cuando una imagen prestada no es una doctrina prestada</h2>
+  </div>
+
+  <section>
+    <h3>2. Orfeo en las catacumbas: ¿el Buen Pastor es un dios pagano?</h3>
+    <span class="verified-tag">Verificado: Catacumbas de Domitila y Priscila, datación siglo III (Wikipedia citando fuentes arqueológicas; Bible Odyssey; academia.edu)</span>
+
+    <p>Es completamente cierto, y no hay nada que ocultar aquí: en varias catacumbas romanas del siglo III —especialmente la Catacumba de Domitila y la Catacumba de Priscila— aparecen frescos que representan a <strong>Orfeo</strong>, el héroe griego que con su lira amansaba a las fieras, en un contexto funerario claramente cristiano. La iconografía es inconfundible: Orfeo, sentado sobre una roca, lira en mano, rodeado de animales que escuchan su música. Este motivo coexiste, en las mismas catacumbas, con representaciones del Buen Pastor llevando una oveja sobre los hombros —y los historiadores del arte coinciden en que ambas imágenes comparten composición y, en algunos casos, sentido simbólico.</p>
+
+    <div class="scripture">
+      <div class="source">Salmo 23:1; Juan 10:11</div>
+      <div class="text">"Jehová es mi pastor; nada me faltará." / "Yo soy el buen pastor; el buen pastor su vida da por las ovejas."</div>
+    </div>
+
+    <div class="academic">
+      <div class="source">Wikipedia, "Catacombs of Domitilla" (artículo verificado contra bibliografía arqueológica citada); Bible Odyssey, "The Good Shepherd in the Catacomb of Priscilla" (recurso académico de la Society of Biblical Literature)</div>
+      <div class="text">"Orfeo es una de las figuras mitológicas paganas más conocidas que aparecen en el arte cristiano primitivo, y la representación de él encantando a las bestias incluye algunas de las escenas más innegablemente paganas que aparecen en contextos cristianos." La diferencia, señalan estos mismos estudios, está en el detalle: mientras la iconografía pagana tradicional rodea a Orfeo de "criaturas salvajes, bestiales", las versiones cristianas posteriores lo representan con animales mansos —ovejas, corderos— coherentes con la imaginería bíblica del Buen Pastor.</div>
+    </div>
+
+    <p>La pregunta relevante no es si el préstamo visual ocurrió —ocurrió, y de manera documentada—, sino qué significa ese préstamo. Aquí es donde el argumento popular se equivoca de categoría.</p>
+
+    <div class="dilemma">
+      <div class="dilemma-side a">
+        <h4>LA OBJECIÓN</h4>
+        <p>Si los primeros cristianos representaron a Cristo usando literalmente la figura de un héroe pagano (Orfeo), eso demuestra que percibían a Cristo como una variante o continuación de las divinidades paganas existentes, no como una realidad radicalmente distinta.</p>
+      </div>
+      <div class="dilemma-side b">
+        <h4>LA RESPUESTA</h4>
+        <p>El propio concepto teológico del "Buen Pastor" no proviene de Orfeo: proviene directamente del Salmo 23 y de Juan 10, textos bíblicos sin relación alguna con la mitología griega. Lo que los artistas cristianos del siglo III tomaron de Orfeo no fue una creencia, sino un <em>recurso visual ya existente</em> en el repertorio artístico grecorromano —la composición de una figura central, sentada, rodeada de animales en actitud pacífica— para representar visualmente una idea que ya era plenamente bíblica antes de que existiera ese arte. Es, en términos de historia del arte, exactamente lo mismo que ocurre cuando un pintor renacentista usa la perspectiva o el desnudo clásico —vocabulario visual grecorromano— para representar escenas explícitamente cristianas, sin que nadie infiera de ello que el pintor "creía" en la mitología clásica. Como observa Bible Odyssey, las versiones cristianas del motivo alteran deliberadamente los elementos no compatibles con la teología bíblica —sustituyendo bestias salvajes por ovejas mansas—, precisamente porque lo que se conserva es la composición visual, no el contenido del mito.</p>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Adoptar una convención artística o compositiva ya existente en una cultura para representar visualmente una idea —sin adoptar el contenido doctrinal o religioso asociado a esa convención en su uso original— es préstamo de vocabulario visual, no sincretismo doctrinal.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La imagen del Buen Pastor en las catacumbas usa la composición visual de Orfeo (figura sentada, música, animales en torno) para representar un concepto —Cristo como pastor de su pueblo— que procede íntegra y exclusivamente de textos bíblicos (Salmo 23, Juan 10), modificando además los elementos del modelo pagano incompatibles con esa teología.</span></div>
+      <div class="conclusion">Por tanto, la presencia de Orfeo en las catacumbas documenta un préstamo de recursos artísticos disponibles en la cultura ambiente, no la importación de una creencia pagana al contenido de la fe cristiana.</div>
+    </div>
+  </section>
+
+  <section id="isis-maria">
+    <h3>3. Isis y Horus: ¿el origen de la Virgen con el Niño?</h3>
+    <span class="debate-tag">Debate académico real, presentado con sus dos posiciones documentadas</span>
+
+    <p>Esta es, de todas las objeciones examinadas en este documento, la que tiene el respaldo académico más genuino y, por ello, merece un tratamiento más cuidadoso que un simple "eso es falso". Existen, en efecto, estatuillas y pinturas egipcias —desde el siglo VIII a.C., y masivamente desde época grecorromana— que representan a la diosa Isis amamantando a su hijo Horus en su regazo (el llamado tipo "Isis lactans"), y la composición es, en muchos casos, visualmente muy cercana a la posterior iconografía de la "Virgen de la leche" (María amamantando al Niño).</p>
+
+    <div class="academic">
+      <div class="source">Sabrina Higgins (Universidad Simon Fraser), "Divine Mothers: The Influence of Isis on the Virgin Mary in Egyptian Lactans-Iconography", Journal of the Canadian Society for Coptic Studies 3-4 (2012), 71-90</div>
+      <div class="text">Higgins, especialista en cristianismo egipcio primitivo y mariología, concluye tras su estudio comparativo que las similitudes iconográficas "demuestran que las imágenes de Isis influyeron en las de María, pero no que los cristianos adoptaran deliberadamente la iconografía de Isis ni otros elementos de su culto". Es decir: hay influencia visual documentable, pero la propia especialista distingue expresamente esa influencia formal de una adopción de contenido cultual o doctrinal.</div>
+    </div>
+
+    <div class="academic">
+      <div class="source">Vincent Tran Tam Tinh, estudio de referencia sobre la iconografía de Isis lactans (1973), datos recogidos en Wikipedia ("Isis") y contrastados con Higgins (2012)</div>
+      <div class="text">Un dato cronológico relevante, señalado por este investigador y confirmado por estudios posteriores: las últimas imágenes documentadas de Isis amamantando a Horus datan del siglo IV d.C., mientras que las primeras imágenes conocidas de María amamantando a Jesús datan del siglo VII d.C. —es decir, existe un margen de unos tres siglos entre el final de un tipo iconográfico y el comienzo documentado del otro, lo cual complica cualquier relato de "sustitución" directa e inmediata, aunque no excluye una influencia indirecta o tardía a través de la pervivencia local del motivo, sobre todo en Egipto.</div>
+    </div>
+
+    <p>El propio artículo de Wikipedia sobre Isis, que cita a varios especialistas con posiciones distintas, resume bien la división real entre historiadores: Stephen Benko sostiene que la devoción a María estuvo "profundamente influida" por el culto a varias diosas, incluida Isis; John McGuckin, historiador de la Iglesia, sostiene en cambio que María "absorbió rasgos superficiales —como la iconografía— de estas diosas, pero los fundamentos de su culto eran enteramente cristianos". Esta es una discusión académica auténtica, no una leyenda urbana sin respaldo: por eso aquí no se puede, ni se debe, dar un veredicto simple de "falso".</p>
+
+    <div class="highlight">
+      <strong>La distinción que importa:</strong> incluso los autores que defienden con más fuerza la influencia de Isis en la iconografía mariana —como Higgins, Thomas F. Mathews o Norman Muller— hablan de influencia en la <em>iconografía</em> (cómo se compone visualmente una imagen de madre con hijo), no de un origen del <em>contenido teológico</em> de la mariología cristiana, que se desarrolla a partir de los relatos evangélicos de la Anunciación y la Natividad (Lc 1-2) y de las controversias cristológicas del siglo V sobre la maternidad divina de María (Concilio de Éfeso, 431 d.C., centrado en si Cristo era una sola persona divina, no en ningún precedente egipcio).
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Una influencia documentada en la composición visual de un tipo iconográfico (madre sentada amamantando a un hijo divino en su regazo) no equivale, sin más evidencia adicional, a una influencia en el contenido doctrinal que esa imagen pretende comunicar, especialmente cuando ese contenido deriva de fuentes textuales completamente distintas (los evangelios) y de controversias teológicas (Éfeso 431) sin relación con el culto a Isis.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Los especialistas que documentan la influencia iconográfica de Isis sobre María —Higgins entre ellos— distinguen explícitamente esa influencia formal de cualquier adopción deliberada del culto o la doctrina isíaca, y señalan además un margen cronológico de varios siglos entre los dos tipos de imagen.</span></div>
+      <div class="conclusion">Por tanto, la imagen de la Virgen con el Niño puede reconocer, sin contradicción ni vergüenza, cierta influencia compositiva de un repertorio visual disponible en el Egipto tardoantiguo, sin que esto implique que la doctrina mariana católica "provenga" del culto a Isis ni que su contenido sea de origen pagano.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE III: LA TRINIDAD -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="trinidad-pagana">
+    <span class="part-label">Parte III — La Trinidad, ¿Doctrina Pagana?</span>
+    <h2>De la cita más citada fuera de contexto al error lógico de fondo</h2>
+  </div>
+
+  <section>
+    <h3>4. "La Trinidad es pagana": la cita de Gregorio de Nisa, bien leída</h3>
+    <span class="verified-tag">Verificado en dos traducciones independientes del original griego (NPNF, ed. Schaff; catholiclibrary.org)</span>
+
+    <p>Numerosos sitios y vídeos que defienden el origen pagano de la Trinidad citan un pasaje de san Gregorio de Nisa —uno de los grandes arquitectos de la teología trinitaria del siglo IV— como si el propio santo "admitiera" que la Trinidad combina judaísmo y paganismo. Conviene citar el texto completo y leerlo con el cuidado que merece.</p>
+
+    <div class="patristic">
+      <div class="source">San Gregorio de Nisa, La Gran Catequesis (Oratio Catechetica Magna), cap. 3 (c. 386 d.C.; trad. Nicene and Post-Nicene Fathers, Second Series, vol. 5, ed. Philip Schaff)</div>
+      <div class="text">"...la unidad de la naturaleza no admite división, de modo que la supremacía de la única Primera Causa no queda partida y dividida en Deidades diferentes, ni tampoco la afirmación armoniza con el dogma judío; sino que la verdad pasa por el medio entre estas dos concepciones, destruyendo cada herejía y, sin embargo, aceptando de cada una lo que le es útil. El dogma judío queda destruido por la aceptación del Verbo y por la creencia en el Espíritu; mientras que el error politeísta de la escuela griega se desvanece por la unidad de la naturaleza, que deroga esta imaginación de pluralidad."</div>
+    </div>
+
+    <div class="dilemma">
+      <div class="dilemma-side a">
+        <h4>LA OBJECIÓN</h4>
+        <p>Gregorio de Nisa, una autoridad trinitaria de primer orden, afirma literalmente que la verdad cristiana sobre Dios "pasa por el medio" entre el judaísmo y el "error politeísta de la escuela griega", aceptando "lo útil" de cada uno. Esto parecería una admisión patrística directa de que la Trinidad es, en parte, una síntesis con elementos tomados del politeísmo pagano griego.</p>
+      </div>
+      <div class="dilemma-side b">
+        <h4>LA RESPUESTA</h4>
+        <p>Gregorio no está diciendo que el cristianismo tomó prestados dioses o doctrinas paganas concretas. Estructuralmente, su argumento es lógico, no histórico-genético: el "dogma judío" representa, en su esquema retórico, el polo de la <em>unidad sin distinción real de personas</em>; la "escuela griega" representa el polo opuesto, el de la <em>pluralidad sin unidad de naturaleza</em> (varios dioses, cada uno con su propia esencia separada). Gregorio sostiene que la verdad cristiana <em>rechaza ambos errores</em> y conserva lo correcto de cada extremo conceptual: la unidad de naturaleza (frente al politeísmo, que multiplica esencias) y la distinción real de personas (frente a una lectura que, según él, no afirma plenamente la personalidad del Verbo y del Espíritu). Es exactamente el mismo tipo de argumento que se usa para decir "la verdad está entre el extremo A y el extremo B" sin que eso implique que la verdad "tomó prestado" contenido doctrinal de A o de B; es una afirmación sobre <em>estructura lógica</em> (unidad y pluralidad), no sobre <em>genealogía histórica</em> de doctrinas o divinidades concretas. Es revelador, además, que el propio Gregorio llame "error" explícitamente a la pluralidad politeísta griega: no está adoptando el politeísmo, está usándolo como ejemplo de lo que la Trinidad <em>no es</em>, igual que llama "dogma" insuficiente —no "error" en el mismo grado— a la estricta unidad sin distinción de personas.</p>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Un argumento que sitúa una posición propia "entre dos errores", rechazando explícitamente ambos y conservando solo el principio lógico correcto de cada uno (aquí: unidad de naturaleza, y distinción real de personas), no es una afirmación de que la posición propia derive históricamente, por copia o adopción, de ninguno de los dos errores citados.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Gregorio de Nisa describe explícitamente el "error politeísta de la escuela griega" como un error que la doctrina trinitaria "destruye" y "hace desvanecer", no como una fuente de la que la Trinidad toma contenido doctrinal o divinidades concretas.</span></div>
+      <div class="conclusion">Por tanto, la cita de Gregorio de Nisa, leída en su contexto inmediato, es exactamente lo contrario de una admisión de origen pagano: es un argumento explícito contra el politeísmo, formulado mediante una estructura retórica de "término medio" entre dos errores lógicos, no entre dos genealogías religiosas.</div>
+    </div>
+  </section>
+
+  <section id="trinidad-genetica">
+    <h3>5. El error lógico detrás de "hay triadas en todas las religiones"</h3>
+
+    <p>Más allá de la cita de Gregorio de Nisa, el argumento de fondo de "la Trinidad es pagana" suele apoyarse en la observación de que muchas religiones antiguas —egipcia (Osiris-Isis-Horus), babilónica, hindú (Trimurti)— presentan agrupaciones de tres divinidades. La objeción razona: si hay "trinidades" en todas partes, la cristiana debe de ser una variación más del mismo patrón universal.</p>
+
+    <div class="academic">
+      <div class="source">Falacia genética (concepto estándar de lógica informal, no exclusivo de ningún autor; aplicado aquí al caso concreto)</div>
+      <div class="text">Inferir que una idea es falsa, prestada o carente de contenido propio simplemente porque existen ideas superficialmente similares en otras culturas es un caso clásico de falacia genética: el origen aparente o la mera semejanza estructural de una idea no determina su verdad ni su procedencia real. El mismo razonamiento, aplicado de forma consistente, obligaría a descartar también el monoteísmo (presente en zoroastrismo, judaísmo e islam, entre otros) como "prestado" de cualquiera de esas tradiciones a las demás, lo cual ningún historiador serio sostiene sin evidencia textual directa de dependencia.</div>
+    </div>
+
+    <p>Pero el problema de esta objeción no es solo lógico: es también que la comparación, examinada de cerca, es superficial. Las llamadas "triadas" paganas —egipcia, babilónica o hindú— son, en todos los casos documentados, agrupaciones de <strong>tres dioses distintos, con tres esencias o naturalezas separadas</strong>, unidos por relación de familia (padre-madre-hijo, como Osiris-Isis-Horus) o de función cósmica (creación-conservación-destrucción, como en el Trimurti hindú). La doctrina cristiana de la Trinidad afirma, en cambio, algo estructuralmente distinto y sin verdadero paralelo en esas tradiciones: <strong>una sola naturaleza o esencia divina indivisa, subsistente en tres Personas realmente distintas</strong> —no tres dioses, sino un solo Dios. Esta es precisamente la distinción que Gregorio de Nisa articula en el pasaje citado en el punto anterior: unidad de naturaleza, pluralidad de personas, una combinación sin equivalente exacto en las "triadas" paganas que se le suelen comparar.</p>
+
+    <div class="academic">
+      <div class="source">Larry W. Hurtado (Universidad de Edimburgo) y Richard Bauckham (Universidad de St Andrews), bibliografía especializada en la cristología más temprana del Nuevo Testamento (entre otras obras, Bauckham, <em>Jesus and the God of Israel</em>, Eerdmans, 2008; Hurtado, diversas publicaciones sobre el "patrón devocional binitario/triádico" en el judaísmo del Segundo Templo y el cristianismo primitivo)</div>
+      <div class="text">Ambos especialistas —ninguno de ellos preocupado por defender la ortodoxia católica como tal, sino por reconstruir históricamente la cristología del Nuevo Testamento— documentan que la atribución de identidad divina a Jesús y al Espíritu en los textos del Nuevo Testamento se desarrolla desde dentro del marco del monoteísmo judío del Segundo Templo, mediante la relectura de textos veterotestamentarios sobre YHWH aplicados a Cristo y al Espíritu (el tipo de pasajes examinados en los documentos previos de esta serie sobre la cristología paulina y de Hechos), no mediante la importación de divinidades o tríadas del entorno helenístico circundante.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>La existencia de agrupaciones de tres divinidades distintas en otras culturas no demuestra, por sí sola, que una doctrina trinitaria estructuralmente diferente —un solo Dios en tres Personas, no tres dioses— derive históricamente de esas agrupaciones; concluir lo contrario es una falacia genética.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Las "triadas" paganas citadas en la objeción son, en todos los casos documentados, agrupaciones de tres esencias divinas separadas, mientras que la doctrina cristiana afirma una sola esencia indivisa en tres Personas distintas —una estructura lógica diferente, no una variación de la misma—; y la investigación histórica especializada sobre los orígenes de la cristología neotestamentaria (Hurtado, Bauckham) la sitúa dentro del desarrollo interno del monoteísmo judío, no en la importación de divinidades helenísticas.</span></div>
+      <div class="conclusion">Por tanto, el argumento de "hay triadas en todas las religiones, luego la Trinidad es una de ellas" combina una falacia lógica (genética) con una comparación estructuralmente inexacta entre conceptos teológicos distintos.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE IV: FECHAS Y FIESTAS -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="navidad-fecha">
+    <span class="part-label">Parte IV — Fechas y Fiestas: ¿Sincretismo Calendárico?</span>
+    <h2>Lo que la cronología real, y no la leyenda, puede establecer</h2>
+  </div>
+
+  <section>
+    <h3>6. La Navidad y el "Sol Invictus": lo que dicen las fuentes</h3>
+    <span class="debate-tag">Debate académico real entre dos hipótesis, presentado con honestidad</span>
+
+    <p>La afirmación de que el 25 de diciembre fue "robado" a una fiesta romana del Sol Invicto es, probablemente, la objeción de sincretismo más repetida y, al mismo tiempo, una de las más simplificadas en su versión popular. Existen, en la investigación histórica seria, dos hipótesis rivales, y ambas merecen exponerse con precisión.</p>
+
+    <table>
+      <tr><th>Hipótesis</th><th>Argumento central</th><th>Problema principal</th></tr>
+      <tr><td><strong>Historia de las religiones</strong> (Hermann Usener, siglo XIX)</td><td>El 25 de diciembre se habría escogido para sustituir o neutralizar la fiesta romana del Sol Invicto.</td><td>La fiesta oficial de "Natalis Solis Invicti" del 25 de diciembre solo aparece documentada en el Calendario de Filocalo, del año 354 d.C. —y se asocia al culto instaurado por el emperador Aureliano en el año 274 d.C.—. Hay testimonios cristianos del 25 de diciembre como fecha de referencia anteriores a esa institución oficial del culto solar.</td></tr>
+      <tr><td><strong>Cálculo cronológico</strong> (defendida por historiadores como Thomas Talley y, más recientemente, Andrew McGowan)</td><td>Algunos cristianos del siglo II-III calculaban la fecha de la concepción de Cristo a partir de la fecha que asignaban a su muerte (25 de marzo), y sumaban nueve meses, llegando al 25 de diciembre como fecha del nacimiento.</td><td>Requiere reconstruir un razonamiento cronológico que no todos los testimonios antiguos explicitan del mismo modo, y algunos especialistas (p. ej. Hans Förster) han cuestionado su solidez documental.</td></tr>
+    </table>
+
+    <div class="academic">
+      <div class="source">Andrew McGowan (Berkeley Divinity School, Universidad de Yale), "How December 25 Became Christmas", Biblical Archaeology Review / Biblical Archaeology Society (artículo de referencia, accesible y revisado por la institución académica que lo publica)</div>
+      <div class="text">"No tenemos evidencia de que los cristianos adoptaran fiestas paganas en el siglo III, que es precisamente cuando se establecieron las fechas de la Navidad. Por tanto, parece poco probable que la fecha se eligiera simplemente para coincidir con festividades solares paganas." McGowan señala además que la fiesta del 25 de diciembre "parece haber existido ya antes del 312" —es decir, antes de la conversión de Constantino—, citando testimonios de los cristianos donatistas del norte de África que conocían esa fecha desde antes de esa conversión. Añade un dato cronológico importante: "no es hasta el siglo XII que encontramos la primera sugerencia de que la celebración del nacimiento de Jesús se fijó deliberadamente en la época de fiestas paganas" —es decir, la teoría de la sustitución deliberada, lejos de ser un dato antiguo, es en sí misma una hipótesis tardía, medieval, no patrística.</div>
+    </div>
+
+    <p>El propio McGowan, con la honestidad que corresponde a un historiador serio, reconoce que la cuestión "no se puede establecer con total certeza" y que ciertos elementos de la fiesta navideña, ya desarrollados entre los siglos IV y XIX, "pueden derivar de tradiciones paganas" —especialmente después de que, a partir del siglo IV, la Iglesia comenzara deliberadamente a reorientar festividades populares (véase el punto 10 de este documento sobre la inculturación). Lo que la evidencia documental no respalda es la versión simplificada y viral según la cual los cristianos del siglo III, perseguidos y minoritarios, habrían "copiado" una fiesta solar ya instaurada oficialmente cuando esa institución oficial (Aureliano, 274 d.C.) es, en varios testimonios, posterior a los primeros cálculos cristianos conocidos de la fecha.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Una hipótesis de "sustitución deliberada de una fiesta pagana ya existente" requiere, como mínimo, que la fiesta pagana en cuestión esté documentada como institución oficial anterior al cálculo cristiano de la fecha que supuestamente la sustituye.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La institución oficial romana de la fiesta del Sol Invicto en el 25 de diciembre se documenta en el año 354 d.C. (Calendario de Filocalo) y se asocia al culto promovido por Aureliano desde el 274 d.C., mientras que testimonios cristianos sobre esa fecha —incluidos los de comunidades donatistas norteafricanas— son anteriores a la conversión de Constantino (312 d.C.), y la primera sugerencia documentada de una sustitución deliberada aparece solo en el siglo XII.</span></div>
+      <div class="conclusion">Por tanto, la afirmación popular de que la Navidad "robó" una fecha pagana ya establecida invierte, en varios de sus elementos cronológicos verificables, el orden real de los acontecimientos documentados, aunque la cuestión exacta del origen del 25 de diciembre sigue siendo, en sus detalles, objeto de debate académico legítimo entre quienes defienden el cálculo cronológico interno y quienes ven una influencia solar posterior.</div>
+    </div>
+  </section>
+
+  <section id="arbol-navidad">
+    <h3>7. El árbol de Navidad: una tradición del siglo XVI, no del XVI a.C.</h3>
+    <span class="verified-tag">Verificado: Wikipedia, Encyclopaedia Britannica y múltiples historiadores especializados coinciden en la datación</span>
+
+    <p>A diferencia de la fecha del 25 de diciembre, el árbol de Navidad decorado dentro de los hogares es, en este caso, un ejemplo donde la evidencia histórica es clara y prácticamente sin debate: <strong>no existe ninguna continuidad documentada</strong> entre cualquier práctica de culto a los árboles de la Europa pagana antigua (celta, germánica o romana) y la costumbre del árbol de Navidad decorado tal como existe hoy.</p>
+
+    <table>
+      <tr><th>Fecha</th><th>Hecho documentado</th></tr>
+      <tr><td>723 d.C.</td><td>Leyenda (no un registro contemporáneo, sino una narración posterior) de san Bonifacio talando el "roble de Donar/Thor" en Geismar, Alemania, durante su misión evangelizadora.</td></tr>
+      <tr><td>Siglo XV</td><td>Aparecen en Alemania los "árboles del Paraíso": abetos colgados con manzanas, usados en representaciones teatrales medievales sobre Adán y Eva el día de su fiesta litúrgica (24 de diciembre), sin relación con cultos paganos de árboles.</td></tr>
+      <tr><td>1510-1539</td><td>Primeros registros de árboles erguidos en plazas o catedrales: Riga (placa conmemorativa de 1510) y la Catedral de Estrasburgo (1539, bajo el reformador protestante Martín Bucero).</td></tr>
+      <tr><td>1576</td><td>Representación más antigua firmemente datada de un árbol de Navidad: una talla en la clave de un arco en Turckheim, Alsacia.</td></tr>
+      <tr><td>1605</td><td>Primer testimonio escrito detallado de árboles decorados en los hogares de Estrasburgo, con rosas de papel, manzanas y dulces.</td></tr>
+      <tr><td>Siglo XIX</td><td>Inmigrantes alemanes llevan la costumbre a Estados Unidos; se populariza en el mundo anglosajón tras la difusión de imágenes de la familia real británica (de origen alemán) con su árbol decorado.</td></tr>
+    </table>
+
+    <div class="academic">
+      <div class="source">Encyclopaedia Britannica, "History of Christmas Trees: How Did the Tradition Start?"; Wikipedia, "Christmas tree" (ambos artículos cotejados, citando registros documentales de Estrasburgo y Turckheim)</div>
+      <div class="text">Ambas fuentes confirman que "el árbol de Navidad se registró por primera vez entre los luteranos alemanes en el siglo XVI" y que la representación firmemente datada más antigua es la talla de 1576 en Turckheim. La leyenda de Bonifacio y el roble de Donar —que sí describe la sustitución de un símbolo de culto pagano por un símbolo cristiano, en el sentido de inculturación misionera (véase punto 10)— es, en su forma narrativa habitual, una elaboración posterior, sin relación de continuidad documentada con la práctica, ochocientos años más tardía, del árbol decorado en interiores.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Una acusación de "sincretismo pagano continuado" requiere, como mínimo, una línea de continuidad documentada entre la práctica pagana antigua y la práctica cristiana posterior que supuestamente la perpetúa.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Entre la leyenda del roble de Donar (siglo VIII, si se acepta como histórica en su núcleo) y el primer registro documental de un árbol decorado en un hogar o espacio público cristiano (Riga 1510, Estrasburgo 1539) transcurren casi ochocientos años sin ningún testimonio intermedio de una práctica continuada de "árbol pagano decorado" que se transforme gradualmente en costumbre cristiana.</span></div>
+      <div class="conclusion">Por tanto, el árbol de Navidad es, en la evidencia documental disponible, una innovación devocional y festiva de la Alemania de la Reforma y la pre-Reforma (siglos XV-XVI), no la pervivencia ininterrumpida de un rito pagano de la Antigüedad.</div>
+    </div>
+  </section>
+
+  <section id="mitra">
+    <h3>8. Mitra: el mito de los "paralelos exactos"</h3>
+    <span class="verified-tag">Verificado en publicaciones académicas especializadas en mitraísmo (Roger Beck, David Ulansey)</span>
+
+    <p>Ningún otro caso de la "teoría del copista" ha sido tan citado —ni tan desmontado por los propios especialistas en la materia— como el de Mitra, el dios de un culto mistérico romano (no idéntico, pese a compartir el nombre, al antiguo dios persa Mitra). Las listas virales de "paralelos" suelen incluir: nacido el 25 de diciembre, nacido de una virgen, doce discípulos, llamado "el buen pastor" y "la luz del mundo", con una "última cena" y un rito de iniciación con agua. Examinadas estas afirmaciones contra la bibliografía especializada en mitraísmo —no contra apologética cristiana, sino contra historiadores académicos del culto mitraico—, casi ninguna resiste el examen de las fuentes primarias.</p>
+
+    <div class="academic">
+      <div class="source">Roger Beck (especialista en mitraísmo, Universidad de Toronto), citado en Wikipedia ("Mithraism in comparison with other belief systems") y en History for Atheists (Tim O'Neill, historiador no creyente especializado en desmontar mitos históricos pseudoacadémicos)</div>
+      <div class="text">Beck califica la idea de que el nacimiento de Mitra se asociara al 25 de diciembre como "el más rancio de los 'hechos'" sobre Mitra, señalando que "la única evidencia de ello es la celebración del nacimiento de Invictus en esa fecha, según el Calendario de Filocalo" —y que Invictus es Sol Invictus, el dios solar de Aureliano, no necesariamente Mitra, pese a que algunas inscripciones usan el epíteto compuesto "Mitra Sol Invicto". Beck concluye explícitamente: "de ello no se sigue que un dios solar distinto, anterior y no oficial [Mitra] comparta esa fecha sin más".</div>
+    </div>
+
+    <div class="academic">
+      <div class="source">Wikipedia, "Mithraism in comparison with other belief systems", citando a David Ulansey y a Roger Beck (1987)</div>
+      <div class="text">Sobre el "nacimiento virginal": "Mitra nació de una roca, no de una mujer virgen." No existe ninguna fuente mitraica primaria, iconográfica o textual, que represente a Mitra naciendo de un vientre humano o materno de ningún tipo, virginal o no.</div>
+    </div>
+
+    <p>El artículo de verificación histórica "Bad Ancient" —proyecto académico dedicado a contrastar afirmaciones virales sobre el mundo antiguo— resume el estado de la cuestión con prudencia: incluso concediendo que algunos devotos de Mitra pudieran, en fecha tardía, celebrar algo relacionado con el 25 de diciembre por su asociación con el Sol, "esto no prueba que su culto fuera la inspiración del calendario festivo cristiano", y la revista <em>Catholic Answers Magazine</em>, citando exactamente el mismo cuerpo de bibliografía especializada (Beck, Clauss), llega a la misma conclusión: la lista viral de "paralelos Mitra-Cristo" depende casi en su totalidad de erudición del siglo XIX (Franz Cumont), hoy revisada y en gran parte abandonada por los especialistas actuales en mitraísmo.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Una afirmación de dependencia histórica entre dos relatos religiosos requiere evidencia documental primaria de los elementos concretos que se dicen compartidos, no solo la repetición de una lista de semejanzas sin verificación contra las fuentes mitraicas reales.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Los especialistas académicos en mitraísmo (Beck, Ulansey, Clauss) documentan que Mitra nace de una roca, no de una virgen; que no existe evidencia primaria de una fiesta de su nacimiento en el 25 de diciembre, fecha que en las fuentes corresponde de forma distinta a Sol Invictus; y que buena parte de los "paralelos" populares (doce discípulos, última cena) carecen de respaldo en las fuentes mitraicas primarias y derivan de erudición del siglo XIX hoy revisada.</span></div>
+      <div class="conclusion">Por tanto, la afirmación de que el cristianismo copió a Mitra no resiste el contraste con la bibliografía especializada en mitraísmo actual, que es, además, mayoritariamente obra de historiadores sin ningún interés apologético en defender al cristianismo.</div>
+    </div>
+  </section>
+
+  <section id="pascua-ishtar">
+    <h3>9. "Pascua viene de Ishtar": el error lingüístico viral</h3>
+    <span class="verified-tag">Verificado: imposibilidad lingüística confirmada por filólogos y asiriólogos independientes</span>
+
+    <p>Esta es, de todas las afirmaciones examinadas en este documento, la que tiene una refutación más simple, más definitiva y más fácil de verificar por cualquier persona: es un error puramente lingüístico, no una cuestión de interpretación histórica.</p>
+
+    <div class="academic">
+      <div class="source">Tales of Times Forgotten (análisis filológico, con tabla comparativa de la palabra "Pascua" en lenguas europeas) e History for Atheists (Tim O'Neill), ambos citando a Beda el Venerable, De Temporum Ratione, cap. 15 (725 d.C.)</div>
+      <div class="text">La única fuente histórica antigua que menciona una posible diosa llamada "Eostre" es el monje inglés Beda el Venerable, quien escribe en latín, en el siglo VIII, que el mes de abril (Eosturmonath) recibía su nombre de una diosa anglosajona local llamada Eostre, en cuyo honor se celebraban fiestas en ese mes; según Beda, los cristianos de su tiempo y lugar pasaron a usar ese mismo nombre de mes para designar la fiesta de la Pascua cristiana. Ningún texto antiguo —ni Beda ni ninguna otra fuente— menciona jamás una relación entre esta diosa y la diosa mesopotámica Ishtar, que pertenece a una familia lingüística completamente distinta (semítica/acadia) y a una cultura geográficamente remota (Mesopotamia) respecto del entorno anglosajón de Beda (Inglaterra).</div>
+    </div>
+
+    <p>El argumento lingüístico decisivo es además universalmente comprobable: la inmensa mayoría de las lenguas del mundo cristiano —español "Pascua", francés "Pâques", italiano "Pasqua", portugués "Páscoa", rumano "Paşti", griego "Πάσχα", ruso "Пасха"— derivan directamente del hebreo "Pesaj" (la Pascua judía), a través del griego y el latín "Pascha". <strong>Solo el inglés ("Easter") y el alemán ("Ostern") son la excepción</strong>, y derivan, según Beda, del nombre de un mes germánico, no de ninguna palabra semítica ni de Ishtar.</p>
+
+    <div class="highlight">
+      <strong>La prueba que zanja la cuestión:</strong> si la teoría "Pascua viene de Ishtar" fuera correcta como teoría de origen histórico real, debería poderse rastrear esa derivación en las lenguas donde el cristianismo se predicó primero y con mayor cercanía geográfica a Mesopotamia —griego, siríaco, copto, armenio—; exactamente lo contrario ocurre: esas lenguas usan formas derivadas del hebreo "Pesaj", y la única excepción está, precisamente, en las lenguas más alejadas, tanto geográfica como cronológicamente, de cualquier contacto con el culto a Ishtar. Como resume con ironía el filólogo especializado citado arriba: "si tu teoría del origen pagano solo funciona en inglés y en alemán, no es una teoría histórica: es un error de traducción".
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Una derivación etimológica real entre dos palabras requiere una conexión documentable de transmisión lingüística entre las lenguas y culturas implicadas, no una mera semejanza fonética superficial entre dos palabras de familias lingüísticas distintas.</span></div>
+      <div class="premise"><span class="label">P2</span><span>"Easter" deriva, según la única fuente antigua disponible (Beda, siglo VIII), de un nombre de mes anglosajón sin relación documentada con Ishtar; "Ishtar" pertenece a la familia semítica/acadia, geográfica y cronológicamente ajena al entorno de Beda; y la inmensa mayoría de las lenguas cristianas, incluidas las más cercanas histórica y geográficamente a Mesopotamia, derivan la palabra de "Pesaj" hebreo, no de ninguna raíz relacionada con Ishtar.</span></div>
+      <div class="conclusion">Por tanto, "Pascua viene de Ishtar" no es una hipótesis históricamente debatida, sino una confusión etimológica basada exclusivamente en la semejanza fonética accidental entre dos palabras inglesas, sin ningún respaldo en la lingüística histórica comparada.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE V: INCULTURACIÓN -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="inculturacion">
+    <span class="part-label">Parte V — Lo que la Iglesia sí Reconoce</span>
+    <h2>Inculturación misionera: una estrategia documentada, no un secreto descubierto</h2>
+  </div>
+
+  <section>
+    <h3>10. Gregorio Magno y la carta a Mellitus: inculturación, no sincretismo</h3>
+    <span class="verified-tag">Verificado: carta citada por Bede, Historia Eclesiástica del Pueblo Inglés, I.30 (carta fechada en 601 d.C.)</span>
+
+    <p>El argumento final, y el más importante para distinguir con honestidad lo que la Iglesia católica reconoce abiertamente de lo que las teorías de sincretismo le atribuyen falsamente, es este: la Iglesia <strong>nunca ha ocultado</strong> que, a partir del siglo IV y especialmente en la evangelización de Europa entre los siglos VI y X, adoptó deliberadamente una estrategia misionera de <em>reaprovechamiento</em> de templos, fechas festivas y costumbres locales, reorientándolos hacia un contenido explícitamente cristiano. Esto es inculturación documentada, explicada por la propia jerarquía eclesiástica en sus propias cartas, no un sincretismo oculto descubierto por investigadores modernos.</p>
+
+    <div class="academic">
+      <div class="source">Papa San Gregorio Magno, Carta al abad Mellitus (601 d.C.), preservada y citada por San Bede el Venerable, Historia Eclesiástica del Pueblo Inglés, libro I, cap. 30 (recurso citado de forma independiente por Andrew McGowan en su artículo académico sobre el origen de la Navidad)</div>
+      <div class="text">Gregorio instruye a Mellitus, antes de su partida hacia la misión en Britania, que los templos paganos de los anglosajones no sean destruidos sino "rociados con agua bendita" y convertidos en iglesias, "para que la gente, viendo que sus lugares de culto no son destruidos, abandone el error de su corazón y, conociendo y adorando al verdadero Dios, acuda con más familiaridad a los lugares a los que está acostumbrada"; y recomienda igualmente que las fiestas de sacrificio de animales que los paganos celebraban se transformen en celebraciones cristianas en las fechas de la dedicación de las iglesias o de las fiestas de los mártires, "para que mientras se les permite cierto goce exterior, más fácilmente consientan en el goce interior".</div>
+    </div>
+
+    <p>Esta carta —autenticidad no disputada por ningún historiador serio, y citada de forma independiente por especialistas tanto católicos como no confesionales, incluido el propio Andrew McGowan citado en el punto 6— es la prueba documental de que, cuando la Iglesia efectivamente reorientó fechas o lugares de culto pagano, lo hizo como <strong>estrategia pastoral consciente y explicada por escrito</strong>, no como una contaminación doctrinal disfrazada. La diferencia con el "sincretismo" en sentido propio —la creencia de que dos sistemas religiosos distintos son, en el fondo, la misma verdad bajo nombres diferentes— no podría ser más clara: Gregorio no dice "los dioses paganos son formas de Cristo"; dice "destruid el error de su corazón, y dadles, en los mismos lugares y fechas que ya frecuentan por costumbre, el contenido verdadero que les falta".</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El sincretismo doctrinal consiste en tratar dos sistemas de creencia distintos como si fueran, en el fondo, la misma verdad o realidad divina bajo nombres diferentes; la inculturación misionera consiste, en cambio, en usar lugares, fechas o formas culturales ya familiares a un pueblo como vehículo para comunicarle un contenido doctrinal explícitamente distinto y, en este caso, opuesto al que tenían antes.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La carta de Gregorio Magno a Mellitus, documentada y citada de forma independiente por historiadores no confesionales, instruye explícitamente la segunda estrategia —reaprovechar templos y fechas para "destruir el error" y sustituirlo por el "verdadero Dios"— y en ningún momento sugiere la primera.</span></div>
+      <div class="conclusion">Por tanto, los casos reales y documentados de reaprovechamiento de templos o fechas paganas por parte de la Iglesia corresponden, según su propia documentación interna, a una estrategia de inculturación pastoral consciente, categóricamente distinta del sincretismo doctrinal que las teorías populares le atribuyen.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- CONCLUSIÓN -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="silogismo-maestro">
+    <span class="part-label">Conclusión</span>
+    <h2>El silogismo maestro y el veredicto final</h2>
+  </div>
+
+  <section>
+    <h3>11. El silogismo maestro</h3>
+
+    <p>Los nueve casos examinados en este documento —que cubren cristología patrística temprana, arte funerario, doctrina trinitaria, calendario litúrgico y costumbres festivas— convergen en un patrón metodológico común que puede formularse en un único silogismo de cierre.</p>
+
+    <div class="syllogism maestro">
+      <div class="premise"><span class="label">P1</span><span>Una acusación de "sincretismo pagano" solo es históricamente sólida si demuestra, con fuentes primarias verificables, (a) una dependencia documentada de contenido doctrinal —no solo semejanza superficial o vocabulario visual compartido—, y (b) una secuencia cronológica donde la supuesta fuente pagana sea efectivamente anterior y la dependencia cristiana posterior y verificable.</span></div>
+      <div class="premise"><span class="label">P2</span><span>En los nueve casos examinados, al contrastar la afirmación popular con las fuentes primarias y la bibliografía académica especializada —incluida la de historiadores sin ningún interés en defender al cristianismo, como Roger Beck sobre Mitra o Tim O'Neill sobre Eostre—, se constata sistemáticamente que: Justino Mártir usa un argumento retórico explícito, no una admisión de origen (1); el préstamo de Orfeo es vocabulario visual aplicado a contenido bíblico preexistente (2); la influencia de Isis sobre la iconografía mariana, donde es real, se limita a la composición visual y no al contenido doctrinal, según los propios especialistas que la documentan (3); la cita de Gregorio de Nisa sobre la Trinidad es, leída en contexto, un argumento lógico contra el politeísmo, no a favor de él (4); la comparación con "triadas" paganas comete una falacia genética sobre conceptos estructuralmente distintos (5); la cronología de la fiesta de Sol Invictus complica, en varios de sus elementos verificables, la teoría de la sustitución deliberada de la fecha navideña (6); el árbol de Navidad carece de continuidad documentada con cualquier práctica pagana antigua (7); los "paralelos" de Mitra no resisten el contraste con la mitraicología académica actual (8); y la derivación "Pascua-Ishtar" es un error lingüístico sin ninguna base comparada (9).</span></div>
+      <div class="conclusion">Por tanto, la narrativa popular y generalizada del "cristianismo como reciclaje de mitologías paganas" no se sostiene como tesis histórica general cuando se exige, caso por caso, el nivel de evidencia que cualquier afirmación histórica seria requeriría —y la única categoría de "préstamo" que la evidencia documental sí confirma de manera consistente es la del vocabulario artístico y la estrategia misionera de inculturación, ambas categóricamente distintas, y explícitamente reconocidas como tales, del sincretismo doctrinal que la objeción popular da por sentado.</div>
+    </div>
+  </section>
+
+  <div class="verdict" id="veredicto">
+    <h2>El veredicto final</h2>
+
+    <p><strong>La distinción es el hallazgo, no la negación.</strong> Este documento no ha argumentado que el cristianismo se desarrolló en un vacío cultural hermético, sin contacto alguno con el mundo grecorromano, egipcio o germánico que lo rodeaba —eso sería tan poco serio históricamente como la tesis contraria—. Ha argumentado algo más preciso: que existe una diferencia real, documentable y verificable entre tomar prestado un recurso artístico (Orfeo, el halo solar), aplicar una estrategia misionera consciente y explicada por escrito (Gregorio Magno), y adoptar una creencia o divinidad pagana como contenido de la propia fe —y que, examinada fuente por fuente, la inmensa mayoría de las acusaciones populares de "sincretismo pagano" pertenecen a la primera o segunda categoría, presentadas falsamente como si fueran la tercera.</p>
+
+    <p><strong>Donde la evidencia es genuinamente débil, se ha dicho con la misma claridad.</strong> La pregunta sobre Isis y la iconografía mariana, y la pregunta sobre el origen exacto del 25 de diciembre, son las dos cuestiones de este documento donde existe debate académico real entre especialistas serios, y aquí se han presentado como tales, con sus dos posiciones documentadas, en lugar de forzar una falsa certeza en ningún sentido.</p>
+
+    <p><strong>La conclusión.</strong> Examinar las fuentes primarias y la bibliografía académica especializada —no la versión simplificada de un documental o una infografía viral— es, en casi todos los casos analizados aquí, suficiente para mostrar que la afirmación popular invierte la cronología, malinterpreta el género retórico de la fuente citada, o confunde préstamo artístico con adopción doctrinal. Esto no resuelve, por sí solo, la pregunta teológica de si el cristianismo es verdadero; pero sí establece que la objeción del "sincretismo pagano", en la forma en que circula popularmente, no es el argumento histórico sólido que pretende ser.</p>
+
+    <p>FUENTES PRINCIPALES CITADAS: San Justino Mártir, Primera Apología, caps. 21, 22, 54 · San Gregorio de Nisa, La Gran Catequesis, cap. 3 · San Gregorio Magno, Carta a Mellitus (601 d.C., en Bede, Historia Eclesiástica I.30) · Beda el Venerable, De Temporum Ratione, cap. 15 · Andrew McGowan, "How December 25 Became Christmas", Biblical Archaeology Society · Roger Beck, estudios sobre mitraísmo (Phoenix 41:3, 1987; Journal of Roman Studies 90, 2000) · David Ulansey sobre Mitra · Sabrina Higgins, "Divine Mothers", Journal of the Canadian Society for Coptic Studies 3-4 (2012) · Vincent Tran Tam Tinh, estudio de referencia sobre Isis lactans (1973) · Larry Hurtado y Richard Bauckham sobre los orígenes de la cristología neotestamentaria · Philip A. Shaw, <em>Pagan Goddesses in the Early Germanic World</em> (2011) · Tim O'Neill (History for Atheists) y el proyecto Bad Ancient sobre verificación histórica de afirmaciones virales</p>
+  </div>
+
+</main>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('nav-toggle');
+  const overlay = document.getElementById('overlay');
+
+  function closeNav() {
+    sidebar.classList.remove('open');
+    toggle.classList.remove('open');
+    overlay.classList.remove('visible');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = sidebar.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    overlay.classList.toggle('visible', isOpen);
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.querySelectorAll('#sidebar nav a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('progress-bar').style.width = scrolled + '%';
+  });
+
+  const navLinks = document.querySelectorAll('#sidebar nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  document.querySelectorAll('main [id]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Cristo de Pablo: La Divinidad de Jesús y la Trinidad en el Corpus Paulino</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f7f4ef;
+    --accent: #6b1d3a;
+    --accent2: #1a3a5c;
+    --gold: #b8860b;
+    --grey-light: #e8e4dc;
+    --grey-mid: #9e9589;
+    --white: #ffffff;
+    --verdict: #1a0a1f;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  #sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    width: 300px;
+    height: 100vh;
+    background: var(--ink);
+    color: var(--paper);
+    overflow-y: auto;
+    z-index: 100;
+    transform: translateX(-300px);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    padding: 2rem 1.5rem;
+  }
+
+  #sidebar.open { transform: translateX(0); }
+
+  #sidebar h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.75rem;
+  }
+
+  #sidebar nav a {
+    display: block;
+    padding: 0.5rem 0;
+    color: #ccc;
+    text-decoration: none;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #222;
+    transition: color 0.2s, padding-left 0.2s;
+  }
+
+  #sidebar nav a:hover { color: var(--gold); padding-left: 0.5rem; }
+  #sidebar nav a.active { color: var(--gold); font-weight: 600; }
+
+  #sidebar nav .section-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--grey-mid);
+    padding: 0.75rem 0 0.25rem;
+  }
+
+  #nav-toggle {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 200;
+    background: var(--ink);
+    border: none;
+    color: var(--paper);
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 8px;
+    transition: background 0.2s;
+  }
+
+  #nav-toggle:hover { background: var(--accent); }
+
+  #nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  #nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #nav-toggle.open span:nth-child(2) { opacity: 0; }
+  #nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  #overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 50;
+  }
+  #overlay.visible { display: block; }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 2rem 6rem;
+  }
+
+  .hero {
+    padding: 6rem 0 4rem;
+    border-bottom: 3px solid var(--ink);
+    margin-bottom: 4rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--grey-mid);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    font-style: italic;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+  }
+
+  .part-header {
+    margin: 5rem 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--grey-light);
+  }
+
+  .part-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .part-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 2rem;
+  }
+
+  section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin: 2.5rem 0 0.75rem;
+    border-left: 4px solid var(--accent2);
+    padding-left: 0.75rem;
+  }
+
+  p { margin-bottom: 1.2rem; }
+
+  .syllogism {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+    position: relative;
+    border-left: 6px solid var(--gold);
+  }
+
+  .syllogism::before {
+    content: 'SILOGISMO';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .syllogism.maestro::before { content: 'SILOGISMO MAESTRO'; }
+  .syllogism.maestro { border-left-color: var(--accent); background: #1a0a14; }
+
+  .syllogism .premise {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem;
+    align-items: start;
+    font-size: 0.95rem;
+  }
+
+  .syllogism .premise .label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.75rem;
+    padding-top: 0.15rem;
+  }
+
+  .syllogism .conclusion {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #444;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #fff;
+  }
+
+  .syllogism .conclusion::before {
+    content: '∴ ';
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .scripture {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    border-left: 6px solid var(--accent2);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-style: italic;
+  }
+
+  .scripture .source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent2);
+    font-style: normal;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .scripture .text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .patristic {
+    background: #fdf8f2;
+    border: 1px solid #e6d5b8;
+    border-left: 6px solid var(--gold);
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .patristic .source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  .patristic .text {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: #3a2e1f;
+    font-style: italic;
+  }
+
+  .verse-card {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    border-top: 5px solid var(--accent2);
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .verse-card .verse-number {
+    display: inline-block;
+    background: var(--accent2);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .verse-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .paradox-box {
+    border: 2px solid var(--accent2);
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .paradox-box::before {
+    content: 'PUNTO CLAVE';
+    position: absolute;
+    top: -0.7rem;
+    left: 1rem;
+    background: var(--paper);
+    padding: 0 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent2);
+  }
+
+  .dilemma {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .dilemma-side {
+    padding: 1.5rem;
+    border-top: 4px solid;
+  }
+
+  .dilemma-side.a { border-color: var(--accent); background: #fdf0f4; }
+  .dilemma-side.b { border-color: var(--accent2); background: #f0f4ff; }
+
+  .dilemma-side h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .dilemma-side p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .stat-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .stat-box .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-box .label {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+    display: block;
+    line-height: 1.3;
+  }
+
+  .verdict {
+    background: var(--verdict);
+    color: #fff;
+    padding: 3rem 2.5rem;
+    margin: 4rem 0;
+    border-top: 6px solid var(--gold);
+  }
+
+  .verdict h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .verdict p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #ddd;
+    margin-bottom: 1.25rem;
+  }
+
+  .verdict strong { color: #fff; }
+
+  blockquote {
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    background: #fff;
+    color: #333;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--grey-mid);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--ink);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--grey-light);
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td { background: #fff; }
+
+  .verse-atom {
+    background: linear-gradient(135deg, #1a3a5c, #0f0e0d);
+    color: white;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .verse-atom .verse-ref {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .verse-atom .verse-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #eee;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .highlight {
+    background: #fffbeb;
+    border: 1px solid var(--gold);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  .highlight strong { color: var(--accent2); }
+
+  .trinity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .trinity-card {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    border-top: 4px solid var(--accent2);
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .trinity-card h5 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .trinity-card p {
+    font-size: 0.85rem;
+    color: #444;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    main { padding: 1.25rem 1.25rem 4rem; }
+    .dilemma { grid-template-columns: 1fr; }
+    .trinity-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    #sidebar, #nav-toggle, #overlay, #progress-bar { display: none; }
+    main { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="overlay"></div>
+
+<button id="nav-toggle" aria-label="Menú de navegación">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" role="navigation" aria-label="Índice de contenidos">
+  <h2>Índice</h2>
+  <nav>
+    <span class="section-label">Introducción</span>
+    <a href="#intro">El testimonio más antiguo</a>
+
+    <span class="section-label">Parte I — Cristología Explícita</span>
+    <a href="#corintios124">1. 1 Corintios 1:24, 30 — Poder y sabiduría de Dios</a>
+    <a href="#colosenses1">2. Colosenses 1:15-20 — Imagen y Creador</a>
+    <a href="#colosenses2">3. Colosenses 2:9 — Toda la plenitud de la Deidad</a>
+    <a href="#tito">4. Tito 2:13 — Nuestro gran Dios y Salvador</a>
+    <a href="#romanos9">5. Romanos 9:5 — Sobre todas las cosas, Dios</a>
+
+    <span class="section-label">Parte II — Títulos y Atributos Divinos</span>
+    <a href="#1corintios8">6. 1 Corintios 8:6 — Un solo Señor, por medio del cual todo existe</a>
+    <a href="#1timoteo">7. 1 Timoteo 3:16 — El misterio de la piedad: Dios manifestado en carne</a>
+    <a href="#2tesalonicenses">8. 2 Tesalonicenses 1:12 — Nuestro Dios y Señor Jesucristo</a>
+    <a href="#hebreos-puente">9. Un puente: el "Kyrios" del Antiguo Testamento aplicado a Cristo</a>
+    <a href="#roca-1corintios10">10. 1 Corintios 10:4, 9 — "La roca era Cristo": YHWH en el Éxodo</a>
+
+    <span class="section-label">Parte III — El Espíritu Santo</span>
+    <a href="#espiritu-1corintios">11. 1 Corintios 2:10-11 — El Espíritu escudriña lo profundo de Dios</a>
+    <a href="#espiritu-romanos">12. Romanos 8:9-11 — El Espíritu de Dios, el Espíritu de Cristo</a>
+    <a href="#espiritu-efesios">13. Efesios 4:30 — No contristar al Espíritu Santo de Dios</a>
+
+    <span class="section-label">Parte IV — La Trinidad Completa</span>
+    <a href="#trinidad-2corintios">14. 2 Corintios 13:14 — La bendición trinitaria</a>
+    <a href="#trinidad-efesios4">15. Efesios 4:4-6 — Un Espíritu, un Señor, un Dios y Padre</a>
+    <a href="#trinidad-1corintios12">16. 1 Corintios 12:4-6 — El mismo Espíritu, el mismo Señor, el mismo Dios</a>
+
+    <span class="section-label">Conclusión</span>
+    <a href="#silogismo-maestro">17. El silogismo maestro</a>
+    <a href="#veredicto">18. El veredicto final</a>
+  </nav>
+</nav>
+
+<main>
+
+  <header class="hero" id="intro">
+    <p class="hero-eyebrow">Apologética Cristiana · Análisis Cristológico y Trinitario</p>
+    <h1>El Cristo de <em>Pablo</em>:<br>La Divinidad de Jesús<br>en el Corpus Paulino</h1>
+    <p class="hero-subtitle">Un recorrido exhaustivo por los pasajes paulinos donde la divinidad de Cristo se afirma explícitamente, con su recepción e interpretación en los Padres de la Iglesia, y una sección final sobre la Trinidad completa</p>
+    <span class="hero-badge">Catálogo completo con silogismo maestro</span>
+  </header>
+
+  <section>
+    <p>Existe la idea difundida de que la altísima cristología del Nuevo Testamento —Jesús como Dios encarnado— sería una elaboración tardía, ajena al Pablo histórico, y que solo se habría consolidado en los concilios del siglo IV. El propio corpus paulino desmiente esta idea de raíz: décadas antes de cualquier concilio, y en el género literario menos propenso a la especulación —cartas pastorales, ocasionales, dirigidas a comunidades concretas con problemas concretos—, Pablo da por supuesta, cita en himnos ya tradicionales, y argumenta a partir de la identidad divina de Jesucristo con una naturalidad que solo se explica si esa convicción era ya, en su tiempo, parte del depósito común de la fe cristiana primitiva.</p>
+
+    <p>Este documento recorre los pasajes paulinos más explícitos sobre la divinidad de Cristo, examina cómo los Padres de la Iglesia —desde el siglo II hasta el IV— los leyeron, citaron y usaron para defender la ortodoxia frente a las primeras herejías (el subordinacionismo arriano, el modalismo de Práxeas, el docetismo), y cierra con una sección dedicada al testimonio paulino sobre el Espíritu Santo y sobre la Trinidad como tal, articulada explícitamente en varias de sus fórmulas de bendición.</p>
+
+    <div class="highlight">
+      <strong>Método:</strong> Cada pasaje se presenta en tres capas: (1) el texto bíblico en su contexto inmediato; (2) su interpretación o cita explícita en los Padres de la Iglesia; (3) un silogismo que extrae la implicación cristológica. El documento cierra con un silogismo maestro que integra el conjunto.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE I: CRISTOLOGÍA EXPLÍCITA -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="corintios124">
+    <span class="part-label">Parte I — Cristología Explícita</span>
+    <h2>Los pasajes centrales</h2>
+  </div>
+
+  <section>
+    <div class="verse-card">
+      <span class="verse-number">PASAJE 1</span>
+      <h4>1 Corintios 1:24, 30 — Cristo, poder de Dios y sabiduría de Dios</h4>
+
+      <div class="scripture">
+        <div class="source">1 Corintios 1:24</div>
+        <div class="text">"Mas para los llamados, así judíos como griegos, Cristo poder de Dios, y sabiduría de Dios."</div>
+      </div>
+
+      <div class="scripture">
+        <div class="source">1 Corintios 1:30</div>
+        <div class="text">"Mas por él estáis vosotros en Cristo Jesús, el cual nos ha sido hecho por Dios sabiduría, justificación, santificación y redención."</div>
+      </div>
+
+      <p>Este pasaje, escrito hacia el año 53-54 d.C. —una de las primeras cartas paulinas que se conservan—, identifica a Cristo con dos atributos que el Antiguo Testamento reserva exclusivamente a YHWH: el "poder de Dios" (<em>dynamis theou</em>) y la "sabiduría de Dios" (<em>sophia theou</em>). El paralelo es preciso: en Proverbios 8 y en el resto de la literatura sapiencial judía, la Sabiduría es la agencia personificada por medio de la cual Dios crea y ordena el universo. Pablo no dice que Cristo "tiene" sabiduría o "posee" poder: dice que Cristo <em>es</em> el poder de Dios y la sabiduría de Dios, identificándolo con el atributo mismo, no con un receptor del atributo.</p>
+
+      <p>Este pasaje se convirtió, en la controversia arriana del siglo IV, en uno de los textos más disputados de toda la Escritura: los arrianos lo usaban para argumentar que, si Cristo es llamado "sabiduría" del mismo modo que el resto de la creación procede de la sabiduría divina, entonces Cristo mismo sería parte de esa creación. Atanasio respondió a esta lectura citando el versículo de manera explícita y repetida a lo largo de sus cuatro Discursos contra los Arianos.</p>
+
+      <div class="patristic">
+        <div class="source">San Atanasio de Alejandría, <em>Discurso III contra los Arianos</em>, 26 (trad. Nicene and Post-Nicene Fathers, Second Series, vol. 4)</div>
+        <div class="text">"Pero ahora, puesto que el Verbo de Dios, por quien todas las cosas llegaron a ser, se dignó hacerse también Hijo del hombre, y se humilló a sí mismo, tomando forma de siervo, por ello para los judíos la Cruz de Cristo es escándalo, pero para nosotros Cristo es 'poder de Dios' y 'sabiduría de Dios' (1 Corintios 1:24); pues 'el Verbo', como dice Juan, 'se hizo carne'."</div>
+      </div>
+
+      <div class="patristic">
+        <div class="source">San Atanasio de Alejandría, <em>Discurso IV contra los Arianos</em>, 1 (trad. Nicene and Post-Nicene Fathers, Second Series, vol. 4)</div>
+        <div class="text">"El Verbo es Dios de Dios; pues 'el Verbo era Dios' (Juan 1:1), y también: 'De quienes son los padres, y de quienes según la carne vino Cristo, el cual es Dios sobre todas las cosas, bendito por los siglos. Amén' (Romanos 9:5). Y puesto que Cristo es Dios de Dios, y Verbo, Sabiduría, Hijo y Poder de Dios, por tanto se declara en las divinas Escrituras un solo Dios."</div>
+      </div>
+
+      <div class="patristic">
+        <div class="source">San Atanasio de Alejandría, <em>Discurso I contra los Arianos</em>, 9 (trad. Nicene and Post-Nicene Fathers, Second Series, vol. 4)</div>
+        <div class="text">"Pues la verdad da testimonio de que Dios es la Fuente eterna de su propia Sabiduría; y si la Fuente es eterna, la Sabiduría también debe ser necesariamente eterna. Porque en ella fueron hechas todas las cosas, como dice David en el Salmo: 'En sabiduría las hiciste todas'; y Salomón dice: 'El Señor con sabiduría fundó la tierra' (Proverbios 3:19). Y esta Sabiduría es el Verbo, y por él, como dice Juan, 'todas las cosas fueron hechas', y 'sin él nada fue hecho'. Y este Verbo es Cristo; pues 'hay un solo Dios, el Padre, de quien son todas las cosas, y nosotros para él; y un solo Señor Jesucristo, por quien son todas las cosas, y nosotros por él' (1 Corintios 8:6). Y si todas las cosas son por medio de él, él mismo no ha de ser contado entre ese 'todas'."</div>
+      </div>
+
+      <div class="syllogism">
+        <div class="premise"><span class="label">P1</span><span>Si Cristo es llamado "Sabiduría" en el mismo sentido en que el resto de la creación procede de la sabiduría de Dios, entonces existió un tiempo en que esa Sabiduría no existía, pues toda criatura tiene un comienzo.</span></div>
+        <div class="premise"><span class="label">P2</span><span>Pero la fuente de la cual procede la Sabiduría —Dios mismo— es eterna; y una fuente eterna no puede producir, en algún momento posterior a su propia eternidad, algo que antes no existiera como su Sabiduría propia, pues entonces Dios habría estado en algún momento sin sabiduría.</span></div>
+        <div class="conclusion">Por tanto, la Sabiduría de Dios —es decir, Cristo, según 1 Corintios 1:24— es coeterna con Dios mismo, y no una criatura producida en el tiempo, sino el atributo personal y eterno de Dios encarnado.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="colosenses1">
+    <div class="verse-card">
+      <span class="verse-number">PASAJE 2</span>
+      <h4>Colosenses 1:15-17 — Imagen del Dios invisible, Creador de todas las cosas</h4>
+
+      <div class="scripture">
+        <div class="source">Colosenses 1:15-17</div>
+        <div class="text">"Él es la imagen del Dios invisible, el primogénito de toda creación. Porque en él fueron creadas todas las cosas, las que hay en los cielos y las que hay en la tierra, visibles e invisibles... todo fue creado por medio de él y para él. Y él es antes de todas las cosas, y todas las cosas en él subsisten."</div>
+      </div>
+
+      <p>El término griego <em>prōtotokos</em> ("primogénito") ha sido el centro de una disputa histórica precisamente porque los arrianos lo leyeron como indicador de origen temporal: el primer ser creado. Pero el propio texto excluye esta lectura por su estructura interna: el versículo 16 explica el sentido del primogénito al afirmar inmediatamente que "en él fueron creadas <em>todas las cosas</em>" —sin excepción alguna—, lo cual es lógicamente incoherente si Cristo mismo estuviera incluido entre lo creado.</p>
+
+      <div class="patristic">
+        <div class="source">Atanasio el Apostólico, <em>Catena sobre Colosenses 1:15</em> (h. 373 d.C.)</div>
+        <div class="text">"No porque proviniera del Padre fue llamado 'Primogénito', sino porque en él llegó a ser la creación; y así como antes de la creación él era el Hijo, por quien fue la creación, así también antes de ser llamado Primogénito de toda la creación, el Verbo mismo estaba con Dios y el Verbo era Dios... Si el Verbo fuera también una de las criaturas, la Escritura habría dicho de él también que era Primogénito de las otras criaturas; pero de hecho, el decir los santos que él es 'Primogénito de toda la creación' demuestra que el Hijo de Dios es otro que toda la creación y no una criatura."</div>
+      </div>
+
+      <div class="patristic">
+        <div class="source">San Ambrosio de Milán, <em>Catena sobre Colosenses 1:15</em> (h. 397 d.C.)</div>
+        <div class="text">"Sed como la imagen en la moneda, inmutable, conservando los mismos rasgos cada día. Cuando veas la moneda, ve la imagen; cuando veas la ley, ve a Cristo, la imagen de Dios, en la ley. Y porque él mismo es la imagen del Dios invisible e incorruptible, que él brille para vosotros como en el espejo de la ley. Confesadlo en la ley para que lo reconozcáis en el evangelio."</div>
+      </div>
+
+      <div class="patristic">
+        <div class="source">Severiano de Gabala, <em>Catena sobre Colosenses 1:15</em> (h. 425 d.C.)</div>
+        <div class="text">"Pablo quiere decir y mostrar que Cristo está antes de todo. Pues si él no estuviera antes de todo, ¿cómo podrían haber sido creadas todas las cosas en él? En él, dice Pablo, fueron creadas todas las cosas, de modo que, negando que nuestra esperanza esté en los ángeles, pongamos nuestra esperanza en Cristo."</div>
+      </div>
+
+      <div class="syllogism">
+        <div class="premise"><span class="label">P1</span><span>Colosenses 1:16 afirma que "todas las cosas" —sin excepción enumerada— fueron creadas en, por medio de, y para Cristo.</span></div>
+        <div class="premise"><span class="label">P2</span><span>Si Cristo mismo estuviera incluido en la categoría de "todas las cosas creadas", el texto sería autocontradictorio: Cristo se habría creado a sí mismo, lo cual es lógicamente imposible.</span></div>
+        <div class="conclusion">Por tanto, "primogénito de toda creación" no puede significar "el primer ser creado", sino que designa preeminencia y anterioridad sobre el orden creado del cual Cristo mismo, como Creador, queda necesariamente excluido.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="colosenses2">
+    <div class="verse-card">
+      <span class="verse-number">PASAJE 3</span>
+      <h4>Colosenses 2:9 — Toda la plenitud de la Deidad, corporalmente</h4>
+
+      <div class="scripture">
+        <div class="source">Colosenses 2:9</div>
+        <div class="text">"Porque en él habita toda la plenitud de la Deidad corporalmente."</div>
+      </div>
+
+      <p>El término griego es <em>theotēs</em> —no simplemente <em>theios</em> ("divino" en un sentido cualitativo o derivado), sino el sustantivo abstracto que designa la Deidad en sí misma, el ser-Dios pleno. Pablo no dice que en Cristo habita "algo divino" o "una cualidad de Dios": afirma que la <em>totalidad</em> (<em>plērōma</em>, "plenitud") de la Deidad reside en él, y lo hace además "corporalmente" (<em>sōmatikōs</em>), precisando que esta plenitud no es una presencia simbólica o angélica, sino encarnada en un cuerpo humano real.</p>
+
+      <div class="syllogism">
+        <div class="premise"><span class="label">P1</span><span>El término <em>theotēs</em> designa, en el uso lingüístico griego del período, la Deidad en cuanto tal —no una cualidad participada o derivada, sino el ser divino íntegro.</span></div>
+        <div class="premise"><span class="label">P2</span><span>Pablo afirma que esta Deidad íntegra ("toda la plenitud") habita en Cristo de manera corporal, real, no simbólica.</span></div>
+        <div class="conclusion">Por tanto, Colosenses 2:9 excluye explícitamente cualquier cristología que conciba a Cristo como un ser meramente "divino" en sentido derivado o participado: afirma la identidad plena entre Cristo encarnado y la naturaleza divina del Padre.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tito">
+    <div class="verse-card">
+      <span class="verse-number">PASAJE 4</span>
+      <h4>Tito 2:13 — La aparición de la gloria de nuestro gran Dios y Salvador Jesucristo</h4>
+
+      <div class="scripture">
+        <div class="source">Tito 2:13</div>
+        <div class="text">"Aguardando la esperanza bienaventurada y la manifestación gloriosa de nuestro gran Dios y Salvador Jesucristo."</div>
+      </div>
+
+      <p>La construcción gramatical griega de este versículo (<em>tou megalou theou kai sōtēros hēmōn Iēsou Christou</em>) sigue la llamada "regla de Sharp": cuando dos sustantivos singulares están unidos por <em>kai</em> ("y") y el primero lleva artículo mientras el segundo no lo lleva, ambos sustantivos se refieren a la misma persona. Es decir, gramaticalmente, "nuestro gran Dios" y "Salvador" no son dos sujetos distintos (el Padre y luego el Hijo) sino un único sujeto: Jesucristo es identificado simultáneamente como "Dios" y como "Salvador".</p>
+
+      <div class="patristic">
+        <div class="source">Teodoreto de Ciro, <em>Carta 146</em> (h. 451 d.C.)</div>
+        <div class="text">"San Pablo aquí llama a Cristo el gran Dios, y así reprende la blasfemia herética que niega su Divinidad... llama al mismo tanto Salvador, como gran Dios, y Jesucristo."</div>
+      </div>
+
+      <div class="patristic">
+        <div class="source">San Juan Crisóstomo, <em>Homilías sobre la Epístola a Tito</em>, Homilía 4 (h. 390-400 d.C.)</div>
+        <div class="text">"¿Qué pueden decir, entonces, aquellos que alegan que el Hijo es inferior al Padre?"</div>
+      </div>
+
+      <div class="highlight">
+        <strong>Dato adicional:</strong> La expresión compuesta <em>theos sōtēr</em> ("Dios Salvador") tenía, en el contexto greco-romano del siglo I, un peso religioso reconocible que el lector original no podía pasar por alto: era el título que las inscripciones imperiales aplicaban a los emperadores divinizados. Pablo, al aplicar ese mismo título compuesto a Jesús en el contexto de una carta pastoral —no de un himno especulativo, sino de instrucciones prácticas de conducta cristiana— da por supuesto, sin necesidad de argumentarlo, que la audiencia ya reconoce a Cristo bajo esa categoría.
+      </div>
+
+      <div class="syllogism">
+        <div class="premise"><span class="label">P1</span><span>La construcción gramatical griega de Tito 2:13 (artículo + sustantivo + <em>kai</em> + sustantivo sin artículo, ambos en singular) identifica, según la regla gramatical de Sharp aplicada consistentemente en el resto del Nuevo Testamento, a un único referente.</span></div>
+        <div class="premise"><span class="label">P2</span><span>Esta construcción aplica los títulos "nuestro gran Dios" y "Salvador" al mismo sujeto: Jesucristo.</span></div>
+        <div class="conclusion">Por tanto, Tito 2:13 llama explícitamente a Jesucristo "Dios" —no como una inferencia teológica posterior, sino como la lectura gramatical que Teodoreto y Crisóstomo, hablantes nativos de griego, defendieron explícitamente frente a quienes negaban la igualdad del Hijo con el Padre.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="romanos9">
+    <div class="verse-card">
+      <span class="verse-number">PASAJE 5</span>
+      <h4>Romanos 9:5 — El que está sobre todas las cosas, Dios bendito por los siglos</h4>
+
+      <div class="scripture">
+        <div class="source">Romanos 9:5</div>
+        <div class="text">"De quienes son los patriarcas, y de los cuales, según la carne, vino Cristo, el cual es Dios sobre todas las cosas, bendito por los siglos. Amén."</div>
+      </div>
+
+      <p>Este versículo, situado en medio del lamento de Pablo por Israel, es notable porque irrumpe en una enumeración de privilegios históricos de Israel (la adopción, la gloria, los pactos, la Ley, las promesas, los patriarcas) con una doxología que aplica a Cristo, "según la carne" descendiente de esos mismos patriarcas, el título "Dios sobre todas las cosas, bendito por los siglos" —una fórmula de bendición que en toda la tradición judía y en el resto de las cartas de Pablo se reserva exclusivamente para YHWH.</p>
+
+      <div class="patristic">
+        <div class="source">Tertuliano, <em>Contra Práxeas</em>, cap. 13 (h. 213 d.C.; trad. Ante-Nicene Fathers, vol. III)</div>
+        <div class="text">"No hablaré en absoluto de dioses, ni de señores, sino que seguiré al apóstol; de modo que si el Padre y el Hijo han de ser invocados por igual, llamaré 'Dios' al Padre, e invocaré a Jesucristo como 'Señor'. Pero cuando se mencione a Cristo solo, podré llamarlo 'Dios', como dice el mismo apóstol: 'De quien es Cristo, que está sobre todas las cosas, Dios bendito por siempre' (Romanos 9:5)."</div>
+      </div>
+
+      <div class="syllogism">
+        <div class="premise"><span class="label">P1</span><span>La fórmula "Dios bendito por los siglos" (<em>eulogētos eis tous aiōnas</em>) es, en el uso paulino y en la tradición judía precedente, una doxología reservada exclusivamente a YHWH, nunca aplicada a una criatura.</span></div>
+        <div class="premise"><span class="label">P2</span><span>Romanos 9:5 aplica esta misma fórmula directamente a Cristo, identificándolo gramaticalmente como su sujeto inmediato según la lectura defendida ya en el siglo III por Tertuliano.</span></div>
+        <div class="conclusion">Por tanto, Pablo aplica a Cristo, sin matización ni distanciamiento retórico, la fórmula doxológica reservada al Dios único de Israel.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE II: TÍTULOS Y ATRIBUTOS DIVINOS -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="1corintios8">
+    <span class="part-label">Parte II — Títulos y Atributos Divinos</span>
+    <h2>El Kyrios y la actividad creadora de Cristo</h2>
+  </div>
+
+  <section>
+    <h3>6. 1 Corintios 8:6 — Un solo Dios, un solo Señor, por medio del cual todo existe</h3>
+
+    <div class="scripture">
+      <div class="source">1 Corintios 8:6</div>
+      <div class="text">"Para nosotros, sin embargo, sólo hay un Dios, el Padre, del cual proceden todas las cosas, y nosotros somos para él; y un Señor, Jesucristo, por medio del cual son todas las cosas, y nosotros por medio de él."</div>
+    </div>
+
+    <p>Este versículo es excepcionalmente significativo porque Pablo reformula deliberadamente el <em>Shemá</em> de Israel ("Oye, Israel: el Señor nuestro Dios, el Señor uno es", Dt 6:4) —el texto monoteísta por excelencia del judaísmo— insertando a Jesús dentro de la propia identidad divina única, no como un segundo dios añadido, sino distribuyendo entre el Padre y el Hijo las dos preposiciones que el judaísmo aplicaba exclusivamente a YHWH como origen ("de quien") y agente ("por quien") de toda la creación. El erudito N. T. Wright ha mostrado de manera influyente que esta es una de las evidencias más tempranas y contundentes de que la comunidad cristiana primitiva incluyó a Jesús dentro de la identidad del Dios único de Israel, sin diluir el monoteísmo ni añadir una segunda divinidad.</p>
+
+    <div class="patristic">
+      <div class="source">San Atanasio de Alejandría, <em>Discurso I contra los Arianos</em>, 10 (trad. Nicene and Post-Nicene Fathers, Second Series, vol. 4)</div>
+      <div class="text">"Y este Verbo es Cristo; pues 'hay un solo Dios, el Padre, de quien son todas las cosas, y nosotros para él; y un solo Señor Jesucristo, por quien son todas las cosas, y nosotros por él' (1 Corintios 8:6). Y si todas las cosas son por medio de él, él mismo no ha de ser contado entre ese 'todas'. Pues quien se atreva a llamarlo, a través de quien son las cosas, una de ese 'todas', ciertamente tendrá especulaciones semejantes acerca de Dios, de quien son todas las cosas."</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El Shemá de Deuteronomio 6:4 aplica a YHWH, en exclusiva, el origen y la causa de toda la realidad.</span></div>
+      <div class="premise"><span class="label">P2</span><span>1 Corintios 8:6 reformula esa misma confesión, distribuyendo el origen ("de quien") al Padre y la mediación creadora ("por quien son todas las cosas") al Señor Jesucristo, sin introducir un segundo dios ni romper la unicidad confesada.</span></div>
+      <div class="conclusion">Por tanto, Pablo incluye a Jesús dentro de la identidad única del Dios de Israel a través de la actividad creadora misma —el atributo más exclusivamente divino que existe—, en el texto bíblico menos esperado para hacerlo: la confesión monoteísta central del judaísmo.</div>
+    </div>
+  </section>
+
+  <section id="1timoteo">
+    <h3>7. 1 Timoteo 3:16 — El misterio de la piedad: Dios manifestado en carne</h3>
+
+    <div class="scripture">
+      <div class="source">1 Timoteo 3:16</div>
+      <div class="text">"E indiscutiblemente, grande es el misterio de la piedad: Dios fue manifestado en carne, justificado en el Espíritu, visto de los ángeles, predicado a los gentiles, creído en el mundo, recibido arriba en gloria."</div>
+    </div>
+
+    <p>Este versículo —que la mayoría de los comentaristas reconocen como fragmento de un himno litúrgico cristiano primitivo incorporado por Pablo— condensa en seis líneas paralelas toda la trayectoria de la Encarnación, desde la manifestación en carne hasta la exaltación en gloria. Aunque algunas tradiciones manuscritas posteriores leen "él" (<em>hos</em>) en lugar de "Dios" (<em>theos</em>) en la primera línea —una variante textual conocida y discutida en la crítica textual—, ambas lecturas exigen como sujeto implícito una persona preexistente que se manifiesta, no que comienza a existir, en la carne: la estructura misma del himno presupone una entidad divina o cuasi-divina anterior a la Encarnación que se hace visible en ella.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El himno de 1 Timoteo 3:16 describe una secuencia: manifestación en carne, justificación en el Espíritu, visión por los ángeles, predicación, fe, glorificación —un movimiento desde lo invisible hacia lo manifestado y luego hacia lo exaltado.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Esta secuencia solo es coherente si el sujeto preexiste a su "manifestación en carne": no se puede manifestar lo que antes no existía de algún modo.</span></div>
+      <div class="conclusion">Por tanto, este himno cristiano primitivo —ya en circulación litúrgica antes de que Pablo lo cite— presupone la preexistencia de Cristo como condición necesaria de su Encarnación, reforzando el mismo patrón que Colosenses 1 y 1 Corintios 1:24 ya han establecido.</div>
+    </div>
+  </section>
+
+  <section id="2tesalonicenses">
+    <h3>8. 2 Tesalonicenses 1:12 — La gracia de nuestro Dios y del Señor Jesucristo</h3>
+
+    <div class="scripture">
+      <div class="source">2 Tesalonicenses 1:12 (cf. también 1:1-2)</div>
+      <div class="text">"Para que el nombre de nuestro Señor Jesucristo sea glorificado en vosotros, y vosotros en él, por la gracia de nuestro Dios y Señor Jesucristo."</div>
+    </div>
+
+    <p>De nuevo aparece aquí la misma estructura gramatical de Tito 2:13 (artículo + sustantivo + <em>kai</em> + sustantivo sin artículo repetido), que la mayoría de los gramáticos del griego neotestamentario —siguiendo la regla de Sharp aplicada de forma consistente en las epístolas pastorales y generales— identifican como una sola persona bajo dos títulos: "nuestro Dios y Señor" es Jesucristo, no una referencia separada al Padre seguida de otra al Hijo.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>La misma construcción gramatical (artículo singular + dos sustantivos unidos por <em>kai</em>, el segundo sin artículo) aparece de forma consistente en 2 Tesalonicenses 1:12 y en Tito 2:13, ambas atribuidas tradicionalmente a Pablo.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Esta construcción identifica gramaticalmente un único sujeto bajo ambos títulos.</span></div>
+      <div class="conclusion">Por tanto, este no es un caso aislado de ambigüedad sintáctica explotable, sino un patrón estilístico repetido del propio corpus paulino para aplicar simultáneamente "Dios" y "Señor" al mismo Jesucristo.</div>
+    </div>
+  </section>
+
+  <section id="hebreos-puente">
+    <h3>9. El "Kyrios" del Antiguo Testamento aplicado sistemáticamente a Cristo</h3>
+
+    <p>Más allá de los pasajes individuales examinados, existe un patrón sistemático en todo el corpus paulino que merece mención propia: Pablo aplica con regularidad a Jesús el título <em>Kyrios</em> ("Señor"), que en la Septuaginta —la traducción griega del Antiguo Testamento que la Iglesia primitiva usaba como su Biblia— es la traducción estándar del tetragrama sagrado YHWH. Cuando Pablo cita un texto del Antiguo Testamento que originalmente se refiere a YHWH y lo aplica a Jesús —como ocurre en Romanos 14:10-11 con Isaías 45:23 ("todos compareceremos ante el tribunal de Cristo... ante mí se doblará toda rodilla"), o en Romanos 10:13 con Joel 2:32 ("todo aquel que invocare el nombre del Señor será salvo")—, no está cometiendo un descuido exegético: está aplicando deliberadamente a Cristo el nombre y la identidad reservados a YHWH.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Texto del Antiguo Testamento (sobre YHWH)</th>
+          <th>Aplicación paulina a Cristo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Isaías 45:23 — "ante mí se doblará toda rodilla"</td>
+          <td>Romanos 14:10-11 — todos compareceremos ante el tribunal de Cristo; ante él se doblará toda rodilla</td>
+        </tr>
+        <tr>
+          <td>Joel 2:32 — "todo aquel que invocare el nombre del Señor será salvo"</td>
+          <td>Romanos 10:13 — aplicado directamente a la confesión de Jesús como Señor</td>
+        </tr>
+        <tr>
+          <td>Salmo 102:25-27 — atributos eternos del Creador YHWH</td>
+          <td>Patrón paralelo en Hebreos 1:10-12 (tradición paulina/deuteropaulina)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight">
+      <strong>Por qué esto importa más que cualquier verso aislado:</strong> Un único título aplicado por error o metáfora podría discutirse. Pero un patrón sistemático, repetido en cartas distintas, en contextos distintos, dirigido a audiencias distintas, donde siempre el mismo nombre divino (YHWH/Kyrios) y los mismos textos veterotestamentarios reservados a Dios se trasladan a Jesús, no es casualidad literaria: es una convicción teológica estructural que Pablo daba por establecida en la fe que había recibido y transmitía.
+    </div>
+  </section>
+
+  <section id="roca-1corintios10">
+    <div class="verse-card">
+      <span class="verse-number">PASAJE 10</span>
+      <h4>1 Corintios 10:4, 9 — "Y la roca era Cristo": YHWH presente ya en el Éxodo</h4>
+
+      <div class="scripture">
+        <div class="source">1 Corintios 10:1-4</div>
+        <div class="text">"Porque no quiero, hermanos, que ignoréis que nuestros padres todos estuvieron bajo la nube, y todos pasaron el mar; y todos en Moisés fueron bautizados en la nube y en el mar, y todos comieron el mismo alimento espiritual, y todos bebieron la misma bebida espiritual; porque bebían de la roca espiritual que los seguía, y la roca era Cristo."</div>
+      </div>
+
+      <div class="scripture">
+        <div class="source">1 Corintios 10:9</div>
+        <div class="text">"Ni tentemos al Señor, como algunos de ellos le tentaron, y perecieron por las serpientes."</div>
+      </div>
+
+      <p>Este pasaje tiene un peso argumental distinto al de los himnos litúrgicos que Pablo cita en otras cartas (como el de 1 Timoteo 3:16): no es una fórmula tradicional incorporada, sino un argumento propio del apóstol, desarrollado en prosa discursiva, dentro de una de sus cartas mejor atestiguadas y más tempranas (1 Corintios, h. 53-55 d.C.). Pablo relee el relato del Éxodo —la roca que, según Números 20:7-11 y Éxodo 17:1-7, dio agua a Israel en el desierto— y afirma sin rodeos que esa roca, que "los seguía" a lo largo de toda la marcha, "era Cristo". No dice que la roca lo "representaba" o lo "anunciaba": dice que <em>era</em> él.</p>
+
+      <p>La identificación es teológicamente exigente porque "la Roca" (en hebreo, <em>tsur</em>) es uno de los títulos divinos que el Antiguo Testamento reserva a YHWH como objeto de culto exclusivo: "Roca que te creó" y "Roca de tu salvación" en el Cántico de Moisés (Deuteronomio 32:4, 15, 18), o "¿Quién es Roca, sino sólo nuestro Dios?" en 2 Samuel 22:32 y el Salmo 18:31. Al afirmar que esa misma Roca que acompañó a Israel en el desierto "era Cristo", Pablo no está construyendo una metáfora ornamental: está situando a Cristo, antes de su nacimiento humano, como el agente divino presente y activo en la historia de Israel bajo un título que el judaísmo aplicaba en exclusiva a YHWH. El versículo 9, inmediatamente después, refuerza la misma lectura: a quien los israelitas "tentaron" en el desierto (cf. Éxodo 17:2, Números 21:5, Salmo 78:18) Pablo lo llama, sin matización, "el Señor" —y por el contexto inmediato, ese Señor es Cristo.</p>
+
+      <div class="patristic">
+        <div class="source">San Agustín de Hipona, <em>In Ioannis Evangelium Tractatus</em>, 124, 5 (h. 416-417 d.C.; texto latino: <em>In evangelium Ioannis tractatus CXXIV</em>; traducción propia del latín)</div>
+        <div class="text">"¿Quieres saber de qué roca se dice que viene Pedro? Escucha a Pablo: 'No quiero que ignoréis, hermanos, que todos nuestros padres estuvieron bajo la nube, y todos atravesaron el mar, y todos fueron bautizados en Moisés, en la nube y en el mar, y todos comieron el mismo alimento espiritual, y todos bebieron la misma bebida espiritual; porque bebían de la roca espiritual que los seguía: y la roca era Cristo'... Porque la roca era Cristo: sobre ese fundamento fue edificado también el propio Pedro. Pues nadie puede poner otro fundamento que el que ya está puesto, que es Cristo Jesús."</div>
+      </div>
+
+      <div class="highlight">
+        <strong>Dato adicional:</strong> Esta misma lectura —"la roca era Cristo"— se convirtió en lectura prácticamente unánime de la tradición patrística posterior, citada de forma recurrente por autores tan distintos como Orígenes, Ambrosio, Tertuliano o Cirilo de Alejandría, casi siempre en el contexto del bautismo y la Eucaristía: si el Cristo preexistente ya alimentaba y daba de beber a Israel en el desierto con su propia presencia espiritual, los sacramentos cristianos continúan esa misma acción que el propio Pablo describe, sin presentarla nunca como una innovación doctrinal que requiera justificación.
+      </div>
+
+      <div class="syllogism">
+        <div class="premise"><span class="label">P1</span><span>"La Roca" es, en el Antiguo Testamento (Dt 32:4, 15, 18; 2 S 22:32; Sal 18:31), un título cultual reservado a YHWH como única fuente de salvación y sustento de Israel, no un título aplicable a un ángel, a un agente creado, o a una simple figura literaria sin más.</span></div>
+        <div class="premise"><span class="label">P2</span><span>1 Corintios 10:4 aplica este mismo título directamente a Cristo, afirmando además que él —no un símbolo de él— acompañaba realmente a Israel en el desierto, siglos antes de su nacimiento humano; y el v. 9 aplica a Cristo, bajo el nombre de "el Señor", el relato veterotestamentario en que Israel "tentó" a YHWH.</span></div>
+        <div class="conclusion">Por tanto, en una de sus cartas más tempranas y mediante un argumento propio —no una cita de himno tradicional—, Pablo presenta a Cristo como preexistente y activo en la historia de Israel bajo un título exclusivo de YHWH, extendiendo la identidad divina del Dios único de Israel a la persona de Jesucristo de la manera más directa posible: identificándolo retroactivamente con el propio YHWH que sostuvo a su pueblo en el desierto.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE III: EL ESPÍRITU SANTO -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="espiritu-1corintios">
+    <span class="part-label">Parte III — El Espíritu Santo</span>
+    <h2>La tercera Persona en el testimonio paulino</h2>
+  </div>
+
+  <section>
+    <h3>11. 1 Corintios 2:10-11 — El Espíritu escudriña lo profundo de Dios</h3>
+
+    <div class="scripture">
+      <div class="source">1 Corintios 2:10-11</div>
+      <div class="text">"Pero Dios nos las reveló a nosotros por el Espíritu; porque el Espíritu todo lo escudriña, aun lo profundo de Dios... así tampoco nadie conoció las cosas de Dios, sino el Espíritu de Dios."</div>
+    </div>
+
+    <p>Pablo atribuye al Espíritu un conocimiento de "lo profundo de Dios" (<em>ta bathē tou theou</em>) comparable —de hecho, idéntico en su estructura argumental— al conocimiento que solo el propio espíritu humano tiene de sus propios pensamientos íntimos (v. 11). La lógica del argumento exige que el Espíritu tenga, respecto de Dios, el mismo tipo de acceso interno e inmediato que el espíritu humano tiene de sí mismo: no un conocimiento externo o comunicado, sino una identidad cognoscitiva propia de quien comparte la misma naturaleza que conoce.</p>
+
+    <div class="patristic">
+      <div class="source">San Basilio Magno, <em>Sobre el Espíritu Santo</em>, cap. 10, §24 (375 d.C.; trad. Nicene and Post-Nicene Fathers, Second Series, vol. 8)</div>
+        <div class="text">"No es lícito, afirman ellos, que el Espíritu Santo sea colocado junto al Padre y al Hijo, a causa de la diferencia de su naturaleza y la inferioridad de su dignidad. Contra ellos es justo responder con las palabras de los apóstoles: 'Debemos obedecer a Dios antes que a los hombres' (Hechos 5:29). Pues si nuestro Señor, al ordenar el bautismo de salvación, encargó a sus discípulos bautizar a todas las naciones en el nombre 'del Padre y del Hijo y del Espíritu Santo' (Mateo 28:19), sin desdeñar la comunión con él, y estos hombres alegan que no debemos colocarlo junto al Padre y al Hijo, ¿no es claro que se oponen abiertamente al mandamiento de Dios?"</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Según la analogía que el propio Pablo establece en 1 Corintios 2:11, solo el espíritu propio de una persona conoce íntimamente "lo profundo" de esa misma persona.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El Espíritu Santo conoce, según el mismo pasaje, "lo profundo de Dios" con ese mismo tipo de conocimiento íntimo e interno.</span></div>
+      <div class="conclusion">Por tanto, el Espíritu Santo se relaciona con Dios como el espíritu propio de una persona se relaciona con esa persona: comparte su misma naturaleza íntima, no la conoce desde fuera como un agente externo o creado.</div>
+    </div>
+  </section>
+
+  <section id="espiritu-romanos">
+    <h3>12. Romanos 8:9-11 — El Espíritu de Dios es el Espíritu de Cristo</h3>
+
+    <div class="scripture">
+      <div class="source">Romanos 8:9, 11</div>
+      <div class="text">"Mas vosotros no estáis en la carne, sino en el Espíritu, si es que el Espíritu de Dios mora en vosotros. Y si alguno no tiene el Espíritu de Cristo, no es de él... Y si el Espíritu de aquel que levantó de los muertos a Jesús mora en vosotros, el que levantó de los muertos a Cristo Jesús vivificará también vuestros cuerpos mortales por su Espíritu que mora en vosotros."</div>
+    </div>
+
+    <p>En apenas tres versículos, Pablo intercambia con total naturalidad las expresiones "Espíritu de Dios", "Espíritu de Cristo" y, en el versículo inmediatamente anterior, "Cristo" sin más (v. 10: "si Cristo está en vosotros"), tratándolas como equivalentes funcionales: la presencia del Espíritu de Dios en el creyente <em>es</em> la presencia de Cristo en el creyente. Esta fluidez terminológica solo es coherente teológicamente si el Espíritu, Cristo y Dios comparten una identidad y unidad de naturaleza tal que la presencia de uno implica necesariamente la presencia de los otros, sin que esto colapse las distinciones personales que el propio pasaje mantiene (es "el Espíritu de" Dios, no Dios sin más; es "el Espíritu de" Cristo, no Cristo sin más).</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Pablo usa "Espíritu de Dios", "Espíritu de Cristo" y "Cristo en vosotros" como equivalentes funcionales en el mismo párrafo argumental (Rom 8:9-11), sin marcar ninguna distinción de efecto o de presencia.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Esta equivalencia de efecto solo es posible si el Espíritu comparte la misma naturaleza e identidad divina que el Padre y el Hijo, manteniendo a la vez su distinción personal (es "de" Dios y "de" Cristo, no idéntico sin remanente a ninguno de los dos).</span></div>
+      <div class="conclusion">Por tanto, este pasaje expresa, en lenguaje pastoral y no especulativo, la misma estructura que la teología trinitaria posterior formalizaría: unidad de naturaleza y de obra entre el Padre, el Hijo y el Espíritu, junto con la distinción real de las tres personas.</div>
+    </div>
+  </section>
+
+  <section id="espiritu-efesios">
+    <h3>13. Efesios 4:30 — No contristar al Espíritu Santo de Dios</h3>
+
+    <div class="scripture">
+      <div class="source">Efesios 4:30</div>
+      <div class="text">"Y no contristéis al Espíritu Santo de Dios, con el cual fuisteis sellados para el día de la redención."</div>
+    </div>
+
+    <p>El verbo "contristar" (<em>lypeite</em>) atribuye al Espíritu una capacidad relacional y personal —puede ser agraviado, puede experimentar algo análogo al dolor relacional— que el Antiguo Testamento, en un pasaje paralelo evidente (Isaías 63:10, "contristaron su Espíritu Santo"), aplica directamente al propio YHWH. Pablo no describe al Espíritu como una fuerza impersonal o una energía: lo describe con el mismo lenguaje relacional con que se describe a una persona divina capaz de ser agraviada por la conducta de aquellos a quienes ha sellado como propios.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Solo una persona —no una fuerza o energía impersonal— puede ser "contristada" en el sentido relacional que el verbo implica.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Efesios 4:30 atribuye esta capacidad relacional al Espíritu Santo, replicando el lenguaje que Isaías 63:10 aplica a YHWH mismo.</span></div>
+      <div class="conclusion">Por tanto, el Espíritu Santo es presentado por Pablo como una persona divina real, capaz de relación, y no como una fuerza impersonal subordinada.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE IV: LA TRINIDAD COMPLETA -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="trinidad-2corintios">
+    <span class="part-label">Parte IV — La Trinidad Completa</span>
+    <h2>Las tres Personas juntas en una sola fórmula paulina</h2>
+  </div>
+
+  <section>
+    <h3>14. 2 Corintios 13:14 — La bendición trinitaria</h3>
+
+    <div class="verse-atom">
+      <div class="verse-ref">2 Corintios 13:14</div>
+      <div class="verse-text">"La gracia del Señor Jesucristo, el amor de Dios, y la comunión del Espíritu Santo sean con todos vosotros. Amén."</div>
+    </div>
+
+    <p>Esta fórmula de despedida —una de las más citadas litúrgicamente en toda la historia de la Iglesia, y que sigue empleándose como bendición final en la liturgia eucarística de múltiples tradiciones cristianas hasta el día de hoy— distribuye explícitamente tres dones distintos (gracia, amor, comunión) entre tres sujetos distintos (el Señor Jesucristo, Dios, el Espíritu Santo), colocados en perfecta paridad sintáctica dentro de una sola oración de bendición. No hay jerarquía gramatical entre los tres miembros: cada uno encabeza su propia cláusula con el mismo peso estructural.</p>
+
+    <div class="trinity-grid">
+      <div class="trinity-card">
+        <h5>El Señor Jesucristo</h5>
+        <p>Otorga la <strong>gracia</strong> (<em>charis</em>)</p>
+      </div>
+      <div class="trinity-card">
+        <h5>Dios (el Padre)</h5>
+        <p>Otorga el <strong>amor</strong> (<em>agapē</em>)</p>
+      </div>
+      <div class="trinity-card">
+        <h5>El Espíritu Santo</h5>
+        <p>Otorga la <strong>comunión</strong> (<em>koinōnia</em>)</p>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>2 Corintios 13:14 distribuye tres dones espirituales distintos entre tres sujetos personales distintos, en estructura sintáctica paralela y sin jerarquía gramatical entre ellos.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Pablo no introduce esta fórmula como una novedad doctrinal que requiera explicación, sino como una bendición de cierre, dando por supuesto que la comunidad ya reconoce esta tríada de sujetos divinos como parte natural de su fe.</span></div>
+      <div class="conclusion">Por tanto, este versículo —escrito hacia el año 55-56 d.C., generaciones antes de cualquier concilio trinitario— da testimonio de que la articulación tripartita de la divinidad (Cristo, Dios Padre, Espíritu Santo) ya formaba parte del lenguaje litúrgico cotidiano de las primeras comunidades cristianas fundadas por Pablo.</div>
+    </div>
+  </section>
+
+  <section id="trinidad-efesios4">
+    <h3>15. Efesios 4:4-6 — Un Espíritu, un Señor, un Dios y Padre</h3>
+
+    <div class="scripture">
+      <div class="source">Efesios 4:4-6</div>
+      <div class="text">"Un cuerpo, y un Espíritu, como también fuisteis llamados a una misma esperanza... un Señor, una fe, un bautismo, un Dios y Padre de todos, el cual es sobre todos, y por todos, y en todos."</div>
+    </div>
+
+    <p>Esta secuencia es particularmente reveladora porque combina la fórmula trinitaria con el lenguaje monoteísta más enfático ("un Dios", repetido en eco directo del Shemá): Pablo no percibe contradicción alguna entre afirmar "un Espíritu... un Señor... un Dios y Padre" en una sola respiración y mantener al mismo tiempo la confesión monoteísta básica de la fe que había heredado del judaísmo. La unidad de la Iglesia (un cuerpo) se funda, según el propio argumento de Pablo, en la unidad de la divinidad que la habita bajo sus tres designaciones: Espíritu, Señor y Dios Padre.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Efesios 4:4-6 afirma "un Espíritu... un Señor... un Dios y Padre" en una secuencia que funciona como fundamento teológico de la unidad eclesial.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Esta triple unidad no se presenta como tres divinidades unidas por alianza o cooperación, sino como el fundamento singular ("un cuerpo") de la única Iglesia, lo que exige una unidad de naturaleza, no solo de propósito.</span></div>
+      <div class="conclusion">Por tanto, Pablo articula aquí, en clave práctica y eclesiológica, la misma estructura que la teología trinitaria nombrará después con precisión técnica: tres designaciones personales distintas dentro de la unidad indivisible de un solo Dios.</div>
+    </div>
+  </section>
+
+  <section id="trinidad-1corintios12">
+    <h3>16. 1 Corintios 12:4-6 — El mismo Espíritu, el mismo Señor, el mismo Dios</h3>
+
+    <div class="scripture">
+      <div class="source">1 Corintios 12:4-6</div>
+      <div class="text">"Hay diversidad de dones, pero el Espíritu es el mismo. Y hay diversidad de ministerios, pero el Señor es el mismo. Y hay diversidad de operaciones, pero Dios, que hace todas las cosas en todos, es el mismo."</div>
+    </div>
+
+    <p>En este mismo tratado, San Basilio Magno formula explícitamente, a propósito de la obra divina en la creación, una estructura trinitaria de causación que ilumina directamente el principio que Pablo aplica aquí a los dones espirituales: una sola obra repartida, sin confusión ni subordinación de naturaleza, entre las tres Personas.</p>
+
+    <div class="patristic">
+      <div class="source">San Basilio Magno, <em>Sobre el Espíritu Santo</em>, cap. 16, §38 (375 d.C.; trad. Nicene and Post-Nicene Fathers, Second Series, vol. 8)</div>
+      <div class="text">"Y en la creación, considera ante todo, te ruego, la causa original de todas las cosas hechas, que es el Padre; la causa creadora, que es el Hijo; y la causa perfeccionadora, que es el Espíritu; de modo que los espíritus ministradores subsisten por la voluntad del Padre, son traídos a la existencia por la operación del Hijo, y son perfeccionados por la presencia del Espíritu."</div>
+      </div>
+
+    <p>Aunque Basilio formula este principio a propósito de la creación de las potencias angélicas y no de los dones carismáticos de 1 Corintios 12 en particular, la estructura lógica es idéntica a la que el propio capítulo dedica, unas líneas antes, a las "diversas operaciones" del Espíritu: una sola acción divina indivisible que se despliega, sin jerarquía de naturaleza, según tres modos irreductibles de causación —origen, mediación creadora y perfeccionamiento— que corresponden exactamente a las tres designaciones de 1 Corintios 12:4-6: "el mismo Espíritu... el mismo Señor... el mismo Dios".</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>1 Corintios 12:4-6 atribuye una misma obra —la distribución de dones espirituales en la Iglesia— de manera triple a "el Espíritu", "el Señor" y "Dios", usando en cada caso la fórmula "el mismo" para enfatizar la identidad detrás de la diversidad de manifestaciones.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Una misma obra divina indivisible —la distribución soberana de dones espirituales— solo puede ser realizada conjuntamente por personas que comparten una misma naturaleza y poder divinos, no por un agente principal y dos subordinados de naturaleza distinta.</span></div>
+      <div class="conclusion">Por tanto, este pasaje confirma, en el contexto más práctico posible —la vida cotidiana de una iglesia local con dones carismáticos diversos—, la misma estructura trinitaria que aparece en las fórmulas litúrgicas: tres personas, una sola obra y una sola naturaleza divina.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SILOGISMO MAESTRO -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="silogismo-maestro">
+    <span class="part-label">Síntesis Final</span>
+    <h2>El silogismo maestro</h2>
+  </div>
+
+  <section>
+    <p>Los dieciséis pasajes examinados —repartidos entre 1 Corintios, Colosenses, Tito, Romanos, 1 Timoteo, 2 Tesalonicenses y Efesios, es decir, a través de prácticamente todo el corpus paulino tradicional— convergen en un solo patrón que puede condensarse en un único silogismo maestro, del cual los dieciséis silogismos anteriores son, cada uno, una premisa de apoyo independiente.</p>
+
+    <div class="syllogism maestro">
+      <div class="premise"><span class="label">P1</span><span>Un escritor que (a) aplica a una persona los atributos exclusivos de la divinidad —sabiduría y poder eternos de Dios (1 Co 1:24, 30; 1 Ti 3:16), actividad creadora universal (Col 1:16; 1 Co 8:6), la plenitud total de la Deidad de forma corporal (Col 2:9), y la omnisciencia respecto de los misterios más íntimos de Dios (1 Co 2:10-11 para el Espíritu); (b) le aplica directamente los títulos reservados a YHWH —"Dios sobre todas las cosas, bendito por los siglos" (Rom 9:5), "nuestro gran Dios y Salvador" (Tit 2:13), el Kyrios de los textos veterotestamentarios trasladados sin alteración (Rom 14:10-11 con Is 45:23; Rom 10:13 con Joel 2:32), y la Roca que sostuvo y dio de beber a Israel en el desierto, título cultual exclusivo de YHWH (1 Co 10:4, 9 con Dt 32:4, 15, 18); y (c) coloca a esa misma persona, junto con el Espíritu, en paridad sintáctica perfecta con "Dios" o "el Padre" dentro de fórmulas litúrgicas de bendición que la comunidad ya usaba sin necesidad de explicación (2 Co 13:14; Ef 4:4-6; 1 Co 12:4-6) — no está describiendo a una criatura exaltada, ni a un segundo dios subordinado, ni a una fuerza impersonal, sino a una persona que comparte, real y plenamente, la única naturaleza divina junto al Padre y al Espíritu Santo.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El apóstol Pablo, en cartas dirigidas a comunidades distintas, en décadas distintas (años 50 a 60 d.C.), en géneros literarios distintos (himnos preexistentes incorporados, doxologías espontáneas, fórmulas de bendición litúrgica, argumentación doctrinal explícita), hace exactamente las tres cosas descritas en (a), (b) y (c) respecto de Jesucristo, y simultáneamente sitúa al Espíritu Santo en la misma estructura de igualdad personal y operativa junto al Padre y al Hijo.</span></div>
+      <div class="conclusion">SILOGISMO MAESTRO: Por tanto, el propio Pablo —el autor cristiano más temprano y mejor documentado del Nuevo Testamento, escribiendo independientemente de cualquier desarrollo conciliar posterior— da testimonio de una fe trinitaria ya plenamente formada en la generación apostólica: un solo Dios, confesado bajo tres personas reales y distintas —Padre, Hijo y Espíritu Santo—, cada una de las cuales recibe en el propio texto paulino los atributos, los títulos y el culto que pertenecen, sin división ni disminución, a la única naturaleza divina. La cristología y la doctrina trinitaria de Nicea (325) y Constantinopla (381) no inventan esta convicción: la heredan, la formalizan terminológicamente, y la defienden frente a las negaciones que —como demuestra la respuesta de Atanasio, Hilario, Basilio y Tertuliano examinada en cada sección— intentaron precisamente vaciar de contenido estos mismos textos paulinos que aquí se han recorrido.</div>
+    </div>
+  </section>
+
+  <!-- VEREDICTO FINAL -->
+  <div class="verdict" id="veredicto">
+    <h2>El Veredicto: Un Testimonio Demasiado Temprano para Ser Tardío</h2>
+
+    <p>La objeción que sostiene que la divinidad de Cristo y la doctrina trinitaria son construcciones helenísticas tardías, impuestas sobre un Jesús originalmente humano por concilios posteriores influidos por la filosofía griega, no resiste el examen del propio corpus paulino. Lo que este documento ha mostrado, pasaje por pasaje, es que <strong>las afirmaciones más altas sobre la persona de Cristo y la actividad personal del Espíritu Santo no aparecen como innovaciones argumentadas con esfuerzo, sino como presupuestos dados por sentados</strong>: identificando a Cristo con el poder y la sabiduría mismos de Dios ya en una de las primeras cartas conservadas (1 Co 1:24, 30), incorporados en himnos ya tradicionales en tiempos de Pablo (1 Timoteo 3:16), insertados en fórmulas de bendición que cierran cartas sin ninguna necesidad de justificación doctrinal (2 Corintios 13:14, Efesios 4:4-6), y aplicados con naturalidad gramatical a Jesús en el género literario menos especulativo de todos: instrucciones pastorales prácticas (Tito 2:13, 2 Tesalonicenses 1:12).</p>
+
+    <p><strong>La recepción patrística no añade nada ajeno a estos textos: los defiende contra quienes, ya en el siglo II al IV, intentaron leerlos de otro modo.</strong> Atanasio no inventó la preexistencia de Cristo: la defendió frente a Arrio, que la negaba citando los mismos versículos paulinos que aquí se han examinado. Tertuliano no inventó la aplicación del título "Dios" a Cristo en Romanos 9:5: la citó textualmente contra Práxeas, que disolvía las personas en una sola. Basilio no inventó la divinidad personal del Espíritu Santo: la extrajo, verso por verso, del propio corpus paulino, frente a quienes —como Eustacio— sostenían que el Espíritu era una criatura.</p>
+
+    <p><strong>El patrón acumulativo es lo decisivo.</strong> Cualquiera de estos dieciséis pasajes, tomado de manera aislada, podría discutirse exegéticamente —y de hecho lo ha sido durante dos mil años. Pero la convergencia de dieciséis pasajes distintos, en ocho cartas distintas, a través de un mínimo de diez años de correspondencia paulina, aplicando de manera consistente los mismos atributos exclusivos de la divinidad, los mismos títulos reservados a YHWH, y la misma estructura tripersonal en las fórmulas de bendición, no se explica por casualidad literaria ni por interpolación tardía aislada: se explica porque la convicción de que Jesucristo es Dios encarnado, y de que el Espíritu Santo es una persona divina junto al Padre y al Hijo, formaba ya parte del núcleo de la fe que Pablo había recibido y transmitía como apóstol, antes de que ningún concilio se reuniera para nombrarla con precisión técnica.</p>
+  </div>
+
+  <footer style="border-top:1px solid var(--grey-light); padding-top:2rem; font-size:0.8rem; color:var(--grey-mid); font-family:'JetBrains Mono',monospace; line-height:1.8;">
+    <p>FUENTES PRINCIPALES CITADAS: Colosenses 1:15-20, 2:9 · Tito 2:13 · Romanos 9:5, 8:9-11, 10:13 · 1 Corintios 2:10-11, 8:6, 10:4, 10:9, 12:4-6 · 1 Timoteo 3:16 · 2 Tesalonicenses 1:12 · Efesios 4:4-6, 4:30 · 2 Corintios 13:14 · Isaías 45:23, 63:10 · Joel 2:32 · Deuteronomio 6:4, 32:4, 32:15, 32:18 · 2 Samuel 22:32 · Salmo 18:31 · Atanasio de Alejandría, Discursos contra los Arianos (c. 339-359) · Hilario de Poitiers, De Trinitate · Ambrosio de Milán y Severiano de Gabala, Catena sobre Colosenses · Teodoreto de Ciro, Comentario a las Epístolas Pastorales · Tertuliano, Contra Práxeas (c. 213) · Basilio Magno, Sobre el Espíritu Santo (375 d.C.) · Agustín de Hipona, In Ioannis Evangelium Tractatus 124 (h. 416-417 d.C.) · N. T. Wright, sobre 1 Corintios 8:6 y la identidad divina de Cristo</p>
+  </footer>
+
+</main>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('progress-bar').style.width = progress + '%';
+  });
+
+  const toggle = document.getElementById('nav-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('visible');
+    toggle.classList.add('open');
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+    toggle.classList.remove('open');
+  }
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+
+  overlay.addEventListener('click', closeSidebar);
+
+  sidebar.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeSidebar);
+  });
+
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('#sidebar nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

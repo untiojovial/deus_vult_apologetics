@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agustín de Hipona — El Corazón Inquieto</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --tinta:#0D0B08; --tinta-media:#1A1510; --tinta-suave:#261E16;
+  --terracota:#7A2E1A; --terracota-viva:#A33E24; --terracota-suave:#C4614A;
+  --arena:#E8D5B0; --arena-clara:#F7F2E8; --arena-oscura:#C9B88A;
+  --oro:#C49A3C; --oro-claro:#E0BC68; --oro-palido:#F5E8C0;
+  --blanco:#FAF6EE; --gris-calido:#8A7A68;
+  --borde:rgba(196,154,60,0.18); --borde-fuerte:rgba(196,154,60,0.45);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--tinta);color:var(--arena);font-family:'Lora',Georgia,serif;font-size:18px;line-height:1.85;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--tinta);}
+::-webkit-scrollbar-thumb{background:var(--oro);border-radius:3px;}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--terracota),var(--oro));z-index:2000;width:0%;transition:width 0.1s;}
+
+/* NAV */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:56px;background:rgba(13,11,8,0.97);border-bottom:1px solid var(--borde);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;backdrop-filter:blur(16px);}
+.nav-brand{font-family:'Cinzel',serif;font-size:0.85rem;font-weight:600;color:var(--oro);letter-spacing:0.12em;text-transform:uppercase;}
+.nav-brand em{color:var(--arena);font-style:normal;font-weight:400;}
+#hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+#hamburger span{display:block;width:24px;height:2px;background:var(--oro);}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:56px;left:0;width:268px;height:calc(100vh - 56px);background:var(--tinta-media);border-right:1px solid var(--borde);overflow-y:auto;z-index:900;padding:1.2rem 0;transition:transform 0.35s cubic-bezier(.4,0,.2,1);}
+#sidebar::-webkit-scrollbar{width:3px;}
+#sidebar::-webkit-scrollbar-thumb{background:var(--oro);}
+.sb-cat{font-family:'Barlow Condensed',sans-serif;font-size:0.58rem;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--oro);padding:0.85rem 1.35rem 0.35rem;border-top:1px solid var(--borde);margin-top:0.4rem;}
+.sb-cat:first-child{border-top:none;margin-top:0;}
+.sb-a{display:block;padding:0.38rem 1.35rem;color:var(--gris-calido);font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:400;letter-spacing:0.03em;border-left:3px solid transparent;transition:all 0.2s;cursor:pointer;text-decoration:none;}
+.sb-a:hover,.sb-a.act{color:var(--arena);border-left-color:var(--oro);background:rgba(196,154,60,0.07);padding-left:1.6rem;}
+.sb-a.act{color:var(--oro-claro);font-weight:600;}
+
+/* MAIN */
+#main{margin-left:268px;padding-top:56px;}
+
+/* CORAZÓN CSS */
+.heart-css{position:relative;display:inline-block;width:1em;height:1em;transform:rotate(-45deg);}
+.heart-css::before,.heart-css::after{content:'';position:absolute;width:1em;height:1em;background:currentColor;border-radius:50%;}
+.heart-css::before{top:0;left:0;}
+.heart-css::after{top:0;left:0.5em;}
+
+/* HERO */
+#hero{min-height:100vh;background:var(--tinta);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+
+.hero-africa{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(122,46,26,0.25) 0%,transparent 60%),radial-gradient(ellipse at 75% 30%,rgba(196,154,60,0.08) 0%,transparent 50%);pointer-events:none;}
+
+/* Corazón en llamas gigante como marca de agua */
+.hero-flame-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);pointer-events:none;user-select:none;}
+.hero-flame{width:320px;height:320px;position:relative;opacity:0.055;animation:latido 4s ease-in-out infinite;}
+@keyframes latido{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+.hero-flame::before,.hero-flame::after{content:'';position:absolute;width:200px;height:200px;background:var(--terracota);border-radius:50%;}
+.hero-flame::before{bottom:0;left:0;}
+.hero-flame::after{bottom:0;left:100px;}
+.hero-flame-center{position:absolute;bottom:0;left:50%;transform:translateX(-50%) rotate(45deg);width:180px;height:180px;background:var(--terracota);}
+.llama{position:absolute;bottom:160px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:60px solid transparent;border-right:60px solid transparent;border-bottom:120px solid var(--oro);border-radius:50%;opacity:0.6;filter:blur(4px);animation:llamear 3s ease-in-out infinite;}
+@keyframes llamear{0%,100%{transform:translateX(-50%) scaleX(1);opacity:0.6;}33%{transform:translateX(-52%) scaleX(0.88);opacity:0.8;}66%{transform:translateX(-48%) scaleX(1.1);opacity:0.5;}}
+
+.hero-content{position:relative;z-index:2;text-align:center;max-width:860px;padding:2rem;animation:sube 1.2s ease both;}
+@keyframes sube{from{opacity:0;transform:translateY(36px);}to{opacity:1;transform:translateY(0);}}
+
+.hero-cejas{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.4em;text-transform:uppercase;color:var(--oro);margin-bottom:1.8rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.hero-cejas::before,.hero-cejas::after{content:'';width:44px;height:1px;background:var(--oro);opacity:0.45;}
+
+.hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2.2rem,5.5vw,5rem);font-weight:900;line-height:1.05;color:var(--arena-clara);margin-bottom:0.4rem;letter-spacing:-0.01em;}
+.hero-title .t{color:var(--terracota-suave);}
+
+.hero-sub{font-family:'Cinzel',serif;font-size:clamp(0.85rem,1.8vw,1.15rem);font-weight:400;color:var(--gris-calido);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:2rem;}
+
+.hero-fechas{font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;color:var(--oro);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:2.5rem;}
+
+.hero-motto{font-size:1.1rem;font-style:italic;color:rgba(232,213,176,0.7);max-width:580px;margin:0 auto 2.5rem;border-left:3px solid var(--terracota);padding-left:1.3rem;text-align:left;line-height:1.72;}
+
+.hero-scroll{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--oro);cursor:pointer;text-decoration:none;animation:bajar 2.2s ease-in-out infinite;}
+@keyframes bajar{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+
+/* BANDA ESTADÍSTICA */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);background:var(--terracota);padding:2.5rem 3rem;}
+.stat-n{font-family:'Cinzel Decorative',serif;font-size:2.8rem;font-weight:700;color:var(--arena-clara);line-height:1;margin-bottom:0.2rem;}
+.stat-l{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(232,213,176,0.55);}
+.stat-item{text-align:center;}
+
+/* SECCIONES */
+.sec{padding:5rem 4.5rem;position:relative;}
+.sec.alt{background:var(--tinta-media);}
+.sec-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.32em;text-transform:uppercase;color:var(--oro);margin-bottom:0.7rem;}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:var(--arena-clara);line-height:1.15;margin-bottom:0.85rem;}
+.sec-title .t{color:var(--terracota-suave);}
+.sec-rule{width:52px;height:2px;background:linear-gradient(90deg,var(--terracota),var(--oro));margin-bottom:0;}
+.sec-header{margin-bottom:2.8rem;}
+
+/* PROSA */
+.prosa{max-width:740px;font-size:1.02rem;color:rgba(232,213,176,0.82);line-height:1.92;}
+.prosa p{margin-bottom:1.3rem;}
+.prosa strong{color:var(--oro-claro);font-weight:600;}
+.prosa em{color:rgba(232,213,176,0.92);}
+
+/* DOS COLUMNAS */
+.dos-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+
+/* TIMELINE */
+.linea{position:relative;padding-left:2.5rem;margin-top:2rem;}
+.linea::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--terracota),var(--oro),transparent);}
+.li{position:relative;padding-bottom:2.5rem;opacity:0;transform:translateX(-16px);transition:all 0.5s ease;}
+.li.vis{opacity:1;transform:translateX(0);}
+.li-dot{position:absolute;left:-2.85rem;top:0.38rem;width:13px;height:13px;border-radius:50%;background:var(--tinta);border:2px solid var(--oro);transition:all 0.3s;}
+.li:hover .li-dot{background:var(--oro);box-shadow:0 0 10px var(--oro);}
+.li-year{font-family:'Cinzel',serif;font-size:1.45rem;font-weight:700;color:var(--oro);margin-bottom:0.2rem;line-height:1;}
+.li-ev{font-family:'Lora',serif;font-size:1.05rem;font-weight:600;color:var(--arena-clara);margin-bottom:0.5rem;}
+.li-txt{font-size:0.95rem;color:rgba(232,213,176,0.72);line-height:1.82;max-width:660px;}
+.li-tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:0.58rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;background:rgba(122,46,26,0.25);color:var(--terracota-suave);border:1px solid rgba(122,46,26,0.5);border-radius:2px;padding:0.18rem 0.55rem;margin-bottom:0.45rem;}
+
+/* CITA */
+.cita{margin:3rem 0;padding:2rem 2.8rem 2rem 3rem;background:rgba(122,46,26,0.12);border:1px solid rgba(196,154,60,0.2);position:relative;}
+.cita::before{content:'\275D';position:absolute;top:-0.9rem;left:1.8rem;font-size:3.2rem;color:var(--oro);font-family:'Cinzel Decorative',serif;line-height:1;}
+.cita p{font-family:'Lora',serif;font-size:clamp(1rem,1.8vw,1.3rem);font-style:italic;color:var(--arena-clara);line-height:1.72;margin-bottom:0.85rem;}
+.cita cite{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-style:normal;color:var(--oro);letter-spacing:0.14em;text-transform:uppercase;font-weight:600;}
+
+/* RESALTE */
+.hl{background:rgba(122,46,26,0.15);border-left:4px solid var(--terracota);padding:1.35rem 1.75rem;margin:1.7rem 0;border-radius:0 2px 2px 0;}
+.hl-t{font-family:'Cinzel',serif;font-size:0.95rem;font-weight:700;color:var(--terracota-suave);margin-bottom:0.42rem;}
+.hl p{font-size:0.92rem;color:rgba(232,213,176,0.78);line-height:1.78;}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(295px,1fr));gap:1.5rem;margin-top:2rem;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--borde);padding:1.85rem 1.7rem;position:relative;transition:all 0.3s;opacity:0;transform:translateY(16px);}
+.card.vis{opacity:1;transform:translateY(0);}
+.card:hover{border-color:var(--oro-claro);background:rgba(196,154,60,0.05);transform:translateY(-3px);box-shadow:0 8px 26px rgba(122,46,26,0.18);}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--terracota),var(--oro));opacity:0;transition:opacity 0.3s;}
+.card:hover::after{opacity:1;}
+.card-t{font-family:'Cinzel',serif;font-size:1.05rem;font-weight:700;color:var(--arena-clara);margin-bottom:0.3rem;}
+.card-s{font-family:'Barlow Condensed',sans-serif;font-size:0.63rem;color:var(--oro);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;margin-bottom:0.72rem;}
+.card-p{font-size:0.91rem;color:rgba(232,213,176,0.68);line-height:1.78;}
+
+/* PILARES */
+.pilares{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:2px;margin-top:2rem;background:rgba(196,154,60,0.07);}
+.pilar{background:var(--tinta);padding:2.2rem 1.9rem;transition:all 0.3s;opacity:0;transform:translateY(12px);}
+.sec.alt .pilar{background:var(--tinta-media);}
+.pilar.vis{opacity:1;transform:translateY(0);}
+.pilar:hover{background:rgba(122,46,26,0.12);}
+.pilar-n{font-family:'Cinzel Decorative',serif;font-size:2.8rem;font-weight:700;color:rgba(196,154,60,0.13);line-height:1;margin-bottom:0.4rem;transition:color 0.3s;}
+.pilar:hover .pilar-n{color:rgba(196,154,60,0.3);}
+.pilar-t{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--arena-clara);margin-bottom:0.6rem;}
+.pilar-p{font-size:0.89rem;color:rgba(232,213,176,0.64);line-height:1.78;}
+
+/* SCHEMA */
+.schema{background:rgba(196,154,60,0.04);border:1px solid var(--borde-fuerte);padding:2.4rem 2.8rem;margin:2.4rem 0;position:relative;}
+.schema-lbl{position:absolute;top:-0.6rem;left:1.4rem;background:var(--tinta);padding:0 0.6rem;font-family:'Barlow Condensed',sans-serif;font-size:0.58rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--oro);}
+.sec.alt .schema-lbl{background:var(--tinta-media);}
+.schema-t{font-family:'Cinzel',serif;font-size:1.2rem;font-weight:700;color:var(--oro-claro);margin-bottom:0.9rem;}
+.schema-b{font-size:0.96rem;color:rgba(232,213,176,0.8);line-height:1.88;}
+.schema-b p{margin-bottom:0.88rem;}
+.schema-b strong{color:var(--oro-claro);}
+
+/* TABLA */
+.tabla{width:100%;border-collapse:collapse;margin-top:2rem;}
+.tabla th{text-align:left;font-family:'Barlow Condensed',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--oro);padding:0.7rem 1rem;border-bottom:1px solid var(--borde-fuerte);}
+.tabla td{padding:0.95rem 1rem;font-size:0.89rem;color:rgba(232,213,176,0.75);border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;line-height:1.72;}
+.tabla tr:hover td{background:rgba(122,46,26,0.1);color:var(--arena);}
+.tabla td:first-child{font-family:'Cinzel',serif;font-size:0.95rem;font-weight:600;color:var(--arena-clara);}
+.badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:0.57rem;font-weight:600;padding:0.17rem 0.48rem;border-radius:2px;text-transform:uppercase;letter-spacing:0.1em;}
+.bt{background:rgba(122,46,26,0.25);color:#D47A5A;border:1px solid rgba(122,46,26,0.5);}
+.bg{background:rgba(196,154,60,0.15);color:var(--oro);border:1px solid rgba(196,154,60,0.35);}
+.bw{background:rgba(255,255,255,0.07);color:#999;border:1px solid rgba(255,255,255,0.14);}
+
+/* BAND ESPECIAL */
+.conf-band{background:var(--arena-oscura);padding:3.5rem 4.5rem;display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:center;}
+.conf-word{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;color:var(--tinta);line-height:1.05;letter-spacing:-0.01em;}
+.conf-word em{display:block;font-size:0.28em;font-style:normal;font-weight:400;color:rgba(13,11,8,0.5);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.3rem;font-family:'Barlow Condensed',sans-serif;}
+.conf-def{font-family:'Lora',serif;font-size:1.08rem;color:var(--tinta);line-height:1.82;}
+.conf-def strong{font-weight:700;}
+
+/* DIVISOR */
+.div-corazon{text-align:center;padding:1.5rem 0;font-size:1.2rem;color:rgba(196,154,60,0.18);letter-spacing:0.8em;user-select:none;font-family:'Barlow Condensed',sans-serif;}
+
+/* FINAL */
+.final-sec{background:var(--tinta);padding:6rem 4.5rem;text-align:center;position:relative;overflow:hidden;}
+.final-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(122,46,26,0.1) 0%,transparent 65%);pointer-events:none;}
+.final-corazon{width:80px;height:80px;position:relative;margin:0 auto 2rem;transform:rotate(-45deg);animation:latido 4s ease-in-out infinite;}
+.final-corazon::before,.final-corazon::after{content:'';position:absolute;width:80px;height:80px;background:var(--terracota);border-radius:50%;}
+.final-corazon::before{top:0;left:0;}
+.final-corazon::after{top:0;left:40px;}
+.final-corazon-center{position:absolute;bottom:0;left:0;width:80px;height:80px;background:var(--terracota);}
+.rip{font-family:'Cinzel',serif;font-size:clamp(1.3rem,2.8vw,2.2rem);font-weight:600;color:var(--oro);margin-bottom:0.5rem;position:relative;z-index:2;}
+.rip-s{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.42em;text-transform:uppercase;color:rgba(232,213,176,0.25);position:relative;z-index:2;}
+.rip-lat{font-family:'Lora',serif;font-size:0.95rem;font-style:italic;color:rgba(232,213,176,0.35);position:relative;z-index:2;margin-top:0.3rem;}
+
+footer{background:var(--tinta-media);border-top:1px solid var(--borde);padding:1.7rem 4.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.ft-b{font-family:'Cinzel',serif;font-size:0.9rem;color:var(--oro);font-weight:600;letter-spacing:0.06em;}
+.ft-c{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;color:rgba(232,213,176,0.25);}
+
+#overlay{display:none;position:fixed;inset:0;top:56px;background:rgba(0,0,0,0.7);z-index:800;}
+#overlay.vis{display:block;}
+
+@media(max-width:920px){
+  #sidebar{transform:translateX(-100%);}
+  #sidebar.open{transform:translateX(0);}
+  #main{margin-left:0;}
+  #hamburger{display:flex;}
+  .sec{padding:3.5rem 1.75rem;}
+  .dos-col{grid-template-columns:1fr;gap:2rem;}
+  .stat-band{grid-template-columns:repeat(2,1fr);padding:2rem 1.5rem;gap:2rem;}
+  .conf-band{grid-template-columns:1fr;padding:2.5rem 1.75rem;gap:1.5rem;}
+  footer{padding:1.5rem 1.75rem;}
+  .final-sec{padding:4rem 1.75rem;}
+}
+@media(max-width:540px){
+  .pilares{grid-template-columns:1fr;}
+  .cards{grid-template-columns:1fr;}
+  .stat-band{grid-template-columns:1fr 1fr;}
+  .hero-flame-wrap{display:none;}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav id="navbar">
+  <div class="nav-brand"><em>Conociendo a</em> Agustín de Hipona</div>
+  <button id="hamburger" onclick="toggleSB()"><span></span><span></span><span></span></button>
+</nav>
+<div id="overlay" onclick="toggleSB()"></div>
+<aside id="sidebar">
+  <div class="sb-cat">I — Agustín de Hipona</div>
+  <a class="sb-a" onclick="ir('hero')">Presentación</a>
+  <a class="sb-a" onclick="ir('nacimiento')">Nacimiento y Familia</a>
+  <a class="sb-a" onclick="ir('juventud')">Juventud y Crisis</a>
+  <a class="sb-a" onclick="ir('conversion')">La Conversión</a>
+  <a class="sb-a" onclick="ir('sacerdote')">Sacerdote y Obispo</a>
+  <a class="sb-a" onclick="ir('obispo')">El Obispo de Hipona</a>
+  <a class="sb-a" onclick="ir('obras')">Sus Obras</a>
+  <a class="sb-a" onclick="ir('filosofia')">Filosofía y Teología</a>
+  <a class="sb-a" onclick="ir('posiciones')">Posiciones Doctrinales</a>
+  <a class="sb-a" onclick="ir('muerte')">Muerte y Legado</a>
+  <div class="sb-cat">II — Orden de San Agustín</div>
+  <a class="sb-a" onclick="ir('origen-osa')">Orígenes Históricos</a>
+  <a class="sb-a" onclick="ir('gran-union')">La Gran Unión de 1244</a>
+  <a class="sb-a" onclick="ir('carisma-osa')">Carisma y Espiritualidad</a>
+  <a class="sb-a" onclick="ir('expansion-osa')">Expansión Mundial</a>
+  <a class="sb-a" onclick="ir('figuras-osa')">Figuras Insignes</a>
+  <a class="sb-a" onclick="ir('osa-hoy')">La OSA Hoy</a>
+  <div class="sb-cat">III — Agustinos Recoletos</div>
+  <a class="sb-a" onclick="ir('origen-oar')">Origen de la Recolección</a>
+  <a class="sb-a" onclick="ir('carisma-oar')">Carisma Recoleto</a>
+  <a class="sb-a" onclick="ir('mision-oar')">Misiones y Expansión</a>
+  <a class="sb-a" onclick="ir('figuras-oar')">Santos y Beatos</a>
+  <a class="sb-a" onclick="ir('oar-hoy')">Los OAR Hoy</a>
+</aside>
+<main id="main">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-africa"></div>
+  <div class="hero-flame-wrap">
+    <div class="hero-flame">
+      <div class="hero-flame-center"></div>
+    </div>
+    <div class="llama"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-cejas">Tagaste · Cartago · Milán · Hipona</div>
+    <h1 class="hero-title">Agustín<br><span class="t">de Hipona</span></h1>
+    <p class="hero-sub">El Corazón Inquieto — Doctor de la Gracia — Padre de Occidente</p>
+    <div class="hero-fechas">354 d.C. — 430 d.C.</div>
+    <blockquote class="hero-motto">
+      "Nos hiciste, Señor, para Ti, y nuestro corazón está inquieto hasta que descanse en Ti."
+    </blockquote>
+    <a class="hero-scroll" onclick="ir('nacimiento')">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 12L2 4h12L8 12z"/></svg>
+      Conocer su vida
+    </a>
+  </div>
+</section>
+
+<!-- STAT BAND -->
+<div class="stat-band">
+  <div class="stat-item"><div class="stat-n">76</div><div class="stat-l">años de vida</div></div>
+  <div class="stat-item"><div class="stat-n">5M+</div><div class="stat-l">palabras escritas</div></div>
+  <div class="stat-item"><div class="stat-n">35</div><div class="stat-l">años como obispo</div></div>
+  <div class="stat-item"><div class="stat-n">397</div><div class="stat-l">tratados y sermones</div></div>
+</div>
+
+<!-- NACIMIENTO -->
+<section class="sec" id="nacimiento">
+  <div class="sec-header">
+    <div class="sec-eyebrow">I · Orígenes · 354 d.C.</div>
+    <h2 class="sec-title">Nacimiento y <span class="t">Familia</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="dos-col">
+    <div class="prosa">
+      <p>Aurelio Agustín nació el <strong>13 de noviembre del año 354 d.C.</strong> en Tagaste, una pequeña ciudad de la provincia romana de Numidia —en la actual Argelia—. Era hijo de <strong>Patricio</strong>, un decurión pagano de rango moderado, y de <strong>Mónica</strong>, mujer cristiana de fe profunda que más tarde sería canonizada y venerada como patrona de las madres y de las personas con familiares alejados de la fe.</p>
+      <p>Tagaste era una ciudad de provincias del África romana: un mundo de intenso sincretismo cultural donde convivían la latinidad imperial, el sustrato bereber nativo, las comunidades judías y las primeras comunidades cristianas, junto con movimientos como el donatismo que dividían al cristianismo africano desde hacía décadas. Agustín creció en ese mundo complejo, bilingüe de hecho —latín en la educación, el bereber en el entorno doméstico—, sensible a las tensiones religiosas y culturales que marcarían su pensamiento.</p>
+      <p>Patricio buscó para su hijo la mejor educación posible. Agustín estudió primero en Tagaste, luego en <strong>Madaura</strong> —ciudad vecina de mayor cultura—, y finalmente, gracias al mecenazgo del rico Romaniano, fue enviado a <strong>Cartago</strong>, la gran metrópoli del África romana, para completar su formación retórica. Cartago era entonces la segunda ciudad del Mediterráneo occidental: un hervidero intelectual, moral y religioso que marcó al joven Agustín con una intensidad que él mismo describiría décadas después con magistral elocuencia.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ Santa Mónica — la madre que nunca dejó de orar</div>
+        <p>Mónica es una de las figuras más entrañables de la Antigüedad cristiana. Cristiana fervorosa, rezó sin cesar por la conversión de su esposo Patricio —que se bautizó antes de morir— y luego por la de su hijo Agustín, durante décadas. Un obispo le dijo: "No es posible que perezca el hijo de tantas lágrimas." Ella lo siguió hasta Milán, vivió su conversión y murió en Ostia a los 56 años, poco después de aquel encuentro místico que Agustín narra con incomparable belleza en las Confesiones.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ África romana — una cuna de grandes intelectos</div>
+        <p>El África romana del siglo IV fue tierra fértil para el pensamiento cristiano: de ella procedían Tertuliano, Cipriano de Cartago, Lactancio y el propio Agustín. El rigorismo moral, la profundidad teológica y la pasión polé­mica que caracterizarían al cristianismo africano dejaron su huella permanente en Agustín: nunca fue un pensador tibio ni un teólogo de medias tintas.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ El nombre "Agustín"</div>
+        <p>El nombre latino <em>Augustinus</em> deriva de <em>Augustus</em> —el título imperial—, que a su vez viene de <em>augere</em>, "aumentar, engrandecer". Una ironía providencial: el hombre cuyo nombre evoca la grandeza imperial acabó mostrando que la verdadera grandeza no es la del poder político sino la de la inteligencia y el amor puestos al servicio de Dios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JUVENTUD -->
+<section class="sec alt" id="juventud">
+  <div class="sec-header">
+    <div class="sec-eyebrow">II · 370–386 d.C.</div>
+    <h2 class="sec-title">Juventud, <span class="t">Crisis</span> y Búsqueda</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="linea">
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Cartago</div>
+      <div class="li-year">370–373</div>
+      <div class="li-ev">Los años de Cartago — el fuego de la pasión</div>
+      <div class="li-txt">En Cartago, el joven Agustín se lanzó a la vida intelectual y sensual con igual intensidad. Tomó una concubina —cuyo nombre no revela en las Confesiones— con quien tuvo a su hijo <strong>Adeodato</strong> ("dado por Dios"). La relación duró quince años. Agustín amó genuinamente a esta mujer, aunque la abandonaría al convertirse, con un dolor que nunca ocultó. Cartago era también el lugar donde la retórica se aprendía y enseñaba: Agustín se convirtió en un maestro consumado de la palabra, la herramienta con la que brillaría toda su vida.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Maniqueísmo</div>
+      <div class="li-year">373–383</div>
+      <div class="li-ev">Nueve años entre los maniqueos</div>
+      <div class="li-txt">La lectura del <em>Hortensio</em> de Cicerón encendió en Agustín el amor a la sabiduría. Buscando una explicación del mal y de la materia, se adhirió al <strong>maniqueísmo</strong> —religión dualista de origen persa que explicaba el universo como combate eterno entre el principio del Bien y el principio del Mal—. Durante nueve años fue "oyente" maniqueo, convencido de que su sistema racional era superior al cristianismo. Pero la incapacidad del gran maestro maniqueo Fausto para responder sus dudas fue el primer derrumbe de esta certeza.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Roma y Milán</div>
+      <div class="li-year">383–385</div>
+      <div class="li-ev">El salto a Roma y la cátedra de Milán</div>
+      <div class="li-txt">Huyendo de los estudiantes cartagineses —que se negaban a pagar sus honorarios—, Agustín marchó a Roma. Allí sufrió una grave enfermedad y conoció el escepticismo académico de los neoplatónicos. La simpatía del prefecto de Roma, Símaco, le consiguió la <strong>cátedra de Retórica imperial de Milán</strong>: la posición más prestigiosa del mundo académico del Imperio. Tenía 30 años y estaba en la cima del éxito mundano. Por dentro, su búsqueda espiritual era cada vez más urgente.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Neoplatonismo</div>
+      <div class="li-year">385–386</div>
+      <div class="li-ev">Los libros de los platónicos — la gran preparación</div>
+      <div class="li-txt">En Milán, amigos suyos le pusieron en las manos libros de los neoplatónicos —probablemente Plotino y Porfirio, en la traducción latina de Mario Victorino—. La lectura fue para Agustín una iluminación intelectual: el neoplatonismo le enseñó que el principio de todo es espiritual e inmaterial, que el mal no es una sustancia sino una privación de bien, y que el alma puede ascender hacia Dios. Esto demolió el maniqueísmo y preparó su mente para el Evangelio. Pero los platónicos, dirá Agustín después, le mostraron el país sin decirle el camino: ese camino era Cristo.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">San Ambrosio</div>
+      <div class="li-year">384–386</div>
+      <div class="li-ev">El encuentro con Ambrosio de Milán</div>
+      <div class="li-txt"><strong>Ambrosio de Milán</strong>, el gran obispo de la capital imperial, fue decisivo para la conversión de Agustín, aunque de manera indirecta. Agustín asistía a sus homilías inicialmente por curiosidad retórica —quería observar cómo el famoso orador construía sus discursos— pero quedó fascinado por el contenido: Ambrosio leía el Antiguo Testamento alegóricamente, mostrando que las dificultades literales que habían alejado a Agustín del cristianismo en su juventud eran solubles. La Biblia podía leerse con inteligencia. Y Ambrosio le enseñó que Dios es espiritual, no corpóreo —una duda que había atormentado a Agustín—.</div>
+    </div>
+  </div>
+  <div class="cita">
+    <p>"Tarde te amé, hermosura tan antigua y tan nueva, tarde te amé. Y tú estabas dentro de mí y yo afuera, y por fuera te buscaba, y en esa fealdad mía me arrojaba sobre aquellas cosas hermosas que tú creaste."</p>
+    <cite>— Agustín de Hipona, Confesiones, X, 27</cite>
+  </div>
+</section>
+
+<!-- CONVERSIÓN -->
+<section class="sec" id="conversion">
+  <div class="sec-header">
+    <div class="sec-eyebrow">III · 386–387 d.C.</div>
+    <h2 class="sec-title">La <span class="t">Conversión</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="dos-col">
+    <div class="prosa">
+      <p>El verano del <strong>386 d.C.</strong> fue el más intenso de la vida de Agustín. En Milán vivía con su madre Mónica, su hijo Adeodato, su amigo Alipio y otros compañeros. Intelectualmente estaba convencido del cristianismo; moralmente seguía paralizado. Quería ser casto, pero no podía. Su oración más famosa de esa época lo resume todo: <em>"Señor, dame castidad y continencia, pero todavía no."</em></p>
+      <p>El relato del libro VIII de las Confesiones describe el momento cumbre con una precisión psicológica que no ha sido superada en la literatura occidental. Un amigo le narra la vida de San Antonio Abad: hombres sencillos, sin su educación ni su elocuencia, habían abrazado a Dios con toda el alma mientras él, el gran retórico, seguía indeciso. La vergüenza y el dolor lo empujan al huerto de la casa.</p>
+      <p>Allí, llorando bajo una higuera, escucha la voz de un niño —o niña— que repite: <strong>"Toma y lee, toma y lee"</strong> (<em>tolle, lege</em>). Agustín abre las cartas de Pablo al azar y cae en Romanos 13, 13-14: <em>"No en comilonas y embriagueces, no en lechos y lujurias, no en contiendas y envidias, sino revestíos del Señor Jesucristo y no toméis providencias para las concupiscencias de la carne."</em></p>
+      <p>Al terminar de leer, escribe: <em>"Una luz de certeza inundó mi corazón y se disiparon todas las tinieblas de la duda."</em> La conversión fue total e instantánea. El <strong>24-25 de abril del 387 d.C.</strong>, la noche de Pascua, Ambrosio de Milán bautizó a Agustín junto con su hijo Adeodato y su amigo Alipio.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ Tolle, lege — la voz que cambió la historia</div>
+        <p>El episodio del <em>tolle, lege</em> es uno de los momentos más reproducidos de la historia espiritual de Occidente. Agustín mismo insiste en que no fue un fenómeno extraordinario —sólo una voz infantil— pero que lo vivió como señal divina. Psicológicamente representa el fin de la voluntad dividida que él mismo había descrito con agudeza: la voluntad que quiere y no quiere al mismo tiempo, que se da órdenes a sí misma y no se obedece.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ La visión de Ostia</div>
+        <p>Poco después del bautismo, Agustín y Mónica tuvieron juntos en Ostia —mientras esperaban el barco para regresar a África— una experiencia mística que Agustín narra en el libro IX de las Confesiones: los dos, conversando sobre la vida eterna, sintieron que sus mentes tocaban por un instante la Sabiduría eterna. Días después, Mónica murió a los 56 años. Agustín la lloró y la recuerda con ternura infinita.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ Casiciaco — el retiro filosófico</div>
+        <p>Entre la conversión y el bautismo, Agustín se retiró con su círculo a Casiciaco, una villa campestre cerca de Milán. Allí escribió sus primeros diálogos filosóficos —<em>Contra Academicos</em>, <em>De beata vita</em>, <em>De ordine</em>— en los que dialogaba con sus amigos y su madre sobre la verdad, la felicidad y la providencia. Son obras de una frescura intelectual incomparable: la filosofía vivida en comunidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SACERDOTE -->
+<section class="sec alt" id="sacerdote">
+  <div class="sec-header">
+    <div class="sec-eyebrow">IV · 388–396 d.C.</div>
+    <h2 class="sec-title">Regreso a África: <span class="t">Sacerdote</span> y Prior</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prosa" style="margin-bottom:2.5rem;">
+    <p>Tras la muerte de Mónica y un año en Roma estudiando la vida monástica, Agustín regresó a África en el <strong>388 d.C.</strong> con la intención de fundar una comunidad de vida filosófico-cristiana en Tagaste, su ciudad natal. Vendió sus bienes, distribuyó lo obtenido a los pobres y estableció con un grupo de amigos una comunidad de oración, estudio y vida en común. Este "monasterio de Tagaste" fue el germen de la futura espiritualidad agustiniana.</p>
+    <p>En el año <strong>391 d.C.</strong>, Agustín visitó la ciudad costera de <strong>Hipona Regia</strong> para ayudar a un amigo que quería hacerse monje. El obispo Valerio —un anciano griego que hablaba mal el latín— aprovechó la ocasión: la comunidad aclamó a Agustín como presbítero. Agustín aceptó llorando —él mismo cuenta que la gente creyó que lloraba de alegría, pero lloraba ante la gravedad del ministerio—. Fue ordenado contra su voluntad, siguiendo un patrón común en la Iglesia antigua.</p>
+    <p>Estableció en Hipona un <strong>monasterio clerical</strong>: los sacerdotes que vivían con él compartían bienes, oraban juntos y estudiaban juntos las Escrituras. Este modelo de vida común del clero —lo que la tradición llamará la <em>vita apostolica</em>— se convertiría en el ideal inspirador de la Orden de San Agustín siglos después.</p>
+  </div>
+  <div class="hl">
+    <div class="hl-t">✦ Adeodato — el hijo que no llegó a ver florecer</div>
+    <p>El hijo de Agustín, Adeodato, fue bautizado con él en Milán en el 387. Era, según Agustín, de inteligencia extraordinaria. Juntos escribieron el diálogo filosófico <em>De Magistro</em>, donde el joven de quince años debate sobre el lenguaje y el conocimiento con una agudeza asombrosa. Adeodato murió apenas dos años después del bautismo, antes de cumplir los veinte años. Agustín lo recuerda en las Confesiones con un amor y un dolor que atraviesan los siglos.</p>
+  </div>
+</section>
+
+<!-- OBISPO -->
+<section class="sec" id="obispo">
+  <div class="sec-header">
+    <div class="sec-eyebrow">V · 396–430 d.C.</div>
+    <h2 class="sec-title">El Gran <span class="t">Obispo de Hipona</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prosa" style="margin-bottom:2.5rem;">
+    <p>En el <strong>395-396 d.C.</strong>, Agustín fue consagrado obispo coadjutor de Hipona y al año siguiente obispo titular a la muerte de Valerio. Durante los siguientes treinta y cinco años gobernó una diócesis pobre, plagada de conflictos religiosos, económicamente precaria y amenazada por los bárbaros. Todo esto no le impidió producir el corpus teológico y filosófico más vasto de la Antigüedad cristiana.</p>
+    <p>Como obispo, Agustín fue todo a la vez: <strong>juez</strong> (los obispos resolvían litigios civiles), <strong>predicador</strong> (habló varias veces por semana durante décadas), <strong>polemista</strong> (contra maniqueos, donatistas, pelagianos, paganos y arrianos), <strong>administrador</strong> (gestionaba los bienes de la Iglesia para los pobres), <strong>pastor</strong> (visitaba enfermos, liberaba esclavos, rescataba cautivos) y <strong>teólogo</strong> (escribía de noche lo que predicaba de día). Nadie antes ni después ha sostenido semejante ritmo durante tanto tiempo.</p>
+  </div>
+  <div class="linea">
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Controversia</div>
+      <div class="li-year">393–411</div>
+      <div class="li-ev">La controversia donatista — la Iglesia de los santos o de los pecadores</div>
+      <div class="li-txt">El donatismo era un cisma africano que afirmaba que la validez de los sacramentos dependía de la santidad del ministro. Los donatistas se consideraban la "Iglesia pura" y rebautizaban a los católicos. Agustín combatió el donatismo durante veinte años con sermones, escritos y —dolorosamente— apelando finalmente a la intervención civil. Su doctrina sobre la objetividad de los sacramentos (el ministro actúa <em>in persona Christi</em>, no en nombre propio) se convirtió en teología perenne. La Conferencia de Cartago del 411 selló la derrota legal del donatismo.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Gracia</div>
+      <div class="li-year">411–430</div>
+      <div class="li-ev">La controversia pelagiana — gracia y libertad</div>
+      <div class="li-txt">Pelagio, monje bretón de gran ascetismo, enseñaba que el hombre puede alcanzar la salvación por sus propias fuerzas morales: la gracia de Dios es una ayuda externa, no una transformación interior necesaria. Para Agustín, esto destruía el Evangelio. Respondió con una serie de obras monumentales sobre la gracia, el pecado original y la predestinación que marcaron para siempre la teología occidental. La controversia pelagiana produjo algunas de sus páginas más hondas —y algunas de sus posiciones más extremas, que la Iglesia matizaría después—.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Crisis imperial</div>
+      <div class="li-year">410–426</div>
+      <div class="li-ev">El saqueo de Roma y La Ciudad de Dios</div>
+      <div class="li-txt">En el <strong>410 d.C.</strong>, los visigodos de Alarico saquearon Roma por primera vez en ocho siglos. El impacto psicológico fue inmenso: la Ciudad Eterna, identificada con la civilización y la eternidad, había caído. Los paganos culpaban al cristianismo: los dioses viejos, abandonados, se habían vengado. La respuesta de Agustín fueron los veintidós libros de <em>La Ciudad de Dios</em>, escritos entre 413 y 426: la obra de filosofía política más influyente de la Antigüedad tardía y uno de los pilares del pensamiento occidental.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Vándalos</div>
+      <div class="li-year">429–430</div>
+      <div class="li-ev">Los vándalos y el asedio de Hipona</div>
+      <div class="li-txt">En el 429, los vándalos de Genserico cruzaron desde España al norte de África y comenzaron a arrasar la región. En el verano del 430, pusieron sitio a Hipona. Agustín tenía 76 años, estaba gravemente enfermo y sabía que moría. Pidió que le pegaran en la pared los salmos penitenciales para leerlos desde la cama. <strong>El 28 de agosto del 430 d.C.</strong>, mientras los vándalos asediaban la ciudad, Agustín de Hipona murió. Hipona caería meses después y sería destruida. Sus libros, providencialmente, ya habían sido copiados y distribuidos por todo el Mediterráneo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OBRAS -->
+<section class="sec alt" id="obras">
+  <div class="sec-header">
+    <div class="sec-eyebrow">VI — Bibliografía</div>
+    <h2 class="sec-title">Sus <span class="t">Obras Principales</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prosa" style="margin-bottom:2.5rem;">
+    <p>Agustín es el escritor más prolífico de la Antigüedad latina cristiana. Se conservan más de <strong>232 tratados, 396 sermones y 270 cartas</strong>. Su contemporáneo Posidio de Calama escribió: "Creo que ningún hombre puede haber leído todo lo que Agustín escribió." A continuación, sus obras más influyentes.</p>
+  </div>
+  <div class="cards">
+    <div class="card vis">
+      <div class="card-t">Confesiones</div>
+      <div class="card-s">397–400 d.C. · Autobiografía espiritual</div>
+      <div class="card-p">Trece libros en forma de oración dirigida a Dios que narran la vida de Agustín desde su infancia hasta la muerte de Mónica. Es simultáneamente autobiografía, psicología, filosofía y teología. Inauguró el género de la autobiografía interior en Occidente. Ningún texto hasta Rousseau alcanzó semejante profundidad de autoexamen. Sigue siendo uno de los libros más leídos de la historia de la humanidad, traducido a centenares de idiomas.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">La Ciudad de Dios</div>
+      <div class="card-s">413–426 d.C. · Filosofía política y teología de la historia</div>
+      <div class="card-p">Veintidós libros que responden al paganismo post-410. Los diez primeros refutan la acusación de que el cristianismo destruyó Roma; los doce siguientes elaboran la gran visión de las dos ciudades —la Ciudad de Dios y la Ciudad del Mundo— que recorren toda la historia humana. Fundó la filosofía cristiana de la historia y la teología política occidental durante mil años.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">De Trinitate</div>
+      <div class="card-s">399–422 d.C. · Teología trinitaria</div>
+      <div class="card-p">Quince libros sobre la Trinidad, la obra más especulativa de Agustín. Los primeros siete libros exponen la doctrina bíblica y patrística; los últimos ocho buscan analogías de la Trinidad en el alma humana (memoria, inteligencia, voluntad). Definió la teología trinitaria occidental para siempre y establece la procedencia del Espíritu Santo del Padre <em>y</em> del Hijo (Filioque), origen de la controversia con Oriente.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">De Doctrina Christiana</div>
+      <div class="card-s">396–426 d.C. · Hermenéutica bíblica</div>
+      <div class="card-p">Cuatro libros que establecen los principios de interpretación de la Escritura y los fundamentos de la predicación cristiana. El libro IV es el primer tratado de retórica cristiana de la historia: legitima el uso de la elocuencia clásica al servicio del Evangelio. Fue el manual de hermenéutica dominante durante toda la Edad Media.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">De Libero Arbitrio</div>
+      <div class="card-s">388–395 d.C. · Libertad y mal</div>
+      <div class="card-p">Tres libros en forma de diálogo sobre el libre albedrío, el origen del mal y la responsabilidad humana. Escrito en su período de transición entre el maniqueísmo y el pleno catolicismo. Propone que el mal no es una sustancia sino una privación de bien causada por el mal uso de la libertad. Una de las soluciones más elegantes al problema del mal en la historia de la filosofía.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">De Magistro</div>
+      <div class="card-s">389 d.C. · Filosofía del lenguaje</div>
+      <div class="card-p">Diálogo con su hijo Adeodato sobre el lenguaje y la enseñanza. Llega a la conclusión de que ninguna palabra exterior puede transmitir el conocimiento directamente: el verdadero maestro interior es el Verbo de Dios, la Verdad que ilumina desde dentro. La doctrina de la iluminación agustiniana tiene aquí su exposición más vívida y personal.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Contra Academicos</div>
+      <div class="card-s">386 d.C. · Filosofía</div>
+      <div class="card-p">Su primer obra filosófica, escrita en Casiciaco. Refuta el escepticismo de la Academia nueva —que afirmaba que la verdad es inalcanzable— mostrando que hay verdades que el escéptico no puede negar sin contradecirse: "Sé que existo; sé que pienso; sé que prefiero la felicidad a la miseria." Un anticipo del <em>cogito</em> cartesiano en clave agustiniana, más de mil años antes.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">De Natura et Gratia / De Gratia et Libero Arbitrio</div>
+      <div class="card-s">415–426 d.C. · Gracia y libertad</div>
+      <div class="card-p">Conjunto de obras anti-pelagianas que desarrollan la doctrina agustiniana de la gracia: el hombre herido por el pecado original no puede salvarse por sus propias fuerzas; necesita la gracia gratuita e inmerecida de Dios. La tensión entre gracia y libertad que estas obras articulan alimentó siglos de debate teológico, desde Trento hasta la controversia jansenista del siglo XVII.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Enchiridion de Fide, Spe et Caritate</div>
+      <div class="card-s">421 d.C. · Manual doctrinal</div>
+      <div class="card-p">Un manual de fe, esperanza y caridad escrito a petición de un laico llamado Lorenzo. Comenta el Credo, el Padrenuestro y los mandamientos del amor. Es la exposición más clara y accesible de la síntesis doctrinal agustiniana. Usado como catecismo durante la Edad Media y valorado hasta hoy como introducción al pensamiento de Agustín.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Retractaciones</div>
+      <div class="card-s">426–427 d.C. · Revisión crítica</div>
+      <div class="card-p">Al final de su vida, Agustín revisó cronológicamente todos sus escritos, corrigiendo errores, matizando afirmaciones y clarificando malentendidos. Es un acto de extraordinaria honestidad intelectual: pocos pensadores han tenido la humildad de revisar públicamente su propia obra. Las Retractaciones son también una fuente histórica inapreciable para fechar y entender sus obras.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Enarrationes in Psalmos</div>
+      <div class="card-s">392–420 d.C. · Comentario bíblico</div>
+      <div class="card-p">Comentario a los 150 salmos del Antiguo Testamento, la obra más extensa de Agustín. Dictada o predicada a lo largo de décadas, muestra al Agustín pastor y predicador en su estado más espontáneo y humano. El Cristo total —cabeza y miembros— reza en cada salmo: esto es la clave hermenéutica que Agustín aplica con admirable consistencia durante treinta años de predicación.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Sermones al pueblo</div>
+      <div class="card-s">391–430 d.C. · Predicación</div>
+      <div class="card-p">Se conservan casi 400 sermones, muchos descubiertos tardíamente (el gran hallazgo de Dolbeau en 1990 añadió 26 sermones desconocidos). El Agustín que predica es distinto del que escribe: más directo, más humorístico, más tierno. Habla a pescadores, artesanos y campesinos sobre el Evangelio con una accesibilidad que no sacrifica la profundidad. Son documentos únicos de la vida cristiana del siglo V.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FILOSOFIA -->
+<section class="sec" id="filosofia">
+  <div class="sec-header">
+    <div class="sec-eyebrow">VII — Pensamiento</div>
+    <h2 class="sec-title">Filosofía y <span class="t">Teología</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prosa" style="margin-bottom:2.5rem;">
+    <p>Agustín no es un filósofo sistemático al modo de Aristóteles o Tomás: es un pensador que filosofa desde la fe y la experiencia, que usa los instrumentos de la filosofía griega —especialmente el neoplatonismo— para articular la revelación cristiana. Su método es el de la <em>fides quaerens intellectum</em>: la fe que busca comprensión. <em>"Cree para que entiendas; entiende para que creas mejor"</em> (<em>crede ut intelligas; intellige ut credas</em>).</p>
+  </div>
+  <div class="pilares">
+    <div class="pilar">
+      <div class="pilar-n">I</div>
+      <div class="pilar-t">La iluminación divina</div>
+      <div class="pilar-p">El hombre no alcanza la verdad por sus solas fuerzas naturales: necesita la iluminación del Verbo divino, la Verdad eterna que ilumina desde dentro toda inteligencia. No es que Dios nos diga lo que debemos pensar: es que nuestra capacidad de conocer la verdad —las verdades matemáticas, morales, lógicas— presupone una participación en la Verdad inmutable que es Dios. Sin esta luz interior, la mente humana no podría reconocer lo verdadero como verdadero.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">II</div>
+      <div class="pilar-t">El argumento del cogito avant la lettre</div>
+      <div class="pilar-p">Contra los escépticos, Agustín formuló mil años antes que Descartes el argumento de la indubitabilidad de la existencia propia: si me engaño, existo; si dudo, pienso. En el <em>De Civitate Dei</em> escribe: "Si fallor, sum" —"Si me engaño, soy." Pero a diferencia del cogito cartesiano, para Agustín este descubrimiento no es el punto de partida autónomo de la razón: es la huella de Dios en el alma, el indicio de que hay una Verdad que fundamenta nuestra capacidad de reconocer la verdad.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">III</div>
+      <div class="pilar-t">El mal como privación</div>
+      <div class="pilar-p">El maniqueísmo enseñaba que el mal es una sustancia real, co-eterna con el bien. La síntesis agustiniana —tomada del neoplatonismo y profundizada desde el Génesis— es que el mal no es sustancia sino privación de bien: ausencia de una perfección que debería estar. No existe "la oscuridad": existe la ausencia de luz. No existe "el mal": existe la privación del bien. Dios no creó el mal: creó seres buenos que pueden privarse del bien mediante el mal uso de su libertad.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">IV</div>
+      <div class="pilar-t">Las dos ciudades</div>
+      <div class="pilar-p">La gran visión histórica de Agustín: desde el principio del tiempo existen dos "ciudades" —no geográficas sino espirituales— fundadas en dos amores: la Ciudad de Dios, fundada en el amor a Dios hasta el desprecio de sí; y la Ciudad del Mundo, fundada en el amor a sí mismo hasta el desprecio de Dios. Estas dos ciudades están mezcladas en la historia y sólo serán definitivamente separadas en el juicio final. Ningún Estado terreno se identifica con la Ciudad de Dios: la Iglesia peregrina atraviesa la historia sin confundirse con ella.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">V</div>
+      <div class="pilar-t">La gracia y la libertad</div>
+      <div class="pilar-p">La tensión más dramática del pensamiento agustiniano: si la gracia de Dios es absolutamente necesaria para la salvación —y lo es— y si Dios predestina a algunos a la salvación —lo que Agustín afirma—, ¿qué queda de la libertad humana? Agustín nunca abandonó ninguno de los dos polos: la gracia es absolutamente gratuita e inmerecida, y el hombre es absolutamente responsable. La tensión no se resuelve lógicamente: se vive en la oración y la confianza. Este nudo fecundó siglos de teología.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">VI</div>
+      <div class="pilar-t">La memoria y el tiempo</div>
+      <div class="pilar-p">El libro X de las Confesiones y el libro XI contienen dos de las meditaciones filosóficas más originales de la Antigüedad: la exploración de la memoria como "presencia de las cosas pasadas" y el análisis del tiempo como "distensión del alma". El tiempo no es algo exterior al espíritu: es la experiencia interior de la duración. El pasado existe como recuerdo, el futuro como expectación, el presente como atención. Esta fenomenología del tiempo influirá directamente en Husserl y Heidegger.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">VII</div>
+      <div class="pilar-t">El corazón inquieto — el deseo como ontología</div>
+      <div class="pilar-p">La frase de apertura de las Confesiones no es sólo retórica: enuncia una antropología. El hombre es esencialmente un ser de deseo: su corazón está estructuralmente abierto a algo que ninguna realidad finita puede satisfacer. Este deseo infinito —que Agustín vivió con intensidad extrema en su juventud— es la huella del Infinito en el finito, la imagen de Dios en el hombre. La inquietud no es un defecto: es la condición de posibilidad del encuentro con Dios.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">VIII</div>
+      <div class="pilar-t">La Trinidad y el alma</div>
+      <div class="pilar-p">En el <em>De Trinitate</em>, Agustín busca en el alma humana vestigios de la Trinidad divina. La tríada más conocida es: <em>mens</em> (mente), <em>notitia</em> (conocimiento de sí) y <em>amor</em> (amor de sí) —que refleja al Padre, al Hijo y al Espíritu Santo—. No son demostraciones de la Trinidad sino análogos que ayudan a comprender cómo tres Personas distintas pueden ser un solo Dios. Esta psicología trinitaria influyó enormemente en la mística y la antropología medievales.</div>
+    </div>
+  </div>
+  <div class="cita" style="margin-top:3rem;">
+    <p>"Nos has hecho para Ti, Señor, y nuestro corazón está inquieto hasta que descanse en Ti. Dame lo que mandas y manda lo que quieras."</p>
+    <cite>— Agustín, Confesiones I, 1 y X, 29</cite>
+  </div>
+</section>
+
+<!-- POSICIONES -->
+<section class="sec alt" id="posiciones">
+  <div class="sec-header">
+    <div class="sec-eyebrow">VIII — Doctrina</div>
+    <h2 class="sec-title">Posiciones <span class="t">Doctrinales</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prosa" style="margin-bottom:2rem;">
+    <p>Agustín definió buena parte de la doctrina cristiana occidental. Sus posiciones, elaboradas en el fragor de controversias concretas, se convirtieron en puntos de referencia obligados para la teología latina durante más de mil años.</p>
+  </div>
+  <table class="tabla">
+    <thead>
+      <tr><th>Tema</th><th>Posición agustiniana</th><th>Contexto e influencia</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Pecado original</td><td>El pecado de Adán dañó a toda la naturaleza humana, transmitido por generación. El hombre nace en un estado de debilidad espiritual que sólo la gracia sana.</td><td>Contra Pelagio. Base del Concilio de Cartago (418) y de Trento (1546). Punto de tensión permanente con el oriente cristiano.</td></tr>
+      <tr><td>Gracia y predestinación</td><td>La gracia es absolutamente gratuita e inmerecida. Dios predestina a algunos a la salvación. La reprobación de otros es permisión, no causación positiva.</td><td>Posición más extrema que la Iglesia matizó. Tomás la equilibró. Calvino la radicalizó. Jansenio la deformó. El debate sigue abierto.</td></tr>
+      <tr><td>Trinidad</td><td>Las tres Personas son un solo Dios de idéntica sustancia. El Espíritu procede del Padre y del Hijo (Filioque). El Hijo es eternamente engendrado, no creado.</td><td>Contra el arrianismo. El Filioque, introducido en el Credo occidental, se convirtió en causa del Cisma de 1054 con la Iglesia Ortodoxa.</td></tr>
+      <tr><td>Los sacramentos</td><td>La validez del sacramento no depende de la santidad del ministro sino de la acción de Cristo. Un ministro indigno bautiza válidamente porque es Cristo quien bautiza.</td><td>Contra el donatismo. Definido en el Concilio de Cartago. Doctrina perenne sobre la objetividad sacramental.</td></tr>
+      <tr><td>La Iglesia</td><td>La Iglesia visible y la invisible no se identifican perfectamente: hay miembros visibles que no lo son en el corazón, y puede haber corazones unidos a Cristo fuera de los límites visibles.</td><td>Visión que inspira tanto la eclesiología del Vaticano II (Lumen Gentium) como desarrollos ecuménicos posteriores.</td></tr>
+      <tr><td>El tiempo y la creación</td><td>Dios no creó el mundo en el tiempo sino con el tiempo: el tiempo mismo es criatura. Antes de la creación no había "antes". La pregunta "¿qué hacía Dios antes de crear?" es incoherente.</td><td>Solución filosófica de extraordinaria modernidad, compatible con la cosmología contemporánea del Big Bang según algunos físicos y teólogos.</td></tr>
+      <tr><td>La guerra justa</td><td>La guerra puede ser lícita si es declarada por autoridad legítima, por causa justa y con recta intención. La violencia en sí es un mal; puede tolerarse para prevenir un mal mayor.</td><td>Elaborada en el contexto de los bárbaros. Base de la doctrina de la guerra justa medieval (Tomás, Vitoria, Grocio) y moderna.</td></tr>
+      <tr><td>La mujer y el matrimonio</td><td>El matrimonio es un bien natural con tres bienes: la prole, la fidelidad y el sacramento. La relación conyugal es honesta y santa, aunque Agustín, marcado por su historia personal, muestra ambivalencia respecto a la sexualidad.</td><td>Su influencia en la moral sexual occidental fue enorme y no siempre feliz. El Vaticano II y Juan Pablo II elaboraron una visión más positiva del cuerpo.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- MUERTE -->
+<section class="sec" id="muerte">
+  <div class="sec-header">
+    <div class="sec-eyebrow">IX — 430 d.C. en adelante</div>
+    <h2 class="sec-title">Muerte y <span class="t">Legado Eterno</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="dos-col">
+    <div class="prosa">
+      <p>Agustín murió el <strong>28 de agosto del 430</strong> —festividad que le dedica el calendario litúrgico— mientras Hipona estaba asediada por los vándalos. Tenía los salmos penitenciales pegados en la pared y los leía llorando. Murió en paz, rodeado de su comunidad, después de pedir que no lo molestaran para dedicarse enteramente a la oración y al llanto de penitencia.</p>
+      <p>Su cuerpo fue trasladado a Cerdeña para protegerlo de los bárbaros. En el siglo VIII, el rey lombardo Liutprando lo trasladó a <strong>Pavía</strong>, donde sus reliquias descansan hoy en la basílica de San Pietro in Ciel d'Oro —la misma iglesia donde yace también Boecio, otro gran representante de la cultura antigua en el umbral de la Edad Media—.</p>
+      <p>Agustín fue declarado <strong>Doctor de la Iglesia</strong> —uno de los cuatro Grandes Doctores de Occidente junto a Ambrosio, Jerónimo y Gregorio—. Su influencia en la teología, la filosofía, la política, la espiritualidad y la literatura occidentales no tiene paralelo entre los Padres: sin él no se entiende Anselmo, ni Tomás de Aquino, ni Bonaventura, ni Lutero, ni Calvino, ni Pascal, ni Malebranche, ni Kierkegaard, ni Heidegger, ni Wittgenstein —quien citó las Confesiones en las <em>Investigaciones Filosóficas</em>.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ La influencia en la Reforma protestante</div>
+        <p>Lutero era monje agustino y conocía profundamente a Agustín. Su insistencia en la gracia <em>sola gratia</em>, la fe <em>sola fide</em> y la Escritura <em>sola Scriptura</em> tiene raíces agustinianas. Calvino se apropió de la doctrina de la predestinación agustiniana llevándola a sus extremos lógicos. La paradoja es que tanto la Reforma como la Contrarreforma invocaban a Agustín como autoridad: el tridentino Agustín de la gracia que actúa a través de los sacramentos versus el agustín protestante de la gracia que actúa sólo por la fe.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ El "Doctor Gratiae" — Doctor de la Gracia</div>
+        <p>El título que la tradición dió a Agustín lo define perfectamente: Doctor de la Gracia. Toda su teología gira en torno a la conciencia de que el hombre no puede salvarse por sí mismo, de que todo don viene de Dios, de que la relación con Dios es fundamentalmente recepción y gratitud. La humildad que no pudo ejercer en su juventud se convirtió en el tema central de su madurez teológica.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ Patrono y modelo universal</div>
+        <p>San Agustín es patrón de los teólogos, los impresores (por su amor a los libros), los cerveceros (de joven bebía) y varias diócesis. Es patrono de la Orden de San Agustín y de los Agustinos Recoletos. Su festividad —28 de agosto— es celebrada en toda la Iglesia católica, en las iglesias anglicana, luterana y ortodoxa. Es, sin disputa, uno de los diez pensadores más influyentes de toda la historia de Occidente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-corazon">✦ ✦ ✦</div>
+
+<!-- ORIGEN OSA -->
+<section class="sec alt" id="origen-osa">
+  <div class="sec-header">
+    <div class="sec-eyebrow">X — Orden de San Agustín · Orígenes</div>
+    <h2 class="sec-title">La Orden de <span class="t">San Agustín</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="conf-band" style="margin-bottom:3rem;">
+    <div class="conf-word"><em>fundada</em>1244<br>OSA</div>
+    <div class="conf-def">
+      La Orden de San Agustín (OSA) no nació de un solo fundador en un momento preciso, sino de la <strong>Gran Unión</strong> decretada por el Papa Inocencio IV en 1244 y formalizada definitivamente por Alejandro IV en 1256. Agrupó bajo una sola Regla —la <em>Regla de San Agustín</em>— a diversas congregaciones de eremitas que seguían la espiritualidad agustiniana dispersas por Italia y el Mediterráneo. El resultado fue una de las cuatro grandes órdenes mendicantes medievales, junto a los franciscanos, los dominicos y los carmelitas.
+    </div>
+  </div>
+  <div class="dos-col">
+    <div class="prosa">
+      <p>La Regla que Agustín escribió para su comunidad femenina en Hipona —la <em>Regula ad servos Dei</em>— circuló durante siglos como modelo de vida común cristiana. En los siglos XI y XII, el movimiento de la <em>vita apostolica</em> —retorno a la vida comunitaria del primer cristianismo— generó por toda Europa comunidades de canónigos y eremitas que adoptaron la Regla agustiniana por su equilibrio entre contemplación e interioridad, sin los extremos del eremitismo solitario ni la vida canonial sin tensión espiritual.</p>
+      <p>En Italia central —especialmente en la Toscana y los Estados Pontificios— florecieron varios grupos independientes: los <strong>Guilelmitas</strong>, los <strong>Brettineses</strong>, los <strong>Tuscanos</strong> y los <strong>Lombardos</strong>, todos siguiendo versiones de la Regla agustiniana. El papado, alarmado por la proliferación de grupos religiosos difíciles de supervisar, tomó la decisión de unificarlos.</p>
+      <p>El primer paso fue el decreto de Inocencio IV en <strong>1244</strong>; el definitivo fue la Bula <em>Licet Ecclesiae</em> de Alejandro IV en <strong>1256</strong>, que creó formalmente la <em>Ordo Eremitarum Sancti Augustini</em> (OESA), dotándola de constituciones propias y gobierno centralizado. El primer Prior General fue <strong>Lanfranco de Milán</strong>.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ La Regla de San Agustín</div>
+        <p>La Regla que dio nombre y espíritu a la Orden es uno de los documentos más breves y más profundos de la espiritualidad cristiana. Más que un reglamento de detalles externos, es una exposición del espíritu de la vida común: la primacía del amor, la unidad del corazón y el alma, el servicio mutuo, la corrección fraterna y la búsqueda de Dios como fin de todo. El texto fundante: <em>"La razón principal por la que os reunís es para vivir unánimes en la casa y tener un solo corazón y una sola alma orientados hacia Dios."</em></p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ El hábito negro</div>
+        <p>Los agustinos visten hábito negro con cinturón de cuero: el negro evoca la noche del alma que se orienta a la Luz divina, la austeridad y la penitencia agustiniana. El cinturón recuerda la "zona de cuero" que San Agustín usaba como signo de su estado de vida. El escudo de la Orden muestra un corazón en llamas atravesado por una flecha y coronado por el libro de las Escrituras: la imagen del amor ardiente hacia Dios y la Palabra que lo alimenta.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRAN UNIÓN -->
+<section class="sec" id="gran-union">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XI — 1256–1400</div>
+    <h2 class="sec-title">La Gran Unión y el <span class="t">Primer Siglo</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="linea">
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Fundación</div>
+      <div class="li-year">1256</div>
+      <div class="li-ev">Bula Licet Ecclesiae — el nacimiento oficial</div>
+      <div class="li-txt">La bula de Alejandro IV unificó los grupos eremíticos agustinianos bajo un solo gobierno y una sola constitución. La nueva Orden recibió los privilegios de las Órdenes Mendicantes: podía predicar, confesar y enseñar en las universidades sin depender de los obispos locales. Este último privilegio fue decisivo: en pocos decenios los agustinos se establecieron en las grandes universidades medievales, especialmente en París, Oxford y Bolonia.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Teología</div>
+      <div class="li-year">1270–1350</div>
+      <div class="li-ev">La gran escuela teológica agustiniana</div>
+      <div class="li-txt">Los siglos XIII-XIV vieron florecer una brillante escuela teológica agustiniana en las universidades. <strong>Egidio Romano</strong> (c.1243-1316), discípulo de Tomás de Aquino pero más fiel al agustinismo, fue el primer doctor de la Orden y uno de los teólogos más influyentes del medievo. <strong>Gregorio de Rímini</strong> (†1358), nombrado "auténtico intérprete de Agustín", desarrolló una versión rigurosa del agustinismo sobre la gracia que influiría en Lutero. La Orden aportó también pensadores políticos como Egidio Romano, cuyo <em>De regimine principum</em> fue el manual de gobierno más usado del siglo XIV.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Expansión</div>
+      <div class="li-year">1300–1400</div>
+      <div class="li-ev">Expansión por toda Europa</div>
+      <div class="li-txt">En el siglo XIV la Orden contaba con más de 350 conventos repartidos por toda Europa: Italia, Alemania, Francia, España, Portugal, Inglaterra. La figura del agustino como predicador universitario y pastor urbano se consolidó. En las ciudades italianas los conventos agustinianos se convirtieron en centros de irradiación cultural: en ellos estudiaron Dante Alighieri y Petrarca, que se consideró amigo espiritual de los agustinos. En el convento agustiniano de Milán, el joven Leonardo da Vinci aprendió geometría.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Crisis y reforma</div>
+      <div class="li-year">1348–1420</div>
+      <div class="li-ev">La Peste Negra y el movimiento de reforma interna</div>
+      <div class="li-txt">La Peste Negra de 1348 diezmó a la Orden como a toda Europa. El período de crisis generó también un movimiento de reforma interna: grupos de frailes que querían volver a la observancia original de la Regla, a la pobreza más estricta y a la vida contemplativa más intensa. Estas comunidades de "observantes" —precedente directo de los futuros Recoletos— surgieron en varias provincias de la Orden, especialmente en Italia y España. Lutero pertenecería a la congregación de observantes alemanes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CARISMA OSA -->
+<section class="sec alt" id="carisma-osa">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XII — Espiritualidad</div>
+    <h2 class="sec-title">Carisma y <span class="t">Espiritualidad</span> Agustiniana</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prosa" style="margin-bottom:2.5rem;">
+    <p>La espiritualidad agustiniana no es un sistema de prácticas externas sino una orientación interior profunda, basada directamente en los textos de San Agustín. Sus rasgos más característicos son:</p>
+  </div>
+  <div class="pilares">
+    <div class="pilar">
+      <div class="pilar-n">α</div>
+      <div class="pilar-t">El corazón inquieto — búsqueda de Dios</div>
+      <div class="pilar-p">El inquietum cor de las Confesiones es el símbolo de toda la espiritualidad agustiniana: el hombre es un ser de deseo que no encuentra reposo en nada finito. Esta inquietud no se elimina ni se suprime: se orienta. El monje agustino no huye del mundo para calmarse, sino para intensificar la búsqueda hasta encontrar a Aquel que solo puede satisfacerla.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">β</div>
+      <div class="pilar-t">La vida en común — unidad del corazón</div>
+      <div class="pilar-p">La Regla comienza con la meta: "vivir unánimes, teniendo un solo corazón y una sola alma orientados hacia Dios." La vida común no es un medio para otro fin: es ya una forma de amor. El encuentro con Dios no es sólo individual: se realiza en la comunidad fraterna. Por eso los agustinos nunca fueron ermitaños solitarios aunque llevaran el nombre de "eremitas": eran contemplativos en comunidad.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">γ</div>
+      <div class="pilar-t">El amor — fundamento de todo</div>
+      <div class="pilar-p">La fórmula agustiniana "ama y haz lo que quieras" (<em>dilige et quod vis fac</em>) no es un permiso para la arbitrariedad: es la convicción de que quien ama verdaderamente a Dios y al prójimo no necesita más reglamentos, porque el amor le dictará lo correcto en cada situación. La caridad es la forma de todas las virtudes: sin ella, todo lo demás es vacío.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">δ</div>
+      <div class="pilar-t">La interioridad — Dios más íntimo que yo</div>
+      <div class="pilar-p">La mística agustiniana es una mística de la interioridad: "No salgas fuera; entra dentro de ti mismo, porque en el hombre interior habita la verdad" (<em>noli foras ire, in te ipsum redi</em>). No un repliegue egoísta sino un descubrimiento: en el centro del alma, más íntimo que cualquier pensamiento o sentimiento, habita el Dios que te hizo y te sostiene en el ser. Esta tradición de interioridad agustiniana influirá en toda la mística occidental.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">ε</div>
+      <div class="pilar-t">La gracia — todo es don</div>
+      <div class="pilar-p">El monje agustino sabe desde el principio que su conversión, su perseverancia y su eventual salvación son puro don. No hay lugar para el orgullo espiritual: la humildad agustiniana es ontológica, no meramente psicológica. El hombre que recibe todo de Dios sólo puede responder con gratitud, y esa gratitud es la forma más profunda de la oración.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">ζ</div>
+      <div class="pilar-t">Predicación y estudio — contemplar y dar</div>
+      <div class="pilar-p">Como dominicos, los agustinos son una Orden mendicante volcada a la predicación. Pero el apostolado agustiniano no es activismo: surge de la contemplación. "Dar a otros los frutos de la contemplación" (<em>contemplata aliis tradere</em>) define el ritmo de su vida. El estudio de la teología no es lujo intelectual: es preparación para llevar a los demás a Dios con la misma palabra con que Agustín transformó África.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPANSIÓN OSA -->
+<section class="sec" id="expansion-osa">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XIII — 1400–1900</div>
+    <h2 class="sec-title">Expansión <span class="t">Mundial</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prosa" style="margin-bottom:2.5rem;">
+    <p>La Orden de San Agustín acompañó las grandes empresas de la historia europea moderna: la Reforma y la Contrarreforma, la evangelización de América y Asia, la Ilustración y la secularización. Siempre desde la misma identidad agustiniana: el corazón inquieto buscando a Dios y ofreciendo a los demás el fruto de ese encuentro.</p>
+  </div>
+  <div class="cards">
+    <div class="card vis">
+      <div class="card-t">Lutero y la Reforma — el hijo que se fue</div>
+      <div class="card-s">1483–1546</div>
+      <div class="card-p">Martín Lutero fue fraile agustino durante once años, profundo conocedor de Agustín y de la teología de la gracia. Su ruptura con Roma en 1517 fue también una ruptura con la Orden, aunque muchos frailes alemanes le siguieron. La tragedia teológica de la Reforma tiene raíces agustinianas: ambas partes reivindicaban al mismo Doctor de la Gracia. Lutero acentuó la gracia hasta disolver la libertad; Trento equilibró los dos polos que Agustín había mantenido en tensión.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">América — la evangelización agustiniana</div>
+      <div class="card-s">1533 en adelante</div>
+      <div class="card-p">Los agustinos llegaron a México en 1533, apenas doce años después de la conquista. Evangelizaron Michoacán, Guerrero, Hidalgo y el Perú. Construyeron iglesias y conventos de extraordinaria belleza —los conventos agustinianos del siglo XVI en México son Patrimonio Mundial de la UNESCO. Aprendieron las lenguas indígenas, escribieron los primeros diccionarios y gramáticas del náhuatl, purépecha y totonaco. El papel de la Orden en la preservación de culturas indígenas fue decisivo.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Filipinas — tierra agustiniana</div>
+      <div class="card-s">1565 en adelante</div>
+      <div class="card-p">Los agustinos fueron los primeros religiosos en llegar a Filipinas con la expedición de Legazpi en 1565. Durante siglos fueron la Orden más influyente del archipiélago. Construyeron las primeras iglesias en piedra, evangelizaron la mayor parte del territorio y crearon la primera universidad. La Iglesia de San Agustín de Intramuros en Manila es el edificio más antiguo de Filipinas, declarado Patrimonio Mundial.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Perú, Colombia y Brasil</div>
+      <div class="card-s">1551 en adelante</div>
+      <div class="card-p">Los agustinos establecieron presencia en el Perú en 1551, fundando conventos en Lima, Cuzco y otras ciudades. En Colombia evangelizaron extensas regiones. En Brasil tuvieron presencia más tardía. En todos estos territorios los agustinos combinaron la acción evangelizadora con la defensa de los derechos de los indígenas, siguiendo la tradición humanista de la Orden.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">La Reforma de Tomás de Villanueva</div>
+      <div class="card-s">Siglo XVI</div>
+      <div class="card-p">Tomás de Villanueva (1486-1555), fraile agustino, arzobispo de Valencia y canonizado en 1658, fue uno de los grandes reformadores eclesiásticos del siglo XVI dentro de la Orden. Conocido como el "Limosnero" por su caridad extrema con los pobres, representó el espíritu agustiniano en su plenitud: contemplación, estudio, predicación y caridad concreta. Es uno de los patrones de la Provincia agustiniana de España.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">La OSA en la Ilustración y la Modernidad</div>
+      <div class="card-s">Siglos XVIII–XX</div>
+      <div class="card-p">Las revoluciones liberales del siglo XIX supusieron la supresión de las órdenes religiosas en gran parte de Europa y América Latina: la Orden perdió miles de frailes y cientos de conventos. La reconstrucción fue lenta y penosa. Sin embargo, en el siglo XX la Orden se renovó: nuevas provincias en África, Asia y América, un relanzamiento del carisma agustiniano y la canonización de nuevos mártires y santos consolidaron la presencia universal de la OSA.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FIGURAS OSA -->
+<section class="sec alt" id="figuras-osa">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XIV — Santos y Beatos</div>
+    <h2 class="sec-title">Figuras <span class="t">Insignes</span> de la OSA</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="cards">
+    <div class="card vis">
+      <div class="card-t">San Tomás de Villanueva</div>
+      <div class="card-s">1486–1555 · España</div>
+      <div class="card-p">Fraile agustino, arzobispo de Valencia, canonizado en 1658. "El Limosnero": gastó las rentas del arzobispado en los pobres, rescató cautivos, fundó hospitales. Predicador magistral y teólogo sólido. Representó el ideal agustiniano de contemplación y caridad unidas. Patrón de la Orden en España.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Santa Clara de Montefalco</div>
+      <div class="card-s">1268–1308 · Italia</div>
+      <div class="card-p">Monja agustiniana de vida contemplativa intensa. Al morir, su corazón mostró impresas las imágenes de la Pasión de Cristo: la cruz, la corona de espinas, los clavos. Canonizada en 1881. Uno de los ejemplos más admirables de la mística agustiniana italiana medieval.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">San Juan de Sahagún</div>
+      <div class="card-s">1430–1479 · España</div>
+      <div class="card-p">Fraile agustino de Salamanca, famoso por su predicación pacificadora entre las familias nobles que ensangrentaban la ciudad con sus venganzas. Canonizado en 1690. Patrono de Salamanca. Su figura encarna el apostolado urbano de la Orden: predicar la paz donde hay violencia y odio.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Beato Alonso de Orozco</div>
+      <div class="card-s">1500–1591 · España</div>
+      <div class="card-p">Místico agustiniano de la corte española, escritor espiritual prolífico, predicador real de Carlos V y Felipe II. Fundó el convento agustiniano del Escorial. Su espiritualidad combina la mística agustiniana con la austeridad castellana. Beatificado por Juan Pablo II en 1882.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Santos Mártires del Japón</div>
+      <div class="card-s">Siglo XVII</div>
+      <div class="card-p">Numerosos frailes agustinos fueron martirizados en Japón durante la persecución Tokugawa del siglo XVII. Entre ellos se cuentan San Hernando de Ayala, San Juan de Santa Marta y otros. Sus martirios representan la fidelidad de la Orden hasta la muerte en tierras de misión lejanas.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Egidio Romano</div>
+      <div class="card-s">c.1243–1316 · Italia</div>
+      <div class="card-p">Doctor de la Orden, discípulo de Tomás de Aquino, uno de los teólogos más influyentes del siglo XIII-XIV. Su <em>De regimine principum</em> fue el manual de política más leído del Medievo. En teología defendió un agustinismo matizado con elementos tomistas. Fue el primer Prior General de la Orden con título de "Doctor".</div>
+    </div>
+  </div>
+</section>
+
+<!-- OSA HOY -->
+<section class="sec" id="osa-hoy">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XV — Siglo XXI</div>
+    <h2 class="sec-title">La OSA <span class="t">Hoy</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="dos-col">
+    <div class="prosa">
+      <p>La Orden de San Agustín cuenta hoy con aproximadamente <strong>2.800 frailes</strong> distribuidos en 49 provincias y circunscripciones en más de 50 países. El Prior General tiene su sede en Roma, en el Collegio Internazionale Agostiniano. La Orden gestiona universidades, colegios, parroquias, centros misioneros y casas de espiritualidad en todos los continentes.</p>
+      <p>Las áreas de mayor vitalidad actual son <strong>África subsahariana</strong> —donde la Orden crece con fuerza— y <strong>Asia</strong>, donde la presencia histórica en Filipinas se refuerza con nuevas presencias en India, Indonesia y Corea. En Europa y América la Orden enfrenta el desafío de la secularización con una renovación del carisma agustiniano centrada en la espiritualidad, el diálogo cultural y la acción social.</p>
+      <p>El Prior General elegido en el Capítulo General de 2022 es <strong>Alejandro Moral Antón</strong>, español. Bajo su gobierno la Orden continúa el proceso de renovación iniciado por el Concilio Vaticano II: mayor sintonía con la espiritualidad agustiniana original, apertura al diálogo interreligioso y compromiso con la justicia social desde la perspectiva del Evangelio.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ El Instituto Patristico Augustinianum</div>
+        <p>El Augustinianum de Roma, dirigido por la Orden, es uno de los centros de investigación patrística más importantes del mundo. Publica la revista <em>Augustinianum</em> y la colección <em>Studia Ephemeridis Augustinianum</em>. Allí se edita la versión crítica completa de las obras de San Agustín (<em>Corpus Augustinianum Gissense</em>) y se forman investigadores de toda la Iglesia.</div>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ Espiritualidad agustiniana renovada</div>
+        <p>El Concilio Vaticano II invitó a las órdenes religiosas a renovarse volviendo al carisma original de sus fundadores. Para la OSA esto significó releer a Agustín directamente, sin filtros manualescos, y redescubrir la riqueza de la Regla: la comunidad de amor, la búsqueda de Dios como centro de todo, la unidad de contemplación y apostolado. La reforma ha producido frutos visibles en la calidad de vida espiritual de muchas comunidades.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-corazon">✦ ✦ ✦</div>
+
+<!-- ORIGEN OAR -->
+<section class="sec alt" id="origen-oar">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XVI — Agustinos Recoletos · Orígenes</div>
+    <h2 class="sec-title">Origen de la <span class="t">Recolección</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="conf-band" style="margin-bottom:3rem;">
+    <div class="conf-word"><em>fundada</em>1588<br>OAR</div>
+    <div class="conf-def">
+      Los Agustinos Recoletos (OAR) son una familia religiosa nacida dentro de la Orden de San Agustín como movimiento de <strong>reforma y vuelta a los orígenes</strong>. El nombre "recoletos" (del latín <em>recollectus</em>, recogido, recogimiento) indica su espiritualidad: el recogimiento interior, la concentración del alma en Dios, la vida contemplativa más intensa que el agustinismo mendicante ordinario. Erigidos canónicamente como Congregación independiente en <strong>1588</strong> y como Orden autónoma en <strong>1912</strong>.
+    </div>
+  </div>
+  <div class="dos-col">
+    <div class="prosa">
+      <p>El movimiento de reforma dentro de la Orden de San Agustín comenzó en el siglo XV con el anhelo de volver a una observancia más fiel de la Regla: mayor silencio, mayor pobreza, vida más contemplativa, menos activismo apostólico. En España este impulso tomó forma concreta en torno a <strong>1588</strong>, cuando un grupo de frailes observantes de las provincias españolas obtuvieron del Papa Sixto V la aprobación para vivir separados como <em>Congregación de Recoletos de España e Indias</em>.</p>
+      <p>Los primeros conventos recoletos se establecieron en <strong>Talavera de la Reina</strong> (1589) y luego en otras ciudades castellanas. Desde el principio la Congregación tuvo vocación misionera: en 1606 los primeros recoletos llegaron a <strong>Filipinas</strong>, y de allí partirían a misiones en China, Japón, Persia y más tarde Colombia. La tensión entre contemplación y misión —heredada de Agustín mismo, que fue simultáneamente monje y obispo— define el carisma recoleto desde sus orígenes.</p>
+      <p>En <strong>1912</strong>, el Papa Pío X erigió la Congregación como <em>Orden de Agustinos Recoletos</em> independiente, con Prior General propio y constituciones propias. La autonomía confirmó lo que ya era una realidad viva: los recoletos eran una familia espiritual propia, con su historia, sus santos y su manera de encarnar el agustinismo.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ El "Recogimiento" — corazón del carisma</div>
+        <p>El <em>recogimiento</em> es una corriente espiritual española del siglo XVI que propone la oración interior, el silencio del alma y la concentración en la presencia de Dios como camino de unión. Los recoletos la encarnan institucionalmente: sus conventos son lugares de silencio, sus horarios reservan amplios espacios para la oración personal, y su ideal es el monje-apóstol que irradia lo que ha recibido en la soledad.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ El hábito recoleto</div>
+        <p>Los Agustinos Recoletos visten el mismo hábito negro de la Orden madre, pero con una capa corta característica que los distingue. Su escudo heráldico lleva el corazón en llamas agustiniano con el añadido de una estrella —símbolo de la Estrella de la mañana (la Virgen María) y de la contemplación que orienta—. El escudo y el nombre "Recoleto" son la síntesis visual de su identidad: agustinos que regresan al corazón.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ San Ezequiel Moreno — el patrón americano</div>
+        <p>San Ezequiel Moreno Díaz (1848-1906), Agustino Recoleto español misionero en Colombia, obispo de Pasto, es el más célebre de los santos de la Orden. Canonizado por Juan Pablo II en 1992, encarna el ideal recoleto: un hombre de profunda vida interior y ardor apostólico que consagró su vida a los más pobres de la Amazonía colombiana.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARISMA OAR -->
+<section class="sec" id="carisma-oar">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XVII — Espiritualidad</div>
+    <h2 class="sec-title">El Carisma <span class="t">Recoleto</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prosa" style="margin-bottom:2.5rem;">
+    <p>La espiritualidad de los Agustinos Recoletos es una profundización del agustinismo: si la Orden de San Agustín encarna el equilibrio entre contemplación y apostolado, los Recoletos acentúan deliberadamente el polo contemplativo, creando una síntesis propia que los distingue dentro de la gran familia agustiniana.</p>
+  </div>
+  <div class="pilares">
+    <div class="pilar">
+      <div class="pilar-n">I</div>
+      <div class="pilar-t">El recogimiento interior</div>
+      <div class="pilar-p">La oración mental prolongada, el silencio, el retiro periódico y la atención a la vida interior son pilares del estilo de vida recoleto. La palabra "recogimiento" describe una actitud permanente del alma: reunir las potencias dispersas —memoria, entendimiento, voluntad— y orientarlas unitariamente hacia Dios. Es la <em>interioridad</em> agustiniana llevada a su máxima intensidad práctica.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">II</div>
+      <div class="pilar-t">La pobreza como libertad</div>
+      <div class="pilar-p">Los recoletos insisten en una pobreza real y no meramente formal: la renuncia efectiva a los bienes como condición de la libertad interior para buscar sólo a Dios. Esta pobreza no es miseria sino opción evangélica radical: el que no posee nada está disponible para todo. En las misiones americanas y asiáticas esta pobreza se manifestó en la identificación con los más pobres.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">III</div>
+      <div class="pilar-t">La fraternidad agustiniana</div>
+      <div class="pilar-p">Como toda la familia agustiniana, los recoletos ponen en el centro la vida fraterna: la comunidad no es un medio para la obra sino el primer lugar donde se vive el Evangelio. La corrección fraterna, el perdón mutuo, la corresponsabilidad en el gobierno de la comunidad son rasgos definitorios tomados directamente de la Regla de Agustín.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">IV</div>
+      <div class="pilar-t">La misión — dar lo contemplado</div>
+      <div class="pilar-p">La tensión recoleta entre contemplación y misión no es contradicción: es la paradoja evangélica de quien es enviado precisamente porque ha encontrado. Los recoletos fueron misioneros en Filipinas, Colombia, Brasil, Venezuela, Kenia, Tanzania, Brasil, Corea y otros países no por activismo sino porque el amor contemplado se derrama necesariamente hacia los que no lo conocen.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">V</div>
+      <div class="pilar-t">La devoción mariana</div>
+      <div class="pilar-p">Los Agustinos Recoletos tienen una devoción mariana especialmente intensa, heredada de la tradición agustiniana que veía en María el modelo perfecto del alma que acoge la gracia. La advocación de <em>Nuestra Señora del Buen Consejo</em> —originalmente vinculada a los agustinos de Genazzano, Italia— es especialmente venerada en la familia recoleta.</div>
+    </div>
+    <div class="pilar">
+      <div class="pilar-n">VI</div>
+      <div class="pilar-t">El estudio al servicio de la misión</div>
+      <div class="pilar-p">Los recoletos heredan de Agustín la convicción de que el estudio serio es forma de oración y preparación necesaria para el apostolado. Sus colegios y universidades —especialmente en Filipinas, Colombia y España— encarnan esta convicción: dar lo mejor intelectualmente a los que se educa es una forma de caridad. La ignorancia no es virtud; la sabiduría puesta al servicio de Dios y los pobres sí lo es.</div>
+    </div>
+  </div>
+  <div class="cita" style="margin-top:3rem;">
+    <p>"Entra dentro de ti mismo y busca a Dios allí donde Él te espera: más íntimo a ti que tú mismo. La contemplación no es huida del mundo: es el único modo de tener algo verdadero que dar al mundo."</p>
+    <cite>— Espíritu de los Agustinos Recoletos, basado en Agustín de Hipona</cite>
+  </div>
+</section>
+
+<!-- MISIONES OAR -->
+<section class="sec alt" id="mision-oar">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XVIII — Apostolado</div>
+    <h2 class="sec-title">Misiones y <span class="t">Expansión</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="linea">
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Filipinas</div>
+      <div class="li-year">1606</div>
+      <div class="li-ev">Llegada a Filipinas — tierra de martirio y evangelización</div>
+      <div class="li-txt">Los primeros Agustinos Recoletos llegaron a Filipinas en 1606, apenas dieciocho años después de la fundación de la Congregación. Evangelizaron las islas de Palawan, Cebú, Negros y Mindanao, además de extensas regiones de Mindanao aún no alcanzadas por el catolicismo. Fundaron el primer convento recoleto filipino en Cavite en 1606. Filipinas sigue siendo hoy la Provincia más numerosa de la Orden, con cientos de frailes y una presencia en toda la sociedad filipina.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Mártires</div>
+      <div class="li-year">1616–1637</div>
+      <div class="li-ev">Los mártires del Japón y de Asia</div>
+      <div class="li-txt">Desde Filipinas, los recoletos intentaron entrar en Japón y otras tierras hostiles. Varios frailes fueron martirizados en Japón durante la persecución Tokugawa. El Beato Pedro de Zúñiga y sus compañeros son los más conocidos. También hubo mártires en China, Indonesia y Persia. La sangre de los mártires recoletos regó Asia en el siglo XVII: sus causas de beatificación y canonización, muchas aún en curso, reflejan la intensidad de su presencia misionera.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Colombia</div>
+      <div class="li-year">1640</div>
+      <div class="li-ev">Colombia — el corazón americano de la Orden</div>
+      <div class="li-txt">Los recoletos llegaron a Colombia en 1640 y evangelizaron extensas regiones de la Amazonía, los Llanos y la costa Caribe. Fundaron misiones entre los pueblos indígenas de los Llanos Orientales —los Achagua, los Sáliva, los Airico— aprendiendo sus lenguas y creando las primeras gramáticas. Colombia sigue siendo uno de los países con mayor presencia recoleta: la Provincia de Colombia tiene cientos de frailes distribuidos en 15 departamentos.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">África</div>
+      <div class="li-year">Siglo XX</div>
+      <div class="li-ev">África — el nuevo continente recoleto</div>
+      <div class="li-txt">En el siglo XX los Agustinos Recoletos abrieron misiones en <strong>Kenia, Tanzania, Sudáfrica y Madagascar</strong>. El crecimiento en África ha sido notable: vocaciones locales numerosas, comunidades jóvenes y vivas, construcción de escuelas, hospitales y centros pastorales. La Demarcación de África es hoy una de las áreas de mayor dinamismo en la Orden, con perspectivas de crecimiento muy positivas para el siglo XXI.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">Corea y Asia</div>
+      <div class="li-year">1977</div>
+      <div class="li-ev">Corea del Sur — una presencia inesperada y fructífera</div>
+      <div class="li-txt">Los recoletos llegaron a Corea del Sur en 1977 y encontraron un ambiente sorprendentemente receptivo. La Demarcación de Corea-Japón ha crecido hasta contar con decenas de frailes coreanos y una Universidad Agustiniana en Seúl. El agustinismo en el contexto cultural asiático ha dado frutos originales: una mística de la interioridad que dialoga bien con las tradiciones contemplativas coreanas y japonesas.</div>
+    </div>
+    <div class="li">
+      <div class="li-dot"></div>
+      <div class="li-tag">España</div>
+      <div class="li-year">Hoy</div>
+      <div class="li-ev">España — la Provincia madre renovada</div>
+      <div class="li-txt">La Provincia de España, madre de toda la familia recoleta, ha sufrido el declive vocacional de la Europa secularizada pero mantiene una presencia significativa en Madrid, Marcilla, Monachil, Ávila y otras ciudades. El Colegio Internacional Agustiniano Recoleto de Madrid y la editorial Augustinus son dos de sus aportaciones más importantes a la vida de la Iglesia española. La Provincia sostiene también misiones en América Latina y África.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FIGURAS OAR -->
+<section class="sec" id="figuras-oar">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XIX — Santos y Beatos</div>
+    <h2 class="sec-title">Santos y <span class="t">Beatos</span> Recoletos</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="cards">
+    <div class="card vis">
+      <div class="card-t">San Ezequiel Moreno Díaz</div>
+      <div class="card-s">1848–1906 · España / Colombia</div>
+      <div class="card-p">El primer santo canonizado de los Agustinos Recoletos (Juan Pablo II, 1992). Nacido en Alfaro (La Rioja), misionero en Filipinas y luego en Colombia, obispo de Pasto desde 1896 hasta su muerte por tuberculosis. Hombre de oración profunda, caridad extrema con los pobres e integridad moral valiente —enfrentó al poder político por defender la doctrina cristiana—. Su tumba en Pasto es lugar de peregrinación permanente.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Beato Victoriano Pío Chumillas y Compañeros</div>
+      <div class="card-s">† 1936 · España</div>
+      <div class="card-p">Diecinueve Agustinos Recoletos martirizados durante la Guerra Civil española en 1936, beatificados por Juan Pablo II en 1992. Entre ellos frailes de distintas edades y ministerios: sacerdotes, hermanos laicos, estudiantes. Su martirio es testimonio de la fidelidad de la Orden en las circunstancias más extremas. Sus causas siguen siendo referencia para los recoletos españoles.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Beato Pedro de Zúñiga y Compañeros</div>
+      <div class="card-s">† 1622 · Japón</div>
+      <div class="card-p">Pedro de Zúñiga, Agustino Recoleto, fue martirizado en Nagasaki en 1622 durante la persecución Tokugawa. Beatificado en 1981. Con él fueron martirizado el dominico Luis Flores y otros compañeros. Su martirio ocurrió por inmersión en agua hirviente —una de las formas de ejecución preferidas por los perseguidores—. Representan la fidelidad misionera recoleta en tierras de Asia.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Beato Isidoro Bakanja</div>
+      <div class="card-s">1885–1909 · Congo</div>
+      <div class="card-p">Laico congoleño catequista, afiliado espiritual a los Agustinos Recoletos, martirizado por un administrador colonial belga por negarse a abandonar su fe y el escapulario que portaba. Beatificado por Juan Pablo II en 1994. Símbolo de la vocación laical agustiniana y de la Iglesia africana naciente. Su causa de canonización avanza.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Venerable Luisa de Carvajal</div>
+      <div class="card-s">1566–1614 · España</div>
+      <div class="card-p">Mujer laica de la órbita espiritual agustiniana recoleta, que marchó sola a la Inglaterra protestante para asistir a los católicos perseguidos. Misionera sin ser monja, arriesgó su vida continuamente, fue encarcelada varias veces y murió en Londres. Su causa de beatificación está en proceso. Símbolo de la vocación laical agustiniana femenina.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Beato Francisco Palau y Quer</div>
+      <div class="card-s">1811–1872 · España</div>
+      <div class="card-p">Carmelita descalzo de espiritualidad profundamente agustiniana (fue discípulo espiritual de los recoletos), fundador de dos congregaciones religiosas, místico y escritor espiritual. Aunque no pertenece formalmente a la Orden, su figura está estrechamente ligada al renacimiento agustiniano recoleto español del siglo XIX.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OAR HOY -->
+<section class="sec alt" id="oar-hoy">
+  <div class="sec-header">
+    <div class="sec-eyebrow">XX — Siglo XXI</div>
+    <h2 class="sec-title">Los Agustinos Recoletos <span class="t">Hoy</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="dos-col">
+    <div class="prosa">
+      <p>La Orden de Agustinos Recoletos cuenta hoy con aproximadamente <strong>1.200 frailes</strong> distribuidos en más de 20 países. La sede del Prior General se encuentra en Roma. Las Provincias más numerosas son las de <strong>Filipinas</strong>, <strong>Colombia</strong>, <strong>España</strong> y las emergentes de <strong>África</strong> y <strong>Corea</strong>. La Orden está presente en América Latina, Europa, Asia, África y Oceanía.</p>
+      <p>El Prior General elegido en 2019 es el Padre <strong>Miguel Miras Morales</strong> (España). Bajo su gobierno la Orden ha intensificado el proceso de renovación espiritual y el diálogo intercultural: el carisma recoleto del recogimiento y la contemplación se presenta hoy como respuesta a la dispersión y la superficialidad de la cultura digital contemporánea.</p>
+      <p>Entre los apostolados más significativos de la Orden hoy destacan: la <strong>Universidad San Agustín de Iloilo</strong> (Filipinas), una de las universidades católicas más importantes del sudeste asiático; el <strong>Colegio Mayor Agustiniano Recoleto</strong> de Madrid; la misión en la Amazonía colombiana con comunidades indígenas; las escuelas y hospitales en Kenia y Tanzania; y la pastoral universitaria en Corea del Sur.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ La revista Recollectio</div>
+        <p>La <em>Recollectio</em> es la revista académica de los Agustinos Recoletos, publicada anualmente en Roma con colaboraciones de investigadores de todo el mundo. Se especializa en espiritualidad agustiniana, historia de la Orden y teología. Es referencia obligada para cualquier investigador del agustinismo recoleto.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ La familia agustiniana ampliada</div>
+        <p>La Orden de Agustinos Recoletos es miembro de la Familia Agustiniana, que incluye también la OSA, los Agustinos de la Asunción (Asuncionistas), los Agustinos Descalzos y diversas congregaciones femeninas de espiritualidad agustiniana. Esta familia espiritual cuenta con más de 50.000 personas consagradas en todo el mundo que siguen en alguna forma la Regla de San Agustín.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ El futuro recoleto: África y Asia</div>
+        <p>Los demógrafos de la vida religiosa señalan que el futuro de la Orden se encuentra en África y Asia. Las Demarcaciones de Kenia-Tanzania y Corea-Japón están produciendo vocaciones locales jóvenes y bien formadas. El agustinismo recoleto —con su énfasis en la interioridad, la comunidad fraterna y la misión— parece responder a necesidades espirituales profundas de esas culturas. El siglo XXI puede ser el siglo africano y asiático de los Agustinos Recoletos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<div class="final-sec">
+  <div class="final-glow"></div>
+  <div class="final-corazon">
+    <div class="final-corazon-center"></div>
+  </div>
+  <p class="rip">† Aurelius Augustinus Hipponensis †</p>
+  <p class="rip-s">Doctor de la Gracia · Padre de Occidente · 354–430 d.C.</p>
+  <p class="rip-lat">Cor nostrum inquietum est donec requiescat in Te</p>
+  <br><br>
+  <div style="max-width:660px;margin:0 auto;position:relative;z-index:2;">
+    <div class="cita" style="text-align:left;">
+      <p>"Tú nos hiciste para Ti, Señor, y nuestro corazón está inquieto hasta que descanse en Ti. Grande eres, Señor, y muy digno de alabanza. Grande es tu poder y tu sabiduría no tiene número. Y el hombre, pequeña parte de tu creación, quiere alabarte."</p>
+      <cite>— Agustín de Hipona, Confesiones I, 1</cite>
+    </div>
+  </div>
+  <br>
+  <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(232,213,176,0.18);position:relative;z-index:2;">Natus Thagaste · XIII Novembris CCCLIV</p>
+  <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(232,213,176,0.18);position:relative;z-index:2;">Defunctus Hippone Regii · XXVIII Augusti CDXXX</p>
+  <br>
+  <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(232,213,176,0.12);position:relative;z-index:2;margin-top:1rem;">Ordo Sancti Augustini · 1256 · Ordo Augustinianorum Recollectorum · 1588</p>
+</div>
+
+<footer>
+  <div class="ft-b">Agustín de Hipona · OSA · OAR</div>
+  <div class="ft-c">El corazón inquieto que descansa en Dios · 354–430 d.C. · In Memoriam Aeternam</div>
+</footer>
+
+</main>
+
+<script>
+function toggleSB(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('vis');
+}
+function ir(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const top=el.getBoundingClientRect().top+window.scrollY-64;
+  window.scrollTo({top,behavior:'smooth'});
+  if(window.innerWidth<=920){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('vis');
+  }
+}
+// Barra de progreso
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  const p=(window.scrollY/(d.scrollHeight-d.clientHeight))*100;
+  document.getElementById('progress').style.width=p+'%';
+});
+// Enlace activo en sidebar
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.sb-a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      links.forEach(l=>{
+        const oc=l.getAttribute('onclick')||'';
+        l.classList.toggle('act',oc.includes("'"+id+"'"));
+      });
+    }
+  });
+},{threshold:0.18,rootMargin:'-56px 0px -38% 0px'});
+secs.forEach(s=>obs.observe(s));
+// Animaciones al hacer scroll
+const aObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting)setTimeout(()=>e.target.classList.add('vis'),i*65);
+  });
+},{threshold:0.07});
+document.querySelectorAll('.li,.card,.pilar').forEach(el=>aObs.observe(el));
+</script>
+</body>
+</html>

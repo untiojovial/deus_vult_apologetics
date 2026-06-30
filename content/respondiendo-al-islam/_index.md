@@ -24,3 +24,5 @@ aliases:
 - [Edad de Maria (Dossier)](/respondiendo-al-islam/edad-maria-dossier/)
 - [El Paraclito de Juan 14-16 (Dossier)](/respondiendo-al-islam/paracleto-dossier/)
 - [Daniel y el Quinto Reino (Dossier)](/respondiendo-al-islam/daniel-quinto-reino-dossier/)
+- [Hadices Médicos y Problemas Científicos en la Sunnah (Dossier)](/respondiendo-al-islam/hadices-medicos-dossier/)
+- [El Testigo Involuntario — Abu Dawud 4002 y Q18:86 (Dossier)](/respondiendo-al-islam/testigo-involuntario-dossier/)

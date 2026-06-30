@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Concilio de Florencia (1431-1445) — Historia, Teología y Repercusiones</title>
+<style>
+:root{
+  --black:#0a0a0a;--panel:#181818;--card:#1c1c1c;--card2:#222218;
+  --gold:#d4a017;--gold-light:#f0c040;--gold-dim:#8a6610;--gold-faint:rgba(212,160,23,.08);
+  --white:#f5f5f0;--soft:#d8d4c8;--dim:#9a9488;
+  --border:rgba(212,160,23,.3);--border-dark:#2a2a1a;
+  --red:#9b2020;--blue:#1a3a6e;--blue-light:#2c5fab;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--white);background:var(--black);line-height:1.75;}
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));width:0%;z-index:2000;}
+.layout{display:flex;min-height:100vh;}
+main{flex:1;max-width:1040px;margin:0 auto;transition:margin-left .25s ease;}
+
+/* ── TOC ── */
+#tocToggle{position:fixed;top:14px;left:14px;z-index:1001;width:44px;height:44px;border-radius:8px;border:1.5px solid var(--gold-dim);cursor:pointer;background:var(--panel);color:var(--gold);font-size:19px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.5);transition:left .25s ease;}
+#tocToggle:hover{background:var(--card);border-color:var(--gold);}
+nav#toc{width:320px;flex-shrink:0;background:var(--panel);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;padding:68px 14px 28px;z-index:999;transform:translateX(-100%);transition:transform .25s ease;box-shadow:4px 0 30px rgba(0,0,0,.6);border-right:1px solid var(--border);}
+nav#toc.open{transform:translateX(0);}
+body.toc-open main{margin-left:320px;}
+body.toc-open #tocToggle{left:334px;}
+#tocSearch{width:100%;padding:9px 12px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--white);font-size:13px;font-family:Helvetica,Arial,sans-serif;margin-bottom:14px;outline:none;}
+#tocSearch::placeholder{color:var(--dim);}
+#tocSearch:focus{border-color:var(--gold);}
+nav#toc h2{font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin:0 0 10px;opacity:.8;}
+nav#toc ul{list-style:none;padding:0;margin:0;}
+nav#toc a{display:block;color:var(--soft);text-decoration:none;font-size:12.5px;font-family:Helvetica,Arial,sans-serif;padding:6px 10px;border-radius:5px;transition:background .12s,color .12s;border-left:3px solid transparent;line-height:1.35;}
+nav#toc a.lvl3{font-size:11.5px;color:var(--dim);padding-left:14px;}
+nav#toc a:hover{background:rgba(212,160,23,.1);color:var(--gold-light);}
+nav#toc a.active{background:rgba(212,160,23,.15);color:var(--gold-light);border-left-color:var(--gold);}
+nav#toc .group{margin-bottom:2px;}
+nav#toc .group-head{display:flex;align-items:center;justify-content:space-between;gap:6px;cursor:pointer;padding:7px 10px;border-radius:5px;font-family:Helvetica,Arial,sans-serif;font-size:13px;font-weight:bold;color:var(--soft);transition:background .12s;user-select:none;}
+nav#toc .group-head:hover{background:rgba(255,255,255,.05);}
+nav#toc .group-head .chev{font-size:9px;color:var(--gold);transition:transform .2s;flex-shrink:0;}
+nav#toc .group.open>.group-head .chev{transform:rotate(90deg);}
+nav#toc .group-body{max-height:0;overflow:hidden;transition:max-height .3s ease;padding-left:6px;border-left:2px solid rgba(212,160,23,.15);margin-left:12px;}
+nav#toc .group.open>.group-body{max-height:2000px;}
+nav#toc.searching .group-body{max-height:2000px !important;}
+nav#toc.searching li.no-match{display:none;}
+nav#toc.searching .group:not(.has-match){display:none;}
+#tocOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:998;}
+body.toc-open #tocOverlay{display:block;}
+
+/* ── Cover ── */
+.cover{text-align:center;padding:100px 48px 72px;background:linear-gradient(170deg,#080600 0%,#0a0a0a 55%,#0a0800 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 50% 38%,rgba(212,160,23,.08),transparent);pointer-events:none;}
+.cover-eye{font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin:0 0 18px;}
+.cover h1{font-size:42px;color:var(--gold-light);margin:0 0 6px;line-height:1.1;text-shadow:0 0 50px rgba(212,160,23,.25);}
+.cover h1.sub{font-size:22px;color:var(--soft);margin:0 0 8px;font-weight:normal;}
+.cover h1.dates{font-size:17px;color:var(--gold-dim);margin:0 0 26px;font-style:italic;font-weight:normal;}
+.cover-rule{width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 22px;}
+.cover-tag{color:var(--dim);font-style:italic;font-size:15px;margin:0 0 7px;}
+.cover-meta{color:var(--dim);font-size:12px;margin-top:38px;font-family:Helvetica,Arial,sans-serif;letter-spacing:.5px;}
+
+/* ── Page layout ── */
+.page{padding:52px 60px;}
+h1.section{background:var(--panel);color:var(--gold-light);font-family:Helvetica,Arial,sans-serif;font-size:17px;padding:13px 20px;border-radius:6px;margin:0 0 18px;border-left:4px solid var(--gold);letter-spacing:.4px;}
+h2.sub{color:var(--gold);font-size:15px;margin:32px 0 12px;border-bottom:1px solid var(--border);padding-bottom:5px;font-family:Helvetica,Arial,sans-serif;}
+h3.sub3{color:var(--soft);font-size:13.5px;margin:20px 0 8px;font-family:Helvetica,Arial,sans-serif;letter-spacing:.3px;}
+p{text-align:justify;margin:0 0 14px;font-size:15px;color:var(--soft);}
+p b{color:var(--gold-light);}
+em,i{color:var(--dim);}
+hr.gold{border:none;border-top:1px solid var(--border);margin:28px 0;}
+
+/* ── Definition grid ── */
+.defgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px;margin:14px 0 24px;}
+.defcard{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:13px 15px;border-top:3px solid var(--gold-dim);}
+.defcard .term{font-family:Helvetica,Arial,sans-serif;font-weight:bold;color:var(--gold-light);font-size:13px;margin:0 0 6px;display:flex;align-items:center;gap:6px;}
+.defcard .term::before{content:"§";color:var(--gold-dim);font-size:12px;}
+.defcard .def{font-size:13px;text-align:justify;margin:0;color:var(--soft);}
+
+/* ── Participant card ── */
+.participants{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin:16px 0 24px;}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-left:4px solid var(--gold-dim);}
+.pcard .pname{font-family:Helvetica,Arial,sans-serif;font-weight:bold;color:var(--gold-light);font-size:13.5px;margin:0 0 4px;}
+.pcard .prole{font-family:Helvetica,Arial,sans-serif;font-size:11px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:.4px;margin:0 0 8px;}
+.pcard .pdesc{font-size:13px;color:var(--soft);margin:0;text-align:justify;}
+
+/* ── Timeline ── */
+.timeline{position:relative;padding-left:28px;margin:18px 0 26px;}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold-dim),rgba(138,102,16,.2));}
+.tl-item{position:relative;margin-bottom:20px;}
+.tl-item::before{content:'';position:absolute;left:-24px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--gold-dim);border:2px solid var(--gold);}
+.tl-item.major::before{background:var(--gold);width:14px;height:14px;left:-26px;top:4px;}
+.tl-date{font-family:Helvetica,Arial,sans-serif;font-size:11.5px;font-weight:bold;color:var(--gold);letter-spacing:.3px;margin-bottom:3px;}
+.tl-event{font-size:14px;color:var(--soft);}
+.tl-event b{color:var(--gold-light);}
+
+/* ── Decree / document card ── */
+.decree{background:var(--card2);border:1px solid var(--border);border-radius:9px;padding:0;margin:20px 0;overflow:hidden;}
+.decree .dheader{background:linear-gradient(90deg,var(--gold-dim),rgba(138,102,16,.35));color:var(--black);padding:10px 18px;font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:13.5px;letter-spacing:.3px;}
+.decree .dbody{padding:16px 20px;}
+.decree .dlabel{font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 4px;}
+.decree .dtext{font-style:italic;color:var(--soft);font-size:14.5px;margin:6px 0;}
+.decree .dtext.latin{color:var(--gold-light);font-size:13.5px;background:rgba(212,160,23,.05);border-left:3px solid var(--gold);padding:8px 14px;border-radius:0 5px 5px 0;margin:8px 0;}
+.decree .dnote{font-size:13px;color:var(--soft);margin:0;text-align:justify;}
+
+/* ── Quote / source box ── */
+.quote{background:rgba(212,160,23,.05);border-left:4px solid var(--gold);padding:12px 18px;margin:12px 0;border-radius:0 6px 6px 0;font-style:italic;color:var(--soft);font-size:14.5px;}
+.quote cite{display:block;font-style:normal;font-size:12px;color:var(--gold-dim);margin-top:6px;font-family:Helvetica,Arial,sans-serif;}
+
+/* ── Comparison table ── */
+table.cmp{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:13px;}
+table.cmp th{background:var(--panel);color:var(--gold-light);padding:9px 11px;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:12px;border-bottom:2px solid var(--gold-dim);}
+table.cmp td{padding:9px 11px;border-bottom:1px solid var(--border-dark);vertical-align:top;color:var(--soft);}
+table.cmp tr:nth-child(even) td{background:rgba(212,160,23,.03);}
+table.cmp tr:hover td{background:rgba(212,160,23,.06);}
+table.cmp .cat{color:var(--gold);font-weight:bold;font-family:Helvetica,Arial,sans-serif;font-size:12px;}
+
+/* ── Highlight boxes ── */
+.hl{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:16px 22px;margin:16px 0;font-size:14.5px;color:var(--soft);}
+.hl.gold{border-color:var(--gold);background:rgba(212,160,23,.06);}
+.hl.red{border-color:var(--red);background:rgba(155,32,32,.06);}
+.hl.blue{border-color:var(--blue-light);background:rgba(44,95,171,.06);}
+.hl b{color:var(--gold-light);}
+
+/* ── Lineblocks ── */
+.lineblock{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:14px 18px;margin:14px 0;border-top:4px solid var(--gold-dim);}
+.lineblock h4{font-family:Helvetica,Arial,sans-serif;color:var(--black);background:var(--gold);display:inline-block;padding:4px 12px;border-radius:3px;margin:0 0 8px;font-size:13px;}
+.lineblock ul{margin:6px 0 0;padding-left:20px;font-size:13.5px;color:var(--soft);}
+.lineblock li{margin-bottom:7px;text-align:justify;}
+
+.conc-item{margin-bottom:12px;font-size:15px;color:var(--soft);}
+.conc-item b{color:var(--gold-light);}
+.final{text-align:center;color:var(--dim);font-style:italic;font-size:13px;margin-top:32px;}
+
+section{scroll-margin-top:24px;}
+h2.sub{scroll-margin-top:24px;}
+@media(max-width:860px){
+  body.toc-open main{margin-left:0;}
+  body.toc-open #tocToggle{left:14px;}
+  nav#toc{width:88%;max-width:340px;}
+  .page{padding:30px 22px;}
+  .defgrid,.participants{grid-template-columns:1fr;}
+  .cover h1{font-size:28px;}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<button id="tocToggle" title="Índice (M)">☰</button>
+<div id="tocOverlay"></div>
+<div class="layout">
+
+<nav id="toc">
+  <h2>Índice de contenidos</h2>
+  <input type="text" id="tocSearch" placeholder="Buscar… (ej. 'Filioque')">
+  <ul>
+    <li><a href="#portada">Portada</a></li>
+    <li><a href="#intro">Introducción</a></li>
+    <li><a href="#contexto">I. Contexto histórico</a></li>
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>II. El Concilio: fases y sedes</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a class="lvl3" href="#basilea">Basilea (1431-1437)</a></li>
+          <li><a class="lvl3" href="#ferrara">Ferrara (1438-1439)</a></li>
+          <li><a class="lvl3" href="#florencia">Florencia (1439-1442)</a></li>
+          <li><a class="lvl3" href="#roma">Roma (1443-1445)</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>III. Participantes principales</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a class="lvl3" href="#part-lat">Delegación latina</a></li>
+          <li><a class="lvl3" href="#part-gr">Delegación griega</a></li>
+          <li><a class="lvl3" href="#part-otros">Otras delegaciones</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>IV. Los debates teológicos</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a class="lvl3" href="#deb-filioque">El Filioque</a></li>
+          <li><a class="lvl3" href="#deb-primado">El Primado del Papa</a></li>
+          <li><a class="lvl3" href="#deb-purgatorio">El Purgatorio</a></li>
+          <li><a class="lvl3" href="#deb-pan">El Pan ácimo y fermentado</a></li>
+          <li><a class="lvl3" href="#deb-union">Otras cuestiones de unión</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>V. Los decretos de unión</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a class="lvl3" href="#dec-laetentur">Laetentur Caeli — Con los griegos</a></li>
+          <li><a class="lvl3" href="#dec-armenos">Decreto para los armenios</a></li>
+          <li><a class="lvl3" href="#dec-coptos">Decreto para los coptos y etíopes</a></li>
+          <li><a class="lvl3" href="#dec-sirios">Decreto para los sirios</a></li>
+          <li><a class="lvl3" href="#dec-caldeos">Decreto para caldeos y maronitas</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li><a href="#colofon">VI. El Exsultate Deo — Sacramento de la Eucaristía</a></li>
+    <li><a href="#cronologia">VII. Cronología detallada</a></li>
+    <li><a href="#repercusiones">VIII. Repercusiones inmediatas</a></li>
+    <li><a href="#fracaso">IX. El fracaso de la unión en Oriente</a></li>
+    <li><a href="#trento">X. Legado hacia el Concilio de Trento</a></li>
+    <li><a href="#vaticano">XI. Herencia en el Vaticano I y II</a></li>
+    <li><a href="#teologia">XII. Significado teológico permanente</a></li>
+    <li><a href="#conclusion">XIII. Conclusión</a></li>
+  </ul>
+</nav>
+
+<main>
+<section id="portada" class="cover">
+  <p class="cover-eye">Historia de la Iglesia · Perspectiva Católica</p>
+  <h1>EL CONCILIO DE FLORENCIA</h1>
+  <h1 class="sub">El gran intento de reunificación de la Iglesia cristiana</h1>
+  <h1 class="dates">1431 – 1445</h1>
+  <div class="cover-rule"></div>
+  <p class="cover-tag">Contexto histórico · Participantes · Debates teológicos · Decretos de unión · Repercusiones</p>
+  <p class="cover-tag">Basilea · Ferrara · Florencia · Roma — Cuatro ciudades, un solo concilio</p>
+  <p class="cover-meta">Tratado histórico-teológico · Perspectiva Católica · Edición extensa</p>
+</section>
+
+<div class="page">
+
+<section id="intro">
+  <h1 class="section">INTRODUCCIÓN</h1>
+  <p>Pocas asambleas eclesiásticas en la historia de la Iglesia han encarnado con tanta intensidad la esperanza y la tragedia como el Concilio de Florencia. Convocado en un momento de crisis extrema — el Cisma de Occidente acababa de cerrarse pero dejaba heridas abiertas, el conciliarismo amenazaba la autoridad papal, y el Imperio Romano de Oriente agonizaba ante el avance otomano — el Concilio aspiró nada menos que a reunificar las Iglesias latina y griega separadas desde 1054, incorporar a las antiguas comunidades orientales disidentes (armenios, coptos, etíopes, sirios, caldeos, maronitas), y definir la doctrina sacramental con una precisión sin precedentes.</p>
+  <p>Lo que comenzó en Basilea como una extensión del programa reformista del Concilio de Constanza terminó en Florencia como uno de los ejercicios teológicos más rigurosos y culturalmente fascinantes de la historia cristiana — con los mejores teólogos de Oriente y Occidente debatiendo durante meses el Filioque, el Purgatorio, el primado papal y la materia de los sacramentos, en sesiones que se prolongaban horas y se registraban con una minuciosidad que hoy permite reconstruir el intercambio argumentativo con notable detalle.</p>
+  <p>La perspectiva católica sobre Florencia no es triunfalista sino compleja: el concilio produjo uniones reales pero frágiles, definiciones dogmáticas permanentes pero resistidas, y un legado teológico que atraviesa el Concilio de Trento (1545-1563), el Vaticano I (1869-1870) y el Vaticano II (1962-1965). Entender Florencia es entender la autocomprensión de la Iglesia Católica sobre su unidad, su autoridad y su relación con el Oriente cristiano.</p>
+  <hr class="gold">
+</section>
+
+<section id="contexto">
+  <h1 class="section">I. CONTEXTO HISTÓRICO</h1>
+  <h2 class="sub">El mundo en 1430: tres crisis simultáneas</h2>
+  <p>Para comprender el Concilio de Florencia es imprescindible situar sus tres coordenadas históricas fundamentales: la crisis interna de la Iglesia occidental (conciliarismo vs. papado), la crisis existencial del Imperio Romano de Oriente ante el avance otomano, y la gran ruptura de 1054 que llevaba casi cuatro siglos sin resolución.</p>
+
+  <div class="defgrid">
+    <div class="defcard"><p class="term">El Gran Cisma de Occidente (1378-1417)</p><p class="def">Durante casi cuarenta años, la Iglesia occidental sufrió la existencia simultánea de dos y hasta tres papas rivales. El Concilio de Constanza (1414-1418) resolvió la crisis eligiendo a Martín V, pero al hacerlo impulsó la doctrina conciliarista: la idea de que un concilio ecuménico era superior en autoridad al papa. Esta doctrina, condenada por Roma pero viva en Basilea, será el telón de fondo permanente de Florencia.</p></div>
+    <div class="defcard"><p class="term">El avance otomano y la agonía de Bizancio</p><p class="def">En 1430 el sultán Murat II conquistó Tesalónica, la segunda ciudad del Imperio. Constantinopla quedaba prácticamente aislada, rodeada por territorio otomano. El Emperador Juan VIII Paleólogo comprendió que la supervivencia del Imperio dependía de obtener ayuda militar de Occidente, y Occidente condicionaba esa ayuda a la reunificación eclesiástica. La geopolítica y la teología estaban íntimamente enlazadas.</p></div>
+    <div class="defcard"><p class="term">El Cisma de Oriente (1054 y sus antecedentes)</p><p class="def">La ruptura entre Roma y Constantinopla en 1054 tenía raíces anteriores (crisis fotiana del s. IX) y causas múltiples: el Filioque añadido al Credo sin concilio ecuménico, la cuestión del primado papal, diferencias litúrgicas (pan ácimo vs. fermentado), y tensiones culturales profundas entre el mundo latino-germánico y el helenístico-bizantino. El intento de unión en Lyon (1274) había sido efímero y artificioso.</p></div>
+    <div class="defcard"><p class="term">El Conciliarismo en Basilea</p><p class="def">El Concilio de Basilea, inaugurado en 1431 bajo Martín V y continuado por Eugenio IV, pronto entró en conflicto abierto con el papa. Los padres conciliares de Basilea afirmaban la superioridad del concilio sobre el pontificado — doctrina de Haec Sancta (Constanza, 1415). Esta tensión interna de la Iglesia latina será el motor que desplazó el concilio de Basilea a Ferrara y luego a Florencia, bajo control directo de Eugenio IV.</p></div>
+    <div class="defcard"><p class="term">El Renacimiento y Florencia de los Médici</p><p class="def">Cosme de Médici, el banquero más poderoso de Europa, financió el concilio en Florencia y ofreció su ciudad como sede. La presencia de los sabios griegos — incluido el filósofo Gemisto Pletón — tuvo un impacto cultural y filosófico extraordinario: fue el catalizador de la Academia Platónica de Florencia y del humanismo renacentista que bebería de las fuentes griegas redescubiertas en este contexto.</p></div>
+    <div class="defcard"><p class="term">Las Iglesias orientales disidentes</p><p class="def">Más allá del Cisma de 1054, existían comunidades que se habían separado de Roma y de Constantinopla en torno a los concilios de Éfeso (431) y Calcedonia (451): los nestorianos (Iglesia de Oriente, Caldeos), los monofisitas (coptos, etíopes, sirios jacobitas, armenios). El Concilio de Florencia intentó también su reintegración, con resultados muy variables.</p></div>
+  </div>
+
+  <h2 class="sub">El Cisma de 1054: causas teológicas y eclesiológicas</h2>
+  <p>La llamada «Gran Escisión» no fue un evento único sino el punto de ruptura visible de una lenta divergencia de siglos. En julio de 1054, el cardenal Humberto de Silva Cándida depositó en el altar de Santa Sofía de Constantinopla una bula de excomunión contra el Patriarca Miguel Cerulario. Cerulario respondió excomulgando a los legados papales. Las excomuniones mutuas no serían levantadas hasta 1964, por Pablo VI y el Patriarca Atenágoras.</p>
+  <p>Las causas del Cisma que el Concilio de Florencia intentaría abordar eran múltiples y de distinta naturaleza:</p>
+  <div class="lineblock">
+    <h4>CAUSAS TEOLÓGICAS DEL CISMA</h4>
+    <ul>
+      <li><b>El Filioque:</b> La Iglesia occidental había añadido «Filioque» («y del Hijo») al Credo de Nicea-Constantinopla, afirmando que el Espíritu Santo procede del Padre <i>y del Hijo</i>. Oriente argumentaba que esta adición era unilateral, dogmáticamente incorrecta y canónicamente ilegal (no aprobada por concilio ecuménico).</li>
+      <li><b>El Primado de Roma:</b> Oriente reconocía al Papa como «primus inter pares» — primero entre iguales — pero rechazaba la jurisdicción universal directa sobre todas las Iglesias que Roma reclamaba. La eclesiología latina (jurisdicción universal) y la oriental (pentarquía de patriarcados iguales con primado de honor para Roma) eran irreconciliables en sus formulaciones extremas.</li>
+      <li><b>Pan ácimo vs. fermentado:</b> Cerulario había acusado a los latinos de usar pan sin levadura (ácimo) en la Eucaristía, práctica que los griegos consideraban judaizante. Los latinos defendían la legitimidad de ambas tradiciones.</li>
+      <li><b>El Purgatorio:</b> La doctrina occidental del Purgatorio como lugar o estado de purificación activa post mortem no tenía equivalente exacto en la teología oriental, que prefería hablar de un estado de «espera» sin especificar tormentos purificatorios.</li>
+    </ul>
+  </div>
+
+  <h2 class="sub">La delegación griega llega a Italia: un viaje histórico</h2>
+  <p>En noviembre de 1437, una delegación griega de más de 700 personas embarcó desde Constantinopla hacia Italia. Encabezada por el Emperador Juan VIII Paleólogo y el Patriarca Ecuménico José II, incluía metropolitanos, teólogos, cortesanos y guardaespaldas. Era la primera vez desde hacía siglos que un Emperador romano de Oriente pisaba suelo italiano en visita oficial. La flota papal que los transportó fue financiada en parte por Cosme de Médici.</p>
+  <p>La expedición era, en sí misma, un acto de desesperación: Constantinopla tenía quizás diez o quince años de vida antes de caer ante los otomanos. La reunificación con Roma era la última carta diplomática disponible para obtener una cruzada occidental que salvara la ciudad. Los griegos llegaron sabiendo que necesitaban un acuerdo, pero también sabiendo que sus feligreses en casa estarían observando cada concesión con extrema suspicacia.</p>
+</section>
+
+<section id="sec2">
+  <h1 class="section">II. EL CONCILIO: FASES Y SEDES</h1>
+  <p>El Concilio que la historia conoce como «de Florencia» es en realidad la continuación canónica de un único concilio que atravesó cuatro ciudades y catorce años (1431-1445). Su itinerario refleja los conflictos de poder entre el papado y el conciliarismo, las necesidades logísticas de alojar a la delegación oriental, y las oportunidades diplomáticas del Renacimiento italiano.</p>
+
+  <h2 class="sub" id="basilea">Fase I — Basilea (1431-1437): el conflicto con el conciliarismo</h2>
+  <p>El papa Martín V convocó el Concilio de Basilea en 1431 como cumplimiento de las disposiciones de Constanza que exigían concilios periódicos. Murió antes de que se inaugurara, y su sucesor <b>Eugenio IV</b> (Gabriele Condulmer, elegido el 3 de marzo de 1431) heredó una situación difícil: los padres conciliares de Basilea, liderados por el cardenal Giuliano Cesarini, tenían una agenda reformista ambiciosa y doctrinas conciliaristas que entraban en colisión directa con la autoridad papal.</p>
+  <p>En 1431 Eugenio IV intentó disolver el concilio, pero los padres conciliares se negaron y en 1432 declararon que su autoridad era superior a la del Papa — aplicando la doctrina de Haec Sancta. Durante varios años el papa y el concilio operaron en tensión creciente. La oportunidad de trasladar el concilio a Italia para negociar con los griegos proporcionó a Eugenio IV la palanca que necesitaba: en septiembre de 1437, mediante la bula <i>Doctoris Gentium</i>, trasladó el concilio a Ferrara.</p>
+  <p>Los padres que se quedaron en Basilea se radicalizaron: en 1439 depusieron a Eugenio IV (un acto sin efecto canónico) y eligieron al antipapa <b>Félix V</b> (Amadeo VIII de Saboya), iniciando el último cisma occidental de la historia. El «Conciliábulo de Basilea» se convirtió así en el epítome del conciliarismo radical, y su fracaso final consolidó definitivamente la autoridad papal.</p>
+
+  <h2 class="sub" id="ferrara">Fase II — Ferrara (1438-1439): primeras sesiones con los griegos</h2>
+  <p>El concilio se inauguró formalmente en Ferrara el <b>8 de enero de 1438</b> bajo la presidencia de Eugenio IV, con la presencia del Emperador Juan VIII Paleólogo y el Patriarca José II de Constantinopla. La delegación oriental incluía aproximadamente veinte metropolitanos y obispos, además de numerosos teólogos.</p>
+  <p>Las primeras sesiones en Ferrara (enero-octubre de 1438) estuvieron dominadas por el debate sobre el Purgatorio y, sobre todo, por los preliminares del debate sobre el Filioque. Los griegos insistían en que el Filioque era una adición ilegal al Credo, independientemente de su verdad teológica. Los latinos respondían que el dogma era correcto y que la adición había sido hecha legítimamente por la Iglesia occidental.</p>
+  <p>Una epidemia de peste en Ferrara y las dificultades financieras (Cosme de Médici ofrecía mejores condiciones en Florencia) llevaron al traslado de la asamblea.</p>
+
+  <h2 class="sub" id="florencia">Fase III — Florencia (1439-1442): el corazón del concilio</h2>
+  <p>Trasladado a Florencia en enero de 1439, el concilio entró en su fase más intensa y teológicamente productiva. Las sesiones de debate formal entre los mejores teólogos de ambas tradiciones se prolongaron durante meses. Los principales debates — sobre el Filioque (enero-marzo de 1439), el Purgatorio, el pan ácimo y el primado papal — se desarrollaron con rigor académico extraordinario, con citas de Padres griegos y latinos en ambos lados.</p>
+  <p>El <b>5 de julio de 1439</b> fue firmado el decreto de unión con los griegos — <i>Laetentur Caeli</i> — en la catedral de Santa María del Fiore (el Duomo de Florencia), cuya cúpula acababa de ser completada por Brunelleschi en 1436. El momento tenía una carga simbólica extraordinaria: en la obra arquitectónica más audaz de su tiempo, bajo la cúpula más grande construida desde el Panteón, se sellaba la reunificación de las Iglesias separadas desde 1054.</p>
+  <p>El Patriarca José II no vivió para firmarlo: murió el 10 de junio de 1439, pocas semanas antes del decreto. El acuerdo fue suscrito por el Emperador Juan VIII y todos los obispos orientales presentes, <b>con la excepción del metropolitano de Éfeso, Marco Eugenikos</b>, quien se negó a firmar y cuya resistencia se convertiría en el símbolo de la oposición ortodoxa al acuerdo.</p>
+  <p>En los meses y años siguientes, se alcanzaron uniones con otras comunidades orientales: armenios (noviembre de 1439), coptos y etíopes (febrero de 1442).</p>
+
+  <h2 class="sub" id="roma">Fase IV — Roma (1443-1445): las uniones restantes</h2>
+  <p>Trasladado a Roma en 1443, el concilio completó su trabajo con los decretos de unión para los sirios jacobitas (septiembre de 1444), caldeos (nestorianos orientales, agosto de 1445) y maronitas del Chipre (septiembre de 1445). Con esto el papa Eugenio IV cerraba el concilio habiendo logrado, al menos formalmente, la unión con prácticamente todas las grandes tradiciones cristianas orientales.</p>
+</section>
+
+<section id="sec3">
+  <h1 class="section">III. PARTICIPANTES PRINCIPALES</h1>
+
+  <h2 class="sub" id="part-lat">Delegación latina</h2>
+  <div class="participants">
+    <div class="pcard">
+      <p class="pname">Papa Eugenio IV (Gabriele Condulmer, 1383-1447)</p>
+      <p class="prole">Presidente del Concilio · Pontífice Romano</p>
+      <p class="pdesc">Veneciano de familia patricia, sobrino del papa Gregorio XII. Prior agustino, obispo de Siena y cardenal antes de su elección papal en 1431. Hombre de profunda vida espiritual pero políticamente hábil, capaz de navegar entre el conciliarismo de Basilea, la política italiana y la diplomacia con los griegos. Su firme mantenimiento de la autoridad pontificia contra el conciliarismo de Basilea fue el contrapunto necesario al acuerdo teológico de Florencia. Fue él quien presidió personalmente las sesiones más cruciales y quien firmó los decretos de unión.</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Cardenal Giuliano Cesarini (1398-1444)</p>
+      <p class="prole">Legado Papal · Presidente de las Comisiones</p>
+      <p class="pdesc">Uno de los teólogos más brillantes de la Iglesia latina, inicialmente presidente del Concilio de Basilea y simpatizante del conciliarismo moderado. Fue, sin embargo, quien más decisivamente trabajó para el traslado a Ferrara y para hacer posible el diálogo con los griegos. Murió en la batalla de Varna (1444), en la cruzada que intentó materializarse como resultado del concilio, lo cual es un símbolo de la tragedia de la empresa florentina.</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Juan de Torquemada O.P. (1388-1468)</p>
+      <p class="prole">Teólogo papal · Defensor del Primado</p>
+      <p class="pdesc">Dominico español (tío del famoso Inquisidor General Tomás de Torquemada), el más agudo defensor teológico del primado papal en el concilio. Sus argumentos sobre la jurisdicción universal del Papa — sistematizados en su <i>Summa de Ecclesia</i> — prepararon directamente el terreno para la definición del Vaticano I en 1870. Fue hecho cardenal por Eugenio IV en 1439 como reconocimiento de sus servicios en Florencia.</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Ambrosio Traversari O.S.B. (1386-1439)</p>
+      <p class="prole">Humanista y teólogo · Intermediario cultural</p>
+      <p class="pdesc">Prior general de los Camaldulenses y uno de los grandes humanistas del primer Renacimiento. Su dominio del griego era excepcional, y fue el principal puente cultural entre las delegaciones. Había traducido numerosos Padres griegos al latín, lo que le daba una perspectiva única para arbitrar las disputas patrísticas. Murió en noviembre de 1439, apenas meses después de la firma del decreto de unión, sin conocer las dificultades de su implementación.</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Cardenal Niccolò Albergati (1373-1443)</p>
+      <p class="prole">Cardenal · Diplomático</p>
+      <p class="pdesc">Cartujo y cardenal, conocido por su santidad personal y su habilidad diplomática. Fue uno de los principales negociadores de los aspectos prácticos del concilio y contribuyó decisivamente a mantener la cohesión de la delegación latina en los momentos de mayor tensión con los griegos. Su figura encarna la combinación de reforma interior y proyección ecuménica que Eugenio IV intentaba representar.</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Cosme de Médici (1389-1464)</p>
+      <p class="prole">Anfitrión y financiador del Concilio</p>
+      <p class="pdesc">Aunque no fue participante teológico, Cosme de Médici fue indispensable: financió el traslado de la delegación oriental, ofreció Florencia como sede y sufragó los gastos de alojamiento de toda la asamblea. Su motivación era múltiple: prestigio político para Florencia, ventajas comerciales con el Oriente, y un genuino interés intelectual por el pensamiento griego. La presencia de Gemisto Pletón y otros sabios griegos en su círculo durante el concilio fue el origen directo de la Academia Platónica de Florencia.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="part-gr">Delegación griega</h2>
+  <div class="participants">
+    <div class="pcard">
+      <p class="pname">Emperador Juan VIII Paleólogo (1392-1448)</p>
+      <p class="prole">Basileus de los Romanos · Jefe de la delegación imperial</p>
+      <p class="pdesc">Hijo del Emperador Manuel II, Juan VIII era un hombre culto, religioso y trágicamente consciente de la situación desesperada de su Imperio. Vino a Florencia buscando ayuda militar, no unión teológica — aunque comprendía que la segunda era condición de la primera. Aceptó el decreto de unión como necesidad política sin que quede claro cuánto lo creía sinceramente como acuerdo teológico. Regresó a Constantinopla sin la cruzada que esperaba, y murió en 1448 sin haber visto la caída de la ciudad que amaba.</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Patriarca José II de Constantinopla (c. 1360-1439)</p>
+      <p class="prole">Patriarca Ecuménico · Segunda autoridad de la delegación</p>
+      <p class="pdesc">Anciano y enfermo cuando llegó a Italia, José II era un hombre de profunda espiritualidad que tomó el proceso de unión con seriedad teológica genuina. Sus instrucciones antes de morir — dejó un documento confesando su fe en la doctrina católica sobre el primado y el Purgatorio — fueron citadas repetidamente por los latinos como prueba de la sinceridad del acuerdo. Murió el 10 de junio de 1439 en la Villa Médici en Fiesole, sin poder firmar el decreto que tanto había trabajado para preparar.</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Besarión, Metropolitano de Nicea (c. 1403-1472)</p>
+      <p class="prole">Teólogo griego · Defensor de la unión · Posterior cardenal latino</p>
+      <p class="pdesc">El más brillante teólogo de la delegación griega y, junto con Marco Eugenikos, el más influyente en el resultado del concilio — aunque en dirección opuesta. Besarión era un humanista platónico que veía la unión con Roma como teológicamente posible y culturalmente deseable. Fue el arquitecto intelectual griego del decreto sobre el Filioque. Después del concilio se quedó en Italia, fue hecho cardenal por Eugenio IV, y se convirtió en el gran mediador del legado griego al humanismo occidental, donando su biblioteca a Venecia (hoy Biblioteca Marciana).</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Marco Eugenikos, Metropolitano de Éfeso (c. 1392-1444)</p>
+      <p class="prole">Principal opositor de la unión · Símbolo de la resistencia ortodoxa</p>
+      <p class="pdesc">Fue el único obispo griego que se negó a firmar el decreto de unión de 1439. Teólogo riguroso y apasionado defensor de la tradición ortodoxa, Marco no veía el acuerdo alcanzado como genuina unión sino como capitulación inaceptable ante las posiciones latinas. A su regreso a Constantinopla se convirtió en el líder espiritual de la oposición anti-unionista. Se dice que al enterarse de que Marco no había firmado, el Papa Eugenio IV exclamó: «Y entonces no hemos logrado nada.» Su canonización por la Iglesia Ortodoxa en 1734 simboliza la perspectiva ortodoxa sobre todo el episodio.</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Gemisto Pletón (c. 1355-1452)</p>
+      <p class="prole">Filósofo · Consejero imperial · No teólogo oficial</p>
+      <p class="pdesc">El más extraordinario de los sabios griegos venidos a Florencia, aunque su papel en el concilio era secundario (era consejero político, no teólogo). Platónico radical, heterodoxo en sus propias creencias religiosas (algunos lo consideran proto-pagano), su serie de conferencias en Florencia sobre la superioridad de Platón sobre Aristóteles fascinó a los humanistas italianos. Cosme de Médici lo escuchó y concibió la idea de una Academia Platónica. Pletón fue así el catalizador cultural más importante del concilio, con un impacto que superó con creces su papel diplomático.</p>
+    </div>
+    <div class="pcard">
+      <p class="pname">Isidoro de Kiev (c. 1385-1463)</p>
+      <p class="prole">Metropolitano de Kiev y Toda Rusia</p>
+      <p class="pdesc">Griego de nacimiento nombrado Metropolitano de Moscú y Kiev por el Patriarca de Constantinopla, Isidoro fue uno de los más entusiastas defensores de la unión entre los griegos. Firmó el decreto y a su regreso a Moscú fue arrestado por el Gran Príncipe Vasili II, que rechazó el acuerdo de Florencia. Escapó y regresó a Italia, donde Eugenio IV lo hizo cardenal. Su rechazo por Moscú fue el origen directo de la proclamación de la autocefalia de la Iglesia rusa en 1448 — una de las consecuencias más duraderas de Florencia.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="part-otros">Otras delegaciones orientales</h2>
+  <p>Además de los griegos, el concilio recibió delegaciones de diversas Iglesias orientales que llegaron en distintos momentos:</p>
+  <table class="cmp">
+    <tr><th>Comunidad</th><th>Representantes</th><th>Fecha del decreto</th><th>Resultado inmediato</th></tr>
+    <tr><td class="cat">Armenios</td><td>Delegados del Catholicós armenio Constantino VI</td><td>22 noviembre 1439</td><td>Decreto <i>Exsultate Deo</i> (parcialmente); unión formal pero sin seguimiento real en Armenia</td></tr>
+    <tr><td class="cat">Coptos y etíopes</td><td>Delegados de la Iglesia copta y del Preste Juan etíope</td><td>4 febrero 1442</td><td>Decreto <i>Cantate Domino</i>; unión efímera, sin consecuencias prácticas duraderas</td></tr>
+    <tr><td class="cat">Sirios jacobitas</td><td>Delegados del Patriarca sirio</td><td>30 septiembre 1444</td><td>Decreto de unión; impacto muy limitado en la Iglesia siria</td></tr>
+    <tr><td class="cat">Caldeos (nestorianos)</td><td>Arzobispo de Edesa Timoteo</td><td>7 agosto 1445</td><td>Decreto de unión; origen de la Iglesia Caldea Católica moderna</td></tr>
+    <tr><td class="cat">Maronitas de Chipre</td><td>Delegados maronitas</td><td>Septiembre 1445</td><td>Confirmación de la unión ya existente; la Iglesia Maronita nunca se separó formalmente de Roma</td></tr>
+  </table>
+</section>
+
+<section id="sec4">
+  <h1 class="section">IV. LOS DEBATES TEOLÓGICOS</h1>
+  <p>Las sesiones de debate en Ferrara y Florencia fueron extraordinarias por su rigor y por la calidad de los participantes. Ambas partes citaban a los Padres de la Iglesia — griegos y latinos — para apoyar sus posiciones. Los debates se prolongaban horas y eran registrados por secretarios. Lo que sigue es un análisis de cada tema principal.</p>
+
+  <h2 class="sub" id="deb-filioque">El Filioque: el debate central</h2>
+  <p>La palabra latina <i>Filioque</i> («y del Hijo») había sido añadida al Credo de Nicea-Constantinopla (381) en la Iglesia occidental a partir del siglo VI (primero en España, luego en el Imperio Franco, y finalmente en Roma en 1014). La frase resultante afirmaba que el Espíritu Santo procede «del Padre y del Hijo» (<i>qui ex Patre Filioque procedit</i>), en contraste con el texto original: «que procede del Padre».</p>
+
+  <div class="hl red">
+    <p style="margin:0;"><b>La posición griega:</b> El Filioque era inaceptable por <i>dos razones independientes</i>: (1) <b>Razón canónica:</b> el Credo era intocable sin la aprobación de un Concilio Ecuménico; ningún patriarca, obispo ni papa podía añadirlo unilateralmente. (2) <b>Razón teológica:</b> la doctrina era errónea; el Espíritu procede únicamente del Padre, que es el único «principio» (archē) en la Trinidad. La doble procesión implicaría dos principios o degeneraría en sabelianismo al fusionar las propiedades del Padre y del Hijo.</p>
+  </div>
+  <div class="hl blue">
+    <p style="margin:0;"><b>La posición latina:</b> (1) <b>Sobre la canonicidad:</b> la adición era legítima porque la Iglesia tiene autoridad para hacer explícito lo que estaba implícito en la revelación, y los concilios ecuménicos posteriores a Nicea habían desarrollado el Credo. Además, los Padres griegos (Cirilo de Alejandría, Epifanio, incluso Atanasio en algunos textos) habían enseñado la doble procesión. (2) <b>Sobre la teología:</b> el Espíritu procede del Padre y del Hijo como de un único principio (<i>tamquam ex uno principio</i>) — no hay dos principios porque la voluntad y el poder de Padre e Hijo son uno. La distinción de personas no implica distinción de principio en las procesiones.</p>
+  </div>
+
+  <p>El debate clave sobre el Filioque se desarrolló en febrero-marzo de 1439, con <b>Marco Eugenikos</b> como principal portavoz griego y el teólogo latino <b>Juan de Montenero O.P.</b> como principal portavoz latino. Sesión tras sesión, ambos lados presentaban citas patrísticas. El punto de inflexión llegó cuando Besarión, revisando los textos de los Padres griegos, concedió que muchos de ellos — en particular Cirilo de Alejandría — habían enseñado la procesión del Espíritu a través del Hijo («διά τοῦ Υἱοῦ», dia tou Huiou), lo cual era teológicamente equivalente al Filioque latino.</p>
+
+  <div class="decree">
+    <div class="dheader">Solución teológica — «A través del Hijo» como equivalente al «y del Hijo»</div>
+    <div class="dbody">
+      <div class="dlabel">El texto del Laetentur Caeli sobre el Filioque</div>
+      <p class="dtext latin">«Definimus... Spiritum Sanctum ex Patre Filioque aeternaliter esse; et essentiam suam suumque esse subsistens ex Patre simul et Filio habere; et ex utroque aeternaliter, tamquam ab uno principio et unica spiratione, procedere.»</p>
+      <div class="dlabel">Traducción</div>
+      <p class="dtext">«Definimos... que el Espíritu Santo existe eternamente del Padre y del Hijo; que tiene su esencia y su ser subsistente a la vez del Padre y del Hijo; y que procede de ambos eternamente, como de un único principio y una única espiración.»</p>
+      <div class="dlabel">La clave diplomática: el añadido griego</div>
+      <p class="dnote">El decreto añadía crucialmente: «Y puesto que lo que el Padre da, el Hijo da también... los griegos afirman que el Espíritu procede del Padre <i>a través del Hijo</i>, lo que viene a significar lo mismo que los latinos, a saber, que el Espíritu procede del Padre y del Hijo.» Esta equivalencia entre «del Padre y del Hijo» (latino) y «del Padre a través del Hijo» (griego) fue el gran logro teológico de Florencia — y también su punto más frágil, pues nunca todos los teólogos griegos aceptaron la equivalencia.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="deb-primado">El Primado del Papa</h2>
+  <p>El segundo gran debate concernía la autoridad del Obispo de Roma sobre la Iglesia universal. La posición latina sostenía la jurisdicción universal directa del papa sobre todas las Iglesias; la griega reconocía un primado de honor pero no de jurisdicción directa sobre las Iglesias orientales, gobernadas por sus propios patriarcas.</p>
+
+  <div class="decree">
+    <div class="dheader">Texto del decreto sobre el Primado</div>
+    <div class="dbody">
+      <p class="dtext latin">«Item diffinimus, sanctam Apostolicam Sedem et Romanum Pontificem in universum orbem tenere primatum, et ipsum Pontificem Romanum successorem esse beati Petri principis Apostolorum et verum Christi Vicarium, totiusque Ecclesiae Caput, et omnium Christianorum Patrem ac Doctorem existere; et ipsi in beato Petro pascendi, regendi ac gubernandi universalem Ecclesiam a Domino nostro Iesu Christo plenam potestatem traditam esse.»</p>
+      <div class="dlabel">Traducción</div>
+      <p class="dtext">«Asimismo definimos que la Santa Sede Apostólica y el Romano Pontífice tienen el primado sobre todo el orbe, y que el propio Romano Pontífice es sucesor del bienaventurado Pedro, príncipe de los Apóstoles, y verdadero Vicario de Cristo, cabeza de toda la Iglesia y padre y maestro de todos los cristianos; y que a él le fue dado por Nuestro Señor Jesucristo, en la persona del bienaventurado Pedro, el poder pleno de apacentar, regir y gobernar la Iglesia universal.»</p>
+      <div class="dlabel">La cláusula de salvaguarda oriental</div>
+      <p class="dnote">El decreto añadía la crucial cláusula: «<i>salvis privilegiis et iuribus patriarcharum orientalium</i>» — «salvo los privilegios y derechos de los patriarcas orientales». Esta cláusula, negociada duramente, era deliberadamente ambigua: los latinos la entendían como subordinada al primado universal; los griegos la interpretaban como su protección efectiva frente a la interferencia romana. La ambigüedad era el precio de la firma.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="deb-purgatorio">El Purgatorio</h2>
+  <p>La doctrina occidental del Purgatorio — un estado o lugar de purificación activa para las almas que mueren en gracia de Dios pero sin haber completado la penitencia debida por sus pecados — no tenía un equivalente exacto en la teología oriental, que prefería hablar de un estado de espera sin especificar la naturaleza ni los tormentos de esa espera.</p>
+
+  <div class="decree">
+    <div class="dheader">Solución de compromiso sobre el Purgatorio</div>
+    <div class="dbody">
+      <p class="dtext latin">«...animas vere poenitentes, in Dei caritate decessas, antequam dignis poenitentiae fructibus de commissis et omissis satisfecerint, purgantibus post mortem poenis purgari.»</p>
+      <div class="dlabel">Traducción</div>
+      <p class="dtext">«...las almas que, verdaderamente arrepentidas, murieron en el amor de Dios, antes de haber satisfecho con dignos frutos de penitencia por lo cometido y omitido, son purgadas después de la muerte con penas purificadoras.»</p>
+      <div class="dlabel">La deliberada omisión del fuego</div>
+      <p class="dnote">Nótese que el decreto no menciona «fuego» purgatorial — una omisión deliberada para respetar la sensibilidad teológica oriental, que rechazaba la representación física del Purgatorio. El acuerdo se logró definiendo el hecho de la purificación post mortem sin precisar el modo. Los griegos pudieron aceptar esto porque no negaban la posibilidad de un estado purificador, sino solo la representación latina de sus características físicas. Los latinos consideraban que lo esencial — la realidad de la purificación — había sido definido.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="deb-pan">El Pan Ácimo y Fermentado</h2>
+  <p>La Iglesia latina usaba pan sin levadura (ácimo) en la Eucaristía, siguiendo el precedente de la Última Cena como cena pascual judía. La Iglesia oriental usaba pan con levadura (fermentado), argumentando que la Última Cena no fue una cena pascual ritual y que el pan fermentado simbolizaba la humanidad plena de Cristo.</p>
+  <p>Este debate, que había sido uno de los detonantes del cisma de 1054 (Cerulario acusó a los latinos de judaizar), fue resuelto en Florencia de forma relativamente sencilla: el decreto declaró que tanto el pan ácimo como el fermentado eran materias válidas para la Eucaristía, y que cada Iglesia debía usar su propia tradición. Esta solución de pluralismo litúrgico dentro de la unidad de fe fue uno de los logros más modernos del concilio.</p>
+
+  <h2 class="sub" id="deb-union">Otras cuestiones: el orden y los sacramentos</h2>
+  <p>Las negociaciones con las comunidades orientales disidentes (armenios, coptos, sirios, caldeos) plantearon también cuestiones sobre los sacramentos — especialmente sobre la materia, forma e intención necesarias para la validez sacramental. El decreto para los armenios (<i>Exsultate Deo</i>) se convirtió en la primera exposición sistemática de la doctrina de los siete sacramentos desde una perspectiva tanto teológica como pastoral, con notable influencia en el Concilio de Trento.</p>
+</section>
+
+<section id="sec5">
+  <h1 class="section">V. LOS DECRETOS DE UNIÓN</h1>
+
+  <div class="decree" id="dec-laetentur">
+    <div class="dheader">Laetentur Caeli — Decreto de Unión con los Griegos (5 de julio de 1439)</div>
+    <div class="dbody">
+      <div class="dlabel">Nombre y significado</div>
+      <p class="dnote">El decreto toma su nombre de sus palabras iniciales: «<i>Laetentur caeli et exsultet terra</i>» — «Alégrense los cielos y regocíjese la tierra», tomadas del Salmo 96 (95). El título captura la euforia del momento: tras años de negociaciones, el Cisma de 1054 parecía superado.</p>
+      <div class="dlabel">Contenido dogmático</div>
+      <p class="dnote">El decreto definió cuatro puntos: (1) la doctrina del Filioque como correcta y equivalente a la fórmula griega «a través del Hijo»; (2) la doctrina del Purgatorio como purificación real post mortem, sin especificar el fuego; (3) el primado universal del Papa sobre toda la Iglesia, «salvo los privilegios de los patriarcas orientales»; (4) la validez de la Eucaristía con pan ácimo o fermentado, según la tradición de cada Iglesia.</p>
+      <div class="dlabel">La firma</div>
+      <p class="dnote">El decreto fue firmado en la catedral de Santa María del Fiore el 5 de julio de 1439. Por la parte latina firmó el papa Eugenio IV y los cardenales presentes. Por la parte griega firmaron el Emperador Juan VIII y todos los obispos orientales presentes. La única excepción fue Marco Eugenikos de Éfeso, quien se retiró sin firmar — hecho que el Papa recibió, según las crónicas, con visible consternación.</p>
+      <div class="dlabel">La proclamación pública</div>
+      <p class="dtext">El día siguiente, 6 de julio, el decreto fue proclamado públicamente en la catedral, primero en latín por el cardenal Cesarini, y luego en griego por el Metropolitano Besarión. Las crónicas describen una atmósfera de emoción extraordinaria — lagrimas, abrazos, el inicio de tedeum litúrgicos que sonaron hasta bien entrada la noche en Florencia.</p>
+    </div>
+  </div>
+
+  <div class="decree" id="dec-armenos">
+    <div class="dheader">Decreto para los Armenios — Exsultate Deo (22 de noviembre de 1439)</div>
+    <div class="dbody">
+      <div class="dlabel">Contexto</div>
+      <p class="dnote">Los armenios habían rechazado el Concilio de Calcedonia (451) y eran considerados monofisitas por la Iglesia Calcedónica, aunque la cristología armenia es más matizada que el monofisismo estricto. Su delegación llegó a Florencia buscando clarificación doctrinal y reconocimiento.</p>
+      <div class="dlabel">Importancia dogmática</div>
+      <p class="dnote">El decreto para los armenios es teológicamente uno de los más importantes del concilio por razones independientes del tema armenio: contiene la primera definición sistemática y magisterial de los <b>siete sacramentos</b>, su materia, forma, ministro y efectos. Esta sección fue adoptada casi literalmente por el Concilio de Trento al definir los sacramentos. También define que los diez mandamientos obligan a todos los cristianos y contiene una exposición de la doctrina del pecado original — convirtiéndose en uno de los documentos magistrales más completos de la Iglesia pretridentina.</p>
+      <div class="dlabel">Los siete sacramentos definidos</div>
+      <p class="dtext">El decreto enumera: Bautismo, Confirmación, Eucaristía, Penitencia, Extremaunción, Orden y Matrimonio — con sus respectivas materias y formas, siguiendo el esquema tomista pero en lenguaje accesible.</p>
+    </div>
+  </div>
+
+  <div class="decree" id="dec-coptos">
+    <div class="dheader">Decreto para los Coptos y Etíopes — Cantate Domino (4 de febrero de 1442)</div>
+    <div class="dbody">
+      <div class="dlabel">Contexto</div>
+      <p class="dnote">La Iglesia copta egipcia y la Iglesia etíope habían rechazado Calcedonia, adhiriendo al miafisismo (la naturaleza de Cristo es «única», síntesis de lo divino y lo humano, sin mezcla ni confusión). La delegación copto-etíope llegó a Florencia desde Roma, donde habían sido recibidos por el Papa. Su interés era principalmente reconocimiento político y eclesiástico, no tanto reforma doctrinal.</p>
+      <div class="dlabel">Contenido y la condena implícita de herejías</div>
+      <p class="dnote">El decreto contiene una larga sección de cristología ortodoxa calcedónica — las dos naturalezas en Cristo, perfectamente Dios y perfectamente hombre — y condena explícitamente el nestorianismo, el eutiquianismo y el apolinarismo. Al aceptar el decreto, los representantes coptos y etíopes suscribían la cristología calcedónica, lo cual contradecía la tradición de sus propias Iglesias. El acuerdo fue, en la práctica, poco más que formal.</p>
+    </div>
+  </div>
+
+  <div class="decree" id="dec-sirios">
+    <div class="dheader">Decreto para los Sirios (30 de septiembre de 1444)</div>
+    <div class="dbody">
+      <div class="dlabel">Los sirios jacobitas</div>
+      <p class="dnote">La Iglesia siria jacobita, también miafisita y heredera de la tradición de Severino de Antioquía, envió representantes a Roma (la sede del concilio en esa fase). El decreto de unión para los sirios fue el más breve de los formulados, centrado principalmente en la aceptación del Primado romano y los puntos principales del Laetentur Caeli. La Iglesia siria católica moderna — una de las Iglesias orientales católicas en plena comunión con Roma — es descendiente de estas negociaciones.</p>
+    </div>
+  </div>
+
+  <div class="decree" id="dec-caldeos">
+    <div class="dheader">Decreto para Caldeos y Maronitas (7-8 de agosto y septiembre de 1445)</div>
+    <div class="dbody">
+      <div class="dlabel">Los caldeos — herederos de los nestorianos</div>
+      <p class="dnote">La Iglesia de Oriente, llamada «nestoriana» por sus adversarios (aunque el propio Nestorio no fuera el origen de su doctrina), había rechazado el Concilio de Éfeso (431). Su arzobispo de Edesa, Timoteo, llegó a Roma en 1445 y suscribió el decreto de unión. Esta unión dio origen a la Iglesia Caldea Católica — hoy la Iglesia en comunión con Roma más numerosa de Iraq — que coexiste con la Iglesia Asiria de Oriente no unida.</p>
+      <div class="dlabel">Los maronitas de Chipre</div>
+      <p class="dnote">La Iglesia Maronita, con sede en el Monte Líbano y comunidades en Chipre, nunca había roto formalmente con Roma. Su inclusión en el concilio fue principalmente una confirmación y clarificación de la comunión ya existente. Los maronitas son hoy la única Iglesia oriental que nunca experimentó un cisma completo con Roma.</p>
+    </div>
+  </div>
+</section>
+
+<section id="colofon">
+  <h1 class="section">VI. EL EXSULTATE DEO — LA DOCTRINA DE LOS SACRAMENTOS</h1>
+  <p>El decreto para los armenios, <i>Exsultate Deo</i>, merece una sección independiente por su importancia doctrinal autónoma, que trasciende el contexto de la unión con los armenios. Es, junto al Laetentur Caeli, el documento dogmático más significativo de todo el concilio.</p>
+
+  <table class="cmp">
+    <tr><th>Sacramento</th><th>Materia</th><th>Forma</th><th>Ministro ordinario</th><th>Efecto principal</th></tr>
+    <tr><td class="cat">Bautismo</td><td>Agua natural</td><td>«Yo te bautizo en el nombre del Padre, del Hijo y del Espíritu Santo»</td><td>Cualquier persona (en necesidad)</td><td>Remisión de todo pecado (original y actual); nacimiento espiritual</td></tr>
+    <tr><td class="cat">Confirmación</td><td>Crisma bendecido por el obispo</td><td>«Te signo con la señal de la cruz y te confirmo con el crisma de salud»</td><td>Obispo</td><td>Fortaleza en la fe; don del Espíritu Santo</td></tr>
+    <tr><td class="cat">Eucaristía</td><td>Pan de trigo y vino de uva</td><td>Palabras de la consagración</td><td>Sacerdote válidamente ordenado</td><td>Verdadero cuerpo y sangre de Cristo; comunión con Dios</td></tr>
+    <tr><td class="cat">Penitencia</td><td>Actos del penitente (contrición, confesión, satisfacción)</td><td>Palabras de absolución</td><td>Sacerdote con jurisdicción</td><td>Perdón de pecados mortales cometidos después del Bautismo</td></tr>
+    <tr><td class="cat">Extremaunción</td><td>Óleo de oliva bendecido por el obispo</td><td>Palabras prescritas</td><td>Sacerdote</td><td>Remisión de pecados; salud espiritual (y corporal si conviene)</td></tr>
+    <tr><td class="cat">Orden</td><td>Imposición de manos del obispo (debatido)</td><td>Palabras de la consagración episcopal</td><td>Obispo</td><td>Configuración con Cristo sacerdote; poder de orden</td></tr>
+    <tr><td class="cat">Matrimonio</td><td>Los contrayentes mismos</td><td>Palabras del consentimiento mutuo</td><td>Los contrayentes (el sacerdote asiste)</td><td>Gracia para la vida conyugal; indisolubilidad</td></tr>
+  </table>
+
+  <div class="hl gold">
+    <p style="margin:0;"><b>El «Exsultate Deo» como precursor de Trento:</b> El decreto armenio de Florencia fue el texto de referencia que los padres del Concilio de Trento (1545-1563) tuvieron ante sí al definir los sacramentos contra la Reforma protestante. La estructura, la terminología (materia, forma, ministro, efecto) y muchas de las definiciones de Trento son desarrollos directos de lo que Florencia formuló en 1439. En este sentido, Florencia no es solo un concilio de unión ecuménica: es también el eslabón teológico entre la escolástica medieval (Tomás de Aquino) y la definición dogmática postridentina de los sacramentos.</p>
+  </div>
+</section>
+
+<section id="cronologia">
+  <h1 class="section">VII. CRONOLOGÍA DETALLADA DEL CONCILIO</h1>
+  <div class="timeline">
+    <div class="tl-item major">
+      <div class="tl-date">18 diciembre 1431</div>
+      <div class="tl-event"><b>Inauguración en Basilea.</b> El cardenal Giuliano Cesarini abre el concilio en nombre de Martín V. El papa muere 10 días después; le sucede Eugenio IV el 3 de marzo de 1431.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">18 diciembre 1431 – 1437</div>
+      <div class="tl-event">Fase de Basilea: debates sobre reforma eclesiástica, conflictos crecientes entre el concilio y Eugenio IV. El concilio se declara superior al papa (Haec Sancta renovada). Eugenio IV intenta disolverlo en varias ocasiones.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Noviembre 1437</div>
+      <div class="tl-event"><b>La flota papal parte hacia Constantinopla</b> para recoger a la delegación griega. Cosme de Médici financia parte del transporte.</div>
+    </div>
+    <div class="tl-item major">
+      <div class="tl-date">8 enero 1438</div>
+      <div class="tl-event"><b>Inauguración solemne en Ferrara.</b> El Emperador Juan VIII Paleólogo y el Patriarca José II de Constantinopla llegan a Ferrara. El concilio se declara ecuménico y legítimo, separándose definitivamente del conciliábulo de Basilea.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Enero – Octubre 1438</div>
+      <div class="tl-event">Sesiones en Ferrara: debates sobre el Purgatorio, preliminares del Filioque. Los griegos insisten en que el debate debe comenzar por la cuestión canónica de la adición del Filioque al Credo, no por su verdad teológica.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">10 junio 1438</div>
+      <div class="tl-event">Apertura del debate formal sobre el Purgatorio en Ferrara. El metropolitano Marcos de Éfeso y el arzobispo de Rodas son los principales portavoces.</div>
+    </div>
+    <div class="tl-item major">
+      <div class="tl-date">Enero 1439</div>
+      <div class="tl-event"><b>Traslado a Florencia.</b> La epidemia de peste en Ferrara y la mejor financiación ofrecida por Cosme de Médici determinan el traslado. El Papa acepta oficialmente la oferta florentina.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Enero – Marzo 1439</div>
+      <div class="tl-event">Las sesiones más intensas del debate sobre el Filioque. Juan de Montenero contra Marcos de Éfeso. Besarión comienza a inclinarse hacia la posición latina. Se identifican los textos de Padres griegos que enseñan la procesión «a través del Hijo».</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Abril – Junio 1439</div>
+      <div class="tl-event">Negociaciones privadas sobre el texto del decreto de unión. Debates sobre el primado y la cláusula de salvaguarda para los patriarcas orientales. Enferma gravemente el Patriarca José II.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">10 junio 1439</div>
+      <div class="tl-event">Muere el Patriarca José II en Fiesole, en la villa de los Médici. Deja un testamento teológico reconociendo la autoridad papal y la doctrina del Purgatorio.</div>
+    </div>
+    <div class="tl-item major">
+      <div class="tl-date">5 julio 1439</div>
+      <div class="tl-event"><b>Firma del Laetentur Caeli</b> en Santa María del Fiore. El decreto de unión con los griegos es proclamado en latín y griego. Marcos de Éfeso no firma. El Papa y el Emperador abrazan el documento.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Septiembre 1439</div>
+      <div class="tl-event">Los obispos griegos regresan a Constantinopla con el decreto. Marcos de Éfeso también regresa, comenzando inmediatamente su campaña de oposición.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">22 noviembre 1439</div>
+      <div class="tl-event"><b>Decreto para los armenios</b> — Exsultate Deo. Primera definición sistemática de los siete sacramentos.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">25 junio 1439</div>
+      <div class="tl-event">El conciliábulo de Basilea depone a Eugenio IV y elige al antipapa Félix V (Amadeo VIII de Saboya). Último antipapa de la historia de la Iglesia.</div>
+    </div>
+    <div class="tl-item major">
+      <div class="tl-date">4 febrero 1442</div>
+      <div class="tl-event"><b>Decreto para los coptos y etíopes</b> — Cantate Domino. El decreto más extenso dogmáticamente, con una cristología calcedónica completa.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1443</div>
+      <div class="tl-event">El concilio se traslada a Roma. Eugenio IV consolida su autoridad frente al conciliábulo de Basilea, que pierde apoyo progresivamente.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">30 septiembre 1444</div>
+      <div class="tl-event"><b>Decreto para los sirios jacobitas.</b></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">7 agosto 1445</div>
+      <div class="tl-event"><b>Decreto para los caldeos</b> (origen de la Iglesia Caldea Católica).</div>
+    </div>
+    <div class="tl-item major">
+      <div class="tl-date">Septiembre 1445</div>
+      <div class="tl-event"><b>Clausura del Concilio.</b> Decreto para los maronitas de Chipre. Eugenio IV clausura formalmente la asamblea. Félix V aún sigue como antipapa, pero su posición es ya insostenible; abdicará en 1449.</div>
+    </div>
+  </div>
+</section>
+
+<section id="repercusiones">
+  <h1 class="section">VIII. REPERCUSIONES INMEDIATAS</h1>
+  <h2 class="sub">La recepción del decreto en Occidente</h2>
+  <p>En Occidente, el decreto de Florencia fue recibido con entusiasmo y alivio. La reunificación con los griegos — incluso si su fragilidad era ya visible — fue presentada como un triunfo histórico de la autoridad pontificia y de la misión ecuménica de la Iglesia. Eugenio IV utilizó el éxito de Florencia para consolidar su posición frente al conciliábulo de Basilea, cuya causa se debilitó irreversiblemente: si el Papa podía lograr lo que Basilea nunca habría podido — la reunificación con los griegos — ¿quién podía seguir argumentando que el conciliarismo era el futuro?</p>
+  <p>El cardenal Juan de Torquemada desarrolló en los años siguientes su <i>Summa de Ecclesia</i>, el más completo tratado de eclesiología papal del siglo XV, directamente inspirado en los debates de Florencia y en las definiciones del Laetentur Caeli sobre el primado. Esta obra fue el puente doctrinal directo hacia la definición de la infalibilidad papal en el Vaticano I.</p>
+
+  <h2 class="sub">La fallida cruzada: Varna (1444)</h2>
+  <p>El objetivo político inmediato de los griegos — obtener una cruzada militar que salvara Constantinopla — parecía al alcance de la mano tras Florencia. El papa Eugenio IV promovió activamente la empresa, y el rey Vladislao III de Polonia-Hungría lideró un ejército cruzado que avanzó hacia los Balcanes. El cardenal Cesarini, artífice de Florencia, acompañó la expedición.</p>
+  <p>El <b>10 de noviembre de 1444</b>, el ejército cruzado fue aniquilado por el sultán Murat II en la Batalla de Varna. Vladislao III murió en combate, y el cardenal Cesarini desapareció en la derrota — probablemente muerto. La cruzada había fracasado estrepitosamente, y con ella la esperanza de que la unión de Florencia trajera la salvación militar a Bizancio.</p>
+
+  <h2 class="sub">La caída de Constantinopla (1453)</h2>
+  <p>Ocho años después de la clausura del concilio y apenas cuatro años después de la muerte de Juan VIII Paleólogo, <b>Constantinopla cayó ante el sultán Mehmed II el 29 de mayo de 1453</b>. El último Emperador romano, Constantino XI Paleólogo (hermano de Juan VIII), murió combatiendo en las murallas. La Hagia Sofía fue convertida en mezquita ese mismo día.</p>
+  <p>La caída de Constantinopla fue, entre otras cosas, el epitafio de la unión de Florencia. El Imperio que necesitaba la reunificación eclesiástica para sobrevivir había desaparecido. El Patriarcado de Constantinopla, ahora bajo dominación otomana, retomó su identidad ortodoxa sin el peso de la necesidad política que había llevado a Juan VIII a Florencia. En 1484, el Patriarcado convocó un sínodo en Constantinopla que rechazó formalmente el decreto de unión de 1439 y anuló sus efectos para la Iglesia ortodoxa griega.</p>
+</section>
+
+<section id="fracaso">
+  <h1 class="section">IX. EL FRACASO DE LA UNIÓN EN ORIENTE</h1>
+  <h2 class="sub">La oposición interna griega: Marco Eugenikos y sus seguidores</h2>
+  <p>Cuando los obispos griegos regresaron a Constantinopla en el otoño de 1439, se encontraron con una oposición masiva entre el clero, los monjes y el pueblo. Marco Eugenikos, el único que no había firmado, fue recibido como héroe. La oposición al decreto de Florencia en Oriente no fue superficial ni pasajera: fue profunda, teológica y culturalmente arraigada.</p>
+  <p>Los argumentos de la oposición ortodoxa eran varios:</p>
+  <div class="lineblock">
+    <h4>ARGUMENTOS DE LA OPOSICIÓN ORTODOXA</h4>
+    <ul>
+      <li><b>Los obispos habían cedido bajo presión política:</b> firmaron porque el Emperador lo necesitaba, no porque estuvieran convencidos teológicamente. Los testimonios de varios obispos griegos confirman que muchos firmaron contra su propio juicio.</li>
+      <li><b>El Filioque sigue siendo inaceptable:</b> la equivalencia entre «del Hijo» y «a través del Hijo» no convencía a los teólogos orientales, que la consideraban una argucia retórica, no una reconciliación real.</li>
+      <li><b>El primado papal era inaceptable sin reservas más fuertes:</b> la cláusula de salvaguarda para los patriarcas era demasiado vaga para proteger la autonomía real de las Iglesias orientales.</li>
+      <li><b>El concilio no fue libre:</b> la delegación griega era rehén de las necesidades políticas del Imperio; su «libertad» de negociación era ilusoria.</li>
+    </ul>
+  </div>
+
+  <h2 class="sub">El rechazo de Moscú y la autocefalia rusa (1448)</h2>
+  <p>El Metropolitano Isidoro de Kiev regresó a Moscú en marzo de 1441 portando el decreto de unión y sus insignias cardenalicias. El Gran Príncipe Vasili II lo mandó arrestar inmediatamente, declarando el decreto de Florencia una traición a la Ortodoxia. Isidoro escapó y regresó a Italia.</p>
+  <p>En 1448, dos años antes de la caída de Constantinopla, la Iglesia rusa proclamó su <b>autocefalia</b> — su independencia de Constantinopla — y eligió su propio metropolitano sin consultar al Patriarca. Esta ruptura, precipitada por el rechazo de Florencia, fue el origen de la Iglesia Ortodoxa Rusa autocéfala que existe hoy, y que en el siglo XVII convertiría a Moscú en el «Tercer Roma» — la sede de la verdadera Ortodoxia después de la «traición» de Constantinopla en Florencia y su caída ante los turcos.</p>
+
+  <h2 class="sub">El Sínodo de Constantinopla (1484) y la anulación formal</h2>
+  <p>Después de la caída de Constantinopla, el Patriarcado de Constantinopla — ahora bajo tutela otomana, dependiente del favor del sultán para su supervivencia — convocó un sínodo en 1484 que rechazó formalmente el decreto de Florencia. A partir de ese momento, el acuerdo de 1439 fue considerado nulo y sin efecto por la Iglesia Ortodoxa de Constantinopla y las demás Iglesias ortodoxas que la reconocían.</p>
+  <p>La perspectiva católica sobre este rechazo es que fue canónicamente inválido — un concilio particular no puede revocar definiciones de un concilio ecuménico — pero pastoralmente comprensible dada la situación política extraordinaria en que se encontraba el Patriarcado bajo el Imperio Otomano. El diálogo teológico católico-ortodoxo del siglo XX, especialmente a partir del Vaticano II, ha abordado todas estas cuestiones con mayor profundidad y libertad de la que fue posible en 1439.</p>
+</section>
+
+<section id="trento">
+  <h1 class="section">X. LEGADO HACIA EL CONCILIO DE TRENTO (1545-1563)</h1>
+  <p>Aunque Florencia y Trento son concilios con objetivos muy distintos — el primero busca la unión con el Oriente cristiano; el segundo responde a la Reforma protestante —, la conexión doctrinal entre ambos es profunda y directa.</p>
+  <div class="defgrid">
+    <div class="defcard"><p class="term">Los siete sacramentos</p><p class="def">El Decreto para los Armenios (Exsultate Deo, 1439) formuló por primera vez el número, la materia, la forma y los efectos de los siete sacramentos en lenguaje magisterial. El Concilio de Trento (Sesión VII, 1547) tomó este decreto como punto de partida para su definición dogmática de los sacramentos contra los reformadores protestantes, que reducían los sacramentos a dos (Bautismo y Cena del Señor) o uno.</p></div>
+    <div class="defcard"><p class="term">La doctrina del Purgatorio</p><p class="def">La definición de Florencia sobre el Purgatorio — estado real de purificación post mortem, sin especificar el fuego — fue citada por Trento como magisterio previo en el decreto sobre el Purgatorio (Sesión XXV, 1563). La continuidad doctrinal entre ambos concilios es explícita.</p></div>
+    <div class="defcard"><p class="term">El Primado papal vs. el Conciliarismo</p><p class="def">El éxito de Eugenio IV en Florencia y el fracaso del conciliábulo de Basilea-Félix V enterraron prácticamente el conciliarismo como doctrina viable. Trento pudo celebrarse como concilio claramente sujeto a la autoridad pontificia — sin las tensiones que habían paralizado a Basilea — precisamente porque Florencia había resuelto el conflicto de autoridad a favor del papado.</p></div>
+    <div class="defcard"><p class="term">La tradición apostólica no escrita</p><p class="def">Florencia afirmó la legitimidad de la tradición oral apostólica junto con la Escritura, en el contexto de defender la adición del Filioque (no escrita en la Biblia pero presente en la tradición de los Padres). Trento formalizaría esta posición en el decreto Sacrosancta (1546): las Escrituras y las tradiciones apostólicas como fuentes conjuntas de la Revelación.</p></div>
+  </div>
+</section>
+
+<section id="vaticano">
+  <h1 class="section">XI. HERENCIA EN EL VATICANO I Y II</h1>
+  <h2 class="sub">El Vaticano I (1869-1870) y el Primado</h2>
+  <p>La constitución dogmática <i>Pastor Aeternus</i> del Vaticano I, que definió la infalibilidad pontificia y la jurisdicción universal ordinaria del Papa sobre toda la Iglesia, es el desarrollo directo de lo que Florencia había establecido en el Laetentur Caeli. La línea doctrinal es clara: Florencia (1439) → Torquemada, <i>Summa de Ecclesia</i> (1453) → Belarmino, <i>De Romano Pontifice</i> (1586) → Vaticano I (1870).</p>
+  <p>La definición del Vaticano I fue, sin embargo, más precisa y más fuerte que la de Florencia en un punto crucial: afirmó la <b>infalibilidad personal</b> del Papa cuando define <i>ex cathedra</i> materias de fe y costumbres. Florencia había definido el primado de jurisdicción pero no había abordado explícitamente la infalibilidad. La cuestión había quedado implícita en la aceptación de la autoridad magisterial universal del Pontífice.</p>
+
+  <h2 class="sub">El Vaticano II (1962-1965) y el ecumenismo</h2>
+  <p>El Concilio Vaticano II retomó, de forma radicalmente diferente en método y espíritu, el proyecto ecuménico de Florencia. El decreto <i>Unitatis Redintegratio</i> (1964) sobre el ecumenismo y la constitución <i>Lumen Gentium</i> sobre la Iglesia incorporaron dos lecciones de la experiencia florentina:</p>
+  <p><b>Primera:</b> La unión cristiana no puede alcanzarse mediante decreto o presión política, sino solo a través de un diálogo genuino en verdad y caridad. Vaticano II inauguró el método del diálogo ecuménico permanente — con comisiones mixtas, declaraciones conjuntas, encuentros de oración — en lugar del método conciliar de negociación doctrinal bajo presión geopolítica.</p>
+  <p><b>Segunda:</b> El 7 de diciembre de 1965, el día antes del cierre del Vaticano II, <b>Pablo VI y el Patriarca Atenágoras I levantaron mutuamente las excomuniones de 1054</b> — el gesto simbólico más poderoso del ecumenismo católico-ortodoxo del siglo XX. Lo que Florencia intentó por decreto en 1439, el Vaticano II comenzó a construir por reconciliación en 1965.</p>
+
+  <div class="hl gold">
+    <p style="margin:0;"><b>Florencia y el ecumenismo moderno:</b> Los teólogos del diálogo católico-ortodoxo del siglo XX — incluyendo el cardenal Johannes Willebrands, Yves Congar y los participantes en la Comisión Internacional Mixta Católico-Ortodoxa (creada en 1979) — han estudiado los debates de Florencia con nueva profundidad. La declaración de Ravenna (2007), que reconoce un primado de Roma en la Iglesia indivisa del primer milenio, retoma la cuestión central de Florencia con herramientas metodológicas que el siglo XV no tenía.</p>
+  </div>
+</section>
+
+<section id="teologia">
+  <h1 class="section">XII. SIGNIFICADO TEOLÓGICO PERMANENTE</h1>
+  <h2 class="sub">Florencia como ejercicio de teología comparada</h2>
+  <p>Más allá de sus resultados inmediatos — que en el plano de la unión eclesiástica fueron mayoritariamente efímeros —, el Concilio de Florencia tiene un valor teológico permanente como ejercicio de <b>teología comparada rigurosa</b> entre dos grandes tradiciones del cristianismo.</p>
+  <p>Por primera vez en la historia, los mejores representantes de las tradiciones latina y griega se sentaron durante meses a debatir sus diferencias citándose mutuamente los Padres comunes. El resultado fue, en muchos casos, el descubrimiento de que las diferencias eran menores de lo que parecían — la distinción entre «del Hijo» y «a través del Hijo» en la procesión del Espíritu; la distinción entre «penas purificadoras» y «fuego purgatorial» — y en otros casos el descubrimiento de que eran más profundas — el primado jurisdiccional del Papa vs. la pentarquía de los patriarcas.</p>
+
+  <h2 class="sub">La eclesiología florentina y sus tensiones</h2>
+  <p>El Concilio de Florencia produjo la formulación más completa del primado papal anterior al Vaticano I, pero también la más completa con reservas orientales explícitas. La cláusula <i>salvis privilegiis et iuribus patriarcharum orientalium</i> reconocía implícitamente que el primado papal no borraba la legítima autonomía de las Iglesias orientales — una tensión que el ecumenismo del siglo XX ha explorado bajo la categoría de «unidad en la diversidad» o «comunión de Iglesias».</p>
+
+  <div class="lineblock">
+    <h4>CONTRIBUCIONES DOCTRINALES PERMANENTES DE FLORENCIA</h4>
+    <ul>
+      <li><b>Primera definición magisterial de los siete sacramentos</b> con su materia, forma, ministro y efecto — base de la doctrina tridentina y del Catecismo actual.</li>
+      <li><b>Definición del Primado papal con cláusulas de salvaguarda oriental</b> — formulación que Vaticano II retomaría en su eclesiología de comunión.</li>
+      <li><b>Equivalencia «Filioque» / «a través del Hijo»</b> — reconocida hoy como el camino más prometedor para la reconciliación entre las posiciones latina y oriental sobre el Espíritu Santo.</li>
+      <li><b>Definición del Purgatorio sin especificar el fuego</b> — formulación que respeta la sensibilidad oriental y que el Catecismo de la Iglesia Católica (1992) mantiene en sus términos esenciales.</li>
+      <li><b>Primer reconocimiento formal de la validez litúrgica de múltiples tradiciones</b> (pan ácimo y fermentado) dentro de la unidad de fe — principio del pluralismo litúrgico que el Vaticano II formalizaría en el decreto <i>Orientalium Ecclesiarum</i>.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h1 class="section">XIII. CONCLUSIÓN</h1>
+  <p>El Concilio de Florencia es una de las empresas más audaces, más trágicas y más fecundas de la historia de la Iglesia. Audaz porque intentó lo que nadie había logrado desde 1054: la reunificación de Oriente y Occidente mediante un acuerdo teológico genuino, no por conquista ni por mera convención política. Trágica porque la reunión duró menos que las expectativas que la habían generado: la caída de Constantinopla en 1453 enterró la unión diplomática junto con el Imperio que la había necesitado. Y fecunda porque sus definiciones doctrinales — sobre los sacramentos, el primado, el Purgatorio y el Filioque — alimentaron la teología católica durante cinco siglos y siguen siendo referencias vivas en el diálogo ecuménico.</p>
+
+  <div class="conc-item"><b>1. Históricamente:</b> Florencia representó el último gran intento de reunificación del mundo cristiano antes de la Reforma protestante, y uno de los momentos de mayor intercambio cultural entre el humanismo griego y el latino — con consecuencias filosóficas y artísticas que rebasaron con mucho el ámbito estrictamente eclesiástico.</div>
+  <div class="conc-item"><b>2. Eclesiológicamente:</b> El concilio consolidó la autoridad papal frente al conciliarismo, formuló la más completa definición pretridentina del primado, y al mismo tiempo reconoció implícitamente la pluralidad de tradiciones legítimas dentro de la Iglesia universal — tensión que la eclesiología del siglo XX aprendería a articular bajo la categoría de «comunión».</div>
+  <div class="conc-item"><b>3. Dogmáticamente:</b> El Exsultate Deo (decreto para los armenios) es el eslabón entre la escolástica medieval y la definición tridentina de los sacramentos. El Laetentur Caeli es el punto de referencia de la doctrina católica sobre el primado y la relación con las Iglesias orientales separadas.</div>
+  <div class="conc-item"><b>4. Ecuménicamente:</b> Las categorías elaboradas en Florencia — especialmente la equivalencia entre el Filioque latino y el «a través del Hijo» griego, y la distinción entre primado de jurisdicción y derechos patriarcales — son las categorías que los diálogos católico-ortodoxos del siglo XX han retomado con nueva perspectiva y mayor esperanza.</div>
+  <div class="conc-item"><b>5. Culturalmente:</b> La presencia de los sabios griegos en Florencia fue el catalizador del neoplatonismo renacentista, de la Academia Platónica de los Médici y de la recuperación de los textos griegos clásicos en Occidente. En este sentido, el Concilio de Florencia tiene una dimensión cultural que trasciende la historia eclesiástica y pertenece a la historia del pensamiento europeo.</div>
+
+  <div class="hl gold">
+    <p style="margin:0;"><b>La perspectiva católica final:</b> Desde una perspectiva católica, el Concilio de Florencia es un concilio ecuménico válido cuyos decretos dogmáticos — sobre los sacramentos, el primado y las cuestiones de fe y moral — son parte del magisterio ordinario de la Iglesia. Sus decretos de unión con las Iglesias orientales, aunque no se materializaron en comunión duradera en el siglo XV, abrieron el camino para las Iglesias Orientales Católicas actuales — caldeas, coptas, maronitas, melquitas, sirias, armenias, ucranianas, rumanas y otras — que viven en plena comunión con Roma manteniendo sus propias liturgias y tradiciones. Florencia fue, en este sentido, la primera gran realización del principio que el Vaticano II formulará como «la Iglesia como comunión de Iglesias»: unidad en la fe, pluralidad en las tradiciones.</p>
+  </div>
+
+  <hr class="gold">
+  <p class="final"><i>«Laetentur caeli et exsultet terra: sublata est enim inter occidentales et orientales diutina maeroris nebula, concordiae lux renituit.»</i></p>
+  <p class="final">«Alégrense los cielos y regocíjese la tierra: la larga nube de tristeza entre occidentales y orientales ha sido levantada, la luz de la concordia brilla de nuevo.»</p>
+  <p class="final" style="margin-top:6px;">— <i>Laetentur Caeli</i>, Decreto de Unión con los Griegos, 5 de julio de 1439.</p>
+  <p class="final" style="margin-top:14px;"><i>Finis coronat opus.</i> — Tratado histórico-teológico sobre el Concilio de Florencia.</p>
+</section>
+
+</div></main></div>
+
+<script>
+const toc=document.getElementById('toc'),btn=document.getElementById('tocToggle'),
+  ov=document.getElementById('tocOverlay'),srch=document.getElementById('tocSearch'),
+  body=document.body,bar=document.getElementById('progress');
+const open=()=>{toc.classList.add('open');body.classList.add('toc-open');};
+const close=()=>{toc.classList.remove('open');body.classList.remove('toc-open');};
+btn.addEventListener('click',()=>toc.classList.contains('open')?close():open());
+ov.addEventListener('click',close);
+document.addEventListener('keydown',e=>{
+  if(e.key.toLowerCase()==='m'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){toc.classList.contains('open')?close():open();}
+  if(e.key==='Escape')close();
+});
+if(window.innerWidth>860)open();
+document.querySelectorAll('#toc .group').forEach(g=>{
+  if(g.dataset.default==='open')g.classList.add('open');
+  g.querySelector(':scope>.group-head').addEventListener('click',()=>g.classList.toggle('open'));
+});
+const links=Array.from(document.querySelectorAll('#toc a'));
+const anchors=links.map(l=>{try{return document.querySelector(l.getAttribute('href'));}catch(e){return null;}}).filter(Boolean);
+function onScroll(){
+  const h=document.documentElement;
+  bar.style.width=(h.scrollHeight-h.clientHeight>0?h.scrollTop/(h.scrollHeight-h.clientHeight)*100:0)+'%';
+  let cur=anchors[0];
+  anchors.forEach(s=>{if(s.offsetTop<=window.scrollY+150)cur=s;});
+  links.forEach(l=>l.classList.remove('active'));
+  if(!cur)return;
+  const act=document.querySelector('#toc a[href="#'+cur.id+'"]');
+  if(act){act.classList.add('active');let g=act.closest('.group');while(g){g.classList.add('open');g=g.parentElement?.closest('.group');}}
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+links.forEach(l=>{
+  l.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(l.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+    if(window.innerWidth<=860)close();
+  });
+});
+srch.addEventListener('input',()=>{
+  const q=srch.value.trim().toLowerCase();
+  if(!q){toc.classList.remove('searching');document.querySelectorAll('#toc li').forEach(li=>li.classList.remove('no-match'));document.querySelectorAll('#toc .group').forEach(g=>g.classList.remove('has-match'));return;}
+  toc.classList.add('searching');
+  document.querySelectorAll('#toc li').forEach(li=>{
+    const a=li.querySelector(':scope>a');if(!a)return;
+    const m=a.textContent.toLowerCase().includes(q);
+    li.classList.toggle('no-match',!m);
+    if(m){let g=li.closest('.group');while(g){g.classList.add('has-match');g=g.parentElement?.closest('.group');}}
+  });
+});
+</script>
+</body>
+</html>

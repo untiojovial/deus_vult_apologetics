@@ -26,3 +26,5 @@ No para acumular datos sin fin, sino para verificar afirmaciones con metodo.
 - [Las Lenguas de Jesus (Dossier)](/historia/lenguas-de-jesus-dossier/)
 - [Metodo Historico (Dossier)](/historia/metodo-historico-dossier/)
 - [Testimonios Historicos de las Muertes de los Apostoles (Dossier)](/historia/muerte-historica-apostoles-dossier/)
+- [El Concilio de Florencia (1431-1445) (Dossier)](/historia/concilio-florencia-dossier/)
+- [El Mito del Sincretismo Pagano — Respuesta Católica (Dossier)](/historia/sincretismo-pagano-dossier/)

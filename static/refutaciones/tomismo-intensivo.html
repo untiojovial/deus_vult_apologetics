@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomismo Intensivo — Cornelio Fabro</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Cormorant+Upright:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0E0E0E; --ink-mid:#161616; --ink-lift:#222222;
+  --parchment:#F2EDE3; --parchment2:#EDE6D6;
+  --gold:#B8963E; --gold-light:#D4AF60; --gold-pale:#F5E8C8;
+  --rust:#8B3A2A; --cream:#FAF7F0; --muted:#7A7060;
+  --border:rgba(184,150,62,0.18); --border-strong:rgba(184,150,62,0.45);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--parchment);font-family:'EB Garamond',Georgia,serif;font-size:19px;line-height:1.82;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--ink);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--rust),var(--gold));z-index:2000;width:0%;transition:width 0.1s;}
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:58px;background:rgba(14,14,14,0.97);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;backdrop-filter:blur(14px);}
+.nav-brand{font-family:'Cormorant Upright',serif;font-size:1.05rem;font-weight:600;color:var(--gold);letter-spacing:0.06em;}
+.nav-brand em{color:var(--parchment);font-style:normal;font-weight:300;}
+#hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+#hamburger span{display:block;width:24px;height:2px;background:var(--gold);transition:all 0.3s;}
+#sidebar{position:fixed;top:58px;left:0;width:270px;height:calc(100vh - 58px);background:var(--ink-mid);border-right:1px solid var(--border);overflow-y:auto;z-index:900;padding:1.25rem 0;transition:transform 0.35s cubic-bezier(.4,0,.2,1);}
+#sidebar::-webkit-scrollbar{width:3px;}
+#sidebar::-webkit-scrollbar-thumb{background:var(--gold);}
+.sb-group-title{font-family:'DM Sans',sans-serif;font-size:0.58rem;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);padding:0.9rem 1.4rem 0.4rem;border-top:1px solid var(--border);margin-top:0.5rem;}
+.sb-group-title:first-child{border-top:none;margin-top:0;}
+.sb-link{display:block;padding:0.42rem 1.4rem;color:var(--muted);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:400;border-left:3px solid transparent;transition:all 0.2s;cursor:pointer;}
+.sb-link:hover,.sb-link.active{color:var(--parchment);border-left-color:var(--gold);background:rgba(184,150,62,0.07);padding-left:1.65rem;}
+.sb-link.active{color:var(--gold-light);font-weight:500;}
+#main{margin-left:270px;padding-top:58px;}
+#hero{min-height:100vh;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.hero-mandorla{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(184,150,62,0.07) 0%,transparent 68%);animation:breathe 8s ease-in-out infinite;pointer-events:none;}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.6;}50%{transform:translate(-50%,-50%) scale(1.08);opacity:1;}}
+.hero-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:520px;height:520px;border:1px solid rgba(184,150,62,0.12);border-radius:50%;animation:spin-slow 90s linear infinite;}
+.hero-ring2{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:380px;height:380px;border:1px solid rgba(184,150,62,0.08);border-radius:50%;animation:spin-slow 60s linear infinite reverse;}
+@keyframes spin-slow{to{transform:translate(-50%,-50%) rotate(360deg);}}
+.hero-esse{position:absolute;font-family:'Cormorant Upright',serif;font-size:28rem;font-weight:700;color:rgba(184,150,62,0.04);line-height:1;pointer-events:none;user-select:none;top:50%;left:50%;transform:translate(-50%,-52%);letter-spacing:-0.05em;}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:820px;padding:2rem;animation:fadeUp 1.2s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+.hero-eyebrow{font-family:'DM Sans',sans-serif;font-size:0.65rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--gold);margin-bottom:1.75rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:44px;height:1px;background:var(--gold);opacity:0.5;}
+.hero-title{font-family:'Cormorant Upright',serif;font-size:clamp(3rem,7vw,6.5rem);font-weight:700;line-height:1.0;color:var(--parchment);margin-bottom:0.5rem;letter-spacing:-0.01em;}
+.hero-title .gold{color:var(--gold-light);}
+.hero-sub{font-family:'EB Garamond',serif;font-size:clamp(1rem,2.2vw,1.45rem);font-style:italic;color:var(--muted);margin-bottom:1.5rem;}
+.hero-dates{font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--gold);letter-spacing:0.16em;text-transform:uppercase;margin-bottom:2.5rem;}
+.hero-motto{font-size:1.1rem;font-style:italic;color:rgba(242,237,227,0.65);max-width:580px;margin:0 auto 2.5rem;border-left:3px solid var(--gold);padding-left:1.25rem;text-align:left;line-height:1.7;}
+.hero-scroll{display:inline-flex;align-items:center;gap:0.5rem;font-family:'DM Sans',sans-serif;font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);cursor:pointer;text-decoration:none;animation:bob 2.2s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);background:var(--gold);padding:2.5rem 3rem;}
+.stat-item{text-align:center;}
+.stat-number{font-family:'Cormorant Upright',serif;font-size:3rem;font-weight:700;color:var(--ink);line-height:1;margin-bottom:0.2rem;}
+.stat-label{font-family:'DM Sans',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(14,14,14,0.55);}
+.section{padding:5rem 4.5rem;position:relative;}
+.section.alt{background:var(--ink-mid);}
+.section-header{margin-bottom:3rem;}
+.sec-eyebrow{font-family:'DM Sans',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:0.7rem;}
+.sec-title{font-family:'Cormorant Upright',serif;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:700;color:var(--parchment);line-height:1.12;margin-bottom:0.9rem;}
+.sec-title .gold{color:var(--gold-light);}
+.sec-rule{width:56px;height:2px;background:linear-gradient(90deg,var(--gold),var(--rust));}
+.prose{max-width:740px;font-size:1.03rem;color:rgba(242,237,227,0.82);line-height:1.9;}
+.prose p{margin-bottom:1.3rem;}
+.prose strong{color:var(--gold-light);font-weight:600;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.timeline{position:relative;padding-left:2.5rem;margin-top:2rem;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),var(--rust),transparent);}
+.tl-item{position:relative;padding-bottom:2.5rem;opacity:0;transform:translateX(-18px);transition:all 0.5s ease;}
+.tl-item.vis{opacity:1;transform:translateX(0);}
+.tl-dot{position:absolute;left:-2.85rem;top:0.4rem;width:12px;height:12px;border-radius:50%;background:var(--ink);border:2px solid var(--gold);transition:all 0.3s;}
+.tl-item:hover .tl-dot{background:var(--gold);box-shadow:0 0 10px var(--gold);}
+.tl-year{font-family:'Cormorant Upright',serif;font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:0.2rem;line-height:1;}
+.tl-event{font-family:'EB Garamond',serif;font-size:1.08rem;font-weight:600;color:var(--parchment);margin-bottom:0.5rem;}
+.tl-text{font-size:0.95rem;color:rgba(242,237,227,0.72);line-height:1.82;max-width:660px;}
+.tl-tag{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.58rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;background:rgba(184,150,62,0.1);color:var(--gold);border:1px solid rgba(184,150,62,0.3);border-radius:2px;padding:0.18rem 0.55rem;margin-bottom:0.45rem;}
+.blockquote{margin:3rem 0;padding:2.2rem 2.8rem 2.2rem 3.2rem;background:rgba(184,150,62,0.05);border:1px solid var(--border);position:relative;}
+.blockquote::before{content:'\275D';position:absolute;top:-1rem;left:2rem;font-size:3.5rem;color:var(--gold);font-family:'Cormorant Upright',serif;line-height:1;}
+.blockquote p{font-family:'EB Garamond',serif;font-size:clamp(1.05rem,1.8vw,1.35rem);font-style:italic;color:var(--parchment);line-height:1.72;margin-bottom:0.9rem;}
+.blockquote cite{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-style:normal;color:var(--gold);letter-spacing:0.14em;text-transform:uppercase;font-weight:600;}
+.hl{background:rgba(184,150,62,0.06);border-left:4px solid var(--gold);padding:1.4rem 1.8rem;margin:1.75rem 0;border-radius:0 2px 2px 0;}
+.hl-title{font-family:'Cormorant Upright',serif;font-size:1rem;font-weight:600;color:var(--gold-light);margin-bottom:0.45rem;}
+.hl p{font-size:0.93rem;color:rgba(242,237,227,0.78);line-height:1.78;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2rem;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--border);padding:1.9rem 1.75rem;position:relative;transition:all 0.3s;opacity:0;transform:translateY(18px);}
+.card.vis{opacity:1;transform:translateY(0);}
+.card:hover{border-color:var(--gold-light);background:rgba(184,150,62,0.05);transform:translateY(-3px);box-shadow:0 8px 28px rgba(184,150,62,0.08);}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--rust));opacity:0;transition:opacity 0.3s;}
+.card:hover::after{opacity:1;}
+.card-title{font-family:'Cormorant Upright',serif;font-size:1.12rem;font-weight:600;color:var(--parchment);margin-bottom:0.35rem;}
+.card-sub{font-family:'DM Sans',sans-serif;font-size:0.65rem;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;}
+.card-text{font-size:0.92rem;color:rgba(242,237,227,0.68);line-height:1.78;}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;margin-top:2rem;background:rgba(184,150,62,0.06);}
+.pillar{background:var(--ink);padding:2.4rem 2rem;transition:all 0.3s;opacity:0;transform:translateY(14px);}
+.section.alt .pillar{background:var(--ink-mid);}
+.pillar.vis{opacity:1;transform:translateY(0);}
+.pillar:hover{background:rgba(184,150,62,0.05);}
+.pillar-num{font-family:'Cormorant Upright',serif;font-size:3.2rem;font-weight:700;color:rgba(184,150,62,0.14);line-height:1;margin-bottom:0.45rem;transition:color 0.3s;}
+.pillar:hover .pillar-num{color:rgba(184,150,62,0.32);}
+.pillar-title{font-family:'Cormorant Upright',serif;font-size:1.05rem;font-weight:600;color:var(--parchment);margin-bottom:0.65rem;}
+.pillar-text{font-size:0.9rem;color:rgba(242,237,227,0.65);line-height:1.78;}
+.schema{background:rgba(184,150,62,0.04);border:1px solid var(--border-strong);padding:2.5rem 3rem;margin:2.5rem 0;position:relative;}
+.schema-label{position:absolute;top:-0.65rem;left:1.5rem;background:var(--ink);padding:0 0.6rem;font-family:'DM Sans',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);}
+.section.alt .schema-label{background:var(--ink-mid);}
+.schema-title{font-family:'Cormorant Upright',serif;font-size:1.3rem;font-weight:700;color:var(--gold-light);margin-bottom:1rem;}
+.schema-body{font-size:0.97rem;color:rgba(242,237,227,0.8);line-height:1.88;}
+.schema-body p{margin-bottom:0.9rem;}
+.schema-body strong{color:var(--gold-light);}
+.comp-table{width:100%;border-collapse:collapse;margin-top:2rem;}
+.comp-table th{text-align:left;font-family:'DM Sans',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);padding:0.7rem 1rem;border-bottom:1px solid var(--border-strong);}
+.comp-table td{padding:1rem 1rem;font-size:0.9rem;color:rgba(242,237,227,0.75);border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;line-height:1.72;}
+.comp-table tr:hover td{background:rgba(184,150,62,0.04);color:var(--parchment);}
+.comp-table td:first-child{font-family:'Cormorant Upright',serif;font-size:1rem;font-weight:600;color:var(--parchment);}
+.badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.58rem;font-weight:600;padding:0.18rem 0.5rem;border-radius:2px;text-transform:uppercase;letter-spacing:0.1em;}
+.badge-gold{background:rgba(184,150,62,0.15);color:var(--gold);border:1px solid rgba(184,150,62,0.35);}
+.badge-rust{background:rgba(139,58,42,0.2);color:#C8805A;border:1px solid rgba(139,58,42,0.4);}
+.badge-grey{background:rgba(255,255,255,0.07);color:#999;border:1px solid rgba(255,255,255,0.14);}
+.concept-band{background:var(--gold);padding:4rem 4.5rem;display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:center;}
+.concept-word{font-family:'Cormorant Upright',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:700;color:var(--ink);line-height:1;letter-spacing:-0.02em;}
+.concept-word em{display:block;font-size:0.35em;font-style:normal;font-weight:400;color:rgba(14,14,14,0.5);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;font-family:'DM Sans',sans-serif;}
+.concept-def{font-family:'EB Garamond',serif;font-size:1.12rem;color:var(--ink);line-height:1.82;}
+.concept-def strong{font-weight:700;}
+.final{background:var(--ink);padding:6rem 4.5rem;text-align:center;position:relative;overflow:hidden;}
+.final-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(184,150,62,0.07) 0%,transparent 70%);pointer-events:none;}
+.final-esse{font-family:'Cormorant Upright',serif;font-size:12rem;font-weight:700;color:rgba(184,150,62,0.06);line-height:1;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;}
+.rip{font-family:'Cormorant Upright',serif;font-size:clamp(1.4rem,3vw,2.5rem);font-weight:500;font-style:italic;color:var(--gold);margin-bottom:0.5rem;position:relative;z-index:2;}
+.rip-sub{font-family:'DM Sans',sans-serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(242,237,227,0.28);position:relative;z-index:2;}
+.esse-divider{text-align:center;font-family:'Cormorant Upright',serif;font-size:3rem;color:rgba(184,150,62,0.15);line-height:1;padding:1rem 0;user-select:none;}
+footer{background:var(--ink-mid);border-top:1px solid var(--border);padding:1.75rem 4.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.ft-brand{font-family:'Cormorant Upright',serif;font-size:1rem;color:var(--gold);font-weight:600;}
+.ft-copy{font-family:'DM Sans',sans-serif;font-size:0.7rem;color:rgba(242,237,227,0.28);}
+#overlay{display:none;position:fixed;inset:0;top:58px;background:rgba(0,0,0,0.65);z-index:800;}
+#overlay.vis{display:block;}
+@media(max-width:920px){
+  #sidebar{transform:translateX(-100%);}
+  #sidebar.open{transform:translateX(0);}
+  #main{margin-left:0;}
+  #hamburger{display:flex;}
+  .section{padding:3.5rem 1.75rem;}
+  .two-col{grid-template-columns:1fr;gap:2rem;}
+  .stat-band{grid-template-columns:repeat(2,1fr);padding:2rem 1.5rem;gap:2rem;}
+  .concept-band{grid-template-columns:1fr;padding:2.5rem 1.75rem;gap:1.5rem;}
+  footer{padding:1.5rem 1.75rem;}
+  .final{padding:4rem 1.75rem;}
+}
+@media(max-width:540px){
+  .pillars{grid-template-columns:1fr;}
+  .cards{grid-template-columns:1fr;}
+  .stat-band{grid-template-columns:1fr 1fr;}
+  .hero-esse{font-size:12rem;}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav id="navbar">
+  <div class="nav-brand">Tomismo <em>Intensivo</em> · Cornelio Fabro</div>
+  <button id="hamburger" aria-label="Menú" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+</nav>
+<div id="overlay" onclick="toggleSidebar()"></div>
+<aside id="sidebar">
+  <div class="sb-group-title">I — Cornelio Fabro</div>
+  <a class="sb-link" onclick="goTo('hero')">Presentación</a>
+  <a class="sb-link" onclick="goTo('vida')">Vida y Formación</a>
+  <a class="sb-link" onclick="goTo('vocacion')">Orden, Vocación y Primeras Obras</a>
+  <a class="sb-link" onclick="goTo('academia')">Trayectoria Académica</a>
+  <a class="sb-link" onclick="goTo('obras-fabro')">Sus Obras Principales</a>
+  <a class="sb-link" onclick="goTo('contexto')">Contexto Filosófico</a>
+  <a class="sb-link" onclick="goTo('ultimos')">Últimos Años y Herencia</a>
+  <div class="sb-group-title">II — Tomismo Intensivo</div>
+  <a class="sb-link" onclick="goTo('que-es')">¿Qué es el Tomismo Intensivo?</a>
+  <a class="sb-link" onclick="goTo('esse')">El Esse como Acto de Todos los Actos</a>
+  <a class="sb-link" onclick="goTo('participacion')">La Participación</a>
+  <a class="sb-link" onclick="goTo('causalidad')">Causalidad Trascendente y Creación</a>
+  <a class="sb-link" onclick="goTo('libertad')">Libertad y Trascendencia</a>
+  <a class="sb-link" onclick="goTo('modernidad')">Fabro frente a la Filosofía Moderna</a>
+  <a class="sb-link" onclick="goTo('kierkegaard')">Fabro y Kierkegaard</a>
+  <a class="sb-link" onclick="goTo('vs-tomismo')">Frente al Tomismo Clásico</a>
+  <a class="sb-link" onclick="goTo('criticas')">Críticas y Debates</a>
+  <a class="sb-link" onclick="goTo('vigencia')">Vigencia Actual</a>
+</aside>
+<main id="main">
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mandorla"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring2"></div>
+  <div class="hero-esse">esse</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Cornelio Fabro · Filosofía Tomista</div>
+    <h1 class="hero-title">Tomismo<br><span class="gold">Intensivo</span></h1>
+    <p class="hero-sub">La recuperación metafísica del esse en Santo Tomás de Aquino</p>
+    <div class="hero-dates">Cornelio Fabro · 1911 — 1995</div>
+    <blockquote class="hero-motto">
+      "El ser no es un concepto vacío: es el acto más íntimo de todas las cosas, el pulso oculto de la realidad. Quien lo olvida, pierde a Dios. Quien lo recuerda, lo encuentra."
+    </blockquote>
+    <a class="hero-scroll" onclick="goTo('vida')">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 12L2 4h12L8 12z"/></svg>
+      Descender al fundamento
+    </a>
+  </div>
+</section>
+<div class="stat-band">
+  <div class="stat-item"><div class="stat-number">84</div><div class="stat-label">años de vida</div></div>
+  <div class="stat-item"><div class="stat-number">60+</div><div class="stat-label">obras publicadas</div></div>
+  <div class="stat-item"><div class="stat-number">1911</div><div class="stat-label">año de nacimiento</div></div>
+  <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">acto del esse</div></div>
+</div>
+
+<!-- VIDA -->
+<section class="section" id="vida">
+  <div class="section-header">
+    <div class="sec-eyebrow">01 — Orígenes · 1911–1933</div>
+    <h2 class="sec-title">Vida y <span class="gold">Formación</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="two-col">
+    <div class="prose">
+      <p>Cornelio Fabro nació el <strong>24 de agosto de 1911</strong> en Flumignano, una aldea del Friuli, región del noreste de Italia marcada por la austeridad, la fe popular y la proximidad a la frontera eslava. Era el tercer hijo de una familia campesina de sólida devoción católica. El Friuli —tierra de dos guerras, de paisajes alpinos y llanuras frías, de una latinidad templada por influencias germánicas y eslavas— moldearía en él un carácter sobrio, riguroso y de profundidad sin ostentación.</p>
+      <p>Desde niño mostró una inteligencia excepcional y una sensibilidad religiosa inusual. Con catorce años ingresó al <strong>seminario diocesano de Udine</strong>, donde encontró en la filosofía escolástica el lenguaje que necesitaba para articular sus preguntas más profundas: ¿qué es el ser? ¿por qué existe algo en vez de nada? ¿cómo puede la criatura finita relacionarse con un Dios infinito? Estas preguntas, ardientes y concretas para él, guiarían toda su vida.</p>
+      <p>Más tarde fue enviado a <strong>Roma</strong> para estudiar filosofía y teología en la Pontificia Universidad Lateranense, donde obtuvo el doctorado con matrícula de honor. Sus profesores reconocieron en él un talento fuera de lo ordinario: no sólo la capacidad de asimilar sistemas sino la de <strong>ver más allá de ellos</strong>, detectar sus presupuestos ocultos y sus zonas de sombra. En Roma descubrió a los grandes comentaristas de Tomás —Cayetano, Juan de Santo Tomás— y, por primera vez, sintió que algo fundamental había sido perdido en esas interpretaciones brillantes pero reductoras.</p>
+      <p>Descubrió también a <strong>Étienne Gilson</strong>, el filósofo francés que estaba haciendo en Francia lo que Fabro haría en Italia: volver al Tomás original, sin los filtros de la escolástica tardía. La lectura de Gilson fue para Fabro una confirmación de su intuición y un estímulo para ir aún más lejos.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-title">✦ El Friuli como cuna filosófica</div>
+        <p>El Friuli es una región de fronteras: entre Italia y el mundo eslavo, entre montaña y llanura. Esta experiencia de límite y tensión entre mundos distintos se reflejaría en la filosofía de Fabro: siempre en la frontera entre tradición y modernidad, entre Tomás y Kierkegaard, entre la metafísica clásica y el existencialismo contemporáneo. El fronterizo no pertenece a un solo mundo: conoce ambos lados y puede hablar con todos.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-title">✦ El primer encuentro con la Summa</div>
+        <p>Fabro recordó siempre el momento en que leyó por primera vez el artículo de la Summa Theologiae donde Tomás afirma que el esse es "acto de todos los actos y perfección de todas las perfecciones". No lo entendió del todo al principio, pero sintió que allí había algo decisivo que los manuales del seminario no alcanzaban a transmitir. Esa intuición inicial se convertiría en el programa de investigación de toda su vida.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-title">✦ La música y el arte como vías de acceso</div>
+        <p>Fabro no era sólo filósofo: era también un hombre de sensibilidad estética aguda. Amaba el canto gregoriano, la pintura románica y la arquitectura medieval. En ellos veía lo que luego articularía filosóficamente: que la belleza es una participación en el Esse Divino, y que el arte auténtico es una vía de acceso a Dios tan real —aunque diferente— como el argumento metafísico.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOCACIÓN -->
+<section class="section alt" id="vocacion">
+  <div class="section-header">
+    <div class="sec-eyebrow">02 — 1934–1950</div>
+    <h2 class="sec-title">Orden, <span class="gold">Sacerdocio</span> y Primeras Obras</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Vida religiosa</div>
+      <div class="tl-year">1934</div>
+      <div class="tl-event">Profesión religiosa en los Estigmatinos</div>
+      <div class="tl-text">Fabro ingresa a la Congregación de los Sacerdotes del Sagrado Corazón de Jesús (Estigmatinos), fundada por San Gaspar Bertoni. La espiritualidad de la congregación, centrada en la participación en la Pasión de Cristo, resonará en su filosofía: también el ser finito "participa" en el Ser infinito. El 4 de junio de 1934 emite la profesión religiosa perpetua. La vida en comunidad, la oración litúrgica y el apostolado darán carne y hueso a sus abstracciones metafísicas.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Sacerdocio</div>
+      <div class="tl-year">1937</div>
+      <div class="tl-event">Ordenación sacerdotal y primeras publicaciones</div>
+      <div class="tl-text">Es ordenado sacerdote en Roma. Ese mismo año publica su primer artículo académico sobre la doctrina tomista del conocimiento. Ya anticipa su método: volver a los textos originales de Tomás en latín con rigor filológico, sin filtrar a través de los comentaristas escolásticos posteriores que, según Fabro, habían distorsionado y empobrecido el pensamiento original del Aquinate. El artículo circula entre especialistas y genera atención inmediata.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Obra fundacional</div>
+      <div class="tl-year">1939</div>
+      <div class="tl-event">La nozione metafisica di partecipazione — la irrupción</div>
+      <div class="tl-text">Publica su primera obra mayor, fruto de años de investigación. Demuestra que la participación no es un concepto marginal en Tomás sino la clave de bóveda de toda su metafísica. El eco en los círculos filosóficos europeos es inmediato: un nuevo intérprete de Tomás ha nacido, uno que lee al Aquinate con ojos distintos y resultados que nadie había visto antes. La obra será revisada y ampliada en 1950 y 1961, convirtiéndose en referencia obligatoria para todo medievalista serio.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Segunda Guerra</div>
+      <div class="tl-year">1940–1945</div>
+      <div class="tl-event">La guerra y el descubrimiento del existencialismo</div>
+      <div class="tl-text">Los años de guerra son para Fabro años de lectura frenética. Lee a Heidegger, a Sartre, a Kierkegaard —cuya obra le llega en alemán antes de que existan traducciones italianas—. Aprende danés para acceder a Kierkegaard en los originales, un esfuerzo que revelará su seriedad intelectual. La devastación de Europa confirma su tesis: el olvido del ser tiene consecuencias civilizatorias. La filosofía no es adorno académico: es cuestión de vida o muerte para las culturas.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Gnoseología</div>
+      <div class="tl-year">1941</div>
+      <div class="tl-event">Percezione e pensiero — defensa del realismo</div>
+      <div class="tl-text">Publica su gran obra gnoseológica: una defensa del realismo intelectual tomista frente al idealismo kantiano y sus derivados. Demuestra que la inteligencia humana puede alcanzar la realidad extramental sin perderse en el laberinto de la representación subjetiva. Una de las refutaciones más rigurosas del idealismo desde una posición tomista. Muchos colegas no creyentes la estudian con respeto.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Síntesis</div>
+      <div class="tl-year">1950</div>
+      <div class="tl-event">Segunda edición ampliada de la Partecipazione</div>
+      <div class="tl-text">La revisión de su obra fundacional incorpora el diálogo con Gilson y las nuevas investigaciones medievales. Fabro añade el análisis de las fuentes neoplatónicas de Tomás (Proclo, el pseudo-Dionisio) y demuestra cómo Tomás las transforma radicalmente al integrarlas en su metafísica del esse creado. La participación tomista no es una herencia platónica no digerida: es una síntesis original que supera tanto a Platón como a Aristóteles.</div>
+    </div>
+  </div>
+  <div class="blockquote">
+    <p>"La guerra me enseñó que las ideas tienen consecuencias. Una filosofía que niega el ser funda una civilización que niega al hombre. Una filosofía que recuerda el esse funda una civilización que recuerda a Dios. No hay nada más práctico que la metafísica."</p>
+    <cite>— Cornelio Fabro, carta a un discípulo, 1947</cite>
+  </div>
+</section>
+
+<!-- ACADEMIA -->
+<section class="section" id="academia">
+  <div class="section-header">
+    <div class="sec-eyebrow">03 — 1950–1985</div>
+    <h2 class="sec-title">Trayectoria <span class="gold">Académica</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>Fabro desarrolló su carrera principalmente en <strong>Roma</strong> y en las grandes universidades italianas, aunque su influencia se extendió a toda Europa y a América Latina. Fue un académico infatigable: enseñó metafísica, historia de la filosofía moderna, gnoseología y filosofía de Dios durante más de cuatro décadas, formando generaciones de filósofos en el método del tomismo intensivo.</p>
+    <p>Su método didáctico era singular: combinaba la lectura directa de los textos de Santo Tomás en latín con un dominio asombroso de la filosofía moderna, desde Descartes hasta Heidegger, pasando por Kant, Hegel, Marx, Nietzsche y Sartre. Podía recitar pasajes enteros de la <em>Summa</em> y contraponerlos inmediatamente a la <em>Crítica de la Razón Pura</em> o al <em>Ser y la Nada</em>. A diferencia de muchos tomistas de su época, <strong>no huyó de la modernidad</strong>: la estudió con rigor y la criticó desde dentro.</p>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">Pontificio Ateneo Antonianum</div>
+      <div class="card-sub">Roma · 1947–1970</div>
+      <div class="card-text">Su primera cátedra universitaria estable. Aquí desarrolló sus cursos magistrales de metafísica que luego se convertirían en libros. Los estudiantes recuerdan clases en las que el tiempo desaparecía. Formó aquí a la primera generación de fabristas italianos, muchos de los cuales llevarían el tomismo intensivo a universidades de todo el mundo.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Pontificia Universidad Lateranense</div>
+      <div class="card-sub">Roma · 1958–1980</div>
+      <div class="card-text">Principal sede de su actividad docente. Sus cursos sobre la historia del ateísmo moderno y sobre la libertad fueron legendarios. Aquí polemizó con representantes del tomismo trascendental, del existencialismo y del marxismo filosófico. Sus debates eran eventos académicos de primer orden.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Director de "Divus Thomas"</div>
+      <div class="card-sub">Piacenza · 1954–1975</div>
+      <div class="card-text">Dirigió durante años la revista filosófica Divus Thomas, una de las publicaciones tomistas más antiguas. Desde ella promovió el tomismo intensivo, publicó polémicas con otras escuelas y abrió las páginas a interlocutores no creyentes, convencido de que el diálogo auténtico exige interlocutores reales, no sombras.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Universidad de Perugia</div>
+      <div class="card-sub">Italia · años 1970</div>
+      <div class="card-text">Enseñó en la Universidad secular de Perugia, donde tuvo alumnos marxistas y positivistas que asistían fascinados por su capacidad de destruir argumentos ateos desde dentro usando la lógica que los propios ateos afirmaban respetar. Muchos no se convirtieron, pero reconocieron que el tomismo no es irracionalismo.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Centro di Gallarate</div>
+      <div class="card-sub">Participante habitual</div>
+      <div class="card-text">Participó durante décadas en el Centro di Studi Filosofici di Gallarate, foro de encuentro entre tomistas, idealistas, marxistas y fenomenólogos. Sus intervenciones eran las más polémicas y las más esperadas. Allí su debate con los "tomistas esencialistas" alcanzó mayor publicidad académica.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Centro Internazionale di Studi Tomistici</div>
+      <div class="card-sub">Roma · fundado 1990</div>
+      <div class="card-text">En 1990 fundó este centro dedicado a promover el tomismo intensivo y a formar nuevas generaciones de filósofos. Publicó ediciones críticas de sus obras, organizó coloquios internacionales y estableció lazos con universidades de España, América Latina y Polonia donde el tomismo intensivo encontró terreno especialmente fértil.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OBRAS FABRO -->
+<section class="section alt" id="obras-fabro">
+  <div class="section-header">
+    <div class="sec-eyebrow">04 — Bibliografía selecta</div>
+    <h2 class="sec-title">Obras <span class="gold">Principales</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>Fabro publicó más de sesenta libros y centenares de artículos en revistas de todo el mundo. Su corpus es de variedad asombrosa: desde la metafísica más técnica hasta el análisis de Kierkegaard, pasando por el ateísmo contemporáneo, la gnoseología, la filosofía de la libertad y la historia de la filosofía moderna.</p>
+  </div>
+  <div class="cards">
+    <div class="card vis">
+      <div class="card-title">La nozione metafisica di partecipazione</div>
+      <div class="card-sub">1939 — Obra fundacional</div>
+      <div class="card-text">El libro que lo puso en el mapa filosófico internacional. Demuestra que la participación es el concepto central de la metafísica tomista —no un préstamo platónico residual sino la clave que articula la distinción esse/essentia, la causalidad creadora y la relación criatura-Creador. Revisada y ampliada en 1950 y 1961. Traducida al inglés, alemán y español. Sigue siendo texto de referencia obligado.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Percezione e pensiero</div>
+      <div class="card-sub">1941 — Gnoseología tomista</div>
+      <div class="card-text">Su gran obra gnoseológica. Defiende el realismo intelectual tomista frente al idealismo kantiano y sus herederos. Muestra cómo la inteligencia humana puede alcanzar la realidad extramental sin perderse en la representación subjetiva. Una de las refutaciones más rigurosas del idealismo desde una posición tomista clásica.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Partecipazione e causalità</div>
+      <div class="card-sub">1960 — Obra cumbre</div>
+      <div class="card-text">Considerada su obra maestra. En más de 700 páginas desarrolla la conexión entre participación metafísica y causalidad divina, demostrando que la creación no es sólo producción eficiente sino comunicación del esse. Introduce con claridad el concepto de "causalidad trascendente" que distingue al Dios de Tomás del demiurgo platónico y del motor aristotélico.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Introduzione all'ateismo moderno (2 vols.)</div>
+      <div class="card-sub">1964 — Historia crítica</div>
+      <div class="card-text">Monumental análisis histórico-filosófico de los grandes sistemas ateos modernos: Spinoza, Feuerbach, Marx, Nietzsche, Sartre. Fabro no los descarta sino que los disecciona con rigor, mostrando el momento preciso en que cada ateísmo abandona el esse y las consecuencias filosóficas que esa renuncia arrastra. Sigue siendo texto de referencia irrenunciable.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Dall'essere all'esistente</div>
+      <div class="card-sub">1957 — Comparación</div>
+      <div class="card-text">"Del ser al existente": comparación sistemática entre la metafísica del esse en Tomás y el existencialismo contemporáneo (Heidegger, Sartre, Jaspers). Fabro demuestra que la pregunta fundamental del existencialismo —la existencia concreta, individual, irrepetible— estaba ya planteada en Tomás, pero respondida de manera incomparablemente más profunda.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Tomismo e pensiero moderno</div>
+      <div class="card-sub">1969 — Confrontación</div>
+      <div class="card-text">Articula la relación entre la metafísica tomista y los grandes temas modernos: subjetividad, libertad, historia, ciencia. Demuestra que el tomismo intensivo no necesita "actualizarse" añadiendo elementos modernos —como intentaron los tomistas trascendentales mezclando Tomás con Kant— sino que en sus propias categorías puede responder a todos esos temas con mayor rigor.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">L'uomo e il rischio di Dio</div>
+      <div class="card-sub">1967 — Filosofía religiosa</div>
+      <div class="card-text">"El hombre y el riesgo de Dios". Un libro más accesible en el que Fabro habla de la experiencia religiosa, la libertad ante Dios, el ateísmo como opción existencial y la posibilidad de una relación personal con el Creador. Revela la dimensión espiritual que subyace bajo toda su filosofía técnica. Quizás su libro más leído fuera de los círculos académicos.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">La svolta antropologica di Karl Rahner</div>
+      <div class="card-sub">1974 — Gran polémica</div>
+      <div class="card-text">Crítica filosófica demoledora al intento del influyente teólogo jesuita de reformar el tomismo desde categorías kantianas y heideggerianas. Para Fabro, el "tomismo trascendental" de Rahner desfigura a Tomás al aceptar el giro subjetivista moderno. Una de las polémicas más importantes de la filosofía católica del siglo XX, con réplicas y contrarréplicas que duraron años.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Kierkegaard e il genio del cristianesimo</div>
+      <div class="card-sub">1972 — Síntesis insólita</div>
+      <div class="card-text">Fabro fue el primer gran tomista que tomó a Kierkegaard completamente en serio. Este libro defiende que el filósofo danés no se opone al tomismo sino que lo complementa: donde Tomás da el fundamento metafísico del esse, Kierkegaard da la descripción existencial de la libertad ante Dios. Una síntesis que muchos consideraban imposible y Fabro demostró fecunda.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Riflessioni sulla libertà</div>
+      <div class="card-sub">1983 — Filosofía de la libertad</div>
+      <div class="card-text">Su obra sistemática sobre la libertad humana. Distingue libertad de elección (libre albedrío) y libertad de participación (libertad que crece al unirse a Dios). Para Fabro, la libertad auténtica no es independencia de Dios sino participación en la libertad divina. Va contra el liberalismo y también contra el determinismo desde una misma raíz metafísica.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXTO -->
+<section class="section" id="contexto">
+  <div class="section-header">
+    <div class="sec-eyebrow">05 — Coordenadas históricas</div>
+    <h2 class="sec-title">Contexto <span class="gold">Filosófico</span>: El Tomismo del Siglo XX</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2rem;">
+    <p>Para entender la aportación de Fabro es indispensable situar el estado del tomismo en el siglo XX y los debates que determinaron su posición. El tomismo no era un monolito: era un campo de batalla entre escuelas rivales que interpretaban de maneras muy diferentes el legado del Aquinate.</p>
+  </div>
+  <table class="comp-table">
+    <thead>
+      <tr><th>Corriente</th><th>Representantes</th><th>Tesis central</th><th>Postura de Fabro</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tomismo Esencialista</td>
+        <td>Cayetano, Juan de Santo Tomás, manuales neo-escolásticos XIX–XX</td>
+        <td>La esencia es el centro de la metafísica tomista. El esse actúa como cópula lógica, no como acto real ontológico.</td>
+        <td><span class="badge badge-rust">Crítica radical</span> Fabro afirma que esto traiciona a Tomás y lo aristoteliza, borrando la novedad cristiana del esse como acto creado y participado.</td>
+      </tr>
+      <tr>
+        <td>Tomismo de la Participación</td>
+        <td>Étienne Gilson, Anton Pegis</td>
+        <td>El esse es el acto central. La influencia neoplatónica en Tomás es real y fecunda, no contaminación.</td>
+        <td><span class="badge badge-gold">Convergencia</span> Fabro comparte la centralidad del esse con Gilson, aunque señala que Gilson no desarrolló suficientemente la estructura sistemática de la participación.</td>
+      </tr>
+      <tr>
+        <td>Tomismo Trascendental</td>
+        <td>Joseph Maréchal, Karl Rahner, Emerich Coreth, Bernard Lonergan</td>
+        <td>Integrar la crítica kantiana en el tomismo: la apertura trascendente del espíritu al ser como punto de contacto con Dios.</td>
+        <td><span class="badge badge-rust">Rechazo severo</span> Para Fabro esta síntesis cede demasiado a la modernidad y termina subjetivizando el esse, convirtiendo a Tomás en un proto-kantiano irreconocible.</td>
+      </tr>
+      <tr>
+        <td>Tomismo Maritainiano</td>
+        <td>Jacques Maritain</td>
+        <td>Filosofía cristiana que dialoga con el arte, la política y los derechos humanos desde el tomismo integral.</td>
+        <td><span class="badge badge-grey">Respeto crítico</span> Admira a Maritain pero lo considera demasiado concesivo con el humanismo moderno. Prefiere la confrontación filosófica a la síntesis apresurada.</td>
+      </tr>
+      <tr>
+        <td>Existencialismo ateo</td>
+        <td>Sartre, Heidegger, Camus</td>
+        <td>La existencia precede a la esencia. El ser es facticidad arrojada sin fundamento. Dios es imposible o innecesario.</td>
+        <td><span class="badge badge-rust">Refutación sistemática</span> Les reconoce el mérito de haber vuelto a la existencia concreta, pero muestra que sin el esse tomista acaban inevitablemente en nihilismo.</td>
+      </tr>
+      <tr>
+        <td>Fenomenología</td>
+        <td>Husserl, Merleau-Ponty, Edith Stein</td>
+        <td>Vuelta "a las cosas mismas", descripción rigurosa de la experiencia. Suspensión metodológica de la metafísica.</td>
+        <td><span class="badge badge-grey">Diálogo selectivo</span> Aprecia el método descriptivo pero rechaza el bracketing metafísico: sin la metafísica del esse la fenomenología se queda en la superficie de la experiencia.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ÚLTIMOS AÑOS -->
+<section class="section alt" id="ultimos">
+  <div class="section-header">
+    <div class="sec-eyebrow">06 — 1985–1995</div>
+    <h2 class="sec-title">Últimos Años y <span class="gold">Herencia</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="two-col">
+    <div class="prose">
+      <p>Los últimos años de Fabro estuvieron marcados por la <strong>preocupación por la crisis de la Iglesia y de la filosofía católica</strong> en el postconcilio. Veía con angustia cómo muchos teólogos y filósofos, embriagados por la novedad, abandonaban el tomismo sin haberlo comprendido realmente, adoptando categorías modernas que él consideraba filosóficamente deficientes y espiritualmente peligrosas.</p>
+      <p>No cesó de escribir y publicar. En 1990 fundó junto con discípulos el <strong>Centro Internazionale di Studi Tomistici</strong> en Roma, destinado a promover el tomismo intensivo y a formar nuevas generaciones de filósofos. El Centro publicó ediciones críticas y organizó coloquios internacionales que siguen celebrándose hoy.</p>
+      <p>Cornelio Fabro <strong>falleció el 4 de julio de 1995</strong> en Roma, a los 84 años. Murió como había vivido: leyendo, escribiendo y orando. El necrológico más bello lo escribió su discípulo Battista Mondin: <em>"Cornelio Fabro fue el pensador más grande que el catolicismo italiano produjo en el siglo XX."</em></p>
+      <p>Su influencia en el mundo hispánico fue especialmente profunda. Sus obras fueron traducidas al español y generaron escuelas en Madrid, Pamplona, Buenos Aires, México y Santiago de Chile. Filósofos como <strong>Ángel Luis González</strong>, Enrique Martínez (Universidad de Navarra) y Octavio Derisi (Buenos Aires) continuaron y desarrollaron el tomismo intensivo en lengua española.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-title">✦ Juan Pablo II y la Fides et Ratio</div>
+        <p>Juan Pablo II, filósofo tomista formado en Lublin, conocía y apreciaba el trabajo de Fabro. La encíclica Fides et Ratio (1998), en la que el Papa defiende la capacidad de la razón para alcanzar la verdad y recomienda el estudio de Santo Tomás, es en parte deudora de las batallas filosóficas que Fabro había librado durante décadas. La encíclica cita explícitamente la necesidad de recuperar el realismo metafísico que el tomismo intensivo propugnaba.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-title">✦ La biblioteca de Fabro</div>
+        <p>Al morir, Fabro dejó una biblioteca de más de 20.000 volúmenes, muchos con anotaciones marginales que constituyen un mapa de su pensamiento en desarrollo. Esta biblioteca, hoy parcialmente digitalizada, revela a un lector omnívoro: junto a los tomos de Tomás y los comentaristas medievales convivían Hegel, Marx, Nietzsche, Kierkegaard, Heidegger y Sartre, todos densamente subrayados y comentados.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-title">✦ La escuela de Fabro hoy</div>
+        <p>Los discípulos directos e indirectos de Fabro —Battista Mondin, Ángel Luis González, John Wippel, Stephen Brock, Enrique Martínez— han desarrollado el tomismo intensivo en múltiples direcciones: filosofía de la mente, ética, filosofía del derecho, diálogo con la neurociencia y la física cuántica. La "escuela fabriana" es hoy una de las corrientes tomistas más activas y académicamente productivas del mundo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="esse-divider">— esse —</div>
+
+<!-- QUÉ ES -->
+<section class="section" id="que-es">
+  <div class="section-header">
+    <div class="sec-eyebrow">07 — Concepto fundamental</div>
+    <h2 class="sec-title">¿Qué es el <span class="gold">Tomismo Intensivo</span>?</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="concept-band" style="margin-bottom:3rem;">
+    <div class="concept-word"><em>el nombre</em>Tomismo<br>Intensivo</div>
+    <div class="concept-def">
+      El nombre "tomismo intensivo" fue acuñado por Fabro para distinguir su lectura de Santo Tomás de las lecturas que llamaba "<strong>extensivas</strong>": las que desarrollan el sistema tomista añadiendo nuevos contenidos, integrando categorías modernas, ampliando el corpus hacia afuera. El tomismo intensivo, en cambio, propone <strong>profundizar verticalmente</strong> en el núcleo original del pensamiento de Tomás: el acto de ser (<em>actus essendi</em>), convencido de que en ese núcleo están ya las respuestas a todos los grandes problemas filosóficos, incluidos los de la modernidad. No es un tomismo que se "moderniza": es un tomismo que demuestra ser <strong>más radical que la modernidad misma</strong>.
+    </div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>La tesis fundamental del tomismo intensivo puede formularse de manera aparentemente sencilla: <strong>Santo Tomás de Aquino realizó una revolución metafísica que ninguno de sus intérpretes posteriores comprendió plenamente</strong>. Esa revolución consistió en poner el <em>esse</em> —el acto de ser— en el centro absoluto de la metafísica, desplazando a la <em>essentia</em> del lugar que había ocupado en toda la filosofía griega y en gran parte de la escolástica posterior.</p>
+    <p>Los escolásticos posteriores a Tomás —comenzando con el influyente Cayetano (siglo XV-XVI)— volvieron, sin darse cuenta, a <strong>centrar la metafísica en la esencia</strong>. Interpretaron el esse tomista como una cópula lógica, no como el acto real más íntimo de cada cosa existente. Esta inversión parece técnica, pero sus consecuencias son enormes: si el centro es la esencia, Dios se convierte en la Esencia Suprema; si el centro es el esse, Dios es el Esse Subsistente —el Ser mismo— y la diferencia entre Creador y criatura es incomparablemente más profunda e irreversible.</p>
+    <p>Fabro demuestra que esta lectura "esencialista" es filosóficamente inferior y que volviendo a los textos del propio Tomás —con rigor filológico— emerge una metafísica radicalmente distinta, incomparablemente más rica y más capaz de sostener el diálogo con la filosofía moderna desde una posición de superioridad intelectual, no de defensiva apologética.</p>
+  </div>
+  <div class="schema">
+    <div class="schema-label">esquema conceptual</div>
+    <div class="schema-title">Lectura esencialista vs. lectura intensiva</div>
+    <div class="schema-body">
+      <p><strong>Lectura esencialista (Cayetano y escolástica manual):</strong> El primer dato metafísico es la esencia —lo que algo es—. El esse es una cópula o la actualización de la esencia. Dios es la Esencia perfectísima, el Ser necesario por definición. La distinción entre esencia y existencia es real pero la esencia ocupa el centro. El ser es casi un predicado añadido a la esencia.</p>
+      <p><strong>Lectura intensiva (Fabro siguiendo al Tomás auténtico):</strong> El primer dato metafísico es el esse —el acto de ser—. La esencia es sólo el principio limitante que "recibe" el esse. En Dios, esse y essentia se identifican (Ipsum Esse Subsistens). En la criatura, la esencia recibe un esse que no le pertenece: lo tiene participado de Dios. El ser no es un predicado: es el acto más profundo, más íntimo y más real de cada cosa que existe. Es más íntimo a la cosa que la cosa misma a sí misma.</p>
+      <p><strong>La consecuencia crucial:</strong> En la lectura intensiva, cada cosa existente lleva en su interior una relación constitutiva con el Esse Divino, porque su esse es participación del Esse de Dios. La existencia del mundo no es un hecho bruto: es un don continuo, una creación permanente, una participación activa en el ser que sólo Dios posee por sí mismo y desde sí mismo.</p>
+    </div>
+  </div>
+  <div class="blockquote">
+    <p>"El esse en Santo Tomás no es el mínimo lógico de la predicación sino el máximo ontológico de la realidad: es el acto de todos los actos y la perfección de todas las perfecciones. Quien no comprenda esto no comprende nada de Tomás, aunque haya leído toda la Summa de cabo a rabo."</p>
+    <cite>— Cornelio Fabro, Partecipazione e causalità, 1960</cite>
+  </div>
+</section>
+
+<!-- ESSE -->
+<section class="section alt" id="esse">
+  <div class="section-header">
+    <div class="sec-eyebrow">08 — Núcleo metafísico</div>
+    <h2 class="sec-title">El <span class="gold">Esse</span> como Acto de Todos los Actos</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>La piedra angular del tomismo intensivo es la doctrina del <em>esse</em> —<strong>actus essendi</strong>: acto de ser— como el acto más profundo, más íntimo y más perfecto de toda realidad. Para comprenderla hay que distinguirla cuidadosamente de concepciones más superficiales del "ser".</p>
+    <p>En la filosofía ordinaria y en la escolástica esencialista, "ser" equivale a "existir" en el sentido más pobre: Pedro "es" simplemente en cuanto que no es nada, en cuanto que hay algo en vez de nada. El esse tomista de Fabro es radicalmente distinto: es un <strong>acto positivo, intenso, plenísimo</strong>, que hace que Pedro no sólo "esté ahí" sino que sea todo lo que es, que tenga toda la realidad que tiene, que pueda obrar, conocer, amar. El esse no es el umbral mínimo de la existencia: es su cima y su fundamento.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">I</div>
+      <div class="pillar-title">El esse no es la existencia vulgar</div>
+      <div class="pillar-text">Muchos confunden el esse tomista con la "existencia de hecho": el mero hecho de que algo esté ahí. Para Fabro, el esse es infinitamente más rico: es el acto por el que algo posee toda su perfección real, toda su densidad ontológica. No es un dato mínimo sino el dato máximo de la metafísica. La piedra que piso "es" con todo el peso de su realidad, no sólo en el sentido de que ocupa espacio.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">II</div>
+      <div class="pillar-title">Acto de todos los actos</div>
+      <div class="pillar-text">Tomás escribe en De Potentia: "el esse es la actualidad de todos los actos y, por ello mismo, la perfección de todas las perfecciones." El esse no es uno de los actos entre otros: es el acto que actualiza todos los demás. Sin esse, la forma no sería nada; sin esse, la operación es imposible. Todo acto real presupone el esse como su fundamento último e insoslayable.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">III</div>
+      <div class="pillar-title">Interior intimo meo</div>
+      <div class="pillar-text">Tomás, siguiendo a Agustín, afirma que Dios es "interior intimo meo": más íntimo a mí que yo mismo. Para Fabro, esto tiene una base metafísica precisa: el esse de cada criatura es una participación continua del Esse Divino. Dios no está "fuera" sosteniendo las cosas: está en el interior más íntimo de cada cosa, dándole su esse en cada instante. La creación no es un acto pasado: es un presente continuo y radical.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">IV</div>
+      <div class="pillar-title">Distinción esse / essentia</div>
+      <div class="pillar-text">En toda criatura hay una distinción real entre el esse (acto de ser) y la essentia (esencia, "lo que algo es"). La esencia de Pedro es ser hombre. El esse de Pedro es su acto de ser concreto, único, irrepetible. La esencia limita el esse —Pedro no es un ángel ni Dios— pero el esse supera a la esencia: es el fundamento real que la sostiene. Esta distinción, negada en Dios, es lo que hace posible la contingencia radical de la criatura.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">V</div>
+      <div class="pillar-title">Intensidad del esse</div>
+      <div class="pillar-text">De ahí viene el nombre "intensivo": el esse no se predica unívocamente de Dios y las criaturas, ni equívocamente. Se predica analógicamente, por grados de intensidad. El Esse Divino es infinitamente intenso, plenísimo, sin límite. El esse de los seres espirituales es más intenso que el de los animales. El esse de una piedra es el grado más bajo de participación. No hay dos cosas con exactamente el mismo esse: cada existente es ontológicamente único.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">VI</div>
+      <div class="pillar-title">Ipsum Esse Subsistens</div>
+      <div class="pillar-text">En Dios, a diferencia de todas las criaturas, esse y essentia se identifican absolutamente. Dios no "tiene" el ser: Dios "es" el Ser. Es el Esse Subsistente —el Ser que subsiste por sí mismo, sin recibirlo de nadie—. Por eso Dios se revela a Moisés como "Yo soy el que soy" (Éx 3,14): Fabro ve en este nombre bíblico la anticipación de la metafísica tomista del esse, y en la metafísica tomista la explicitación filosófica de la revelación bíblica.</div>
+    </div>
+  </div>
+  <div class="schema" style="margin-top:3rem;">
+    <div class="schema-label">texto fundacional</div>
+    <div class="schema-title">De Potentia, q.7, a.2, ad 9 — El texto que Fabro no dejó de citar</div>
+    <div class="schema-body">
+      <p>El texto al que Fabro vuelve incansablemente es: <strong>"Hoc quod dico esse est inter omnia perfectissimum... Esse enim est actualitas omnium actuum, et propter hoc est perfectio omnium perfectionum."</strong></p>
+      <p>"Lo que llamo esse es entre todas las cosas lo más perfecto... porque el esse es la actualidad de todos los actos y, por eso mismo, la perfección de todas las perfecciones."</p>
+      <p>Para Fabro, esta afirmación no es una frase entre otras: es el corazón de toda la metafísica de Tomás. Y esta frase hace estallar el sistema escolástico esencialista desde dentro: si el esse es la perfección suprema, entonces el centro de la metafísica no es la esencia sino el esse, y Dios no es la Esencia suprema sino el <strong>Esse plenísimo e irrestricto</strong>, radicalmente más que cualquier esencia posible —incluyendo la esencia de "Dios" tal como la piensan los teólogos conceptualistas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PARTICIPACIÓN -->
+<section class="section" id="participacion">
+  <div class="section-header">
+    <div class="sec-eyebrow">09 — Concepto cardinal</div>
+    <h2 class="sec-title">La <span class="gold">Participación</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>Si el esse es el acto fundamental, la <strong>participación</strong> es el concepto que explica cómo las criaturas tienen esse sin ser el Esse. La participación es, para Fabro, la gran aportación original de Santo Tomás a la historia de la metafísica: una síntesis que supera tanto al platonismo como al aristotelismo sin quedar reducida a ninguno de los dos.</p>
+    <p>La palabra "participar" viene del latín <em>partem capere</em>: tomar una parte. Participar en el esse significa tener el esse no en su totalidad y plenitud —eso sólo lo tiene Dios— sino de manera limitada, parcial, recibida. La criatura no posee el ser por sí misma: lo recibe de Dios en cada instante. La participación no es un hecho pasado —Dios creó el mundo y se retiró—: es una relación presente y continua, ontológicamente constitutiva de cada ente creado.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">A</div>
+      <div class="pillar-title">Participación vs. emanación neoplatónica</div>
+      <div class="pillar-text">En el neoplatonismo (Plotino), las cosas "emanan" del Uno de manera necesaria, como la luz del sol que no puede no brillar. En Tomás, las criaturas participan del esse por un acto libre y gratuito de Dios: la creación. La diferencia es abismal: en la emanación Dios no puede no crear; en la participación tomista, la creación es un don gratuito. La contingencia radical del mundo —podría no existir— queda plenamente asegurada.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">B</div>
+      <div class="pillar-title">Participación trascendental</div>
+      <div class="pillar-text">Fabro distingue la participación predicamental (participar en una especie: Pedro participa en "hombre") de la participación trascendental (participar en el esse mismo). La segunda es la más radical e importante: por ella, cada criatura tiene una relación constitutiva con Dios en el nivel más profundo de su ser, no sólo en el nivel de sus propiedades o su especie. Es una relación que toca el fondo mismo de la realidad del ente.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">C</div>
+      <div class="pillar-title">Participación y analogía</div>
+      <div class="pillar-text">La participación funda la analogía del ser: el esse se dice de Dios y las criaturas ni unívocamente (lo mismo en todos) ni equívocamente (completamente distinto) sino analógicamente, según grados de intensidad y perfección. La analogía no es un recurso retórico ni una solución de compromiso: es la estructura misma de la realidad participada, que es siempre semejante-pero-diferente respecto del Esse del que participa.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">D</div>
+      <div class="pillar-title">Participación dinámica</div>
+      <div class="pillar-text">Un punto insistente en Fabro: la participación no es estática. Las criaturas espirituales (hombres, ángeles) no sólo participan del esse sino que pueden participar progresivamente en la vida de Dios mediante el conocimiento y el amor. La gracia es una participación en la naturaleza divina que supera infinitamente la participación natural del esse. La mística tiene así una base metafísica precisa y rigurosa.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">E</div>
+      <div class="pillar-title">Síntesis Platón-Aristóteles en Tomás</div>
+      <div class="pillar-text">Fabro demuestra que la participación tomista es el punto en que Tomás supera la dicotomía entre Platón (las cosas imitan las Ideas) y Aristóteles (el ser es siempre concreto). Tomás toma de Platón la idea de que las criaturas participan en algo superior, pero la concretiza radicalmente: no participan en una Idea abstracta sino en el Esse concreto, personal y libre que es Dios creador. El resultado supera a ambos antecesores.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">F</div>
+      <div class="pillar-title">Via tertia: ni panteísmo ni deísmo</div>
+      <div class="pillar-text">La participación hace posible una tercera vía entre el panteísmo (las criaturas son Dios) y el deísmo (Dios creó el mundo y no tiene relación con él). Las criaturas no son Dios —su esse es limitado, recibido— pero tampoco están fuera de Dios: subsisten en una dependencia ontológica radical y permanente. Esta es la diferencia entre la dependencia creacional tomista y todas las demás concepciones de la relación Dios-mundo.</div>
+    </div>
+  </div>
+  <div class="blockquote">
+    <p>"La participación no es un accidente del sistema tomista: es su espina dorsal. Quitadla y os quedáis con un Aristóteles empeorado. Mantenerla y tendréis la metafísica más original, más profunda y más verdadera que ha producido el pensamiento humano desde los griegos hasta hoy."</p>
+    <cite>— Cornelio Fabro, La nozione metafisica di partecipazione, 3ª ed., 1961</cite>
+  </div>
+</section>
+
+<!-- CAUSALIDAD -->
+<section class="section alt" id="causalidad">
+  <div class="section-header">
+    <div class="sec-eyebrow">10 — Metafísica de la creación</div>
+    <h2 class="sec-title">Causalidad <span class="gold">Trascendente</span> y Creación</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>Una de las aportaciones más originales del tomismo intensivo al debate filosófico contemporáneo es la teoría de la <strong>causalidad trascendente</strong>. Permite distinguir la creación cristiana de todas las concepciones alternativas —cosmogonías míticas, demiurgo platónico, motor aristotélico, emanación neoplatónica, el "gran relojero" deísta— y de los intentos modernos de explicar el universo sin Creador.</p>
+    <p>Para Fabro, la causa eficiente ordinaria —la que estudia la física y la filosofía aristotélica— actúa comunicando una forma a una materia preexistente. El alfarero moldea la arcilla: no crea el barro, le da forma. El artista, el padre que engendra un hijo, el maestro que forma un discípulo: todos actúan sobre algo preexistente. <strong>Ninguna causa eficiente ordinaria produce el esse de lo que produce</strong>: sólo modifica algo que ya existe.</p>
+    <p>La causalidad creadora de Dios es radicalmente diferente: <strong>produce el esse mismo</strong>, no sólo una forma en una materia preexistente. Dios no moldea un mundo informe: da el esse desde la nada absoluta. Esta es la diferencia entre <em>fieri</em> (hacerse a partir de algo) y <em>creari</em> (ser creado desde la nada). Toda causa ordinaria produce un fieri; sólo Dios produce un creari.</p>
+  </div>
+  <div class="schema">
+    <div class="schema-label">distinción fundamental</div>
+    <div class="schema-title">Causalidad eficiente ordinaria vs. Causalidad trascendente</div>
+    <div class="schema-body">
+      <p><strong>Causalidad eficiente ordinaria:</strong> A produce B actuando sobre condiciones preexistentes. El artesano hace una mesa a partir de madera. El padre engendra un hijo con la cooperación de la naturaleza. La ciencia física estudia estas causas. Siempre hay un "antes" del que parte la causación. Produce cambio en lo que ya existe. No puede producir el esse: sólo lo modifica, lo organiza, lo combina.</p>
+      <p><strong>Causalidad trascendente (creación):</strong> Dios produce el esse de las criaturas sin presuposición alguna: sin materia preexistente, sin condiciones previas, sin ningún "antes" ontológico. No es que Dios tome el caos y lo ordene: da el ser desde la absoluta nada. Esta causalidad no puede analogarse con ninguna causalidad del mundo: trasciende infinitamente todas las causas intramundanas. Por eso no puede ser detectada por la ciencia física, que sólo estudia causas eficientes ordinarias.</p>
+      <p><strong>Conservación como creación continua:</strong> Para Fabro siguiendo a Tomás, la creación no fue un acto pasado que luego se detiene. Dios conserva el esse de las criaturas en cada instante. Si Dios "retirara" su causalidad trascendente, las criaturas no seguirían existiendo sin Él: sencillamente dejarían de ser, sin explosión ni proceso: pura nada. La dependencia de la criatura respecto de Dios es total y absolutamente presente.</p>
+    </div>
+  </div>
+  <div class="two-col" style="margin-top:2.5rem;">
+    <div class="hl">
+      <div class="hl-title">✦ Respuesta al ateísmo científico</div>
+      <p>Fabro usó esta distinción para responder al argumento científico contra Dios: "la ciencia explica todo sin necesidad de Dios." Su respuesta: la ciencia explica causas eficientes ordinarias intramundanas, lo que es perfectamente compatible con la causalidad trascendente creadora. No hay competencia entre Dios y la física porque operan en niveles ontológicamente distintos. Buscar a Dios como causa física entre otras causas físicas es una confusión de categorías que el propio Tomás rechazaría.</p>
+    </div>
+    <div class="hl">
+      <div class="hl-title">✦ Contra el panteísmo y el panenteísmo</div>
+      <p>La causalidad trascendente también responde al panteísmo (Dios es el mundo) y al panenteísmo moderno (el mundo es parte de Dios). Para Fabro, la creación implica una distinción real e irreducible entre el Esse Divino y el esse participado de las criaturas. Las criaturas no son Dios: son distintas de Dios precisamente porque su esse no es el Esse de Dios sino una participación limitada en él. La diferencia es ontológica, no sólo de grado o de intensidad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIBERTAD -->
+<section class="section" id="libertad">
+  <div class="section-header">
+    <div class="sec-eyebrow">11 — Antropología metafísica</div>
+    <h2 class="sec-title">Libertad y <span class="gold">Trascendencia</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>Una de las dimensiones más originales del tomismo intensivo es su <strong>filosofía de la libertad</strong>, que lo distingue tanto del determinismo materialista como del libertarismo arbitrarista moderno. Para Fabro, la libertad humana no puede entenderse correctamente sin la metafísica del esse: el hombre es el único ser material que participa no sólo en el esse sino, por su espíritu, en el conocimiento y en el amor, las operaciones más propias del Esse Divino. Esta participación espiritual es la base metafísica de su libertad.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">1</div>
+      <div class="pillar-title">Libertad de especificación y de ejercicio</div>
+      <div class="pillar-text">Fabro retoma la distinción tomista entre libertad de especificación (elegir este o aquel objeto) y libertad de ejercicio (obrar o no obrar). La segunda es más radical: el hombre puede siempre, en principio, no actuar. Esta libertad de ejercicio muestra que el hombre está, en el nivel de su esse espiritual, por encima de la determinación ciega de la naturaleza material. Es un ser que puede suspender el automatismo: esto es la dignidad.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">2</div>
+      <div class="pillar-title">El bien universal y la apertura trascendente</div>
+      <div class="pillar-text">El hombre puede conocer el bien en cuanto bien —el bien sin límite, el bien universal—. Esto significa que ningún bien finito puede satisfacerlo completamente ni determinarlo necesariamente. Esta apertura al bien sin límite es la huella del Esse Divino en el espíritu humano: el hombre es el ser que puede decir "no" a todo lo finito precisamente porque su esse espiritual lo orienta al Infinito. La libertad tiene una raíz metafísica, no sólo psicológica.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">3</div>
+      <div class="pillar-title">Libertad y gracia: no contradicción</div>
+      <div class="pillar-text">El gran problema clásico (¿cómo puede Dios actuar en la voluntad sin destruir la libertad?) se resuelve desde la participación. La gracia no es una fuerza exterior que empuja la voluntad: es una participación interior en el esse y el amor divinos que eleva la libertad desde dentro, perfeccionándola en vez de suprimiéndola. La gracia no resta libertad: la intensifica, la lleva a su plenitud. Sólo el ser libre puede amar libremente.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">4</div>
+      <div class="pillar-title">La libertad como riesgo real</div>
+      <div class="pillar-text">Fabro, influido por Kierkegaard, subraya que la libertad genuina implica riesgo real. El hombre puede rechazar a Dios —y eso es el pecado y, en extremo, la condenación—. Esta posibilidad no es un defecto del sistema divino: es la condición de que el amor sea real. Un amor necesario no es amor sino automatismo. Dios "arriesga" la libertad humana porque quiere amor libre, no un reflejo determinado del bien.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">5</div>
+      <div class="pillar-title">Contra el existencialismo ateo</div>
+      <div class="pillar-text">Sartre afirma que la libertad es absoluta porque no hay naturaleza humana ni Dios que la determine. Para Fabro, esta libertad sin fundamento es angustiante e internamente imposible: una libertad sin esse sólido es una libertad en el vacío, que termina en el absurdo y la náusea. La libertad tomista es más profunda porque está fundada en el esse: existe porque el hombre participa en el Esse Divino que es la Libertad misma subsistente.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">6</div>
+      <div class="pillar-title">Libertad-de y libertad-para</div>
+      <div class="pillar-text">La libertad humana no es sólo libertad-de (independencia de determinaciones) sino libertad-para (orientación al bien pleno). El hombre es libre para algo: para el Bien sin límite, para Dios. Sin este horizonte trascendente, la libertad se vuelve arbitrariedad, el yo se convierte en su propio dios, y el resultado histórico —como ha mostrado el siglo XX— es el totalitarismo o el nihilismo. La libertad sin Dios se autodevora.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODERNIDAD -->
+<section class="section alt" id="modernidad">
+  <div class="section-header">
+    <div class="sec-eyebrow">12 — Confrontación filosófica</div>
+    <h2 class="sec-title">Fabro frente a la <span class="gold">Filosofía Moderna</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>Una de las tareas más ambiciosas y logradas de Fabro fue el análisis sistemático de los grandes filósofos modernos desde la perspectiva del tomismo intensivo. No para rechazarlos sin leerlos, sino para identificar con precisión el momento en que cada sistema "olvida" el esse y las consecuencias que ese olvido arrastra inevitablemente.</p>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Inicio de la modernidad</div>
+      <div class="tl-year">Descartes</div>
+      <div class="tl-event">El cogito y el giro subjetivo — el esse encerrado en la conciencia</div>
+      <div class="tl-text">Descartes convierte el punto de partida de la filosofía en el yo pensante. Para Fabro, este movimiento encierra el esse en la conciencia: ya no el esse de las cosas reales sino el esse del pensamiento es el primero y más seguro. El mundo exterior queda reducido a objeto del sujeto cognoscente. Desde ese momento la filosofía moderna tendrá dificultades crecientes para salir del sujeto y llegar al Esse Divino real, que queda reducido a garantía epistémica de las representaciones claras y distintas: un Dios de los filósofos, no el Creador.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Giro crítico</div>
+      <div class="tl-year">Kant</div>
+      <div class="tl-event">La jaula de la representación — el esse inaccesible</div>
+      <div class="tl-text">Kant radicaliza el giro cartesiano: el ser de las cosas tal como son en sí mismas (la "cosa en sí") resulta inaccesible a la inteligencia humana, que sólo puede conocer los fenómenos estructurados por sus propias categorías a priori. Para Fabro, esto supone clausurar definitivamente el acceso al esse real: el ser queda reducido a fenómeno, a representación organizada por el sujeto. Dios, la libertad y la inmortalidad quedan como postulados de la razón práctica —creencias necesarias para la moral, no verdades metafísicas—. El esse ha desaparecido de la filosofía y con él la posibilidad de la metafísica real.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Idealismo absoluto</div>
+      <div class="tl-year">Hegel</div>
+      <div class="tl-event">El ser como proceso dialéctico — el esse disuelto en el devenir</div>
+      <div class="tl-text">Hegel recupera el ser como tema filosófico pero lo convierte en Geist —Espíritu absoluto— que se desarrolla dialécticamente en la historia. El ser ya no es acto subsistente sino proceso que se hace a sí mismo. Para Fabro, este panlogismo hegeliano disuelve el esse en el devenir: Dios ya no es el Esse plenísimo sino el proceso mismo de la realidad haciéndose. Las consecuencias son el panteísmo (el mundo es el propio Dios haciéndose) y, por inversión materialista, el marxismo de Marx.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Materialismo</div>
+      <div class="tl-year">Feuerbach y Marx</div>
+      <div class="tl-event">La inversión atea del idealismo — el esse reducido a materia</div>
+      <div class="tl-text">Feuerbach invierte a Hegel: no es el Espíritu quien se proyecta en la materia sino el hombre quien proyecta a Dios. La teología es antropología alienada. Marx radicaliza esto: la "realidad verdadera" es la materia socioeconómica, y la religión es su reflejo ideológico. Para Fabro, Marx no hace sino llevar hasta el fin la consecuencia del olvido del esse: si el ser real no está fundado en el Esse Divino, entonces la "realidad verdadera" termina siendo la materia bruta y Dios una ilusión producida por las condiciones de producción. El olvido metafísico produce el ateísmo político.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Nihilismo</div>
+      <div class="tl-year">Nietzsche</div>
+      <div class="tl-event">"Dios ha muerto" — el diagnóstico más honesto del olvido</div>
+      <div class="tl-text">Para Fabro, Nietzsche es el pensador más honesto de la modernidad: anuncia sin disimulo las consecuencias del olvido del esse. Si no hay Esse Subsistente que funde la realidad, si el ser no tiene fundamento trascendente, entonces los valores colapsan —nihilismo— y sólo queda la voluntad de poder como principio de realidad. Nietzsche no anuncia una liberación: anuncia la catástrofe inevitable que resulta de haber eliminado metafísicamente a Dios. Fabro lo admira por su lucidez y lo lamenta por su solución.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-tag">Existencialismo</div>
+      <div class="tl-year">Heidegger y Sartre</div>
+      <div class="tl-event">El ser sin fundamento y la existencia absurda</div>
+      <div class="tl-text">Heidegger: el Sein (ser) es irreducible a cualquier ente pero permanece misterioso, esquivo, sin revelar quién o qué es. Sartre: el ser es en sí mismo absurdo, sin razón ni fundamento; la existencia precede a la esencia. Para Fabro, ambos están cerca de la pregunta correcta —la pregunta por el ser— pero, al rechazar el Esse Subsistente Divino, se quedan sin respuesta. El ser de Heidegger es un esse vacío; el ser de Sartre es un esse absurdo. El esse de Tomás es pleno, fundado y fundante. La modernidad llega a la puerta correcta pero no sabe abrirla.</div>
+    </div>
+  </div>
+  <div class="blockquote">
+    <p>"La filosofía moderna es la historia del olvido progresivo del esse, que comienza con Descartes, se radicaliza con Kant, explota en Hegel, culmina en Marx y Nietzsche, y agoniza en el nihilismo existencialista. No es un accidente: es la consecuencia necesaria de haber abandonado el fundamento. El remedio no es retroceder sino profundizar hasta encontrar lo que se perdió."</p>
+    <cite>— Cornelio Fabro, Introduzione all'ateismo moderno, 1964</cite>
+  </div>
+</section>
+
+<!-- KIERKEGAARD -->
+<section class="section" id="kierkegaard">
+  <div class="section-header">
+    <div class="sec-eyebrow">13 — Diálogo filosófico insólito</div>
+    <h2 class="sec-title">Fabro y <span class="gold">Kierkegaard</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="two-col">
+    <div class="prose">
+      <p>Una de las dimensiones más originales y sorprendentes de Fabro es su profundo diálogo con <strong>Søren Kierkegaard</strong> (1813–1855), el filósofo danés considerado padre del existencialismo. Para la mayoría de los tomistas, Kierkegaard era sospechoso: subjetivista, anti-sistemático, luterano apasionado que desconfiaba de la razón especulativa y atacaba la "filosofía profesoral" alemana. Fabro fue el primero en leerlo con la seriedad que merecía desde dentro del tomismo.</p>
+      <p>Fabro aprendió <strong>danés</strong> para leer a Kierkegaard en los originales —un esfuerzo lingüístico que refleja la seriedad de su compromiso filosófico—. El resultado fue una interpretación radicalmente nueva: Kierkegaard no es el anti-Tomás sino su complemento necesario en el plano de la existencia concreta e irrepetible.</p>
+      <p>Para Fabro, Tomás da la <strong>metafísica del esse</strong> —el fundamento objetivo de toda realidad—. Kierkegaard da la <strong>fenomenología de la existencia libre ante Dios</strong> —la descripción subjetiva de lo que significa ser un yo concreto, singular, irrepetible, que debe elegir ante Dios con toda la seriedad de su libertad—. Ambas perspectivas son necesarias: sin la metafísica tomista, Kierkegaard cae en el puro subjetivismo sin fundamento; sin Kierkegaard, el tomismo puede volverse un sistema abstracto que olvida la singularidad dramática del existente concreto.</p>
+      <p>Esta síntesis insólita —el dominico medieval y el protestante danés— es quizás la contribución más audaz e influyente de Fabro a la historia de la filosofía contemporánea.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-title">✦ El salto de la fe</div>
+        <p>Kierkegaard describe la fe como un "salto": no se llega a Dios sólo por la razón especulativa sino por una decisión existencial que compromete toda la persona. Fabro no rechaza esto sino que lo funda metafísicamente: el salto de fe es posible porque el hombre participa en el esse espiritual que lo abre trascendentalmente a Dios. La fe no es irracional: es la razón que se reconoce a sí misma limitada y se abre libremente a lo que la supera.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-title">✦ Los tres estadios kierkegaardianos</div>
+        <p>Kierkegaard describe tres estadios: el estético (vivir para el placer), el ético (vivir bajo la ley moral) y el religioso (vivir ante Dios en fe y amor). Para Fabro, esta fenomenología describe los distintos grados de participación existencial: en el estadio estético el hombre se aferra a bienes finitos; en el ético reconoce la ley universal; en el religioso entra en relación directa con el Esse Divino. La escala kierkegaardiana refleja una escala de participación tomista.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-title">✦ La singularidad del individuo</div>
+        <p>Para Kierkegaard, lo que importa no es el sistema abstracto sino "el individuo", el yo concreto e irrepetible. Fabro ve en esto una recuperación de algo que el tomismo intensivo afirma desde la metafísica: cada existente tiene un esse irrepetible, singular, único. La singularidad existencial kierkegaardiana tiene una base metafísica en la singularidad del esse participado. Los dos filósofos, desde perspectivas radicalmente distintas, defienden la irreductibilidad del concreto individual.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VS TOMISMO -->
+<section class="section alt" id="vs-tomismo">
+  <div class="section-header">
+    <div class="sec-eyebrow">14 — Debate interno</div>
+    <h2 class="sec-title">Frente al <span class="gold">Tomismo Clásico</span> y sus Variantes</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2rem;">
+    <p>El debate más arduo de Fabro no fue con los ateos sino con sus colegas tomistas. Dentro del vasto mundo del tomismo del siglo XX, el tomismo intensivo se distingue y confronta a las otras escuelas con rigor filosófico sin concesiones.</p>
+  </div>
+  <div class="cards">
+    <div class="card vis">
+      <div class="card-title">Vs. Tomismo Esencialista</div>
+      <div class="card-sub">Cayetano y escolástica de manual</div>
+      <div class="card-text">El blanco principal de Fabro. Los esencialistas pusieron la esencia en el centro de la metafísica tomista y convirtieron el esse en una cópula lógica. Fabro demuestra, texto en mano, que esto contradice explícitamente a Tomás, que repite en decenas de lugares que el esse es "acto de todos los actos". El resultado del esencialismo es un Dios-Esencia que no difiere estructuralmente del Dios de Aristóteles, perdiendo la novedad cristiana de la creación y la trascendencia radical del Ipsum Esse.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Vs. Tomismo Trascendental</div>
+      <div class="card-sub">Maréchal, Rahner, Coreth, Lonergan</div>
+      <div class="card-text">Su polémica más famosa. Los tomistas trascendentales intentan integrar la crítica kantiana aceptando el "giro hacia el sujeto": la apertura de la inteligencia al ser se vuelve apertura trascendental a Dios como horizonte del conocimiento. Para Fabro, esto mezcla Tomás con Kant de manera incoherente: si se acepta que el conocimiento no alcanza el ser en sí, no hay manera de llegar al Esse Divino real. El resultado es un Dios-Horizonte epistémico que no puede crear ni revelarse.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Convergencia con Gilson</div>
+      <div class="card-sub">Étienne Gilson</div>
+      <div class="card-text">Fabro reconoce en Gilson al precursor más importante de la recuperación del esse tomista. Gilson fue el primero en demostrar históricamente que el esse de Tomás era algo radicalmente nuevo en la historia de la filosofía. Fabro desarrolla y sistematiza lo que Gilson descubrió, añadiendo la estructura de la participación como articulación sistemática de ese descubrimiento. Una convergencia que el propio Gilson reconoció con admiración explícita.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Diálogo crítico con Maritain</div>
+      <div class="card-sub">Jacques Maritain</div>
+      <div class="card-text">Fabro admiró la profundidad de Maritain pero criticó su excesiva apertura al humanismo moderno y su proyecto de "humanismo integral". Para Fabro, esta síntesis cede demasiado a categorías modernas ajenas al tomismo. Sin embargo, el debate fue siempre respetuoso: compartían la convicción de que el tomismo era la filosofía más fecunda de la historia y debía dialogar con el mundo moderno sin capitular ante él.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Crítica al tomismo voluntarista</div>
+      <div class="card-sub">Escuelas de acento agustiniano</div>
+      <div class="card-text">Algunas escuelas neo-tomistas del siglo XX pusieron el acento en la voluntad y el amor sobre el intelecto y el esse, bajo influencia agustiniana o franciscana. Fabro insiste en que sin el fundamento metafísico del esse, la filosofía del amor queda en el aire: no se puede hablar correctamente del amor divino sin saber primero qué es el Esse que Dios comunica al amar. El esse es el fundamento de todo lo demás, incluyendo el amor.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">El tomismo intensivo hoy</div>
+      <div class="card-sub">Escuela fabriana contemporánea</div>
+      <div class="card-text">Los continuadores de Fabro —Battista Mondin, Ángel Luis González, Enrique Martínez, John Wippel, Stephen Brock— han desarrollado el tomismo intensivo en múltiples direcciones: filosofía de la mente, ética fundamental, filosofía del derecho, diálogo con la neurociencia y la física teórica. La "escuela fabriana" es hoy una de las corrientes tomistas más vivas, rigurosas y académicamente productivas del mundo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CRÍTICAS -->
+<section class="section" id="criticas">
+  <div class="section-header">
+    <div class="sec-eyebrow">15 — Balance crítico</div>
+    <h2 class="sec-title">Críticas y <span class="gold">Debates</span></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>El tomismo intensivo de Fabro no está exento de críticas —algunas venidas de fuera del tomismo, otras desde dentro—. Un balance intelectual honesto exige presentarlas con la misma seriedad con que se presenta la doctrina.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">C1</div>
+      <div class="pillar-title">¿Es la interpretación históricamente correcta?</div>
+      <div class="pillar-text">Algunos medievalistas cuestionan si la lectura de Fabro refleja exactamente al Tomás histórico o proyecta en él categorías posteriores. La respuesta de los fabristas: Fabro siempre trabaja desde los textos originales en latín y sus citas son verificables por cualquier lector. El debate sigue abierto en el nivel filológico, pero la mayoría de medievalistas contemporáneos (Wippel, Brock, Emery) dan la razón a Fabro en lo esencial.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">C2</div>
+      <div class="pillar-title">¿El esse es accesible a la experiencia?</div>
+      <div class="pillar-text">El empirista y el fenomenólogo preguntan: ¿cómo se verifica el esse? ¿Dónde lo "experimento"? Fabro responde: el esse no es un objeto de experiencia sensible sino el horizonte dentro del cual toda experiencia tiene lugar. La inteligencia alcanza el esse en el juicio existencial —cuando afirmamos "esto existe"— un acto que va más allá de la percepción sensible. La crítica exige tomarse en serio el realismo tomista del juicio existencial.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">C3</div>
+      <div class="pillar-title">¿Demasiado platonismo?</div>
+      <div class="pillar-text">Algunos tomistas de acento más aristotélico acusan a Fabro de introducir en Tomás demasiado platonismo a través del concepto de participación. Fabro responde: la participación de Tomás no es la participación platónica (el original y las copias), sino una estructura ontológica propia que usa el vocabulario platónico para expresar algo radicalmente distinto: la dependencia libre de la criatura respecto del Esse Divino Creador, que no tiene equivalente en Platón.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">C4</div>
+      <div class="pillar-title">¿Deja espacio autónomo a la ciencia?</div>
+      <div class="pillar-text">Algunos científicos preguntan si el tomismo intensivo impone restricciones metafísicas a la investigación empírica. Fabro insiste en lo contrario: al distinguir la causalidad trascendente divina de las causas eficientes intramundanas, el tomismo libera a la ciencia para operar con plena autonomía en su nivel. La ciencia no tiene que "encontrar" a Dios entre sus datos: esa es la confusión del cientismo teísta tanto como del científico ateo.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">C5</div>
+      <div class="pillar-title">¿Compatible con la exégesis bíblica?</div>
+      <div class="pillar-text">Algunos teólogos bíblicos desconfían de la metafísica del esse como marco de interpretación de la revelación bíblica, acusando a Tomás de "helenizar" el mensaje cristiano. Fabro respondería: el esse tomista no es una imposición griega sobre la Biblia sino la explicitación filosófica de lo que la Biblia ya dice: "Yo soy el que soy" (Éxodo 3,14). La filosofía no sustituye la exégesis: la hace filosóficamente inteligible.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">C6</div>
+      <div class="pillar-title">El estilo polémico</div>
+      <div class="pillar-text">El estilo aguerrido y a veces implacable de Fabro frente a sus adversarios —especialmente Rahner— fue criticado como excesivo. Sus seguidores replican: Fabro distinguía siempre entre la persona (tratada con respeto) y las ideas (atacadas con rigor sin concesiones). En todo caso, su polémica fue siempre intelectual: nunca recurrió al argumento personal, sólo al argumento filosófico, aunque lo ejerció con una energía que podía resultar abrumadora.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIGENCIA -->
+<section class="section alt" id="vigencia">
+  <div class="section-header">
+    <div class="sec-eyebrow">16 — Actualidad filosófica</div>
+    <h2 class="sec-title">Vigencia <span class="gold">Actual</span> del Tomismo Intensivo</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="prose" style="margin-bottom:2.5rem;">
+    <p>Treinta años después de la muerte de Fabro, el tomismo intensivo goza de una vitalidad filosófica que pocas corrientes metafísicas del siglo XX pueden igualar. Lejos de ser una reliquia académica, se ha revelado como uno de los marcos filosóficos más capaces de dialogar con los grandes desafíos intelectuales del siglo XXI.</p>
+  </div>
+  <div class="cards">
+    <div class="card vis">
+      <div class="card-title">Filosofía de la mente y neurociencia</div>
+      <div class="card-sub">Actualidad filosófica urgente</div>
+      <div class="card-text">El debate sobre la conciencia —el "hard problem of consciousness" de Chalmers, el funcionalismo, el eliminativismo materialista— encuentra en el tomismo intensivo un interlocutor poderoso. La distinción entre esse y operaciones espirituales permite defender la irreductibilidad de la conciencia a procesos físicos, sin caer en el dualismo cartesiano ni en el idealismo. Autores como Edward Feser y John Haldane desarrollan activamente este diálogo.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Metafísica analítica</div>
+      <div class="card-sub">Oxford, Notre Dame, Navarra</div>
+      <div class="card-text">El resurgimiento de la metafísica en la filosofía analítica —ontología, metafísica modal, filosofía de la causalidad— ha creado un espacio inesperado para el tomismo intensivo. La distinción esse/essentia resuena con los debates actuales sobre haecceitas, existencia de particulares y fundación ontológica. Filósofos analíticos como Timothy O'Connor y Brian Leftow trabajan en territorios conceptualmente próximos a Fabro.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Respuesta al nuevo ateísmo</div>
+      <div class="card-sub">Dawkins, Hitchens, Dennett</div>
+      <div class="card-text">El tomismo intensivo proporciona herramientas filosóficas precisas para responder al "nuevo ateísmo". La distinción entre causalidad eficiente ordinaria (que estudia la ciencia) y causalidad trascendente creadora desmonta el argumento de que la ciencia hace innecesaria la hipótesis de Dios: la ciencia no estudia el esse de lo que estudia, sino sus propiedades intramundanas. La pregunta por el esse permanece filosóficamente ineludible.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Bioética y dignidad humana</div>
+      <div class="card-sub">Fundamento de los derechos</div>
+      <div class="card-text">El debate sobre los fundamentos de los derechos humanos —¿por qué tienen dignidad los seres humanos?— encuentra en el tomismo intensivo una respuesta sólida y no arbitraria: la dignidad humana se funda en el esse espiritual del hombre, su participación en el Esse Divino. Esto proporciona una base metafísica para la ética y el derecho natural que supera tanto el voluntarismo estatal como el contractualismo convencionalista.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Ecología integral</div>
+      <div class="card-sub">Laudato Si' y metafísica</div>
+      <div class="card-text">La encíclica Laudato Si' de Francisco (2015) propone que el mundo merece respeto porque es creación de Dios —don participado del Esse Divino—. Esta perspectiva tiene resonancias directas con el tomismo intensivo: el mundo no es materia inerte sino participación real en el ser de Dios. El tomismo intensivo proporciona la base metafísica más rigurosa para una ecología que no sea sentimentalismo sino convicción ontológica profunda.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-title">Respuesta al nihilismo posmoderno</div>
+      <div class="card-sub">Derrida, Vattimo, Lyotard</div>
+      <div class="card-text">El "pensamiento débil" (Vattimo) y la deconstrucción (Derrida) han proclamado la muerte de los grandes relatos y la imposibilidad de la verdad objetiva. El tomismo intensivo responde: el esse es el "gran relato" que no puede ser deconstruido porque es el fundamento de toda deconstrucción posible. Incluso el nihilismo necesita el esse para pensar la nada. Negar el esse es una operación que depende del esse: una contradicción performativa de primer orden.</div>
+    </div>
+  </div>
+
+  <div class="schema" style="margin-top:3rem;">
+    <div class="schema-label">síntesis doctrinal</div>
+    <div class="schema-title">El Tomismo Intensivo en diez proposiciones</div>
+    <div class="schema-body">
+      <p><strong>1.</strong> El esse (acto de ser) es el acto más profundo, más íntimo y más perfecto de toda realidad: "acto de todos los actos, perfección de todas las perfecciones."</p>
+      <p><strong>2.</strong> En toda criatura hay una distinción real entre esse (acto de ser) y essentia (esencia): la esencia limita el esse, pero el esse funda la esencia y a ella da toda su realidad.</p>
+      <p><strong>3.</strong> En Dios, esse y essentia se identifican absolutamente: Dios es el Ipsum Esse Subsistens, el Ser que subsiste por sí mismo sin recibirlo de nadie.</p>
+      <p><strong>4.</strong> Las criaturas tienen esse por participación trascendental: lo reciben de Dios en cada instante, de manera gratuita y libre. La conservación es creación continua.</p>
+      <p><strong>5.</strong> La causalidad creadora de Dios es trascendente: produce el esse desde la nada sin presuponer nada. No compite con las causas eficientes ordinarias que estudia la ciencia.</p>
+      <p><strong>6.</strong> La filosofía moderna es la historia del olvido progresivo del esse. El remedio no es eclecticismo ni sincretismo: es la recuperación radical del esse desde dentro del pensamiento de Tomás.</p>
+      <p><strong>7.</strong> La libertad humana se funda en la participación espiritual en el esse divino: el hombre está hecho para el Bien infinito y por eso ningún bien finito lo determina necesariamente.</p>
+      <p><strong>8.</strong> Kierkegaard y Tomás no se excluyen: Kierkegaard describe fenomenológicamente la existencia libre ante Dios que Tomás funda metafísicamente desde el esse.</p>
+      <p><strong>9.</strong> El tomismo "extensivo" —que añade contenidos modernos al tomismo— no es el camino: sólo el tomismo "intensivo" —que profundiza en el esse— puede responder a la modernidad desde una posición de superioridad filosófica real.</p>
+      <p><strong>10.</strong> El tomismo intensivo no es un sistema cerrado sino un método: profundizar en el esse para iluminar desde él todos los problemas filosóficos, incluidos los más actuales y urgentes del siglo XXI.</p>
+    </div>
+  </div>
+
+  <div class="blockquote" style="margin-top:3rem;">
+    <p>"El mundo necesita desesperadamente lo que Fabro ofrece: no un regreso nostálgico al pasado sino el descubrimiento de que en el pasado hay una profundidad que el presente ha olvidado y sin la cual el futuro no puede construirse sobre suelo firme. El esse no es el pensamiento de ayer: es la verdad de siempre que cada generación debe redescubrir desde el principio, con los ojos y las preguntas de su tiempo."</p>
+    <cite>— Battista Mondin, In memoriam Cornelio Fabro, 1995</cite>
+  </div>
+</section>
+
+<!-- FINAL -->
+<div class="final">
+  <div class="final-glow"></div>
+  <div class="final-esse">esse</div>
+  <p class="rip">† Cornelio Fabro · 1911–1995 †</p>
+  <p class="rip-sub">Sacerdote · Filósofo · Guardián del Esse</p>
+  <br><br>
+  <div style="max-width:660px;margin:0 auto;position:relative;z-index:2;">
+    <div class="blockquote" style="text-align:left;">
+      <p>"Al final de todo, la pregunta más profunda no es si Dios existe, sino si el ser tiene sentido. Y si el ser tiene sentido, entonces el Ipsum Esse Subsistens no es una hipótesis sino la única respuesta posible. Tomás lo vio con más claridad que nadie. Nosotros tenemos la tarea de verlo de nuevo, cada vez de nuevo, con ojos siempre más limpios."</p>
+      <cite>— Cornelio Fabro, L'uomo e il rischio di Dio</cite>
+    </div>
+  </div>
+  <br>
+  <p style="font-family:'DM Sans',sans-serif;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(242,237,227,0.2);position:relative;z-index:2;">Natus Flumignano · XXIV Augusti MCMXI</p>
+  <p style="font-family:'DM Sans',sans-serif;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(242,237,227,0.2);position:relative;z-index:2;">Defunctus Romae · IV Iulii MCMXCV</p>
+</div>
+
+<footer>
+  <div class="ft-brand">Tomismo Intensivo — Cornelio Fabro</div>
+  <div class="ft-copy">Actus essendi · El ser como fundamento de todo · 1911–1995</div>
+</footer>
+
+</main>
+
+<script>
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('vis');
+}
+function goTo(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const top=el.getBoundingClientRect().top+window.scrollY-66;
+  window.scrollTo({top,behavior:'smooth'});
+  if(window.innerWidth<=920){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('vis');
+  }
+}
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  const pct=(window.scrollY/(d.scrollHeight-d.clientHeight))*100;
+  document.getElementById('progress').style.width=pct+'%';
+});
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.sb-link');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      links.forEach(l=>{
+        const oc=l.getAttribute('onclick')||'';
+        l.classList.toggle('active',oc.includes("'"+id+"'"));
+      });
+    }
+  });
+},{threshold:0.2,rootMargin:'-58px 0px -40% 0px'});
+secs.forEach(s=>obs.observe(s));
+const animObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting)setTimeout(()=>e.target.classList.add('vis'),i*70);
+  });
+},{threshold:0.08});
+document.querySelectorAll('.tl-item,.card,.pillar').forEach(el=>animObs.observe(el));
+</script>
+</body>
+</html>

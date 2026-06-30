@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Defensa de la Torah — Apologética Académica</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --negro:#0A0906; --negro-m:#12100D; --negro-s:#1C1914;
+  --pergamino:#F0E6CC; --pergamino2:#E8D9B8; --pergamino3:#D4C49A;
+  --azul:#1A3A5C; --azul-m:#2356864; --azul-v:#2E6DA4;
+  --oro:#C8971E; --oro-c:#E0B84A; --oro-p:#F5E0A0;
+  --rojo:#8B1A1A; --rojo-v:#B02020; --rojo-s:#D44040;
+  --verde:#1A4A2E; --verde-v:#2A7A46;
+  --blanco:#FAF7F0;
+  --borde:rgba(200,151,30,0.2); --borde-f:rgba(200,151,30,0.5);
+  --sombra-texto:rgba(10,9,6,0.8);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--negro);color:var(--pergamino);font-family:'Source Serif 4',Georgia,serif;font-size:18px;line-height:1.85;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--negro);}
+::-webkit-scrollbar-thumb{background:var(--oro);border-radius:3px;}
+
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--rojo),var(--oro));z-index:2000;width:0%;transition:width 0.1s;}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:56px;background:rgba(10,9,6,0.97);border-bottom:1px solid var(--borde);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;backdrop-filter:blur(16px);}
+.nav-b{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--oro);letter-spacing:0.06em;}
+.nav-b em{color:var(--pergamino);font-style:normal;font-weight:400;font-size:0.8rem;}
+#hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+#hbg span{display:block;width:24px;height:2px;background:var(--oro);}
+
+/* SIDEBAR */
+#sb{position:fixed;top:56px;left:0;width:272px;height:calc(100vh - 56px);background:var(--negro-m);border-right:1px solid var(--borde);overflow-y:auto;z-index:900;padding:1rem 0;transition:transform 0.35s cubic-bezier(.4,0,.2,1);}
+#sb::-webkit-scrollbar{width:3px;}
+#sb::-webkit-scrollbar-thumb{background:var(--oro);}
+.sc{font-family:'Inter',sans-serif;font-size:0.56rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--oro);padding:0.8rem 1.3rem 0.3rem;border-top:1px solid var(--borde);margin-top:0.3rem;}
+.sc:first-child{border-top:none;margin-top:0;}
+.sl{display:block;padding:0.38rem 1.3rem;color:#8A7A68;font-family:'Inter',sans-serif;font-size:0.77rem;border-left:3px solid transparent;transition:all 0.2s;cursor:pointer;}
+.sl:hover,.sl.on{color:var(--pergamino);border-left-color:var(--oro);background:rgba(200,151,30,0.07);padding-left:1.55rem;}
+.sl.on{color:var(--oro-c);font-weight:600;}
+
+#main{margin-left:272px;padding-top:56px;}
+
+/* HERO */
+#hero{min-height:100vh;background:var(--negro);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.h-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 25% 55%,rgba(26,58,92,0.3) 0%,transparent 55%),radial-gradient(ellipse at 75% 30%,rgba(139,26,26,0.15) 0%,transparent 45%);pointer-events:none;}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,151,30,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(200,151,30,0.03) 1px,transparent 1px);background-size:55px 55px;pointer-events:none;}
+.h-text-bg{position:absolute;font-family:'Playfair Display',serif;font-size:22rem;font-weight:900;color:rgba(200,151,30,0.03);line-height:1;top:50%;left:50%;transform:translate(-50%,-52%);pointer-events:none;user-select:none;white-space:nowrap;}
+.hc{position:relative;z-index:2;text-align:center;max-width:900px;padding:2rem;animation:su 1.2s ease both;}
+@keyframes su{from{opacity:0;transform:translateY(36px);}to{opacity:1;transform:translateY(0);}}
+.hej{font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.4em;text-transform:uppercase;color:var(--oro);margin-bottom:1.8rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.hej::before,.hej::after{content:'';width:40px;height:1px;background:var(--oro);opacity:0.4;}
+.ht{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,5.5rem);font-weight:900;line-height:1.02;color:var(--pergamino);margin-bottom:0.4rem;letter-spacing:-0.01em;}
+.ht .r{color:var(--rojo-s);}
+.ht .g{color:var(--oro-c);}
+.hsub{font-family:'Playfair Display',serif;font-size:clamp(0.95rem,2vw,1.25rem);font-style:italic;color:#8A7A68;margin-bottom:2rem;letter-spacing:0.04em;}
+.hmotto{font-size:1.05rem;font-style:italic;color:rgba(240,230,204,0.65);max-width:620px;margin:0 auto 2.5rem;border-left:3px solid var(--azul-v, #2E6DA4);padding-left:1.3rem;text-align:left;line-height:1.72;}
+.hsc{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Inter',sans-serif;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--oro);cursor:pointer;text-decoration:none;animation:bj 2.2s ease-in-out infinite;}
+@keyframes bj{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+
+/* BANDA STAT */
+.sb2{display:grid;grid-template-columns:repeat(4,1fr);background:var(--azul);padding:2.2rem 3rem;}
+.si{text-align:center;}
+.sn{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:var(--pergamino);line-height:1;margin-bottom:0.2rem;}
+.sl2{font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(240,230,204,0.5);}
+
+/* SECCIONES */
+.S{padding:5rem 4.5rem;position:relative;}
+.S.alt{background:var(--negro-m);}
+.sey{font-family:'Inter',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--oro);margin-bottom:0.65rem;}
+.st{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.7rem);font-weight:700;color:var(--blanco);line-height:1.12;margin-bottom:0.8rem;}
+.st .r{color:var(--rojo-s);}
+.st .g{color:var(--oro-c);}
+.st .b{color:#6AADDF;}
+.sr{width:52px;height:2px;background:linear-gradient(90deg,var(--oro),var(--rojo));margin-bottom:0;}
+.Sh{margin-bottom:2.8rem;}
+
+/* PROSE */
+.pr{max-width:740px;font-size:1rem;color:rgba(240,230,204,0.82);line-height:1.92;}
+.pr p{margin-bottom:1.25rem;}
+.pr strong{color:var(--oro-c);font-weight:600;}
+.pr em{font-style:italic;}
+
+/* 2 COL */
+.dc{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+
+/* OBJECIÓN / RESPUESTA */
+.debate{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:2.5rem 0;border:1px solid var(--borde-f);}
+.obj-col{background:rgba(139,26,26,0.12);border-right:1px solid rgba(139,26,26,0.3);padding:2rem 2rem 2rem 2rem;}
+.res-col{background:rgba(26,58,92,0.15);padding:2rem;}
+.col-head{font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:2px solid;}
+.obj-col .col-head{color:var(--rojo-s);border-color:var(--rojo);}
+.res-col .col-head{color:#6AADDF;border-color:var(--azul-v, #2E6DA4);}
+.col-text{font-size:0.92rem;color:rgba(240,230,204,0.8);line-height:1.82;}
+.col-text p{margin-bottom:0.9rem;}
+.col-text strong{font-weight:600;}
+.obj-col .col-text strong{color:#E07070;}
+.res-col .col-text strong{color:#6AADDF;}
+
+/* VEREDICTO */
+.veredicto{background:linear-gradient(135deg,rgba(26,74,46,0.2),rgba(42,122,70,0.1));border:1px solid rgba(42,122,70,0.5);border-left:4px solid var(--verde-v);padding:1.5rem 2rem;margin:2rem 0;}
+.v-t{font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:#6ADB8A;margin-bottom:0.5rem;}
+.v-p{font-size:0.94rem;color:rgba(240,230,204,0.85);line-height:1.8;}
+.v-p strong{color:#6ADB8A;}
+
+/* CITA */
+.cit{margin:2.5rem 0;padding:1.8rem 2.5rem 1.8rem 2.8rem;background:rgba(200,151,30,0.06);border:1px solid var(--borde);position:relative;}
+.cit::before{content:'\275D';position:absolute;top:-0.8rem;left:1.6rem;font-size:3rem;color:var(--oro);font-family:'Playfair Display',serif;line-height:1;}
+.cit p{font-family:'Playfair Display',serif;font-size:clamp(0.98rem,1.6vw,1.2rem);font-style:italic;color:var(--pergamino);line-height:1.72;margin-bottom:0.75rem;}
+.cit cite{font-family:'Inter',sans-serif;font-size:0.68rem;font-style:normal;color:var(--oro);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;}
+
+/* HIGHLIGHT */
+.hl{background:rgba(200,151,30,0.07);border-left:4px solid var(--oro);padding:1.3rem 1.7rem;margin:1.5rem 0;border-radius:0 2px 2px 0;}
+.hl-t{font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--oro-c);margin-bottom:0.4rem;}
+.hl p{font-size:0.91rem;color:rgba(240,230,204,0.78);line-height:1.78;}
+.hl p strong{color:var(--oro-c);}
+
+/* ALERTA ROJA */
+.alerta{background:rgba(139,26,26,0.12);border-left:4px solid var(--rojo);padding:1.3rem 1.7rem;margin:1.5rem 0;}
+.alerta-t{font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--rojo-s);margin-bottom:0.4rem;}
+.alerta p{font-size:0.91rem;color:rgba(240,230,204,0.78);line-height:1.78;}
+.alerta p strong{color:#E07070;}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;margin-top:2rem;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--borde);padding:1.8rem 1.65rem;position:relative;transition:all 0.3s;opacity:0;transform:translateY(15px);}
+.card.vis{opacity:1;transform:translateY(0);}
+.card:hover{border-color:var(--oro-c);background:rgba(200,151,30,0.05);transform:translateY(-3px);box-shadow:0 6px 24px rgba(200,151,30,0.08);}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--oro),var(--rojo));opacity:0;transition:opacity 0.3s;}
+.card:hover::after{opacity:1;}
+.card-t{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--blanco);margin-bottom:0.3rem;}
+.card-s{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--oro);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;margin-bottom:0.65rem;}
+.card-p{font-size:0.9rem;color:rgba(240,230,204,0.68);line-height:1.78;}
+.card-p strong{color:var(--oro-c);}
+
+/* PILLARS */
+.pils{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;margin-top:2rem;background:rgba(200,151,30,0.06);}
+.pil{background:var(--negro);padding:2.2rem 1.8rem;transition:all 0.3s;opacity:0;transform:translateY(12px);}
+.S.alt .pil{background:var(--negro-m);}
+.pil.vis{opacity:1;transform:translateY(0);}
+.pil:hover{background:rgba(26,58,92,0.15);}
+.pil-n{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:rgba(200,151,30,0.12);line-height:1;margin-bottom:0.4rem;transition:color 0.3s;}
+.pil:hover .pil-n{color:rgba(200,151,30,0.28);}
+.pil-t{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--blanco);margin-bottom:0.55rem;}
+.pil-p{font-size:0.88rem;color:rgba(240,230,204,0.65);line-height:1.78;}
+.pil-p strong{color:var(--oro-c);}
+
+/* SCHEMA */
+.schema{background:rgba(200,151,30,0.04);border:1px solid var(--borde-f);padding:2.2rem 2.7rem;margin:2.2rem 0;position:relative;}
+.schema-l{position:absolute;top:-0.58rem;left:1.4rem;background:var(--negro);padding:0 0.55rem;font-family:'Inter',sans-serif;font-size:0.57rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--oro);}
+.S.alt .schema-l{background:var(--negro-m);}
+.schema-t{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--oro-c);margin-bottom:0.85rem;}
+.schema-b{font-size:0.95rem;color:rgba(240,230,204,0.8);line-height:1.88;}
+.schema-b p{margin-bottom:0.85rem;}
+.schema-b strong{color:var(--oro-c);}
+
+/* TABLA */
+.tbl{width:100%;border-collapse:collapse;margin-top:2rem;font-size:0.88rem;}
+.tbl th{text-align:left;font-family:'Inter',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--oro);padding:0.65rem 0.9rem;border-bottom:1px solid var(--borde-f);}
+.tbl td{padding:0.9rem 0.9rem;color:rgba(240,230,204,0.75);border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;line-height:1.7;}
+.tbl tr:hover td{background:rgba(200,151,30,0.04);color:var(--pergamino);}
+.tbl td:first-child{font-weight:600;color:var(--pergamino);}
+.badge{display:inline-block;font-family:'Inter',sans-serif;font-size:0.56rem;font-weight:700;padding:0.16rem 0.46rem;border-radius:2px;text-transform:uppercase;letter-spacing:0.1em;}
+.br{background:rgba(139,26,26,0.2);color:#E07070;border:1px solid rgba(139,26,26,0.4);}
+.bg2{background:rgba(26,74,46,0.2);color:#6ADB8A;border:1px solid rgba(26,74,46,0.4);}
+.bb{background:rgba(26,58,92,0.25);color:#6AADDF;border:1px solid rgba(46,109,164,0.4);}
+
+/* DIVISOR */
+.div-s{text-align:center;padding:1.2rem 0;color:rgba(200,151,30,0.15);letter-spacing:1em;font-size:1.1rem;user-select:none;}
+
+/* FINAL */
+.fin{background:var(--negro);padding:5rem 4.5rem;text-align:center;position:relative;overflow:hidden;}
+.fin-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(26,58,92,0.12) 0%,transparent 65%);pointer-events:none;}
+.fin-r{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.8vw,2.2rem);font-weight:700;color:var(--oro);margin-bottom:0.5rem;position:relative;z-index:2;}
+.fin-s{font-family:'Inter',sans-serif;font-size:0.66rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(240,230,204,0.22);position:relative;z-index:2;}
+
+footer{background:var(--negro-m);border-top:1px solid var(--borde);padding:1.6rem 4.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fb{font-family:'Playfair Display',serif;font-size:0.9rem;color:var(--oro);font-weight:700;}
+.fc{font-family:'Inter',sans-serif;font-size:0.68rem;color:rgba(240,230,204,0.25);}
+
+#ov{display:none;position:fixed;inset:0;top:56px;background:rgba(0,0,0,0.72);z-index:800;}
+#ov.vis{display:block;}
+
+@media(max-width:920px){
+  #sb{transform:translateX(-100%);}
+  #sb.open{transform:translateX(0);}
+  #main{margin-left:0;}
+  #hbg{display:flex;}
+  .S{padding:3.5rem 1.75rem;}
+  .dc{grid-template-columns:1fr;gap:2rem;}
+  .sb2{grid-template-columns:repeat(2,1fr);padding:2rem 1.5rem;gap:2rem;}
+  .debate{grid-template-columns:1fr;}
+  .obj-col{border-right:none;border-bottom:1px solid rgba(139,26,26,0.3);}
+  footer{padding:1.4rem 1.75rem;}
+  .fin{padding:4rem 1.75rem;}
+}
+@media(max-width:540px){
+  .pils{grid-template-columns:1fr;}
+  .cards{grid-template-columns:1fr;}
+  .sb2{grid-template-columns:1fr 1fr;}
+  .h-text-bg{font-size:10rem;}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav id="nav">
+  <div class="nav-b">Defensa de la Torah <em>· Apologética Académica</em></div>
+  <button id="hbg" onclick="tSB()"><span></span><span></span><span></span></button>
+</nav>
+<div id="ov" onclick="tSB()"></div>
+<aside id="sb">
+  <div class="sc">I — Fundamentos</div>
+  <a class="sl" onclick="ir('hero')">Introducción</a>
+  <a class="sl" onclick="ir('autoria')">Autoría Mosaica</a>
+  <a class="sl" onclick="ir('dt34')">Deuteronomio 34 y la muerte de Moisés</a>
+  <a class="sl" onclick="ir('hipotesis-doc')">La Hipótesis Documental (JEDP)</a>
+  <div class="sc">II — Las 7 Objeciones</div>
+  <a class="sl" onclick="ir('obj1')">Obj. 1: El monoteísmo tardío</a>
+  <a class="sl" onclick="ir('obj2')">Obj. 2: Pacto copiado de vasallaje</a>
+  <a class="sl" onclick="ir('obj3')">Obj. 3: Anacronismo filisteo</a>
+  <a class="sl" onclick="ir('obj4')">Obj. 4: "Ur de los Caldeos"</a>
+  <a class="sl" onclick="ir('obj5')">Obj. 5: Título de propiedad retroactivo</a>
+  <a class="sl" onclick="ir('obj6')">Obj. 6: Camellos en el año 2000 a.C.</a>
+  <a class="sl" onclick="ir('obj7')">Obj. 7: Anacronismos como prueba de autoría tardía</a>
+  <div class="sc">III — Evidencia Positiva</div>
+  <a class="sl" onclick="ir('arqueologia')">Arqueología a favor</a>
+  <a class="sl" onclick="ir('coherencia')">Coherencia interna</a>
+  <a class="sl" onclick="ir('exilio')">El exilio babilónico no explica todo</a>
+  <a class="sl" onclick="ir('conclusion')">Conclusión apologética</a>
+</aside>
+<main id="main">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-bg"></div>
+  <div class="h-grid"></div>
+  <div class="h-text-bg">תּוֹרָה</div>
+  <div class="hc">
+    <div class="hej">Apologética bíblica · Estudio académico</div>
+    <h1 class="ht">Defensa de<br>la <span class="g">Torah</span></h1>
+    <p class="hsub">Autoría, datación y coherencia histórica del Pentateuco</p>
+    <blockquote class="hmotto">
+      "La verdad no teme al escrutinio. Una fe inteligente examina las objeciones más duras con las mejores herramientas disponibles y no retrocede ante ninguna pregunta honesta."
+    </blockquote>
+    <a class="hsc" onclick="ir('autoria')">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 12L2 4h12L8 12z"/></svg>
+      Examinar la evidencia
+    </a>
+  </div>
+</section>
+
+<!-- BANDA -->
+<div class="sb2">
+  <div class="si"><div class="sn">3.400+</div><div class="sl2">años de transmisión</div></div>
+  <div class="si"><div class="sn">7</div><div class="sl2">objeciones refutadas</div></div>
+  <div class="si"><div class="sn">100+</div><div class="sl2">académicos citables</div></div>
+  <div class="si"><div class="sn">0</div><div class="sl2">contradicciones fatales</div></div>
+</div>
+
+<!-- AUTORÍA MOSAICA -->
+<section class="S" id="autoria">
+  <div class="Sh">
+    <div class="sey">I — Fundamento</div>
+    <h2 class="st">Autoría <span class="g">Mosaica</span> del Pentateuco</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="dc">
+    <div class="pr">
+      <p>La posición tradicional —judía, cristiana e islámica— sostiene que <strong>Moisés escribió o compiló el Pentateuco</strong> (Génesis, Éxodo, Levítico, Números y Deuteronomio) bajo inspiración divina. Esta posición no es mera fe ciega: está respaldada por testimonio interno, externo y evidencia histórica coherente.</p>
+      <p>El propio Pentateuco afirma en múltiples lugares que <strong>Moisés escribió</strong>: Éxodo 17:14 ("Escribe esto para memoria en un libro"), Éxodo 24:4 ("Y Moisés escribió todas las palabras del SEÑOR"), Números 33:2, Deuteronomio 31:9, 31:22, 31:24-26. Esto no prueba la autoría mosaica, pero establece que la tradición interna es inequívoca.</p>
+      <p>El <strong>testimonio externo</strong> es igualmente sólido: la Mishnah, el Talmud, Filón de Alejandría, Josefo, todos los libros históricos del Antiguo Testamento (Josué, Reyes, Crónicas, Esdras, Nehemías), el Nuevo Testamento en más de ochenta referencias, y los Padres de la Iglesia, todos atribuyen el Pentateuco a Moisés sin distinción.</p>
+      <p>Es importante aclarar metodológicamente: la <strong>autoría mosaica no exige que Moisés escribiera cada sílaba con su propia mano</strong>. Los estudiosos conservadores aceptan que Moisés pudo usar secretarios, fuentes documentales previas, y que escribas posteriores pudieron añadir aclaraciones editoriales menores —como actualizaciones de topónimos— sin alterar la sustancia del texto. Esto no es concesión: es práctica universal de la escritura antigua.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ ¿Quién era Moisés para escribir?</div>
+        <p>La objeción de que Moisés no podía escribir un corpus tan elaborado olvida su formación: criado en la corte de Faraón, Moisés recibió <strong>la mejor educación del mundo antiguo</strong>. Hechos 7:22 lo confirma: "Moisés fue instruido en toda la sabiduría de los egipcios." El Egipto del siglo XV-XIV a.C. tenía una tradición literaria y burocrática de más de mil años. Moisés era el hombre del siglo mejor equipado para esta tarea.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ Evidencia del alfabeto protocananeo</div>
+        <p>El desarrollo del <strong>alfabeto protocananeo</strong> (siglos XV-XIV a.C.) precisamente en el período mosaico hace perfectamente plausible que la Torah fuera escrita entonces. Los descubrimientos de inscripciones en Serabit el-Khadim (Sinaí, c.1500 a.C.) muestran que el alfabeto ya existía donde Moisés estuvo. No había obstáculo técnico alguno para la escritura del Pentateuco en esa época.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ El contexto egipcio del Génesis</div>
+        <p>El Génesis y el Éxodo contienen <strong>abundantes egipcianismos</strong> auténticos: nombres egipcios (Asenat, Potifar, Zafnat-panea), términos burocráticos de la corte, detalles de costumbres funerarias, de la administración del grano y de la burocracia del faraón que son arqueológicamente precisos para el período del Imperio Nuevo. Un autor del siglo VII a.C. no habría podido inventar estos detalles que la arqueología posterior confirmó.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEUTERONOMIO 34 -->
+<section class="S alt" id="dt34">
+  <div class="Sh">
+    <div class="sey">II — La objeción clásica</div>
+    <h2 class="st">¿Cómo escribió Moisés su <span class="r">propia muerte</span>?</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="alerta">
+    <div class="alerta-t">⚠ La Objeción</div>
+    <p>Deuteronomio 34 narra la muerte y sepultura de Moisés, incluyendo el lugar, las circunstancias, el luto de treinta días del pueblo y la afirmación de que "nunca más se levantó profeta en Israel como Moisés." ¿Cómo pudo Moisés escribir su propia necrológica? ¿No prueba esto que el Pentateuco fue escrito después de su muerte por otro autor?</p>
+  </div>
+  <div class="pr" style="margin-bottom:2.5rem;">
+    <p>Esta es, paradójicamente, la objeción más antigua y también la más fácilmente respondida. Los rabinos la conocían perfectamente y dieron respuestas articuladas hace más de dos milenios. Examinemos las opciones.</p>
+  </div>
+  <div class="pils">
+    <div class="pil">
+      <div class="pil-n">1</div>
+      <div class="pil-t">Profecía anticipatoria</div>
+      <div class="pil-p">Si Moisés era profeta —lo que la propia Torah afirma— podía escribir anticipadamente los eventos de su propia muerte por revelación divina. <strong>No es más difícil teológicamente</strong> que aceptar que Moisés predijo otros eventos futuros detallados que el libro también contiene. La profecía de su propia muerte es coherente con el carácter profético del libro.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">2</div>
+      <div class="pil-t">Adición editorial reconocida</div>
+      <div class="pil-p">La posición más común entre estudiosos conservadores: Deuteronomio 34 fue añadido por <strong>Josué o por los sacerdotes</strong> levíticos tras la muerte de Moisés, como epílogo final al corpus que Moisés había entregado. Esto no requiere autoría tardía de todo el Pentateuco: sólo de las últimas doce frases. El Talmud (Bava Batra 14b-15a) ya registra esta respuesta: "Las últimas ocho versículos del Deuteronomio los escribió Josué."</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">3</div>
+      <div class="pil-t">Precedente literario antiguo</div>
+      <div class="pil-p">En el mundo antiguo, era <strong>práctica establecida</strong> que los autores de textos legales o sapienciales incluyeran en tercera persona referencias a sí mismos, o que sus discípulos añadieran epílogos necrológicos a obras completas. Las obras de Moisés paralelas en forma literaria —los tratados de vasallaje hititas, las inscripciones reales egipcias— terminan frecuentemente con colofones escritos por escribas posteriores que no alteran la autoría sustancial del documento.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">4</div>
+      <div class="pil-t">El argumento del silencio inverso</div>
+      <div class="pil-p">Si el Pentateuco fuera una fabricación del siglo VII-VI a.C., <strong>¿por qué el "inventor" no se cuidó de eliminar este problema</strong>? Un falsificador sofisticado habría terminado el Deuteronomio de manera que no evidenciara nada. La "tosquedad" de la inclusión de la muerte de Moisés dentro del corpus que lleva su nombre apunta a autenticidad, no a fabricación: los auténticos colofones de secretarios son siempre los más "inelegantes".</div>
+    </div>
+  </div>
+  <div class="veredicto" style="margin-top:2.5rem;">
+    <div class="v-t">✔ Veredicto</div>
+    <p class="v-p">La narración de la muerte de Moisés en Deuteronomio 34 no refuta la autoría mosaica del Pentateuco. Es perfectamente explicable como <strong>adición editorial legítima de Josué o los levitas</strong>, como profecía anticipatoria, o como colofón de secretario siguiendo la práctica del mundo antiguo. Esta objeción, conocida desde la Antigüedad, tiene respuestas articuladas desde hace dos milenios. Su utilización como "refutación decisiva" revela desconocimiento de la literatura de respuesta existente.</p>
+  </div>
+</section>
+
+<!-- HIPÓTESIS DOCUMENTAL -->
+<section class="S" id="hipotesis-doc">
+  <div class="Sh">
+    <div class="sey">III — El gran argumento moderno</div>
+    <h2 class="st">La Hipótesis <span class="r">Documental</span> (JEDP)</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr" style="margin-bottom:2.5rem;">
+    <p>La <strong>Hipótesis Documental</strong> —también llamada teoría de las cuatro fuentes o modelo JEDP— fue formulada en su forma clásica por Julius Wellhausen en 1878. Propone que el Pentateuco no fue escrito por Moisés sino compilado entre los siglos IX y V a.C. a partir de cuatro fuentes independientes: <strong>J</strong> (el Yahvista, siglo IX a.C.), <strong>E</strong> (el Elohísta, siglo VIII a.C.), <strong>D</strong> (el Deuteronomista, siglo VII a.C.) y <strong>P</strong> (el Sacerdotal, siglo VI-V a.C.).</p>
+    <p>Esta hipótesis <strong>dominó la academia bíblica durante casi un siglo</strong>, pero desde los años 1970-1980 ha sido objeto de críticas tan severas desde dentro de la crítica histórica secular que muchos académicos la han abandonado o reformado radicalmente. Lo que los apologistas afirman no es sólo la posición creyente: es el estado actual de la ciencia bíblica secular.</p>
+  </div>
+  <div class="schema">
+    <div class="schema-l">Estado actual de la academia</div>
+    <div class="schema-t">El colapso interno de la Hipótesis Documental</div>
+    <div class="schema-b">
+      <p><strong>Rolf Rendtorff</strong> (Universidad de Heidelberg, discípulo de von Rad): "Los presupuestos metodológicos de Wellhausen son circulares. Las fuentes se identifican por los criterios que previamente se ha decidido que las diferencian. Es un razonamiento cerrado sobre sí mismo." (<em>The Problem of the Process of Transmission in the Pentateuch</em>, 1977)</p>
+      <p><strong>John Van Seters</strong> (Universidad de Carolina del Norte): Rechazó la fuente J como del siglo IX a.C. y la reubicó en el período exílico, destruyendo la secuencia temporal de Wellhausen desde dentro.</p>
+      <p><strong>Erhard Blum</strong>: Propuso sustituir las cuatro fuentes por dos "composiciones" (KD y KP), admitiendo que las fuentes individuales son inextricables del texto actual.</p>
+      <p><strong>Thomas L. Thompson</strong> y <strong>Niels Peter Lemche</strong> (Escuela de Copenhague): Fueron tan lejos en el escepticismo que situaron la composición del Pentateuco en el período helenístico (siglos IV-III a.C.), demoliendo la cronología de Wellhausen por el polo opuesto.</p>
+      <p>Resultado: la academia secular no tiene hoy <strong>ningún consenso</strong> sobre cuándo ni cómo se compuso el Pentateuco. El "consenso de Wellhausen" se ha fragmentado en docenas de modelos incompatibles entre sí. Esto no prueba la autoría mosaica, pero sí prueba que la hipótesis documental no es ciencia establecida sino teoría en crisis.</p>
+    </div>
+  </div>
+  <div class="cards" style="margin-top:2rem;">
+    <div class="card vis">
+      <div class="card-t">El problema del criterio divino</div>
+      <div class="card-s">Debilidad metodológica</div>
+      <div class="card-p">Wellhausen separó fuentes por el uso de los nombres divinos "Yahvé" y "Elohim". Pero el texto hebreo usa ambos nombres deliberadamente con significados distintos: Elohim como Dios trascendente y creador, Yahvé como Dios de la alianza e historia. <strong>Ugarit y Ebla muestran que autores únicos usaban múltiples nombres divinos en un solo texto</strong> por razones literarias y teológicas, no de autoría plural.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">El problema de las "duplicaciones"</div>
+      <div class="card-s">Malentendido literario</div>
+      <div class="card-p">Wellhausen interpretó las repeticiones del Pentateuco (dos relatos de la creación, dos versiones del diluvio) como prueba de fuentes distintas. Pero la <strong>literatura ugarítica, egipcia e hitita del II milenio a.C.</strong> muestra que la repetición con variación ("paralelismo expansivo") es un recurso literario estilístico normal en el antiguo Oriente Próximo. No es señal de múltiples autores sino de técnica narrativa antigua.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">El problema de la coherencia literaria</div>
+      <div class="card-s">Evidencia contraria</div>
+      <div class="card-p">Si el Pentateuco fuera una compilación de cuatro fuentes independientes ensambladas por redactores, deberíamos esperar <strong>costuras visibles, contradicciones irresolubles y discontinuidades narrativas</strong>. En cambio, el texto muestra una coherencia de vocabulario, estructura narrativa, sistema legal y teología que apunta más naturalmente a un autor o grupo unificado que a una compilación tardía.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">El presupuesto evolucionista de Wellhausen</div>
+      <div class="card-s">Sesgo ideológico documentado</div>
+      <div class="card-p">Wellhausen aplicó al texto bíblico el <strong>evolucionismo hegeliano</strong> de su época: asumió a priori que la religión evoluciona del politeísmo primitivo al monoteísmo sofisticado. Este presupuesto filosófico —no arqueológico ni filológico— determinó sus conclusiones. El propio Wellhausen lo confesó: "Escribí mi historia de Israel antes de estudiarlo." La teoría precede a la evidencia.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">El argumento de Kitchen</div>
+      <div class="card-s">Egipólogo de Oxford</div>
+      <div class="card-p">Kenneth Kitchen (Universidad de Liverpool), uno de los mayores expertos mundiales en el Antiguo Egipto y el Antiguo Oriente Próximo, demostró en <em>On the Reliability of the Old Testament</em> (2003) que <strong>las estructuras literarias, los sistemas legales, las fórmulas de pacto y los detalles culturales del Pentateuco encajan perfectamente en el II milenio a.C.</strong> y son ajenos al I milenio. La evidencia arqueológica favorece la datación temprana.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">El manuscrito del Mar Muerto</div>
+      <div class="card-s">Evidencia textual</div>
+      <div class="card-p">Los <strong>Manuscritos del Mar Muerto</strong> (siglos III-I a.C.) contienen copias del Pentateuco prácticamente idénticas al texto masorético del siglo X d.C. Esto demuestra que el texto fue transmitido con extraordinaria fidelidad durante más de mil años, y que ya estaba fijado al menos en el siglo III a.C. <strong>No hay evidencia manuscrita de múltiples versiones</strong> correspondientes a las cuatro fuentes hipotéticas: el texto siempre aparece como unidad.</div>
+    </div>
+  </div>
+</section>
+
+<div class="div-s">✦ ✦ ✦</div>
+
+<!-- OBJ 1: MONOTEÍSMO -->
+<section class="S alt" id="obj1">
+  <div class="Sh">
+    <div class="sey">Objeción 1 — @dilogos.sagrados</div>
+    <h2 class="st">"El monoteísmo fue una <span class="r">invención tardía</span>"</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="alerta">
+    <div class="alerta-t">⚠ La Infografía Sostiene</div>
+    <p>Que Israel pasó de politeísmo → monolatría → monoteísmo; que las inscripciones de Kuntillet Ajrud (siglo VIII a.C.) muestran israelitas adorando "a Yahvé y su Asherah"; que el monoteísmo estricto fue un "proyecto tardío editado hacia el pasado"; y que Josué 24:2 admite que los antepasados servían a otros dioses.</p>
+  </div>
+  <div class="debate">
+    <div class="obj-col">
+      <div class="col-head">⊗ El Argumento Secular</div>
+      <div class="col-text">
+        <p>El modelo evolucionista afirma que el monoteísmo israelita no fue revelado sino <strong>desarrollado gradualmente</strong> desde formas politeístas primitivas. Las inscripciones de Kuntillet Ajrud serían evidencia de que en el siglo VIII a.C. los israelitas ordinarios seguían siendo politeístas. El monoteísmo estricto sería una imposición sacerdotal tardía, probablemente del período del rey Josías (siglo VII a.C.) o incluso del exilio babilónico.</p>
+        <p>Josué 24:2 cita a Dios diciendo que "vuestros padres… sirvieron a otros dioses", lo que probaría que el politeísmo fue el estado religioso original de Israel.</p>
+      </div>
+    </div>
+    <div class="res-col">
+      <div class="col-head">✔ La Respuesta Apologética</div>
+      <div class="col-text">
+        <p><strong>1. Descripción ≠ prescripción.</strong> Que la Torah describa que Israel cayó en idolatría (lo cual admite explícitamente en Éxodo, Números, Jueces y los libros históricos) no prueba que el monoteísmo fuera la creencia tardía. Al contrario: un texto inventado para justificar el monoteísmo no presentaría tan honestamente las recaídas del pueblo. La Torah es el documento más autocrítico de la Antigüedad.</p>
+        <p><strong>2. Kuntillet Ajrud: lectura parcial.</strong> Las inscripciones dicen "Yahvé de Teimán y su Asherah." El término hebreo <em>asherah</em> puede referirse a un árbol ritual o poste sagrado, no necesariamente a una diosa. <strong>Muchos hebraístas (Zevit, Day, Hadley) debaten si "su Asherah" implica una consorte divina o simplemente un símbolo cultual</strong>. Además, estas inscripciones representan práctica popular heterodoxa, exactamente lo que los profetas del siglo VIII (Amós, Oseas, Isaías) denuncian furiosamente como apostasía. Que haya israelitas politeístas en el siglo VIII prueba la autenticidad del conflicto profético, no la invención tardía del monoteísmo.</p>
+        <p><strong>3. El Sinaí y el Éxodo son anteriores a Josías.</strong> Si el monoteísmo fuera invención de Josías (c.621 a.C.), ¿cómo explica el crítico secular que los profetas del siglo VIII —Amós, Oseas, Miqueas, Isaías— ya lo presuponen con plena vigencia, un siglo antes de Josías? <strong>El monoteísmo precede a la reforma de Josías</strong> en la misma evidencia que los críticos usan.</p>
+        <p><strong>4. Josué 24:2 no prueba politeísmo original.</strong> Este texto narra que los antepasados de Abraham adoraban otros dioses en Mesopotamia —lo cual es históricamente impecable: Mesopotamia era politeísta—. La Torah presenta la vocación de Abraham como ruptura con ese politeísmo familiar, no como continuidad. Este texto confirma la narrativa bíblica, no la contradice.</p>
+      </div>
+    </div>
+  </div>
+  <div class="veredicto">
+    <div class="v-t">✔ Veredicto Académico</div>
+    <p class="v-p">La evidencia de práctica popular politeísta en Israel (que la Biblia misma denuncia profusamente) no prueba que el monoteísmo fuera una invención tardía. Prueba exactamente lo que la Torah afirma: que Israel era un pueblo que recibió una revelación monoteísta y repetidamente la traicionó. <strong>La existencia del pecado no refuta la ley que lo define como pecado.</strong> El modelo evolucionista de Wellhausen-Smith aplica a la Biblia categorías darwinistas que el propio Darwin no aplicaría a los textos: la evidencia de violación no demuestra la inexistencia de la norma violada.</p>
+  </div>
+</section>
+
+<!-- OBJ 2: PACTO VASALLAJE -->
+<section class="S" id="obj2">
+  <div class="Sh">
+    <div class="sey">Objeción 2 — @dilogos.sagrados</div>
+    <h2 class="st">¿El pacto bíblico copia tratados de <span class="r">vasallaje asirio</span>?</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="alerta">
+    <div class="alerta-t">⚠ La Infografía Sostiene</div>
+    <p>Que el Pacto de Abraham (Génesis 17) copia exactamente la estructura de los tratados de vasallaje asirio-hititas (identificación del rey, prólogo histórico, estipulaciones, bendiciones y maldiciones), lo que probaría que es un documento político fabricado, no una revelación divina.</p>
+  </div>
+  <div class="debate">
+    <div class="obj-col">
+      <div class="col-head">⊗ El Argumento Secular</div>
+      <div class="col-text">
+        <p>La estructura del pacto bíblico (berith) imita los tratados de vasallaje del Antiguo Oriente Próximo: el Gran Rey se identifica, narra sus beneficios pasados, impone condiciones, y promete bendiciones si se cumple y maldiciones si se viola. <strong>Esto probaría que el pacto bíblico no es revelación sino formato político reciclado</strong>, una manera de darle autoridad divina a compromisos que son en realidad contractos humanos de dominación.</p>
+      </div>
+    </div>
+    <div class="res-col">
+      <div class="col-head">✔ La Respuesta Apologética</div>
+      <div class="col-text">
+        <p><strong>1. La similitud de estructura confirma la datación temprana, no tardía.</strong> Este es el argumento más invertido de toda la presentación. George Mendenhall (1954) y Klaus Baltzer (1960) fueron los primeros en documentar que los pactos bíblicos siguen la estructura de los tratados hititas del siglo XV-XIV a.C. (II milenio), <strong>no la de los tratados asirios del siglo VIII-VII a.C.</strong> (I milenio). Los tratados asirios tienen una estructura diferente: omiten el prólogo histórico y multiplican las maldiciones. El pacto bíblico encaja perfectamente en el período mosaico y es <strong>anacrónico respecto a los tratados del período de Josías</strong>. La infografía usa el argumento exactamente al revés: la similitud prueba la datación temprana.</p>
+        <p><strong>2. Dios usa el lenguaje que los hombres comprenden.</strong> Que Dios usara el formato contractual del mundo antiguo para comunicarse con Israel no es sorprendente: es pedagógicamente coherente. Un padre que firma un contrato de adopción no está "copiando" al Estado: está usando el instrumento legal disponible para expresar una relación real. La forma no determina la autenticidad del contenido.</p>
+        <p><strong>3. La inversión semántica es radical.</strong> En los tratados de vasallaje humanos, el Gran Rey es un monarca terreno que amenaza con destrucción. En el berith bíblico, el "Gran Rey" es Dios, las "estipulaciones" son mandamientos éticos de dignidad humana, y las "bendiciones" apuntan a la vida y la prosperidad. Usar el mismo formato para decir algo radicalmente diferente es exactamente lo que hacen los grandes textos religiosos: subvertir las formas culturales para introducir contenido nuevo.</p>
+      </div>
+    </div>
+  </div>
+  <div class="veredicto">
+    <div class="v-t">✔ Veredicto: El argumento se invierte</div>
+    <p class="v-p">La comparación del pacto bíblico con los tratados hititas del II milenio a.C., lejos de refutar la autoría mosaica, la <strong>confirma cronológicamente</strong>. Kenneth Kitchen ha demostrado exhaustivamente que esta estructura específica (con prólogo histórico) es característica del siglo XV-XIV a.C. y desaparece en los tratados del I milenio. <strong>Un falsificador del siglo VII a.C. habría producido un texto con la estructura asiriria tardía, no con la hitita temprana.</strong></p>
+  </div>
+</section>
+
+<!-- OBJ 3: FILISTEOS -->
+<section class="S alt" id="obj3">
+  <div class="Sh">
+    <div class="sey">Objeción 3 — Evidencia B</div>
+    <h2 class="st">El anacronismo <span class="r">filisteo</span> de 800 años</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="alerta">
+    <div class="alerta-t">⚠ La Infografía Sostiene</div>
+    <p>Abraham e Isaac hacen pactos con Abimelec "rey de los filisteos" en Génesis 21, pero los filisteos (Pueblos del Mar) no llegaron a Canaán hasta el siglo XII a.C., unos 800 años después de la época patriarcal (2000 a.C.). Esto sería un anacronismo fatal que prueba autoría tardía.</p>
+  </div>
+  <div class="debate">
+    <div class="obj-col">
+      <div class="col-head">⊗ El Argumento Secular</div>
+      <div class="col-text">
+        <p>Si Abraham vivió hacia el 2000 a.C. y los filisteos no se establecieron en Canaán hasta el 1200-1100 a.C. (tras el colapso de la Edad de Bronce), entonces la referencia a "Abimelec rey de los filisteos" en Génesis 21 es un <strong>anacronismo de 800 años</strong>, equivalente a escribir una biografía de Julio César negociando con el ejército de Napoleón. Esto prueba que el texto fue escrito mucho después de los eventos que describe.</p>
+      </div>
+    </div>
+    <div class="res-col">
+      <div class="col-head">✔ La Respuesta Apologética</div>
+      <div class="col-text">
+        <p><strong>1. "Filisteos" puede ser un gentilicio actualizado.</strong> El fenómeno de la <em>actualización de topónimos</em> es universal y documentado en la literatura antigua: los autores usaban el nombre contemporáneo del lugar o pueblo para que sus lectores identificaran la geografía, aunque el nombre original fuera diferente. La misma Torah llama "Dan" a la ciudad de Lais (Génesis 14:14) cuando el nombre "Dan" sólo lo recibirá siglos después (Jueces 18). Esto no es anacronismo: es convención literaria de localización geográfica para el lector.</p>
+        <p><strong>2. Presencia pre-filistea en la zona.</strong> Hay evidencia de poblaciones egeas o de origen mediterráneo ("pre-filisteos") en la costa cananea ya desde el período del Bronce Medio. Algunos arqueólogos (Bietak, Dothan) han encontrado cerámica de tipo minoico o egeo en la franja costera que luego sería filistea, anterior al gran asentamiento del 1200 a.C. El término "filisteos" en Génesis puede referirse a estos pobladores pre-migración o a sus predecesores costeros.</p>
+        <p><strong>3. Abimelec no es descrito como filisteo clásico.</strong> El Abimelec del Génesis no tiene nada que ver culturalmente con los filisteos del período de los Jueces y Samuel: no tiene la cultura material, las costumbres, la organización militar ni los nombres divinos de los filisteos tardíos. Su nombre es semítico (no indo-europeo como los nombres filisteos clásicos). Su ciudad, Gerar, es una ciudad cananea. El texto usa "filisteos" como gentilicio regional, no como caracterización étnica precisa.</p>
+        <p><strong>4. La infografía comete la falacia que denuncia.</strong> Asume que el término "filisteos" en Génesis debe referirse exactamente al mismo grupo étnico del siglo XII a.C. Pero los propios académicos críticos admiten que la etnografía del Antiguo Testamento es compleja y que los nombres de pueblos se reutilizan. El "error" sólo existe si se aplica una precisión etnográfica que ni el texto ni la práctica literaria antigua exigen.</p>
+      </div>
+    </div>
+  </div>
+  <div class="veredicto">
+    <div class="v-t">✔ Veredicto</div>
+    <p class="v-p">La referencia a "filisteos" en el Génesis patriarcal es explicable como <strong>actualización topográfica, gentilicio regional flexible, o referencia a pobladores pre-filisteos costeros</strong>. Ninguna de estas explicaciones requiere autoría tardía. Además, si el texto fuera escrito en el siglo VII a.C. por autores que conocían perfectamente a los filisteos del período de los Jueces y Samuel, habrían descrito a Abimelec con características culturales filisteas reconocibles. El hecho de que no lo hagan apunta a que la descripción preserva memorias auténticas de un período anterior.</p>
+  </div>
+</section>
+
+<!-- OBJ 4: UR DE LOS CALDEOS -->
+<section class="S" id="obj4">
+  <div class="Sh">
+    <div class="sey">Objeción 4 — Evidencia C</div>
+    <h2 class="st">"Ur de los <span class="r">Caldeos</span>" — ¿anacronismo del siglo VII?</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="alerta">
+    <div class="alerta-t">⚠ La Infografía Sostiene</div>
+    <p>Génesis 11:28 llama al lugar de origen de Abraham "Ur Kasdim" (Ur de los Caldeos). El Imperio Neobabilónico (Caldeo) no dominó la región hasta el 626 a.C. Para alguien del 2000 a.C. la palabra "Caldeos" no existía. Esto probaría que el texto fue escrito por un sacerdote del siglo VII para quien los caldeos eran su realidad política actual.</p>
+  </div>
+  <div class="debate">
+    <div class="obj-col">
+      <div class="col-head">⊗ El Argumento Secular</div>
+      <div class="col-text">
+        <p>El término "Kasdim" (Caldeos) como calificativo de Ur sería una huella dactilar del siglo VII-VI a.C., cuando el Imperio Neobabilónico (de origen caldeo) dominaba Mesopotamia. Un autor del 2000 a.C. no habría llamado "Ur de los Caldeos" a la ciudad porque los caldeos como entidad política reconocible no existían entonces. Esto probaría que el texto fue escrito retrospectivamente durante o después del exilio babilónico.</p>
+      </div>
+    </div>
+    <div class="res-col">
+      <div class="col-head">✔ La Respuesta Apologética</div>
+      <div class="col-text">
+        <p><strong>1. "Kasdim" no es exclusivamente neobabilónico.</strong> El término "Kasdim" (Kaldú en las fuentes asirias) aparece en textos cuneiformes ya desde el siglo XIII a.C. —mucho antes del Imperio Neobabilónico— como nombre de tribus semíticas del sur de Mesopotamia. No es un término inventado en el siglo VII: es un topónimo o etnónimo que designa una región geográfica con larga historia propia. <strong>La pregunta no es si existían los caldeos en el 2000 a.C. sino si el topónimo "Ur de los Caldeos" ya existía o fue añadido como clarificación posterior.</strong></p>
+        <p><strong>2. Actualización de topónimos: práctica universal.</strong> Como ya señalamos con "Dan" y los "filisteos", la Torah contiene otros ejemplos de nombres actualizados. Génesis 14:14 llama "Dan" a una ciudad que en tiempos de Abraham se llamaba "Lais". Si el crítico acepta que ese es un topónimo actualizado por convención, debe aplicar el mismo criterio a "Ur de los Caldeos". La práctica de clarificar topónimos arcaicos con nombres contemporáneos es universalmente atestiguada en la literatura antigua y no implica autoría tardía del texto entero.</p>
+        <p><strong>3. Hay múltiples ciudades llamadas "Ur".</strong> En el antiguo Oriente Próximo había al menos dos ciudades importantes llamadas "Ur". El calificativo "de los Caldeos" puede ser precisamente un apéndice identificador antiguo para distinguirla de otras ciudades homónimas, añadido tempranamente por copistas para evitar confusión geográfica. Esto no requiere un contexto político del siglo VII.</p>
+        <p><strong>4. El argumento presupone lo que debe probar.</strong> Para que "Ur de los Caldeos" sea un anacronismo fatal, hay que demostrar que a) el calificativo existía exclusivamente en el siglo VII, b) que fue insertado en ese momento, y c) que no pudo ser una glosa explicativa añadida en cualquier momento de la cadena de transmisión. Ninguno de estos tres pasos puede demostrarse: son asunciones.</p>
+      </div>
+    </div>
+  </div>
+  <div class="veredicto">
+    <div class="v-t">✔ Veredicto</div>
+    <p class="v-p">"Ur de los Caldeos" es compatible con la autoría mosaica como <strong>clarificación geográfica convencional</strong>, o como uso de un etnónimo regional que precede al Imperio Neobabilónico. El argumento sólo funciona si se asume que el término "Kasdim" era exclusivo del siglo VII, lo que no puede demostrarse. Además, el propio Génesis muestra conocimiento preciso de la Ur mesopotámica del III-II milenio (nivel ziggurat, cultura sumeria) que un autor del siglo VII tendría dificultades en inventar.</p>
+  </div>
+</section>
+
+<!-- OBJ 5: TÍTULO DE PROPIEDAD -->
+<section class="S alt" id="obj5">
+  <div class="Sh">
+    <div class="sey">Objeción 5 — El Móvil del Crimen</div>
+    <h2 class="st">¿La Torah como <span class="r">título de propiedad</span> retroactivo?</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="alerta">
+    <div class="alerta-t">⚠ La Infografía Sostiene</div>
+    <p>Entre los siglos VII y VI a.C., Israel y Judá pierden su tierra frente a los imperios asirio y babilónico. El "móvil" para fabricar el Génesis sería crear un documento retroactivo que dijera: "Esta tierra nos fue dada por el creador del universo", legitimando así la reclamación territorial mediante ficción religiosa.</p>
+  </div>
+  <div class="debate">
+    <div class="obj-col">
+      <div class="col-head">⊗ El Argumento Secular</div>
+      <div class="col-text">
+        <p>La hipótesis del "título de propiedad": Israel, derrotado y exiliado, necesitaba una justificación teológica para reclamar la tierra perdida. Los sacerdotes habrían fabricado o editado radicalmente el relato de la promesa abrahámica para crear una reclamación divina sobre Canaán que superara cualquier reclamo político humano. El Génesis sería propaganda política religiosa disfrazada de historia antigua.</p>
+      </div>
+    </div>
+    <div class="res-col">
+      <div class="col-head">✔ La Respuesta Apologética</div>
+      <div class="col-text">
+        <p><strong>1. El argumento prueba demasiado.</strong> Si el "móvil" para fabricar el Génesis era justificar la posesión de la tierra, ¿por qué el texto está lleno de elementos que contradicen ese propósito? El Génesis incluye: el pecado de los patriarcas, la promiscuidad de Lot, el engaño de Jacob, el fratricidio de Simeón y Leví, la apostasía de los hijos de Israel en Egipto. Un documento de propaganda propagandística habría presentado a los antepasados como héroes sin mancha, no como figuras profundamente defectuosas. La honestidad autodestructiva del texto es incompatible con la hipótesis de la fabricación propagandística.</p>
+        <p><strong>2. La promesa de la tierra no necesita el exilio como motivo.</strong> Si Israel vivía en la tierra prometida antes del exilio, no necesitaba un "título de propiedad": la posesión era el propio título. La promesa abrahámica tendría mucho más sentido como documento histórico auténtico del período pre-entrada-en-Canaán —cuando Israel aún no la poseía— que como fabricación del exilio, cuando Israel ya la había perdido. Un pueblo exiliado no fabrica documentos de propiedad: hace revoluciones o acuerdos diplomáticos.</p>
+        <p><strong>3. El argumento del "móvil" es circular.</strong> Postular un móvil (recuperar la tierra) no prueba que el crimen (fabricación) ocurrió. Los fiscales del mundo real saben que el móvil sin evidencia física no condena a nadie. La evidencia arqueológica y literaria del Pentateuco apunta al II milenio a.C., no al I. El "móvil" propuesto no explica ni los detalles egipcios auténticos, ni la estructura hitita de los pactos, ni la precisión geográfica del desierto del Sinaí.</p>
+        <p><strong>4. El exilio produjo teología del castigo, no de la reclamación.</strong> La literatura bíblica claramente producida durante el exilio —Lamentaciones, Ezequiel, los Salmos del exilio— está dominada por la teología del castigo, la confesión del pecado y la esperanza futura, no por la reclamación territorial agresiva. Si el exilio fue el contexto de fabricación del Génesis, ¿por qué el texto no refleja la teología dominante del exilio?</p>
+      </div>
+    </div>
+  </div>
+  <div class="veredicto">
+    <div class="v-t">✔ Veredicto</div>
+    <p class="v-p">La hipótesis del "título de propiedad retroactivo" es una narrativa especulativa sin respaldo arqueológico que contradice la evidencia interna del propio texto. Un documento de propaganda habría sido <strong>hagiográfico con los patriarcas, coherente con la teología del exilio y desprovisto de los embarazosos anacronismos que la crítica misma señala</strong>. El Génesis no es ninguna de estas cosas. La complejidad, honestidad y arcaísmo del texto son más compatibles con documentos auténticos del II milenio que con fabricación propagandística tardía.</p>
+  </div>
+</section>
+
+<!-- OBJ 6: CAMELLOS -->
+<section class="S" id="obj6">
+  <div class="Sh">
+    <div class="sey">Objeción 6 — Evidencia A</div>
+    <h2 class="st">Los <span class="r">camellos</span> en el año 2000 a.C.</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="alerta">
+    <div class="alerta-t">⚠ La Infografía Sostiene</div>
+    <p>Génesis 12:16 menciona camellos entre los bienes de Abraham. Pero según excavaciones del Valle de Arabá (Ben-Yosef &amp; Sapir-Hen), el camello doméstico no aparece en evidencia arqueológica en Canaán hasta el siglo X a.C. (930 a.C.). Esto sería un "fallo cronológico de 1.000 años" que prueba que el autor describió su propia época, no la de Abraham.</p>
+  </div>
+  <div class="debate">
+    <div class="obj-col">
+      <div class="col-head">⊗ El Argumento Secular</div>
+      <div class="col-text">
+        <p>El estudio de Ben-Yosef y Sapir-Hen (2014) en el Valle de Arabá encontró que los huesos de camello doméstico en esa región específica aparecen a partir del siglo X a.C. Esto se extrapoló a la conclusión de que el camello doméstico no existía en todo el Levante en el 2000 a.C. La mención de camellos en el Génesis sería por tanto un anacronismo de 1.000 años, prueba de autoría tardía.</p>
+      </div>
+    </div>
+    <div class="res-col">
+      <div class="col-head">✔ La Respuesta Apologética</div>
+      <div class="col-text">
+        <p><strong>1. El estudio no dice lo que la infografía afirma.</strong> El estudio de Ben-Yosef y Sapir-Hen se limitó al Valle de Arabá (sur del Neguev). Sus autores explícitamente reconocieron que <strong>sus conclusiones no pueden generalizarse a toda la región</strong>. Extrapolar datos de una zona de minería del cobre a todo el Creciente Fértil es metodológicamente inaceptable. El artículo original es mucho más cauteloso que la presentación viral que se hizo de él.</p>
+        <p><strong>2. La evidencia de camello doméstico en el II milenio a.C. existe.</strong> Hay múltiples hallazgos de restos de camello doméstico anteriores al siglo X a.C.: representaciones de camellos con jinetes en sellos del III milenio a.C. en Irán y Mesopotamia; huesos de camello doméstico en Shahr-i-Sokhta (Irán, c.2500 a.C.); figurillas de barro con camellos cargados en contextos del Bronce Medio en Palestina; menciones de camellos en textos cuneiformes del II milenio a.C. La ausencia de evidencia en un sitio específico no es evidencia de ausencia universal.</p>
+        <p><strong>3. El camello doméstico tardó siglos en generalizarse.</strong> La domesticación del camello en Arabia ya existía hacia el 3000-2500 a.C. (evidencia de Omán y el Golfo Pérsico). Su uso se extendió gradualmente hacia el oeste. Que fuera raro y costoso en Canaán en el 2000 a.C. es perfectamente compatible con el texto: Abraham no tiene un rebaño de camellos sino que los recibe como regalo excepcional del faraón —precisamente lo que esperaríamos si los camellos eran raros y valiosos en esa época.</p>
+        <p><strong>4. El argumento de la ausencia es el más débil.</strong> La arqueología nunca puede probar que algo no existía: sólo puede demostrar que no ha sido encontrado donde se ha buscado. Los estudios de fauna en el Levante del Bronce Medio son incompletos. Afirmar que el camello doméstico "no existía" en el 2000 a.C. en base a muestras parciales es metodológicamente indefendible.</p>
+      </div>
+    </div>
+  </div>
+  <div class="veredicto">
+    <div class="v-t">✔ Veredicto: Objeción basada en evidencia mal leída</div>
+    <p class="v-p">El argumento del camello es el más publicitado y el más fácilmente refutable. El estudio original (Ben-Yosef &amp; Sapir-Hen, 2014) fue <strong>masivamente malinterpretado</strong> en los medios de comunicación y en las redes sociales. Sus propios autores limitaron sus conclusiones a una zona geográfica específica. La evidencia positiva de camellos domesticados en el II milenio a.C. en el Oriente Próximo existe y es conocida en la academia. <strong>El argumento viral es un caso de estudio en la distorsión mediática de resultados arqueológicos.</strong></p>
+  </div>
+</section>
+
+<!-- OBJ 7: ANACRONISMOS -->
+<section class="S alt" id="obj7">
+  <div class="Sh">
+    <div class="sey">Objeción 7 — La Huella Dactilar</div>
+    <h2 class="st">Los anacronismos como <span class="r">prueba de autoría tardía</span></h2>
+    <div class="sr"></div>
+  </div>
+  <div class="alerta">
+    <div class="alerta-t">⚠ La Infografía Sostiene</div>
+    <p>Si ves un smartphone en un cuadro medieval, sabes que el autor vivió mucho después. El Génesis estaría "lleno de smartphones literarios" —anacronismos que revelan autoría tardía del mismo modo que un objeto fuera de época en una pintura revela el período del pintor.</p>
+  </div>
+  <div class="debate">
+    <div class="obj-col">
+      <div class="col-head">⊗ El Argumento Secular</div>
+      <div class="col-text">
+        <p>La analogía del smartphone medieval es visualmente poderosa: un objeto claramente imposible en un contexto dado revela al instante que algo no encaja cronológicamente. Aplicado a la Torah: los "anacronismos" (filisteos, camellos, caldeos, estructura de vasallaje) serían los "smartphones" que revelan que el autor vivió siglos después de los eventos que describe.</p>
+      </div>
+    </div>
+    <div class="res-col">
+      <div class="col-head">✔ La Respuesta Apologética</div>
+      <div class="col-text">
+        <p><strong>1. La analogía falla en el punto central.</strong> Un smartphone en un cuadro medieval es un anacronismo lógicamente imposible: los smartphones no existían en la Edad Media. Pero ninguno de los "anacronismos" bíblicos propuestos es lógicamente imposible en el contexto afirmado: los camellos domésticos existían en Arabia antes del 2000 a.C., los protofílisteos existían en la costa cananea, el término "caldeos" tiene historia previa al Imperio Neobabilónico, y la estructura de vasallaje hitita existía precisamente en el período mosaico. La analogía sólo funciona si los anacronismos son reales, y como hemos demostrado, ninguno lo es de manera concluyente.</p>
+        <p><strong>2. La analogía inversa funciona mejor para la datación tardía.</strong> Si el Génesis fuera escrito en el siglo VII-VI a.C., esperaríamos encontrar referencias a realidades del I milenio: terminología política persa o babilónica claramente anacrónca hacia atrás, nombres propios de dioses del panteón semítico tardío, estructuras administrativas del período monárquico israelita. En cambio, el texto muestra <strong>conocimiento de detalles del Bronce Medio y del contexto egipcio del II milenio</strong> que un autor del siglo VII no habría podido inventar correctamente.</p>
+        <p><strong>3. Los "smartphones bíblicos" son todos discutibles.</strong> Todos y cada uno de los presuntos anacronismos del Génesis tienen explicaciones académicamente defendibles que no requieren autoría tardía. Ninguno es el equivalente de un smartphone en un cuadro medieval: son, en el peor caso, topónimos actualizados, referencias a grupos pre-migratorios, o detalles cuya datación es debatida. La analogía requiere certeza que la arqueología no proporciona.</p>
+        <p><strong>4. La evidencia pro-datación temprana es ignorada.</strong> Las infografías presentan sólo la evidencia que apunta hacia la autoría tardía e ignoran la evidencia masiva que apunta hacia la temprana: los egipcianismos auténticos del Génesis y el Éxodo, la estructura hitita de los pactos (compatible con el II milenio, incompatible con el I), el conocimiento preciso de la geografía del Sinaí y del desierto, el vocabulario arcaico hebreo que es anterior al período monárquico.</p>
+      </div>
+    </div>
+  </div>
+  <div class="veredicto">
+    <div class="v-t">✔ Veredicto: Evidencia selectiva</div>
+    <p class="v-p">La estrategia de las infografías es la del <strong>razonamiento confirmatorio</strong> (<em>confirmation bias</em>): seleccionar sólo los datos que apoyan la conclusión predecida e ignorar sistemáticamente la evidencia contraria. Ningún tribunal académico, científico o judicial condenaría a partir de evidencia seleccionada unilateralmente. Una evaluación honesta de los datos arqueológicos, filológicos y literarios muestra que la evidencia <strong>no es concluyente en ninguna dirección</strong>, pero que la hipótesis de la autoría temprana (mosaica o cuasi-mosaica) explica más datos con menos anomalías que las hipótesis tardías.</p>
+  </div>
+</section>
+
+<div class="div-s">✦ ✦ ✦</div>
+
+<!-- ARQUEOLOGÍA POSITIVA -->
+<section class="S" id="arqueologia">
+  <div class="Sh">
+    <div class="sey">Evidencia positiva — I</div>
+    <h2 class="st">Arqueología <span class="g">a favor</span> del Pentateuco</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr" style="margin-bottom:2.5rem;">
+    <p>Frente a los presuntos anacronismos, existe una evidencia arqueológica positiva que las infografías ignoran sistemáticamente. Esta evidencia no prueba la inspiración divina de la Torah (eso excede el método arqueológico), pero sí corrobora su autenticidad histórica y su compatibilidad con una datación temprana.</p>
+  </div>
+  <div class="cards">
+    <div class="card vis">
+      <div class="card-t">Los textos de Ebla</div>
+      <div class="card-s">Siria, c.2300 a.C.</div>
+      <div class="card-p">Los archivos de Ebla (descubiertos en 1974-1975) contienen miles de tablillas del III milenio a.C. con nombres propios, ciudades y costumbres que aparecen en el Génesis. Nombres como Ur, Sodoma, Gomorra y otros de la lista del Génesis 14 aparecen en los archivos de Ebla, confirmando que estas ciudades existían en el período patriarcal. Un autor del siglo VII no habría podido inventar esta corroboración geográfica.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Los textos de Nuzi</div>
+      <div class="card-s">Mesopotamia, siglo XV a.C.</div>
+      <div class="card-p">Los archivos de Nuzi (Mesopotamia, siglos XV-XIV a.C.) revelan costumbres patriarcales precisamente del tipo descrito en el Génesis: la adopción de un siervo como heredero cuando no hay hijos (Génesis 15:2-3), la entrega de la esclava de la esposa al marido cuando la esposa es estéril (Génesis 16), la venta del derecho de primogenitura (Génesis 25:29-34). Estas prácticas son características del II milenio y arcaicas en el I: un autor tardío no las habría inventado.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Los contratos matrimoniales de Mari</div>
+      <div class="card-s">Siria, c.1800 a.C.</div>
+      <div class="card-p">Los archivos de Mari (siglo XVIII a.C.) confirman costumbres legales, formas de contrato matrimonial y prácticas de herencia idénticas a las del Génesis patriarcal. El precio de la novia, las condiciones de divorcio y los derechos de los hijos de esclavas descritos en el Génesis encajan perfectamente en el contexto de Mari y son ajenos a la legislación del período monárquico israelita.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">La estela de Merneptah</div>
+      <div class="card-s">Egipto, 1208 a.C.</div>
+      <div class="card-p">La estela del faraón Merneptah (1208 a.C.) es la primera mención extrabiblica de "Israel" como pueblo en Canaán: "Israel está arrasada; su simiente ya no existe." Esto confirma que Israel existía como pueblo en Canaán antes del 1200 a.C., <strong>exactamente en el período posterior al Éxodo según la cronología bíblica</strong>. La existencia de Israel como entidad antes del I milenio no puede negarse.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Los nombre propios egipcios del Génesis</div>
+      <div class="card-s">Genuinamente del Imperio Nuevo</div>
+      <div class="card-p">Los nombres egipcios del relato de José —Potifar, Zafnat-panea, Asenat— son auténticos nombres del Imperio Nuevo egipcio (siglos XVI-XII a.C.) y no del período tardío o el exilio. Un falsificador del siglo VII a.C., cuando Egipto era ya culturalmente distante, no habría podido inventar estos nombres con precisión. Egyptólogos como Kitchen y Hoffmeier han documentado exhaustivamente esta autenticidad egipcia del texto.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">La Tablilla de Tel Dan</div>
+      <div class="card-s">Israel, siglo IX a.C.</div>
+      <div class="card-p">La inscripción aramea de Tel Dan (siglo IX a.C.) menciona "la casa de David" (bytdwd) como entidad política real. Esto refuta a los "minimalistas bíblicos" (Lemche, Thompson) que negaban la historicidad de David. Si la Biblia es correcta sobre la existencia de David como fundador de una dinastía —dato que la crítica radical negaba— su fiabilidad histórica en otros puntos también merece reconsideración.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">La geografía del Sinaí</div>
+      <div class="card-s">Precisión cartográfica arcaica</div>
+      <div class="card-p">Los itinerarios del Éxodo y el peregrinaje por el desierto describen una geografía del Sinaí cuya precisión topográfica habría sido difícil de inventar para un autor del siglo VII que no conocía esa región. La identificación arqueológica de varios de los sitios mencionados (Ezión-geber, Cades-barnea, el Mar de Caña) corresponde a la geografía real, no a una invención literaria.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Los textos de Ugarit</div>
+      <div class="card-s">Siria, siglo XIV-XIII a.C.</div>
+      <div class="card-p">La literatura ugarítica (siglo XIV-XIII a.C.) muestra que el hebreo arcaico del Pentateuco —su vocabulario, sus formas poéticas, su mitología residual— es genuinamente del II milenio a.C. El lenguaje poético de Éxodo 15 (el Cántico de Moisés) y de Deuteronomio 32 tiene paralelos directos con la poesía ugarítica y es lingüísticamente anterior al período monárquico israelita. La datación lingüística apunta al II milenio, no al I.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COHERENCIA INTERNA -->
+<section class="S alt" id="coherencia">
+  <div class="Sh">
+    <div class="sey">Evidencia positiva — II</div>
+    <h2 class="st">Coherencia <span class="g">interna</span> del texto</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr" style="margin-bottom:2rem;">
+    <p>Si el Pentateuco fuera una compilación tardía y propagandística, esperaríamos encontrar incoherencias ideológicas graves, hagiografía de los patriarcas, y una perspectiva que refleja claramente los intereses del período del exilio. Lo que encontramos es lo contrario.</p>
+  </div>
+  <div class="pils">
+    <div class="pil">
+      <div class="pil-n">1</div>
+      <div class="pil-t">Honestidad autodestructiva</div>
+      <div class="pil-p">El Pentateuco describe: Abraham miente dos veces sobre Sara (Génesis 12 y 20), Isaac repite la misma mentira (Génesis 26), Jacob engaña a su padre Isaac y a su suegro Labán, los hijos de Jacob venden a José como esclavo, Judá yace con su nuera Tamar pensando que es una prostituta, Moisés mata a un egipcio y huye, y comete el error que le impide entrar en la Tierra Prometida. <strong>Ningún documento de propaganda fabricaría esta galería de defectos en los héroes fundadores.</strong></div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">2</div>
+      <div class="pil-t">Leyes que protegen a los débiles</div>
+      <div class="pil-p">El código legal del Pentateuco (Éxodo, Levítico, Deuteronomio) contiene protecciones para los esclavos, los extranjeros, las viudas, los huérfanos y los pobres que van mucho más allá de lo que cualquier sistema legal contemporáneo del Oriente Próximo requería. Si el Pentateuco fuera fabricación sacerdotal para justificar el poder, ¿por qué incluye tantas restricciones al poder y tantas protecciones a los sin-poder?</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">3</div>
+      <div class="pil-t">El texto critica a los líderes</div>
+      <div class="pil-p">Los propios sacerdotes levitas son criticados en el Pentateuco (los hijos de Aarón mueren por desobediencia, Éxodo 32 narra el pecado del Becerro de Oro con Aarón como protagonista). Si el texto fuera fabricado por sacerdotes para legitimar su poder, no incluiría la narración más devastadora contra la credibilidad sacerdotal de toda la Biblia. La autocrítica es incompatible con la fabricación interesada.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">4</div>
+      <div class="pil-t">Vocabulario arcaico no actualizado</div>
+      <div class="pil-p">Si el Pentateuco fuera escrito o reescrito radicalmente en el siglo VII a.C., esperaríamos un vocabulario hebreo del período monárquico tardío. En cambio, el hebreo del Pentateuco contiene <strong>arcaísmos léxicos y gramaticales</strong> que los traductores y copistas posteriores no siempre entendían (el Targum arameo evidencia dificultades de comprensión). Nadie fabrica un texto en el lenguaje arcaico de mil años atrás: sencillamente no podría hacerlo con autenticidad.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">5</div>
+      <div class="pil-t">Ausencia de anacronismos del exilio</div>
+      <div class="pil-p">Si el Pentateuco fuera escrito durante o después del exilio babilónico, esperaríamos referencias a la cultura, los dioses, los reyes o la geografía de Babilonia. En cambio, el texto es <strong>notablemente silencioso sobre el mundo babilónico</strong>. La única referencia directa a Babilonia en el Pentateuco es la Torre de Babel (Génesis 11), que presenta Babilonia negativamente —lo contrario de lo que haría un autor bajo dominio babilónico que buscara la simpatía del conquistador.</p>
+    </div>
+    <div class="pil">
+      <div class="pil-n">6</div>
+      <div class="pil-t">El Sabbath y la circuncisión</div>
+      <div class="pil-p">Dos de las instituciones más características de la identidad judía —el Sabbath semanal y la circuncisión— no tienen paralelo exacto en ninguna otra cultura del Oriente Próximo de cualquier período. El Sabbath semanal de siete días es único. Si el Pentateuco fuera una compilación tardía que "tomó prestadas" ideas del entorno cultural, habría adoptado prácticas comunes; en cambio, sus instituciones más características son singulares. La singularidad apunta a origen genuino, no a fabricación imitativa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EL EXILIO NO EXPLICA TODO -->
+<section class="S" id="exilio">
+  <div class="Sh">
+    <div class="sey">Evidencia positiva — III</div>
+    <h2 class="st">El exilio babilónico <span class="g">no explica</span> el Pentateuco</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="schema">
+    <div class="schema-l">Argumento estructural</div>
+    <div class="schema-t">Lo que debería estar y no está — Lo que está y no debería</div>
+    <div class="schema-b">
+      <p><strong>Si el Pentateuco fuera escrito/editado radicalmente durante el exilio (siglo VI a.C.), debería contener:</strong></p>
+      <p>— Terminología político-administrativa persa o neobabilónica (está completamente ausente).<br>— Referencias a la destrucción del Templo de Salomón (ausente en el Pentateuco).<br>— Teología del exilio: la diáspora, la nostalgia de Sión, el lamento por Jerusalén (domina en Lamentaciones, Salmos 137, Ezequiel; completamente ausente en el Pentateuco).<br>— Polémicas contra los dioses babilónicos (presentes en Isaías 40-55 y Daniel; ausentes en el Pentateuco).<br>— La estructura de los tratados de vasallaje asirio-tardía (siglo VII a.C.), que es diferente de la hitita del II milenio que el Pentateuco presenta.</p>
+      <p><strong>Lo que el Pentateuco contiene que no se explica desde el exilio:</strong></p>
+      <p>— Detalles culturales, legales y geográficos precisamente del Bronce Medio y el Imperio Nuevo egipcio.<br>— Vocabulario hebreo arcaico anterior al período monárquico.<br>— Estructuras de pacto características del II milenio a.C. (tipo hitita).<br>— Conocimiento de rutas del Sinaí, geografía de Canaán pre-israelita y Mesopotamia del III-II milenio.<br>— Nombres propios egipcios auténticos del Imperio Nuevo que un autor tardío no podría inventar.</p>
+    </div>
+  </div>
+  <div class="dc" style="margin-top:2.5rem;">
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ El testimonio del Nuevo Testamento</div>
+        <p>Si la hipótesis secular es correcta y el Pentateuco fue fabricado en el siglo VI-V a.C., ¿cómo explica que Jesucristo, los fariseos, los escribas y todos los judíos del siglo I d.C. aceptaran sin la menor duda la autoría mosaica? La hipótesis secular requiere que toda una civilización aceptó sin resistencia una fabricación reciente que nadie denunció. El contraste con la reacción ante las falsificaciones documentales reales del mundo antiguo —siempre denunciadas por alguien— es llamativo.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ Comparación con la literatura del exilio</div>
+        <p>La literatura bíblica claramente del exilio (Ezequiel, Lamentaciones, Deutero-Isaías, Esdras, Nehemías) tiene un tono, vocabulario y preocupaciones muy distintos del Pentateuco. Si el Pentateuco fuera del mismo período, esta diferencia de estilo y contenido sería inexplicable. El Pentateuco es un documento de otro mundo cultural y temporal que las obras del siglo VI-V a.C.</p>
+      </div>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ La crítica textual confirma la unidad</div>
+        <p>La crítica textual —que examina la transmisión manuscrita— no ha encontrado ninguna evidencia de que el Pentateuco existiera alguna vez en versiones separadas correspondientes a las cuatro fuentes hipotéticas de Wellhausen. Los manuscritos del Mar Muerto, la Septuaginta griega (siglo III a.C.) y el Pentateuco samaritano muestran variantes menores de tradición textual, pero ninguna "versión J" o "versión E" separada. Las fuentes hipotéticas son reconstrucciones teóricas sin respaldo manuscrito.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ El testimonio de los pueblos vecinos</div>
+        <p>Ni los egipcios, ni los babilonios, ni los asirios —que dejaron abundantísima documentación de sus relaciones con Israel— hacen ninguna referencia a que Israel "inventó" su historia sagrada en un momento determinado. El silencio de los archivos imperiales sobre la "fabricación" de la Torah es elocuente: si hubiera sido un acontecimiento reciente, algún escriba extranjero lo habría notado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLA COMPARATIVA -->
+<section class="S alt" id="conclusion">
+  <div class="Sh">
+    <div class="sey">Conclusión apologética</div>
+    <h2 class="st">Balance <span class="g">Final</span> de la Evidencia</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr" style="margin-bottom:2rem;">
+    <p>Una apologética honesta no niega que existen preguntas difíciles sobre el Pentateuco. Las hay, y los estudiosos conservadores las abordan con rigor. Lo que sí puede afirmarse con plena responsabilidad académica es que <strong>la hipótesis de la autoría mosaica o cuasi-mosaica del Pentateuco es defendible, respetable y en muchos puntos mejor sustentada por la evidencia que las alternativas tardías</strong>.</p>
+  </div>
+  <table class="tbl">
+    <thead>
+      <tr><th>Criterio</th><th>Hipótesis tardía (siglo VII-V a.C.)</th><th>Autoría mosaica (siglo XV-XIII a.C.)</th><th>Evidencia</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Estructura de los pactos</td><td>Debería ser tipo asirio (I milenio)</td><td>Tipo hitita (II milenio) — exacto</td><td><span class="badge bg2">Favorece datación temprana</span></td></tr>
+      <tr><td>Vocabulario hebreo</td><td>Debería ser monárquico tardío</td><td>Arcaico, anterior al período monárquico</td><td><span class="badge bg2">Favorece datación temprana</span></td></tr>
+      <tr><td>Nombres egipcios del Génesis</td><td>Difícilmente inventables en siglo VII</td><td>Auténticos del Imperio Nuevo</td><td><span class="badge bg2">Favorece datación temprana</span></td></tr>
+      <tr><td>Costumbres patriarcales (Nuzi, Mari)</td><td>Arcaicas en el I milenio</td><td>Precisamente del II milenio</td><td><span class="badge bg2">Favorece datación temprana</span></td></tr>
+      <tr><td>Ausencia de terminología exílica</td><td>Inexplicable si el texto es del exilio</td><td>Natural: el texto es anterior</td><td><span class="badge bg2">Favorece datación temprana</span></td></tr>
+      <tr><td>Anacronismos alegados</td><td>Explicados como prueba de autoría tardía</td><td>Todos explicables sin autoría tardía</td><td><span class="badge bb">Debate abierto</span></td></tr>
+      <tr><td>Evidencia manuscrita de fuentes JEDP</td><td>Cero manuscritos de fuentes separadas</td><td>Un texto unificado desde los MSS más antiguos</td><td><span class="badge bg2">Favorece unidad</span></td></tr>
+      <tr><td>Honestidad narrativa</td><td>Incompatible con propaganda</td><td>Compatible con registro histórico auténtico</td><td><span class="badge bg2">Favorece autenticidad</span></td></tr>
+      <tr><td>Consenso académico secular actual</td><td>En colapso: no hay consenso post-Wellhausen</td><td>Resurgimiento de modelos de datación temprana</td><td><span class="badge bb">Debate abierto</span></td></tr>
+      <tr><td>Muerte de Moisés (Dt 34)</td><td>Prueba de autoría post-mosaica</td><td>Epílogo legítimo de Josué/sacerdotes</td><td><span class="badge bb">Debate resuelto tradicionalmente</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="cit" style="margin-top:3rem;">
+    <p>"La hipótesis documental de Wellhausen no es ciencia: es una filosofía evolucionista aplicada a textos con el vocabulario de la ciencia. Cuando examinamos la evidencia arqueológica con ojos libres de ese presupuesto, el Pentateuco resulta ser un documento notablemente fidedigno del II milenio a.C."</p>
+    <cite>— Kenneth Kitchen, On the Reliability of the Old Testament, 2003</cite>
+  </div>
+  <div class="cit">
+    <p>"He llegado a la conclusión de que los presupuestos metodológicos de la crítica histórica clásica son filosóficamente insostenibles y que el texto bíblico merece ser leído con la misma presunción de fiabilidad histórica que aplicamos a otros textos de la Antigüedad."</p>
+    <cite>— James K. Hoffmeier, Israel in Egypt, 1997</cite>
+  </div>
+  <div class="cit">
+    <p>"El modelo de cuatro fuentes (JEDP) ha sido tan atacado desde dentro de la crítica histórica que ya no puede presentarse como el consenso académico que fue en el siglo XIX. Hoy hay tantos modelos como estudiosos, lo que indica que el problema permanece abierto."</p>
+    <cite>— Richard Elliott Friedman, The Bible with Sources Revealed, 2003</cite>
+  </div>
+
+  <div class="schema" style="margin-top:2.5rem;">
+    <div class="schema-l">Conclusión final</div>
+    <div class="schema-t">Lo que la honestidad intelectual requiere admitir</div>
+    <div class="schema-b">
+      <p><strong>Lo que la evidencia prueba:</strong> Que el Pentateuco es un documento de extraordinaria complejidad e historicidad, que contiene material auténtico del II milenio a.C., que su transmisión fue fiel durante más de dos milenios, y que las hipótesis de autoría tardía tienen graves problemas de evidencia que sus propios proponentes reconocen.</p>
+      <p><strong>Lo que la evidencia no prueba:</strong> Ni la autoría mosaica con certeza absoluta, ni la autoría tardía con certeza absoluta. La arqueología y la filología son ciencias que trabajan con probabilidades, no con certezas. El apologista honesto no afirma más de lo que la evidencia sostiene.</p>
+      <p><strong>Lo que la fe añade:</strong> La posición creyente no es que la arqueología prueba la inspiración divina —eso está más allá del método arqueológico—. Es que la evidencia disponible es coherente con la afirmación de que el Pentateuco preserva memoria histórica auténtica de eventos reales, transmitida y conservada con fidelidad extraordinaria bajo la providencia divina. Esta posición es académicamente respetable, intelectualmente honesta y teológicamente coherente.</p>
+      <p><strong>El veredicto sobre las infografías:</strong> Presentan <strong>un caso unilateral construido sobre evidencia seleccionada, mal citada o malinterpretada</strong>, que ignora sistemáticamente la evidencia favorable a la datación temprana y presenta como "consenso científico" lo que es en realidad una hipótesis en crisis desde hace cuatro décadas. Una educación bíblica honesta requiere presentar ambos lados del debate con sus fortalezas y debilidades reales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<div class="fin">
+  <div class="fin-glow"></div>
+  <p class="fin-r">תּוֹרָה — La Torah permanece</p>
+  <p class="fin-s">Apologética · Historia · Fe · Razón</p>
+  <br><br>
+  <div style="max-width:660px;margin:0 auto;position:relative;z-index:2;">
+    <div class="cit" style="text-align:left;">
+      <p>"La verdadera ciencia y la verdadera fe no se temen mutuamente. Las preguntas difíciles hacen más robusta la fe que las examina con honestidad que la devoción que las evita. El Dios de la Torah es el Dios de la verdad: no teme el escrutinio de sus criaturas."</p>
+      <cite>— Principio de la apologética bíblica responsable</cite>
+    </div>
+  </div>
+  <br>
+  <p style="font-family:'Inter',sans-serif;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,230,204,0.15);position:relative;z-index:2;">Fuentes: Kitchen · Hoffmeier · Mendenhall · Baltzer · Rendtorff · Cassuto · Harrison · Wenham · Waltke · Sailhamer</p>
+</div>
+
+<footer>
+  <div class="fb">Defensa de la Torah — Apologética Académica</div>
+  <div class="fc">Una respuesta seria a objeciones serias · Fe e inteligencia no se excluyen</div>
+</footer>
+
+</main>
+
+<script>
+function tSB(){
+  document.getElementById('sb').classList.toggle('open');
+  document.getElementById('ov').classList.toggle('vis');
+}
+function ir(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const top=el.getBoundingClientRect().top+window.scrollY-64;
+  window.scrollTo({top,behavior:'smooth'});
+  if(window.innerWidth<=920){
+    document.getElementById('sb').classList.remove('open');
+    document.getElementById('ov').classList.remove('vis');
+  }
+}
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  const p=(window.scrollY/(d.scrollHeight-d.clientHeight))*100;
+  document.getElementById('progress').style.width=p+'%';
+});
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.sl');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      links.forEach(l=>{
+        const oc=l.getAttribute('onclick')||'';
+        l.classList.toggle('on',oc.includes("'"+id+"'"));
+      });
+    }
+  });
+},{threshold:0.18,rootMargin:'-56px 0px -38% 0px'});
+secs.forEach(s=>obs.observe(s));
+const aObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting)setTimeout(()=>e.target.classList.add('vis'),i*65);
+  });
+},{threshold:0.07});
+document.querySelectorAll('.card,.pil').forEach(el=>aObs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>פֶּרֶא אָדָם — Análisis filológico · Génesis 16:12</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root{
+  --bg:#08111E;
+  --surf:#0F1C2E;
+  --card:#152438;
+  --card2:#1A2D47;
+  --border:#1E3052;
+  --border2:#253C60;
+  --navy:#1B2A4A;
+  --navyL:#243A62;
+  --gold:#C9A84C;
+  --goldD:#8B6914;
+  --goldG:rgba(201,168,76,0.12);
+  --goldG2:rgba(201,168,76,0.06);
+  --crim:#8B1A1A;
+  --crimL:#C0392B;
+  --white:#F2F0EB;
+  --dimW:#9AABBF;
+  --faint:#3A4E65;
+  --olive:#3A5A2A;
+  --oliveL:#5A8A4A;
+  --nav-h:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;line-height:1.78;overflow-x:hidden;}
+
+/* ═══════════════════════════════════════
+   TOP STICKY NAV
+═══════════════════════════════════════ */
+#topnav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);
+  background:rgba(8,17,30,0.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);z-index:500;
+  display:flex;align-items:center;gap:0;
+}
+#topnav-logo{
+  flex-shrink:0;padding:0 1.4rem;
+  font-family:'Playfair Display',serif;font-size:1.35rem;
+  color:var(--gold);direction:rtl;letter-spacing:.05em;
+  border-right:1px solid var(--border);height:100%;
+  display:flex;align-items:center;
+  text-shadow:0 0 20px rgba(201,168,76,.25);
+}
+#topnav-tabs{
+  display:flex;align-items:stretch;overflow-x:auto;
+  scrollbar-width:none;height:100%;flex:1;
+}
+#topnav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{
+  flex-shrink:0;padding:0 1.1rem;cursor:pointer;
+  font-size:0.72rem;text-transform:uppercase;letter-spacing:.13em;
+  color:var(--dimW);border:none;background:none;
+  height:100%;display:flex;align-items:center;gap:0.45rem;
+  border-bottom:2px solid transparent;transition:all .2s;
+  font-family:'JetBrains Mono',monospace;white-space:nowrap;
+}
+.nav-tab:hover{color:var(--white);background:var(--goldG2);}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--goldG);}
+.nav-tab .tab-num{
+  font-size:0.58rem;color:var(--faint);
+  font-family:'JetBrains Mono',monospace;
+}
+.nav-tab.active .tab-num{color:var(--goldD);}
+#toc-btn{
+  flex-shrink:0;border:none;background:none;cursor:pointer;
+  padding:0 1.2rem;height:100%;border-left:1px solid var(--border);
+  color:var(--dimW);font-size:1rem;transition:all .2s;display:flex;align-items:center;gap:0.5rem;
+}
+#toc-btn:hover{color:var(--gold);background:var(--goldG);}
+#toc-btn span{font-size:0.68rem;text-transform:uppercase;letter-spacing:.15em;font-family:'JetBrains Mono',monospace;}
+
+/* ═══════════════════════════════════════
+   TOC OVERLAY
+═══════════════════════════════════════ */
+#toc-overlay{
+  position:fixed;inset:0;z-index:800;display:none;
+  background:rgba(4,9,18,0.88);backdrop-filter:blur(8px);
+}
+#toc-overlay.open{display:flex;align-items:flex-start;justify-content:center;padding-top:80px;}
+#toc-panel{
+  background:var(--surf);border:1px solid var(--border2);
+  width:min(680px,90vw);max-height:80vh;overflow-y:auto;
+  padding:0;scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+#toc-panel::-webkit-scrollbar{width:4px;}
+#toc-panel::-webkit-scrollbar-thumb{background:var(--border);}
+#toc-header{
+  position:sticky;top:0;background:var(--card);
+  padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+#toc-header h2{
+  font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--white);
+}
+#toc-close{
+  border:none;background:none;color:var(--dimW);cursor:pointer;
+  font-size:1.4rem;line-height:1;transition:color .2s;
+}
+#toc-close:hover{color:var(--gold);}
+.toc-group{padding:0.6rem 0;}
+.toc-group-label{
+  padding:0.5rem 1.5rem 0.25rem;
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  text-transform:uppercase;letter-spacing:.2em;color:var(--faint);
+}
+.toc-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:0.65rem 1.5rem;cursor:pointer;
+  transition:all .18s;border-left:2px solid transparent;
+}
+.toc-item:hover{background:var(--goldG);border-left-color:var(--goldD);}
+.toc-item.done{opacity:.55;}
+.toc-num{
+  font-family:'JetBrains Mono',monospace;font-size:0.75rem;
+  color:var(--goldD);min-width:1.8rem;
+}
+.toc-title{font-size:0.9rem;color:var(--dimW);}
+.toc-item:hover .toc-title{color:var(--white);}
+.toc-check{margin-left:auto;color:var(--goldD);font-size:0.85rem;display:none;}
+.toc-item.done .toc-check{display:block;}
+
+/* ═══════════════════════════════════════
+   PROGRESS LINE
+═══════════════════════════════════════ */
+#progline{
+  position:fixed;top:var(--nav-h);left:0;right:0;height:2px;
+  background:var(--border);z-index:490;
+}
+#progfill{height:100%;background:linear-gradient(90deg,var(--crim),var(--gold));width:0%;transition:width .1s;}
+
+/* ═══════════════════════════════════════
+   MAIN LAYOUT
+═══════════════════════════════════════ */
+main{padding-top:var(--nav-h);}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+#sec-hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:6rem 8vw 5rem;position:relative;overflow:hidden;
+}
+#sec-hero::before{
+  content:'פֶּרֶא';
+  position:absolute;right:-0.05em;top:50%;transform:translateY(-50%);
+  font-family:'Playfair Display',serif;font-size:clamp(12rem,28vw,26rem);
+  color:rgba(201,168,76,0.028);pointer-events:none;direction:rtl;line-height:1;z-index:0;
+}
+.hero-inner{position:relative;z-index:1;max-width:900px;}
+.hero-kicker{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  text-transform:uppercase;letter-spacing:.28em;color:var(--gold);
+  display:flex;align-items:center;gap:0.8rem;margin-bottom:1.6rem;
+}
+.hero-kicker::before{content:'';width:2.2rem;height:1px;background:var(--gold);}
+.hero-heb{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(4rem,10vw,8rem);
+  font-weight:900;color:var(--gold);direction:rtl;
+  line-height:1;letter-spacing:.06em;margin-bottom:0.5rem;
+  text-shadow:0 0 80px rgba(201,168,76,0.18);
+}
+.hero-translit{
+  font-family:'JetBrains Mono',monospace;font-size:1.05rem;
+  color:var(--dimW);font-style:italic;margin-bottom:0.5rem;
+}
+.hero-trad{
+  font-family:'Playfair Display',serif;font-size:1.55rem;font-style:italic;
+  color:var(--white);margin-bottom:2rem;
+}
+.hero-trad em{color:var(--gold);font-style:normal;}
+.hero-sub{
+  font-size:1rem;color:var(--dimW);max-width:640px;
+  line-height:1.88;font-weight:300;margin-bottom:2.5rem;
+}
+.hero-pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:3rem;}
+.pill{
+  font-family:'JetBrains Mono',monospace;font-size:0.63rem;
+  padding:0.28rem 0.75rem;border:1px solid var(--border2);
+  color:var(--dimW);text-transform:uppercase;letter-spacing:.1em;
+  border-radius:1px;
+}
+.pill.g{border-color:var(--goldD);color:var(--gold);}
+.pill.r{border-color:var(--crim);color:#E57373;}
+
+/* ═══════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════ */
+.section{
+  padding:5.5rem 8vw 2rem;position:relative;
+}
+.sec-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:0.62rem;
+  text-transform:uppercase;letter-spacing:.25em;color:var(--gold);
+  display:flex;align-items:center;gap:0.7rem;margin-bottom:1.1rem;
+}
+.sec-eyebrow::before{content:'';width:1.6rem;height:1px;background:var(--gold);}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.55rem,3vw,2.3rem);
+  font-weight:700;color:var(--white);margin-bottom:0.5rem;line-height:1.22;
+}
+.sec-rule{width:2.8rem;height:2px;background:linear-gradient(90deg,var(--crim),var(--gold));margin:1.2rem 0 2rem;}
+.lead{font-size:1.05rem;color:var(--dimW);line-height:1.88;max-width:800px;margin-bottom:1.8rem;}
+p{color:var(--dimW);margin-bottom:1.2rem;max-width:800px;line-height:1.85;}
+p strong,p b{color:var(--white);}
+
+/* ═══════════════════════════════════════
+   BETWEEN-SECTION NAVIGATOR
+═══════════════════════════════════════ */
+.sec-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:2rem 8vw 0;border-top:1px solid var(--border);
+  margin-top:4rem;gap:1rem;
+}
+.sec-nav-btn{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0.85rem 1.3rem;background:var(--surf);
+  border:1px solid var(--border2);cursor:pointer;
+  transition:all .2s;text-align:left;max-width:42%;
+  text-decoration:none;
+}
+.sec-nav-btn:hover{background:var(--goldG);border-color:var(--goldD);}
+.sec-nav-btn.disabled{opacity:.25;pointer-events:none;}
+.sec-nav-btn .nav-arrow{font-size:1.2rem;color:var(--gold);flex-shrink:0;}
+.sec-nav-btn .nav-meta{font-family:'JetBrains Mono',monospace;font-size:0.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--dimW);margin-bottom:0.2rem;}
+.sec-nav-btn .nav-label{font-size:0.85rem;color:var(--white);line-height:1.3;}
+.sec-nav-btn.next{flex-direction:row-reverse;text-align:right;}
+.sec-nav-center{
+  display:flex;flex-direction:column;align-items:center;gap:0.4rem;flex-shrink:0;
+}
+.sec-nav-dots{display:flex;gap:0.35rem;}
+.sec-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--border2);cursor:pointer;transition:all .2s;
+}
+.sec-dot.active{background:var(--gold);transform:scale(1.3);}
+.sec-dot.done{background:var(--goldD);}
+.sec-nav-pos{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  color:var(--faint);text-transform:uppercase;letter-spacing:.15em;
+}
+
+/* ═══════════════════════════════════════
+   SECTION SEPARATOR VISUAL DIVIDER
+═══════════════════════════════════════ */
+.sec-divider{
+  width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);
+  margin:0;
+}
+
+/* ═══════════════════════════════════════
+   HEBREW BLOCK
+═══════════════════════════════════════ */
+.heb-block{
+  background:linear-gradient(135deg,var(--card),var(--surf));
+  border:1px solid var(--border2);border-left:4px solid var(--gold);
+  padding:2rem 2.2rem;margin:2rem 0;text-align:center;
+}
+.hb-main{
+  font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);
+  color:var(--gold);direction:rtl;display:block;
+  line-height:1.65;margin-bottom:0.65rem;letter-spacing:.04em;
+}
+.hb-tr{
+  font-family:'JetBrains Mono',monospace;font-size:0.85rem;
+  color:var(--dimW);display:block;margin-bottom:0.5rem;font-style:italic;
+}
+.hb-trad{font-size:0.97rem;color:var(--white);font-style:italic;font-family:'Playfair Display',serif;}
+
+/* ═══════════════════════════════════════
+   QUOTE
+═══════════════════════════════════════ */
+.qb{border-left:3px solid var(--gold);padding:1.4rem 1.8rem;background:var(--card);margin:2rem 0;position:relative;}
+.qb::before{content:'\201C';font-family:'Playfair Display',serif;font-size:4.5rem;color:var(--gold);opacity:.15;position:absolute;top:-0.5rem;left:0.7rem;line-height:1;pointer-events:none;}
+.qb .qt{font-family:'Playfair Display',serif;font-size:1.02rem;font-style:italic;color:var(--white);line-height:1.88;padding-left:0.8rem;margin-bottom:0.6rem;}
+.qb .qs{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--gold);text-transform:uppercase;letter-spacing:.13em;padding-left:0.8rem;}
+.qb.crim{border-left-color:var(--crimL);}
+.qb.crim::before{color:var(--crimL);}
+.qb.crim .qs{color:#E57373;}
+.qb.olive{border-left-color:var(--oliveL);}
+.qb.olive::before{color:var(--oliveL);}
+.qb.olive .qs{color:#7DC85A;}
+
+/* ═══════════════════════════════════════
+   CARDS
+═══════════════════════════════════════ */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin:2rem 0;}
+.card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--gold);padding:1.5rem;}
+.card.cr{border-top-color:var(--crimL);}
+.card.ol{border-top-color:var(--oliveL);}
+.card.br{border-top-color:#8B6030;}
+.card-ey{font-family:'JetBrains Mono',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:0.5rem;}
+.card.cr .card-ey{color:#E57373;}
+.card.ol .card-ey{color:#7DC85A;}
+.card.br .card-ey{color:var(--gold);}
+.card-ttl{font-size:0.95rem;font-weight:600;color:var(--white);margin-bottom:0.5rem;line-height:1.3;}
+.card-bod{font-size:0.86rem;color:var(--dimW);line-height:1.75;}
+
+/* ═══════════════════════════════════════
+   COMPARE
+═══════════════════════════════════════ */
+.compare{display:grid;grid-template-columns:1fr 3rem 1fr;margin:2rem 0;align-items:stretch;}
+.cmp-side{padding:1.6rem;border:1px solid var(--border);}
+.cmp-side.L{background:rgba(255,255,255,.015);border-right:none;}
+.cmp-side.R{background:var(--navy);border-left:none;}
+.cmp-mid{background:var(--surf);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--crimL);font-size:1.3rem;}
+.cmp-lbl{font-family:'JetBrains Mono',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:.18em;margin-bottom:0.6rem;}
+.cmp-side.L .cmp-lbl{color:var(--faint);}
+.cmp-side.R .cmp-lbl{color:var(--gold);}
+.cmp-heb{font-family:'Playfair Display',serif;font-size:1.75rem;direction:rtl;font-weight:700;margin-bottom:0.35rem;}
+.cmp-side.L .cmp-heb{color:var(--faint);}
+.cmp-side.R .cmp-heb{color:var(--gold);text-shadow:0 0 18px rgba(201,168,76,.22);}
+.cmp-tr{font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-style:italic;margin-bottom:0.35rem;}
+.cmp-side.L .cmp-tr{color:var(--faint);}
+.cmp-side.R .cmp-tr{color:var(--dimW);}
+.cmp-trad{font-size:0.9rem;font-style:italic;margin-bottom:0.75rem;}
+.cmp-side.L .cmp-trad{color:var(--faint);}
+.cmp-side.R .cmp-trad{color:var(--white);}
+.cmp-desc{font-size:0.85rem;line-height:1.72;}
+.cmp-side.L .cmp-desc{color:var(--faint);}
+.cmp-side.R .cmp-desc{color:var(--dimW);}
+.cmp-footer{grid-column:1/-1;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.22);border-top:none;padding:1rem 1.4rem;font-size:0.89rem;color:var(--dimW);}
+.cmp-footer strong{color:var(--gold);}
+
+/* ═══════════════════════════════════════
+   CLAUSES
+═══════════════════════════════════════ */
+.clauses{margin:2rem 0;}
+.cl-row{display:grid;grid-template-columns:3px 3rem 3fr 1fr 2fr;align-items:stretch;margin-bottom:1px;}
+.cl-acc{background:var(--gold);}
+.cl-row:nth-child(2) .cl-acc{background:var(--crimL);}
+.cl-row:nth-child(3) .cl-acc{background:var(--oliveL);}
+.cl-row:nth-child(4) .cl-acc{background:#8B6030;}
+.cl-num{background:var(--card2);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--gold);min-height:82px;}
+.cl-row:nth-child(2) .cl-num{color:var(--crimL);}
+.cl-row:nth-child(3) .cl-num{color:#7DC85A;}
+.cl-row:nth-child(4) .cl-num{color:var(--gold);}
+.cl-heb{background:var(--card);padding:0.9rem 1.1rem;border-left:1px solid var(--border);}
+.cl-hb{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);direction:rtl;display:block;margin-bottom:0.2rem;}
+.cl-row:nth-child(2) .cl-hb{color:var(--crimL);}
+.cl-row:nth-child(3) .cl-hb{color:#7DC85A;}
+.cl-row:nth-child(4) .cl-hb{color:var(--gold);}
+.cl-tr{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--dimW);font-style:italic;}
+.cl-type{background:var(--surf);padding:0.7rem;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:0.58rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);text-align:center;}
+.cl-row:nth-child(2) .cl-type{color:#E57373;}
+.cl-row:nth-child(3) .cl-type{color:#7DC85A;}
+.cl-desc{background:var(--bg);padding:0.9rem 1.1rem;border-left:1px solid var(--border);font-size:0.85rem;color:var(--dimW);display:flex;align-items:center;line-height:1.65;}
+
+/* ═══════════════════════════════════════
+   SILOGISMO
+═══════════════════════════════════════ */
+.sil{background:var(--surf);border:1px solid var(--border2);margin:2.5rem 0;}
+.sil-hdr{background:linear-gradient(90deg,var(--crim),#6B0A0A);padding:0.7rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.73rem;color:var(--white);text-transform:uppercase;letter-spacing:.2em;font-weight:600;}
+.sil-row{display:flex;border-bottom:1px solid var(--border);}
+.sil-row:last-child{border-bottom:none;}
+.sil-lbl{min-width:3.8rem;padding:1rem 1.1rem;font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:600;color:var(--gold);border-right:1px solid var(--border);display:flex;align-items:flex-start;}
+.sil-row.C .sil-lbl{background:var(--gold);color:#000;}
+.sil-row.C .sil-txt{background:rgba(201,168,76,.06);color:var(--white);}
+.sil-txt{padding:1rem 1.4rem;font-size:0.91rem;color:var(--dimW);line-height:1.82;flex:1;}
+.sil-txt strong{color:var(--white);}
+
+/* ═══════════════════════════════════════
+   TABLE
+═══════════════════════════════════════ */
+.big-tbl{width:100%;border-collapse:collapse;margin:2rem 0;font-size:0.88rem;}
+.big-tbl th{padding:0.82rem 1rem;font-family:'JetBrains Mono',monospace;font-size:0.68rem;text-transform:uppercase;letter-spacing:.13em;text-align:left;}
+.big-tbl th:nth-child(1){background:var(--navy);color:var(--white);}
+.big-tbl th:nth-child(2){background:var(--crim);color:var(--white);}
+.big-tbl th:nth-child(3){background:var(--olive);color:var(--white);}
+.big-tbl td{padding:0.9rem 1rem;border:1px solid var(--border);vertical-align:top;line-height:1.68;}
+.big-tbl tr:nth-child(even) td{background:var(--card);}
+.big-tbl tr:nth-child(odd) td{background:var(--surf);}
+.big-tbl td:nth-child(1){color:var(--white);font-weight:600;background:rgba(27,42,74,.5)!important;}
+.big-tbl td:nth-child(2),.big-tbl td:nth-child(3){color:var(--dimW);}
+
+/* ═══════════════════════════════════════
+   PREP TABLE
+═══════════════════════════════════════ */
+.prep-tbl{width:100%;border-collapse:collapse;margin:2rem 0;}
+.prep-tbl th{background:var(--card2);color:var(--white);padding:0.78rem 1rem;font-size:0.68rem;text-transform:uppercase;letter-spacing:.15em;font-family:'JetBrains Mono',monospace;text-align:left;}
+.prep-tbl td{padding:0.9rem 1rem;border:1px solid var(--border);font-size:0.88rem;color:var(--dimW);vertical-align:middle;}
+.prep-tbl tr:nth-child(even) td{background:var(--card);}
+.prep-tbl tr:nth-child(odd) td{background:var(--surf);}
+.prep-tbl .KEY td{background:rgba(201,168,76,.08)!important;color:var(--white);}
+.prep-tbl .KEY td:first-child{color:var(--gold);}
+.phb{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);direction:rtl;}
+.KEY .phb{font-size:1.6rem;}
+.pbadge{display:inline-block;background:var(--gold);color:#000;font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:0.12rem 0.45rem;text-transform:uppercase;letter-spacing:.1em;margin-left:0.5rem;}
+
+/* ═══════════════════════════════════════
+   CALLOUT
+═══════════════════════════════════════ */
+.callout{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.25);padding:1.3rem 1.6rem;margin:2rem 0;}
+.callout-lbl{font-family:'JetBrains Mono',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:0.5rem;}
+.callout-body{font-size:0.92rem;color:var(--dimW);line-height:1.82;}
+.callout-body strong{color:var(--white);}
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+.reveal.vis{opacity:1;transform:none;}
+
+/* ═══════════════════════════════════════
+   FLOATING BACK-TOP
+═══════════════════════════════════════ */
+#bttop{
+  position:fixed;bottom:2rem;right:2rem;width:2.4rem;height:2.4rem;
+  background:var(--gold);border:none;cursor:pointer;color:#000;
+  font-size:1rem;font-weight:700;display:none;align-items:center;justify-content:center;
+  z-index:400;transition:opacity .2s;
+}
+#bttop.show{display:flex;}
+
+/* ═══════════════════════════════════════
+   KEYBOARD HINT
+═══════════════════════════════════════ */
+#kbd-hint{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
+  background:rgba(15,28,46,.88);border:1px solid var(--border2);
+  padding:0.5rem 1rem;font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  color:var(--dimW);letter-spacing:.1em;z-index:400;pointer-events:none;
+  opacity:0;transition:opacity .4s;
+}
+#kbd-hint.show{opacity:1;}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:800px){
+  .section{padding:4rem 5vw 1.5rem;}
+  #sec-hero{padding:5rem 5vw 4rem;}
+  .compare{grid-template-columns:1fr;}
+  .cmp-mid{display:none;}
+  .cmp-side.L,.cmp-side.R{border:1px solid var(--border);border-bottom:none;}
+  .cmp-footer{grid-column:1;border-top:1px solid rgba(201,168,76,.2);}
+  .cl-row{grid-template-columns:3px 2.2rem 1fr;grid-template-rows:auto auto;}
+  .cl-type{display:none;}
+  .cl-desc{grid-column:2/-1;border-left:none;border-top:1px solid var(--border);}
+  .sec-nav{flex-direction:column;}
+  .sec-nav-btn{max-width:100%;width:100%;}
+  #topnav-logo{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ TOP NAV ══════════ -->
+<header id="topnav">
+  <div id="topnav-logo">פֶּרֶא אָדָם</div>
+  <div id="topnav-tabs">
+    <!-- filled by JS -->
+  </div>
+  <button id="toc-btn" onclick="openToc()">
+    <span>☰</span><span>Índice</span>
+  </button>
+</header>
+
+<div id="progline"><div id="progfill"></div></div>
+
+<!-- ══════════ TOC OVERLAY ══════════ -->
+<div id="toc-overlay" onclick="if(event.target===this)closeToc()">
+  <div id="toc-panel">
+    <div id="toc-header">
+      <h2>Índice completo</h2>
+      <button id="toc-close" onclick="closeToc()">✕</button>
+    </div>
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ══════════ MAIN ══════════ -->
+<main>
+
+<!-- ─── HERO ─── -->
+<section id="sec-hero" class="section">
+  <div class="hero-inner">
+    <div class="hero-kicker">Filología hebrea · Exégesis · Apologética comparada</div>
+    <div class="hero-heb">פֶּרֶא אָדָם</div>
+    <div class="hero-translit">pere adam</div>
+    <div class="hero-trad">«<em>un onagro</em> de hombre»</div>
+    <p class="hero-sub">Análisis filológico y teológico de la profecía del Ángel del Señor a Agar en Génesis 16:12. La anteposición nominal, el campo semántico del onagro salvaje, las cuatro cláusulas proféticas y su correspondencia con la narrativa islámica, con caso paralelo en Génesis 27:40.</p>
+    <div class="hero-pills">
+      <span class="pill g">Génesis 16:12</span>
+      <span class="pill g">Génesis 27:40</span>
+      <span class="pill">Job 39:5-8</span>
+      <span class="pill">Rashi · Ibn Ezra</span>
+      <span class="pill">Targum Onkelos</span>
+      <span class="pill r">Yihad bil-sayf</span>
+      <span class="pill">Edom = Roma</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── S1: TEXTO HEBREO ─── -->
+<div class="sec-divider"></div>
+<section id="sec-texto" class="section">
+  <div class="sec-eyebrow">Sección I</div>
+  <h2 class="sec-title">El texto hebreo y su construcción</h2>
+  <div class="sec-rule"></div>
+  <p class="lead">La profecía del ángel del Señor a Agar en Génesis 16:12 es uno de los textos más densos y filológicamente significativos del Pentateuco. No es una descripción literaria casual sino una declaración profética estructurada en cuatro cláusulas que definen la naturaleza, la conducta, la consecuencia geopolítica y la posición permanente de Ismael y su descendencia.</p>
+  <div class="heb-block reveal">
+    <span class="hb-main">וְהוּא יִהְיֶה פֶּרֶא אָדָם יָדוֹ בַכֹּל וְיַד כֹּל בּוֹ וְעַל-פְּנֵי כָל-אֶחָיו יִשְׁכֹּן</span>
+    <span class="hb-tr">ve-hu yihye pere adam · yado va-kol · ve-yad kol bo · ve-al-pene kol-ejav yishkon</span>
+    <span class="hb-trad">«y él será un onagro de hombre; su mano contra todos y la mano de todos contra él; y frente a la faz de todos sus hermanos habitará»</span>
+  </div>
+  <p>El versículo contiene cuatro cláusulas proféticas que deben analizarse por separado. Antes, es necesario determinar con precisión qué significa el término central: <strong>פֶּרֶא</strong> (pere). Este análisis es la clave de toda la interpretación porque la construcción gramatical de la primera cláusula invierte la jerarquía semántica estándar de una manera que tiene consecuencias de gran alcance.</p>
+  <div class="callout reveal">
+    <div class="callout-lbl">Principio metodológico</div>
+    <div class="callout-body">El análisis parte de la semántica del hebreo bíblico, no de la traducción. <strong>Pere es un sustantivo concreto, no un adjetivo genérico:</strong> designa una especie animal específica con un perfil conductual definido con precisión en el antiguo Oriente Próximo. Ninguna traducción al español, griego o latín captura completamente la imagen que el término evoca en su contexto cultural original.</div>
+  </div>
+</section>
+
+<!-- ─── S2: QUÉ ES PERE ─── -->
+<div class="sec-divider"></div>
+<section id="sec-pere" class="section">
+  <div class="sec-eyebrow">Sección II</div>
+  <h2 class="sec-title">¿Qué es פֶּרֶא (pere)?</h2>
+  <div class="sec-rule"></div>
+  <p class="lead"><strong>פֶּרֶא no es un adjetivo sino un sustantivo concreto:</strong> el onagro, el asno salvaje del desierto (<em>Equus hemionus</em>). No es «salvaje» como calificativo genérico, sino la imagen precisa de un animal específico conocido en todo el antiguo Oriente Próximo por cuatro características muy definidas que el oyente hebreo evocaba de inmediato al escuchar el término.</p>
+  <div class="cards">
+    <div class="card reveal">
+      <div class="card-ey">Rasgo I</div>
+      <div class="card-ttl">Indomable — ningún yugo lo sujeta jamás</div>
+      <div class="card-bod">El onagro no puede ser domesticado. A diferencia del asno doméstico (<em>ḥamor</em>), que puede ser cargado y dirigido, el <em>pere</em> rechaza constitutivamente toda sujeción. No es que no haya sido domado todavía: es que no puede serlo. La indomabilidad no es circunstancial sino ontológica.</div>
+    </div>
+    <div class="card cr reveal">
+      <div class="card-ey">Rasgo II</div>
+      <div class="card-ttl">Violento y territorial — ataca a quienes se aproximan</div>
+      <div class="card-bod">El onagro defiende su espacio con violencia activa. No es un animal reactivo que solo ataca cuando es atacado: anticipa y ataca. La expresión «su mano contra todos» (<em>yado va-kol</em>) reproduce esta conducta en el plano geopolítico: la ofensiva es permanente y constitutiva.</div>
+    </div>
+    <div class="card ol reveal">
+      <div class="card-ey">Rasgo III</div>
+      <div class="card-ttl">Fuera de la civilización — el desierto como único hogar</div>
+      <div class="card-bod">El habitat del onagro es el desierto y las llanuras saladas. No vive en comunidad organizada ni sujeto a ningún orden social o legal. El desierto es su condición, no su circunstancia. Vive fuera del cercado: fuera de la ciudad, fuera del pacto, fuera de la ley.</div>
+    </div>
+    <div class="card br reveal">
+      <div class="card-ey">Rasgo IV</div>
+      <div class="card-ttl">Impredecible — actúa por impulso, no por razón</div>
+      <div class="card-bod">El onagro no está sujeto a la razón ni al cálculo. Sus movimientos no responden a lógica ni a pacto. Se ríe del conductor (Job 39:7) porque la autoridad humana le es constitutivamente ajena. Actúa por instinto y no puede ser sometido por la razón, la negociación ni el acuerdo.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--white);margin:2.5rem 0 0.5rem;">Job 39:5-8 — El onagro descrito por la voz de Dios</h3>
+  <p>Job 39:5-8 confirma el campo semántico exacto que se aplica a Ismael en Génesis 16:12. Esta descripción fue escrita sin referencia a la profecía de Agar: es el perfil del animal en sí mismo, que el lector hebreo traía ya activado al leer <em>pere adam</em>.</p>
+  <div class="qb reveal">
+    <div class="qt">«¿Quién dejó libre al onagro, y quién soltó las ligaduras del asno montés? Al cual yo di por casa el desierto, y por morada las llanuras saladas. Se burla del tumulto de la ciudad, no oye las voces del arriero. Lo escabroso de los montes es su pasto, y anda buscando toda cosa verde.»</div>
+    <div class="qs">Job 39:5-8 — Descripción del פֶּרֶא por la voz de Dios mismo</div>
+  </div>
+  <div class="cards">
+    <div class="card reveal">
+      <div class="card-ey">v.5 — «¿Quién lo dejó libre?»</div>
+      <div class="card-ttl">La libertad como diseño divino, no accidente</div>
+      <div class="card-bod">La pregunta retórica implica que nadie puede sujetar al onagro porque Dios lo hizo libre. Su indomabilidad no es una falla del adiestramiento humano: es un diseño de la creación. Ningún hombre, ningún rey, ninguna ley lo sujeta.</div>
+    </div>
+    <div class="card cr reveal">
+      <div class="card-ey">v.6 — «Por casa el desierto»</div>
+      <div class="card-ttl">Fuera del cercado de la alianza</div>
+      <div class="card-bod">El desierto como hogar es literalmente la ausencia del espacio de la alianza. El Israel del pacto vive en Canaán. El <em>pere</em> vive fuera. Esta imagen reaparece en la profecía sobre Ismael: excluido del pacto (Gén. 17:21), su hogar es el desierto.</div>
+    </div>
+    <div class="card ol reveal">
+      <div class="card-ey">v.7 — «Se burla del arriero»</div>
+      <div class="card-ttl">Rechazo activo de toda autoridad</div>
+      <div class="card-bod">No es incapacidad de obedecer: es negativa. El onagro <em>se ríe</em> del conductor —el verbo hebreo es <em>tsaḥaq</em>. Hay voluntad activa de no-sujeción, no solo incapacidad pasiva. La diferencia es ontológica.</div>
+    </div>
+    <div class="card br reveal">
+      <div class="card-ey">v.8 — «Recorre los montes»</div>
+      <div class="card-ttl">Movimiento perpetuo, sin asiento</div>
+      <div class="card-bod">El onagro no tiene territorio fijo: recorre, busca, se mueve. Ningún territorio lo define ni lo contiene. Esta imagen reproduce la cláusula final de Gén. 16:12: presencia permanente y en movimiento frente a todos sus hermanos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── S3: ANTEPOSICIÓN ─── -->
+<div class="sec-divider"></div>
+<section id="sec-gram" class="section">
+  <div class="sec-eyebrow">Sección III · Gramática hebrea</div>
+  <h2 class="sec-title">La construcción gramatical: énfasis por anteposición</h2>
+  <div class="sec-rule"></div>
+  <p class="lead">La pregunta de partida —¿se invierte el orden de los sustantivos para dar mayor énfasis?— tiene una respuesta técnica precisa y decisiva. En hebreo bíblico, la posición del elemento en una cadena nominal no es estilística sino <strong>semánticamente jerárquica</strong>. El término antepuesto es el término dominante.</p>
+
+  <div class="compare reveal">
+    <div class="cmp-side L">
+      <div class="cmp-lbl">Orden estándar — hipotético</div>
+      <div class="cmp-heb">אָדָם פֶּרֶא</div>
+      <div class="cmp-tr">adam pere</div>
+      <div class="cmp-trad">«un hombre que es onagro»</div>
+      <div class="cmp-desc">La humanidad es el término principal. El animal es descriptor subordinado. El sujeto es un ser humano con características salvajes. La bestia describe al hombre.</div>
+    </div>
+    <div class="cmp-mid">→</div>
+    <div class="cmp-side R">
+      <div class="cmp-lbl">Texto real — Génesis 16:12</div>
+      <div class="cmp-heb">פֶּרֶא אָדָם</div>
+      <div class="cmp-tr">pere adam</div>
+      <div class="cmp-trad">«un onagro de hombre»</div>
+      <div class="cmp-desc">El animal precede al ser humano. La bestia es el término dominante. La humanidad queda subordinada a la naturaleza animal. El hombre describe al onagro.</div>
+    </div>
+    <div class="cmp-footer"><strong>Conclusión gramatical:</strong> No es «un hombre algo salvaje» sino «una bestia que tiene forma de hombre». La anteposición del sustantivo animal establece la bestialidad como naturaleza primaria y la humanidad como rasgo secundario. Inversión deliberada de la jerarquía ontológica, confirmada por Rashi, Ibn Ezra y la gramática de Gesenius (§ 131).</div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin:2.5rem 0 1rem;">Rashi e Ibn Ezra sobre פֶּרֶא אָדָם</h3>
+  <div class="cards">
+    <div class="card reveal" style="border-top-color:var(--gold);">
+      <div class="card-ey">RASHI · רש"י · 1040-1105 d.C.</div>
+      <div class="card-ttl">«Vivirá como los animales del desierto, fuera del orden social»</div>
+      <div class="card-bod" style="font-size:0.88rem;">Rashi identifica expresamente que <em>pere</em> no es un calificativo sino un modo de existencia: Ismael habitará fuera del cercado de la civilización, como los animales del campo. La comparación no es poética sino ontológica: no habla de cómo actúa Ismael, sino de lo que Ismael es constitutivamente.</div>
+    </div>
+    <div class="card cr reveal">
+      <div class="card-ey">IBN EZRA · אבן עזרא · 1089-1167 d.C.</div>
+      <div class="card-ttl">«Vida en el errar, sin sujeción a ningún rey ni ley»</div>
+      <div class="card-bod" style="font-size:0.88rem;">Ibn Ezra, con su competencia filológica insuperable en el hebreo bíblico, señala que <em>pere</em> aquí connota específicamente la vida en el errar: sin rey (sin estructura política), sin ley (sin pacto normativo). La anarquía como condición ontológica, no como elección ideológica.</div>
+    </div>
+  </div>
+  <div class="callout reveal">
+    <div class="callout-lbl">Valor apologético de estas fuentes</div>
+    <div class="callout-body">Rashi (Francia, siglo XI) e Ibn Ezra (Al-Ándalus, siglo XII) son <strong>fuentes judías no-cristianas</strong> que llegan independientemente a la misma conclusión: <em>pere adam</em> describe la naturaleza constitutiva de Ismael, no su comportamiento. Esto tiene alto valor apologético: la interpretación no puede sospecharse de sesgo cristocéntrico.</div>
+  </div>
+</section>
+
+<!-- ─── S4: CUATRO CLÁUSULAS ─── -->
+<div class="sec-divider"></div>
+<section id="sec-clausulas" class="section">
+  <div class="sec-eyebrow">Sección IV</div>
+  <h2 class="sec-title">La profecía completa: las cuatro cláusulas</h2>
+  <div class="sec-rule"></div>
+  <p class="lead">El versículo no se agota en <em>pere adam</em>. Contiene cuatro cláusulas proféticas distintas, cada una añade una dimensión: naturaleza, conducta, consecuencia y posición permanente. Las cuatro forman una unidad de sentido coherente y se refuerzan mutuamente.</p>
+
+  <div class="clauses reveal">
+    <div class="cl-row">
+      <div class="cl-acc"></div>
+      <div class="cl-num">I</div>
+      <div class="cl-heb"><span class="cl-hb">פֶּרֶא אָדָם</span><span class="cl-tr">pere adam · «onagro de hombre»</span></div>
+      <div class="cl-type">Naturaleza</div>
+      <div class="cl-desc">Constitución interior: indomable, bestial, pre-social. Establece lo que Ismael es, no lo que hace. La bestialidad precede a la conducta.</div>
+    </div>
+    <div class="cl-row">
+      <div class="cl-acc"></div>
+      <div class="cl-num">II</div>
+      <div class="cl-heb"><span class="cl-hb">יָדוֹ בַכֹּל</span><span class="cl-tr">yado va-kol · «su mano contra todos»</span></div>
+      <div class="cl-type">Conducta</div>
+      <div class="cl-desc">Ofensiva permanente y constitutiva. La mano activa contra todos sin excepción. No es circunstancial sino modo de existencia perpetuo.</div>
+    </div>
+    <div class="cl-row">
+      <div class="cl-acc"></div>
+      <div class="cl-num">III</div>
+      <div class="cl-heb"><span class="cl-hb">וְיַד כֹּל בּוֹ</span><span class="cl-tr">ve-yad kol bo · «la mano de todos contra él»</span></div>
+      <div class="cl-type">Consecuencia</div>
+      <div class="cl-desc">Hostilidad universal recíproca. El conflicto no es personal ni histórico: es estructural. La oposición de todos es consecuencia necesaria de la ofensiva constitutiva.</div>
+    </div>
+    <div class="cl-row">
+      <div class="cl-acc"></div>
+      <div class="cl-num">IV</div>
+      <div class="cl-heb"><span class="cl-hb">עַל-פְּנֵי כָל-אֶחָיו יִשְׁכֹּן</span><span class="cl-tr">al-pene kol-ejav yishkon</span></div>
+      <div class="cl-type">Posición</div>
+      <div class="cl-desc">Geopolítica perpetua. El verbo <em>yishkon</em> (de la raíz de la Shekiná) indica permanencia: la tensión frente a Israel no pasará.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin:2.5rem 0 1rem;">La cláusula final: עַל-פְּנֵי כָל-אֶחָיו יִשְׁכֹּן</h3>
+  <div class="heb-block reveal">
+    <span class="hb-main">עַל-פְּנֵי כָל-אֶחָיו יִשְׁכֹּן</span>
+    <span class="hb-tr">al-pene kol-ejav yishkon</span>
+    <span class="hb-trad">«frente a la faz de todos sus hermanos habitará»</span>
+  </div>
+  <div class="cards">
+    <div class="card reveal">
+      <div class="card-ey">עַל-פְּנֵי — Al-pene</div>
+      <div class="card-ttl">«Sobre la faz» — confrontación directa y activa</div>
+      <div class="card-bod">No es «cerca» o «junto a». La preposición <em>al</em> (עַל) implica superposición, presión y antagonismo. Estar <em>al-pene</em> de alguien es estar cara a cara en posición de tensión activa, no de vecindad neutral.</div>
+    </div>
+    <div class="card cr reveal">
+      <div class="card-ey">כָל-אֶחָיו — Kol-ejav</div>
+      <div class="card-ttl">«Todos sus hermanos» — la familia abrahímica completa</div>
+      <div class="card-bod">Isaac y por extensión Israel. La relación es fraternal en su origen —comparten a Abraham— pero contenciosa en su estructura. La fraternidad es el dato de origen; la tensión es el dato profético. No hay reconciliación implícita.</div>
+    </div>
+    <div class="card ol reveal">
+      <div class="card-ey">יִשְׁכֹּן — Yishkon</div>
+      <div class="card-ttl">«Habitará» — raíz de la Shekiná, permanencia</div>
+      <div class="card-bod">שָׁכַן (<em>shakan</em>) es la raíz de la Shekiná, la presencia moradora de Dios. Aquí indica que la posición de confrontación no es transitoria. La tensión no pasará: es el modo de habitación definitivo y permanente de la nación ismaelita.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── S5: ISLAM ─── -->
+<div class="sec-divider"></div>
+<section id="sec-islam" class="section">
+  <div class="sec-eyebrow">Sección V · Correspondencias históricas</div>
+  <h2 class="sec-title">¿Encaja con la narrativa islámica de fuerza y violencia?</h2>
+  <div class="sec-rule"></div>
+  <p class="lead">Desde una perspectiva apologética cristiana, la correspondencia entre el perfil de Génesis 16:12 y el perfil histórico e ideológico del Islam clásico es notable en tres niveles distintos. Esta no es una lectura eisegética: es la lectura que Juan Damasceno, los Padres de la Iglesia y apologetas medievales han sostenido con base textual explícita.</p>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold);margin:0 0 1rem;">a) Orgullo por la violencia como virtud: יָדוֹ בַכֹּל y la yihad bil-sayf</h3>
+
+  <div class="compare reveal">
+    <div class="cmp-side L">
+      <div class="cmp-lbl">Profecía bíblica</div>
+      <div class="cmp-heb">יָדוֹ בַכֹּל</div>
+      <div class="cmp-tr">yado va-kol</div>
+      <div class="cmp-trad">«Su mano contra todos»</div>
+      <div class="cmp-desc">No es defensa reactiva. Es afirmación de ofensiva estructural permanente: la mano va contra todos, no como excepción sino como modo de existencia. La violencia no es un desvío de su naturaleza sino su expresión más auténtica.</div>
+    </div>
+    <div class="cmp-mid">≡</div>
+    <div class="cmp-side R">
+      <div class="cmp-lbl">Islam clásico</div>
+      <div class="cmp-heb" style="font-size:1.2rem;">الجهاد بالسيف</div>
+      <div class="cmp-tr">al-jihad bil-sayf</div>
+      <div class="cmp-trad">«La yihad de la espada»</div>
+      <div class="cmp-desc">Categoría jurídica legítima y codificada en las cuatro escuelas sunitas (hanafí, malikí, shafiíta, hanbalí). El Islam clásico no considera la violencia en la expansión de la fe como moralmente problemática per se. La ofensiva no es desvío sino modo de ser.</div>
+    </div>
+    <div class="cmp-footer">El isomorfismo entre la profecía y la doctrina islámica clásica no es eisegesis: es la correspondencia entre una predicción sobre la naturaleza constitutiva de una nación y el sistema normativo que esa nación ha desarrollado para canalizar esa naturaleza. La ofensiva no es excepción: es regla.</div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold);margin:2.5rem 0 1rem;">b) Rechazo del orden de la alianza</h3>
+  <div class="qb reveal">
+    <div class="qt">«Mi pacto lo estableceré con Isaac [...] pero mi pacto lo estableceré con Isaac.»</div>
+    <div class="qs">Génesis 17:19-21 — La exclusión formal de Ismael del pacto de la alianza</div>
+  </div>
+  <div class="cards">
+    <div class="card reveal">
+      <div class="card-ey">El onagro fuera del cercado</div>
+      <div class="card-ttl">La exclusión como condición ontológica</div>
+      <div class="card-bod">El <em>pere</em>, por definición, vive fuera del espacio estructurado de la alianza. La exclusión de Ismael del pacto (Gén. 17:21) reproduce exactamente esta imagen: queda fuera del marco de la revelación progresiva que va de Abraham a Moisés, de Moisés a los profetas, y culmina en el Mesías.</div>
+    </div>
+    <div class="card cr reveal">
+      <div class="card-ey">Rechazo doctrinal del pacto</div>
+      <div class="card-ttl">El Islam rechaza la continuidad de la alianza</div>
+      <div class="card-bod">El Islam rechaza explícitamente que la Torah sinaítica siga vigente, que el sacerdocio levítico tenga valor y que la Encarnación sea el cumplimiento del pacto abrahámico. Rechaza el marco completo de la alianza progresiva. El onagro no vive en el cercado del pacto: vive frente a él en tensión permanente.</div>
+    </div>
+    <div class="card ol reveal">
+      <div class="card-ey">Rechazo de la Encarnación</div>
+      <div class="card-ttl">El cumplimiento del pacto rechazado</div>
+      <div class="card-bod">La doctrina coránica sobre Jesús —que no es Hijo de Dios, que no murió en la cruz, que no es el Logos encarnado— constituye un rechazo sistemático del momento en que el pacto abrahámico alcanza su plenitud según la teología cristiana.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold);margin:2.5rem 0 1rem;">c) Expansión territorial por la espada — Siglos VII-VIII d.C.</h3>
+  <div class="qb crim reveal">
+    <div class="qt">«Hasta el día de hoy pone en el corazón de sus seguidores ordenar la guerra para llevar a la gente a su fe. Esta es la herejía de los ismaelitas, la primera de las bestias que preceden al Anticristo.»</div>
+    <div class="qs">Juan Damasceno (676-749 d.C.) · De Haeresibus, 101 · El primer apologeta cristiano que analizó el Islam, desde dentro del mundo islámico</div>
+  </div>
+  <div class="cards">
+    <div class="card reveal"><div class="card-ey">622-651 d.C.</div><div class="card-ttl">Arabia y Persia (Imperio Sasánida)</div><div class="card-bod">Unificación de la Península Arábiga y conquista total del Imperio Persa en menos de 30 años. El Imperio Persa, una de las grandes potencias de la Antigüedad, desaparece en una generación.</div></div>
+    <div class="card cr reveal"><div class="card-ey">639-698 d.C.</div><div class="card-ttl">Egipto y el Norte de África</div><div class="card-bod">Conquista del granero del mundo mediterráneo y expansión por todo el Magreb. Siglos de presencia cristiana norteafricana borrados en décadas.</div></div>
+    <div class="card ol reveal"><div class="card-ey">711-751 d.C.</div><div class="card-ttl">Hispania y Asia Central</div><div class="card-bod">Conquista casi total de la Península Ibérica en siete años y expansión hasta el río Indo. Victoria sobre el Imperio Tang en Talas (751). Velocidad sin paralelo en la historia religiosa.</div></div>
+  </div>
+</section>
+
+<!-- ─── S6: ESAU ─── -->
+<div class="sec-divider"></div>
+<section id="sec-esau" class="section">
+  <div class="sec-eyebrow">Sección VI · Caso paralelo</div>
+  <h2 class="sec-title">Génesis 27:40 — La bendición sobre Esaú</h2>
+  <div class="sec-rule"></div>
+  <p class="lead">Para confirmar que el método filológico de Génesis 16:12 no es arbitrario sino sistemático, se examina el caso paralelo de la profecía de Isaac sobre Esaú. El hebreo bíblico emplea aquí la misma estrategia: una construcción gramatical de alta carga semántica —una preposición con valor ontológico— para caracterizar a otra nación excluida del pacto.</p>
+
+  <div class="heb-block reveal">
+    <span class="hb-main">וְעַל-חַרְבְּךָ תִחְיֶה</span>
+    <span class="hb-tr">ve-al-jarbeja tijye</span>
+    <span class="hb-trad">«y por tu espada vivirás»</span>
+  </div>
+  <div class="qb reveal">
+    <div class="qt">«Y por tu espada vivirás, y a tu hermano servirás; y acontecerá cuando te fortalezcas, que descargarás su yugo de tu cerviz.»</div>
+    <div class="qs">Génesis 27:40 — La profecía completa de Isaac sobre Esaú</div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin:2.5rem 0 1rem;">La preposición עַל como fundamento existencial</h3>
+  <p>La construcción contiene una anomalía preposicional deliberada que carga ontológicamente el texto. No es cualquier preposición la que conecta a Esaú con su espada:</p>
+  <table class="prep-tbl reveal">
+    <thead><tr><th>Preposición</th><th>Significado</th><th>Implicación</th><th>¿En el texto?</th></tr></thead>
+    <tbody>
+      <tr><td><span class="phb">בְּ</span> (be)</td><td>«Mediante» — instrumento</td><td>«Sobrevivirás <em>usando</em> la espada». La espada es una herramienta, no un fundamento.</td><td style="color:var(--faint);">No</td></tr>
+      <tr><td><span class="phb">מִן</span> (min)</td><td>«De / a partir de» — origen</td><td>«Vivirás <em>de</em> la espada». Fuente de sustento. Más fuerte que <em>be</em>, aún instrumental.</td><td style="color:var(--faint);">No</td></tr>
+      <tr class="KEY"><td><span class="phb">עַל</span> (al) <span class="pbadge">TEXTO REAL</span></td><td>«Sobre / en base a» — fundamento</td><td>«Existirás <em>sobre</em> la espada como suelo ontológico». La violencia no es instrumento sino base existencial.</td><td style="color:var(--gold);font-weight:700;">✓ Gén. 27:40</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin:2.5rem 0 1rem;">El verbo תָּרִיד — Misma raíz semántica que el onagro</h3>
+  <div class="heb-block reveal">
+    <span class="hb-main">כַּאֲשֶׁר תָּרִיד</span>
+    <span class="hb-tr">kaasher tarid · (raíz: רוּד — rud)</span>
+    <span class="hb-trad">«cuando te agites / vayas errante / te rebeles»</span>
+  </div>
+  <div class="cards">
+    <div class="card reveal"><div class="card-ey">Significado 1</div><div class="card-ttl">Vagar con inquietud — sin destino ni sujeción</div><div class="card-bod">El movimiento de <em>rud</em> no tiene destino ni propósito exterior: agitación interna que se expresa en errancia perpetua. No es exploración intencional sino incapacidad constitutiva de detenerse bajo autoridad ajena.</div></div>
+    <div class="card cr reveal"><div class="card-ey">Significado 2</div><div class="card-ttl">Agitarse — movimiento nervioso e impulsivo</div><div class="card-bod">Como el onagro que «se ríe del conductor» (Job 39:7), Esaú se agita cuando siente el yugo. La agitación no es razonada: es instintiva. La libertad que busca no es ideológica sino constitutiva.</div></div>
+    <div class="card ol reveal"><div class="card-ey">Significado 3 — político</div><div class="card-ttl">Rebelarse — sacudir el yugo de sujeción</div><div class="card-bod">En contexto político, תָּרִיד implica sacudirse el yugo de autoridad superior. La rebelión no es programática sino instintiva: es la respuesta natural de quien no puede soportar sujeción. Igual que el <em>pere</em> con el arriero.</div></div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin:2.5rem 0 1rem;">Edom = Roma en la tradición rabínica y cristiana</h3>
+  <div class="qb reveal">
+    <div class="qt">«Edom es Roma. El poder que oprime a Israel y al mundo con la espada es el heredero del temperamento de Esaú.»</div>
+    <div class="qs">Bereshit Rabbah 67 (siglo V d.C.) · Midrash rabínico sobre Génesis 27</div>
+  </div>
+  <div class="cards">
+    <div class="card reveal"><div class="card-ey">Bereshit Rabbah · siglo V d.C.</div><div class="card-ttl">Edom = Roma: la identificación midrásica</div><div class="card-bod">El midrash identifica sistemáticamente a Edom con Roma. No es alegoría sino tipología: Roma hereda el temperamento de Esaú — gobierno por la fuerza, hostilidad a Israel, vida sustentada por la violencia militar.</div></div>
+    <div class="card cr reveal"><div class="card-ey">Patrística cristiana</div><div class="card-ttl">Roma pagana como Edom</div><div class="card-bod">Los Padres de la Iglesia adoptaron esta lectura. Agustín de Hipona distingue entre la Roma terrena (Esaú, que vive por la espada) y la posibilidad de redención. La tensión esauíta estructura su teología de las dos ciudades.</div></div>
+    <div class="card ol reveal"><div class="card-ey">Escolástica medieval</div><div class="card-ttl">Esaú y el poder secular</div><div class="card-bod">En la escolástica, Edom/Esaú es tipo del poder temporal que vive por la espada y debe quedar subordinado al espiritual. Estructura el debate medieval entre <em>potestas temporalis</em> y <em>potestas spiritualis</em>.</div></div>
+  </div>
+</section>
+
+<!-- ─── S7: TABLA COMPARATIVA ─── -->
+<div class="sec-divider"></div>
+<section id="sec-tabla" class="section">
+  <div class="sec-eyebrow">Sección VII · Síntesis comparativa</div>
+  <h2 class="sec-title">Tabla comparativa: Ismael vs. Esaú — Dos profecías, un método</h2>
+  <div class="sec-rule"></div>
+  <p class="lead">La comparación sistemática demuestra que el hebreo bíblico emplea un método consistente para caracterizar a las naciones excluidas del pacto mediante construcciones gramaticales de alta carga semántica. El método no es arbitrario.</p>
+
+  <table class="big-tbl reveal">
+    <thead><tr>
+      <th>Rasgo</th>
+      <th>Ismael — פֶּרֶא אָדָם (Gén. 16:12)</th>
+      <th>Esaú/Edom — עַל-חַרְבְּךָ תִחְיֶה (Gén. 27:40)</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>Texto clave</td><td>Génesis 16:12</td><td>Génesis 27:40</td></tr>
+      <tr><td>Mecanismo gramatical</td><td>Anteposición nominal: <em>pere adam</em> (bestia › humano)</td><td>Preposición ontológica: <em>al-jarbeja</em> (existencia sobre la espada)</td></tr>
+      <tr><td>Relación con la violencia</td><td>Constitutiva: es un «onagro», la bestia indomable. La violencia es su naturaleza.</td><td>Existencial: «vivirás sobre ella». La espada es su suelo ontológico.</td></tr>
+      <tr><td>Campo semántico compartido</td><td><em>Pere</em>: indomable, errante, sin yugo, fuera del cercado</td><td><em>Rud</em> (תָּרִיד): agitación, errancia, rechazo del yugo</td></tr>
+      <tr><td>Posición respecto al pacto</td><td>Excluido: Gén. 17:21 — el pacto es con Isaac</td><td>Despojado: Gén. 25:33 — vendió su primogenitura a Jacob</td></tr>
+      <tr><td>Destino geopolítico</td><td>Desierto, hostilidad perpetua contra todos, presencia contenciosa frente a Israel</td><td>Sujeción intermitente a Israel con rebelión periódica cuando se fortalece</td></tr>
+      <tr><td>Confirmación rabínica</td><td>Rashi: «fuera del orden social». Ibn Ezra: «sin rey ni ley»</td><td>Bereshit Rabbah 67: «Edom es Roma, hereda el temperamento de Esaú»</td></tr>
+      <tr><td>Identificación histórica</td><td>Nación árabe → Islam clásico (Juan Damasceno, 676-749 d.C.)</td><td>Edom → Roma (Bereshit Rabbah; Patrística cristiana medieval)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ─── S8: CONCLUSIÓN ─── -->
+<div class="sec-divider"></div>
+<section id="sec-concl" class="section">
+  <div class="sec-eyebrow">Conclusión filológico-teológica</div>
+  <h2 class="sec-title">La bestialidad como naturaleza primaria</h2>
+  <div class="sec-rule"></div>
+  <p class="lead">El análisis converge en una conclusión que puede estructurarse en un silogismo formal de cuatro premisas y conclusión, usando exclusivamente los datos filológicos, gramaticales, exegéticos e históricos establecidos a lo largo del análisis.</p>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo Final · La naturaleza primaria de la nación ismaelita</div>
+    <div class="sil-row">
+      <div class="sil-lbl">P1</div>
+      <div class="sil-txt">La construcción <strong>פֶּרֶא אָדָם</strong> en Génesis 16:12 antepone el sustantivo concreto <em>pere</em> (onagro, <em>Equus hemionus</em>) al sustantivo <em>adam</em> (ser humano). En hebreo bíblico, esta anteposición invierte la jerarquía semántica estándar y establece el término antepuesto como elemento dominante y primario, subordinando la humanidad de Ismael a su naturaleza bestial. Esto está confirmado por la gramática hebrea (Gesenius § 131) y la exégesis rabínica medieval de Rashi e Ibn Ezra.</div>
+    </div>
+    <div class="sil-row">
+      <div class="sil-lbl">P2</div>
+      <div class="sil-txt">El campo semántico del <em>pere</em> —documentado en Job 39:5-8 y en las 12 ocurrencias del término en el Tanaj— abarca: indomabilidad constitutiva, violencia territorial activa, vida fuera del orden social y del pacto, y rechazo irreversible de toda autoridad. Estas características son ontológicas, no conductuales: el onagro no puede ser domesticado porque su naturaleza no lo permite, no porque no haya sido correctamente adiestrado.</div>
+    </div>
+    <div class="sil-row">
+      <div class="sil-lbl">P3</div>
+      <div class="sil-txt">Las tres cláusulas adicionales del versículo confirman y amplían el perfil: <em>yado va-kol</em> («su mano contra todos») = ofensiva permanente y constitutiva; <em>ve-yad kol bo</em> («la mano de todos contra él») = hostilidad universal recíproca y estructural; <em>al-pene kol-ejav yishkon</em> («frente a todos sus hermanos habitará para siempre») = presencia contenciosa y permanente frente a la familia abrahímica, confirmada por el verbo <em>shakan</em> de raíz permanente. El caso paralelo de Génesis 27:40 confirma que el hebreo bíblico emplea este tipo de construcciones de manera sistemática para las naciones excluidas del pacto.</div>
+    </div>
+    <div class="sil-row">
+      <div class="sil-lbl">P4</div>
+      <div class="sil-txt">La correspondencia entre este perfil —naturaleza violenta constitutiva, vida fuera del pacto, ofensiva permanente, presencia contenciosa— y el perfil histórico e ideológico del Islam clásico es reconocida desde el siglo VII d.C. por Juan Damasceno (que llamó al Islam «la herejía de los ismaelitas»), por los apologetas medievales y por la exégesis comparada moderna. Esta correspondencia no depende de un solo texto sino de la convergencia de todos los vectores del análisis.</div>
+    </div>
+    <div class="sil-row C">
+      <div class="sil-lbl">∴ C</div>
+      <div class="sil-txt"><strong>La construcción פֶּרֶא אָדָם no es una descripción accidental ni atenuada.</strong> Es una declaración profética de precisión filológica deliberada que establece la bestialidad —indomabilidad, violencia constitutiva, vida fuera del pacto y del orden social— como naturaleza <em>primaria</em> de la nación ismaelita. Que este perfil tenga correspondencia histórica e ideológica con el Islam clásico en su doctrina de la yihad bil-sayf, en su rechazo del pacto encarnacional y en su expansión por la espada, no es una lectura forzada sino la lectura que el judaísmo rabínico confirma (Rashi, Ibn Ezra) y que la tradición cristiana desde Juan Damasceno ha sostenido con base textual. El método es sistemático en el Tanaj: las naciones excluidas del pacto reciben, cada una, un perfil de construcción gramatical de alta densidad semántica que define su naturaleza constitutiva frente al pueblo de la alianza.</div>
+    </div>
+  </div>
+
+  <div class="callout reveal" style="margin-top:2.5rem;">
+    <div class="callout-lbl">Fuentes citadas en este análisis</div>
+    <div class="callout-body">
+      <strong>Tanaj (textos citados íntegramente):</strong> Génesis 16:12 · Génesis 17:19-21 · Génesis 27:40 · Job 39:5-8<br><br>
+      <strong>Exégesis rabínica:</strong> Rashi, <em>Perush al haTorah</em> (Bereshit 16:12) · Ibn Ezra, <em>Perush haTorah</em> (Bereshit 16:12) · Bereshit Rabbah 67<br><br>
+      <strong>Patrística:</strong> Juan Damasceno (676-749 d.C.), <em>De Haeresibus</em>, 101<br><br>
+      <strong>Gramática:</strong> Gesenius, <em>Hebräische Grammatik</em>, § 131 · campo semántico de פֶּרֶא en las 12 ocurrencias del Tanaj · raíz רוּד y sus acepciones
+    </div>
+  </div>
+</section>
+
+</main>
+
+<button id="bttop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div id="kbd-hint">← → teclas para navegar entre secciones</div>
+
+<script>
+/* ─────────── DATA ─────────── */
+const SECTIONS = [
+  { id:'sec-hero',   tab:'Portada',         group:'', short:'Inicio' },
+  { id:'sec-texto',  tab:'I. Texto hebreo', group:'El texto', short:'Texto' },
+  { id:'sec-pere',   tab:'II. פֶּרֶא',       group:'El onagro', short:'Pere' },
+  { id:'sec-gram',   tab:'III. Gramática',  group:'Gramática', short:'Gramática' },
+  { id:'sec-clausulas', tab:'IV. Cuatro cláusulas', group:'Profecía', short:'Cláusulas' },
+  { id:'sec-islam',  tab:'V. Islam',        group:'Islam', short:'Islam' },
+  { id:'sec-esau',   tab:'VI. Esaú',        group:'Paralelo', short:'Esaú' },
+  { id:'sec-tabla',  tab:'VII. Tabla',      group:'Comparativa', short:'Tabla' },
+  { id:'sec-concl',  tab:'VIII. Conclusión',group:'', short:'Conclusión' },
+];
+let currentSec = 0;
+
+/* ─────────── BUILD TOP TABS ─────────── */
+const tabsEl = document.getElementById('topnav-tabs');
+SECTIONS.forEach((s,i) => {
+  const btn = document.createElement('button');
+  btn.className = 'nav-tab' + (i===0?' active':'');
+  btn.innerHTML = `<span class="tab-num">${i>0?String(i).padStart(2,'0'):''}</span>${s.tab}`;
+  btn.onclick = () => goTo(i);
+  btn.dataset.idx = i;
+  tabsEl.appendChild(btn);
+});
+
+/* ─────────── BUILD BETWEEN-SECTION NAVS ─────────── */
+function buildSecNavs() {
+  SECTIONS.forEach((s,i) => {
+    const sec = document.getElementById(s.id);
+    if (!sec) return;
+    const nav = document.createElement('div');
+    nav.className = 'sec-nav';
+    nav.id = 'snav-' + i;
+
+    const prev = i > 0 ? SECTIONS[i-1] : null;
+    const next = i < SECTIONS.length-1 ? SECTIONS[i+1] : null;
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'sec-nav-btn prev' + (prev?'':' disabled');
+    prevBtn.innerHTML = `<span class="nav-arrow">←</span><div><div class="nav-meta">Sección anterior</div><div class="nav-label">${prev?prev.tab:'—'}</div></div>`;
+    if (prev) prevBtn.onclick = () => goTo(i-1);
+
+    const center = document.createElement('div');
+    center.className = 'sec-nav-center';
+    const dots = document.createElement('div');
+    dots.className = 'sec-nav-dots';
+    SECTIONS.forEach((_,di) => {
+      const d = document.createElement('div');
+      d.className = 'sec-dot' + (di===i?' active':'') + (di<i?' done':'');
+      d.onclick = () => goTo(di);
+      d.title = SECTIONS[di].short;
+      dots.appendChild(d);
+    });
+    const pos = document.createElement('div');
+    pos.className = 'sec-nav-pos';
+    pos.textContent = `${i+1} / ${SECTIONS.length}`;
+    center.appendChild(dots);
+    center.appendChild(pos);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'sec-nav-btn next' + (next?'':' disabled');
+    nextBtn.innerHTML = `<div><div class="nav-meta">Siguiente sección</div><div class="nav-label">${next?next.tab:'—'}</div></div><span class="nav-arrow">→</span>`;
+    if (next) nextBtn.onclick = () => goTo(i+1);
+
+    nav.appendChild(prevBtn);
+    nav.appendChild(center);
+    nav.appendChild(nextBtn);
+    sec.appendChild(nav);
+  });
+}
+buildSecNavs();
+
+/* ─────────── BUILD TOC ─────────── */
+function buildToc() {
+  const panel = document.getElementById('toc-panel');
+  const hdr = document.getElementById('toc-header');
+
+  const groups = {};
+  SECTIONS.forEach((s,i) => {
+    const g = s.group || 'General';
+    if (!groups[g]) groups[g] = [];
+    groups[g].push({...s, idx:i});
+  });
+
+  Object.entries(groups).forEach(([g, items]) => {
+    const grp = document.createElement('div');
+    grp.className = 'toc-group';
+    const lbl = document.createElement('div');
+    lbl.className = 'toc-group-label';
+    lbl.textContent = g;
+    grp.appendChild(lbl);
+    items.forEach(it => {
+      const row = document.createElement('div');
+      row.className = 'toc-item';
+      row.id = 'toc-row-' + it.idx;
+      row.innerHTML = `<span class="toc-num">${String(it.idx+1).padStart(2,'0')}</span><span class="toc-title">${it.tab}</span><span class="toc-check">✓</span>`;
+      row.onclick = () => { goTo(it.idx); closeToc(); };
+      grp.appendChild(row);
+    });
+    panel.appendChild(grp);
+  });
+}
+buildToc();
+
+/* ─────────── NAVIGATION ─────────── */
+function goTo(idx) {
+  const sec = document.getElementById(SECTIONS[idx].id);
+  if (!sec) return;
+  window.scrollTo({ top: sec.offsetTop - 60, behavior:'smooth' });
+  setActive(idx);
+}
+
+function setActive(idx) {
+  currentSec = idx;
+  // tabs
+  document.querySelectorAll('.nav-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  // scroll tab into view
+  const activeTab = document.querySelector(`.nav-tab[data-idx="${idx}"]`);
+  if (activeTab) activeTab.scrollIntoView({block:'nearest',inline:'nearest'});
+  // toc rows
+  document.querySelectorAll('.toc-item').forEach((r,i) => {
+    r.classList.toggle('done', i < idx);
+  });
+}
+
+/* ─────────── SCROLL OBSERVER ─────────── */
+const secEls = SECTIONS.map(s => document.getElementById(s.id));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = secEls.indexOf(e.target);
+      if (idx !== -1) setActive(idx);
+    }
+  });
+}, { rootMargin:'-25% 0px -68% 0px' });
+secEls.forEach(el => { if(el) obs.observe(el); });
+
+/* ─────────── PROGRESS BAR ─────────── */
+const fill = document.getElementById('progfill');
+window.addEventListener('scroll', () => {
+  const h = document.body.scrollHeight - window.innerHeight;
+  fill.style.width = (window.scrollY / h * 100) + '%';
+  document.getElementById('bttop').classList.toggle('show', window.scrollY > 400);
+}, {passive:true});
+
+/* ─────────── REVEAL ─────────── */
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, {threshold:0.07});
+reveals.forEach(r => ro.observe(r));
+
+/* ─────────── KEYBOARD NAV ─────────── */
+let kbdTimer;
+document.addEventListener('keydown', e => {
+  const tag = document.activeElement.tagName;
+  if (tag==='INPUT'||tag==='TEXTAREA') return;
+  if (e.key==='ArrowRight'||e.key==='ArrowDown') { e.preventDefault(); goTo(Math.min(currentSec+1,SECTIONS.length-1)); showKbd(); }
+  if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); goTo(Math.max(currentSec-1,0)); showKbd(); }
+  if (e.key==='Escape') closeToc();
+});
+function showKbd() {
+  const h = document.getElementById('kbd-hint');
+  h.classList.add('show');
+  clearTimeout(kbdTimer);
+  kbdTimer = setTimeout(() => h.classList.remove('show'), 1800);
+}
+
+/* ─────────── TOC ─────────── */
+function openToc() { document.getElementById('toc-overlay').classList.add('open'); }
+function closeToc() { document.getElementById('toc-overlay').classList.remove('open'); }
+
+/* Show keyboard hint on first load */
+setTimeout(showKbd, 1200);
+</script>
+</body>
+</html>

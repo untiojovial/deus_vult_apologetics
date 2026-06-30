@@ -18,3 +18,5 @@ Aqui trabajamos pasajes complejos con metodo: contexto, genero, lenguaje y tradi
 - [Patristica NT (Dossier)](/biblia/patristica-nt-dossier/)
 - [Genesis Catolico (Dossier)](/biblia/genesis-catolico-dossier/)
 - [Juan 11 (Dossier)](/biblia/jn11-dossier/)
+- [פֶּרֶא אָדָם — Análisis Filológico de Génesis 16:12 (Dossier)](/biblia/pere-adam-genesis-16-dossier/)
+- [Defensa de la Torah — Apologética Académica (Dossier)](/biblia/defensa-torah-dossier/)

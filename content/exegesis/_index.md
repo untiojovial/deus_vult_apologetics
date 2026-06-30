@@ -22,3 +22,6 @@ Aqui trabajamos pasajes complejos con rigor, claridad y fidelidad al texto sagra
 - [El Senor del Sabado - Marcos 2:28 (Dossier)](/exegesis/senor-del-sabado-marcos-dossier/)
 - [El Padre y Yo Somos Uno - Juan 10:30 (Dossier)](/exegesis/padre-yo-somos-uno-dossier/)
 - [El Alfa y la Omega - Apocalipsis (Dossier)](/exegesis/alpha-omega-dossier/)
+- [Marcos 10:18 — ¿Negación o Afirmación de la Divinidad? (Dossier)](/exegesis/marcos-10-18-dossier/)
+- [Marcos 13:32 — ¿Ignorancia o No-Revelación? (Dossier)](/exegesis/marcos-13-32-dossier/)
+- [La Cátedra de Moisés — Mateo 23:2-3 (Dossier)](/exegesis/catedra-moises-dossier/)

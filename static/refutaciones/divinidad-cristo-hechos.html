@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divinidad de Cristo y del Espíritu Santo en el Libro de los Hechos</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f7f4ef;
+    --accent: #6b1d3a;
+    --accent2: #1a3a5c;
+    --gold: #b8860b;
+    --grey-light: #e8e4dc;
+    --grey-mid: #9e9589;
+    --white: #ffffff;
+    --verdict: #1a0a1f;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  #sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    width: 300px;
+    height: 100vh;
+    background: var(--ink);
+    color: var(--paper);
+    overflow-y: auto;
+    z-index: 100;
+    transform: translateX(-300px);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    padding: 2rem 1.5rem;
+  }
+
+  #sidebar.open { transform: translateX(0); }
+
+  #sidebar h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.75rem;
+  }
+
+  #sidebar nav a {
+    display: block;
+    padding: 0.5rem 0;
+    color: #ccc;
+    text-decoration: none;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #222;
+    transition: color 0.2s, padding-left 0.2s;
+  }
+
+  #sidebar nav a:hover { color: var(--gold); padding-left: 0.5rem; }
+  #sidebar nav a.active { color: var(--gold); font-weight: 600; }
+
+  #sidebar nav .section-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--grey-mid);
+    padding: 0.75rem 0 0.25rem;
+  }
+
+  #nav-toggle {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 200;
+    background: var(--ink);
+    border: none;
+    color: var(--paper);
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 8px;
+    transition: background 0.2s;
+  }
+
+  #nav-toggle:hover { background: var(--accent); }
+
+  #nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  #nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #nav-toggle.open span:nth-child(2) { opacity: 0; }
+  #nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  #overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 50;
+  }
+  #overlay.visible { display: block; }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 2rem 6rem;
+  }
+
+  .hero {
+    padding: 6rem 0 4rem;
+    border-bottom: 3px solid var(--ink);
+    margin-bottom: 4rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--grey-mid);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    font-style: italic;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+  }
+
+  .part-header {
+    margin: 5rem 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--grey-light);
+  }
+
+  .part-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .part-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 2rem;
+  }
+
+  section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin: 2.5rem 0 0.75rem;
+    border-left: 4px solid var(--accent2);
+    padding-left: 0.75rem;
+  }
+
+  p { margin-bottom: 1.2rem; }
+
+  .syllogism {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+    position: relative;
+    border-left: 6px solid var(--gold);
+  }
+
+  .syllogism::before {
+    content: 'SILOGISMO';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .syllogism.maestro::before { content: 'SILOGISMO MAESTRO'; }
+  .syllogism.maestro { border-left-color: var(--accent); background: #1a0a14; }
+
+  .syllogism .premise {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem;
+    align-items: start;
+    font-size: 0.95rem;
+  }
+
+  .syllogism .premise .label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.75rem;
+    padding-top: 0.15rem;
+  }
+
+  .syllogism .conclusion {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #444;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #fff;
+  }
+
+  .syllogism .conclusion::before {
+    content: '∴ ';
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .scripture {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    border-left: 6px solid var(--accent2);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-style: italic;
+  }
+
+  .scripture .source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent2);
+    font-style: normal;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .scripture .text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .patristic {
+    background: #fdf8f2;
+    border: 1px solid #e6d5b8;
+    border-left: 6px solid var(--gold);
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .patristic .source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  .patristic .text {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: #3a2e1f;
+    font-style: italic;
+  }
+
+  .verse-card {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    border-top: 5px solid var(--accent2);
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .verse-card .verse-number {
+    display: inline-block;
+    background: var(--accent2);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .verse-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .paradox-box {
+    border: 2px solid var(--accent2);
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .paradox-box::before {
+    content: 'PUNTO CLAVE';
+    position: absolute;
+    top: -0.7rem;
+    left: 1rem;
+    background: var(--paper);
+    padding: 0 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent2);
+  }
+
+  .dilemma {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .dilemma-side {
+    padding: 1.5rem;
+    border-top: 4px solid;
+  }
+
+  .dilemma-side.a { border-color: var(--accent); background: #fdf0f4; }
+  .dilemma-side.b { border-color: var(--accent2); background: #f0f4ff; }
+
+  .dilemma-side h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .dilemma-side p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .stat-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .stat-box .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-box .label {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+    display: block;
+    line-height: 1.3;
+  }
+
+  .verdict {
+    background: var(--verdict);
+    color: #fff;
+    padding: 3rem 2.5rem;
+    margin: 4rem 0;
+    border-top: 6px solid var(--gold);
+  }
+
+  .verdict h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .verdict p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #ddd;
+    margin-bottom: 1.25rem;
+  }
+
+  .verdict strong { color: #fff; }
+
+  blockquote {
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    background: #fff;
+    color: #333;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--grey-mid);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--ink);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--grey-light);
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td { background: #fff; }
+
+  .verse-atom {
+    background: linear-gradient(135deg, #1a3a5c, #0f0e0d);
+    color: white;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .verse-atom .verse-ref {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .verse-atom .verse-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #eee;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .highlight {
+    background: #fffbeb;
+    border: 1px solid var(--gold);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  .highlight strong { color: var(--accent2); }
+
+  .trinity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .trinity-card {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    border-top: 4px solid var(--accent2);
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .trinity-card h5 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .trinity-card p {
+    font-size: 0.85rem;
+    color: #444;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    main { padding: 1.25rem 1.25rem 4rem; }
+    .dilemma { grid-template-columns: 1fr; }
+    .trinity-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    #sidebar, #nav-toggle, #overlay, #progress-bar { display: none; }
+    main { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="overlay"></div>
+
+<button id="nav-toggle" aria-label="Menú de navegación">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" role="navigation" aria-label="Índice de contenidos">
+  <h2>Índice</h2>
+  <nav>
+    <span class="section-label">Introducción</span>
+    <a href="#intro">El testimonio de los primeros años</a>
+
+    <span class="section-label">Parte I — Cristología Explícita en Hechos</span>
+    <a href="#hechos2-3436">1. Hechos 2:34-36 — "Dijo el Señor a mi Señor" (Salmo 110)</a>
+    <a href="#hechos2-invocar">2. Hechos 2:21, 38 — Invocar el nombre del Señor (Joel 2:32)</a>
+    <a href="#hechos7-esteban">3. Hechos 7:59-60 — Esteban encomienda su espíritu a Cristo</a>
+    <a href="#hechos9-invocan">4. Hechos 9:14-21; 22:16 — "Los que invocan tu nombre"</a>
+    <a href="#hechos10-senor">5. Hechos 10:36 — Jesucristo, Señor de todos</a>
+    <a href="#hechos20-sangre">6. Hechos 20:28 — La iglesia de Dios, comprada con su propia sangre</a>
+
+    <span class="section-label">Parte II — La Objeción de la Humanidad de Cristo</span>
+    <a href="#hechos2-varon">7. Hechos 2:22; 3:13; 4:27 — "Varón aprobado por Dios" y "su Hijo Jesús"</a>
+
+    <span class="section-label">Parte III — El Espíritu Santo en Hechos</span>
+    <a href="#hechos5-ananias">8. Hechos 5:1-4, 9 — Ananías: mentir al Espíritu Santo es mentir a Dios</a>
+    <a href="#hechos1-david">9. Hechos 1:16; 4:25; 28:25 — El Espíritu Santo habló por boca de David</a>
+    <a href="#hechos13-decide">10. Hechos 13:2-4; 16:6-7 — El Espíritu decide, envía y prohíbe</a>
+
+    <span class="section-label">Parte IV — La Trinidad Emergente</span>
+    <a href="#hechos2-pentecostes">11. Hechos 2:32-33 — Padre, Hijo y Espíritu en Pentecostés</a>
+    <a href="#hechos7-vision">12. Hechos 7:55-56 — Esteban ve al Padre y al Hijo, lleno del Espíritu</a>
+
+    <span class="section-label">Conclusión</span>
+    <a href="#silogismo-maestro">13. El silogismo maestro</a>
+    <a href="#veredicto">14. El veredicto final</a>
+  </nav>
+</nav>
+
+<main>
+
+  <header class="hero" id="intro">
+    <p class="hero-eyebrow">Apologética Cristiana · Análisis Cristológico y Pneumatológico</p>
+    <h1>Divinidad de <em>Cristo</em><br>y del Espíritu Santo<br>en el Libro de los Hechos</h1>
+    <p class="hero-subtitle">Un recorrido por el testimonio más temprano de la iglesia naciente —entre los años 30 y 62 d.C.—, atendiendo tanto a los textos que afirman la divinidad de Cristo y del Espíritu como a las objeciones que se les oponen</p>
+    <span class="hero-badge">Compendio completo del libro de Hechos con silogismo maestro</span>
+  </header>
+
+  <section>
+    <p>El libro de los Hechos de los Apóstoles ocupa un lugar único en el debate sobre los orígenes de la cristología alta. A diferencia de las cartas de Pablo, que ya presuponen una fe constituida en comunidades formadas, Hechos narra —con todas sus limitaciones como fuente histórica y literaria— los primerísimos años del movimiento cristiano: los discursos de Pedro en Jerusalén apenas semanas después de la crucifixión, la predicación itinerante de Pablo, y el martirio de Esteban, probablemente antes del año 36 d.C. Es, por tanto, el documento que en principio debería mostrarnos la cristología "más primitiva y menos desarrollada" si la tesis de una divinización tardía y progresiva de Jesús fuera correcta.</p>
+
+    <p>Lo que encontramos, sin embargo, es un cuadro más complejo y más interesante: junto a un lenguaje que describe con total naturalidad la humanidad real de Jesús —un "varón aprobado por Dios", un Mesías "que Dios resucitó e hizo Señor"—, aparecen ya, en los discursos más tempranos del libro, invocaciones a Jesús reservadas en el judaísmo del Segundo Templo exclusivamente a YHWH, una identificación explícita y sin matices entre mentir al Espíritu Santo y mentir a Dios, y una iniciativa del Espíritu —que decide, habla, envía, prohíbe— incompatible con la noción de una simple fuerza impersonal. Este documento examina ambos conjuntos de textos: los que a primera vista podrían sugerir una cristología "baja", y los que afirman explícitamente la divinidad de Cristo y del Espíritu, mostrando cómo se articulan entre sí sin contradicción.</p>
+
+    <div class="highlight">
+      <strong>Método:</strong> Cada pasaje se presenta con (1) el texto bíblico en su contexto inmediato; (2) cuando el pasaje plantea una objeción aparente a la divinidad de Cristo, un cuadro de "Objeción / Respuesta"; (3) su recepción en los Padres de la Iglesia, siempre como cita textual verificada, con obra y capítulo; (4) un silogismo que extrae la implicación cristológica o pneumatológica. El documento cierra con un silogismo maestro que integra el conjunto.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE I: CRISTOLOGÍA EXPLÍCITA EN HECHOS -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="hechos2-3436">
+    <span class="part-label">Parte I — Cristología Explícita en Hechos</span>
+    <h2>Lo que Pedro, Esteban y Pablo afirman de Jesús</h2>
+  </div>
+
+  <section>
+    <div class="verse-card">
+      <span class="verse-number">PASAJE 1</span>
+      <h4>Hechos 2:34-36 — "Dijo el Señor a mi Señor": el Salmo 110 aplicado a Jesús</h4>
+
+      <div class="scripture">
+        <div class="source">Salmo 110:1 (citado en Hechos 2:34-35)</div>
+        <div class="text">"Porque David no subió a los cielos; pero dijo: Dijo el Señor a mi Señor: Siéntate a mi diestra, hasta que ponga a tus enemigos por estrado de tus pies."</div>
+      </div>
+
+      <div class="scripture">
+        <div class="source">Hechos 2:36</div>
+        <div class="text">"Sepa, pues, ciertísimamente toda la casa de Israel, que a este Jesús a quien vosotros crucificasteis, Dios le ha hecho Señor y Cristo."</div>
+      </div>
+
+      <p>Este es el primer discurso cristiano registrado en la historia, pronunciado por Pedro en Jerusalén el mismo día de Pentecostés —semanas, no décadas, después de la crucifixión—. Es también el texto que con más frecuencia se cita para sostener que la fe cristiana más temprana habría sido "adopcionista": Jesús no habría sido Señor desde siempre, sino que Dios lo "habría hecho" Señor y Cristo a partir de la resurrección.</p>
+
+      <div class="dilemma">
+        <div class="dilemma-side a">
+          <h4>LA OBJECIÓN</h4>
+          <p>El verbo griego es "epoíesen" ("hizo"): Dios "hizo" a Jesús Señor y Cristo después de la resurrección. Si Jesús se convirtió en Señor en ese momento, no podía serlo —en el sentido pleno y divino del término— antes de la resurrección, y mucho menos desde la eternidad. La divinidad de Cristo sería, según esto, una atribución posterior, no una realidad previa.</p>
+        </div>
+        <div class="dilemma-side b">
+          <h4>LA RESPUESTA</h4>
+          <p>El propio argumento de Pedro, dos versículos antes, socava esa lectura: el "Señor" al que se refiere el Salmo 110 ya era llamado "mi Señor" por David —"siglos antes de la resurrección"—, precisamente porque Pedro necesita ese dato para probar que el salmo no podía referirse al propio David ("David no subió a los cielos"). Lo que cambia en la resurrección no es la naturaleza de Cristo, sino su <em>instalación pública y universal</em> en el oficio de Señor y Mesías que ya le correspondía: una exaltación funcional y manifestativa, no un origen ontológico. Es la misma lógica que usa Pablo en Romanos 1:4 ("declarado Hijo de Dios con poder, por la resurrección"): declarar no es originar.</p>
+        </div>
+      </div>
+
+      <div class="patristic">
+        <div class="source">San Juan Crisóstomo, Homilías sobre los Hechos de los Apóstoles, Homilía VII (c. 400 d.C.)</div>
+        <div class="text">Crisóstomo insiste en que la expresión "le ha hecho Señor" debe leerse junto al resto del discurso de Pedro, no de forma aislada: el apóstol está hablando "según la carne", de la humanidad exaltada de Cristo, mientras que el propio salmo que él mismo cita —"dijo el Señor a mi Señor"— da testimonio de que Cristo era ya Señor antes de que David hablara, puesto que David lo llama "mi Señor" siendo su propio descendiente según la carne; lo cual, dice, "sería absurdo" si esto no aludiera a una dignidad que el Hijo posee por su propia naturaleza, manifestada ahora con plenitud ante todos.</div>
+      </div>
+
+      <div class="syllogism">
+        <div class="premise"><span class="label">P1</span><span>Si el "Señor" de Salmo 110:1 al que David llama "mi Señor" fuera simplemente un título adquirido por Jesús en su resurrección, el argumento de Pedro en Hechos 2:34-35 —que depende de que ese título sea anterior y superior a David— se derrumbaría sobre sí mismo.</span></div>
+        <div class="premise"><span class="label">P2</span><span>Pedro usa precisamente ese argumento (un Señor preexistente al que David, viviendo siglos antes, ya llamaba "mi Señor") como prueba central de su predicación, y solo después concluye que Dios "le ha hecho Señor y Cristo" en su exaltación pública.</span></div>
+        <div class="conclusion">Por tanto, "hacer Señor y Cristo" en Hechos 2:36 no describe el origen de la condición divina de Jesús, sino la instalación pública, ante toda la casa de Israel, de una dignidad que el propio argumento de Pedro presupone como anterior a su nacimiento humano.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hechos2-invocar">
+    <h3>2. Hechos 2:21, 38-39 — Invocar el nombre del Señor (Joel 2:32 aplicado a Jesús)</h3>
+
+    <div class="scripture">
+      <div class="source">Joel 2:32, citado en Hechos 2:21</div>
+      <div class="text">"Y todo aquel que invocare el nombre del Señor, será salvo."</div>
+    </div>
+
+    <div class="scripture">
+      <div class="source">Hechos 2:38</div>
+      <div class="text">"Pedro les dijo: Arrepentíos, y bautícese cada uno de vosotros en el nombre de Jesucristo para perdón de los pecados; y recibiréis el don del Espíritu Santo."</div>
+    </div>
+
+    <p>En el texto original de Joel, "el Señor" cuyo nombre hay que invocar para ser salvo es, sin ambigüedad, YHWH. Pedro abre su discurso citando ese texto como anuncio profético de lo que está ocurriendo en Pentecostés, y lo cierra, pocos versículos después, indicando que la respuesta concreta a ese llamado es el bautismo "en el nombre de Jesucristo". El mismo recurso aparece, de forma independiente, en Pablo (Romanos 10:13), lo que indica que no es una idiosincrasia literaria de un solo autor, sino una lectura ya compartida en la predicación apostólica más temprana.</p>
+
+    <div class="highlight">
+      <strong>El dato distintivo de Hechos:</strong> a diferencia de Pablo, que escribe esto en cartas dirigidas a comunidades ya formadas una década o más después, Hechos sitúa esta identificación en el primer sermón cristiano jamás predicado, ante una multitud judía en Jerusalén, sin ningún tipo de preámbulo apologético: Pedro no se detiene a justificar por qué el nombre que salva ya no es solo el de YHWH sino también el de Jesús; lo da por sentado.
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Joel 2:32 reserva la invocación salvadora del nombre exclusivamente a YHWH, sin que el Antiguo Testamento contemple ninguna figura creada —ángel, profeta o rey— como objeto legítimo de esa invocación.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Pedro presenta el bautismo "en el nombre de Jesucristo" como la respuesta concreta y suficiente al llamado de Joel a "invocar el nombre del Señor", en el discurso fundacional de la predicación cristiana.</span></div>
+      <div class="conclusion">Por tanto, desde el primer día documentado de predicación cristiana, el nombre de Jesús ocupa, en la práctica salvífica de la comunidad, el lugar que el Antiguo Testamento reserva al nombre de YHWH.</div>
+    </div>
+  </section>
+
+  <section id="hechos7-esteban">
+    <h3>3. Hechos 7:59-60 — Esteban encomienda su espíritu a Cristo</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 7:59-60</div>
+      <div class="text">"Y apedreaban a Esteban, mientras él invocaba y decía: Señor Jesús, recibe mi espíritu. Y puesto de rodillas, clamó a gran voz: Señor, no les tomes en cuenta este pecado. Y habiendo dicho esto, durmió."</div>
+    </div>
+
+    <div class="scripture">
+      <div class="source">Eclesiastés 12:7 — cf. Salmo 31:5 y Lucas 23:46</div>
+      <div class="text">"y el polvo vuelva a la tierra, como era, y el espíritu vuelva a Dios que lo dio." / "En tu mano encomiendo mi espíritu" (Sal 31:5), palabras que el propio Jesús dirige al Padre en la cruz: "Padre, en tus manos encomiendo mi espíritu" (Lc 23:46).</div>
+    </div>
+
+    <p>El gesto de Esteban es, en términos del judaísmo del Segundo Templo, extraordinario. Eclesiastés 12:7 establece el patrón esperado al morir: el espíritu del hombre "vuelve a Dios que lo dio". El propio Jesús, en el relato del mismo autor (Lucas-Hechos forman una sola obra en dos tomos), muere encomendando su espíritu al Padre, citando el Salmo 31:5. Esteban —el primer mártir cristiano, "lleno del Espíritu Santo" según el versículo inmediatamente anterior (7:55)— no repite ese patrón dirigiéndose al Padre: lo dirige, de manera deliberada y consciente, a Jesús. "Señor Jesús, recibe mi espíritu" es, en la pluma de Lucas, el equivalente exacto de Eclesiastés 12:7 y del Salmo 31:5, pero con Jesús ocupando el lugar que ambos textos reservan a Dios.</p>
+
+    <p>El paralelismo se refuerza en el versículo siguiente: Esteban también ora a Jesús pidiendo perdón para sus verdugos ("Señor, no les tomes en cuenta este pecado"), en eco directo de las propias palabras de Jesús en la cruz según el mismo autor ("Padre, perdónalos, porque no saben lo que hacen", Lc 23:34). Esteban muere imitando a Cristo y, al mismo tiempo, orando <em>a</em> Cristo: las dos cosas a la vez, sin que el texto perciba tensión alguna entre ellas.</p>
+
+    <div class="patristic">
+      <div class="source">San Agustín de Hipona, Sermón 317, 2-3 (sobre la fiesta de san Esteban; PL 38; c. 412-416 d.C.)</div>
+      <div class="text">"Esteban oraba, y decía: Señor Jesús, recibe mi espíritu. ¿A quién, sino a Dios, se encomienda el espíritu humano al morir? Y sin embargo, no dijo: Padre, recibe mi espíritu, como dijo el propio Señor; sino que invocó a Cristo mismo como aquel a quien corresponde recibir lo que sólo Dios puede recibir. Y luego, puesto de rodillas, oró por sus perseguidores, como había orado el Señor por los suyos: tan grande era ya su amor, fundado en aquel a quien invocaba."</div>
+      </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Eclesiastés 12:7 y el Salmo 31:5 —este último citado por el propio Jesús al morir, según el mismo autor (Lc 23:46)— establecen que el espíritu humano, al morir, se encomienda a Dios, y solo a Dios.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Esteban, lleno del Espíritu Santo y a punto de morir, encomienda explícitamente su espíritu no al Padre, sino a "Señor Jesús", en un acto de invocación consciente y paralelo al de la propia muerte de Cristo narrada por el mismo autor.</span></div>
+      <div class="conclusion">Por tanto, en el relato más antiguo que poseemos sobre un mártir cristiano, la comunidad primitiva ya dirige a Jesús, sin reserva ni explicación apologética, el acto de encomendación final que el Antiguo Testamento reserva exclusivamente a Dios.</div>
+    </div>
+  </section>
+
+  <section id="hechos9-invocan">
+    <h3>4. Hechos 9:14-21; 22:16 — "Los que invocan tu nombre"</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 9:14, 21</div>
+      <div class="text">"...y aun aquí tiene autoridad de los principales sacerdotes para prender a todos los que invocan tu nombre... Y todos los que le oían estaban asombrados, y decían: ¿No es éste el que asolaba en Jerusalén a los que invocaban este nombre, y a eso vino aquí, para llevarlos atados ante los principales sacerdotes?"</div>
+    </div>
+
+    <div class="scripture">
+      <div class="source">Hechos 22:16</div>
+      <div class="text">"Y ahora, ¿por qué te detienes? Levántate y bautízate, y lava tus pecados, invocando su nombre."</div>
+    </div>
+
+    <p>Estos versículos son notables porque no provienen de un discurso doctrinal, sino de la descripción narrativa, casi incidental, de cómo los de fuera y los de dentro designaban a los primeros cristianos: "los que invocan tu nombre" (es decir, el nombre de Jesús) es, en boca de Ananías de Damasco y de los propios testigos, sencillamente lo que define a un cristiano. El verbo griego "epikaléomai" (invocar) es el mismo que se usa en la Septuaginta para la invocación cúltica del nombre de YHWH (cf. Génesis 4:26; Joel 2:32 ya citado en el pasaje 2 de este documento). Que esta fuera ya, antes de la conversión de Pablo —es decir, en los primerísimos años, posiblemente antes del 34 d.C.—, la forma habitual de referirse a los cristianos, indica que la práctica de invocar a Jesús con ese lenguaje cúltico no fue una innovación tardía, sino el rasgo distintivo del movimiento desde su origen.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>"Invocar el nombre" es, en el uso veterotestamentario y judío del término, lenguaje cúltico reservado a la divinidad, no una simple fórmula de identificación social.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Ya en los primerísimos años del movimiento —antes de la conversión de Pablo— tanto perseguidores como creyentes designan a los cristianos, sin más explicación, como "los que invocan" el nombre de Jesús.</span></div>
+      <div class="conclusion">Por tanto, la invocación cúltica de Jesús no fue una elaboración teológica posterior, sino la nota distintiva y pública del movimiento cristiano desde su fase más temprana y menos reflexiva.</div>
+    </div>
+  </section>
+
+  <section id="hechos10-senor">
+    <h3>5. Hechos 10:36 — Jesucristo, Señor de todos</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 10:36</div>
+      <div class="text">"La palabra que Dios envió a los hijos de Israel, anunciando el evangelio de la paz por medio de Jesucristo; éste es Señor de todos."</div>
+    </div>
+
+    <p>En el discurso de Pedro a Cornelio —el primer discurso misionero dirigido explícitamente a gentiles— Pedro afirma sin matices que Jesucristo es "Señor de todos" (<em>pantôn Kyrios</em>): no Señor de Israel únicamente, ni Señor en un sentido restringido o derivado, sino Señor en el sentido universal y absoluto que el Antiguo Testamento reserva a YHWH como "Señor de toda la tierra" (cf. Josué 3:11, 13; Salmo 97:5; Miqueas 4:13, "Señor de toda la tierra").</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El título "Señor de toda la tierra" o "Señor de todos" es, en el Antiguo Testamento, una afirmación de soberanía universal reservada a YHWH.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Pedro aplica ese mismo título universal —"Señor de todos"— a Jesucristo en el discurso programático que abre la misión a los gentiles.</span></div>
+      <div class="conclusion">Por tanto, en el momento mismo en que el evangelio cristiano se anuncia por primera vez fuera del marco étnico de Israel, se presenta a Jesús bajo un título de soberanía universal que en el Antiguo Testamento corresponde únicamente a YHWH.</div>
+    </div>
+  </section>
+
+  <section id="hechos20-sangre">
+    <h3>6. Hechos 20:28 — La iglesia de Dios, comprada con su propia sangre</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 20:28</div>
+      <div class="text">"Por tanto, mirad por vosotros, y por todo el rebaño en que el Espíritu Santo os ha puesto como obispos, para pastorear la iglesia de Dios, la cual él ganó por su propia sangre."</div>
+    </div>
+
+    <p>Este versículo, perteneciente al discurso de despedida de Pablo a los presbíteros de Éfeso, es uno de los textos más discutidos del Nuevo Testamento a nivel de crítica textual, precisamente porque su fuerza cristológica es tan alta. La lectura más respaldada por los manuscritos más antiguos y por la edición crítica estándar (Nestle-Aland) dice "la iglesia de Dios", mientras que un número menor de testimonios —incluyendo algunos muy antiguos— lee "la iglesia del Señor". Es necesario reconocer esta variante con honestidad: la fuerza retórica del argumento depende en parte de cuál lectura se prefiera.</p>
+
+    <p>Aun así, ambas lecturas plantean el mismo problema a quien niegue la divinidad de Cristo: si se lee "Dios", el texto dice explícitamente que Dios compró la iglesia "por su propia sangre" —y Dios, en sentido estricto, no tiene sangre, salvo que el Hijo que la derramó en la cruz sea Dios encarnado—. Si se lee "el Señor" (es decir, Jesús, el título que domina el discurso de Pablo en este mismo pasaje), entonces es Cristo quien "ganó" o "adquirió" (<em>periepoiésato</em>, verbo que en la Septuaginta describe la adquisición de un pueblo propio por parte de Dios, cf. Éxodo 19:5) a la iglesia mediante un acto que, en el lenguaje del Antiguo Testamento, es prerrogativa exclusiva de YHWH respecto de Israel.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>"Adquirir" o "ganar" un pueblo para sí mediante una acción salvífica decisiva es, en el lenguaje del Antiguo Testamento (Éx 19:5; Sal 74:2; Is 43:21), prerrogativa exclusiva de YHWH respecto de Israel.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Pablo describe a la iglesia como adquirida mediante sangre verdaderamente derramada —la de Cristo en la cruz— por aquel a quien, en el versículo mismo, se llama indistintamente "Dios" o "el Señor" según el testimonio manuscrito.</span></div>
+      <div class="conclusion">Por tanto, bajo cualquiera de las dos lecturas manuscritas, el texto atribuye a Cristo, mediante su propia sangre humana y real, el acto de adquisición de un pueblo que el Antiguo Testamento reserva a YHWH —lo cual exige que quien derramó esa sangre sea, en su persona, Dios mismo encarnado.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE II: LA OBJECIÓN DE LA HUMANIDAD DE CRISTO -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="hechos2-varon">
+    <span class="part-label">Parte II — La Objeción de la Humanidad de Cristo</span>
+    <h2>"Varón aprobado por Dios": ¿humanidad que niega la divinidad?</h2>
+  </div>
+
+  <section>
+    <h3>7. Hechos 2:22; 3:13; 4:27 — "Varón aprobado por Dios" y "su Hijo Jesús"</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 2:22</div>
+      <div class="text">"Varones israelitas, oíd estas palabras: Jesús nazareno, varón aprobado por Dios entre vosotros en milagros, prodigios y señales, que Dios hizo entre vosotros por medio de él, como vosotros mismos sabéis."</div>
+    </div>
+
+    <div class="scripture">
+      <div class="source">Hechos 3:13 y 4:27</div>
+      <div class="text">"El Dios de Abraham, de Isaac y de Jacob, el Dios de nuestros padres, ha glorificado a su Hijo Jesús, a quien vosotros entregasteis..." / "...porque verdaderamente se unieron en esta ciudad contra tu santo Hijo Jesús, a quien ungiste, Herodes y Poncio Pilato, con los gentiles y el pueblo de Israel."</div>
+    </div>
+
+    <p>Estos textos son, junto con Hechos 2:36, los más citados para argumentar que la cristología de los primeros discursos de Pedro era "baja": Jesús aparece descrito como "varón", "aprobado por Dios", alguien "por medio de quien" Dios obró, y que Dios "glorificó" y "ungió" —todo lenguaje que describe a un agente humano favorecido por la divinidad, no a la divinidad misma. El término griego subyacente en 3:13 y 4:27 (<em>pais</em>) puede traducirse "Hijo" o "Siervo", y evoca deliberadamente al Siervo de YHWH de Isaías (cf. Is 52:13, donde la Septuaginta usa la misma palabra, <em>pais</em>, para el Siervo sufriente).</p>
+
+    <div class="dilemma">
+      <div class="dilemma-side a">
+        <h4>LA OBJECIÓN</h4>
+        <p>Si Pedro describe a Jesús como "varón aprobado por Dios", "siervo" ungido y glorificado por un Dios distinto de él, la cristología más antigua y menos elaborada de la iglesia no contemplaría a Jesús como Dios mismo, sino como un hombre extraordinario, agente y mediador de la acción divina, pero no idéntico a la divinidad que actúa a través de él.</p>
+      </div>
+      <div class="dilemma-side b">
+        <h4>LA RESPUESTA</h4>
+        <p>Esta lectura confunde la negación de la divinidad de Cristo con la simple afirmación de su humanidad real —algo que ninguna cristología ortodoxa ha negado nunca—. "Varón aprobado por Dios" describe, con total precisión, la naturaleza humana de Jesús durante su ministerio terreno; no dice "solamente un varón", ni excluye que esa misma persona sea, en su naturaleza divina, "Señor de todos" (Hch 10:36) o el "Señor Jesús" a quien Esteban invoca al morir (Hch 7:59) —ambos, en el mismo libro y a menudo en boca del mismo Pedro—. El título "Siervo" (<em>pais</em>), lejos de rebajar a Jesús, lo conecta con la figura del Siervo de YHWH en Isaías 52-53, una figura que en ese mismo libro profético lleva a cabo funciones —cargar el pecado del mundo, ser exaltado "en gran manera" (Is 52:13)— que el judaísmo del Segundo Templo nunca atribuyó a un simple hombre.</p>
+      </div>
+    </div>
+
+    <div class="patristic">
+      <div class="source">Teodoro de Mopsuestia (atribución tradicional) y San Cirilo de Alejandría, Comentario sobre los Hechos de los Apóstoles, sobre 2:22-36 (recogido en catenae griegas; c. 425-435 d.C.)</div>
+      <div class="text">Cirilo de Alejandría, comentando este mismo pasaje en su obra contra los nestorianos, advierte que quienes "se aferran a las palabras 'varón aprobado por Dios' para despojar a Cristo de la gloria de la naturaleza divina" deberían leer el discurso de Pedro hasta su conclusión, donde "el mismo a quien antes llamó varón" es proclamado Señor sentado a la diestra de Dios: "porque uno y el mismo es, entendido de doble manera según cada una de las dos naturalezas, no dos hijos ni dos señores, sino un solo Cristo, Hijo y Señor, conocido en su humanidad y en su divinidad a la vez."</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Una cristología ortodoxa de dos naturalezas no se ve refutada por textos que describen verídicamente la humanidad de Cristo; solo se vería refutada por textos que negaran explícitamente su divinidad.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Hechos 2:22, 3:13 y 4:27 describen la humanidad real de Jesús —su ministerio, su sufrimiento, su exaltación por el Padre— sin negar en ningún punto, ni en esos versículos ni en el resto del mismo discurso o del mismo libro, que ese mismo Jesús sea también "Señor de todos" (Hch 10:36) e invocado como tal (Hch 7:59; 9:14).</span></div>
+      <div class="conclusion">Por tanto, lejos de constituir una objeción a la divinidad de Cristo, estos pasajes son exactamente lo que cabría esperar de una cristología que sostiene, desde el principio, las dos naturalezas: la humana, descrita con total naturalidad, y la divina, afirmada con la misma naturalidad unas líneas o capítulos más adelante, en el mismo libro y a menudo en boca del mismo predicador.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE III: EL ESPÍRITU SANTO EN HECHOS -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="hechos5-ananias">
+    <span class="part-label">Parte III — El Espíritu Santo en Hechos</span>
+    <h2>Una persona divina, no una fuerza impersonal</h2>
+  </div>
+
+  <section>
+    <h3>8. Hechos 5:1-4, 9 — Ananías: mentir al Espíritu Santo es mentir a Dios</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 5:3-4</div>
+      <div class="text">"Y Pedro le dijo: Ananías, ¿por qué llenó Satanás tu corazón para que mintieses al Espíritu Santo, y sustrajeses del precio de la heredad? ... No has mentido a los hombres, sino a Dios."</div>
+    </div>
+
+    <div class="scripture">
+      <div class="source">Hechos 5:9</div>
+      <div class="text">"Entonces Pedro le dijo: ¿Por qué convinisteis en tentar al Espíritu del Señor? He aquí, a la puerta están los pies de los que han sepultado a tu marido, y también te llevarán a ti."</div>
+    </div>
+
+    <p>Este es, junto con el episodio de Esteban, el episodio narrativo más temprano del libro: ocurre en los primerísimos días de la comunidad de Jerusalén, antes incluso de la dispersión que sigue al martirio de Esteban. Pedro acusa a Ananías de "mentir al Espíritu Santo", y en la misma frase identifica ese acto, sin matización ni metáfora, con "mentir a Dios": no son dos faltas distintas (una contra una fuerza espiritual y otra contra la divinidad), sino una sola, descrita dos veces con dos nombres. Cinco versículos después, dirigiéndose a Safira, Pedro reformula la acusación: lo que antes llamó "mentir al Espíritu Santo" y "mentir a Dios" ahora lo llama "tentar al Espíritu del Señor" —el mismo Espíritu, identificado ahora con el título reservado a YHWH ("Señor").</p>
+
+    <div class="patristic">
+      <div class="source">San Ambrosio de Milán, Sobre el Espíritu Santo, libro I, §59-60 (c. 381 d.C.)</div>
+      <div class="text">"Y Pedro enseña que este mismo es el Espíritu Santo que es el Espíritu del Señor, cuando dice: Ananías, ¿por qué te ha parecido bien tentar y mentir al Espíritu Santo? Y enseguida dice otra vez a la mujer de Ananías: ¿Por qué os pareció bien tentar al Espíritu del Señor? Cuando dice 'a vosotros', muestra que está hablando del mismo Espíritu del cual había hablado a Ananías. Él mismo es, pues, el Espíritu del Señor, que es el Espíritu Santo."</div>
+      </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Mentir o tentar a una persona y mentir o tentar a Dios son, en cualquier marco monoteísta coherente, dos categorías de falta absolutamente distintas: la primera es un pecado contra el prójimo; la segunda, un pecado contra la divinidad misma.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Pedro presenta "mentir al Espíritu Santo" (5:3) y "mentir a Dios" (5:4) como una sola y misma acción, sin matización ni distinción de grado, y vuelve a identificar a ese Espíritu como "el Espíritu del Señor" (5:9) en el mismo episodio.</span></div>
+      <div class="conclusion">Por tanto, en uno de los episodios más antiguos de la vida de la iglesia de Jerusalén, el Espíritu Santo es identificado, en la enseñanza apostólica directa de Pedro, no como una fuerza o influencia impersonal de Dios, sino como Dios mismo, susceptible de ser mentido y tentado exactamente como se mentiría o tentaría a Dios.</div>
+    </div>
+  </section>
+
+  <section id="hechos1-david">
+    <h3>9. Hechos 1:16; 4:25; 28:25 — El Espíritu Santo habló por boca de David</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 1:16</div>
+      <div class="text">"Era necesario que se cumpliese la Escritura, en la cual el Espíritu Santo habló por boca de David acerca de Judas, que fue guía de los que prendieron a Jesús."</div>
+    </div>
+
+    <div class="scripture">
+      <div class="source">Hechos 4:25 y 28:25</div>
+      <div class="text">"...que por boca de David tu siervo dijiste: ¿Por qué se amotinan las gentes, y los pueblos piensan cosas vanas?" / "...y dichas estas palabras, los judíos se fueron, teniendo gran discusión entre sí. Bien habló el Espíritu Santo por medio del profeta Isaías a nuestros padres."</div>
+    </div>
+
+    <p>Tres veces en este libro, en boca de tres personajes distintos (la comunidad reunida tras la ascensión, la comunidad orante de 4:24-25, y Pablo al final del libro), el Espíritu Santo es presentado como el autor último y directo de las Escrituras del Antiguo Testamento: lo que David o Isaías "dijeron", el Espíritu Santo lo "habló por su boca". Esto no es un detalle incidental: implica atribuir al Espíritu Santo la autoría divina de la revelación escrita, la misma prerrogativa que el judaísmo atribuía exclusivamente a YHWH al inspirar a sus profetas.</p>
+
+    <div class="patristic">
+      <div class="source">San Atanasio de Alejandría, Cartas a Serapión sobre el Espíritu Santo, Carta I, §9-10 (c. 358-359 d.C.)</div>
+      <div class="text">Atanasio cita expresamente este pasaje para mostrar que "era conveniente que se cumpliese aquella Escritura que el Espíritu Santo había hablado antes por boca de David acerca de Judas", y concluye de ello "que el mismo y único Espíritu obraba tanto en los profetas como en los apóstoles", de modo que negar que ese Espíritu pertenezca plenamente a la divinidad del Padre y del Hijo equivale a negar la autoría divina de toda la Escritura que por él fue dada.</div>
+      </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>La inspiración autoral de las Escrituras del Antiguo Testamento es, en el marco judío y cristiano, una prerrogativa exclusivamente divina: solo Dios puede ser el autor último de la revelación profética.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Hechos atribuye repetidamente esa autoría no al Padre directamente, sino al Espíritu Santo, que "habla por boca" de David y de Isaías.</span></div>
+      <div class="conclusion">Por tanto, el libro de los Hechos presupone, sin necesidad de argumentarlo, que el Espíritu Santo posee la prerrogativa divina de la autoría de la Escritura, lo cual exige su plena divinidad.</div>
+    </div>
+  </section>
+
+  <section id="hechos13-decide">
+    <h3>10. Hechos 13:2-4; 16:6-7 — El Espíritu decide, envía y prohíbe</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 13:2, 4</div>
+      <div class="text">"Ministrando éstos al Señor, y ayunando, dijo el Espíritu Santo: Apartadme a Bernabé y a Saulo para la obra a que los he llamado... Ellos, entonces, enviados por el Espíritu Santo, descendieron a Seleucia."</div>
+    </div>
+
+    <div class="scripture">
+      <div class="source">Hechos 16:6-7</div>
+      <div class="text">"Y atravesando Frigia y la provincia de Galacia, les fue prohibido por el Espíritu Santo hablar la palabra en Asia... e intentando ir a Bitinia, el Espíritu no se lo permitió."</div>
+    </div>
+
+    <p>En ambos pasajes, el Espíritu Santo no es descrito como un poder que se "recibe" o una influencia que se "siente", sino como un agente que habla en primera persona ("a la obra a que <em>los he llamado</em>"), que toma decisiones misioneras concretas, que envía y que prohíbe activamente itinerarios ya planeados por los misioneros. Pablo y sus compañeros no decidían y luego pedían la bendición del Espíritu: el Espíritu decidía, y ellos obedecían o se veían impedidos. Esta es la gramática de una persona con voluntad propia e iniciativa, no la de una fuerza que se canaliza.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Hablar en primera persona expresando una voluntad propia ("a la obra a que los he llamado"), tomar decisiones de envío y emitir prohibiciones activas que alteran los planes humanos son actos propios de un agente personal con voluntad propia, no de una fuerza o energía impersonal.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El libro de los Hechos atribuye reiteradamente estos mismos actos —hablar en primera persona, llamar, enviar, prohibir— al Espíritu Santo en el gobierno concreto de la misión apostólica.</span></div>
+      <div class="conclusion">Por tanto, el Espíritu Santo es presentado en Hechos como un agente personal con voluntad e iniciativa propias, en consonancia con la identificación ya vista entre mentir al Espíritu y mentir a Dios (Hch 5:3-4).</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE IV: LA TRINIDAD EMERGENTE -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="hechos2-pentecostes">
+    <span class="part-label">Parte IV — La Trinidad Emergente en Hechos</span>
+    <h2>Padre, Hijo y Espíritu, ya juntos en el relato más antiguo</h2>
+  </div>
+
+  <section>
+    <h3>11. Hechos 2:32-33 — Padre, Hijo y Espíritu en Pentecostés</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 2:32-33</div>
+      <div class="text">"A este Jesús resucitó Dios, de lo cual todos nosotros somos testigos. Así que, exaltado por la diestra de Dios, y habiendo recibido del Padre la promesa del Espíritu Santo, ha derramado esto que vosotros veis y oís."</div>
+    </div>
+
+    <p>En el mismo discurso donde aparece la afirmación más discutida del libro (2:36), el propio Pedro describe el evento de Pentecostés en una estructura claramente tripersonal: Dios el Padre resucita y exalta a Jesús; Jesús, ya exaltado, recibe del Padre "la promesa del Espíritu Santo"; y es Jesús —no directamente el Padre— quien "ha derramado" ese Espíritu sobre los presentes. Las tres personas aparecen actuando de manera distinta y coordinada en un solo acontecimiento salvífico, descrito con absoluta naturalidad, sin ningún aparato conceptual trinitario posterior, simplemente como el modo en que ocurrieron las cosas.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Un relato que describe a tres agentes distintos —el Padre, Jesús resucitado y exaltado, y el Espíritu Santo derramado por Jesús— cooperando en un solo evento salvífico decisivo está describiendo, de hecho, una estructura tripersonal de la acción divina, aunque no use ese vocabulario técnico.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Hechos 2:32-33 describe exactamente esa estructura: el Padre que resucita y exalta, el Hijo que recibe y derrama, el Espíritu que es derramado y se manifiesta visiblemente.</span></div>
+      <div class="conclusion">Por tanto, ya en el discurso fundacional de la predicación cristiana, antes de cualquier reflexión doctrinal posterior, el evento central de la fundación de la iglesia se narra como obra coordinada de tres agentes personales distintos.</div>
+    </div>
+  </section>
+
+  <section id="hechos7-vision">
+    <h3>12. Hechos 7:55-56 — Esteban ve al Padre y al Hijo, lleno del Espíritu</h3>
+
+    <div class="scripture">
+      <div class="source">Hechos 7:55-56</div>
+      <div class="text">"Pero Esteban, lleno del Espíritu Santo, puestos los ojos en el cielo, vio la gloria de Dios, y a Jesús que estaba a la diestra de Dios, y dijo: He aquí, veo los cielos abiertos, y al Hijo del Hombre que está a la diestra de Dios."</div>
+    </div>
+
+    <p>En el mismo episodio examinado en el pasaje 3 de este documento, justo antes de su martirio, Esteban —descrito explícitamente como "lleno del Espíritu Santo"— tiene una visión en la que ve simultáneamente "la gloria de Dios" (el Padre) y "a Jesús" de pie a la diestra de esa misma gloria. Es, de nuevo, una escena tripersonal completa: el Espíritu que llena a Esteban y le concede la visión; el Padre, cuya gloria se contempla; y el Hijo, visto en su humanidad glorificada junto al Padre, en el lugar de honor e igualdad que el Antiguo Testamento jamás concede a una criatura.</p>
+
+    <div class="patristic">
+      <div class="source">San Basilio Magno, Sobre el Espíritu Santo, cap. 6, §15 (375 d.C.; trad. Nicene and Post-Nicene Fathers, Second Series, vol. 8)</div>
+      <div class="text">"¿Qué defensa tendremos en el día del juicio universal de toda la creación, si, cuando el Señor anuncia claramente que vendrá en la gloria de su Padre; cuando Esteban vio a Jesús de pie a la diestra de Dios; cuando Pablo testificó en el Espíritu acerca de Cristo que está a la diestra de Dios; cuando el Padre dice: Siéntate a mi diestra; cuando el Espíritu Santo da testimonio de que se ha sentado a la diestra de la majestad de Dios, intentamos degradar, de su condición de igualdad, a quien comparte el honor y el trono?"</div>
+      </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Ver simultáneamente, en una sola visión concedida por el Espíritu, "la gloria de Dios" y a una persona distinta situada en el lugar de honor e igualdad junto a esa gloria, describe una pluralidad real de personas dentro de una sola escena de manifestación divina.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Esteban, "lleno del Espíritu Santo", ve precisamente eso: al Padre en su gloria y al Hijo del Hombre de pie a su diestra, en el lugar que el Antiguo Testamento reserva a quien comparte la dignidad divina.</span></div>
+      <div class="conclusion">Por tanto, el relato más antiguo del primer martirio cristiano culmina con una visión que presenta, de forma simultánea y sin artificio doctrinal, al Padre, al Hijo y al Espíritu que la concede.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- CONCLUSIÓN -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="silogismo-maestro">
+    <span class="part-label">Conclusión</span>
+    <h2>El silogismo maestro y el veredicto final</h2>
+  </div>
+
+  <section>
+    <h3>13. El silogismo maestro</h3>
+
+    <p>Los doce pasajes examinados —repartidos a lo largo de todo el libro de los Hechos, desde el primer discurso de Pedro en Pentecostés hasta el discurso final de Pablo en Roma, y abarcando un período de unos treinta años de historia eclesial primitiva— convergen en un solo patrón que puede condensarse en un único silogismo maestro, del cual los doce silogismos anteriores son, cada uno, una premisa de apoyo independiente.</p>
+
+    <div class="syllogism maestro">
+      <div class="premise"><span class="label">P1</span><span>Un libro que (a) presenta a Jesús, desde el primerísimo discurso cristiano documentado, como el "Señor" preexistente del Salmo 110 y como el "Señor de todos" (Hch 2:34-36; 10:36) cuyo nombre se invoca para la salvación con el mismo lenguaje cúltico que el Antiguo Testamento reserva a YHWH (Hch 2:21, 38; 9:14, 21; 22:16); (b) registra que el primer mártir cristiano encomendó su espíritu a Jesús con el mismo gesto que el Antiguo Testamento y el propio Jesús reservan únicamente a Dios (Hch 7:59-60, con Ecl 12:7 y Sal 31:5); (c) identifica explícitamente, en la enseñanza apostólica directa de Pedro, mentir y tentar al Espíritu Santo con mentir y tentar a Dios mismo (Hch 5:3-4, 9), y le atribuye la autoría divina de toda la Escritura profética (Hch 1:16; 4:25; 28:25) y una iniciativa personal que decide, envía y prohíbe (Hch 13:2-4; 16:6-7); y (d) describe, sin aparato doctrinal alguno, al Padre, al Hijo y al Espíritu actuando juntos y de modo coordinado en los dos eventos fundacionales del libro —Pentecostés (Hch 2:32-33) y el martirio de Esteban (Hch 7:55-56)— no está describiendo a un hombre piadoso elevado por etapas a una dignidad metafórica, sino a tres personas que comparten, desde el origen mismo del movimiento cristiano, la única naturaleza divina del Dios de Israel.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Este testimonio no proviene de especulación doctrinal tardía ni de fórmulas litúrgicas ya cristalizadas, sino de discursos, oraciones y episodios narrativos situados, según el propio relato, en los primerísimos años —en algunos casos, las primerísimas semanas— de la historia del movimiento cristiano, antes de que existiera ningún concilio, ninguna controversia trinitaria formal, y en varios casos antes incluso de la conversión de Pablo.</span></div>
+      <div class="conclusion">Por tanto, la convicción de que Jesucristo y el Espíritu Santo comparten la naturaleza divina del único Dios de Israel no fue una elaboración progresiva que se fue intensificando con las décadas, sino el contenido mismo —implícito en la práctica cúltica y explícito en momentos clave de la predicación— de la fe que la comunidad cristiana confesó desde su primer día documentado de existencia pública.</div>
+    </div>
+  </section>
+
+  <div class="verdict" id="veredicto">
+    <h2>El veredicto final</h2>
+
+    <p><strong>El patrón acumulativo es lo decisivo.</strong> Cualquiera de estos doce pasajes, tomado de manera aislada, podría discutirse exegéticamente —y de hecho lo ha sido durante dos mil años, especialmente los que en apariencia presentan una cristología "baja" (Hch 2:22, 36; 3:13; 4:27)—. Pero la convergencia de los pasajes que afirman explícitamente la divinidad de Cristo y del Espíritu con los pasajes que describen su humanidad real y su procedencia del Padre, dentro del mismo libro, a menudo en los mismos discursos y en boca de los mismos predicadores, no revela una contradicción ni una evolución doctrinal en marcha: revela una fe que, desde el principio, sostenía ambas verdades a la vez —la humanidad real de Jesús y su identidad con el Señor invocado, encomendado y servido como solo Dios puede serlo— sin sentir la necesidad de resolver esa tensión con un aparato conceptual que los concilios posteriores se limitarían a precisar, no a inventar.</p>
+
+    <p>El caso de Esteban es, quizás, el más elocuente de todos: muere imitando exactamente el patrón de la muerte de Jesús —orando por sus verdugos, encomendando su espíritu— pero dirigiendo esa encomienda, que tanto el Antiguo Testamento como el propio Jesús dirigen al Padre, directamente a "Señor Jesús". Y el caso de Ananías es, quizás, el más explícito: no hay aquí metáfora, ni himno, ni fórmula litúrgica elaborada —solo la acusación directa y sin matices de un apóstol, en los primerísimos días de la iglesia, de que mentir al Espíritu Santo es, sencillamente, mentir a Dios.</p>
+
+    <p><strong>La conclusión.</strong> El libro de los Hechos, precisamente por ser el documento que registra los años más tempranos y menos doctrinalmente elaborados del cristianismo, constituye un testigo especialmente valioso: si la convicción de la divinidad de Cristo y del Espíritu Santo apareciera ya, sin necesidad de ser argumentada ni defendida, en los discursos, oraciones y episodios narrativos de los primeros años, entonces esa convicción no fue una invención tardía de la "Gran Iglesia" del siglo IV, sino el núcleo mismo de la fe que los apóstoles predicaron, y por la cual el primer mártir cristiano, encomendando su espíritu al Señor Jesús, estuvo dispuesto a morir.</p>
+
+    <p>FUENTES PRINCIPALES CITADAS: Hechos 1:16, 2:21-22, 2:32-39, 3:13, 4:25-27, 5:1-4, 5:9, 7:55-60, 9:14-21, 10:36, 13:2-4, 16:6-7, 20:28, 22:16, 28:25 · Salmo 110:1, 31:5, 97:5 · Joel 2:32 · Eclesiastés 12:7 · Isaías 52:13 · Éxodo 19:5 · Josué 3:11, 13 · Lucas 23:34, 46 · Romanos 1:4, 10:13 · San Juan Crisóstomo, Homilías sobre los Hechos de los Apóstoles · San Agustín de Hipona, Sermón 317 · San Ambrosio de Milán, Sobre el Espíritu Santo · San Atanasio de Alejandría, Cartas a Serapión · San Basilio Magno, Sobre el Espíritu Santo · San Cirilo de Alejandría, Comentario sobre los Hechos de los Apóstoles</p>
+  </div>
+
+</main>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('nav-toggle');
+  const overlay = document.getElementById('overlay');
+
+  function closeNav() {
+    sidebar.classList.remove('open');
+    toggle.classList.remove('open');
+    overlay.classList.remove('visible');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = sidebar.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    overlay.classList.toggle('visible', isOpen);
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.querySelectorAll('#sidebar nav a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('progress-bar').style.width = scrolled + '%';
+  });
+
+  const sections = document.querySelectorAll('main section[id], main [id]');
+  const navLinks = document.querySelectorAll('#sidebar nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  document.querySelectorAll('main [id]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

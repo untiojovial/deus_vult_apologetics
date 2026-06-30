@@ -19,3 +19,5 @@ La idea es responder con argumentos claros, fuentes serias y lenguaje comprensib
 - [El Colapso del Teismo Imperfecto (Dossier)](/filosofia/colapso-teismo-neoclasico-dossier/)
 - [Refutacion del Coran Increado (Dossier)](/filosofia/refutacion-coran-increado-dossier/)
 - [Tomismo, Eternidad y Colapso Modal (Dossier)](/filosofia/tomismo-eternidad-colapso-modal-dossier/)
+- [La Tríada Trascendental — Van Til y Tomás de Aquino (Dossier)](/filosofia/triada-trascendental-dossier/)
+- [Tomismo Intensivo — Cornelio Fabro (Dossier)](/filosofia/tomismo-intensivo-dossier/)

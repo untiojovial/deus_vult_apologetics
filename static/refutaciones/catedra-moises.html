@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Cátedra de Moisés: Resolviendo la Tensión de Mateo 23:2-3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f7f4ef;
+    --accent: #8b1a1a;
+    --accent2: #1a3a5c;
+    --gold: #b8860b;
+    --grey-light: #e8e4dc;
+    --grey-mid: #9e9589;
+    --white: #ffffff;
+    --verdict: #0a1f2d;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent2), var(--gold));
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  /* ── SIDEBAR NAV ── */
+  #sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    width: 300px;
+    height: 100vh;
+    background: var(--ink);
+    color: var(--paper);
+    overflow-y: auto;
+    z-index: 100;
+    transform: translateX(-300px);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    padding: 2rem 1.5rem;
+  }
+
+  #sidebar.open { transform: translateX(0); }
+
+  #sidebar h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.75rem;
+  }
+
+  #sidebar nav a {
+    display: block;
+    padding: 0.5rem 0;
+    color: #ccc;
+    text-decoration: none;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #222;
+    transition: color 0.2s, padding-left 0.2s;
+  }
+
+  #sidebar nav a:hover { color: var(--gold); padding-left: 0.5rem; }
+  #sidebar nav a.active { color: var(--gold); font-weight: 600; }
+
+  #sidebar nav .section-group { margin-bottom: 0.25rem; }
+  #sidebar nav .section-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--grey-mid);
+    padding: 0.75rem 0 0.25rem;
+  }
+
+  /* ── TOGGLE BUTTON ── */
+  #nav-toggle {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 200;
+    background: var(--ink);
+    border: none;
+    color: var(--paper);
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 8px;
+    transition: background 0.2s;
+  }
+
+  #nav-toggle:hover { background: var(--accent2); }
+
+  #nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  #nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #nav-toggle.open span:nth-child(2) { opacity: 0; }
+  #nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── OVERLAY ── */
+  #overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 50;
+  }
+  #overlay.visible { display: block; }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 2rem 6rem;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 6rem 0 4rem;
+    border-bottom: 3px solid var(--ink);
+    margin-bottom: 4rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent2);
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--grey-mid);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    font-style: italic;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent2);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+  }
+
+  /* ── SECTIONS ── */
+  .part-header {
+    margin: 5rem 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--grey-light);
+  }
+
+  .part-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .part-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 2rem;
+  }
+
+  section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin: 2.5rem 0 0.75rem;
+    border-left: 4px solid var(--accent2);
+    padding-left: 0.75rem;
+  }
+
+  p { margin-bottom: 1.2rem; }
+
+  /* ── SILOGISMOS ── */
+  .syllogism {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+    position: relative;
+    border-left: 6px solid var(--gold);
+  }
+
+  .syllogism::before {
+    content: 'SILOGISMO';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .syllogism .premise {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem;
+    align-items: start;
+    font-size: 0.95rem;
+  }
+
+  .syllogism .premise .label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.75rem;
+    padding-top: 0.15rem;
+  }
+
+  .syllogism .conclusion {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #444;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #fff;
+  }
+
+  .syllogism .conclusion::before {
+    content: '∴ ';
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ── CITAS BÍBLICAS ── */
+  .scripture {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    border-left: 6px solid var(--accent2);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-style: italic;
+  }
+
+  .scripture .source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent2);
+    font-style: normal;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .scripture .text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  /* ── ESTUDIOS / FUENTES ACADÉMICAS ── */
+  .study-card {
+    background: #fff;
+    border: 1px solid var(--grey-light);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .study-card .journal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    background: #eef2f7;
+    padding: 0.3rem 0.5rem;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+  }
+
+  .study-card .content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+  }
+
+  .study-card .content p {
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  /* ── PARADOJA / NUDO ── */
+  .paradox-box {
+    border: 2px solid var(--accent2);
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .paradox-box::before {
+    content: 'EL NUDO DEL PROBLEMA';
+    position: absolute;
+    top: -0.7rem;
+    left: 1rem;
+    background: var(--paper);
+    padding: 0 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent2);
+  }
+
+  .solution-box {
+    border: 2px solid var(--gold);
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    background: #fffdf7;
+  }
+
+  .solution-box::before {
+    content: 'LA SOLUCIÓN';
+    position: absolute;
+    top: -0.7rem;
+    left: 1rem;
+    background: var(--paper);
+    padding: 0 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+  }
+
+  /* ── DILEMA / COMPARATIVA ── */
+  .dilemma {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .dilemma-side {
+    padding: 1.5rem;
+    border-top: 4px solid;
+  }
+
+  .dilemma-side.a { border-color: var(--accent); background: #fff0f0; }
+  .dilemma-side.b { border-color: var(--accent2); background: #f0f4ff; }
+
+  .dilemma-side h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .dilemma-side p { font-size: 0.9rem; margin-bottom: 0; }
+
+  /* ── ESTADÍSTICAS / NÚMEROS DESTACADOS ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .stat-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .stat-box .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-box .label {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+    display: block;
+    line-height: 1.3;
+  }
+
+  /* ── VEREDICTO FINAL ── */
+  .verdict {
+    background: var(--verdict);
+    color: #fff;
+    padding: 3rem 2.5rem;
+    margin: 4rem 0;
+    border-top: 6px solid var(--gold);
+  }
+
+  .verdict h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .verdict p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #ddd;
+    margin-bottom: 1.25rem;
+  }
+
+  .verdict strong { color: #fff; }
+
+  /* ── BLOCKQUOTE ── */
+  blockquote {
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    background: #fff;
+    color: #333;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--grey-mid);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── TABLA ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--ink);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--grey-light);
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td { background: #fff; }
+
+  /* ── BLOQUE BÍBLICO DESTACADO ── */
+  .verse-atom {
+    background: linear-gradient(135deg, #1a3a5c, #0f0e0d);
+    color: white;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .verse-atom .verse-ref {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .verse-atom .verse-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #eee;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    background: #fffbeb;
+    border: 1px solid var(--gold);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  .highlight strong { color: var(--accent2); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    main { padding: 1.25rem 1.25rem 4rem; }
+    .dilemma { grid-template-columns: 1fr; }
+    .study-card { grid-template-columns: 1fr; }
+    .study-card .journal { writing-mode: horizontal-tb; transform: none; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    #sidebar, #nav-toggle, #overlay, #progress-bar { display: none; }
+    main { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="overlay"></div>
+
+<button id="nav-toggle" aria-label="Menú de navegación">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" role="navigation" aria-label="Índice de contenidos">
+  <h2>Índice</h2>
+  <nav>
+    <span class="section-label">Introducción</span>
+    <a href="#intro">El problema planteado por los críticos</a>
+
+    <span class="section-label">Parte I — El Texto</span>
+    <a href="#texto-completo">1. Mateo 23:1-3 en su contexto inmediato</a>
+    <a href="#la-catedra">2. ¿Qué era la "cátedra de Moisés"?</a>
+    <a href="#lectura-publica">2b. La cátedra como lectura pública (Hch 15:21)</a>
+
+    <span class="section-label">Parte II — La Objeción</span>
+    <a href="#objecion-central">3. La objeción en su forma más fuerte</a>
+    <a href="#pasajes-contradictorios">4. Los pasajes donde Jesús sí contradice a los fariseos</a>
+
+    <span class="section-label">Parte III — La Clave Exegética</span>
+    <a href="#distincion-cargo">5. La distinción fundamental: cargo vs. conducta</a>
+    <a href="#torah-vs-halakha">6. Torá escrita vs. tradición oral: dos autoridades distintas</a>
+    <a href="#contexto-deuteronomio">7. La base en Deuteronomio 17: el precedente que Jesús invoca</a>
+
+    <span class="section-label">Parte IV — Verificación Caso por Caso</span>
+    <a href="#caso-corban">8. Caso 1: el korban y el cuarto mandamiento (Mt 15)</a>
+    <a href="#caso-juramentos">9. Caso 2: los juramentos del templo (Mt 23:16-22)</a>
+    <a href="#caso-levadura">10. Caso 3: la levadura de los fariseos (Mt 16:6-12)</a>
+    <a href="#caso-diezmo">11. Caso 4: el diezmo de la menta y el eneldo (Mt 23:23)</a>
+
+    <span class="section-label">Parte V — La Ironía Retórica</span>
+    <a href="#ironia">12. ¿Hay también un filo irónico en el v. 3?</a>
+    <a href="#arqueologia">13. La evidencia arqueológica de Corazín</a>
+
+    <span class="section-label">Parte VI — La Objeción Más Seria</span>
+    <a href="#objecion-juicio">14. ¿Justifica esto el juicio de Cristo?</a>
+    <a href="#deuteronomio-no-blanco">15. Deuteronomio 17 exige proceso justo, no veredicto arbitrario</a>
+    <a href="#caso-corban-paralelo">16. El mismo patrón: cuando la cátedra abandona la Torá</a>
+    <a href="#apedreamiento">17. Los apedreamientos: ni siquiera fueron procesos</a>
+    <a href="#testigo-veraz">18. El criterio mosaico para discernir blasfemia</a>
+
+    <span class="section-label">Conclusión</span>
+    <a href="#silogismos-finales">19. Los silogismos de la resolución</a>
+    <a href="#veredicto">20. El veredicto final</a>
+  </nav>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <header class="hero" id="intro">
+    <p class="hero-eyebrow">Apologética Cristiana · Análisis Exegético</p>
+    <h1>La Cátedra de <em>Moisés</em>:<br>Resolviendo la Tensión<br>de Mateo 23</h1>
+    <p class="hero-subtitle">Un análisis sistemático que demuestra que el mandato de Jesús de obedecer a los fariseos (Mt 23:2-3) y sus reprensiones posteriores no son contradictorios, sino dos juicios sobre dos objetos completamente distintos</p>
+    <span class="hero-badge">Argumento completo con silogismos</span>
+  </header>
+
+  <!-- INTRO -->
+  <section>
+    <p>Críticos del cristianismo —tanto seculares como de otras tradiciones religiosas— señalan con frecuencia un supuesto problema en Mateo 23:2-3: Jesús ordena a la multitud obedecer todo lo que los escribas y fariseos enseñan porque "se sientan en la cátedra de Moisés", y sin embargo, en el resto de los evangelios —incluyendo el resto del propio capítulo 23— Jesús contradice repetidamente la enseñanza farisea, calificándola de hipócrita, vacía y contraria a la propia Ley que pretenden custodiar. El erudito Jack Dean Kingsbury llegó a calificar esta tensión como uno de los problemas exegéticos sin solución plenamente satisfactoria en la literatura académica sobre Mateo.</p>
+
+    <p>El presente documento aborda la objeción de frente, sin minimizarla, y muestra que la aparente contradicción se disuelve cuando se distingue —con el respaldo del propio texto griego, del contexto judío del siglo I y de la estructura argumental de Jesús en otros pasajes— entre dos objetos de juicio que nunca se confunden: la <strong>autoridad institucional</strong> que Jesús reconoce, y la <strong>conducta personal e innovación doctrinal</strong> que Jesús condena.</p>
+
+    <div class="highlight">
+      <strong>Método:</strong> Cada sección emplea al menos un silogismo formal (premisa mayor – premisa menor – conclusión). Se examinan los pasajes "contradictorios" uno por uno, en su contexto griego y judío, antes de proponer la síntesis. No se evita ningún pasaje difícil.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE I: EL TEXTO -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="texto-completo">
+    <span class="part-label">Parte I — El Texto en su Contexto</span>
+    <h2>Lo que Mateo 23:1-3 dice exactamente</h2>
+  </div>
+
+  <section>
+    <h3>1. Mateo 23:1-3 en su contexto inmediato</h3>
+
+    <div class="scripture">
+      <div class="source">Mateo 23:1-3 (RVR1960 / texto griego subyacente)</div>
+      <div class="text">"Entonces habló Jesús a la gente y a sus discípulos, diciendo: En la cátedra de Moisés se sientan los escribas y los fariseos. Así que, todo lo que os digan que guardéis, guardadlo y hacedlo; mas no hagáis conforme a sus obras, porque dicen, y no hacen."</div>
+    </div>
+
+    <p>Es crucial notar que este pasaje no aparece de manera aislada. Es la <strong>introducción</strong> a un discurso que continúa durante 34 versículos más, en los cuales Jesús pronuncia siete u ocho "ayes" (<em>ouai</em>) devastadores contra esos mismos escribas y fariseos, llamándolos hipócritas siete veces, ciegos cinco veces, y "sepulcros blanqueados", "serpientes" y "generación de víboras". El propio capítulo contiene, por tanto, ambos polos de la supuesta contradicción: el mandato de obedecerlos (v. 3) y la condena más severa que Jesús pronuncia en todo el Nuevo Testamento (vv. 13-36).</p>
+
+    <p>Esto descarta de inmediato cualquier intento de resolver el problema alegando que Mateo simplemente "compiló mal" dichos de ocasiones distintas sin verificar su coherencia. El propio evangelista coloca ambos extremos en el mismo discurso, deliberadamente. Esto sugiere que el evangelista —y presumiblemente Jesús mismo— no veía aquí contradicción alguna, sino una distinción que su audiencia original entendía con naturalidad y que el lector moderno necesita reconstruir.</p>
+  </section>
+
+  <section id="la-catedra">
+    <h3>2. ¿Qué era la "cátedra de Moisés"?</h3>
+
+    <p>La expresión griega <em>epi tēs Mōuseōs kathedras</em> ("sobre la cátedra de Moisés") no es una metáfora vaga. Designaba una realidad concreta y reconocible en el judaísmo del siglo I: el asiento de piedra, situado en un lugar prominente de la sinagoga, desde el cual el maestro de la Ley se sentaba para exponer e interpretar la Torá ante la congregación.</p>
+
+    <div class="study-card">
+      <div class="journal">Arqueología</div>
+      <div class="content">
+        <h4>La silla de Corazín</h4>
+        <p>Los arqueólogos de la Autoridad de Antigüedades de Israel descubrieron en la sinagoga de Corazín —a pocos kilómetros de Capernaúm, donde Jesús predicó habitualmente— una silla de basalto del siglo IV conocida hoy como "la Silla de Moisés", confirmando que la expresión no era una figura retórica abstracta, sino la referencia a un mueble litúrgico real y a la función institucional que representaba.</p>
+      </div>
+    </div>
+
+    <p>Sentarse "en la cátedra de Moisés" significaba, por tanto, ocupar el cargo de intérprete autorizado de la Torá —una función de sucesión que los escribas y fariseos reivindicaban remontar hasta el propio Moisés a través de una cadena ininterrumpida de transmisión (cf. Mishná, Avot 1:1: "Moisés recibió la Torá del Sinaí y la transmitió a Josué..."). Jesús, al usar esta expresión, no está improvisando una metáfora: está reconociendo el marco institucional judío tal como sus oyentes lo entendían.</p>
+
+    <p>El verbo usado para describir la acción de los fariseos —<em>ekathisan</em>, "se sentaron"— es además significativo en aoristo: describe el hecho consumado de que ellos <em>ocupan</em> esa posición, no necesariamente que la merezcan moralmente. Este matiz —ya presente en el propio griego del versículo 2— resultará clave en la solución que se desarrollará en la Parte III.</p>
+  </section>
+
+  <section id="lectura-publica">
+    <h3>2b. Una segunda vía de lectura: la cátedra como lectura pública de la Torá (Hechos 15:21)</h3>
+
+    <p>Existe una interpretación complementaria —no necesariamente excluyente de la desarrollada en la Parte III, sino que puede reforzarla desde otro ángulo— que limita aún más el alcance de lo que Jesús está reconociendo en Mateo 23:2. Esta lectura parte de un dato que el propio Nuevo Testamento proporciona sobre la función concreta de la "cátedra de Moisés" en la práctica sinagogal del siglo I.</p>
+
+    <div class="scripture">
+      <div class="source">Hechos 15:21</div>
+      <div class="text">"Porque Moisés, desde tiempos antiguos, tiene en cada ciudad quienes lo predican, pues es leído en las sinagogas todos los sábados."</div>
+    </div>
+
+    <p>Este versículo, pronunciado por Santiago en el concilio de Jerusalén apenas una generación después del ministerio de Jesús, describe exactamente la misma institución que Mateo 23:2 menciona: la práctica semanal, fija y universal ("en cada ciudad") de la lectura pública del texto de la Torá cada sábado en la sinagoga. El verbo griego <em>anaginōskomenos</em> ("siendo leído") es precisamente el término técnico para la lectura pública en voz alta de un texto —no para su interpretación libre, comentario o ampliación casuística, sino para la proclamación del texto mismo tal como está escrito.</p>
+
+    <div class="solution-box">
+      <p>Bajo esta lectura, "sentarse en la cátedra de Moisés" no describiría primariamente la función de interpretar y ampliar la Torá mediante la halajá oral —terreno donde los fariseos introducían las tradiciones que Jesús denuncia—, sino el acto más restringido y concreto de <strong>leer en voz alta el texto mosaico</strong> ante la congregación cada sábado, como recoge Hechos 15:21. El erudito Eitan Bar resume esta perspectiva: la cátedra de Moisés "no era simbólica de autoridad transferible: era proclamación funcional" del texto escrito, no un cheque en blanco sobre cualquier interpretación posterior añadida a ese texto.</p>
+    </div>
+
+    <p>Esta vía de lectura tiene una ventaja exegética notable: estrecha aún más el objeto del mandato de Jesús en el v. 3a. Si lo que los fariseos hacían "desde la cátedra" era, en su núcleo, <em>leer la Torá de Moisés</em> —no producir interpretaciones expansivas como el <em>korban</em> o la casuística de los juramentos—, entonces el mandato de Jesús "todo lo que os digan que guardéis, guardadlo y hacedlo" se refiere, en su sentido más estricto y literal, a <strong>lo que la propia Torá leída dice</strong>, no a las capas de tradición oral que los fariseos añadían después de la lectura, durante la exposición homilética que solía seguir a la lectura pública del texto.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Hechos 15:21 describe la función nuclear de "la cátedra de Moisés" como la lectura pública del texto mosaico cada sábado en cada sinagoga —un acto de proclamación textual, no de innovación doctrinal.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Cuando Jesús ordena obedecer "todo lo que os digan que guardéis" desde esa cátedra, el referente más inmediato y literal es el contenido de la Torá que se leía en voz alta desde ese asiento, no las adiciones interpretativas que los maestros desarrollaban después de la lectura.</span></div>
+      <div class="conclusion">Por tanto, Mateo 23:3a puede leerse, con total naturalidad gramatical y con respaldo en el uso paralelo de Hechos 15:21, como un mandato de obedecer la Torá de Moisés en cuanto tal —no las tradiciones humanas que la rodeaban—, lo cual armoniza directamente con las condenas posteriores a esas mismas tradiciones humanas sin requerir siquiera la distinción cargo/conducta desarrollada en la Parte III, aunque ambas lecturas son compatibles y se refuerzan mutuamente.</div>
+    </div>
+
+    <p>Conviene precisar el alcance de esta vía: no pretende sustituir la distinción institucional desarrollada más adelante, sino ofrecer un fundamento textual adicional y quizá más económico. Bajo esta lectura, el "ay" recurrente de Jesús —"dicen, y no hacen" (v. 3b), y las denuncias de tradiciones que "invalidan la palabra de Dios" (Mt 15:6)— no señalan una contradicción con el v. 3a en absoluto: señalan precisamente la brecha entre lo que la Torá leída dice y lo que los propios lectores, al salir de la cátedra, practicaban o enseñaban como añadido. El mandato de obediencia recae sobre el texto proclamado; la condena recae sobre quienes lo proclaman sin vivirlo, o lo amplían contradiciéndolo.</p>
+
+    <div class="highlight">
+      <strong>Cómo se relacionan ambas vías:</strong> La distinción cargo/conducta (Parte III) explica por qué incluso la <em>función institucional</em> de los fariseos merece respeto aunque su conducta personal no. La lectura de Hechos 15:21 añade una precisión adicional: lo que esa función transmitía en su núcleo —la lectura del texto mosaico mismo— es exactamente lo que merece obediencia, mientras que las capas de tradición oral añadidas alrededor de esa lectura son las que Jesús somete a escrutinio y, en los casos vistos en la Parte IV, condena. Ambas lecturas convergen en el mismo resultado: Jesús nunca ordena obedecer cualquier cosa que un fariseo diga sin más; ordena obedecer la Torá de Moisés que la cátedra estaba destinada a transmitir.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE II: LA OBJECIÓN -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="objecion-central">
+    <span class="part-label">Parte II — La Objeción en su Forma Más Fuerte</span>
+    <h2>Por qué esto parece, en efecto, una contradicción</h2>
+  </div>
+
+  <section>
+    <h3>3. La objeción en su forma más fuerte</h3>
+
+    <p>Antes de proponer cualquier solución, es importante formular la objeción con toda su fuerza, sin caricaturizarla:</p>
+
+    <div class="paradox-box">
+      <p>Jesús ordena explícitamente: "todo lo que os digan que guardéis, guardadlo y hacedlo" (Mt 23:3a). El verbo griego usado, <em>poiēsate</em> ("hacedlo"), es un imperativo categórico, sin matices ni condiciones expresadas en el propio versículo. No dice "obedecedles cuando coincidan con la Torá" ni "obedecedles selectivamente". Dice: todo lo que digan, hacedlo. Sin embargo, en múltiples otros pasajes —incluidos varios dentro del propio capítulo 23— Jesús enseña exactamente lo contrario de lo que los fariseos enseñaban, y llama a sus enseñanzas vacías, hipócritas y contrarias a la voluntad de Dios. Si Jesús ordenó obedecer "todo lo que digan" y luego él mismo contradice lo que dicen, parece que Jesús se contradice a sí mismo, o que su propio mandato es inconsistente con su propia práctica.</p>
+    </div>
+
+    <p>Esta es la forma más robusta de la objeción, y merece ser tomada en serio antes de resolverla.</p>
+  </section>
+
+  <section id="pasajes-contradictorios">
+    <h3>4. Los pasajes donde Jesús sí contradice a los fariseos</h3>
+
+    <p>Para que la solución sea honesta, debe enfrentar los pasajes específicos donde la tensión es más aguda. Son principalmente cuatro, y los trataremos uno por uno en la Parte IV:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Pasaje</th>
+          <th>Enseñanza farisea</th>
+          <th>Lo que Jesús dice en contra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mateo 15:1-9</td>
+          <td>El <em>korban</em> permite anular la obligación de honrar a los padres mediante un voto religioso</td>
+          <td>"Vosotros invalidáis la palabra de Dios por vuestra tradición" (v. 6)</td>
+        </tr>
+        <tr>
+          <td>Mateo 23:16-22</td>
+          <td>Jurar por el oro del templo obliga; jurar por el templo mismo no obliga</td>
+          <td>"¡Insensatos y ciegos!" (v. 17)</td>
+        </tr>
+        <tr>
+          <td>Mateo 16:6-12</td>
+          <td>La doctrina general de fariseos y saduceos</td>
+          <td>Advierte contra su "levadura" como algo corruptor que hay que evitar</td>
+        </tr>
+        <tr>
+          <td>Mateo 23:23-24</td>
+          <td>El diezmo escrupuloso de hierbas menores</td>
+          <td>"Habéis dejado lo más importante de la ley: la justicia, la misericordia y la fe" (v. 23)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Cualquier solución que ignore alguno de estos cuatro pasajes sería incompleta. Procedemos ahora a construir la clave exegética que los reconcilia con Mateo 23:2-3.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE III: LA CLAVE EXEGÉTICA -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="distincion-cargo">
+    <span class="part-label">Parte III — La Clave Exegética</span>
+    <h2>Dos juicios sobre dos objetos distintos</h2>
+  </div>
+
+  <section>
+    <h3>5. La distinción fundamental: cargo institucional vs. conducta personal</h3>
+
+    <p>La solución que la mayoría de los comentaristas serios de Mateo —France, Blomberg, Carson, Hagner— convergen en señalar es esta: Jesús, en el v. 2, reconoce una <strong>posición institucional</strong> (la cátedra de Moisés como función social y legal de interpretación de la Torá en la sinagoga del siglo I); en el v. 3b y en el resto del discurso, condena una <strong>conducta personal</strong> (la hipocresía, la ostentación, la sustitución de la Torá por tradiciones humanas). No son el mismo objeto de evaluación, y por tanto no hay contradicción lógica al afirmar algo positivo del primero y algo negativo del segundo.</p>
+
+    <div class="solution-box">
+      <p>El erudito R.T. France lo expresa con precisión: el reconocimiento de la cátedra de Moisés "simplemente establece el nivel de responsabilidad ante el cual los maestros fariseos deben ser sometidos a juicio". No es un cheque en blanco sobre su doctrina: es el reconocimiento de que ocupan, de hecho, el cargo desde el cual deberían enseñar fielmente la Torá —precisamente el estándar que Jesús usará después para juzgarlos con mayor severidad, no menor.</p>
+    </div>
+
+    <p>Esta distinción no es una invención moderna para salvar el texto: tiene un paralelo exacto en la propia experiencia política y religiosa de cualquier sociedad. Un ciudadano puede reconocer que un juez ocupa legítimamente el tribunal —y que sus sentencias, en cuanto proceden del tribunal, deben ser acatadas— sin que eso implique aprobar la conducta personal o incluso las opiniones privadas de ese juez fuera de la sala. Reconocer el cargo no es aprobar a la persona que lo ocupa, ni todo lo que esa persona hace al margen de la función del cargo.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Mateo 23:2-3a evalúa una posición institucional (la cátedra de Moisés, el cargo legítimo de intérprete de la Torá en la sinagoga del siglo I).</span></div>
+      <div class="premise"><span class="label">P2</span><span>Mateo 23:3b en adelante evalúa la conducta personal de los individuos que ocupan ese cargo (su hipocresía, su sustitución de mandamientos divinos por tradiciones humanas).</span></div>
+      <div class="conclusion">Por tanto, afirmar algo positivo sobre el objeto de P1 y algo negativo sobre el objeto de P2 no constituye una contradicción lógica, del mismo modo que no es contradictorio decir "el tribunal merece respeto" y "este juez es corrupto" en la misma frase.</div>
+    </div>
+  </section>
+
+  <section id="torah-vs-halakha">
+    <h3>6. Torá escrita vs. tradición oral: dos autoridades distintas</h3>
+
+    <p>Hay una segunda capa de la distinción que profundiza la primera. El judaísmo del siglo I distinguía —y los propios fariseos insistían en esta distinción— entre la <strong>Torá escrita</strong> (los cinco libros de Moisés) y la <strong>halajá oral</strong> (las interpretaciones, ampliaciones y aplicaciones desarrolladas por los maestros, que los fariseos sostenían que también se remontaban a Moisés en el Sinaí, transmitidas oralmente).</p>
+
+    <p>Jesús, en el conjunto del Nuevo Testamento, nunca rechaza la autoridad de la Torá escrita; al contrario, la confirma explícitamente: "no he venido para abrogar [la Ley], sino para cumplir" (Mt 5:17). Lo que Jesús rechaza, repetidamente, es la pretensión farisea de que su halajá oral —su capa adicional de "tradiciones de los hombres"— tuviera la misma autoridad divina que la Torá escrita, especialmente cuando esa halajá llegaba a <strong>contradecir o vaciar de contenido</strong> el mandamiento original que pretendía aplicar.</p>
+
+    <div class="highlight">
+      <strong>El criterio que emerge:</strong> Jesús distingue sistemáticamente entre (a) la exposición fiel de la Torá de Moisés —que merece obediencia porque la propia Torá es la Palabra de Dios— y (b) las adiciones humanas que invierten o anulan esa misma Torá —que merecen denuncia precisamente porque traicionan el cargo que dicen representar. Mateo 23:2-3 no es una contradicción: es la aplicación consistente de este criterio.
+    </div>
+  </section>
+
+  <section id="contexto-deuteronomio">
+    <h3>7. La base en Deuteronomio 17: el precedente que Jesús invoca</h3>
+
+    <div class="verse-atom">
+      <div class="verse-ref">Deuteronomio 17:10-11</div>
+      <div class="verse-text">"Y harás según la sentencia que te indiquen los del lugar que Jehová escogiere, y cuidarás de hacer según todo lo que te enseñen. Según la ley que te enseñen, y según el juicio que te digan, harás; no te apartarás ni a diestra ni a siniestra de la sentencia que te declaren."</div>
+    </div>
+
+    <p>Cuando Jesús dice "todo lo que os digan que guardéis, guardadlo y hacedlo", está usando una fórmula que recuerda deliberadamente este pasaje del Deuteronomio, donde Moisés mismo instituye la autoridad judicial e interpretativa que los jueces y sacerdotes ejercerían en su nombre. Es decir, Jesús no está creando una norma nueva de obediencia incondicional a cualquier persona que se autoproclame maestro: está reconociendo que existe, desde el propio Pentateuco, una institución de autoridad interpretativa legítima, y que esa institución —en el siglo I— estaba, de hecho, ocupada por escribas y fariseos.</p>
+
+    <p>Esto es coherente con un patrón que aparece en otros lugares del Nuevo Testamento: la autoridad de una institución legítima puede subsistir incluso cuando las personas que la ocupan actúan mal. Pablo instruye a los creyentes a someterse a las autoridades civiles "porque no hay autoridad sino de parte de Dios" (Romanos 13:1), sin que esto implique aprobar la conducta personal de cada gobernante. El mismo patrón estructural opera en Mateo 23.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Deuteronomio 17:10-11 establece que Israel debe obedecer la sentencia interpretativa de la autoridad judicial legítima instituida por Moisés.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Los escribas y fariseos del siglo I ocupaban, de hecho, esa función institucional de interpretación de la Torá en la sinagoga (la "cátedra de Moisés").</span></div>
+      <div class="conclusion">Por tanto, Jesús, al invocar el principio de Deuteronomio 17 en Mateo 23:2-3, reconoce la legitimidad formal de la institución sin pronunciarse todavía sobre la fidelidad de cada maestro individual a esa institución —juicio que pronunciará inmediatamente después, en el resto del discurso.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE IV: VERIFICACIÓN CASO POR CASO -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="caso-corban">
+    <span class="part-label">Parte IV — Verificación Caso por Caso</span>
+    <h2>¿Resiste la distinción el examen de cada pasaje?</h2>
+  </div>
+
+  <section>
+    <h3>8. Caso 1: el <em>korban</em> y el cuarto mandamiento (Mateo 15:1-9)</h3>
+
+    <div class="scripture">
+      <div class="source">Mateo 15:3-6</div>
+      <div class="text">Jesús responde a la pregunta de los fariseos sobre por qué sus discípulos no se lavan las manos: "¿Por qué también vosotros quebrantáis el mandamiento de Dios por vuestra tradición? Porque Dios dijo: Honra a tu padre y a tu madre... Pero vosotros decís: Cualquiera que diga a su padre o a su madre: Es ya ofrenda a Dios todo aquello con que pudiera ayudarte, queda libre. Así habéis invalidado la palabra de Dios por vuestra tradición."</div>
+    </div>
+
+    <p>Este es exactamente el caso que la distinción de la Parte III predice. La tradición farisea del <em>korban</em> (un voto que declaraba ciertos bienes "dedicados a Dios", liberando así a la persona de usarlos para mantener a sus padres ancianos) no es una exposición de la Torá: es una innovación humana que <strong>anula</strong> un mandamiento explícito de la propia Torá (Éxodo 20:12). Jesús no está rechazando aquí la autoridad de Moisés ni la cátedra que la representa: está denunciando que, en este caso concreto, los fariseos abandonaron la cátedra de Moisés para sentarse en una cátedra propia, sustituyendo el mandamiento divino por su tradición.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Mateo 23:2-3 ordena obedecer la enseñanza fariseo en cuanto exposición legítima de la Torá de Moisés.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La tradición del <em>korban</em> denunciada en Mateo 15 no expone la Torá: la invalida explícitamente, sustituyendo el mandamiento divino de honrar a los padres por una tradición humana que lo anula.</span></div>
+      <div class="conclusion">Por tanto, Mateo 15 no contradice Mateo 23:2-3: es precisamente el tipo de caso que Mateo 23:3b ya anticipa al distinguir entre lo que los fariseos "dicen" (que debe obedecerse si es fiel a la Torá) y lo que "hacen" cuando traicionan esa fidelidad.</div>
+    </div>
+  </section>
+
+  <section id="caso-juramentos">
+    <h3>9. Caso 2: los juramentos del templo y del altar (Mateo 23:16-22)</h3>
+
+    <div class="scripture">
+      <div class="source">Mateo 23:16-18</div>
+      <div class="text">"¡Ay de vosotros, guías ciegos! que decís: Si alguno jura por el templo, no es nada; pero si alguno jura por el oro del templo, es deudor. ¡Insensatos y ciegos! porque ¿qué es más, el oro, o el templo que santifica al oro? También decís: Si alguno jura por el altar, no es nada; pero si jura por la ofrenda que está sobre él, es deudor."</div>
+    </div>
+
+    <p>Este pasaje —que ocurre en el mismo discurso, apenas trece versículos después de la orden de obedecer a los fariseos— es el que hace más evidente que la distinción cargo/conducta es la lectura correcta. Aquí Jesús no está corrigiendo una interpretación de la Torá: está exponiendo una casuística leguleya, una invención retórica de los propios fariseos sin base alguna en el texto mosaico, diseñada para crear escapatorias legales en los juramentos. No hay aquí "cátedra de Moisés" en juego: hay astucia humana disfrazada de erudición religiosa.</p>
+
+    <p>El propio vocabulario que Jesús usa —"insensatos y ciegos"— es revelador: no dice "intérpretes errados de la Torá", sino que ataca directamente su <em>razonamiento</em> particular sobre los juramentos, un terreno donde ellos mismos habían abandonado cualquier pretensión de estar exponiendo el texto mosaico para entrar en pura ingeniería casuística.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>La distinción del v. 2-3 separa la exposición de la Torá (que merece obediencia) de la innovación casuística sin base en la Torá (que no la merece).</span></div>
+      <div class="premise"><span class="label">P2</span><span>La doctrina sobre los juramentos del templo y del altar en Mt 23:16-22 es una invención casuística sin fundamento en el texto mosaico, diseñada para manipular la fuerza vinculante de los votos.</span></div>
+      <div class="conclusion">Por tanto, este pasaje cae fuera del ámbito que Mateo 23:2-3 protege, y su condena es perfectamente coherente con —de hecho, exigida por— el criterio que el propio v. 3 establece.</div>
+    </div>
+  </section>
+
+  <section id="caso-levadura">
+    <h3>10. Caso 3: la levadura de los fariseos (Mateo 16:6-12)</h3>
+
+    <p>Este es, quizás, el paralelo más instructivo, porque el propio Mateo nos dice explícitamente cómo interpretar la metáfora. Jesús advierte a sus discípulos: "Mirad, guardaos de la levadura de los fariseos y de los saduceos" (Mt 16:6). Los discípulos, al principio, lo entienden literalmente —como una referencia al pan— hasta que Jesús aclara su sentido.</p>
+
+    <div class="scripture">
+      <div class="source">Mateo 16:11-12</div>
+      <div class="text">"¿Cómo es que no entendéis que no os hablé del pan?... Entonces entendieron que no les había hablado del pan, sino de la levadura de los fariseos y de los saduceos." Lucas, narrando el mismo episodio temático, lo precisa aún más: "Guardaos de la levadura de los fariseos, que es la hipocresía" (Lc 12:1).</div>
+    </div>
+
+    <p>Este pasaje confirma, con la propia interpretación del evangelista, que lo que Jesús ataca sistemáticamente no es la función institucional de la cátedra de Moisés, sino un patrón de conducta —la hipocresía, identificada aquí explícitamente como el contenido de la "levadura"— que corrompe el ejercicio de esa función. La "levadura" no es la Torá que enseñan: es el modo corrupto, ostentoso y autocomplaciente en que la enseñan y la viven, exactamente el mismo blanco que Mateo 23:3b señala ("dicen, y no hacen").</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El propio Mateo (16:12) y Lucas (12:1) identifican la "levadura de los fariseos" como su hipocresía y su corrupción doctrinal añadida, no como la Torá de Moisés que custodiaban.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Mateo 23:3b condena exactamente ese mismo objeto: que los fariseos "dicen, y no hacen" —es decir, su hipocresía conductual, no su cargo institucional.</span></div>
+      <div class="conclusion">Por tanto, Mateo 16:6-12 no introduce una nueva contradicción: confirma, con la propia explicación interna del texto, que el objeto de la condena de Jesús es consistentemente la conducta hipócrita y no la cátedra de Moisés en sí misma.</div>
+    </div>
+  </section>
+
+  <section id="caso-diezmo">
+    <h3>11. Caso 4: el diezmo de la menta y el eneldo (Mateo 23:23-24)</h3>
+
+    <div class="scripture">
+      <div class="source">Mateo 23:23</div>
+      <div class="text">"¡Ay de vosotros, escribas y fariseos, hipócritas! porque diezmáis la menta y el eneldo y el comino, y dejáis lo más importante de la ley: la justicia, la misericordia y la fe. Esto era necesario hacer, sin dejar de hacer aquello."</div>
+    </div>
+
+    <p>Este es, de los cuatro casos, el que muestra con mayor claridad que la solución no es un simple "ignorar lo malo, hacer lo bueno" arbitrario, sino un criterio coherente de <em>jerarquía dentro de la propia Torá</em>. Nótese la frase final: "esto era necesario hacer, sin dejar de hacer aquello". Jesús <strong>no rechaza</strong> el diezmo de las hierbas menores —de hecho, lo afirma como obligación legítima ("esto era necesario hacer")— sino que denuncia que los fariseos invirtieron las prioridades: cumplieron escrupulosamente lo secundario y abandonaron "lo más importante de la ley" (los <em>barea tou nomou</em>, literalmente "lo pesado de la Ley"): la justicia, la misericordia y la fe, que son, según el propio Jesús, el centro de lo que la Torá de Moisés realmente exige (cf. Miqueas 6:8).</p>
+
+    <p>Este pasaje es, de hecho, la confirmación textual más explícita de la tesis de este documento: Jesús distingue entre obedecer la Torá auténtica (incluido su diezmo, que afirma como válido) y la distorsión farisea que prioriza lo trivial sobre lo esencial sin abandonar la Torá. No hay aquí ninguna contradicción con Mateo 23:2-3: hay la aplicación más explícita posible del mismo criterio.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Jesús afirma explícitamente en Mt 23:23 que el diezmo de las hierbas menores "era necesario hacer" —es decir, reconoce su validez como mandato de la Torá.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Jesús denuncia que los fariseos usaron ese cumplimiento escrupuloso de lo secundario para evadir lo principal: la justicia, la misericordia y la fe.</span></div>
+      <div class="conclusion">Por tanto, este pasaje no contradice la orden de obediencia de Mt 23:2-3: la profundiza, mostrando que la verdadera obediencia a la cátedra de Moisés exige sostener tanto los mandamientos menores como los mayores, sin que el cumplimiento aparente de los primeros sirva de cortina para el abandono de los segundos.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE V: LA IRONÍA RETÓRICA -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="ironia">
+    <span class="part-label">Parte V — Una Capa Retórica Adicional</span>
+    <h2>¿Hay también ironía deliberada en el v. 3?</h2>
+  </div>
+
+  <section>
+    <h3>12. ¿Hay también un filo irónico en el versículo 3?</h3>
+
+    <p>Más allá de la distinción cargo/conducta —que por sí sola resuelve la objeción lógica— varios comentaristas han señalado una dimensión retórica adicional que refuerza la solución: el propio estilo de Jesús en Mateo 23 es marcadamente sarcástico e hiperbólico ("cuelan el mosquito y se tragan el camello", v. 24), y algunos eruditos sugieren que el v. 3a tiene ya un matiz irónico anticipado, preparando deliberadamente el contraste devastador del v. 3b: "haced lo que dicen" suena, en el contexto retórico del discurso completo, a una concesión formal que el propio Jesús sabe que va a vaciar de inmediato al revelar la hipocresía sistemática que sigue.</p>
+
+    <p>Esta lectura no sustituye a la distinción institucional desarrollada en la Parte III: la complementa. Incluso si se prescinde por completo del matiz irónico, la distinción entre cargo y conducta es suficiente y está bien establecida en la literatura exegética seria. Pero el tono general del discurso —que pasa de una concesión aparentemente neutra en el v. 2-3a a una serie de condenas crecientes hasta el clímax de los "ayes"— sugiere que Jesús estructura deliberadamente su argumento para que la audiencia perciba, al final del discurso, cuán vacía ha quedado la autoridad moral (aunque no la autoridad formal) de quienes ocupan la cátedra.</p>
+
+    <div class="highlight">
+      <strong>Importante:</strong> Esta lectura irónica es un refuerzo retórico, no la base de la solución. La solución central —la distinción entre cargo institucional y conducta personal, anclada en Deuteronomio 17 y verificada en los cuatro casos anteriores— es suficiente por sí misma y no depende de que se acepte o no esta capa adicional de ironía.
+    </div>
+  </section>
+
+  <section id="arqueologia">
+    <h3>13. La evidencia arqueológica de Corazín y su valor confirmatorio</h3>
+
+    <p>El hallazgo de la Silla de Moisés en la sinagoga de Corazín —ya mencionado en la sección 2— no es solo un dato curioso: tiene valor argumental directo. Confirma que la expresión "cátedra de Moisés" se refería a una institución social concreta, reconocible y delimitada (un asiento, una función, un momento litúrgico específico de exposición de la Torá), y no a una autoridad genérica e ilimitada sobre cualquier cosa que un escriba o fariseo dijera en cualquier contexto.</p>
+
+    <p>Esto refuerza la lectura institucional: Jesús reconoce la legitimidad de una <em>función específica y delimitada</em> —la exposición pública de la Torá desde ese asiento, en ese contexto sinagogal—, no una autoridad ilimitada sobre la totalidad de la conducta, la ética personal o las innovaciones legales de cada fariseo en cualquier circunstancia. El alcance limitado de la "cátedra" como institución concreta es coherente con —y refuerza— la distinción cargo/conducta que resuelve la objeción.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SILOGISMOS FINALES -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="silogismos-finales">
+    <span class="part-label">Síntesis Final</span>
+    <h2>Los silogismos de la resolución</h2>
+  </div>
+
+  <section>
+    <p>Los argumentos desarrollados pueden condensarse en cuatro silogismos que, juntos, disuelven completamente la objeción inicial.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Una afirmación positiva sobre el cargo institucional que alguien ocupa (Mt 23:2-3a, anclado en Dt 17:10-11) y una afirmación negativa sobre la conducta personal de quien lo ocupa (Mt 23:3b-36) no son lógicamente contradictorias, siempre que se refieran a objetos de juicio distintos.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El análisis textual de los cuatro casos de tensión más citados (korban en Mt 15, juramentos en Mt 23:16-22, levadura en Mt 16:6-12, diezmo en Mt 23:23-24) demuestra en cada caso que Jesús condena conducta hipócrita o innovación humana sin base en la Torá, nunca la exposición fiel de la Torá de Moisés en sí misma.</span></div>
+      <div class="conclusion">SILOGISMO I: Por tanto, Mateo 23:2-3 y las reprensiones posteriores de Jesús a los fariseos no son contradictorios: son dos juicios coherentes sobre dos objetos distintos, verificables caso por caso en el propio texto.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El propio Mateo (16:12) y Lucas (12:1) interpretan internamente la "levadura de los fariseos" como su hipocresía, no como su cargo de intérpretes de la Torá.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Esta auto-interpretación del texto bíblico confirma, sin necesidad de recurrir a fuentes externas, que la distinción cargo/conducta no es una solución importada por apologistas modernos, sino una clave hermenéutica presente ya en los propios evangelistas.</span></div>
+      <div class="conclusion">SILOGISMO II: Por tanto, la solución propuesta tiene respaldo intratextual directo, lo que la hace más sólida que una mera armonización ad hoc.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>En Mateo 23:23, Jesús afirma explícitamente que el diezmo farisaico de hierbas menores "era necesario hacer" —validando una práctica concreta de la halajá farisea como legítima exposición de la Torá.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Si Mateo 23:2-3 fuera contradicho sistemáticamente por el resto del capítulo, Jesús no tendría motivo alguno para validar explícitamente ninguna práctica farisea específica; sin embargo, lo hace.</span></div>
+      <div class="conclusion">SILOGISMO III: Por tanto, el propio capítulo 23 demuestra internamente que la obediencia exigida en el v. 3a no fue abolida en los versículos siguientes, sino aplicada con discernimiento: lo que es fiel a la Torá se afirma; lo que la traiciona, se condena.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El precedente de Deuteronomio 17:10-11 establece que la obediencia a la autoridad interpretativa legítima de Israel deriva de la institución que Moisés mismo fundó, no de la perfección moral de cada persona que ocupa esa institución en cada generación.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Este mismo patrón —obediencia a la institución, escrutinio de la conducta personal— aparece también en la enseñanza de Pablo sobre la autoridad civil (Romanos 13:1) y en la propia práctica veterotestamentaria de obedecer a reyes corruptos en cuanto autoridad legítima sin aprobar sus pecados personales.</span></div>
+      <div class="conclusion">SILOGISMO IV: Por tanto, Mateo 23:2-3 no introduce un principio aislado ni ad hoc: aplica un patrón bíblico consistente de distinción entre autoridad institucional y conducta personal, presente tanto antes como después de Jesús en la propia revelación bíblica.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE VI: EL JUICIO DE CRISTO -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="objecion-juicio">
+    <span class="part-label">Parte VI — La Objeción Más Seria</span>
+    <h2>¿Justifica esta solución el juicio y la condena de Cristo?</h2>
+  </div>
+
+  <section>
+    <h3>14. La objeción en su forma más afilada</h3>
+
+    <p>Existe una extensión de la objeción original que merece ser tratada con la máxima seriedad, porque si la solución de las Partes III-V no la resiste, la propia solución se volvería contraproducente. La objeción es la siguiente:</p>
+
+    <div class="paradox-box">
+      <p>Si Jesús ordenó obedecer a quienes se sientan en la cátedra de Moisés (Mt 23:2-3) invocando el principio de Deuteronomio 17:10-11 ("según el juicio que te digan, harás"), y si Caifás era el sumo sacerdote que presidía el tribunal supremo de Israel —el más alto cargo dentro de esa misma institución que Deuteronomio 17 describe—, ¿no se sigue que el propio Jesús estaría comprometido a aceptar como legítimo el veredicto de Caifás contra él mismo? Y si los fariseos que intentaron apedrearlo en Juan 8 y Juan 10 ocupaban posiciones de autoridad religiosa similares a la "cátedra de Moisés", ¿no estarían, según la misma lógica, actuando correctamente al intentar ejecutar la pena que la Ley prescribe para la blasfemia (Levítico 24:16)?</p>
+    </div>
+
+    <p>Esta objeción merece una respuesta clara, directa y sin rodeos: <strong>no, en absoluto</strong>. Y la razón no es una excepción ad hoc introducida para salvar el caso de Jesús, sino que se sigue del propio contenido del principio que se está aplicando, examinado con el mismo rigor textual que se ha empleado en el resto de este documento.</p>
+  </section>
+
+  <section id="deuteronomio-no-blanco">
+    <h3>15. Deuteronomio 17 nunca otorgó un cheque en blanco: exige proceso justo, no veredicto arbitrario</h3>
+
+    <p>El error de la objeción consiste en extraer la frase "según el juicio que te digan, harás" (Dt 17:11) de su contexto inmediato, como si autorizara cualquier resultado que un tribunal alcanzara, sin importar cómo lo alcanzara. Pero el propio capítulo 17 —y los capítulos legales que lo rodean en Deuteronomio— no dicen eso. Establecen, con el mismo nivel de autoridad divina, los <strong>requisitos procesales</strong> que ese tribunal debe cumplir para que su veredicto sea válido:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Requisito procesal mosaico</th>
+          <th>Fuente</th>
+          <th>¿Se cumplió en el juicio de Jesús?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Se requieren al menos dos o tres testigos concordantes para una condena capital</td>
+          <td>Deuteronomio 17:6; 19:15</td>
+          <td>No: los testigos presentados se contradecían entre sí (Mc 14:56, 59)</td>
+        </tr>
+        <tr>
+          <td>Prohibición de unirse a un testigo falso o malicioso</td>
+          <td>Éxodo 23:1</td>
+          <td>No: el propio tribunal buscó activamente testigos falsos (Mt 26:59)</td>
+        </tr>
+        <tr>
+          <td>El juez no puede actuar simultáneamente como testigo o acusador</td>
+          <td>Principio derivado de Dt 19:15-21 sobre imparcialidad judicial</td>
+          <td>No: Caifás abandonó la búsqueda de testigos y exigió él mismo una confesión autoincriminatoria (Mt 26:63-65)</td>
+        </tr>
+        <tr>
+          <td>Nadie puede ser obligado a testificar contra sí mismo bajo coacción procesal</td>
+          <td>Principio procesal del derecho mosaico clásico</td>
+          <td>No: Caifás juramentó a Jesús bajo presión para forzar una respuesta autoincriminatoria (Mt 26:63)</td>
+        </tr>
+        <tr>
+          <td>Los juicios capitales no debían celebrarse de noche ni en vísperas de fiesta</td>
+          <td>Práctica procesal del Sanedrín (Mishná, Sanhedrin 4:1)</td>
+          <td>No: el juicio ante Caifás se celebró de madrugada, la noche de la Pascua (Mt 26:34, 57-75)</td>
+        </tr>
+        <tr>
+          <td>El sumo sacerdote no podía rasgar sus vestiduras (acto reservado y prohibido al sumo sacerdote)</td>
+          <td>Levítico 21:10</td>
+          <td>No: Caifás rasgó sus vestiduras en un gesto teatral de indignación (Mt 26:65)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Este no es un catálogo de detalles menores. Es la constatación de que el propio tribunal que condenó a Jesús violó, punto por punto, las garantías procesales que el mismo cuerpo legal mosaico —el que incluye Deuteronomio 17— exige para que un veredicto sea legítimo. La objeción invoca Deuteronomio 17:11 para validar el juicio de Caifás, pero ignora que ese mismo marco legal mosaico es precisamente lo que demuestra que el juicio fue ilegítimo según sus propios estándares.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El mandato de obedecer "el juicio que os digan" (Dt 17:11) presupone que ese juicio se alcanzó mediante el proceso que la propia Torá de Moisés exige: testigos veraces y concordantes, ausencia de coacción, imparcialidad judicial.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El juicio contra Jesús ante Caifás violó sistemáticamente esos mismos requisitos procesales mosaicos: testigos falsos y contradictorios, autoincriminación forzada, juez actuando como acusador, horario y circunstancias prohibidas.</span></div>
+      <div class="conclusion">Por tanto, el "juicio" pronunciado por Caifás no es el tipo de veredicto que Deuteronomio 17:11 manda obedecer; es, según el propio criterio interno de la Torá, un fraude procesal que la Torá misma habría condenado. Invocar Dt 17 para legitimar ese juicio invierte el sentido del texto que se cita.</div>
+    </div>
+  </section>
+
+  <section id="caso-corban-paralelo">
+    <h3>16. El mismo patrón ya verificado: cuando la "cátedra" abandona la Torá que dice servir</h3>
+
+    <p>Esta conclusión no es una excepción introducida solo para el caso de Jesús: es la aplicación exacta del mismo criterio ya verificado en la Parte IV con el caso del <em>korban</em> (Mt 15) y los juramentos del templo (Mt 23:16-22). En ambos casos se demostró que cuando quienes ocupan la cátedra de Moisés abandonan el contenido de la Torá que esa cátedra existe para transmitir —sustituyéndolo por procedimientos, tradiciones o veredictos que la propia Torá no autoriza—, dejan de actuar <em>desde</em> la cátedra de Moisés en el sentido relevante, y su autoridad institucional no cubre ese acto concreto.</p>
+
+    <p>El juicio de Caifás es, estructuralmente, el mismo fenómeno que el <em>korban</em>: una institución legítima (el sumo sacerdocio, el Sanedrín) produciendo un resultado que contradice frontalmente el cuerpo legal que esa institución existía para custodiar. Si Jesús no estaba obligado a aprobar el <em>korban</em> a pesar de provenir de maestros legítimamente sentados en la cátedra, tampoco la lógica de Mateo 23:2-3 exige aprobar un veredicto que viola los procedimientos de la misma Torá que supuestamente lo autoriza.</p>
+
+    <div class="highlight">
+      <strong>El punto decisivo:</strong> La objeción asume que "ocupar la cátedra" garantiza la legitimidad de cualquier resultado que se produzca desde ella. Pero ya se demostró en la Parte IV, con los propios ejemplos del korban y los juramentos, que esto es precisamente lo que Mateo 23 niega. La cátedra obliga en cuanto transmite fielmente la Torá (cf. la lectura de Hechos 15:21 desarrollada en la sección 2b); cuando el ocupante de la cátedra produce un resultado contrario a esa Torá —ya sea una tradición como el korban, ya sea un veredicto judicial fraudulento como el de Caifás— deja de operar bajo la cobertura del mandato de obediencia, y pasa a ser objeto de la misma denuncia que el resto del capítulo pronuncia.
+    </div>
+  </section>
+
+  <section id="apedreamiento">
+    <h3>17. Los intentos de apedreamiento (Juan 8:59; 10:31): ni siquiera fueron procesos judiciales</h3>
+
+    <p>El caso de los intentos de apedreamiento en Juan 8:59 y Juan 10:31 es, si cabe, más sencillo de resolver que el juicio ante Caifás, porque ni siquiera alcanza el nivel de un proceso judicial al que la pregunta de Deuteronomio 17 pudiera aplicarse.</p>
+
+    <div class="scripture">
+      <div class="source">Juan 10:31-33</div>
+      <div class="text">"Entonces los judíos volvieron a tomar piedras para apedrearlo. Jesús les respondió: Muchas buenas obras os he mostrado de mi Padre; ¿por cuál de ellas me queréis apedrear? Le respondieron los judíos: Por buena obra no te apedreamos, sino porque blasfemas, pues siendo hombre, te haces Dios."</div>
+    </div>
+
+    <p>Deuteronomio 17:8-13 describe explícitamente un tribunal: jueces, sacerdotes, un proceso formal de examen de la causa en el lugar central que Dios escogiere. Lo que ocurre en Juan 8 y Juan 10 no es eso. Es una turba que, en mitad de una disputa verbal en el atrio del templo, recoge piedras de manera espontánea para ejecutar sumariamente a Jesús sin testigos formales, sin comparecencia ante el Sanedrín, sin sentencia, y sin ninguno de los procedimientos que la propia Ley exige incluso para los casos más claros de pena capital (cf. Dt 17:6-7, que exige que sean los propios testigos quienes inicien la ejecución después de un veredicto formal, no una multitud espontánea reaccionando a una afirmación que consideran ofensiva).</p>
+
+    <p>Es decir: estos episodios no son un ejercicio —legítimo o ilegítimo— de la "cátedra de Moisés". Son linchamientos. La cátedra de Moisés, tal como se ha definido en las secciones 2 y 2b de este documento, designa la función institucional de leer y enseñar la Torá desde un asiento reconocido en la sinagoga, no la potestad de cualquier individuo o multitud para ejecutar sumariamente a una persona por una afirmación que les resulta intolerable.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El mandato de obediencia de Mateo 23:2-3, anclado en Deuteronomio 17:10-11, se refiere a la institución judicial e interpretativa formal —jueces, sacerdotes, proceso, comparecencia, testigos— no a la acción espontánea de una multitud.</span></div>
+      <div class="premise"><span class="label">P2</span><span>Los intentos de apedreamiento de Juan 8:59 y 10:31 fueron actos de violencia colectiva espontánea, sin testigos formales, sin comparecencia ante tribunal alguno y sin sentencia: no son un ejercicio de la cátedra de Moisés ni de la institución judicial de Deuteronomio 17.</span></div>
+      <div class="conclusion">Por tanto, estos episodios quedan fuera por completo del alcance de lo que Mateo 23:2-3 exige obedecer. No hay ningún sentido en el que la solución exegética desarrollada en este documento implique aprobar, ni remotamente, estos actos de violencia sin proceso.</div>
+    </div>
+  </section>
+
+  <section id="testigo-veraz">
+    <h3>18. El criterio que la propia Torá da para distinguir profecía verdadera de blasfemia</h3>
+
+    <p>Queda un último elemento que refuerza la respuesta: la acusación de "blasfemia" que tanto Caifás como la multitud de Juan 8-10 invocan presupone, para ser válida, que la afirmación de Jesús sobre sí mismo fuera falsa. Pero precisamente ese es el punto que el propio Nuevo Testamento documenta como verificado por obras: resurrecciones, sanidades, el cumplimiento de profecías mesiánicas anteriores. La propia Torá, en Deuteronomio 13:1-5 y 18:20-22, da el criterio para distinguir a un falso profeta de uno verdadero: la falsedad de sus afirmaciones y la ausencia de respaldo divino en señales. Ningún tribunal que ignora deliberadamente esa evidencia —como hace el Sanedrín en los evangelios, que no disputa los milagros sino que busca eliminarlos del registro o atribuirlos a otra fuente (cf. Mt 12:24)— está aplicando el procedimiento de discernimiento que la propia Torá exige antes de ejecutar un veredicto de blasfemia.</p>
+
+    <p>Este punto no pretende resolver aquí la cuestión cristológica completa —eso excede el alcance de este documento— sino señalar que, incluso dentro del marco puramente procesal mosaico, la acusación de blasfemia contra Jesús no fue sometida al escrutinio que la propia Ley exige para una condena de esa gravedad. El tribunal no examinó la evidencia; la descartó activamente.</p>
+  </section>
+
+  <!-- VEREDICTO FINAL -->
+  <div class="verdict" id="veredicto">
+    <h2>El Veredicto: Una Tensión Real, una Solución Sólida</h2>
+
+    <p>La objeción merecía ser tomada en serio, y este documento no la ha esquivado: ha examinado los cuatro pasajes donde la tensión es más aguda —el korban, los juramentos del templo, la levadura, el diezmo de hierbas menores— y en cada uno de ellos ha verificado, con el propio texto griego y el contexto judío del siglo I, que Jesús distingue sistemáticamente entre dos objetos de juicio: <strong>la cátedra de Moisés como institución legítima de interpretación de la Torá</strong>, que merece obediencia porque deriva de la propia autoridad mosaica reconocida en Deuteronomio 17, y <strong>la conducta personal e innovación doctrinal de quienes ocupan esa cátedra</strong>, que merece denuncia cuando traiciona o invierte la Torá que dice servir.</p>
+
+    <p><strong>Esta distinción no es una armonización forzada inventada para salvar el texto.</strong> Tiene anclaje en Deuteronomio 17, confirmación en la propia interpretación interna de Mateo 16 y Lucas 12 sobre la "levadura", y verificación caso por caso en cada uno de los pasajes más citados como "contradictorios". El propio Jesús, en Mateo 23:23, valida explícitamente una práctica farisea concreta mientras condena la inversión de prioridades que la acompaña —mostrando que su discurso completo opera con un criterio coherente, no con una negación general de todo lo que dice el versículo 3.</p>
+
+    <p><strong>El paralelo del juez y el tribunal</strong> ilumina la lógica subyacente: reconocer la legitimidad de una institución no es aprobar incondicionalmente a cada persona que la ocupa. Jesús reconoce el tribunal de Moisés; juzga con severidad a los jueces que lo ocupan indignamente. Ambos juicios, lejos de contradecirse, se necesitan mutuamente: solo se puede acusar a alguien de traicionar un cargo si antes se reconoce la legitimidad y la exigencia de ese cargo.</p>
+
+    <p><strong>Sobre el juicio de Caifás y los intentos de apedreamiento:</strong> la misma lógica que resuelve la tensión original cierra también, sin excepciones ni concesiones, esta extensión más severa de la objeción. Deuteronomio 17 nunca autorizó un veredicto cualquiera: autorizó un veredicto alcanzado mediante el proceso justo que la propia Torá exige —testigos veraces, ausencia de coacción, imparcialidad judicial—, y el juicio ante Caifás violó cada uno de esos requisitos según el propio relato evangélico. Los intentos de apedreamiento en Juan 8 y 10 ni siquiera alcanzan el nivel de un proceso judicial al que el principio de Deuteronomio 17 pudiera aplicarse: fueron actos de violencia colectiva espontánea, ajenos por completo a la institución que Mateo 23:2-3 reconoce. <strong>Afirmar que la cátedra de Moisés merece respeto institucional no implica, en ningún punto de este argumento, validar un fraude procesal ni un linchamiento.</strong> Por el contrario: es la propia Torá invocada por los acusadores la que, aplicada con coherencia, condena el modo en que fue usada contra Jesús.</p>
+
+    <p>Mateo 23 no es, por tanto, un capítulo internamente fracturado que el cristianismo deba defender con explicaciones improvisadas, ni una llave que abra la puerta a justificar la condena de Cristo. Es, leído en su integridad, uno de los testimonios más coherentes del Nuevo Testamento sobre cómo distinguir entre la autoridad de la Palabra de Dios y la fragilidad —a veces la corrupción— de quienes la administran. <strong>Esa distinción, lejos de ser una debilidad del texto, es precisamente lo que permite a cualquier comunidad de fe sostener la autoridad de la revelación divina mientras examina con honestidad a sus propios líderes religiosos, e incluso mientras reconoce que esos mismos líderes, en el peor momento de su historia, traicionaron por completo la Torá que decían defender al condenar al propio Mesías que esa Torá anunciaba.</strong></p>
+  </div>
+
+  <footer style="border-top:1px solid var(--grey-light); padding-top:2rem; font-size:0.8rem; color:var(--grey-mid); font-family:'JetBrains Mono',monospace; line-height:1.8;">
+    <p>FUENTES PRINCIPALES CITADAS: Mateo 5:17, 12:24, 15:1-9, 16:6-12, 23:1-36, 26:57-75 · Juan 8:59, 10:31-33 · Lucas 12:1 · Hechos 15:21 · Deuteronomio 13:1-5, 17:6-13, 18:20-22, 19:15-21 · Levítico 21:10, 24:16 · Éxodo 23:1 · Romanos 13:1 · Mishná, Avot 1:1; Sanhedrin 4:1 · R.T. France, The Gospel According to Matthew (TNTC, 1985) · Craig Blomberg, Matthew (NAC) · D.A. Carson, comentario sobre Mateo · Donald Hagner, Matthew 14-28 (WBC) · Jack Dean Kingsbury, sobre la dificultad exegética de Mt 23:2-3 · Eitan Bar, "They Sit on Moses' Seat: What Jesus Did—and Did Not—Authorize" · Autoridad de Antigüedades de Israel, hallazgo de la Silla de Moisés en la sinagoga de Corazín (siglo IV) · JETS 46/3 (2003), "Matthew 23:2-4" · Análisis procesal del juicio ante Caifás según la legalidad mosaica (thebiblesays.com, "Jesus's Trial")</p>
+  </footer>
+
+</main>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('progress-bar').style.width = progress + '%';
+  });
+
+  // Sidebar toggle
+  const toggle = document.getElementById('nav-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('visible');
+    toggle.classList.add('open');
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+    toggle.classList.remove('open');
+  }
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+
+  overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar on nav link click
+  sidebar.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeSidebar);
+  });
+
+  // Active section highlighting
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('#sidebar nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conociendo a Benedicto XVI — Joseph Ratzinger</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0A0A0A;
+    --negro-medio: #141414;
+    --negro-suave: #1C1C1C;
+    --amarillo: #F5C518;
+    --amarillo-oscuro: #C9A227;
+    --amarillo-palido: #FFF4C2;
+    --blanco: #F5F5F5;
+    --blanco-puro: #FFFFFF;
+    --gris: #888888;
+    --gris-suave: #2A2A2A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--negro); }
+  ::-webkit-scrollbar-thumb { background: var(--amarillo); border-radius: 3px; }
+
+  /* ── NAVBAR ── */
+  #navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(10,10,10,0.96);
+    border-bottom: 1px solid var(--amarillo-oscuro);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--amarillo);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-logo span { color: var(--blanco); font-weight: 400; }
+
+  #hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+  }
+
+  #hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--amarillo);
+    transition: all 0.3s ease;
+  }
+
+  /* ── ÍNDICE LATERAL (SIDEBAR) ── */
+  #sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - 60px);
+    background: var(--negro-medio);
+    border-right: 1px solid rgba(245,197,24,0.15);
+    overflow-y: auto;
+    z-index: 900;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    padding: 1.5rem 0;
+  }
+
+  #sidebar::-webkit-scrollbar { width: 3px; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--amarillo-oscuro); }
+
+  .sidebar-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    padding: 0 1.5rem 0.75rem;
+    border-bottom: 1px solid rgba(245,197,24,0.12);
+    margin-bottom: 0.5rem;
+  }
+
+  .sidebar-section { margin-bottom: 0.15rem; }
+
+  .sidebar-link {
+    display: block;
+    padding: 0.5rem 1.5rem;
+    color: var(--gris);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+  }
+
+  .sidebar-link:hover,
+  .sidebar-link.active {
+    color: var(--blanco);
+    border-left-color: var(--amarillo);
+    background: rgba(245,197,24,0.06);
+    padding-left: 1.75rem;
+  }
+
+  .sidebar-link.active { color: var(--amarillo); font-weight: 500; }
+
+  .sidebar-link .num {
+    color: var(--amarillo-oscuro);
+    font-size: 0.7rem;
+    margin-right: 0.4rem;
+    font-weight: 600;
+  }
+
+  /* ── MAIN CONTENT ── */
+  #main {
+    margin-left: 280px;
+    padding-top: 60px;
+    transition: margin 0.35s ease;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--negro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-cross {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    opacity: 0.04;
+    animation: pulse-cross 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse-cross {
+    0%, 100% { opacity: 0.03; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.06; transform: translate(-50%, -50%) scale(1.03); }
+  }
+
+  .hero-bg-cross::before, .hero-bg-cross::after {
+    content: '';
+    position: absolute;
+    background: var(--amarillo);
+    border-radius: 4px;
+  }
+  .hero-bg-cross::before {
+    width: 80px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .hero-bg-cross::after {
+    width: 100%;
+    height: 80px;
+    top: 30%;
+    transform: translateY(-50%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(245,197,24,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,197,24,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 860px;
+    padding: 2rem;
+    animation: fadeInUp 1.2s ease both;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 1px;
+    background: var(--amarillo-oscuro);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--blanco-puro);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-title .gold { color: var(--amarillo); }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gris);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-dates {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--amarillo-oscuro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+
+  .hero-quote {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(245,245,245,0.7);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    border-left: 3px solid var(--amarillo);
+    padding-left: 1.25rem;
+    text-align: left;
+  }
+
+  .hero-scroll {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    cursor: pointer;
+    text-decoration: none;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 5rem 4rem;
+    position: relative;
+  }
+
+  .section:nth-child(even) { background: var(--negro-suave); }
+
+  .section-header {
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--blanco-puro);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-title .accent { color: var(--amarillo); }
+
+  .section-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--amarillo), var(--amarillo-oscuro));
+    margin-top: 1rem;
+  }
+
+  .prose {
+    max-width: 760px;
+    font-size: 1.05rem;
+    color: rgba(245,245,245,0.85);
+    line-height: 1.9;
+  }
+
+  .prose p { margin-bottom: 1.25rem; }
+
+  .prose strong { color: var(--amarillo); font-weight: 600; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--amarillo), var(--amarillo-oscuro), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.85rem;
+    top: 0.35rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--negro);
+    border: 2px solid var(--amarillo);
+    transition: all 0.3s;
+  }
+
+  .timeline-item:hover .timeline-dot {
+    background: var(--amarillo);
+    box-shadow: 0 0 12px var(--amarillo);
+  }
+
+  .timeline-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--amarillo);
+    margin-bottom: 0.25rem;
+    line-height: 1;
+  }
+
+  .timeline-event {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--blanco-puro);
+    margin-bottom: 0.6rem;
+  }
+
+  .timeline-text {
+    font-size: 0.97rem;
+    color: rgba(245,245,245,0.75);
+    line-height: 1.8;
+    max-width: 680px;
+  }
+
+  .timeline-tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: rgba(245,197,24,0.12);
+    color: var(--amarillo);
+    border: 1px solid rgba(245,197,24,0.3);
+    border-radius: 2px;
+    padding: 0.2rem 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .card {
+    background: var(--negro-suave);
+    border: 1px solid rgba(245,197,24,0.12);
+    border-radius: 2px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card:hover {
+    border-color: var(--amarillo);
+    background: rgba(245,197,24,0.04);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(245,197,24,0.08);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--amarillo), var(--amarillo-oscuro));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--blanco-puro);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-year {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: var(--amarillo-oscuro);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-text {
+    font-size: 0.92rem;
+    color: rgba(245,245,245,0.7);
+    line-height: 1.75;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .quote-block {
+    margin: 3rem 0;
+    padding: 2.5rem 3rem;
+    background: rgba(245,197,24,0.04);
+    border: 1px solid rgba(245,197,24,0.15);
+    position: relative;
+  }
+
+  .quote-block::before {
+    content: '❝';
+    position: absolute;
+    top: -1.2rem;
+    left: 2rem;
+    font-size: 4rem;
+    color: var(--amarillo);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+  }
+
+  .quote-block p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-style: italic;
+    color: var(--blanco-puro);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .quote-block cite {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    color: var(--amarillo);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ── PHILOSOPHY PILLARS ── */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    margin-top: 2rem;
+    background: rgba(245,197,24,0.08);
+  }
+
+  .pillar {
+    background: var(--negro);
+    padding: 2.5rem 2rem;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  .section:nth-child(even) .pillar { background: var(--negro-suave); }
+
+  .pillar.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pillar:hover { background: rgba(245,197,24,0.05); }
+
+  .pillar-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(245,197,24,0.15);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+  }
+
+  .pillar:hover .pillar-number { color: rgba(245,197,24,0.35); }
+
+  .pillar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--blanco-puro);
+    margin-bottom: 0.75rem;
+  }
+
+  .pillar-text {
+    font-size: 0.9rem;
+    color: rgba(245,245,245,0.65);
+    line-height: 1.75;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    background: rgba(245,197,24,0.07);
+    border-left: 4px solid var(--amarillo);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .highlight-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--amarillo);
+    margin-bottom: 0.5rem;
+  }
+
+  .highlight p {
+    font-size: 0.95rem;
+    color: rgba(245,245,245,0.8);
+    line-height: 1.75;
+  }
+
+  /* ── TWO-COLUMN ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* ── STAT BAND ── */
+  .stat-band {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--amarillo);
+    padding: 3rem 4rem;
+  }
+
+  .stat-item { text-align: center; }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--negro);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.6);
+  }
+
+  /* ── POPE POSITIONS ── */
+  .positions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+  }
+
+  .positions-table th {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(245,197,24,0.2);
+  }
+
+  .positions-table td {
+    padding: 1.1rem 1rem;
+    font-size: 0.92rem;
+    color: rgba(245,245,245,0.75);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+
+  .positions-table tr:hover td { background: rgba(245,197,24,0.04); color: var(--blanco); }
+
+  .pos-stance {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .pos-conservador { background: rgba(245,197,24,0.15); color: var(--amarillo); border: 1px solid rgba(245,197,24,0.3); }
+  .pos-tradicional { background: rgba(255,255,255,0.06); color: #aaa; border: 1px solid rgba(255,255,255,0.15); }
+  .pos-doctrinal { background: rgba(200,160,0,0.12); color: #d4a017; border: 1px solid rgba(200,160,0,0.3); }
+
+  /* ── FINAL SECTION (death / legacy) ── */
+  .final-section {
+    background: var(--negro);
+    padding: 6rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cross {
+    width: 60px;
+    height: 80px;
+    margin: 0 auto 2.5rem;
+    position: relative;
+  }
+
+  .final-cross::before, .final-cross::after {
+    content: '';
+    position: absolute;
+    background: var(--amarillo);
+  }
+
+  .final-cross::before {
+    width: 6px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+  }
+
+  .final-cross::after {
+    width: 100%;
+    height: 6px;
+    top: 30%;
+    border-radius: 3px;
+  }
+
+  .final-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(245,197,24,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .requiescat {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2.5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--amarillo);
+    margin-bottom: 0.5rem;
+  }
+
+  .in-pace {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(245,245,245,0.4);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--negro-medio);
+    border-top: 1px solid rgba(245,197,24,0.1);
+    padding: 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--amarillo);
+    font-weight: 700;
+  }
+
+  .footer-copy {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(245,245,245,0.3);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #sidebar {
+      transform: translateX(-100%);
+    }
+
+    #sidebar.open {
+      transform: translateX(0);
+    }
+
+    #main {
+      margin-left: 0;
+    }
+
+    #hamburger { display: flex; }
+
+    .section { padding: 4rem 1.75rem; }
+
+    .two-col { grid-template-columns: 1fr; gap: 2rem; }
+
+    .stat-band {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 2rem 1.5rem;
+      gap: 2rem;
+    }
+
+    .final-section { padding: 4rem 1.75rem; }
+
+    footer { padding: 1.5rem 1.75rem; }
+
+    .positions-table { font-size: 0.82rem; }
+  }
+
+  @media (max-width: 540px) {
+    .hero-content { padding: 1.25rem; }
+    .pillars { grid-template-columns: 1fr; }
+    .stat-band { grid-template-columns: 1fr 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── OVERLAY ── */
+  #overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 800;
+    top: 60px;
+  }
+
+  #overlay.visible { display: block; }
+
+  /* ── PROGRESS BAR ── */
+  #progress {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 2px;
+    background: var(--amarillo);
+    z-index: 1001;
+    width: 0%;
+    transition: width 0.1s;
+  }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS -->
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Conociendo a <span>Benedicto XVI</span></div>
+  <button id="hamburger" aria-label="Menú" onclick="toggleSidebar()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- OVERLAY (mobile) -->
+<div id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div class="sidebar-title">Índice de Contenidos</div>
+
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('hero')"><span class="num">00</span>Presentación</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('infancia')"><span class="num">01</span>Infancia y Familia</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('guerra')"><span class="num">02</span>La Guerra y el Seminario</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('academico')"><span class="num">03</span>Trayectoria Académica</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('concilio')"><span class="num">04</span>El Concilio Vaticano II</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('arzobispo')"><span class="num">05</span>Arzobispo y Cardenal</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('cdf')"><span class="num">06</span>Prefecto de la CDF</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('filosofia')"><span class="num">07</span>Filosofía y Teología</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('eleccion')"><span class="num">08</span>Elección como Papa</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('pontificado')"><span class="num">09</span>Pontificado</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('posiciones')"><span class="num">10</span>Posiciones Doctrinales</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('obras')"><span class="num">11</span>Obras Principales</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('renuncia')"><span class="num">12</span>La Renuncia Histórica</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('postpapado')"><span class="num">13</span>Post Papado</a>
+  </div>
+  <div class="sidebar-section">
+    <a class="sidebar-link" onclick="goTo('fallecimiento')"><span class="num">14</span>Fallecimiento y Legado</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- 00 HERO -->
+  <section id="hero">
+    <div class="hero-bg-cross"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Joseph Aloisius Ratzinger</div>
+      <h1 class="hero-title">Conociendo a<br><span class="gold">Benedicto XVI</span></h1>
+      <p class="hero-subtitle">El Papa Teólogo — Guardián de la Fe</p>
+      <div class="hero-dates">16 de abril de 1927 — 31 de diciembre de 2022</div>
+      <blockquote class="hero-quote">
+        "La verdad no es una cosa que nosotros simplemente poseemos; es algo que nos posee a nosotros, nos pone en movimiento y así nos ayuda a encontrar el camino hacia los demás."
+      </blockquote>
+      <a class="hero-scroll" onclick="goTo('infancia')">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 12L2 4h12L8 12z"/></svg>
+        Descubrir su vida
+      </a>
+    </div>
+  </section>
+
+  <!-- STAT BAND -->
+  <div class="stat-band">
+    <div class="stat-item">
+      <div class="stat-number">95</div>
+      <div class="stat-label">años de vida</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">8</div>
+      <div class="stat-label">años de pontificado</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">60+</div>
+      <div class="stat-label">obras publicadas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">265°</div>
+      <div class="stat-label">sucesor de San Pedro</div>
+    </div>
+  </div>
+
+  <!-- 01 INFANCIA -->
+  <section class="section" id="infancia">
+    <div class="section-header">
+      <div class="section-eyebrow">01 — Orígenes</div>
+      <h2 class="section-title">Infancia y <span class="accent">Familia</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="two-col">
+      <div class="prose">
+        <p>Joseph Aloisius Ratzinger nació el <strong>16 de abril de 1927</strong> en Marktl am Inn, una pequeña localidad de Baviera, Alemania. Llegó al mundo el Sábado Santo, un hecho que él mismo interpretaría más tarde como un signo providencial: su vida entera estaría marcada por la espera y la celebración de la Pascua.</p>
+        <p>Era el menor de tres hermanos. Su padre, <strong>Joseph Ratzinger Sr.</strong>, era un gendarme bávaro de convicciones católicas profundas y carácter íntegro que sufrió persecución por su oposición a los nazis. Su madre, <strong>María Peintner</strong>, era una mujer de enorme piedad, cocinera hábil y alma musical que transmitió a sus hijos el amor por la liturgia, el canto y la belleza.</p>
+        <p>Su hermano mayor, <strong>Georg Ratzinger</strong>, fue su compañero de toda la vida, inseparable amigo y sacerdote también notable —famoso director del coro Domspatzen de Ratisbona—. Su hermana, <strong>María Ratzinger</strong>, nunca se casó y dedicó su vida a cuidar a Joseph durante décadas, actuando como su ama de llaves y secretaria personal hasta su muerte en 1991.</p>
+        <p>La familia Ratzinger se mudó varias veces por Baviera huyendo del acoso nazi al padre. Vivieron en Tittmoning, Aschau am Inn y finalmente en Hufschlag, cerca de Traunstein. Pese a las dificultades económicas y políticas, el hogar era un oasis de oración, música y cultura. El pequeño Joseph aprendió a leer el latín antes de los diez años y quedó fascinado para siempre por la misa tridentina de su primera infancia.</p>
+      </div>
+      <div>
+        <div class="highlight">
+          <div class="highlight-title">✦ El día de su nacimiento</div>
+          <p>Ratzinger nació exactamente el Sábado Santo de 1927 —la víspera más solemne del año cristiano— y fue bautizado ese mismo día con agua bendita recién consagrada durante la vigilia pascual. Él lo vio siempre como un signo sobre su vocación: vivir entre la oscuridad del Viernes Santo y la luz de la Resurrección.</p>
+        </div>
+        <div class="highlight" style="margin-top:1.5rem;">
+          <div class="highlight-title">✦ La música como lengua materna</div>
+          <p>Desde niño dominó el piano y amó profundamente a Mozart y Beethoven. La música nunca fue un pasatiempo: era, para él, una forma de acceder a la belleza trascendente, una demostración de que Dios existe porque la belleza existe. Tocó el piano hasta los últimos años de su vida.</p>
+        </div>
+        <div class="highlight" style="margin-top:1.5rem;">
+          <div class="highlight-title">✦ Raíces bávaras indelebles</div>
+          <p>El carácter bávaro —sereno, profundo, apegado a la tradición, amante del paisaje alpino y la gastronomía local— marcó toda su personalidad. Nunca dejó de ser, en el fondo, un hijo de aquella Baviera rural y profundamente católica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 GUERRA Y SEMINARIO -->
+  <section class="section" id="guerra">
+    <div class="section-header">
+      <div class="section-eyebrow">02 — 1939–1951</div>
+      <h2 class="section-title">La Guerra y el <span class="accent">Llamado</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Vocación temprana</div>
+        <div class="timeline-year">1939</div>
+        <div class="timeline-event">Ingreso al Seminario Menor de Traunstein</div>
+        <div class="timeline-text">Con apenas doce años, Joseph y su hermano Georg ingresan al seminario menor. El ambiente de estudios clásicos, latín, griego y teología resulta el hábitat natural para el joven Joseph, quien ya mostraba un talento intelectual excepcional. La vida comunitaria refuerza en él la convicción de su vocación.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Guerra</div>
+        <div class="timeline-year">1941</div>
+        <div class="timeline-event">Forzado ingreso a las Juventudes Hitlerianas</div>
+        <div class="timeline-text">Como todos los jóvenes alemanes, fue obligado a inscribirse en las Juventudes Hitlerianas. Nunca asistió a sus reuniones, actitud que costó multas a su familia. Este episodio fue malinterpretado décadas después y desató polémicas, pero los historiadores son unánimes: su oposición al nazismo fue real y costosa.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Servicio militar</div>
+        <div class="timeline-year">1943–1944</div>
+        <div class="timeline-event">Movilización y auxilio antiaéreo</div>
+        <div class="timeline-text">Es llamado a servicio auxiliar antiaéreo en Munich y luego enviado a la frontera austro-húngara a construir defensas. Nunca disparó un arma. En 1944 desertó y regresó a pie a su casa en Traunstein, arriesgando la vida —los desertores eran fusilados—. Fue detenido brevemente, pero el soldado que lo capturó comprendió su situación y lo dejó ir.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Prisionero</div>
+        <div class="timeline-year">1945</div>
+        <div class="timeline-event">Prisionero de guerra americano y liberación</div>
+        <div class="timeline-text">Al finalizar la guerra, fue capturado por tropas americanas. Estuvo brevemente en un campo de prisioneros y fue liberado en junio de 1945. Al llegar a su casa encontró a sus padres esperándolo. Semanas después, él y Georg retomaron sus estudios en el seminario de Freising, con una fe inquebrantable que la guerra no había podido destruir sino, si cabe, profundizado.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Ordenación</div>
+        <div class="timeline-year">29 junio 1951</div>
+        <div class="timeline-event">Ordenación sacerdotal junto a su hermano Georg</div>
+        <div class="timeline-text">Joseph y Georg son ordenados sacerdotes el mismo día, en la catedral de Freising, por el Cardenal Michael von Faulhaber. Ratzinger describió ese momento como el más importante de su vida. Celebró su primera misa en Hufschlag, ante su familia y su comunidad natal. Comenzaba así un sacerdocio que duraría más de setenta años.</div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p>"La guerra me enseñó que la fe no es decoración cultural. Es lo único que permanece cuando todo lo demás se derrumba. La Cruz no es símbolo del fracaso, sino del amor más grande posible."</p>
+      <cite>— Joseph Ratzinger, Memorias (Mi vida)</cite>
+    </div>
+  </section>
+
+  <!-- 03 ACADÉMICO -->
+  <section class="section" id="academico">
+    <div class="section-header">
+      <div class="section-eyebrow">03 — 1951–1972</div>
+      <h2 class="section-title">El Teólogo <span class="accent">Académico</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="prose" style="max-width:100%; margin-bottom:2.5rem;">
+      <p>Tras su ordenación, Ratzinger se lanzó a la investigación teológica con una energía prodigiosa. En 1953 obtuvo su <strong>doctorado en teología</strong> en la Universidad de Munich con una brillante tesis sobre San Agustín titulada <em>"El pueblo y la casa de Dios en la doctrina de la Iglesia de San Agustín"</em>. La tesis de habilitación, sobre la teología de la historia en San Buenaventura, estuvo a punto de ser rechazada por su novedad metodológica, pero finalmente fue aceptada en 1957.</p>
+      <p>Enseñó en <strong>Freising, Bonn, Münster, Tübingen</strong> y finalmente en <strong>Regensburg (Ratisbona)</strong>, donde se instaló definitivamente junto a su hermano Georg. En cada universidad dejó huella como uno de los teólogos más brillantes y originales de la posguerra. Sus clases atraían multitudes de estudiantes. Era accesible, pedagógico y capaz de hacer comprensible lo más abstruso.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Docencia</div>
+        <div class="timeline-year">1958</div>
+        <div class="timeline-event">Cátedra en Freising y Bonn</div>
+        <div class="timeline-text">Obtiene su primera cátedra de teología fundamental en Freising y luego en la Universidad de Bonn. Su profundidad patrística —conocimiento de los Padres de la Iglesia— y su capacidad de conectar tradición y actualidad lo hacen famoso en los círculos académicos alemanes.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Período de Tübingen</div>
+        <div class="timeline-year">1966–1969</div>
+        <div class="timeline-event">Universidad de Tübingen — el punto de quiebre</div>
+        <div class="timeline-text">Los años en Tübingen son cruciales. Ratzinger comparte departamento con Hans Küng, con quien tuvo amistad que luego se enfriará profundamente. Las revueltas estudiantiles del 68, la vulgarización marxista de la teología y el caos postconciliar que observa en primera persona lo llevan a una profunda reflexión: la libertad sin verdad es autodestructiva. Estos años moldean su posterior "giro conservador", que él nunca verá como giro sino como fidelidad.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Regensburg</div>
+        <div class="timeline-year">1969</div>
+        <div class="timeline-event">Universidad de Regensburg — casa definitiva</div>
+        <div class="timeline-text">Se traslada a Ratisbona, donde será catedrático y vicerrector hasta 1977. Aquí escribe algunas de sus obras más importantes, funda con Karl Lehmann y Hans Urs von Balthasar la revista teológica <em>Communio</em> —que se convertirá en referencia mundial—, y vive sus años más serenos y creativamente fecundos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 CONCILIO -->
+  <section class="section" id="concilio">
+    <div class="section-header">
+      <div class="section-eyebrow">04 — 1962–1965</div>
+      <h2 class="section-title">El Concilio <span class="accent">Vaticano II</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="two-col">
+      <div class="prose">
+        <p>El Cardenal Josef Frings, Arzobispo de Colonia, eligió al joven Ratzinger como su <strong>asesor teológico personal</strong> para el Concilio Vaticano II (1962–1965). Fue una decisión providencial: Ratzinger tenía apenas 35 años y se convirtió en uno de los teólogos más influyentes en la redacción de los documentos conciliares.</p>
+        <p>En la primera fase del Concilio, Ratzinger pertenecía al ala reformista. Fue de los que contribuyó a desbloquear los esquemas preparatorios excesivamente rígidos que la curia romana había preparado. Trabajó especialmente en la <em>Dei Verbum</em> (Constitución sobre la Revelación Divina) y en la <em>Lumen Gentium</em> (sobre la Iglesia).</p>
+        <p>Sin embargo, a diferencia de otros teólogos progresistas, Ratzinger nunca quiso una ruptura con la Tradición, sino una <strong>"reforma en la continuidad"</strong>. Cuando observó cómo algunos interpretaban el Concilio como una revolución o una ruptura con el pasado, empezó a distanciarse de ese sector. Este proceso interior duraría décadas.</p>
+      </div>
+      <div>
+        <div class="pillars" style="display:block;">
+          <div class="pillar visible" style="margin-bottom:2px; padding:1.5rem 1.75rem;">
+            <div class="pillar-title" style="font-size:1rem;">Dei Verbum — La Palabra de Dios</div>
+            <div class="pillar-text">Contribuyó decisivamente a que la Constitución sobre la Revelación Divina integrara la Tradición y la Escritura como fuentes complementarias, rechazando una visión rígidamente escolástica pero también el biblicismo puro.</div>
+          </div>
+          <div class="pillar visible" style="margin-bottom:2px; padding:1.5rem 1.75rem;">
+            <div class="pillar-title" style="font-size:1rem;">Lumen Gentium — La Iglesia</div>
+            <div class="pillar-text">Trabajó en la doctrina de la colegialidad episcopal y la eclesiología de comunión, buscando un equilibrio entre la primacía papal y la responsabilidad de los obispos en su conjunto.</div>
+          </div>
+          <div class="pillar visible" style="padding:1.5rem 1.75rem;">
+            <div class="pillar-title" style="font-size:1rem;">Gaudium et Spes — Mundo y Sociedad</div>
+            <div class="pillar-text">Mostró reservas sobre el optimismo antropológico de este documento, aunque lo aceptó. Ya entonces advertía contra una teología que se disolviera demasiado en las categorías del mundo moderno.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-block" style="margin-top:3rem;">
+      <p>"El Concilio no ha creado una nueva Iglesia. El Vaticano II debe leerse a la luz de la Tradición, no como una ruptura con ella. Una hermenéutica de la discontinuidad y la ruptura no solo no corresponde a lo que el Concilio intentó, sino que además es destructiva."</p>
+      <cite>— Benedicto XVI, Discurso a la Curia Romana, 22 diciembre 2005</cite>
+    </div>
+  </section>
+
+  <!-- 05 ARZOBISPO -->
+  <section class="section" id="arzobispo">
+    <div class="section-header">
+      <div class="section-eyebrow">05 — 1977–1981</div>
+      <h2 class="section-title">Arzobispo de <span class="accent">Munich</span> y Cardenal</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="prose">
+      <p>El <strong>25 de mayo de 1977</strong>, Pablo VI sorprendió al mundo académico nombrando al teólogo Ratzinger Arzobispo de Munich y Freising. Era inusual que un teólogo sin experiencia pastoral diocesana previa recibiera una archidiócesis tan importante. Ratzinger aceptó el nombramiento como una obediencia difícil, dejando atrás su amada vida universitaria.</p>
+      <p>Eligió como lema episcopal <strong><em>"Cooperatores Veritatis"</em></strong> —"Colaboradores de la Verdad"—, tomado de la Tercera Carta de San Juan. Este lema sintetizaba perfectamente su visión del ministerio eclesial: servir a la verdad, no administrarla.</p>
+      <p>El <strong>27 de junio de 1977</strong>, apenas días después de su consagración episcopal, Pablo VI lo creó Cardenal, otorgándole el título de Cardenal Presbítero de Santa María Consolatrice al Tiburtino. Era ya uno de los purpurados más jóvenes e influyentes de la Iglesia.</p>
+      <p>Su gestión como arzobispo fue breve pero significativa. Ordenó sacerdotes, realizó visitas pastorales, y siguió escribiendo. Participó activamente en el Sínodo de los Obispos de 1977 sobre la catequesis, donde conoció profundamente a <strong>Karol Wojtyła</strong>, el Cardenal de Cracovia con quien forjó una amistad filosófica y espiritual que cambiaría la historia de la Iglesia.</p>
+    </div>
+    <div class="highlight">
+      <div class="highlight-title">✦ La amistad con Wojtyła</div>
+      <p>Ratzinger y Wojtyła se conocieron en los años del Concilio pero se aproximaron especialmente en los Sínodos de los setenta. Compartían el anticomunismo, la preocupación por la banalización postconciliar y una visión personalista de la teología. Cuando Wojtyła se convirtió en Juan Pablo II en 1978, su primera llamada fue al Cardenal Ratzinger.</p>
+    </div>
+  </section>
+
+  <!-- 06 CDF -->
+  <section class="section" id="cdf">
+    <div class="section-header">
+      <div class="section-eyebrow">06 — 1981–2005</div>
+      <h2 class="section-title">Prefecto de la <span class="accent">Fe</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="prose" style="margin-bottom:2rem;">
+      <p>El <strong>25 de noviembre de 1981</strong>, Juan Pablo II nombró a Ratzinger Prefecto de la Congregación para la Doctrina de la Fe (CDF), el organismo vaticano encargado de salvaguardar la ortodoxia doctrinal. Este cargo, históricamente conocido como "Santo Oficio", convirtió a Ratzinger en el segundo hombre más poderoso de la Iglesia y en una de las figuras más controvertidas del catolicismo contemporáneo.</p>
+      <p>Durante <strong>casi veinticuatro años</strong> dirigió la CDF, convirtiéndose en el asesor doctrinal más cercano a Juan Pablo II. Trabajaron en una sintonía casi perfecta: el Papa viajaba, predicaba y tenía el carisma mediático; Ratzinger escribía, vigilaba y construía el cuerpo doctrinal. Muchos documentos firmados por Juan Pablo II llevan la impronta intelectual de Ratzinger.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card visible">
+        <div class="card-icon">📜</div>
+        <div class="card-title">Instrucción sobre la Teología de la Liberación</div>
+        <div class="card-year">1984</div>
+        <div class="card-text">Publicó la controvertida "Libertatis Nuntius", que criticaba la apropiación marxista de la teología de la liberación latinoamericana, distinguiendo entre la opción por los pobres (legítima) y el análisis marxista de clases (inaceptable). Fue muy mal recibida en América Latina pero clarificó un debate esencial.</div>
+      </div>
+      <div class="card visible">
+        <div class="card-icon">✝️</div>
+        <div class="card-title">Dominus Iesus</div>
+        <div class="card-year">2000</div>
+        <div class="card-text">Declaración que afirmaba la unicidad y universalidad salvífica de Jesucristo y la Iglesia. Provocó tensiones ecuménicas con protestantes y ortodoxos al afirmar que las comunidades eclesiales no católicas no son "Iglesias" en sentido pleno. Ratzinger defendió que era doctrina perenne, no novedad.</div>
+      </div>
+      <div class="card visible">
+        <div class="card-icon">📖</div>
+        <div class="card-title">Catecismo de la Iglesia Católica</div>
+        <div class="card-year">1992</div>
+        <div class="card-text">Coordinó la elaboración del Catecismo universal —el primero desde el Concilio de Trento en el siglo XVI—. Una obra de síntesis monumental que tardó una década en prepararse y que se convirtió en referencia indispensable para la enseñanza católica mundial.</div>
+      </div>
+      <div class="card visible">
+        <div class="card-icon">⚖️</div>
+        <div class="card-title">Casos de abuso sexual clerical</div>
+        <div class="card-year">2001</div>
+        <div class="card-text">En 2001 Juan Pablo II le asignó la competencia exclusiva sobre los casos de abuso sexual por parte de clérigos. Ratzinger fue el primero en tomar estos casos en serio institucionalmente, centralizando la gestión y expulsando a sacerdotes culpables —incluyendo el caso de Marcial Maciel, fundador de los Legionarios de Cristo, que sancionó con arresto espiritual.</div>
+      </div>
+      <div class="card visible">
+        <div class="card-icon">🔔</div>
+        <div class="card-title">Nota doctrinal sobre la acción política</div>
+        <div class="card-year">2002</div>
+        <div class="card-text">Publicó una nota que recordaba a los políticos católicos su obligación de coherencia con la moral natural, especialmente en temas como el aborto y la familia. Fue muy discutida en democracias occidentales y abrió el debate sobre la relación entre la fe y el voto.</div>
+      </div>
+      <div class="card visible">
+        <div class="card-icon">🌍</div>
+        <div class="card-title">Decano del Colegio Cardenalicio</div>
+        <div class="card-year">2002</div>
+        <div class="card-text">Fue elegido Decano del Colegio Cardenalicio, lo que le convirtió en el primer cardenal entre los cardenales. En este papel presidió las exequias de Juan Pablo II ante miles de millones de personas, pronunciando una homilía memorable que muchos creen fue el primer acto de su campaña al pontificado.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 FILOSOFÍA -->
+  <section class="section" id="filosofia">
+    <div class="section-header">
+      <div class="section-eyebrow">07 — Pensamiento</div>
+      <h2 class="section-title">Filosofía y <span class="accent">Teología</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="prose" style="margin-bottom:3rem;">
+      <p>Ratzinger fue ante todo un <strong>teólogo de la Revelación</strong>. Su pensamiento no se construyó sobre sistemas abstractos sino sobre la lectura profunda de los Padres de la Iglesia —especialmente <strong>San Agustín</strong>, al que dedicó su tesis doctoral y a quien consideró su maestro espiritual e intelectual durante toda la vida.</p>
+      <p>Filosóficamente, bebió del <strong>personalismo cristiano</strong> —Romano Guardini, Martin Buber, Gabriel Marcel— y de la fenomenología. Rechazó tanto el positivismo científico que expulsa lo metafísico como el relativismo posmoderno que disuelve la verdad en la opinión. Para él, la razón humana no está en contradicción con la fe: se necesitan mutuamente.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-number">I</div>
+        <div class="pillar-title">Fe y Razón — inseparables</div>
+        <div class="pillar-text">El gran combate intelectual de Ratzinger fue contra el divorcio entre fe y razón. En su famosa Conferencia de Ratisbona (2006) argumentó que el Dios cristiano es el Logos —la Razón—, y que por tanto la fe cristiana es intrínsecamente racional. La violencia en nombre de Dios contradice la naturaleza misma de Dios.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">II</div>
+        <div class="pillar-title">La Verdad como fundamento</div>
+        <div class="pillar-text">Para Ratzinger, el relativismo —la posición que niega verdades objetivas— es "la mayor amenaza de nuestro tiempo". La democracia misma necesita un fundamento de valores no negociables. Sin verdad, la libertad se convierte en arbitrariedad y el poder en tiranía. Llamó a esto "dictadura del relativismo".</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">III</div>
+        <div class="pillar-title">La Belleza como vía de acceso a Dios</div>
+        <div class="pillar-text">La teología de la belleza —la "via pulchritudinis"— es central en su pensamiento. La música, el arte y la arquitectura sagrada no son decoración: son epifanías. La liturgia debe ser bella porque la belleza evangeliza donde el argumento no llega. Por eso defendió el rito tridentino con pasión.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">IV</div>
+        <div class="pillar-title">Agustinismo y Eclesiología</div>
+        <div class="pillar-text">De San Agustín tomó la tensión entre la Ciudad de Dios y la Ciudad del Mundo, la primacía de la gracia, y una visión de la Iglesia como comunidad de amor más que de poder. La Iglesia no es una ONG ni una organización política; es el Cuerpo de Cristo, sacramento de salvación.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">V</div>
+        <div class="pillar-title">Hermenéutica de la Continuidad</div>
+        <div class="pillar-text">Su principio interpretativo más influyente: los documentos del Vaticano II —y toda la Tradición— deben leerse con una "hermenéutica de la reforma en la continuidad", no como ruptura. El verdadero aggiornamento es profundizar en las raíces, no cortarlas.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">VI</div>
+        <div class="pillar-title">Europa y las raíces cristianas</div>
+        <div class="pillar-text">Advirtió insistentemente sobre el peligro de una Europa que reniega de sus raíces greco-romano-cristianas. Para Ratzinger, una Europa que pierde su memoria espiritual pierde también su brújula ética y se condena a la autodestrucción. La secularización radical es, a largo plazo, nihilismo.</div>
+      </div>
+    </div>
+    <div class="quote-block" style="margin-top:3rem;">
+      <p>"El mundo sería salvado si existiera más belleza. La belleza es conocimiento —una forma superior de conocimiento— porque ilumina allí donde el razonamiento habitual parece no llegar. La Via Pulchritudinis, el camino de la belleza, nos puede conducir a Dios."</p>
+      <cite>— Joseph Ratzinger, "La Nueva Evangelización"</cite>
+    </div>
+  </section>
+
+  <!-- 08 ELECCIÓN -->
+  <section class="section" id="eleccion">
+    <div class="section-header">
+      <div class="section-eyebrow">08 — Abril 2005</div>
+      <h2 class="section-title">Habemus <span class="accent">Papam</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="two-col">
+      <div class="prose">
+        <p>El <strong>2 de abril de 2005</strong>, a las 21:37, falleció Juan Pablo II. El mundo vivió uno de los lutos más masivos de la historia contemporánea. Ratzinger, como Decano del Colegio Cardenalicio, presidió los funerales del 8 de abril ante cuatro millones de peregrinos en Roma, pronunciando una homilía que conmovió al mundo.</p>
+        <p>El <strong>Cónclave</strong> comenzó el 18 de abril de 2005 en la Capilla Sixtina. Ciento quince cardenales electores participaron. Muchos analistas esperaban un papa del sur global —África, Latinoamérica— pero la Providencia tenía otros planes. En la segunda jornada, al cuarto escrutinio, el <strong>19 de abril de 2005</strong>, Joseph Ratzinger alcanzó la mayoría de dos tercios.</p>
+        <p>A las 17:50, la fumata blanca ascendió sobre la Capilla Sixtina. El Cardenal Protodiacono Jorge Medina Estévez pronunció la fórmula inmortal: <em>"Annuntio vobis gaudium magnum: habemus Papam… qui sibi nomen imposuit Benedictum."</em></p>
+        <p>Eligió el nombre <strong>Benedicto</strong>, en honor a San Benito de Nursia, patrón de Europa y padre del monaquismo occidental, y en recuerdo de Benedicto XV, el "papa de la paz" durante la Primera Guerra Mundial.</p>
+      </div>
+      <div>
+        <div class="highlight">
+          <div class="highlight-title">✦ Las palabras que conmovieron al mundo</div>
+          <p>En la homilía de los funerales de Juan Pablo II, Ratzinger dijo: <em>"Podemos estar seguros de que nuestro amado papa está ahora a la ventana de la Casa del Padre, nos ve y nos bendice."</em> En ese momento miles de carteles con "Santo Subito" inundaron la plaza. Muchos creen que esa homilía le valió el pontificado.</p>
+        </div>
+        <div class="highlight" style="margin-top:1.5rem;">
+          <div class="highlight-title">✦ "Un trabajador humilde en la viña del Señor"</div>
+          <p>Sus primeras palabras como papa, desde la logia de la Basílica de San Pedro, fueron estas. Añadió que le consolaba saber que el Señor sabía trabajar y actuar también con instrumentos insuficientes. Una declaración de humildad que también era un programa teológico.</p>
+        </div>
+        <div class="highlight" style="margin-top:1.5rem;">
+          <div class="highlight-title">✦ El papa más anciano desde Clemente XII</div>
+          <p>Asumió el pontificado a los 78 años, convirtiéndose en el papa más anciano elegido desde Clemente XII en 1730. Sus detractores lo veían como un papa de transición; sus admiradores, como el hombre providencial para una época de confusión doctrinal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 PONTIFICADO -->
+  <section class="section" id="pontificado">
+    <div class="section-header">
+      <div class="section-eyebrow">09 — 2005–2013</div>
+      <h2 class="section-title">El <span class="accent">Pontificado</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="prose" style="margin-bottom:2.5rem;">
+      <p>El pontificado de Benedicto XVI duró <strong>siete años, diez meses y nueve días</strong>. Fue un papa que gobernó principalmente desde el escritorio y el púlpito, no desde el estadio. Sus encíclicas, homilías, catequesis y libros son el legado más sólido de su pontificado. Sin el carisma viajero de Juan Pablo II ni la informalidad mediática de Francisco, Benedicto gobernó con profundidad intelectual y sobriedad pastoral.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Primera Encíclica</div>
+        <div class="timeline-year">2006</div>
+        <div class="timeline-event">Deus Caritas Est — Dios es Amor</div>
+        <div class="timeline-text">Su primera encíclica, publicada en enero de 2006, fue una meditación sobre el amor que sorprendió al mundo por su profundidad y su belleza. Distinguía el eros (amor humano) del ágape (amor divino) mostrando cómo se enriquecen mutuamente. Se convirtió en un bestseller teológico. Nadie esperaba que la primera encíclica de un "inquisidor" fuera un himno al amor.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Controversia</div>
+        <div class="timeline-year">2006</div>
+        <div class="timeline-event">Discurso de Ratisbona y la crisis del Islam</div>
+        <div class="timeline-text">En septiembre de 2006, en su Universidad de Regensburg, Benedicto XVI pronunció una conferencia académica sobre fe y razón en la que citó al emperador bizantino Manuel II Paleólogo sobre el Islam y la violencia. La cita desencadenó protestas masivas en el mundo islámico, quemas de iglesias y asesinatos. Benedicto expresó pesar aunque no retiró el argumento central: la violencia religiosa contradice la naturaleza de Dios y la razón.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Liturgia</div>
+        <div class="timeline-year">2007</div>
+        <div class="timeline-event">Summorum Pontificum — liberación del rito antiguo</div>
+        <div class="timeline-text">Con el Motu Proprio "Summorum Pontificum" liberalizó el uso de la Misa Tridentina (el rito romano anterior al Concilio), permitiendo a cualquier sacerdote celebrarla sin permiso especial. Fue un acto de reconciliación con los movimientos litúrgicos tradicionales y una declaración teológica sobre la continuidad de la Tradición. También buscó la reconciliación con los lefebvristas.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Viajes</div>
+        <div class="timeline-year">2008</div>
+        <div class="timeline-event">Viaje a EEUU — Washington y Nueva York</div>
+        <div class="timeline-text">Visitó los Estados Unidos, se reunió con víctimas de abusos sexuales en una reunión histórica —la primera en la que un Papa se reunía personalmente con víctimas— y habló en la ONU. Su discurso ante la Asamblea General, sobre la verdad, los derechos humanos y el multilateralismo, fue aclamado por todos los sectores políticos.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Segunda Encíclica</div>
+        <div class="timeline-year">2009</div>
+        <div class="timeline-event">Caritas in Veritate — Economía y Justicia Social</div>
+        <div class="timeline-text">Encíclica social publicada en medio de la crisis económica mundial de 2008–2009. Propuso una economía al servicio del ser humano, criticó tanto el capitalismo desregulado como los colectivismos estatistas, e introdujo el concepto de "gratuidad" como principio económico. Fue estudiada en universidades de todo el espectro político.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Pontificado</div>
+        <div class="timeline-year">2010</div>
+        <div class="timeline-event">Crisis de los abusos — la hora más oscura</div>
+        <div class="timeline-text">El año 2010 fue el más difícil: los escándalos de abusos sexuales estallan en Irlanda, Alemania, EEUU, Bélgica y otros países. Benedicto respondió con cartas pastorales directas, reuniones con víctimas, expulsiones de sacerdotes y una nueva normativa más estricta. Se negó a los encubrimientos y dejó claro que la Iglesia no podría ser creíble si no hacía justicia a las víctimas.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Diálogo</div>
+        <div class="timeline-year">2011</div>
+        <div class="timeline-event">Visita a Alemania — debate sobre laicismo</div>
+        <div class="timeline-text">Su visita a Alemania, su tierra natal, incluyó un histórico discurso ante el Bundestag en el que interpeló a los legisladores alemanes sobre los fundamentos éticos del derecho. Fue la primera vez que un Papa hablaba ante el parlamento alemán. Sorprendió con críticas a la ecología superficial y llamó a una "ecología humana" que cuide también la naturaleza del hombre.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-tag">Última Encíclica</div>
+        <div class="timeline-year">2013</div>
+        <div class="timeline-event">Lumen Fidei — La luz de la Fe (comenzada por Benedicto)</div>
+        <div class="timeline-text">Inició la redacción de una encíclica sobre la Fe, que quedó incompleta al renunciar. Su sucesor Francisco la publicó indicando que era fruto del trabajo de Benedicto XVI, con algunas adiciones propias. Es el único caso en la historia de una encíclica escrita por dos papas.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 POSICIONES -->
+  <section class="section" id="posiciones">
+    <div class="section-header">
+      <div class="section-eyebrow">10 — Doctrina</div>
+      <h2 class="section-title">Posiciones <span class="accent">Doctrinales</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="prose" style="margin-bottom:2rem;">
+      <p>Benedicto XVI fue el teólogo-papa más prolífico en materia doctrinal desde León XIII. Sus posiciones eran coherentes, basadas en una visión integral del ser humano como criatura racional y espiritual hecha a imagen de Dios. Las presentamos a continuación con el fundamento de cada una.</p>
+    </div>
+    <table class="positions-table">
+      <thead>
+        <tr>
+          <th>Tema</th>
+          <th>Posición</th>
+          <th>Fundamentación</th>
+          <th>Tono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Aborto</strong></td>
+          <td>Radicalmente opuesto. Consideró el aborto un crimen grave contra la vida humana desde la concepción.</td>
+          <td>Dignidad inviolable de toda vida humana; el embrión es ya persona. Derecho natural.</td>
+          <td><span class="pos-conservador">Doctrinal</span></td>
+        </tr>
+        <tr>
+          <td><strong>Matrimonio y Familia</strong></td>
+          <td>Matrimonio exclusivamente entre hombre y mujer. Las uniones homosexuales no pueden equipararse al matrimonio.</td>
+          <td>Naturaleza complementaria del ser humano, orden creacional, bien de los hijos.</td>
+          <td><span class="pos-conservador">Doctrinal</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ecumenismo</strong></td>
+          <td>Favorable al diálogo, pero sin relativismo. Las diferencias doctrinales son reales y no deben minimizarse.</td>
+          <td>La verdad no puede sacrificarse por la unidad; la unidad auténtica requiere la verdad.</td>
+          <td><span class="pos-tradicional">Realista</span></td>
+        </tr>
+        <tr>
+          <td><strong>Diálogo Interreligioso</strong></td>
+          <td>Apoya el diálogo desde la identidad firme. Jesús es el único Salvador, no uno entre muchos caminos equivalentes.</td>
+          <td>Dominus Iesus (2000); Unicidad de Cristo no negociable para el diálogo auténtico.</td>
+          <td><span class="pos-doctrinal">Cristológico</span></td>
+        </tr>
+        <tr>
+          <td><strong>Relativismo moral</strong></td>
+          <td>Su mayor preocupación: el relativismo es "la dictadura del relativismo", amenaza a la civilización.</td>
+          <td>Sin verdad objetiva, no hay derechos humanos posibles; todo se vuelve poder.</td>
+          <td><span class="pos-conservador">Filosófico</span></td>
+        </tr>
+        <tr>
+          <td><strong>Bioética</strong></td>
+          <td>Opuesto a la eutanasia, la clonación, la fecundación in vitro y la manipulación genética embrionaria.</td>
+          <td>El ser humano no es material de laboratorio; la dignidad no está en la utilidad.</td>
+          <td><span class="pos-doctrinal">Antropológico</span></td>
+        </tr>
+        <tr>
+          <td><strong>Celibato sacerdotal</strong></td>
+          <td>Defensor convencido del celibato como signo escatológico y forma de amor total.</td>
+          <td>El celibato no es disciplina accidental sino expresión del ser-para-Dios del sacerdote.</td>
+          <td><span class="pos-tradicional">Teológico</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ordenación de mujeres</strong></td>
+          <td>Imposible. La decisión de Juan Pablo II en la "Ordinatio Sacerdotalis" es definitiva e irreformable.</td>
+          <td>Cristo eligió sólo varones; la Iglesia no tiene autoridad para cambiar esta decisión del Señor.</td>
+          <td><span class="pos-conservador">Doctrinal</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ecología</strong></td>
+          <td>Padre de la "ecología humana": la naturaleza del hombre (su ser hombre-mujer, su dignidad) merece tanta protección como la naturaleza física.</td>
+          <td>Caritas in Veritate; Discurso al Bundestag 2011. El hombre es también naturaleza que hay que respetar.</td>
+          <td><span class="pos-doctrinal">Novedoso</span></td>
+        </tr>
+        <tr>
+          <td><strong>Economía</strong></td>
+          <td>Crítico del capitalismo desregulado y de los colectivismos. Propuso una economía de la gratuidad y el bien común.</td>
+          <td>Caritas in Veritate. El mercado necesita valores éticos para no degradarse en especulación.</td>
+          <td><span class="pos-tradicional">Social-cristiano</span></td>
+        </tr>
+        <tr>
+          <td><strong>Liturgia</strong></td>
+          <td>Defensor de la sacralidad, la belleza y la orientación ad orientem. Liberalizó el rito tridentino.</td>
+          <td>La liturgia no es improvisación creativa: es la oración milenaria de la Iglesia, su tesoro más precioso.</td>
+          <td><span class="pos-doctrinal">Litúrgico</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 11 OBRAS -->
+  <section class="section" id="obras">
+    <div class="section-header">
+      <div class="section-eyebrow">11 — Bibliografía</div>
+      <h2 class="section-title">Obras <span class="accent">Principales</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="prose" style="margin-bottom:2.5rem;">
+      <p>Ratzinger / Benedicto XVI fue uno de los papas más prolíficos en historia. Con más de <strong>sesenta obras</strong> publicadas entre libros, encíclicas, exhortaciones y documentos mayores, dejó un corpus teológico comparable al de los grandes escolásticos. A continuación, sus obras más influyentes con resumen.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-title">Introducción al Cristianismo</div>
+        <div class="card-year">1968 — Obra Cumbre</div>
+        <div class="card-text">Publicada cuando era profesor en Tübingen, es su obra más popular y quizás la más importante. Una meditación sobre el Credo apostólico que busca responder qué significa creer hoy, en un mundo racionalista. Combina profundidad patrística con sensibilidad hacia los interrogantes modernos. Traducida a más de 20 idiomas, sigue siendo lectura obligatoria en seminarios de todo el mundo.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Dios y el Mundo</div>
+        <div class="card-year">2000 — Entrevista-libro</div>
+        <div class="card-text">Larga entrevista con el periodista Peter Seewald que resultó en un libro de alta divulgación teológica. Ratzinger habla de su fe, de Dios, de Jesucristo, de la Iglesia y del mundo contemporáneo con una claridad y cercanía únicas. Permite conocer al hombre detrás del teólogo.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">La Sal de la Tierra</div>
+        <div class="card-year">1997 — Entrevista-libro</div>
+        <div class="card-text">Primera gran entrevista con Peter Seewald, en la que el entonces Cardenal Prefecto habla sin filtros sobre la crisis de la Iglesia, el postconcilio, la teología moderna y sus propias posiciones. Un retrato intelectual y espiritual de primera mano. Causó sensación por su franqueza.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Mi Vida — Memorias</div>
+        <div class="card-year">1998 — Autobiografía</div>
+        <div class="card-text">Sus memorias autobiográficas, que cubren desde su nacimiento hasta su nombramiento como Prefecto de la CDF. Una prosa limpia, contemplativa y sin afán de autojustificación. Revela la Baviera de su infancia, los años de seminario, la guerra, el Concilio y la academia con una honestidad conmovedora.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Deus Caritas Est</div>
+        <div class="card-year">2006 — Primera Encíclica</div>
+        <div class="card-text">Primera encíclica pontificia. Una meditación de extraordinaria profundidad sobre el amor: el eros y el ágape, el amor humano y el amor divino. Demuestra que la Iglesia no teme la dimensión erótica del amor sino que la purifica y eleva. Fue casi unánimemente elogiada incluso por no creyentes.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Spe Salvi — Salvados en la Esperanza</div>
+        <div class="card-year">2007 — Segunda Encíclica</div>
+        <div class="card-text">Meditación sobre la esperanza cristiana en diálogo con la modernidad. Analiza el concepto ilustrado de progreso como sucedáneo de la esperanza religiosa, muestra sus límites, y ofrece la esperanza teologal como la única capaz de enfrentarse a la muerte y al sufrimiento. Una de sus obras más originales.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Caritas in Veritate</div>
+        <div class="card-year">2009 — Tercera Encíclica</div>
+        <div class="card-text">Gran encíclica social en contexto de crisis económica global. Propone que la caridad —el amor— debe ser el principio rector de la economía, y que el desarrollo humano auténtico no es sólo material. Introduce el principio de gratuidad: el mercado no puede funcionar sólo por interés, necesita también donación libre.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Jesús de Nazaret (3 volúmenes)</div>
+        <div class="card-year">2007, 2011, 2012</div>
+        <div class="card-text">Su obra personal más querida. No es un documento magisterial sino la meditación del creyente Ratzinger sobre la figura de Jesús. Combina exégesis científica y contemplación espiritual, demostrando que el Jesús histórico y el Cristo de la fe son el mismo. El primer volumen vendió millones de ejemplares en meses. Fue un acontecimiento editorial y teológico sin precedentes.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">El Espíritu de la Liturgia</div>
+        <div class="card-year">2000 — Teología litúrgica</div>
+        <div class="card-text">Publicado cuando era Cardenal, es su obra litúrgica más importante. Argumenta por qué la liturgia debe ser sagrada, orientada a Dios, bella y fiel a la Tradición. Critica las reformas postconciliares que banalizaron la misa y propone un "movimiento litúrgico" de renovación profunda. Inspiró el Summorum Pontificum.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Fe, Verdad y Tolerancia</div>
+        <div class="card-year">2003 — Diálogo interreligioso</div>
+        <div class="card-text">Ensayo sobre la relación entre el cristianismo y las religiones del mundo. Rechaza el relativismo religioso ("todas las religiones son iguales") sin caer en el fundamentalismo. Propone que el diálogo auténtico requiere identidades fuertes, no diluidas. Una de sus obras más influyentes en teología de las religiones.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Verbum Domini</div>
+        <div class="card-year">2010 — Exhortación Apostólica</div>
+        <div class="card-text">Exhortación postsinodal sobre la Palabra de Dios en la vida y misión de la Iglesia. Una síntesis magnífica de la teología bíblica de Ratzinger: la Biblia no es un libro más, es la Palabra viva de Dios que actúa en quien la acoge con fe. Insiste en la "forma sinfónica" de la Revelación: Escritura, Tradición y Magisterio.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Luz del Mundo</div>
+        <div class="card-year">2010 — Entrevista-libro</div>
+        <div class="card-text">Tercera gran entrevista con Seewald, la primera como papa reinante. Habla de la crisis de abusos, del Islam, del relativismo, de su propio pontificado y de la posibilidad de renunciar —lo que muchos leyeron como una señal anticipada de lo que ocurriría en 2013. Generó titulares mundiales por sus comentarios sobre el uso del preservativo en casos extremos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 RENUNCIA -->
+  <section class="section" id="renuncia">
+    <div class="section-header">
+      <div class="section-eyebrow">12 — 11 Febrero 2013</div>
+      <h2 class="section-title">La Renuncia <span class="accent">Histórica</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="two-col">
+      <div class="prose">
+        <p>El <strong>11 de febrero de 2013</strong>, Lunes de Carnaval y fiesta litúrgica de Nuestra Señora de Lourdes, Benedicto XVI convocó a los cardenales a un consistorio ordinario en el Vaticano, aparentemente para anunciar algunas canonizaciones. Al final de la reunión, el Papa tomó la palabra en latín y pronunció las palabras que sacudieron al mundo:</p>
+        <p><em>"Después de haber examinado repetidamente mi conciencia ante Dios, he llegado a la certeza de que mis fuerzas, por la avanzada edad, ya no son aptas para ejercer adecuadamente el ministerio petrino."</em></p>
+        <p>Era la primera renuncia papal en <strong>casi 600 años</strong> —desde Gregorio XII en 1415, y la primera totalmente voluntaria desde Celestino V en 1294. Los cardenales presentes quedaron estupefactos. La noticia corrió por el mundo en minutos y generó un terremoto mediático.</p>
+        <p>La renuncia era válida desde las <strong>20:00 del 28 de febrero de 2013</strong>. Ese día, en una imagen cargada de simbolismo, el helicóptero que llevaba al papa renunciante despegó desde los jardines del Vaticano en dirección a Castel Gandolfo. Miles de personas lo vieron partir.</p>
+        <p>Benedicto explicó su decisión como un acto de servicio a la Iglesia, no de abandono. El papado, razonó, necesitaba energías que él ya no tenía. La verdadera fidelidad al cargo era, en su estado, cederlo. Fue una decisión de extraordinaria lucidez y humildad.</p>
+      </div>
+      <div>
+        <div class="highlight">
+          <div class="highlight-title">✦ "La decisión más difícil de mi vida"</div>
+          <p>En su último libro, <em>Últimas conversaciones</em> con Seewald (2016), reconoció que renunciar fue "la decisión más difícil" de su vida. No era cansancio espiritual sino físico y cognitivo. Sabía que el papa necesitaba todas sus facultades para gobernar una institución de mil millones de fieles.</p>
+        </div>
+        <div class="highlight" style="margin-top:1.5rem;">
+          <div class="highlight-title">✦ ¿Presión externa?</div>
+          <p>Diversas teorías surgieron sobre presiones externas (el escándalo "Vatileaks" de documentos filtrados, la mafia vaticana, la salud). Benedicto siempre rechazó estas interpretaciones y reafirmó que fue una decisión completamente libre, tomada en oración y discernimiento. Los historiadores tienden a aceptar su versión.</p>
+        </div>
+        <div class="highlight" style="margin-top:1.5rem;">
+          <div class="highlight-title">✦ El relámpago sobre San Pedro</div>
+          <p>La tarde del día del anuncio, un rayo impactó espectacularmente en la cúpula de la Basílica de San Pedro. El fotógrafo Filippo Monteforte captó la imagen, que dio la vuelta al mundo. La providencia, para creyentes y agnósticos, parecía comentar el acontecimiento.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p>"El mundo de hoy, sujeto a rápidas transformaciones y agitado por cuestiones de gran relevancia para la vida de la fe, para gobernar la barca de San Pedro y anunciar el Evangelio, exige también el vigor del cuerpo y del alma, vigor que, en los últimos meses, se ha deteriorado en mí de tal forma que he de reconocer mi incapacidad para ejercer bien el ministerio que me fue encomendado."</p>
+      <cite>— Benedicto XVI, Declaración de Renuncia, 11 febrero 2013</cite>
+    </div>
+  </section>
+
+  <!-- 13 POST PAPADO -->
+  <section class="section" id="postpapado">
+    <div class="section-header">
+      <div class="section-eyebrow">13 — 2013–2022</div>
+      <h2 class="section-title">El <span class="accent">Emérito</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="prose" style="margin-bottom:2.5rem;">
+      <p>Tras la elección del <strong>Cardenal Jorge Bergoglio</strong> como Francisco I el 13 de marzo de 2013, Benedicto regresó al Vaticano para residir en el Monasterio Mater Ecclesiae, en los jardines vaticanos. Era la primera vez en la historia que un papa y su sucesor convivían —al menos físicamente cerca— en el mismo estado.</p>
+      <p>Adoptó el título de <strong>Papa Emérito</strong>, siguió vistiendo blanco, conservó su nombre papal y mantuvo el tratamiento de "Su Santidad". Estas decisiones fueron criticadas por algunos como fuentes de confusión en la Iglesia, pero Benedicto las justificó como parte de una nueva figura institucional —la del papa que renuncia— que la Iglesia necesitaba definir.</p>
+      <p>Sus años de retiro transcurrieron en <strong>oración, estudio, lectura y música</strong>. Recibió visitas, continuó escribiendo y en ocasiones publicó artículos y cartas que generaron debate —sobre la crisis de abusos, sobre el sacerdocio, sobre la reforma litúrgica—. Sus declaraciones fueron siempre ponderadas, pero su sola presencia en el Vaticano generó tensión entre quienes lo veían como referencia alternativa a Francisco.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card visible">
+        <div class="card-icon">📝</div>
+        <div class="card-title">La Iglesia y el escándalo de los abusos sexuales</div>
+        <div class="card-year">2019</div>
+        <div class="card-text">En 2019 publicó un largo ensayo sobre la crisis de abusos que causó sensación. Señalaba como causas la revolución sexual de los 60, el colapso de la teología moral y la pérdida del sentido de Dios. Fue aplaudido por unos y criticado duramente por otros, pero demostró que el papa emérito seguía pensando y publicando.</div>
+      </div>
+      <div class="card visible">
+        <div class="card-icon">📖</div>
+        <div class="card-title">Últimas Conversaciones</div>
+        <div class="card-year">2016</div>
+        <div class="card-text">Entrevista-libro con Seewald desde su retiro en el Mater Ecclesiae. Una de las confesiones intelectuales y espirituales más honestas de un anciano que sabe que se acerca el fin y hace balance. Habla de la muerte, del juicio, de Francisco, de su renuncia y de sus esperanzas.</div>
+      </div>
+      <div class="card visible">
+        <div class="card-icon">🏛️</div>
+        <div class="card-title">Relación con Francisco</div>
+        <div class="card-year">2013–2022</div>
+        <div class="card-text">La relación entre los dos papas fue descrita por ambos como "fraterna y cordial". Se reunieron múltiples veces en el Vaticano. Aunque sus visiones teológicas y pastorales difieren en matices importantes, ambos subrayaron la unidad. Benedicto apoyó públicamente las grandes iniciativas de Francisco, incluyendo la Laudato Si' y la Amoris Laetitia, aunque con algunos matices expresados en privado.</div>
+      </div>
+      <div class="card visible">
+        <div class="card-icon">✒️</div>
+        <div class="card-title">Carta sobre el celibato sacerdotal</div>
+        <div class="card-year">2020</div>
+        <div class="card-text">Junto al Cardenal Sarah, publicó un libro defendiendo el celibato sacerdotal coincidiendo con un Sínodo sobre la Amazonia que debatía la posibilidad de ordenar hombres casados. Su intervención causó polémica y fue leída como una crítica implícita a Francisco. Benedicto aclaró luego que el libro fue iniciativa de Sarah y que él sólo había contribuido con un texto sobre el celibato.</div>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-top:2rem;">
+      <div class="highlight-title">✦ La visita a su hermano Georg</div>
+      <p>En junio de 2020, cuando su hermano Georg Ratzinger estaba gravemente enfermo en Ratisbona, Benedicto viajó a Alemania para visitarlo —su primer viaje fuera de Italia desde la renuncia. Fue un viaje emotivo: dos hermanos sacerdotes ancianísimos, separados por la historia y reunidos en las horas finales. Georg falleció el 1 de julio de 2020. Benedicto regresó al Vaticano para continuar su retiro.</p>
+    </div>
+  </section>
+
+  <!-- 14 FALLECIMIENTO -->
+  <section class="section" id="fallecimiento">
+    <div class="section-header">
+      <div class="section-eyebrow">14 — 31 Diciembre 2022</div>
+      <h2 class="section-title">Fallecimiento y <span class="accent">Legado</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="two-col">
+      <div class="prose">
+        <p>El <strong>28 de diciembre de 2022</strong>, el Vaticano anunció que Benedicto XVI se encontraba en condiciones de salud "muy graves". Las horas siguientes fueron de vigilia mundial. Millones de fieles en todo el planeta oraron por el anciano papa emérito.</p>
+        <p>El <strong>31 de diciembre de 2022</strong>, a las <strong>9:34 de la mañana</strong>, Joseph Ratzinger —Benedicto XVI— falleció en el Monasterio Mater Ecclesiae del Vaticano. Tenía <strong>95 años</strong>. Sus últimas palabras, según su secretario personal el arzobispo Georg Gänswein, fueron: <em>"Jesé, ti amo"</em> —"Jesús, te amo"</em> en bávaro dialectal.</p>
+        <p>El papa Francisco anunció el fallecimiento con estas palabras: <em>"Con dolor comunico que ha fallecido esta mañana el papa emérito Benedicto XVI. Os pido que recéis por él."</em> Brevedad sobria, emoción contenida.</p>
+        <p>Su cuerpo fue expuesto en la Basílica de San Pedro durante tres días. Más de <strong>200.000 personas</strong> desfilaron ante sus restos. Los funerales fueron presididos por el papa Francisco el <strong>5 de enero de 2023</strong> en la Plaza de San Pedro, ante 50.000 fieles y representaciones de todo el mundo.</p>
+        <p>Fue enterrado en la <strong>cripta vaticana</strong>, en la tumba que había ocupado Juan Pablo II antes de su traslado. Un gesto de continuidad con su predecesor y amigo. Una vida de 95 años se cerraba en el mismo suelo donde están enterrados casi todos los sucesores de Pedro.</p>
+      </div>
+      <div>
+        <div class="highlight">
+          <div class="highlight-title">✦ El primer papa emérito de la era moderna</div>
+          <p>Benedicto XVI abrió en la historia de la Iglesia una figura nueva: la del papa emérito. Su muerte como "papa emérito" y no como papa reinante también fue histórica —es el primero en morir en esa condición en la era contemporánea. La Iglesia deberá seguir reflexionando sobre esta institución que él inauguró.</p>
+        </div>
+        <div class="highlight" style="margin-top:1.5rem;">
+          <div class="highlight-title">✦ El teólogo que amó la verdad</div>
+          <p>Su epitafio oficial, sencillo y preciso: <em>"Benedictus XVI. Pontifex Maximus Servus Servorum Dei."</em> El siervo de los siervos de Dios. El hombre que siendo el más poderoso de la Iglesia se definió siempre como servidor. Un teólogo que creyó con toda su inteligencia y toda su alma.</p>
+        </div>
+        <div class="highlight" style="margin-top:1.5rem;">
+          <div class="highlight-title">✦ Su legado intelectual</div>
+          <p>Más de sesenta obras, tres encíclicas, decenas de exhortaciones, discursos y documentos mayores. La revista <em>Communio</em>, fundada con Hans Urs von Balthasar, que sigue siendo referencia teológica mundial. Una visión de la Iglesia como comunidad de la verdad y el amor que continuará siendo fuente de inspiración por generaciones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <div class="final-section">
+    <div class="final-glow"></div>
+    <div class="final-cross"></div>
+    <p class="requiescat">Requiescat in Pace</p>
+    <p class="in-pace">† 31 de Diciembre de 2022 †</p>
+    <br><br>
+    <div style="max-width:680px; margin:0 auto;">
+      <div class="quote-block" style="text-align:left;">
+        <p>"El mundo cambiará cuando los hombres cambien. Y los hombres cambiarán cuando se conviertan. Y se convertirán cuando descubran que hay algo por lo que vale la pena morir. Y eso sólo lo da Dios."</p>
+        <cite>— Joseph Ratzinger</cite>
+      </div>
+    </div>
+    <br>
+    <p style="font-family:'Inter',sans-serif; font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,245,245,0.25);">Natus Marktl am Inn · XVI Aprilis MCMXXVII</p>
+    <p style="font-family:'Inter',sans-serif; font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,245,245,0.25);">Defunctus Civitate Vaticana · XXXI Decembris MMXXII</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Benedicto XVI — In Memoriam</div>
+    <div class="footer-copy">Una vida al servicio de la Verdad y la Fe · Joseph Aloisius Ratzinger 1927–2022</div>
+  </footer>
+
+</main>
+
+<script>
+  /* ── SIDEBAR TOGGLE ── */
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('visible');
+  }
+
+  /* ── SCROLL TO SECTION ── */
+  function goTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = 70;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+    // Close sidebar on mobile
+    if (window.innerWidth <= 900) {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('visible');
+    }
+  }
+
+  /* ── PROGRESS BAR ── */
+  window.addEventListener('scroll', () => {
+    const el = document.documentElement;
+    const pct = (window.scrollY / (el.scrollHeight - el.clientHeight)) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+
+  /* ── ACTIVE SIDEBAR LINK ── */
+  const sections = document.querySelectorAll('section[id], div[id="fallecimiento"]');
+  const links = document.querySelectorAll('.sidebar-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        links.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('onclick').includes(`'${id}'`));
+        });
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '-60px 0px -40% 0px' });
+
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+  /* ── ANIMATE ON SCROLL ── */
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.timeline-item, .card, .pillar').forEach(el => {
+    animObserver.observe(el);
+  });
+</script>
+</body>
+</html>

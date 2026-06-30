@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Divinidad de Cristo en las Epístolas Católicas</title>
+<style>
+  :root{
+    --black:#0a0a0a; --dark:#111; --panel:#181818; --card:#1c1c1c;
+    --gold:#d4a017; --gold-light:#f0c040; --gold-dim:#8a6610;
+    --white:#f5f5f0; --white-soft:#d8d4c8; --white-dim:#9a9488;
+    --border:#2a2a1a; --border-gold:rgba(212,160,23,.35); --red:#9b2020;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--white);background:var(--black);line-height:1.7;}
+
+  #progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));width:0%;z-index:2000;transition:width .08s linear;}
+
+  .layout{display:flex;min-height:100vh;}
+  main{flex:1;max-width:1020px;margin:0 auto;transition:margin-left .25s ease;}
+
+  #tocToggle{position:fixed;top:14px;left:14px;z-index:1001;width:44px;height:44px;border-radius:8px;border:1.5px solid var(--gold-dim);cursor:pointer;background:var(--panel);color:var(--gold);font-size:19px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.5);transition:left .25s ease,background .15s;}
+  #tocToggle:hover{background:var(--card);border-color:var(--gold);}
+
+  nav#toc{width:320px;flex-shrink:0;background:var(--panel);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;padding:68px 14px 28px;z-index:999;transform:translateX(-100%);transition:transform .25s ease;box-shadow:4px 0 30px rgba(0,0,0,.6);border-right:1px solid var(--border-gold);}
+  nav#toc.open{transform:translateX(0);}
+  body.toc-open main{margin-left:320px;}
+  body.toc-open #tocToggle{left:334px;}
+
+  #tocSearch{width:100%;padding:9px 12px;border-radius:6px;border:1px solid var(--border-gold);background:rgba(255,255,255,.04);color:var(--white);font-size:13px;font-family:Helvetica,Arial,sans-serif;margin-bottom:14px;outline:none;}
+  #tocSearch::placeholder{color:var(--white-dim);}
+  #tocSearch:focus{border-color:var(--gold);background:rgba(212,160,23,.07);}
+
+  nav#toc h2{font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin:0 0 10px;opacity:.8;}
+  nav#toc ul{list-style:none;padding:0;margin:0;}
+  nav#toc li{margin:0;}
+  nav#toc a{display:block;color:var(--white-soft);text-decoration:none;font-size:12.5px;font-family:Helvetica,Arial,sans-serif;padding:6px 10px;border-radius:5px;transition:background .12s,color .12s;border-left:3px solid transparent;line-height:1.35;}
+  nav#toc a.lvl3{font-size:11.5px;color:var(--white-dim);padding-left:14px;}
+  nav#toc a:hover{background:rgba(212,160,23,.1);color:var(--gold-light);}
+  nav#toc a.active{background:rgba(212,160,23,.15);color:var(--gold-light);border-left-color:var(--gold);}
+
+  nav#toc .group{margin-bottom:2px;}
+  nav#toc .group-head{display:flex;align-items:center;justify-content:space-between;gap:6px;cursor:pointer;padding:7px 10px;border-radius:5px;font-family:Helvetica,Arial,sans-serif;font-size:13px;font-weight:bold;color:var(--white-soft);transition:background .12s;user-select:none;}
+  nav#toc .group-head:hover{background:rgba(255,255,255,.05);}
+  nav#toc .group-head .chev{font-size:9px;color:var(--gold);transition:transform .2s;flex-shrink:0;}
+  nav#toc .group.open>.group-head .chev{transform:rotate(90deg);}
+  nav#toc .group-body{max-height:0;overflow:hidden;transition:max-height .25s ease;padding-left:6px;border-left:2px solid rgba(212,160,23,.15);margin-left:12px;}
+  nav#toc .group.open>.group-body{max-height:1800px;}
+  nav#toc.searching .group-body{max-height:1800px !important;}
+  nav#toc.searching li.no-match{display:none;}
+  nav#toc.searching .group:not(.has-match){display:none;}
+
+  #tocOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:998;}
+  body.toc-open #tocOverlay{display:block;}
+
+  .cover{text-align:center;padding:100px 48px 70px;background:linear-gradient(170deg,#0d0d00 0%,#0a0a0a 60%,#110a00 100%);border-bottom:1px solid var(--border-gold);position:relative;overflow:hidden;}
+  .cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 40%,rgba(212,160,23,.07),transparent);pointer-events:none;}
+  .cover-eyebrow{font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin:0 0 18px;}
+  .cover h1{font-size:38px;color:var(--gold-light);margin:0 0 6px;line-height:1.15;text-shadow:0 0 40px rgba(212,160,23,.3);}
+  .cover h1.sub{font-size:21px;color:var(--white-soft);margin:0 0 24px;font-weight:normal;}
+  .cover-rule{width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 22px;}
+  .cover-tag{color:var(--white-dim);font-style:italic;font-size:15px;margin:0 0 8px;}
+  .cover-meta{color:var(--white-dim);font-size:12px;margin-top:36px;font-family:Helvetica,Arial,sans-serif;letter-spacing:.5px;}
+
+  .page{padding:52px 60px;}
+  h1.section{background:var(--panel);color:var(--gold-light);font-family:Helvetica,Arial,sans-serif;font-size:17px;padding:13px 20px;border-radius:6px;margin:0 0 18px;border-left:4px solid var(--gold);letter-spacing:.4px;}
+  h2.sub{color:var(--gold);font-size:15px;margin:30px 0 12px;border-bottom:1px solid var(--border-gold);padding-bottom:5px;font-family:Helvetica,Arial,sans-serif;}
+  h3.sub3{color:var(--white-soft);font-size:13.5px;margin:18px 0 8px;font-family:Helvetica,Arial,sans-serif;}
+  p{text-align:justify;margin:0 0 14px;font-size:15px;color:var(--white-soft);}
+  p b{color:var(--gold-light);}
+  em,i{color:var(--white-dim);}
+  hr.gold{border:none;border-top:1px solid var(--border-gold);margin:28px 0;}
+
+  .defgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px;margin:14px 0 24px;}
+  .defcard{background:var(--card);border:1px solid var(--border-gold);border-radius:8px;padding:13px 15px;border-top:3px solid var(--gold-dim);}
+  .defcard .term{font-family:Helvetica,Arial,sans-serif;font-weight:bold;color:var(--gold-light);font-size:13px;margin:0 0 6px;display:flex;align-items:center;gap:6px;}
+  .defcard .term::before{content:"§";color:var(--gold-dim);font-size:12px;}
+  .defcard .def{font-size:13px;text-align:justify;margin:0;color:var(--white-soft);}
+
+  .versecard{background:var(--card);border:1px solid var(--border-gold);border-radius:9px;padding:0;margin:22px 0;overflow:hidden;}
+  .versecard .vheader{background:linear-gradient(90deg,var(--gold-dim),rgba(138,102,16,.4));color:var(--black);padding:10px 18px;font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:13.5px;letter-spacing:.3px;}
+  .versecard .vbody{padding:16px 20px;}
+  .versecard .greek{background:rgba(212,160,23,.06);border-left:3px solid var(--gold);padding:10px 16px;margin:10px 0;border-radius:0 6px 6px 0;font-style:italic;color:var(--gold-light);font-size:14px;}
+  .versecard .vtext{font-style:italic;color:var(--white-soft);font-size:14.5px;margin:8px 0;}
+  .versecard .vlabel{font-family:Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 4px;}
+
+  .syllogism{background:var(--card);border:1px solid var(--border-gold);border-radius:8px;padding:16px 20px;margin:18px 0;}
+  .syllogism .label{font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:11.5px;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;}
+  .syllogism .premise{color:var(--white-soft);font-size:14px;margin:5px 0;}
+  .syllogism .premise b{color:var(--gold-light);}
+  .syllogism hr{border:none;border-top:1px solid var(--gold-dim);margin:10px 0;opacity:.6;}
+  .syllogism .conclusion{color:var(--gold-light);font-weight:bold;font-size:14.5px;margin:6px 0;}
+  .syllogism .nota{color:var(--white-dim);font-style:italic;font-size:12.5px;margin-top:8px;}
+
+  .master-syl{background:linear-gradient(145deg,#1a1400,#111100);border:2px solid var(--gold);border-radius:10px;padding:28px 32px;margin:28px 0;box-shadow:0 0 40px rgba(212,160,23,.15);}
+  .master-syl .master-title{font-family:Helvetica,Arial,sans-serif;font-size:13px;font-weight:bold;color:var(--gold-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;text-align:center;}
+  .master-syl .mp{display:flex;gap:12px;align-items:baseline;margin:10px 0;font-size:14px;color:var(--white-soft);}
+  .master-syl .mp-num{flex-shrink:0;width:52px;font-family:Helvetica,Arial,sans-serif;font-size:11.5px;color:var(--gold-dim);font-weight:bold;text-align:right;}
+  .master-syl hr{border:none;border-top:2px solid var(--gold);margin:18px 0;opacity:.5;}
+  .master-syl .qed{font-size:15.5px;color:var(--gold-light);font-weight:bold;border-left:4px solid var(--gold);padding-left:14px;margin-top:10px;line-height:1.6;}
+
+  .highlight{background:var(--card);border:1px solid var(--border-gold);border-radius:7px;padding:16px 22px;margin:16px 0;font-size:14.5px;color:var(--white-soft);}
+  .highlight.gold{border-color:var(--gold);background:rgba(212,160,23,.06);}
+  .highlight.red{border-color:var(--red);background:rgba(155,32,32,.07);}
+
+  .patristic{background:rgba(255,255,255,.02);border:1px dashed var(--border-gold);border-radius:6px;padding:12px 18px;margin:10px 0;font-size:13.5px;color:var(--white-dim);}
+  .patristic .pname{font-family:Helvetica,Arial,sans-serif;font-weight:bold;color:var(--gold-dim);font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;}
+
+  .lineblock{background:var(--card);border:1px solid var(--border-gold);border-radius:6px;padding:14px 18px;margin:14px 0;border-top:4px solid var(--gold-dim);}
+  .lineblock h4{font-family:Helvetica,Arial,sans-serif;color:var(--black);background:var(--gold);display:inline-block;padding:4px 12px;border-radius:3px;margin:0 0 8px;font-size:13px;}
+  .lineblock ul{margin:6px 0 0;padding-left:20px;font-size:13.5px;color:var(--white-soft);}
+  .lineblock li{margin-bottom:7px;text-align:justify;}
+
+  .obj{color:var(--red);font-style:italic;margin:18px 0 5px;font-size:15px;}
+  .resp{color:var(--white-soft);margin:0 0 16px;font-size:14.5px;padding-left:16px;border-left:3px solid var(--gold-dim);}
+  .resp b{color:var(--gold-light);}
+  .conc-item{margin-bottom:12px;font-size:15px;color:var(--white-soft);}
+  .conc-item b{color:var(--gold-light);}
+  .final{text-align:center;color:var(--white-dim);font-style:italic;font-size:13px;margin-top:32px;}
+  table.tbl{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:13px;}
+  table.tbl th{background:var(--panel);color:var(--gold-light);padding:9px 11px;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:12px;border-bottom:2px solid var(--gold-dim);}
+  table.tbl td{padding:9px 11px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--white-soft);}
+  table.tbl tr:hover td{background:rgba(212,160,23,.04);}
+  section{scroll-margin-top:24px;}
+  h2.sub{scroll-margin-top:24px;}
+  @media(max-width:860px){
+    body.toc-open main{margin-left:0;}
+    body.toc-open #tocToggle{left:14px;}
+    nav#toc{width:88%;max-width:340px;}
+    .page{padding:30px 22px;}
+    .defgrid{grid-template-columns:1fr;}
+    .master-syl{padding:18px 16px;}
+    .cover h1{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<button id="tocToggle" title="Índice (M)">☰</button>
+<div id="tocOverlay"></div>
+<div class="layout">
+
+<nav id="toc">
+  <h2>Índice de contenidos</h2>
+  <input type="text" id="tocSearch" placeholder="Buscar… (ej. '2 Pedro 1:1')">
+  <ul>
+    <li><a href="#portada">Portada</a></li>
+    <li><a href="#intro">Introducción y método</a></li>
+    <li><a href="#defs">Glosario de términos</a></li>
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>I. Las Epístolas de Pedro</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a class="lvl3" href="#v-2p1-1">2 Pedro 1:1 — Nuestro Dios y Salvador</a></li>
+          <li><a class="lvl3" href="#v-2p1-2">2 Pedro 1:2 — Distinción y contraste deliberado</a></li>
+          <li><a class="lvl3" href="#v-2p3-18">2 Pedro 3:18 — Doxología final a Cristo</a></li>
+          <li><a class="lvl3" href="#v-1p1-2">1 Pedro 1:2 — Fórmula trinitaria</a></li>
+          <li><a href="#pedro-padres">Recepción patrística</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>II. Las Epístolas de Juan</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a class="lvl3" href="#v-1jn5-20">1 Juan 5:20 — Este es el Dios verdadero</a></li>
+          <li><a class="lvl3" href="#v-1jn5-7">1 Juan 5:7-8 — Comma Johanneum</a></li>
+          <li><a class="lvl3" href="#v-1jn1-1">1 Juan 1:1-2 — La Vida eterna manifestada</a></li>
+          <li><a class="lvl3" href="#v-2jn1-9">2 Juan 1:9 — La doctrina de Cristo</a></li>
+          <li><a href="#juan-padres">Recepción patrística</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li>
+      <div class="group" data-default="open">
+        <div class="group-head"><span>III. La Epístola de Judas</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a class="lvl3" href="#v-jd1-4">Judas 1:4 — Único Soberano, Jesucristo</a></li>
+          <li><a class="lvl3" href="#v-jd1-5">Judas 1:5 — Jesús salvó a Israel del Éxodo</a></li>
+          <li><a class="lvl3" href="#v-jd1-25">Judas 1:24-25 — Doxología final</a></li>
+          <li><a href="#judas-padres">Recepción patrística</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li>
+      <div class="group">
+        <div class="group-head"><span>IV. La Epístola de Santiago</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a class="lvl3" href="#v-stg1-1">Santiago 1:1 — Siervo de Dios y de Jesucristo</a></li>
+          <li><a class="lvl3" href="#v-stg2-1">Santiago 2:1 — El Señor de la Gloria</a></li>
+          <li><a href="#stg-padres">Recepción patrística</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li>
+      <div class="group">
+        <div class="group-head"><span>V. Trinidad y Espíritu Santo</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a href="#trin-1p1-2">1 Pedro 1:2 — Obra trinitaria</a></li>
+          <li><a href="#trin-jd1-20">Judas 1:20-21 — Estructura trinitaria</a></li>
+          <li><a href="#trin-1jn4-2">1 Juan 4:2 — El Espíritu que confiesa</a></li>
+          <li><a href="#trin-es">El Espíritu Santo: personalidad y divinidad</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li>
+      <div class="group">
+        <div class="group-head"><span>VI. Objeciones y respuestas</span><span class="chev">▶</span></div>
+        <div class="group-body"><ul>
+          <li><a href="#obj1">Obj. 1 — 2 Pe 1:1 distingue dos personas</a></li>
+          <li><a href="#obj2">Obj. 2 — 1 Jn 5:20 apunta al Padre</a></li>
+          <li><a href="#obj3">Obj. 3 — El Comma es espurio</a></li>
+          <li><a href="#obj4">Obj. 4 — Judas 5 dice «el Señor»</a></li>
+          <li><a href="#obj5">Obj. 5 — Santiago no llama Dios a Jesús</a></li>
+          <li><a href="#obj6">Obj. 6 — Títulos honoríficos, no ontológicos</a></li>
+        </ul></div>
+      </div>
+    </li>
+    <li><a href="#sintesis">VII. Síntesis: Mapa de la convergencia</a></li>
+    <li><a href="#silogismo-maestro">VIII. Silogismo Maestro</a></li>
+    <li><a href="#conclusion">IX. Conclusión</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="portada" class="cover">
+  <p class="cover-eyebrow">Apologética cristológica · Epístolas Católicas</p>
+  <h1>LA DIVINIDAD DE CRISTO</h1>
+  <h1 class="sub">En las Epístolas de Pedro, Juan, Judas y Santiago<br>(con exclusión deliberada del corpus paulino)</h1>
+  <div class="cover-rule"></div>
+  <p class="cover-tag">Análisis gramatical griego · Recepción patrística · Silogística formal</p>
+  <p class="cover-tag">Con sección sobre la Trinidad completa y la persona del Espíritu Santo</p>
+  <p class="cover-meta">Tratado de cristología neotestamentaria · Edición técnica extensa</p>
+</section>
+
+<div class="page">
+
+<section id="intro">
+  <h1 class="section">INTRODUCCIÓN Y MÉTODO</h1>
+  <p>La apologética trinitaria recurre con frecuencia al corpus paulino — Filipenses 2:6-11, Colosenses 1:15-20, Tito 2:13 — para establecer la divinidad de Cristo. Esta estrategia, aunque legítima, deja una laguna explotada por el antitrinitarismo moderno: la sugerencia de que la cristología alta es una innovación paulina, ajena a la predicación original de los apóstoles más cercanos a Jesús — Pedro, Juan, y los hermanos del Señor, Santiago y Judas.</p>
+  <p>Este tratado cierra deliberadamente esa laguna excluyendo a Pablo de su evidencia primaria. El argumento es, por tanto, <b>más fuerte por ser más restringido</b>: si la divinidad de Cristo puede demostrarse exclusivamente desde las llamadas «epístolas católicas» (1-2 Pedro, 1-3 Juan, Judas, Santiago), entonces la cristología alta no depende de Pablo, sino que pertenece al núcleo apostólico más amplio, incluyendo a quienes convivieron con Jesús en su ministerio terrenal (Pedro, Juan) y a su propia familia carnal (Santiago, Judas — «hermanos del Señor», Mc 6:3).</p>
+  <p>El método combina tres niveles: <b>(1)</b> análisis gramatical del texto griego original, con especial atención a la regla de Granville Sharp y a los antecedentes pronominales; <b>(2)</b> recepción patrística — cómo los Padres de la Iglesia (Policarpo, Ireneo, Clemente de Alejandría, Orígenes) leyeron estos textos en los siglos II-III; y <b>(3)</b> formalización silogística de cada argumento, culminando en un Silogismo Maestro de ocho premisas. En cada sección se señala con precisión el peso relativo de cada argumento: primario (gramática directa), secundario (contexto literario) o condicionado (dependiente de variante textual).</p>
+  <hr class="gold">
+</section>
+
+<section id="defs">
+  <h1 class="section">GLOSARIO DE TÉRMINOS FUNDAMENTALES</h1>
+  <div class="defgrid">
+    <div class="defcard"><p class="term">Regla de Granville Sharp</p><p class="def">Regla gramatical griega (Sharp, 1798, validada modernamente por Daniel Wallace): cuando dos sustantivos singulares personales no-propios están unidos por καί y el primero lleva artículo definido mientras el segundo no, ambos se refieren a la misma persona. Activa la identificación «Dios y Salvador = Jesucristo» en 2 Pe 1:1 y «único Soberano y Señor = Jesucristo» en Jud 1:4.</p></div>
+    <div class="defcard"><p class="term">Antecedente pronominal (houtos)</p><p class="def">οὗτος («este») apunta por defecto gramatical al referente más próximo en la cláusula anterior, salvo que el contexto lo contradiga. En 1 Jn 5:20, el antecedente inmediato es «Ἰησοῦ Χριστῷ» (Jesucristo), lo que convierte «este es el Dios verdadero» en predicación directa de Cristo.</p></div>
+    <div class="defcard"><p class="term">Doxología litúrgica</p><p class="def">Fórmula «a él sea la gloria por los siglos, amén» reservada en el judaísmo del Segundo Templo exclusivamente a YHWH. Su aplicación directa a Jesucristo en 2 Pe 3:18 y Jud 1:24-25 es un indicador cúltico de primer orden: se le otorga el tipo de honor reservado a Dios.</p></div>
+    <div class="defcard"><p class="term">Despotēs (δεσπότης)</p><p class="def">Término griego de soberanía absoluta, más fuerte que kyrios en algunos contextos. En la LXX designa casi exclusivamente la autoridad incondicional de YHWH sobre la creación (Job 5:8; Sab 6:7; Lc 2:29; Hch 4:24; Ap 6:10). Su aplicación a Jesucristo en Jud 1:4 es una de las afirmaciones de señorío absoluto más fuertes del NT.</p></div>
+    <div class="defcard"><p class="term">Kyrios (κύριος)</p><p class="def">En la Septuaginta, κύριος traduce el Tetragrámaton YHWH en más de 6.000 ocasiones. Aplicarlo a Jesús sin matización (Pedro, Juan, Judas, Santiago lo hacen sistemáticamente) transfiere en el marco semántico judío la identidad del Nombre divino del AT al Cristo del NT.</p></div>
+    <div class="defcard"><p class="term">Shekiná / Gloria</p><p class="def">La presencia visible gloriosa de YHWH manifestada en el AT (Éx 24:16-17; 40:34; 1 Re 8:11; Ez 1:28). Identificar a Jesucristo con «la Gloria» en Stg 2:1 (τῆς δόξης) sugiere su identificación con la Shekiná misma, no meramente con un reflejo o imagen de ella.</p></div>
+    <div class="defcard"><p class="term">Lectio difficilior</p><p class="def">Principio de crítica textual: cuando existen dos lecturas de un manuscrito, la más difícil teológicamente es probablemente la original, pues los copistas tendían a suavizar lo difícil, no a complicarlo. Aplicado a Jud 1:5: «Jesús» (que atribuye el Éxodo a Cristo preexistente) es más difícil que «el Señor», y por eso más probablemente original.</p></div>
+    <div class="defcard"><p class="term">Fórmula trinitaria implícita</p><p class="def">Pasaje que menciona coordinadamente al Padre, al Hijo y al Espíritu Santo en una estructura de agencia salvífica compartida, sin usar terminología posterior («Trinidad», «consubstancial»). 1 Pe 1:2 y Jud 1:20-21 son los ejemplos más claros en las epístolas católicas.</p></div>
+  </div>
+  <hr class="gold">
+</section>
+
+<!-- ═══════════ PEDRO ═══════════ -->
+<section id="sec1">
+  <h1 class="section">I. LAS EPÍSTOLAS DE PEDRO</h1>
+  <p>Pedro, el discípulo que confesó a Jesús como «el Cristo, el Hijo del Dios viviente» (Mt 16:16), que presenció la Transfiguración (2 Pe 1:16-18) y que negó a Jesús tres veces antes de ser restaurado (Jn 21:15-19), escribe con la autoridad de testigo ocular. Sus dos epístolas contienen algunas de las fórmulas cristológicas más explícitas de todo el NT no-paulino.</p>
+
+  <div class="versecard" id="v-2p1-1">
+    <div class="vheader">2 Pedro 1:1 — «Nuestro Dios y Salvador Jesucristo»</div>
+    <div class="vbody">
+      <p class="vtext">«Simón Pedro, siervo y apóstol de Jesucristo, a los que habéis alcanzado, por la justicia de nuestro Dios y Salvador Jesucristo, una fe igualmente preciosa que la nuestra.»</p>
+      <div class="greek">τοῦ Θεοῦ ἡμῶν καὶ Σωτῆρος Ἰησοῦ Χριστοῦ<br><span style="font-size:12px;color:var(--white-dim);">tou Theou hēmōn kai Sōtēros Iēsou Christou — "del Dios nuestro y Salvador Jesús Cristo"</span></div>
+      <div class="vlabel">Análisis gramatical — Regla de Granville Sharp</div>
+      <p class="vtext" style="font-style:normal;">La construcción sigue el patrón TSKS (artículo–sustantivo–καί–sustantivo): un solo artículo (τοῦ) gobierna «Θεοῦ» (Dios) y «Σωτῆρος» (Salvador), conectados por καί, seguidos del nombre propio «Ἰησοῦ Χριστοῦ». Ambos sustantivos son comunes pluralizables (theoi, sōtēres), no nombres propios, activando plenamente la regla. El resultado gramatical: los dos títulos se predican de una única persona, Jesucristo. Daniel Wallace (<i>Greek Grammar Beyond the Basics</i>, 1996) confirma que 2 Pe 1:1 es uno de los casos canónicos de la regla, sin excepciones técnicas aplicables.</p>
+      <div class="vlabel">Confirmación por coherencia estilística interna</div>
+      <p class="vtext" style="font-style:normal;">Pedro emplea la misma estructura TSKS en tres pasajes más de la misma epístola: «nuestro Señor y Salvador Jesucristo» (1:11; 2:20; 3:18). En ninguno de ellos disputa nadie que «Señor» y «Salvador» se refieren a Jesús únicamente. La coherencia estilística exige tratar 1:1 de forma idéntica — sería inconsistente leer cuatro instancias idénticas de manera diferente sin razón gramatical que lo justifique.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="v-2p1-2">
+    <div class="vheader">2 Pedro 1:2 — La distinción personal en el versículo inmediatamente siguiente</div>
+    <div class="vbody">
+      <p class="vtext">«Gracia y paz os sean multiplicadas, en el conocimiento de Dios y de nuestro Señor Jesús.»</p>
+      <div class="greek">ἐν ἐπιγνώσει τοῦ Θεοῦ καὶ Ἰησοῦ τοῦ Κυρίου ἡμῶν<br><span style="font-size:12px;color:var(--white-dim);">— aquí "Dios" y "Jesús" llevan artículos separados: dos personas distinguibles</span></div>
+      <div class="vlabel">El contraste deliberado confirma el control gramatical de Pedro</div>
+      <p class="vtext" style="font-style:normal;">El v. 2 distingue gramaticalmente al Padre («Dios») del Hijo («nuestro Señor Jesús») mediante dos artículos independientes, sin el patrón TSKS. La alternancia deliberada de estructura entre vv. 1 y 2 demuestra control sintáctico consciente: Pedro <b>sabe distinguir</b> cuando quiere (v. 2: distinción personal) y <b>sabe identificar</b> cuando quiere (v. 1: identidad ontológica). Esta es exactamente la gramática que la teología trinitaria clásica predice: una sola naturaleza divina (v. 1: Jesús es Dios) y dos Personas distinguibles (v. 2: el Padre y el Hijo). La variación no es error del autor sino argumento del exegeta.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="v-2p3-18">
+    <div class="vheader">2 Pedro 3:18 — Doxología litúrgica dirigida a Jesucristo</div>
+    <div class="vbody">
+      <p class="vtext">«Antes bien, creced en la gracia y el conocimiento de nuestro Señor y Salvador Jesucristo. A él sea gloria ahora y hasta el día de la eternidad. Amén.»</p>
+      <div class="vlabel">Peso cúltico de la doxología</div>
+      <p class="vtext" style="font-style:normal;">«A él sea gloria... amén» es la fórmula doxológica que en el judaísmo del Segundo Templo estaba reservada exclusivamente a YHWH (cf. Sal 89:52; Dan 2:20; 4 Mac 18:24). Pedro cierra su última epístola dirigiendo exactamente esta fórmula a «nuestro Señor y Salvador Jesucristo» — el antecedente directo del pronombre «a él» (αὐτῷ) — sin mediación ni distinción. Un judío monoteísta que aplicara esta fórmula a alguien que no fuera YHWH habría cometido, en su propio marco teológico, un acto de idolatría. Pedro no lo percibe como tal: lo formula con naturalidad, lo cual implica que en su cristología Jesús ya pertenece a la identidad de YHWH.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="v-1p1-2">
+    <div class="vheader">1 Pedro 1:2 — Estructura trinitaria de la elección salvífica</div>
+    <div class="vbody">
+      <p class="vtext">«Elegidos según la presciencia de Dios Padre en santificación del Espíritu, para obedecer y ser rociados con la sangre de Jesucristo: Gracia y paz os sean multiplicadas.»</p>
+      <div class="greek">κατὰ πρόγνωσιν Θεοῦ Πατρός, ἐν ἁγιασμῷ Πνεύματος, εἰς ὑπακοὴν καὶ ῥαντισμὸν αἵματος Ἰησοῦ Χριστοῦ<br><span style="font-size:12px;color:var(--white-dim);">Tres preposiciones (κατά / ἐν / εἰς) distinguen tres agencias causales: Padre, Espíritu, Hijo</span></div>
+      <div class="vlabel">Causalidad tripartita coordinada</div>
+      <p class="vtext" style="font-style:normal;">Las tres preposiciones griegas estructuran tres modos distintos de agencia salvífica: el Padre presupone (κατά = causa electiva), el Espíritu santifica (ἐν = causa aplicativa), el Hijo redime con su sangre (εἰς = causa meritoria). Las tres agencias tienen el mismo rango sintáctico — ninguna aparece en posición subordinada respecto a las otras — lo que presupone, sin terminología doctrinal posterior, que las tres Personas operan al mismo nivel de agencia divina en la economía de la salvación. Analizado en profundidad en la Sección V.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="pedro-padres">Recepción patrística — Epístolas de Pedro</h2>
+  <div class="patristic">
+    <div class="pname">Clemente de Alejandría (c. 150–215 d.C.) — Adumbrationes in Epistulam Petri</div>
+    Comentando 2 Pe 1:1, Clemente afirma sin ambigüedad que Pedro confiesa «la justicia de nuestro Dios y Salvador» como predicado de un único sujeto: el Verbo encarnado Jesucristo, quien «hizo todas las cosas según la voluntad del Padre». No contempla la lectura de dos personas en el versículo.
+  </div>
+  <div class="patristic">
+    <div class="pname">Cirilo de Alejandría (c. 376–444 d.C.) — Contra Nestorio I</div>
+    Usa 2 Pe 1:1 explícitamente en la controversia nestoriana: la unidad gramatical de «Dios y Salvador» en el versículo prueba que el mismo sujeto es Dios y es Salvador — no hay separación entre una hipóstasis divina que salva y una hipóstasis humana que sufre. El texto de Pedro cierra el nestorianismo por la vía gramatical antes de que lo haga el Concilio de Éfeso (431).
+  </div>
+  <div class="patristic">
+    <div class="pname">Orígenes (c. 184–253 d.C.) — Comentario al Evangelio de Juan</div>
+    Cita 2 Pe 1:1 junto con Jn 1:1 y Jn 20:28 como tríptico de textos que demuestran contra los monarquianos que el Hijo es «verdadero Dios» — no un nombre honorífico vacío sino predicación de naturaleza — distinto en persona del Padre pero idéntico en naturaleza divina.
+  </div>
+</section>
+
+<!-- ═══════════ JUAN ═══════════ -->
+<section id="sec2">
+  <h1 class="section">II. LAS EPÍSTOLAS DE JUAN</h1>
+  <p>El discípulo amado que redactó el evangelio más alto del canon — abriéndolo con «en el principio era el Verbo, y el Verbo era Dios» — mantiene la misma densidad cristológica en sus tres epístolas. Notablemente, en 1 Juan la identidad correcta de Jesús no es un tema periférico sino el <b>criterio de ortodoxia</b> frente al cisma (1 Jn 2:18-23; 4:1-3; 2 Jn 1:7-11): confesar o negar quién es Jesús determina si se tiene o no se tiene a Dios.</p>
+
+  <div class="versecard" id="v-1jn5-20">
+    <div class="vheader">1 Juan 5:20 — «Este es el Dios verdadero y la vida eterna»</div>
+    <div class="vbody">
+      <p class="vtext">«Pero sabemos que el Hijo de Dios ha venido y nos ha dado entendimiento para conocer al que es verdadero; y estamos en el verdadero, en su Hijo Jesucristo. Este es el verdadero Dios y la vida eterna.»</p>
+      <div class="greek">οὗτός ἐστιν ὁ ἀληθινὸς Θεὸς καὶ ζωὴ αἰώνιος<br><span style="font-size:12px;color:var(--white-dim);">houtos estin ho alēthinos Theos kai zōē aiōnios — "este es el verdadero Dios y vida eterna"</span></div>
+      <div class="vlabel">Análisis del antecedente pronominal</div>
+      <p class="vtext" style="font-style:normal;">El pronombre demostrativo οὗτος («este») tiene como antecedente gramatical <b>inmediato</b> «Ἰησοῦ Χριστῷ» (Jesucristo), la frase nominal más próxima antes de la cláusula. La regla por defecto en koiné es el antecedente más próximo (cf. idéntico patrón en 2 Jn 1:7: «este — houtos — es el engañador y el anticristo», donde «este» señala sin duda al «engañador» recién mencionado). Murray Harris (<i>Jesus as God</i>, 1992) concluye que aunque la ambigüedad es real, la consideración más pesada es que «vida eterna» en 5:20 se identifica en 1 Jn 1:2 explícitamente con la persona del Hijo manifestado («la vida eterna que estaba con el Padre y nos fue manifestada»), cerrando la lectura cristológica mediante la estructura literaria de la propia carta.</p>
+      <div class="vlabel">Inclusio literaria entre 1:1-2 y 5:20</div>
+      <p class="vtext" style="font-style:normal;">La epístola abre con «la vida eterna que estaba con el Padre y nos fue manifestada» (1:2) — referida a la persona de Cristo, palpable e histórica. Cierra con «este es el Dios verdadero y la vida eterna» (5:20). La <i>inclusio</i> es deliberada: el mismo sujeto que en 1:2 es «Vida eterna manifestada» es en 5:20 «el Dios verdadero». Juan enmarca toda la carta entre dos predicaciones de Cristo como «vida eterna», y solo la segunda añade explícitamente «el Dios verdadero». La cristología alta no es accidental ni tardía en 1 Juan: es su armazón literario.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="v-1jn5-7">
+    <div class="vheader">1 Juan 5:7-8 — El testimonio triple (Comma Johanneum)</div>
+    <div class="vbody">
+      <p class="vtext">«Porque tres son los que dan testimonio <i>[en el cielo: el Padre, el Verbo y el Espíritu Santo; y estos tres son uno. Y tres son los que dan testimonio en la tierra]</i>: el Espíritu, el agua y la sangre; y estos tres concuerdan.»</p>
+      <div class="vlabel">Estado textual — documentado con rigor</div>
+      <p class="vtext" style="font-style:normal;">El texto entre corchetes — conocido como <i>Comma Johanneum</i> — está ausente en la totalidad de los manuscritos griegos anteriores al siglo XIV (incluidos los grandes unciales: Sinaítico, Vaticano, Alejandrino, Éfrem). Aparece solo en manuscritos griegos tardíos y en parte de la tradición latina occidental. El consenso de la crítica textual moderna — incluyendo eruditos confesionalmente conservadores como Bruce Metzger, Kurt Aland y Gordon Fee — lo considera una glosa marginal latina absorbida tardíamente al texto griego. <b>Este tratado no lo emplea como evidencia primaria.</b></p>
+      <div class="vlabel">Valor histórico-teológico indirecto</div>
+      <p class="vtext" style="font-style:normal;">Se documenta aquí porque su inserción — ya en la tradición latina de los siglos IV-V, con primeras citas en Cipriano y Prisciliano — testifica que la lectura trinitaria explícita era tan natural en el contexto joánico que un comentarista la glosó marginalmente para clarificarla. Es evidencia de recepción patrística, no de texto original. El caso para la divinidad de Cristo en Juan se sostiene perfectamente sin el Comma, como demuestran los otros tres textos joánicos de esta sección.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="v-1jn1-1">
+    <div class="vheader">1 Juan 1:1-2 — La Vida eterna preexistente que se hizo palpar</div>
+    <div class="vbody">
+      <p class="vtext">«Lo que era desde el principio, lo que hemos oído, lo que hemos visto con nuestros ojos, lo que hemos contemplado, y palparon nuestras manos tocante al Verbo de vida — la vida fue manifestada, y la hemos visto, y testificamos, y os anunciamos la vida eterna, la cual estaba con el Padre, y nos fue manifestada.»</p>
+      <div class="vlabel">Doble predicación: eternidad + corporalidad en el mismo sujeto</div>
+      <p class="vtext" style="font-style:normal;">Juan predica de la misma realidad dos propiedades en aparente tensión máxima: (a) preexistencia eterna junto al Padre («lo que era desde el principio», «estaba con el Padre»), y (b) tangibilidad histórica y física («palparon nuestras manos», «hemos visto»). Esta doble predicación en un único sujeto — eternidad más corporeidad — es la estructura lógica exacta de la doctrina de la Encarnación: una única persona que es a la vez eterna y temporal, divina y humana. Es incompatible con cualquier cristología que reduzca a Jesús a una criatura temporal sin preexistencia personal, y con cualquier docetismo que reduzca su cuerpo a apariencia. Juan ataca simultáneamente en ambas direcciones desde la primera frase de la carta.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="v-2jn1-9">
+    <div class="vheader">2 Juan 1:9 — La doctrina de Cristo como criterio de posesión de Dios mismo</div>
+    <div class="vbody">
+      <p class="vtext">«Cualquiera que se extravía y no persevera en la doctrina de Cristo, no tiene a Dios; el que persevera en la doctrina de Cristo, ése sí tiene al Padre y al Hijo.»</p>
+      <div class="vlabel">Implicación estructural</div>
+      <p class="vtext" style="font-style:normal;">Juan establece una ecuación: «tener correctamente la doctrina de Cristo» equivale a «tener a Dios», y rechazarla equivale a «no tener a Dios». Esta equivalencia solo es coherente si el Hijo comparte la identidad divina de modo que tenerlo bien identificado sea constitutivo de tener a Dios mismo — no meramente un apéndice opcional de la fe. Un profeta o ángel creado no puede cumplir este papel: rechazar la identidad correcta de un mensajero creado no implicaría perder a Dios. Solo si Cristo pertenece a la identidad de Dios tiene sentido afirmar que negar quién es Cristo equivale a perder a Dios.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="juan-padres">Recepción patrística — Epístolas de Juan</h2>
+  <div class="patristic">
+    <div class="pname">Ireneo de Lyon (c. 130–202 d.C.) — Adversus Haereses III.16.8</div>
+    Cita 1 Jn 5:20 explícitamente contra los gnósticos cerintianos (que separaban el «Cristo celestial» del «hombre Jesús»), argumentando que «el mismo Jesucristo es verdadero Dios» y que Juan «no dejó lugar para ninguna separación entre el Cristo celestial y el Jesús histórico». Este uso de 1 Jn 5:20 por Ireneo — el más completo sistematizador del siglo II — confirma que la lectura cristológica del texto era la lectura apostólica normalizada, no una innovación posterior.
+  </div>
+  <div class="patristic">
+    <div class="pname">Policarpo de Esmirna (c. 69–155 d.C.) — Epístola a los Filipenses</div>
+    Policarpo conoció personalmente al apóstol Juan (según Ireneo, que cita a Policarpo en este dato). En su única epístola superviviente se dirige a Cristo con dobletes de divinidad-señorío («nuestro Señor y Dios Jesucristo») y en su martirio (c. 155 d.C.) ora directamente a Cristo con fórmulas que el judaísmo reservaba a YHWH. La cristología de Policarpo es la cristología de Juan, según el eslabón genealógico Juan → Policarpo → Ireneo, todos unánimes en la lectura alta.
+  </div>
+  <div class="patristic">
+    <div class="pname">Atanasio de Alejandría (c. 296–373 d.C.) — Discursos contra los Arrianos</div>
+    Usa 1 Jn 1:1-2 («la vida que estaba con el Padre») como prueba de la coeternidad del Hijo, argumentando que si la Vida (= el Hijo) «estaba con el Padre» desde «el principio», no puede haber habido «un tiempo en que el Hijo no existía» — lema arriano directamente refutado. El texto joánico no paulino es, para Atanasio, evidencia primaria independiente de Pablo.
+  </div>
+</section>
+
+<!-- ═══════════ JUDAS ═══════════ -->
+<section id="sec3">
+  <h1 class="section">III. LA EPÍSTOLA DE JUDAS</h1>
+  <p>Judas, «hermano de Jacobo» (Jud 1:1) y por tanto hermano carnal de Jesús según Mc 6:3, escribe la carta más breve del NT (25 versículos), pero con una densidad cristológica desproporcionada a su extensión. El hecho de que alguien que creció en la misma casa que Jesús en Nazaret lo confese con los títulos que analizamos a continuación es, biográficamente, un dato de peso único en toda la apologética cristológica.</p>
+
+  <div class="versecard" id="v-jd1-4">
+    <div class="vheader">Judas 1:4 — «Nuestro único Soberano y Señor, Jesucristo»</div>
+    <div class="vbody">
+      <p class="vtext">«Porque algunos hombres han entrado encubiertamente... hombres impíos que convierten en libertinaje la gracia de nuestro Dios, y niegan a Dios el único Soberano, y a nuestro Señor Jesucristo.»</p>
+      <div class="greek">τὸν μόνον δεσπότην καὶ κύριον ἡμῶν Ἰησοῦν Χριστὸν ἀρνούμενοι<br><span style="font-size:12px;color:var(--white-dim);">ton monon despotēn kai kyrion hēmōn Iēsoun Christon arnoumenoi — "al único Soberano y Señor nuestro, Jesús Cristo, negando"</span></div>
+      <div class="vlabel">Análisis gramatical — segunda instancia de la regla de Granville Sharp</div>
+      <p class="vtext" style="font-style:normal;">La estructura griega coloca «τὸν μόνον δεσπότην» (el único Soberano) y «κύριον ἡμῶν Ἰησοῦν Χριστόν» (nuestro Señor Jesucristo) bajo un único artículo acusativo (τόν) conectados por καί — estructura TSKS idéntica a 2 Pe 1:1. Richard Bauckham (<i>Jude, 2 Peter</i>, Word Biblical Commentary) concluye que la lectura unitaria es la más natural: «el único Soberano y nuestro Señor Jesucristo» son la misma persona. Jesucristo es identificado con el único Despotēs.</p>
+      <div class="vlabel">El peso del término Despotēs</div>
+      <p class="vtext" style="font-style:normal;">δεσπότης aparece en la LXX para la soberanía absoluta de YHWH (Job 5:8; Sab 6:7; Is 1:24) y en el NT exclusivamente para el señorío divino absoluto: el «Señor» que Simeón puede dejar morir ya que ha visto la salvación (Lc 2:29), la comunidad en oración que invoca «Δέσποτα» al presentar a Pedro y Juan ante el Sanedrín (Hch 4:24), los mártires que claman «Δέσποτα» ante el trono celestial (Ap 6:10). Judas no emplea un honorífico genérico: aplica a Jesús el término de soberanía absoluta que identifica a YHWH como dueño de la historia y de las vidas humanas.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="v-jd1-5">
+    <div class="vheader">Judas 1:5 — «Jesús» salvó al pueblo sacándolo de Egipto (variante textual)</div>
+    <div class="vbody">
+      <p class="vtext">«Mas quiero recordaros, ya que una vez lo habéis sabido, que el Señor <i>[var. Jesús]</i>, habiendo salvado al pueblo sacándolo de Egipto, después destruyó a los que no creyeron.»</p>
+      <div class="greek">[ὁ] Ἰησοῦς, λαὸν ἐκ γῆς Αἰγύπτου σώσας, τὸ δεύτερον τοὺς μὴ πιστεύσαντας ἀπώλεσεν<br><span style="font-size:12px;color:var(--white-dim);">"Jesús, habiendo salvado un pueblo de la tierra de Egipto, la segunda vez destruyó a los que no creyeron"</span></div>
+      <div class="vlabel">Estado del problema textual — argumentado sin evasión</div>
+      <p class="vtext" style="font-style:normal;">La lectura «Ἰησοῦς» (Jesús) como sujeto de la liberación del Éxodo está atestiguada por los manuscritos alejandrinos más antiguos y de mayor peso (Vaticano [B], Alejandrino [A], el papiro P72, la Vulgata Clementina en algunas ramas, las versiones coptas). La tradición bizantina posterior mayoritaria lee «κύριος» (el Señor). Las ediciones críticas modernas de mayor autoridad — NA28, ECM, UBS5/6, THGNT — prefieren «Ἰησοῦς» aplicando el principio de <i>lectio difficilior</i>: un copista tiene motivos para suavizar «Jesús hizo el Éxodo» convirtiéndolo en «el Señor hizo el Éxodo», pero no al revés. <b>Peso del argumento: probable pero condicionado</b> — el tratado no lo emplea como premisa del Silogismo Maestro.</p>
+      <div class="vlabel">Implicación cristológica si la lectura es original</div>
+      <p class="vtext" style="font-style:normal;">Si Judas escribió «Jesús», atribuye al Jesús preencarnado la salvación de Israel en el Éxodo — acto que el AT asigna exclusivamente a YHWH (Éx 14:30; Nm 14:29-35; Dt 1:30). Judas estaría en la misma línea que 1 Co 10:4 («la roca era Cristo») y Jn 8:58 («antes que Abraham fuese, yo soy»): Cristo activo en la historia veterotestamentaria como YHWH que guía y juzga. Incluso con la lectura «el Señor», el patrón de Judas de usar «kyrios» para Jesús en 1:4, 9, 14, 17, 21 y 25 hace que «el Señor que hizo el Éxodo» sea más naturalmente identificado con Jesús que con el Padre.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="v-jd1-25">
+    <div class="vheader">Judas 1:24-25 — Doxología final e inclusio con 1:4</div>
+    <div class="vbody">
+      <p class="vtext">«Y a aquel que es poderoso para guardaros sin caída, y presentaros sin mancha delante de su gloria con gran alegría, al único y sabio Dios, nuestro Salvador, sea gloria y majestad, dominio y autoridad, antes de toda la eternidad, y ahora, y por todos los siglos. Amén.»</p>
+      <div class="vlabel">Inclusio literaria con 1:4 y función doxológica</div>
+      <p class="vtext" style="font-style:normal;">Judas abrió su carta mencionando a «nuestro único Soberano (despotēs) y Señor Jesucristo» (1:4). La cierra dirigiendo gloria al «único y sabio Dios, nuestro Salvador» (1:25). La inclusio literaria — «único» (monos) enmarcando tanto el inicio como el final de la carta con un título de singularidad absoluta — refuerza la lectura unitaria de 1:4: el «único Soberano» y el «único Dios Salvador» son el mismo referente, Jesucristo. Manuscritos tardíos añaden «por medio de Jesucristo nuestro Señor» mediando la doxología, pero incluso estos añaden a Jesús en la estructura trinitaria de la doxología, no lo eliminan.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="judas-padres">Recepción patrística — Epístola de Judas</h2>
+  <div class="patristic">
+    <div class="pname">Clemente de Alejandría (c. 150–215 d.C.) — Stromata</div>
+    Cita la Epístola de Judas como canónica y apostólica, y en su comentario sobre el v. 4 entiende «despotēs» y «kyrios» como predicados ambos de Cristo, en el contexto de su teología del Logos encarnado como Soberano universal.
+  </div>
+  <div class="patristic">
+    <div class="pname">Orígenes (c. 184–253 d.C.) — De Principiis</div>
+    Trata Judas con autoridad canónica plena. Cita el v. 5 (en su forma «el Señor», que era la lectura predominante en su época) como evidencia de la actividad continua del Logos-Cristo a través de toda la historia de la salvación, en continuidad con los juicios veterotestamentarios de YHWH.
+  </div>
+</section>
+
+<!-- ═══════════ SANTIAGO ═══════════ -->
+<section id="sec4">
+  <h1 class="section">IV. LA EPÍSTOLA DE SANTIAGO</h1>
+  <p>Santiago «el Justo», hermano carnal de Jesús (Mc 6:3; Gá 1:19) y primer obispo de Jerusalén, escribe la epístola más centrada en ética práctica del NT. Su cristología explícita es deliberadamente contenida — es el género de una epístola sapiencial judeo-cristiana, no un tratado dogmático. Sin embargo, contiene dos textos de notable densidad cristológica precisamente porque emergen de forma natural en un contexto no-doctrinal: son datos, no argumentos. Y los datos biográficos del autor los hacen excepcionalmente significativos.</p>
+
+  <div class="versecard" id="v-stg1-1">
+    <div class="vheader">Santiago 1:1 — «Siervo de Dios y del Señor Jesucristo»</div>
+    <div class="vbody">
+      <p class="vtext">«Santiago, siervo de Dios y del Señor Jesucristo, a las doce tribus que están en la dispersión: Salud.»</p>
+      <div class="greek">Θεοῦ καὶ Κυρίου Ἰησοῦ Χριστοῦ δοῦλος<br><span style="font-size:12px;color:var(--white-dim);">Theou kai Kyriou Iēsou Christou doulos — "de Dios y del Señor Jesucristo siervo"</span></div>
+      <div class="vlabel">Peso biográfico del autodenominarse «siervo» de su propio hermano</div>
+      <p class="vtext" style="font-style:normal;">Santiago se presenta como δοῦλος — «siervo», «esclavo» — de dos sujetos coordinados gramaticalmente con idéntico rango: «Dios» (Θεοῦ) y «el Señor Jesucristo» (Κυρίου Ἰησοῦ Χριστοῦ). En el marco del AT, «siervo de YHWH» es el título de máxima dignidad religiosa: Moisés (Nm 12:7), Josué (Jos 1:1), David (Sal 78:70). Que Santiago, quien creció en la misma casa de Nazaret que Jesús, quien inicialmente no creía en él durante su ministerio (Jn 7:5), quien fue convertido por la aparición del Resucitado (1 Co 15:7), se presente en la apertura solemne de su carta como «esclavo» de ese mismo hermano — con idéntica gramática que usa para Dios — es un dato biográfico sin equivalente en la historia religiosa: solo la convicción de que su hermano era YHWH mismo puede explicar la naturalidad con que lo formula.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="v-stg2-1">
+    <div class="vheader">Santiago 2:1 — «La fe de nuestro Señor Jesucristo, el de la Gloria»</div>
+    <div class="vbody">
+      <p class="vtext">«Hermanos míos, que vuestra fe en nuestro Señor Jesucristo glorioso sea sin acepción de personas.»</p>
+      <div class="greek">τὴν πίστιν τοῦ Κυρίου ἡμῶν Ἰησοῦ Χριστοῦ τῆς δόξης<br><span style="font-size:12px;color:var(--white-dim);">tēn pistin tou Kyriou hēmōn Iēsou Christou tēs doxēs — "la fe del Señor nuestro Jesucristo de la Gloria"</span></div>
+      <div class="vlabel">El genitivo τῆς δόξης como identificación con la Shekiná</div>
+      <p class="vtext" style="font-style:normal;">El genitivo «τῆς δόξης» (de la Gloria) que califica a «nuestro Señor Jesucristo» es una construcción gramaticalmente inusual y teológicamente densa. Las traducciones que lo vierten como «glorioso» suavizan la fuerza del griego: Santiago dice literalmente «el Señor Jesucristo de la Gloria» — una aposición con la Gloria en mayúscula. En la tradición veterotestamentaria, «la Gloria» (ἡ δόξα / כָּבֹוד YHWH) es la Shekiná — la presencia manifiesta, tangible y gloriosa de YHWH mismo (Éx 24:16-17; 33:18-23; 40:34; 1 Re 8:11; Ez 1:28). Identificar a Jesucristo con «la Gloria» en términos absolutos, sin calificación, es afirmar que él es la Shekiná de YHWH en persona. Bauckham (<i>James</i>, New Testament Readings) y Davids (<i>Commentary on James</i>) coinciden en que esta es la implicación cristológica más alta de toda la epístola.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="stg-padres">Recepción patrística — Epístola de Santiago</h2>
+  <div class="patristic">
+    <div class="pname">Eusebio de Cesarea (c. 260–339 d.C.) — Historia Eclesiástica II.23</div>
+    Cita a Hegesipo (s. II) documentando el martirio de Santiago el Justo en Jerusalén (c. 62 d.C.): justo antes de ser lapidado, Santiago proclama públicamente que Jesús «está sentado en el cielo a la diestra del gran Poder y vendrá sobre las nubes del cielo» — combinando Sal 110:1 y Dan 7:13 en una confesión explícita de señorío celestial divino de su propio hermano. La cristología personal de Santiago, más allá de su epístola pastoral, era plenamente alta.
+  </div>
+  <div class="patristic">
+    <div class="pname">Beda el Venerable (c. 672–735 d.C.) — Comentario a la Epístola de Santiago</div>
+    Sobre Stg 2:1, interpreta «el Señor de la Gloria» como referencia directa a la naturaleza divina de Cristo, conectándolo con 1 Co 2:8 («crucificaron al Señor de gloria») para demostrar la coherencia cristológica entre Santiago y Pablo sin que uno dependa del otro literariamente.
+  </div>
+</section>
+
+<!-- ═══════════ TRINIDAD Y ES ═══════════ -->
+<section id="sec5">
+  <h1 class="section">V. LA TRINIDAD COMPLETA Y EL ESPÍRITU SANTO</h1>
+  <p>Además de los textos centrados en la divinidad del Hijo, las epístolas católicas contienen fórmulas en las que Padre, Hijo y Espíritu aparecen coordinados en una única estructura salvífica de rango funcional igual. Estas estructuras trinitarias <i>implícitas</i> son doctrinalmente significativas porque emergen de forma no-doctrinal: no intentan definir la Trinidad, sino describir la experiencia salvífica cristiana — y al hacerlo revelan que la tríada Padre-Hijo-Espíritu es su gramática más natural.</p>
+
+  <div class="versecard" id="trin-1p1-2">
+    <div class="vheader">1 Pedro 1:2 — Tres agencias causales, tres Personas, una salvación</div>
+    <div class="vbody">
+      <p class="vtext">«Elegidos según la presciencia de Dios Padre en santificación del Espíritu, para obedecer y ser rociados con la sangre de Jesucristo.»</p>
+      <div class="vlabel">Análisis de las tres preposiciones causales</div>
+      <p class="vtext" style="font-style:normal;">Pedro distribuye la causalidad de la salvación entre tres agentes distintos mediante tres preposiciones distintas: <b>κατά</b> (Padre → causa electiva de conocimiento previo), <b>ἐν</b> (Espíritu → causa instrumental de santificación), <b>εἰς</b> (Hijo → causa final de obediencia y expiación por sangre). Las tres preposiciones tienen el mismo peso sintáctico — ninguna está subordinada a las otras — lo que coloca a las tres Personas en igualdad funcional de agencia divina. Pedro no reflexiona sobre esto teológicamente: lo enuncia con la naturalidad de quien describe la estructura normal de la vida cristiana, lo que implica que la triada es ya la gramática básica de la fe apostólica, no una elaboración posterior.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="trin-jd1-20">
+    <div class="vheader">Judas 1:20-21 — Estructura trinitaria en la exhortación pastoral</div>
+    <div class="vbody">
+      <p class="vtext">«Pero vosotros, amados, edificándoos sobre vuestra santísima fe, orando en el Espíritu Santo, conservaos en el amor de Dios, esperando la misericordia de nuestro Señor Jesucristo para vida eterna.»</p>
+      <div class="vlabel">Tres acciones dirigidas a tres Personas</div>
+      <p class="vtext" style="font-style:normal;">Tres imperativos participiales se articulan, cada uno, en relación con una Persona distinta: «orando <b>en el Espíritu Santo</b>» (el Espíritu como medio y agente de la oración), «conservaos en el amor <b>de Dios</b>» (el Padre como origen del amor que sostiene), «esperando la misericordia <b>de nuestro Señor Jesucristo</b>» (el Hijo como objeto de la esperanza escatológica). La estructura es tripartita sin serlo doctrinalmente: Judas no habla de la Trinidad, habla de la vida cristiana — y la vida cristiana tiene esta forma trina de forma natural. Notablemente, la estructura es paralela a Mt 28:19 sin depender literariamente de ella: son dos tradiciones apostólicas independientes que convergen en la misma gramática triádica.</p>
+    </div>
+  </div>
+
+  <div class="versecard" id="trin-1jn4-2">
+    <div class="vheader">1 Juan 4:2 — El Espíritu de Dios como agente personal de confesión cristológica</div>
+    <div class="vbody">
+      <p class="vtext">«En esto conoced el Espíritu de Dios: todo espíritu que confiesa que Jesucristo ha venido en carne, es de Dios; y todo espíritu que no confiesa que Jesucristo ha venido en carne, no es de Dios.»</p>
+      <div class="vlabel">Personalidad del Espíritu: acción cognoscitivo-volitiva</div>
+      <p class="vtext" style="font-style:normal;">Juan atribuye al Espíritu la acción de «confesar» (ὁμολογεῖ) — un acto cognoscitivo, volitivo y locutor que, en la gramática griega, presupone un sujeto racional capaz de formular un contenido proposicional verdadero o falso. Una fuerza impersonal o energía no confiesa: reconoce, actúa, propaga, pero no formula verdades cristológicas. El Espíritu que «confiesa» es un agente personal. La distinción ulterior — espíritu de Dios vs. espíritu del anticristo — traza una línea entre dos fuentes espirituales opuestas que solo tiene sentido si el Espíritu de Dios es un agente con identidad propia, no un mero poder neutro.</p>
+    </div>
+  </div>
+
+  <h2 class="sub" id="trin-es">El Espíritu Santo por separado: cuatro predicaciones de personalidad y divinidad</h2>
+  <div class="defgrid">
+    <div class="defcard"><p class="term">Agencia profética activa (2 Pe 1:21)</p><p class="def">«Santos hombres de Dios hablaron siendo impulsados (pheromenoi) por el Espíritu Santo.» El verbo «impulsar / llevar» describe una acción directiva activa del Espíritu sobre los profetas — no pasividad del Espíritu sino agencia sobre personas. Un agente que dirige a personas racionales debe tener personalidad.</p></div>
+    <div class="defcard"><p class="term">Conocimiento predictivo (1 Pe 1:11)</p><p class="def">«El Espíritu de Cristo que estaba en ellos, el cual anunciaba de antemano los sufrimientos de Cristo.» El Espíritu anticipa eventos históricos futuros y los comunica a los profetas — función de conocimiento racional prospectivo, propio de un ser inteligente, no de una energía.</p></div>
+    <div class="defcard"><p class="term">Inhabitación de origen divino (1 Pe 4:14)</p><p class="def">«El Espíritu de gloria y de Dios reposa sobre vosotros.» La fórmula apositiva «Espíritu de gloria y de Dios» identifica al Espíritu con la Shekiná («gloria») y con Dios mismo — el mismo genitivo que en Stg 2:1 colocaba a Jesús en la identidad de la Gloria de YHWH. La fórmula sitúa al Espíritu en la identidad divina, no fuera de ella.</p></div>
+    <div class="defcard"><p class="term">Co-testificación trinitaria (Jud 1:20-21)</p><p class="def">El Espíritu recibe la misma relación activa que el Padre y el Hijo en la estructura tripartita de Jud 1:20-21: se «ora en» él con la misma naturalidad con que se «permanece en» el amor del Padre y se «espera» la misericordia del Hijo. Coordinación funcional de igual rango, sin distinción de naturaleza.</p></div>
+  </div>
+
+  <div class="patristic">
+    <div class="pname">Basilio de Cesarea (c. 330–379 d.C.) — De Spiritu Sancto XIV-XVI</div>
+    Cita 1 Pe 1:11-12 («el Espíritu de Cristo... el Espíritu Santo enviado del cielo») como prueba de la plena divinidad del Espíritu, argumentando contra los Pneumatómacos que el NT no distingue rango entre el Espíritu y las otras dos Personas. La coordinación del Espíritu con el Padre y el Hijo en 1 Pe 1:2 es su argumento central: ningún apóstol coordinaria en igualdad funcional a una criatura con el Creador.
+  </div>
+  <div class="patristic">
+    <div class="pname">Gregorio Nacianceno (c. 329–390 d.C.) — Oración Teológica V (Sobre el Espíritu Santo)</div>
+    Argumenta que fórmulas como Jud 1:20-21 y 1 Pe 1:2 serían «teológicamente absurdas y blasfemas» si el Espíritu fuera una criatura: ningún escritor inspirado coordinaría en la misma estructura de agencia salvífica a una criatura con el Padre y el Hijo sin distinguir explícitamente la diferencia de naturaleza — distinción que estos textos nunca hacen.
+  </div>
+
+  <div class="highlight gold">
+    <p style="margin:0;"><b>Síntesis pneumatológica:</b> Las epístolas católicas no ofrecen un tratado de pneumatología — eso vendrá en respuesta al pneumatomaquismo del siglo IV. Pero contienen los cuatro elementos exegéticos necesarios para la doctrina posterior: (1) personalidad activa (acción cognoscitiva, directiva, locucionaria); (2) relación de pertenencia íntima a la naturaleza divina (no criatura sino «Espíritu de Dios»); (3) agencia profética de igual rango que YHWH; (4) coordinación trinitaria de igual rango funcional con el Padre y el Hijo. La pneumatología dogmática no inventa estos datos: los sistematiza.</p>
+  </div>
+</section>
+
+<!-- ═══════════ OBJECIONES ═══════════ -->
+<section id="sec6">
+  <h1 class="section">VI. OBJECIONES PREVISIBLES Y RESPUESTAS</h1>
+
+  <h3 id="obj1" class="sub3">Objeción 1 — «2 Pedro 1:1 distingue a Dios del Padre y al Salvador Jesucristo: son dos personas»</h3>
+  <p class="obj">«La KJV traduce 'God, and our Saviour Jesus Christ' con dos sujetos. La regla de Sharp no aplica porque su alcance gramatical es disputado.»</p>
+  <p class="resp"><b>Respuesta:</b> La KJV data de 1611; Sharp publicó su regla en 1798. La traducción jacobea no refleja la gramática koiné post-Iluminismo sino el estado pre-Sharp de los estudios griegos. La regla ha sido validada independientemente por Daniel Wallace (<i>Greek Grammar Beyond the Basics</i>, 1996), A.T. Robertson y prácticamente el consenso de los gramáticos del NT del siglo XX. Su alcance técnico — sustantivos no-propios pluralizables, singular, personal — se cumple en 2 Pe 1:1 sin excepción. Además, el argumento decisivo no es solo la regla en abstracto: es la consistencia estilística interna de Pedro, quien usa la misma estructura TSKS en 1:11, 2:20 y 3:18 con referente único (Jesús). Leer 1:1 con referente doble mientras se lee 1:11 con referente único viola la coherencia interna sin justificación gramatical.</p>
+
+  <h3 id="obj2" class="sub3">Objeción 2 — «En 1 Juan 5:20, 'houtos' apunta al Padre — Juan 17:3 llama Dios verdadero al Padre, no al Hijo»</h3>
+  <p class="obj">«El contexto teológico johánico prefiere al Padre como el 'Verdadero'; Jesús es el Hijo, no el Dios verdadero.»</p>
+  <p class="resp"><b>Respuesta:</b> Jn 17:3 llama al Padre «el único Dios verdadero» en contraste con «los falsos dioses» del paganismo — no afirma que el Hijo no sea Dios. La regla del antecedente más próximo en griego da prioridad a «Ἰησοῦ Χριστῷ» sobre «τὸν ἀληθινόν» en la cláusula de 1 Jn 5:20. Además, la <i>inclusio</i> literaria entre 1:2 («la vida eterna que estaba con el Padre») y 5:20 («el Dios verdadero y la vida eterna») ancla gramaticalmente «vida eterna» en Cristo en ambos extremos de la carta. Eruditos como Raymond Brown (no sospechoso de sesgo trinitarista conservador) reconocen que la lectura cristológica de «houtos» es «la más natural gramaticalmente», aunque él prefiere la ambigüedad deliberada. Ambas lecturas son gramaticalmente posibles; la cristológica es la más directa.</p>
+
+  <h3 id="obj3" class="sub3">Objeción 3 — «El Comma Johanneum es espurio; incluirlo descalifica todo el argumento»</h3>
+  <p class="obj">«Si el documento cita un pasaje falsificado, su metodología es incompetente o deshonesta.»</p>
+  <p class="resp"><b>Respuesta:</b> Este tratado <b>no lo emplea como evidencia primaria</b> — lo documenta con la etiqueta explícita de texto no-original y lo analiza solo como dato de historia de la recepción, con todas las reservas metodológicas indicadas en la sección II. La honestidad textual no es debilidad sino fortaleza del argumento: el caso de la divinidad de Cristo en las epístolas joánicas descansa sobre 5:20, 1:1-2 y 2 Jn 1:9, ninguno de los cuales tiene problema textual significativo. Una argumentación que puede permitirse rechazar abiertamente uno de sus textos sin perder su conclusión es más robusta, no más débil, que una que depende de todos sus textos sin distinción.</p>
+
+  <h3 id="obj4" class="sub3">Objeción 4 — «Judas 5 dice 'el Señor' en la mayoría de manuscritos; la lectura 'Jesús' es minoritaria»</h3>
+  <p class="obj">«Las ediciones críticas modernas tienen sesgo alejandrino; la mayoría de manuscritos dicen 'el Señor'.»</p>
+  <p class="resp"><b>Respuesta:</b> Legítima en parte — por eso el tratado presenta este texto como «probable pero condicionado» y no lo emplea en el Silogismo Maestro. Pero la crítica textual no se rige por mayoría de manuscritos sino por calidad y antigüedad de los testimonios: los unciales alejandrinos B y A, el papiro P72 y las versiones coptas son más antiguos que la masa de manuscritos bizantinos. La <i>lectio difficilior</i> es un principio de larga validación académica. Y, como se nota en la sección III, incluso con la lectura «el Señor», el patrón consistent de Judas de usar «kyrios» para Jesús hace que «el Señor del Éxodo» sea identificable con Cristo sin forzar el texto.</p>
+
+  <h3 id="obj5" class="sub3">Objeción 5 — «Santiago nunca llama 'Dios' a Jesús; su cristología es de cristología baja»</h3>
+  <p class="obj">«El 'silencio' cristológico de Santiago en cinco capítulos demuestra que la tradición jerosolimitana primitiva tenía una cristología subordinada.»</p>
+  <p class="resp"><b>Respuesta:</b> El argumento del silencio es metodológicamente frágil cuando hay evidencia positiva: Stg 1:1 coloca a «el Señor Jesucristo» en la misma posición gramatical de servidumbre total (doulos) que «Dios»; Stg 2:1 identifica a Jesús con «la Gloria» (τῆς δόξης), la Shekiná veterotestamentaria. El género de una epístola sapiencial judeo-cristiana dirigida a comunidades diaspóricas sobre ética práctica no requiere ni produce tratados cristológicos sistemáticos. Argumentar «cristología baja» desde el silencio en este género es una falacia de expectativa de género. Además, Hegesipo (s. II), citado por Eusebio, documenta que Santiago confesó antes de morir la entronización celestial de Jesús a la diestra de Dios (Sal 110:1 + Dan 7:13) — la cristología personal más alta posible.</p>
+
+  <h3 id="obj6" class="sub3">Objeción 6 — «Kyrios, Theos y Despotēs eran honoríficos helenísticos, no afirmaciones ontológicas de divinidad»</h3>
+  <p class="obj">«Los emperadores romanos eran llamados 'kyrios' y 'theos' sin implicar divinidad metafísica real. El NT usa el mismo lenguaje honorífico.»</p>
+  <p class="resp"><b>Respuesta:</b> Esta objeción ignora el marco semántico específico de los autores. Pedro, Juan, Santiago y Judas son judíos estrictamente monoteístas, formados en la Shemá (Dt 6:4) y en la LXX, donde kyrios = YHWH y theos referido a YHWH implica la unicidad absoluta del Creador. En el marco semántico judío — no helenístico-pagano — aplicar estos términos a Jesús sin matización y sin generar crisis de monoteísmo (cosa que estos autores no perciben como conflicto) solo es coherente si Jesús ya pertenece, en su teología, a la identidad de YHWH. La misma epístola de Santiago afirma con toda seriedad: «tú crees que Dios es uno; bien haces» (2:19) — el monoteísmo es fundacional, no marginal. Que el mismo autor llame a Jesús «el Señor Jesucristo de la Gloria» (2:1) y se proclame «siervo de Dios y del Señor Jesucristo» (1:1) sin contradicción percibida implica que ambas predicaciones son compatibles en su teología: Jesús pertenece a la unicidad de Dios sin multiplicar dioses.</p>
+</section>
+
+<!-- ═══════════ SÍNTESIS ═══════════ -->
+<section id="sintesis">
+  <h1 class="section">VII. SÍNTESIS — MAPA DE LA CONVERGENCIA</h1>
+  <p>Diez textos de cuatro autores apostólicos independientes convergen en tres líneas de evidencia que se sostienen mutuamente pero pueden examinarse por separado:</p>
+
+  <div class="lineblock">
+    <h4>LÍNEA 1 — GRAMÁTICA GRIEGA (Granville Sharp + TSKS)</h4>
+    <ul>
+      <li>2 Pe 1:1: un artículo, dos predicados (Dios + Salvador), un referente: Jesucristo. Validado por la coherencia estilística interna de Pedro en 1:11, 2:20 y 3:18.</li>
+      <li>Jud 1:4: idéntica construcción TSKS: «único Soberano (despotēs) y Señor» = Jesucristo. Un título reservado a YHWH en la LXX aplicado a Cristo.</li>
+      <li>Stg 1:1: paralelismo de doulos: servidumbre idéntica a «Dios» y a «el Señor Jesucristo», colocando a ambos en posición gramaticalmente equivalente de autoridad sobre el autor.</li>
+    </ul>
+  </div>
+
+  <div class="lineblock">
+    <h4>LÍNEA 2 — ANTECEDENTES PRONOMINALES Y TÍTULOS VETEROTESTAMENTARIOS TRANSFERIDOS</h4>
+    <ul>
+      <li>1 Jn 5:20: «houtos» (este) → antecedente más próximo = Jesucristo → «el Dios verdadero y la vida eterna». Confirmado por <i>inclusio</i> literaria con 1 Jn 1:2.</li>
+      <li>1 Jn 1:1-2: preexistencia eterna + tangibilidad física del mismo sujeto — estructura lógica de la Encarnación.</li>
+      <li>Stg 2:1: Jesús = «el de la Gloria» (τῆς δόξης) — la Shekiná de YHWH.</li>
+      <li>Jud 1:5 (probable): Jesús como sujeto preencarnado del Éxodo — función exclusiva de YHWH en el AT.</li>
+    </ul>
+  </div>
+
+  <div class="lineblock">
+    <h4>LÍNEA 3 — DOXOLOGÍA LITÚRGICA Y COORDINACIÓN TRINITARIA DE IGUAL RANGO</h4>
+    <ul>
+      <li>2 Pe 3:18: fórmula doxológica «a él sea gloria... amén» dirigida a Cristo — reservada a YHWH en el judaísmo del Segundo Templo.</li>
+      <li>Jud 1:24-25: doxología de clausura que hace inclusio con 1:4 — el «único Dios Salvador» es el mismo «único Soberano» de la apertura.</li>
+      <li>1 Pe 1:2 y Jud 1:20-21: estructuras trinitarias en las que Padre, Hijo y Espíritu operan en agencia salvífica de igual rango funcional, sin ningún marcador de jerarquía de naturaleza.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ SILOGISMO MAESTRO ═══════════ -->
+<section id="silogismo-maestro">
+  <h1 class="section">VIII. SILOGISMO MAESTRO</h1>
+  <p>Las premisas son independientes entre sí: el fallo de cualquiera de ellas no arrastra a las demás. La conclusión se sigue de la conjunción de todas, pero también se sostiene ante el fallo parcial de alguna.</p>
+
+  <div class="master-syl">
+    <div class="master-title">∴ SILOGISMO MAESTRO — LA DIVINIDAD DE CRISTO EN LAS EPÍSTOLAS CATÓLICAS<br>(con exclusión deliberada del corpus paulino)</div>
+    <div class="chain">
+      <div class="mp"><span class="mp-num">P. 1</span><span>2 Pedro 1:1 aplica a Jesucristo, mediante la regla gramatical TSKS (Granville Sharp, validada por Wallace y el consenso de la gramática koiné moderna), los títulos coordinados «Dios» y «Salvador» bajo un único artículo — en estructura idéntica a la que el propio Pedro usa para «Señor y Salvador» en 1:11, 2:20 y 3:18 sin que nadie dispute el referente único.</span></div>
+      <div class="mp"><span class="mp-num">P. 2</span><span>1 Juan 5:20 identifica a Jesucristo —antecedente gramatical inmediato del pronombre «houtos»— como «el Dios verdadero y la vida eterna»; la <i>inclusio</i> literaria entre 1 Jn 1:2 («la vida eterna que estaba con el Padre y nos fue manifestada» = Cristo) y 5:20 cierra la predicación en Jesucristo, no en un Padre no mencionado en la cláusula inmediata.</span></div>
+      <div class="mp"><span class="mp-num">P. 3</span><span>Judas 1:4 aplica a Jesucristo, con idéntica estructura TSKS, el título «único Soberano» (τὸν μόνον δεσπότην), término que en la LXX designa casi exclusivamente la autoridad absoluta de YHWH sobre la creación — y lo hace Judas, quien creció en la misma casa familiar que Jesús en Nazaret.</span></div>
+      <div class="mp"><span class="mp-num">P. 4</span><span>Santiago 1:1 coloca a «el Señor Jesucristo» en posición gramaticalmente idéntica a «Dios» como objeto de servidumbre absoluta (doulos) del propio hermano carnal de Jesús; Santiago 2:1 identifica a Jesús con «la Gloria» (τῆς δόξης), la Shekiná de la presencia gloriosa de YHWH en el AT, en un texto no-doctrinal que revela la cristología natural del autor.</span></div>
+      <div class="mp"><span class="mp-num">P. 5</span><span>2 Pedro 3:18 y Judas 1:24-25 dirigen a Jesucristo la fórmula doxológica («a él sea gloria... amén») que en el judaísmo del Segundo Templo estaba reservada exclusivamente a YHWH; ninguno de los autores percibe contradicción con su propio monoteísmo estricto (cf. Stg 2:19), lo que implica que en su teología Jesús pertenece ya a la identidad de YHWH.</span></div>
+      <div class="mp"><span class="mp-num">P. 6</span><span>1 Pedro 1:2 y Judas 1:20-21 coordinan al Padre, al Hijo y al Espíritu Santo en estructuras de agencia salvífica de igual rango funcional, sin ningún marcador de jerarquía de naturaleza entre ellos; el Espíritu es además predicado de personalidad activa (2 Pe 1:21; 1 Pe 1:11; 1 Jn 4:2) y de pertenencia íntima a la naturaleza divina (1 Pe 4:14: «Espíritu de gloria y de Dios»).</span></div>
+      <div class="mp"><span class="mp-num">P. 7</span><span>Los cuatro autores —Pedro, Juan, Santiago y Judas— son judíos estrictamente monoteístas, sin dependencia literaria mutua demostrable entre sus corpus, y representan al menos tres tradiciones apostólicas independientes (tradición petrina, tradición joánica, tradición de los hermanos del Señor), ninguna de las cuales depende del corpus paulino como fuente cristológica.</span></div>
+      <div class="mp"><span class="mp-num">P. 8</span><span>La recepción patrística más temprana —Policarpo (discípulo directo de Juan, c. 69–155 d.C.), Ireneo (c. 130–202), Clemente de Alejandría (c. 150–215), Orígenes (c. 184–253), Eusebio citando a Hegesipo sobre el martirio de Santiago— interpreta unánimemente estos textos como afirmaciones de la identidad divina plena de Cristo, sin que exista ningún testimonio de una lectura subordinacionista alternativa en los dos primeros siglos.</span></div>
+      <hr>
+      <p class="qed">∴ De las premisas 1-8 se sigue necesariamente: <b>la confesión de la divinidad plena de Jesucristo no es una construcción exclusivamente paulina ni una elaboración tardía del siglo II</b>. Está atestiguada de forma gramaticalmente verificable, exegéticamente robusta e históricamente primaria en los escritos de los tres apóstoles más cercanos al Jesús histórico (Pedro, Juan) y en los de su propia familia carnal (Santiago, Judas). La convergencia de cuatro tradiciones apostólicas independientes sobre este único punto cristológico, confirmada por la recepción patrística unánime desde el siglo I hasta el IV, constituye una de las líneas de evidencia más sólidas de toda la apologética cristiana. <b>Negar esta conclusión exige rechazar simultáneamente</b>: la gramática koiné estándar (regla de Sharp), el principio del antecedente pronominal más próximo, la semántica veterotestamentaria de los títulos divinos en autores judíos monoteístas, la coherencia estilística interna de los propios autores, y la lectura patrística unánime de los dos primeros siglos — un coste exegético y hermenéutico que ninguna alternativa unitaria ha logrado sostener de forma consistente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONCLUSIÓN ═══════════ -->
+<section id="conclusion">
+  <h1 class="section">IX. CONCLUSIÓN</h1>
+  <p>El examen de diez textos en las epístolas de Pedro, Juan, Judas y Santiago, con rigor gramatical y atención a la recepción patrística, demuestra que la confesión de la divinidad de Cristo pertenece al núcleo apostólico más amplio, no al corpus paulino específico. Los cinco criterios convergentes son:</p>
+
+  <div class="conc-item"><b>1. Gramatical:</b> La regla de Granville Sharp identifica a Cristo como «Dios» en 2 Pe 1:1 y como «único Soberano» en Jud 1:4 por construcciones TSKS verificables independientemente del juicio teológico del lector. La consistencia estilística de Pedro confirma el primer texto desde el interior de la misma epístola.</div>
+  <div class="conc-item"><b>2. Pronominal-contextual:</b> El antecedente más próximo de «houtos» en 1 Jn 5:20 es Jesucristo, reforzado por la <i>inclusio</i> literaria entre 1:2 y 5:20 que ancla «vida eterna» en la persona de Cristo en ambos extremos de la carta.</div>
+  <div class="conc-item"><b>3. Tipológico-veterotestamentario:</b> Títulos y funciones exclusivos de YHWH en el AT — Despotēs, la Shekiná/Gloria, el Salvador del Éxodo — se transfieren a Jesús sin matización ni disculpa por parte de autores judíos cuyo monoteísmo es incuestionable (Stg 2:19), implicando que Jesús ya pertenece para ellos a la identidad de YHWH.</div>
+  <div class="conc-item"><b>4. Cúltico-doxológico:</b> La fórmula litúrgica de alabanza eterna reservada a YHWH (doxología) se dirige directamente a Cristo en 2 Pe 3:18 y Jud 1:25, sin mediación ni distinción — acto que en el judaísmo habría sido idolatría si Jesús no fuera YHWH mismo.</div>
+  <div class="conc-item"><b>5. Trinitario-pneumatológico:</b> Padre, Hijo y Espíritu aparecen coordinados en estructuras de agencia salvífica de igual rango funcional (1 Pe 1:2; Jud 1:20-21), con el Espíritu predicado de personalidad activa y pertenencia a la naturaleza divina — sin que ningún texto marque jerarquía de naturaleza entre los tres.</div>
+
+  <div class="highlight gold">
+    <p style="margin:0;"><b>La fuerza apologética del argumento reside en su restricción deliberada:</b> al excluir a Pablo se cierra la única escapatoria argumentativa del antitrinitarismo moderno. Cuatro tradiciones apostólicas independientes — sin coordinación literaria mutua demostrable — afirman la divinidad de Cristo con gramatica verificable, en marcos monoteístas estrictos, a través de autores que conocieron a Jesús en carne. La hipótesis de que todos falsificaron independientemente la misma cristología alta es más improbable que la explicación más simple: la divinidad de Cristo fue la convicción apostólica original desde el principio.</p>
+  </div>
+
+  <hr class="gold">
+  <p class="final"><i>«Este es el verdadero Dios y la vida eterna.»</i><br>1 Juan 5:20</p>
+  <p class="final" style="margin-top:10px;"><i>Finis coronat opus.</i> — Tratado de cristología neotestamentaria comparada.</p>
+</section>
+
+</div><!-- /.page -->
+</main>
+</div><!-- /.layout -->
+
+<script>
+  const toc=document.getElementById('toc'),btn=document.getElementById('tocToggle'),
+    ov=document.getElementById('tocOverlay'),srch=document.getElementById('tocSearch'),
+    body=document.body,bar=document.getElementById('progress');
+  const open=()=>{toc.classList.add('open');body.classList.add('toc-open');};
+  const close=()=>{toc.classList.remove('open');body.classList.remove('toc-open');};
+  btn.addEventListener('click',()=>toc.classList.contains('open')?close():open());
+  ov.addEventListener('click',close);
+  document.addEventListener('keydown',e=>{
+    if(e.key.toLowerCase()==='m'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){toc.classList.contains('open')?close():open();}
+    if(e.key==='Escape')close();
+  });
+  if(window.innerWidth>860)open();
+
+  document.querySelectorAll('#toc .group').forEach(g=>{
+    if(g.dataset.default==='open')g.classList.add('open');
+    g.querySelector(':scope > .group-head').addEventListener('click',()=>g.classList.toggle('open'));
+  });
+
+  const links=Array.from(document.querySelectorAll('#toc a'));
+  const anchors=links.map(l=>{try{return document.querySelector(l.getAttribute('href'));}catch(e){return null;}}).filter(Boolean);
+
+  function onScroll(){
+    const h=document.documentElement;
+    bar.style.width=(h.scrollHeight-h.clientHeight>0?h.scrollTop/(h.scrollHeight-h.clientHeight)*100:0)+'%';
+    let cur=anchors[0];
+    anchors.forEach(s=>{if(s.offsetTop<=window.scrollY+150)cur=s;});
+    links.forEach(l=>l.classList.remove('active'));
+    if(!cur)return;
+    const act=document.querySelector('#toc a[href="#'+cur.id+'"]');
+    if(act){act.classList.add('active');let g=act.closest('.group');while(g){g.classList.add('open');g=g.parentElement?.closest('.group');}}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  links.forEach(l=>{
+    l.addEventListener('click',e=>{
+      e.preventDefault();
+      const t=document.querySelector(l.getAttribute('href'));
+      if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+      if(window.innerWidth<=860)close();
+    });
+  });
+
+  srch.addEventListener('input',()=>{
+    const q=srch.value.trim().toLowerCase();
+    if(!q){toc.classList.remove('searching');document.querySelectorAll('#toc li').forEach(li=>li.classList.remove('no-match'));document.querySelectorAll('#toc .group').forEach(g=>g.classList.remove('has-match'));return;}
+    toc.classList.add('searching');
+    document.querySelectorAll('#toc li').forEach(li=>{
+      const a=li.querySelector(':scope > a');if(!a)return;
+      const m=a.textContent.toLowerCase().includes(q);
+      li.classList.toggle('no-match',!m);
+      if(m){let g=li.closest('.group');while(g){g.classList.add('has-match');g=g.parentElement?.closest('.group');}}
+    });
+  });
+</script>
+</body>
+</html>
