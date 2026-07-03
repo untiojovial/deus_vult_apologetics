@@ -1,6 +1,6 @@
 ---
 title: "La Negacion de la Cruz: El Docetismo no era Cristiano ni es Islamico (Dossier)"
-date: 2026-07-03T10:15:00-05:00
+date: 2026-07-02T10:15:00-05:00
 draft: false
 slug: "docetismo-crucifixion-dossier"
 url: "/respondiendo-al-islam/docetismo-crucifixion-dossier/"

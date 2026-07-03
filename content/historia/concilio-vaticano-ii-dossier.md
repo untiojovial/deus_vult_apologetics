@@ -1,6 +1,6 @@
 ---
 title: "El Concilio Vaticano II y la Lumen Gentium (Dossier)"
-date: 2026-07-03T10:00:00-05:00
+date: 2026-07-02T10:00:00-05:00
 draft: false
 slug: "concilio-vaticano-ii-dossier"
 url: "/historia/concilio-vaticano-ii-dossier/"

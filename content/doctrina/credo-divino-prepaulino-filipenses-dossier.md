@@ -1,6 +1,6 @@
 ---
 title: "Credo Divino Prepaulino de Filipenses (Dossier)"
-date: 2026-07-03T09:05:00-05:00
+date: 2026-07-02T09:05:00-05:00
 draft: false
 slug: "credo-divino-prepaulino-filipenses-dossier"
 url: "/doctrina/credo-divino-prepaulino-filipenses-dossier/"

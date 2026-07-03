@@ -1,6 +1,6 @@
 ---
 title: "Versiculos Dificiles de la Biblia (Dossier)"
-date: 2026-07-03T11:25:00-05:00
+date: 2026-07-02T11:25:00-05:00
 draft: false
 slug: "versiculos-dificiles-dossier"
 url: "/biblia/versiculos-dificiles-dossier/"

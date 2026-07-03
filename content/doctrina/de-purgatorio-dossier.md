@@ -1,6 +1,6 @@
 ---
 title: "De Purgatorio (Dossier)"
-date: 2026-07-03T10:30:00-05:00
+date: 2026-07-02T10:30:00-05:00
 draft: false
 slug: "de-purgatorio-dossier"
 url: "/doctrina/de-purgatorio-dossier/"

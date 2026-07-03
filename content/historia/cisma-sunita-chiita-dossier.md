@@ -1,6 +1,6 @@
 ---
 title: "El Gran Cisma: Sunitas y Chiitas (Dossier)"
-date: 2026-07-03T10:45:00-05:00
+date: 2026-07-02T10:45:00-05:00
 draft: false
 slug: "cisma-sunita-chiita-dossier"
 url: "/historia/cisma-sunita-chiita-dossier/"

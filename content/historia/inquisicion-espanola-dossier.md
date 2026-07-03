@@ -1,6 +1,6 @@
 ---
 title: "La Inquisicion Espanola: Historia Contra el Mito (Dossier)"
-date: 2026-07-03T11:10:00-05:00
+date: 2026-07-02T11:10:00-05:00
 draft: false
 slug: "inquisicion-espanola-dossier"
 url: "/historia/inquisicion-espanola-dossier/"

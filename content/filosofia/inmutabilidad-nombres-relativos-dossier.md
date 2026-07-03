@@ -1,6 +1,6 @@
 ---
 title: "La Inmutabilidad de Dios y los Nombres Relativos (Dossier)"
-date: 2026-07-03T09:15:00-05:00
+date: 2026-07-02T09:15:00-05:00
 draft: false
 slug: "inmutabilidad-nombres-relativos-dossier"
 url: "/filosofia/inmutabilidad-nombres-relativos-dossier/"

@@ -1,6 +1,6 @@
 ---
 title: "En Defensa del Apostol Pablo: Objeciones Academicas Resueltas (Dossier)"
-date: 2026-07-03T11:40:00-05:00
+date: 2026-07-02T11:40:00-05:00
 draft: false
 slug: "objeciones-pablo-resueltas-dossier"
 url: "/respondiendo-al-islam/objeciones-pablo-resueltas-dossier/"

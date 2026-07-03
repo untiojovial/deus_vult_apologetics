@@ -1,6 +1,6 @@
 ---
 title: "Teofanias y Cristofanias del Antiguo Testamento (Dossier)"
-date: 2026-07-03T09:10:00-05:00
+date: 2026-07-02T09:10:00-05:00
 draft: false
 slug: "teofanias-cristofanias-dossier"
 url: "/historia/teofanias-cristofanias-dossier/"

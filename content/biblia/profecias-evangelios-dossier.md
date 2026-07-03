@@ -1,6 +1,6 @@
 ---
 title: "100 Profecias Cumplidas en los Cuatro Evangelios (Dossier)"
-date: 2026-07-03T10:55:00-05:00
+date: 2026-07-02T10:55:00-05:00
 draft: false
 slug: "profecias-evangelios-dossier"
 url: "/biblia/profecias-evangelios-dossier/"

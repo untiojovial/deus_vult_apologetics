@@ -1,6 +1,6 @@
 ---
 title: "La Navidad No Es Pagana (Dossier)"
-date: 2026-07-03T10:10:00-05:00
+date: 2026-07-02T10:10:00-05:00
 draft: false
 slug: "navidad-no-es-pagana-dossier"
 url: "/historia/navidad-no-es-pagana-dossier/"

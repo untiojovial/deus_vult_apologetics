@@ -1,6 +1,6 @@
 ---
 title: "Cristo Impecabilidad: Tentacion e Impecabilidad de Cristo (Dossier)"
-date: 2026-07-03T09:20:00-05:00
+date: 2026-07-02T09:20:00-05:00
 draft: false
 slug: "cristo-impecabilidad-dossier"
 url: "/doctrina/cristo-impecabilidad-dossier/"

@@ -1,6 +1,6 @@
 ---
 title: "Maria, Madre de Dios (Dossier)"
-date: 2026-07-03T10:25:00-05:00
+date: 2026-07-02T10:25:00-05:00
 draft: false
 slug: "maria-madre-de-dios-dossier"
 url: "/doctrina/maria-madre-de-dios-dossier/"

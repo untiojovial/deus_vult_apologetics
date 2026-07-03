@@ -1,6 +1,6 @@
 ---
 title: "De Praedestinatione: Disputatio (Dossier)"
-date: 2026-07-03T10:40:00-05:00
+date: 2026-07-02T10:40:00-05:00
 draft: false
 slug: "de-praedestinatione-dossier"
 url: "/filosofia/de-praedestinatione-dossier/"

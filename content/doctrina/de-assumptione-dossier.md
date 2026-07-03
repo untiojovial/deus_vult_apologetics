@@ -1,6 +1,6 @@
 ---
 title: "De Assumptione (Dossier)"
-date: 2026-07-03T10:35:00-05:00
+date: 2026-07-02T10:35:00-05:00
 draft: false
 slug: "de-assumptione-dossier"
 url: "/doctrina/de-assumptione-dossier/"

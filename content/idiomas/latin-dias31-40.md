@@ -1,6 +1,6 @@
 ---
 title: "Latín — Días 31–40 · Nivel Avanzado"
-date: 2026-07-03T11:35:00-05:00
+date: 2026-07-02T11:35:00-05:00
 draft: false
 slug: "latin-dias31-40"
 url: "/idiomas/latin-dias31-40/"

@@ -1,6 +1,6 @@
 ---
 title: "Las Cruzadas: Historia y Defensa Catolica (Dossier)"
-date: 2026-07-03T11:15:00-05:00
+date: 2026-07-02T11:15:00-05:00
 draft: false
 slug: "cruzadas-dossier"
 url: "/historia/cruzadas-dossier/"

@@ -1,6 +1,6 @@
 ---
 title: "El Concilio de Trento (Dossier)"
-date: 2026-07-03T11:05:00-05:00
+date: 2026-07-02T11:05:00-05:00
 draft: false
 slug: "concilio-trento-dossier"
 url: "/historia/concilio-trento-dossier/"

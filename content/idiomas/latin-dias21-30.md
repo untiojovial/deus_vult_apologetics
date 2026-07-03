@@ -1,6 +1,6 @@
 ---
 title: "Latín — Días 21–30"
-date: 2026-07-03T11:30:00-05:00
+date: 2026-07-02T11:30:00-05:00
 draft: false
 slug: "latin-dias21-30"
 url: "/idiomas/latin-dias21-30/"

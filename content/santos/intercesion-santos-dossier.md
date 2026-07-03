@@ -1,6 +1,6 @@
 ---
 title: "La Intercesion de los Santos (Dossier)"
-date: 2026-07-03T10:05:00-05:00
+date: 2026-07-02T10:05:00-05:00
 draft: false
 slug: "intercesion-santos-dossier"
 url: "/santos/intercesion-santos-dossier/"

@@ -1,6 +1,6 @@
 ---
 title: "Predestinacion Islamica: Qadar y la Excusa de Adan (Dossier)"
-date: 2026-07-03T09:00:00-05:00
+date: 2026-07-02T09:00:00-05:00
 draft: false
 slug: "predestinacion-islamica-dossier"
 url: "/respondiendo-al-islam/predestinacion-islamica-dossier/"

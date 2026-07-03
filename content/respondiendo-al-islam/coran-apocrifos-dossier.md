@@ -1,6 +1,6 @@
 ---
 title: "El Coran y los Evangelios Apocrifos (Dossier)"
-date: 2026-07-03T10:20:00-05:00
+date: 2026-07-02T10:20:00-05:00
 draft: false
 slug: "coran-apocrifos-dossier"
 url: "/respondiendo-al-islam/coran-apocrifos-dossier/"
