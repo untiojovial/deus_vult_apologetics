@@ -15,3 +15,4 @@ Aquí se presentan dossiers biográficos, teológicos y espirituales sobre figur
 
 - [Agustín de Hipona — El Corazón Inquieto (Dossier)](/santos/agustin-hipona-dossier/)
 - [Benedicto XVI — Joseph Ratzinger (Dossier)](/santos/benedicto-xvi-dossier/)
+- [La Intercesion de los Santos (Dossier)](/santos/intercesion-santos-dossier/)

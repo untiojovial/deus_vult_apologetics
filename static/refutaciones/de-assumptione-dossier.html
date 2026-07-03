@@ -1,0 +1,2427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Assumptione · Tratado Apologético</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Cormorant+SC:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS DE DISEÑO — IDENTIDAD MARIANA
+   El Purgatorio: pergamino, bermellón, sepia.
+   La Asunción: mármol blanco, azul noche, lapislázuli, plata.
+   ============================================================ */
+:root{
+  /* Fondo: mármol blanco, no pergamino */
+  --blanco-marmol:#F7F5F2;
+  --blanco-marmol-2:#EFF0F2;
+  --gris-perla:#DDE3EC;
+
+  /* Tinta: azul noche profundo, no sepia */
+  --azul-noche:#1A2744;
+  --azul-noche-suave:#223060;
+  --lapislazuli:#2D4E8A;
+  --lapislazuli-claro:#3D67B5;
+  --azul-cielo:#6B8FC7;
+
+  /* Acento: dorado más frío que el del Purgatorio */
+  --dorado:#B8962E;
+  --dorado-claro:#D4B458;
+  --dorado-palido:#EED98A;
+
+  /* Plata */
+  --plata:#8EA5C0;
+  --plata-oscura:#5A7499;
+
+  /* Texto principal */
+  --tinta:#1A2744;
+  --tinta-suave:#2D4060;
+  --tinta-media:#445577;
+
+  /* Tipografías */
+  --serif-display:'Cormorant Garamond', serif;
+  --serif-sc:'Cormorant SC', serif;
+  --serif-body:'Spectral', serif;
+
+  --sombra-azul: 0 8px 32px rgba(26,39,68,0.13);
+  --sombra-dorada: 0 4px 18px rgba(184,150,46,0.18);
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+
+body{
+  background:
+    radial-gradient(ellipse at top right, rgba(45,78,138,0.07), transparent 55%),
+    radial-gradient(ellipse at bottom left, rgba(184,150,46,0.05), transparent 50%),
+    var(--blanco-marmol);
+  color:var(--tinta);
+  font-family:var(--serif-body);
+  font-size:18px;
+  line-height:1.78;
+  min-height:100vh;
+  position:relative;
+}
+
+/* textura marmórea sutil */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none; z-index:1;
+  opacity:0.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;
+}
+
+a{ color:var(--lapislazuli); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+::selection{ background:var(--dorado-palido); color:var(--azul-noche); }
+:focus-visible{ outline:2px solid var(--lapislazuli); outline-offset:3px; }
+
+/* ============ LAYOUT ============ */
+.envoltura{ display:flex; max-width:1420px; margin:0 auto; position:relative; z-index:2; }
+
+/* ============ BARRA PROGRESO ============ */
+.barra-progreso{
+  position:fixed; top:0; left:0; height:3px;
+  background:linear-gradient(90deg, var(--lapislazuli), var(--dorado));
+  z-index:60; width:0%; transition:width 0.1s linear;
+}
+
+/* ============ BOTÓN TOGGLE MÓVIL ============ */
+.indice-toggle{
+  display:none; position:fixed;
+  top:18px; left:18px; z-index:50;
+  width:48px; height:48px;
+  background:var(--azul-noche); color:var(--dorado-claro);
+  border:1px solid var(--dorado); border-radius:3px;
+  font-size:20px; cursor:pointer;
+  align-items:center; justify-content:center;
+  box-shadow:var(--sombra-azul);
+}
+.overlay-indice{
+  display:none; position:fixed; inset:0;
+  background:rgba(26,39,68,0.45); z-index:44;
+}
+.overlay-indice.visible{ display:block; }
+
+/* ============ ÍNDICE LATERAL — CIELO NOCTURNO ============ */
+aside.indice{
+  width:340px; flex-shrink:0;
+  position:sticky; top:0; height:100vh; overflow-y:auto;
+  /* Firma única: cielo azul noche con "estrellas" vía gradientes radiales */
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,0.08) 1px, transparent 1px),
+    radial-gradient(circle at 72% 8%, rgba(255,255,255,0.06) 1px, transparent 1px),
+    radial-gradient(circle at 45% 22%, rgba(255,255,255,0.07) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 88% 35%, rgba(255,255,255,0.05) 1px, transparent 1px),
+    radial-gradient(circle at 28% 48%, rgba(255,255,255,0.09) 1px, transparent 1px),
+    radial-gradient(circle at 65% 58%, rgba(255,255,255,0.06) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 12% 68%, rgba(255,255,255,0.07) 1px, transparent 1px),
+    radial-gradient(circle at 55% 75%, rgba(255,255,255,0.05) 1px, transparent 1px),
+    radial-gradient(circle at 82% 82%, rgba(255,255,255,0.08) 1px, transparent 1px),
+    radial-gradient(circle at 35% 90%, rgba(255,255,255,0.06) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 93% 95%, rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(170deg, #1A2744 0%, #16213E 45%, #0F1A33 100%);
+  color:rgba(239,240,242,0.85);
+  padding:34px 0 60px;
+  border-right:2px solid var(--dorado);
+  scrollbar-width:thin;
+  scrollbar-color:var(--dorado) #0F1A33;
+}
+aside.indice::-webkit-scrollbar{ width:7px; }
+aside.indice::-webkit-scrollbar-thumb{ background:var(--dorado); border-radius:4px; }
+aside.indice::-webkit-scrollbar-track{ background:#0F1A33; }
+
+.indice-cabecera{
+  padding:0 26px 22px;
+  border-bottom:1px solid rgba(184,150,46,0.3);
+  margin-bottom:16px; text-align:center;
+}
+.indice-cabecera .marca{
+  font-family:var(--serif-sc); letter-spacing:0.14em;
+  color:var(--dorado-claro); font-size:12.5px;
+  display:block; margin-bottom:8px;
+}
+/* flor de lis decorativa en CSS puro */
+.fleur-de-lis{
+  display:block; margin:0 auto 10px;
+  color:var(--dorado); font-size:22px; letter-spacing:6px;
+}
+.indice-cabecera h2{
+  font-family:var(--serif-display); font-weight:400; font-style:italic;
+  font-size:28px; color:#F0F2F6; line-height:1.15;
+}
+.indice-cabecera .sub{
+  display:block; font-family:var(--serif-body); font-size:12px;
+  color:rgba(239,240,242,0.5); margin-top:8px; font-style:italic;
+  line-height:1.45;
+}
+
+.buscador-indice{ padding:0 22px 16px; }
+.buscador-indice input{
+  width:100%;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(184,150,46,0.35);
+  border-radius:3px; color:#EFF0F2;
+  padding:9px 12px;
+  font-family:var(--serif-body); font-size:14.5px;
+}
+.buscador-indice input::placeholder{ color:rgba(239,240,242,0.35); font-style:italic; }
+#sinResultadosIndice{ margin-top:10px; font-size:12px; color:rgba(239,240,242,0.4); font-style:italic; text-align:center; }
+
+nav.tabla-materias{ padding:0 12px; }
+
+.tm-parte{ margin-bottom:3px; }
+.tm-parte > a.tm-parte-titulo{
+  display:flex; gap:10px; align-items:baseline;
+  padding:10px 14px;
+  font-family:var(--serif-sc); font-size:14px; letter-spacing:0.05em;
+  color:var(--dorado-claro); border-radius:3px;
+}
+.tm-parte > a.tm-parte-titulo:hover{ background:rgba(184,150,46,0.1); text-decoration:none; }
+.tm-parte > a.tm-parte-titulo.activo{ background:rgba(45,78,138,0.35); color:#F0F2F6; }
+.tm-parte-num{ color:var(--plata); font-family:var(--serif-display); font-style:italic; font-size:16px; flex-shrink:0; }
+
+ul.tm-articulos{
+  list-style:none; margin:0 0 10px 18px;
+  border-left:1px solid rgba(184,150,46,0.2); padding-left:14px;
+}
+ul.tm-articulos li a{
+  display:block; padding:5px 10px;
+  font-size:13.5px; color:rgba(239,240,242,0.72);
+  border-radius:3px; line-height:1.4;
+}
+ul.tm-articulos li a:hover{ background:rgba(45,78,138,0.25); color:#EFF0F2; text-decoration:none; }
+ul.tm-articulos li a.activo{
+  background:rgba(45,78,138,0.3); color:#EFF0F2;
+  border-left:2px solid var(--lapislazuli-claro); margin-left:-1px; padding-left:9px;
+}
+
+.indice-pie{
+  margin-top:26px; padding:18px 26px 0;
+  border-top:1px solid rgba(184,150,46,0.2);
+  font-family:var(--serif-display); font-size:13px;
+  color:rgba(239,240,242,0.4); text-align:center; font-style:italic;
+  line-height:1.55;
+}
+
+/* ============ CONTENIDO PRINCIPAL ============ */
+main{ flex:1; min-width:0; padding:0 0 120px; }
+
+/* ============ PORTADA ============ */
+.portada{
+  position:relative; text-align:center;
+  padding:100px 80px 90px;
+  border-bottom:2px solid var(--dorado);
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(45,78,138,0.04) 0%, transparent 60%);
+}
+/* arco de estrellas sobre la portada */
+.portada::before{
+  content:"★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★";
+  position:absolute; top:28px; left:0; right:0;
+  text-align:center; font-size:13px; letter-spacing:10px;
+  color:var(--dorado-claro); opacity:0.7; pointer-events:none;
+}
+.portada::after{
+  content:"";
+  position:absolute; inset:22px;
+  border:1px solid rgba(45,78,138,0.2); pointer-events:none;
+}
+.portada .orla-superior{
+  font-family:var(--serif-sc); letter-spacing:0.18em;
+  color:var(--lapislazuli); font-size:13.5px; margin-bottom:26px;
+  text-transform:uppercase;
+}
+.portada .ave{
+  font-family:var(--serif-display); font-weight:300; font-style:italic;
+  font-size:18px; color:var(--dorado); margin-bottom:20px; letter-spacing:0.06em;
+}
+.portada h1{
+  font-family:var(--serif-display); font-weight:400; font-style:italic;
+  font-size:clamp(46px,7.5vw,88px); line-height:1.03;
+  color:var(--azul-noche);
+  letter-spacing:-0.01em;
+}
+.portada h1 small{
+  display:block; font-family:var(--serif-sc); font-style:normal; font-weight:600;
+  font-size:clamp(14px,1.8vw,19px); letter-spacing:0.2em;
+  color:var(--lapislazuli); margin-top:18px;
+}
+.portada .subtitulo{
+  max-width:680px; margin:36px auto 0;
+  font-family:var(--serif-body); font-style:italic;
+  font-size:19.5px; color:var(--tinta-media); line-height:1.65;
+}
+.portada .lema{
+  margin-top:46px; font-family:var(--serif-display); font-size:18.5px;
+  font-style:italic; color:var(--azul-noche);
+}
+.portada .lema span{
+  display:block; font-family:var(--serif-sc); font-style:normal;
+  font-size:12px; letter-spacing:0.12em; color:var(--dorado); margin-top:8px;
+}
+.estadisticas-portada{
+  display:flex; justify-content:center; gap:54px; margin-top:52px; flex-wrap:wrap;
+}
+.estadisticas-portada div{ text-align:center; }
+.estadisticas-portada .num{
+  font-family:var(--serif-display); font-weight:600; font-size:40px;
+  color:var(--lapislazuli); display:block;
+}
+.estadisticas-portada .lbl{
+  font-family:var(--serif-sc); font-size:11px; letter-spacing:0.12em; color:var(--tinta-media);
+}
+
+/* ============ PARTES / SECCIONES ============ */
+.parte{ padding:70px 80px 10px; scroll-margin-top:0; }
+.parte-encabezado{ text-align:center; margin-bottom:50px; }
+.parte-encabezado .numero-romano{
+  font-family:var(--serif-display); font-style:italic; font-weight:400;
+  font-size:16px; color:var(--dorado); letter-spacing:0.1em;
+}
+.parte-encabezado h2{
+  font-family:var(--serif-display); font-weight:400; font-style:italic;
+  font-size:clamp(32px,4vw,52px); margin-top:6px; color:var(--azul-noche);
+  letter-spacing:-0.01em;
+}
+.parte-encabezado .descripcion-parte{
+  max-width:640px; margin:16px auto 0;
+  font-family:var(--serif-body); font-style:italic;
+  color:var(--tinta-media); font-size:16.5px; line-height:1.6;
+}
+.divisor-orna{ text-align:center; color:var(--dorado); font-size:16px; letter-spacing:14px; margin:18px 0 0; }
+
+/* ============ ARTÍCULOS ============ */
+.articulo{
+  max-width:760px; margin:0 auto 64px;
+  scroll-margin-top:90px;
+  background:rgba(255,255,255,0.65);
+  border:1px solid var(--gris-perla);
+  border-top:3px solid var(--lapislazuli);
+  border-radius:0 0 3px 3px;
+  padding:42px 52px;
+  box-shadow:var(--sombra-azul);
+  position:relative;
+}
+.articulo-etiqueta{
+  font-family:var(--serif-sc); font-size:12px; letter-spacing:0.12em;
+  color:var(--lapislazuli); margin-bottom:6px; display:block;
+}
+.articulo h3{
+  font-family:var(--serif-display); font-weight:500; font-style:italic;
+  font-size:clamp(23px,3vw,31px); color:var(--azul-noche);
+  margin-bottom:24px; line-height:1.25;
+}
+.capitular{
+  float:left; font-family:var(--serif-display); font-weight:600;
+  font-size:72px; line-height:0.78; color:var(--lapislazuli);
+  padding:6px 10px 0 0; margin-top:2px;
+}
+.articulo p{ margin-bottom:16px; text-align:justify; hyphens:auto; color:var(--tinta); }
+.articulo strong{ color:var(--lapislazuli); font-weight:600; }
+.articulo em{ font-style:italic; color:var(--tinta-suave); }
+
+/* ============ CITAS BÍBLICAS ============ */
+.cita-biblica{
+  margin:26px 0; padding:20px 24px 20px 28px;
+  background:rgba(45,78,138,0.05);
+  border-left:4px solid var(--lapislazuli);
+  border-radius:0 3px 3px 0;
+  font-family:var(--serif-display);
+}
+.cita-biblica p{
+  font-style:italic; font-size:18px; color:var(--azul-noche);
+  margin-bottom:8px; text-align:left; font-weight:400;
+}
+.cita-biblica cite{
+  display:block; font-style:normal;
+  font-family:var(--serif-sc); font-size:12px; letter-spacing:0.08em;
+  color:var(--lapislazuli); text-align:right;
+}
+
+/* ============ CITAS PATRÍSTICAS — SELLO CON FLOR DE LIS ============ */
+.cita-padre{
+  margin:30px 0; display:flex; gap:18px;
+  background:linear-gradient(135deg, #fff, #F4F6FA);
+  border:1px solid var(--gris-perla);
+  border-radius:4px; padding:24px 24px 24px 22px;
+  box-shadow:var(--sombra-dorada);
+  position:relative;
+}
+/* cinta superior dorada (mismo truco que Purgatorio pero azul) */
+.cita-padre::before{
+  content:"";
+  position:absolute; top:-1px; left:22px;
+  width:46px; height:13px;
+  background:var(--lapislazuli);
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 72%,0 100%);
+}
+/* sello con flor de lis */
+.sello-padre{
+  flex-shrink:0; width:64px; height:64px; border-radius:50%;
+  border:2px solid var(--dorado);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  font-family:var(--serif-sc); font-size:10.5px; color:var(--dorado);
+  text-align:center; line-height:1.2;
+  background:var(--azul-noche);
+}
+.sello-padre .flor{ font-size:16px; display:block; margin-bottom:3px; }
+.cita-padre-texto p{
+  font-family:var(--serif-body); font-style:italic;
+  font-size:16px; color:var(--tinta-suave); text-align:left; margin-bottom:6px;
+}
+.cita-padre-texto p:nth-of-type(2){
+  font-style:normal; font-size:16.5px; color:var(--tinta);
+}
+.fuente-padre{
+  font-family:var(--serif-sc); font-size:11.5px; letter-spacing:0.06em;
+  color:var(--tinta-media); font-style:normal;
+}
+.fuente-padre b{ color:var(--lapislazuli); }
+
+/* ============ SILOGISMOS ============ */
+.silogismo{ margin:30px 0; border:1.5px solid var(--azul-noche); border-radius:3px; overflow:hidden; }
+.silogismo-cabecera{
+  background:var(--azul-noche); color:#EFF0F2;
+  padding:10px 22px;
+  font-family:var(--serif-sc); font-size:13px; letter-spacing:0.08em;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.silogismo-cabecera .forma{ color:var(--dorado-claro); font-family:var(--serif-body); font-style:italic; letter-spacing:0; font-size:12.5px; }
+.silogismo-cuerpo{ padding:22px 26px 24px; background:rgba(247,245,242,0.7); }
+.silogismo-linea{
+  display:grid; grid-template-columns:90px 1fr; gap:14px;
+  padding:7px 0; font-family:var(--serif-body); font-size:16px; align-items:baseline;
+}
+.silogismo-linea .etiqueta{
+  font-family:var(--serif-sc); font-size:11.5px; letter-spacing:0.06em;
+  color:var(--lapislazuli); text-align:right; padding-top:2px;
+}
+.silogismo-linea.conclusion{
+  border-top:1px solid var(--dorado); margin-top:6px; padding-top:14px; font-weight:600;
+}
+.silogismo-linea.conclusion .etiqueta{ color:var(--dorado); }
+
+/* ============ CADENA LÓGICA (elemento único de este tratado) ============ */
+.cadena-logica{
+  margin:34px 0;
+  display:flex; flex-direction:column; gap:0;
+  align-items:stretch;
+}
+.cadena-eslabón{
+  background:var(--azul-noche); color:#EFF0F2;
+  padding:18px 26px; position:relative;
+  font-family:var(--serif-body); font-size:16.5px; line-height:1.55;
+}
+.cadena-eslabón:nth-child(odd){
+  background:var(--lapislazuli); margin-left:0; margin-right:40px;
+  border-radius:4px 0 0 4px;
+}
+.cadena-eslabón:nth-child(even){
+  background:var(--azul-noche); margin-left:40px; margin-right:0;
+  border-radius:0 4px 4px 0;
+}
+.cadena-eslabón.conclusión-final{
+  background:var(--dorado); color:var(--azul-noche);
+  margin:0; border-radius:4px; font-weight:600;
+  text-align:center; font-family:var(--serif-display); font-style:italic; font-size:18px;
+}
+.cadena-etiqueta{
+  font-family:var(--serif-sc); font-size:11px; letter-spacing:0.1em;
+  color:var(--dorado-claro); display:block; margin-bottom:6px;
+}
+.cadena-eslabón.conclusión-final .cadena-etiqueta{ color:var(--azul-noche-suave); }
+.cadena-flecha{
+  text-align:center; font-size:22px; color:var(--dorado);
+  margin:4px 0; line-height:1;
+}
+
+/* ============ OBJECIONES ============ */
+.objeciones{
+  margin:30px 0; background:rgba(26,39,68,0.03);
+  border:1px dashed rgba(45,78,138,0.35);
+  border-radius:4px; padding:22px 26px;
+}
+.objeciones > h4{
+  font-family:var(--serif-sc); font-size:14px; letter-spacing:0.08em;
+  color:var(--lapislazuli); margin-bottom:14px;
+}
+.objecion{ margin-bottom:18px; }
+.objecion:last-child{ margin-bottom:0; }
+.objecion .num-obj{
+  font-family:var(--serif-display); font-style:italic; font-weight:600;
+  color:var(--lapislazuli); margin-right:6px;
+}
+.objecion p{ display:inline; text-align:left; }
+.respuesta-obj{ margin-top:6px; padding-left:22px; border-left:2px solid var(--dorado); }
+.respuesta-obj .etiqueta-resp{
+  font-family:var(--serif-sc); font-size:11px; letter-spacing:0.08em;
+  color:var(--dorado); display:block; margin-bottom:3px;
+}
+
+/* ============ SINTESIS ============ */
+.sintesis{
+  margin-top:28px; background:var(--azul-noche); color:rgba(239,240,242,0.9);
+  border-radius:4px; padding:22px 26px;
+}
+.sintesis h4{
+  font-family:var(--serif-sc); font-size:12px; letter-spacing:0.1em;
+  color:var(--dorado-claro); margin-bottom:8px;
+}
+.sintesis p{ color:rgba(239,240,242,0.88); text-align:left; margin-bottom:0; font-size:16px; }
+
+/* ============ LISTAS ============ */
+.lista-fundamentos{ margin:20px 0; list-style:none; counter-reset:fund; }
+.lista-fundamentos li{
+  counter-increment:fund; position:relative;
+  padding:8px 0 8px 40px; text-align:left;
+}
+.lista-fundamentos li::before{
+  content:counter(fund, upper-roman);
+  position:absolute; left:0; top:8px;
+  font-family:var(--serif-display); font-style:italic; font-weight:600;
+  color:var(--dorado); font-size:15px; width:30px;
+}
+
+/* ============ TABLA COMPARATIVA ============ */
+.tabla-padres-envoltura{
+  overflow-x:auto; margin:26px 0;
+  border:1px solid var(--gris-perla); border-radius:4px;
+}
+table.tabla-padres{
+  width:100%; border-collapse:collapse;
+  font-family:var(--serif-body); font-size:15px; min-width:600px;
+}
+table.tabla-padres thead{ background:var(--azul-noche); color:#EFF0F2; }
+table.tabla-padres th{
+  padding:12px 16px; text-align:left;
+  font-family:var(--serif-sc); font-size:12px; letter-spacing:0.06em; font-weight:600;
+}
+table.tabla-padres td{
+  padding:13px 16px; border-top:1px solid var(--gris-perla); vertical-align:top;
+}
+table.tabla-padres tbody tr:nth-child(even){ background:rgba(45,78,138,0.04); }
+table.tabla-padres td.nombre-padre{ font-weight:600; color:var(--lapislazuli); white-space:nowrap; }
+
+/* ============ PIE ============ */
+footer.pie-tratado{
+  text-align:center; padding:60px 40px;
+  border-top:2px solid var(--dorado); margin-top:40px;
+}
+footer.pie-tratado .crismon{
+  font-size:30px; color:var(--lapislazuli); margin-bottom:14px;
+  letter-spacing:0.2em;
+}
+footer.pie-tratado p{
+  font-family:var(--serif-body); font-style:italic;
+  color:var(--tinta-media); font-size:16px;
+  max-width:520px; margin:0 auto 6px; line-height:1.6;
+}
+footer.pie-tratado .sello-final{
+  margin-top:18px; font-family:var(--serif-sc);
+  font-size:11px; letter-spacing:0.14em; color:var(--dorado);
+}
+
+/* ============ VOLVER ARRIBA ============ */
+.volver-arriba{
+  position:fixed; bottom:26px; right:26px;
+  width:50px; height:50px; border-radius:50%;
+  background:var(--azul-noche); color:var(--dorado-claro);
+  border:1px solid var(--dorado);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; cursor:pointer; box-shadow:var(--sombra-azul);
+  opacity:0; pointer-events:none;
+  transition:opacity 0.3s ease, transform 0.3s ease; z-index:40;
+}
+.volver-arriba.visible{ opacity:1; pointer-events:auto; }
+.volver-arriba:hover{ transform:translateY(-3px); }
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:980px){
+  aside.indice{
+    position:fixed; left:0; top:0; height:100vh; width:300px;
+    transform:translateX(-100%); transition:transform 0.3s ease; z-index:45;
+  }
+  aside.indice.abierto{ transform:translateX(0); }
+  .indice-toggle{ display:flex; }
+  .parte, .portada{ padding-left:28px; padding-right:28px; }
+  .articulo{ padding:30px 22px; }
+}
+@media(max-width:600px){
+  body{ font-size:16.5px; }
+  .portada{ padding:80px 20px 60px; }
+  .portada h1{ font-size:38px; }
+  .estadisticas-portada{ gap:28px; }
+  .silogismo-linea{ grid-template-columns:65px 1fr; font-size:15px; }
+  .cita-padre{ flex-direction:column; }
+  .cadena-eslabón:nth-child(odd){ margin-right:20px; }
+  .cadena-eslabón:nth-child(even){ margin-left:20px; }
+}
+@media(prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .volver-arriba, .barra-progreso{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="barra-progreso" id="barraProgreso"></div>
+<button class="indice-toggle" id="toggleIndice" aria-label="Abrir índice">☰</button>
+<div class="overlay-indice" id="overlayIndice"></div>
+
+<div class="envoltura">
+
+  <!-- ============ ÍNDICE LATERAL ============ -->
+  <aside class="indice" id="indiceLateral">
+    <div class="indice-cabecera">
+      <span class="marca">✠ Tractatus Mariologicus ✠</span>
+      <span class="fleur-de-lis">⚜ ⚜ ⚜</span>
+      <h2>De Assumptione<br>Beatæ Mariæ</h2>
+      <span class="sub">Defensa desde la Escritura, los Padres<br>y la necesidad dogmática</span>
+    </div>
+    <div class="buscador-indice">
+      <input type="text" id="buscadorIndice" placeholder="Buscar en el índice…" autocomplete="off">
+      <div id="sinResultadosIndice" style="display:none;">Sin coincidencias</div>
+    </div>
+    <nav class="tabla-materias" id="tablaMaterias" aria-label="Índice del tratado">
+
+      <div class="tm-parte">
+        <a href="#proemio" class="tm-parte-titulo"><span class="tm-parte-num">—</span> Proemio</a>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-primera" class="tm-parte-titulo"><span class="tm-parte-num">I</span> Fundamentos bíblicos</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-1-1">Art. 1 — Génesis 3,15: la enemistad total con la serpiente</a></li>
+          <li><a href="#art-1-2">Art. 2 — Lucas 1,28: "llena de gracia" y sus implicaciones</a></li>
+          <li><a href="#art-1-3">Art. 3 — Apocalipsis 12: la Mujer vestida de sol</a></li>
+          <li><a href="#art-1-4">Art. 4 — Salmo 132,8: "Levántate, Señor, al lugar de tu reposo"</a></li>
+          <li><a href="#art-1-5">Art. 5 — Cantar de los Cantares 3,6 y 8,5</a></li>
+          <li><a href="#art-1-6">Art. 6 — Lucas 1,48: "todas las generaciones me llamarán bienaventurada"</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-segunda" class="tm-parte-titulo"><span class="tm-parte-num">II</span> Necesidad dogmática</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-2-1">Art. 1 — La Inmaculada Concepción como premisa</a></li>
+          <li><a href="#art-2-2">Art. 2 — El pecado original y la muerte: nexo causal</a></li>
+          <li><a href="#art-2-3">Art. 3 — María no pagó el precio del pecado</a></li>
+          <li><a href="#art-2-4">Art. 4 — La cadena lógica completa: silogismo maestro</a></li>
+          <li><a href="#art-2-5">Art. 5 — La maternidad divina y la incorrupción del Arca</a></li>
+          <li><a href="#art-2-6">Art. 6 — El cuerpo de María no podía corromperse</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-tercera" class="tm-parte-titulo"><span class="tm-parte-num">III</span> Testimonio de los Padres</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-3-1">Art. 1 — San Epifanio de Salamina</a></li>
+          <li><a href="#art-3-2">Art. 2 — Timoteo de Jerusalén</a></li>
+          <li><a href="#art-3-3">Art. 3 — San Modesto de Jerusalén</a></li>
+          <li><a href="#art-3-4">Art. 4 — San Germán de Constantinopla</a></li>
+          <li><a href="#art-3-5">Art. 5 — San Juan Damasceno</a></li>
+          <li><a href="#art-3-6">Art. 6 — San Andrés de Creta</a></li>
+          <li><a href="#art-3-7">Art. 7 — San Agustín y el principio antecedente</a></li>
+          <li><a href="#art-3-8">Art. 8 — La praxis litúrgica: Dormición en Oriente</a></li>
+          <li><a href="#art-3-9">Art. 9 — Tabla sinóptica patrística</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-cuarta" class="tm-parte-titulo"><span class="tm-parte-num">IV</span> Argumentos filosóficos</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-4-1">Art. 1 — De la conveniencia y la potencia de Dios</a></li>
+          <li><a href="#art-4-2">Art. 2 — Del honor debido a la Madre por el Hijo</a></li>
+          <li><a href="#art-4-3">Art. 3 — De la unidad de Madre e Hijo glorificados</a></li>
+          <li><a href="#art-4-4">Art. 4 — Del cuerpo como parte esencial de la persona</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-quinta" class="tm-parte-titulo"><span class="tm-parte-num">V</span> Objeciones y respuestas</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-5-1">Art. 1 — "No hay Asunción explícita en la Biblia"</a></li>
+          <li><a href="#art-5-2">Art. 2 — "Es una invención tardía"</a></li>
+          <li><a href="#art-5-3">Art. 3 — "Contradice la resurrección general"</a></li>
+          <li><a href="#art-5-4">Art. 4 — "¿Murió María o fue asunta en vida?"</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-sexta" class="tm-parte-titulo"><span class="tm-parte-num">VI</span> Magisterio y síntesis</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-6-1">Art. 1 — La definición dogmática de Pío XII (1950)</a></li>
+          <li><a href="#art-6-2">Art. 2 — Recapitulación silogística general</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#glosario" class="tm-parte-titulo"><span class="tm-parte-num">⚜</span> Glosario</a>
+      </div>
+      <div class="tm-parte">
+        <a href="#fuentes" class="tm-parte-titulo"><span class="tm-parte-num">⚜</span> Fuentes citadas</a>
+      </div>
+    </nav>
+    <div class="indice-pie">
+      "Assumpta est Maria in cælum:<br>gaudent Angeli"<br>— Antífona de la Asunción
+    </div>
+  </aside>
+
+  <!-- ============ CONTENIDO ============ -->
+  <main>
+
+    <!-- PORTADA -->
+    <section class="portada">
+      <span class="orla-superior">Tractatus Mariologicus de Novissimis</span>
+      <div class="ave">Ave, gratia plena · Dominus tecum</div>
+      <h1>De Assumptione<br>Beatæ Mariæ Virginis
+        <small>Apología desde la Escritura, los Santos Padres<br>y la necesidad lógica de la Inmaculada Concepción</small>
+      </h1>
+      <p class="subtitulo">Un tratado que muestra cómo la Asunción de María no es un añadido devocional,
+      sino la consecuencia necesaria e inevitable de lo que ya se cree sobre su Concepción Inmaculada,
+      sobre el nexo entre pecado y muerte, y sobre la dignidad de la Theotókos.</p>
+      <div class="estadisticas-portada">
+        <div><span class="num">6</span><span class="lbl">Partes</span></div>
+        <div><span class="num">28</span><span class="lbl">Artículos</span></div>
+        <div><span class="num">10</span><span class="lbl">Padres citados</span></div>
+        <div><span class="num">8</span><span class="lbl">Silogismos</span></div>
+      </div>
+      <p class="lema">"Quæ est ista quæ ascendit de deserto, deliciis affluens?"
+        <span>Cantar de los Cantares 8, 5 — aplicado a María por la tradición</span>
+      </p>
+    </section>
+
+    <!-- PROEMIO -->
+    <section class="parte" id="proemio">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Proemio</span>
+        <h2>El argumento central de este tratado</h2>
+        <p class="descripcion-parte">Por qué la Asunción no es un apéndice devocional sino
+        una consecuencia necesaria de lo que ya está definido.</p>
+        <div class="divisor-orna">⚜ ⚜ ⚜</div>
+      </div>
+      <div class="articulo">
+        <span class="capitular">E</span>
+        <p>ste tratado adopta una estrategia apologética deliberadamente distinta de la habitual.
+        No parte de la Asunción para buscarle apoyo en la Escritura y la Tradición —aunque ese
+        apoyo existe y será expuesto—, sino que parte de lo que los propios adversarios de la
+        doctrina generalmente admiten y muestra que la Asunción se sigue de ello con
+        <strong>necesidad lógica</strong>.</p>
+
+        <p>El argumento central es este: si se acepta que María fue concebida sin pecado original
+        (Inmaculada Concepción, definida dogmáticamente en 1854), y si se acepta el dato paulino
+        de que la muerte entró en el mundo a través del pecado (Romanos 5,12), entonces se sigue
+        necesariamente que María —que no tuvo pecado— no estaba sujeta al dominio de la muerte en
+        el mismo modo que los demás seres humanos. Y si no estaba sujeta al dominio de la muerte,
+        su cuerpo no podía corromperse en la tumba como consecuencia del pecado que ella nunca tuvo.
+        Luego fue asunta — de un modo u otro — a la gloria sin corrupción.</p>
+
+        <p>Este argumento tiene una virtud apologética particular: funciona con las premisas del
+        adversario. El que admite la Inmaculada Concepción y el que acepta la teología paulina
+        sobre el pecado y la muerte ya tiene, sin saberlo, todas las premisas del silogismo de la
+        Asunción. Solo necesita ver la conclusión que se sigue.</p>
+
+        <div class="sintesis">
+          <h4>Estructura del tratado</h4>
+          <p>Parte I expone los textos bíblicos. Parte II desarrolla el argumento de necesidad
+          dogmática a partir de la Inmaculada Concepción y el nexo pecado-muerte. Parte III reúne
+          el testimonio patrístico. Parte IV presenta los argumentos filosóficos. Parte V responde
+          las objeciones principales. Parte VI sintetiza con la definición dogmática de 1950.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE I — FUNDAMENTOS BÍBLICOS -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-primera">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Primera</span>
+        <h2>Los fundamentos bíblicos</h2>
+        <p class="descripcion-parte">Los textos de la Escritura que, leídos en la Tradición viva
+        de la Iglesia, iluminan la gloria corporal de María.</p>
+        <div class="divisor-orna">⚜ ⚜ ⚜</div>
+      </div>
+
+      <!-- 1.1 -->
+      <article class="articulo" id="art-1-1">
+        <span class="articulo-etiqueta">Parte I · Artículo 1</span>
+        <h3>Génesis 3,15 — La enemistad total con la serpiente</h3>
+        <span class="capitular">E</span>
+        <p>l <em>Protoevangelio</em> —el primer anuncio de la Redención— establece una enemistad
+        radical entre la serpiente y la Mujer, y entre su linaje y el de ella. Desde los Padres
+        hasta Pío IX en <em>Ineffabilis Deus</em>, este versículo ha sido leído como el fundamento
+        bíblico de los privilegios marianos.</p>
+
+        <div class="cita-biblica">
+          <p>"Inimicitias ponam inter te et mulierem, et semen tuum et semen illius: ipsa conteret
+          caput tuum, et tu insidiaberis calcaneo eius."</p>
+          <cite>Génesis 3, 15 — Vulgata</cite>
+        </div>
+        <div class="cita-biblica">
+          <p>"Pondré enemistad entre ti y la mujer, y entre tu linaje y el suyo; ella te aplastará
+          la cabeza, y tú le acecharás el talón."</p>
+          <cite>Génesis 3, 15 — versión española</cite>
+        </div>
+
+        <p>La lógica teológica del versículo impone exigencias extraordinarias a la "Mujer" en
+        cuestión: la <strong>enemistad es total</strong>, sin excepción ni atenuación
+        —"pondré enemistad entre ti y la mujer"—. Si la enemistad entre María y la serpiente
+        hubiera admitido excepciones, es decir, si en algún momento el pecado hubiera tenido
+        dominio sobre ella o sobre su cuerpo, la enemistad no sería total sino parcial. El hecho
+        de que la corrupción del sepulcro sea un dominio de la serpiente sobre el cuerpo humano
+        —consecuencia directa del pecado que la serpiente introdujo— hace que la enemistad total
+        exija que ese dominio tampoco se ejerciera sobre María.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo I — Forma Barbara</span>
+            <span class="forma">de la enemistad total y la incorrupción</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Si la enemistad entre la Mujer y la serpiente es total y sin excepción (Gn 3,15),
+              entonces la serpiente —cuyo dominio incluye la corrupción del cuerpo como consecuencia
+              del pecado— no puede tener dominio alguno sobre el cuerpo de esa Mujer.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>María es la Mujer del Protoevangelio, identificada así por la Tradición y por
+              la bula <em>Ineffabilis Deus</em>.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>La serpiente no tiene dominio sobre el cuerpo de María, ni siquiera en la muerte:
+              su cuerpo no podía corromperse — fue asunta.</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 1.2 -->
+      <article class="articulo" id="art-1-2">
+        <span class="articulo-etiqueta">Parte I · Artículo 2</span>
+        <h3>Lucas 1,28 — <em>Kecharitōménē</em>: llena de gracia</h3>
+        <span class="capitular">E</span>
+        <p>l saludo del ángel Gabriel a María no es un cumplido: es una descripción ontológica.
+        El término griego empleado —<em>κεχαριτωμένη</em> (<em>kecharitōménē</em>)— es un
+        participio perfecto pasivo del verbo <em>charitóō</em>, que significa "gracia hecha en
+        alguien", en voz pasiva y en aspecto perfecto. El perfecto en griego expresa una acción
+        completa en el pasado cuyos efectos permanecen plenamente en el presente.</p>
+
+        <div class="cita-biblica">
+          <p>"Καὶ εἰσελθὼν πρὸς αὐτὴν εἶπεν· χαῖρε, κεχαριτωμένη, ὁ κύριος μετὰ σοῦ."</p>
+          <cite>Lucas 1, 28 — texto griego original</cite>
+        </div>
+        <div class="cita-biblica">
+          <p>"Et ingressus angelus ad eam dixit: Ave, gratia plena, Dominus tecum."</p>
+          <cite>Lucas 1, 28 — Vulgata Latina</cite>
+        </div>
+
+        <p>Dos precisiones gramaticales son decisivas aquí:</p>
+
+        <ul class="lista-fundamentos">
+          <li>El saludo del ángel usa el participio como <strong>modo de dirigirse a ella</strong>,
+          no como calificativo añadido: la llama "llena-de-gracia" como si fuera su nombre propio,
+          lo que indica que ese estado la define de modo permanente y total, no ocasional.</li>
+          <li>El aspecto <strong>perfecto del participio</strong> señala que la gracia fue infundida
+          completamente antes del momento del saludo —es decir, desde su misma concepción—.
+          Este es el fundamento gramatical del dogma de la Inmaculada Concepción.</li>
+          <li>San Jerónimo traduce <em>kecharitōménē</em> como <em>gratia plena</em> —"llena de
+          gracia"—: plenitud que, por definición, excluye la sombra del pecado original y, por
+          implicación, de sus consecuencias permanentes en el cuerpo.</li>
+        </ul>
+
+        <p>Si María es "llena de gracia" de modo permanente y total, la corrupción del sepulcro
+        —que es una consecuencia de la ausencia de gracia, del pecado que arrastró al cuerpo
+        hacia la muerte— no puede aplicársele. La "plenitud de gracia" es incompatible con el
+        dominio permanente de la corrupción sobre su cuerpo.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo — de la plenitud de gracia y la incorrupción</span>
+            <span class="forma">ex kecharitōménē</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>La corrupción del cuerpo en el sepulcro es consecuencia directa del pecado
+              (Romanos 5,12; Génesis 3,19): allí donde no hay pecado, no hay título para esa
+              corrupción.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>María es <em>kecharitōménē</em> —"plenamente agraciada", totalmente libre de
+              pecado desde el primer instante de su existencia (Lucas 1,28 + definición dogmática
+              de 1854).</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>No existe título para que el cuerpo de María experimente la corrupción del
+              sepulcro: la plenitud de gracia excluye la consecuencia del pecado que María
+              nunca tuvo. Fue asunta.</span>
+            </div>
+          </div>
+        </div>
+
+        <p>San Andrés de Creta, comentando este saludo del ángel en su homilía sobre la Dormición,
+        extrae la conclusión con claridad: "Tú que fuiste saludada como llena de gracia por aquel
+        mensajero de luz, ¿cómo habrías de experimentar la oscuridad de la muerte como si fuera
+        tu morada permanente?" La plenitud de gracia y la permanencia de la muerte son, para
+        Andrés, contradictorios en el mismo sujeto.</p>
+      </article>
+
+      <!-- 1.3 -->
+      <article class="articulo" id="art-1-3">
+        <span class="articulo-etiqueta">Parte I · Artículo 3</span>
+        <h3>Apocalipsis 12 — La Mujer vestida de sol</h3>
+        <span class="capitular">L</span>
+        <p>a visión de Apocalipsis 12 presenta a una Mujer que la Tradición ha leído en clave
+        tanto eclesial como mariana —con particular énfasis en las coronas de gloria que
+        la adornan—. La descripción de la Mujer en la gloria celeste ha sido relacionada con la
+        Asunción desde la patrística griega.</p>
+
+        <div class="cita-biblica">
+          <p>"Et signum magnum apparuit in cælo: mulier amicta sole, et luna sub pedibus eius,
+          et in capite eius corona stellarum duodecim."</p>
+          <cite>Apocalipsis 12, 1 — Vulgata</cite>
+        </div>
+        <div class="cita-biblica">
+          <p>"Y apareció en el cielo una señal grande: una mujer vestida del sol, con la luna
+          debajo de sus pies, y sobre su cabeza una corona de doce estrellas."</p>
+          <cite>Apocalipsis 12, 1 — versión española</cite>
+        </div>
+
+        <p>Varios elementos de la visión tienen peso teológico propio para la doctrina de la
+        Asunción:</p>
+
+        <ul class="lista-fundamentos">
+          <li><strong>La Mujer aparece en el cielo</strong>, no en la tierra: la escena es
+          celestial desde su primer versículo. Si la Mujer tiene una dimensión mariana —que la
+          Tradición afirma sin exclusividad—, entonces María aparece representada en la Escritura
+          en un estado de gloria celeste que incluye su persona completa.</li>
+          <li><strong>"Vestida del sol"</strong>: el sol es símbolo de la gloria divina que
+          envuelve completamente a la Mujer —no solo su alma, sino su figura entera, que la
+          Tradición ha leído como figura corporal—.</li>
+          <li><strong>La corona de doce estrellas</strong>: gloria triunfante, análoga a la del
+          Cordero y de los mártires glorificados, que en el Apocalipsis siempre incluye la
+          dimensión corporal de la gloria final.</li>
+        </ul>
+
+        <p>San Andrés de Creta y San Juan Damasceno aplicarán explícitamente esta visión a María
+        glorificada en cuerpo y alma. La lectura no es proyección tardía: está enraizada en la
+        identificación de María como la Mujer del Génesis 3, continuada en la Mujer del Apocalipsis.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo — de la Mujer celeste</span>
+            <span class="forma">ex Apocalypsi 12</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Si la Escritura presenta a la Mujer —identificada tipológicamente con María
+              desde el Génesis— en estado de gloria celeste que envuelve su figura completa
+              (vestida del sol, coronada de estrellas), esa representación no puede ser mero
+              símbolo vacío: apunta a una realidad efectiva de glorificación personal.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Apocalipsis 12,1 presenta exactamente esa figura gloriosa en el cielo,
+              continuación de la Mujer del Protoevangelio (Génesis 3,15), identificada por la
+              Tradición con María.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>La Escritura apunta, en la figura de la Mujer celeste de Apocalipsis 12, a
+              la glorificación efectiva de María en cuerpo y alma: la Asunción.</span>
+            </div>
+          </div>
+        </div>
+
+        <p>La <em>Munificentissimus Deus</em> de Pío XII cita expresamente este pasaje del
+        Apocalipsis entre los textos que la Tradición ha leído como fundamento bíblico de la
+        Asunción, reconociendo así que la lectura mariológica de Apocalipsis 12 no es una
+        imposición exegética posterior, sino una hermenéutica recibida con autoridad desde los
+        Padres hasta el Magisterio contemporáneo.</p>
+      </article>
+
+      <!-- 1.4 -->
+      <article class="articulo" id="art-1-4">
+        <span class="articulo-etiqueta">Parte I · Artículo 4</span>
+        <h3>Salmo 132 (131), 8 — "Levántate, Señor, al lugar de tu reposo, tú y el Arca de tu poder"</h3>
+        <span class="capitular">E</span>
+        <p>l Salmo 132 es un salmo davídico que celebra el traslado del Arca de la Alianza al
+        Templo de Sión. En su lectura tipológica —seguida por los Padres desde el siglo IV—,
+        el Arca prefigura a María, y la ascensión del Arca al Templo prefigura la Asunción de
+        María al cielo.</p>
+
+        <div class="cita-biblica">
+          <p>"Surge, Domine, in requiem tuam, tu et arca sanctificationis tuæ."</p>
+          <cite>Salmo 131 (132), 8 — Vulgata</cite>
+        </div>
+        <div class="cita-biblica">
+          <p>"Levántate, Señor, ven a tu lugar de reposo, tú y el arca de tu poder."</p>
+          <cite>Salmo 132 (131), 8 — versión española</cite>
+        </div>
+
+        <p>La tipología Arca-María es una de las más desarrolladas de toda la mariología patrística.
+        Sus fundamentos son múltiples y convergentes:</p>
+
+        <ul class="lista-fundamentos">
+          <li>El Arca contenía la Palabra de Dios en tablas de piedra; María contuvo la Palabra
+          hecha carne en sus entrañas. El Arca era la que más directamente "llevaba" la presencia
+          divina en Israel; María es la que lleva a Dios mismo.</li>
+          <li>El Arca era de madera de acacia incorruptible, recubierta de oro puro —imagen
+          de la incorrupción—: los Padres leyeron aquí la incorrupción del cuerpo de María.</li>
+          <li>El rey David danzó delante del Arca cuando fue trasladada (2 Sam 6,14): el mismo
+          gesto de Juan Bautista en el vientre de Isabel ante la presencia de María (Lc 1,41)
+          refuerza la identificación tipológica en el propio Nuevo Testamento.</li>
+          <li>El Arca nunca fue abandonada ni cayó en manos del enemigo: la Tradición leyó
+          esto como imagen de que el cuerpo de María —"Arca nueva"— no podía caer bajo el
+          dominio del enemigo de la muerte y la corrupción.</li>
+        </ul>
+      </article>
+
+      <!-- 1.5 -->
+      <article class="articulo" id="art-1-5">
+        <span class="articulo-etiqueta">Parte I · Artículo 5</span>
+        <h3>Cantar de los Cantares 3,6 y 8,5 — La que sube del desierto</h3>
+        <span class="capitular">D</span>
+        <p>os versículos del Cantar de los Cantares han sido relacionados por la Tradición con
+        la Asunción de María: la imagen de una figura que "sube" en gloria, precedida de nubes
+        de incienso, hacia el encuentro con el Amado.</p>
+
+        <div class="cita-biblica">
+          <p>"Quæ est ista quæ ascendit per desertum sicut virgula fumi ex aromatibus myrrhæ
+          et thuris et universi pulveris pigmentarii?"</p>
+          <cite>Cantar de los Cantares 3, 6 — Vulgata</cite>
+        </div>
+        <div class="cita-biblica">
+          <p>"¿Quién es ésta que sube del desierto como columna de humo, perfumada de mirra
+          e incienso y de toda clase de aromas de mercader?"</p>
+          <cite>Cantar de los Cantares 3, 6 — versión española</cite>
+        </div>
+        <div class="cita-biblica">
+          <p>"Quæ est ista quæ ascendit de deserto, deliciis affluens, innixa super dilectum suum?"</p>
+          <cite>Cantar de los Cantares 8, 5 — Vulgata</cite>
+        </div>
+
+        <p>El verbo es siempre el mismo: <em>ascendit</em> — "sube", "asciende". El sujeto que
+        asciende lo hace desde el "desierto" —figura del mundo mortal— hacia el encuentro con el
+        Amado, "apoyada sobre su amado". La Tradición mariana ha leído este "apoyarse sobre el
+        amado" como figura del Hijo que eleva a su Madre: la Asunción como el abrazo del Hijo
+        que levanta a la que lo llevó a él.</p>
+
+        <p>San Germán de Constantinopla, en su primera homilía sobre la Dormición, cita
+        explícitamente Cantar 3,6 aplicándolo a la subida de María al cielo: la que sube del
+        desierto de este mundo "perfumada" —enriquecida con la plenitud de gracia que la hizo
+        <em>kecharitōménē</em>— es la Madre de Dios asunta en cuerpo y alma.</p>
+      </article>
+
+      <!-- 1.6 -->
+      <article class="articulo" id="art-1-6">
+        <span class="articulo-etiqueta">Parte I · Artículo 6</span>
+        <h3>Lucas 1,48 — "Todas las generaciones me llamarán bienaventurada"</h3>
+        <span class="capitular">E</span>
+        <p>l Magnificat de María contiene una profecía de amplísimo alcance: todas las generaciones
+        la llamarán <em>bienaventurada</em> (<em>μακαρίαν</em> en griego, <em>beatam</em> en
+        latín). Esta bienaventuranza proclamada para todas las generaciones tiene implicaciones
+        teológicas que los Padres desarrollaron en relación con la gloria de María.</p>
+
+        <div class="cita-biblica">
+          <p>"Quia respexit humilitatem ancillæ suæ: ecce enim ex hoc beatam me dicent omnes
+          generationes."</p>
+          <cite>Lucas 1, 48 — Vulgata</cite>
+        </div>
+        <div class="cita-biblica">
+          <p>"Porque ha puesto los ojos en la humildad de su esclava; por eso desde ahora todas
+          las generaciones me llamarán bienaventurada."</p>
+          <cite>Lucas 1, 48 — versión española</cite>
+        </div>
+
+        <p>La <em>beatitudo</em> bíblica no es mero elogio social: en el lenguaje veterotestamentario
+        y en la tradición judía, el "bienaventurado" (<em>ašrê</em> en hebreo, μακάριος en griego)
+        es quien goza de la plenitud del favor divino, de la comunión plena con Dios. Las
+        <em>Bienaventuranzas</em> del Sermón de la Montaña describen, precisamente, el estado de
+        los que heredarán el Reino, verán a Dios, etc. Que María sea <em>bienaventurada</em> en
+        sentido pleno —no solo en su alma sino en su persona— implica que goza de la plenitud de la
+        vida divina que el Hijo vino a traer: una bienaventuranza que, en la escatología cristiana,
+        incluye la glorificación del cuerpo.</p>
+
+        <p>El argumento se refuerza con la inmediatez del Magnificat: María lo canta cuando
+        todavía lleva al Hijo en su vientre, cuando la Redención aún no se ha consumado en la Cruz.
+        La bienaventuranza que proclama es anticipada —<em>ex hoc</em>, "desde ahora"— por la
+        sola presencia de la gracia que la habita. Si ya desde ese momento toda generación la
+        llamará bienaventurada, esa bienaventuranza tiene que ser real, total y permanente:
+        no puede quedar interrumpida por la corrupción del sepulcro como si la acción de Dios
+        en ella hubiera sido a la postre incompleta.</p>
+
+        <div class="cita-biblica">
+          <p>"Fecit mihi magna qui potens est, et sanctum nomen eius."</p>
+          <cite>Lucas 1, 49 — "Grandes cosas ha hecho en mí el Poderoso, cuyo nombre es Santo"</cite>
+        </div>
+
+        <p>"Grandes cosas" (<em>magna</em>) en plural: no una sola gracia, sino la totalidad de
+        los dones con que Dios enriqueció a su Madre. La Tradición ha leído en ese plural todas
+        las prerrogativas marianas —Inmaculada Concepción, Maternidad divina, virginidad
+        perpetua y, finalmente, Asunción— como las "grandes cosas" que el Poderoso hizo en ella.
+        La Asunción es la última y más visible de esas "grandes cosas": la que corona visiblemente
+        todas las demás ante los ojos de la Iglesia y del mundo.</p>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Primera</h4>
+          <p>Los seis textos bíblicos examinados forman, como en el tratado del Purgatorio, un
+          mosaico convergente: la enemistad total con la serpiente (Génesis 3,15) excluye el
+          dominio de la corrupción; la plenitud de gracia permanente (Lucas 1,28) excluye la
+          consecuencia del pecado; la Mujer celeste (Apocalipsis 12) apunta a la gloria real;
+          la tipología del Arca (Salmo 132,8) afirma la traslación gloriosa; la Amada que sube
+          (Cantar de los Cantares) figura la Asunción; y la bienaventuranza total (Lucas 1,48-49)
+          exige la plenitud que incluye el cuerpo. Ninguno de estos textos da, aislado, una
+          "prueba" directa en el sentido técnico. Pero su convergencia, leída en la Tradición
+          viva de la Iglesia, constituye un fundamento escriturístico genuino y antiguo.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE II — NECESIDAD DOGMÁTICA -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-segunda">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Segunda</span>
+        <h2>La necesidad dogmática</h2>
+        <p class="descripcion-parte">La Asunción como consecuencia lógicamente necesaria de la
+        Inmaculada Concepción y del nexo bíblico entre el pecado original y la muerte.</p>
+        <div class="divisor-orna">⚜ ⚜ ⚜</div>
+      </div>
+
+      <!-- 2.1 -->
+      <article class="articulo" id="art-2-1">
+        <span class="articulo-etiqueta">Parte II · Artículo 1</span>
+        <h3>La Inmaculada Concepción como premisa mayor del argumento</h3>
+        <span class="capitular">E</span>
+        <p>l Papa Pío IX definió el 8 de diciembre de 1854, en la bula <em>Ineffabilis Deus</em>,
+        que la Bienaventurada Virgen María fue preservada inmune de toda mancha del pecado original
+        en el primer instante de su concepción. Esta definición es el punto de partida del
+        argumento central de este tratado.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>PÍO IX<br>1854</div>
+          <div class="cita-padre-texto">
+            <p>"Declaramus, pronuntiamus et definimus, doctrinam, quæ tenet, beatissimam Virginem
+            Mariam in primo instanti suæ conceptionis fuisse singulari omnipotentis Dei gratia et
+            privilegio, intuitu meritorum Christi Iesu Salvatoris humani generis, ab omni originalis
+            culpæ labe præservatam immunem, esse a Deo revelatam, atque idcirco ab omnibus fidelibus
+            firmiter constanterque credendam."</p>
+            <p>"Declaramos, pronunciamos y definimos que la doctrina que sostiene que la
+            Bienaventurada Virgen María fue preservada inmune de toda mancha de culpa original en
+            el primer instante de su concepción, por singular gracia y privilegio de Dios
+            omnipotente, en atención a los méritos de Cristo Jesús Salvador del género humano,
+            está revelada por Dios y por tanto debe ser firme y constantemente creída por todos
+            los fieles."</p>
+            <span class="fuente-padre"><b>Pío IX</b> — Bula <em>Ineffabilis Deus</em>, 8 de diciembre de 1854 — texto latino oficial</span>
+          </div>
+        </div>
+
+        <p>Esta definición dogmática establece con precisión los términos que necesitamos para el
+        argumento: María fue preservada de <strong>toda mancha de culpa original</strong>
+        (<em>ab omni originalis culpæ labe</em>) —no solo de sus consecuencias morales, sino de
+        la culpa en su raíz—. Este es el punto de partida del silogismo que llevaría a la
+        Asunción noventa y seis años después.</p>
+      </article>
+
+      <!-- 2.2 -->
+      <article class="articulo" id="art-2-2">
+        <span class="articulo-etiqueta">Parte II · Artículo 2</span>
+        <h3>El nexo causal entre el pecado original y la muerte — Romanos 5,12</h3>
+        <span class="capitular">L</span>
+        <p>a segunda premisa del argumento central es un dato paulino que ninguna tradición
+        cristiana niega: la muerte entró en el mundo como consecuencia del pecado de Adán.
+        Sin el pecado original, no habría muerte tal como la conocemos.</p>
+
+        <div class="cita-biblica">
+          <p>"Propterea sicut per unum hominem peccatum in hunc mundum intravit, et per peccatum
+          mors, et ita in omnes homines mors pertransiit, in quo omnes peccaverunt."</p>
+          <cite>Romanos 5, 12 — Vulgata</cite>
+        </div>
+        <div class="cita-biblica">
+          <p>"Por tanto, como el pecado entró en el mundo por un solo hombre, y por el pecado la
+          muerte, así la muerte se extendió a todos los hombres, por cuanto todos pecaron."</p>
+          <cite>Romanos 5, 12 — versión española</cite>
+        </div>
+
+        <p>San Pablo no dice que la muerte es un fenómeno biológico neutral que ya existiría
+        independientemente del pecado: dice que <em>entró</em> en el mundo <em>por</em> el pecado.
+        La muerte —incluyendo la corrupción del cuerpo en el sepulcro— es, según este texto,
+        una consecuencia del pecado original. Tres precisiones son indispensables aquí:</p>
+
+        <ul class="lista-fundamentos">
+          <li><strong>La muerte como "paga del pecado"</strong> (Romanos 6,23: <em>stipendia
+          enim peccati mors</em>): la muerte no es el estado natural del ser humano, sino el
+          "salario" —retribución judicial— de una deuda contraída por el pecado. Quien no contrajo
+          la deuda no debe el salario.</li>
+          <li><strong>La corrupción del cuerpo</strong> es parte inseparable de lo que en la
+          tradición bíblica se llama "muerte": no solo el momento del deceso, sino la
+          desintegración del cuerpo, el "polvo volverás" (Gn 3,19). Esta corrupción es también
+          consecuencia del pecado original.</li>
+          <li><strong>La redención de la muerte</strong> (1 Cor 15,55-56: "¿Dónde está, oh
+          muerte, tu victoria?") muestra que la victoria sobre la muerte es inseparable de la
+          victoria sobre el pecado: si el pecado es vencido radicalmente, también lo es la muerte.
+          En nadie el pecado fue vencido más radicalmente que en María.</li>
+        </ul>
+      </article>
+
+      <!-- 2.3 -->
+      <article class="articulo" id="art-2-3">
+        <span class="articulo-etiqueta">Parte II · Artículo 3</span>
+        <h3>María no pagó el precio del pecado: la conclusión intermedia</h3>
+        <span class="capitular">S</span>
+        <p>i la muerte es el "salario del pecado" (Romanos 6,23), y si María nunca tuvo pecado
+        (definición dogmática de 1854), entonces María no debe ese salario. Esta conclusión,
+        simple en su lógica, tiene consecuencias teológicas enormes.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo II — Forma Camestres</span>
+            <span class="forma">del salario no debido</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>La muerte y la corrupción del cuerpo son el salario —retribución debida— del
+              pecado original (Romanos 5,12; 6,23; Génesis 3,19).</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>María no tuvo pecado original ni ninguna de sus mancillas (definición dogmática,
+              <em>Ineffabilis Deus</em>, 1854).</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>María no debía el salario de la muerte y la corrupción: su cuerpo no tenía
+              deuda que pagar a través de la desintegración en el sepulcro.</span>
+            </div>
+          </div>
+        </div>
+
+        <p>Esta conclusión no afirma todavía que María no murió: la cuestión de si la Virgen
+        sufrió el tránsito de la muerte antes de la Asunción es debatida y no definida (como
+        explicará el Artículo 4 de la Parte V). Lo que afirma es más preciso: independientemente
+        de cómo fue su tránsito, su cuerpo no podía estar sujeto a la corrupción del sepulcro,
+        porque esa corrupción es consecuencia de una deuda —el pecado— que ella no tenía.</p>
+      </article>
+
+      <!-- 2.4 -->
+      <article class="articulo" id="art-2-4">
+        <span class="articulo-etiqueta">Parte II · Artículo 4</span>
+        <h3>La cadena lógica completa — El silogismo maestro</h3>
+        <span class="capitular">A</span>
+        <p>hora podemos presentar el argumento de necesidad dogmática en su forma completa,
+        como cadena de inferencias donde cada eslabón sostiene al siguiente. Esta es la
+        estructura apologética central de este tratado.</p>
+
+        <div class="cadena-logica">
+          <div class="cadena-eslabón">
+            <span class="cadena-etiqueta">Premisa 1 — Paulina (Romanos 5,12; 6,23)</span>
+            La muerte y la corrupción del cuerpo son consecuencia causal del pecado original.
+            Sin pecado, no habría esa muerte: es el "salario" de una deuda contraída por Adán.
+          </div>
+          <div class="cadena-flecha">↓</div>
+          <div class="cadena-eslabón">
+            <span class="cadena-etiqueta">Premisa 2 — Dogma de 1854 (Ineffabilis Deus)</span>
+            María fue preservada de todo pecado original desde el primer instante de su
+            concepción, por los méritos de Cristo anticipados a ella.
+          </div>
+          <div class="cadena-flecha">↓</div>
+          <div class="cadena-eslabón">
+            <span class="cadena-etiqueta">Consecuencia necesaria 1</span>
+            Si María no tuvo pecado, no contrajo la deuda cuyo salario es la corrupción.
+            Su cuerpo no estaba sujeto al dominio de la desintegración en el sepulcro.
+          </div>
+          <div class="cadena-flecha">↓</div>
+          <div class="cadena-eslabón">
+            <span class="cadena-etiqueta">Premisa 3 — Maternidad divina (Concilio de Éfeso, 431)</span>
+            María es la Theotókos —Madre de Dios—: el cuerpo que llevó, alimentó y dio a
+            luz a la Segunda Persona de la Trinidad. Este cuerpo tiene una dignidad única en
+            toda la creación.
+          </div>
+          <div class="cadena-flecha">↓</div>
+          <div class="cadena-eslabón">
+            <span class="cadena-etiqueta">Consecuencia necesaria 2</span>
+            Un cuerpo que no debía la corrupción por su inmunidad del pecado, y que además
+            tiene la más alta dignidad creada por haber sido templo del Hijo de Dios, no puede
+            haber permanecido en la tumba en desintegración: sería indecoroso respecto a la
+            Omnipotencia, que puede y quiere dar a cada quien lo que le corresponde.
+          </div>
+          <div class="cadena-flecha">↓</div>
+          <div class="cadena-eslabón conclusión-final">
+            <span class="cadena-etiqueta">Conclusión — Asunción necesaria</span>
+            Luego María fue asunta en cuerpo y alma a la gloria celeste: consecuencia lógica,
+            teológica y moral ineludible de lo que ya se afirma sobre su Concepción y su
+            Maternidad divina.
+          </div>
+        </div>
+
+        <p>Este argumento tiene una fuerza apologética particular frente a quienes aceptan la
+        Inmaculada Concepción y el Concilio de Éfeso pero dudan de la Asunción: si admiten las
+        premisas 2 y 3, ya tienen lógicamente la conclusión, aunque no lo hayan advertido.</p>
+      </article>
+
+      <!-- 2.5 -->
+      <article class="articulo" id="art-2-5">
+        <span class="articulo-etiqueta">Parte II · Artículo 5</span>
+        <h3>La maternidad divina y la dignidad del "Arca nueva"</h3>
+        <span class="capitular">L</span>
+        <p>a maternidad divina —<em>theotokía</em>— añade al argumento anterior una razón de
+        conveniencia tan poderosa que algunos teólogos la consideran la premisa más fuerte de
+        toda la argumentación mariológica. El cuerpo de María no fue cualquier cuerpo: fue el
+        cuerpo que fue templo real, no metafórico, de la divinidad encarnada.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo III — de la dignidad del templo</span>
+            <span class="forma">ex maternitate divina</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>El Antiguo Testamento estableció que el Arca de la Alianza —morada de la
+              presencia divina— debía ser de madera incorruptible (Éxodo 25,10) y nunca cayó en
+              manos del enemigo de forma permanente; fue siempre rescatada o trasladada a lugar
+              de honor. Con mayor razón el "Arca nueva" de la Nueva Alianza merece honor igual o
+              mayor.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>El cuerpo de María es el "Arca nueva": contuvo no ya las tablas de la Ley,
+              sino al Legislador mismo; no ya el maná, sino el Pan de vida; no ya la vara de
+              Aarón, sino el Sumo Sacerdote eterno. Su dignidad supera infinitamente a la del
+              Arca material.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Con mayor razón el cuerpo de María —el Arca nueva de la Nueva Alianza— no
+              podía caer bajo el dominio permanente del enemigo de la muerte y la corrupción:
+              fue asunta, "trasladada a lugar de honor" en la gloria del Hijo.</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2.6 -->
+      <article class="articulo" id="art-2-6">
+        <span class="articulo-etiqueta">Parte II · Artículo 6</span>
+        <h3>El cuerpo de María no podía corromperse: el argumento de la incorrupción</h3>
+        <span class="capitular">L</span>
+        <p>a síntesis teológica de la Parte Segunda puede formularse ahora como un único argumento
+        de necesidad, que combina la razón de la ausencia de pecado con la razón de la dignidad
+        materna.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo IV — Síntesis de la Parte Segunda</span>
+            <span class="forma">de la doble razón de incorrupción</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>El cuerpo que (a) no contrajo la deuda del pecado original y (b) fue templo real
+              del Hijo de Dios tiene una doble razón para no ser abandonado a la corrupción del
+              sepulcro: la razón de justicia (no debe el salario que no contrajo) y la razón de
+              conveniencia (la más alta dignidad exige el más alto honor).</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>El cuerpo de María reúne exactamente ambas razones: ausencia de pecado
+              original (por definición dogmática) y maternidad divina (por fe de toda la Iglesia
+              desde Éfeso, 431).</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>El cuerpo de María tiene una doble razón de necesidad para no ser abandonado
+              a la corrupción: fue asunta en cuerpo y alma, por razón de justicia y de
+              conveniencia máxima.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Segunda</h4>
+          <p>La Asunción de María no es una doctrina flotante, añadida sin conexión con el resto
+          del edificio dogmático. Es la conclusión que se sigue necesariamente —por razón de
+          justicia y de conveniencia máxima— de dos dogmas ya definidos anteriormente: la
+          Inmaculada Concepción y la Maternidad divina. Quien admite ambos dogmas ya tiene, sin
+          advertirlo, todas las premisas de la Asunción.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE III — TESTIMONIO PATRÍSTICO -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-tercera">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Tercera</span>
+        <h2>El testimonio de los Padres</h2>
+        <p class="descripcion-parte">La creencia en la Asunción — o Dormición y glorificación
+        corporal — está atestiguada en el Oriente cristiano desde el siglo IV y en el
+        Occidente desde el siglo VII, con notable coherencia doctrinal.</p>
+        <div class="divisor-orna">⚜ ⚜ ⚜</div>
+      </div>
+
+      <!-- 3.1 -->
+      <article class="articulo" id="art-3-1">
+        <span class="articulo-etiqueta">Parte III · Artículo 1</span>
+        <h3>San Epifanio de Salamina — primer testimonio ambiguo y su valor</h3>
+        <span class="capitular">S</span>
+        <p>an Epifanio (m. 403) es el primer Padre que aborda directamente la cuestión del
+        destino final del cuerpo de María. Su testimonio es valioso precisamente por su cautela:
+        no afirma positivamente la Asunción, pero tampoco afirma que María murió y su cuerpo se
+        corrompió. Su silencio ante esta posibilidad es, en sí mismo, significativo.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>EPIFAN.<br>† 403</div>
+          <div class="cita-padre-texto">
+            <p>"Let no one search after her [Mary's] end. For we do not find her death in holy
+            Scripture [...] whether she died or did not die, whether she was buried or was not
+            buried [...] God forbid that I should apply this to harm any one. I am not sure
+            whether she died."</p>
+            <p>"Que nadie busque su fin [de María]. Pues no encontramos su muerte en la Sagrada
+            Escritura [...] si murió o no murió, si fue sepultada o no fue sepultada [...] Dios
+            me libre de aplicar esto para dañar a alguien. No estoy seguro de si ella murió."</p>
+            <span class="fuente-padre"><b>San Epifanio de Salamina</b> — <em>Panarion</em> (Adversus Haereses), 78, 23 — trad. inglesa F. Williams (1994), ed. Brill; versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>El valor apologético de este texto es preciso: Epifanio, que conoce toda la tradición
+        de su tiempo y es un heresiarca-cazador meticuloso, no dice que María murió y fue
+        sepultada como todos los demás. Dice que "no sabe". En el siglo IV, si la tumba de María
+        en Jerusalén fuera un dato establecido y venerado, Epifanio lo sabría. Su incertidumbre
+        implica que en su tiempo no existía una tradición firme de sepultura de María análoga a
+        la de los apóstoles o mártires.</p>
+      </article>
+
+      <!-- 3.2 -->
+      <article class="articulo" id="art-3-2">
+        <span class="articulo-etiqueta">Parte III · Artículo 2</span>
+        <h3>Timoteo de Jerusalén — siglo V</h3>
+        <span class="capitular">T</span>
+        <p>imoteo de Jerusalén, en un sermón del siglo V, afirma con convicción que María fue
+        preservada de la muerte por el privilegio de su maternidad divina.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>TIMOTEO<br>HIER.<br>s. V</div>
+          <div class="cita-padre-texto">
+            <p>"Wherefore the Virgin is immortal to this day, seeing that He who had dwelt in her
+            transported her to the regions of her assumption. For it behoved that she should
+            behold her Son sitting on the right hand of His Father."</p>
+            <p>"Por esto la Virgen es inmortal hasta el día de hoy, pues Aquel que había habitado
+            en ella la trasladó a las regiones de su asunción. Porque convenía que ella viese
+            a su Hijo sentado a la diestra de su Padre."</p>
+            <span class="fuente-padre"><b>Timoteo de Jerusalén</b> — <em>Homilía sobre Simeón y Ana</em> — trad. inglesa de dominio público, <em>Ante-Nicene Fathers</em>, vol. extra; versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>Obsérvese la razón teológica que da Timoteo para la Asunción: que María debía "ver a su
+        Hijo sentado a la diestra del Padre". Es un argumento de conveniencia fundado en la
+        maternidad divina —exactamente el mismo que desarrollaremos en la Parte IV—, lo que
+        confirma que esta línea de razonamiento es antigua y no una construcción tardía.</p>
+
+        <p>El testimonio de Timoteo tiene además un valor histórico de primer orden: procede de
+        Jerusalén, la ciudad donde María vivió, murió —o fue asunta— y donde la memoria de los
+        hechos relacionados con ella habría sido más viva y controvertida si hubiera habido razones
+        para dudar. Que un obispo de Jerusalén del siglo V afirme sin vacilación la inmortalidad
+        y la traslación gloriosa de María implica que en la Iglesia madre de Jerusalén no existía
+        ninguna tradición contraria —ningún sepulcro, ninguna reliquia corporal— que contradijera
+        su afirmación.</p>
+
+        <p>El hecho de que Timoteo use el tiempo presente —"la Virgen <em>es</em> inmortal hasta
+        el día de hoy"— y no el pretérito perfecto es también significativo: no dice "fue llevada
+        al cielo en tal fecha", sino que afirma un estado presente y continuo de gloria. La
+        Asunción no es para él un evento puntual del pasado sino una condición permanente de María
+        en el momento en que escribe.</p>
+      </article>
+
+      <!-- 3.3 -->
+      <article class="articulo" id="art-3-3">
+        <span class="articulo-etiqueta">Parte III · Artículo 3</span>
+        <h3>San Modesto de Jerusalén — † 634</h3>
+        <span class="capitular">S</span>
+        <p>an Modesto, patriarca de Jerusalén, es uno de los primeros Padres que predica
+        homilías explícitamente dedicadas a la Dormición y glorificación de María, con una
+        teología ya plenamente desarrollada.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>MODEST.<br>HIER.<br>† 634</div>
+          <div class="cita-padre-texto">
+            <p>"As the most glorious Mother of Christ, our Saviour and God and the giver of life
+            and immortality, has been endowed with life by Him, she has received an eternal
+            incorruptibility of the body together with Him who has raised her up from the tomb
+            and has taken her up to Himself in a way known only to Him."</p>
+            <p>"Como la gloriosísima Madre de Cristo, nuestro Salvador y Dios y dador de vida e
+            inmortalidad, ha sido enriquecida con la vida por Él, ha recibido la incorruptibilidad
+            eterna del cuerpo junto con Aquel que la ha levantado de la tumba y la ha tomado consigo
+            de un modo que solo Él conoce."</p>
+            <span class="fuente-padre"><b>San Modesto de Jerusalén</b> — <em>Encomium in Dormitionem Deiparæ</em> — trad. inglesa de dominio público; versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>San Modesto es extraordinariamente preciso: habla de "incorruptibilidad eterna del
+        cuerpo", de ser "levantada de la tumba" y de ser "tomada consigo" por Cristo. No es
+        una imagen poética: es afirmación doctrinal explícita de la glorificación corporal de
+        María, con tres afirmaciones distintas y complementarias.</p>
+
+        <p>Merece especial atención la estructura del argumento de Modesto: la glorificación de
+        María se fundamenta en que fue "enriquecida con la vida" por el mismo Hijo que es
+        "dador de vida e inmortalidad". El argumento es circular en el mejor sentido escolástico:
+        María dio la vida humana al que es fuente de la vida divina; el que es fuente de la vida
+        devuelve ahora a su Madre, multiplicada, la vida que recibió de ella. La reciprocidad del
+        misterio de la Encarnación alcanza aquí su expresión más perfecta.</p>
+
+        <p>La frase "de un modo que solo Él conoce" (<em>modo sibi noto</em>) es también
+        significativa: Modesto no pretende describir los detalles del modo en que ocurrió la
+        Asunción —si precedió o no una muerte, qué tipo de glorificación fue exactamente—, sino
+        afirmar el hecho con certeza mientras deja los detalles a la sabiduría divina. Esta
+        es precisamente la actitud que el Magisterio adoptará dieciséis siglos después en la
+        definición dogmática de 1950: afirmar el hecho sin pronunciarse sobre los modos.</p>
+      </article>
+
+      <!-- 3.4 -->
+      <article class="articulo" id="art-3-4">
+        <span class="articulo-etiqueta">Parte III · Artículo 4</span>
+        <h3>San Germán de Constantinopla — † 733</h3>
+        <span class="capitular">S</span>
+        <p>an Germán, patriarca de Constantinopla y gran teólogo mariano, predicó tres grandes
+        homilías sobre la Dormición que constituyen el corpus patrístico más rico sobre la
+        Asunción antes de la definición dogmática.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>GERMÁN.<br>CP.<br>† 733</div>
+          <div class="cita-padre-texto">
+            <p>"Thou art she who, as it is written, appears in beauty, and thy virginal body is
+            all holy, all chaste, entirely the habitation of God, so that it is henceforth
+            completely exempt from dissolution into dust [...] It was fitting, indeed, that she,
+            who had kept her virginity intact in childbirth, should also have her body kept free
+            from all corruption after death."</p>
+            <p>"Tú eres aquella que, como está escrito, aparece en belleza, y tu cuerpo virginal
+            es todo santo, todo casto, enteramente morada de Dios, de modo que está en adelante
+            completamente exento de disolución en polvo [...] Era conveniente, en efecto, que
+            ella, que había preservado intacta su virginidad en el parto, tuviera también su
+            cuerpo preservado de toda corrupción después de la muerte."</p>
+            <span class="fuente-padre"><b>San Germán de Constantinopla</b> — <em>Homilía I sobre la Dormición</em> — trad. inglesa B. E. Daley SJ, <em>On the Dormition of Mary</em> (SVS Press, 1998); versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>Nótese el argumento de Germán: la misma razón que preservó la virginidad de María
+        en el parto —la acción sobrenatural del Espíritu Santo, que hizo posible lo que
+        biológicamente parecía imposible— actúa también para preservar su cuerpo de la
+        corrupción después de la muerte. El poder de Dios que actuó en la Encarnación no
+        abandona a la Madre del Señor en el sepulcro.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>GERMÁN.<br>CP.<br>† 733</div>
+          <div class="cita-padre-texto">
+            <p>"How could she who had given life to God the Incarnate Word, suffer corruption
+            in the grave? Impossible! For as the brightness of the sun extends over the whole
+            world, so did the grace of Christ make thee a partaker of incorruption, O Virgin
+            most blessed!"</p>
+            <p>"¿Cómo podría sufrir corrupción en el sepulcro la que dio vida a Dios el Verbo
+            encarnado? ¡Imposible! Pues así como el resplandor del sol se extiende sobre todo
+            el mundo, así la gracia de Cristo te hizo partícipe de la incorrupción, ¡oh
+            Virgen bienaventurada!"</p>
+            <span class="fuente-padre"><b>San Germán de Constantinopla</b> — <em>Homilía II sobre la Dormición</em> — trad. inglesa de dominio público; versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>La segunda homilía de Germán añade al argumento de conveniencia un argumento de
+        imposibilidad: no dice solo que sería "inconveniente" que María se corrompiera en el
+        sepulcro, sino que es directamente <em>imposible</em>. La imposibilidad no es lógica
+        abstracta —Dios podría haberlo permitido si hubiera querido— sino moral: es imposible
+        en el sentido en que es imposible que Dios actúe de modo incoherente con su propia
+        naturaleza perfecta y con los privilegios que Él mismo otorgó a su Madre.</p>
+      </article>
+
+      <!-- 3.5 -->
+      <article class="articulo" id="art-3-5">
+        <span class="articulo-etiqueta">Parte III · Artículo 5</span>
+        <h3>San Juan Damasceno — † 749</h3>
+        <span class="capitular">S</span>
+        <p>an Juan Damasceno es el gran sistematizador de la teología oriental y el Padre que
+        expone con mayor precisión filosófica y teológica la doctrina de la Asunción, vinculándola
+        directamente con la Maternidad divina y con la resurrección de Cristo.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>IO.<br>DAMASC.<br>† 749</div>
+          <div class="cita-padre-texto">
+            <p>"It was fitting that she, who had preserved her virginity intact in childbirth,
+            should have her body kept free from all corruption even after death. It was fitting
+            that she, who had carried the Creator as a child at her breast, should dwell in
+            the divine tabernacles. It was fitting that the spouse, whom the Father had taken
+            to himself, should live in the divine mansions. It was fitting that she who had
+            seen her Son upon the cross and who had thereby received into her heart the sword
+            of sorrow [...] should look upon him as he sits with the Father."</p>
+            <p>"Era conveniente que ella, que había preservado intacta su virginidad en el parto,
+            tuviera su cuerpo preservado de toda corrupción incluso después de la muerte. Era
+            conveniente que ella, que había llevado al Creador como niño en su seno, habitase en
+            los tabernáculos divinos. Era conveniente que la esposa a quien el Padre había tomado
+            para sí viviese en las moradas divinas. Era conveniente que la que había visto a su
+            Hijo en la cruz y había recibido por ello en su corazón la espada del dolor [...] le
+            viera sentado junto al Padre."</p>
+            <span class="fuente-padre"><b>San Juan Damasceno</b> — <em>Segunda Homilía sobre la Dormición</em>, PG 96, 741 — trad. inglesa de dominio público; versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>La estructura retórica del texto damasceno —"era conveniente"— no es apelación a lo
+        meramente agradable, sino a lo que se sigue necesariamente de la dignidad de María y de
+        la perfección de Dios: lo que "conviene" a la Omnipotencia que ama a su Madre no puede
+        dejar de suceder, porque la Omnipotencia puede hacer lo que conviene y el Amor perfecto
+        no omite lo que debe.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>IO.<br>DAMASC.<br>† 749</div>
+          <div class="cita-padre-texto">
+            <p>"Ἔδει γὰρ τὴν οὐρανοῦ βασίλισσαν καὶ τοῦ κόσμου κόσμον ἐν τοῖς θείοις σκηνώμασιν
+            αὐλίζεσθαι· ἔδει τὴν τοῦ Θεοῦ Λόγου μητέρα..."</p>
+            <p>"Era necesario que la Reina del cielo y ornamento del mundo habitase en los
+            tabernáculos divinos; era necesario que la Madre del Dios Verbo..."</p>
+            <span class="fuente-padre"><b>San Juan Damasceno</b> — <em>Tercera Homilía sobre la Dormición</em>, PG 96, 761 — texto griego original, trad. literal propia</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3.6 -->
+      <article class="articulo" id="art-3-6">
+        <span class="articulo-etiqueta">Parte III · Artículo 6</span>
+        <h3>San Andrés de Creta — † 740</h3>
+        <span class="capitular">S</span>
+        <p>an Andrés de Creta, arzobispo y autor del famoso Gran Canon, predicó cuatro homilías
+        sobre la Dormición de María que constituyen, junto a las de Damasceno, el fundamento
+        patrístico oriental más sólido de la doctrina.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>ANDRÉS<br>CRET.<br>† 740</div>
+          <div class="cita-padre-texto">
+            <p>"And so the source of Life is transported to Life by Him who is Life [...] The
+            most immaculate body of the Mother of God received a fitting crown for its glory.
+            For it was not fitting that a vessel of election should await the universal
+            resurrection; it was fitting rather that she herself, as a temple of the living
+            God, should be received into the divine dwelling places."</p>
+            <p>"Y así la fuente de la Vida es trasladada a la Vida por Aquel que es la Vida [...]
+            El cuerpo inmaculado de la Madre de Dios recibió la corona apropiada a su gloria.
+            Porque no era conveniente que un vaso de elección aguardase la resurrección universal;
+            era más conveniente que ella misma, como templo del Dios vivo, fuera recibida en las
+            moradas divinas."</p>
+            <span class="fuente-padre"><b>San Andrés de Creta</b> — <em>Homilía IV sobre la Dormición</em> — trad. inglesa de dominio público; versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>El argumento de Andrés merece análisis detenido porque introduce una distinción que
+        los demás Padres no habían formulado con tanta precisión: la distinción entre la
+        resurrección general del juicio final y la glorificación anticipada de María. Para Andrés,
+        no se trata de que María "se saltara" la resurrección general —como si eso fuera una
+        trampa fraudulenta—, sino de que la dignidad de un "vaso de elección" de su categoría
+        exige una excepción de la misma índole que la excepción de Cristo mismo: así como Cristo
+        resucitó antes que todos los demás sin que eso contradiga la resurrección general, así
+        María participa de esa primicia del Hijo.</p>
+
+        <p>La expresión "fuente de la Vida transportada a la Vida por Aquel que es la Vida"
+        tiene la precisión de una fórmula trinitaria aplicada a la mariología: María es "fuente
+        de la Vida" porque de ella nació Cristo, que es la Vida (Juan 14,6); y es "transportada
+        a la Vida" por el mismo Cristo. La cadena es completa: María → Cristo → María. La
+        Asunción es el punto de llegada de la lógica de la Encarnación misma.</p>
+      </article>
+      <article class="articulo" id="art-3-7">
+        <span class="articulo-etiqueta">Parte III · Artículo 7</span>
+        <h3>San Agustín y el principio antecedente — el argumento de la santidad máxima</h3>
+        <span class="capitular">S</span>
+        <p>an Agustín no predicó sobre la Asunción —la cuestión no estaba todavía formalmente
+        planteada en su tiempo en Occidente—, pero estableció un principio teológico que se
+        convertiría en uno de los argumentos más citados en favor de la Inmaculada Concepción y,
+        por extensión, de la Asunción.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>AGUST.<br>† 430</div>
+          <div class="cita-padre-texto">
+            <p>"Excepta itaque sancta virgine Maria, de qua propter honorem Domini nullam prorsus,
+            cum de peccatis agitur, haberi volo quæstionem — unde enim scimus quid ei plus
+            gratiæ collatum fuerit ad vincendum omni ex parte peccatum, quæ concipere ac parere
+            meruit quem constat nullum habuisse peccatum?"</p>
+            <p>"Exceptuando, pues, a la santa Virgen María, de quien, cuando se trata de los
+            pecados, no quiero que se haga ninguna cuestión en absoluto — en honor del Señor —;
+            porque ¿de dónde sabemos cuánta gracia mayor le fue concedida para vencer el pecado
+            por completo, ella que mereció concebir y dar a luz a Aquel de quien consta que no
+            tuvo ningún pecado?"</p>
+            <span class="fuente-padre"><b>San Agustín</b> — <em>De Natura et Gratia</em>, cap. 36, 42 — texto latino: CSEL 60 (edición Urba y Zycha); trad. literal propia</span>
+          </div>
+        </div>
+
+        <p>Este texto no afirma la Inmaculada Concepción de modo explícito —Agustín no llega
+        a eso—, pero establece un principio de proporción: María recibió una gracia tan
+        singular para vencer el pecado que Agustín no se atreve ni siquiera a plantear la
+        pregunta de si pecó, "en honor del Señor". Si María recibió singularísima gracia para
+        vencer el pecado durante su vida, con mayor razón esa misma gracia la preservó de las
+        consecuencias del pecado en su cuerpo después de la muerte.</p>
+      </article>
+
+      <!-- 3.8 -->
+      <article class="articulo" id="art-3-8">
+        <span class="articulo-etiqueta">Parte III · Artículo 8</span>
+        <h3>La praxis litúrgica — La fiesta de la Dormición en Oriente</h3>
+        <span class="capitular">L</span>
+        <p>a celebración litúrgica de la Dormición de María en la Iglesia oriental constituye,
+        en sí misma, un argumento de peso: no una opinión teológica, sino la fe de toda la
+        Iglesia expresada en la liturgia —<em>lex orandi, lex credendi</em>—.</p>
+
+        <ul class="lista-fundamentos">
+          <li>La fiesta de la <strong>Dormición</strong> (<em>Koimesis</em> en griego) está
+          documentada en Jerusalén desde el siglo V, inicialmente el 18 de enero; en el siglo
+          VI el emperador Mauricio la estableció para todo el Imperio Oriente el 15 de agosto,
+          donde permanece hasta hoy en todos los ritos orientales.</li>
+          <li>Las liturgias orientales para esta fiesta —las <em>Kontakia</em> de Romano el
+          Mélodo (siglo VI), los <em>Cánones</em> de Cosmas de Mayuma y Juan Damasceno (siglo
+          VIII)— describen unánimemente la glorificación corporal de María: no solo su muerte
+          piadosa, sino su elevación corporal a la gloria celestial.</li>
+          <li>El término <em>Koimesis</em> (dormición) que usa la Iglesia oriental no implica
+          mera muerte biológica: en todo el vocabulario bíblico y patrístico, "dormirse"
+          (<em>koimasthai</em>) referido a un justo significa tránsito temporal hacia una
+          glorificación que sigue a la muerte, como anticipa 1 Tesalonicenses 4,13-15.</li>
+        </ul>
+
+        <p>El hecho de que Oriente y Occidente celebren esta fiesta de modo independiente —el
+        Oriente como <em>Koimesis</em>, el Occidente como <em>Assumptio</em>— pero con el mismo
+        contenido esencial (glorificación corporal de María) es un argumento de convergencia
+        geográfica e independiente análogo al que vimos en el tratado del Purgatorio: la fe no
+        fue inventada en un lugar y exportada, sino que emergió de modo autónomo en tradiciones
+        distintas apuntando al mismo dato.</p>
+      </article>
+
+      <!-- 3.9 — TABLA -->
+      <article class="articulo" id="art-3-9">
+        <span class="articulo-etiqueta">Parte III · Artículo 9</span>
+        <h3>Tabla sinóptica del testimonio patrístico y litúrgico</h3>
+        <span class="capitular">P</span>
+        <p>ara facilitar la visión de conjunto, se presenta una tabla cronológica con los
+        testimonios examinados.</p>
+
+        <div class="tabla-padres-envoltura">
+          <table class="tabla-padres">
+            <thead>
+              <tr><th>Padre / Fuente</th><th>Sede / Región</th><th>Siglo</th><th>Contenido del testimonio</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="nombre-padre">San Epifanio</td><td>Salamina (Chipre)</td><td>IV</td><td>Incertidumbre sobre la muerte de María: no hay tradición de sepultura</td></tr>
+              <tr><td class="nombre-padre">Timoteo de Jerusalén</td><td>Jerusalén</td><td>V</td><td>"La Virgen es inmortal": traslación a la gloria por el Hijo</td></tr>
+              <tr><td class="nombre-padre">Romano el Mélodo</td><td>Constantinopla</td><td>VI</td><td>Kontakia litúrgicos sobre la Koimesis y glorificación corporal</td></tr>
+              <tr><td class="nombre-padre">San Modesto</td><td>Jerusalén</td><td>VII</td><td>"Incorruptibilidad eterna del cuerpo": levantada de la tumba por Cristo</td></tr>
+              <tr><td class="nombre-padre">San Andrés de Creta</td><td>Creta</td><td>VII–VIII</td><td>"No convenía que un vaso de elección aguardase la resurrección general"</td></tr>
+              <tr><td class="nombre-padre">San Germán de CP.</td><td>Constantinopla</td><td>VIII</td><td>Cuerpo exento de disolución en polvo por su maternidad divina</td></tr>
+              <tr><td class="nombre-padre">San Juan Damasceno</td><td>Palestina / Damasco</td><td>VIII</td><td>Sistematización teológica completa; argumento de conveniencia máxima</td></tr>
+              <tr><td class="nombre-padre">San Agustín (principio)</td><td>Hipona</td><td>IV–V</td><td>Gracia singularísima para vencer el pecado: premisa indirecta</td></tr>
+              <tr><td class="nombre-padre">Liturgia oriental (Koimesis)</td><td>Todo Oriente</td><td>V→</td><td>Fe litúrgica unánime: glorificación corporal de María el 15 de agosto</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Tercera</h4>
+          <p>El testimonio patrístico de la Asunción, a diferencia del Purgatorio, está
+          concentrado principalmente en el Oriente —Jerusalén, Constantinopla, Palestina, Creta—,
+          pero con una coherencia doctrinal notable entre autores de épocas y tradiciones distintas.
+          La ausencia de tradición firme de sepultura de María —ya en Epifanio— es, en sí misma,
+          un dato de primer orden: en el mundo cristiano antiguo, la tumba de los santos era el
+          centro del culto. La ausencia de un culto a la tumba de María, combinada con la
+          existencia de un culto a su glorificación corporal, indica que la Iglesia antigua ya
+          sabía que el cuerpo de María no estaba en ningún sepulcro.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE IV — ARGUMENTOS FILOSÓFICOS -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-cuarta">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Cuarta</span>
+        <h2>Argumentos filosóficos</h2>
+        <p class="descripcion-parte">Cuatro argumentos derivados de la razón natural aplicada
+        a los atributos divinos y a la relación filial entre Cristo y María.</p>
+        <div class="divisor-orna">⚜ ⚜ ⚜</div>
+      </div>
+
+      <!-- 4.1 -->
+      <article class="articulo" id="art-4-1">
+        <span class="articulo-etiqueta">Parte IV · Artículo 1</span>
+        <h3>De la conveniencia y la Omnipotencia divina</h3>
+        <span class="capitular">E</span>
+        <p>l argumento de conveniencia (<em>argumentum ex decentia</em>) es el más frecuente en
+        la tradición mariológica. Consiste en mostrar que la Asunción es "lo que convenía" a la
+        dignidad de Dios, a la dignidad de María y a la perfección de la Redención, y que lo que
+        convenía no puede ser que Dios no lo hiciera, siendo Omnipotente.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo V — de la conveniencia omnipotente</span>
+            <span class="forma">argumentum ex decentia et potentia</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Dios siempre hace lo que conviene a su perfecta bondad, sabiduría y amor, cuando
+              puede hacerlo. Como es Omnipotente, siempre puede hacerlo. Luego Dios siempre hace lo
+              que conviene a la perfección de su obrar.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Conviene a la perfecta bondad, sabiduría y amor de Dios que su Madre —de quien
+              tomó su naturaleza humana, que fue preservada de todo pecado por su previsión— goce
+              en gloria de cuerpo y alma junto a Él, en lugar de permanecer en la corrupción del
+              sepulcro.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego Dios hizo que María gozase de la gloria en cuerpo y alma: fue asunta.</span>
+            </div>
+          </div>
+        </div>
+
+        <p>Se anticipa la objeción: "conveniencia" no es "necesidad". Respuesta: la conveniencia
+        que se afirma aquí no es la del gusto o la estética, sino la de la perfección moral de
+        Dios. Si hay algo que conviene a la perfección de Dios —es decir, que está en coherencia
+        interna con sus atributos— y Dios puede hacerlo, <em>debe</em> hacerlo en el sentido en
+        que el artesano perfecto no puede, sin incurrir en inconsistencia, omitir el acabado que
+        la obra pide. Santo Tomás formula esto como <em>potuit, decuit, ergo fecit</em>: "pudo,
+        convenía, luego lo hizo" — máxima que Pío XII cita explícitamente en
+        <em>Munificentissimus Deus</em>.</p>
+      </article>
+
+      <!-- 4.2 -->
+      <article class="articulo" id="art-4-2">
+        <span class="articulo-etiqueta">Parte IV · Artículo 2</span>
+        <h3>Del honor debido a la Madre por el Hijo</h3>
+        <span class="capitular">E</span>
+        <p>l cuarto mandamiento —"Honra a tu padre y a tu madre"— es, en la Escritura y en la
+        tradición moral, una exigencia de justicia, no un consejo opcional. Cristo, que vino a
+        cumplir la Ley en toda su plenitud (Mateo 5,17), no pudo ser menos que perfecto en el
+        cumplimiento del mandamiento que Él mismo había dado a Israel en el Sinaí. La pregunta
+        teológica pertinente es, pues, esta: ¿cuál es el máximo honor que el Hijo puede dar
+        a su Madre cuando ese Hijo es el Omnipotente?</p>
+
+        <div class="cita-biblica">
+          <p>"Non veni solvere, sed adimplere."</p>
+          <cite>Mateo 5, 17 — Vulgata: "No vine a abolir, sino a cumplir"</cite>
+        </div>
+
+        <p>El argumento tiene una elegancia particular: no recurre a datos revelados específicos
+        sobre María, sino al carácter moral de Cristo —su perfección— y a su Omnipotencia. Quien
+        acepta que Cristo es perfectamente bueno y que es Omnipotente ya tiene las dos premisas
+        del argumento. La conclusión se sigue sin necesidad de añadir ninguna premisa adicional
+        sobre la mariología.</p>
+
+        <ul class="lista-fundamentos">
+          <li>En la boda de Caná (Juan 2,1-11), Cristo obró el primer signo —contrariando, en
+          apariencia, el momento que él mismo había indicado— <em>a petición de su Madre</em>.
+          Esto muestra, incluso en el ámbito de los milagros, que Cristo honraba la intercesión
+          y los deseos de María de modo extraordinario.</li>
+          <li>Desde la Cruz, Cristo confió a María al discípulo amado y al discípulo amado a
+          María (Juan 19,26-27): su último acto antes de morir incluyó proveer para su Madre.
+          El Hijo que cuida de su Madre hasta el último instante de su agonía no la abandonará
+          en el sepulcro.</li>
+          <li>La tradición moral judía, en la que Cristo fue formado, consideraba el honor a la
+          madre como obligación de la más alta urgencia: los rabinos enseñaban que honrar a la
+          madre era casi tan grave como honrar a Dios mismo, pues en los tres —Dios, padre, madre—
+          participa el origen de la vida del hijo.</li>
+        </ul>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo VI — del cuarto mandamiento cumplido perfectamente</span>
+            <span class="forma">ex pietate filiali perfecta</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>El hijo moralmente perfecto honra a su madre hasta el límite de sus posibilidades.
+              Cristo es el Hijo moralmente perfecto y sus posibilidades son omnipotentes: no tiene
+              límite en lo que puede hacer por su Madre.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>El honor más alto que un Hijo omnipotente puede dar a su Madre es preservarla
+              de la corrupción, glorificarla en cuerpo y alma y elevarla a su presencia: nada más
+              alto es concebible dentro del orden de la creación.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Cristo honró a su Madre con el honor más alto que su Omnipotencia permite:
+              la glorificación corporal plena — la Asunción. Afirmar lo contrario sería afirmar
+              que Cristo no cumplió perfectamente el cuarto mandamiento, lo cual contradice su
+              perfección moral.</span>
+            </div>
+          </div>
+        </div>
+
+        <p>San Juan Damasceno recoge este argumento en su segunda homilía sobre la Dormición
+        con una precisión memorable: "Era conveniente que ella que había guardado al Creador en
+        su seno como niño fuera ahora guardada en las moradas del Hijo." El movimiento es
+        exactamente inverso e igual: María guardó al Hijo; el Hijo guarda a María. La reciprocidad
+        filial perfecta es la Asunción.</p>
+      </article>
+
+      <!-- 4.3 -->
+      <article class="articulo" id="art-4-3">
+        <span class="articulo-etiqueta">Parte IV · Artículo 3</span>
+        <h3>De la unidad de Madre e Hijo glorificados</h3>
+        <span class="capitular">L</span>
+        <p>a Redención consumada en Cristo incluye la glorificación de su humanidad —Cuerpo y
+        Alma—. El cuerpo glorificado de Cristo es el primero y el modelo de todos los cuerpos
+        que serán glorificados en la resurrección final. María, que está unida al Hijo de modo
+        único —le dio la naturaleza humana, sufrió con Él al pie de la Cruz—, participa de esa
+        victoria de modo anticipado y pleno.</p>
+
+        <div class="cita-biblica">
+          <p>"Nunc autem Christus resurrexit a mortuis, primitiæ dormientium."</p>
+          <cite>1 Corintios 15, 20 — Vulgata: "Cristo ha resucitado de entre los muertos, primicias de los que durmieron"</cite>
+        </div>
+
+        <ul class="lista-fundamentos">
+          <li>San Pablo enseña que Cristo es "las primicias de los que durmieron" (1 Cor 15,20):
+          la resurrección de Cristo es el principio y garantía de la resurrección de todos. Las
+          primicias son la parte primera de la cosecha que garantiza el resto. María, que tiene
+          la relación más íntima con Cristo de toda la creación —de ella tomó su humanidad—,
+          es la primera en participar de esas primicias tras el propio Cristo.</li>
+          <li>El Concilio Vaticano II enseña (Lumen Gentium 68) que "la Virgen está ya
+          glorificada en cuerpo y alma en el cielo, donde es imagen y comienzo de la Iglesia que
+          ha de consumarse en el siglo futuro": la Asunción es el anticipo de la gloria que toda
+          la Iglesia espera, no una excepción aislada sino el comienzo visible de lo que vendrá
+          para todos.</li>
+          <li>La unión del cuerpo glorificado de Cristo con el cuerpo corruptible de su Madre
+          —permaneciendo Él glorificado y ella en desintegración— sería una tensión teológica
+          difícilmente sostenible: la victoria del Hijo sobre la muerte alcanza necesariamente
+          a la carne que tomó de ella (cf. Génesis 2,23 en sentido inverso: el Hijo tomó de
+          la Madre lo que el Adán primero tomó de Eva).</li>
+        </ul>
+
+        <div class="cita-biblica">
+          <p>"Mulier, ecce filius tuus [...] Ecce mater tua."</p>
+          <cite>Juan 19, 26-27 — "Mujer, he ahí tu hijo [...] He ahí tu madre"</cite>
+        </div>
+
+        <p>Las últimas palabras de Cristo a su Madre desde la Cruz —entregándola al discípulo
+        amado, figura de toda la Iglesia— no son solo un gesto de piedad filial: son el último
+        acto público del testamento de Cristo respecto a María. El que cuida de su Madre hasta el
+        último suspiro de su agonía no la abandonará en el sepulcro: la Asunción es el cumplimiento
+        silencioso y definitivo de ese testamento.</p>
+      </article>
+
+      <!-- 4.4 -->
+      <article class="articulo" id="art-4-4">
+        <span class="articulo-etiqueta">Parte IV · Artículo 4</span>
+        <h3>Del cuerpo como parte esencial de la persona humana</h3>
+        <span class="capitular">L</span>
+        <p>a tradición filosófica cristiana —contra el dualismo platónico que considera el
+        cuerpo una "cárcel del alma"— enseña que el ser humano es una unidad sustancial de
+        alma y cuerpo: el cuerpo no es un accidente sino parte esencial de la persona. Si la
+        beatitud de María fuera solo espiritual, María no estaría todavía plenamente glorificada:
+        estaría en estado de cierta imperfección en espera de la resurrección final.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo VII — de la plenitud de la beatitud</span>
+            <span class="forma">ex philosophia corporis</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>La beatitud plena de una persona humana requiere la glorificación de toda su
+              persona — alma y cuerpo —, pues el cuerpo es parte esencial, no accidental, del ser
+              humano.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>La dignidad de María —Madre de Dios, llena de gracia, preservada del pecado—
+              exige la bienaventuranza más plena que la creatura puede recibir.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>La bienaventuranza de María es plena —incluyendo la glorificación corporal—
+              ya desde el término de su vida terrena: eso es la Asunción.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Cuarta</h4>
+          <p>Los cuatro argumentos filosóficos convergen en el mismo punto: la Omnipotencia
+          de Dios no puede omitir lo que conviene a su perfección; la piedad filial perfecta de
+          Cristo exige el máximo honor para su Madre; la victoria sobre la muerte que comienza en
+          Cristo alcanza a quien con Él está más íntimamente unida; y la filosofía del cuerpo
+          exige la glorificación corporal para la beatitud plena. Ninguno de estos argumentos
+          depende de textos bíblicos particulares ni de testimonios patrísticos: se siguen de los
+          atributos divinos y de la anthropología cristiana del cuerpo.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE V — OBJECIONES Y RESPUESTAS -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-quinta">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Quinta</span>
+        <h2>Objeciones mayores y respuestas</h2>
+        <p class="descripcion-parte">Las cuatro objeciones más frecuentes contra la Asunción,
+        presentadas con su máxima fuerza y respondidas.</p>
+        <div class="divisor-orna">⚜ ⚜ ⚜</div>
+      </div>
+
+      <!-- 5.1 -->
+      <article class="articulo" id="art-5-1">
+        <span class="articulo-etiqueta">Parte V · Artículo 1</span>
+        <h3>"No hay Asunción explícita en la Biblia"</h3>
+        <span class="capitular">E</span>
+        <p>s cierto que ningún versículo bíblico dice literalmente "María fue asunta en cuerpo y
+        alma al cielo". De ahí se objeta que toda la doctrina carece de fundamento escriturístico.</p>
+
+        <div class="objeciones">
+          <h4>Respuesta en tres niveles</h4>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Nivel 1 — El argumento afecta a demasiado —</span>
+            <p>La Santísima Trinidad no aparece en esos términos en un único versículo bíblico; la
+            segunda naturaleza de Cristo tampoco se formula como "dos naturalezas en una persona"
+            en texto alguno; el canon bíblico mismo no está definido en la Biblia. La ausencia
+            del término técnico no equivale a la ausencia de la realidad. Lo que la Iglesia afirma
+            es que la realidad de la Asunción se sigue necesariamente de lo que la Escritura enseña
+            sobre el pecado, la muerte, la gracia y la dignidad de María —como se ha mostrado
+            en la Parte I y la Parte II—.</p>
+          </div>
+          <div class="respuesta-obj" style="margin-top:14px;">
+            <span class="etiqueta-resp">Nivel 2 — El silencio es elocuente —</span>
+            <p>La Escritura tampoco contiene ningún indicio de tumba de María, de reliquias de
+            su cuerpo, de traslado de sus restos, de disputa sobre el lugar de su sepultura —todo
+            lo cual era de primera importancia en el mundo cristiano primitivo—. En contraste,
+            los cuerpos de Pedro, Pablo, Juan, Esteban, todos los apóstoles y mártires dieron
+            lugar a cultos reliquiales documentados desde el siglo I y II. La ausencia total de
+            este fenómeno para María, combinada con la existencia temprana de un culto a su
+            glorificación, es argumento de peso.</p>
+          </div>
+          <div class="respuesta-obj" style="margin-top:14px;">
+            <span class="etiqueta-resp">Nivel 3 — La Tradición como locus theologicus —</span>
+            <p>La Iglesia Católica no afirma que la Escritura sola contenga toda la Revelación
+            sin resto. La Tradición viva —incluyendo la liturgia, el consensus Patrum y el
+            sentido de fe del Pueblo de Dios— es también vehículo de la Revelación (Dei Verbum 9).
+            La doctrina de la Asunción está sostenida por la Tradición litúrgica ininterrumpida
+            desde el siglo V y por el consenso de los teólogos desde el siglo VIII.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5.2 -->
+      <article class="articulo" id="art-5-2">
+        <span class="articulo-etiqueta">Parte V · Artículo 2</span>
+        <h3>"Es una invención tardía — definida solo en 1950"</h3>
+        <span class="capitular">L</span>
+        <p>a definición dogmática se produjo el 1 de noviembre de 1950, lo que podría sugerir
+        que la doctrina es reciente y sin raíces antiguas. Esta objeción confunde dos cosas
+        completamente distintas: la fecha de la <em>definición formal</em> de una doctrina y
+        la antigüedad de la <em>creencia</em> que esa definición proclama solemnemente.</p>
+
+        <div class="objeciones">
+          <h4>Respuesta en cuatro niveles</h4>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Nivel 1 — Distinción entre definición y doctrina —</span>
+            <p>La Iglesia define dogmáticamente doctrinas que ya creía antes de la definición:
+            la definición no crea la doctrina, la <em>proclama</em> como perteneciente al depósito
+            de la fe transmitido desde los orígenes apostólicos. El dogma de la Trinidad fue
+            formulado con precisión en Nicea (325), pero la fe en la Trinidad es apostólica.
+            El dogma de la Inmaculada Concepción fue definido en 1854, pero la creencia en la
+            inmunidad de María del pecado original tiene raíces patrísticas del siglo IV. La
+            fecha de la definición no es la fecha de nacimiento de la doctrina: es la fecha en
+            que la Iglesia consideró maduro y necesario el momento de proclamarla formalmente.</p>
+          </div>
+          <div class="respuesta-obj" style="margin-top:14px;">
+            <span class="etiqueta-resp">Nivel 2 — La antigüedad del testimonio litúrgico —</span>
+            <p>Como se ha mostrado en la Parte III, la fiesta de la Dormición-Asunción está
+            documentada en Jerusalén desde el siglo V —quince siglos antes de la definición de
+            1950—. El emperador Mauricio la estableció en todo el Imperio Romano de Oriente en
+            el siglo VI. Las homilías de San Modesto de Jerusalén (siglo VII), San Andrés de
+            Creta (siglo VII-VIII), San Germán de Constantinopla (siglo VIII) y San Juan
+            Damasceno (siglo VIII) muestran una doctrina ya plenamente formada y universalmente
+            recibida en el Oriente cristiano. En Occidente, la fiesta aparece en Roma en el
+            siglo VII. Son trece siglos de tradición litúrgica ininterrumpida antes de la
+            definición formal.</p>
+          </div>
+          <div class="respuesta-obj" style="margin-top:14px;">
+            <span class="etiqueta-resp">Nivel 3 — El argumento del silencio sepulcral —</span>
+            <p>Hay un dato histórico de primer orden que se suele pasar por alto: en el mundo
+            cristiano antiguo, la tumba de los santos era el centro del culto local y el origen
+            de las peregrinaciones. Los sepulcros de Pedro y Pablo en Roma, de Santiago en
+            Compostela, de Juan en Éfeso, de Marcos en Alejandría: todos documentados, todos
+            venerados, todos objeto de disputas entre iglesias que querían sus reliquias. No hay
+            nada de esto para María. Ninguna iglesia antigua reivindica poseer su cuerpo o su
+            tumba. Ninguna fuente antigua —ni favorable ni adversaria al cristianismo— menciona
+            reliquias corporales de María. La única explicación coherente de este silencio
+            universal es que en la Iglesia antigua se sabía que el cuerpo de María no estaba
+            en ningún sepulcro.</p>
+          </div>
+          <div class="respuesta-obj" style="margin-top:14px;">
+            <span class="etiqueta-resp">Nivel 4 — La definición de 1950 como respuesta a una petición universal —</span>
+            <p>Pío XII no decidió solo y de pronto definir este dogma en 1950. La Constitución
+            Apostólica <em>Munificentissimus Deus</em> documenta que, antes de proceder a la
+            definición, el Papa hizo una consulta universal al episcopado católico —obispos de
+            todo el mundo— preguntando si consideraban que la Asunción era definible como dogma
+            y si era el deseo del clero y de los fieles que así se hiciera. La respuesta fue
+            prácticamente unánime: de casi 1.200 obispos consultados, solo seis respondieron
+            con reservas menores, y ninguno negó la doctrina misma. Esta unanimidad episcopal
+            mundial es, en sí misma, expresión del sensus fidei de la Iglesia universal —la
+            fe que el Espíritu Santo mantiene indefectible en el Pueblo de Dios— y un argumento
+            de peso comparable al de los Padres para las doctrinas más antiguas.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5.3 -->
+      <article class="articulo" id="art-5-3">
+        <span class="articulo-etiqueta">Parte V · Artículo 3</span>
+        <h3>"La Asunción privilegia a María sobre la resurrección general y es injusta"</h3>
+        <span class="capitular">A</span>
+        <p>Se objeta que, si María ya está glorificada en cuerpo y alma, eso supone una
+        anticipación de la resurrección general que introduce una excepción injusta al orden
+        establecido por Dios.</p>
+
+        <div class="objeciones">
+          <h4>Respuesta</h4>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Hay precedentes bíblicos —</span>
+            <p>La Escritura afirma que Enoc "fue llevado por Dios y ya no apareció" (Génesis 5,24;
+            Hebreos 11,5) y que Elías "subió al cielo en un torbellino" (2 Reyes 2,11). En ambos
+            casos se trata de traslaciones corporales al cielo sin esperar la resurrección general,
+            atestiguadas por la Escritura misma. Si Dios actuó así con Enoc y Elías —que son
+            figuras del Antiguo Testamento, cuya gracia es incomparablemente menor a la de
+            María— con cuánto mayor razón actuará así con la Madre del Verbo encarnado.</p>
+          </div>
+          <div class="respuesta-obj" style="margin-top:14px;">
+            <span class="etiqueta-resp">La "excepción" es coherente, no injusta —</span>
+            <p>La resurrección de Cristo mismo es la "excepción" fundante de todo el orden nuevo:
+            Él resucitó antes que todos. La Asunción de María no viola el orden sino que participa
+            del mismo principio: quien está unido a Cristo de modo único, participa de su victoria
+            de modo anticipado. Esto no es injusticia, sino coherencia con la lógica de la gracia,
+            que no es uniforme sino proporcional a la vocación recibida.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5.4 -->
+      <article class="articulo" id="art-5-4">
+        <span class="articulo-etiqueta">Parte V · Artículo 4</span>
+        <h3>"¿Murió María antes de ser asunta, o fue asunta en vida?"</h3>
+        <span class="capitular">L</span>
+        <p>a cuestión de si María sufrió la muerte corporal antes de la Asunción es una de las
+        más antiguas y más honestamente tratadas en la teología católica. Tiene la particularidad
+        de ser una cuestión abierta: la definición dogmática de 1950 no la zanja, deliberadamente.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>PÍO XII<br>1950</div>
+          <div class="cita-padre-texto">
+            <p>"Declaramus, pronuntiamus ac definimus esse divinitus revelatum dogma: Immaculatam
+            Deiparam semper Virginem Mariam, expleto terrestris vitæ cursu, fuisse corpore et
+            anima ad cælestem gloriam assumptam."</p>
+            <p>"Declaramos, pronunciamos y definimos que es dogma divinamente revelado: que la
+            Inmaculada Madre de Dios, la siempre Virgen María, terminado el curso de su vida
+            terrena, fue asunta en cuerpo y alma a la gloria celeste."</p>
+            <span class="fuente-padre"><b>Pío XII</b> — Constitución Apostólica <em>Munificentissimus Deus</em>, 1 nov. 1950 — texto latino oficial</span>
+          </div>
+        </div>
+
+        <p>Nótese la expresión deliberadamente abierta: "terminado el curso de su vida terrena"
+        (<em>expleto terrestris vitæ cursu</em>) — no dice "después de morir", porque la cuestión
+        de si María murió o fue asunta directamente en vida es teológicamente libre. La Tradición
+        oriental sostiene la Dormición (muerte piadosa seguida de resurrección y asunción); algunos
+        teólogos occidentales defendieron la asunción en vida sin muerte previa. Ambas posiciones
+        son compatibles con el dogma definido, pues lo que el dogma afirma es exclusivamente la
+        glorificación corporal, no el modo en que se llegó a ella.</p>
+
+        <div class="objeciones">
+          <h4>¿Importa para el argumento central?</h4>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">No importa decisivamente —</span>
+            <p>El argumento de necesidad dogmática expuesto en la Parte II llega a la misma
+            conclusión sea cual sea la respuesta: si María murió y resucitó glorificada antes
+            de la resurrección general, eso es la Asunción; si María no experimentó la muerte
+            y fue asunta directamente, eso también es la Asunción. En ambos casos, su cuerpo
+            no se corrompió en el sepulcro —que es la consecuencia que se sigue de la ausencia
+            de pecado—.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE VI — MAGISTERIO Y SÍNTESIS -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-sexta">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Sexta</span>
+        <h2>Magisterio y síntesis final</h2>
+        <p class="descripcion-parte">La definición dogmática de 1950 y el silogismo
+        recapitulativo que cierra el tratado.</p>
+        <div class="divisor-orna">⚜ ⚜ ⚜</div>
+      </div>
+
+      <!-- 6.1 -->
+      <article class="articulo" id="art-6-1">
+        <span class="articulo-etiqueta">Parte VI · Artículo 1</span>
+        <h3>La definición dogmática de Pío XII — <em>Munificentissimus Deus</em> (1950)</h3>
+        <span class="capitular">E</span>
+        <p>l 1 de noviembre de 1950, el Papa Pío XII promulgó la Constitución Apostólica
+        <em>Munificentissimus Deus</em>, que define ex cathedra el dogma de la Asunción.
+        Es, hasta la fecha, la única definición dogmática solemne pronunciada ex cathedra
+        por un Papa en virtud de la infalibilidad pontificia definida en el Vaticano I.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre"><span class="flor">⚜</span>PÍO XII<br>1950</div>
+          <div class="cita-padre-texto">
+            <p>"Quare si quis, quod Deus avertat, id vel negare, vel in dubium vocare voluntarie
+            ausus fuerit, quod a Nobis definitum est, noverit se a divina fide prorsus defecisse."</p>
+            <p>"Por lo tanto, si alguno, lo que Dios no permita, osare voluntariamente negar o
+            poner en duda lo que por Nos ha sido definido, que sepa que ha abandonado totalmente
+            la fe divina."</p>
+            <span class="fuente-padre"><b>Pío XII</b> — <em>Munificentissimus Deus</em>, § 47, 1 noviembre 1950 — texto latino oficial</span>
+          </div>
+        </div>
+
+        <p>La Constitución dedica la mayor parte de su texto no a argumentos filosóficos o
+        bíblicos aislados, sino a demostrar el <strong>consenso universal</strong> de la Iglesia
+        sobre esta doctrina: la convergencia de los Padres, la unanimidad litúrgica de Oriente y
+        Occidente, el sentido de fe del Pueblo de Dios expresado en innumerables testimonios,
+        y la coherencia interna de la doctrina con los dogmas ya definidos. En particular,
+        cita expresamente el principio medieval <em>potuit, decuit, ergo fecit</em> como
+        fundamento de la argumentación.</p>
+
+        <p>Pío XII añade explícitamente que la Asunción completa la obra de la Redención:
+        la victoria de Cristo sobre la muerte y el pecado alcanza plenamente a quien estaba
+        más unida a Él, y así la Asunción de María es el "sello" de la Redención, la
+        demostración de que la victoria sobre la muerte es real y total.</p>
+      </article>
+
+      <!-- 6.2 -->
+      <article class="articulo" id="art-6-2">
+        <span class="articulo-etiqueta">Parte VI · Artículo 2</span>
+        <h3>Recapitulación silogística general</h3>
+        <span class="capitular">R</span>
+        <p>eunimos ahora los tres órdenes de argumentación —bíblico, dogmático-necesario y
+        patrístico-filosófico— en el silogismo recapitulativo del tratado.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo VIII — Recapitulación general</span>
+            <span class="forma">de la triple convergencia</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Una doctrina se sigue con certeza de fe cuando: (a) se halla implícita en
+              múltiples textos bíblicos leídos en la Tradición; (b) se deduce necesariamente de
+              dogmas ya definidos; (c) es atestiguada por el consenso patrístico de varias
+              tradiciones independientes; y (d) ha sido definida solemnemente por la autoridad
+              magisterial competente.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>La Asunción de María cumple las cuatro condiciones: (a) implícita en Gn 3,15;
+              Lc 1,28; Ap 12; Sal 132,8; Ct 3,6; Lc 1,48. (b) Se deduce necesariamente de la
+              Inmaculada Concepción y del nexo paulino pecado-muerte. (c) Atestiguada en Oriente
+              y Occidente desde el siglo V de modo convergente. (d) Definida ex cathedra por
+              Pío XII el 1 de noviembre de 1950.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego la Asunción de María en cuerpo y alma a la gloria celeste es doctrina
+              de certeza de fe católica: no devoción opcional, sino verdad revelada que pertenece
+              al depósito de la fe, se sigue necesariamente de lo que ya estaba definido, y ha sido
+              proclamada solemnemente para ser creída por todos los fieles.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sintesis">
+          <h4>Palabra final</h4>
+          <p>La Asunción de María no es el capricho devocionalsino la consecuencia más coherente
+          y necesaria de lo que la Iglesia ya cree sobre el pecado, la gracia, la muerte, la
+          Maternidad divina y la Redención de Cristo. Quien acepta que la muerte es salario del
+          pecado, y que María no tuvo pecado, ya tiene — en esas dos afirmaciones — la semilla
+          de toda la doctrina. El árbol que de ella brota es la Asunción. <em>Assumpta est Maria
+          in cælum: gaudent Angeli.</em></p>
+        </div>
+      </article>
+    </section>
+
+    <!-- GLOSARIO -->
+    <section class="parte" id="glosario">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Apéndice</span>
+        <h2>Glosario de términos</h2>
+        <div class="divisor-orna">⚜ ⚜ ⚜</div>
+      </div>
+      <div class="articulo">
+        <p><strong>Asunción</strong> — Elevación del cuerpo y el alma de María a la gloria celestial
+        al término de su vida terrena, sin que su cuerpo experimentara corrupción en el sepulcro.</p>
+
+        <p><strong>Dormición (<em>Koimesis</em>)</strong> — Término oriental para el tránsito de
+        María, que subraya la muerte como "sueño" que precede a la glorificación. No contradice la
+        Asunción: la supone.</p>
+
+        <p><strong>Ex cathedra</strong> — Definición solemne e infalible pronunciada por el Papa
+        en virtud de su autoridad suprema como Pastor de toda la Iglesia, en materia de fe o
+        costumbres.</p>
+
+        <p><strong>Inmaculada Concepción</strong> — Preservación de María de toda mancha del
+        pecado original desde el primer instante de su concepción, por los méritos anticipados
+        de Cristo. Dogma definido en 1854.</p>
+
+        <p><strong><em>Kecharitōménē</em></strong> — Participio perfecto pasivo griego (Lucas 1,28)
+        con el que el ángel saluda a María: "la que ha sido plenamente agraciada". La forma
+        verbal indica una acción completa en el pasado cuyos efectos permanecen.</p>
+
+        <p><strong>Maternidad divina (<em>Theotokía</em>)</strong> — La cualidad de María de ser
+        verdadera Madre del Hijo de Dios hecho carne. Definida por el Concilio de Éfeso (431)
+        al proclamar a María <em>Theotókos</em> —"Madre de Dios"—.</p>
+
+        <p><strong><em>Potuit, decuit, ergo fecit</em></strong> — "Pudo, convenía, luego lo hizo."
+        Principio teológico medieval (atribuido a Duns Escoto) usado para argumentar que lo que
+        conviene a la perfección de Dios y Él puede hacer, de hecho lo hace.</p>
+
+        <p><strong>Tipología bíblica</strong> — Método hermenéutico por el que personas, cosas o
+        eventos del Antiguo Testamento (tipos) prefiguran realidades del Nuevo (antitipas). La
+        tipología Arca-María es uno de los ejemplos más desarrollados de la tradición.</p>
+      </div>
+    </section>
+
+    <!-- FUENTES -->
+    <section class="parte" id="fuentes">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Apéndice</span>
+        <h2>Fuentes y ediciones citadas</h2>
+        <div class="divisor-orna">⚜ ⚜ ⚜</div>
+      </div>
+      <div class="articulo">
+        <p>Los textos bíblicos en latín siguen la Vulgata Clementina; las versiones griegas
+        (Génesis LXX, Nuevo Testamento) se citan del Textus Receptus cotejado con el texto
+        crítico Nestle-Aland. Las versiones españolas son traducciones literales propias elaboradas
+        para este tratado a partir del texto original.</p>
+
+        <p>Las citas de los Padres en inglés proceden de traducciones de dominio público:
+        <em>Ante-Nicene Fathers</em> y <em>Nicene and Post-Nicene Fathers</em> (ed. Roberts-Donaldson
+        y Schaff, siglo XIX), y la colección <em>On the Dormition of Mary</em> de B. E. Daley SJ
+        (SVS Press, 1998) para los autores orientales más tardíos. El texto griego de Juan
+        Damasceno sigue la <em>Patrologia Graeca</em> de Migne (PG 96). El texto de San Agustín
+        sigue el CSEL (Corpus Scriptorum Ecclesiasticorum Latinorum), ed. Urba-Zycha.</p>
+
+        <p>Los textos magisteriales (Pío IX, Pío XII) se citan del texto latino oficial publicado
+        en <em>Acta Apostolicæ Sedis</em> y disponible en el archivo del Vatican.va. Las versiones
+        españolas de los textos magisteriales son traducciones literales propias.</p>
+
+        <p>Para profundizar, se recomiendan: M. Jugie AA, <em>La Mort et l'Assomption de la
+        Sainte Vierge</em> (1944); H. du Manoir SJ, <em>Maria</em> (8 vols.); J. A. de Aldama SJ,
+        <em>Sacræ Theologiæ Summa III</em>; y el ya citado B. E. Daley SJ para las fuentes
+        orientales.</p>
+      </div>
+    </section>
+
+    <footer class="pie-tratado">
+      <div class="crismon">⚜ ✠ ⚜</div>
+      <p>"Assumpta est Maria in cælum, gaudent Angeli, collaudantes benedicunt Dominum."</p>
+      <p>Tratado apologético sobre la Asunción de la Bienaventurada Virgen María,
+      compuesto para utilidad de quien busca comprender la coherencia interior de la fe.</p>
+      <span class="sello-final">Ave, gratia plena — Ora pro nobis</span>
+    </footer>
+
+  </main>
+</div>
+
+<button class="volver-arriba" id="volverArriba" aria-label="Volver al inicio">↑</button>
+
+<script>
+// ---- Toggle índice móvil ----
+const toggleIndice = document.getElementById('toggleIndice');
+const indiceLateral = document.getElementById('indiceLateral');
+const overlayIndice = document.getElementById('overlayIndice');
+
+function abrirIndice(){ indiceLateral.classList.add('abierto'); overlayIndice.classList.add('visible'); toggleIndice.textContent='✕'; }
+function cerrarIndice(){ indiceLateral.classList.remove('abierto'); overlayIndice.classList.remove('visible'); toggleIndice.textContent='☰'; }
+toggleIndice.addEventListener('click', ()=>{ indiceLateral.classList.contains('abierto')?cerrarIndice():abrirIndice(); });
+overlayIndice.addEventListener('click', cerrarIndice);
+document.querySelectorAll('.tabla-materias a').forEach(a=>{ a.addEventListener('click',()=>{ if(window.innerWidth<=980) cerrarIndice(); }); });
+
+// ---- Buscador ----
+const buscadorIndice = document.getElementById('buscadorIndice');
+const sinResultados = document.getElementById('sinResultadosIndice');
+buscadorIndice.addEventListener('input', e=>{
+  const q = e.target.value.trim().toLowerCase();
+  let hubo = false;
+  document.querySelectorAll('.tm-parte').forEach(parte=>{
+    const tituloTexto = parte.querySelector('.tm-parte-titulo').textContent.toLowerCase();
+    const tituloCoincide = tituloTexto.includes(q);
+    const items = parte.querySelectorAll('ul.tm-articulos li');
+    let algunaVisible = false;
+    items.forEach(li=>{
+      const coincide = q===''||li.textContent.toLowerCase().includes(q);
+      li.style.display = coincide?'':'none';
+      if(coincide) algunaVisible=true;
+    });
+    const mostrar = q===''||tituloCoincide||algunaVisible;
+    parte.style.display = mostrar?'':'none';
+    if(!tituloCoincide&&algunaVisible) items.forEach(li=>{ li.style.display=''; });
+    if(mostrar) hubo=true;
+  });
+  if(sinResultados) sinResultados.style.display = hubo?'none':'block';
+});
+
+// ---- IntersectionObserver para activo ----
+const enlacesIndice = Array.from(document.querySelectorAll('.tabla-materias a[href^="#"]'));
+const mapaEnlaces = new Map();
+enlacesIndice.forEach(a=>{ const el=document.getElementById(a.getAttribute('href').slice(1)); if(el) mapaEnlaces.set(el,a); });
+
+function marcarActivo(enlace){
+  enlacesIndice.forEach(a=>a.classList.remove('activo'));
+  if(enlace){
+    enlace.classList.add('activo');
+    if(window.innerWidth>980){
+      const r=enlace.getBoundingClientRect(), ra=indiceLateral.getBoundingClientRect();
+      if(r.top<ra.top+60||r.bottom>ra.bottom-20) enlace.scrollIntoView({block:'center',behavior:'auto'});
+    }
+  }
+}
+
+let ultimoVisible=null;
+const observador = new IntersectionObserver(entradas=>{
+  const visibles=entradas.filter(en=>en.isIntersecting);
+  if(!visibles.length) return;
+  visibles.sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);
+  const elegido=visibles[0].target;
+  if(elegido!==ultimoVisible){ ultimoVisible=elegido; marcarActivo(mapaEnlaces.get(elegido)); }
+},{root:null, rootMargin:'-110px 0px -65% 0px', threshold:0});
+mapaEnlaces.forEach((_,el)=>observador.observe(el));
+
+// ---- Barra progreso + volver arriba ----
+const barraProgreso=document.getElementById('barraProgreso');
+const volverArriba=document.getElementById('volverArriba');
+function actualizarScroll(){
+  const tot=document.documentElement.scrollHeight-window.innerHeight;
+  barraProgreso.style.width=(tot>0?(window.scrollY/tot)*100:0)+'%';
+  volverArriba.classList.toggle('visible',window.scrollY>500);
+}
+window.addEventListener('scroll',actualizarScroll,{passive:true});
+window.addEventListener('load',actualizarScroll);
+window.addEventListener('resize',actualizarScroll);
+volverArriba.addEventListener('click',()=>{ window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'}); });
+</script>
+</body>
+</html>

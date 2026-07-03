@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Concilio Vaticano II y la Lumen Gentium</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --negro:#0F0E0C; --negro-m:#181614; --negro-s:#231F1A;
+  --blanco:#FAF8F5; --blanco2:#F0EDE8; --crema:#E8E0D0;
+  --oro:#C8960C; --oro-c:#E8B420; --oro-p:#F5E4A8;
+  --azul:#1B3A6B; --azul-v:#2A5BA8; --azul-c:#6A9FD8;
+  --rojo:#8B1517; --rojo-v:#B02020; --rojo-s:#D44040;
+  --gris:#8A8070;
+  --borde:rgba(200,150,12,0.2); --borde-f:rgba(200,150,12,0.48);
+  --borde-az:rgba(27,58,107,0.35);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--negro);color:var(--blanco2);font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.85;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--negro);}
+::-webkit-scrollbar-thumb{background:var(--oro);border-radius:3px;}
+
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--rojo),var(--oro),var(--azul-v));z-index:2000;width:0%;transition:width 0.1s;}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:56px;background:rgba(15,14,12,0.97);border-bottom:1px solid var(--borde);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;backdrop-filter:blur(16px);}
+.nav-b{font-family:'Cormorant SC',serif;font-size:0.9rem;font-weight:500;color:var(--oro);letter-spacing:0.1em;}
+.nav-b em{color:var(--blanco2);font-style:normal;font-weight:300;font-size:0.82rem;}
+#hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+#hbg span{display:block;width:24px;height:2px;background:var(--oro);}
+
+/* SIDEBAR */
+#sb{position:fixed;top:56px;left:0;width:272px;height:calc(100vh - 56px);background:var(--negro-m);border-right:1px solid var(--borde);overflow-y:auto;z-index:900;padding:1rem 0;transition:transform 0.35s cubic-bezier(.4,0,.2,1);}
+#sb::-webkit-scrollbar{width:3px;}
+#sb::-webkit-scrollbar-thumb{background:var(--oro);}
+.sc{font-family:'DM Sans',sans-serif;font-size:0.56rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--oro);padding:0.8rem 1.3rem 0.3rem;border-top:1px solid var(--borde);margin-top:0.3rem;}
+.sc:first-child{border-top:none;margin-top:0;}
+.sl{display:block;padding:0.38rem 1.3rem;color:var(--gris);font-family:'DM Sans',sans-serif;font-size:0.77rem;border-left:3px solid transparent;transition:all 0.2s;cursor:pointer;text-decoration:none;}
+.sl:hover,.sl.on{color:var(--blanco2);border-left-color:var(--oro);background:rgba(200,150,12,0.07);padding-left:1.55rem;}
+.sl.on{color:var(--oro-c);font-weight:600;}
+
+#main{margin-left:272px;padding-top:56px;}
+
+/* ═══ HERO ═══ */
+#hero{min-height:100vh;background:var(--negro);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.h-vat{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(27,58,107,0.22) 0%,transparent 55%),radial-gradient(ellipse at 80% 25%,rgba(139,21,23,0.12) 0%,transparent 45%);pointer-events:none;}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,150,12,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(200,150,12,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+
+/* Cruz Vaticana CSS */
+.cruz-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);pointer-events:none;user-select:none;opacity:0.055;animation:lat 7s ease-in-out infinite;}
+@keyframes lat{0%,100%{transform:translate(-50%,-52%) scale(1);}50%{transform:translate(-50%,-52%) scale(1.04);}}
+.cruz{width:200px;height:280px;position:relative;}
+.cruz::before{content:'';position:absolute;left:50%;transform:translateX(-50%);width:44px;height:100%;background:var(--oro);border-radius:4px;}
+.cruz::after{content:'';position:absolute;top:28%;left:0;width:100%;height:44px;background:var(--oro);border-radius:4px;}
+
+.hc{position:relative;z-index:2;text-align:center;max-width:900px;padding:2rem;animation:su 1.2s ease both;}
+@keyframes su{from{opacity:0;transform:translateY(36px);}to{opacity:1;transform:translateY(0);}}
+.hej{font-family:'DM Sans',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.42em;text-transform:uppercase;color:var(--oro);margin-bottom:1.8rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.hej::before,.hej::after{content:'';width:42px;height:1px;background:var(--oro);opacity:0.4;}
+.ht{font-family:'Cormorant SC',serif;font-size:clamp(2.4rem,5.5vw,5.2rem);font-weight:600;line-height:1.05;color:var(--blanco);margin-bottom:0.4rem;letter-spacing:0.02em;}
+.ht .az{color:var(--azul-c);}
+.ht .rj{color:var(--rojo-s);}
+.hsub{font-family:'Cormorant Garamond',serif;font-size:clamp(0.9rem,2vw,1.2rem);font-style:italic;color:var(--gris);margin-bottom:1.75rem;letter-spacing:0.04em;}
+.hfec{font-family:'DM Sans',sans-serif;font-size:0.75rem;color:var(--oro);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:2.5rem;}
+.hmot{font-size:1.05rem;font-style:italic;color:rgba(240,237,232,0.65);max-width:620px;margin:0 auto 2.5rem;border-left:3px solid var(--azul-v);padding-left:1.3rem;text-align:left;line-height:1.72;}
+.hsc{display:inline-flex;align-items:center;gap:0.5rem;font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--oro);cursor:pointer;text-decoration:none;animation:bj 2.2s ease-in-out infinite;}
+@keyframes bj{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+
+/* BANDA */
+.banda{display:grid;grid-template-columns:repeat(4,1fr);}
+.b1{background:var(--azul);padding:2.2rem 2rem;text-align:center;}
+.b2{background:var(--rojo);padding:2.2rem 2rem;text-align:center;}
+.b3{background:var(--oro);padding:2.2rem 2rem;text-align:center;}
+.b4{background:var(--negro-s);padding:2.2rem 2rem;text-align:center;border:1px solid var(--borde);}
+.bn{font-family:'Cormorant SC',serif;font-size:2.6rem;font-weight:700;color:var(--blanco);line-height:1;margin-bottom:0.2rem;}
+.b3 .bn{color:var(--negro);}
+.bl{font-family:'DM Sans',sans-serif;font-size:0.58rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(240,237,232,0.5);}
+.b3 .bl{color:rgba(15,14,12,0.55);}
+
+/* SECCIONES */
+.S{padding:5rem 4.5rem;position:relative;}
+.S.alt{background:var(--negro-m);}
+.sey{font-family:'DM Sans',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--oro);margin-bottom:0.65rem;}
+.st{font-family:'Cormorant SC',serif;font-size:clamp(1.7rem,3.2vw,2.7rem);font-weight:600;color:var(--blanco);line-height:1.12;margin-bottom:0.8rem;letter-spacing:0.01em;}
+.st .az{color:var(--azul-c);}
+.st .rj{color:var(--rojo-s);}
+.st .or{color:var(--oro-c);}
+.sr{width:50px;height:2px;background:linear-gradient(90deg,var(--oro),var(--azul-v));}
+.Sh{margin-bottom:2.8rem;}
+
+/* PROSA */
+.pr{max-width:740px;font-size:1rem;color:rgba(240,237,232,0.82);line-height:1.9;}
+.pr p{margin-bottom:1.25rem;}
+.pr strong{color:var(--oro-c);font-weight:600;}
+
+/* 2 COLUMNAS */
+.dc{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:2.5rem;margin-top:2rem;}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--oro),var(--azul-v),transparent);}
+.li{position:relative;padding-bottom:2.4rem;opacity:0;transform:translateX(-16px);transition:all 0.5s ease;}
+.li.vis{opacity:1;transform:translateX(0);}
+.ld{position:absolute;left:-2.82rem;top:0.38rem;width:13px;height:13px;border-radius:50%;background:var(--negro);border:2px solid var(--oro);transition:all 0.3s;}
+.li:hover .ld{background:var(--oro);box-shadow:0 0 10px var(--oro);}
+.ly{font-family:'Cormorant SC',serif;font-size:1.4rem;font-weight:600;color:var(--oro);margin-bottom:0.2rem;line-height:1;}
+.lev{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--blanco);margin-bottom:0.5rem;}
+.ltx{font-size:0.93rem;color:rgba(240,237,232,0.72);line-height:1.82;max-width:660px;}
+.ltag{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.57rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;border-radius:2px;padding:0.17rem 0.52rem;margin-bottom:0.42rem;}
+.tag-az{background:rgba(27,58,107,0.3);color:var(--azul-c);border:1px solid rgba(42,91,168,0.5);}
+.tag-or{background:rgba(200,150,12,0.15);color:var(--oro-c);border:1px solid rgba(200,150,12,0.4);}
+.tag-rj{background:rgba(139,21,23,0.25);color:var(--rojo-s);border:1px solid rgba(176,32,32,0.4);}
+
+/* CITA */
+.cit{margin:2.5rem 0;padding:1.8rem 2.5rem 1.8rem 2.8rem;background:rgba(200,150,12,0.06);border:1px solid var(--borde);position:relative;}
+.cit::before{content:'\275D';position:absolute;top:-0.85rem;left:1.6rem;font-size:3rem;color:var(--oro);font-family:'Cormorant SC',serif;line-height:1;}
+.cit p{font-family:'Cormorant Garamond',serif;font-size:clamp(0.98rem,1.7vw,1.22rem);font-style:italic;color:var(--blanco);line-height:1.72;margin-bottom:0.75rem;}
+.cit cite{font-family:'DM Sans',sans-serif;font-size:0.67rem;font-style:normal;color:var(--oro);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;}
+
+/* HIGHLIGHT */
+.hl{background:rgba(200,150,12,0.07);border-left:4px solid var(--oro);padding:1.3rem 1.7rem;margin:1.5rem 0;border-radius:0 2px 2px 0;}
+.hl-t{font-family:'DM Sans',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--oro-c);margin-bottom:0.4rem;}
+.hl p,.hl-p{font-size:0.91rem;color:rgba(240,237,232,0.78);line-height:1.78;}
+.hl p strong,.hl-p strong{color:var(--oro-c);}
+
+/* AZUL */
+.hl-az{background:rgba(27,58,107,0.15);border-left:4px solid var(--azul-v);padding:1.3rem 1.7rem;margin:1.5rem 0;border-radius:0 2px 2px 0;}
+.hl-az .hl-t{color:var(--azul-c);}
+.hl-az p{font-size:0.91rem;color:rgba(240,237,232,0.78);line-height:1.78;}
+.hl-az p strong{color:var(--azul-c);}
+
+/* ROJO — objeción */
+.alerta{background:rgba(139,21,23,0.12);border-left:4px solid var(--rojo);padding:1.3rem 1.7rem;margin:1.5rem 0;}
+.alerta-t{font-family:'DM Sans',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--rojo-s);margin-bottom:0.4rem;}
+.alerta p{font-size:0.91rem;color:rgba(240,237,232,0.78);line-height:1.78;}
+.alerta p strong{color:#E07070;}
+
+/* CATECISMO BOX */
+.catbox{background:rgba(240,237,232,0.04);border:2px solid var(--borde-f);padding:2rem 2.5rem;margin:2rem 0;position:relative;}
+.catbox-lbl{position:absolute;top:-0.65rem;left:1.4rem;background:var(--negro);padding:0 0.6rem;font-family:'DM Mono',monospace;font-size:0.6rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--oro);}
+.S.alt .catbox-lbl{background:var(--negro-m);}
+.cat-ref{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--azul-c);letter-spacing:0.1em;margin-bottom:0.8rem;display:block;}
+.cat-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--blanco);line-height:1.75;}
+.cat-text strong{color:var(--oro-c);font-style:normal;}
+
+/* DEBATE */
+.debate{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:2.5rem 0;border:1px solid var(--borde-f);}
+.obj-col{background:rgba(139,21,23,0.1);border-right:1px solid rgba(139,21,23,0.3);padding:2rem;}
+.res-col{background:rgba(27,58,107,0.12);padding:2rem;}
+.col-head{font-family:'DM Sans',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:0.55rem;border-bottom:2px solid;}
+.obj-col .col-head{color:var(--rojo-s);border-color:var(--rojo);}
+.res-col .col-head{color:var(--azul-c);border-color:var(--azul-v);}
+.col-txt{font-size:0.91rem;color:rgba(240,237,232,0.8);line-height:1.82;}
+.col-txt p{margin-bottom:0.88rem;}
+.obj-col .col-txt strong{color:#E07070;}
+.res-col .col-txt strong{color:var(--azul-c);}
+
+/* VEREDICTO */
+.verd{background:linear-gradient(135deg,rgba(27,74,27,0.18),rgba(42,122,42,0.08));border:1px solid rgba(42,140,42,0.4);border-left:4px solid #3DA83D;padding:1.5rem 2rem;margin:2rem 0;}
+.verd-t{font-family:'DM Sans',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:#6ADB6A;margin-bottom:0.5rem;}
+.verd p{font-size:0.93rem;color:rgba(240,237,232,0.85);line-height:1.8;}
+.verd p strong{color:#6ADB6A;}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;margin-top:2rem;}
+.card{background:rgba(255,255,255,0.025);border:1px solid var(--borde);padding:1.8rem 1.65rem;position:relative;transition:all 0.3s;opacity:0;transform:translateY(15px);}
+.card.vis{opacity:1;transform:translateY(0);}
+.card:hover{border-color:var(--oro-c);background:rgba(200,150,12,0.05);transform:translateY(-3px);box-shadow:0 6px 24px rgba(200,150,12,0.08);}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--oro),var(--azul-v));opacity:0;transition:opacity 0.3s;}
+.card:hover::after{opacity:1;}
+.card-t{font-family:'Cormorant SC',serif;font-size:1.05rem;font-weight:600;color:var(--blanco);margin-bottom:0.3rem;}
+.card-s{font-family:'DM Sans',sans-serif;font-size:0.6rem;color:var(--oro);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;margin-bottom:0.65rem;}
+.card-p{font-size:0.9rem;color:rgba(240,237,232,0.68);line-height:1.78;}
+.card-p strong{color:var(--oro-c);}
+
+/* PILARES */
+.pils{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;margin-top:2rem;background:rgba(200,150,12,0.07);}
+.pil{background:var(--negro);padding:2.2rem 1.8rem;transition:all 0.3s;opacity:0;transform:translateY(12px);}
+.S.alt .pil{background:var(--negro-m);}
+.pil.vis{opacity:1;transform:translateY(0);}
+.pil:hover{background:rgba(27,58,107,0.15);}
+.pil-n{font-family:'Cormorant SC',serif;font-size:2.8rem;font-weight:700;color:rgba(200,150,12,0.13);line-height:1;margin-bottom:0.4rem;transition:color 0.3s;}
+.pil:hover .pil-n{color:rgba(200,150,12,0.3);}
+.pil-t{font-family:'Cormorant SC',serif;font-size:1rem;font-weight:600;color:var(--blanco);margin-bottom:0.6rem;}
+.pil-p{font-size:0.88rem;color:rgba(240,237,232,0.65);line-height:1.78;}
+.pil-p strong{color:var(--oro-c);}
+
+/* SCHEMA */
+.schema{background:rgba(200,150,12,0.04);border:1px solid var(--borde-f);padding:2.2rem 2.7rem;margin:2.2rem 0;position:relative;}
+.schema-l{position:absolute;top:-0.58rem;left:1.4rem;background:var(--negro);padding:0 0.55rem;font-family:'DM Sans',sans-serif;font-size:0.57rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--oro);}
+.S.alt .schema-l{background:var(--negro-m);}
+.schema-t{font-family:'Cormorant SC',serif;font-size:1.15rem;font-weight:600;color:var(--oro-c);margin-bottom:0.85rem;}
+.schema-b{font-size:0.95rem;color:rgba(240,237,232,0.8);line-height:1.88;}
+.schema-b p{margin-bottom:0.85rem;}
+.schema-b strong{color:var(--oro-c);}
+
+/* TABLA */
+.tbl{width:100%;border-collapse:collapse;margin-top:2rem;font-size:0.87rem;}
+.tbl th{text-align:left;font-family:'DM Sans',sans-serif;font-size:0.57rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--oro);padding:0.65rem 0.9rem;border-bottom:1px solid var(--borde-f);}
+.tbl td{padding:0.88rem 0.9rem;color:rgba(240,237,232,0.75);border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;line-height:1.7;}
+.tbl tr:hover td{background:rgba(200,150,12,0.04);color:var(--blanco2);}
+.tbl td:first-child{font-family:'Cormorant SC',serif;font-size:0.95rem;font-weight:600;color:var(--blanco);}
+
+.badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:0.55rem;font-weight:700;padding:0.16rem 0.44rem;border-radius:2px;text-transform:uppercase;letter-spacing:0.1em;}
+.baz{background:rgba(27,58,107,0.25);color:var(--azul-c);border:1px solid rgba(42,91,168,0.4);}
+.bor{background:rgba(200,150,12,0.15);color:var(--oro-c);border:1px solid rgba(200,150,12,0.35);}
+.brj{background:rgba(139,21,23,0.2);color:var(--rojo-s);border:1px solid rgba(176,32,32,0.4);}
+.bvd{background:rgba(27,74,27,0.2);color:#6ADB6A;border:1px solid rgba(42,140,42,0.4);}
+
+/* DIVISOR */
+.div-s{text-align:center;padding:1.2rem 0;color:rgba(200,150,12,0.15);letter-spacing:1em;font-size:1.1rem;user-select:none;}
+
+/* FINAL */
+.fin{background:var(--negro);padding:5.5rem 4.5rem;text-align:center;position:relative;overflow:hidden;}
+.fin-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(27,58,107,0.1) 0%,transparent 65%);pointer-events:none;}
+.fin-cruz{width:60px;height:80px;position:relative;margin:0 auto 2.5rem;}
+.fin-cruz::before{content:'';position:absolute;left:50%;transform:translateX(-50%);width:8px;height:100%;background:var(--oro);border-radius:4px;}
+.fin-cruz::after{content:'';position:absolute;top:28%;left:0;width:100%;height:8px;background:var(--oro);border-radius:4px;}
+.fin-r{font-family:'Cormorant SC',serif;font-size:clamp(1.3rem,2.8vw,2.2rem);font-weight:600;color:var(--oro);margin-bottom:0.5rem;position:relative;z-index:2;}
+.fin-s{font-family:'DM Sans',sans-serif;font-size:0.66rem;letter-spacing:0.42em;text-transform:uppercase;color:rgba(240,237,232,0.22);position:relative;z-index:2;}
+
+footer{background:var(--negro-m);border-top:1px solid var(--borde);padding:1.6rem 4.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fb{font-family:'Cormorant SC',serif;font-size:0.9rem;color:var(--oro);font-weight:600;}
+.fc{font-family:'DM Sans',sans-serif;font-size:0.68rem;color:rgba(240,237,232,0.25);}
+
+#ov{display:none;position:fixed;inset:0;top:56px;background:rgba(0,0,0,0.72);z-index:800;}
+#ov.vis{display:block;}
+
+@media(max-width:920px){
+  #sb{transform:translateX(-100%);}
+  #sb.open{transform:translateX(0);}
+  #main{margin-left:0;}
+  #hbg{display:flex;}
+  .S{padding:3.5rem 1.75rem;}
+  .dc{grid-template-columns:1fr;gap:2rem;}
+  .banda{grid-template-columns:repeat(2,1fr);}
+  .debate{grid-template-columns:1fr;}
+  .obj-col{border-right:none;border-bottom:1px solid rgba(139,21,23,0.3);}
+  footer{padding:1.4rem 1.75rem;}
+  .fin{padding:4rem 1.75rem;}
+}
+@media(max-width:540px){
+  .pils{grid-template-columns:1fr;}
+  .cards{grid-template-columns:1fr;}
+  .banda{grid-template-columns:1fr 1fr;}
+  .cruz-wrap{display:none;}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav id="nav">
+  <div class="nav-b">Concilio Vaticano II <em>· Lumen Gentium · Nostra Aetate</em></div>
+  <button id="hbg" onclick="tSB()"><span></span><span></span><span></span></button>
+</nav>
+<div id="ov" onclick="tSB()"></div>
+<aside id="sb">
+  <div class="sc">I — Historia Previa</div>
+  <a class="sl" onclick="ir('hero')">Presentación</a>
+  <a class="sl" onclick="ir('crisis-modernismo')">La Crisis Modernista</a>
+  <a class="sl" onclick="ir('pio-xii')">Pío X a Pío XII</a>
+  <a class="sl" onclick="ir('nuevo-penelope')">Los Teólogos de la Renovación</a>
+  <div class="sc">II — El Concilio</div>
+  <a class="sl" onclick="ir('convocatoria')">Juan XXIII y la Convocatoria</a>
+  <a class="sl" onclick="ir('desarrollo')">Desarrollo: Las 4 Sesiones</a>
+  <a class="sl" onclick="ir('documentos')">Los 16 Documentos</a>
+  <a class="sl" onclick="ir('hermeneutica')">Hermenéutica del Concilio</a>
+  <div class="sc">III — Lumen Gentium</div>
+  <a class="sl" onclick="ir('lg-historia')">Historia y Aprobación</a>
+  <a class="sl" onclick="ir('lg-estructura')">Estructura del Documento</a>
+  <a class="sl" onclick="ir('subsistit')">El Subsistit in</a>
+  <a class="sl" onclick="ir('pueblo-dios')">El Pueblo de Dios</a>
+  <a class="sl" onclick="ir('colegialidad')">Colegialidad Episcopal</a>
+  <a class="sl" onclick="ir('laicado')">El Laicado</a>
+  <a class="sl" onclick="ir('maria')">María en la Iglesia</a>
+  <div class="sc">IV — La Gran Objeción</div>
+  <a class="sl" onclick="ir('nostra-aetate')">Nostra Aetate y el Islam</a>
+  <a class="sl" onclick="ir('cic-841')">CIC §841 — El texto exacto</a>
+  <a class="sl" onclick="ir('objecion')">La Objeción: ¿El mismo Dios?</a>
+  <a class="sl" onclick="ir('respuesta')">Respuesta Teológica</a>
+  <a class="sl" onclick="ir('conclusion')">Conclusión</a>
+</aside>
+<main id="main">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-vat"></div>
+  <div class="h-grid"></div>
+  <div class="cruz-wrap"><div class="cruz"></div></div>
+  <div class="hc">
+    <div class="hej">Roma · 1962–1965 · Aggiornamento</div>
+    <h1 class="ht">Concilio<br><span class="az">Vaticano</span> <span class="rj">II</span></h1>
+    <p class="hsub">Lumen Gentium · Nostra Aetate · La Iglesia en el Mundo Moderno</p>
+    <div class="hfec">11 de octubre 1962 — 8 de diciembre 1965</div>
+    <blockquote class="hmot">
+      "La Iglesia no es una fortaleza que se defiende; es una madre que sale al encuentro de sus hijos. El aggiornamento no es traición a la Tradición: es la Tradición que respira."
+    </blockquote>
+    <a class="hsc" onclick="ir('crisis-modernismo')">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 12L2 4h12L8 12z"/></svg>
+      Explorar el Concilio
+    </a>
+  </div>
+</section>
+
+<!-- BANDA -->
+<div class="banda">
+  <div class="b1"><div class="bn">2.860</div><div class="bl">Padres conciliares</div></div>
+  <div class="b2"><div class="bn">16</div><div class="bl">Documentos promulgados</div></div>
+  <div class="b3"><div class="bn">4</div><div class="bl">Sesiones (1962–65)</div></div>
+  <div class="b4"><div class="bn">XXI</div><div class="bl">Concilio ecuménico de la historia</div></div>
+</div>
+
+<!-- CRISIS MODERNISMO -->
+<section class="S" id="crisis-modernismo">
+  <div class="Sh">
+    <div class="sey">I · Antecedentes · 1870–1914</div>
+    <h2 class="st">La Crisis <span class="or">Modernista</span> y sus raíces</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="dc">
+    <div class="pr">
+      <p>Para entender el Concilio Vaticano II es imprescindible comprender la crisis que lo precedió. En el siglo XIX, la Iglesia se enfrentó a tres grandes desafíos simultáneos: el <strong>racionalismo ilustrado</strong> que negaba la posibilidad de la revelación sobrenatural, el <strong>historicismo crítico</strong> que disolvía el dogma en evolución histórica relativista, y el <strong>liberalismo político</strong> que ponía en entredicho el papel público de la religión.</p>
+      <p>La respuesta inicial fue defensiva y concentradora. El <strong>Concilio Vaticano I</strong> (1869–1870) definió la infalibilidad pontificia y la primacía de jurisdicción del Papa —respuesta necesaria al gallicanismo y el febronianismo—, pero quedó interrumpido por la entrada de las tropas de Garibaldi en Roma. El "Syllabus Errorum" de Pío IX (1864) condenó sin matices el liberalismo, el socialismo y el naturalismo, adoptando a veces una actitud de trinchera que dificultó el diálogo.</p>
+      <p>El <strong>modernismo teológico</strong> de principios del siglo XX —con figuras como Alfred Loisy en Francia y George Tyrrell en Inglaterra— fue la respuesta liberal extrema a esta situación: intentó reconciliar el catolicismo con la crítica histórica moderna disolviendo el dogma en "experiencia religiosa" evolutiva. Pío X respondió con la encíclica <strong>Pascendi Dominici Gregis</strong> (1907) y el juramento antimodernista, condenando duramente estas tendencias.</p>
+      <p>El problema fue que, junto con los errores genuinamente peligrosos del modernismo extremo, la represión también afectó a teólogos legítimamente renovadores. El clima de desconfianza intelectual generado en las primeras décadas del siglo XX retrasó el necesario diálogo de la Iglesia con la modernidad durante décadas.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ El Vaticano I — el Concilio inconcluso</div>
+        <p class="hl-p">El Vaticano I (1869–1870) fue interrumpido tras definir la infalibilidad pontificia. Quedó pendiente el tratamiento de los obispos, cuya relación con el Papa necesitaba equilibrarse. Durante noventa años, la Iglesia funcionó con una eclesiología incompleta —sólo la cabeza, sin el desarrollo del cuerpo episcopal— lo que generó tensiones pastorales y teológicas que el Vaticano II resolvería con la doctrina de la colegialidad.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ La cuestión romana</div>
+        <p class="hl-p">La pérdida de los Estados Pontificios en 1870 dejó al Papa como "prisionero del Vaticano" hasta los Pactos de Letrán (1929). Esta situación política generó en la Iglesia una actitud de confrontación con el mundo moderno que, aunque comprensible históricamente, necesitaba superarse para que la Iglesia pudiera hablar con autoridad moral a la sociedad contemporánea.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ Las dos guerras mundiales</div>
+        <p class="hl-p">Las dos guerras mundiales transformaron el panorama intelectual y moral de Occidente. El optimismo ilustrado del siglo XIX quedó sepultado bajo millones de cadáveres. La Iglesia, que había resistido el optimismo racionalista, se encontró ahora en posición de ofrecer una visión más realista del hombre —la doctrina del pecado original y la necesidad de la redención cobraron nueva urgencia—. El Vaticano II se celebró en este contexto de pos-guerra y Guerra Fría.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PÍO X A PÍO XII -->
+<section class="S alt" id="pio-xii">
+  <div class="Sh">
+    <div class="sey">II · 1914–1958</div>
+    <h2 class="st">De Pío X a <span class="or">Pío XII</span> — preparando el terreno</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="tl">
+    <div class="li">
+      <div class="ld"></div>
+      <div class="ltag tag-or">Pío XI</div>
+      <div class="ly">1922–1939</div>
+      <div class="lev">El papado social y el diálogo con el totalitarismo</div>
+      <div class="ltx">Pío XI publicó las grandes encíclicas sociales (<em>Quadragesimo Anno</em>, 1931) y tuvo que navegar entre el fascismo, el nazismo y el comunismo. Firmó el Concordato con Mussolini (1929, que resolvió la "cuestión romana") y condenó el nazismo con <em>Mit brennender Sorge</em> (1937) y el comunismo con <em>Divini Redemptoris</em> (1937). Su pontificado desarrolló la doctrina social de la Iglesia y mostró que el catolicismo tenía algo que decir a los grandes problemas políticos del siglo.</div>
+    </div>
+    <div class="li">
+      <div class="ld"></div>
+      <div class="ltag tag-az">Pío XII</div>
+      <div class="ly">1939–1958</div>
+      <div class="lev">Mystici Corporis y la renovación bíblica y litúrgica</div>
+      <div class="ltx">Pío XII fue un papa de transición crucial. Su encíclica <strong>Mystici Corporis Christi</strong> (1943) renovó la eclesiología con la imagen bíblica de la Iglesia como Cuerpo Místico de Cristo. <strong>Divino Afflante Spiritu</strong> (1943) abrió la exégesis bíblica católica a los métodos histórico-críticos —un giro revolucionario que liberó a los exegetas de las restricciones anti-modernistas excesivas—. La constitución <em>Mediator Dei</em> (1947) preparó la reforma litúrgica. Pío XII abrió las puertas que el Vaticano II cruzaría.</div>
+    </div>
+    <div class="li">
+      <div class="ld"></div>
+      <div class="ltag tag-rj">Tensión interna</div>
+      <div class="ly">1950</div>
+      <div class="lev">Humani Generis — el frenazo</div>
+      <div class="ltx">La encíclica <em>Humani Generis</em> (1950) de Pío XII condenó ciertos excesos de la "nouvelle théologie" francesa —los teólogos renovadores de Le Saulchoir y Fourvière— causando la suspensión temporal de enseñanza de figuras como Yves Congar, Henri de Lubac y Marie-Dominique Chenu. La ironía histórica: estos mismos teólogos, rehabilitados por Juan XXIII, se convirtieron en los principales arquitectos del Vaticano II y sus documentos centrales.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEÓLOGOS RENOVACIÓN -->
+<section class="S" id="nuevo-penelope">
+  <div class="Sh">
+    <div class="sey">III · La preparación intelectual</div>
+    <h2 class="st">Los Teólogos de la <span class="az">Renovación</span></h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr" style="margin-bottom:2.5rem;">
+    <p>El Vaticano II no surgió de la nada. Fue la culminación de décadas de trabajo intelectual silencioso por parte de teólogos que, bajo sospecha o directamente sancionados, prepararon el terreno de la renovación. Sin ellos, el Concilio no habría tenido el vocabulario ni los conceptos para articular sus intuiciones.</p>
+  </div>
+  <div class="cards">
+    <div class="card vis">
+      <div class="card-t">Yves Congar OP</div>
+      <div class="card-s">1904–1995 · Francia</div>
+      <div class="card-p">El gran eclesiólogo del siglo XX. Su obra <em>Verdadera y falsa reforma en la Iglesia</em> (1950) articuló los principios de una renovación eclesial que no fuera ruptura sino profundización. Sancionado por Pío XII, rehabilitado por Juan XXIII, fue el principal arquitecto de la <strong>Lumen Gentium</strong>. Creado cardenal por Juan Pablo II en 1994, a los 90 años.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Henri de Lubac SJ</div>
+      <div class="card-s">1896–1991 · Francia</div>
+      <div class="card-p">Renovó la teología de la gracia y la naturaleza con <em>Sobrenatural</em> (1946), mostrando que la dicotomía entre lo natural y lo sobrenatural era artificial e impedía una comprensión correcta del deseo de Dios en el hombre. Sancionado, rehabilitado, fue uno de los asesores más influyentes del Concilio. También creado cardenal por Juan Pablo II.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Karl Rahner SJ</div>
+      <div class="card-s">1904–1984 · Alemania</div>
+      <div class="card-p">El teólogo sistemático más influyente del siglo XX. Su concepto de <strong>"cristianos anónimos"</strong> —que Dios actúa en quienes buscan el bien aunque no conozcan explícitamente a Cristo— influyó en la redacción de los textos conciliares sobre las religiones no cristianas. Asesor personal del Cardenal König de Viena en el Concilio.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Marie-Dominique Chenu OP</div>
+      <div class="card-s">1895–1990 · Francia</div>
+      <div class="card-p">Medievalista e historiador de la teología. Su insistencia en la encarnación de la teología en la historia y la cultura fue fundamental para la redacción de <em>Gaudium et Spes</em>. Sostuvo que la Iglesia debe "leer los signos de los tiempos" —expresión que se convirtió en una de las frases clave del Concilio.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Hans Urs von Balthasar</div>
+      <div class="card-s">1905–1988 · Suiza</div>
+      <div class="card-p">Aunque no participó directamente como perito conciliar, su teología de la belleza (<em>Gloria: Una estética teológica</em>) y su soteriología influyeron profundamente en el espíritu del Concilio. Con Ratzinger y Lehmann, fundó la revista <em>Communio</em> para promover una recepción ortodoxa del Vaticano II.</div>
+    </div>
+    <div class="card vis">
+      <div class="card-t">Joseph Ratzinger</div>
+      <div class="card-s">1927–2022 · Alemania</div>
+      <div class="card-p">El joven teólogo de Bonn, asesor del Cardenal Frings de Colonia, participó activamente en las primeras sesiones del Concilio como perito renovador. Su evolución posterior —desde posiciones más progresistas hacia una posición de "reforma en la continuidad"— refleja la tensión interpretativa que el Concilio generaría. Como Benedicto XVI sería el papa del Vaticano II reflexionado.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONVOCATORIA -->
+<section class="S alt" id="convocatoria">
+  <div class="Sh">
+    <div class="sey">IV · 25 enero 1959</div>
+    <h2 class="st">Juan XXIII y el <span class="az">Aggiornamento</span></h2>
+    <div class="sr"></div>
+  </div>
+  <div class="dc">
+    <div class="pr">
+      <p>El <strong>25 de enero de 1959</strong>, apenas noventa días después de su elección, el Papa Juan XXIII anunció la convocatoria de un Concilio Ecuménico en la Basílica de San Pablo Extramuros. El anuncio sorprendió a todos, incluida la Curia romana. Los cardenales presentes guardaron un silencio que el propio Papa Juan interpretó como estupefacción.</p>
+      <p>Juan XXIII —Angelo Roncalli, el "papa gordo" elegido como candidato de transición a los 77 años— resultó ser uno de los pontificados más revolucionarios de la historia. No convocó el Concilio para definir nuevos dogmas ni condenar nuevas herejías: lo convocó para el <strong>aggiornamento</strong> —la "puesta al día"— de la Iglesia, para que pudiera hablar al hombre contemporáneo en un lenguaje que él pudiera escuchar.</p>
+      <p>Su famosa distinción programática: el Concilio no buscaría <strong>condenar errores</strong> —tarea de los concilios pasados— sino <strong>presentar positivamente</strong> la verdad cristiana con "la medicina de la misericordia antes que las armas de la severidad." Esta opción pastoral y no anatemizante marcaría el carácter singular de todos los documentos del Vaticano II.</p>
+      <p>Juan XXIII abrió el Concilio el <strong>11 de octubre de 1962</strong> con el discurso <em>Gaudet Mater Ecclesiae</em> —"Se alegra la Madre Iglesia"— en el que criticó directamente a los "profetas de calamidades" que veían el mundo sólo con pesimismo. Murió el <strong>3 de junio de 1963</strong>, durante el intervalo entre la primera y segunda sesión. Su sucesor Pablo VI continuó y completó el Concilio.</p>
+    </div>
+    <div>
+      <div class="cit">
+        <p>"No para discutir un artículo u otro de la doctrina fundamental de la Iglesia... sino para encontrar las formas renovadas de exponer estos tesoros de la doctrina cristiana y de presentarlos de una manera más eficaz a las almas."</p>
+        <cite>— Juan XXIII, Gaudet Mater Ecclesiae, 11 octubre 1962</cite>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ La "apertura de la ventana"</div>
+        <p class="hl-p">Juan XXIII explicó el aggiornamento con una imagen simple: "Abriré la ventana de la Iglesia para que entre un poco de aire fresco." No quería tirar abajo el edificio ni cambiar su estructura: quería ventilarlo. Esta imagen doméstica y humilde capturó perfectamente su programa: renovación en continuidad, no ruptura.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ Pablo VI — el papa del Concilio</div>
+        <p class="hl-p">Giovanni Battista Montini (Pablo VI) fue elegido en junio de 1963 y presidió las tres sesiones restantes del Concilio. Su papel fue decisivo: equilibró las tendencias más progresistas con la continuidad doctrinal, añadió la <em>Nota Explicativa Praevia</em> a la Lumen Gentium para clarificar que la colegialidad no menoscababa la primacía papal, y guió el Concilio hasta su conclusión el 8 de diciembre de 1965.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESARROLLO 4 SESIONES -->
+<section class="S" id="desarrollo">
+  <div class="Sh">
+    <div class="sey">V · 1962–1965</div>
+    <h2 class="st">Las <span class="or">Cuatro Sesiones</span> del Concilio</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="tl">
+    <div class="li">
+      <div class="ld"></div>
+      <div class="ltag tag-az">1ª Sesión</div>
+      <div class="ly">Oct–Dic 1962</div>
+      <div class="lev">El rechazo de los esquemas — la Iglesia toma el control</div>
+      <div class="ltx">La primera sesión fue el gran momento dramático del Concilio. La Curia romana había preparado esquemas doctrinales previos de corte preconciliar y defensivo. El Cardenal Frings de Colonia —asesorado por el joven Ratzinger— criticó públicamente los esquemas preparados por el Santo Oficio. La asamblea rechazó los textos curialescos y exigió comenzar de nuevo. Fue el momento en que los Padres conciliares asumieron el protagonismo frente a la burocracia vaticana. Juan XXIII murió en junio de 1963 antes de ver la segunda sesión.</div>
+    </div>
+    <div class="li">
+      <div class="ld"></div>
+      <div class="ltag tag-or">2ª Sesión</div>
+      <div class="ly">Sep–Dic 1963</div>
+      <div class="lev">Pablo VI y el debate sobre la colegialidad</div>
+      <div class="ltx">La segunda sesión bajo Pablo VI fue la más teológicamente intensa. El debate central fue sobre la colegialidad episcopal: ¿tienen los obispos en conjunto, con el Papa, autoridad sobre la Iglesia universal? La "minoría" —principalmente obispos de curia y algunos conservadores— temía que la colegialidad menoscabara la primacía papal definida en el Vaticano I. Pablo VI añadió la <em>Nota Explicativa Praevia</em> para clarificar que la colegialidad actúa siempre con y nunca sin el Papa. Esta nota fue objeto de debate intenso: ¿aclaración o limitación?</div>
+    </div>
+    <div class="li">
+      <div class="ld"></div>
+      <div class="ltag tag-az">3ª Sesión</div>
+      <div class="ly">Sep–Nov 1964</div>
+      <div class="lev">Aprobación de Lumen Gentium y "el jueves negro"</div>
+      <div class="ltx">La tercera sesión aprobó la constitución dogmática <strong>Lumen Gentium</strong> (21 noviembre 1964) y el decreto sobre el ecumenismo <em>Unitatis Redintegratio</em>. El llamado "jueves negro" (19 noviembre 1964) fue cuando Pablo VI, bajo presión de la minoría conciliar, introdujo modificaciones de último momento en la declaración sobre la libertad religiosa y el decreto sobre el ecumenismo, causando la frustración de los obispos progresistas. Este episodio reveló la tensión permanente entre el Papa y la asamblea.</div>
+    </div>
+    <div class="li">
+      <div class="ld"></div>
+      <div class="ltag tag-or">4ª Sesión</div>
+      <div class="ly">Sep–Dic 1965</div>
+      <div class="lev">Nostra Aetate, Dei Verbum, Gaudium et Spes y el cierre</div>
+      <div class="ltx">La cuarta y última sesión fue la más productiva en número de documentos aprobados. Se promulgaron: <strong>Nostra Aetate</strong> (sobre las religiones no cristianas, 28 octubre 1965), <strong>Dei Verbum</strong> (sobre la Revelación, 18 noviembre 1965) y la magna <strong>Gaudium et Spes</strong> (sobre la Iglesia en el mundo actual, 7 diciembre 1965). El 8 de diciembre de 1965, solemnidad de la Inmaculada Concepción, Pablo VI cerró el Concilio. El Vaticano II había promulgado 4 constituciones, 9 decretos y 3 declaraciones en tres años de trabajo intensísimo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOS 16 DOCUMENTOS -->
+<section class="S alt" id="documentos">
+  <div class="Sh">
+    <div class="sey">VI — Los frutos del Concilio</div>
+    <h2 class="st">Los <span class="az">16 Documentos</span> Conciliares</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr" style="margin-bottom:2rem;">
+    <p>El Vaticano II produjo cuatro tipos de documentos en orden decreciente de autoridad doctrinal: <strong>Constituciones</strong> (las más solemnes), <strong>Decretos</strong>, <strong>Declaraciones</strong> y Mensajes. Los más importantes son las cuatro constituciones.</p>
+  </div>
+  <table class="tbl">
+    <thead><tr><th>Documento</th><th>Tipo</th><th>Fecha</th><th>Tema central</th></tr></thead>
+    <tbody>
+      <tr><td>Sacrosanctum Concilium</td><td><span class="badge bvd">Constitución</span></td><td>4 dic 1963</td><td>La reforma litúrgica. Permitió la misa en lengua vernácula, mayor participación de los fieles, revisión del calendario litúrgico.</td></tr>
+      <tr><td>Lumen Gentium</td><td><span class="badge bvd">Constitución</span></td><td>21 nov 1964</td><td>La Iglesia: su naturaleza, misión, el Pueblo de Dios, la colegialidad episcopal, el laicado, la vida consagrada, María.</td></tr>
+      <tr><td>Dei Verbum</td><td><span class="badge bvd">Constitución</span></td><td>18 nov 1965</td><td>La Revelación divina: relación entre Escritura y Tradición, inspiración bíblica, interpretación, importancia de la Biblia en la vida de la Iglesia.</td></tr>
+      <tr><td>Gaudium et Spes</td><td><span class="badge bvd">Constitución</span></td><td>7 dic 1965</td><td>La Iglesia y el mundo moderno: familia, cultura, economía, política, paz internacional, dignidad humana.</td></tr>
+      <tr><td>Unitatis Redintegratio</td><td><span class="badge baz">Decreto</span></td><td>21 nov 1964</td><td>El ecumenismo: reconocimiento de las comunidades cristianas separadas, bases del diálogo ecuménico.</td></tr>
+      <tr><td>Orientalium Ecclesiarum</td><td><span class="badge baz">Decreto</span></td><td>21 nov 1964</td><td>Las iglesias orientales católicas: sus ritos propios, patriarcas, disciplina.</td></tr>
+      <tr><td>Presbyterorum Ordinis</td><td><span class="badge baz">Decreto</span></td><td>7 dic 1965</td><td>El ministerio y vida de los presbíteros: su identidad, espiritualidad, formación.</td></tr>
+      <tr><td>Nostra Aetate</td><td><span class="badge brj">Declaración</span></td><td>28 oct 1965</td><td>Las relaciones de la Iglesia con las religiones no cristianas: hinduismo, budismo, islam, judaísmo. El rechazo del antisemitismo.</td></tr>
+      <tr><td>Dignitatis Humanae</td><td><span class="badge brj">Declaración</span></td><td>7 dic 1965</td><td>La libertad religiosa: derecho de todo ser humano a buscar la verdad y practicar su religión sin coerción.</td></tr>
+      <tr><td>Ad Gentes</td><td><span class="badge baz">Decreto</span></td><td>7 dic 1965</td><td>La actividad misionera de la Iglesia: fundamentos teológicos y orientaciones pastorales.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- HERMENÉUTICA -->
+<section class="S" id="hermeneutica">
+  <div class="Sh">
+    <div class="sey">VII — Clave interpretativa</div>
+    <h2 class="st">¿Cómo leer el <span class="az">Concilio</span>?</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="dc">
+    <div class="pr">
+      <p>El debate hermenéutico sobre el Vaticano II —cómo interpretarlo correctamente— es uno de los más importantes de la teología contemporánea. Benedicto XVI formuló en su discurso a la Curia del 22 de diciembre de 2005 la distinción fundamental entre dos hermenéuticas opuestas.</p>
+      <p>La <strong>hermenéutica de la ruptura</strong> interpreta el Vaticano II como un nuevo comienzo, casi una nueva Iglesia, que habría superado definitivamente la Iglesia preconciliar. Esta lectura fue adoptada tanto por progresistas radicales —que querían ir mucho más lejos que el Concilio— como por lefebvristas tradicionalistas —que rechazaban el Concilio precisamente porque lo leían como ruptura.</p>
+      <p>La <strong>hermenéutica de la reforma en la continuidad</strong> —que Benedicto XVI defendió y que es la posición oficial de la Iglesia— interpreta el Concilio como desarrollo orgánico de la Tradición. El Vaticano II no contradice los concilios anteriores: profundiza, amplía y aplica a un nuevo contexto histórico lo que siempre fue la fe de la Iglesia. Los documentos deben leerse en continuidad con el Magisterio anterior, no en ruptura.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ La "letra" y el "espíritu"</div>
+        <p class="hl-p">Una distinción que generó conflictos interminables: algunos teólogos y pastores postconciliares invocaron el "espíritu del Concilio" para justificar innovaciones que los textos aprobados no respaldaban —o incluso contradecían—. Ratzinger/Benedicto XVI insistió repetidamente en que el "espíritu del Concilio" no puede usarse para superar los textos del Concilio: el espíritu real del Vaticano II se encuentra en sus documentos, no en una interpretación dinámica autónoma de ellos.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ El Concilio que no fue</div>
+        <p class="hl-p">El Vaticano II no aprobó: la ordenación de mujeres al sacerdocio, la supresión del celibato sacerdotal, la intercomunión eucarística con protestantes, la relativización del dogma cristológico, ni la disolución de los votos religiosos. Lo que la "recepción progresista" del Concilio quiso hacer con él y lo que el Concilio realmente dijo son cosas frecuentemente muy distintas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-s">✦ ✦ ✦</div>
+
+<!-- LUMEN GENTIUM HISTORIA -->
+<section class="S alt" id="lg-historia">
+  <div class="Sh">
+    <div class="sey">VIII — Constitución Dogmática</div>
+    <h2 class="st">Lumen Gentium — <span class="or">Historia y Aprobación</span></h2>
+    <div class="sr"></div>
+  </div>
+  <div class="dc">
+    <div class="pr">
+      <p>La <strong>Lumen Gentium</strong> (<em>"Luz de las Naciones"</em>) es la Constitución Dogmática sobre la Iglesia, el documento más importante del Vaticano II. Su nombre —tomado de sus primeras palabras— evoca la imagen del Cristo Luz del mundo, cuya luz la Iglesia refleja y transmite.</p>
+      <p>La historia de su redacción es la historia del Concilio en miniatura. El esquema original presentado por la Comisión Teológica preconciliar era un documento juridicista y jerárquico, centrado en la institución y el poder. Los Padres conciliares lo rechazaron en la primera sesión. El nuevo esquema, redactado principalmente por <strong>Yves Congar</strong>, <strong>Karl Rahner</strong> y <strong>Gérard Philips</strong> (su principal redactor técnico), adoptó un enfoque bíblico, patrístico y pastoral radicalmente distinto.</p>
+      <p>Fue aprobada el <strong>21 de noviembre de 1964</strong>, en la tercera sesión, por 2.151 votos a favor y apenas 5 en contra. Esta casi unanimidad refleja el amplio consenso que se alcanzó tras largos debates. El texto final, con sus ocho capítulos, es un documento de extraordinaria riqueza que renovó la autocomprensión de la Iglesia Católica para el siglo XX y XXI.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ El giro eclesiológico fundamental</div>
+        <p class="hl-p">La eclesiología anterior al Vaticano II (el "manual escolástico") describía la Iglesia principalmente en categorías jurídicas: sociedad perfecta, monarquía pontificia, cuerpo jerárquico. La Lumen Gentium introduce imágenes bíblicas primordiales: la Iglesia como <strong>misterio</strong>, como <strong>sacramento</strong>, como <strong>Pueblo de Dios</strong>, como <strong>Cuerpo de Cristo</strong>, como <strong>Templo del Espíritu Santo</strong>. Este cambio de metáfora no es cosmético: cambia el centro de gravedad de la ecclesiología.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ Gérard Philips — el artesano</div>
+        <p class="hl-p">El teólogo belga Gérard Philips fue el redactor técnico principal de la Lumen Gentium. Su habilidad para formular compromisos que satisficieran tanto a la mayoría renovadora como a la minoría conservadora fue decisiva para el éxito del documento. Su comentario en dos volúmenes a la Lumen Gentium sigue siendo referencia indispensable para su interpretación correcta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESTRUCTURA LG -->
+<section class="S" id="lg-estructura">
+  <div class="Sh">
+    <div class="sey">IX — El documento</div>
+    <h2 class="st">Estructura de la <span class="az">Lumen Gentium</span></h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pils">
+    <div class="pil">
+      <div class="pil-n">I</div>
+      <div class="pil-t">El Misterio de la Iglesia (§§1-8)</div>
+      <div class="pil-p">La Iglesia no es ante todo una institución sino un misterio: la presencia activa de la Trinidad en la historia. Es sacramento universal de salvación, imagen de la Trinidad, Cuerpo de Cristo, Esposa del Cordero. Las imágenes bíblicas se acumulan para mostrar que la Iglesia es incomprehensible en categorías meramente sociológicas o jurídicas.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">II</div>
+      <div class="pil-t">El Pueblo de Dios (§§9-17)</div>
+      <div class="pil-p">El capítulo más revolucionario estructuralmente. Al poner el Pueblo de Dios <em>antes</em> del capítulo sobre la jerarquía, el Concilio afirma que lo fundamental es ser bautizado, no ser ordenado. Toda la Iglesia, en su conjunto, es el nuevo Israel peregrino. La jerarquía está al servicio del pueblo, no al revés. Este orden de capítulos fue muy discutido y muy deliberado.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">III</div>
+      <div class="pil-t">La Constitución Jerárquica (§§18-29)</div>
+      <div class="pil-p">El capítulo sobre la jerarquía desarrolla la doctrina de la <strong>colegialidad episcopal</strong>: los obispos en comunión con el Papa forman el colegio apostólico, sucesor del colegio de los Doce. Cada obispo es responsable no sólo de su diócesis sino de toda la Iglesia universal. La primacía papal del Vaticano I se mantiene pero se sitúa en el contexto de la responsabilidad colegial.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">IV</div>
+      <div class="pil-t">Los Fieles Laicos (§§30-38)</div>
+      <div class="pil-p">Por primera vez en la historia conciliar, un documento dedica un capítulo específico a los laicos. No son simplemente receptores pasivos del ministerio clerical: son sujetos activos de la misión de la Iglesia en el mundo. Su vocación específica es la <em>consecratio mundi</em>: transformar las realidades temporales desde dentro según el Evangelio.</p>
+    </div>
+    <div class="pil">
+      <div class="pil-n">V</div>
+      <div class="pil-t">La Vocación Universal a la Santidad (§§39-42)</div>
+      <div class="pil-p">Todos los bautizados —no sólo religiosos y sacerdotes— están llamados a la santidad plena. No existe una "santidad de segunda categoría" para los laicos: la santidad es una sola, aunque se vive en vocaciones distintas. Este capítulo democratizó espiritualmente la Iglesia: la mística no es monopolio claustral.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">VI</div>
+      <div class="pil-t">Los Religiosos (§§43-47)</div>
+      <div class="pil-p">La vida consagrada (monjes, frailes, religiosas) es un signo escatológico en la Iglesia: anticipa el Reino de Dios y recuerda a toda la comunidad que el mundo presente pasa. Los religiosos no son "los perfectos" que otros no pueden imitar: son testigos de que la perfección plena está aún por venir.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">VII</div>
+      <div class="pil-t">La Iglesia Escatológica (§§48-51)</div>
+      <div class="pil-p">La Iglesia en su plenitud incluye a los que ya llegaron a la patria (santos en el cielo), los que se purifican (almas del purgatorio) y los que peregrinan en la tierra. La comunión de los santos es una realidad viva que une los tres estados. La intercesión de los santos y la oración por los difuntos tienen aquí su fundamento dogmático.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">VIII</div>
+      <div class="pil-t">La Santísima Virgen María (§§52-69)</div>
+      <div class="pil-p">El Concilio decidió por votación (1.114 a 1.074) incorporar el tratado mariano dentro de la Lumen Gentium en vez de publicarlo como documento separado. Esta decisión teológicamente significativa sitúa a María donde pertenece: dentro de la Iglesia, como su miembro más excelente, no fuera de ella como entidad paralela.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSISTIT IN -->
+<section class="S alt" id="subsistit">
+  <div class="Sh">
+    <div class="sey">X — El párrafo más debatido</div>
+    <h2 class="st">El <span class="or">Subsistit in</span> — la Iglesia única y las otras Iglesias</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="catbox" style="margin-bottom:2.5rem;">
+    <div class="catbox-lbl">Lumen Gentium §8</div>
+    <span class="cat-ref">LG 8 — Texto oficial</span>
+    <div class="cat-text">"Esta Iglesia, constituida y ordenada en este mundo como una sociedad, <strong>subsiste en</strong> (subsistit in) la Iglesia Católica, gobernada por el sucesor de Pedro y por los Obispos en comunión con él, aunque fuera de su estructura se encuentren muchos elementos de santificación y de verdad que, como bienes propios de la Iglesia de Cristo, impulsan hacia la unidad católica."</div>
+  </div>
+  <div class="dc">
+    <div class="pr">
+      <p>El cambio de la fórmula anterior —"la Iglesia de Cristo es la Iglesia Católica"— a "la Iglesia de Cristo <em>subsiste en</em> la Iglesia Católica" fue uno de los más debatidos del Concilio. Fue propuesto precisamente para permitir reconocer que <strong>fuera de la Iglesia Católica existen elementos genuinos de la Iglesia de Cristo</strong>: la Escritura, los sacramentos (algunos), la fe trinitaria, etc.</p>
+      <p>La Congregación para la Doctrina de la Fe aclaró en 2007 (<em>Responsum ad quaestiones</em>) que el "subsiste en" no significa que la Iglesia de Cristo esté fragmentada entre diversas comunidades: <strong>la Iglesia de Cristo subsiste plena y únicamente en la Iglesia Católica</strong>, aunque elementos de ella se encuentran también en otras comunidades. Esto no es relativismo: es reconocimiento de la realidad eclesial compleja posterior al cisma de 1054 y a la Reforma.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ ¿Qué son las "Iglesias" no católicas?</div>
+        <p class="hl-p">La CDF distingue: las <strong>Iglesias Ortodoxas</strong> son "Iglesias" en sentido propio porque tienen apostolicidad, episcopado válido y eucaristía válida —aunque están en comunión imperfecta con Roma—. Las <strong>comunidades eclesiales protestantes</strong> no son "Iglesias" en sentido técnico porque carecen del sacerdocio ministerial válido en sentido católico, aunque son "medios de salvación" reconocidos. Esta distinción —presente en <em>Unitatis Redintegratio</em>— causó la polémica del <em>Dominus Iesus</em> de 2000.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUEBLO DE DIOS -->
+<section class="S" id="pueblo-dios">
+  <div class="Sh">
+    <div class="sey">XI — El capítulo revolucionario</div>
+    <h2 class="st">El <span class="az">Pueblo de Dios</span></h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr" style="margin-bottom:2.5rem;">
+    <p>El capítulo II de la Lumen Gentium —"El Pueblo de Dios"— fue el más revolucionario en términos eclesiológicos porque cambió el orden estructural: antes de hablar de la jerarquía habló del bautismo. Este orden dice algo: ser cristiano es más fundamental que ser sacerdote u obispo. La gracia del bautismo es la gracia primera y fundante de la vida eclesial.</p>
+  </div>
+  <div class="schema">
+    <div class="schema-l">Doctrina central LG §§9-17</div>
+    <div class="schema-t">Las tres dimensiones del Sacerdocio según la Lumen Gentium</div>
+    <div class="schema-b">
+      <p><strong>Sacerdocio común de los fieles (LG §10):</strong> Todo bautizado participa del sacerdocio de Cristo. No es una metáfora: los laicos ofrecen sacrificios espirituales en su vida ordinaria, participan activamente en la liturgia, testimonian la fe en el mundo. Este sacerdocio es real aunque esencialmente diferente del sacerdocio ministerial.</p>
+      <p><strong>Sacerdocio ministerial (LG §10):</strong> El sacerdocio ordenado "actúa in persona Christi Capitis" —en la persona de Cristo Cabeza— y tiene una función específica de presidir la eucaristía, perdonar los pecados y guiar la comunidad. Difiere "esencialmente y no sólo en grado" del sacerdocio común. Esta formulación fue deliberada para excluir la interpretación protestante de que el ministerio ordenado es sólo una función delegada por la comunidad.</p>
+      <p><strong>Sensus Fidei (LG §12):</strong> El conjunto de los fieles tiene un "sentido de la fe" (sensus fidei) por el que reconoce y vive la verdad revelada. "El conjunto de los fieles, que tienen la unción del Santo (cf. 1 Jn 2,20 y 27), puede errar en materia de fe." Este párrafo —el más citado en debates eclesiológicos actuales— reconoce que la fe del pueblo tiene valor teológico propio, no sólo la enseñanza jerárquica.</p>
+    </div>
+  </div>
+  <div class="cit">
+    <p>"La totalidad de los fieles, que tienen la unción del Santo, no puede equivocarse cuando cree, y esta prerrogativa peculiar suya la manifiesta mediante el sentido sobrenatural de la fe de todo el pueblo."</p>
+    <cite>— Lumen Gentium §12</cite>
+  </div>
+</section>
+
+<!-- COLEGIALIDAD -->
+<section class="S alt" id="colegialidad">
+  <div class="Sh">
+    <div class="sey">XII — La gran novedad eclesiológica</div>
+    <h2 class="st">La <span class="or">Colegialidad</span> Episcopal</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="dc">
+    <div class="pr">
+      <p>La doctrina de la colegialidad episcopal es la aportación eclesiológica más significativa del Vaticano II. Completa lo que el Vaticano I había dejado incompleto: si en 1870 se definió la primacía y la infalibilidad del Papa, en 1964 se desarrolla la responsabilidad colegial del episcopado.</p>
+      <p>El principio: <strong>los obispos no son simplemente delegados del Papa en sus diócesis</strong>. Cada obispo es sucesor de los Apóstoles, responsable junto con el Papa de toda la Iglesia universal. El colegio episcopal (todos los obispos en comunión con el Papa) tiene autoridad sobre la Iglesia universal. Esta autoridad colegial no puede ejercerse sin el Papa —no contra él— pero tampoco puede ejercerse prescindiendo de los obispos.</p>
+      <p>Las <strong>consecuencias prácticas</strong> de la colegialidad fueron: el Sínodo de los Obispos (institución creada por Pablo VI en 1965), los Consejos episcopales regionales y las Conferencias episcopales nacionales. Todas estas instituciones representan la colegialidad en acción, aunque el debate sobre el alcance exacto de su autoridad continúa.</p>
+    </div>
+    <div>
+      <div class="hl">
+        <div class="hl-t">✦ La Nota Explicativa Praevia</div>
+        <p class="hl-p">Para aquietar los temores de la "minoría" conciliar, Pablo VI ordenó añadir al texto de la Lumen Gentium una "Nota Explicativa Praevia" que clarificaba: la colegialidad no crea un órgano paralelo al Papa ni menoscaba su primacía. El colegio episcopal actúa "siempre con su cabeza y nunca sin ella." Esta nota fue recibida con disgusto por los teólogos más progresistas pero fue teológicamente correcta: sin ella, el texto habría podido interpretarse como limitación de la primacía papal.</p>
+      </div>
+      <div class="hl" style="margin-top:1.5rem;">
+        <div class="hl-t">✦ La tensión no resuelta</div>
+        <p class="hl-p">La tensión entre primacía papal y colegialidad episcopal no quedó resuelta conceptualmente en el Vaticano II: quedó en tensión fecunda. El Concilio afirmó ambos polos sin ofrecer un sistema que los articulara perfectamente. Esta tensión ha alimentado décadas de debate eclesiológico y es uno de los desafíos más importantes del pontificado de Francisco.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAICADO -->
+<section class="S" id="laicado">
+  <div class="Sh">
+    <div class="sey">XIII — Una novedad histórica</div>
+    <h2 class="st">El <span class="az">Laicado</span> en la Lumen Gentium</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr" style="margin-bottom:2rem;">
+    <p>Nunca antes en la historia conciliar se había dedicado un capítulo entero a los fieles laicos. La Lumen Gentium (cap. IV, §§30-38) lo hizo. Los laicos no son simplemente destinatarios del ministerio clerical: tienen su propia vocación apostólica específica, que no es clerical sino secular.</p>
+  </div>
+  <div class="pils">
+    <div class="pil">
+      <div class="pil-n">α</div>
+      <div class="pil-t">La consagración del mundo</div>
+      <div class="pil-p">La vocación específica del laico es la <em>consecratio mundi</em>: transformar las realidades temporales —familia, trabajo, política, cultura, economía— desde dentro según el Evangelio. Los laicos no son "clérigos fallidos" ni "monjes del mundo": son la Iglesia en el corazón del siglo, su misión es única e insustituible.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">β</div>
+      <div class="pil-t">Corresponsabilidad eclesial</div>
+      <div class="pil-p">Los laicos tienen no sólo el derecho sino el deber de expresar al clero, con confianza y respeto, sus opiniones sobre el bien de la Iglesia (LG §37). Esto no es democratización de la Iglesia sino reconocimiento de que el Espíritu actúa en todo el Pueblo de Dios y que la jerarquía necesita escuchar lo que el Espíritu dice a través de los fieles.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">γ</div>
+      <div class="pil-t">La participación litúrgica</div>
+      <div class="pil-p">La reforma litúrgica del Vaticano II (Sacrosanctum Concilium) nació de la eclesiología del Pueblo de Dios: si todos los bautizados son sacerdotes (en sentido común), todos deben participar activamente en la liturgia, no asistir pasivamente. La misa en lengua vernácula, la posición del altar versus populum y la distribución de la comunión bajo las dos especies son consecuencias de esta eclesiología.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">δ</div>
+      <div class="pil-t">Los movimientos laicales</div>
+      <div class="pil-p">El reconocimiento conciliar del laicado impulsó el florecimiento de movimientos y comunidades laicales en el postconcilio: Comunión y Liberación, el Camino Neocatecumenal, el Opus Dei (canonizado en 1982 su fundador), los Focolares, la Renovación Carismática Católica. Todos ellos encarnan, de maneras distintas, el principio conciliar de la vocación apostólica laical.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARÍA -->
+<section class="S alt" id="maria">
+  <div class="Sh">
+    <div class="sey">XIV — Cap. VIII de la LG</div>
+    <h2 class="st">María en la <span class="or">Iglesia</span></h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr">
+    <p>La decisión de incorporar el tratado mariano dentro de la Lumen Gentium (en vez de publicarlo como documento separado) fue de las más debatidas del Concilio. Ganó por apenas 40 votos de diferencia (1.114 a 1.074). La opción teológica era clara: María no es una entidad paralela a la Iglesia ni fuera de ella, sino su miembro más excelente. La mariología correcta es siempre mariología eclesial: María es figura de la Iglesia, es la creyente perfecta, es la que dice "sí" a Dios con todo su ser.</p>
+    <p>El Concilio confirmó los títulos dogmáticos de María (Madre de Dios, Virgen perpetua, Inmaculada, Asunta) pero fue deliberadamente moderado en el desarrollo de nuevos títulos. No definió la "mediación universal" ni la "corredentora" —aunque estos temas se debatieron—. Esto no fue rechazo sino prudencia: el Concilio quería profundizar en la base ecuménica del diálogo sin añadir obstáculos innecesarios.</p>
+  </div>
+</section>
+
+<div class="div-s">✦ ✦ ✦</div>
+
+<!-- NOSTRA AETATE -->
+<section class="S" id="nostra-aetate">
+  <div class="Sh">
+    <div class="sey">XV — La Declaración sobre las religiones</div>
+    <h2 class="st">Nostra Aetate y <span class="az">el Islam</span></h2>
+    <div class="sr"></div>
+  </div>
+  <div class="dc">
+    <div class="pr">
+      <p>La declaración <strong>Nostra Aetate</strong> (<em>"En nuestra era"</em>), promulgada el 28 de octubre de 1965, es uno de los documentos más breves del Concilio (apenas cinco párrafos) y uno de los más influyentes. Trata de la relación de la Iglesia con las religiones no cristianas: el hinduismo (§2), el budismo (§2), el islam (§3) y el judaísmo (§4).</p>
+      <p>El párrafo sobre el Islam (§3) reconoce que los musulmanes "junto con nosotros adoran al Dios único, viviente y subsistente, misericordioso y todopoderoso, Creador del cielo y de la tierra, que habló a los hombres." Reconoce también que "aunque no reconocen a Jesús como Dios, le veneran como profeta", que "honran a su madre virginal" y que valoran la oración, la limosna y el ayuno.</p>
+      <p>Este párrafo —sumamente breve y diplomáticamente equilibrado— se convirtió en la fuente de una de las controversias más importantes de la teología postconciliar: ¿afirma el Concilio que católicos y musulmanes adoran "al mismo Dios"?</p>
+    </div>
+    <div>
+      <div class="catbox">
+        <div class="catbox-lbl">Nostra Aetate §3</div>
+        <span class="cat-ref">NA 3 — Texto oficial completo del párrafo sobre el Islam</span>
+        <div class="cat-text">"La Iglesia mira también con aprecio a los musulmanes que adoran al único Dios, viviente y subsistente, misericordioso y todopoderoso, Creador del cielo y de la tierra, que habló a los hombres, a cuyos ocultos designios procuran someterse con toda el alma, como se sometió a Dios Abraham, a quien la fe islámica mira con complacencia. <strong>Aunque no reconocen a Jesús como Dios</strong>, lo veneran como profeta, honran a su madre virginal María, y a veces invocan con devoción. Esperan, además, el día del juicio, cuando Dios retribuirá a todos los hombres resucitados. Por ello, aprecian la vida moral y dan culto a Dios, sobre todo mediante la oración, las limosnas y el ayuno."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CIC 841 -->
+<section class="S alt" id="cic-841">
+  <div class="Sh">
+    <div class="sey">XVI — El texto del Catecismo</div>
+    <h2 class="st">El <span class="or">CIC §841</span> — ¿Qué dice exactamente?</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="catbox">
+    <div class="catbox-lbl">Catecismo de la Iglesia Católica §841</div>
+    <span class="cat-ref">CIC §841 — Texto oficial en castellano</span>
+    <div class="cat-text">"Las relaciones de la Iglesia con los musulmanes. El plan de salvación comprende también a los que reconocen al Creador, entre quienes se encuentran ante todo los musulmanes: <strong>ellos profesan tener la fe de Abraham y adoran con nosotros al Dios único y misericordioso que juzgará a los hombres en el último día</strong> (LG 16)."</div>
+  </div>
+  <div class="pr" style="margin-top:2.5rem;">
+    <p>Este párrafo del Catecismo cita directamente la Lumen Gentium §16 —no la Nostra Aetate—. La Lumen Gentium §16 dice: "Pero el plan de salvación abarca también a los que reconocen al Creador, entre los cuales están en primer lugar los musulmanes que, profesando tener la fe de Abraham, adoran con nosotros al Dios único y misericordioso que ha de juzgar a los hombres el último día." El Catecismo reproduce casi literalmente este texto conciliar.</p>
+    <p>La frase clave es: <strong>"adoran con nosotros al Dios único y misericordioso."</strong> Esta formulación es el origen de la objeción que examinaremos a continuación.</p>
+  </div>
+</section>
+
+<!-- LA OBJECIÓN -->
+<section class="S" id="objecion">
+  <div class="Sh">
+    <div class="sey">XVII — La controversia</div>
+    <h2 class="st">La Objeción: ¿Adoramos <span class="rj">al mismo Dios</span>?</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="alerta">
+    <div class="alerta-t">⚠ La Objeción formulada</div>
+    <p>El CIC §841 (citando LG §16 y NA §3) afirma que los musulmanes "adoran con nosotros al Dios único." Pero el Dios del Islam (Alá) y el Dios cristiano son esencialmente distintos: el Islam niega explícitamente la Trinidad, rechaza la divinidad de Cristo y la filiación divina, y concibe a Dios de manera radicalmente diferente. ¿No es el CIC §841 una afirmación falsa, relativista o incluso herética? ¿No equivale a decir que todas las religiones son iguales? Si adoramos al "mismo Dios", ¿para qué evangelizar a los musulmanes?</p>
+  </div>
+  <div class="pr" style="margin-top:2rem;">
+    <p>Esta objeción es seria y merece una respuesta seria. No puede despacharse con vagas apelaciones a la "fraternidad universal" ni puede ignorarse por "políticamente incorrecta." Es una objeción teológica legítima que toca cuestiones de identidad cristiana, misión evangelizadora y coherencia doctrinal. La examinamos con rigor.</p>
+  </div>
+</section>
+
+<!-- RESPUESTA TEOLÓGICA -->
+<section class="S alt" id="respuesta">
+  <div class="Sh">
+    <div class="sey">XVIII — Respuesta apologética</div>
+    <h2 class="st">Respuesta <span class="or">Teológica</span> a la Objeción</h2>
+    <div class="sr"></div>
+  </div>
+
+  <div class="debate">
+    <div class="obj-col">
+      <div class="col-head">⊗ La Objeción desarrollada</div>
+      <div class="col-txt">
+        <p>El argumento más fuerte contra el CIC §841: <strong>el Dios de la Trinidad no es el mismo que el Alá coránico</strong>. El Dios cristiano es trino: Padre, Hijo y Espíritu Santo, consubstanciales y co-eternos. El Islam rechaza la Trinidad como politeísmo: "No digáis tres" (Corán 4:171). El Islam rechaza la filiación divina: "No es propio de Dios tomar un hijo" (Corán 19:35). El Islam rechaza la encarnación: Cristo no es Dios encarnado sino profeta. Si la Trinidad es constitutiva de quién es Dios para los cristianos, y el Islam la niega categóricamente, <strong>¿cómo puede ser el mismo Dios?</strong></p>
+        <p>Secundariamente: si es el mismo Dios, la misión evangelizadora hacia los musulmanes pierde su urgencia. Si ya adoran al mismo Dios que nosotros, ¿para qué quieren el Evangelio?</p>
+      </div>
+    </div>
+    <div class="res-col">
+      <div class="col-head">✔ La Respuesta teológica articulada</div>
+      <div class="col-txt">
+        <p><strong>1. El Concilio no afirma identidad doctrinal, sino referencia objetiva común.</strong> Hay una diferencia crucial entre decir "los musulmanes adoran al mismo Dios" e identificar el Dios del Islam con el Dios cristiano doctrinalmente. El Concilio afirma la primera cosa, no la segunda. La Nostra Aetate §3 dice explícitamente: "aunque <strong>no reconocen a Jesús como Dios</strong>." El Concilio sabe perfectamente que hay diferencias doctrinales radicales: por eso las nombra. No las borra.</p>
+        <p><strong>2. La distinción entre referencia y descripción.</strong> Cuando musulmanes y cristianos hablan de "Dios", ¿hablan del mismo ser o de seres distintos? La respuesta teológica tradicional es que hablan del <strong>mismo ser</strong> (el Creador único del universo, el Ser necesario, el Señor de la historia) aunque lo <em>describan</em> de maneras profundamente distintas. Esta distinción es fundamental en filosofía del lenguaje y en teología: la referencia puede ser la misma aunque las descripciones sean diferentes.</p>
+        <p><strong>3. El monoteísmo como punto de contacto real.</strong> Judíos, cristianos y musulmanes son todos herederos de la revelación monoteísta abrahámica. Los tres rechazan los ídolos, los tres afirman que Dios es uno, creador, trascendente, personal, justo y misericordioso. Esta herencia común no es trivial: es lo que hace posible el diálogo. El Concilio no dice que esta herencia sea suficiente para la salvación: dice que es un punto de encuentro real.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="schema" style="margin-top:2.5rem;">
+    <div class="schema-l">Distinción teológica fundamental</div>
+    <div class="schema-t">La distinción entre "mismo Dios" y "mismo conocimiento de Dios"</div>
+    <div class="schema-b">
+      <p><strong>El argumento filosófico de fondo:</strong> ¿Puede alguien referirse a un ser sin conocerlo completamente? La respuesta es obvio que sí: yo puedo hablar del "presidente de tal país" sin conocerlo personalmente ni describir correctamente todos sus rasgos. Mi descripción puede ser parcial, distorsionada o incluso equivocada en puntos importantes, pero el referente es el mismo. De manera análoga, el musulmán y el cristiano apuntan al mismo Ser —el Creador del universo— aunque sus descripciones de ese Ser difieran radicalmente.</p>
+      <p><strong>El argumento teológico clásico:</strong> La teología distingue el <em>Deus sub ratione Deitatis</em> (Dios en sí mismo, en su naturaleza) y el <em>Deus ut cognitus</em> (Dios tal como es conocido por nosotros). El Dios en sí mismo es uno: no hay dos dioses distintos, el de los cristianos y el de los musulmanes. Pero el conocimiento de Dios es muy diferente entre ambas tradiciones. La Trinidad no es una "adición" al Dios monoteísta: es la revelación de lo que Dios siempre ha sido internamente. El musulmán que adora al Creador está adorando a Alguien que internamente es trinitario, aunque no lo sepa.</p>
+      <p><strong>La analogía de los Padres:</strong> Santo Tomás y los Padres de la Iglesia afirmaron que los filósofos paganos griegos —Platón, Aristóteles— habían alcanzado por razón natural un conocimiento parcial pero real del Dios verdadero. El monoteísmo filosófico griego era verdadero conocimiento de Dios, aunque radicalmente incompleto. El Islam, que procede en parte de la revelación bíblica (Antiguo Testamento, cuya revelación acepta parcialmente), tiene un conocimiento de Dios cualitativamente mayor que el del filósofo pagano, aunque siga siendo radicalmente incompleto sin la revelación trinitaria de Cristo.</p>
+    </div>
+  </div>
+
+  <div class="pils" style="margin-top:2rem;">
+    <div class="pil">
+      <div class="pil-n">A</div>
+      <div class="pil-t">Lo que el Catecismo afirma</div>
+      <div class="pil-p">El CIC §841 afirma: que los musulmanes <em>profesan</em> la fe de Abraham, que <em>adoran al Dios único y misericordioso</em>, que esperan el juicio final. Todo esto es descriptivo de la fe islámica y es factualmente correcto. No dice que el Islam sea equivalente al cristianismo, ni que la revelación coránica sea igual a la revelación evangélica, ni que los musulmanes no necesiten el Evangelio.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">B</div>
+      <div class="pil-t">Lo que el Catecismo NO afirma</div>
+      <div class="pil-p">El CIC §841 no dice: que el Islam y el cristianismo son religiones equivalentes, que los musulmanes ya tienen toda la revelación que necesitan, que la misión evangelizadora es innecesaria, que el Corán es Palabra de Dios en el mismo sentido que la Biblia, ni que el Alá coránico es idéntico doctrinalmente al Dios trinitario. <strong>Leer en el texto lo que no está es el error hermenéutico de quienes usan este párrafo contra la fe católica.</strong></div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">C</div>
+      <div class="pil-t">La diferencia radical permanece</div>
+      <div class="pil-p">El Concilio y el Catecismo son absolutamente claros: <strong>el Islam no reconoce a Jesús como Dios</strong>, y por tanto le falta la revelación más plena de quién es Dios. La negación islámica de la Trinidad no es un "error menor": es la negación del corazón de la revelación cristiana. Esto no impide reconocer que el Islam, al adorar al Creador, apunta en la dirección del Dios verdadero, aunque su imagen de Dios sea incompleta y en puntos importantes distorsionada.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">D</div>
+      <div class="pil-t">La misión evangelizadora</div>
+      <div class="pil-p">Que los musulmanes "adoren al mismo Dios" en el sentido del CIC §841 no elimina la necesidad del Evangelio: la refuerza. Si Dios es el Dios trinitario que se reveló plenamente en Jesucristo, y los musulmanes adoran a ese mismo Dios pero sin conocer su nombre más íntimo (Padre, Hijo, Espíritu) ni su obra salvadora en Cristo, entonces <strong>necesitan el Evangelio precisamente porque merecen conocer más plenamente al Dios que ya buscan</strong>.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">E</div>
+      <div class="pil-t">El precedente patrístico</div>
+      <div class="pil-p">Los Padres de la Iglesia afirmaron que los paganos virtuosos podían alcanzar conocimiento de Dios por la razón natural. San Justino habló de "semillas del Logos" en la filosofía griega. Si los paganos podían conocer parcialmente al Dios verdadero por razón natural, con mayor motivo los musulmanes —que tienen acceso a la revelación bíblica parcialmente— pueden estar ordenados al Dios verdadero aunque no posean la plenitud de la revelación.</div>
+    </div>
+    <div class="pil">
+      <div class="pil-n">F</div>
+      <div class="pil-t">La salvación y el conocimiento</div>
+      <div class="pil-p">La Iglesia enseña que Dios puede salvar a quienes no conocen explícitamente el Evangelio, si viven según su conciencia y la ley natural (LG §16). Esto no significa que todas las religiones sean igualmente verdaderas: significa que la misericordia de Dios no está limitada por la ignorancia invencible. Reconocer esta posibilidad no relativiza la revelación cristiana: afirma la soberanía de la gracia divina.</div>
+    </div>
+  </div>
+
+  <div class="verd" style="margin-top:2.5rem;">
+    <div class="verd-t">✔ Síntesis teológica</div>
+    <p><strong>El CIC §841 no afirma que el Islam y el cristianismo tengan el mismo Dios en el sentido de que sean doctrinalmente equivalentes.</strong> Afirma que el islam apunta al mismo Ser —el Creador único, juez del mundo— que los cristianos adoran como Padre, Hijo y Espíritu Santo. Esta distinción entre referencia común y descripción radicalmente diferente es la clave de todo. <strong>No es relativismo: es precisión filosófica y teológica.</strong> El Concilio no dice que el Islam baste para la salvación: dice que el Islam no adora a un ídolo vacío sino al Dios verdadero, aunque velado, incompleto, sin la plenitud revelada en Cristo. La misión evangelizadora no sólo no se debilita: adquiere un fundamento más profundo — anunciar a los que ya buscan a Dios Quién es Él realmente.</p>
+  </div>
+
+  <div class="cit" style="margin-top:2rem;">
+    <p>"El que Islam sea una gran religión monoteísta no significa que sea igual al cristianismo. Precisamente porque ambos apuntan al mismo Dios, el Islam está, en cierto sentido, más cerca del cristianismo que otras religiones: comparte la fe en un Dios personal, creador, misericordioso y juez. Pero le falta lo esencial: el nombre más íntimo de Dios, que es Amor que se da a sí mismo — Padre, Hijo, Espíritu Santo."</p>
+    <cite>— Joseph Ratzinger / Benedicto XVI, Dios y el Mundo, 2000</cite>
+  </div>
+
+  <div class="schema" style="margin-top:2rem;">
+    <div class="schema-l">Tabla comparativa doctrinal</div>
+    <div class="schema-t">Lo que une y lo que distingue: Dios en el Islam y en el Cristianismo</div>
+    <div class="schema-b">
+      <p><strong>Lo que comparten:</strong> Monoteísmo estricto · Rechazo de la idolatría · Dios es creador de cielo y tierra · Dios es personal (no impersonal como en el panteísmo) · Dios es misericordioso · Dios es juez de las acciones humanas · Habrá una vida después de la muerte y un juicio final · La oración, la limosna y el ayuno son formas de adoración · Veneración de Abraham como padre en la fe.</p>
+      <p><strong>Lo que los distingue radicalmente:</strong> El Islam niega la Trinidad (shirk: asociar a Dios algo que no es Dios) · El Islam niega la divinidad de Cristo · El Islam niega la encarnación · El Islam niega que Dios tenga un Hijo en sentido real · El Islam niega la expiación redentora de Cristo · El Islam niega la gracia en sentido cristiano (participación en la vida divina) · La imagen islámica de Dios excluye el amor interno trinitario: Dios no puede "amar" en el sentido cristiano (donación interpersonal) porque es absolutamente uno sin relaciones internas · La Revelación coránica no es compatible con la Revelación bíblica en puntos fundamentales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section class="S" id="conclusion">
+  <div class="Sh">
+    <div class="sey">XIX — Balance final</div>
+    <h2 class="st">Conclusión: El <span class="az">Vaticano II</span> bien entendido</h2>
+    <div class="sr"></div>
+  </div>
+  <div class="pr" style="margin-bottom:2.5rem;">
+    <p>El Concilio Vaticano II, correctamente interpretado según la "hermenéutica de la reforma en la continuidad" que Benedicto XVI defendió, no es una ruptura con la Tradición ni una capitulación ante la modernidad. Es la Tradición que respira, que profundiza en sus raíces para dar frutos nuevos.</p>
+  </div>
+  <div class="schema">
+    <div class="schema-l">Síntesis final</div>
+    <div class="schema-t">Lo que el Vaticano II y el CIC §841 dicen y no dicen</div>
+    <div class="schema-b">
+      <p><strong>El Vaticano II y el CIC §841 dicen:</strong> Que los musulmanes adoran al Dios único y misericordioso (el Creador). Que el islam tiene puntos de contacto reales con el cristianismo. Que estos puntos de contacto hacen posible y necesario el diálogo. Que la Iglesia mira a los musulmanes con aprecio y respeto. Que Dios puede actuar fuera de los límites visibles de la Iglesia. Que la salvación es posible para quien, sin culpa, no conoce el Evangelio explícitamente.</p>
+      <p><strong>El Vaticano II y el CIC §841 NO dicen:</strong> Que el Islam y el cristianismo son religiones equivalentes. Que la revelación coránica es igual a la revelación cristiana. Que la Trinidad es una opción doctrinal entre otras. Que los musulmanes no necesitan el Evangelio. Que la misión evangelizadora carece de sentido. Que el Alá del Corán es idéntico al Padre de Jesucristo en todos sus atributos y relaciones. Que la salvación se obtiene fuera de Cristo. Que todas las religiones son iguales.</p>
+      <p><strong>La clave interpretativa:</strong> El diálogo interreligioso que el Vaticano II inauguró no es relativismo: es la expresión práctica de la verdad de que Dios ama a todos los hombres y que la Iglesia debe acercarse a todos con el anuncio del Evangelio, comenzando por reconocer lo que hay de verdadero y bueno en cada tradición. El reconocimiento no es equiparación. El respeto no es indiferencia. La apertura no es la renuncia a la identidad. El Vaticano II no dijo que todas las religiones llevan al mismo lugar: dijo que la Iglesia debe salir al encuentro de los hombres de buena voluntad dondequiera que estén y con lo que tienen, para llevarlos a la plenitud que sólo Cristo ofrece.</p>
+    </div>
+  </div>
+  <div class="cit" style="margin-top:2rem;">
+    <p>"El Concilio no suprimió la diferencia entre la verdad plena de la revelación cristiana y las verdades parciales de las demás religiones. Lo que suprimió fue el desprecio, la soberbia y la indiferencia. No la misión: la misionó más profundamente, porque quien conoce a alguien como persona y respeta su búsqueda genuina puede anunciarle la Buena Noticia de manera que él pueda escucharla."</p>
+    <cite>— Yves Congar OP, Verdadera y Falsa Reforma en la Iglesia</cite>
+  </div>
+</section>
+
+<!-- FINAL -->
+<div class="fin">
+  <div class="fin-glow"></div>
+  <div class="fin-cruz"></div>
+  <p class="fin-r">Lumen Gentium — Luz de las Naciones</p>
+  <p class="fin-s">Roma · 1962–1965 · In aeternum</p>
+  <br><br>
+  <div style="max-width:660px;margin:0 auto;position:relative;z-index:2;">
+    <div class="cit" style="text-align:left;">
+      <p>"La Iglesia es en Cristo como un sacramento, o sea signo e instrumento de la unión íntima con Dios y de la unidad de todo el género humano."</p>
+      <cite>— Lumen Gentium §1</cite>
+    </div>
+  </div>
+  <br>
+  <p style="font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,237,232,0.14);position:relative;z-index:2;">Concilium Vaticanum II · MCMLXII–MCMLXV · Sub Ioanne XXIII et Paulo VI</p>
+</div>
+
+<footer>
+  <div class="fb">Concilio Vaticano II · Lumen Gentium</div>
+  <div class="fc">Historia, Documentos, Teología y Diálogo Interreligioso · Apologética Católica</div>
+</footer>
+
+</main>
+<script>
+function tSB(){
+  document.getElementById('sb').classList.toggle('open');
+  document.getElementById('ov').classList.toggle('vis');
+}
+function ir(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const top=el.getBoundingClientRect().top+window.scrollY-64;
+  window.scrollTo({top,behavior:'smooth'});
+  if(window.innerWidth<=920){
+    document.getElementById('sb').classList.remove('open');
+    document.getElementById('ov').classList.remove('vis');
+  }
+}
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  const p=(window.scrollY/(d.scrollHeight-d.clientHeight))*100;
+  document.getElementById('progress').style.width=p+'%';
+});
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.sl');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      links.forEach(l=>{
+        const oc=l.getAttribute('onclick')||'';
+        l.classList.toggle('on',oc.includes("'"+id+"'"));
+      });
+    }
+  });
+},{threshold:0.18,rootMargin:'-56px 0px -38% 0px'});
+secs.forEach(s=>obs.observe(s));
+const aObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting)setTimeout(()=>e.target.classList.add('vis'),i*65);
+  });
+},{threshold:0.07});
+document.querySelectorAll('.card,.pil,.li').forEach(el=>aObs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>María, Madre de Dios — Defensa Teológica y Filosófica de la Maternidad Divina</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0A0A0A;
+    --negro-suave: #161616;
+    --gris-borde: #2A2A2A;
+    --amarillo: #D4A82C;
+    --amarillo-claro: #E8C667;
+    --amarillo-tenue: #8C7022;
+    --blanco: #FAFAF8;
+    --blanco-suave: #C9C7C0;
+    --gris-texto: #9A9890;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--blanco);
+    color: var(--negro);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  #cielo-estrellado { display: none; }
+
+  /* ═══════════════════════════════════════
+     BARRA DE PROGRESO
+  ═══════════════════════════════════════ */
+  #barra-progreso {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--amarillo);
+    z-index: 1000;
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  /* ═══════════════════════════════════════
+     HÉROE
+  ═══════════════════════════════════════ */
+  #hero {
+    position: relative;
+    z-index: 1;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--negro);
+    border-bottom: 3px solid var(--amarillo);
+  }
+
+  .mandorla { display: none; }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  #hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(32px, 6vw, 64px);
+    font-weight: 700;
+    color: var(--blanco);
+    line-height: 1.2;
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+  }
+
+  #hero h1 span {
+    color: var(--amarillo);
+    display: block;
+    font-size: 0.85em;
+    margin-top: 4px;
+  }
+
+  .hero-subtitulo {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(15px, 2vw, 19px);
+    font-style: italic;
+    color: var(--blanco-suave);
+    max-width: 640px;
+    margin: 0 auto 44px;
+    line-height: 1.7;
+  }
+
+  .hero-latin {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--amarillo);
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    border-top: 1px solid var(--gris-borde);
+    border-bottom: 1px solid var(--gris-borde);
+    padding: 16px 30px;
+    display: inline-block;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--amarillo-tenue);
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+
+  /* ═══════════════════════════════════════
+     NAVEGACIÓN / ÍNDICE LATERAL INTERACTIVO
+  ═══════════════════════════════════════ */
+  #nav-flotante {
+    position: fixed;
+    right: 24px;
+    top: 24px;
+    bottom: 24px;
+    z-index: 900;
+    background: var(--negro);
+    border: 1px solid var(--gris-borde);
+    border-radius: 6px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+  }
+
+  #nav-flotante.oculto {
+    transform: translateX(calc(100% + 24px));
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #nav-flotante.colapsado {
+    width: 54px;
+  }
+  #nav-flotante.colapsado .nav-buscador-wrap,
+  #nav-flotante.colapsado .nav-progreso-texto,
+  #nav-flotante.colapsado #nav-lista,
+  #nav-flotante.colapsado .nav-titulo {
+    display: none;
+  }
+  #nav-flotante.colapsado .nav-cabecera { justify-content: center; padding: 14px 0; }
+  #nav-flotante.colapsado #nav-colapsar { transform: rotate(180deg); }
+
+  #nav-toggle {
+    position: fixed;
+    right: 16px;
+    top: 16px;
+    z-index: 1000;
+    background: var(--negro);
+    border: 1px solid var(--amarillo-tenue);
+    color: var(--amarillo);
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 3px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    display: none;
+  }
+  #nav-toggle:hover { background: var(--amarillo); color: var(--negro); border-color: var(--amarillo); }
+  #nav-toggle.visible { display: block; }
+
+  .nav-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px 12px;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  .nav-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+  }
+
+  #nav-colapsar {
+    background: none;
+    border: 1px solid var(--gris-borde);
+    color: var(--blanco-suave);
+    width: 26px;
+    height: 26px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  #nav-colapsar:hover { border-color: var(--amarillo); color: var(--amarillo); }
+
+  .nav-buscador-wrap {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gris-borde);
+    position: relative;
+  }
+
+  #nav-buscador {
+    width: 100%;
+    background: var(--negro-suave);
+    border: 1px solid var(--gris-borde);
+    color: var(--blanco);
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    padding: 8px 10px;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #nav-buscador:focus { border-color: var(--amarillo-tenue); }
+  #nav-buscador::placeholder { color: var(--gris-texto); }
+
+  #nav-buscador-contador {
+    display: block;
+    font-family: 'EB Garamond', serif;
+    font-size: 11.5px;
+    font-style: italic;
+    color: var(--gris-texto);
+    margin-top: 6px;
+    min-height: 14px;
+  }
+
+  .nav-progreso-texto {
+    padding: 10px 18px;
+    font-family: 'Cinzel', serif;
+    font-size: 9.5px;
+    letter-spacing: 1px;
+    color: var(--gris-texto);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  #nav-progreso-pct, #nav-seccion-actual { color: var(--amarillo); }
+
+  #nav-lista {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 0 16px;
+  }
+
+  .nav-grupo {
+    border-bottom: 1px solid var(--gris-borde);
+  }
+  .nav-grupo:last-child { border-bottom: none; }
+
+  .nav-grupo summary {
+    font-family: 'Cinzel', serif;
+    font-size: 11.5px;
+    letter-spacing: 1px;
+    color: var(--blanco-suave);
+    text-transform: uppercase;
+    padding: 11px 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    user-select: none;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-grupo summary::-webkit-details-marker { display: none; }
+
+  .nav-grupo summary:hover { color: var(--amarillo-claro); background: rgba(212,168,44,0.05); }
+
+  .nav-grupo summary::after {
+    content: '+';
+    margin-left: auto;
+    color: var(--gris-texto);
+    font-size: 13px;
+    font-family: Georgia, serif;
+  }
+  .nav-grupo[open] summary::after { content: '−'; }
+
+  .nav-grupo.activo summary { color: var(--amarillo); }
+
+  .nav-num {
+    color: var(--amarillo-tenue);
+    font-size: 11px;
+    min-width: 16px;
+  }
+  .nav-grupo.activo .nav-num { color: var(--amarillo); }
+
+  .nav-item {
+    display: block;
+    padding: 7px 18px 7px 30px;
+    color: var(--gris-texto);
+    text-decoration: none;
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    line-height: 1.4;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-item:hover, .nav-item.activo {
+    color: var(--amarillo-claro);
+    border-left-color: var(--amarillo);
+    background: rgba(212,168,44,0.07);
+  }
+
+  .nav-item.sub {
+    padding-left: 42px;
+    font-size: 12.5px;
+  }
+  .nav-item.sub:hover, .nav-item.sub.activo { padding-left: 44px; }
+
+  .nav-item mark, .nav-grupo summary mark {
+    background: var(--amarillo);
+    color: var(--negro);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  .nav-item.oculto-busqueda { display: none; }
+  .nav-grupo.oculto-busqueda { display: none; }
+
+  #nav-lista::-webkit-scrollbar { width: 4px; }
+  #nav-lista::-webkit-scrollbar-track { background: var(--negro); }
+  #nav-lista::-webkit-scrollbar-thumb { background: var(--amarillo-tenue); border-radius: 2px; }
+
+  /* ═══════════════════════════════════════
+     CONTENIDO PRINCIPAL
+  ═══════════════════════════════════════ */
+  #contenido {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 30px 100px;
+  }
+
+  @media (min-width: 1300px) {
+    #contenido { margin: 0 auto 0 max(auto, calc((100vw - 800px - 348px) / 2)); }
+  }
+
+  /* ═══════════════════════════════════════
+     SECCIONES
+  ═══════════════════════════════════════ */
+  .seccion {
+    margin: 70px 0;
+  }
+
+  .seccion-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--negro);
+  }
+
+  .seccion-numero {
+    font-family: 'Cinzel', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--amarillo);
+    line-height: 1;
+    min-width: 56px;
+  }
+
+  .seccion-titulo-wrap { flex: 1; }
+
+  .seccion-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .seccion h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(21px, 3.6vw, 32px);
+    font-weight: 700;
+    color: var(--negro);
+    line-height: 1.25;
+  }
+
+  .seccion h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(16px, 2.6vw, 21px);
+    font-weight: 600;
+    color: var(--negro);
+    margin: 42px 0 18px;
+    padding-left: 14px;
+    border-left: 3px solid var(--amarillo);
+  }
+
+  .seccion h4 {
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--negro);
+    margin: 28px 0 12px;
+    font-style: italic;
+  }
+
+  .seccion p {
+    margin-bottom: 19px;
+    color: var(--negro);
+    font-size: 17.5px;
+  }
+
+  /* ═══════════════════════════════════════
+     CITAS BÍBLICAS
+  ═══════════════════════════════════════ */
+  .cita-biblica {
+    background: var(--negro-suave);
+    border-left: 4px solid var(--amarillo);
+    border-radius: 0 4px 4px 0;
+    padding: 22px 26px;
+    margin: 28px 0;
+  }
+
+  .cita-biblica .cita-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--blanco);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  .cita-biblica .cita-ref {
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     CITAS PATRÍSTICAS
+  ═══════════════════════════════════════ */
+  .cita-patristica {
+    background: var(--blanco);
+    border: 1px solid var(--negro);
+    border-left: 4px solid var(--negro);
+    border-radius: 0 4px 4px 0;
+    padding: 26px 30px;
+    margin: 28px 0;
+  }
+
+  .padre-nombre {
+    font-family: 'Cinzel', serif;
+    font-size: 11.5px;
+    letter-spacing: 2.5px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .cita-patristica .cita-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: 18.5px;
+    font-style: italic;
+    color: var(--negro);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .cita-patristica .cita-fuente {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: var(--gris-texto);
+    font-style: italic;
+  }
+
+  /* ═══════════════════════════════════════
+     SILOGISMOS
+  ═══════════════════════════════════════ */
+  .silogismo {
+    background: var(--blanco);
+    border: 1px solid var(--negro);
+    border-top: 3px solid var(--amarillo);
+    border-radius: 0 0 4px 4px;
+    padding: 26px 30px;
+    margin: 28px 0;
+  }
+
+  .silogismo-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 3px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  .premisa {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+
+  .premisa-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9.5px;
+    letter-spacing: 1.5px;
+    color: var(--amarillo-tenue);
+    min-width: 70px;
+    padding-top: 3px;
+    text-transform: uppercase;
+  }
+
+  .premisa-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: 16.5px;
+    color: var(--negro);
+    line-height: 1.6;
+  }
+
+  .conclusion {
+    display: flex;
+    gap: 16px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--negro);
+    align-items: flex-start;
+  }
+
+  .conclusion-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9.5px;
+    letter-spacing: 1.5px;
+    color: var(--negro);
+    min-width: 70px;
+    padding-top: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .conclusion-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: 17.5px;
+    color: var(--negro);
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .silogismo-nota {
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--gris-texto);
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gris-borde);
+  }
+
+  /* ═══════════════════════════════════════
+     CUADROS INFO
+  ═══════════════════════════════════════ */
+  .cuadro-info {
+    background: var(--negro-suave);
+    border: 1px solid var(--gris-borde);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin: 22px 0;
+  }
+
+  .cuadro-info h5 {
+    font-family: 'Cinzel', serif;
+    font-size: 11.5px;
+    letter-spacing: 2px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+    margin-bottom: 13px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  .cuadro-info p {
+    color: var(--blanco-suave);
+    font-size: 15.5px;
+  }
+
+  /* ═══════════════════════════════════════
+     PADRE DE LA IGLESIA — TARJETA
+  ═══════════════════════════════════════ */
+  .padre-card {
+    background: var(--blanco);
+    border: 1px solid var(--negro);
+    border-radius: 4px;
+    padding: 26px;
+    margin: 26px 0;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .padre-icono {
+    width: 60px;
+    height: 60px;
+    background: var(--negro);
+    border: 1px solid var(--amarillo);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+    color: var(--amarillo);
+  }
+
+  .padre-info h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--negro);
+    margin: 0 0 4px;
+    font-style: normal;
+  }
+
+  .padre-info .padre-datos {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: var(--gris-texto);
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  .padre-info p {
+    font-size: 15.5px;
+    color: var(--negro);
+    margin-bottom: 0;
+  }
+
+  /* ═══════════════════════════════════════
+     DECORADORES
+  ═══════════════════════════════════════ */
+  .ornamento {
+    text-align: center;
+    color: var(--amarillo-tenue);
+    font-size: 18px;
+    margin: 46px 0;
+    letter-spacing: 16px;
+  }
+
+  .separador {
+    border: none;
+    border-top: 1px solid var(--gris-borde);
+    margin: 56px 0;
+    position: relative;
+  }
+
+  .separador::before {
+    content: '◆';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--blanco);
+    padding: 0 16px;
+    color: var(--amarillo);
+    font-size: 11px;
+  }
+
+  /* ═══════════════════════════════════════
+     DEFINICIÓN DOGMÁTICA
+  ═══════════════════════════════════════ */
+  .dogma-box {
+    background: var(--negro);
+    border: 1px solid var(--amarillo);
+    border-radius: 4px;
+    padding: 34px 38px;
+    margin: 38px 0;
+    text-align: center;
+  }
+
+  .dogma-box .dogma-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--amarillo);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .dogma-box .dogma-texto {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(17px, 2.2vw, 23px);
+    font-style: italic;
+    color: var(--blanco);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .dogma-box .dogma-pie {
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    color: var(--amarillo-tenue);
+  }
+
+  /* ═══════════════════════════════════════
+     TIMELINE
+  ═══════════════════════════════════════ */
+  .timeline { position: relative; padding-left: 36px; margin: 28px 0; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--gris-borde);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 26px;
+    padding: 18px 22px;
+    background: var(--negro-suave);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -31px;
+    top: 22px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--amarillo);
+    border: 2px solid var(--blanco);
+  }
+
+  .timeline-anio {
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    color: var(--amarillo);
+    margin-bottom: 8px;
+  }
+
+  .timeline-item h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 14.5px;
+    color: var(--blanco);
+    margin: 0 0 8px;
+    font-style: normal;
+  }
+
+  .timeline-item p {
+    font-size: 14.5px;
+    margin-bottom: 0;
+    color: var(--blanco-suave);
+  }
+
+  /* ═══════════════════════════════════════
+     GRILLA DE ARGUMENTOS
+  ═══════════════════════════════════════ */
+  .grilla-argumentos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin: 28px 0;
+  }
+
+  .arg-card {
+    background: var(--blanco);
+    border: 1px solid var(--negro);
+    border-top: 3px solid var(--amarillo);
+    border-radius: 0 0 4px 4px;
+    padding: 20px;
+  }
+
+  .arg-card-icono { display: none; }
+
+  .arg-card h5 {
+    font-family: 'Cinzel', serif;
+    font-size: 12.5px;
+    letter-spacing: 0.5px;
+    color: var(--negro);
+    margin-bottom: 10px;
+  }
+
+  .arg-card p {
+    font-size: 14.5px;
+    color: var(--gris-texto);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* ═══════════════════════════════════════
+     NOTAS AL MARGEN
+  ═══════════════════════════════════════ */
+  .nota-margen {
+    float: right;
+    width: 200px;
+    margin: 0 0 20px 24px;
+    padding: 16px;
+    background: var(--negro-suave);
+    border-radius: 4px;
+    font-family: 'EB Garamond', serif;
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--blanco-suave);
+    line-height: 1.6;
+    clear: right;
+  }
+
+  /* ═══════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════ */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--negro);
+    border-top: 3px solid var(--amarillo);
+    text-align: center;
+    padding: 56px 30px;
+    margin-top: 70px;
+  }
+
+  .footer-simbolo {
+    font-size: 36px;
+    color: var(--amarillo);
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  footer p {
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--blanco-suave);
+    margin-bottom: 8px;
+  }
+
+  footer .footer-latin {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--amarillo-tenue);
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════ */
+  @media (max-width: 1100px) {
+    #nav-flotante {
+      top: 0; right: 0; bottom: 0;
+      border-radius: 0;
+      border-top: none; border-bottom: none; border-right: none;
+      width: 300px;
+      transform: translateX(100%);
+      opacity: 1;
+    }
+    #nav-flotante.visible { transform: translateX(0); }
+    #nav-flotante.oculto { transform: translateX(100%); pointer-events: none; }
+    #nav-toggle.visible { display: block; }
+  }
+
+  @media (max-width: 768px) {
+    #contenido { padding: 0 18px 60px; }
+    .nota-margen { float: none; width: 100%; margin: 0 0 20px; }
+    .padre-card { grid-template-columns: 1fr; }
+    .padre-icono { width: 50px; height: 50px; font-size: 22px; }
+    .dogma-box { padding: 24px 20px; }
+    #nav-flotante { width: 86vw; max-width: 320px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Barra de progreso -->
+<div id="barra-progreso"></div>
+
+<!-- Toggle del índice (móvil) -->
+<button id="nav-toggle" onclick="toggleNav()">☰ ÍNDICE</button>
+
+<!-- Navegación flotante interactiva -->
+<aside id="nav-flotante">
+  <div class="nav-cabecera">
+    <div class="nav-titulo">Índice</div>
+    <button id="nav-colapsar" onclick="toggleColapso()" title="Contraer índice" aria-label="Contraer índice">«</button>
+  </div>
+
+  <div class="nav-buscador-wrap">
+    <input id="nav-buscador" type="text" placeholder="Buscar en el índice…" autocomplete="off">
+    <span id="nav-buscador-contador"></span>
+  </div>
+
+  <div class="nav-progreso-texto">
+    <span id="nav-progreso-pct">0%</span> leído · sección <span id="nav-seccion-actual">—</span>
+  </div>
+
+  <nav id="nav-lista">
+
+    <details class="nav-grupo" data-grupo="introduccion" open>
+      <summary><span class="nav-num">I</span> Introducción</summary>
+      <a class="nav-item" href="#introduccion">Introducción al Dogma Mariano Central</a>
+      <a class="nav-item sub" href="#definicion-dogma">Definición Precisa del Dogma</a>
+      <a class="nav-item sub" href="#historia-doctrina">Desarrollo Histórico de la Doctrina</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="fundamentos-biblicos">
+      <summary><span class="nav-num">II</span> Fundamentos Bíblicos</summary>
+      <a class="nav-item" href="#fundamentos-biblicos">Los Fundamentos Bíblicos</a>
+      <a class="nav-item sub" href="#anuncio-gabriel">El Anuncio del Ángel Gabriel</a>
+      <a class="nav-item sub" href="#visitacion-isabel">La Visitación y el Saludo de Isabel</a>
+      <a class="nav-item sub" href="#emanuel-isaias">Emanuel: «Dios con Nosotros»</a>
+      <a class="nav-item sub" href="#prologo-juan">El Prólogo de San Juan</a>
+      <a class="nav-item sub" href="#galatas-plenitud">La Plenitud de los Tiempos (Gálatas 4,4)</a>
+      <a class="nav-item sub" href="#hijo-altisimo">«Hijo del Altísimo» (Lucas 1,32.35)</a>
+      <a class="nav-item sub" href="#senor-david">«¿Cómo el Señor de David?» (Mateo 22,41-45)</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="padres-iglesia">
+      <summary><span class="nav-num">III</span> Padres de la Iglesia</summary>
+      <a class="nav-item" href="#padres-iglesia">El Testimonio Patrístico</a>
+      <a class="nav-item sub" href="#san-ignacio-antioquia">San Ignacio de Antioquía</a>
+      <a class="nav-item sub" href="#san-ireneo-mdt">San Ireneo de Lyon</a>
+      <a class="nav-item sub" href="#origenes">Orígenes de Alejandría</a>
+      <a class="nav-item sub" href="#san-atanasio">San Atanasio de Alejandría</a>
+      <a class="nav-item sub" href="#san-gregorio-nacianceno">San Gregorio Nacianceno</a>
+      <a class="nav-item sub" href="#san-ambrosio-mdt">San Ambrosio de Milán</a>
+      <a class="nav-item sub" href="#san-agustin-mdt">San Agustín de Hipona</a>
+      <a class="nav-item sub" href="#san-cirilo-alejandria">San Cirilo de Alejandría</a>
+      <a class="nav-item sub" href="#san-juan-crisostomo">San Juan Crisóstomo</a>
+      <a class="nav-item sub" href="#san-leon-magno">San León Magno</a>
+      <a class="nav-item sub" href="#san-juan-damasceno-mdt">San Juan Damasceno</a>
+      <a class="nav-item sub" href="#santo-tomas-mdt">Santo Tomás de Aquino</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="silogismos">
+      <summary><span class="nav-num">IV</span> Silogismos Filosóficos</summary>
+      <a class="nav-item" href="#silogismos">Argumentación Filosófico-Teológica</a>
+      <a class="nav-item sub" href="#sil-comunicacion-idiomas">La Comunicación de Idiomas</a>
+      <a class="nav-item sub" href="#sil-unidad-persona">Unidad de Persona en Cristo</a>
+      <a class="nav-item sub" href="#sil-relacion-terminativa">La Relación Terminativa a la Persona</a>
+      <a class="nav-item sub" href="#sil-dignidad-infinita">Dignidad Cuasi-Infinita de María</a>
+      <a class="nav-item sub" href="#sil-maternidad-real">Verdadera Maternidad, no Metafórica</a>
+      <a class="nav-item sub" href="#sil-arrianismo">Refutación del Arrianismo Encubierto</a>
+      <a class="nav-item sub" href="#sil-nestorianismo">Refutación Formal del Nestorianismo</a>
+      <a class="nav-item sub" href="#sil-fundamento-otros-privilegios">Fundamento de los Demás Privilegios</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="concilio-efeso">
+      <summary><span class="nav-num">V</span> El Concilio de Éfeso</summary>
+      <a class="nav-item" href="#concilio-efeso">El Concilio Ecuménico de Éfeso (431)</a>
+      <a class="nav-item sub" href="#crisis-nestoriana">La Crisis Nestoriana</a>
+      <a class="nav-item sub" href="#cartas-cirilo">Las Cartas de San Cirilo a Nestorio</a>
+      <a class="nav-item sub" href="#desarrollo-concilio">Desarrollo y Sentencia del Concilio</a>
+      <a class="nav-item sub" href="#calcedonia">La Confirmación en Calcedonia (451)</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="liturgia-tradicion">
+      <summary><span class="nav-num">VI</span> Liturgia y Tradición</summary>
+      <a class="nav-item" href="#liturgia-tradicion">Liturgia y Tradición Viva</a>
+      <a class="nav-item sub" href="#sub-tuum">El Sub Tuum Praesidium</a>
+      <a class="nav-item sub" href="#fiestas-theotokos">Fiestas Litúrgicas de la Theotókos</a>
+      <a class="nav-item sub" href="#arte-iconografia">Arte e Iconografía Mariana Primitiva</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="magisterio-posterior">
+      <summary><span class="nav-num">VII</span> El Magisterio Posterior</summary>
+      <a class="nav-item" href="#magisterio-posterior">Confirmaciones Magisteriales Posteriores</a>
+      <a class="nav-item sub" href="#lumen-gentium">El Concilio Vaticano II — Lumen Gentium</a>
+      <a class="nav-item sub" href="#pablo-vi-marialis">Pablo VI y el Título Conciliar</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="objeciones">
+      <summary><span class="nav-num">VIII</span> Objeciones y Respuestas</summary>
+      <a class="nav-item" href="#objeciones">Objeciones Principales</a>
+      <a class="nav-item sub" href="#obj-imposibilidad">¿Puede una Criatura ser Madre de Dios?</a>
+      <a class="nav-item sub" href="#obj-eterno">La Objeción desde la Eternidad Divina</a>
+      <a class="nav-item sub" href="#obj-nestoriana">La Objeción Nestoriana Reformulada</a>
+      <a class="nav-item sub" href="#obj-islam">La Objeción Coránica</a>
+    </details>
+
+    <details class="nav-grupo" data-grupo="conclusion">
+      <summary><span class="nav-num">IX</span> Conclusión</summary>
+      <a class="nav-item" href="#conclusion">Síntesis Final</a>
+    </details>
+
+  </nav>
+</aside>
+
+<!-- HÉROE -->
+<section id="hero">
+  <p class="hero-eyebrow">Defensa Teológica, Patrística y Filosófica</p>
+  <h1>María<span>Madre de Dios</span></h1>
+  <p class="hero-subtitulo">Una exposición completa de las pruebas bíblicas, el testimonio de los Padres de la Iglesia y la demostración filosófica de la Maternidad Divina de la Virgen María, definida en el Concilio de Éfeso del año 431</p>
+  <div class="hero-latin">Sancta Maria, Mater Dei, ora pro nobis peccatoribus</div>
+  <div class="scroll-hint">DESCENDER</div>
+</section>
+
+<!-- CONTENIDO -->
+<main id="contenido">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN I — INTRODUCCIÓN
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="introduccion">
+    <div class="seccion-header">
+      <div class="seccion-numero">I</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Prolegómenos</div>
+        <h2>Introducción al Dogma Mariano Central</h2>
+      </div>
+    </div>
+
+    <p>De todos los privilegios y títulos atribuidos a la Santísima Virgen María, ninguno es más fundamental, más antiguo ni más decisivo que el de Madre de Dios — en griego, <em>Theotókos</em> (Θεοτόκος), literalmente "la que da a luz a Dios". Mientras que otros dogmas marianos, como la Inmaculada Concepción o la Asunción, fueron definidos formalmente en los siglos XIX y XX, la Maternidad Divina de María fue solemnemente proclamada ya en el año 431, en el Concilio Ecuménico de Éfeso, convirtiéndose en el primer gran dogma mariano de la historia de la Iglesia.</p>
+
+    <p>Pero conviene precisar desde el principio una cuestión capital, con frecuencia mal entendida incluso por católicos practicantes: el Concilio de Éfeso no definió este dogma como una verdad aislada sobre María, sino como una consecuencia necesaria e ineludible de la verdad sobre Cristo. La controversia que dio origen a esta definición no era, en su raíz, una disputa mariológica, sino una disputa cristológica: el verdadero objeto en discusión era si en Jesucristo hay una sola persona divina que asume una naturaleza humana íntegra, o si hay, en cierto modo, dos sujetos distintos —uno humano y otro divino— unidos de manera más laxa. María, la Theotókos, se convirtió en el campo de batalla doctrinal porque el título que se le atribuye revela, con una precisión asombrosa, qué se cree acerca de su Hijo.</p>
+
+    <p>Este es un patrón que se repetirá constantemente a lo largo de esta exposición: la mariología, en su forma más auténtica y ortodoxa, no es nunca un fin en sí misma, sino que está siempre al servicio de la cristología. Se honra a María precisamente porque, al hacerlo correctamente, se confiesa con mayor precisión quién es Cristo. Negar a María el título de Madre de Dios no empequeñece solamente a María: empequeñece, ante todo, al mismo Cristo, fragmentando su persona única en dos sujetos inconexos.</p>
+
+    <div id="definicion-dogma"></div>
+    <h3>Definición Precisa del Dogma</h3>
+
+    <div class="dogma-box">
+      <p class="dogma-eyebrow">Definición Dogmática — Concilio de Éfeso — Año 431</p>
+      <p class="dogma-texto">"Si alguno no confiesa que el Emmanuel es verdaderamente Dios, y que por ello la Santa Virgen es Theotókos (Madre de Dios), pues dio a luz según la carne al Verbo de Dios hecho carne, sea anatema."</p>
+      <p class="dogma-pie">— Anatema I, adjunto a la Carta Segunda de San Cirilo a Nestorio, aprobada por el Concilio de Éfeso</p>
+    </div>
+
+    <p>Tres elementos esenciales componen esta definición: <strong style="color:var(--dorado-claro)">primero</strong>, que el Hijo nacido de María es verdadera y plenamente Dios, no meramente un hombre habitado o asistido por la divinidad; <strong style="color:var(--dorado-claro)">segundo</strong>, que María dio a luz no a una naturaleza separada, sino a la única Persona del Verbo encarnado, "según la carne"; <strong style="color:var(--dorado-claro)">tercero</strong>, que por esta razón —y solamente por ella— el título "Madre de Dios" no es una metáfora piadosa ni una hipérbole devocional, sino una afirmación teológica rigurosamente exacta, fundada en la unidad de la persona de Cristo.</p>
+
+    <p>Es importante subrayar que el dogma no afirma que María sea madre de la naturaleza divina en cuanto tal —lo cual sería absurdo, pues la naturaleza divina es eterna e increada, y ninguna criatura puede ser causa de Dios—. Afirma, con mayor precisión, que María es madre de la Persona divina del Verbo, en cuanto esa Persona asumió temporalmente una naturaleza humana completa en su seno virginal. La distinción entre persona y naturaleza, que los teólogos posteriores explicitarán con instrumentos conceptuales cada vez más refinados, es la clave que permite sostener simultáneamente la maternidad verdadera de María y la inmutabilidad e impasibilidad de la naturaleza divina.</p>
+
+    <div id="historia-doctrina"></div>
+    <h3>Desarrollo Histórico de la Doctrina</h3>
+
+    <p>Como en el caso de otros dogmas marianos, la doctrina de la Maternidad Divina no surgió de la nada en el siglo V: estaba contenida en germen en el Nuevo Testamento, fue profesada implícita y explícitamente por los primeros Padres de la Iglesia, y se fue precisando conceptualmente a medida que las controversias cristológicas exigían mayor rigor terminológico.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLO I D.C.</div>
+        <h4>El testimonio neotestamentario</h4>
+        <p>Lucas 1,43 registra a Isabel llamando a María "la madre de mi Señor" (en griego, <em>Kyrios</em>, título reservado a la divinidad), y Gálatas 4,4 afirma que Dios "envió a su Hijo, nacido de mujer", estableciendo el fundamento escriturístico del dogma.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLO II</div>
+        <h4>San Ignacio de Antioquía y la "epifanía" de Dios</h4>
+        <p>Ignacio, discípulo cercano a la generación apostólica, habla de "nuestro Dios, Jesucristo", "concebido por María" según el plan de Dios, uniendo sin reservas la maternidad de María a la divinidad de Cristo.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLO III</div>
+        <h4>Orígenes y la primera atestación del término Theotókos</h4>
+        <p>Según testimonio de Sócrates Escolástico, Orígenes de Alejandría habría sido uno de los primeros en emplear formalmente el término griego <em>Theotókos</em> para referirse a María, mostrando que el título ya circulaba en ambientes teológicos cultos antes de la controversia nestoriana.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLO IV</div>
+        <h4>Consolidación del título tras Nicea</h4>
+        <p>Tras la definición de la consustancialidad del Hijo con el Padre en el Concilio de Nicea (325), Padres como Atanasio y los Capadocios emplean con naturalidad el título Theotókos, dándolo ya por aceptado en la piedad y la teología de la época.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">428-431</div>
+        <h4>La crisis nestoriana y el Concilio de Éfeso</h4>
+        <p>Nestorio, patriarca de Constantinopla, cuestiona públicamente el título de Theotókos, proponiendo en su lugar "Christotókos" (Madre de Cristo). San Cirilo de Alejandría lidera la respuesta ortodoxa, que culmina en la condena de Nestorio y la definición solemne del dogma en el Concilio Ecuménico de Éfeso.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">451</div>
+        <h4>Confirmación en el Concilio de Calcedonia</h4>
+        <p>El Concilio de Calcedonia, al definir con precisión la unión de las dos naturalezas en la única Persona de Cristo ("sin confusión, sin cambio, sin división, sin separación"), confirma y refuerza el fundamento cristológico de la Maternidad Divina de María.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">1964</div>
+        <h4>El Concilio Vaticano II — Lumen Gentium</h4>
+        <p>El Papa Pablo VI proclama solemnemente a María como "Madre de la Iglesia" al cierre de la tercera sesión del Concilio Vaticano II, en continuidad directa con el título de Theotókos confirmado en el capítulo VIII de la constitución <em>Lumen Gentium</em>.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN II — FUNDAMENTOS BÍBLICOS
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="fundamentos-biblicos">
+    <div class="seccion-header">
+      <div class="seccion-numero">II</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Sagrada Escritura</div>
+        <h2>Los Fundamentos Bíblicos</h2>
+      </div>
+    </div>
+
+    <p>A diferencia de otros privilegios marianos, cuyo fundamento escriturístico requiere una lectura tipológica más elaborada, la Maternidad Divina de María está afirmada en el Nuevo Testamento con una claridad y una densidad teológica excepcionales. No se trata de un argumento que dependa de un solo texto aislado, sino de una convergencia robusta entre la anunciación angélica, el testimonio de Isabel, la cristología explícita de Juan y Pablo, y la propia autocomprensión de Jesús acerca de su identidad divina.</p>
+
+    <div id="anuncio-gabriel"></div>
+    <h3>El Anuncio del Ángel Gabriel (Lucas 1,26-35)</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"He aquí que concebirás en tu vientre y darás a luz un hijo, y le pondrás por nombre Jesús. Él será grande, y será llamado Hijo del Altísimo, y el Señor Dios le dará el trono de David, su padre [...] El Espíritu Santo vendrá sobre ti y el poder del Altísimo te cubrirá con su sombra; por eso el que ha de nacer será llamado Santo, Hijo de Dios."</p>
+      <p class="cita-ref">Lucas 1, 31-32.35</p>
+    </div>
+
+    <p>El ángel Gabriel no anuncia a María el nacimiento de un profeta más, ni siquiera de un mesías meramente humano en el sentido davídico tradicional: anuncia la concepción de Aquel que será llamado, con toda propiedad, "Hijo del Altísimo" e "Hijo de Dios". La concepción se atribuye explícitamente a la acción del Espíritu Santo y al "poder del Altísimo", no a la generación humana ordinaria. El hijo que María concebirá no es, por tanto, simplemente humano con una vocación divina; es, desde el primer instante de su existencia humana, la Persona divina del Hijo, que asume la naturaleza humana en el seno de María.</p>
+
+    <p>De aquí se sigue una consecuencia lógica ineludible: si lo que María concibe y da a luz es la Persona del Hijo de Dios —y no simplemente una naturaleza humana separada que después sería "habitada" por la divinidad—, entonces María es, en sentido propio y no metafórico, Madre de Dios. La alternativa —que María sea madre solamente de la naturaleza humana de Cristo, mientras una segunda relación, no maternal, vincularía a María con la Persona divina— es precisamente la posición nestoriana que la Iglesia rechazó como herética.</p>
+
+    <div id="visitacion-isabel"></div>
+    <h3>La Visitación y el Saludo de Isabel (Lucas 1,41-43)</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"En cuanto Isabel oyó el saludo de María, la criatura saltó en su vientre. Se llenó Isabel del Espíritu Santo y exclamó a gran voz: '¡Bendita tú entre las mujeres, y bendito el fruto de tu vientre! ¿Quién soy yo para que me visite la madre de mi Señor?'"</p>
+      <p class="cita-ref">Lucas 1, 41-43</p>
+    </div>
+
+    <p>Este texto es de una importancia capital, con frecuencia subestimada. Isabel, "llena del Espíritu Santo" —es decir, hablando bajo inspiración profética, no por mera cortesía humana— llama a María "la madre de mi Señor". La palabra griega empleada es <em>Kyrios</em> (Κύριος), el mismo término con el que la versión griega del Antiguo Testamento (la Septuaginta) traduce el nombre sagrado de Dios, YHWH. Cuando los primeros cristianos confiesan a Jesús como "Kyrios", están haciendo una afirmación de divinidad plena, no simplemente reconociendo un título honorífico de respeto humano (cf. Filipenses 2,9-11, donde "el nombre sobre todo nombre" que se da a Jesús incluye precisamente este título divino).</p>
+
+    <p>Por tanto, cuando Isabel llama a María "madre de mi Señor", bajo inspiración del Espíritu Santo, está afirmando —en el primer capítulo del primer evangelio que narra estos eventos— exactamente lo que el Concilio de Éfeso definiría cuatro siglos más tarde: que María es madre de Aquel que es Kyrios, Señor y Dios. El dogma de Éfeso no añade ningún contenido nuevo a la fe revelada: simplemente explicita, con la precisión técnica que las controversias posteriores exigieron, lo que ya estaba contenido en esta exclamación profética de Isabel.</p>
+
+    <div id="emanuel-isaias"></div>
+    <h3>Emanuel: «Dios con Nosotros» (Isaías 7,14 y Mateo 1,23)</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Por tanto, el Señor mismo os dará una señal: La virgen concebirá, y dará a luz un hijo, y le pondrá por nombre Emanuel."</p>
+      <p class="cita-ref">Isaías 7, 14</p>
+    </div>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Todo esto sucedió para que se cumpliese lo que dijo el Señor por el profeta: 'He aquí que la virgen concebirá y dará a luz un hijo, y le pondrán por nombre Emanuel', que traducido es: Dios con nosotros."</p>
+      <p class="cita-ref">Mateo 1, 22-23</p>
+    </div>
+
+    <p>San Mateo no se limita a citar la profecía de Isaías: añade su propia traducción explicativa del nombre "Emanuel" como "Dios con nosotros" (en hebreo, <em>‘Immānū’ēl</em>, literalmente "con-nosotros-Dios"). Este nombre no es meramente simbólico, en el sentido de que Dios estaría "con" su pueblo de manera figurada, como podría decirse de cualquier intervención providencial. El contexto mateano es inequívocamente literal: el hijo que la virgen dará a luz será, Él mismo, Dios presente entre los hombres de un modo radicalmente nuevo: por encarnación, no por simple asistencia.</p>
+
+    <p>Si el hijo de la Virgen es, en el sentido más estricto, "Dios con nosotros", entonces la Virgen que lo da a luz es necesariamente la Madre de ese Dios encarnado. El texto de Mateo, situado deliberadamente en el primer capítulo de su evangelio, establece desde el inicio mismo del Nuevo Testamento la identidad divina del Hijo de María, anclando teológicamente todo lo que seguirá.</p>
+
+    <div id="prologo-juan"></div>
+    <h3>El Prólogo de San Juan (Juan 1,1.14)</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"En el principio existía el Verbo, y el Verbo estaba junto a Dios, y el Verbo era Dios [...] Y el Verbo se hizo carne y habitó entre nosotros."</p>
+      <p class="cita-ref">Juan 1, 1.14</p>
+    </div>
+
+    <p>El prólogo joánico es, sin lugar a dudas, el texto neotestamentario que con mayor densidad teológica afirma la divinidad plena del Verbo y, simultáneamente, su verdadera encarnación: "el Verbo se hizo carne", no "el Verbo entró en contacto con la carne" ni "el Verbo asistió a un hombre de carne". El verbo griego empleado, <em>egéneto</em> (ἐγένετο, "se hizo", "llegó a ser"), indica un cambio real en el modo de existencia del Verbo, que sin dejar de ser Dios, asume verdaderamente la condición humana.</p>
+
+    <p>La carne que el Verbo asumió, según el relato concordante de los evangelios sinópticos, fue formada en el seno virginal de María por obra del Espíritu Santo. Si el Verbo —que "era Dios"— "se hizo carne" en María, entonces María es, sin ambages ni reservas, la Madre de Dios encarnado. Negar esta conclusión equivaldría a romper la unidad entre el Verbo eterno (Juan 1,1) y la carne asumida (Juan 1,14), precisamente la separación que la herejía nestoriana, en su forma más sutil, terminaba introduciendo.</p>
+
+    <div id="galatas-plenitud"></div>
+    <h3>La Plenitud de los Tiempos (Gálatas 4,4)</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Pero cuando llegó la plenitud del tiempo, Dios envió a su Hijo, nacido de mujer, nacido bajo la ley, para rescatar a los que estaban bajo la ley."</p>
+      <p class="cita-ref">Gálatas 4, 4-5</p>
+    </div>
+
+    <p>San Pablo, en uno de los testimonios cristológicos más antiguos del Nuevo Testamento —la Epístola a los Gálatas es anterior, en su redacción, a los evangelios sinópticos en su forma final— afirma con absoluta claridad que es "su Hijo" —es decir, el Hijo de Dios, preexistente, "enviado" por el Padre— quien "nació de mujer". El sujeto que nace de María no es un hombre distinto del Hijo de Dios, al que el Hijo de Dios se uniría posteriormente, sino el Hijo mismo, que ya en su nacimiento es designado como tal.</p>
+
+    <p>La fórmula paulina es notablemente precisa: no dice que Dios "creó" a su Hijo en el vientre de María (lo que sugeriría un origen temporal de la Persona divina), sino que "envió" a su Hijo —ya existente eternamente— para que "naciera de mujer". Esto distingue con claridad la generación eterna del Hijo respecto del Padre (que no tiene principio) de su nacimiento temporal de María (que sí lo tiene), sin que ambas afirmaciones entren en contradicción: el mismo Hijo que nace eternamente del Padre nace temporalmente, según la carne, de María.</p>
+
+    <div id="hijo-altisimo"></div>
+    <h3>«Hijo del Altísimo» y la Concepción Virginal (Lucas 1,32.35)</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Respondió María al ángel: '¿Cómo será esto, puesto que no conozco varón?' El ángel le contestó: 'El Espíritu Santo vendrá sobre ti, y el poder del Altísimo te cubrirá con su sombra; por eso, el que va a nacer será santo, y será llamado Hijo de Dios.'"</p>
+      <p class="cita-ref">Lucas 1, 34-35</p>
+    </div>
+
+    <p>La pregunta de María —"¿cómo será esto?"— y la respuesta del ángel establecen de modo inequívoco que la concepción de Jesús no procede de generación humana ordinaria, sino directamente de la acción del Espíritu Santo, "el poder del Altísimo". Esta intervención divina directa en el origen mismo de la existencia humana de Jesús es la razón teológica última por la cual su filiación divina no es adoptiva ni metafórica, sino constitutiva desde el primer instante: "el que va a nacer será [...] llamado Hijo de Dios" no en virtud de una elección o adopción posterior, sino en virtud de su origen mismo.</p>
+
+    <div id="senor-david"></div>
+    <h3>«¿Cómo el Señor de David?» (Mateo 22,41-45)</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Preguntó Jesús: '¿Qué pensáis del Mesías? ¿De quién es hijo?' Le respondieron: 'De David'. Él les dijo: 'Entonces, ¿cómo es que David, inspirado por el Espíritu, lo llama Señor, diciendo: Dijo el Señor a mi Señor: Siéntate a mi derecha [...]? Pues si David lo llama Señor, ¿cómo puede ser su hijo?'"</p>
+      <p class="cita-ref">Mateo 22, 41-45 (cf. Salmo 110,1)</p>
+    </div>
+
+    <p>En esta enseñanza, el mismo Jesús plantea a los fariseos un dilema teológico cuya solución es precisamente la unión de dos naturalezas en una sola Persona: el Mesías es, según la carne, "hijo de David" (descendiente humano, nacido de la estirpe davídica a través de María), y al mismo tiempo es "Señor" de David (superior a él en dignidad divina, preexistente). Esta doble afirmación —hijo según la carne, Señor según la divinidad— es exactamente la estructura conceptual que el dogma de la Maternidad Divina articula con relación a María: ella es verdaderamente madre según la carne de Aquel que, en su Persona divina, es Señor y Dios, anterior a ella y a toda la creación.</p>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN III — PADRES DE LA IGLESIA
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="padres-iglesia">
+    <div class="seccion-header">
+      <div class="seccion-numero">III</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Tradición Patrística</div>
+        <h2>El Testimonio de los Padres de la Iglesia</h2>
+      </div>
+    </div>
+
+    <p>El título de Madre de Dios no fue una invención conciliar del siglo V, surgida repentinamente para resolver una controversia coyuntural. Por el contrario, el Concilio de Éfeso pudo definir el dogma con tanta firmeza precisamente porque se apoyaba en una tradición patrística ya secular, prácticamente unánime, que desde los primeros siglos había vinculado de manera indisoluble la maternidad de María con la divinidad de su Hijo. Revisar este testimonio es indispensable para comprender que Nestorio, lejos de representar una opinión teológica legítima entre otras, se apartaba de una corriente de fe constante y universalmente recibida.</p>
+
+    <div id="san-ignacio-antioquia"></div>
+    <h3>San Ignacio de Antioquía (c. 35-107 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">✝</div>
+      <div class="padre-info">
+        <h4>San Ignacio de Antioquía</h4>
+        <p class="padre-datos">Obispo y mártir · Antioquía de Siria · c. 35-107 d.C.</p>
+        <p>Discípulo de los Apóstoles, posiblemente de San Juan, y tercer obispo de Antioquía. Sus cartas, escritas camino al martirio en Roma, constituyen el testimonio cristiano más antiguo después del Nuevo Testamento sobre la divinidad de Cristo y su nacimiento de María.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Ignacio de Antioquía</p>
+      <p class="cita-texto">"Hay un solo médico, carnal y espiritual a la vez, engendrado e inengendrado, Dios hecho carne, vida verdadera en la muerte, nacido de María y nacido de Dios, primero pasible y luego impasible, Jesucristo nuestro Señor."</p>
+      <p class="cita-fuente">— <em>Carta a los Efesios</em>, cap. 7</p>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Ignacio de Antioquía</p>
+      <p class="cita-texto">"Nuestro Dios, Jesucristo, fue concebido por María según el plan de Dios, de la estirpe de David, pero también del Espíritu Santo."</p>
+      <p class="cita-fuente">— <em>Carta a los Efesios</em>, cap. 18</p>
+    </div>
+
+    <p>Ignacio, escribiendo apenas unas décadas después de la muerte de los Apóstoles, no muestra ninguna vacilación en afirmar simultáneamente que Jesucristo es "nuestro Dios" y que fue "concebido por María". La fórmula "nacido de María y nacido de Dios" (literalmente, en el original griego, "de María y de Dios") expresa con extraordinaria concisión la doble generación de Cristo —eterna del Padre, temporal de María— sin que ello fragmente su unidad personal. Este texto, anterior en más de tres siglos a la controversia nestoriana, demuestra que la fe en la Maternidad Divina de María pertenecía al núcleo de la predicación apostólica más temprana.</p>
+
+    <div id="san-ireneo-mdt"></div>
+    <h3>San Ireneo de Lyon (c. 130-202 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">⛪</div>
+      <div class="padre-info">
+        <h4>San Ireneo de Lyon</h4>
+        <p class="padre-datos">Obispo, teólogo y Padre de la Iglesia · Esmirna/Lyon · c. 130-202 d.C.</p>
+        <p>Discípulo de San Policarpo, vinculado por tanto a la tradición joánica. Su obra <em>Adversus Haereses</em> es la refutación más sistemática del gnosticismo en el siglo II, y contiene una cristología de notable precisión sobre la unidad de Cristo.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Ireneo de Lyon</p>
+      <p class="cita-texto">"El mismo es Hijo de Dios y de hombre. Tal como había sido predicho desde el principio, que Dios sería visto por los hombres y conversaría con ellos sobre la tierra [...] No habría sido un nuevo nacimiento si Aquel que había de nacer no fuera, en algún sentido, también Dios y hombre."</p>
+      <p class="cita-fuente">— <em>Adversus Haereses</em>, III, 19, 1</p>
+    </div>
+
+    <p>Ireneo articula aquí, ya en el siglo II, la lógica fundamental que el Concilio de Éfeso explicitará tres siglos después: el "nuevo nacimiento" de Cristo es significativo y salvador precisamente porque quien nace es, simultáneamente, Dios y hombre en una sola realidad personal. La maternidad de María queda así indisolublemente unida a la identidad divino-humana de su Hijo.</p>
+
+    <div id="origenes"></div>
+    <h3>Orígenes de Alejandría (c. 184-253 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">📜</div>
+      <div class="padre-info">
+        <h4>Orígenes de Alejandría</h4>
+        <p class="padre-datos">Teólogo, exégeta y catequista · Alejandría/Cesarea · c. 184-253 d.C.</p>
+        <p>Figura de inmensa erudición e influencia en la teología de los siglos siguientes, aunque algunas de sus especulaciones fueron posteriormente censuradas. Según el testimonio del historiador Sócrates Escolástico, Orígenes habría sido de los primeros en emplear formalmente el término "Theotókos".</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">Testimonio sobre Orígenes (Sócrates Escolástico)</p>
+      <p class="cita-texto">"Orígenes, en el primer tomo de sus Comentarios al Evangelio según San Mateo, expone ampliamente cómo debe entenderse el término Theotókos, dando a entender que ya en su tiempo el vocablo era objeto de explicación teológica precisa."</p>
+      <p class="cita-fuente">— Sócrates Escolástico, <em>Historia Eclesiástica</em>, VII, 32 (referencia a la obra perdida de Orígenes)</p>
+    </div>
+
+    <p>Aunque el texto original de Orígenes sobre este punto no se ha conservado íntegramente, el testimonio indirecto de Sócrates Escolástico —historiador eclesiástico del siglo V, contemporáneo de la controversia nestoriana— confirma que el término <em>Theotókos</em> circulaba ya en ambientes teológicos eruditos en el siglo III, mucho antes de que Nestorio lo cuestionara. Esto desmonta cualquier pretensión de que el título fuera una novedad doctrinal del siglo V: era, por el contrario, una expresión ya asentada que Nestorio intentó remover de la liturgia y la predicación.</p>
+
+    <div id="san-atanasio"></div>
+    <h3>San Atanasio de Alejandría (c. 296-373 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🛡</div>
+      <div class="padre-info">
+        <h4>San Atanasio de Alejandría</h4>
+        <p class="padre-datos">Obispo y Doctor de la Iglesia · Alejandría · c. 296-373 d.C.</p>
+        <p>El gran defensor de la fe nicena contra el arrianismo, exiliado en cinco ocasiones por su firmeza doctrinal. Su cristología, centrada en la consustancialidad del Hijo con el Padre, es el fundamento directo sobre el que se construirá después la defensa de la Maternidad Divina de María.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Atanasio de Alejandría</p>
+      <p class="cita-texto">"El Verbo de Dios [...] tomó para sí un cuerpo, y un cuerpo humano como el nuestro [...] de una Virgen pura e inmaculada, sin la intervención de varón, un cuerpo propio, en el cual habitar y a través del cual revelarse."</p>
+      <p class="cita-fuente">— <em>De Incarnatione Verbi</em>, cap. 8</p>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Atanasio de Alejandría</p>
+      <p class="cita-texto">"Llamamos a María Theotókos, porque Aquel que de ella nació, según la carne, es verdadero Dios."</p>
+      <p class="cita-fuente">— Atribuido tradicionalmente a Atanasio en la primera homilía sobre la Anunciación; recogido por la tradición posterior alejandrina como síntesis de su doctrina</p>
+    </div>
+
+    <p>Atanasio estableció el principio cristológico fundamental —"lo que no fue asumido no fue redimido"— que exige que el Verbo divino asuma una naturaleza humana íntegra y real, formada verdaderamente en el seno de María. Su insistencia en la consustancialidad plena del Hijo con el Padre (la doctrina nicena del <em>homoousios</em>) es la base lógica indispensable sobre la que descansa, sin posibilidad de disputa, el título de Theotókos: si el Hijo es plenamente Dios, y nace verdaderamente de María, María es Madre de Dios.</p>
+
+    <div id="san-gregorio-nacianceno"></div>
+    <h3>San Gregorio Nacianceno (c. 329-390 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🕊</div>
+      <div class="padre-info">
+        <h4>San Gregorio Nacianceno</h4>
+        <p class="padre-datos">Obispo, teólogo y Doctor de la Iglesia · Capadocia/Constantinopla · c. 329-390 d.C.</p>
+        <p>Uno de los tres grandes Padres Capadocios, llamado "el Teólogo" por excelencia en la tradición oriental. Su <em>Epístola a Cledonio</em> contiene una de las afirmaciones más tajantes y tempranas en favor del uso del título Theotókos, formulada décadas antes de la controversia nestoriana.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Gregorio Nacianceno</p>
+      <p class="cita-texto">"Si alguno no admite que Santa María es Theotókos, está separado de la divinidad."</p>
+      <p class="cita-fuente">— <em>Epístola 101 a Cledonio</em></p>
+    </div>
+
+    <p>Esta sentencia de Gregorio Nacianceno, escrita hacia el año 382 —casi medio siglo antes del Concilio de Éfeso—, anticipa con una contundencia extraordinaria la condena que el Concilio pronunciará contra Nestorio. Gregorio no formula esta afirmación como una opinión piadosa personal, sino como un criterio de ortodoxia: negar el título de Theotókos equivale, según él, a separarse de la fe en la divinidad de Cristo. Este texto fue, de hecho, invocado explícitamente durante la controversia nestoriana como prueba de la antigüedad y la autoridad del término.</p>
+
+    <div id="san-ambrosio-mdt"></div>
+    <h3>San Ambrosio de Milán (c. 340-397 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🏛</div>
+      <div class="padre-info">
+        <h4>San Ambrosio de Milán</h4>
+        <p class="padre-datos">Obispo y Doctor de la Iglesia · Tréveris/Milán · c. 340-397 d.C.</p>
+        <p>Uno de los cuatro grandes Doctores de la Iglesia latina, maestro de San Agustín. Su mariología, articulada principalmente en sus comentarios al evangelio de Lucas, vincula constantemente la dignidad de María a la divinidad del Hijo que concibió.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Ambrosio de Milán</p>
+      <p class="cita-texto">"Una sola es la Virgen María, de la cual leemos que el Señor descendió en su seno [...] Y por eso justamente se dice de ella: ¿Cómo será esto?, porque no se trataba del orden de la naturaleza, sino del privilegio de la gracia, para que de una virgen naciera Dios."</p>
+      <p class="cita-fuente">— <em>Expositio in Lucam</em>, II, 4</p>
+    </div>
+
+    <div id="san-agustin-mdt"></div>
+    <h3>San Agustín de Hipona (354-430 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">❤️</div>
+      <div class="padre-info">
+        <h4>San Agustín de Hipona</h4>
+        <p class="padre-datos">Obispo y Doctor de la Iglesia · Tagaste/Hipona · 354-430 d.C.</p>
+        <p>El más influyente de los Padres latinos, contemporáneo casi exacto de la controversia nestoriana (murió en agosto de 430, meses antes del Concilio de Éfeso). Su cristología, centrada en la unidad de la persona de Cristo, anticipa con precisión la doctrina que el Concilio definiría poco después de su muerte.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Agustín de Hipona</p>
+      <p class="cita-texto">"Dios fue creado hombre, permaneciendo Dios; Dios, que existía antes de todos los tiempos, comenzó a ser hombre en el tiempo... el mismo es completamente Hijo de Dios, y completamente hijo del hombre."</p>
+      <p class="cita-fuente">— <em>Sermo 186</em>, sobre la Natividad del Señor</p>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Agustín de Hipona</p>
+      <p class="cita-texto">"María, llena de fe, concibió a Cristo primero en su mente que en su cuerpo. 'He aquí —dijo— la esclava del Señor, hágase en mí según tu palabra'. Creyó y se cumplió en ella lo que creía."</p>
+      <p class="cita-fuente">— <em>De Sancta Virginitate</em>, cap. 3</p>
+    </div>
+
+    <p>Agustín formula con notable claridad la paradoja central del dogma: "Dios, que existía antes de todos los tiempos, comenzó a ser hombre en el tiempo". No hay aquí dos sujetos —uno eterno y otro temporal— sino un único sujeto, el Hijo de Dios, que sin dejar de ser eterno comienza, en su humanidad, a existir en el tiempo a través del nacimiento de María. Esta es exactamente la doctrina que el Concilio de Éfeso confirmará poco después de la muerte de Agustín.</p>
+
+    <div id="san-cirilo-alejandria"></div>
+    <h3>San Cirilo de Alejandría (c. 376-444 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">👑</div>
+      <div class="padre-info">
+        <h4>San Cirilo de Alejandría</h4>
+        <p class="padre-datos">Patriarca de Alejandría y Doctor de la Iglesia · Alejandría · c. 376-444 d.C.</p>
+        <p>El principal artífice teológico de la condena del nestorianismo y la definición del Concilio de Éfeso. Sus cartas a Nestorio, especialmente la Segunda, fueron formalmente aprobadas por el Concilio como expresión auténtica de la fe católica sobre la unión de las dos naturalezas en Cristo.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Cirilo de Alejandría</p>
+      <p class="cita-texto">"No decimos que la naturaleza del Verbo, al hacerse carne, se transformó en hombre, ni que fue asumida por una mera persona humana; sino que el Verbo, habiendo unido a sí mismo, según la hipóstasis, una carne animada por un alma racional, se hizo hombre de manera inefable e incomprensible [...] Por esta razón, la Santa Virgen es llamada Theotókos, no porque la naturaleza del Verbo haya tomado de ella el principio de su ser, sino porque, habiéndose unido a sí mismo el cuerpo animado racionalmente, el Verbo se sometió a nacer según la carne de ella."</p>
+      <p class="cita-fuente">— Carta Segunda a Nestorio, aprobada por el Concilio de Éfeso (431)</p>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Cirilo de Alejandría</p>
+      <p class="cita-texto">"Si alguno no confiesa que el Emmanuel es verdaderamente Dios, y que por ello la Santa Virgen es Theotókos, pues dio a luz según la carne al Verbo de Dios hecho carne, sea anatema."</p>
+      <p class="cita-fuente">— Anatema I de los Doce Anatemas adjuntos a la Carta Tercera a Nestorio</p>
+    </div>
+
+    <p>El texto de Cirilo es de una precisión teológica notable: distingue cuidadosamente entre el origen eterno de la naturaleza divina del Verbo (que en modo alguno procede de María) y el verdadero nacimiento según la carne de ese mismo Verbo encarnado (que sí procede de María). María no es causa de la divinidad del Hijo —lo cual sería metafísicamente imposible—, pero es verdaderamente madre de la Persona del Hijo, en cuanto esa Persona se hizo hombre y nació de ella. Esta distinción entre persona y naturaleza, articulada con rigor por Cirilo, será el instrumento conceptual decisivo para resolver la controversia.</p>
+
+    <div id="san-juan-crisostomo"></div>
+    <h3>San Juan Crisóstomo (c. 347-407 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🎙</div>
+      <div class="padre-info">
+        <h4>San Juan Crisóstomo</h4>
+        <p class="padre-datos">Patriarca de Constantinopla y Doctor de la Iglesia · Antioquía/Constantinopla · c. 347-407 d.C.</p>
+        <p>Llamado "Crisóstomo" ("boca de oro") por su extraordinaria elocuencia homilética. Predecesor de Nestorio en la sede de Constantinopla, su cristología, aunque procedente de la misma escuela antioquena que después derivaría en el nestorianismo, es plenamente ortodoxa en la unidad de la persona de Cristo.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Juan Crisóstomo</p>
+      <p class="cita-texto">"No te asombres de que Dios haya nacido de una virgen: maravíllate más bien de que Aquel que es eterno haya querido nacer en el tiempo, sin que por ello disminuyera en nada su gloria, ni la Virgen perdiera su honra al haber dado a luz a su propio Creador."</p>
+      <p class="cita-fuente">— <em>Homilía sobre el Nacimiento del Salvador</em></p>
+    </div>
+
+    <p>Es significativo que el mismo ambiente teológico de Antioquía y Constantinopla del que procedía Nestorio hubiera producido, una generación antes, un testimonio tan claramente ortodoxo como el de Crisóstomo. Esto demuestra que el error nestoriano no era una consecuencia necesaria de la escuela teológica antioquena en su conjunto, sino una desviación particular de Nestorio dentro de ella, que la propia tradición antioquena —representada después por figuras como Juan de Antioquía, reconciliado finalmente con Cirilo— terminó por corregir.</p>
+
+    <div id="san-leon-magno"></div>
+    <h3>San León Magno (c. 400-461 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">⚖️</div>
+      <div class="padre-info">
+        <h4>San León Magno</h4>
+        <p class="padre-datos">Papa y Doctor de la Iglesia · Roma · c. 400-461 d.C.</p>
+        <p>Su <em>Tomus ad Flavianum</em> ("Tomo a Flaviano"), leído en el Concilio de Calcedonia (451), fue aclamado por los Padres conciliares con la célebre exclamación "¡Pedro ha hablado por boca de León!". Es la síntesis cristológica que consolidó definitivamente la doctrina de Éfeso.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San León Magno</p>
+      <p class="cita-texto">"Permaneciendo en la forma de Dios, en la cual es igual al Padre, se hizo hombre en la forma de siervo [...] El nacimiento de la carne es manifestación de la naturaleza humana; el parto de una virgen es indicio del poder divino. Se manifiesta la infancia del niño en la humildad de la cuna; se anuncia la grandeza del Altísimo por las voces de los ángeles."</p>
+      <p class="cita-fuente">— <em>Tomus ad Flavianum</em> (Carta 28), aprobado en el Concilio de Calcedonia</p>
+    </div>
+
+    <p>León Magno articula con fórmulas de precisión casi jurídica la unión de las dos naturalezas en la única Persona de Cristo: "Cada naturaleza conserva sus propiedades sin defecto, y, así como la forma de Dios no quita la forma de siervo, así la forma de siervo no disminuye la forma de Dios". Esta síntesis, recibida por el Concilio de Calcedonia, confirma y refuerza retroactivamente la legitimidad del título Theotókos definido en Éfeso veinte años antes.</p>
+
+    <div id="san-juan-damasceno-mdt"></div>
+    <h3>San Juan Damasceno (c. 676-749 d.C.)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">🌟</div>
+      <div class="padre-info">
+        <h4>San Juan Damasceno</h4>
+        <p class="padre-datos">Padre y Doctor de la Iglesia · Damasco/Mar Saba · c. 676-749 d.C.</p>
+        <p>Último gran Padre de la Iglesia oriental, cuya obra <em>De Fide Orthodoxa</em> sintetiza toda la tradición cristológica anterior, incluyendo las definiciones de Éfeso y Calcedonia, con una claridad sistemática que sería decisiva para la teología medieval posterior, tanto oriental como occidental.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">San Juan Damasceno</p>
+      <p class="cita-texto">"Este nombre, Theotókos, contiene en sí todo el misterio de la economía de la salvación. Si Aquella que dio a luz es Theotókos, es ciertamente Dios Aquel que de ella nació, y ciertamente es también hombre. Pues, ¿cómo podría haber dado a luz a Dios un Dios que naciera de Dios sin pasar por una naturaleza humana?"</p>
+      <p class="cita-fuente">— <em>De Fide Orthodoxa</em>, III, 12</p>
+    </div>
+
+    <p>Juan Damasceno señala con agudeza que el título Theotókos no es solamente una afirmación sobre María, sino una fórmula compendiosa que contiene "todo el misterio de la economía de la salvación": de él se sigue necesariamente tanto la verdadera divinidad del Hijo como su verdadera humanidad, ambas requeridas para que el título tenga sentido. El nombre "Madre de Dios" es, en este sentido, un resumen credal completo en dos palabras.</p>
+
+    <div id="santo-tomas-mdt"></div>
+    <h3>Santo Tomás de Aquino (1225-1274)</h3>
+
+    <div class="padre-card">
+      <div class="padre-icono">📘</div>
+      <div class="padre-info">
+        <h4>Santo Tomás de Aquino</h4>
+        <p class="padre-datos">Doctor de la Iglesia, Doctor Común · Roccasecca/Fossanova · 1225-1274</p>
+        <p>Aunque posterior a la época estrictamente patrística, su tratamiento sistemático de la Maternidad Divina en la <em>Summa Theologiae</em> constituye la síntesis escolástica definitiva de toda la tradición anterior, articulando con precisión filosófica los conceptos de persona, naturaleza y relación que sustentan el dogma.</p>
+      </div>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">Santo Tomás de Aquino</p>
+      <p class="cita-texto">"La Bienaventurada Virgen es llamada Madre de Dios no porque sea madre de la divinidad, sino porque es madre, según la naturaleza humana, de la Persona que tiene la naturaleza divina y la naturaleza humana. [...] La maternidad de la Virgen termina en la Persona del Hijo de Dios, no porque haya engendrado la naturaleza divina, sino porque la Persona que engendró según la carne es la misma Persona que subsiste en la naturaleza divina."</p>
+      <p class="cita-fuente">— <em>Summa Theologiae</em>, III, q. 35, a. 4</p>
+    </div>
+
+    <p>Tomás de Aquino formaliza con instrumentos aristotélicos la distinción que Cirilo había intuido y formulado teológicamente: la relación de maternidad no termina (en sentido técnico: no tiene como término) en la naturaleza, sino en la Persona. María es madre de una Persona divina, no madre de "la divinidad" en abstracto. Esta precisión disuelve cualquier apariencia de absurdo metafísico en la afirmación "María es Madre de Dios", pues no implica que una criatura sea causa de la naturaleza increada de Dios, sino que una criatura humana es, en sentido propio y real, madre de Aquel que es, en su Persona única, Dios.</p>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN IV — SILOGISMOS FILOSÓFICOS
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="silogismos">
+    <div class="seccion-header">
+      <div class="seccion-numero">IV</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Razón y Fe</div>
+        <h2>Argumentación Filosófico-Teológica</h2>
+      </div>
+    </div>
+
+    <p>El dogma de la Maternidad Divina, aunque revelado y no descubierto por la sola razón natural, admite —una vez aceptado por la fe— un análisis filosófico riguroso que muestra su perfecta coherencia interna. Los conceptos centrales que la metafísica clásica aporta a esta tarea son los de persona, naturaleza, y relación, articulados ya por los Padres griegos y sistematizados después por la escolástica medieval. Los silogismos siguientes desarrollan estas herramientas conceptuales para mostrar que el título de "Madre de Dios" no contiene contradicción alguna, sino que es la única forma coherente de expresar la unidad de Cristo.</p>
+
+    <div id="sil-comunicacion-idiomas"></div>
+    <h3>I. La Comunicación de Idiomas (Communicatio Idiomatum)</h3>
+
+    <p>El principio teológico llamado "comunicación de idiomas" (del latín <em>communicatio idiomatum</em>, "comunicación de las propiedades") establece que, dada la unidad de persona en Cristo, los atributos propios de cada una de sus dos naturalezas —la divina y la humana— pueden predicarse legítimamente del único sujeto que las posee, es decir, de la Persona del Verbo encarnado.</p>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo I — Fundamento Lógico de la Comunicación de Idiomas</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">En toda proposición predicativa del tipo "S es P", el sujeto gramatical (S) designa, en metafísica clásica, no una naturaleza abstracta sino una persona o sujeto concreto que posee dicha naturaleza.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">En Cristo hay una única Persona (el Verbo) que subsiste en dos naturalezas completas, la divina y la humana, sin confusión ni separación entre ellas (definición de Calcedonia, 451).</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">Por tanto, cualquier predicado verdadero de la naturaleza divina de Cristo (p. ej., "es eterno", "es Dios") y cualquier predicado verdadero de su naturaleza humana (p. ej., "nació en Belén", "murió en la cruz") son, en última instancia, predicados de la misma y única Persona, el Verbo encarnado.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">El hecho de "nacer de María" es un predicado verdadero de la naturaleza humana de Cristo (pues la naturaleza divina, eterna e increada, no puede "nacer").</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, es lícito y necesario afirmar que "Dios nació de María" —no porque la naturaleza divina haya nacido, sino porque la Persona del Verbo, que es Dios, nació de María según su naturaleza humana. De aquí se sigue inmediatamente que María es, en sentido propio, Madre de Dios.</span>
+      </div>
+      <p class="silogismo-nota">Esta es exactamente la estructura lógica que Cirilo defendió frente a Nestorio: éste rechazaba la comunicación de idiomas porque presuponía, implícitamente, dos sujetos distintos en Cristo (uno divino al que no se podían atribuir los predicados humanos, y otro humano al que no se podían atribuir los predicados divinos), negando con ello la unidad personal que la fe católica confiesa.</p>
+    </div>
+
+    <div id="sil-unidad-persona"></div>
+    <h3>II. Unidad de Persona en Cristo</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo II — De la Unidad Personal a la Maternidad Divina</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">En la Encarnación, el Verbo eterno no se unió a un hombre ya existente como a un sujeto distinto (lo cual constituiría una "unión de dos personas"), sino que asumió en su propia Persona divina una naturaleza humana completa, careciendo esta naturaleza humana de subsistencia personal propia (doctrina de la "unión hipostática").</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">Por tanto, en Cristo no hay dos sujetos o personas (uno divino y otro humano) que cooperen o se relacionen entre sí, sino un único sujeto personal —el Verbo— que posee y actúa a través de dos naturalezas distintas.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">María concibió y dio a luz, según las leyes ordinarias de la generación humana (asistidas por la acción singular del Espíritu Santo en la concepción virginal), a un individuo humano concreto: el cuerpo y alma humanos asumidos por el Verbo.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">Pero ese individuo humano, al carecer de subsistencia personal propia y distinta (por la premisa 1), no es "otra persona" además del Verbo: es el Verbo mismo, existiendo y actuando humanamente.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, lo que María dio a luz no fue "un hombre" distinto del Verbo, al que el Verbo se uniría después, sino el Verbo mismo, haciéndose hombre en su seno. María es, en consecuencia, madre de la Persona del Verbo, es decir, Madre de Dios — y no meramente madre de una naturaleza humana abstracta o de un sujeto humano independiente.</span>
+      </div>
+    </div>
+
+    <div id="sil-relacion-terminativa"></div>
+    <h3>III. La Relación Terminativa a la Persona, no a la Naturaleza</h3>
+
+    <p>Este es el argumento tomista clásico, ya esbozado en la cita patrística de Santo Tomás, que conviene desarrollar en forma silogística explícita, pues resuelve la objeción más intuitiva que suele plantearse contra el dogma: "¿cómo puede una criatura ser causa de Dios, que es eterno e increado?".</p>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo III — Distinción entre Término Material y Término Formal de la Maternidad</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">Toda relación de maternidad (X es madre de Y) tiene dos aspectos: un aspecto material (la naturaleza o sustancia que la madre transmite genéticamente al hijo) y un aspecto formal o personal (el sujeto o persona concreta que resulta de dicha generación y que es propiamente "el hijo").</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">En toda maternidad humana ordinaria, estos dos aspectos coinciden en el mismo sujeto: la madre transmite la naturaleza humana, y el sujeto personal que nace (con subsistencia propia) es enteramente humano.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">En el caso único y sobrenatural de la generación de Cristo, María transmite efectivamente la naturaleza humana (aspecto material de la maternidad), pero el sujeto personal que asume y posee esa naturaleza humana no es un sujeto meramente humano de nueva subsistencia, sino la Persona ya preexistente del Verbo divino (aspecto formal/personal).</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">La relación de maternidad, en sentido estrictamente metafísico, termina (tiene su término propio) no en la naturaleza transmitida, sino en la persona que subsiste en ella: se es madre <em>de alguien</em> (una persona), no madre <em>de algo</em> (una naturaleza en abstracto).</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, dado que el término personal de la maternidad de María es la Persona divina del Verbo —aunque el término material o naturaleza transmitida sea sólo la naturaleza humana—, la relación de maternidad de María termina propiamente en una Persona divina. María es, por consiguiente, Madre de Dios en sentido formal y propio, sin que ello implique en absoluto que sea causa o "madre" de la naturaleza divina, que permanece eterna, increada e inmutable.</span>
+      </div>
+      <p class="silogismo-nota">Esta distinción disuelve enteramente la objeción de que el dogma implicaría hacer a una criatura "causa" de Dios. María no es causa de la divinidad del Verbo (lo cual sería metafísicamente imposible, pues lo creado no puede causar lo increado); es, en cambio, verdaderamente madre de la Persona del Verbo según la naturaleza humana que esa misma Persona libremente asumió.</p>
+    </div>
+
+    <div id="sil-dignidad-infinita"></div>
+    <h3>IV. La Dignidad Cuasi-Infinita de María</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo IV — Proporción entre Dignidad y Término de la Relación</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">La dignidad de una relación se mide, en parte, por la dignidad del término al que dicha relación se refiere: ser padre de un mendigo y ser padre de un rey son relaciones formalmente similares (paternidad), pero de dignidad muy distinta, en proporción a la dignidad del hijo.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">El término de la maternidad de María es una Persona de dignidad infinita: la segunda Persona de la Santísima Trinidad, Dios mismo.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">Por tanto, la dignidad de la relación de maternidad de María, aunque ella misma sea una criatura finita, recibe —por razón de su término— una dignidad que los teólogos escolásticos califican de "cuasi-infinita": no infinita en sí misma (pues procede de una criatura finita), pero sin límite superior posible entre las criaturas, pues no puede haber una relación creada de mayor dignidad que la maternidad respecto de Dios mismo.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, María posee, en virtud de su Maternidad Divina, la mayor dignidad que puede corresponder a una pura criatura, superior a la de todos los ángeles y santos, no por mérito propio independiente, sino por la sola razón de su relación única con la Persona divina del Verbo. Esta dignidad es, además, la raíz teológica de todos los demás privilegios marianos: su Inmaculada Concepción, su virginidad perpetua y su Asunción se justifican, en la tradición teológica, como exigencias de conveniencia derivadas precisamente de esta dignidad cuasi-infinita.</span>
+      </div>
+    </div>
+
+    <div id="sil-maternidad-real"></div>
+    <h3>V. Verdadera Maternidad, no Metafórica ni Adoptiva</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo V — Realismo Biológico y Teológico de la Maternidad</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">Los evangelios afirman que el cuerpo de Jesús fue formado verdaderamente en el seno de María, por un proceso de gestación real de nueve meses, con verdadero parto (Lc 2,6-7; Gá 4,4).</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">Una maternidad meramente metafórica, adoptiva o simbólica no implicaría gestación biológica real ni parto verdadero, sino simplemente una relación de cuidado, crianza o representación legal.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">La maternidad de María respecto de Jesús cumple todos los criterios de una maternidad biológica real: concepción en su seno, gestación, parto verdadero. No es, por tanto, una maternidad metafórica ni adoptiva, sino física y real.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 4</span>
+        <span class="premisa-texto">El sujeto que María concibió, gestó y dio a luz es, según la premisa de la unidad de Persona en Cristo (Silogismo II), la misma Persona divina del Verbo, no un sujeto humano distinto de Él.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, la maternidad de María respecto de Dios no es una figura de lenguaje piadosa, ni una relación honorífica o adoptiva, sino una maternidad real, física y verdadera respecto de la Persona divina del Verbo encarnado. El título "Madre de Dios" debe leerse con el mismo realismo literal con que se lee "madre de Jesús" en cualquier pasaje evangélico.</span>
+      </div>
+    </div>
+
+    <div id="sil-arrianismo"></div>
+    <h3>VI. Refutación del Arrianismo Encubierto</h3>
+
+    <p>Aunque el arrianismo —la negación de la consustancialidad del Hijo con el Padre— había sido condenado en Nicea (325), conviene mostrar formalmente por qué cualquier rechazo del título Theotókos reintroduce, aunque sea de manera encubierta, una negación de la plena divinidad de Cristo.</p>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo VI — De la Negación del Título a la Negación de la Divinidad</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">Si se niega que María sea Madre de Dios, se debe afirmar una de estas dos alternativas: (a) que el Hijo de María no es verdaderamente Dios, o (b) que, siendo Dios, existen en Cristo dos sujetos personales distintos, de los cuales sólo el humano nace de María.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">La alternativa (a) es la herejía arriana, ya condenada en Nicea (325): negar la consustancialidad plena del Hijo con el Padre.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">La alternativa (b) es la herejía nestoriana: introducir una dualidad de sujetos personales en Cristo, rompiendo la unidad de su persona.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, toda negación del título "Madre de Dios" conduce necesariamente, por un camino u otro, a una cristología herética: o bien arriana (si se niega la divinidad del Hijo), o bien nestoriana (si se introduce una dualidad de sujetos). La afirmación de la Maternidad Divina de María no es, pues, una añadidura piadosa optativa, sino una salvaguarda lógica necesaria de la ortodoxia cristológica nicena y calcedonense.</span>
+      </div>
+    </div>
+
+    <div id="sil-nestorianismo"></div>
+    <h3>VII. Refutación Formal del Nestorianismo</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo VII — El Argumento Decisivo de San Cirilo</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">Según la propuesta nestoriana, María sería "Christotókos" (madre de Cristo) pero no "Theotókos" (madre de Dios), distinguiendo entre "Cristo" —entendido como la unión moral o conjunción de dos sujetos, divino y humano— y "Dios" o "el Verbo" en sentido estricto.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">Pero el Nuevo Testamento no conoce esta distinción entre "Cristo" y "el Verbo de Dios" como dos sujetos diversos: "Cristo" es, sencillamente, el nombre del Verbo encarnado, el mismo y único Hijo de Dios hecho hombre (cf. Jn 1,1.14; Flp 2,6-7).</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">Si "Cristo" y "el Verbo de Dios" son el mismo y único sujeto personal —y no dos sujetos en conjunción moral—, entonces ser "madre de Cristo" (Christotókos) es exactamente lo mismo que ser "madre del Verbo de Dios hecho hombre", es decir, Madre de Dios (Theotókos).</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, la distinción nestoriana entre "Christotókos" y "Theotókos" es lógicamente insostenible si se mantiene —como exige la fe ortodoxa— la unidad personal de Cristo. Aceptar "Christotókos" pero rechazar "Theotókos" sólo tiene sentido si, en el fondo, se está concibiendo a "Cristo" como un sujeto distinto del Verbo de Dios —precisamente la separación nestoriana de las dos naturalezas en dos sujetos, que el Concilio de Éfeso condenó como herética.</span>
+      </div>
+      <p class="silogismo-nota">Este fue, en sustancia, el argumento decisivo que San Cirilo esgrimió contra Nestorio: aceptar "Christotókos" y rechazar "Theotókos" no es una postura intermedia o moderada, sino que presupone ya, de manera encubierta, la división nestoriana de Cristo en dos sujetos.</p>
+    </div>
+
+    <div id="sil-fundamento-otros-privilegios"></div>
+    <h3>VIII. La Maternidad Divina como Fundamento de los Demás Privilegios Marianos</h3>
+
+    <div class="silogismo">
+      <p class="silogismo-titulo">Silogismo VIII — Primacía Lógica de la Maternidad Divina</p>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 1</span>
+        <span class="premisa-texto">Todo privilegio o gracia concedido a una criatura tiene una razón de conveniencia que lo justifica dentro del plan de Dios; cuanto mayor es la dignidad de la criatura, mayores y más numerosos pueden ser, por convenientia, los privilegios que recibe.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 2</span>
+        <span class="premisa-texto">La Maternidad Divina es, como se ha mostrado (Silogismo IV), la fuente de la dignidad más alta posible para una criatura: la dignidad cuasi-infinita derivada de su relación personal con el Verbo encarnado.</span>
+      </div>
+      <div class="premisa">
+        <span class="premisa-label">Premisa 3</span>
+        <span class="premisa-texto">Los demás privilegios marianos —la preservación del pecado original (Inmaculada Concepción), la virginidad perpetua, la asunción corporal a los cielos— son todos justificados teológicamente, en la tradición de la Iglesia, como exigencias de conveniencia derivadas de esta dignidad suprema de ser Madre de Dios.</span>
+      </div>
+      <div class="conclusion">
+        <span class="conclusion-label">Conclusión</span>
+        <span class="conclusion-texto">Por tanto, la Maternidad Divina no es un privilegio mariano más entre otros, situado al mismo nivel que los demás: es el privilegio fontal y radical del que todos los demás se derivan como consecuencias de conveniencia teológica. Por esta razón, la Iglesia ha reconocido siempre a la Maternidad Divina como el primero y más fundamental de todos los títulos marianos, la raíz de la cual brota toda la mariología católica.</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN V — EL CONCILIO DE ÉFESO
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="concilio-efeso">
+    <div class="seccion-header">
+      <div class="seccion-numero">V</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Historia Conciliar</div>
+        <h2>El Concilio Ecuménico de Éfeso (431)</h2>
+      </div>
+    </div>
+
+    <p>El tercer Concilio Ecuménico de la historia de la Iglesia, reunido en la ciudad de Éfeso —significativamente, una sede de antigua devoción mariana, asociada por la tradición a los últimos años de la Virgen— entre junio y septiembre del año 431, constituye el momento culminante en que la fe constante de la Iglesia sobre la Maternidad Divina de María recibió su formulación dogmática definitiva, en respuesta a la crisis doctrinal provocada por Nestorio, patriarca de Constantinopla.</p>
+
+    <div id="crisis-nestoriana"></div>
+    <h3>La Crisis Nestoriana</h3>
+
+    <p>Nestorio, monje de notable elocuencia formado en la escuela teológica de Antioquía, fue elevado a la sede patriarcal de Constantinopla en el año 428. Poco después de su consagración, comenzó a expresar reservas públicas sobre el uso del título <em>Theotókos</em>, ya profundamente arraigado en la piedad popular y en la predicación de la capital imperial. Según su planteamiento, atribuir a María el título de "Madre de Dios" resultaba inapropiado, pues —razonaba— una criatura humana no puede ser literalmente madre de la naturaleza divina, eterna e increada. Propuso, como alternativa más prudente, el título <em>Christotókos</em> ("Madre de Cristo"), entendiendo por "Cristo" la conjunción o unión moral de dos sujetos distintos: el Verbo divino y el hombre Jesús, unidos por una relación de "habitación" o "asistencia" más que por una verdadera unidad de persona.</p>
+
+    <p>El problema de fondo, como advirtieron rápidamente sus contemporáneos, no era meramente terminológico. Detrás de la preferencia por "Christotókos" se escondía una cristología defectuosa: si "Cristo" designa la conjunción de dos sujetos —uno divino, otro humano— y no la Persona única del Verbo encarnado, entonces la unidad de Cristo queda fragmentada en dos centros de identidad personal relacionados moralmente, pero no unidos sustancialmente. Esta fragmentación, llevada a sus últimas consecuencias, comprometía la doctrina misma de la salvación: si no es el mismo Dios quien sufre, muere y resucita en su humanidad asumida, sino un hombre meramente asistido por la divinidad, la obra redentora pierde su valor infinito.</p>
+
+    <div id="cartas-cirilo"></div>
+    <h3>Las Cartas de San Cirilo a Nestorio</h3>
+
+    <p>San Cirilo, patriarca de Alejandría, fue el principal responsable de articular la respuesta teológica ortodoxa a esta crisis. Entre los años 429 y 430 dirigió a Nestorio una serie de cartas de creciente precisión doctrinal y firmeza pastoral, de las cuales la <strong style="color:var(--dorado-claro)">Segunda Carta a Nestorio</strong> sería posteriormente aprobada formalmente por el Concilio de Éfeso como expresión auténtica de la fe católica, y la <strong style="color:var(--dorado-claro)">Tercera Carta</strong>, acompañada de los célebres "Doce Anatemas", se convertiría en el documento doctrinal de referencia para la condena del nestorianismo.</p>
+
+    <div class="cuadro-info">
+      <h5>Los Doce Anatemas de San Cirilo (selección)</h5>
+      <p><strong style="color:var(--dorado-claro)">Anatema I:</strong> Quien no confiese que el Emmanuel es verdaderamente Dios, y que por ello la Santa Virgen es Theotókos —pues dio a luz, según la carne, al Verbo de Dios hecho carne— sea anatema.</p>
+      <p><strong style="color:var(--dorado-claro)">Anatema II:</strong> Quien no confiese que el Verbo de Dios Padre se unió, según la hipóstasis (es decir, en unidad de persona), a la carne, y que es uno solo, Cristo, con su propia carne, el mismo Dios y hombre a la vez, sea anatema.</p>
+      <p><strong style="color:var(--dorado-claro)">Anatema III:</strong> Quien divida las hipóstasis (personas) de Cristo después de la unión, uniéndolas solamente por una conjunción de dignidad, autoridad o poder, y no por una verdadera unión natural, sea anatema.</p>
+      <p>Estos anatemas, aprobados en el Concilio, condenan formalmente la separación de Cristo en dos sujetos personales, exigiendo la confesión de una sola Persona divina subsistente en dos naturalezas.</p>
+    </div>
+
+    <div id="desarrollo-concilio"></div>
+    <h3>Desarrollo y Sentencia del Concilio</h3>
+
+    <p>El emperador Teodosio II, ante la magnitud de la controversia, convocó un Concilio Ecuménico para reunirse en Éfeso el 7 de junio del año 431. Las circunstancias históricas del Concilio fueron, hay que reconocerlo con honestidad, complejas y no exentas de tensiones eclesiásticas y políticas: Cirilo, alegando demoras inaceptables, abrió las sesiones el 22 de junio sin esperar la llegada de los obispos de la delegación antioquena —encabezada por Juan de Antioquía, simpatizante inicial de Nestorio— ni de los legados del Papa Celestino I, retrasados por una tormenta marítima.</p>
+
+    <p>En esta primera sesión, presidida por Cirilo como delegado papal, se leyó y aprobó la Segunda Carta de Cirilo a Nestorio como expresión auténtica de la fe niceno-constantinopolitana, y se procedió a la condena formal de Nestorio, depuesto de su sede episcopal. Cuando los legados papales llegaron días después, ratificaron en las sesiones segunda y tercera (10 y 11 de julio) lo decidido en la primera sesión, otorgando así la confirmación de la autoridad romana a las decisiones conciliares. La delegación antioquena, llegada también después de la condena, protestó inicialmente por el procedimiento empleado, lo que generó una tensión eclesial considerable; no obstante, en los años siguientes —particularmente a través de la llamada "Fórmula de Unión" de 433— se alcanzó la reconciliación entre Cirilo y Juan de Antioquía, consolidando definitivamente la recepción universal del dogma.</p>
+
+    <p>Pese a estas complejidades procedimentales —que la honestidad histórica obliga a no ocultar—, el contenido doctrinal definido en Éfeso fue recibido de manera prácticamente unánime por toda la Iglesia, tanto de Oriente como de Occidente, y el emperador Teodosio II, a pesar de su simpatía inicial por Nestorio, terminó por ratificar oficialmente las decisiones del Concilio, exiliando finalmente a Nestorio a un monasterio egipcio, donde permanecería hasta su muerte.</p>
+
+    <div id="calcedonia"></div>
+    <h3>La Confirmación en el Concilio de Calcedonia (451)</h3>
+
+    <p>Veinte años después de Éfeso, el cuarto Concilio Ecuménico, reunido en Calcedonia, tuvo que enfrentar el problema opuesto: el monofisismo (defendido entre otros por Eutiques), que, llevando demasiado lejos la insistencia en la unidad de Cristo, terminaba confundiendo o fusionando las dos naturalezas en una sola. Calcedonia definió, con la célebre fórmula de las "cuatro negaciones", que las dos naturalezas de Cristo subsisten "sin confusión, sin cambio, sin división, sin separación" en la única Persona del Verbo.</p>
+
+    <div class="dogma-box">
+      <p class="dogma-eyebrow">Definición Dogmática — Concilio de Calcedonia — Año 451</p>
+      <p class="dogma-texto">"Reconocemos a un solo y mismo Cristo, Hijo, Señor, Unigénito, en dos naturalezas, sin confusión, sin cambio, sin división, sin separación [...] concurriendo en una sola Persona e Hipóstasis, no partido o dividido en dos personas, sino uno y el mismo Hijo Unigénito, Dios Verbo, Señor Jesucristo."</p>
+      <p class="dogma-pie">— Definición de Fe del Concilio de Calcedonia, año 451</p>
+    </div>
+
+    <p>Esta definición calcedonense, lejos de contradecir o matizar la doctrina de Éfeso, la confirma y la complementa: al precisar con mayor exactitud técnica cómo subsisten las dos naturalezas en la única Persona del Verbo, refuerza precisamente el fundamento sobre el que descansa el título de Theotókos, pues solamente si hay una única Persona divina subsistiendo verdaderamente en una naturaleza humana real, puede afirmarse con propiedad que la mujer que dio a luz esa naturaleza humana es, en sentido pleno, Madre de Dios.</p>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN VI — LITURGIA Y TRADICIÓN
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="liturgia-tradicion">
+    <div class="seccion-header">
+      <div class="seccion-numero">VI</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Lex Orandi, Lex Credendi</div>
+        <h2>Liturgia y Tradición Viva</h2>
+      </div>
+    </div>
+
+    <p>Como en el caso de la Inmaculada Concepción, el principio <em>lex orandi, lex credendi</em> —la ley del orar es la ley del creer— se cumple de manera ejemplar en la doctrina de la Maternidad Divina. La oración litúrgica más antigua dirigida a María invoca ya explícitamente su condición de "Madre de Dios", demostrando que la fe en este título no nació en el Concilio de Éfeso, sino que fue allí solamente confirmada y defendida frente al ataque nestoriano.</p>
+
+    <div id="sub-tuum"></div>
+    <h3>El Sub Tuum Praesidium</h3>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"Sub tuum praesidium confugimus, Sancta Dei Genitrix; nostras deprecationes ne despicias in necessitatibus nostris, sed a periculis cunctis libera nos semper, Virgo gloriosa et benedicta."</p>
+      <p class="cita-ref">Sub tuum praesidium — Papiro griego de Egipto, datado entre los siglos III y IV</p>
+    </div>
+
+    <p>Esta oración —"Bajo tu amparo nos acogemos, Santa Madre de Dios"— es la pieza de devoción mariana más antigua que se conserva en forma escrita, hallada en un papiro egipcio cuya datación los especialistas sitúan, según las distintas hipótesis, entre el siglo III y el siglo IV, es decir, entre cien y ciento cincuenta años antes del Concilio de Éfeso. El título empleado en el texto griego original es precisamente <em>Theotókos</em> (Θεοτόκε, en forma vocativa), lo que demuestra documentalmente que la invocación litúrgica a María como "Madre de Dios" era ya una práctica establecida en la oración cristiana mucho antes de que Nestorio la cuestionara.</p>
+
+    <p>Este dato documental es decisivo para la historia de la doctrina: la controversia nestoriana no inauguró una nueva devoción, sino que intentó remover una práctica litúrgica ya antigua y extendida. El Concilio de Éfeso, al condenar a Nestorio, no estaba innovando, sino defendiendo y formalizando dogmáticamente una fe que el pueblo cristiano, en su oración cotidiana, profesaba desde generaciones atrás.</p>
+
+    <div id="fiestas-theotokos"></div>
+    <h3>Fiestas Litúrgicas de la Theotókos</h3>
+
+    <p>Tras el Concilio de Éfeso, la fiesta de la Maternidad Divina de María se difundió rápidamente por toda la cristiandad, aunque con fechas y denominaciones variables según las distintas tradiciones litúrgicas locales, antes de su fijación posterior en el calendario universal.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLO V (Tras 431)</div>
+        <h4>Difusión inmediata tras Éfeso</h4>
+        <p>En las décadas siguientes al Concilio, las iglesias de Oriente comienzan a instituir celebraciones específicas en honor de la Theotókos, generalmente vinculadas a las fiestas de la Natividad y la Anunciación del Señor.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">SIGLO VII</div>
+        <h4>La fiesta romana del 1 de enero</h4>
+        <p>En Roma se establece la celebración de la octava de la Natividad, el 1 de enero, con un marcado carácter mariano centrado en la maternidad divina de María, antecedente directo de la actual solemnidad.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">1931</div>
+        <h4>El XV centenario de Éfeso — Pío XI</h4>
+        <p>Con ocasión del decimoquinto centenario del Concilio, el Papa Pío XI instituye la fiesta de la "Maternidad Divina de María" para toda la Iglesia universal, fijándola en esa época en el 11 de octubre.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-anio">1969</div>
+        <h4>La reforma del calendario — Pablo VI</h4>
+        <p>Tras la reforma litúrgica del Concilio Vaticano II, la solemnidad de Santa María, Madre de Dios, se traslada al 1 de enero, octavo día de la Natividad, restaurando la antigua tradición romana y subrayando su carácter de solemnidad mariana fundamental que abre el año litúrgico civil.</p>
+      </div>
+    </div>
+
+    <div id="arte-iconografia"></div>
+    <h3>Arte e Iconografía Mariana Primitiva</h3>
+
+    <p>El arte cristiano de los primeros siglos constituye otro testimonio independiente y elocuente de la fe en la Maternidad Divina. Las catacumbas romanas conservan representaciones de María con el Niño que datan de los siglos II y III, mucho antes de la controversia nestoriana, entre ellas la célebre imagen de la catacumba de Priscila, considerada por muchos historiadores del arte como la representación mariana más antigua conocida.</p>
+
+    <p>Tras el Concilio de Éfeso, la iconografía mariana experimentó un notable florecimiento, particularmente en la decoración de basílicas dedicadas a celebrar la victoria doctrinal sobre el nestorianismo. El ejemplo más insigne es la basílica romana de <strong style="color:var(--dorado-claro)">Santa María la Mayor</strong>, cuyos mosaicos del arco triunfal, encargados por el Papa Sixto III inmediatamente después del Concilio (entre 432 y 440), representan escenas de la infancia de Cristo con una intención teológica explícita: proclamar visualmente, a través del arte, la verdad recién definida sobre la Maternidad Divina de María frente al error nestoriano. La iconografía se convirtió así en catequesis permanente del dogma para un pueblo mayoritariamente analfabeto.</p>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN VII — EL MAGISTERIO POSTERIOR
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="magisterio-posterior">
+    <div class="seccion-header">
+      <div class="seccion-numero">VII</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Continuidad Doctrinal</div>
+        <h2>Confirmaciones Magisteriales Posteriores</h2>
+      </div>
+    </div>
+
+    <p>El dogma de la Maternidad Divina, lejos de quedar como una definición aislada en el siglo V, ha sido reafirmado constantemente por el Magisterio de la Iglesia a lo largo de los siglos, hasta llegar a los documentos del Concilio Vaticano II, que sitúan explícitamente la mariología contemporánea sobre el fundamento de Éfeso.</p>
+
+    <div id="lumen-gentium"></div>
+    <h3>El Concilio Vaticano II — Lumen Gentium</h3>
+
+    <p>La Constitución Dogmática <em>Lumen Gentium</em> (1964), en su capítulo VIII, dedicado íntegramente a la Santísima Virgen María, sitúa expresamente la Maternidad Divina como fundamento de toda la consideración teológica posterior sobre María, recordando con precisión la doctrina de Éfeso y Calcedonia.</p>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">Concilio Vaticano II</p>
+      <p class="cita-texto">"La Virgen María [...] es reconocida y honrada como verdadera Madre de Dios y del Redentor [...] Por el don y el oficio de la maternidad divina, por la cual se une con el Hijo redentor, y por sus gracias y funciones singulares, se halla también íntimamente unida con la Iglesia."</p>
+      <p class="cita-fuente">— <em>Lumen Gentium</em>, n. 53</p>
+    </div>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">Concilio Vaticano II</p>
+      <p class="cita-texto">"En efecto, María, [...] concibiendo a Cristo, engendrándolo, alimentándolo, presentándolo al Padre en el templo, sufriendo con su Hijo agonizante en la cruz, cooperó de manera enteramente singular a la obra del Salvador [...] Por esta razón es para nosotros madre en el orden de la gracia."</p>
+      <p class="cita-fuente">— <em>Lumen Gentium</em>, n. 61</p>
+    </div>
+
+    <p>El Concilio Vaticano II no introduce ninguna novedad doctrinal respecto a Éfeso, sino que reafirma con lenguaje contemporáneo la misma verdad: la dignidad de María como "verdadera Madre de Dios y del Redentor" es la base sobre la que se erige toda consideración ulterior de su papel en la economía de la salvación y en la vida de la Iglesia.</p>
+
+    <div id="pablo-vi-marialis"></div>
+    <h3>Pablo VI y la Proclamación de «Madre de la Iglesia»</h3>
+
+    <p>El 21 de noviembre de 1964, al clausurar la tercera sesión del Concilio Vaticano II, el Papa Pablo VI proclamó solemnemente a María como "Madre de la Iglesia", título que, lejos de ser independiente de la Maternidad Divina, se presenta explícitamente como su consecuencia y prolongación: en cuanto Madre del Cabeza (Cristo), María es también, en sentido análogo y subordinado, Madre del Cuerpo (la Iglesia, que es el Cuerpo de Cristo).</p>
+
+    <div class="cita-patristica">
+      <p class="padre-nombre">Papa Pablo VI</p>
+      <p class="cita-texto">"A gloria de la Virgen María y para nuestro consuelo, declaramos a María Santísima Madre de la Iglesia, es decir, de todo el Pueblo de Dios, tanto de los fieles como de los Pastores, que la llaman Madre amantísima."</p>
+      <p class="cita-fuente">— Discurso de clausura de la tercera sesión del Concilio Vaticano II, 21 de noviembre de 1964</p>
+    </div>
+
+    <p>Posteriormente, en su encíclica <em>Marialis Cultus</em> (1974), Pablo VI insistiría en que toda devoción mariana auténtica debe estar siempre "cristológicamente referida", es decir, ordenada a manifestar y profundizar la verdad sobre Cristo. Este principio, que recorre toda la tradición desde los Padres hasta el Concilio Vaticano II, confirma la tesis central de esta exposición: el dogma de la Maternidad Divina no es un fin mariológico autónomo, sino el primer y más radical servicio que la mariología presta a la cristología, precisamente honrando a la Madre en función de la verdad sobre el Hijo.</p>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN VIII — OBJECIONES Y RESPUESTAS
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="objeciones">
+    <div class="seccion-header">
+      <div class="seccion-numero">VIII</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Apologética</div>
+        <h2>Objeciones Principales y sus Respuestas</h2>
+      </div>
+    </div>
+
+    <p>La honestidad intelectual exige examinar con seriedad las objeciones más importantes que se han levantado, históricamente y en el debate contemporáneo, contra el título de Madre de Dios. Algunas de estas objeciones son de naturaleza puramente filosófica; otras proceden de tradiciones religiosas que comparten con el cristianismo la fe en un Dios único y trascendente, pero discrepan sobre la identidad de Cristo.</p>
+
+    <div id="obj-imposibilidad"></div>
+    <h3>Objeción I: ¿Puede una Criatura ser Madre de Dios?</h3>
+
+    <p><strong style="color:var(--dorado-claro)">Objeción:</strong> Dios es, por definición, eterno, increado e inmutable. Toda maternidad implica ser causa, en algún sentido, de la existencia del hijo. Pero ninguna criatura puede ser causa de la existencia de Dios, pues Dios no tiene causa alguna fuera de sí mismo (es <em>a se</em>, "por sí mismo"). Por tanto, parece metafísicamente imposible que María, una criatura, sea "madre" de Dios en sentido propio; el título sólo podría entenderse como una metáfora piadosa o una manera de hablar aproximada.</p>
+
+    <p><strong style="color:var(--dorado-claro)">Respuesta:</strong> La objeción es válida en cuanto a su premisa metafísica —en efecto, ninguna criatura puede ser causa de la naturaleza divina, eterna e increada— pero comete un error al aplicarla incorrectamente al caso de la Maternidad Divina, tal como ésta ha sido definida por la Iglesia. Como se ha mostrado extensamente en el Silogismo III (sección IV), María no es causa de la naturaleza divina del Verbo, que permanece eterna e inmutable; es causa, en el orden de la generación humana, únicamente de la naturaleza humana que el Verbo asumió libremente. La relación de maternidad, sin embargo, no termina en la naturaleza transmitida sino en la Persona que subsiste en ella, y esa Persona —preexistente, eterna— es divina. María es, por tanto, verdaderamente madre de una Persona divina según la naturaleza humana de esa Persona, sin ser en ningún sentido causa de su naturaleza divina. No hay aquí contradicción metafísica alguna, una vez hecha esta distinción esencial entre persona y naturaleza.</p>
+
+    <div id="obj-eterno"></div>
+    <h3>Objeción II: La Objeción desde la Eternidad Divina</h3>
+
+    <p><strong style="color:var(--dorado-claro)">Objeción:</strong> Si el Hijo de Dios es eterno —existente desde siempre, sin principio—, ¿cómo puede tener un "principio" en el tiempo a través del nacimiento de María? Afirmar que María es "madre" de un ser eterno parece implicar que ese ser comenzó a existir en un momento determinado (el de su concepción o nacimiento), lo cual contradice su eternidad.</p>
+
+    <p><strong style="color:var(--dorado-claro)">Respuesta:</strong> Esta objeción confunde el orden de la naturaleza divina con el orden de la naturaleza humana asumida, precisamente la confusión que la doctrina de las "dos naturalezas sin confusión" (Calcedonia) previene. El Verbo, en su naturaleza divina, no comienza a existir en María: existe eternamente, sin principio, engendrado eternamente por el Padre (cf. Jn 1,1). Lo que comienza a existir en el tiempo —en el seno de María— no es la Persona divina en cuanto tal, sino la naturaleza humana que esa Persona, ya eternamente existente, asume libremente en un momento histórico determinado. San Agustín expresó esta verdad con una fórmula memorable: "Dios, que existía antes de todos los tiempos, comenzó a ser hombre en el tiempo" (<em>Sermo</em> 186). No hay, por tanto, ninguna contradicción: lo eterno permanece eterno; lo que tiene principio temporal es exclusivamente la humanidad asumida, no la divinidad que la asume.</p>
+
+    <div id="obj-nestoriana"></div>
+    <h3>Objeción III: La Objeción Nestoriana Reformulada</h3>
+
+    <p><strong style="color:var(--dorado-claro)">Objeción:</strong> Algunos cristianos, incluso después de Éfeso, han argumentado que llamar a María "Madre de Dios" corre el riesgo de divinizar excesivamente a María, sugiriendo que ella sería en algún sentido superior o anterior a Dios, como si "engendrara" a la divinidad misma, lo cual recordaría las genealogías divinas de las mitologías paganas, donde diosas madres dan origen a otras divinidades.</p>
+
+    <p><strong style="color:var(--dorado-claro)">Respuesta:</strong> Esta objeción, aunque formulada con preocupación piadosa legítima por evitar excesos marianos, descansa sobre un malentendido que la propia definición de Éfeso previene explícitamente. San Cirilo fue extraordinariamente cuidadoso en precisar, en su Segunda Carta a Nestorio, que María es llamada Theotókos "no porque la naturaleza del Verbo haya tomado de ella el principio de su ser", sino porque el Verbo, ya existente, "se sometió a nacer según la carne de ella". El título no implica en absoluto que María sea origen, causa o anterior a la divinidad del Verbo —lo cual sería, en efecto, una blasfemia comparable a las mitologías paganas que la objeción menciona—; implica únicamente que ella es madre, según la naturaleza humana, de la Persona que es Dios. Lejos de divinizar excesivamente a María, esta precisión doctrinal protege simultáneamente la trascendencia de Dios y la verdadera dignidad maternal de María, sin caer en ninguno de los dos extremos: ni negar su maternidad real (nestorianismo), ni convertirla en origen de la divinidad (paganismo mitológico).</p>
+
+    <div id="obj-islam"></div>
+    <h3>Objeción IV: La Objeción Coránica</h3>
+
+    <p><strong style="color:var(--dorado-claro)">Objeción:</strong> El Corán, en varios pasajes (notablemente Sura 5:116 y Sura 19, dedicada íntegramente a María, a quien honra con gran reverencia), rechaza explícitamente que Dios tenga un "hijo" en sentido literal, y por extensión rechaza el título de "Madre de Dios" aplicado a María, argumentando que tal afirmación comprometería la absoluta trascendencia y unicidad de Dios (<em>tawhid</em>), atribuyéndole, según esta perspectiva, una generación corpórea inapropiada de la divinidad.</p>
+
+    <p><strong style="color:var(--dorado-claro)">Respuesta:</strong> Esta objeción, proveniente de una tradición religiosa que profesa sinceramente la fe en un Dios único y trascendente, merece una respuesta respetuosa pero doctrinalmente precisa, pues toca el núcleo mismo de la diferencia entre el Islam y el Cristianismo respecto a la persona de Jesús. La objeción coránica parte de una comprensión de la "filiación divina" como generación física o carnal de una segunda divinidad a partir de la primera —exactamente la concepción mitológica pagana que, como se ha visto en la Objeción III, el cristianismo ortodoxo rechaza igualmente—. Pero la doctrina cristiana de la generación eterna del Hijo no afirma una generación física, temporal o material dentro de la divinidad, sino una relación personal eterna e inmaterial dentro de la única naturaleza divina indivisible: el Padre engendra eternamente al Hijo comunicándole la totalidad de su misma naturaleza divina, sin multiplicación, sin división, sin proceso temporal ni corpóreo. La unicidad de Dios (que el cristianismo profesa con el mismo énfasis que el Islam, cf. el Credo Niceno: "Creemos en un solo Dios") no queda comprometida por la distinción personal interna a esa única naturaleza divina, del mismo modo que —analógicamente, aunque de forma muy imperfecta— una misma esencia humana puede subsistir en personas distintas sin multiplicar la naturaleza. El título "Madre de Dios" aplicado a María no afirma, por tanto, que ella haya generado una segunda divinidad junto a la primera, sino que es madre, según la humanidad asumida, de la única Persona divina del Hijo, sin que ello introduzca pluralidad alguna en la esencia divina ni comprometa la trascendencia de Dios. El diálogo respetuoso entre ambas tradiciones reconoce aquí una diferencia doctrinal real y profunda —relativa a la identidad misma de Jesús—, pero esa diferencia no nace de que el cristianismo profese un Dios menos único o más "corpóreo" que el del Islam, sino de la afirmación cristiana, ausente en la fe islámica, de que ese único Dios se ha revelado en una pluralidad personal eterna e inmaterial, y que el Verbo, una de esas Personas, se hizo verdaderamente hombre en el seno de María.</p>
+
+    <div class="cuadro-info">
+      <h5>Precisión Importante sobre el Diálogo Interreligioso</h5>
+      <p>Conviene subrayar que esta respuesta no pretende minimizar la sincera reverencia que la tradición islámica profesa hacia María (Maryam), a quien el Corán dedica una sura completa y reconoce virtudes excepcionales, incluyendo su concepción virginal de Jesús. La diferencia doctrinal aquí señalada se refiere exclusivamente a la identidad de Jesús —si es o no la segunda Persona divina encarnada— y no a un desacuerdo sobre la dignidad o pureza moral de María, que ambas tradiciones, cada una desde su propio marco doctrinal, reconocen como extraordinaria.</p>
+    </div>
+  </section>
+
+  <hr class="separador">
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN IX — CONCLUSIÓN
+  ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="conclusion">
+    <div class="seccion-header">
+      <div class="seccion-numero">IX</div>
+      <div class="seccion-titulo-wrap">
+        <div class="seccion-eyebrow">Síntesis Final</div>
+        <h2>Conclusión: El Dogma que Sostiene Todos los Demás</h2>
+      </div>
+    </div>
+
+    <p>Al término de esta exposición, se hace evidente por qué la Maternidad Divina de María ocupa un lugar único y fundacional en la teología católica, distinto del de cualquier otro privilegio mariano. No es, como se ha mostrado, una verdad aislada sobre la persona de María, sino la consecuencia directa e ineludible de la verdad central del cristianismo: que en Jesucristo, una sola Persona divina ha asumido verdaderamente la naturaleza humana, naciendo realmente de una mujer concreta de la historia. Honrar a María como Theotókos es, ante todo, confesar con precisión quién es Cristo.</p>
+
+    <p>El recorrido bíblico, patrístico, conciliar y filosófico desarrollado en estas páginas converge en una misma conclusión: el título "Madre de Dios" no es una exageración devocional ni una metáfora piadosa, sino una afirmación teológica de rigor extremo, defendida con las herramientas más precisas de la filosofía clásica —la distinción entre persona y naturaleza, el principio de la comunicación de idiomas, la doctrina de la unión hipostática— precisamente para que ninguna ambigüedad conceptual pudiera erosionar la verdad central de la fe: que Dios se hizo hombre verdaderamente, y que lo hizo naciendo de una madre real.</p>
+
+    <div class="cita-biblica">
+      <p class="cita-texto">"¿Quién soy yo para que me visite la madre de mi Señor?"</p>
+      <p class="cita-ref">Lucas 1, 43 — Las palabras de Isabel a María, bajo inspiración del Espíritu Santo</p>
+    </div>
+
+    <p>Esta pregunta retórica de Isabel, formulada en el primer capítulo del primer relato evangélico de la Encarnación, contiene ya en germen todo lo que el Concilio de Éfeso definiría con precisión técnica cuatro siglos más tarde. La fe de la Iglesia en la Maternidad Divina de María no es, por tanto, una elaboración tardía y especulativa, sino la explicitación rigurosa de una verdad que el pueblo cristiano, guiado por el Espíritu Santo, confesó desde el primer instante del Evangelio.</p>
+
+    <p>Defender este dogma no es, en última instancia, defender el honor de María por sí mismo, sino defender la integridad misma de la fe cristológica: la unidad indivisible de la Persona de Cristo, verdadero Dios y verdadero hombre, nacido realmente de una madre, para que en Él se realizara realmente —no simbólica ni parcialmente— la unión entre Dios y la humanidad que es el fundamento de toda esperanza de salvación. Como advirtió San Gregorio Nacianceno con una sentencia que ha resonado a través de los siglos: negar que María es Theotókos es, en el fondo, separarse de la verdad sobre la divinidad de su Hijo.</p>
+
+    <div class="dogma-box">
+      <p class="dogma-eyebrow">Antífona Litúrgica de la Solemnidad de Santa María, Madre de Dios</p>
+      <p class="dogma-texto">"Santa María, ruega por nosotros, intercede por el pueblo, ayuda al clero, presta tu intercesión por todo el sexo devoto, las mujeres consagradas a Dios: que se alegren todos los que celebran tu santa solemnidad, oh Santa Madre de Dios."</p>
+      <p class="dogma-pie">— Antífona del Concilio de Éfeso, conservada en la liturgia bizantina</p>
+    </div>
+
+    <p>En última instancia, contemplar a María como Madre de Dios es contemplar, en su forma más concentrada y luminosa, el misterio mismo de la Encarnación: que el Verbo eterno, sin dejar de ser quien es desde toda la eternidad, quiso entrar verdaderamente en la historia humana a través del vientre de una mujer de Nazaret. En ese acto irrepetible de humildad divina y de fe humana se funda no sólo la dignidad incomparable de María, sino la posibilidad misma de la salvación de todo el género humano, llamado, en Cristo, a participar de la naturaleza divina (cf. 2 Pe 1,4) precisamente porque Dios quiso primero, sin reservas, participar verdaderamente de la naturaleza humana.</p>
+
+    <div class="ornamento">✦ ✦ ✦</div>
+
+    <h3>Bibliografía Patrística y Conciliar de Referencia</h3>
+
+    <div class="cuadro-info">
+      <h5>Fuentes Patrísticas y Apostólicas</h5>
+      <p>San Ignacio de Antioquía, <em>Epistola ad Ephesios</em> (c. 107) · San Ireneo, <em>Adversus Haereses</em> (c. 180) · Orígenes, <em>Commentarii in Matthaeum</em> (testimonio en Sócrates Escolástico, <em>Historia Ecclesiastica</em>, VII, 32) · San Atanasio, <em>De Incarnatione Verbi</em> (c. 318) · San Gregorio Nacianceno, <em>Epistola 101 ad Cledonium</em> (c. 382) · San Ambrosio, <em>Expositio Evangelii secundum Lucam</em> (c. 377-386) · San Agustín, <em>Sermo 186; De Sancta Virginitate</em> (c. 400-415) · San Cirilo de Alejandría, <em>Epistolae II et III ad Nestorium, cum XII Anathematismis</em> (429-430) · San Juan Crisóstomo, <em>Homiliae in Natalem Domini</em> (c. 386-398) · San León Magno, <em>Tomus ad Flavianum</em> (449) · San Juan Damasceno, <em>De Fide Orthodoxa</em> (c. 743)</p>
+    </div>
+
+    <div class="cuadro-info">
+      <h5>Fuentes Conciliares y Magisteriales</h5>
+      <p>Concilio de Nicea I, <em>Symbolum Nicaenum</em> (325) · Concilio de Constantinopla I (381) · Concilio de Éfeso, <em>Acta et Anathematismi</em> (431) · Concilio de Calcedonia, <em>Definitio Fidei</em> (451) · Santo Tomás de Aquino, <em>Summa Theologiae</em>, III, qq. 27-35 (c. 1272) · Concilio Vaticano II, <em>Lumen Gentium</em>, cap. VIII, nn. 52-69 (1964) · Papa Pablo VI, Discurso de clausura de la III sesión conciliar (21 de noviembre de 1964) y <em>Marialis Cultus</em> (1974)</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-simbolo">✠</span>
+  <p>Ave María, gratia plena, Dominus tecum</p>
+  <p>Benedicta tu in mulieribus, et benedictus fructus ventris tui, Iesus</p>
+  <p>Sancta Maria, Mater Dei, ora pro nobis peccatoribus</p>
+  <p>Nunc et in hora mortis nostrae. Amen.</p>
+  <br>
+  <p class="footer-latin">Theotókos · Concilium Ephesinum · Anno Domini 431</p>
+</footer>
+
+<script>
+  // ═══════════════════════════════════════
+  // BARRA DE PROGRESO + PORCENTAJE EN EL ÍNDICE
+  // ═══════════════════════════════════════
+  const barra = document.getElementById('barra-progreso');
+  const pctEl = document.getElementById('nav-progreso-pct');
+
+  function actualizarProgreso() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min(100, Math.round(scrollTop / docHeight * 100)) : 0;
+    barra.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
+  }
+  window.addEventListener('scroll', actualizarProgreso, { passive: true });
+  actualizarProgreso();
+
+  // ═══════════════════════════════════════
+  // TOGGLE / COLAPSO DEL ÍNDICE
+  // ═══════════════════════════════════════
+  const navFlotante = document.getElementById('nav-flotante');
+  const navToggleBtn = document.getElementById('nav-toggle');
+  const navColapsarBtn = document.getElementById('nav-colapsar');
+  const esEstrecho = () => window.innerWidth <= 1100;
+
+  function actualizarToggleBtn() {
+    if (!navToggleBtn) return;
+    navToggleBtn.classList.toggle('visible', esEstrecho());
+    const abierto = navFlotante.classList.contains('visible');
+    navToggleBtn.textContent = abierto ? '✕ CERRAR' : '☰ ÍNDICE';
+  }
+
+  function toggleNav() {
+    navFlotante.classList.toggle('visible');
+    navFlotante.classList.remove('oculto');
+    actualizarToggleBtn();
+  }
+  window.toggleNav = toggleNav;
+
+  function toggleColapso() {
+    navFlotante.classList.toggle('colapsado');
+    navColapsarBtn.textContent = navFlotante.classList.contains('colapsado') ? '»' : '«';
+    navColapsarBtn.title = navFlotante.classList.contains('colapsado') ? 'Expandir índice' : 'Contraer índice';
+  }
+  window.toggleColapso = toggleColapso;
+
+  function aplicarModoResponsive() {
+    if (esEstrecho()) {
+      navFlotante.classList.remove('colapsado');
+      navFlotante.classList.remove('visible');
+    } else {
+      navFlotante.classList.remove('visible');
+      navFlotante.classList.remove('oculto');
+    }
+    actualizarToggleBtn();
+  }
+  aplicarModoResponsive();
+  window.addEventListener('resize', aplicarModoResponsive);
+
+  // Cerrar el drawer móvil al elegir un destino
+  navFlotante.addEventListener('click', (e) => {
+    if (e.target.matches('.nav-item') && esEstrecho()) {
+      navFlotante.classList.remove('visible');
+      actualizarToggleBtn();
+    }
+  });
+
+  // ═══════════════════════════════════════
+  // BUSCADOR EN VIVO DEL ÍNDICE
+  // ═══════════════════════════════════════
+  const buscador = document.getElementById('nav-buscador');
+  const contadorBusqueda = document.getElementById('nav-buscador-contador');
+  const grupos = document.querySelectorAll('.nav-grupo');
+
+  function quitarAcentos(s) {
+    return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  function resaltar(el, termino) {
+    const original = el.dataset.textoOriginal || el.textContent;
+    el.dataset.textoOriginal = original;
+    if (!termino) { el.innerHTML = original; return; }
+    const re = new RegExp('(' + termino.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+    const normalizado = quitarAcentos(original.toLowerCase());
+    const idx = quitarAcentos(termino.toLowerCase());
+    if (normalizado.includes(idx)) {
+      el.innerHTML = original.replace(re, '<mark>$1</mark>');
+    } else {
+      el.innerHTML = original;
+    }
+  }
+
+  buscador.addEventListener('input', () => {
+    const termino = buscador.value.trim();
+    const terminoNorm = quitarAcentos(termino.toLowerCase());
+    let totalCoincidencias = 0;
+
+    grupos.forEach(grupo => {
+      const summary = grupo.querySelector('summary');
+      const items = grupo.querySelectorAll('.nav-item');
+      let grupoTieneCoincidencia = false;
+
+      items.forEach(item => {
+        const texto = item.dataset.textoOriginal || item.textContent;
+        item.dataset.textoOriginal = texto;
+        const coincide = !terminoNorm || quitarAcentos(texto.toLowerCase()).includes(terminoNorm);
+        item.classList.toggle('oculto-busqueda', !coincide);
+        if (coincide && terminoNorm) {
+          resaltar(item, termino);
+          grupoTieneCoincidencia = true;
+          totalCoincidencias++;
+        } else {
+          item.innerHTML = texto;
+        }
+      });
+
+      const summaryTexto = summary.dataset.textoOriginal || summary.textContent;
+      summary.dataset.textoOriginal = summaryTexto;
+      const summaryCoincide = !terminoNorm || quitarAcentos(summaryTexto.toLowerCase()).includes(terminoNorm);
+
+      grupo.classList.toggle('oculto-busqueda', terminoNorm && !grupoTieneCoincidencia && !summaryCoincide);
+
+      if (terminoNorm) {
+        if (grupoTieneCoincidencia || summaryCoincide) grupo.open = true;
+      }
+    });
+
+    if (terminoNorm) {
+      contadorBusqueda.textContent = totalCoincidencias === 1
+        ? '1 resultado'
+        : totalCoincidencias + ' resultados';
+    } else {
+      contadorBusqueda.textContent = '';
+      grupos.forEach(g => g.classList.remove('oculto-busqueda'));
+    }
+  });
+
+  // ═══════════════════════════════════════
+  // NAVEGACIÓN ACTIVA EN SCROLL + APERTURA AUTOMÁTICA
+  // ═══════════════════════════════════════
+  const navItems = document.querySelectorAll('.nav-item[href^="#"]');
+  const seccionActualEl = document.getElementById('nav-seccion-actual');
+  const allTargets = Array.from(navItems)
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  const ioNav = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = '#' + e.target.id;
+
+        navItems.forEach(a => {
+          a.classList.toggle('activo', a.getAttribute('href') === id);
+        });
+
+        grupos.forEach(g => g.classList.remove('activo'));
+        const itemActivo = document.querySelector('.nav-item.activo');
+        if (itemActivo) {
+          const grupoPadre = itemActivo.closest('.nav-grupo');
+          if (grupoPadre) {
+            grupoPadre.classList.add('activo');
+            if (!buscador.value.trim()) grupoPadre.open = true;
+            if (seccionActualEl) {
+              const numero = grupoPadre.querySelector('.nav-num')?.textContent || '';
+              seccionActualEl.textContent = numero;
+            }
+          }
+        }
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-20% 0px -60% 0px' });
+
+  allTargets.forEach(t => ioNav.observe(t));
+</script>
+</body>
+</html>

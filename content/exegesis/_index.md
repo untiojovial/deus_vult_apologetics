@@ -25,3 +25,4 @@ Aqui trabajamos pasajes complejos con rigor, claridad y fidelidad al texto sagra
 - [Marcos 10:18 — ¿Negación o Afirmación de la Divinidad? (Dossier)](/exegesis/marcos-10-18-dossier/)
 - [Marcos 13:32 — ¿Ignorancia o No-Revelación? (Dossier)](/exegesis/marcos-13-32-dossier/)
 - [La Cátedra de Moisés — Mateo 23:2-3 (Dossier)](/exegesis/catedra-moises-dossier/)
+- [Juan 20:28 - Filologia y Teologia (Dossier)](/exegesis/juan-20-28-divinidad-dossier/)

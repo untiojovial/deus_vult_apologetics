@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las Cruzadas: historia, defensa católica y verdad académica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070705;--bg-alt:#0d0d0a;--card:#131310;--card-2:#17170f;
+    --border:rgba(212,175,55,0.22);--border-soft:rgba(212,175,55,0.10);
+    --gold:#c9a227;--gold-bright:#ecc659;--gold-soft:rgba(212,175,55,0.10);
+    --white:#f4efe3;--white-dim:#b9b6ab;--maxw:880px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--white-dim);line-height:1.78;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--gold);color:#0a0a08;}
+  ::-webkit-scrollbar{width:10px;}::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--card-2);border:1px solid var(--border);border-radius:6px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+  a{color:var(--gold-bright);text-decoration:none;}a:hover{text-decoration:underline;}
+  strong{color:var(--white);font-weight:600;}em{color:var(--white);}
+
+  #progressBar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));z-index:200;transition:width .12s linear;}
+  .skip-link{position:absolute;left:-999px;top:0;background:var(--gold);color:#000;padding:.5rem 1rem;z-index:300;font-weight:600;}
+  .skip-link:focus{left:0;}
+
+  /* SIDEBAR */
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:310px;background:var(--bg-alt);border-right:1px solid var(--border);overflow-y:auto;padding:2.2rem 1.4rem 3rem;z-index:100;}
+  .brand{display:flex;flex-direction:column;gap:.35rem;padding:0 .6rem;}
+  .brand .mark{width:44px;height:44px;display:flex;align-items:center;justify-content:center;}
+  .brand h1{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--white);font-weight:600;letter-spacing:.02em;margin-top:.6rem;line-height:1.3;}
+  .brand p{font-size:.75rem;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;margin-top:.25rem;}
+  .toc-title{margin:2rem 0 .7rem;padding:0 .6rem;font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .toc-list{list-style:none;display:flex;flex-direction:column;gap:.1rem;}
+  .toc-list a{display:flex;gap:.65rem;align-items:baseline;padding:.52rem .7rem;border-radius:6px;color:var(--white-dim);font-size:.84rem;border-left:2px solid transparent;transition:background .15s,color .15s,border-color .15s;}
+  .toc-list a .num{font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:700;font-size:.84rem;min-width:1.7rem;}
+  .toc-list a:hover{background:var(--gold-soft);color:var(--white);text-decoration:none;}
+  .toc-list a.active{background:var(--gold-soft);color:var(--gold-bright);font-weight:600;border-left-color:var(--gold);}
+  .toc-list a.active .num{color:var(--gold-bright);}
+  .sidebar-foot{margin-top:2.2rem;padding:1rem .7rem 0;border-top:1px solid var(--border-soft);font-size:.72rem;color:var(--white-dim);line-height:1.6;}
+  #menuToggle{display:none;position:fixed;top:1rem;left:1rem;z-index:150;width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--gold-bright);font-size:1.2rem;align-items:center;justify-content:center;cursor:pointer;}
+
+  /* LAYOUT */
+  main{margin-left:310px;}
+  .section{max-width:var(--maxw);margin:0 auto;padding:5.5rem 2.6rem 0;scroll-margin-top:1.5rem;}
+  .section:last-of-type{padding-bottom:2rem;}
+  .eyebrow{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.22;margin-bottom:1.4rem;}
+  h3{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:clamp(1.12rem,2.5vw,1.42rem);margin:2.2rem 0 .8rem;}
+  h4{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:1.1rem;margin-bottom:.5rem;}
+  p{margin-bottom:1.15rem;font-size:1.02rem;}
+  ul,ol{margin:0 0 1.15rem 1.4rem;}
+  li{margin-bottom:.5rem;font-size:1.02rem;}
+
+  /* HERO */
+  .hero{padding:5rem 2.6rem 3rem;max-width:var(--maxw);margin:0 auto;position:relative;}
+  .hero-rosette{position:absolute;top:1rem;right:1.5rem;opacity:.38;}
+  @media (prefers-reduced-motion:no-preference){.hero-rosette .spin{animation:spin 90s linear infinite;transform-origin:50% 50%;}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(2rem,5.8vw,3.4rem);line-height:1.14;max-width:720px;}
+  .hero h1 span{color:var(--gold-bright);}
+  .hero .lede{margin-top:1.4rem;font-size:1.1rem;color:var(--white-dim);max-width:670px;line-height:1.8;}
+  .pills{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.8rem;}
+  .pill{border:1px solid var(--border);border-radius:999px;padding:.4rem 1.1rem;font-size:.77rem;color:var(--gold-bright);letter-spacing:.06em;background:var(--gold-soft);}
+
+  /* CALLOUTS */
+  .callout{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:1.3rem 1.5rem;margin:1.6rem 0 2.2rem;}
+  .callout.note{border-left:3px solid var(--gold);}
+  .callout.danger{border-left:3px solid #9a3535;}
+  .callout.green{border-left:3px solid #3a6e3a;}
+  .callout-title{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-weight:600;font-size:1.05rem;margin-bottom:.55rem;display:flex;align-items:center;gap:.5rem;}
+  .callout-title.red{color:#d96060;}
+  .callout-title.green-t{color:#7ec87e;}
+  .callout p:last-child{margin-bottom:0;}
+
+  /* CITAS VERIFICADAS */
+  .hist-quote{border-left:3px solid var(--gold);padding:.85rem 1.25rem;margin:1.5rem 0;background:rgba(212,175,55,0.05);border-radius:0 6px 6px 0;}
+  .hist-quote p{font-family:'IM Fell English',serif;font-style:italic;font-size:1.06rem;color:var(--white);margin-bottom:.4rem;}
+  .hist-quote .attr{font-size:.74rem;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;}
+
+  /* CRUZADA CARD */
+  .cruzada-card{border:1px solid var(--gold);border-radius:10px;padding:1.8rem 1.9rem;margin:2rem 0;background:linear-gradient(160deg,rgba(212,175,55,0.06) 0%,transparent 60%);}
+  .cruzada-header{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1.1rem;}
+  .cruzada-num{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-size:2rem;font-weight:700;line-height:1;}
+  .cruzada-title{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.3rem;font-weight:600;}
+  .cruzada-dates{font-size:.76rem;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;border:1px solid var(--border);border-radius:4px;padding:.15rem .6rem;white-space:nowrap;}
+  .cruzada-meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;}
+  .cruzada-tag{font-size:.74rem;background:var(--card-2);border:1px solid var(--border-soft);border-radius:4px;padding:.15rem .55rem;color:var(--white-dim);}
+  .cruzada-card p{font-size:.98rem;margin-bottom:.9rem;}
+  .cruzada-card p:last-child{margin-bottom:0;}
+  .resultado{border-top:1px solid var(--border-soft);padding-top:.9rem;margin-top:1rem;}
+  .resultado-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:.4rem;}
+  .resultado.exito{border-top-color:rgba(74,140,74,0.4);}
+  .resultado.fracaso{border-top-color:rgba(154,53,53,0.4);}
+  .resultado.parcial{border-top-color:rgba(212,175,55,0.4);}
+  .resultado.exito .resultado-label{color:#7ec87e;}
+  .resultado.fracaso .resultado-label{color:#d96060;}
+
+  /* EXPANSION ISLÁMICA */
+  .expansion-timeline{display:flex;flex-direction:column;gap:0;margin:1.8rem 0;border-left:2px solid var(--border);padding-left:1.6rem;}
+  .exp-item{position:relative;padding:.55rem 0;}
+  .exp-item::before{content:'';position:absolute;left:-1.67rem;top:.85rem;width:10px;height:10px;border-radius:50%;background:#9a3535;}
+  .exp-item .year{color:#e08080;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1rem;display:inline;}
+  .exp-item p{display:inline;font-size:.94rem;margin:0 0 0 .5rem;}
+  .exp-item.neutral::before{background:var(--gold);}
+  .exp-item.neutral .year{color:var(--gold-bright);}
+
+  /* BOXES */
+  .box{border-left:3px solid var(--gold);background:var(--card);border-radius:0 8px 8px 0;padding:1.15rem 1.4rem;margin:1rem 0;}
+  .box.alt{border-left-color:var(--white);}
+  .box.danger{border-left-color:#9a3535;}
+  .box.green{border-left-color:#3a6e3a;}
+  .box-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;flex-wrap:wrap;}
+  .tag{font-family:'Cormorant Garamond',serif;font-weight:700;color:#0a0a08;background:var(--gold);padding:.18rem .65rem;border-radius:4px;font-size:.8rem;letter-spacing:.04em;white-space:nowrap;}
+  .tag.white{background:var(--white);}
+  .tag.red{background:#9a3535;color:var(--white);}
+  .tag.green{background:#3a6e3a;color:var(--white);}
+  .tag.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold-bright);}
+  .box p{margin-bottom:0;font-size:.98rem;}
+  .box p+p{margin-top:.6rem;}
+  .box .label{color:var(--gold-bright);font-weight:600;font-size:.83rem;text-transform:uppercase;letter-spacing:.1em;}
+
+  /* MITO/REALIDAD */
+  .mito-realidad{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.6rem 0;}
+  @media(max-width:640px){.mito-realidad{grid-template-columns:1fr;}}
+  .mito{border:1px solid #6a2020;background:rgba(100,20,20,0.14);border-radius:8px;padding:1.15rem 1.2rem;}
+  .mito .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:#d96060;border:1px solid #9a3535;border-radius:4px;padding:.15rem .55rem;margin-bottom:.6rem;}
+  .mito p{font-size:.92rem;margin-bottom:0;color:var(--white-dim);}
+  .realidad{border:1px solid rgba(212,175,55,0.4);background:rgba(212,175,55,0.06);border-radius:8px;padding:1.15rem 1.2rem;}
+  .realidad .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold-bright);border:1px solid var(--gold);border-radius:4px;padding:.15rem .55rem;margin-bottom:.6rem;}
+  .realidad p{font-size:.92rem;margin-bottom:0;}
+
+  /* AUTOR CARD */
+  .autor-card{border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.3rem;background:var(--card);margin:.8rem 0;}
+  .autor-card .name{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:1.1rem;}
+  .autor-card .info{color:var(--gold);font-size:.74rem;text-transform:uppercase;letter-spacing:.11em;margin-bottom:.45rem;display:block;}
+  .autor-card p{font-size:.94rem;margin-bottom:0;}
+
+  /* TABLA */
+  .table-wrap{overflow-x:auto;margin:1.8rem 0;border:1px solid var(--border);border-radius:8px;}
+  table{width:100%;border-collapse:collapse;font-size:.91rem;min-width:600px;}
+  th,td{padding:.85rem 1rem;border-bottom:1px solid var(--border-soft);text-align:left;vertical-align:top;}
+  th{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-size:.98rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--gold);background:var(--bg-alt);position:sticky;top:0;}
+  tbody tr:hover{background:rgba(212,175,55,0.04);}
+  tbody tr:last-child td{border-bottom:none;}
+  td.flag{color:var(--gold-bright);font-weight:600;}
+  td.red{color:#d96060;}
+  td.green{color:#7ec87e;}
+
+  /* SECTION BANNER */
+  .section-banner{background:linear-gradient(135deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--border);border-radius:10px;padding:1.8rem 2rem 1.5rem;margin:2rem 0 2.4rem;position:relative;overflow:hidden;}
+  .section-banner::before{content:'';position:absolute;right:-20px;top:-20px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.12),transparent 70%);}
+  .section-banner h3{margin-top:0;color:var(--gold-bright);}
+  .section-banner p{font-size:.96rem;}
+  .section-banner p:last-child{margin-bottom:0;}
+
+  /* DIVIDERS */
+  .divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3.4rem 0;opacity:.5;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border));}
+  .divider::after{background:linear-gradient(to left,transparent,var(--border));}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);margin-top:4rem;padding:2.4rem 2.6rem 3rem;max-width:var(--maxw);margin-left:auto;margin-right:auto;text-align:center;font-size:.85rem;color:var(--white-dim);}
+  footer .mark-small{margin:0 auto 1rem;opacity:.6;}
+  #backToTop{position:fixed;bottom:1.6rem;right:1.6rem;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:var(--card);color:var(--gold-bright);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:120;}
+  #backToTop.visible{opacity:1;pointer-events:auto;}
+  #backToTop:hover{transform:translateY(-3px);}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px;}
+
+  @media(max-width:980px){
+    .sidebar{transform:translateX(-100%);transition:transform .28s ease;box-shadow:20px 0 40px rgba(0,0,0,.5);}
+    .sidebar.open{transform:translateX(0);}
+    main{margin-left:0;}
+    #menuToggle{display:flex;}
+    .hero,.section{padding-left:1.4rem;padding-right:1.4rem;}
+    .hero{padding-top:4.8rem;}
+    .hero-rosette{display:none;}
+    .mito-realidad{grid-template-columns:1fr;}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="progressBar" aria-hidden="true"></div>
+<button id="menuToggle" aria-label="Abrir índice" aria-expanded="false">☰</button>
+
+<nav class="sidebar" id="sidebar" aria-label="Índice del documento">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">
+      <svg width="44" height="44" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1.4">
+          <circle cx="30" cy="30" r="26"/>
+          <line x1="30" y1="7" x2="30" y2="53"/>
+          <line x1="9" y1="22" x2="51" y2="22"/>
+        </g>
+      </svg>
+    </div>
+    <h1>Las Cruzadas</h1>
+    <p>Defensa católica · Historia real</p>
+  </div>
+
+  <div class="toc-title">Índice interactivo</div>
+  <ul class="toc-list">
+    <li><a href="#inicio"><span class="num">00</span><span>Apertura</span></a></li>
+    <li><a href="#desinformacion"><span class="num">01</span><span>El mito moderno de las Cruzadas</span></a></li>
+    <li><a href="#expansion-islamica"><span class="num">02</span><span>461 años de conquista antes de 1095</span></a></li>
+    <li><a href="#clermont"><span class="num">03</span><span>El llamado de Clermont (1095)</span></a></li>
+    <li><a href="#primera-cruzada"><span class="num">04</span><span>Primera Cruzada (1096-1099)</span></a></li>
+    <li><a href="#segunda-cruzada"><span class="num">05</span><span>Segunda Cruzada (1147-1149)</span></a></li>
+    <li><a href="#tercera-cruzada"><span class="num">06</span><span>Tercera Cruzada (1189-1192)</span></a></li>
+    <li><a href="#cuarta-cruzada"><span class="num">07</span><span>Cuarta Cruzada (1202-1204)</span></a></li>
+    <li><a href="#cruzadas-tardias"><span class="num">08</span><span>Quinta a Novena Cruzada</span></a></li>
+    <li><a href="#acre"><span class="num">09</span><span>La caída de Acre y el fin (1291)</span></a></li>
+    <li><a href="#otras-cruzadas"><span class="num">10</span><span>La Reconquista y las otras Cruzadas</span></a></li>
+    <li><a href="#argumentos"><span class="num">11</span><span>Los argumentos centrales de la defensa</span></a></li>
+    <li><a href="#mitos"><span class="num">12</span><span>Los grandes mitos respondidos</span></a></li>
+    <li><a href="#conclusion"><span class="num">13</span><span>Conclusión</span></a></li>
+  </ul>
+
+  <div class="sidebar-foot">
+    Historia de las Cruzadas con citas verificadas de Madden, Riley-Smith, Stark, Tyerman y Runciman. Todas las cruzadas numeradas explicadas y contextualizadas.
+  </div>
+</nav>
+
+<main id="contenido">
+
+  <header class="hero" id="inicio">
+    <div class="hero-rosette" aria-hidden="true">
+      <svg width="170" height="170" viewBox="0 0 200 200" fill="none">
+        <g class="spin">
+          <g stroke="var(--gold)" stroke-width="0.75">
+            <circle cx="100" cy="100" r="88"/>
+            <circle cx="100" cy="100" r="62"/>
+            <circle cx="100" cy="100" r="36"/>
+            <line x1="100" y1="12" x2="100" y2="188"/>
+            <line x1="12" y1="100" x2="188" y2="100"/>
+            <line x1="38" y1="38" x2="162" y2="162"/>
+            <line x1="162" y1="38" x2="38" y2="162"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="eyebrow">Apertura</div>
+    <h1>Las Cruzadas: <span>la respuesta defensiva que el mundo olvidó</span></h1>
+    <p class="lede">
+      Pocas palabras evocan tanta carga moral negativa en el debate contemporáneo como "Cruzada".
+      Se ha convertido en sinónimo de fanatismo religioso, imperialismo medieval y violencia
+      injustificada. Esta imagen, sin embargo, invierte la historia real: las Cruzadas no fueron
+      una agresión sin precedentes de la cristiandad contra un mundo islámico pacífico, sino
+      la respuesta —tardía, imperfecta y a menudo caótica— de Europa a cuatro siglos y medio
+      de conquista militar islámica que había eliminado dos tercios del mundo cristiano original.
+    </p>
+    <p class="lede">
+      Este documento recorre cada una de las Cruzadas numeradas, sus antecedentes, sus resultados
+      y su resolución, con el respaldo de los historiadores académicos más reconocidos del tema
+      —Thomas Madden, Jonathan Riley-Smith, Rodney Stark, Christopher Tyerman— y citas
+      verificadas de sus obras. No niega los errores reales: los reconoce y los contextualiza.
+      Pero exige que la historia se cuente completa.
+    </p>
+    <div class="pills">
+      <span class="pill">Thomas Madden</span>
+      <span class="pill">Jonathan Riley-Smith</span>
+      <span class="pill">Rodney Stark</span>
+      <span class="pill">Christopher Tyerman</span>
+      <span class="pill">1096–1291</span>
+      <span class="pill">Guerra defensiva</span>
+      <span class="pill">Peregrinación armada</span>
+    </div>
+  </header>
+
+  <!-- 01 -->
+  <section class="section" id="desinformacion">
+    <div class="eyebrow">01 · El mito</div>
+    <h2>El mito moderno de las Cruzadas: quién lo fabrica y por qué</h2>
+    <p>
+      La narrativa dominante sobre las Cruzadas en la cultura occidental contemporánea podría resumirse
+      así: ejércitos de europeos fanáticos invadieron tierras musulmanas pacíficas en busca de tierra
+      y botín, masacraron a poblaciones indefensas y exportaron el odio religioso como política exterior
+      de la Iglesia. Esta narrativa tiene un problema fundamental: es históricamente falsa en casi
+      cada uno de sus elementos.
+    </p>
+    <p>
+      Los historiadores académicos especializados en el período, de todas las confesiones y
+      nacionalidades, llevan décadas corrigiendo este relato. El problema es que las correcciones
+      permanecen en los libros académicos, mientras que la narrativa falsa circula en la cultura
+      popular, en las redes sociales y en los discursos políticos.
+    </p>
+
+    <h3>Los historiadores que corrigen el relato</h3>
+    <div class="autor-card">
+      <span class="name">Thomas F. Madden</span>
+      <span class="info">Universidad de Saint Louis · Autor de «The New Concise History of the Crusades» (2005) y «The Crusades: The Essential Readings» (2002)</span>
+      <p>Uno de los medievalistas estadounidenses más reconocidos del período cruzado. Su trabajo combina rigor documental con accesibilidad para el gran público. Ha publicado extensamente sobre la distorsión del relato cruzado en la cultura contemporánea.</p>
+    </div>
+    <div class="autor-card">
+      <span class="name">Jonathan Riley-Smith</span>
+      <span class="info">Universidad de Cambridge · «What Were the Crusades?» (1977, 4ª ed. 2009) · «The Crusades: A History» (2ª ed. 2005)</span>
+      <p>Considerado por muchos el mayor historiador de las Cruzadas del siglo XX. Fue el primero en desarrollar sistemáticamente el concepto de las Cruzadas como peregrinaciones penitenciales armadas, y su trabajo estableció el marco interpretativo que domina la historiografía académica actual.</p>
+    </div>
+    <div class="autor-card">
+      <span class="name">Rodney Stark</span>
+      <span class="info">Universidad de Baylor · «God's Battalions: The Case for the Crusades» (2009) · Sociólogo e historiador de la religión</span>
+      <p>Su obra desmonta sistemáticamente los mitos sobre las motivaciones de los cruzados. Muestra con datos que la mayoría de los participantes en las Cruzadas eran nobles que gastaban fortunas propias —no oportunistas en busca de riqueza— y que el motor fue la fe genuina, no la codicia.</p>
+    </div>
+    <div class="autor-card">
+      <span class="name">Christopher Tyerman</span>
+      <span class="info">Universidad de Oxford · «God's War: A New History of the Crusades» (2006)</span>
+      <p>Su obra de 1.000 páginas es la historia más completa y reciente de las Cruzadas en inglés. Su rigor académico no le impide reconocer la complejidad moral del fenómeno ni cuestionar las simplificaciones de la leyenda negra anticruzada.</p>
+    </div>
+
+    <div class="hist-quote">
+      <p>"Las Cruzadas fueron en todo sentido una guerra defensiva. Fueron la respuesta tardía de Occidente a la conquista musulmana de dos tercios del mundo cristiano."</p>
+      <span class="attr">— Thomas F. Madden · «The Real History of the Crusades» · Crisis Magazine, abril de 2002</span>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 02 -->
+  <section class="section" id="expansion-islamica">
+    <div class="eyebrow">02 · El contexto que se omite</div>
+    <h2>461 años de conquista islámica antes de la Primera Cruzada (632–1095)</h2>
+    <p>
+      El año 1095 —cuando el Papa Urbano II predicó la Primera Cruzada en Clermont— no fue el punto
+      de partida de un conflicto. Fue el momento en que el mundo cristiano occidental, después de
+      cuatro siglos y medio de retroceso territorial incesante, decidió intentar recuperar la
+      iniciativa. Para entender las Cruzadas hay que entender, ante todo, lo que precedió a las Cruzadas.
+    </p>
+    <p>
+      En el año 632, cuando murió el profeta Mahoma, la totalidad del Oriente Medio, el Norte de
+      África y la Península Ibérica eran territorios mayoritariamente cristianos —con sus iglesias,
+      sus patriarcados, sus monasterios, sus comunidades de creyentes que llevaban generaciones
+      practicando su fe—. En el año 1095, la mayor parte de ese mundo había desaparecido bajo
+      la conquista militar islámica.
+    </p>
+
+    <div class="expansion-timeline">
+      <div class="exp-item">
+        <span class="year">634–638 d.C.</span>
+        <p>Los ejércitos árabes conquistan Siria y Palestina. La batalla del Yarmuk (636) destruye el ejército bizantino. Jerusalén se rinde al califa Umar en 638. Antioquía, una de las cinco sedes patriarcales del cristianismo antiguo, cae.</p>
+      </div>
+      <div class="exp-item">
+        <span class="year">639–642</span>
+        <p>Conquista de Egipto. Alejandría —sede del gran patriarcado alejandrino y capital intelectual del Mediterráneo oriental— cae en 642. La comunidad cristiana copta queda bajo dominio islámico.</p>
+      </div>
+      <div class="exp-item">
+        <span class="year">647–698</span>
+        <p>Conquista del norte de África. Cartago, la antigua capital del África romana y sede de San Agustín, cae definitivamente en 698. Las iglesias del norte de África —que habían producido a Tertuliano, Cipriano y Agustín— son eliminadas en las décadas siguientes.</p>
+      </div>
+      <div class="exp-item">
+        <span class="year">711–718</span>
+        <p>Invasión de la Península Ibérica. Tariq ibn Ziyad cruza el Estrecho de Gibraltar con un ejército bereber en 711. En siete años, casi toda la Hispania visigoda —cristiana desde el siglo III— está bajo control musulmán.</p>
+      </div>
+      <div class="exp-item">
+        <span class="year">717–718</span>
+        <p>Segundo gran asedio árabe a Constantinopla. La capital del Imperio Bizantino sobrevive gracias al "fuego griego" y a una flota búlgara aliada. Si hubiera caído entonces, no habría existido ninguna Cruzada posterior porque Europa habría sido flanqueada por el oeste y el este simultáneamente.</p>
+      </div>
+      <div class="exp-item">
+        <span class="year">732</span>
+        <p>Batalla de Tours/Poitiers (Francia). Carlos Martel detiene el avance islámico hacia el interior de Europa occidental. El historiador Edward Gibbon, no precisamente favorable al cristianismo, reconoció que sin esa victoria el Islam podría haber llegado a Polonia.</p>
+      </div>
+      <div class="exp-item">
+        <span class="year">827–902</span>
+        <p>Conquista árabe de Sicilia. La isla, cristiana desde los tiempos apostólicos, pasa bajo dominio islámico durante más de dos siglos.</p>
+      </div>
+      <div class="exp-item">
+        <span class="year">846</span>
+        <p>Raid árabe sobre Roma. Los invasores saquean las iglesias de San Pedro y San Pablo extramuros, situadas fuera de las murallas aurelias. El papa León IV construirá las "murallas leoninas" para proteger el área vaticana. Una incursión a la ciudad santa del cristianismo occidental.</p>
+      </div>
+      <div class="exp-item">
+        <span class="year">1071 — Manzikert</span>
+        <p>La batalla de Manzikert (26 de agosto de 1071) es el punto de inflexión inmediato. Los turcos selyúcidas destruyen el ejército del Imperio Bizantino y capturan al emperador Romano IV Diógenes. Anatolia —la actual Turquía, territorio cristiano desde los viajes de San Pablo— cae bajo control turco en los años siguientes. Dos terceras partes del Imperio Bizantino desaparecen en una generación.</p>
+      </div>
+      <div class="exp-item">
+        <span class="year">mediados de los 1070s</span>
+        <p>Los selyúcidas, más hostiles hacia los peregrinos que los fatimíes que los precedieron, toman Jerusalén y dificultan seriamente el acceso cristiano a los Santos Lugares. Las peregrinaciones desde Europa, que hasta entonces habían sido posibles, se vuelven peligrosas e impredecibles.</p>
+      </div>
+      <div class="exp-item neutral">
+        <span class="year">1095 — Concilio de Piacenza (marzo)</span>
+        <p>El emperador bizantino Alejo I Comneno envía embajadores al papa Urbano II solicitando ayuda militar occidental para recuperar sus territorios. Es la petición que desencadenará el llamado de Clermont.</p>
+      </div>
+    </div>
+
+    <div class="hist-quote">
+      <p>"Los cruzados no eran los agresores. Su tierra natal no había sido atacada. Pero la tierra de sus hermanos espirituales, los antiguos patriarcados de la Iglesia cristiana —Alejandría, Antioquía, Jerusalén— llevaba siglos bajo poder islámico. El Islam había llegado a esas tierras por la espada. Nadie debería olvidar eso."</p>
+      <span class="attr">— Rodney Stark · «God's Battalions: The Case for the Crusades» · HarperOne, 2009, cap. 1</span>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">La asimetría del relato popular</div>
+      <p>
+        El debate público sobre las Cruzadas comienza invariablemente en 1095 —el llamado de Urbano II—,
+        ignorando cuatro siglos y medio de expansión militar islámica que precedió a ese momento.
+        Es como juzgar la Segunda Guerra Mundial comenzando por la invasión de Normandía de 1944,
+        sin mencionar la invasión nazi de Europa desde 1939. Quien controla el punto de partida
+        del relato controla la conclusión moral.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="section" id="clermont">
+    <div class="eyebrow">03 · El llamado</div>
+    <h2>El Concilio de Clermont (noviembre de 1095): por qué Urbano II predicó la Cruzada</h2>
+    <p>
+      El 27 de noviembre de 1095, el papa Urbano II (Otón de Lagery) se dirigió a la multitud
+      reunida en el campo de Clermont —en la actual Auvernia, Francia— con un discurso que cambiaría
+      la historia. El texto exacto no se conserva: lo conocemos a través de cuatro crónicas distintas
+      escritas por testigos o participantes, cuyas versiones coinciden en el espíritu pero difieren
+      en los detalles. No existe "el discurso de Clermont" en singular, sino cuatro versiones
+      que se complementan.
+    </p>
+    <p>
+      El papa no actuaba por iniciativa propia ni movido por ambiciones imperialistas. Respondía a
+      una solicitud formal del emperador Alejo I Comneno, que había enviado embajadores al Concilio
+      de Piacenza en marzo del mismo año pidiendo ayuda militar occidental para defender Bizancio
+      de los turcos selyúcidas. La solicitud era desesperada: el Imperio había perdido dos tercios
+      de su territorio en apenas una generación tras Manzikert (1071).
+    </p>
+
+    <div class="section-banner">
+      <h3>El contenido del llamado de Clermont</h3>
+      <p>
+        Las cuatro crónicas del discurso de Urbano II (Roberto el Monje, Fulquerio de Chartres,
+        Baldrico de Dol y Guiberto de Nogent) coinciden en los elementos esenciales: el papa
+        describió la situación de los cristianos de Oriente bajo el dominio turco, el peligro para
+        los peregrinos que querían visitar Jerusalén, y el estado del Imperio Bizantino asediado.
+        Llamó a quienes estuvieran dispuestos a tomar la cruz a marchar en auxilio de sus hermanos
+        orientales, con la promesa de indulgencia plenaria —la remisión de las penas temporales
+        debidas por los pecados— para quienes participaran con disposición sinceramente penitencial.
+      </p>
+      <p>
+        La respuesta de la multitud —"Deus lo volt" (Dios lo quiere), según Roberto el Monje—
+        fue espontánea e inmediata. No fue un grito de odio: fue la expresión de una convicción
+        religiosa genuina de que la liberación de los Santos Lugares era una obra de piedad.
+      </p>
+    </div>
+
+    <h3>Las motivaciones de los cruzados: lo que los documentos dicen</h3>
+    <p>
+      Jonathan Riley-Smith realizó el estudio más sistemático jamás hecho sobre las motivaciones
+      de los cruzados, examinando cientos de cartas, testamentos y documentos privados de los
+      participantes en la Primera Cruzada. Su conclusión, expuesta en <em>The First Crusaders
+      1095-1131</em> (Cambridge, 1997), desmonta el argumento de que la mayoría fue por tierra
+      o riquezas: la Cruzada era extraordinariamente cara. Los nobles que participaban debían
+      vender o hipotecar sus propiedades para financiarse. La tasa de mortalidad era altísima.
+      Nadie que buscara riqueza fácil habría elegido participar.
+    </p>
+
+    <div class="hist-quote">
+      <p>"Los cruzados eran conscientes de que probablemente iban a morir. Sus testamentos lo demuestran. Fueron porque creían genuinamente que era un acto de amor a Dios y al prójimo, no porque esperaran enriquecerse."</p>
+      <span class="attr">— Jonathan Riley-Smith · «The First Crusaders, 1095–1131» · Cambridge University Press, 1997, introducción</span>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="section" id="primera-cruzada">
+    <div class="eyebrow">04 · Primera Cruzada</div>
+    <h2>La Primera Cruzada (1096–1099)</h2>
+
+    <div class="cruzada-card">
+      <div class="cruzada-header">
+        <span class="cruzada-num">I</span>
+        <span class="cruzada-title">Primera Cruzada</span>
+        <span class="cruzada-dates">1096–1099</span>
+      </div>
+      <div class="cruzada-meta">
+        <span class="cruzada-tag">Papa: Urbano II</span>
+        <span class="cruzada-tag">Líderes: Godofredo de Bouillón, Bohemundo de Tarento, Raimundo de Toulouse</span>
+        <span class="cruzada-tag">Objetivo: Jerusalén</span>
+      </div>
+      <p>
+        En agosto-septiembre de 1096 parten los principales ejércitos cruzados desde Europa occidental.
+        Antes, en la primavera, la llamada <strong>Cruzada del Pueblo</strong> (Cruzada Popular),
+        liderada por Pedro el Ermitaño y Gualterio Sin Haber, había partido sin preparación
+        militar, recorrido Europa saqueando comunidades judías en el Rin —atrocidades condenadas
+        por los obispos locales—, y fue prácticamente aniquilada por los turcos en Civetot
+        (octubre de 1096). La Cruzada del Pueblo ilustra los peores aspectos del fenómeno cruzado:
+        entusiasmo sin disciplina, violencia contra inocentes, resultados militares desastrosos.
+      </p>
+      <p>
+        Los ejércitos principales, organizados y liderados por nobles con experiencia militar, llegaron
+        a Constantinopla en invierno-primavera de 1097. Cruzaron el Bósforo con el apoyo logístico
+        imperial y avanzaron hacia Anatolia. El <strong>1 de julio de 1097</strong>, la batalla de
+        Dorileo (Dorylaeum) fue la primera gran victoria contra los turcos: el ejército selyúcida
+        de Kilij Arslan I fue derrotado decisivamente, abriendo el paso por Anatolia.
+      </p>
+      <p>
+        El <strong>sitio de Antioquía</strong> (octubre 1097 - junio 1098) fue el episodio más
+        dramático. Los cruzados sitiaron la ciudad durante ocho meses en condiciones terribles
+        —hambre, enfermedad, ataques turcos constantes—. El 3 de junio de 1098 tomaron la ciudad
+        por traición interna; al día siguiente, un enorme ejército de socorro turco los rodeó.
+        La victoria del 28 de junio de 1098 sobre ese ejército, en una batalla en que los cruzados
+        salieron hambrientos y superados en número, fue interpretada como milagro por los participantes.
+      </p>
+      <p>
+        <strong>Jerusalén</strong> fue sitiada desde el 7 de junio de 1099. El 15 de julio,
+        las murallas fueron escaladas y la ciudad tomada. Lo que siguió —una masacre de la población
+        musulmana y judía de la ciudad— fue brutal y no puede minimizarse. Fue, sin embargo, práctica
+        estándar de la guerra medieval: una ciudad que resistía al asalto y era tomada por la fuerza
+        era saqueada y su guarnición ejecutada. Las mismas normas se aplicaban en los ejércitos
+        musulmanes. Esto no es justificación moral —es contexto histórico necesario para juzgar
+        correctamente. La misma Jerusalén había sido conquistada por los árabes en 638 con términos
+        de rendición honorables precisamente porque se rindió sin resistencia; las ciudades que
+        resistían corrían diferente suerte en todos los ejércitos de la época.
+      </p>
+      <p>
+        El 12 de agosto de 1099, la batalla de Ascalón derrotó al ejército fatimí que intentaba
+        reconquistar Jerusalén, consolidando el control cruzado.
+      </p>
+      <div class="resultado exito">
+        <div class="resultado-label">Resultado</div>
+        <p>
+          Éxito militar. Establecimiento de cuatro estados cruzados: el Condado de Edesa, el
+          Principado de Antioquía, el Condado de Trípoli y el Reino de Jerusalén. Godofredo de
+          Bouillón fue nombrado primer gobernante de Jerusalén, rechazando el título de "rey"
+          en la ciudad donde Cristo había sido crucificado y eligiendo el de "Defensor del Santo
+          Sepulcro".
+        </p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="section" id="segunda-cruzada">
+    <div class="eyebrow">05 · Segunda Cruzada</div>
+    <h2>La Segunda Cruzada (1147–1149)</h2>
+
+    <div class="cruzada-card">
+      <div class="cruzada-header">
+        <span class="cruzada-num">II</span>
+        <span class="cruzada-title">Segunda Cruzada</span>
+        <span class="cruzada-dates">1147–1149</span>
+      </div>
+      <div class="cruzada-meta">
+        <span class="cruzada-tag">Papa: Eugenio III</span>
+        <span class="cruzada-tag">Predicador: Bernardo de Claraval</span>
+        <span class="cruzada-tag">Líderes: Luis VII de Francia · Conrado III de Alemania</span>
+      </div>
+      <p>
+        El detonante fue la caída del Condado de Edesa —el primero de los estados cruzados, fundado
+        en 1098— ante el atabeg Zengi de Mosul en <strong>diciembre de 1144</strong>. Era la primera
+        gran pérdida territorial cruzada y producía una brecha peligrosa en el sistema defensivo del
+        Oriente Latino.
+      </p>
+      <p>
+        El papa Eugenio III emitió la bula <em>Quantum praedecessores</em> en diciembre de 1145
+        llamando a la Cruzada. La predicación fue encargada a <strong>Bernardo de Claraval</strong>,
+        el monje cisterciense más influyente de su generación, que recorrió Europa inflamando el
+        entusiasmo cruzado. El mismo Bernardo hubo de intervenir para detener las persecuciones
+        contra judíos renanos —en una actuación que, paradójicamente, salvó vidas y fue un ejemplo
+        del papel de la Iglesia como freno a la violencia popular.
+      </p>
+      <p>
+        Los ejércitos alemán y francés partieron en 1147. Conrado III fue derrotado en Anatolia
+        por los turcos antes incluso de llegar a Tierra Santa. Luis VII atravesó Anatolia con enormes
+        pérdidas. Cuando las fuerzas combinadas llegaron a Palestina, el Consejo de Acre (junio de
+        1148) tomó la decisión más discutida de la Cruzada: en lugar de atacar Alepo o Damasco
+        para recuperar Edesa, decidió atacar <strong>Damasco</strong> —aliada de los Cruzados contra
+        Zengi—. El sitio duró cuatro días (julio de 1148) y se abandonó sin resultado. Fue un
+        desastre estratégico y diplomático: Damasco, alienada, se alió con los herederos de Zengi
+        (los Zengíes) y el equilibrio de poder en Levante se deterioró irreversiblemente.
+      </p>
+      <p>
+        Un elemento frecuentemente ignorado: simultáneamente a la Cruzada oriental, otras fuerzas
+        cruzadas combatían en la Península Ibérica —tomando Lisboa a los moros en octubre de 1147—
+        y en el Báltico —comenzando la evangelización y conquista de las tribus eslavas paganas.
+        La Segunda Cruzada fue, en su concepción, un movimiento de tres frentes simultáneos.
+      </p>
+      <div class="resultado fracaso">
+        <div class="resultado-label">Resultado · Fracaso</div>
+        <p>Fracaso total en el frente oriental. El sitio de Damasco fue abandonado. Edesa no fue recuperada. El daño a las relaciones de los estados cruzados con sus vecinos musulmanes moderados fue duradero.</p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 06 -->
+  <section class="section" id="tercera-cruzada">
+    <div class="eyebrow">06 · Tercera Cruzada</div>
+    <h2>La Tercera Cruzada (1189–1192): Ricardo Corazón de León y Saladino</h2>
+
+    <div class="cruzada-card">
+      <div class="cruzada-header">
+        <span class="cruzada-num">III</span>
+        <span class="cruzada-title">Tercera Cruzada</span>
+        <span class="cruzada-dates">1189–1192</span>
+      </div>
+      <div class="cruzada-meta">
+        <span class="cruzada-tag">Papa: Gregorio VIII · Clemente III</span>
+        <span class="cruzada-tag">Líderes: Ricardo I · Felipe II · Federico Barbarroja</span>
+        <span class="cruzada-tag">Detonante: caída de Jerusalén (1187)</span>
+      </div>
+      <p>
+        El detonante fue la catástrofe de <strong>Hattin</strong> (4 de julio de 1187): el sultán
+        ayubí Saladino destruyó el ejército del Reino de Jerusalén —con el rey Guido de Lusignan
+        cautivo— en las colinas del desierto, tras haber cortado el acceso al agua. El 2 de octubre
+        de 1187, Jerusalén se rindió a Saladino. A diferencia de la conquista cruzada de 1099, Saladino
+        permitió la rendición honorable y la salida de la población cristiana —un gesto de caballería
+        que la historia ha recordado con justicia, y que contrasta con la masacre cruzada de 1099.
+      </p>
+      <p>
+        El papa Gregorio VIII emitió la bula <em>Audita tremendi</em> —uno de los documentos más
+        elocuentes y sobrios de toda la historia pontificia—, que reconocía los propios pecados
+        de la cristiandad como causa de la derrota y llamaba a la penitencia y a la reconquista.
+        Los tres grandes reyes de Europa occidental respondieron: <strong>Federico I Barbarroja</strong>
+        del Sacro Imperio, <strong>Felipe II Augusto</strong> de Francia y <strong>Ricardo I
+        Corazón de León</strong> de Inglaterra.
+      </p>
+      <p>
+        Federico Barbarroja, el más poderoso de los tres y con el ejército más numeroso, murió ahogado
+        al cruzar el río Salef en Cilicia el 10 de junio de 1190. Su muerte desintegró el ejército
+        alemán y fue un golpe irreparable a la Cruzada. Felipe II y Ricardo llegaron a Tierra Santa
+        en 1191. La toma de <strong>Acre</strong> (12 de julio de 1191) fue el mayor éxito militar
+        de la Cruzada. Felipe II, enfermo y en conflicto con Ricardo, regresó a Francia.
+      </p>
+      <p>
+        Ricardo I dominó la campaña: la batalla de <strong>Arsuf</strong> (7 de septiembre de 1191)
+        demostró su genio táctico derrotando a Saladino en campo abierto. Ricardo avanzó dos veces
+        hacia Jerusalén y dos veces se retiró —ante la imposibilidad logística de tomar y sostener
+        la ciudad sin suficientes tropas—. La correspondencia entre Ricardo y Saladino, filtrada
+        por las fuentes árabes, muestra un respeto mutuo inusual entre dos rivales de la época.
+      </p>
+      <p>
+        El <strong>Tratado de Jaffa</strong> (2 de septiembre de 1192) estableció una tregua de
+        tres años: los cruzados retuvieron la franja costera desde Jaffa a Tiro; Saladino conservó
+        Jerusalén; los peregrinos cristianos desarmados podrían visitar libremente los Santos Lugares.
+        Ricardo partió sin haber recuperado Jerusalén —un fracaso estratégico— pero con los estados
+        cruzados consolidados y el acceso cristiano a los Santos Lugares garantizado.
+      </p>
+      <div class="resultado parcial">
+        <div class="resultado-label">Resultado · Parcial</div>
+        <p>Fracaso en recuperar Jerusalén. Éxito en consolidar la presencia cruzada en la costa y garantizar el acceso cristiano a los Santos Lugares mediante tratado. Los estados cruzados sobrevivieron un siglo más.</p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="section" id="cuarta-cruzada">
+    <div class="eyebrow">07 · La Cruzada problemática</div>
+    <h2>La Cuarta Cruzada (1202–1204): el desvío que la Iglesia no quiso</h2>
+
+    <div class="cruzada-card">
+      <div class="cruzada-header">
+        <span class="cruzada-num">IV</span>
+        <span class="cruzada-title">Cuarta Cruzada</span>
+        <span class="cruzada-dates">1202–1204</span>
+      </div>
+      <div class="cruzada-meta">
+        <span class="cruzada-tag">Papa: Inocencio III · Excomulgó a los responsables</span>
+        <span class="cruzada-tag">Líderes: Balduino de Flandes · Bonifacio de Montferrato</span>
+        <span class="cruzada-tag">Venecia: Enrique Dandolo</span>
+      </div>
+      <p>
+        La Cuarta Cruzada es el episodio más problemático de toda la historia cruzada, y también el
+        más frecuentemente malentendido. El papa <strong>Inocencio III</strong> —uno de los papas
+        más capaces de la historia medieval— la convocó en 1198 con la intención de atacar Egipto,
+        el centro de poder ayubí. Lo que ocurrió fue completamente diferente de lo planeado.
+      </p>
+      <p>
+        Los cruzados contrataron con <strong>Venecia</strong> el transporte marítimo por una suma
+        que luego no pudieron pagar. La República de Venecia, bajo el anciano y astuto dogo
+        Enrique Dandolo, les propuso compensar la deuda ayudando a reconquistar la ciudad de
+        <strong>Zara</strong> (actual Zadar, Croacia) —una ciudad cristiana que Venecia reclamaba—.
+        Inocencio III los amenazó y luego los excomulgó por atacar Zara (noviembre de 1202).
+      </p>
+      <p>
+        El segundo desvío fue aún más dramático. El príncipe Alejo, hijo del emperador bizantino
+        depuesto Isaac II, prometió a los cruzados reunión de las Iglesias, ayuda militar y enorme
+        pago si lo restituían al trono de Constantinopla. En julio de 1203, los cruzados tomaron
+        Constantinopla sin demasiada resistencia y restauraron a Isaac II. Pero Alejo no pudo
+        cumplir sus promesas; el descontento popular lo derrocó. En abril de 1204, los cruzados,
+        sin paga y sin rumbo, saquearon <strong>Constantinopla</strong> durante tres días.
+      </p>
+      <p>
+        El saqueo fue brutal, con violaciones, asesinatos y destrucción de iglesias —incluyendo
+        la Hagia Sophia— y obras de arte irreemplazables. El daño a las relaciones entre
+        el cristianismo latino y el ortodoxo fue incalculable e irreparable.
+      </p>
+      <div class="resultado fracaso">
+        <div class="resultado-label">Resultado · Fracaso y escándalo</div>
+        <p>Nunca llegó a Tierra Santa. Estableció el efímero Imperio Latino de Constantinopla (1204-1261). Envenenó las relaciones entre Oriente y Occidente cristiano de forma duradera. Inocencio III lo condenó explícitamente.</p>
+      </div>
+    </div>
+
+    <div class="box alt">
+      <div class="box-head"><span class="tag white">Inocencio III · Carta a los latinos de Constantinopla, julio 1205</span></div>
+      <p>
+        El papa Inocencio III, en sus cartas de 1204-1205, condenó el saqueo de Constantinopla
+        en términos inequívocos: los cruzados habían vuelto las espadas, que debían usarse contra
+        los infieles, contra los propios hermanos cristianos; habían violado las iglesias y
+        ultrajado a mujeres y eclesiásticos; su acción no podía en modo alguno estar agradable
+        a Dios. Excomulgó a los participantes en el saqueo. No solo no planeó el desvío: lo
+        denunció públicamente con toda la fuerza de su autoridad.
+      </p>
+    </div>
+
+    <div class="callout danger">
+      <div class="callout-title red">La distinción esencial</div>
+      <p>
+        El saqueo de Constantinopla fue real, brutal e imperdonable. Pero fue obra de cruzados
+        que actuaron contra las instrucciones del papa, que fueron excomulgados por el papa, y
+        que nunca alcanzaron el objetivo declarado de la Cruzada. Responsabilizar a la Iglesia
+        Católica de ese saqueo es tan justo como responsabilizar a un comandante del crimen de
+        sus soldados que actuaron explícitamente en contra de sus órdenes.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="section" id="cruzadas-tardias">
+    <div class="eyebrow">08 · Las Cruzadas tardías</div>
+    <h2>Quinta a Novena Cruzada: el declive progresivo</h2>
+
+    <div class="cruzada-card">
+      <div class="cruzada-header">
+        <span class="cruzada-num">V</span>
+        <span class="cruzada-title">Quinta Cruzada</span>
+        <span class="cruzada-dates">1217–1221</span>
+      </div>
+      <div class="cruzada-meta">
+        <span class="cruzada-tag">Papa: Honorio III</span>
+        <span class="cruzada-tag">Líderes: Juan de Brienne · Cardenal Pelagio</span>
+        <span class="cruzada-tag">Objetivo: Egipto (Damieta)</span>
+      </div>
+      <p>
+        El Cuarto Concilio de Letrán (1215) convocado por Inocencio III planificó una nueva
+        cruzada estratégicamente orientada a Egipto —el corazón del poder ayubí—. Las fuerzas
+        cruzadas llegaron a Tierra Santa en 1217-1218 y sitiaron <strong>Damieta</strong>, la
+        ciudad portuaria del delta del Nilo. La tomaron en noviembre de 1219 tras un año y medio
+        de sitio.
+      </p>
+      <p>
+        El sultán al-Kamil ofreció a los cruzados devolver Jerusalén, Belén y Nazaret a cambio
+        de Damieta. El cardenal Pelagio rechazó la oferta, esperando refuerzos del emperador
+        Federico II que no llegaban. Fue un error estratégico catastrófico. En agosto de 1221,
+        el ejército cruzado avanzó hacia El Cairo, quedó atrapado entre la crecida del Nilo y
+        el ejército egipcio, y fue forzado a rendirse. Damieta fue devuelta. Todo lo ganado se
+        perdió por la rigidez del legado papal.
+      </p>
+      <div class="resultado fracaso">
+        <div class="resultado-label">Resultado · Fracaso</div>
+        <p>Damieta tomada y luego devuelta. Oportunidad de recuperar Jerusalén sin guerra rechazada. La responsabilidad recae principalmente en la inflexibilidad del cardenal Pelagio.</p>
+      </div>
+    </div>
+
+    <div class="cruzada-card">
+      <div class="cruzada-header">
+        <span class="cruzada-num">VI</span>
+        <span class="cruzada-title">Sexta Cruzada</span>
+        <span class="cruzada-dates">1228–1229</span>
+      </div>
+      <div class="cruzada-meta">
+        <span class="cruzada-tag">Papa: Gregorio IX · Excomulgado: Federico II</span>
+        <span class="cruzada-tag">Líder: Federico II de Hohenstaufen</span>
+        <span class="cruzada-tag">Método: diplomacia</span>
+      </div>
+      <p>
+        La Sexta Cruzada es singular: fue liderada por el emperador Federico II cuando estaba
+        excomulgado por el papa Gregorio IX (por haber demorado repetidamente el cumplimiento de
+        su voto cruzado). Fue la única cruzada que recuperó Jerusalén sin combate.
+      </p>
+      <p>
+        Federico II, que hablaba árabe y tenía excelentes relaciones con el mundo islámico, negoció
+        con el sultán al-Kamil el <strong>Tratado de Jaffa</strong> (18 de febrero de 1229):
+        Jerusalén, Belén, Nazaret y un corredor hasta la costa fueron entregados a los cruzados
+        por diez años. Solo la Explanada de las Mezquitas (Haram al-Sharif) quedó bajo administración
+        musulmana. Federico se coronó rey de Jerusalén en la Iglesia del Santo Sepulcro.
+      </p>
+      <p>
+        La reacción fue paradójica: los musulmanes, humillados por al-Kamil por haber cedido la
+        ciudad, y el papa Gregorio IX, que no quería que un excomulgado tuviera el éxito que
+        los papas no habían logrado, ambos criticaron el acuerdo. Jerusalén permaneció en manos
+        cruzadas hasta 1244, cuando fue tomada por los turcos Jwarizmíes.
+      </p>
+      <div class="resultado exito">
+        <div class="resultado-label">Resultado · Éxito diplomático, controversia política</div>
+        <p>Recuperación de Jerusalén sin guerra, por negociación. La ciudad permaneció cristiana de 1229 a 1244. Una hazaña sin equivalente en la historia cruzada, realizada precisamente por el cruzado más heterodoxo.</p>
+      </div>
+    </div>
+
+    <div class="cruzada-card">
+      <div class="cruzada-header">
+        <span class="cruzada-num">VII</span>
+        <span class="cruzada-title">Séptima Cruzada</span>
+        <span class="cruzada-dates">1248–1254</span>
+      </div>
+      <div class="cruzada-meta">
+        <span class="cruzada-tag">Papa: Inocencio IV</span>
+        <span class="cruzada-tag">Líder: Luis IX de Francia (San Luis)</span>
+        <span class="cruzada-tag">Objetivo: Egipto · Luis capturado</span>
+      </div>
+      <p>
+        Luis IX de Francia —canonizado en 1297, uno de los reyes medievales de reputación moral
+        más incontestable— emprendió esta cruzada con organización ejemplar. Tomó Damieta de nuevo
+        con asombrosa facilidad en junio de 1249. El avance hacia El Cairo fue lento. La batalla
+        de al-Mansurah (febrero de 1250) fue un desastre táctico: el conde de Artois avanzó sin
+        esperar al grueso del ejército y fue emboscado. Luis fue capturado el 6 de abril de 1250
+        en la batalla de Fariskur y tuvo que pagar un enorme rescate.
+      </p>
+      <p>
+        Luis permaneció en Tierra Santa hasta 1254, reconstruyendo las defensas de las ciudades
+        cruzadas y negociando la liberación de prisioneros. Su presencia y su carácter personal
+        —trató a los enfermos, visitó los hospitales de campaña, nunca perdió la compostura— lo
+        convirtieron en el modelo de lo que una cruzada "debería" haber sido.
+      </p>
+      <div class="resultado fracaso">
+        <div class="resultado-label">Resultado · Fracaso militar</div>
+        <p>Derrota total en Egipto; Luis capturado; enorme rescate pagado. Sin conquistas durables. La presencia del rey en Tierra Santa consolidó temporalmente los estados cruzados.</p>
+      </div>
+    </div>
+
+    <div class="cruzada-card">
+      <div class="cruzada-header">
+        <span class="cruzada-num">VIII</span>
+        <span class="cruzada-title">Octava Cruzada</span>
+        <span class="cruzada-dates">1270</span>
+      </div>
+      <div class="cruzada-meta">
+        <span class="cruzada-tag">Líder: Luis IX de Francia</span>
+        <span class="cruzada-tag">Destino: Túnez · Muerte de Luis IX</span>
+      </div>
+      <p>
+        Luis IX organizó una segunda expedición. Por razones que los historiadores discuten —quizás
+        la influencia de su hermano Carlos de Anjou, que tenía intereses en Túnez, o la esperanza
+        de convertir al emir de Túnez— la cruzada se dirigió a la costa tunecina en lugar de a Tierra
+        Santa. El calor del verano africano desencadenó una epidemia de disentería. Luis IX murió
+        en Túnez el 25 de agosto de 1270. Con él murió también la última cruzada de dimensión real.
+      </p>
+      <div class="resultado fracaso">
+        <div class="resultado-label">Resultado · Fracaso total</div>
+        <p>Muerte de Luis IX. Ningún objetivo alcanzado. La cruzada fue abandonada. El rey Carlos de Anjou negoció condiciones favorables para Sicilia y regresó.</p>
+      </div>
+    </div>
+
+    <div class="cruzada-card">
+      <div class="cruzada-header">
+        <span class="cruzada-num">IX</span>
+        <span class="cruzada-title">Novena Cruzada</span>
+        <span class="cruzada-dates">1271–1272</span>
+      </div>
+      <div class="cruzada-meta">
+        <span class="cruzada-tag">Líder: Príncipe Eduardo de Inglaterra (futuro Eduardo I)</span>
+        <span class="cruzada-tag">Alcance: mínimo</span>
+      </div>
+      <p>
+        Eduardo de Inglaterra llegó a Acre con una fuerza pequeña. Realizó algunas incursiones y
+        sobrevivió a un intento de asesinato (un asesino fedayin logró herirle con un puñal envenenado
+        del que se recuperó). Negoció una tregua de diez años con el sultán mameluco Baybars y
+        partió en 1272. Es considerada convencionalmente la última de las grandes cruzadas numeradas.
+      </p>
+      <div class="resultado fracaso">
+        <div class="resultado-label">Resultado · Sin consecuencias durables</div>
+        <p>Tregua de diez años. Ninguna conquista. Los mamelucos continuaron su avance sistemático sobre los estados cruzados tras su expiración.</p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 09 -->
+  <section class="section" id="acre">
+    <div class="eyebrow">09 · El fin</div>
+    <h2>La caída de Acre (1291): el fin de los estados cruzados</h2>
+    <p>
+      El sultanato mameluco —fundado tras el golpe de estado que derrocó a los ayubíes en 1250—
+      fue la fuerza militar que consumó la eliminación de la presencia cruzada en Tierra Santa.
+      Baybars (sultanato 1260-1277) y luego al-Ashraf Khalil (sultanato 1290-1293) fueron los
+      artífices de la eliminación sistemática de los estados cruzados, plaza por plaza.
+    </p>
+    <p>
+      <strong>Acre</strong> —el gran puerto cruzado, la ciudad más rica y cosmopolita del Levante,
+      hogar de varias órdenes militares y de una próspera comunidad de mercaderes italianos— era
+      la última gran fortaleza cruzada. El sultán al-Ashraf Khalil comenzó el sitio el 5 de abril
+      de 1291 con un ejército estimado en ochenta mil soldados. La guarnición cruzada disponía de
+      unos quince mil defensores.
+    </p>
+    <p>
+      El 18 de mayo de 1291, las murallas cedieron y la ciudad fue tomada. El maestre de los
+      Hospitalarios, Jean de Villiers, fue herido y evacuado por mar. El maestre de los Templarios,
+      Guillaume de Beaujeu, murió en la brecha. En las semanas siguientes, Tiro, Sidón, Beirut
+      y las últimas posiciones cruzadas fueron evacuadas sin combate. El experimento de los estados
+      cruzados en Oriente había terminado después de casi doscientos años.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">¿Por qué cayeron los estados cruzados?</div>
+      <p>
+        Los estados cruzados no cayeron porque el Islam fuera esencialmente más fuerte o más
+        legítimo. Cayeron por una combinación de factores: la imposibilidad de recibir refuerzos
+        permanentes desde Europa (los cruzados que llegaban tendían a regresar; los que se quedaban
+        eran siempre pocos), la fragmentación política interna de los propios estados, las guerras
+        de sucesión y el intervencionismo de los reyes europeos que más perjudicaban que ayudaban,
+        y la emergencia de los mamelucos como fuerza militar de eficiencia sin precedentes.
+        La causa no fue ni la ausencia de fe ni la injusticia de la empresa, sino la incapacidad
+        logística de mantener indefinidamente una presencia militar a dos mil kilómetros de su base.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 10 -->
+  <section class="section" id="otras-cruzadas">
+    <div class="eyebrow">10 · Más allá de Tierra Santa</div>
+    <h2>La Reconquista y las otras Cruzadas</h2>
+    <p>
+      Las Cruzadas en sentido amplio no se limitaron a las expediciones a Tierra Santa. El concepto
+      de "guerra santa penitencial" se aplicó a tres contextos adicionales que merecen ser explicados.
+    </p>
+
+    <h3>La Reconquista española (711–1492)</h3>
+    <p>
+      La más larga y la más exitosa de todas las guerras cruzadas es también la menos recordada con
+      ese nombre. Desde la invasión musulmana de 711 hasta la rendición de Granada en 1492 —un arco
+      de 781 años—, los reinos cristianos del norte de la Península Ibérica combatieron de forma
+      intermitente para recuperar los territorios conquistados por el Islam. El papa Alejandro II
+      concedió indulgencias a los combatientes en España ya en 1064, y Urbano II reconoció el valor
+      equivalente de combatir en España y en Tierra Santa en el mismo llamado de Clermont. La
+      Reconquista produjo, además, algunos de los más brillantes episodios de convivencia inter-
+      religiosa de la Europa medieval —especialmente en Toledo bajo Alfonso VI, donde traductores
+      judíos, árabes y cristianos colaboraron en hacer accesible a Occidente el pensamiento
+      griego y árabe.
+    </p>
+
+    <h3>Las Cruzadas del Norte (siglos XII–XIV)</h3>
+    <p>
+      Las expediciones contra los pueblos paganos del Báltico —prusianos, livonios, estonios,
+      lituanos— fueron convocadas como cruzadas desde mediados del siglo XII. La Orden Teutónica
+      fue el principal instrumento de esta evangelización-conquista. Sus métodos fueron frecuentemente
+      brutales, y el proceso mezcló inextricablemente la conversión religiosa con la colonización
+      alemana. Lituania, convertida al catolicismo en 1387 —la última conversión de un reino
+      europeo— fue el último fruto de estas expediciones.
+    </p>
+
+    <h3>La Cruzada Albigense (1209–1229)</h3>
+    <p>
+      La cruzada contra los cátaros del sur de Francia es la más moralmente problemática desde la
+      perspectiva católica, porque fue una guerra de cristianos contra otros que se definían como
+      cristianos —aunque la teología cátara era radicalmente dualista y rechazaba la creación
+      material como obra del mal. El saqueo de Béziers (1209) y la matanza de su población —con
+      la atribuida frase "matadlos a todos, Dios reconocerá a los suyos", de autenticidad discutida—
+      manchan este episodio de forma indeleble. El papel de la Iglesia en frenar los excesos y en
+      intentar separar la represión política de la persecución religiosa fue parcial e insuficiente.
+    </p>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="section" id="argumentos">
+    <div class="eyebrow">11 · La defensa católica</div>
+    <h2>Los argumentos centrales de la defensa histórica</h2>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Argumento 1</span><span class="label">Las Cruzadas fueron una respuesta, no un ataque</span></div>
+      <p>
+        El mundo cristiano había perdido Siria, Palestina, Egipto, el Norte de África y España
+        —dos tercios de la cristiandad original— antes de la Primera Cruzada. La expansión
+        islámica fue militar, rápida y sistemática. Las Cruzadas no comenzaron el conflicto:
+        respondieron a él, con cuatro siglos y medio de retraso. Cualquier juicio moral que ignore
+        este hecho es históricamente deshonesto.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Argumento 2</span><span class="label">La motivación principal fue religiosa, no económica</span></div>
+      <p>
+        Participar en una cruzada era extraordinariamente caro. Los nobles debían vender o hipotecar
+        sus propiedades. La mortalidad era altísima. Las probabilidades de enriquecerse eran mínimas
+        —los estados cruzados eran territorios pobres en comparación con Europa occidental—. Quien
+        quería riqueza tenía opciones mucho mejores. Los documentos privados —testamentos, cartas,
+        donaciones piadosas— muestran que la motivación dominante era la penitencia y la devoción,
+        no el lucro.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Argumento 3</span><span class="label">Los estados cruzados no fueron colonias de explotación</span></div>
+      <p>
+        Los estados cruzados —el Reino de Jerusalén, el Principado de Antioquía, los Condados de
+        Edesa y Trípoli— no funcionaron como colonias de explotación sino como sociedades plurales
+        en las que musulmanes, judíos y cristianos de múltiples ritos convivieron, comerciaron y
+        litigaron conjuntamente. Los tribunales del Reino de Jerusalén tenían procedimientos
+        diferenciados para los litigios entre miembros de comunidades distintas. Esto no era una
+        utopía multicultural, pero tampoco era la ocupación de terror que el mito describe.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Argumento 4</span><span class="label">La Iglesia intentó limitar la violencia</span></div>
+      <p>
+        La <em>Paz de Dios</em> y la <em>Tregua de Dios</em> —movimientos eclesiásticos anteriores
+        a las Cruzadas— habían intentado limitar la violencia feudal interna en Europa. La Cruzada
+        fue, en parte, un intento de canalizar esa energía violenta de los nobles guerreros hacia
+        un objetivo externo y, desde la perspectiva eclesiástica, legítimo. Los Papas intervinieron
+        repetidamente para frenar atrocidades: Bernardo de Claraval contra las matanzas de judíos,
+        Inocencio III contra el saqueo de Constantinopla.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Argumento 5</span><span class="label">El contexto temporal es insustituible</span></div>
+      <p>
+        Juzgar las Cruzadas con la moral del siglo XXI —sin esclavitud, con derechos humanos
+        universales, con normas internacionales de guerra— es un anacronismo puro. En el siglo XI,
+        la guerra era la condición normal de la vida política en todos los continentes. Las ciudades
+        que resistían eran saqueadas, en todos los ejércitos, de todos los credos, en todos los
+        territorios. Aplicar este estándar solo a los cruzados, mientras se ignoran las conquistas
+        islámicas que los precedieron, no es historia: es polémica.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 12 -->
+  <section class="section" id="mitos">
+    <div class="eyebrow">12 · Desmontando el relato</div>
+    <h2>Los grandes mitos de las Cruzadas respondidos</h2>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"Las Cruzadas fueron el primer imperialismo occidental. Occidente invadió el mundo árabe sin provocación."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>Siria, Palestina, Egipto y el Norte de África eran tierras cristiano-romanas antes de la conquista árabe. Las Cruzadas intentaron recuperar territorio anteriormente cristiano, no conquistar tierras "árabe-islámicas" preexistentes. El Islam había llegado a esas tierras por la espada generaciones antes.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"Los cruzados masacraron a toda la población de Jerusalén en 1099."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>Hubo una masacre real y grave. Pero las crónicas más exageradas son posteriores y de autores que no estuvieron presentes. Fulquerio de Chartres, testigo presencial, da cifras menores. Los propios historiadores árabes contemporáneos —Ibn al-Qalanisi escribía en Damasco— describen el evento de forma más contenida que fuentes posteriores. La masacre fue real; las cifras de "70.000 muertos" que circulan son anacrónicas e inverosímiles dado el tamaño de la ciudad en 1099.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"Las Cruzadas destruyeron la civilización islámica y causaron el atraso del mundo árabe."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>El mundo islámico de los siglos XI-XIII era mucho más poderoso que los estados cruzados. Los califatos de Bagdad y El Cairo y los sultanatos eran potencias enormes en comparación con los pequeños reinos cruzados del Levante. Los estados cruzados apenas perturbaron el comercio y la vida cultural del mundo islámico en su conjunto. El historiador Bernard Lewis ha señalado que el Islam de la época apenas notó las Cruzadas como fenómeno mayor.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"Las Cruzadas convirtieron por la fuerza a los musulmanes."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>Las Cruzadas nunca tuvieron como objetivo la conversión forzada de los musulmanes. El objetivo fue la recuperación territorial y la protección de los peregrinos. En los estados cruzados, la población musulmana mantuvo su fe, sus mezquitas y su administración propia. La conversión forzosa no fue el modelo cruzado, sino que fue condenada por varios papas.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"Saladino era el modelo de tolerancia; los cruzados eran bárbaros fanáticos."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad">
+        <p>Saladino fue un gobernante notable que merece su reputación en muchos aspectos. Pero la comparación simple es falsa. La conquista cruzada de Jerusalén (1099) fue brutal; la rendición a Saladino (1187) fue honrosa —en parte porque la ciudad se rindió sin resistencia, aplicando el mismo estándar de la época que los cruzados habían ignorado en 1099. Además, Saladino ejecutó a los caballeros templarios y hospitalarios capturados en Hattin y a otros prisioneros de guerra —una práctica que los panegiristas modernos tienden a omitir.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"El papa ordenó las Cruzadas para enriquecer a la Iglesia."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>La Iglesia no recibió ningún beneficio económico directo de las Cruzadas. Los bienes de Tierra Santa no eran administrados por la Iglesia sino por los reyes cruzados. Las órdenes militares —Templarios, Hospitalarios, Teutónicos— acumularon riqueza, pero eso fue un resultado no planeado y frecuentemente problemático. La motivación papal fue genuinamente eclesiástica: la defensa de los peregrinos y la recuperación de los Santos Lugares.</p>
+      </div>
+    </div>
+
+    <div class="hist-quote">
+      <p>"La historia de las Cruzadas es la historia de un intento de la civilización occidental de defenderse a sí misma en circunstancias históricas completamente diferentes a las de hoy. Llamarlas 'cruzadas' hoy como insulto revela una ignorancia monumental de lo que fueron en realidad."</p>
+      <span class="attr">— Thomas F. Madden · «Crusades: The Illustrated History» · University of Michigan Press, 2004, prefacio</span>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 13 -->
+  <section class="section" id="conclusion">
+    <div class="eyebrow">13 · Conclusión</div>
+    <h2>Conclusión: la historia completa que el relato parcial esconde</h2>
+    <p>
+      Las Cruzadas fueron fenómenos complejos, contradictorios, llenos de heroísmo y de crueldad,
+      de fe genuina y de oportunismo político, de visión estratégica y de errores catastróficos.
+      No merecen ni la glorificación ciega de cierta nostalgia medieval ni la condena sistemática
+      de la ideología moderna. Merecen lo que la historia merece siempre: ser contadas completas.
+    </p>
+    <p>
+      La historia completa incluye los cuatro siglos de conquista islámica que precedieron al llamado
+      de Clermont. Incluye las cartas de los cruzados que revelan una fe más que una codicia. Incluye
+      el papel de la Iglesia intentando —con éxito parcial— limitar la violencia. Incluye la condena
+      explícita de Inocencio III al saqueo de Constantinopla. Incluye la impresionante capacidad
+      de los estados cruzados para generar sociedades plurales en un mundo de conflicto. Incluye
+      también, sin evasión, la masacre de Jerusalén en 1099, los pogromos anti-judíos en Europa
+      occidental durante la predicación de las cruzadas, y los excesos de la Cruzada Albigense.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Cruzada</th><th>Años</th><th>Objetivo</th><th>Resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="flag">Primera</td><td>1096-1099</td><td>Jerusalén</td><td class="green">Éxito: Jerusalén tomada, estados cruzados fundados</td></tr>
+          <tr><td class="flag">Segunda</td><td>1147-1149</td><td>Edesa / Damasco</td><td class="red">Fracaso total: Edesa no recuperada, Damasco alienada</td></tr>
+          <tr><td class="flag">Tercera</td><td>1189-1192</td><td>Jerusalén</td><td>Parcial: costa consolidada, acceso a Santos Lugares garantizado</td></tr>
+          <tr><td class="flag">Cuarta</td><td>1202-1204</td><td>Egipto</td><td class="red">Desviada: saqueo de Constantinopla; condenada por Inocencio III</td></tr>
+          <tr><td class="flag">Quinta</td><td>1217-1221</td><td>Egipto (Damieta)</td><td class="red">Fracaso: Damieta tomada y devuelta; oferta de Jerusalén rechazada</td></tr>
+          <tr><td class="flag">Sexta</td><td>1228-1229</td><td>Jerusalén</td><td class="green">Éxito diplomático: Jerusalén recuperada por negociación (hasta 1244)</td></tr>
+          <tr><td class="flag">Séptima</td><td>1248-1254</td><td>Egipto</td><td class="red">Fracaso: Luis IX capturado; enorme rescate</td></tr>
+          <tr><td class="flag">Octava</td><td>1270</td><td>Túnez</td><td class="red">Fracaso: muerte de Luis IX; abandono</td></tr>
+          <tr><td class="flag">Novena</td><td>1271-1272</td><td>Tierra Santa</td><td class="red">Sin resultados durables; tregua de diez años</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">Lo que Steven Runciman dijo y no dijo</div>
+      <p>
+        Steven Runciman, en la conclusión del tercer volumen de <em>A History of the Crusades</em>
+        (1954), escribió que "la Santa Guerra no era más que un largo acto de intolerancia en nombre
+        de Dios, que es el pecado contra el Espíritu Santo". Es el juicio más citado contra las
+        Cruzadas. Pero el propio Runciman —cuya simpatía hacia Bizancio y hacia la civilización
+        islámica es evidente en toda su obra— era un historiador profesional que documentó los 461
+        años de conquista islámica antes de Clermont con el mismo rigor. Usar su frase final
+        ignorando los tres volúmenes que la preceden es hacer exactamente lo que él nunca habría
+        aprobado: truncar la historia para servir a una conclusión predeterminada.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mark-small" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1.3">
+          <circle cx="30" cy="30" r="26"/>
+          <line x1="30" y1="7" x2="30" y2="53"/>
+          <line x1="9" y1="22" x2="51" y2="22"/>
+        </g>
+      </svg>
+    </div>
+    <p>Historia de las nueve Cruzadas numeradas y las expediciones complementares, con defensa católica basada en Madden, Riley-Smith, Stark y Tyerman. Citas verificadas de fuentes académicas publicadas.</p>
+  </footer>
+
+</main>
+
+<button id="backToTop" aria-label="Volver arriba">↑</button>
+
+<script>
+  const sidebar=document.getElementById('sidebar');
+  const menuToggle=document.getElementById('menuToggle');
+  menuToggle.addEventListener('click',()=>{
+    const open=sidebar.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded',open);
+    menuToggle.textContent=open?'✕':'☰';
+  });
+  document.querySelectorAll('.toc-list a').forEach(link=>{
+    link.addEventListener('click',()=>{
+      if(window.innerWidth<=980){sidebar.classList.remove('open');menuToggle.textContent='☰';menuToggle.setAttribute('aria-expanded','false');}
+    });
+  });
+  const progressBar=document.getElementById('progressBar');
+  function updateProgress(){
+    const h=document.documentElement;
+    const s=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    progressBar.style.width=(isFinite(s)?s:0)+'%';
+  }
+  document.addEventListener('scroll',updateProgress,{passive:true});
+  updateProgress();
+  const sections=document.querySelectorAll('main .section, main .hero');
+  const links=document.querySelectorAll('.toc-list a');
+  const linkMap={};
+  links.forEach(l=>linkMap[l.getAttribute('href').slice(1)]=l);
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){links.forEach(l=>l.classList.remove('active'));if(linkMap[entry.target.id])linkMap[entry.target.id].classList.add('active');}
+    });
+  },{rootMargin:'-35% 0px -55% 0px',threshold:0});
+  sections.forEach(s=>observer.observe(s));
+  const backToTop=document.getElementById('backToTop');
+  document.addEventListener('scroll',()=>{backToTop.classList.toggle('visible',window.scrollY>600);},{passive:true});
+  backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>

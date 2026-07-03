@@ -20,3 +20,5 @@ Aqui trabajamos pasajes complejos con metodo: contexto, genero, lenguaje y tradi
 - [Juan 11 (Dossier)](/biblia/jn11-dossier/)
 - [פֶּרֶא אָדָם — Análisis Filológico de Génesis 16:12 (Dossier)](/biblia/pere-adam-genesis-16-dossier/)
 - [Defensa de la Torah — Apologética Académica (Dossier)](/biblia/defensa-torah-dossier/)
+- [100 Profecias Cumplidas en los Cuatro Evangelios (Dossier)](/biblia/profecias-evangelios-dossier/)
+- [Versiculos Dificiles de la Biblia (Dossier)](/biblia/versiculos-dificiles-dossier/)

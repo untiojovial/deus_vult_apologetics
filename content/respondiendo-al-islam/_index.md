@@ -12,6 +12,7 @@ aliases:
 ## Dossiers disponibles
 
 - [Defensa del Apostol Pablo (Dossier)](/respondiendo-al-islam/defensa-apostol-pablo-dossier/)
+- [En Defensa del Apostol Pablo: Objeciones Academicas Resueltas (Dossier)](/respondiendo-al-islam/objeciones-pablo-resueltas-dossier/)
 - [Canon Biblia vs Quran (Dossier)](/respondiendo-al-islam/canon-biblia-quran-dossier/)
 - [Matrimonio Aisha (Dossier)](/respondiendo-al-islam/matrimonio-aisha-dossier/)
 - [Juicio Islámico (Dossier)](/respondiendo-al-islam/juicio-islamico-dossier/)
@@ -27,3 +28,5 @@ aliases:
 - [Hadices Médicos y Problemas Científicos en la Sunnah (Dossier)](/respondiendo-al-islam/hadices-medicos-dossier/)
 - [El Testigo Involuntario — Abu Dawud 4002 y Q18:86 (Dossier)](/respondiendo-al-islam/testigo-involuntario-dossier/)
 - [Predestinación Islámica: Qadar y la Excusa de Adán (Dossier)](/respondiendo-al-islam/predestinacion-islamica-dossier/)
+- [La Negación de la Cruz: El Docetismo no era Cristiano ni es Islámico (Dossier)](/respondiendo-al-islam/docetismo-crucifixion-dossier/)
+- [El Corán y los Evangelios Apocrifos (Dossier)](/respondiendo-al-islam/coran-apocrifos-dossier/)

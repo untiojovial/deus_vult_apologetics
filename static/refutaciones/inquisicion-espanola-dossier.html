@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Inquisición Española: historia contra el mito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070705;--bg-alt:#0d0d0a;--card:#131310;--card-2:#17170f;
+    --border:rgba(212,175,55,0.22);--border-soft:rgba(212,175,55,0.10);
+    --gold:#c9a227;--gold-bright:#ecc659;--gold-soft:rgba(212,175,55,0.10);
+    --white:#f4efe3;--white-dim:#b9b6ab;--maxw:880px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--white-dim);line-height:1.78;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--gold);color:#0a0a08;}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--card-2);border:1px solid var(--border);border-radius:6px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+  a{color:var(--gold-bright);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  strong{color:var(--white);font-weight:600;}
+  em{color:var(--white);}
+
+  #progressBar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));z-index:200;transition:width .12s linear;}
+  .skip-link{position:absolute;left:-999px;top:0;background:var(--gold);color:#000;padding:.5rem 1rem;z-index:300;font-weight:600;}
+  .skip-link:focus{left:0;}
+
+  /* SIDEBAR */
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:308px;background:var(--bg-alt);border-right:1px solid var(--border);overflow-y:auto;padding:2.2rem 1.4rem 3rem;z-index:100;}
+  .brand{display:flex;flex-direction:column;gap:.35rem;padding:0 .6rem;}
+  .brand .mark{width:44px;height:44px;display:flex;align-items:center;justify-content:center;}
+  .brand h1{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--white);font-weight:600;letter-spacing:.02em;margin-top:.6rem;line-height:1.3;}
+  .brand p{font-size:.76rem;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;margin-top:.25rem;}
+  .toc-title{margin:2.2rem 0 .8rem;padding:0 .6rem;font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .toc-list{list-style:none;display:flex;flex-direction:column;gap:.12rem;}
+  .toc-list a{display:flex;gap:.7rem;align-items:baseline;padding:.55rem .7rem;border-radius:6px;color:var(--white-dim);font-size:.86rem;border-left:2px solid transparent;transition:background .15s,color .15s,border-color .15s;}
+  .toc-list a .num{font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:700;font-size:.85rem;min-width:1.8rem;}
+  .toc-list a:hover{background:var(--gold-soft);color:var(--white);text-decoration:none;}
+  .toc-list a.active{background:var(--gold-soft);color:var(--gold-bright);font-weight:600;border-left-color:var(--gold);}
+  .toc-list a.active .num{color:var(--gold-bright);}
+  .sidebar-foot{margin-top:2.4rem;padding:1rem .7rem 0;border-top:1px solid var(--border-soft);font-size:.72rem;color:var(--white-dim);line-height:1.6;}
+  #menuToggle{display:none;position:fixed;top:1rem;left:1rem;z-index:150;width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--gold-bright);font-size:1.2rem;align-items:center;justify-content:center;cursor:pointer;}
+
+  /* LAYOUT */
+  main{margin-left:308px;}
+  .section{max-width:var(--maxw);margin:0 auto;padding:5.5rem 2.6rem 0;scroll-margin-top:1.5rem;}
+  .section:last-of-type{padding-bottom:2rem;}
+  .eyebrow{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.22;margin-bottom:1.4rem;}
+  h3{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:clamp(1.15rem,2.5vw,1.45rem);margin:2.2rem 0 .8rem;}
+  h4{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:1.1rem;margin-bottom:.5rem;}
+  p{margin-bottom:1.15rem;font-size:1.02rem;}
+  ul,ol{margin:0 0 1.15rem 1.4rem;}
+  li{margin-bottom:.5rem;font-size:1.02rem;}
+
+  /* HERO */
+  .hero{padding:5rem 2.6rem 3rem;max-width:var(--maxw);margin:0 auto;position:relative;}
+  .hero-rosette{position:absolute;top:1rem;right:1.5rem;opacity:.4;}
+  @media (prefers-reduced-motion:no-preference){.hero-rosette .spin{animation:spin 80s linear infinite;transform-origin:50% 50%;}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(2.1rem,6vw,3.5rem);line-height:1.14;max-width:720px;}
+  .hero h1 span{color:var(--gold-bright);}
+  .hero .lede{margin-top:1.4rem;font-size:1.12rem;color:var(--white-dim);max-width:670px;line-height:1.8;}
+  .pills{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.8rem;}
+  .pill{border:1px solid var(--border);border-radius:999px;padding:.4rem 1.1rem;font-size:.77rem;color:var(--gold-bright);letter-spacing:.06em;background:var(--gold-soft);}
+
+  /* CALLOUTS */
+  .callout{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:1.3rem 1.5rem;margin:1.6rem 0 2.2rem;}
+  .callout.note{border-left:3px solid var(--gold);}
+  .callout.danger{border-left:3px solid #9a3535;}
+  .callout.green{border-left:3px solid #3a6e3a;}
+  .callout-title{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-weight:600;font-size:1.05rem;margin-bottom:.55rem;display:flex;align-items:center;gap:.5rem;}
+  .callout-title.red{color:#d96060;}
+  .callout-title.green{color:#7ec87e;}
+  .callout p:last-child{margin-bottom:0;}
+
+  /* CITAS */
+  .hist-quote{border-left:3px solid var(--gold);padding:.8rem 1.2rem;margin:1.4rem 0;background:rgba(212,175,55,0.05);border-radius:0 6px 6px 0;}
+  .hist-quote p{font-family:'IM Fell English',serif;font-style:italic;font-size:1.06rem;color:var(--white);margin-bottom:.35rem;}
+  .hist-quote .attr{font-size:.74rem;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;}
+
+  /* MITO / REALIDAD */
+  .mito-realidad{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.6rem 0;}
+  @media (max-width:640px){.mito-realidad{grid-template-columns:1fr;}}
+  .mito{border:1px solid #6a2020;background:rgba(100,20,20,0.15);border-radius:8px;padding:1.2rem 1.3rem;}
+  .mito .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:#d96060;border:1px solid #9a3535;border-radius:4px;padding:.15rem .55rem;margin-bottom:.7rem;}
+  .mito p{font-size:.93rem;margin-bottom:0;color:var(--white-dim);}
+  .realidad{border:1px solid rgba(212,175,55,0.4);background:rgba(212,175,55,0.06);border-radius:8px;padding:1.2rem 1.3rem;}
+  .realidad .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold-bright);border:1px solid var(--gold);border-radius:4px;padding:.15rem .55rem;margin-bottom:.7rem;}
+  .realidad p{font-size:.93rem;margin-bottom:0;}
+
+  /* STAT CARDS */
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:1.8rem 0;}
+  .stat-card{border:1px solid var(--border);border-radius:8px;padding:1.3rem 1rem;background:var(--card);text-align:center;}
+  .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--gold-bright);font-weight:700;line-height:1.1;display:block;}
+  .stat-label{font-size:.76rem;color:var(--white-dim);text-transform:uppercase;letter-spacing:.1em;margin-top:.4rem;display:block;}
+  .stat-note{font-size:.72rem;color:var(--gold);margin-top:.3rem;display:block;}
+
+  /* BOXES */
+  .box{border-left:3px solid var(--gold);background:var(--card);border-radius:0 8px 8px 0;padding:1.15rem 1.4rem;margin:1rem 0;}
+  .box.alt{border-left-color:var(--white);}
+  .box.danger{border-left-color:#9a3535;}
+  .box.green{border-left-color:#3a6e3a;}
+  .box-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;flex-wrap:wrap;}
+  .tag{font-family:'Cormorant Garamond',serif;font-weight:700;color:#0a0a08;background:var(--gold);padding:.18rem .65rem;border-radius:4px;font-size:.8rem;letter-spacing:.04em;white-space:nowrap;}
+  .tag.white{background:var(--white);}
+  .tag.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold-bright);}
+  .tag.red{background:#9a3535;color:var(--white);}
+  .tag.green{background:#3a6e3a;color:var(--white);}
+  .box p{margin-bottom:0;font-size:.98rem;}
+  .box p+p{margin-top:.6rem;}
+  .box .label{color:var(--gold-bright);font-weight:600;font-size:.83rem;text-transform:uppercase;letter-spacing:.1em;}
+
+  /* PERSONA CARDS */
+  .persona-card{border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.4rem;background:var(--card);margin:.9rem 0;}
+  .persona-card .name{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:1.15rem;}
+  .persona-card .dates{color:var(--gold);font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem;display:block;}
+  .persona-card p{font-size:.95rem;margin-bottom:0;}
+  .persona-card p+p{margin-top:.55rem;}
+
+  /* TIMELINE */
+  .timeline{display:flex;flex-direction:column;gap:1.15rem;margin:1.8rem 0;border-left:2px solid var(--border);padding-left:1.6rem;}
+  .timeline-item{position:relative;}
+  .timeline-item::before{content:'';position:absolute;left:-1.67rem;top:.38rem;width:10px;height:10px;border-radius:50%;background:var(--gold);}
+  .timeline-item .year{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.08rem;}
+  .timeline-item p{margin:.25rem 0 0;font-size:.95rem;}
+  .timeline-item.red::before{background:#9a3535;}
+  .timeline-item.green::before{background:#4a8c4a;}
+
+  /* COMPARATIVA */
+  .compare-wrap{overflow-x:auto;margin:1.8rem 0;border:1px solid var(--border);border-radius:8px;}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:640px;}
+  th,td{padding:.9rem 1.05rem;border-bottom:1px solid var(--border-soft);text-align:left;vertical-align:top;}
+  th{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-size:1rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--gold);background:var(--bg-alt);position:sticky;top:0;}
+  tbody tr:hover{background:rgba(212,175,55,0.04);}
+  tbody tr:last-child td{border-bottom:none;}
+  td.flag{color:var(--gold-bright);font-weight:600;}
+  td.red{color:#d96060;}
+  td.green{color:#7ec87e;}
+
+  /* GARANTÍAS PROCESALES */
+  .garantia-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.6rem 0;}
+  .garantia{border:1px solid rgba(212,175,55,0.35);border-radius:8px;padding:1.15rem 1.25rem;background:var(--card);position:relative;}
+  .garantia::before{content:'✓';position:absolute;top:.7rem;right:.9rem;color:var(--gold);font-size:1.1rem;font-weight:700;}
+  .garantia h4{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-size:1.05rem;margin-bottom:.45rem;}
+  .garantia p{font-size:.9rem;margin-bottom:0;}
+
+  /* SECTION BANNER */
+  .section-banner{background:linear-gradient(135deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--border);border-radius:10px;padding:2rem 2rem 1.6rem;margin:2rem 0 2.4rem;position:relative;overflow:hidden;}
+  .section-banner::before{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.12),transparent 70%);}
+  .section-banner h3{margin-top:0;color:var(--gold-bright);}
+  .section-banner p{font-size:.97rem;}
+  .section-banner p:last-child{margin-bottom:0;}
+
+  /* LECTURA GRID */
+  .lectura-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.6rem 0;}
+  .lectura{border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.3rem;background:var(--card);}
+  .lectura .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:.15rem .55rem;margin-bottom:.7rem;}
+  .lectura p{font-size:.93rem;margin-bottom:0;}
+
+  /* DIVIDERS */
+  .divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3.4rem 0;opacity:.5;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border));}
+  .divider::after{background:linear-gradient(to left,transparent,var(--border));}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);margin-top:4rem;padding:2.4rem 2.6rem 3rem;max-width:var(--maxw);margin-left:auto;margin-right:auto;text-align:center;font-size:.85rem;color:var(--white-dim);}
+  footer .mark-small{margin:0 auto 1rem;opacity:.6;}
+
+  #backToTop{position:fixed;bottom:1.6rem;right:1.6rem;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:var(--card);color:var(--gold-bright);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:120;}
+  #backToTop.visible{opacity:1;pointer-events:auto;}
+  #backToTop:hover{transform:translateY(-3px);}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px;}
+
+  @media (max-width:980px){
+    .sidebar{transform:translateX(-100%);transition:transform .28s ease;box-shadow:20px 0 40px rgba(0,0,0,.5);}
+    .sidebar.open{transform:translateX(0);}
+    main{margin-left:0;}
+    #menuToggle{display:flex;}
+    .hero,.section{padding-left:1.4rem;padding-right:1.4rem;}
+    .hero{padding-top:4.8rem;}
+    .hero-rosette{display:none;}
+    .mito-realidad{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="progressBar" aria-hidden="true"></div>
+<button id="menuToggle" aria-label="Abrir índice" aria-expanded="false">☰</button>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar" aria-label="Índice del documento">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">
+      <svg width="44" height="44" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1.4">
+          <circle cx="30" cy="30" r="26"/>
+          <line x1="30" y1="8" x2="30" y2="52"/>
+          <line x1="10" y1="22" x2="50" y2="22"/>
+        </g>
+      </svg>
+    </div>
+    <h1>La Inquisición Española</h1>
+    <p>Historia contra el mito</p>
+  </div>
+
+  <div class="toc-title">Índice interactivo</div>
+  <ul class="toc-list">
+    <li><a href="#inicio"><span class="num">00</span><span>Apertura</span></a></li>
+    <li><a href="#leyenda-negra"><span class="num">01</span><span>La Leyenda Negra: quién la fabricó</span></a></li>
+    <li><a href="#contexto"><span class="num">02</span><span>Contexto histórico real</span></a></li>
+    <li><a href="#creacion"><span class="num">03</span><span>Creación: el papel del Estado</span></a></li>
+    <li><a href="#numeros"><span class="num">04</span><span>Las cifras reales de muertos</span></a></li>
+    <li><a href="#proceso"><span class="num">05</span><span>El proceso inquisitorial: garantías</span></a></li>
+    <li><a href="#tortura"><span class="num">06</span><span>La tortura: límites y comparativa</span></a></li>
+    <li><a href="#penas"><span class="num">07</span><span>Las penas y el brazo secular</span></a></li>
+    <li><a href="#comparativa"><span class="num">08</span><span>Comparativa con tribunales civiles</span></a></li>
+    <li><a href="#inquisidores"><span class="num">09</span><span>Los inquisidores: rigor y misericordia</span></a></li>
+    <li><a href="#mitos"><span class="num">10</span><span>Los grandes mitos uno por uno</span></a></li>
+    <li><a href="#iglesia"><span class="num">11</span><span>La Iglesia: ¿responsable o limitadora?</span></a></li>
+    <li><a href="#conclusion"><span class="num">12</span><span>Conclusión</span></a></li>
+  </ul>
+
+  <div class="sidebar-foot">
+    Análisis histórico de la Inquisición Española basado en los archivos reales abiertos desde 1998, con datos de los historiadores académicos más reconocidos del tema.
+  </div>
+</nav>
+
+<!-- CONTENIDO -->
+<main id="contenido">
+
+  <!-- HERO -->
+  <header class="hero" id="inicio">
+    <div class="hero-rosette" aria-hidden="true">
+      <svg width="170" height="170" viewBox="0 0 200 200" fill="none">
+        <g class="spin">
+          <g stroke="var(--gold)" stroke-width="0.75">
+            <rect x="38" y="38" width="124" height="124"/>
+            <rect x="38" y="38" width="124" height="124" transform="rotate(45 100 100)"/>
+            <circle cx="100" cy="100" r="87"/>
+            <circle cx="100" cy="100" r="60"/>
+            <circle cx="100" cy="100" r="30"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="eyebrow">Apertura</div>
+    <h1>La Inquisición Española: <span>historia contra el mito</span></h1>
+    <p class="lede">
+      Pocas instituciones históricas han sido tan sistemática y deliberadamente desfiguradas como la
+      Inquisición Española. Siglos de propaganda protestante, ilustrada y anticlerical han construido una
+      imagen de cámaras de tortura perpetua, hogueras diarias y millones de muertos que los archivos
+      históricos reales —abiertos al escrutinio académico internacional desde finales del siglo XX—
+      desmienten punto por punto.
+    </p>
+    <p class="lede">
+      Este documento reconstruye la historia real de la Inquisición Española basándose en los datos
+      que los mejores historiadores del tema —entre ellos el británico Henry Charles Lea, el estadounidense
+      Henry Kamen, los españoles Ricardo García Cárcel y Francisco Bethencourt— han extraído de los archivos:
+      cifras reales de procesados y ejecutados, garantías procesales que superaban con creces a los
+      tribunales civiles de la época, límites precisos a la tortura con presencia médica obligatoria,
+      y la separación jurídica entre la sentencia eclesiástica y la ejecución a cargo del Estado.
+    </p>
+    <div class="pills">
+      <span class="pill">Leyenda Negra</span>
+      <span class="pill">Cifras reales</span>
+      <span class="pill">Garantías procesales</span>
+      <span class="pill">Tortura reglamentada</span>
+      <span class="pill">Brazo secular</span>
+      <span class="pill">Kamen · García Cárcel</span>
+      <span class="pill">Archivos inquisitoriales</span>
+    </div>
+  </header>
+
+  <!-- 01 — LEYENDA NEGRA -->
+  <section class="section" id="leyenda-negra">
+    <div class="eyebrow">01 · El origen del mito</div>
+    <h2>La Leyenda Negra: quién la fabricó y con qué interés</h2>
+    <p>
+      Para entender la Inquisición Española hay que entender primero por qué la imagen que la mayoría
+      de la gente tiene de ella es tan radicalmente distinta de lo que revelan los archivos. La respuesta
+      es histórica, política y confesional: la <strong>Leyenda Negra</strong> —el cuerpo de acusaciones
+      exageradas o directamente falsas sobre España y su Iglesia— fue una construcción deliberada,
+      con autores identificables, motivaciones precisas y una maquinaria de difusión muy eficaz.
+    </p>
+
+    <h3>Las tres fuentes de la Leyenda Negra</h3>
+
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">Fuente 1</span>
+        <h4>La propaganda protestante del siglo XVI</h4>
+        <p>
+          En el contexto de las guerras de religión, los países protestantes —especialmente los Países
+          Bajos en rebelión contra España, e Inglaterra— tenían un interés político directo en presentar
+          a España como un imperio de terror teocrático. Las imprentas de Amberes y Londres produjeron
+          miles de panfletos ilustrando con grabados espectaculares —y completamente imaginarios— las
+          supuestas torturas inquisitoriales. El panfleto más influyente fue la <em>Relación</em> de
+          Reginald González de Montes (1567), cuya identidad exacta sigue discutiéndose: un texto que
+          mezcla hechos reales con invenciones y que fue traducido a seis idiomas en pocos años.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Fuente 2</span>
+        <h4>La Ilustración anticlerical del XVIII</h4>
+        <p>
+          En el siglo XVIII, la Inquisición dejó de ser un enemigo protestante para convertirse en el
+          símbolo favorito de la crítica ilustrada a la religión organizada en general y al catolicismo
+          en particular. Voltaire, Montesquieu y los <em>encyclopédistes</em> franceses la usaron como
+          argumento contra la Iglesia, sin interés en la exactitud histórica y con mucho interés en la
+          efectividad polémica. La imagen del "oscurantismo español" tiene aquí su origen intelectual.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Fuente 3</span>
+        <h4>El romanticismo y la cultura popular</h4>
+        <p>
+          El siglo XIX añadió la dimensión cultural: el "Grand Inquisitor" de Dostoievski, la ópera
+          <em>Don Carlos</em> de Verdi, las pinturas de Goya —que, paradójicamente, vivió y trabajó
+          bajo la Inquisición sin ningún problema—, y los relatos góticos anglosajones consolidaron en
+          el imaginario popular una imagen de mazmorras, hogueras eternas y fanatismo sin límite que
+          ningún archivo histórico había generado y ningún archivo histórico podía desmentir, porque ya
+          no se trataba de historia sino de mitología cultural.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">El punto de inflexión: la apertura de los archivos</div>
+      <p>
+        Durante siglos, los archivos de la Inquisición estuvieron cerrados o dispersos, lo que permitió
+        que la imaginación llenara el hueco. A partir del siglo XIX, y especialmente desde 1998, cuando
+        el Vaticano abrió plenamente los fondos del Archivo Secreto que incluyen documentación
+        inquisitorial, los historiadores de todas las confesiones y nacionalidades han podido estudiar
+        los expedientes reales. El resultado fue unánime y sorprendente para el gran público: las cifras,
+        los procedimientos y los registros reales desmontaron sistemáticamente la leyenda.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 02 — CONTEXTO -->
+  <section class="section" id="contexto">
+    <div class="eyebrow">02 · El mundo real del siglo XV</div>
+    <h2>Contexto histórico real: lo que existía antes y alrededor</h2>
+    <p>
+      La Inquisición Española no se puede juzgar en el vacío —en comparación con estándares del siglo
+      XXI que ninguna institución del siglo XV habría reconocido—. Debe juzgarse, si ha de juzgarse
+      históricamente, en su contexto: el del siglo XV europeo, donde la violencia judicial era la
+      norma, la tortura era legal y universal, las ejecuciones públicas eran espectáculos ordinarios,
+      y la distinción entre crimen político y crimen religioso era inexistente en cualquier país de Europa.
+    </p>
+
+    <h3>Lo que hacían los demás simultáneamente</h3>
+    <div class="section-banner">
+      <h3>La Europa que juzgaba a la Inquisición Española</h3>
+      <p>
+        <strong>Inglaterra:</strong> entre 1533 y 1680, la monarquía inglesa ejecutó a más de 300 católicos
+        por el simple hecho de ser sacerdotes o de dar cobijo a sacerdotes —más que la Inquisición Española
+        en todo el siglo XVI—. La tortura era legal en los tribunales de la Torre de Londres. Las brujas
+        fueron ejecutadas en masa: solo en el condado de Essex, entre 1560 y 1680, fueron ahorcadas más
+        de 300 personas acusadas de brujería —en un territorio diminuto—.
+      </p>
+      <p>
+        <strong>Alemania:</strong> las guerras campesinas de 1524-1525 dejaron entre 70.000 y 100.000
+        muertos. La represión de los anabaptistas de Münster en 1535 fue un baño de sangre. Los juicios
+        de brujas en el Sacro Imperio ejecutaron, según estimaciones académicas, entre 25.000 y 60.000
+        personas entre los siglos XVI y XVII.
+      </p>
+      <p>
+        <strong>Francia:</strong> la Masacre de San Bartolomé (agosto de 1572) mató entre 3.000 y
+        10.000 protestantes en París y sus alrededores en tres días —más que toda la Inquisición Española
+        en sus 350 años de existencia—. Los tribunales civiles franceses practicaban la tortura de forma
+        rutinaria y sin las restricciones que los manuales inquisitoriales imponían.
+      </p>
+    </div>
+
+    <h3>España antes de la Inquisición: el contexto interno</h3>
+    <p>
+      La Inquisición Española se estableció en 1478 en un contexto de tensión social muy específico.
+      Durante las décadas anteriores, los llamados <em>conversos</em> —judíos convertidos al
+      cristianismo, a veces bajo presión— habían ascendido a posiciones prominentes en la sociedad
+      española: en la nobleza, en el clero, en el comercio, en la administración real. Una parte de
+      ellos practicaban en privado ritos judaicos mientras profesaban públicamente el cristianismo
+      (los llamados <em>judaizantes</em>). Esto generó una tensión social intensa: entre los
+      "cristianos viejos" que sospechaban de los conversos, y dentro de las propias comunidades
+      conversas, divididas entre los sinceramente convertidos y los que mantenían su fe ancestral en
+      secreto. Las matanzas de judeoconversos en 1391 y los pogromos que siguieron mostraban que,
+      sin una institución que canalizara esas tensiones hacia un proceso legal, la violencia popular
+      y extrajudicial era la única alternativa disponible.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">El argumento del "mal menor"</div>
+      <p>
+        Henry Kamen, el historiador británico cuya obra <em>La Inquisición Española</em> (1965, rev. 1997)
+        es la referencia académica más citada sobre el tema, señala que la Inquisición, al canalizar
+        las acusaciones hacia un proceso legal con reglas y garantías, en realidad <strong>redujo</strong>
+        la violencia popular que habría recaído sobre los conversos sin ella. El tribunal funcionó,
+        en su dimensión social, como un amortiguador entre la presión de las masas y los acusados.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 03 — CREACIÓN -->
+  <section class="section" id="creacion">
+    <div class="eyebrow">03 · Naturaleza institucional</div>
+    <h2>Creación de la Inquisición: un tribunal del Estado, no de la Iglesia</h2>
+    <p>
+      Este es uno de los malentendidos más graves y más persistentes: identificar la Inquisición
+      Española como una institución de la Iglesia Católica. La verdad histórica es considerablemente
+      más matizada, y en un aspecto fundamental invierte la imagen popular: la Inquisición Española
+      fue, ante todo, <strong>un instrumento de la Corona</strong> —de los Reyes Católicos y sus
+      sucesores—, no de la Santa Sede, con la que con frecuencia estuvo en tensión o en abierto conflicto.
+    </p>
+
+    <h3>Los Reyes Católicos y la bula de Sixto IV</h3>
+    <p>
+      La Inquisición Española fue creada por bula del papa Sixto IV el 1 de noviembre de 1478, a petición
+      expresa de los Reyes Católicos, Fernando e Isabel. Pero desde el principio, la institución fue
+      controlada por la Corona, no por Roma: los inquisidores eran nombrados por el rey, no por el papa;
+      el Inquisidor General era propuesto por la Corona y simplemente confirmado por Roma; y los ingresos
+      de los bienes confiscados iban a las arcas reales, no a la Iglesia.
+    </p>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">1482 — Un hecho revelador</span></div>
+      <p>
+        Apenas cuatro años después de crearla, el mismo Sixto IV escribió una carta de protesta a los
+        inquisidores de Aragón denunciando que el tribunal actuaba "movido no por el celo de la fe ni
+        por la salud de las almas, sino por la codicia de riquezas" —una acusación directa de que la
+        confiscación de bienes era el motor real de muchos procesos—. La Corona española simplemente
+        ignoró la carta. Si la Inquisición hubiera sido un instrumento de la Iglesia, el papa hubiera
+        podido suprimirla con una firma. No podía hacerlo porque no la controlaba.
+      </p>
+    </div>
+
+    <h3>El Inquisidor General: funcionario de la Corona</h3>
+    <div class="persona-card">
+      <span class="name">Tomás de Torquemada</span>
+      <span class="dates">Primer Inquisidor General · 1483–1498 · La figura más distorsionada de la historia</span>
+      <p>
+        Torquemada es el nombre que la Leyenda Negra convirtió en sinónimo de fanatismo y crueldad.
+        La realidad histórica es más compleja. Era confesor de la reina Isabel y pertenecía a una familia
+        de conversos —su propio tío, el cardenal Juan de Torquemada, era hijo de converso—, lo que hace
+        especialmente paradójica la caricatura del "perseguidor de conversos". Organizó la estructura
+        del tribunal sobre las <em>Instrucciones</em> de 1484, que establecieron garantías procesales
+        precisas —incluyendo el derecho del acusado a conocer los cargos y a nombrar abogado—.
+      </p>
+      <p>
+        Fue él, y no la Iglesia como institución, quien empujó la expulsión de los judíos no conversos
+        en 1492 —una decisión firmada por los Reyes Católicos, no por el papa—. Sixto IV y luego
+        Alejandro VI nunca la aprobaron con entusiasmo.
+      </p>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">La Iglesia frenó a la Inquisición con frecuencia</div>
+      <p>
+        A lo largo de su historia, la Santa Sede intervino repetidamente para limitar los excesos de la
+        Inquisición Española: Sixto IV (1482), Clemente VII, Pablo III y otros papas protestaron ante
+        los abusos y exigieron mayor respeto a las garantías procesales. El hecho de que esas intervenciones
+        tuvieran un éxito limitado muestra precisamente que el tribunal estaba bajo control de la Corona,
+        no de la Iglesia.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 04 — LOS NÚMEROS -->
+  <section class="section" id="numeros">
+    <div class="eyebrow">04 · Las cifras reales</div>
+    <h2>Las cifras reales de muertos: lo que dicen los archivos</h2>
+    <p>
+      La afirmación más dramática de la Leyenda Negra —que la Inquisición mató a cientos de miles o
+      incluso millones de personas— choca frontalmente con los datos de los archivos inquisitoriales,
+      que son excepcionalmente completos para los estándares de la época. Los inquisidores eran,
+      entre otras cosas, burocráticamente escrupulosos: registraban cada caso, cada sentencia, cada
+      apelación. Esos registros permiten hoy hacer estimaciones con un grado de confianza muy alto.
+    </p>
+
+    <h3>Las estimaciones académicas más sólidas</h3>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-num">~150.000</span>
+        <span class="stat-label">Procesados totales</span>
+        <span class="stat-note">En 350 años de actividad · Kamen, García Cárcel</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">1–2%</span>
+        <span class="stat-label">Tasa de ejecución</span>
+        <span class="stat-note">Del total de procesados · Pérez Villanueva</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">~3.000–5.000</span>
+        <span class="stat-label">Ejecutados en 350 años</span>
+        <span class="stat-note">Estimación máxima · Contreras &amp; Henningsen</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">~826</span>
+        <span class="stat-label">Ejecutados documentados</span>
+        <span class="stat-note">En persona · período 1540–1700 · Henningsen</span>
+      </div>
+    </div>
+
+    <p>
+      El historiador danés Gustav Henningsen y el español Jaime Contreras realizaron en los años 1970-80
+      el mayor estudio estadístico jamás hecho sobre los archivos inquisitoriales: analizaron 44.674
+      procesos de cuarenta y cuatro tribunales distintos entre 1540 y 1700. Sus conclusiones publicadas
+      en <em>The Inquisition in Early Modern Europe</em> (1986) son la referencia académica estándar.
+    </p>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito popular</span>
+        <p>"La Inquisición quemó a millones de personas. Las hogueras ardían continuamente."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad histórica</span>
+        <p>Las estimaciones más altas hablan de 3.000-5.000 ejecuciones en <strong>350 años</strong> de actividad, en un territorio de varios millones de habitantes. En muchos períodos y regiones, pasaban años sin ninguna ejecución. El equivalente a menos de 15 ejecuciones anuales de media —cuando los tribunales civiles europeos de la época ejecutaban decenas en una sola semana.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito popular</span>
+        <p>"Nadie era absuelto. La Inquisición siempre condenaba."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad histórica</span>
+        <p>En el estudio de Henningsen y Contreras, el resultado más frecuente de los procesos no era la condena sino la <strong>absolución o la suspensión del proceso</strong>. Solo una pequeña minoría llegaba a sentencia condenatoria grave. Muchos procesos terminaban con una simple abjuración de levi (declaración de haber errado sin intención herética) y una penitencia menor.</p>
+      </div>
+    </div>
+
+    <h3>¿Por qué la cifra real es tan baja?</h3>
+    <p>
+      La baja tasa de ejecuciones no es accidental: refleja la propia doctrina del tribunal. La
+      Inquisición perseguía la conversión sincera del hereje, no su destrucción. Un acusado que se
+      retractaba y reconocía su error —incluso en el último momento, incluso en el pie de la hoguera—
+      podía escapar de la muerte. Solo el hereje impenitente y relapso (reincidente) que se negaba
+      absolutamente a retractarse era entregado al brazo secular para su ejecución. El objetivo
+      declarado del tribunal era salvar almas, no eliminar cuerpos.
+    </p>
+
+    <div class="hist-quote">
+      <p>"Los inquisidores no eran los monstruos de la leyenda; eran administradores judiciales que, dentro de los estándares de su tiempo, aplicaban el derecho procesal con un rigor que muchos tribunales civiles del siglo XVI no alcanzaban."</p>
+      <span class="attr">— Henry Kamen, historiador británico · La Inquisición Española (ed. revisada, 1997)</span>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 05 — EL PROCESO -->
+  <section class="section" id="proceso">
+    <div class="eyebrow">05 · Derecho procesal</div>
+    <h2>El proceso inquisitorial: garantías que adelantaron siglos al derecho común</h2>
+    <p>
+      El proceso inquisitorial, codificado en las <em>Instrucciones</em> de Torquemada (1484) y
+      perfeccionado sucesivamente por los Inquisidores Generales Diego de Deza (1500) y Francisco
+      Jiménez de Cisneros (1516), contenía una serie de garantías procesales que en muchos puntos
+      superaban ampliamente a los tribunales civiles de la época —y que en algunos aspectos
+      anticipaban principios que el derecho procesal moderno no consagraría hasta siglos después.
+    </p>
+
+    <div class="garantia-list">
+      <div class="garantia">
+        <h4>Derecho a conocer los cargos</h4>
+        <p>El acusado debía conocer los cargos concretos que se le imputaban. En los tribunales civiles europeos de la época, era frecuente que el acusado no supiera de qué se le acusaba hasta el juicio.</p>
+      </div>
+      <div class="garantia">
+        <h4>Derecho a defensa letrada</h4>
+        <p>El acusado tenía derecho a ser asistido por un abogado defensor —el <em>abogado de los presos</em>— sufragado por el tribunal si el reo no podía pagarlo. Este derecho era prácticamente inexistente en la mayoría de los tribunales civiles europeos del siglo XV.</p>
+      </div>
+      <div class="garantia">
+        <h4>Prohibición de testigos anónimos sin límite</h4>
+        <p>Aunque los nombres de los testigos se protegían inicialmente, el acusado podía presentar una lista de personas que le eran hostiles (<em>tachas</em>); si alguna coincidía con los testigos, su testimonio quedaba invalidado. Era una forma indirecta de confrontación con los acusadores.</p>
+      </div>
+      <div class="garantia">
+        <h4>Período de gracia</h4>
+        <p>Cuando el tribunal llegaba a una nueva localidad, proclamaba un "edicto de gracia" de treinta días durante el cual cualquiera que se presentara voluntariamente a confesar errores podía hacerlo con garantía de penas menores —sin confiscación de bienes ni prisión.</p>
+      </div>
+      <div class="garantia">
+        <h4>Doble revisión de la sentencia</h4>
+        <p>Antes de cualquier sentencia de muerte, el tribunal local debía consultar con el Consejo de la Suprema Inquisición en Madrid —el <em>Consejo de la Suprema y General Inquisición</em>—. Este organismo central actuó frecuentemente como freno a los excesos de los tribunales locales.</p>
+      </div>
+      <div class="garantia">
+        <h4>Derecho de apelación ante Roma</h4>
+        <p>Los acusados tenían derecho a apelar ante la Santa Sede. Muchas apelaciones llegaron efectivamente a Roma y dieron lugar a revisiones y absoluciones. Este derecho era completamente ignorado por los tribunales civiles de la época.</p>
+      </div>
+      <div class="garantia">
+        <h4>Presunción de inocencia práctica</h4>
+        <p>La carga de la prueba recaía sobre el tribunal. La confesión del acusado no podía ser la única base de la condena si había sido obtenida bajo tortura; debía ser ratificada libremente al día siguiente fuera de la sala de tormento.</p>
+      </div>
+      <div class="garantia">
+        <h4>Protección ante denuncia maliciosa</h4>
+        <p>Quien presentara una denuncia falsa con intención de dañar al acusado podía ser procesado y condenado por perjurio. Esto desincentivaba las denuncias oportunistas, aunque no las eliminaba del todo.</p>
+      </div>
+    </div>
+
+    <div class="hist-quote">
+      <p>"Si fuera posible transportar a un acusado de herejía desde los tribunales ingleses o franceses del siglo XVI al de la Inquisición Española, habría experimentado unas condiciones procesales incomparablemente más favorables."</p>
+      <span class="attr">— Thomas F. Madden, historiador, Universidad de Saint Louis · «The Truth About the Spanish Inquisition», Crisis Magazine, 2003</span>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 06 — TORTURA -->
+  <section class="section" id="tortura">
+    <div class="eyebrow">06 · El uso de la tortura</div>
+    <h2>La tortura: reglamentada, limitada y con médico presente</h2>
+    <p>
+      Sí: la Inquisición Española utilizó la tortura. No negarlo es una condición de la honestidad
+      histórica. Pero utilizarla como argumento sin el contexto adecuado es un anacronismo deliberado
+      que dice más sobre los prejuicios del comentarista que sobre la realidad del siglo XVI. La
+      tortura era legal y universal en todos los sistemas judiciales europeos de la época —civiles
+      y eclesiásticos, católicos y protestantes—. Lo que distingue a la Inquisición no es haberla
+      usado, sino las <strong>restricciones precisas y por escrito</strong> bajo las que la usaba,
+      que no tenían equivalente en ningún tribunal civil contemporáneo.
+    </p>
+
+    <h3>Las reglas escritas de la tortura inquisitorial</h3>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Restricción 1</span><span class="label">Médico presente obligatoriamente</span></div>
+      <p>
+        Las <em>Instrucciones</em> inquisitoriales exigían la presencia de un médico durante cualquier
+        sesión de tortura. El médico tenía autoridad para detener la sesión si consideraba que el reo
+        estaba en peligro de muerte o de daño irreparable. Esta exigencia era completamente ajena a
+        los tribunales civiles europeos, donde la tortura se aplicaba sin ninguna supervisión médica
+        ni límite formal de daño.
+      </p>
+    </div>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Restricción 2</span><span class="label">Una sola sesión por causa</span></div>
+      <p>
+        La tortura solo podía aplicarse una vez por proceso —aunque la práctica de "suspender" la
+        sesión y reanudarla al día siguiente fue usada en algunos casos como evasión de esta norma—.
+        En los tribunales civiles, la tortura podía repetirse indefinidamente hasta obtener la
+        confesión deseada.
+      </p>
+    </div>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Restricción 3</span><span class="label">Causas limitadas y proporcionales</span></div>
+      <p>
+        La tortura solo podía aplicarse cuando existían pruebas semiplenas —indicios fundados de
+        culpabilidad— pero no prueba plena, y solo para completar la prueba en causas graves. No
+        podía usarse para delitos menores, ni para arrancar confesiones cuando ya existía prueba
+        suficiente, ni contra ancianos, embarazadas, niños o personas muy enfermas.
+      </p>
+    </div>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Restricción 4</span><span class="label">Prohibición de mutilación y derramamiento de sangre</span></div>
+      <p>
+        Los métodos aprobados —la garrucha (suspensión por los brazos atados a la espalda), la toca
+        (administración controlada de agua) y el potro (inmovilización con ligas apretadas)— no debían
+        producir mutilaciones, fracturas ni derramamiento de sangre. Estaban específicamente prohibidos
+        métodos que produjeran daño permanente. En comparación, los tribunales civiles europeos usaban
+        sin restricción la rueda, el descuartizamiento, la aplicación de hierros candentes y otras
+        técnicas que la Inquisición tenía expresamente vedadas.
+      </p>
+    </div>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Restricción 5</span><span class="label">La confesión bajo tortura no valía sola</span></div>
+      <p>
+        Cualquier confesión obtenida durante la sesión de tormento debía ser ratificada libremente
+        por el acusado al día siguiente, en la sala del tribunal y sin coacción. Si el acusado se
+        retractaba de lo confesado bajo tortura, esa confesión no podía usarse como base de condena.
+        Esta regla era jurídicamente sofisticada y no tenía equivalente en el derecho civil de la época.
+      </p>
+    </div>
+
+    <h3>¿Con qué frecuencia se usaba?</h3>
+    <p>
+      La imagen de la tortura como recurso habitual y permanente es falsa. Los registros muestran
+      que en la mayoría de los procesos no se llegaba a la tortura. Según el análisis de Henningsen
+      y Contreras, la tortura se aplicó en menos del <strong>2% de los casos</strong> documentados
+      en el período 1540-1700. El propio tribunal consideraba que la confesión voluntaria obtenida
+      mediante la persuasión del acusado era mucho más valiosa que la confesión arrancada bajo tortura,
+      precisamente porque era más fiable como indicador de arrepentimiento sincero.
+    </p>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito popular</span>
+        <p>"La Inquisición torturaba a todo el mundo durante días hasta que confesaban cualquier cosa."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad histórica</span>
+        <p>La tortura se aplicó en menos del 2% de los casos. Estaba reglamentada por escrito, tenía un médico presente, no podía causar mutilación, solo podía usarse una vez por causa, y la confesión obtenida debía ratificarse libremente al día siguiente para tener valor probatorio.</p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 07 — LAS PENAS -->
+  <section class="section" id="penas">
+    <div class="eyebrow">07 · Las sentencias de muerte</div>
+    <h2>Las penas capitales: la Iglesia no quemaba, entregaba al Estado</h2>
+    <p>
+      Este es uno de los puntos en que la confusión histórica ha sido más sistemática y más deshonesta.
+      La Inquisición <strong>nunca ejecutó directamente a nadie</strong>. La Iglesia, por principio
+      doctrinal y canónico —<em>Ecclesia non sitit sanguinem</em> ("la Iglesia no tiene sed de sangre")—,
+      no podía aplicar penas de muerte. Cuando un acusado era declarado hereje impenitente y el tribunal
+      consideraba agotados todos los recursos para su conversión, la sentencia eclesiástica se limitaba
+      a la "relajación al brazo secular" —la entrega formal del reo a las autoridades civiles del Estado.
+    </p>
+
+    <h3>La "relajación al brazo secular"</h3>
+    <div class="box alt">
+      <div class="box-head"><span class="tag white">Principio canónico</span><span class="label">La Iglesia no derrama sangre</span></div>
+      <p>
+        La fórmula canónica era inequívoca: el tribunal eclesiástico declaraba que ya no podía hacer
+        nada más por la conversión del reo y lo "relajaba" a la jurisdicción civil —con una fórmula
+        que pedía explícitamente a las autoridades civiles que tuvieran "misericordia con él". Quien
+        encendía la hoguera era el verdugo del Estado, no ningún funcionario eclesiástico.
+      </p>
+      <p>
+        La distinción puede parecer formalista, pero no lo es desde el punto de vista jurídico ni
+        desde el punto de vista de la responsabilidad institucional. La Iglesia no tenía jurisdicción
+        sobre la pena capital; la firmaba el Estado y la ejecutaba el Estado. Cuando los críticos
+        de la Inquisición dicen que "la Iglesia quemaba herejes", cometen un error jurídico básico.
+      </p>
+    </div>
+
+    <h3>¿Cuándo se entregaba al brazo secular?</h3>
+    <p>Solo se llegaba a la pena de muerte en dos circunstancias muy específicas:</p>
+    <ol>
+      <li>
+        <strong>El hereje impenitente:</strong> aquel que, habiendo recibido toda la instrucción
+        disponible y todas las oportunidades de retractarse, se negaba absolutamente a abandonar la
+        herejía. En la teología de la época, privar a la comunidad de su influencia corruptora
+        se consideraba equivalente a amputar un miembro gangrenado para salvar el cuerpo.
+      </li>
+      <li>
+        <strong>El hereje relapso:</strong> aquel que ya había sido absuelto y reconciliado con la
+        Iglesia, pero había reincidido en la misma herejía. La reincidencia mostraba que la reconciliación
+        anterior había sido insincera, y el tribunal consideraba agotadas las posibilidades de conversión.
+      </li>
+    </ol>
+
+    <h3>La quema en efigie: una alternativa casi desconocida</h3>
+    <p>
+      Muchos de los "quemados" que aparecen en los registros inquisitoriales no eran personas: eran
+      efigies —muñecos de paja o retratos— de reos que habían huido o habían muerto antes de la
+      sentencia. La quema en efigie era una pena simbólica que infamaba al condenado ausente sin
+      causar ningún daño físico a nadie. Contabilizar estas ejecuciones simbólicas como muertes
+      reales —como hacen algunas obras de divulgación— es un error histórico grave.
+    </p>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito popular</span>
+        <p>"La Iglesia quemaba a los herejes en la hoguera."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad histórica</span>
+        <p>La Iglesia no ejecutaba a nadie. El tribunal eclesiástico declaraba hereje al reo y lo entregaba al Estado con una petición de clemencia. Era el Estado quien firmaba y ejecutaba la pena capital. Además, muchos "quemados" en los registros eran efigies de personas ausentes, no personas reales.</p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 08 — COMPARATIVA -->
+  <section class="section" id="comparativa">
+    <div class="eyebrow">08 · El contexto comparado</div>
+    <h2>Comparativa con los tribunales civiles de la época</h2>
+    <p>
+      Poner los datos de la Inquisición Española en perspectiva comparada con los tribunales civiles
+      coetáneos —incluidos los de países protestantes que se erigiron en críticos de España— produce
+      un resultado que suele dejar sin palabras a quienes han sido educados con la Leyenda Negra.
+    </p>
+
+    <div class="compare-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Criterio</th>
+            <th>Inquisición Española</th>
+            <th>Tribunales civiles europeos (s. XVI)</th>
+            <th>Tribunales ingleses (s. XVI-XVII)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="flag">Derecho a abogado</td>
+            <td class="green">Sí, incluso pagado por el tribunal</td>
+            <td class="red">Raramente</td>
+            <td class="red">No en causas penales graves</td>
+          </tr>
+          <tr>
+            <td class="flag">Conocimiento de los cargos</td>
+            <td class="green">Sí, por escrito</td>
+            <td class="red">No siempre</td>
+            <td class="red">Variable</td>
+          </tr>
+          <tr>
+            <td class="flag">Médico en la tortura</td>
+            <td class="green">Obligatorio</td>
+            <td class="red">No existía tal exigencia</td>
+            <td class="red">No existía tal exigencia</td>
+          </tr>
+          <tr>
+            <td class="flag">Límite de sesiones de tortura</td>
+            <td class="green">Una por proceso</td>
+            <td class="red">Sin límite</td>
+            <td class="red">Sin límite formal</td>
+          </tr>
+          <tr>
+            <td class="flag">Prohibición de mutilación</td>
+            <td class="green">Explícita en las Instrucciones</td>
+            <td class="red">No existía tal prohibición</td>
+            <td class="red">No existía tal prohibición</td>
+          </tr>
+          <tr>
+            <td class="flag">Ratificación libre de confesión</td>
+            <td class="green">Obligatoria al día siguiente</td>
+            <td class="red">No exigida</td>
+            <td class="red">No exigida</td>
+          </tr>
+          <tr>
+            <td class="flag">Apelación a instancia superior</td>
+            <td class="green">Sí, hasta Roma</td>
+            <td class="red">Limitada al mismo sistema</td>
+            <td class="red">Muy limitada</td>
+          </tr>
+          <tr>
+            <td class="flag">Tasa de ejecución</td>
+            <td class="green">1–2% de procesados</td>
+            <td class="red">Mucho mayor en causas graves</td>
+            <td class="red">Alta en causas políticas y religiosas</td>
+          </tr>
+          <tr>
+            <td class="flag">Ejecuciones por brujería</td>
+            <td class="green">Mínimas: la Inquisición era escéptica ante acusaciones de brujería</td>
+            <td class="red">Miles en Alemania, Francia y Escocia</td>
+            <td class="red">Cientos en Inglaterra</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>El caso de la brujería: la Inquisición protegió a las mujeres</h3>
+    <p>
+      Uno de los datos más sorprendentes que emergen de los archivos es el papel de la Inquisición
+      Española respecto a las acusaciones de brujería. En los países protestantes del norte de Europa
+      —Alemania, Escocia, Suecia, Suiza— los juicios de brujas produjeron decenas de miles de ejecuciones
+      en los siglos XVI y XVII, con picos de histeria colectiva que devastaron aldeas enteras. En España,
+      bajo jurisdicción inquisitorial, el fenómeno fue incomparablemente menor.
+    </p>
+    <p>
+      La razón es teológica y epistemológica: los manuales inquisitoriales, especialmente a partir
+      del Inquisidor General Salazar y Frías (1609-1619) —que investigó personalmente el caso de
+      brujería del País Vasco—, adoptaron una postura escéptica ante las acusaciones de brujería:
+      exigían evidencias empíricas de los supuestos crímenes sobrenaturales y consideraban que la
+      mayoría de las acusadas eran mujeres perturbadas o víctimas de ilusiones, no brujas reales.
+      "No hay brujas si no se cree en ellas", escribió Salazar. Esta postura <strong>protegió a
+      cientos de mujeres</strong> que en cualquier tribunal civil o protestante del norte de Europa
+      habrían sido ejecutadas.
+    </p>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 09 — INQUISIDORES -->
+  <section class="section" id="inquisidores">
+    <div class="eyebrow">09 · Los hombres del tribunal</div>
+    <h2>Los inquisidores: teólogos juristas, no torturadores fanáticos</h2>
+    <p>
+      La imagen del inquisidor como fanático torturador es una de las distorsiones más burdas de
+      la Leyenda Negra. Los inquisidores reales eran, en su inmensa mayoría, teólogos y juristas
+      universitarios —formados en las grandes universidades españolas de Salamanca, Alcalá de Henares
+      y Valladolid— con un nivel de preparación académica que superaba con creces al de los jueces
+      civiles de la época. Su trabajo les exigía un conocimiento profundo de la teología escolástica,
+      del derecho procesal, del derecho canónico y, con frecuencia, de las lenguas y las culturas de
+      los grupos que investigaban.
+    </p>
+
+    <div class="persona-card">
+      <span class="name">Francisco Jiménez de Cisneros</span>
+      <span class="dates">Inquisidor General · 1507–1517 · Cardenal de Toledo · Reformador universitario</span>
+      <p>
+        Fundador de la Universidad de Alcalá de Henares (1499), promotor de la <em>Biblia Políglota
+        Complutense</em> —la primera edición crítica del texto bíblico en las lenguas originales—,
+        reformador de las órdenes religiosas españolas antes de Trento, y político de primer orden.
+        Es una de las figuras más brillantes del humanismo español y fue, al mismo tiempo, Inquisidor
+        General. Su figura es incompatible con la imagen del fanático ignorante que la Leyenda Negra
+        necesita.
+      </p>
+    </div>
+
+    <div class="persona-card">
+      <span class="name">Alonso de Salazar y Frías</span>
+      <span class="dates">Inquisidor · 1609–1619 · "El abogado de las brujas"</span>
+      <p>
+        Tras el pánico de brujería en Zugarramurdi (País Vasco, 1609), Salazar fue enviado a
+        investigar. Entrevistó personalmente a más de 1.800 personas que se habían confesado brujas
+        o habían denunciado a otras. Su informe al Consejo de la Suprema es un documento extraordinario
+        de rigor epistemológico: no encontró ni una sola prueba empírica de ningún crimen sobrenatural,
+        y concluyó que las confesiones eran producto de la sugestión colectiva y el miedo. Su investigación
+        salvó de la ejecución a cientos de personas que habrían muerto en cualquier tribunal civil
+        del norte de Europa.
+      </p>
+    </div>
+
+    <div class="persona-card">
+      <span class="name">Francisco Peña</span>
+      <span class="dates">Jurista inquisitorial · s. XVI · Editor del <em>Directorium Inquisitorum</em></span>
+      <p>
+        Peña editó y anotó el manual inquisitorial clásico de Nicolás Eimeric con un corpus de
+        comentarios jurídicos que insistían en las garantías procesales y en la necesidad de prueba
+        sólida antes de cualquier condena. Sus anotaciones son representativas del espíritu jurídico
+        que presidía la formación inquisitorial: la cautela, la prudencia y el respeto al procedimiento.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 10 — LOS GRANDES MITOS -->
+  <section class="section" id="mitos">
+    <div class="eyebrow">10 · Desmontando la leyenda</div>
+    <h2>Los grandes mitos de la Inquisición Española, uno por uno</h2>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"Nadie esperaba a la Inquisición" (Nobody expects the Spanish Inquisition).</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>Todo el mundo la esperaba. El tribunal anunciaba su llegada con semanas de antelación mediante edictos públicos, proclamaba el período de gracia, y convocaba a los testigos de forma previa. Era un proceso extraordinariamente deliberado y predecible —lo contrario de una redada nocturna.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"La Inquisición perseguía científicos y sofocó el pensamiento libre en España."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>La Inquisición no tenía jurisdicción sobre afirmaciones científicas como tales —su competencia era la herejía doctrinal, no la filosofía natural—. La ciencia española del Siglo de Oro fue brillante: médicos, botánicos, cartógrafos, matemáticos, navegantes. La decadencia científica española en el siglo XVIII tuvo causas económicas, políticas y sociales complejas, no inquisitoriales.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"Galileo fue condenado por la Inquisición Española."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>Galileo fue procesado por la Inquisición <strong>romana</strong> (el Sant'Uffizio), no por la Inquisición Española —que eran instituciones distintas, con jurisdicciones distintas y procedimientos distintos—. Además, Galileo no fue ejecutado: fue sometido a arresto domiciliario en una villa de Arcetri hasta su muerte, y siguió publicando. El caso, con todos sus problemas reales, nada tiene que ver con la Inquisición Española.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"La Inquisición perseguía a los moros y judíos por su religión."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>La Inquisición Española <strong>no tenía jurisdicción sobre los judíos ni sobre los musulmanes no bautizados</strong>. Su competencia era exclusiva sobre los bautizados —es decir, sobre los cristianos que practicaban en secreto ritos de otra fe. Los judíos y moros no conversos estaban fuera de su jurisdicción completamente. La expulsión de los judíos en 1492 fue una decisión de la Corona, no de la Inquisición.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"La Inquisición fue el mayor instrumento de opresión de la historia española."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>La Inquisición era, para la mayoría de la población, un tribunal remoto que raramente afectaba la vida ordinaria. Henry Kamen señala que la mayoría de los españoles del siglo XVI nunca tuvo contacto directo con el tribunal. Muchos acudían a él <em>voluntariamente</em> para presentar confesiones espontáneas, buscando la absolución. En algunas regiones, los presos preferían ser transferidos a cárceles inquisitoriales antes que a las civiles, porque las condiciones eran mejores.</p>
+      </div>
+    </div>
+
+    <div class="mito-realidad">
+      <div class="mito">
+        <span class="badge">Mito</span>
+        <p>"Los autos de fe eran orgías de ejecuciones masivas."</p>
+      </div>
+      <div class="realidad">
+        <span class="badge">Realidad</span>
+        <p>El <em>auto de fe</em> ("acto de fe") era una ceremonia pública de lectura de sentencias, que en la inmensa mayoría de los casos consistía en penitencias menores: portar el <em>sambenito</em> (un hábito penitencial), rezos, privación temporal de ciertos derechos. Las ejecuciones, cuando las había, eran una pequeña minoría de los casos presentados en cada auto. Los grabados espectaculares de hogueras masivas son representaciones imaginarias del arte de propaganda protestante, sin correspondencia con los registros reales.</p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 11 — LA IGLESIA -->
+  <section class="section" id="iglesia">
+    <div class="eyebrow">11 · La responsabilidad real</div>
+    <h2>La Iglesia: ¿cómplice o limitadora de la Inquisición?</h2>
+    <p>
+      La pregunta más honesta que puede hacerse sobre la relación entre la Iglesia Católica y la
+      Inquisición Española no es "¿la Iglesia es responsable de todo lo que hizo la Inquisición?"
+      —una pregunta diseñada para producir una condena en bloque—, sino: ¿en qué medida controló,
+      limitó o frenó la Iglesia los excesos del tribunal, y en qué medida los impulsó o toleró?
+    </p>
+
+    <h3>Lo que la Santa Sede hizo en defensa de los acusados</h3>
+    <ul>
+      <li><strong>La carta de Sixto IV (1482):</strong> protesta formal ante los abusos detectados en Aragón, denunciando que el tribunal actuaba por codicia y no por celo religioso.</li>
+      <li><strong>Las apelaciones a Roma:</strong> la Santa Sede actuó repetidamente como tribunal de apelación para los condenados por la Inquisición, y en muchos casos revocó sentencias o exigió nuevos procesos con mayores garantías.</li>
+      <li><strong>El papel del Papa Paulo III:</strong> en 1542, al crear la Inquisición Romana (el Sant'Uffizio), Paulo III estableció un modelo de tribunal eclesiástico con garantías más estrictas que la española, actuando en parte como alternativa y en parte como modelo corrector.</li>
+      <li><strong>La posición ante la brujería:</strong> la Santa Sede fue consistentemente más escéptica ante las acusaciones de brujería que los tribunales civiles protestantes —y la postura de Salazar y Frías refleja una corriente de pensamiento que encontraba respaldo en Roma.</li>
+    </ul>
+
+    <h3>Lo que la Iglesia debe reconocer con honestidad</h3>
+    <p>
+      La honestidad intelectual exige también reconocer lo que la Iglesia misma ha reconocido. En el
+      año 2000, con ocasión del Gran Jubileo, el Papa Juan Pablo II hizo un acto de contrición pública
+      por los pecados cometidos en nombre de la Iglesia a lo largo de la historia —incluyendo el uso
+      de la violencia en servicio de la verdad. El cardenal Joseph Ratzinger, entonces prefecto de la
+      Congregación para la Doctrina de la Fe —sucesora histórica del Sant'Uffizio—, presidió una
+      jornada académica de revisión histórica de la Inquisición, cuyos resultados confirmaron las
+      conclusiones de los historiadores independientes: las cifras de la leyenda eran enormemente
+      exageradas, y los procedimientos reales, comparados con los de la época, mostraban una
+      preocupación por la justicia que la propaganda antieclesiástica había ignorado.
+    </p>
+
+    <div class="hist-quote">
+      <p>"La Iglesia pide perdón no por haber creído en la verdad —de eso no puede arrepentirse—, sino por los medios inadecuados con los que en ocasiones buscó defenderla y transmitirla."</p>
+      <span class="attr">— Cardenal Joseph Ratzinger · Simposio sobre la Inquisición · Roma, 1998</span>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-title green">Un matiz necesario: la Iglesia y el tribunal</div>
+      <p>
+        La distinción fundamental es esta: la Inquisición Española fue un tribunal de la Corona
+        española que utilizaba categorías y procedimientos eclesiásticos, en un período en que la
+        separación entre Iglesia y Estado no existía en ningún país de Europa. Responsabilizar a
+        la Iglesia Católica en bloque de todos los actos de ese tribunal es tan impreciso como
+        responsabilizar al judaísmo de las decisiones del Tribunal Supremo de Israel, o al
+        protestantismo de las ejecuciones ordenadas por los príncipes electores luteranos. La
+        institución, el sistema de creencias que la inspiró y las decisiones individuales de sus
+        actores son realidades distintas que deben evaluarse de forma distinta.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 12 — CONCLUSIÓN -->
+  <section class="section" id="conclusion">
+    <div class="eyebrow">12 · Conclusión</div>
+    <h2>Conclusión: lo que la historia real de la Inquisición nos enseña</h2>
+    <p>
+      La Inquisición Española fue una institución compleja, con luces y sombras reales, que actuó
+      en un mundo radicalmente diferente del nuestro —un mundo en que la tortura era legal en todos
+      los países, las ejecuciones públicas eran entretenimiento, y la separación entre poder civil y
+      religioso era desconocida en cualquier rincón de Europa. Juzgarla con los estándares del siglo
+      XXI, sin contexto, produce anacronismo puro. Compararla con sus contemporáneos produce un
+      resultado muy diferente al que la Leyenda Negra pretende.
+    </p>
+    <p>
+      Los datos que los archivos inquisitoriales han revelado son inequívocos: menos de 5.000
+      ejecuciones en 350 años, una tasa de absolución que asombraría a cualquiera educado en la
+      leyenda, garantías procesales sin equivalente en los tribunales civiles de la época, límites
+      escritos y médicamente supervisados al uso de la tortura, y una postura ante la brujería
+      que salvó a cientos de mujeres de la muerte. Una institución imperfecta, propia de su tiempo,
+      pero incomparablemente menos violenta que lo que la propaganda construyó.
+    </p>
+
+    <div class="compare-wrap">
+      <table>
+        <thead>
+          <tr><th>Afirmación de la Leyenda Negra</th><th>Realidad documental</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="flag">Millones de ejecutados</td><td class="green">3.000–5.000 en 350 años (estimación académica máxima)</td></tr>
+          <tr><td class="flag">Torturas rutinarias y sin límite</td><td class="green">Menos del 2% de casos; reglamentada, con médico, una sesión por causa</td></tr>
+          <tr><td class="flag">La Iglesia quemaba herejes</td><td class="green">El Estado ejecutaba; la Iglesia entregaba con petición de clemencia</td></tr>
+          <tr><td class="flag">Sin garantías procesales</td><td class="green">Abogado, conocimiento de cargos, apelación a Roma, ratificación libre</td></tr>
+          <tr><td class="flag">Perseguía judíos y moros</td><td class="green">Sin jurisdicción sobre no bautizados; solo sobre bautizados apóstatas</td></tr>
+          <tr><td class="flag">Sofocó la ciencia</td><td class="green">Sin competencia sobre ciencia natural; Siglo de Oro científico bajo la Inquisición</td></tr>
+          <tr><td class="flag">Persiguió a brujas en masa</td><td class="green">Escéptica ante acusaciones de brujería; protegió a miles de mujeres</td></tr>
+          <tr><td class="flag">Instrument principal de la Iglesia</td><td class="green">Controlada por la Corona; la Santa Sede intervino repetidamente para frenarla</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">La pregunta que la leyenda impide hacer</div>
+      <p>
+        La Leyenda Negra ha cumplido una función: impedir que se haga la pregunta correcta. La pregunta
+        correcta no es "¿fue la Inquisición Española tan terrible como la pintura?"  —claramente no lo
+        fue—, sino: "¿qué dice de la cultura occidental que hayamos necesitado exagerar tanto la
+        crueldad de una institución española y católica mientras ignoramos o minimizamos atrocidades
+        comparables o mayores de otros países y otras confesiones religiosas?" La respuesta a esa
+        pregunta no habla de la Inquisición: habla de nosotros.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mark-small" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1.4">
+          <circle cx="30" cy="30" r="26"/>
+          <line x1="30" y1="8" x2="30" y2="52"/>
+          <line x1="10" y1="22" x2="50" y2="22"/>
+        </g>
+      </svg>
+    </div>
+    <p>Historia documental de la Inquisición Española basada en los archivos reales y en la historiografía académica contemporánea: Kamen, Henningsen, Contreras, García Cárcel, Madden.</p>
+  </footer>
+
+</main>
+
+<button id="backToTop" aria-label="Volver arriba">↑</button>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const menuToggle = document.getElementById('menuToggle');
+  menuToggle.addEventListener('click', () => {
+    const open = sidebar.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open);
+    menuToggle.textContent = open ? '✕' : '☰';
+  });
+  document.querySelectorAll('.toc-list a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 980) {
+        sidebar.classList.remove('open');
+        menuToggle.textContent = '☰';
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  const progressBar = document.getElementById('progressBar');
+  function updateProgress(){
+    const h = document.documentElement;
+    const s = (h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    progressBar.style.width=(isFinite(s)?s:0)+'%';
+  }
+  document.addEventListener('scroll',updateProgress,{passive:true});
+  updateProgress();
+
+  const sections = document.querySelectorAll('main .section, main .hero');
+  const links = document.querySelectorAll('.toc-list a');
+  const linkMap = {};
+  links.forEach(l => linkMap[l.getAttribute('href').slice(1)] = l);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        if (linkMap[entry.target.id]) linkMap[entry.target.id].classList.add('active');
+      }
+    });
+  }, {rootMargin:'-35% 0px -55% 0px',threshold:0});
+  sections.forEach(s => observer.observe(s));
+
+  const backToTop = document.getElementById('backToTop');
+  document.addEventListener('scroll',()=>{
+    backToTop.classList.toggle('visible',window.scrollY>600);
+  },{passive:true});
+  backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>

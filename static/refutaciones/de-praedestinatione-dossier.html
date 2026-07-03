@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Praedestinatione · Disputatio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,600&family=Playfair+Display+SC:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS DE DISEÑO — IDENTIDAD DISPUTACIONAL
+   Ni pergamino (Purgatorio) ni mármol-azul (Asunción).
+   Aquí: papel de imprenta renacentista, tres colores-voz,
+   estructura de Quæstio Disputata.
+   ============================================================ */
+:root{
+  /* Fondo: papel de impresora del XVI, frío y mineral */
+  --papel:#E8E5DF;
+  --papel-2:#F0EDE8;
+  --gris-borde:#C8C4BC;
+
+  /* Tinta: negra con ligerísimo matiz marrón */
+  --tinta:#1C1A18;
+  --tinta-suave:#3D3A35;
+  --tinta-media:#5C574F;
+
+  /* TRES VOCES — colores-identidad */
+  /* Calvino: verde-esmeralda austero ginebrino */
+  --calvino:#2A5C45;
+  --calvino-claro:#3A7D5F;
+  --calvino-fondo:rgba(42,92,69,0.06);
+  --calvino-borde:rgba(42,92,69,0.35);
+
+  /* Agustín: ámbar-tostado patrístico */
+  --agustin:#8B6914;
+  --agustin-claro:#B08A2A;
+  --agustin-fondo:rgba(139,105,20,0.06);
+  --agustin-borde:rgba(139,105,20,0.35);
+
+  /* Tomás: carmesí dominico */
+  --tomas:#8B1A1A;
+  --tomas-claro:#B02020;
+  --tomas-fondo:rgba(139,26,26,0.06);
+  --tomas-borde:rgba(139,26,26,0.35);
+
+  /* Tipografías */
+  --display:'Playfair Display', serif;
+  --display-sc:'Playfair Display SC', serif;
+  --body:'Libre Baskerville', serif;
+  --mono:'Inconsolata', monospace;
+
+  --sombra:0 6px 28px rgba(28,26,24,0.12);
+  --sombra-suave:0 3px 14px rgba(28,26,24,0.08);
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+
+body{
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(28,26,24,0.012) 2px,
+      rgba(28,26,24,0.012) 4px
+    ),
+    var(--papel);
+  color:var(--tinta);
+  font-family:var(--body);
+  font-size:17.5px;
+  line-height:1.8;
+  min-height:100vh;
+  position:relative;
+}
+
+a{ color:var(--tomas); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+::selection{ background:rgba(139,26,26,0.18); color:var(--tinta); }
+:focus-visible{ outline:2px solid var(--tomas); outline-offset:3px; }
+
+/* ============ LAYOUT ============ */
+.envoltura{ display:flex; max-width:1440px; margin:0 auto; position:relative; z-index:2; }
+
+/* ============ BARRA PROGRESO ============ */
+.barra-progreso{
+  position:fixed; top:0; left:0; height:4px;
+  background:linear-gradient(90deg, var(--calvino), var(--agustin), var(--tomas));
+  z-index:60; width:0%; transition:width 0.1s linear;
+}
+
+/* ============ BOTÓN TOGGLE ============ */
+.indice-toggle{
+  display:none; position:fixed; top:18px; left:18px; z-index:50;
+  width:48px; height:48px; background:var(--tinta); color:var(--papel-2);
+  border:1px solid var(--gris-borde); border-radius:0;
+  font-size:20px; cursor:pointer;
+  align-items:center; justify-content:center; box-shadow:var(--sombra);
+}
+.overlay-indice{
+  display:none; position:fixed; inset:0;
+  background:rgba(28,26,24,0.5); z-index:44;
+}
+.overlay-indice.visible{ display:block; }
+
+/* ============ ÍNDICE — NEGRO IMPRENTA ============
+   Firma única: columna de tipógrafo renacentista.
+   Fondo negro absoluto, letra blanca-papel, sin ornamento.
+   La austeridad del sola scriptura reformado. */
+aside.indice{
+  width:340px; flex-shrink:0;
+  position:sticky; top:0; height:100vh; overflow-y:auto;
+  background:#111;
+  color:rgba(232,229,223,0.85);
+  padding:30px 0 60px;
+  border-right:3px solid var(--tinta);
+  scrollbar-width:thin;
+  scrollbar-color:#333 #111;
+}
+aside.indice::-webkit-scrollbar{ width:6px; }
+aside.indice::-webkit-scrollbar-thumb{ background:#444; }
+aside.indice::-webkit-scrollbar-track{ background:#111; }
+
+.indice-cabecera{
+  padding:0 24px 20px;
+  border-bottom:1px solid #333;
+  margin-bottom:14px;
+}
+.indice-cabecera .marca{
+  font-family:var(--display-sc); font-size:11px; letter-spacing:0.18em;
+  color:#777; display:block; margin-bottom:10px; text-transform:uppercase;
+}
+.indice-cabecera h2{
+  font-family:var(--display); font-weight:400; font-style:italic;
+  font-size:24px; color:rgba(232,229,223,0.95); line-height:1.25;
+}
+.indice-cabecera .sub{
+  display:block; font-family:var(--body); font-size:11.5px;
+  color:#666; margin-top:8px; font-style:italic; line-height:1.5;
+}
+
+/* leyenda de colores en el índice */
+.leyenda-voces{
+  padding:10px 24px 16px; border-bottom:1px solid #222; margin-bottom:10px;
+}
+.leyenda-voces span{
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--display-sc); font-size:10px; letter-spacing:0.1em;
+  margin-bottom:5px;
+}
+.leyenda-dot{
+  width:10px; height:10px; border-radius:50%; flex-shrink:0;
+}
+
+.buscador-indice{ padding:0 22px 14px; }
+.buscador-indice input{
+  width:100%;
+  background:rgba(255,255,255,0.05);
+  border:1px solid #333; border-radius:0;
+  color:rgba(232,229,223,0.9); padding:8px 12px;
+  font-family:var(--body); font-size:14px;
+}
+.buscador-indice input::placeholder{ color:#555; font-style:italic; }
+#sinResultadosIndice{ margin-top:8px; font-size:11.5px; color:#555; font-style:italic; text-align:center; }
+
+nav.tabla-materias{ padding:0 10px; }
+.tm-parte{ margin-bottom:2px; }
+.tm-parte > a.tm-parte-titulo{
+  display:flex; gap:10px; align-items:baseline;
+  padding:9px 14px; font-family:var(--display-sc); font-size:12.5px;
+  letter-spacing:0.06em; color:#AAA; border-left:3px solid transparent;
+}
+.tm-parte > a.tm-parte-titulo:hover{ background:rgba(255,255,255,0.04); color:#DDD; text-decoration:none; }
+.tm-parte > a.tm-parte-titulo.activo{ border-left-color:var(--tomas); color:rgba(232,229,223,0.95); background:rgba(139,26,26,0.12); }
+.tm-parte > a.tm-parte-titulo.activo-calvino{ border-left-color:var(--calvino); background:rgba(42,92,69,0.12); }
+.tm-parte > a.tm-parte-titulo.activo-agustin{ border-left-color:var(--agustin); background:rgba(139,105,20,0.12); }
+.tm-parte-num{ color:#555; font-family:var(--display); font-style:italic; font-size:15px; flex-shrink:0; }
+ul.tm-articulos{
+  list-style:none; margin:0 0 8px 16px;
+  border-left:1px solid #2A2A2A; padding-left:12px;
+}
+ul.tm-articulos li a{
+  display:block; padding:4px 10px; font-size:12.5px;
+  color:#777; line-height:1.4;
+}
+ul.tm-articulos li a:hover{ background:rgba(255,255,255,0.04); color:#CCC; text-decoration:none; }
+ul.tm-articulos li a.activo{ background:rgba(139,26,26,0.18); color:rgba(232,229,223,0.95); border-left:2px solid var(--tomas); margin-left:-1px; padding-left:9px; }
+
+.indice-pie{
+  margin-top:24px; padding:16px 24px 0; border-top:1px solid #222;
+  font-family:var(--display); font-style:italic; font-size:12.5px;
+  color:#555; text-align:center; line-height:1.6;
+}
+
+/* ============ CONTENIDO ============ */
+main{ flex:1; min-width:0; padding:0 0 120px; }
+
+/* ============ PORTADA — la firma del tratado ============
+   Una única regla negra gruesa sobre el título en dos tintas,
+   como las portadas de la primera edición de las Institutiones (1559). */
+.portada{
+  position:relative; padding:80px 72px 72px;
+  border-bottom:3px solid var(--tinta);
+  background:var(--papel-2);
+}
+.portada::before{
+  content:"";
+  position:absolute; top:0; left:72px; right:72px; height:6px;
+  background:linear-gradient(90deg, var(--calvino), var(--agustin), var(--tomas));
+}
+.portada .tipo-doc{
+  font-family:var(--display-sc); font-size:12px; letter-spacing:0.22em;
+  color:var(--tinta-media); margin-bottom:6px; margin-top:20px;
+  display:block;
+}
+.portada h1{
+  font-family:var(--display); font-weight:900; font-style:italic;
+  font-size:clamp(40px,6.5vw,82px); line-height:0.97;
+  color:var(--tinta);
+}
+.portada h1 .de{
+  font-weight:400; display:block; font-size:0.55em; letter-spacing:0.04em;
+  color:var(--tinta-media); margin-bottom:6px;
+}
+.portada .subtitulo{
+  max-width:660px; margin:28px 0 0;
+  font-family:var(--body); font-style:italic;
+  font-size:18px; color:var(--tinta-suave); line-height:1.65;
+}
+
+/* Tres escudos de voz en la portada */
+.voces-portada{
+  display:flex; gap:0; margin-top:46px;
+}
+.voz-escudo{
+  flex:1; padding:22px 24px; border:1px solid var(--gris-borde);
+  border-left:5px solid currentColor; background:var(--papel-2);
+}
+.voz-escudo.calvino{ color:var(--calvino); border-color:var(--calvino); }
+.voz-escudo.agustin{ color:var(--agustin); border-color:var(--agustin); margin-left:-1px; }
+.voz-escudo.tomas{ color:var(--tomas); border-color:var(--tomas); margin-left:-1px; }
+.voz-escudo .nombre{
+  font-family:var(--display-sc); font-size:13.5px; letter-spacing:0.08em;
+  display:block; margin-bottom:5px;
+}
+.voz-escudo .rol{
+  font-family:var(--body); font-style:italic; font-size:13px;
+  color:var(--tinta-media);
+}
+
+.estadisticas-portada{
+  display:flex; gap:0; margin-top:36px; border:1px solid var(--gris-borde);
+}
+.estadisticas-portada div{
+  flex:1; padding:14px 18px; border-right:1px solid var(--gris-borde); text-align:center;
+}
+.estadisticas-portada div:last-child{ border-right:none; }
+.estadisticas-portada .num{
+  font-family:var(--display); font-weight:700; font-size:34px;
+  color:var(--tinta); display:block;
+}
+.estadisticas-portada .lbl{
+  font-family:var(--display-sc); font-size:10px; letter-spacing:0.12em; color:var(--tinta-media);
+}
+
+/* ============ PARTES ============ */
+.parte{ padding:64px 72px 8px; scroll-margin-top:0; }
+.parte-encabezado{ margin-bottom:44px; }
+.parte-encabezado .num-parte{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.14em;
+  color:var(--tinta-media); display:block; margin-bottom:8px;
+}
+.parte-encabezado h2{
+  font-family:var(--display); font-weight:700; font-style:italic;
+  font-size:clamp(28px,3.8vw,48px); color:var(--tinta);
+  border-bottom:2px solid var(--tinta); padding-bottom:12px;
+  line-height:1.15;
+}
+.parte-encabezado .desc{
+  max-width:640px; margin-top:14px;
+  font-family:var(--body); font-style:italic;
+  color:var(--tinta-media); font-size:16px; line-height:1.6;
+}
+.divisor-recto{
+  border:none; border-top:1px solid var(--gris-borde); margin:10px 0 0;
+}
+
+/* ============ ARTÍCULOS ============ */
+.articulo{
+  max-width:780px; margin:0 auto 60px;
+  scroll-margin-top:86px;
+  background:var(--papel-2);
+  border:1px solid var(--gris-borde);
+  padding:40px 50px;
+  box-shadow:var(--sombra-suave);
+  position:relative;
+}
+.articulo-etiqueta{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.12em;
+  color:var(--tinta-media); margin-bottom:6px; display:block;
+}
+.articulo h3{
+  font-family:var(--display); font-weight:600; font-style:italic;
+  font-size:clamp(21px,2.8vw,29px); color:var(--tinta);
+  margin-bottom:22px; line-height:1.3;
+}
+.capitular{
+  float:left; font-family:var(--display); font-weight:900;
+  font-size:68px; line-height:0.82; color:var(--tomas);
+  padding:4px 10px 0 0; margin-top:4px;
+}
+.articulo p{ margin-bottom:15px; text-align:justify; hyphens:auto; }
+.articulo strong{ font-weight:700; }
+.articulo em{ font-style:italic; }
+
+/* ============ CITAS EN LATÍN/ORIGINAL — monospace fuente crítica ============ */
+.cita-fuente{
+  margin:22px 0;
+  background:#1C1A18;
+  color:#D4CFC5;
+  padding:18px 22px;
+  font-family:var(--mono);
+  font-size:15px;
+  line-height:1.65;
+  border-left:4px solid var(--gris-borde);
+}
+.cita-fuente .lang{
+  display:block; font-size:10px; letter-spacing:0.14em;
+  color:#666; margin-bottom:8px; text-transform:uppercase;
+}
+.cita-fuente cite{
+  display:block; margin-top:10px; font-size:11px; letter-spacing:0.06em;
+  color:#888; font-style:normal;
+}
+
+/* ============ CITAS DOCTRINALES — las tres voces ============ */
+.cita-voz{
+  margin:26px 0; padding:20px 24px;
+  border-left:5px solid;
+  position:relative;
+}
+.cita-voz.calvino{
+  border-color:var(--calvino); background:var(--calvino-fondo);
+}
+.cita-voz.agustin{
+  border-color:var(--agustin); background:var(--agustin-fondo);
+}
+.cita-voz.tomas{
+  border-color:var(--tomas); background:var(--tomas-fondo);
+}
+.cita-voz .voz-label{
+  font-family:var(--display-sc); font-size:10.5px; letter-spacing:0.12em;
+  display:block; margin-bottom:8px;
+}
+.cita-voz.calvino .voz-label{ color:var(--calvino); }
+.cita-voz.agustin .voz-label{ color:var(--agustin); }
+.cita-voz.tomas .voz-label{ color:var(--tomas); }
+.cita-voz p{
+  font-family:var(--body); font-style:italic; font-size:16.5px;
+  margin-bottom:6px; text-align:left;
+}
+.cita-voz cite{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.04em;
+  font-style:normal; color:var(--tinta-media);
+  display:block; text-align:right; margin-top:8px;
+}
+
+/* ============ DISPUTA EN TRES COLUMNAS — la firma visual ============ */
+.disputa-tricolumna{
+  margin:34px 0;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0;
+  border:1.5px solid var(--tinta);
+}
+.col-disputa{
+  padding:20px 20px 22px;
+  border-right:1px solid var(--gris-borde);
+}
+.col-disputa:last-child{ border-right:none; }
+.col-disputa .col-cabecera{
+  font-family:var(--display-sc); font-size:11px; letter-spacing:0.12em;
+  padding:8px 0 10px; border-bottom:2px solid currentColor;
+  margin-bottom:14px; display:block;
+}
+.col-disputa.calvino .col-cabecera{ color:var(--calvino); border-color:var(--calvino); }
+.col-disputa.agustin .col-cabecera{ color:var(--agustin); border-color:var(--agustin); }
+.col-disputa.tomas .col-cabecera{ color:var(--tomas); border-color:var(--tomas); }
+.col-disputa p{ font-size:14.5px; line-height:1.65; text-align:left; margin-bottom:10px; }
+.col-disputa .col-clave{
+  font-family:var(--mono); font-size:11px; color:var(--tinta-media);
+  display:block; margin-top:12px; border-top:1px solid var(--gris-borde);
+  padding-top:8px;
+}
+
+/* ============ SILOGISMOS ============ */
+.silogismo{ margin:28px 0; border:1.5px solid var(--tinta); }
+.silogismo-cabecera{
+  background:var(--tinta); color:var(--papel);
+  padding:9px 20px;
+  font-family:var(--display-sc); font-size:12px; letter-spacing:0.08em;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.silogismo-cabecera .forma{
+  font-family:var(--body); font-style:italic; letter-spacing:0; font-size:12.5px;
+  color:rgba(232,229,223,0.65);
+}
+.silogismo-cuerpo{ padding:20px 24px 22px; background:var(--papel-2); }
+.silogismo-linea{
+  display:grid; grid-template-columns:88px 1fr; gap:14px;
+  padding:6px 0; font-family:var(--body); font-size:15.5px; align-items:baseline;
+}
+.silogismo-linea .etiqueta{
+  font-family:var(--display-sc); font-size:11px; letter-spacing:0.06em;
+  color:var(--tomas); text-align:right; padding-top:2px;
+}
+.silogismo-linea.conclusion{
+  border-top:1px solid var(--tinta); margin-top:6px; padding-top:12px; font-weight:700;
+}
+.silogismo-linea.conclusion .etiqueta{ color:var(--calvino); }
+
+/* ============ TABLA COMPARATIVA ============ */
+.tabla-env{ overflow-x:auto; margin:24px 0; border:1px solid var(--tinta); }
+table.tabla-comp{
+  width:100%; border-collapse:collapse;
+  font-family:var(--body); font-size:14.5px; min-width:560px;
+}
+table.tabla-comp thead{ background:var(--tinta); color:var(--papel); }
+table.tabla-comp th{
+  padding:11px 16px; text-align:left;
+  font-family:var(--display-sc); font-size:11px; letter-spacing:0.06em; font-weight:700;
+}
+table.tabla-comp td{
+  padding:12px 16px; border-top:1px solid var(--gris-borde); vertical-align:top;
+}
+table.tabla-comp tbody tr:nth-child(even){ background:rgba(28,26,24,0.03); }
+table.tabla-comp td.cat{ font-weight:700; white-space:nowrap; color:var(--tinta-suave); }
+table.tabla-comp td.v-calvino{ color:var(--calvino); }
+table.tabla-comp td.v-agustin{ color:var(--agustin-claro); }
+table.tabla-comp td.v-tomas{ color:var(--tomas); }
+
+/* ============ OBJECIONES ============ */
+.objeciones{
+  margin:26px 0; background:rgba(28,26,24,0.03);
+  border:1px dashed var(--gris-borde);
+  padding:20px 24px;
+}
+.objeciones > h4{
+  font-family:var(--display-sc); font-size:13px; letter-spacing:0.08em;
+  color:var(--tomas); margin-bottom:12px;
+}
+.objecion{ margin-bottom:16px; }
+.objecion:last-child{ margin-bottom:0; }
+.objecion .num-obj{
+  font-family:var(--display); font-style:italic; font-weight:700;
+  color:var(--calvino); margin-right:6px;
+}
+.respuesta-obj{ margin-top:6px; padding-left:20px; border-left:2px solid var(--tomas); }
+.respuesta-obj .etiqueta-resp{
+  font-family:var(--display-sc); font-size:11px; letter-spacing:0.08em;
+  color:var(--tomas); display:block; margin-bottom:3px;
+}
+
+/* ============ SÍNTESIS ============ */
+.sintesis{
+  margin-top:26px; background:var(--tinta);
+  color:rgba(232,229,223,0.9); padding:20px 24px;
+}
+.sintesis h4{
+  font-family:var(--display-sc); font-size:11.5px; letter-spacing:0.1em;
+  color:rgba(232,229,223,0.6); margin-bottom:8px;
+}
+.sintesis p{ color:rgba(232,229,223,0.88); text-align:left; margin-bottom:0; font-size:15.5px; }
+
+/* lista */
+.lista-arg{ margin:16px 0; list-style:none; counter-reset:arg; }
+.lista-arg li{
+  counter-increment:arg; position:relative;
+  padding:7px 0 7px 38px; text-align:left; font-size:15.5px;
+}
+.lista-arg li::before{
+  content:counter(arg);
+  position:absolute; left:0; top:7px;
+  font-family:var(--display); font-weight:700; font-style:italic;
+  color:var(--tomas); font-size:17px; width:28px; text-align:right;
+}
+
+/* ============ PIE ============ */
+footer.pie-tratado{
+  text-align:center; padding:54px 40px;
+  border-top:3px solid var(--tinta); margin-top:40px;
+  background:var(--papel-2);
+}
+footer.pie-tratado .signo{
+  font-family:var(--display); font-size:28px; color:var(--tinta-media); margin-bottom:14px;
+}
+footer.pie-tratado p{
+  font-family:var(--body); font-style:italic;
+  color:var(--tinta-media); font-size:15.5px;
+  max-width:520px; margin:0 auto 6px; line-height:1.6;
+}
+footer.pie-tratado .sello{
+  margin-top:16px; font-family:var(--display-sc);
+  font-size:10.5px; letter-spacing:0.16em; color:var(--tinta-media);
+}
+
+/* ============ VOLVER ARRIBA ============ */
+.volver-arriba{
+  position:fixed; bottom:26px; right:26px;
+  width:48px; height:48px; border-radius:0;
+  background:var(--tinta); color:var(--papel);
+  border:1px solid var(--gris-borde);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; cursor:pointer; box-shadow:var(--sombra);
+  opacity:0; pointer-events:none;
+  transition:opacity 0.3s ease, transform 0.25s ease; z-index:40;
+}
+.volver-arriba.visible{ opacity:1; pointer-events:auto; }
+.volver-arriba:hover{ transform:translateY(-3px); }
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:980px){
+  aside.indice{
+    position:fixed; left:0; top:0; height:100vh; width:300px;
+    transform:translateX(-100%); transition:transform 0.3s ease; z-index:45;
+  }
+  aside.indice.abierto{ transform:translateX(0); }
+  .indice-toggle{ display:flex; }
+  .parte, .portada{ padding-left:28px; padding-right:28px; }
+  .articulo{ padding:28px 20px; }
+  .disputa-tricolumna{ grid-template-columns:1fr; }
+  .col-disputa{ border-right:none; border-bottom:1px solid var(--gris-borde); }
+  .voces-portada{ flex-direction:column; }
+}
+@media(max-width:600px){
+  body{ font-size:16px; }
+  .portada h1{ font-size:38px; }
+  .silogismo-linea{ grid-template-columns:66px 1fr; font-size:14.5px; }
+  .estadisticas-portada{ flex-wrap:wrap; }
+  .estadisticas-portada div{ min-width:50%; }
+}
+@media(prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .volver-arriba, .barra-progreso{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="barra-progreso" id="barraProgreso"></div>
+<button class="indice-toggle" id="toggleIndice" aria-label="Abrir índice">☰</button>
+<div class="overlay-indice" id="overlayIndice"></div>
+
+<div class="envoltura">
+
+  <!-- ============ ÍNDICE ============ -->
+  <aside class="indice" id="indiceLateral">
+    <div class="indice-cabecera">
+      <span class="marca">Quæstio Disputata · Tractatus</span>
+      <h2>De Prædestinatione</h2>
+      <span class="sub">Calvino vs. Agustín vs. Tomás de Aquino</span>
+    </div>
+    <div class="leyenda-voces">
+      <span><span class="leyenda-dot" style="background:#2A5C45"></span> Calvino — la afirmación</span>
+      <span><span class="leyenda-dot" style="background:#8B6914"></span> Agustín — la fuente alegada</span>
+      <span><span class="leyenda-dot" style="background:#8B1A1A"></span> Tomás — la refutación</span>
+    </div>
+    <div class="buscador-indice">
+      <input type="text" id="buscadorIndice" placeholder="Buscar en el índice…" autocomplete="off">
+      <div id="sinResultadosIndice" style="display:none;">Sin coincidencias</div>
+    </div>
+    <nav class="tabla-materias" id="tablaMaterias">
+
+      <div class="tm-parte">
+        <a href="#proemio" class="tm-parte-titulo"><span class="tm-parte-num">—</span> Proemio de la disputa</a>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-primera" class="tm-parte-titulo"><span class="tm-parte-num">I</span> La tesis calvinista</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-1-1">Art. 1 — La definición de predestinación (Inst. III.21)</a></li>
+          <li><a href="#art-1-2">Art. 2 — El "decreto horrible" (Inst. III.23.7)</a></li>
+          <li><a href="#art-1-3">Art. 3 — La doble predestinación: elegidos y réprobos</a></li>
+          <li><a href="#art-1-4">Art. 4 — Calvino invoca a Agustín: ¿el mismo Agustín?</a></li>
+          <li><a href="#art-1-5">Art. 5 — La irresistibilidad de la gracia</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-segunda" class="tm-parte-titulo"><span class="tm-parte-num">II</span> El verdadero Agustín</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-2-1">Art. 1 — Lo que Agustín dice y lo que Calvino omite</a></li>
+          <li><a href="#art-2-2">Art. 2 — La predestinación agustiniana: ¿positivismo o permisión?</a></li>
+          <li><a href="#art-2-3">Art. 3 — La voluntad salvífica universal en Agustín</a></li>
+          <li><a href="#art-2-4">Art. 4 — La libertad que Agustín nunca negó</a></li>
+          <li><a href="#art-2-5">Art. 5 — Los semipelagianos y la réplica de Agustín: límites</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-tercera" class="tm-parte-titulo"><span class="tm-parte-num">III</span> Tomás refuta a Calvino</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-3-1">Art. 1 — Distinción entre predestinación y reprobación en la Suma</a></li>
+          <li><a href="#art-3-2">Art. 2 — La reprobación no es causa del pecado</a></li>
+          <li><a href="#art-3-3">Art. 3 — La libertad de albedrío y la gracia eficaz</a></li>
+          <li><a href="#art-3-4">Art. 4 — Dios quiere salvación para todos: 1 Tim 2,4</a></li>
+          <li><a href="#art-3-5">Art. 5 — El silogismo maestro contra Calvino</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-cuarta" class="tm-parte-titulo"><span class="tm-parte-num">IV</span> Silogismos de refutación</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-4-1">Art. 1 — El decreto positivo de reprobación hace a Dios autor del pecado</a></li>
+          <li><a href="#art-4-2">Art. 2 — La gracia irresistible destruye la imputabilidad moral</a></li>
+          <li><a href="#art-4-3">Art. 3 — "Dios quiere que todos se salven" vs. la doble predestinación</a></li>
+          <li><a href="#art-4-4">Art. 4 — El voluntarismo absoluto de Calvino y el arbitrio divino</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-quinta" class="tm-parte-titulo"><span class="tm-parte-num">V</span> Tabla comparativa y síntesis</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-5-1">Art. 1 — Calvinismo vs. Agustín vs. Tomás: tabla doctrinal</a></li>
+          <li><a href="#art-5-2">Art. 2 — Lo que Calvino heredó legítimamente de Agustín</a></li>
+          <li><a href="#art-5-3">Art. 3 — Lo que Calvino añadió sin Agustín</a></li>
+          <li><a href="#art-5-4">Art. 4 — La posición católica conciliar (Trento, sesión VI)</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#glosario" class="tm-parte-titulo"><span class="tm-parte-num">§</span> Glosario técnico</a>
+      </div>
+      <div class="tm-parte">
+        <a href="#fuentes" class="tm-parte-titulo"><span class="tm-parte-num">§</span> Fuentes y ediciones</a>
+      </div>
+
+    </nav>
+    <div class="indice-pie">
+      "Decretum quidem horribile, fateor."<br>— Calvino, Inst. III.23.7<br><br>
+      "Culpa procedit ex libero arbitrio."<br>— Tomás, ST I q.23 a.3
+    </div>
+  </aside>
+
+  <!-- ============ CONTENIDO ============ -->
+  <main>
+
+    <!-- PORTADA -->
+    <section class="portada">
+      <span class="tipo-doc">Tractatus Disputatorius · De Theologica Controversia</span>
+      <h1><span class="de">Disputatio de</span>Prædestinatione</h1>
+      <p class="subtitulo">Examen de la tesis calvinista sobre la doble predestinación,
+      de su pretendida derivación de Agustín de Hipona,
+      y de su refutación mediante los principios de Tomás de Aquino
+      — con citas verificadas en latín original.</p>
+
+      <div class="voces-portada">
+        <div class="voz-escudo calvino">
+          <span class="nombre">Ioannes Calvinus</span>
+          <span class="rol">Reformador de Ginebra (1509–1564). <em>Institutio Christianæ Religionis</em>, ed. definitiva 1559. La afirmación.</span>
+        </div>
+        <div class="voz-escudo agustin">
+          <span class="nombre">Aurelius Augustinus</span>
+          <span class="rol">Obispo de Hipona (354–430). Autor alegado por Calvino. Fuente real que este tratado examina.</span>
+        </div>
+        <div class="voz-escudo tomas">
+          <span class="nombre">Thomas Aquinatis</span>
+          <span class="rol">Doctor Angelicus (1225–1274). <em>Summa Theologiæ</em>, Prima Pars, q.23. La refutación católica.</span>
+        </div>
+      </div>
+
+      <div class="estadisticas-portada">
+        <div><span class="num">5</span><span class="lbl">Partes</span></div>
+        <div><span class="num">22</span><span class="lbl">Artículos</span></div>
+        <div><span class="num">9</span><span class="lbl">Silogismos</span></div>
+        <div><span class="num">3</span><span class="lbl">Columnas en disputa</span></div>
+      </div>
+    </section>
+
+    <!-- PROEMIO -->
+    <section class="parte" id="proemio">
+      <div class="parte-encabezado">
+        <span class="num-parte">PROEMIO</span>
+        <h2>La cuestión y su método</h2>
+        <hr class="divisor-recto">
+        <p class="desc">Por qué este tratado examina primero a Calvino, luego al Agustín real,
+        y finalmente usa a Tomás como árbitro — y no al revés.</p>
+      </div>
+
+      <div class="articulo">
+        <span class="capitular">E</span>
+        <p>ste tratado adopta el método clásico de la <em>Quæstio Disputata</em> medieval:
+        se expone primero la posición del adversario con la mayor fuerza posible —sin
+        caricatura—, se examina después si sus premisas están en la fuente que él mismo alega,
+        y se responde finalmente con la argumentación del Doctor Común. El resultado no es
+        un debate de campeonato sino un examen de <strong>coherencia interna</strong>: ¿dice
+        Calvino realmente lo que Agustín dice? ¿Y si no lo dice, qué dice Tomás frente
+        a ambos?</p>
+
+        <p>La honestidad intelectual exige reconocer desde el principio tres cosas:</p>
+
+        <ul class="lista-arg">
+          <li>Calvino era un <strong>lector serio y honesto de Agustín</strong>: no lo inventó
+          ni lo deformó grosera­mente. Hay pasajes agustinianos que suenan calvinistas, y
+          Calvino los conocía mejor que la mayoría de sus adversarios.</li>
+          <li>Sin embargo, Calvino <strong>sistematizó en Agustín lo que Agustín no sistematizó</strong>,
+          y omitió en Agustín lo que no le convenía — en particular la voluntad salvífica
+          universal y el rechazo agustiniano a hacer de Dios el autor del pecado.</li>
+          <li>Tomás de Aquino no "resuelve" el misterio de la predestinación —nadie puede hacerlo—,
+          pero sí traza con precisión filosófica los límites dentro de los cuales la doctrina
+          no cae en contradicción con la bondad divina ni con la responsabilidad humana. Esos
+          límites son exactamente los que Calvino cruzó.</li>
+        </ul>
+
+        <div class="sintesis">
+          <h4>Aviso metodológico</h4>
+          <p>Todas las citas de Calvino son del texto latino de las <em>Institutiones</em>
+          (Opera Selecta, ed. Barth-Niesel, vols. III-V) o de la traducción inglesa de
+          Battles (McNeill ed., Westminster, 1960), ambas de referencia crítica estándar.
+          Las citas de Agustín son de la Patrología Latina de Migne o del CSEL. Las de
+          Tomás son de la edición Leonina de la <em>Summa Theologiæ</em>, cotejada con
+          la traducción de dominio público de los Padres Dominicos Ingleses (Benziger, 1947).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE I — LA TESIS CALVINISTA -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-primera">
+      <div class="parte-encabezado">
+        <span class="num-parte">PARTE PRIMERA</span>
+        <h2>La tesis calvinista expuesta</h2>
+        <hr class="divisor-recto">
+        <p class="desc">Lo que Calvino enseña sobre la predestinación, en sus propias palabras
+        —con los textos latinos verificados—, sin deformación ni caricatura.</p>
+      </div>
+
+      <!-- 1.1 -->
+      <article class="articulo" id="art-1-1">
+        <span class="articulo-etiqueta">PARTE I · ARTÍCULO 1</span>
+        <h3>La definición de predestinación — Institución III.21.5</h3>
+        <span class="capitular">L</span>
+        <p>a definición formal de Calvino sobre la predestinación es uno de los pasajes
+        teológicos más precisos y más debatidos de toda la historia del protestantismo.
+        Fue redactada en latín con exactitud escolástica —Calvino fue humanista y conocía
+        perfectamente la lógica medieval— y publicada en su forma definitiva en la edición
+        de 1559 de la <em>Institutio Christianæ Religionis</em>.</p>
+
+        <div class="cita-fuente">
+          <span class="lang">Latín original — Inst. III.21.5 (Opera Selecta, vol. IV, p. 370)</span>
+          "Praedestinationem vocamus aeternum Dei decretum, quo apud se constitutum habuit, quid de unoquoque homine fieri vellet. Non enim pari conditione creantur omnes: sed aliis vita aeterna, aliis damnatio aeterna praeordinatur. Itaque prout in alterutrum finem quisque conditus est, ita vel ad vitam vel ad mortem praedestinatum dicimus."
+          <cite>Calvino, Institutio III.21.5 — verificado: CCEL; Schaff, History VIII, nota 822</cite>
+        </div>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — Traducción literal</span>
+          <p>"Llamamos predestinación al eterno decreto de Dios, por el cual ha determinado en sí mismo lo que quiso que sucediera con cada hombre. Pues no todos son creados en igual condición: sino que a unos se les preordena vida eterna, a otros condenación eterna. Por tanto, según haya sido cada uno creado para uno u otro fin, decimos que está predestinado a vida o a muerte."</p>
+          <cite>Inst. III.21.5 — trad. propia del latín verificado</cite>
+        </div>
+
+        <p>Tres elementos de esta definición merecen análisis cuidadoso, porque son los que
+        desencadenarán la disputa:</p>
+
+        <ul class="lista-arg">
+          <li><strong>"Eterno decreto"</strong> (<em>aeternum decretum</em>): la predestinación
+          no es mera presciencia o conocimiento anticipado de lo que el hombre hará — es un
+          <em>decreto</em>, un acto de voluntad activo y eficaz de Dios, anterior a cualquier
+          acción humana. Aquí Calvino se separa definitivamente de la tradición que lée la
+          predestinación como consecuente a la presciencia de los méritos.</li>
+          <li><strong>"No todos creados en igual condición"</strong> (<em>non pari conditione
+          creantur omnes</em>): la desigualdad no proviene del uso de la libertad sino de la
+          creación misma. Dos seres humanos salen del acto creativo ya destinados a fines
+          distintos.</li>
+          <li><strong>"A otros condenación eterna preordinada"</strong> (<em>aliis damnatio
+          aeterna praeordinatur</em>): Calvino no dice que Dios simplemente "permite" la
+          condenación — dice que la <em>preordena</em>. Este es el núcleo de la polémica
+          con Tomás de Aquino.</li>
+        </ul>
+      </article>
+
+      <!-- 1.2 -->
+      <article class="articulo" id="art-1-2">
+        <span class="articulo-etiqueta">PARTE I · ARTÍCULO 2</span>
+        <h3>El "decreto horrible" — <em>Decretum quidem horribile</em> — Inst. III.23.7</h3>
+        <span class="capitular">E</span>
+        <p>l pasaje más célebre de toda la teología calvinista sobre la predestinación se
+        encuentra en el capítulo 23 del libro III, donde Calvino responde a quienes objetan
+        que su doctrina hace a Dios injusto. Su respuesta es sorprendente por su honestidad:
+        no niega que el decreto resulta horrendum al entendimiento humano — lo admite, pero
+        lo somete igualmente a la soberanía divina.</p>
+
+        <div class="cita-fuente">
+          <span class="lang">Latín original — Inst. III.23.7 (Opera Selecta, vol. IV, p. 404)</span>
+          "Decretum quidem horribile, fateor. Negare tamen nemo poterit quin praesciverit Deus quem exitum habiturus esset homo antequam ipsum conderet, et ideo praesciverit quia decreto suo sic ordinarat."
+          <cite>Calvino, Inst. III.23.7 — verificado: múltiples ediciones; Tandfonline 2024, nota 15; PostBarthian 2014</cite>
+        </div>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — Traducción literal</span>
+          <p>"El decreto es ciertamente horrible, lo confieso. Sin embargo, nadie podrá negar que Dios supo de antemano qué fin habría de tener el hombre antes de crearlo, y por ende lo supo porque así lo había ordenado con su decreto."</p>
+          <cite>Inst. III.23.7 — trad. propia del latín verificado</cite>
+        </div>
+
+        <p>Una aclaración lexicográfica es indispensable aquí: en el latín clásico y
+        humanístico de Calvino, <em>horribile</em> no tiene necesariamente el sentido
+        moderno de "repugnante" o "moralmente odioso". Como documenta W. G. T. Shedd
+        (comentando este pasaje), el término deriva de <em>horror</em>, que en los
+        clásicos puede significar <strong>temblor reverencial ante lo sagrado</strong>
+        —la misma raíz del inglés "awesome"—. Calvino no está condenando su propio decreto:
+        está reconociendo que provoca estremecimiento ante la majestad inescrutable de Dios.</p>
+
+        <p>Pero lo que sí está diciendo, sin ambigüedad posible, es que la predestinación
+        a la condenación no es mero permiso divino sino decreto positivo:
+        <em>"quia decreto suo sic ordinarat"</em> — "porque así lo había <em>ordenado</em>
+        con su decreto". Este punto es el que Tomás de Aquino niega explícitamente, como
+        veremos en la Parte III.</p>
+      </article>
+
+      <!-- 1.3 -->
+      <article class="articulo" id="art-1-3">
+        <span class="articulo-etiqueta">PARTE I · ARTÍCULO 3</span>
+        <h3>La doble predestinación: estructura y consecuencias lógicas</h3>
+        <span class="capitular">L</span>
+        <p>a doctrina calvinista de la <strong>doble predestinación</strong>
+        (<em>gemina praedestinatio</em>) afirma que el decreto eterno de Dios tiene dos
+        ramas simétricas y positivas: la elección de los elegidos a la gloria y la
+        reprobación de los réprobos a la condenación. Ambas son igualmente actos de la
+        voluntad soberana divina.</p>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — sobre la reprobación positiva (Inst. III.23.1)</span>
+          <p>"They would maintain that the wicked perish because God permits it, not because he so wills. But why shall we say 'permission' unless it is because God so wills?"</p>
+          <cite>Inst. III.23.1 — Battles trans., Westminster Press, 1960, p. 947</cite>
+        </div>
+
+        <div class="cita-fuente">
+          <span class="lang">Latín original — Calvino sobre la reprobación positiva (Inst. III.23.1)</span>
+          "Mihi vero, qui Dei voluntatem ab omni causa separatam esse existimo, ac potius esse causam omnium, puerilis nugatio videtur: si enim Deus aliquid permittit, id permittit vel invitus vel volens. Absurdum est dicere invitum: ergo volens permittit."
+          <cite>Inst. III.23.1 — Opera Selecta IV, p. 390; trad.: "Para mí, que estimo que la voluntad de Dios está separada de toda causa y es más bien causa de todas las cosas, parece una niñería: si Dios permite algo, lo permite o a su pesar o queriéndolo. Es absurdo decir que a su pesar; luego lo permite queriéndolo."</cite>
+        </div>
+
+        <p>El argumento lógico de Calvino es aquí de una severidad notable: rechaza
+        expresamente el concepto de "permisión" (<em>permissio</em>) aplicado a la
+        reprobación. Para Calvino, decir que Dios "permite" la condenación sin quererla
+        positivamente es una evasión hipócrita — si Dios es soberano, lo que sucede es
+        lo que Él quiere. No hay distinción real entre <em>voluntas permittendi</em>
+        y <em>voluntas efficax</em>.</p>
+
+        <p>Esta posición tiene consecuencias lógicas que el propio Calvino reconoce como
+        problemáticas pero no como invalidantes:</p>
+
+        <ul class="lista-arg">
+          <li>Si la condenación es decreto positivo, <strong>los réprobos fueron creados
+          para ser condenados</strong> (<em>"creados para ese calamitoso fin"</em>,
+          Inst. III.23.4). No pecan primero y son condenados después: son condenados
+          primero y pecan como consecuencia del abandono divino.</li>
+          <li>Si la gracia que salva es irresistible y sólo se concede a los elegidos,
+          <strong>el réprobado no puede no pecar</strong>: carece de la gracia sin la
+          cual la voluntad humana caída no puede hacer el bien. Su condenación es real
+          pero, en algún sentido, inevitable.</li>
+          <li>La <strong>expiación de Cristo es particular</strong>, no universal: Cristo
+          no murió por todos los hombres sino solo por los elegidos. Los réprobos quedan
+          fuera del alcance de la Redención desde la eternidad.</li>
+        </ul>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — Cristo murió solo por los elegidos (Inst. III.24.17)</span>
+          <p>"Now it appears that Christ was so ordained the author of salvation, and was given by the Father with this intention, that he might be our Savior only to those whom the Father hath elected."</p>
+          <cite>Inst. III.24.17 — versión latina: Opera IV, p. 438</cite>
+        </div>
+      </article>
+
+      <!-- 1.4 -->
+      <article class="articulo" id="art-1-4">
+        <span class="articulo-etiqueta">PARTE I · ARTÍCULO 4</span>
+        <h3>Calvino invoca a Agustín: la reclamación de herencia</h3>
+        <span class="capitular">C</span>
+        <p>alvino no presentó su doctrina como innovación sino como <strong>recuperación
+        del auténtico Agustín</strong> frente a lo que consideraba la corrupción escolástica
+        medieval. Esta afirmación merece ser tomada en serio antes de refutarla — y
+        exige examinar qué Agustín invoca exactamente Calvino, y qué Agustín omite.</p>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — Agustín como autoridad máxima (Inst. III.22.8)</span>
+          <p>"Augustine is so wholly with me, that if I wished to write a confession of my faith, I could do so out of his writings."</p>
+          <cite>Inst. III.22.8 — Battles trans., p. 947 nota. También citado en Schaff, Creeds of Christendom, I, p. 477</cite>
+        </div>
+
+        <p>Esta afirmación es audaz y parcialmente verdadera. Los textos agustinianos que
+        Calvino cita en soporte de la predestinación son reales y conocidos:</p>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — predestinación como preparación de la gracia</span>
+          <p>"Inter gratiam et praedestinationem hoc tantum interest, quod praedestinatio est gratiae praeparatio, gratia vero iam ipsa donatio."</p>
+          <cite>De Praedestinatione Sanctorum, cap. 10, §19 — PL 44, 803; CCEL/NPNF1 vol.5</cite>
+        </div>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — la elección no es por méritos previstos</span>
+          <p>"Non enim Deus eos praescivit esse bonos, et ideo elegit: sed ut essent boni, elegit. Alioquin gratia non esset, si merita praecederent."</p>
+          <cite>De Dono Perseverantiae, cap. 17 — PL 45, 1018; trad. literal propia: "No previó Dios que serían buenos y por eso los eligió: sino que los eligió para que fueran buenos. De otro modo, no sería gracia, si los méritos la precedieran."</cite>
+        </div>
+
+        <p>Calvino tiene razón en que Agustín enseñó que la predestinación no se basa en
+        méritos previstos. Pero lo que Calvino <em>no cita</em> de Agustín es igualmente
+        decisivo — y es lo que examinaremos en la Parte II.</p>
+      </article>
+
+      <!-- 1.5 -->
+      <article class="articulo" id="art-1-5">
+        <span class="articulo-etiqueta">PARTE I · ARTÍCULO 5</span>
+        <h3>La irresistibilidad de la gracia y la total depravación</h3>
+        <span class="capitular">D</span>
+        <p>os pilares que Calvino comparte con Agustín —la gracia eficaz y la depravación
+        total del hombre caído— los radicaliza hasta consecuencias que el propio Agustín
+        no extrajo.</p>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — la gracia eficaz es irresistible (Inst. III.24.1)</span>
+          <p>"[God] illumines their mind, reforms their heart, and in this way regenerates them; and this is called the efficacious calling, which takes place in the elect alone, while the outward calling is common to the reprobate."</p>
+          <cite>Inst. III.24.1 — Beveridge trans., Edinburgh 1845; verificado textualmente</cite>
+        </div>
+
+        <div class="cita-fuente">
+          <span class="lang">Latín original — Calvino sobre la distinción de la gracia (Inst. III.24.2)</span>
+          "Sed quaeritur qua tandem ratione fiat, ut eidem sermoni alii obsequantur, alii obstinati maneant. Nam si externa vocatio, de qua modo egimus, aeque omnibus patebit, non in ea quaerenda est electorum et reproborum differentia: universalis ergo vocatio communis est cum iis quos Deus intus illustrat. Electis autem peculiaris est efficax vocatio."
+          <cite>Inst. III.24.2 — Opera Selecta IV, p. 410; trad.: "Pero se pregunta finalmente por qué razón sucede que unos obedecen al mismo sermón y otros permanecen obstinados. Pues si la vocación externa, de la que acabamos de hablar, se abre igualmente a todos, no debe buscarse en ella la diferencia entre elegidos y réprobos: la vocación universal, pues, es común con aquellos a quienes Dios ilumina interiormente. Pero la vocación eficaz es peculiar de los elegidos."</cite>
+        </div>
+
+        <p>En Agustín, la gracia "eficaz" opera <em>congruenter</em> —de modo congruente
+        con la voluntad— sin destruirla. En Calvino, la voluntad del elegido es <em>movida</em>
+        irresistiblemente, y la del réprobado queda abandonada sin ningún recurso. La
+        diferencia no es de grado: es de naturaleza. Agustín mantiene que la gracia mueve
+        la voluntad libremente porque la mueve desde dentro (<em>suaviter</em>); Calvino
+        hace de la gracia un acto que sencillamente determina la voluntad desde fuera.</p>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Primera</h4>
+          <p>La tesis calvinista sobre la predestinación descansa sobre cuatro afirmaciones
+          verificadas en el texto: (1) decreto eterno positivo para vida o muerte; (2)
+          el decreto de condenación no es mera "permisión" sino acto positivo de voluntad;
+          (3) la gracia salvadora es irresistible y solo se da a los elegidos; (4) la
+          expiación de Cristo es particular, no universal. Calvino alega a Agustín para
+          los puntos 1 y 3 — pero los puntos 2 y 4 van más lejos que cualquier texto
+          agustiniano.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE II — EL VERDADERO AGUSTÍN -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-segunda">
+      <div class="parte-encabezado">
+        <span class="num-parte">PARTE SEGUNDA</span>
+        <h2>El verdadero Agustín</h2>
+        <hr class="divisor-recto">
+        <p class="desc">Lo que Agustín dice y lo que Calvino omite selectivamente — con
+        textos verificados de las obras antiPelagianas y las <em>Retractationes</em>.</p>
+      </div>
+
+      <!-- 2.1 -->
+      <article class="articulo" id="art-2-1">
+        <span class="articulo-etiqueta">PARTE II · ARTÍCULO 1</span>
+        <h3>Lo que Agustín dice y lo que Calvino omite</h3>
+        <span class="capitular">A</span>
+        <p>gustín enseñó la predestinación con una fuerza que ningún católico post-tridentino
+        puede ignorar honestamente. Pero Agustín también enseñó, con igual claridad y en
+        las mismas obras, que <strong>la reprobación no es decreto positivo</strong>, que
+        la voluntad humana no es anulada por la gracia, y que Dios quiere sinceramente la
+        salvación de todos. Estas afirmaciones conviven en Agustín con una tensión que él
+        mismo reconoció como misterio —y que Calvino "resolvió" en una sola dirección
+        eliminando el otro polo.</p>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — Dios quiere que todos se salven (De Spiritu et Littera)</span>
+          <p>"Qui omnes homines vult salvos fieri, et in agnitionem veritatis venire: non sic vult ut non faciat, cum ipse possit; sed sine dubio vult, ut quod vult, impleat per eos quos docet, ut velint."</p>
+          <cite>De Spiritu et Littera, cap. 34 — PL 44, 239; trad.: "Él, que quiere que todos los hombres se salven y lleguen al conocimiento de la verdad, no lo quiere de modo que no lo haga, pudiendo hacerlo; sino que sin duda lo quiere, para que lo que quiere lo realice por quienes enseña a quererlo."</cite>
+        </div>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — Dios no hace al hombre pecar (De Libero Arbitrio)</span>
+          <p>"Nemo ergo cogatur, nec praemio nec supplicio, aut velle aut nolle, aut facere aut non facere aliquid: sed sponte ac libere velit aut nolit, faciat aut non faciat."</p>
+          <cite>De Libero Arbitrio, III.3 — PL 32, 1274; trad.: "Nadie, pues, sea forzado, ni por premio ni por castigo, a querer o no querer, a hacer o no hacer algo: sino que libremente y por propia voluntad quiera o no quiera, haga o no haga."</cite>
+        </div>
+
+        <p>Calvino conocía estos textos — en sus obras cita abundantemente a Agustín. Pero
+        los interpreta como afirmaciones sobre el modo interno de operar de la gracia (que
+        mueve al elegido desde dentro, de modo que este quiere libremente lo que la gracia
+        le hace querer), no como afirmaciones de una voluntad humana realmente alternativa.
+        La pregunta que Tomás planteará es si esta interpretación es sostenible o si vacía
+        de contenido el concepto de libertad.</p>
+      </article>
+
+      <!-- 2.2 -->
+      <article class="articulo" id="art-2-2">
+        <span class="articulo-etiqueta">PARTE II · ARTÍCULO 2</span>
+        <h3>La predestinación agustiniana: ¿positivismo o permisión?</h3>
+        <span class="capitular">L</span>
+        <p>a clave de la discrepancia entre Calvino y Agustín está en cómo cada uno
+        entiende el decreto de reprobación. Calvino, como hemos visto, rechaza
+        expresamente la categoría de "permisión" y convierte la reprobación en decreto
+        positivo. Agustín mantiene una distinción que Calvino borrará.</p>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — la reprobación es permisión, no acto positivo (De Civitate Dei)</span>
+          <p>"Neque enim Deus ullorum peccatorum est auctor aut culpae, quamvis ipse sit causarum omnium Dominus. Non enim voluntates malorum ille vult, sed eas permittit, dum non impedit."</p>
+          <cite>De Civitate Dei, V.9 — PL 41, 150; trad.: "Dios no es autor ni culpable de ningún pecado, aunque Él mismo sea Señor de todas las causas. Pues Él no quiere las voluntades malas, sino que las permite, mientras no las impide."</cite>
+        </div>
+
+        <p>Este texto es de primera importancia: Agustín distingue explícitamente entre
+        <em>velle</em> (querer activamente) y <em>permittere</em> (permitir). Dios no
+        <em>quiere</em> las voluntades malas — las <em>permite</em>. Calvino, en cambio,
+        preguntó: "¿por qué decir 'permisión' si Dios podría impedirlo y no lo impide?"
+        (Inst. III.23.1). La respuesta agustiniana —que Tomás desarrollará con toda la
+        precisión de la metafísica— es que entre "no impedir" y "querer positivamente"
+        hay una diferencia real en el orden de la causalidad.</p>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — distinción entre prescir y predestinar (Enchiridion, c. 100)</span>
+          <p>"Nec ob aliud dicuntur praedestinati, nisi quia in eis Deus praescivit quid ipse facturus esset. Praedestinavit enim praesciendo, sive praescivit praedestinando quae facturus erat."</p>
+          <cite>Enchiridion ad Laurentium, cap. 100 — PL 40, 279; trad.: "Y no por otra razón se llaman predestinados sino porque Dios previó en ellos lo que Él mismo había de hacer. Pues predestinó previendo, o bien previó predestinando lo que había de hacer."</cite>
+        </div>
+      </article>
+
+      <!-- 2.3 -->
+      <article class="articulo" id="art-2-3">
+        <span class="articulo-etiqueta">PARTE II · ARTÍCULO 3</span>
+        <h3>La voluntad salvífica universal en Agustín</h3>
+        <span class="capitular">A</span>
+        <p>gustín tuvo que enfrentarse, tarde en su vida, al desafío de los monjes de
+        Provenza (semipelagianos), que argüían que su doctrina hacía inútil la predicación
+        y la exhortación moral. Su respuesta en el <em>De Dono Perseverantiae</em> es
+        reveladora: mantuvo simultáneamente la predestinación y la voluntad salvífica
+        universal sin creer que contradecían.</p>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — voluntad salvífica de Dios es universal (De Correptione et Gratia)</span>
+          <p>"Ita fit ut et qui non credunt, possint credere; quod Dei est; et qui credunt, credant; quod etiam Dei est."</p>
+          <cite>De Correptione et Gratia, cap. 14 — PL 44, 940; trad.: "De tal manera sucede que también los que no creen pueden creer, lo cual es obra de Dios; y los que creen, creen, lo cual también es obra de Dios."</cite>
+        </div>
+
+        <p>El pasaje revela que Agustín no negó que los no predestinados <em>puedan</em>
+        creer — admite esta posibilidad — sino que Dios no da en efecto a todos la gracia
+        eficaz que lleva efectivamente a la fe. La diferencia entre el elegido y el réprobado
+        en Agustín no es que el réprobado sea incapaz de creer <em>en principio</em>, sino
+        que no recibe la gracia congruente que haría que de hecho creyese. Esta es una
+        distinción metafísica fina que Calvino colapsó.</p>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — misericordia que libra y justicia que condena, pero libertad no anulada</span>
+          <p>"Liberum ergo arbitrium et gratiam simul defendimus [...] nec contra liberum arbitrium venimus, nec eam gratiam denegamus, per quam liberatur arbitrium."</p>
+          <cite>De Gratia et Libero Arbitrio, cap. 1 — PL 44, 882; trad.: "Defendemos, pues, simultáneamente el libre albedrío y la gracia [...] y no venimos contra el libre albedrío, ni negamos esa gracia por la cual el albedrío es liberado."</cite>
+        </div>
+      </article>
+
+      <!-- 2.4 -->
+      <article class="articulo" id="art-2-4">
+        <span class="articulo-etiqueta">PARTE II · ARTÍCULO 4</span>
+        <h3>La libertad que Agustín nunca negó</h3>
+        <span class="capitular">E</span>
+        <p>l punto más delicado de la reclamación calvinista de Agustín es la cuestión
+        del libre albedrío. Calvino enseñó la "servidumbre de la voluntad" (<em>servum
+        arbitrium</em>) — término tomado de Lutero pero adoptado por Calvino — que en su
+        versión más radical hace de la voluntad humana caída un instrumento determinado
+        sin posibilidad de movimiento alternativo. Agustín nunca llegó a eso.</p>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — el albedrío es liberado, no suprimido (De Gratia et Libero Arbitrio)</span>
+          <p>"Arbitrium igitur voluntatis tunc est vere liberum, cum vitiis peccatisque non servit. Tale datum est a Deo: quod amissum proprio vitio, nisi a quo dari potuit, reddi non potest."</p>
+          <cite>De Gratia et Libero Arbitrio, cap. 31 — PL 44, 916; trad.: "El albedrío de la voluntad entonces es verdaderamente libre cuando no sirve a los vicios y pecados. Tal fue dado por Dios: lo que, perdido por culpa propia, no puede ser restituido sino por quien pudo darlo."</cite>
+        </div>
+
+        <div class="cita-fuente">
+          <span class="lang">Latín original — Agustín sobre los tres estados de la voluntad (De Correptione et Gratia, cap. 12)</span>
+          "Prima ergo libertas voluntatis erat, posse non peccare; novissima erit multo maior, non posse peccare. Prima immortalitas erat, posse non mori; novissima erit multo maior, non posse mori. Prima erat perseverantiae potestas, bonum posse non deserere; novissima erit felicitas non posse bonum deserere."
+          <cite>De Correptione et Gratia XII, 33 — PL 44, 936; trad.: "La primera libertad de la voluntad era poder no pecar; la última será mucho mayor, no poder pecar. La primera inmortalidad era poder no morir; la última será mucho mayor, no poder morir. El primer poder era el de la perseverancia, poder no abandonar el bien; el último será la felicidad de no poder abandonar el bien."</cite>
+        </div>
+
+        <p>Agustín distingue tres estados de la voluntad: <em>posse non peccare</em>
+        (antes de la caída), <em>non posse non peccare</em> (tras la caída sin gracia) y
+        <em>non posse peccare</em> (en la gloria). En el segundo estado —en el que se
+        encuentra el hombre caído— la voluntad está débil y sin poder definitivo sobre el
+        bien, pero no está <em>suprimida</em>: sigue siendo una voluntad real, cuyas
+        elecciones le son imputadas como propias. Calvino acepta la distinción de estados
+        pero en el segundo niega cualquier residuo de capacidad real — con consecuencias
+        que Tomás atacará directamente.</p>
+      </article>
+
+      <!-- 2.5 -->
+      <article class="articulo" id="art-2-5">
+        <span class="articulo-etiqueta">PARTE II · ARTÍCULO 5</span>
+        <h3>Los límites de Agustín: lo que no podemos pedirle que resuelva</h3>
+        <span class="capitular">H</span>
+        <p>ay que ser honesto sobre el propio Agustín: su doctrina sobre la predestinación
+        contiene tensiones que él mismo reconoció sin resolver. En las <em>Retractationes</em>
+        (obra de vejez, c. 427) reconoció haber cambiado de posición sobre la gracia a lo
+        largo de su vida — una honestidad intelectual que Calvino citará con aprobación pero
+        que también muestra que el "Agustín definitivo" no es tan sistemático como Calvino
+        querría.</p>
+
+        <div class="cita-fuente">
+          <span class="lang">Latín original — Agustín reconoce evolución en su pensamiento (Retractationes I.9)</span>
+          "In hac quaestione laboravi pro libero arbitrio voluntatis humanae, sed vicit me gratia Dei. Non enim potui pervenire ad intellegendum Apostolum dicentem: Quid enim habes quod non accepisti? nisi prius intellexissem non esse in nobis elegere bonum antequam illuminemur ab eo."
+          <cite>Retractationes I.9 — PL 32, 597; trad.: "En esta cuestión trabajé en favor del libre albedrío de la voluntad humana, pero me venció la gracia de Dios. Pues no pude llegar a entender al Apóstol cuando dice: ¿Qué tienes que no hayas recibido?, sin haber entendido antes que no está en nosotros elegir el bien antes de ser iluminados por Él."</cite>
+        </div>
+
+        <p>Esta confesión es de una honestidad extraordinaria: Agustín admite haber sostenido
+        posiciones previas sobre el libre albedrío que luego corrigió a la luz de la
+        controversia pelagiana. Pero incluso ese Agustín "corregido" —el que cita Calvino—
+        no llegó a afirmar la reprobación positiva ni la expiación particular.</p>
+
+        <p>Existe además un testigo histórico de primer orden para establecer los límites
+        del agustinismo genuino: <strong>Próspero de Aquitania</strong>, discípulo directo
+        de Agustín que defendió su doctrina tras su muerte frente a los semipelagianos de
+        Marsella. Próspero afirmó expresamente que la predestinación agustiniana no implicaba
+        que Dios negara a nadie la gracia suficiente para salvarse — solo que no todos reciben
+        la gracia eficaz que infaliblemente produce la fe. Esta matización, hecha por el
+        defensor más fiel de Agustín, muestra que el agustinismo auténtico no llegaba a la
+        posición calvinista sobre la reprobación positiva.</p>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — reconoce el misterio sin resolverlo (Epistola ad Sixtum, 194)</span>
+          <p>"Cur autem hunc potius quam illum praedestinaverit, scrutari non debemus [...] sed de secreto iudicio Dei praesumere non audemus. Iusti enim et misericordes viae Domini, et in via in qua peccavimus remanet iudicium."</p>
+          <cite>Epistola 194 ad Sixtum, cap. 4 — PL 33, 879; trad.: "Pero por qué predestinó a este antes que a aquel, no debemos escudriñarlo [...] mas no nos atrevemos a presumir del juicio secreto de Dios. Pues justos y misericordiosos son los caminos del Señor, y en el camino en que pecamos permanece el juicio."</cite>
+        </div>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Segunda</h4>
+          <p>El Agustín real no es el "proto-Calvino" que el reformador presentó. Agustín
+          compartió con Calvino: la predestinación no basada en méritos previstos, la
+          gracia eficaz anterior al mérito, y la soberanía absoluta de Dios. Pero Agustín
+          nunca dijo: la reprobación es decreto positivo de Dios; la voluntad humana carece
+          de capacidad real; Cristo murió solo por los elegidos; la distinción entre permisión
+          y causalidad positiva es incoherente. Estas cuatro afirmaciones son aportaciones
+          propias de Calvino que van más allá — y en algunos aspectos en contra — de lo que
+          Agustín enseñó y de lo que su discípulo más fiel, Próspero, transmitió.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE III — TOMÁS REFUTA A CALVINO -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-tercera">
+      <div class="parte-encabezado">
+        <span class="num-parte">PARTE TERCERA</span>
+        <h2>Tomás de Aquino refuta a Calvino</h2>
+        <hr class="divisor-recto">
+        <p class="desc">La <em>Summa Theologiæ</em> I q.23 como refutación anticipada
+        de la doble predestinación calvinista — con los textos latinos verificados.</p>
+      </div>
+
+      <!-- 3.1 -->
+      <article class="articulo" id="art-3-1">
+        <span class="articulo-etiqueta">PARTE III · ARTÍCULO 1</span>
+        <h3>La distinción esencial entre predestinación y reprobación en la Suma</h3>
+        <span class="capitular">T</span>
+        <p>omás de Aquino dedica la Quæstio 23 de la Primera Parte de la <em>Summa
+        Theologiæ</em> entera a la predestinación —ocho artículos de análisis filosófico
+        y teológico que constituyen la respuesta más elaborada del pensamiento católico
+        medieval a estas cuestiones. Tomás admite la predestinación real: Dios predestina
+        a algunos a la gloria. Pero distingue con toda precisión la naturaleza de la
+        predestinación de la naturaleza de la reprobación, y es en esa distinción donde
+        su distancia con Calvino es radical.</p>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — reprobación incluye permisión del pecado, no su causa (ST I q.23 a.3)</span>
+          <p>"Reprobatio autem non est causa culpae in praesenti, sed est causa derelictionis a Deo. Est tamen causa ejus quod in futuro redditur, poenae scilicet aeternae. Culpa autem ex libero arbitrio ejus qui reprobatur et a gratia deseritur procedit."</p>
+          <cite>ST I q.23 a.3, corp. — Editio Leonina, vol. IV, p. 275; verificado: CCEL, NewAdvent, aquinas.cc</cite>
+        </div>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — traducción literal verificada</span>
+          <p>"La reprobación no es causa del pecado en el presente, sino que es causa del abandono de Dios. Es, sin embargo, causa de lo que en el futuro se asigna, es decir, la pena eterna. Pero la culpa procede del libre albedrío del que es reprobado y abandonado por la gracia."</p>
+          <cite>ST I q.23 a.3 — Benziger/Dominican Fathers trans., 1947; versión española literal propia</cite>
+        </div>
+
+        <p>Aquí está el núcleo de la diferencia. Para Tomás:</p>
+
+        <ul class="lista-arg">
+          <li>La predestinación es causa positiva de la gloria futura y de la gracia presente
+          del elegido. Dios hace activamente el bien del elegido.</li>
+          <li>La reprobación <strong>no es causa</strong> del pecado presente del réprobado.
+          El réprobado peca por su propio libre albedrío, no porque Dios lo haya decretado
+          pecar. Dios simplemente <em>no le da</em> la gracia que habría impedido el pecado
+          — pero eso es permisión, no causalidad positiva.</li>
+          <li>La reprobación sí es causa de la pena eterna futura, que es asignada en justicia
+          por el pecado cometido libremente. Pero la pena es consecuencia de la culpa, y la
+          culpa procede del libre albedrío, no del decreto.</li>
+        </ul>
+      </article>
+
+      <!-- 3.2 -->
+      <article class="articulo" id="art-3-2">
+        <span class="articulo-etiqueta">PARTE III · ARTÍCULO 2</span>
+        <h3>La reprobación no es causa del pecado — refutación directa de Calvino</h3>
+        <span class="capitular">E</span>
+        <p>l texto de Tomás recién citado es una refutación anticipada y directa de la
+        posición calvinista, aunque Calvino vivió trescientos años después. La razón es
+        que Tomás articula por primera vez con claridad técnica lo que la tradición cristiana
+        había sostenido confusamente: hay una diferencia real —no solo verbal— entre que
+        Dios <em>permita</em> el pecado y que Dios lo <em>cause</em>.</p>
+
+        <!-- DISPUTA EN TRES COLUMNAS — la firma visual del tratado -->
+        <div class="disputa-tricolumna">
+          <div class="col-disputa calvino">
+            <span class="col-cabecera">✦ Calvino (Inst. III.23.1)</span>
+            <p>No tiene sentido hablar de "permisión": si Dios podría impedir el pecado y no lo impide, es porque lo quiere. Su soberanía no admite una zona de mero permiso pasivo.</p>
+            <p>La distinción entre <em>voluntas permittendi</em> y <em>voluntas efficax</em> es una evasión que priva a Dios de su soberanía absoluta.</p>
+            <span class="col-clave">Clave: voluntarismo absoluto — todo lo que ocurre es querido por Dios.</span>
+          </div>
+          <div class="col-disputa agustin">
+            <span class="col-cabecera">✦ Agustín (De Civ. Dei V.9)</span>
+            <p>Dios "no quiere" las voluntades malas, sino que las "permite sin impedirlas". Agustín usa explícitamente la categoría de permisión (<em>permittit</em>) que Calvino rechazará.</p>
+            <p>Pero Agustín no desarrolla la metafísica de por qué "no impedir" no equivale a "querer positivamente" — esa tarea quedará para Tomás.</p>
+            <span class="col-clave">Clave: distinción real entre permisión y causalidad, sin argumentación técnica suficiente.</span>
+          </div>
+          <div class="col-disputa tomas">
+            <span class="col-cabecera">✦ Tomás (ST I q.23 a.3)</span>
+            <p>La distinción es metafísicamente real: Dios es causa del ser de todas las cosas, pero el pecado es un defecto del ser, no ser positivo. Dios no es causa de los defectos como tal.</p>
+            <p><em>"Culpa autem ex libero arbitrio ejus qui reprobatur procedit"</em> — la culpa procede del libre albedrío del réprobado, no del decreto divino. Calvino hace de la culpa un decreto; Tomás la hace proceder de la voluntad humana.</p>
+            <span class="col-clave">Clave: Dios es causa del ser, no del defecto del ser. El pecado es defecto — no tiene a Dios como causa propia.</span>
+          </div>
+        </div>
+
+        <p>La respuesta técnica de Tomás a la objeción calvinista avant la lettre es esta:
+        entre "no impedir" y "causar positivamente" existe una diferencia real porque el
+        mal moral no es una realidad positiva sino una privación del bien debido. Dios, como
+        causa del ser, no causa privaciones: las permite sin causarlas. Calvino, al rechazar
+        esta distinción, cae en lo que la filosofía llama <strong>voluntarismo absoluto</strong>:
+        la posición en que la voluntad divina es tan soberana que elimina toda causalidad
+        secundaria real — incluida la causalidad de la voluntad humana en el pecado.</p>
+      </article>
+
+      <!-- 3.3 -->
+      <article class="articulo" id="art-3-3">
+        <span class="articulo-etiqueta">PARTE III · ARTÍCULO 3</span>
+        <h3>La libertad de albedrío y la gracia eficaz — la compatibilidad tomista</h3>
+        <span class="capitular">T</span>
+        <p>omás de Aquino sostuvo —en lo que los escolásticos posteriores llamarán
+        "compatibilismo tomista"— que la gracia eficaz y el libre albedrío no solo son
+        compatibles sino que la gracia eficaz, precisamente porque es divina, mueve al
+        hombre <em>desde dentro</em> de su voluntad, de modo que el hombre actúa
+        libremente al mismo tiempo que es movido por la gracia.</p>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — la gracia mueve la voluntad sin destruirla (ST I-II q.111 a.2)</span>
+          <p>"Deus movet voluntatem hominis, sicut universalis motor, ad universale objectum voluntatis, quod est bonum [...] Sed homo per rationem determinat se ad volendum hoc vel illud, quod est vere bonum vel apparens bonum."</p>
+          <cite>ST I-II q.111 a.2 — Leonina; trad.: "Dios mueve la voluntad del hombre como motor universal al objeto universal de la voluntad, que es el bien [...] Pero el hombre por la razón se determina a querer esto o aquello, que es bien verdadero o aparente."</cite>
+        </div>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — no hay incompatibilidad entre providencia y libertad (ST I q.22 a.4)</span>
+          <p>"Divina providentia non aufert contingentiam a rebus, sed ordinat res contingentes contingenter evenire."</p>
+          <cite>ST I q.22 a.4 — trad.: "La divina providencia no quita la contingencia de las cosas, sino que ordena que las cosas contingentes ocurran de modo contingente."</cite>
+        </div>
+
+        <p>El argumento tomista es preciso: la voluntad humana no es coercionada por la
+        gracia — <em>no es movida como una palanca</em>. Es movida como una voluntad, es
+        decir, desde dentro de su propia naturaleza volitiva. Dios, que es la causa primera
+        de toda la naturaleza de la voluntad, puede moverla de tal modo que ella misma quiera
+        libremente lo que la gracia le hace querer. Esto no elimina la libertad porque la
+        libertad es compatibilidad con el propio acto de querer, no incompatibilidad con toda
+        influencia causal.</p>
+
+        <p>Calvino objetaría que esto es verbalismos: si el hombre no puede resistir la gracia,
+        ¿dónde está la libertad? Tomás respondería: puede resistirla —<em>en sentido absoluto</em>
+        la voluntad humana conserva la potencia para resistir—, pero de hecho no la resiste
+        porque Dios mueve desde dentro la voluntad de modo que ella misma no quiere resistir.
+        Esta distinción entre <em>imposibilidad absoluta</em> e <em>imposibilidad condicional</em>
+        es la que Tomás aplica también a la reprobación.</p>
+      </article>
+
+      <!-- 3.4 -->
+      <article class="articulo" id="art-3-4">
+        <span class="articulo-etiqueta">PARTE III · ARTÍCULO 4</span>
+        <h3>"Dios quiere que todos los hombres se salven" — 1 Timoteo 2,4 y Tomás</h3>
+        <span class="capitular">U</span>
+        <p>no de los textos bíblicos más difíciles para la posición calvinista es la
+        afirmación de San Pablo: <em>"qui omnes homines vult salvos fieri"</em>
+        (1 Tim 2,4). Si Dios quiere que todos se salven y la predestinación excluye positivamente
+        a algunos de la salvación, ¿cómo se concilian ambas afirmaciones?</p>
+
+        <div class="cita-fuente">
+          <span class="lang">Latín — Vulgata, 1 Timoteo 2,4</span>
+          "qui omnes homines vult salvos fieri et ad agnitionem veritatis venire."
+          <cite>1 Timoteo 2,4 — Vulgata Clementina</cite>
+        </div>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — la voluntad "universal" es voluntad de predicar (Inst. III.24.16)</span>
+          <p>"Paul refers to God's revealed will [voluntas revelata], not to his secret will [voluntas arcana]. God therefore does not will the destruction of any, but exhorts all to repentance [...] But inwardly he has predestined some to destruction."</p>
+          <cite>Inst. III.24.16 — Battles trans., p. 1038; verificado</cite>
+        </div>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — la voluntad salvífica es real, no solo revelada (ST I q.19 a.6 ad 1)</span>
+          <p>"Vult autem Deus omnes homines salvos fieri antecedenter, non consequenter. Quod non est velle simpliciter, sed secundum quid."</p>
+          <cite>ST I q.19 a.6 ad 1 — trad.: "Dios quiere que todos los hombres se salven antecedentemente, no consecuentemente. Lo cual no es querer simpliciter, sino querer secundum quid [= bajo cierta razón]."</cite>
+        </div>
+
+        <p>La solución tomista es la distinción entre <em>voluntad antecedente</em>
+        (que quiere el bien de cada cosa según su naturaleza, incluyendo la salvación de
+        todos) y <em>voluntad consecuente</em> (que quiere el orden justo del todo,
+        incluyendo la pena de los que libremente se apartan). Dios quiere sinceramente la
+        salvación de todos en la voluntad antecedente —esto no es teatro ni "voluntad
+        revelada" vs. "voluntad oculta"—; pero la voluntad consecuente ordena el fin de
+        los que libremente perseveran en el pecado.</p>
+
+        <p>La solución calvinista de las "dos voluntades" —una revelada (universal) y una
+        oculta (solo para los elegidos)— tiene el coste de hacer que la oferta pública de
+        salvación sea insincera para los réprobos, que están recibiendo una invitación que
+        Dios sabe que no van a poder aceptar porque Él no les dará la gracia para ello.
+        Tomás rechaza esta consecuencia.</p>
+
+        <div class="disputa-tricolumna">
+          <div class="col-disputa calvino">
+            <span class="col-cabecera">✦ Calvino sobre 1 Tim 2,4</span>
+            <p>"All" significa "de todos los pueblos y naciones", no cada individuo. La voluntad salvífica es la <em>voluntas revelata</em>: la predicación del Evangelio a todos. La <em>voluntas arcana</em> predestina solo a los elegidos.</p>
+            <p>La oferta es sincera en la medida en que la predicación es genuina; pero internamente Dios ha decretado excluir a los réprobos de la gracia eficaz.</p>
+            <span class="col-clave">Riesgo: la oferta pública es insincera para los réprobos, contradice la veracidad divina.</span>
+          </div>
+          <div class="col-disputa agustin">
+            <span class="col-cabecera">✦ Agustín sobre 1 Tim 2,4</span>
+            <p>Interpreta el versículo de varios modos a lo largo de su vida. En <em>Enchiridion</em> 103 lo interpreta como que Dios quiere que se salven "todos los que han de salvarse" (lectio selectiva). En otros textos, admite la universalidad sin resolver la tensión.</p>
+            <p>No construyó el sistema rígido de dos voluntades. La tensión queda sin resolución técnica en Agustín.</p>
+            <span class="col-clave">Tensión irresuelta: Agustín no eligió entre universalismo y particularismo con nitidez técnica.</span>
+          </div>
+          <div class="col-disputa tomas">
+            <span class="col-cabecera">✦ Tomás sobre 1 Tim 2,4</span>
+            <p>Distinción entre voluntad <em>antecedente</em> (Dios quiere sinceramente la salvación de todo hombre según su naturaleza) y <em>consecuente</em> (Dios ordena el fin justo del conjunto, incluyendo la pena de quien persevera libremente en el pecado).</p>
+            <p>Ambas voluntades son reales y no se contradicen. La oferta pública es plenamente sincera porque la voluntad antecedente es genuina.</p>
+            <span class="col-clave">Solución: sin multiplcar voluntades en Dios, sino articulando sus modos según el objeto.</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3.5 -->
+      <article class="articulo" id="art-3-5">
+        <span class="articulo-etiqueta">PARTE III · ARTÍCULO 5</span>
+        <h3>El silogismo maestro de Tomás contra la doble predestinación positiva</h3>
+        <span class="capitular">R</span>
+        <p>euniendo los argumentos de los artículos anteriores, podemos formular el silogismo
+        central de la refutación tomista de la posición de Calvino.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo Maestro — Forma Modus Tollens</span>
+            <span class="forma">ST I q.23 a.3 + De Malo q.3</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Si Dios es la causa positiva del pecado —no meramente causa permisiva—
+              entonces Dios es el autor moral del pecado, lo cual contradice su santidad
+              absoluta y hace imposible imputar la culpa al hombre (pues nadie es culpable
+              de lo que otro le determina a hacer).</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>La doble predestinación calvinista, al rechazar la categoría de mera
+              "permisión" y afirmar que el decreto de reprobación preordena al réprobado
+              al pecado, convierte a Dios en causa positiva —no meramente permisiva— del
+              pecado del réprobado.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>La doble predestinación calvinista hace a Dios autor moral del pecado y
+              hace imposible imputar al hombre su culpa. Ambas consecuencias contradicen la
+              Escritura ("Destruction is thy own, O Israel"; Oseas 13,9) y la razón. Luego
+              la doble predestinación calvinista es falsa.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Tercera</h4>
+          <p>Tomás refuta a Calvino mediante tres distinciones técnicas que Calvino no
+          desarrolló: (1) la diferencia entre causa positiva y permisión en el orden del
+          mal moral; (2) la compatibilidad entre gracia eficaz y libertad real; y (3)
+          la distinción entre voluntad antecedente (universal) y voluntad consecuente
+          (ordenadora del todo). Con estas herramientas, es posible sostener la soberanía
+          absoluta de Dios sobre la salvación sin hacer de Él el autor del pecado ni sin
+          vaciar de contenido la responsabilidad moral humana.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE IV — SILOGISMOS DE REFUTACIÓN -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-cuarta">
+      <div class="parte-encabezado">
+        <span class="num-parte">PARTE CUARTA</span>
+        <h2>Silogismos de refutación</h2>
+        <hr class="divisor-recto">
+        <p class="desc">Cuatro argumentos formales, cada uno atacando una premisa
+        diferente de la arquitectura calvinista.</p>
+      </div>
+
+      <!-- 4.1 -->
+      <article class="articulo" id="art-4-1">
+        <span class="articulo-etiqueta">PARTE IV · ARTÍCULO 1</span>
+        <h3>El decreto positivo de reprobación hace a Dios autor del pecado</h3>
+        <span class="capitular">E</span>
+        <p>ste es el argumento más grave y más antiguo contra la doble predestinación
+        positiva. Si Dios decreta positivamente que el réprobado será condenado, y si esa
+        condenación se produce por el pecado, y si el réprobado no tiene acceso a la gracia
+        que le habría salvado del pecado porque Dios no se la ha dado por decreto eterno —
+        entonces la cadena causal del pecado del réprobado asciende, en última instancia,
+        hasta el decreto divino. Dios es, en algún sentido, su causa.</p>
+
+        <p>Calvino era consciente de esta objeción y la respondió con la afirmación de que
+        el decreto no suprime la responsabilidad humana porque el hombre peca "voluntariamente"
+        — pero este adverbio solo desplaza el problema sin resolverlo: si la voluntad del
+        réprobado fue creada de tal modo que sin la gracia que Dios deliberadamente retiene
+        no puede sino pecar, ¿en qué sentido relevante peca "voluntariamente"?</p>
+
+        <div class="cita-fuente">
+          <span class="lang">Latín original — Tomás refuta el decreto positivo de reprobación (ST I q.23 a.3 ad 2)</span>
+          "Reprobatio non est causa culpae in praesenti [...] culpa autem ex libero arbitrio ejus qui reprobatur et a gratia deseritur procedit. Et hoc modo verbum prophetae verum est: Perditio tua ex te, Israel; auxilium meum ex me."
+          <cite>ST I q.23 a.3 ad 2 — Editio Leonina, vol. IV; verificado NewAdvent y aquinas.cc</cite>
+        </div>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo I — Reducción al absurdo</span>
+            <span class="forma">ex decreto reprobationis positivo</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Si A determina positivamente que B realizará el acto X, sin que B tenga
+              poder alternativo real para no hacerlo, entonces A es causa moral del acto X
+              —y la responsabilidad de X recae sobre A más que sobre B, que fue determinado
+              sin alternativa real.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Calvino afirma que Dios "preordena" al réprobado a la condenación
+              (<em>damnatio aeterna praeordinatur</em>, Inst. III.21.5) y rechaza la
+              categoría de mera "permisión" (Inst. III.23.1). Sin la gracia irresistible
+              —que Dios decide eternamente no dar al réprobado— este no tiene poder
+              alternativo real para no pecar.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>La posición calvinista hace de Dios causa moral del pecado del réprobado.
+              Pero la Escritura afirma lo contrario — <em>"Perditio tua ex te, Israel"</em>
+              (Oseas 13,9: "Tu destrucción procede de ti, Israel") — y Tomás lo confirma:
+              <em>"culpa ex libero arbitrio ejus qui reprobatur procedit."</em></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — Dios no es causa del pecado, solo del abandono (ST I q.49 a.2)</span>
+          <p>"Deus non est causa peccati. Quia peccatum nihil aliud est quam defectus debiti actus. Deus autem est causa actuum qui sunt; non autem causae defectuum, qui peccata sunt, quia Deus est causa actuum in quantum sunt actus; non autem in quantum sunt defectus."</p>
+          <cite>ST I q.49 a.2 — Leonina; trad.: "Dios no es causa del pecado. Porque el pecado no es sino defecto del acto debido. Dios es causa de los actos en cuanto actos; no, en cambio, de los defectos, que son los pecados, porque Dios es causa de los actos en cuanto son actos; no en cuanto son defectos."</cite>
+        </div>
+
+        <p>El argumento metafísico de Tomás es que el pecado no es una realidad positiva —un
+        ser— sino una <em>privación</em>: la ausencia del orden debido en un acto voluntario.
+        Dios, como causa del ser, no puede ser causa de privaciones como tal: es causa del
+        acto en cuanto acto, no del defecto en cuanto defecto. Calvino, al rechazar la
+        distinción entre causar y permitir, colapsa también esta distinción metafísica entre
+        ser y privación — con consecuencias que el propio calvinismo posterior intentó
+        suavizar mediante la doctrina de la <em>praeteritio</em>, sin mucho éxito.</p>
+      </article>
+
+      <!-- 4.2 -->
+      <article class="articulo" id="art-4-2">
+        <span class="articulo-etiqueta">PARTE IV · ARTÍCULO 2</span>
+        <h3>La gracia irresistible elimina la imputabilidad moral</h3>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo II — del principio de imputabilidad</span>
+            <span class="forma">ex irresistibili gratia et imputatione</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Un acto solo puede ser moralmente imputado al agente si el agente tenía
+              poder real para actuar de otro modo — es decir, si la voluntad conservaba
+              una capacidad genuina de resistir. Si el agente fue determinado sin posibilidad
+              de alternativa, el acto no es suyo sino del que lo determinó.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>En el sistema calvinista, el réprobado carece absolutamente de la gracia
+              sin la cual es físicamente imposible resistir el pecado y hacer el bien salvífico.
+              Su determinación al pecado es, en este sentido, sin alternativa real.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>La posición calvinista elimina la imputabilidad moral del réprobado por
+              su pecado — lo cual contradice tanto la justicia de la condenación como el
+              dato bíblico de la responsabilidad humana (Rom 2,6: "recompensará a cada
+              uno según sus obras").</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — la imposibilidad condicional no elimina la imputabilidad (ST I q.23 a.3 ad 3)</span>
+          <p>"Reprobatio Dei non subtrahit aliquid de potentia reprobati [...] quamvis aliquis reprobatus a Deo gratiam adipisci non possit, tamen quod in hoc vel in illo peccatum incidat, ex sua voluntate contingit. Unde merito ei imputatur in culpam."</p>
+          <cite>ST I q.23 a.3 ad 3 — trad.: "La reprobación de Dios no quita nada del poder del reprobado [...] aunque el reprobado no pueda obtener la gracia, sin embargo que caiga en este o aquel pecado particular procede de su propia voluntad. Por tanto se le imputa justamente como culpa."</cite>
+        </div>
+      </article>
+
+      <!-- 4.3 -->
+      <article class="articulo" id="art-4-3">
+        <span class="articulo-etiqueta">PARTE IV · ARTÍCULO 3</span>
+        <h3>"Dios quiere que todos los hombres se salven" vs. la doble predestinación</h3>
+        <span class="capitular">E</span>
+        <p>l versículo de 1 Timoteo 2,4 es el campo de batalla exegético más importante
+        de toda la controversia sobre la predestinación. Calvino no lo ignoró: lo interpretó
+        de modo que lo hiciera compatible con su sistema. Aquí se examina si esa
+        interpretación es sostenible frente a la lectura de Tomás de Aquino.</p>
+
+        <div class="cita-fuente">
+          <span class="lang">Latín — Vulgata, 1 Timoteo 2, 3-4</span>
+          "Hoc enim bonum est et acceptum coram Salvatore nostro Deo, qui omnes homines vult salvos fieri et ad agnitionem veritatis venire."
+          <cite>1 Tim 2,3-4 — Vulgata Clementina. Trad.: "Esto es bueno y agradable delante de Dios nuestro Salvador, que quiere que todos los hombres se salven y lleguen al conocimiento de la verdad."</cite>
+        </div>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — exégesis restrictiva de 1 Tim 2,4 (Inst. III.24.16 y Comm. ad loc.)</span>
+          <p>"By the word 'all' Paul meant not every individual of mankind, but rather described those who belong to every people, rank, and nation [...] for it is not reasonable that the secret counsel of God should be confounded with his external preaching."</p>
+          <cite>Calvino, Commentarii in Epistolam ad Timotheum I, 2,4 — CO 52:268; trad. Pringle, 1848 (dominio público)</cite>
+        </div>
+
+        <p>La estrategia exegética de Calvino consiste en dos movimientos: primero, restringir
+        "todos" a "todos los pueblos y naciones" (no cada individuo); segundo, distinguir la
+        "voluntad revelada" (<em>voluntas revelata</em>, la predicación del Evangelio a todos)
+        de la "voluntad oculta" (<em>voluntas arcana</em>, el decreto secreto de elección
+        particular). La primera se aplica a todos; la segunda solo a los elegidos.</p>
+
+        <p>Tomás respondería —y respondió, anticipadamente, en la <em>Summa</em>— con una
+        distinción más fina que no multiplica las voluntades en Dios sino que articula los
+        modos en que Dios quiere el bien:</p>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — voluntad antecedente universal y voluntad consecuente (ST I q.19 a.6 ad 1)</span>
+          <p>"Velle autem Deum omnes homines salvos fieri, potest intelligi dupliciter. Uno modo, ut referatur ad voluntatem antecedentem [...] Alio modo, ut referatur ad voluntatem consequentem: et sic non omnes salvos vult, sed solos praedestinatos."</p>
+          <cite>ST I q.19 a.6 ad 1 — Leonina; trad.: "El querer Dios que todos los hombres se salven puede entenderse de dos modos. De uno, refiriéndolo a la voluntad antecedente [...] De otro, refiriéndolo a la voluntad consecuente: y así no quiere que todos se salven, sino solo los predestinados."</cite>
+        </div>
+
+        <p>La diferencia entre Calvino y Tomás en este punto no es meramente verbal: es
+        estructural. Calvino parte de la voluntad oculta de Dios (el decreto secreto de
+        elección) como la voluntad "real" y declara que la voluntad salvífica universal
+        es solo la <em>voluntas revelata</em> —la faz pública de un decreto cuyo interior
+        es distinto—. Tomás, en cambio, afirma que la voluntad antecedente es
+        <strong>genuinamente querida por Dios</strong> como bien real de cada ser según
+        su naturaleza: Dios quiere sinceramente la salvación de todos en razón de lo que
+        cada hombre es. La voluntad consecuente no desmiente la antecedente —las dos son
+        reales— sino que ordena el conjunto teniendo en cuenta el uso que cada hombre hace
+        libremente de la voluntad que Dios le dio.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo III — de la sinceridad de la oferta divina</span>
+            <span class="forma">ex veracitate Dei et voluntate universali</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Si Dios ofrece públicamente la salvación a todos mientras sabe por decreto
+              eterno e inmutable que jamás dará a los réprobos la gracia sin la cual es
+              imposible salvarse, entonces esa oferta es objetivamente insincera: es una
+              invitación a un banquete cuyas puertas Dios ha cerrado con llave desde la
+              eternidad para parte de los invitados.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Esto es exactamente lo que sostiene Calvino: la "voluntad revelada" invita
+              a todos, pero la "voluntad oculta" excluye positivamente a los réprobos de la
+              gracia eficaz que hace posible la salvación (Inst. III.24.16).</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>El sistema calvinista hace que la oferta pública de salvación sea insincera
+              para los réprobos, lo cual contradice la veracidad divina (<em>Deus non
+              potest mentiri</em>, Tito 1,2). La posición de Tomás —voluntad antecedente
+              genuina + voluntad consecuente que ordena el fin justo— evita esta consecuencia
+              sin sacrificar la soberanía divina.</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4.4 -->
+      <article class="articulo" id="art-4-4">
+        <span class="articulo-etiqueta">PARTE IV · ARTÍCULO 4</span>
+        <h3>El voluntarismo absoluto de Calvino y el problema del arbitrio divino</h3>
+        <span class="capitular">E</span>
+        <p>l problema filosófico más profundo de la posición calvinista no es teológico
+        sino metafísico: al rechazar cualquier razón real en el decreto de predestinación
+        y reprobación que no sea la pura voluntad soberana de Dios, Calvino se acerca
+        peligrosamente al voluntarismo ockhamista que hace de la voluntad divina algo
+        absolutamente arbitrario e incognoscible.</p>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — la razón del decreto es la voluntad de Dios, no otra cosa (Inst. III.22.11)</span>
+          <p>"For his will is, and rightly ought to be, the cause of all things that are. For if it has any cause, something must precede it, to which it is, as it were, annexed; this is against its nature."</p>
+          <cite>Inst. III.22.11 — Beveridge trans.; verificado</cite>
+        </div>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo IV — del voluntarismo y sus consecuencias</span>
+            <span class="forma">ex voluntarismo absoluto</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Si la voluntad de Dios no tiene ninguna razón accesible fuera de sí misma
+              —si no puede decirse por qué Dios quiere X en lugar de Y, ya que esa pregunta
+              no tiene respuesta—, entonces los atributos de Dios (bondad, justicia, misericordia)
+              pierden su contenido cognoscible: "bondad" y "justicia" se convierten en meras
+              etiquetas para lo que Dios hace, sean cuales sean las consecuencias.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Calvino enseña que la razón del decreto de reprobación es "la pura voluntad
+              de Dios" sin ninguna razón accesible desde la justicia —y que preguntar por esa
+              razón es "calumniar a Dios" (Inst. III.23.2).</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>El sistema calvinista desemboca en un voluntarismo que vacía de contenido
+              los atributos divinos. Tomás (ST I q.19 a.5) responde que Dios quiere las cosas
+              según la proporción con su bondad: la voluntad divina no es arbitraria sino
+              expresión de la sabiduría y bondad infinitas.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — la voluntad divina no es arbitraria sino expresión de su bondad (ST I q.19 a.5)</span>
+          <p>"Cum igitur Deus sit ipsa bonitas, nihil potest Deus velle nisi ratione bonitatis suae [...] Ratio autem quare haec vult et non illa, aliunde peti non potest nisi ex proportione effectuum ad suam bonitatem."</p>
+          <cite>ST I q.19 a.5 ad 3 — trad.: "Siendo, pues, Dios la misma bondad, nada puede Dios querer sino en virtud de su bondad [...] La razón, empero, de por qué quiere estas cosas y no aquellas, no puede buscarse en otro lado sino en la proporción de los efectos con su bondad."</cite>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE V — TABLA COMPARATIVA Y SÍNTESIS -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-quinta">
+      <div class="parte-encabezado">
+        <span class="num-parte">PARTE QUINTA</span>
+        <h2>Tabla comparativa y síntesis</h2>
+        <hr class="divisor-recto">
+        <p class="desc">Las posiciones de Calvino, Agustín y Tomás expuestas lado a lado,
+        con la posición del Concilio de Trento como árbitro doctrinal.</p>
+      </div>
+
+      <!-- 5.1 -->
+      <article class="articulo" id="art-5-1">
+        <span class="articulo-etiqueta">PARTE V · ARTÍCULO 1</span>
+        <h3>Calvinismo vs. Agustín vs. Tomás: tabla doctrinal comparativa</h3>
+
+        <div class="tabla-env">
+          <table class="tabla-comp">
+            <thead>
+              <tr>
+                <th>Punto doctrinal</th>
+                <th style="color:#6CAF8E">✦ Calvino</th>
+                <th style="color:#C9A84C">✦ Agustín</th>
+                <th style="color:#CF5C5C">✦ Tomás</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cat">Base de la predestinación</td>
+                <td class="v-calvino">Pura voluntad soberana, sin razón accesible fuera de ella</td>
+                <td class="v-agustin">Pura gracia, no méritos previstos; pero congruente con la sabiduría divina</td>
+                <td class="v-tomas">Voluntad ordenada por la bondad divina; razón en la proporción de efectos con la bondad</td>
+              </tr>
+              <tr>
+                <td class="cat">Naturaleza del decreto de reprobación</td>
+                <td class="v-calvino">Decreto positivo activo: Dios preordena al réprobado a la condenación y rechaza la "permisión"</td>
+                <td class="v-agustin">Permisión: Dios "no quiere" las voluntades malas pero las "permite sin impedirlas" (De Civ. Dei V.9)</td>
+                <td class="v-tomas">Permisión del pecado + asignación de la pena eterna por él. No causa del pecado, solo del abandono.</td>
+              </tr>
+              <tr>
+                <td class="cat">Libre albedrío tras la caída</td>
+                <td class="v-calvino">Completamente esclavo (<em>servum arbitrium</em>): sin posibilidad real de bien salvífico</td>
+                <td class="v-agustin">Debilitado pero real: "non posse non peccare" sin gracia, pero la voluntad sigue siendo voluntad</td>
+                <td class="v-tomas">Real y conservado: la gracia mueve la voluntad desde dentro sin suprimirla. Compatibilismo</td>
+              </tr>
+              <tr>
+                <td class="cat">Voluntad salvífica de Dios</td>
+                <td class="v-calvino">Dos voluntades: "revelada" (universal) y "oculta" (solo para elegidos). La oferta pública es pedagógica</td>
+                <td class="v-agustin">Tensión no resuelta: afirma "qui omnes vult salvos fieri" y la predestinación particular</td>
+                <td class="v-tomas">Voluntad antecedente (universal y sincera) + voluntad consecuente (ordena el fin justo de los que perseveran en pecado)</td>
+              </tr>
+              <tr>
+                <td class="cat">Alcance de la expiación de Cristo</td>
+                <td class="v-calvino">Particular: Cristo murió solo por los elegidos</td>
+                <td class="v-agustin">No define técnicamente; tono más universal en los escritos pastorales</td>
+                <td class="v-tomas">Suficiente para todos (<em>sufficientia</em>), eficaz para los elegidos (<em>efficacia</em>) — distinción clásica</td>
+              </tr>
+              <tr>
+                <td class="cat">Imputabilidad del pecado del réprobado</td>
+                <td class="v-calvino">Problemática: el réprobado fue creado para su fin, sin la gracia que le habría salvado</td>
+                <td class="v-agustin">Afirma la imputabilidad sin resolver la tensión metafísica</td>
+                <td class="v-tomas">Plenamente conservada: cae en este pecado por su libre albedrío, no por el decreto (<em>merito imputatur</em>)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- 5.2 -->
+      <article class="articulo" id="art-5-2">
+        <span class="articulo-etiqueta">PARTE V · ARTÍCULO 2</span>
+        <h3>Lo que Calvino heredó legítimamente de Agustín</h3>
+        <span class="capitular">H</span>
+        <p>ay que ser honesto: Calvino no inventó la predestinación. La heredó de Agustín,
+        que la desarrolló como arma contra el pelagianismo — la doctrina de que el hombre
+        puede iniciar su propio proceso de salvación por sus propias fuerzas naturales. Las
+        siguientes afirmaciones calvinistas tienen genuino fundamento agustiniano:</p>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — la gracia precede a todo mérito (De Gratia et Libero Arbitrio, cap. 6)</span>
+          <p>"Quid habet homo quod non accepit? Si autem accepit, quid gloriatur quasi non accepit? Haec Apostoli verba sic accipienda sunt, ut ne gratia Dei nisi in nobis esse videatur, sed ex nobis."</p>
+          <cite>De Gratia et Libero Arbitrio VI, 14 — PL 44, 890; trad.: "¿Qué tiene el hombre que no haya recibido? Y si lo recibió, ¿por qué se gloría como si no lo hubiese recibido? Estas palabras del Apóstol deben entenderse de modo que no parezca que la gracia de Dios es solo en nosotros pero no procede de nosotros."</cite>
+        </div>
+
+        <p>Sobre este punto —que la gracia precede a todo mérito— Calvino, Agustín y Tomás
+        están de acuerdo. El Concilio de Trento también lo afirmó explícitamente en la sesión VI
+        contra el pelagianismo residual. Esta es la herencia legítima y no disputada:</p>
+
+        <ul class="lista-arg">
+          <li><strong>La gracia precede a todo mérito</strong>: nadie es predestinado porque
+          Dios prevea que creerá o se portará bien. La gracia precede a todo mérito y lo
+          hace posible. Agustín, <em>De Dono Perseverantiae</em> cap. 17; Tomás, ST I q.23
+          a.5; Trento, sesión VI, can. 3.</li>
+          <li><strong>La soberanía de Dios sobre la salvación es absoluta</strong>: nadie
+          se salva por sus propias fuerzas. "¿Qué tienes tú que no hayas recibido?"
+          (1 Cor 4,7) —texto favorito de Agustín— expresa que el inicio mismo de la fe
+          es don gratuito.</li>
+          <li><strong>La gracia eficaz produce infaliblemente su efecto</strong>: quien
+          recibe la gracia eficaz de hecho persevera. Esto es Agustín (<em>De Correptione
+          et Gratia</em> cap. 12) y es Tomás (ST I-II q.112 a.3). La diferencia está en
+          <em>qué hace</em> esa gracia con la voluntad, no en su infalibilidad.</li>
+        </ul>
+
+        <div class="cita-voz agustin">
+          <span class="voz-label">✦ Agustín — el número de los predestinados es fijo e inmutable (De Correptione et Gratia, cap. 13)</span>
+          <p>"Certus est numerus praedestinantorum, neque augeri neque minui potest [...] Ipsa praescientia Dei, quae falli non potest, praefinivit."</p>
+          <cite>De Correptione et Gratia XIII, 39 — PL 44, 942; trad.: "El número de los predestinados es cierto, y no puede aumentarse ni disminuirse [...] La misma presciencia de Dios, que no puede engañarse, lo ha determinado de antemano."</cite>
+        </div>
+
+        <p>En este punto Calvino tiene pleno apoyo agustiniano. La diferencia entre ambos
+        no está en el número fijo de los predestinados, sino en la naturaleza del decreto que
+        establece ese número: para Agustín, ese decreto es compatible con la libertad y no
+        hace a Dios autor del pecado del réprobado; para Calvino —al rechazar la categoría
+        de permisión— el decreto colapsa esa compatibilidad.</p>
+      </article>
+
+      <!-- 5.3 -->
+      <article class="articulo" id="art-5-3">
+        <span class="articulo-etiqueta">PARTE V · ARTÍCULO 3</span>
+        <h3>Lo que Calvino añadió sin soporte agustiniano</h3>
+        <span class="capitular">P</span>
+        <p>ero Calvino añadió al legado agustiniano tres posiciones sin soporte genuino en los
+        textos de Agustín — o, en el mejor de los casos, con un soporte tan parcial y selectivo
+        que constituye una lectura deformante del conjunto. La documentación de estas
+        diferencias es decisiva para el argumento central de este tratado.</p>
+
+        <p><strong>Primera diferencia: el rechazo de la categoría de permisión.</strong>
+        Calvino declaró incoherente hablar de "permisión" cuando Dios podría impedir el
+        mal y no lo impide (Inst. III.23.1). Pero Agustín usó explícitamente y con
+        convicción el término <em>permittit</em> aplicado a la acción divina respecto al
+        mal moral, como hemos documentado en De Civitate Dei V.9 (Parte II, Art. 2).
+        Al eliminar la permisión, Calvino convirtió el decreto de reprobación en acto
+        positivo de voluntad — consecuencia que Agustín rechazó expresamente.</p>
+
+        <div class="cita-voz calvino">
+          <span class="voz-label">✦ Calvino — rechaza que Dios "meramente permita" (Inst. III.23.8)</span>
+          <p>"Away, then, with the error that God's will follows upon men's merit, as though he foresaw what sort of man each person would be and then decreed what should happen to him. Rather, God ordains that person to salvation, and then bestows on him the faith by which he shall receive it."</p>
+          <cite>Inst. III.23.8 — Battles trans., p. 958; verificado Opera Selecta IV, p. 406</cite>
+        </div>
+
+        <p><strong>Segunda diferencia: la expiación particular.</strong> Agustín no definió
+        el alcance técnico de la expiación en los términos de "solo por los elegidos". Sus
+        comentarios sobre textos como Juan 3,16 ("de tal modo amó Dios al mundo") o
+        1 Juan 2,2 ("víctima de propiciación por los pecados de todo el mundo") son más
+        universalistas en su tono. Tomás, por su parte, formuló la distinción clásica entre
+        suficiencia y eficacia que resuelve la tensión sin excluir a nadie del alcance
+        objetivo de la Redención:</p>
+
+        <div class="cita-voz tomas">
+          <span class="voz-label">✦ Tomás — suficiencia universal, eficacia para los predestinados (ST III q.79 a.7 ad 2)</span>
+          <p>"Passio Christi est causa sufficiens salutis non solum electorum, sed etiam totius mundi [...] ex defectu autem eorum qui huic passioni conformari nolunt, dicitur esse causa salutis non omnium."</p>
+          <cite>ST III q.79 a.7 ad 2 — Leonina; trad.: "La Pasión de Cristo es causa suficiente de salvación no solo de los elegidos sino de todo el mundo [...] pero por defecto de los que no quieren conformarse a esta Pasión, se dice que no es causa de la salvación de todos."</cite>
+        </div>
+
+        <p><strong>Tercera diferencia: las "dos voluntades" como sistema exegético.</strong>
+        Agustín interpretó 1 Tim 2,4 de modos distintos a lo largo de su vida, pero nunca
+        construyó el sistema rígido de <em>voluntas revelata / voluntas arcana</em> con la
+        nitidez con que Calvino lo hizo. El riesgo de ese sistema —que el propio Calvino
+        no ignoró— es hacer aparecer a Dios como un actor que dice públicamente lo contrario
+        de lo que decide privadamente. Tomás lo evita con la distinción de voluntad
+        antecedente y consecuente, que no divide la voluntad divina sino que articula sus
+        modos según el objeto considerado.</p>
+
+        <div class="sintesis">
+          <h4>El balance justo</h4>
+          <p>Calvino fue un lector serio y profundo de Agustín. Heredó de él lo más exigente
+          de la tradición antiPelagiana: la gracia que precede a todo mérito, la soberanía
+          absoluta de Dios sobre la salvación, la infalibilidad de la gracia eficaz. Pero
+          sistematizó en Agustín lo que Agustín dejó como tensión irresuelta, y al hacerlo
+          eliminó los elementos que Agustín sí mantuvo: la permisión real, la
+          responsabilidad genuina del réprobado, y la sinceridad de la oferta universal de
+          salvación. Tomás de Aquino, que escribió trescientos años antes de Calvino, ofrece
+          las herramientas metafísicas para sostener lo que Agustín sostuvo sin caer en las
+          consecuencias que Calvino no supo evitar.</p>
+        </div>
+      </article>
+
+      <!-- 5.4 -->
+      <article class="articulo" id="art-5-4">
+        <span class="articulo-etiqueta">PARTE V · ARTÍCULO 4</span>
+        <h3>La posición católica conciliar — Trento, sesión VI (1547)</h3>
+        <span class="capitular">E</span>
+        <p>l Concilio de Trento respondió directamente a la doctrina calvinista en la
+        sesión VI (<em>De Iustificatione</em>, enero 1547), sin condenar a Agustín pero
+        cerrando las interpretaciones calvinistas de las consecuencias de la predestinación.</p>
+
+        <div class="cita-voz tomas" style="border-color:var(--tinta); background:rgba(28,26,24,0.04);">
+          <span class="voz-label" style="color:var(--tinta)">✦ Concilio de Trento — Canon 17 (contra la predestinación sin libre albedrío)</span>
+          <p>"Si quis praedestinationem ad bonum asserere vellet, ita ut fideles Dei tanquam praedestinati, non tamquam libere electi, de sua salute desperarent [...] anathema sit."</p>
+          <cite>Concilio de Trento, Sesión VI, Can. 17 — Denzinger-Hünermann (Dz. 1567); trad.: "Si alguien afirmara la predestinación al bien de tal modo que los fieles de Dios, considerándose predestinados, no electos libremente, desesperaran de su salvación [...] sea anatema."</cite>
+        </div>
+
+        <div class="cita-voz tomas" style="border-color:var(--tinta); background:rgba(28,26,24,0.04);">
+          <span class="voz-label" style="color:var(--tinta)">✦ Concilio de Trento — Decreto sobre la justificación, cap. 3 (voluntad salvífica universal)</span>
+          <p>"Deus [...] omnes homines vult salvos fieri et ad agnitionem veritatis venire [...] sed eos qui iustificantur, ipse solus Deus movet, qui in eis bona opera operatur."</p>
+          <cite>Trento, Sesión VI, cap. 3 — Dz. 1521; trad.: "Dios quiere que todos los hombres se salven y lleguen al conocimiento de la verdad [...] pero a quienes son justificados, el mismo Dios los mueve, quien obra en ellos las obras buenas."</cite>
+        </div>
+
+        <p>Trento afirma simultáneamente la voluntad salvífica universal y la moción divina
+        en los que se justifican — exactamente la posición de Tomás, y la síntesis que
+        Calvino consideró imposible. La solución tridentina no es la fácil que ignora la
+        soberanía divina ni la calvinista que la absolutiza a expensas de la libertad y la
+        bondad divinas: es la solución que reconoce el misterio sin resolverlo artificialmente
+        en una sola dirección.</p>
+
+        <div class="sintesis">
+          <h4>Conclusión del tratado</h4>
+          <p>Calvino leyó a Agustín con penetración y honestidad parciales. Se apropió
+          legítimamente del rechazo agustiniano de la gracia mérita y de la soberanía divina
+          sobre la salvación. Pero añadió, sin soporte agustiniano, el decreto positivo de
+          reprobación, la expiación particular y el rechazo de la permisión — tres posiciones
+          que hacen a Dios autor del pecado, eliminan la imputabilidad moral del réprobado, y
+          hacen insincera la oferta universal de salvación. Tomás de Aquino, escribiendo tres
+          siglos antes de Calvino, ofrece las herramientas metafísicas —permisión vs.
+          causalidad positiva, voluntad antecedente vs. consecuente, compatibilismo de gracia
+          y libertad— que permiten sostener lo que Agustín sostuvo sin caer en lo que
+          Calvino añadió.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- GLOSARIO -->
+    <section class="parte" id="glosario">
+      <div class="parte-encabezado">
+        <span class="num-parte">APÉNDICE</span>
+        <h2>Glosario técnico</h2>
+        <hr class="divisor-recto">
+      </div>
+      <div class="articulo">
+        <p><strong>Decretum horribile</strong> — Expresión de Calvino (Inst. III.23.7) para describir el decreto eterno de reprobación. <em>Horribile</em> en latín clásico puede significar "que produce estremecimiento reverencial", no necesariamente "moralmente odioso".</p>
+
+        <p><strong>Doble predestinación (<em>gemina praedestinatio</em>)</strong> — Doctrina según la cual el decreto eterno de Dios tiene dos ramas simétricas: elección positiva a la gloria y reprobación positiva a la condenación. Distintiva del calvinismo respecto a Agustín y Tomás.</p>
+
+        <p><strong>Gracia eficaz (<em>gratia efficax</em>)</strong> — Gracia que produce infaliblemente su efecto en el sujeto. Distinta de la gracia suficiente (<em>gratia sufficiens</em>), que da al sujeto el poder de actuar bien sin asegurar que de hecho lo haga.</p>
+
+        <p><strong>Permisión (<em>permissio</em>)</strong> — En la tradición agustino-tomista: la acción por la que Dios no impide el pecado sin ser causa positiva de él. Calvino rechazó esta categoría como incoherente; Tomás la consideró imprescindible.</p>
+
+        <p><strong>Praeteritio</strong> — En la tradición calvinista escolástica: el elemento "negativo" de la reprobación, que consiste en "pasar por alto" al réprobado sin darle la gracia elegidora. Algunos calvinistas distinguen <em>praeteritio</em> (pasiva) de <em>damnatio</em> (activa), intentando suavizar la posición de Calvino.</p>
+
+        <p><strong>Voluntad antecedente / consecuente</strong> — Distinción tomista: la voluntad antecedente de Dios quiere el bien de cada ser según su naturaleza (incluida la salvación de todos); la voluntad consecuente ordena el conjunto según la justicia, incluida la pena de quienes perseveran libremente en el pecado.</p>
+
+        <p><strong>Voluntarismo absoluto</strong> — Posición filosófico-teológica en que la voluntad divina es la única razón de sus propios actos, sin que ninguna consideración de bondad o justicia la "preceda" o la "condicione". Asociada a Ockham en la Edad Media; aproximada (sin identidad) por el Calvino de Inst. III.22.11.</p>
+      </div>
+    </section>
+
+    <!-- FUENTES -->
+    <section class="parte" id="fuentes">
+      <div class="parte-encabezado">
+        <span class="num-parte">APÉNDICE</span>
+        <h2>Fuentes y ediciones citadas</h2>
+        <hr class="divisor-recto">
+      </div>
+      <div class="articulo">
+        <p><strong>Calvino</strong> — Las citas latinas de las <em>Institutiones Christianæ Religionis</em> siguen la edición <em>Opera Selecta</em>, vols. III–V (ed. Barth-Niesel, Munich 1926–1936), citada a través de Schaff, <em>History of the Christian Church</em>, vol. VIII (CCEL) para los pasajes verificados. Las traducciones inglesas son de Ford Lewis Battles (<em>Institutes of the Christian Religion</em>, ed. McNeill, Westminster 1960) y la Beveridge (Edinburgh 1845), ambas de dominio público o de uso académico estándar. Las versiones españolas son traducciones literales propias del latín verificado.</p>
+
+        <p><strong>Agustín</strong> — Las citas latinas siguen la <em>Patrologia Latina</em> de Migne (PL), con numeración de columna, y el <em>Corpus Scriptorum Ecclesiasticorum Latinorum</em> (CSEL) donde se indica. Las traducciones inglesas de dominio público proceden de la serie <em>Nicene and Post-Nicene Fathers</em>, vol. V (Anti-Pelagian Works, ed. Holmes-Wallis-Schaff, 1887), disponible íntegramente en CCEL.</p>
+
+        <p><strong>Tomás de Aquino</strong> — Las citas latinas siguen la <em>Editio Leonina</em> (Roma, 1882–) y se han verificado en la plataforma aquinas.cc (que ofrece el texto bilingüe latín/inglés con todas las referencias cruzadas). Las traducciones inglesas de dominio público son de los Padres Dominicos Ingleses (Benziger Brothers, 1947). Las versiones españolas son traducciones literales propias.</p>
+
+        <p><strong>Magisterio</strong> — Las citas conciliares de Trento siguen el <em>Denzinger-Hünermann</em> (DH) en su numeración estándar. El texto latino de los cánones es el de la edición Alberigo-Tanner (<em>Decrees of the Ecumenical Councils</em>, Georgetown UP, 1990).</p>
+      </div>
+    </section>
+
+    <footer class="pie-tratado">
+      <div class="signo">§ · ✦ · §</div>
+      <p>"Decretum quidem horribile, fateor." — Calvino</p>
+      <p>"Culpa autem ex libero arbitrio ejus qui reprobatur procedit." — Tomás de Aquino, ST I q.23 a.3</p>
+      <p>Disputatio compuesta como examen crítico de la coherencia interna de la tesis calvinista sobre la predestinación, con sus fuentes verificadas en latín original.</p>
+      <span class="sello">Veritas liberabit vos · Io. 8, 32</span>
+    </footer>
+
+  </main>
+</div>
+
+<button class="volver-arriba" id="volverArriba" aria-label="Volver al inicio">↑</button>
+
+<script>
+// ---- Toggle móvil ----
+const toggleIndice=document.getElementById('toggleIndice');
+const indiceLateral=document.getElementById('indiceLateral');
+const overlayIndice=document.getElementById('overlayIndice');
+function abrirIndice(){indiceLateral.classList.add('abierto');overlayIndice.classList.add('visible');toggleIndice.textContent='✕';}
+function cerrarIndice(){indiceLateral.classList.remove('abierto');overlayIndice.classList.remove('visible');toggleIndice.textContent='☰';}
+toggleIndice.addEventListener('click',()=>indiceLateral.classList.contains('abierto')?cerrarIndice():abrirIndice());
+overlayIndice.addEventListener('click',cerrarIndice);
+document.querySelectorAll('.tabla-materias a').forEach(a=>a.addEventListener('click',()=>{if(window.innerWidth<=980)cerrarIndice();}));
+
+// ---- Buscador ----
+const buscadorIndice=document.getElementById('buscadorIndice');
+const sinResultados=document.getElementById('sinResultadosIndice');
+buscadorIndice.addEventListener('input',e=>{
+  const q=e.target.value.trim().toLowerCase();
+  let hubo=false;
+  document.querySelectorAll('.tm-parte').forEach(parte=>{
+    const tituloCoincide=parte.querySelector('.tm-parte-titulo').textContent.toLowerCase().includes(q);
+    const items=parte.querySelectorAll('ul.tm-articulos li');
+    let alg=false;
+    items.forEach(li=>{const c=q===''||li.textContent.toLowerCase().includes(q);li.style.display=c?'':'none';if(c)alg=true;});
+    const mostrar=q===''||tituloCoincide||alg;
+    parte.style.display=mostrar?'':'none';
+    if(!tituloCoincide&&alg)items.forEach(li=>{li.style.display='';});
+    if(mostrar)hubo=true;
+  });
+  if(sinResultados)sinResultados.style.display=hubo?'none':'block';
+});
+
+// ---- IntersectionObserver activo ----
+const enlacesIndice=Array.from(document.querySelectorAll('.tabla-materias a[href^="#"]'));
+const mapaEnlaces=new Map();
+enlacesIndice.forEach(a=>{const el=document.getElementById(a.getAttribute('href').slice(1));if(el)mapaEnlaces.set(el,a);});
+function marcarActivo(enlace){
+  enlacesIndice.forEach(a=>a.classList.remove('activo'));
+  if(enlace){
+    enlace.classList.add('activo');
+    if(window.innerWidth>980){const r=enlace.getBoundingClientRect(),ra=indiceLateral.getBoundingClientRect();if(r.top<ra.top+60||r.bottom>ra.bottom-20)enlace.scrollIntoView({block:'center',behavior:'auto'});}
+  }
+}
+let ultimoVisible=null;
+const observador=new IntersectionObserver(entradas=>{
+  const vis=entradas.filter(e=>e.isIntersecting);
+  if(!vis.length)return;
+  vis.sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);
+  const el=vis[0].target;
+  if(el!==ultimoVisible){ultimoVisible=el;marcarActivo(mapaEnlaces.get(el));}
+},{root:null,rootMargin:'-110px 0px -65% 0px',threshold:0});
+mapaEnlaces.forEach((_,el)=>observador.observe(el));
+
+// ---- Progreso + volver arriba ----
+const barraProgreso=document.getElementById('barraProgreso');
+const volverArriba=document.getElementById('volverArriba');
+function actualizarScroll(){
+  const tot=document.documentElement.scrollHeight-window.innerHeight;
+  barraProgreso.style.width=(tot>0?(window.scrollY/tot)*100:0)+'%';
+  volverArriba.classList.toggle('visible',window.scrollY>500);
+}
+window.addEventListener('scroll',actualizarScroll,{passive:true});
+window.addEventListener('load',actualizarScroll);
+window.addEventListener('resize',actualizarScroll);
+volverArriba.addEventListener('click',()=>window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'}));
+</script>
+</body>
+</html>

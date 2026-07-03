@@ -1,0 +1,2639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Purgatorio · Tratado Apologético</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+SC:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pergamino:#efe6d2;
+  --pergamino-osc:#e4d8ba;
+  --pergamino-mas-osc:#d8c89e;
+  --tinta:#332416;
+  --tinta-suave:#5a4530;
+  --bermellon:#8c2a22;
+  --bermellon-suave:#a8453a;
+  --oro:#9c7a35;
+  --oro-claro:#c4a45e;
+  --verde-sello:#3d4f33;
+  --sombra: 0 8px 30px rgba(51,36,22,0.18);
+  --serif-display:'Cormorant Garamond', serif;
+  --serif-sc:'Cormorant SC', serif;
+  --serif-body:'EB Garamond', serif;
+  --serif-quote:'Spectral', serif;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:
+    radial-gradient(ellipse at top left, rgba(156,122,53,0.06), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(140,42,34,0.05), transparent 55%),
+    var(--pergamino);
+  color:var(--tinta);
+  font-family:var(--serif-body);
+  font-size:18px;
+  line-height:1.75;
+  position:relative;
+  min-height:100vh;
+}
+
+/* textura sutil de pergamino vía ruido SVG */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  opacity:0.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  z-index:1;
+  mix-blend-mode:multiply;
+}
+
+a{color:var(--bermellon); text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+::selection{background:var(--oro-claro); color:var(--tinta);}
+
+:focus-visible{
+  outline:2px solid var(--bermellon);
+  outline-offset:3px;
+}
+
+/* ============ LAYOUT GENERAL ============ */
+
+.envoltura{
+  display:flex;
+  max-width:1400px;
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+}
+
+/* ============ ÍNDICE LATERAL ============ */
+
+.indice-toggle{
+  display:none;
+  position:fixed;
+  top:18px; left:18px;
+  z-index:50;
+  width:48px; height:48px;
+  background:var(--tinta);
+  color:var(--pergamino);
+  border:1px solid var(--oro);
+  border-radius:3px;
+  font-size:20px;
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  box-shadow:var(--sombra);
+}
+
+aside.indice{
+  width:340px;
+  flex-shrink:0;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  background:linear-gradient(180deg, #2b2014, #241b11 60%, #1f170e);
+  color:var(--pergamino-osc);
+  padding:34px 0 60px;
+  border-right:3px double var(--oro);
+  scrollbar-width:thin;
+  scrollbar-color:var(--oro) #241b11;
+}
+aside.indice::-webkit-scrollbar{width:8px;}
+aside.indice::-webkit-scrollbar-thumb{background:var(--oro); border-radius:4px;}
+aside.indice::-webkit-scrollbar-track{background:#241b11;}
+
+.indice-cabecera{
+  padding:0 28px 22px;
+  border-bottom:1px solid rgba(196,164,94,0.35);
+  margin-bottom:18px;
+  text-align:center;
+}
+.indice-cabecera .marca{
+  font-family:var(--serif-sc);
+  letter-spacing:0.14em;
+  color:var(--oro-claro);
+  font-size:13px;
+  display:block;
+  margin-bottom:6px;
+}
+.indice-cabecera h2{
+  font-family:var(--serif-display);
+  font-weight:600;
+  font-style:italic;
+  font-size:26px;
+  color:var(--pergamino);
+}
+.indice-cabecera .sub{
+  display:block;
+  font-family:var(--serif-quote);
+  font-size:12px;
+  color:rgba(239,230,210,0.55);
+  margin-top:8px;
+  letter-spacing:0.04em;
+}
+
+.buscador-indice{
+  padding:0 24px 18px;
+}
+.buscador-indice input{
+  width:100%;
+  background:rgba(239,230,210,0.07);
+  border:1px solid rgba(196,164,94,0.4);
+  border-radius:3px;
+  color:var(--pergamino);
+  padding:9px 12px;
+  font-family:var(--serif-body);
+  font-size:14.5px;
+}
+.buscador-indice input::placeholder{color:rgba(239,230,210,0.4); font-style:italic;}
+
+nav.tabla-materias{
+  padding:0 14px;
+}
+
+.tm-parte{
+  margin-bottom:4px;
+}
+.tm-parte > a.tm-parte-titulo{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  padding:10px 14px;
+  font-family:var(--serif-sc);
+  font-size:14.5px;
+  letter-spacing:0.05em;
+  color:var(--oro-claro);
+  border-radius:3px;
+  cursor:pointer;
+}
+.tm-parte > a.tm-parte-titulo:hover{background:rgba(196,164,94,0.12); text-decoration:none;}
+.tm-parte > a.tm-parte-titulo.activo{background:rgba(140,42,34,0.3); color:var(--pergamino);}
+.tm-parte-num{color:var(--bermellon-suave); font-family:var(--serif-display); font-style:italic; font-size:16px; flex-shrink:0;}
+
+ul.tm-articulos{
+  list-style:none;
+  margin:0 0 10px 18px;
+  border-left:1px solid rgba(196,164,94,0.25);
+  padding-left:14px;
+}
+ul.tm-articulos li a{
+  display:block;
+  padding:6px 10px;
+  font-size:14px;
+  color:rgba(239,230,210,0.78);
+  border-radius:3px;
+  line-height:1.4;
+}
+ul.tm-articulos li a:hover, ul.tm-articulos li a.activo{
+  background:rgba(140,42,34,0.25);
+  color:var(--pergamino);
+  text-decoration:none;
+}
+ul.tm-articulos li a.activo{border-left:2px solid var(--bermellon-suave); margin-left:-1px; padding-left:9px;}
+
+.indice-pie{
+  margin-top:26px;
+  padding:18px 28px 0;
+  border-top:1px solid rgba(196,164,94,0.25);
+  font-family:var(--serif-quote);
+  font-size:12px;
+  color:rgba(239,230,210,0.45);
+  text-align:center;
+  font-style:italic;
+}
+
+/* ============ CONTENIDO PRINCIPAL ============ */
+
+main{
+  flex:1;
+  min-width:0;
+  padding:0 0 120px;
+}
+
+.portada{
+  position:relative;
+  padding:110px 80px 90px;
+  text-align:center;
+  border-bottom:3px double var(--oro);
+  overflow:hidden;
+}
+.portada::after{
+  content:"";
+  position:absolute; inset:18px;
+  border:1px solid rgba(156,122,53,0.4);
+  pointer-events:none;
+}
+.portada .orla-superior{
+  font-family:var(--serif-display);
+  font-style:italic;
+  color:var(--oro);
+  font-size:15px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+}
+.portada .crismon{
+  font-size:40px;
+  color:var(--bermellon);
+  margin-bottom:24px;
+  letter-spacing:0.3em;
+}
+.portada h1{
+  font-family:var(--serif-display);
+  font-weight:700;
+  font-style:italic;
+  font-size:clamp(44px,7vw,84px);
+  line-height:1.05;
+  color:var(--tinta);
+  text-shadow:1px 1px 0 rgba(156,122,53,0.25);
+}
+.portada h1 small{
+  display:block;
+  font-family:var(--serif-sc);
+  font-style:normal;
+  font-weight:600;
+  font-size:clamp(16px,2vw,22px);
+  letter-spacing:0.22em;
+  color:var(--bermellon);
+  margin-top:18px;
+}
+.portada .subtitulo{
+  max-width:680px;
+  margin:34px auto 0;
+  font-family:var(--serif-quote);
+  font-style:italic;
+  font-size:20px;
+  color:var(--tinta-suave);
+  line-height:1.6;
+}
+.portada .lema{
+  margin-top:46px;
+  font-family:var(--serif-display);
+  font-size:19px;
+  font-style:italic;
+  color:var(--tinta);
+}
+.portada .lema span{display:block; font-family:var(--serif-sc); font-style:normal; font-size:12px; letter-spacing:0.12em; color:var(--oro); margin-top:8px;}
+
+.estadisticas-portada{
+  display:flex;
+  justify-content:center;
+  gap:54px;
+  margin-top:54px;
+  flex-wrap:wrap;
+}
+.estadisticas-portada div{text-align:center;}
+.estadisticas-portada .num{
+  font-family:var(--serif-display);
+  font-weight:700;
+  font-size:38px;
+  color:var(--bermellon);
+  display:block;
+}
+.estadisticas-portada .lbl{
+  font-family:var(--serif-sc);
+  font-size:11.5px;
+  letter-spacing:0.12em;
+  color:var(--tinta-suave);
+}
+
+/* ============ SECCIONES / PARTES ============ */
+
+.parte{
+  padding:70px 80px 10px;
+  scroll-margin-top:0px;
+}
+.parte-encabezado{
+  text-align:center;
+  margin-bottom:50px;
+  position:relative;
+}
+.parte-encabezado .numero-romano{
+  font-family:var(--serif-display);
+  font-style:italic;
+  font-weight:600;
+  font-size:17px;
+  color:var(--oro);
+  letter-spacing:0.1em;
+}
+.parte-encabezado h2{
+  font-family:var(--serif-display);
+  font-weight:700;
+  font-size:clamp(32px,4vw,50px);
+  margin-top:6px;
+  color:var(--tinta);
+}
+.parte-encabezado .descripcion-parte{
+  max-width:620px;
+  margin:16px auto 0;
+  font-family:var(--serif-quote);
+  font-style:italic;
+  color:var(--tinta-suave);
+  font-size:16.5px;
+}
+.divisor-orna{
+  text-align:center;
+  color:var(--oro);
+  font-size:20px;
+  letter-spacing:18px;
+  margin:18px 0 0;
+}
+
+/* ============ ARTÍCULOS ============ */
+
+.articulo{
+  max-width:760px;
+  margin:0 auto 64px;
+  scroll-margin-top:90px;
+  background:rgba(255,253,246,0.4);
+  border:1px solid rgba(156,122,53,0.3);
+  border-radius:2px;
+  padding:44px 52px;
+  box-shadow:var(--sombra);
+  position:relative;
+}
+.articulo::before{
+  content:"";
+  position:absolute;
+  top:8px; left:8px; right:8px; bottom:8px;
+  border:1px solid rgba(156,122,53,0.18);
+  pointer-events:none;
+}
+
+.articulo-etiqueta{
+  font-family:var(--serif-sc);
+  font-size:12.5px;
+  letter-spacing:0.12em;
+  color:var(--bermellon);
+  margin-bottom:6px;
+  display:block;
+}
+.articulo h3{
+  font-family:var(--serif-display);
+  font-weight:600;
+  font-style:italic;
+  font-size:clamp(24px,3vw,32px);
+  color:var(--tinta);
+  margin-bottom:24px;
+  line-height:1.25;
+}
+
+.capitular{
+  float:left;
+  font-family:var(--serif-display);
+  font-weight:700;
+  font-size:74px;
+  line-height:0.78;
+  color:var(--bermellon);
+  padding:6px 10px 0 0;
+  margin-top:2px;
+}
+
+.articulo p{
+  margin-bottom:16px;
+  text-align:justify;
+  hyphens:auto;
+  color:var(--tinta);
+}
+.articulo p:first-of-type::first-letter{
+  /* fallback, capitular real se inserta como span */
+}
+
+.articulo strong{color:var(--bermellon-suave); font-weight:600;}
+.articulo em{font-style:italic; color:var(--tinta-suave);}
+
+/* citas bíblicas */
+.cita-biblica{
+  margin:26px 0;
+  padding:20px 24px 20px 28px;
+  background:rgba(140,42,34,0.05);
+  border-left:4px solid var(--bermellon);
+  border-radius:0 3px 3px 0;
+  font-family:var(--serif-quote);
+}
+.cita-biblica p{
+  font-style:italic;
+  font-size:17.5px;
+  color:var(--tinta);
+  margin-bottom:8px;
+  text-align:left;
+}
+.cita-biblica cite{
+  display:block;
+  font-style:normal;
+  font-family:var(--serif-sc);
+  font-size:12.5px;
+  letter-spacing:0.08em;
+  color:var(--bermellon);
+  text-align:right;
+}
+
+/* citas patrísticas — estilo "sello/cinta" */
+.cita-padre{
+  margin:30px 0;
+  display:flex;
+  gap:18px;
+  background:linear-gradient(135deg, #fffdf6, #f6eed7);
+  border:1px solid var(--oro-claro);
+  border-radius:4px;
+  padding:22px 26px;
+  box-shadow:0 4px 14px rgba(156,122,53,0.18);
+  position:relative;
+}
+.cita-padre::before{
+  content:"";
+  position:absolute;
+  top:-1px; left:22px;
+  width:46px; height:14px;
+  background:var(--bermellon);
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 70%,0 100%);
+}
+.sello-padre{
+  flex-shrink:0;
+  width:62px; height:62px;
+  border-radius:50%;
+  border:2px solid var(--oro);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif-sc);
+  font-size:11px;
+  color:var(--oro);
+  text-align:center;
+  line-height:1.15;
+  background:var(--pergamino);
+}
+.cita-padre-texto p{
+  font-family:var(--serif-quote);
+  font-style:italic;
+  font-size:16px;
+  color:var(--tinta-suave);
+  text-align:left;
+  margin-bottom:6px;
+}
+.cita-padre-texto p:nth-of-type(2){
+  font-style:normal;
+  font-size:16.5px;
+  color:var(--tinta);
+}
+.cita-padre-texto .fuente-padre{
+  font-family:var(--serif-sc);
+  font-size:12px;
+  letter-spacing:0.06em;
+  color:var(--tinta-suave);
+  font-style:normal;
+}
+.fuente-padre b{color:var(--bermellon-suave);}
+
+/* silogismos */
+.silogismo{
+  margin:30px 0;
+  border:1.5px solid var(--tinta);
+  border-radius:3px;
+  overflow:hidden;
+}
+.silogismo-cabecera{
+  background:var(--tinta);
+  color:var(--pergamino);
+  padding:10px 22px;
+  font-family:var(--serif-sc);
+  font-size:13px;
+  letter-spacing:0.1em;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.silogismo-cabecera .forma{color:var(--oro-claro); font-family:var(--serif-quote); font-style:italic; letter-spacing:0; font-size:12.5px;}
+.silogismo-cuerpo{
+  padding:22px 26px 24px;
+  background:rgba(255,253,246,0.6);
+}
+.silogismo-linea{
+  display:grid;
+  grid-template-columns:90px 1fr;
+  gap:14px;
+  padding:7px 0;
+  font-family:var(--serif-quote);
+  font-size:16px;
+  align-items:baseline;
+}
+.silogismo-linea .etiqueta{
+  font-family:var(--serif-sc);
+  font-size:12px;
+  letter-spacing:0.06em;
+  color:var(--bermellon);
+  text-align:right;
+  padding-top:2px;
+}
+.silogismo-linea.conclusion{
+  border-top:1px solid var(--oro);
+  margin-top:6px;
+  padding-top:14px;
+  font-weight:600;
+}
+.silogismo-linea.conclusion .etiqueta{color:var(--verde-sello);}
+
+/* objeciones estilo escolástico */
+.objeciones{
+  margin:30px 0;
+  background:rgba(51,36,22,0.03);
+  border:1px dashed rgba(140,42,34,0.4);
+  border-radius:4px;
+  padding:24px 28px;
+}
+.objeciones > h4{
+  font-family:var(--serif-sc);
+  font-size:14px;
+  letter-spacing:0.08em;
+  color:var(--bermellon);
+  margin-bottom:14px;
+}
+.objecion{margin-bottom:18px;}
+.objecion:last-child{margin-bottom:0;}
+.objecion .num-obj{
+  font-family:var(--serif-display);
+  font-style:italic;
+  font-weight:700;
+  color:var(--bermellon);
+  margin-right:6px;
+}
+.objecion p{display:inline; text-align:left;}
+.respuesta-obj{
+  margin-top:6px;
+  padding-left:22px;
+  border-left:2px solid var(--verde-sello);
+}
+.respuesta-obj .etiqueta-resp{
+  font-family:var(--serif-sc);
+  font-size:11.5px;
+  letter-spacing:0.08em;
+  color:var(--verde-sello);
+  display:block;
+  margin-bottom:3px;
+}
+
+/* síntesis / recuadro final de artículo */
+.sintesis{
+  margin-top:30px;
+  background:var(--tinta);
+  color:var(--pergamino-osc);
+  border-radius:4px;
+  padding:22px 26px;
+}
+.sintesis h4{
+  font-family:var(--serif-sc);
+  font-size:12.5px;
+  letter-spacing:0.1em;
+  color:var(--oro-claro);
+  margin-bottom:8px;
+}
+.sintesis p{color:var(--pergamino-osc); text-align:left; margin-bottom:0; font-size:16px;}
+
+/* lista numerada de fundamentos */
+.lista-fundamentos{
+  margin:20px 0 20px 0;
+  list-style:none;
+  counter-reset:fund;
+}
+.lista-fundamentos li{
+  counter-increment:fund;
+  position:relative;
+  padding:8px 0 8px 38px;
+  text-align:left;
+}
+.lista-fundamentos li::before{
+  content:counter(fund, upper-roman);
+  position:absolute;
+  left:0; top:8px;
+  font-family:var(--serif-display);
+  font-style:italic;
+  font-weight:700;
+  color:var(--oro);
+  font-size:15px;
+  width:28px;
+}
+
+/* tabla comparativa Padres */
+.tabla-padres-envoltura{
+  overflow-x:auto;
+  margin:26px 0;
+  border:1px solid var(--oro);
+  border-radius:4px;
+}
+table.tabla-padres{
+  width:100%;
+  border-collapse:collapse;
+  font-family:var(--serif-quote);
+  font-size:15px;
+  min-width:600px;
+}
+table.tabla-padres thead{background:var(--tinta); color:var(--pergamino);}
+table.tabla-padres th{
+  padding:12px 16px;
+  text-align:left;
+  font-family:var(--serif-sc);
+  font-size:12px;
+  letter-spacing:0.06em;
+  font-weight:600;
+}
+table.tabla-padres td{
+  padding:13px 16px;
+  border-top:1px solid rgba(156,122,53,0.25);
+  vertical-align:top;
+}
+table.tabla-padres tbody tr:nth-child(even){background:rgba(156,122,53,0.06);}
+table.tabla-padres td.nombre-padre{font-weight:600; color:var(--bermellon-suave); white-space:nowrap;}
+
+/* objeción mayor estilo "video duda" */
+.duda-mayor{
+  text-align:center;
+  margin:46px auto;
+  max-width:600px;
+}
+.duda-mayor .etiqueta-duda{
+  font-family:var(--serif-sc);
+  font-size:13px;
+  letter-spacing:0.12em;
+  color:var(--bermellon);
+}
+.duda-mayor p{
+  font-family:var(--serif-display);
+  font-style:italic;
+  font-size:22px;
+  text-align:center;
+  color:var(--tinta-suave);
+  margin-top:8px;
+}
+
+/* ============ NOTAS AL PIE / GLOSARIO ============ */
+.glosario-termino{
+  border-bottom:1px dotted var(--bermellon);
+  cursor:help;
+}
+
+footer.pie-tratado{
+  text-align:center;
+  padding:60px 40px;
+  border-top:3px double var(--oro);
+  margin-top:40px;
+}
+footer.pie-tratado .crismon{font-size:26px; color:var(--bermellon); margin-bottom:14px;}
+footer.pie-tratado p{
+  font-family:var(--serif-quote);
+  font-style:italic;
+  color:var(--tinta-suave);
+  font-size:15.5px;
+  max-width:520px;
+  margin:0 auto 6px;
+}
+footer.pie-tratado .sello-final{
+  margin-top:18px;
+  font-family:var(--serif-sc);
+  font-size:11px;
+  letter-spacing:0.14em;
+  color:var(--oro);
+}
+
+/* botón volver arriba */
+.volver-arriba{
+  position:fixed;
+  bottom:26px; right:26px;
+  width:50px; height:50px;
+  border-radius:50%;
+  background:var(--tinta);
+  color:var(--oro-claro);
+  border:1px solid var(--oro);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:var(--sombra);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s ease, transform 0.3s ease;
+  z-index:40;
+}
+.volver-arriba.visible{opacity:1; pointer-events:auto;}
+.volver-arriba:hover{transform:translateY(-3px);}
+
+/* barra de progreso de lectura */
+.barra-progreso{
+  position:fixed;
+  top:0; left:0;
+  height:3px;
+  background:linear-gradient(90deg, var(--bermellon), var(--oro));
+  z-index:60;
+  width:0%;
+  transition:width 0.1s linear;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .volver-arriba, .barra-progreso{transition:none;}
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width:980px){
+  aside.indice{
+    position:fixed;
+    left:0; top:0;
+    height:100vh;
+    width:300px;
+    transform:translateX(-100%);
+    transition:transform 0.3s ease;
+    z-index:45;
+  }
+  aside.indice.abierto{transform:translateX(0);}
+  .indice-toggle{display:flex;}
+  .parte, .portada{padding-left:28px; padding-right:28px;}
+  .articulo{padding:32px 24px;}
+}
+
+@media (max-width:600px){
+  body{font-size:16.5px;}
+  .portada{padding:90px 22px 60px;}
+  .portada h1{font-size:38px;}
+  .estadisticas-portada{gap:30px;}
+  .silogismo-linea{grid-template-columns:70px 1fr; font-size:15px;}
+  .cita-padre{flex-direction:column;}
+  .articulo h3{font-size:23px;}
+  .capitular{font-size:58px;}
+}
+
+/* overlay para cerrar indice en movil */
+.overlay-indice{
+  display:none;
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.4);
+  z-index:44;
+}
+.overlay-indice.visible{display:block;}
+</style>
+</head>
+<body>
+
+<div class="barra-progreso" id="barraProgreso"></div>
+
+<button class="indice-toggle" id="toggleIndice" aria-label="Abrir índice">☰</button>
+<div class="overlay-indice" id="overlayIndice"></div>
+
+<div class="envoltura">
+
+  <!-- ============ ÍNDICE LATERAL ============ -->
+  <aside class="indice" id="indiceLateral">
+    <div class="indice-cabecera">
+      <span class="marca">✠ Tractatus Theologicus ✠</span>
+      <h2>De Purgatorio</h2>
+      <span class="sub">Defensa según la Escritura, los Padres y la recta razón</span>
+    </div>
+
+    <div class="buscador-indice">
+      <input type="text" id="buscadorIndice" placeholder="Buscar en el índice…" autocomplete="off">
+      <div id="sinResultadosIndice" style="display:none; margin-top:10px; font-family:var(--serif-quote); font-style:italic; font-size:12.5px; color:rgba(239,230,210,0.5); text-align:center;">Sin coincidencias</div>
+    </div>
+
+    <nav class="tabla-materias" id="tablaMaterias" aria-label="Índice del tratado">
+
+      <div class="tm-parte">
+        <a href="#proemio" class="tm-parte-titulo"><span class="tm-parte-num">—</span> Proemio</a>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-primera" class="tm-parte-titulo"><span class="tm-parte-num">I</span> El fundamento bíblico</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-1-1">Art. 1 — 2 Macabeos y la oración por los difuntos</a></li>
+          <li><a href="#art-1-2">Art. 2 — El "fuego que probará la obra" (1 Cor 3)</a></li>
+          <li><a href="#art-1-3">Art. 3 — El pecado que no se perdona "ni en este siglo ni en el venidero" (Mt 12)</a></li>
+          <li><a href="#art-1-4">Art. 4 — Mateo 5 y el último cuadrante</a></li>
+          <li><a href="#art-1-4b">Art. 5 — Lucas 12: el texto paralelo y su propia lógica</a></li>
+          <li><a href="#art-1-5">Art. 6 — Nada manchado entrará en la Jerusalén celeste (Ap 21)</a></li>
+          <li><a href="#art-1-6">Art. 7 — La purificación de los justos (Sab 3; 1 Pe 1)</a></li>
+          <li><a href="#art-1-8">Art. 8 — Zacarías 9,11: el pozo sin agua y los prisioneros</a></li>
+          <li><a href="#art-1-9">Art. 9 — Job 1,5 y la intercesión sacerdotal anticipatoria</a></li>
+          <li><a href="#art-1-10">Art. 10 — Malaquías 3,2-3: el fuego del refinador</a></li>
+          <li><a href="#art-1-11">Art. 11 — Ezequiel 22,18-22: la escoria en el crisol</a></li>
+          <li><a href="#art-1-12">Art. 12 — Mateo 18,34-35: el siervo y el verdugo</a></li>
+          <li><a href="#art-1-7">Art. 13 — "Espíritus en prisión" (1 Pe 3-4)</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-segunda" class="tm-parte-titulo"><span class="tm-parte-num">II</span> El testimonio de los Padres</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-2-1">Art. 1 — Tertuliano y la oblación anual por los difuntos</a></li>
+          <li><a href="#art-2-2">Art. 2 — San Cipriano de Cartago</a></li>
+          <li><a href="#art-2-3">Art. 3 — San Cirilo de Jerusalén y el Memento litúrgico</a></li>
+          <li><a href="#art-2-4">Art. 4 — San Juan Crisóstomo</a></li>
+          <li><a href="#art-2-5">Art. 5 — San Ambrosio de Milán</a></li>
+          <li><a href="#art-2-6">Art. 6 — San Agustín de Hipona</a></li>
+          <li><a href="#art-2-7">Art. 7 — San Gregorio Magno</a></li>
+          <li><a href="#art-2-8">Art. 8 — Orígenes y los testimonios orientales tempranos</a></li>
+          <li><a href="#art-2-9">Art. 9 — Tabla sinóptica patrística</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-tercera" class="tm-parte-titulo"><span class="tm-parte-num">III</span> Argumentos de la razón natural</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-3-1">Art. 1 — De la justicia divina y la pena temporal</a></li>
+          <li><a href="#art-3-2">Art. 2 — De la santidad absoluta y la visión beatífica</a></li>
+          <li><a href="#art-3-3">Art. 3 — De la comunión de los santos y la oración eficaz</a></li>
+          <li><a href="#art-3-4">Art. 4 — De los grados de bondad y el término medio</a></li>
+          <li><a href="#art-3-5">Art. 5 — De la misericordia que no anula la justicia</a></li>
+          <li><a href="#art-3-6">Art. 6 — Del amor imperfecto y la pena de daño temporal</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-cuarta" class="tm-parte-titulo"><span class="tm-parte-num">IV</span> Objeciones mayores y respuestas</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-4-1">Art. 1 — "La sangre de Cristo basta y sobra"</a></li>
+          <li><a href="#art-4-2">Art. 2 — "No hay purgatorio explícito en la Biblia"</a></li>
+          <li><a href="#art-4-3">Art. 3 — "Es una invención medieval"</a></li>
+          <li><a href="#art-4-4">Art. 4 — "Contradice la justificación por la fe"</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#parte-quinta" class="tm-parte-titulo"><span class="tm-parte-num">V</span> Magisterio y síntesis doctrinal</a>
+        <ul class="tm-articulos">
+          <li><a href="#art-5-1">Art. 1 — Concilios de Florencia y Trento</a></li>
+          <li><a href="#art-5-2">Art. 2 — Catecismo de la Iglesia Católica</a></li>
+          <li><a href="#art-5-3">Art. 3 — Recapitulación silogística general</a></li>
+        </ul>
+      </div>
+
+      <div class="tm-parte">
+        <a href="#glosario" class="tm-parte-titulo"><span class="tm-parte-num">✦</span> Glosario de términos</a>
+      </div>
+      <div class="tm-parte">
+        <a href="#fuentes" class="tm-parte-titulo"><span class="tm-parte-num">✦</span> Fuentes y ediciones citadas</a>
+      </div>
+
+    </nav>
+
+    <div class="indice-pie">
+      "Orabat pro defunctis"<br>2 Mac 12, 46
+    </div>
+  </aside>
+
+  <!-- ============ CONTENIDO ============ -->
+  <main>
+
+    <!-- PORTADA -->
+    <section class="portada">
+      <span class="orla-superior">Tractatus Theologicus de Novissimis</span>
+      <div class="crismon">✠</div>
+      <h1>De Purgatorio
+        <small>Apología fundada en la Escritura, los Santos Padres<br>y la recta razón filosófica</small>
+      </h1>
+      <p class="subtitulo">"No es cosa vana ni superflua orar por los difuntos, a fin de que sean
+      libertados del pecado" — un tratado extenso que reúne testimonio bíblico, consenso patrístico
+      y demostración filosófica en defensa de la purificación final de las almas.</p>
+
+      <div class="estadisticas-portada">
+        <div><span class="num">5</span><span class="lbl">Partes</span></div>
+        <div><span class="num">31</span><span class="lbl">Artículos</span></div>
+        <div><span class="num">14</span><span class="lbl">Padres citados</span></div>
+        <div><span class="num">13</span><span class="lbl">Textos bíblicos</span></div>
+        <div><span class="num">9</span><span class="lbl">Silogismos</span></div>
+      </div>
+
+      <p class="lema">"Ignis probabit uniuscuiusque opus quale sit"<span>1 Corintios 3, 13 — Vulgata</span></p>
+    </section>
+
+    <!-- PROEMIO -->
+    <section class="parte" id="proemio">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Proemio</span>
+        <h2>Razón de este tratado</h2>
+        <p class="descripcion-parte">Por qué conviene exponer ordenadamente la doctrina del Purgatorio
+        frente a quienes la niegan o la ignoran.</p>
+        <div class="divisor-orna">✦ ✦ ✦</div>
+      </div>
+
+      <div class="articulo">
+        <span class="capitular">D</span>
+        <p>esde los primeros siglos, la fe de la Iglesia ha sostenido constantemente que existe,
+        tras la muerte, un estado de purificación para las almas que mueren en gracia de Dios pero
+        no enteramente libres de las consecuencias temporales del pecado. Este tratado no pretende
+        inventar argumentos nuevos, sino <strong>ordenar y exponer</strong> los que la Escritura,
+        la Tradición de los Padres y la razón filosófica han ofrecido desde antiguo, de modo que el
+        lector encuentre reunido en un solo lugar el fundamento completo de esta doctrina.</p>
+
+        <p>Se seguirá el método clásico: en cada artículo se propondrá primero el testimonio —bíblico,
+        patrístico o racional— y después su análisis, de modo que la verdad no se presente como
+        afirmación desnuda, sino como conclusión razonada a partir de fuentes verificables. Donde
+        existan objeciones serias, se presentarán con honestidad antes de responderlas, siguiendo
+        el modelo escolástico de <em>videtur quod non</em> — "parece que no" — seguido de la
+        resolución (<em>respondeo dicendum</em>).</p>
+
+        <div class="sintesis">
+          <h4>Estructura del tratado</h4>
+          <p>Parte I expone los textos bíblicos. Parte II, el testimonio unánime de los Padres.
+          Parte III, los argumentos puramente filosóficos. Parte IV responde a las objeciones
+          mayores. Parte V sintetiza con el Magisterio conciliar y catequético.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE I — FUNDAMENTO BÍBLICO -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-primera">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Primera</span>
+        <h2>El fundamento bíblico</h2>
+        <p class="descripcion-parte">Los textos de la Escritura que la tradición católica ha leído
+        siempre como testimonio de una purificación post mortem.</p>
+        <div class="divisor-orna">✦ ✦ ✦</div>
+      </div>
+
+      <!-- ART 1.1 -->
+      <article class="articulo" id="art-1-1">
+        <span class="articulo-etiqueta">Parte I · Artículo 1</span>
+        <h3>2 Macabeos y la oración por los difuntos</h3>
+        <span class="capitular">E</span>
+        <p>l testimonio más explícito del Antiguo Testamento se halla en el segundo libro de los
+        Macabeos, donde Judas Macabeo, tras una batalla, ordena hacer una colecta para ofrecer un
+        sacrificio expiatorio por los soldados caídos que habían pecado llevando amuletos idolátricos.
+        El texto sagrado no solo narra el hecho: lo <strong>aprueba expresamente</strong> como acción
+        piadosa y santa.</p>
+
+        <div class="cita-biblica">
+          <p>"Hizo, pues, una colecta entre los soldados, [...] para ofrecer un sacrificio por el
+          pecado. Obró así muy santa y religiosamente, pensando en la resurrección [...] Por eso hizo
+          ofrecer este sacrificio expiatorio por los difuntos, a fin de que fuesen liberados de su
+          pecado."</p>
+          <cite>2 Macabeos 12, 43-46</cite>
+        </div>
+
+        <p>El razonamiento del texto es simple pero decisivo: si los soldados muertos estuvieran ya
+        en el infierno, orar por ellos sería inútil, pues de allí no hay redención posible; y si
+        estuvieran ya en la gloria, la oración sería superflua, pues nada les falta. Para que la
+        oración expiatoria tenga sentido —como el propio texto afirma que lo tiene— debe existir un
+        <strong>tercer estado</strong> intermedio en el que el sufragio por los difuntos resulte
+        eficaz. Esa es, precisamente, la lógica interna del Purgatorio.</p>
+
+        <div class="objeciones">
+          <h4>Objeción y respuesta</h4>
+          <div class="objecion">
+            <span class="num-obj">1.</span>
+            <p>Se podría objetar que los libros de los Macabeos no pertenecen al canon judío
+            palestinense ni al protestante, y por tanto carecen de autoridad probatoria.</p>
+          </div>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Respuesta —</span>
+            <p>El canon católico, confirmado en Trento, recoge la tradición de la Septuaginta,
+            usada por los apóstoles y los primeros cristianos, y reconocida como Escritura por
+            Padres como San Agustín y por los concilios africanos del siglo IV (Hipona, 393; Cartago,
+            397), siglos antes de cualquier disputa canónica posterior. La autoridad del texto, además,
+            no depende solo de su canonicidad formal, sino de que refleja una práctica —la oración
+            por los muertos— ya documentada y aceptada en el judaísmo del Segundo Templo.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 1.2 -->
+      <article class="articulo" id="art-1-2">
+        <span class="articulo-etiqueta">Parte I · Artículo 2</span>
+        <h3>El fuego que "probará la obra de cada uno" — 1 Corintios 3</h3>
+        <span class="capitular">S</span>
+        <p>an Pablo, hablando de quienes edifican sobre el único fundamento que es Cristo, distingue
+        entre materiales nobles (oro, plata, piedras preciosas) y materiales corruptibles (madera,
+        heno, paja). Todos serán probados por el fuego en el día del juicio.</p>
+
+        <div class="cita-biblica">
+          <p>"La obra de cada uno se hará manifiesta, porque el día la dará a conocer, pues por el
+          fuego se hará patente, y la calidad de la obra de cada uno la probará el fuego mismo.
+          Si la obra de alguno que ha edificado permanece, recibirá recompensa; si la obra de alguno
+          se quema, sufrirá pérdida; aunque él mismo se salvará, pero como pasando a través del fuego."</p>
+          <cite>1 Corintios 3, 13-15</cite>
+        </div>
+
+        <p>Obsérvese la estructura precisa del texto: hay un sujeto que <strong>se salva</strong>
+        —luego no va al infierno—, pero que al mismo tiempo <strong>sufre pérdida</strong> y
+        <strong>pasa a través del fuego</strong> —luego no entra directamente en la gloria sin
+        más—. La tradición católica ha leído este "fuego" no como aniquilación, sino como
+        purificación que precede a la plena recompensa. San Agustín, comentando este pasaje, lo
+        aplicará explícitamente a un fuego purgativo posterior a la muerte.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo I — Forma Barbara</span>
+            <span class="forma">de la salvación con pérdida</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Todo el que se salva sin recompensa íntegra, pero sufriendo pérdida purificadora
+              por el fuego, atraviesa un estado distinto del cielo (donde nada se pierde) y distinto
+              del infierno (donde no hay salvación).</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Según 1 Cor 3, 15, hay quienes se salvan sufriendo pérdida purificadora por el
+              fuego.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego existe un estado distinto del cielo y del infierno por el que algunas
+              almas salvadas atraviesan: el Purgatorio.</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 1.3 -->
+      <article class="articulo" id="art-1-3">
+        <span class="articulo-etiqueta">Parte I · Artículo 3</span>
+        <h3>"Ni en este siglo ni en el venidero" — Mateo 12</h3>
+        <span class="capitular">A</span>
+        <p>l hablar de la blasfemia contra el Espíritu Santo, Cristo afirma una fórmula que los
+        Padres consideraron cargada de implicaciones para la vida después de la muerte.</p>
+
+        <div class="cita-biblica">
+          <p>"Al que hable contra el Hijo del Hombre, se le perdonará; pero al que hable contra el
+          Espíritu Santo no se le perdonará, ni en este siglo ni en el venidero."</p>
+          <cite>Mateo 12, 32</cite>
+        </div>
+
+        <p>San Gregorio Magno, en sus <em>Diálogos</em>, advierte que esta frase carecería de sentido
+        si no existiera la posibilidad de que <strong>algunos pecados sean perdonados en el siglo
+        venidero</strong> —es decir, después de la muerte—. Si toda culpa quedara fijada
+        irrevocablemente en el instante de la muerte, sería redundante que Cristo especificara "ni
+        en este siglo ni en el venidero": bastaría con decir "no se le perdonará". La distinción
+        misma presupone que hay pecados que sí pueden ser purgados tras la muerte, aunque este no
+        lo sea.</p>
+
+        <div class="duda-mayor">
+          <span class="etiqueta-duda">Pregúntate</span>
+          <p>¿Por qué mencionar dos siglos si solo uno admite remisión de pecados?</p>
+        </div>
+      </article>
+
+      <!-- ART 1.4 — MATEO 5 -->
+      <article class="articulo" id="art-1-4">
+        <span class="articulo-etiqueta">Parte I · Artículo 4</span>
+        <h3>"Hasta que pagues el último cuadrante" — Mateo 5, 25-26</h3>
+        <span class="capitular">E</span>
+        <p>n el Sermón de la Montaña, dentro del contexto de la reconciliación fraterna, Jesús
+        emplea una imagen judicial de indudable potencia escatológica. La situación descrita —deuda,
+        tribunal, cárcel, plazo para pagar— ha sido leída desde Tertuliano como figura de la
+        condición del alma después de la muerte.</p>
+
+        <div class="cita-biblica">
+          <p>"Ponte de acuerdo con tu adversario enseguida, mientras vas con él por el camino, no sea
+          que el adversario te entregue al juez, y el juez al alguacil, y seas metido en la cárcel.
+          En verdad te digo que no saldrás de allí hasta que hayas pagado el último cuadrante."</p>
+          <cite>Mateo 5, 25-26</cite>
+        </div>
+
+        <p>El argumento escatológico reside en la estructura lógica del versículo: la salida de la
+        cárcel es <strong>posible</strong> —"hasta que hayas pagado"—, lo cual excluye que la
+        situación descrita sea el infierno, del que no hay retorno. Al mismo tiempo, implica una
+        permanencia real y dolorosa durante un tiempo determinado por la deuda pendiente. Si esta
+        imagen no tiene referente en la vida de ultratumba, el versículo no ofrece ninguna
+        enseñanza escatológica; si lo tiene, el referente preciso es un estado temporal de
+        expiación antes de la bienaventuranza plena.</p>
+
+        <p>Tertuliano, primer testigo de esta lectura, escribe comentando exactamente este versículo:
+        la prisión escatológica es aquella de la que no se sale <em>"nisi facta diligentissima
+        compensatione"</em> — "sino mediante la compensación más diligente". Y san Cipriano, en su
+        epístola ya citada, utiliza la misma expresión del versículo —<em>"non exire inde donec
+        solvat novissimum quadrantem"</em>— como descripción directa de la condición purgativa.
+        Es decir, los Padres más antiguos no inventaron esta lectura: la <em>encontraron</em> en el
+        texto.</p>
+
+        <div class="objeciones">
+          <h4>Objeción y respuesta</h4>
+          <div class="objecion">
+            <span class="num-obj">1.</span>
+            <p>Se objeta que el contexto inmediato es la reconciliación fraterna antes del juicio,
+            no una descripción de estados ultramundanos, y por tanto la lectura escatológica sería
+            alegórica y arbitraria.</p>
+          </div>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Respuesta —</span>
+            <p>Que el contexto primario sea ético no impide una resonancia escatológica real:
+            muchos pasajes del Evangelio tienen simultáneamente un sentido moral inmediato y una
+            dimensión escatológica (las parábolas del banquete de bodas, del rico y Lázaro, del
+            siervo sin entrañas). Lo que la tradición afirma no es que este versículo sea
+            <em>exclusivamente</em> una descripción del Purgatorio, sino que su lógica interna —deuda
+            que se puede saldar, prisión de la que se puede salir— resulta coherente con la doctrina
+            del Purgatorio y contribuye a iluminarla. Tertuliano, Cipriano y Gregorio lo leyeron así
+            independientemente, lo cual testimonia que esta lectura pertenece a la tradición
+            hermenéutica de la Iglesia antigua, no a una especulación individual tardía.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 1.4b — LUCAS 12 (artículo propio) -->
+      <article class="articulo" id="art-1-4b">
+        <span class="articulo-etiqueta">Parte I · Artículo 5</span>
+        <h3>Lucas 12, 57-59: el texto paralelo y su propia lógica escatológica</h3>
+        <span class="capitular">E</span>
+        <p>l evangelio de Lucas ofrece una versión del mismo logion que Mateo 5, pero en un contexto
+        distinto y con una formulación que la tradición ha considerado independientemente significativa.
+        Mientras Mateo lo inserta en el Sermón de la Montaña, en contexto de reconciliación fraterna,
+        Lucas lo ubica en una sección sobre la capacidad de discernir los signos de los tiempos —lo
+        que carga la imagen de una urgencia escatológica aún más marcada.</p>
+
+        <div class="cita-biblica">
+          <p>"¿Por qué no juzgáis por vosotros mismos lo que es justo? Cuando vayas con tu adversario
+          al magistrado, procura en el camino librarte de él, no sea que te arrastre ante el juez, y
+          el juez te entregue al alguacil, y el alguacil te arroje en la cárcel. Te digo que no
+          saldrás de allí hasta no haber pagado hasta el último óbolo."</p>
+          <cite>Lucas 12, 57-59</cite>
+        </div>
+
+        <p>Varios elementos de la versión lucana merecen atención propia:</p>
+
+        <ul class="lista-fundamentos">
+          <li><strong>El contexto inmediato</strong> (Lc 12, 54-56) es una exhortación a leer los
+          signos de los tiempos. Jesús reprende a la multitud por saber discernir el cielo pero no
+          discernir "este tiempo" —el tiempo de la gracia en el que todavía se puede reconciliarse
+          antes del juicio definitivo. La urgencia es escatológica.</li>
+          <li><strong>"El último óbolo"</strong> (λεπτόν, la moneda de menor valor posible en
+          griego) subraya la exhaustividad del pago requerido: no hay deuda, por pequeña que sea,
+          que escape a la justicia de Dios. Esto encaja precisamente con la naturaleza del
+          Purgatorio, que es el lugar donde se satisface lo que quedó pendiente, incluso lo mínimo.</li>
+          <li><strong>"No saldrás de allí hasta"</strong> — la partícula temporal griega
+          (<em>ἕως οὗ</em>) indica un término final claro: cuando la deuda esté saldada, el
+          encarcelamiento cesa. Esto distingue este estado del infierno, donde el encarcelamiento
+          no tiene término.</li>
+        </ul>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo — de la deuda escatológica exhaustiva</span>
+            <span class="forma">Lucas 12, 57-59</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Si existe un estado judicial posterior a la muerte del que se sale al satisfacer
+              la deuda íntegra (hasta el último óbolo), ese estado es temporal —no es el infierno—
+              y su término llega al completarse la satisfacción.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Jesús describe (Lc 12, 58-59) un estado así, en el contexto escatológico del
+              discernimiento de "este tiempo" antes del juicio.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>La imagen supone un estado post mortem temporal, del que se sale al saldar la
+              deuda completa: exactamente lo que la doctrina entiende por Purgatorio.</span>
+            </div>
+          </div>
+        </div>
+
+        <p>La distinción entre las versiones de Mateo y Lucas no es irrelevante: el hecho de que el
+        mismo logion aparezca en dos contextos distintos —fraternal en Mateo, escatológico en
+        Lucas— sugiere que la Iglesia primitiva lo entendió como un dicho con alcance tanto ético
+        como ultramundano, no como mera exhortación moral circunstancial.</p>
+
+        <div class="objeciones">
+          <h4>Objeción específica a Lucas 12</h4>
+          <div class="objecion">
+            <span class="num-obj">1.</span>
+            <p>Algunos exegetas reformados arguyen que "el adversario" (ἀντίδικος) no puede ser
+            Dios, pues el Nuevo Testamento no usa ese término para designar a Dios como acusador,
+            y por tanto toda la imagen sería una simple parábola social sin contenido escatológico.</p>
+          </div>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Respuesta —</span>
+            <p>En 1 Pedro 5, 8, precisamente, el mismo término griego ἀντίδικος se aplica al
+            diablo —con lo cual el campo semántico del término incluye claramente figuras espirituales.
+            Más aún, el propio contexto de Lucas 12 (el discernimiento de los signos escatológicos,
+            la incapacidad de juzgar "lo que es justo" ante Dios) hace difícil reducir el logion a
+            pura sociología. La tradición patrística unánime —Tertuliano, Cipriano, Gregorio Magno—
+            leyó esta imagen en clave escatológica, y esa lectura es la que la Iglesia ha recibido
+            como hermenéutica autorizada.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 1.5 -->
+      <article class="articulo" id="art-1-5">
+        <span class="articulo-etiqueta">Parte I · Artículo 6</span>
+        <h3>Nada manchado entrará en la Jerusalén celeste — Apocalipsis 21</h3>
+        <span class="capitular">L</span>
+        <p>a visión final del Apocalipsis establece una condición de entrada a la Ciudad Santa que
+        resulta determinante para el argumento de este tratado.</p>
+
+        <div class="cita-biblica">
+          <p>"No entrará en ella nada profano, ni el que comete abominación y mentira, sino solamente
+          los que están inscritos en el libro de la vida del Cordero."</p>
+          <cite>Apocalipsis 21, 27</cite>
+        </div>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo II — Forma Celarent</span>
+            <span class="forma">de la pureza necesaria para la gloria</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Nada manchado o imperfecto puede entrar en la visión beatífica de Dios (Ap 21, 27).</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Muchos justos mueren amando a Dios pero conservando manchas o imperfecciones
+              veniales no expiadas en vida.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego esos justos necesitan, antes de la visión beatífica, una purificación
+              posterior a la muerte: el Purgatorio.</span>
+            </div>
+          </div>
+        </div>
+
+        <p>Este silogismo es el núcleo lógico de toda la doctrina: une un dato revelado de modo
+        innegable (la santidad absoluta exigida para el cielo) con un dato de experiencia cristiana
+        común (que pocos mueren ya perfectamente purificados), y de la conjunción de ambos se sigue
+        necesariamente la existencia de un estado intermedio de purificación.</p>
+      </article>
+
+      <!-- ART 1.6 -->
+      <article class="articulo" id="art-1-6">
+        <span class="articulo-etiqueta">Parte I · Artículo 7</span>
+        <h3>La purificación de los justos — Sabiduría 3 y 1 Pedro 1</h3>
+        <span class="capitular">D</span>
+        <p>os textos, uno veterotestamentario y otro del Nuevo Testamento, describen a las almas de
+        los justos sometidas a una prueba comparada con el oro purificado en el crisol.</p>
+
+        <div class="cita-biblica">
+          <p>"Las almas de los justos están en la mano de Dios [...] Como oro en el crisol, los probó,
+          y los aceptó como holocausto perfecto."</p>
+          <cite>Sabiduría 3, 1.6</cite>
+        </div>
+
+        <div class="cita-biblica">
+          <p>"Para que la calidad probada de vuestra fe, más preciosa que el oro perecedero que, sin
+          embargo, se prueba con fuego, redunde en alabanza, gloria y honor."</p>
+          <cite>1 Pedro 1, 6-7</cite>
+        </div>
+
+        <p>La metáfora del crisol no es decorativa: el oro que ya fuese perfectamente puro no
+        necesitaría fundirse de nuevo. La imagen presupone un proceso real de eliminación de escoria
+        —es decir, de purificación efectiva— antes de que el metal alcance su estado final de
+        "holocausto perfecto". Aplicada a las almas de los justos, sugiere precisamente lo que el
+        Purgatorio afirma: un proceso purificador, doloroso pero finito, que antecede a la plenitud.</p>
+      </article>
+
+      <!-- ART 1.8 — ZACARÍAS 9,11 -->
+      <article class="articulo" id="art-1-8">
+        <span class="articulo-etiqueta">Parte I · Artículo 8</span>
+        <h3>Zacarías 9,11 — "los prisioneros del pozo sin agua"</h3>
+        <span class="capitular">E</span>
+        <p>l oráculo de Zacarías, en su parte mesiánica, contiene uno de los pasajes del Antiguo
+        Testamento que la tradición patrística leyó con mayor naturalidad como referencia a un estado
+        intermedio entre la vida terrena y la plenitud de la salvación.</p>
+
+        <div class="cita-biblica">
+          <p>"Y tú también, por la sangre de tu alianza, sacaré a tus prisioneros del pozo en que no
+          hay agua."</p>
+          <cite>Zacarías 9, 11</cite>
+        </div>
+
+        <p>El texto habla en voz divina: es <strong>Dios mismo</strong> quien saca a sus prisioneros
+        de un "pozo sin agua" —lugar de detención, no de muerte definitiva, pues el pozo vacío
+        en el mundo bíblico es prisión, no sepultura—. El instrumento de la liberación es
+        explícitamente la <em>"sangre de la alianza"</em>, que los Padres identificaron con la
+        sangre de Cristo. Quien libera a los prisioneros es la Redención misma.</p>
+
+        <p>Varios elementos merecen análisis cuidadoso:</p>
+
+        <ul class="lista-fundamentos">
+          <li>Los prisioneros están <strong>en un pozo</strong>, no en el infierno ni en el seno de
+          Abraham simplemente: la metáfora del pozo implica confinamiento temporal, no condena
+          definitiva.</li>
+          <li>El pozo <strong>no tiene agua</strong> — privación que en el simbolismo bíblico
+          equivale a ausencia de la plenitud vivificante de Dios (cf. Sal 63,2: "Mi alma tiene
+          sed de ti"). Es, en lenguaje bíblico, precisamente la pena de daño: privación dolorosa
+          de Dios, no aniquilación.</li>
+          <li><strong>Dios actúa para liberarlos</strong> —no los abandona— y el instrumento de
+          esa liberación es la sangre expiatoria de la alianza: la misma que, en la teología de la
+          carta a los Hebreos, purifica la conciencia de las obras muertas (Heb 9,14).</li>
+        </ul>
+
+        <p>San Justino Mártir, en el siglo II, ya aplica este versículo al descenso de Cristo al
+        Hades, del que sacará a las almas retenidas. Y la tradición litúrgica oriental, al comentar
+        la anáfora eucarística, vincula este texto con la oración por los difuntos que se eleva en
+        la Liturgia: la misma sangre de la alianza que liberó a los prisioneros del pozo continúa
+        actuando en los sufragios de la Iglesia.</p>
+
+        <div class="cita-biblica">
+          <p>"¿Y tú también? Con la sangre de tu alianza puse en libertad a tus cautivos del lago
+          en que no hay agua."</p>
+          <cite>Zacarías 9, 11 — versión de los LXX (Septuaginta)</cite>
+        </div>
+
+        <p>Nótese que la Septuaginta —la versión bíblica usada por los apóstoles— usa la palabra
+        <em>λάκκος</em> (lago, foso) en lugar de "pozo": un espacio todavía más definitoriamente
+        cerrado y sombrío, que contrasta con la acción liberadora de Dios. El alma presa en ese
+        foso no está en la gloria ni en el infierno: está en espera de la liberación que la sangre
+        de Cristo puede concederle.</p>
+      </article>
+
+      <!-- ART 1.9 — JOB 1,5 -->
+      <article class="articulo" id="art-1-9">
+        <span class="articulo-etiqueta">Parte I · Artículo 9</span>
+        <h3>Job 1, 5 — La intercesión sacerdotal preventiva y su lógica post mortem</h3>
+        <span class="capitular">E</span>
+        <p>l libro de Job contiene, en su apertura narrativa, un gesto de Job que la tradición
+        patrística consideró el más antiguo antecedente bíblico de la oración expiatoria por los
+        seres queridos —con una lógica interna que anticipa directamente la doctrina del Purgatorio.</p>
+
+        <div class="cita-biblica">
+          <p>"Cuando se completaban los días del banquete, Job enviaba a buscarlos para santificarlos;
+          se levantaba de madrugada y ofrecía holocaustos según el número de todos ellos; porque
+          pensaba Job: 'Quizás mis hijos hayan pecado y maldecido a Dios en su corazón.' Así lo
+          hacía Job todos los días."</p>
+          <cite>Job 1, 5</cite>
+        </div>
+
+        <p>Job actúa sobre una mera <em>posibilidad</em> de pecado en sus hijos: no sabe si han
+        pecado, pero ofrece sacrificios expiatorios en su nombre, por si acaso. El texto añade que
+        "así lo hacía Job <strong>todos los días</strong>" —es decir, es una práctica constante,
+        no un gesto excepcional—. La lógica que subyace a esta conducta es exactamente la misma
+        que subyace a la doctrina del Purgatorio:</p>
+
+        <ul class="lista-fundamentos">
+          <li>Los pecados no expiados por uno mismo pueden ser expiados mediante el sacrificio
+          ofrecido por otro —en este caso, el padre en nombre de sus hijos.</li>
+          <li>La intercesión expiatoria tiene <strong>eficacia real</strong> ante Dios —no es
+          mero consuelo psicológico—, o carecería de sentido que Job la practicase con tal
+          constancia.</li>
+          <li>El texto sagrado no condena esta práctica de Job: al contrario, el narrador la
+          presenta como manifestación de la piedad y sabiduría de Job (v. 1: "hombre íntegro y
+          recto, temeroso de Dios y alejado del mal").</li>
+        </ul>
+
+        <p>Los Padres —en particular Orígenes y Agustín— leen Job 1,5 como una de las raíces
+        veterotestamentarias de la práctica cristiana de ofrecer sacrificios por los muertos.
+        La diferencia entre Job y la Iglesia cristiana es únicamente la naturaleza del sacrificio:
+        Job ofrecía holocaustos animales; la Iglesia ofrece el sacrificio incruento de la Eucaristía.
+        Pero en ambos casos la lógica es idéntica: la intercesión expiatoria por quien no puede
+        ya expiar por sí mismo.</p>
+
+        <div class="sintesis">
+          <h4>Nota hermenéutica</h4>
+          <p>Job ora por sus hijos <em>vivos</em>, no por difuntos. Sin embargo, el principio que
+          establece —que la expiación ofrecida por otro puede cubrir pecados del que no los expió
+          suficientemente por sí mismo— es el mismo principio que, extendido a los difuntos, funda
+          la doctrina del Purgatorio. Si el principio vale para los vivos (como Job lo practica),
+          no hay razón teológica intrínseca para que no valga también para los muertos, como
+          2 Macabeos confirmará siglos después en la práctica de Judas Macabeo.</p>
+        </div>
+      </article>
+
+      <!-- ART 1.10 — MALAQUÍAS 3,2-3 -->
+      <article class="articulo" id="art-1-10">
+        <span class="articulo-etiqueta">Parte I · Artículo 10</span>
+        <h3>Malaquías 3, 2-3 — El fuego del refinador y los hijos de Leví</h3>
+        <span class="capitular">L</span>
+        <p>a profecía de Malaquías, una de las más ricas en la tradición teológica sobre la
+        purificación, describe la venida del "Mensajero de la Alianza" con una imagen que los
+        Padres aplicaron tanto al juicio de Cristo como a la purificación de las almas.</p>
+
+        <div class="cita-biblica">
+          <p>"¿Quién podrá soportar el día de su venida? ¿Quién podrá mantenerse en pie cuando
+          aparezca? Porque él es como el fuego del fundidor y como la lejía del lavandero. Se
+          sentará como fundidor y purificador de plata; purificará a los hijos de Leví y los
+          afinará como el oro y la plata, para que presenten al Señor ofrendas en justicia."</p>
+          <cite>Malaquías 3, 2-3</cite>
+        </div>
+
+        <p>Este texto merece una atención especial porque en él confluyen tres imágenes complementarias
+        que articulan con precisión la lógica de la purificación:</p>
+
+        <ul class="lista-fundamentos">
+          <li><strong>El fuego del fundidor</strong> (<em>esh metzaref</em> en hebreo): no es un
+          fuego destructor, sino un fuego que extrae la escoria del metal para dejarlo puro. El
+          mismo metal —la misma alma— que entra en el proceso sale de él purificado, no aniquilado.</li>
+          <li><strong>La lejía del lavandero</strong>: imagen del proceso que elimina las manchas
+          sin destruir la tela. La tela —el alma— conserva su identidad después de la limpieza.</li>
+          <li><strong>"Para que presenten ofrendas en justicia"</strong>: el fin del proceso
+          purificador no es el castigo por sí mismo, sino la capacitación para presentarse ante
+          Dios en modo digno. Esto encaja exactamente con la doctrina del Purgatorio, cuyo fin no
+          es penar sino habilitar para la visión beatífica.</li>
+        </ul>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo — del fuego que purifica sin destruir</span>
+            <span class="forma">Malaquías 3, 2-3</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Un fuego que purifica sin destruir al sujeto, y cuyo fin es habilitarlo para
+              presentar ofrendas justas ante Dios, describe un proceso purificador que termina en
+              comunión —no en condenación ni en inmediata glorificación.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Malaquías 3,2-3 describe precisamente ese fuego aplicado a los "hijos de Leví"
+              (figura de los elegidos que han de ser purificados).</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>La Escritura enseña la existencia de un proceso purificador post-histórico
+              que precede a la presentación plena ante Dios: lo que la Iglesia llama Purgatorio.</span>
+            </div>
+          </div>
+        </div>
+
+        <p>La carta a los Hebreos (Heb 12, 29) cita precisamente el texto de la "zarza ardiente"
+        de Éxodo y concluye: "Nuestro Dios es un fuego devorador." La tradición ha leído ese fuego
+        divino en dos registros: en los condenados, devora; en los elegidos que aún necesitan
+        purificación, refina. La diferencia no está en el fuego, sino en el sujeto que lo recibe.</p>
+      </article>
+
+      <!-- ART 1.11 — EZEQUIEL 22,18-22 -->
+      <article class="articulo" id="art-1-11">
+        <span class="articulo-etiqueta">Parte I · Artículo 11</span>
+        <h3>Ezequiel 22, 18-22 — La escoria en el horno de fundición</h3>
+        <span class="capitular">L</span>
+        <p>a visión de Ezequiel sobre el juicio de Israel emplea una metáfora de fundición que los
+        comentaristas patrísticos —en particular Orígenes y Gregorio Magno— aplicaron al proceso
+        purificador del alma.</p>
+
+        <div class="cita-biblica">
+          <p>"Hijo de hombre, la casa de Israel se ha convertido para mí en escoria; todos ellos son
+          cobre, estaño, hierro y plomo en el crisol: son la escoria de la plata. Por eso así dice
+          el Señor Yahveh: porque todos vosotros os habéis convertido en escoria, he aquí que yo os
+          reuniré en medio de Jerusalén. Como se recoge en un horno la plata, el cobre, el hierro,
+          el plomo y el estaño para encender el fuego bajo ellos y fundirlos, así os reuniré en mi
+          furor y mi ira, os pondré allí y os fundiré."</p>
+          <cite>Ezequiel 22, 18-22</cite>
+        </div>
+
+        <p>El pasaje se refiere primariamente al juicio histórico sobre Israel. Pero la imagen del
+        <strong>horno de fundición</strong> como instrumento de purificación divina —donde el fuego
+        no destruye al metal sino que elimina la escoria— funda un principio teológico de alcance
+        más amplio. Orígenes, en sus <em>Homilías sobre Ezequiel</em>, aplica este texto a la
+        purificación del alma en el período que precede a su plena incorporación a Dios.</p>
+
+        <p>La imagen también resulta significativa para descartar una objeción frecuente: la de
+        que el fuego purificador sería "demasiado duro" para almas que ya están en gracia de Dios.
+        En la metáfora del horno, el fundidor no es un enemigo del metal: es quien libera al metal
+        de lo que lo degrada. La severidad del fuego no contradice el amor del fundidor;
+        es, al contrario, su expresión más eficaz.</p>
+
+        <div class="cita-biblica">
+          <p>"El Señor, al que vosotros buscáis, vendrá de repente a su templo [...] ¿Quién podrá
+          soportar el día de su venida?"</p>
+          <cite>Malaquías 3, 1-2 — en paralelo con Ezequiel 22</cite>
+        </div>
+
+        <p>La convergencia de Malaquías 3 y Ezequiel 22 en la misma imagen —fuego divino que
+        purifica mediante la fusión— constituye una articulación coherente del Antiguo Testamento
+        que los Padres no inventaron: <em>la encontraron</em> en la Escritura y la aplicaron a la
+        condición post mortem de las almas.</p>
+      </article>
+
+      <!-- ART 1.12 — MATEO 18,34-35 -->
+      <article class="articulo" id="art-1-12">
+        <span class="articulo-etiqueta">Parte I · Artículo 12</span>
+        <h3>Mateo 18, 34-35 — El siervo inmisericorde y el verdugo</h3>
+        <span class="capitular">L</span>
+        <p>a parábola del siervo inmisericorde —una de las más extensas y elaboradas del Evangelio
+        de Mateo— contiene en su desenlace una imagen de castigo post mortem que la tradición
+        ha examinado cuidadosamente en relación con la doctrina de la purificación.</p>
+
+        <div class="cita-biblica">
+          <p>"Entonces su amo, indignado, lo entregó a los verdugos hasta que pagase todo lo que
+          le debía. Así también mi Padre celestial hará con vosotros si no perdonáis cada uno a
+          su hermano de corazón."</p>
+          <cite>Mateo 18, 34-35</cite>
+        </div>
+
+        <p>El versículo contiene tres elementos de importancia teológica para el argumento:</p>
+
+        <ul class="lista-fundamentos">
+          <li><strong>"Entregó a los verdugos"</strong> (βασανισταῖς, literalmente "torturadores"):
+          describe un castigo real y doloroso, no meramente simbólico. Los Padres griegos
+          identificaron a estos "torturadores" con los ángeles ejecutores de la justicia divina
+          en el período de purificación.</li>
+          <li><strong>"Hasta que pagase todo lo que le debía"</strong>: la partícula temporal
+          <em>ἕως οὗ</em>, idéntica a la de Lucas 12, 59, indica un plazo que cesa cuando la
+          deuda queda saldada. En el infierno no hay "hasta que" porque no hay deuda saldable:
+          el castigo es eterno. En el Purgatorio sí hay "hasta que": la purificación termina al
+          completarse.</li>
+          <li><strong>"Todo lo que le debía"</strong>: la exhaustividad del pago corresponde
+          exactamente al "último óbolo" de Lucas 12: no hay deuda, por mínima que sea, que
+          no deba ser satisfecha. Esto es precisamente la razón de ser del Purgatorio para
+          las almas que mueren con deudas temporales pequeñas pero no saldadas.</li>
+        </ul>
+
+        <p>La aplicación escatológica de esta parábola es doble: en primer lugar, el siervo
+        inmisericorde representa al que muere sin haber perdonado —y en ese caso el castigo es
+        indefinido—; en segundo lugar, la lógica de la deuda y el plazo sugiere que para quienes
+        sí han perdonado y amado, pero todavía deben algo, existe un período de satisfacción
+        antes de la bienaventuranza plena.</p>
+
+        <div class="objeciones">
+          <h4>Objeción y respuesta</h4>
+          <div class="objecion">
+            <span class="num-obj">1.</span>
+            <p>Se objeta que "todo lo que le debía" podría ser una deuda infinita —el siervo
+            debía diez mil talentos, suma imposible de saldar—, con lo cual el "hasta que" sería
+            ficticio y la condena, de facto, eterna.</p>
+          </div>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Respuesta —</span>
+            <p>La deuda de diez mil talentos representa en la parábola la deuda del pecado mortal
+            ante Dios —deuda que el siervo no pudo pagar, y que el rey <em>ya había perdonado</em>
+            antes de que el siervo se negase a perdonar a su compañero. El punto de la parábola
+            es la ingratitud por una gracia ya recibida, no una descripción de los estados post
+            mortem en general. No obstante, la <em>estructura lógica</em> del versículo
+            34 —entrega a los verdugos con un plazo temporal— sí establece el principio de que
+            existe un modo de castigo temporal previo al estado definitivo, que es la lógica
+            del Purgatorio. La Iglesia no ha usado esta parábola como prueba aislada sino como
+            una de las piezas del mosaico bíblico que convergen hacia la misma doctrina.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 1.7 — CÁRCEL ESPIRITUAL (RENUMERADO) -->
+      <article class="articulo" id="art-1-7">
+        <span class="articulo-etiqueta">Parte I · Artículo 13</span>
+        <h3>Cárcel espiritual y "espíritus en prisión" — 1 Pedro 3 y 4</h3>
+        <span class="capitular">L</span>
+        <p>a primera carta de Pedro contiene dos pasajes de notoria dificultad exegética que, sin
+        embargo, los Padres orientales y occidentales relacionaron tempranamente con la suerte de
+        las almas tras la muerte.</p>
+
+        <div class="cita-biblica">
+          <p>"En su cuerpo fue muerto, y en espíritu fue vivificado. En espíritu fue también y predicó
+          a los espíritus encarcelados."</p>
+          <cite>1 Pedro 3, 18-19</cite>
+        </div>
+
+        <div class="cita-biblica">
+          <p>"Por esto también ha sido predicado el Evangelio a los muertos, para que sean juzgados
+          en la carne según los hombres, pero vivan en espíritu según Dios."</p>
+          <cite>1 Pedro 4, 6</cite>
+        </div>
+
+        <p>No se reclama aquí que estos versículos describan directamente el Purgatorio —su objeto
+        propio, según la mayoría de los Padres, es el "limbo de los justos" anterior a la Redención
+        consumada—. Se citan, sin embargo, porque establecen un principio que la doctrina del
+        Purgatorio presupone: que existe, después de la muerte y antes del juicio final, un ámbito
+        intermedio en el que las almas pueden todavía ser alcanzadas por la acción salvífica de
+        Dios. Ese principio general es el terreno sobre el que se edifica, con los textos ya
+        examinados, la doctrina específica de la purificación de los justos.</p>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Primera</h4>
+          <p>Ningún texto aislado "prueba" el Purgatorio con la contundencia de una fórmula
+          dogmática explícita —cosa que tampoco ocurre, por ejemplo, con la Trinidad en un solo
+          versículo—. Pero la convergencia de <strong>trece líneas de testimonio bíblico
+          independientes</strong> —oración expiatoria por difuntos (2 Macabeos), fuego purificador
+          (1 Cor 3), perdón en el siglo venidero (Mt 12), deuda pagada en prisión temporal
+          (Mt 5 y Lc 12 con sus propias lógicas), pureza absoluta exigida para el cielo (Ap 21),
+          crisol purificador (Sab 3; 1 Pe 1), pozo sin agua y liberación por la sangre de la
+          alianza (Zac 9), intercesión expiatoria anticipatoria (Job 1), fuego refinador de los
+          hijos de Leví (Mal 3), escoria en el horno de fundición (Ez 22), verdugo y deuda hasta
+          el último óbolo (Mt 18), y el ámbito intermedio donde se predica el Evangelio (1 Pe
+          3-4)— constituye un fundamento escriturístico de una solidez que ningún texto aislado
+          podría igualar, y que los Padres no inventaron sino que <em>leyeron</em> en el texto
+          sagrado desde el siglo II.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE II — TESTIMONIO DE LOS PADRES -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-segunda">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Segunda</span>
+        <h2>El testimonio de los Padres</h2>
+        <p class="descripcion-parte">El consenso patrístico, de Oriente y Occidente, desde el siglo
+        II hasta el siglo VI, confirma que la creencia en la purificación post mortem no es
+        invención tardía sino fe recibida.</p>
+        <div class="divisor-orna">✦ ✦ ✦</div>
+      </div>
+
+      <!-- ART 2.1 -->
+      <article class="articulo" id="art-2-1">
+        <span class="articulo-etiqueta">Parte II · Artículo 1</span>
+        <h3>Tertuliano y la oblación anual por los difuntos</h3>
+        <span class="capitular">Y</span>
+        <p>a a finales del siglo II y comienzos del III, Tertuliano de Cartago atestigua una
+        práctica litúrgica ya establecida y arraigada: la oblación —ofrenda eucarística— anual en
+        memoria de los difuntos, particularmente de las viudas por sus esposos fallecidos.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">TERTUL.<br>† c. 220</div>
+          <div class="cita-padre-texto">
+            <p>"Enimvero et pro anima eius orat, et refrigerium interim adpostulat ei, et in prima resurrectione consortium, et offert annuis diebus dormitionis eius."</p>
+            <p style="margin-top:10px;">— "En verdad, ora por su alma, y le pide entretanto refrigerio, y consorcio en la primera resurrección; y ofrece [el sacrificio] en el aniversario del día de su tránsito."</p>
+            <span class="fuente-padre"><b>Tertuliano</b> — <em>De Monogamia</em>, cap. X, 5 (texto latino: ed. V. Bulhart, CSEL 76; trad. literal propia)</span>
+          </div>
+        </div>
+
+        <p>El valor de este testimonio es precisamente su carácter de <strong>dato sociológico</strong>:
+        Tertuliano no está proponiendo una doctrina nueva ni defendiéndola con argumentos —la da
+        por supuesta, como costumbre ya antigua en su tiempo, lo cual empuja sus orígenes hacia el
+        siglo I o comienzos del II, es decir, a la generación apostólica o inmediatamente posterior.</p>
+      </article>
+
+      <!-- ART 2.2 -->
+      <article class="articulo" id="art-2-2">
+        <span class="articulo-etiqueta">Parte II · Artículo 2</span>
+        <h3>San Cipriano de Cartago</h3>
+        <span class="capitular">S</span>
+        <p>an Cipriano, obispo y mártir del siglo III, distingue con claridad entre los mártires
+        —que entran directamente en la gloria— y los demás fieles, que deberán pasar por un fuego
+        purificador antes de alcanzarla.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">CIPRIAN.<br>† 258</div>
+          <div class="cita-padre-texto">
+            <p>"Aliud est ad veniam stare, aliud ad gloriam pervenire: aliud missum in carcerem non exire inde donec solvat novissimum quadrantem, aliud statim fidei et virtutis accipere mercedem: aliud pro peccatis longo dolore cruciatum emundari et purgari diu igne, aliud peccata omnia passione purgasse."</p>
+            <p style="margin-top:10px;">— "Una cosa es esperar el perdón, y otra llegar a la gloria; una, ser enviado a la cárcel y no salir de allí hasta pagar el último cuadrante, y otra recibir al instante la recompensa de la fe y la virtud; una, ser purificado y purgado largamente con el dolor del castigo por los pecados, y otra haber purgado todos los pecados con el padecimiento [del martirio]."</p>
+            <span class="fuente-padre"><b>San Cipriano</b> — <em>Epístola LV (Ad Antonianum / Ad clerum), 20</em> — texto latino según ed. Fell-Pearson (1682); trad. literal propia</span>
+          </div>
+        </div>
+
+        <p>Esta distinción —mártir vs. penitente ordinario— sería incoherente si no existiera de
+        hecho un proceso purificador post mortem ("purgari diu igne", "ser purgado largamente por
+        el fuego") distinto e inferior a la entrada inmediata en la gloria propia del martirio.
+        Nótese que el verbo empleado por Cipriano —<em>purgari</em>— es precisamente la raíz de la
+        que deriva el término "Purgatorio".</p>
+      </article>
+
+      <!-- ART 2.3 -->
+      <article class="articulo" id="art-2-3">
+        <span class="articulo-etiqueta">Parte II · Artículo 3</span>
+        <h3>San Cirilo de Jerusalén y el Memento litúrgico</h3>
+        <span class="capitular">E</span>
+        <p>n sus célebres <em>Catequesis Mistagógicas</em>, dirigidas a los recién bautizados, San
+        Cirilo explica el sentido de la conmemoración de los difuntos dentro mismo del Canon de la
+        Misa, en pleno siglo IV en Jerusalén.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">CIRILO<br>HIEROS.<br>† 386</div>
+          <div class="cita-padre-texto">
+            <p>"Then we make mention also of those who have already fallen asleep: first, the patriarchs, prophets, apostles, and martyrs [...] then on behalf also of the holy fathers and bishops who have already fallen asleep, and, to sum up, of all who have already fallen asleep amongst us, believing that it will be a very great benefit to the souls of those for whom the supplication is put up, while that holy and most awesome sacrifice is set forth."</p>
+            <p style="margin-top:10px;">— "Después hacemos mención también de los que ya se durmieron: primero, de los patriarcas, profetas, apóstoles y mártires [...] luego también por los santos padres y obispos ya difuntos, y, en suma, por todos los que entre nosotros ya se han dormido, creyendo que será de grandísimo provecho para las almas de aquellos por quienes se eleva la súplica, mientras está presente sobre el altar aquel santo y tremendo sacrificio."</p>
+            <span class="fuente-padre"><b>San Cirilo de Jerusalén</b> — <em>Catequesis Mistagógica V</em>, 9 — trad. inglesa de dominio público E. H. Gifford, <em>NPNF</em> 2ª serie, vol. VII (1894); versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>Este testimonio es de gran peso porque describe una liturgia ya plenamente formada y
+        recibida por toda la asamblea —no una opinión privada de Cirilo, sino la praxis común de la
+        Iglesia de Jerusalén que él, como obispo, transmite a los neófitos como parte de la
+        catequesis sacramental ordinaria.</p>
+      </article>
+
+      <!-- ART 2.4 -->
+      <article class="articulo" id="art-2-4">
+        <span class="articulo-etiqueta">Parte II · Artículo 4</span>
+        <h3>San Juan Crisóstomo</h3>
+        <span class="capitular">E</span>
+        <p>l "Doctor de la Eucaristía", patriarca de Constantinopla, exhorta repetidamente desde el
+        púlpito a socorrer a los difuntos, no con lágrimas estériles, sino con limosnas, oraciones
+        y el sacrificio eucarístico.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">CRISÓST.<br>† 407</div>
+          <div class="cita-padre-texto">
+            <p>"Let us weep for these; let us assist them according to our power; let us think of some assistance for them, small though it be, yet still let us assist them. How and in what way? By praying and entreating others to make prayers for them, by continually giving to the poor on their behalf. [...] Not in vain did the Apostles order that remembrance should be made of the dead in the dreadful Mysteries. They know that great gain resulteth to them, great benefit."</p>
+            <p style="margin-top:10px;">— "Lloremos por ellos; ayudémoslos según nuestras fuerzas; pensemos en algún auxilio para ellos, por pequeño que sea, pero ayudémoslos de todos modos. ¿Cómo y de qué manera? Orando y pidiendo a otros que oren por ellos, dando limosna continuamente a los pobres en su nombre. [...] No en vano ordenaron los Apóstoles que se hiciera memoria de los difuntos en los tremendos Misterios. Saben que de ello resulta para ellos gran provecho, gran beneficio."</p>
+            <span class="fuente-padre"><b>San Juan Crisóstomo</b> — <em>Homilía III sobre la Epístola a los Filipenses</em> — trad. inglesa de dominio público, <em>NPNF</em> 1ª serie, vol. XIII (ed. Philip Schaff); versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>Nótese el argumento implícito en el propio Crisóstomo: si tales remedios "no fueron
+        instituidos en vano", su eficacia exige un sujeto receptor capaz de beneficiarse de ellos
+        —es decir, un alma que ni está ya en la gloria consumada (donde nada le falta) ni está
+        en el infierno (de donde nada la rescata)—.</p>
+      </article>
+
+      <!-- ART 2.5 -->
+      <article class="articulo" id="art-2-5">
+        <span class="articulo-etiqueta">Parte II · Artículo 5</span>
+        <h3>San Ambrosio de Milán</h3>
+        <span class="capitular">A</span>
+        <p>l predicar la oración fúnebre por el emperador Teodosio, San Ambrosio modela él mismo la
+        práctica que predica: ruega por el descanso y la purificación del alma del difunto emperador.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">AMBROS.<br>† 397</div>
+          <div class="cita-padre-texto">
+            <p>"Da requiem perfectam servo tuo Theodosio, requiem illam, quam praeparasti sanctis tuis."</p>
+            <p style="margin-top:10px;">— "Concede el descanso perfecto a tu siervo Teodosio, aquel descanso que has preparado para tus santos."</p>
+            <span class="fuente-padre"><b>San Ambrosio</b> — <em>De Obitu Theodosii</em>, 36 — texto latino según Migne, <em>PL</em> 16; trad. literal propia</span>
+          </div>
+        </div>
+
+        <p>Ambrosio también comenta directamente el pasaje de 1 Corintios 3 ya examinado en el
+        Artículo 2 de la Parte Primera, aplicándolo a quienes, aun siendo salvos, deben pasar por la
+        prueba purificadora antes de la recompensa plena.</p>
+      </article>
+
+      <!-- ART 2.6 -->
+      <article class="articulo" id="art-2-6">
+        <span class="articulo-etiqueta">Parte II · Artículo 6</span>
+        <h3>San Agustín de Hipona</h3>
+        <span class="capitular">N</span>
+        <p>ingún Padre latino desarrolla la doctrina con mayor profundidad teológica que Agustín,
+        quien además narra en sus <em>Confesiones</em> cómo su propia madre, Santa Mónica, le pidió
+        en su lecho de muerte que se acordara de ella ante el altar del Señor.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">AGUST.<br>† 430</div>
+          <div class="cita-padre-texto">
+            <p>"Nor can it be denied that the souls of the dead are benefited by the piety of their living friends, who offer the sacrifice of the Mediator, or give alms in the church on their behalf. But these services are of advantage only to those who during their lives have earned such merit, that services of this kind can help them."</p>
+            <p style="margin-top:10px;">— "Tampoco puede negarse que las almas de los difuntos reciben beneficio de la piedad de sus amigos vivos, que ofrecen el sacrificio del Mediador, o dan limosna en la Iglesia en su favor. Pero estos servicios solo aprovechan a aquellos que, mientras vivían, merecieron que tales servicios pudieran ayudarles."</p>
+            <span class="fuente-padre"><b>San Agustín</b> — <em>Enchiridion ad Laurentium</em>, cap. 110 — trad. inglesa de dominio público J. F. Shaw (1887); versión española literal propia</span>
+          </div>
+        </div>
+
+        <div class="cita-padre">
+          <div class="sello-padre">AGUST.<br>† 430</div>
+          <div class="cita-padre-texto">
+            <p>"Qui hoc opinantur, nullas poenas nisi purgatorias uolunt esse post mortem [...] Nos uero etiam in hac quidem mortali uita esse quasdam poenas purgatorias confitemur." [...] "Purgatorias autem poenas nullas futuras opinetur, nisi ante illud ultimum tremendumque iudicium."</p>
+            <p style="margin-top:10px;">— "Los que esto opinan [los platónicos], sostienen que no hay penas después de la muerte sino purgatorias [...] Nosotros, en cambio, confesamos que también en esta vida mortal existen ciertas penas purgatorias." [...] "Que nadie piense que habrá penas purgatorias, sino antes de aquel juicio final y tremendo."</p>
+            <span class="fuente-padre"><b>San Agustín</b> — <em>De Civitate Dei</em>, XXI, 13 y 16 — texto latino según ed. crítica (thelatinlibrary.com, dominio público); trad. literal propia</span>
+          </div>
+        </div>
+
+        <p>Es de notar que, en este mismo pasaje, Agustín discute la opinión de los platónicos —que
+        sostenían penas purificadoras tras la muerte basándose en Virgilio— y, distinguiéndose de
+        ellos, afirma que también la fe cristiana reconoce "penas purgatorias" (<em>poenas
+        purgatorias</em>), aunque solo antes del juicio final. Es uno de los primeros lugares de
+        toda la literatura latina donde el adjetivo <em>purgatorius</em> se aplica técnicamente a
+        las penas del alma después de la muerte —un siglo antes de que el sustantivo "Purgatorio"
+        se consolidara como término técnico en la Edad Media—.</p>
+
+        <p>Agustín introduce además, en otras obras, una precisión decisiva: la distinción entre
+        pecados "leves" o "cotidianos" y los pecados graves no perdonados, afirmando que solo
+        aquellos —la escoria venial, no el pecado mortal impenitente— son materia del fuego
+        purificador. Esta distinción anticipa con siglos de antelación la doctrina escolástica
+        posterior sobre pena temporal versus pena eterna.</p>
+      </article>
+
+      <!-- ART 2.7 -->
+      <article class="articulo" id="art-2-7">
+        <span class="articulo-etiqueta">Parte II · Artículo 7</span>
+        <h3>San Gregorio Magno</h3>
+        <span class="capitular">E</span>
+        <p>l último de los grandes Padres latinos sistematiza explícitamente lo que sus predecesores
+        habían afirmado con menos precisión terminológica, comentando directamente Mateo 12, 32
+        (examinado en el Artículo 3 de la Parte Primera).</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">GREGOR.<br>† 604</div>
+          <div class="cita-padre-texto">
+            <p>"By which sayings it is plain, that in such state as a man departeth out of this life, in the same he is presented in judgment before God. But yet we must believe that before the day of judgment there is a Purgatory fire for certain small sins: because our Saviour saith, that he which speaketh blasphemy against the Holy Ghost, that it shall not be forgiven him, neither in this world, nor in the world to come: out of which sentence we learn, that some sins may be forgiven in this world, and some other in the world to come."</p>
+            <p style="margin-top:10px;">— "Por estas palabras es claro que, en el estado en que el hombre sale de esta vida, en ese mismo es presentado a juicio ante Dios. Pero hemos de creer que antes del día del juicio existe un fuego de Purgatorio para ciertos pecados leves: porque nuestro Salvador dice que quien hable blasfemia contra el Espíritu Santo, no le será perdonado ni en este mundo ni en el venidero: de cuya sentencia aprendemos que algunos pecados pueden ser perdonados en este mundo, y algunos otros en el venidero."</p>
+            <span class="fuente-padre"><b>San Gregorio Magno</b> — <em>Diálogos</em>, Libro IV, cap. XXXIX — trad. inglesa de dominio público, P. W. (1608), reed. E. G. Gardner (1911); versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>Es el mismo razonamiento ya expuesto exegéticamente en la Parte I: Gregorio simplemente
+        lo formaliza con precisión escolástica avant la lettre, confirmando que la lectura católica
+        de ese versículo no es una imposición posterior, sino la interpretación recibida ya en el
+        siglo VI por uno de los cuatro grandes Doctores latinos. Nótese, además, que tanto el texto
+        original (<em>"ignis... purgatorius"</em>) como su traducción clásica al inglés del siglo
+        XVII emplean ya el término "fuego de Purgatorio" como expresión técnica establecida —misma
+        raíz que ya había empleado Agustín, como se vio en el Artículo 6—.</p>
+      </article>
+
+      <!-- ART 2.8 -->
+      <article class="articulo" id="art-2-8">
+        <span class="articulo-etiqueta">Parte II · Artículo 8</span>
+        <h3>Orígenes y los testimonios orientales tempranos</h3>
+        <span class="capitular">E</span>
+        <p>n el Oriente cristiano, ya en el siglo III, Orígenes de Alejandría desarrolla —con un
+        lenguaje propio y a veces especulativo, que la Iglesia no recibió en todos sus detalles—
+        la idea de un fuego purificador que actúa sobre el alma después de la muerte según la
+        calidad de sus obras.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">ORÍGENES<br>† c. 253</div>
+          <div class="cita-padre-texto">
+            <p>"...it is a purificatory fire which is brought upon the world, and probably also on each one of those who stand in need of chastisement by the fire and healing at the same time, seeing it burns indeed, but does not consume, those who are without a material body [...] and which burns and consumes those who by their actions, words, and thoughts have built up wood, or hay, or stubble, in that which is figuratively termed a building."</p>
+            <p style="margin-top:10px;">— "...es un fuego purificador el que se trae sobre el mundo, y probablemente también sobre cada uno de los que necesitan a la vez castigo por el fuego y curación, ya que arde, en efecto, pero no consume a quienes carecen de cuerpo material [...] y arde y consume a quienes, por sus acciones, palabras y pensamientos, han edificado madera, heno o paja sobre aquello que figuradamente se llama edificio."</p>
+            <span class="fuente-padre"><b>Orígenes</b> — <em>Contra Celsum</em>, Libro V, cap. 15 — trad. inglesa de dominio público, <em>Ante-Nicene Fathers</em>, vol. IV (ed. Roberts-Donaldson, 1885); versión española literal propia</span>
+          </div>
+        </div>
+
+        <p>Es importante una precisión honesta: la escatología origeniana fue parcialmente censurada
+        en concilios posteriores por sus excesos especulativos (en particular la apocatástasis
+        universal). No se invoca aquí a Orígenes como autoridad dogmática sin matices, sino como
+        testimonio histórico de que la idea de un fuego purificador post mortem, distinto del fuego
+        que aniquila, estaba ya presente y siendo argumentada filosóficamente en Alejandría —y
+        después en Cesarea, donde escribió esta obra de madurez— en pleno siglo III, de forma
+        independiente del desarrollo latino de Tertuliano y Cipriano.</p>
+
+        <div class="objeciones">
+          <h4>Sobre San Juan Damasceno y la tradición oriental posterior</h4>
+          <div class="objecion">
+            <span class="num-obj">§</span>
+            <p>Más tarde, San Juan Damasceno (siglo VIII) atestiguará en su <em>Tercer Discurso sobre
+            la Dormición</em> la antigua costumbre de ofrecer sufragios por los difuntos, confirmando
+            que la praxis oriental —más allá de la formulación escolástica latina del término
+            "Purgatorio"— mantuvo siempre la creencia subyacente en la utilidad de la oración por
+            los muertos, núcleo común a ambas tradiciones, oriental y occidental.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 2.9 — TABLA -->
+      <article class="articulo" id="art-2-9">
+        <span class="articulo-etiqueta">Parte II · Artículo 9</span>
+        <h3>Tabla sinóptica del testimonio patrístico</h3>
+        <span class="capitular">P</span>
+        <p>ara facilitar la visión de conjunto, se presenta una tabla cronológica con los Padres
+        examinados, su sede o región, el siglo de su testimonio y el aspecto específico de la
+        doctrina que cada uno confirma.</p>
+
+        <div class="tabla-padres-envoltura">
+          <table class="tabla-padres">
+            <thead>
+              <tr><th>Padre</th><th>Región / Sede</th><th>Siglo</th><th>Aporte específico</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="nombre-padre">Tertuliano</td><td>Cartago (África)</td><td>II–III</td><td>Praxis litúrgica ya antigua de oblación por difuntos</td></tr>
+              <tr><td class="nombre-padre">Orígenes</td><td>Alejandría (Egipto)</td><td>III</td><td>Exégesis del fuego purificador sobre 1 Cor 3</td></tr>
+              <tr><td class="nombre-padre">San Cipriano</td><td>Cartago (África)</td><td>III</td><td>Distinción entre purificación gradual y gloria inmediata del mártir</td></tr>
+              <tr><td class="nombre-padre">San Cirilo de Jerusalén</td><td>Jerusalén</td><td>IV</td><td>Memento por los difuntos dentro del Canon eucarístico</td></tr>
+              <tr><td class="nombre-padre">San Juan Crisóstomo</td><td>Antioquía / Constantinopla</td><td>IV–V</td><td>Eficacia de la limosna y la oración por las almas</td></tr>
+              <tr><td class="nombre-padre">San Ambrosio</td><td>Milán</td><td>IV</td><td>Oración fúnebre y aplicación directa de 1 Cor 3</td></tr>
+              <tr><td class="nombre-padre">San Agustín</td><td>Hipona (África)</td><td>IV–V</td><td>Distinción pecado venial/mortal aplicada al fuego purgativo</td></tr>
+              <tr><td class="nombre-padre">San Gregorio Magno</td><td>Roma</td><td>VI</td><td>Sistematización de Mateo 12, 32 y formalización doctrinal</td></tr>
+              <tr><td class="nombre-padre">San Juan Damasceno</td><td>Damasco / Jerusalén</td><td>VIII</td><td>Confirmación de la praxis oriental de sufragios</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Segunda</h4>
+          <p>La doctrina aparece de forma independiente y simultánea en África (Tertuliano, Cipriano,
+          Agustín), en Egipto (Orígenes), en Palestina (Cirilo), en Asia Menor y Constantinopla
+          (Crisóstomo), en Italia (Ambrosio, Gregorio) y en Siria (Damasceno) — es decir, en
+          prácticamente todas las grandes sedes patrísticas del primer milenio, sin que exista un
+          solo Padre conocido que la haya negado expresamente. Esta convergencia geográfica y
+          cronológica, sin posibilidad de coordinación editorial entre autores tan dispersos, es
+          en sí misma un argumento de peso a favor de que se trata de fe recibida desde los
+          orígenes apostólicos, y no de invención tardía.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE III — ARGUMENTOS FILOSÓFICOS -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-tercera">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Tercera</span>
+        <h2>Argumentos de la razón natural</h2>
+        <p class="descripcion-parte">Más allá de la autoridad de la Escritura y de los Padres, la
+        recta razón filosófica —aplicada a los atributos divinos y a la condición del alma—
+        conduce a la misma conclusión.</p>
+        <div class="divisor-orna">✦ ✦ ✦</div>
+      </div>
+
+      <!-- ART 3.1 -->
+      <article class="articulo" id="art-3-1">
+        <span class="articulo-etiqueta">Parte III · Artículo 1</span>
+        <h3>De la justicia divina y la pena temporal</h3>
+        <span class="capitular">L</span>
+        <p>a teología clásica distingue entre la <strong>culpa</strong> del pecado (la ofensa misma
+        contra Dios) y la <strong>pena</strong> debida por él (la reparación del orden violado).
+        La absolución sacramental remite la culpa y la pena eterna, pero la experiencia común de la
+        vida cristiana —y la propia justicia de Dios— muestran que con frecuencia subsiste una pena
+        temporal, incluso después de perdonada la culpa.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo III — Forma Barbara</span>
+            <span class="forma">de la deuda temporal subsistente</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Todo pecado, incluso perdonado en su culpa, puede dejar tras de sí una deuda
+              temporal de reparación que la justicia exige satisfacer (cf. el caso de David, perdonado
+              en su culpa pero sometido a pena temporal: 2 Samuel 12, 13-14).</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Muchos fieles mueren con la culpa perdonada pero sin haber satisfecho enteramente
+              esa deuda temporal en vida.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego, para que la justicia divina —que no deja nada sin orden— quede plenamente
+              satisfecha, esa deuda temporal debe saldarse después de la muerte: en el Purgatorio.</span>
+            </div>
+          </div>
+        </div>
+
+        <p>Este argumento no opone la justicia a la misericordia divina, sino que muestra cómo
+        ambas convergen: la misericordia ya ha actuado al perdonar la culpa eterna; la justicia
+        actúa después, ordenando la reparación de lo que aún queda desordenado, sin que esto
+        suponga "pagar" la salvación, que sigue siendo don gratuito.</p>
+      </article>
+
+      <!-- ART 3.2 -->
+      <article class="articulo" id="art-3-2">
+        <span class="articulo-etiqueta">Parte III · Artículo 2</span>
+        <h3>De la santidad absoluta y la visión beatífica</h3>
+        <span class="capitular">L</span>
+        <p>a visión beatífica —contemplar a Dios "cara a cara" (1 Cor 13, 12)— es, por definición,
+        unión inmediata con la Santidad infinita. La metafísica clásica enseña que dos realidades
+        de naturaleza absolutamente dispar no pueden unirse inmediatamente sin que la inferior sea
+        elevada o purificada a la disposición requerida.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo IV — Forma Celarent</span>
+            <span class="forma">de la proporción necesaria entre sujeto y fin</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Ningún sujeto puede alcanzar inmediatamente un fin que excede infinitamente su
+              disposición actual, sin antes ser proporcionado a él.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>El alma que muere en gracia pero con apegos o imperfecciones residuales no está
+              todavía proporcionada a la visión inmediata de la Santidad infinita de Dios.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego esa alma requiere un proceso de proporción —de purificación— antes de
+              alcanzar la visión beatífica: lo que la fe llama Purgatorio.</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 3.3 -->
+      <article class="articulo" id="art-3-3">
+        <span class="articulo-etiqueta">Parte III · Artículo 3</span>
+        <h3>De la comunión de los santos y la oración eficaz</h3>
+        <span class="capitular">L</span>
+        <p>a Iglesia profesa en el Credo la "comunión de los santos", entendida tradicionalmente
+        como solidaridad espiritual entre la Iglesia peregrinante (en la tierra), la purgante (en
+        el Purgatorio) y la triunfante (en el cielo). Este argumento parte de la práctica universal
+        y constante —ya documentada bíblica y patrísticamente en las Partes I y II— de orar por
+        los difuntos.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo V — Forma Darii</span>
+            <span class="forma">de la eficacia presupuesta en la oración</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Toda práctica universal de la Iglesia, mantenida ininterrumpidamente desde los
+              orígenes apostólicos y nunca condenada como superstición, presupone un objeto real al
+              que corresponde.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>La oración por los difuntos es una práctica universal de la Iglesia mantenida
+              desde los orígenes apostólicos.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego la oración por los difuntos presupone un objeto real: almas que, no
+              estando en el infierno (donde la oración no aprovecha) ni consumadas ya en el cielo
+              (donde nada falta), pueden beneficiarse realmente de ella. Eso es el Purgatorio.</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 3.4 -->
+      <article class="articulo" id="art-3-4">
+        <span class="articulo-etiqueta">Parte III · Artículo 4</span>
+        <h3>De los grados de bondad y el término medio</h3>
+        <span class="capitular">L</span>
+        <p>a experiencia moral común reconoce grados muy diversos de santidad entre quienes mueren
+        "en gracia de Dios": desde el mártir que entrega la vida por Cristo hasta el creyente
+        tibio que muere arrepentido en el último instante tras una vida de negligencias. Tratar a
+        ambos de manera idéntica —gloria inmediata para uno y para otro— violaría el principio
+        clásico de proporción entre disposición y recompensa.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo VI — Forma Ferio</span>
+            <span class="forma">de la proporción moral</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Ningún acto de justicia perfecta trata de modo idéntico disposiciones moralmente
+              desiguales.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>El mártir y el creyente tibio arrepentido in extremis mueren con disposiciones
+              moralmente muy desiguales, aunque ambos en gracia.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego la justicia perfecta de Dios no los trata de modo idéntico: concede al
+              mártir la gloria inmediata y dispone para el segundo un proceso de purificación previo
+              —el Purgatorio— que restablece la debida proporción sin negarle la salvación ya
+              concedida en gracia.</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 3.5 -->
+      <article class="articulo" id="art-3-5">
+        <span class="articulo-etiqueta">Parte III · Artículo 5</span>
+        <h3>De la misericordia que no anula la justicia</h3>
+        <span class="capitular">U</span>
+        <p>na objeción frecuente sostiene que afirmar el Purgatorio empequeñece la misericordia
+        divina, como si Dios fuese "tacaño" con el perdón. El argumento filosófico responde
+        distinguiendo entre los atributos divinos, que en Dios son realmente idénticos entre sí,
+        pero que se manifiestan según modos formalmente distintos en su obrar <em>ad extra</em>.</p>
+
+        <div class="lista-fundamentos">
+          <li>La misericordia perdona la culpa eterna y abre la puerta a la salvación: esto ya
+          ha ocurrido en el alma que muere en gracia.</li>
+          <li>La justicia ordena que lo que queda desordenado sea reparado, sin que esto contradiga
+          la misericordia ya ejercida, igual que un padre que perdona a su hijo puede aun así
+          pedirle que repare el daño causado.</li>
+          <li>Negar toda pena temporal en nombre de la misericordia conduciría, llevado al extremo,
+          a negar también la justicia divina como atributo real —posición que ningún teísmo
+          clásico, cristiano o no, puede sostener sin caer en un voluntarismo que vacía de
+          sentido moral al universo.</li>
+        </div>
+
+        <div class="sintesis">
+          <h4>Conclusión del argumento</h4>
+          <p>El Purgatorio no es la negación de la misericordia, sino precisamente su fruto: solo
+          porque Dios ha sido misericordioso perdonando la culpa eterna, puede ahora ejercer su
+          justicia purificadora sin destruir al alma, sino perfeccionándola para la gloria que ya
+          le ha sido concedida en su raíz.</p>
+        </div>
+      </article>
+
+      <!-- ART 3.6 -->
+      <article class="articulo" id="art-3-6">
+        <span class="articulo-etiqueta">Parte III · Artículo 6</span>
+        <h3>Del amor imperfecto y la pena de daño temporal</h3>
+        <span class="capitular">L</span>
+        <p>a tradición teológica describe el sufrimiento propio del Purgatorio con dos elementos:
+        una <em>pena de sentido</em> (comúnmente figurada como fuego) y, sobre todo, una <em>pena
+        de daño</em> —el dolor, infinitamente más agudo, de desear a Dios con toda el alma y verse
+        todavía privado de su visión inmediata—.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo VII — Forma Darii</span>
+            <span class="forma">del deseo no saciado como pena suficiente</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Para un alma que ya conoce con certeza su salvación y ama a Dios sobre todas las
+              cosas, el mayor sufrimiento concebible es el retraso, aunque temporal, de la unión
+              plena con el Amado.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>Las almas del Purgatorio aman ya a Dios sobre todas las cosas, conocen su propia
+              salvación con certeza, pero todavía no gozan de la visión inmediata.</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego las almas del Purgatorio padecen el mayor sufrimiento concebible para un
+              alma salvada —y por eso la pena del Purgatorio es real y seria, sin que esto contradiga
+              que se trata, a la vez, de almas ya definitivamente salvas y en paz con Dios en cuanto
+              a su destino final.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sintesis">
+          <h4>Síntesis de la Parte Tercera</h4>
+          <p>Los seis argumentos expuestos —deuda temporal, proporción metafísica para la visión
+          beatífica, eficacia presupuesta de la oración, proporción moral entre méritos desiguales,
+          armonía entre justicia y misericordia, y la pena de daño como anhelo no saciado— no
+          dependen de ningún texto bíblico ni patrístico particular: se siguen de los atributos
+          divinos (justicia, santidad, misericordia) y de la condición moral del alma humana,
+          accesibles en principio a la sola razón natural reflexionando sobre lo que la fe revela
+          acerca de Dios y del hombre.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE IV — OBJECIONES MAYORES -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-cuarta">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Cuarta</span>
+        <h2>Objeciones mayores y respuestas</h2>
+        <p class="descripcion-parte">Las cuatro objeciones más frecuentes, presentadas con su
+        mayor fuerza posible antes de ser respondidas.</p>
+        <div class="divisor-orna">✦ ✦ ✦</div>
+      </div>
+
+      <!-- ART 4.1 -->
+      <article class="articulo" id="art-4-1">
+        <span class="articulo-etiqueta">Parte IV · Artículo 1</span>
+        <h3>"La sangre de Cristo basta y sobra: añadir el Purgatorio es restarle eficacia"</h3>
+        <span class="capitular">S</span>
+        <p>e formula así: si Cristo "lo pagó todo" en la cruz (cf. Juan 19, 30: "Todo está
+        consumado"), entonces sostener que el alma debe todavía purificarse después de la muerte
+        parece implicar que la obra redentora de Cristo fue insuficiente.</p>
+
+        <div class="objeciones">
+          <h4>Respuesta</h4>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Distinción —</span>
+            <p>Se confunden dos órdenes distintos: la <strong>suficiencia objetiva</strong> de la
+            redención —que en sí misma es infinita y no admite incremento alguno— y su
+            <strong>aplicación subjetiva y progresiva</strong> a cada alma concreta a lo largo del
+            tiempo. La Iglesia entera vive ya de esta distinción: la confesión sacramental, la
+            penitencia, la mortificación voluntaria del cristiano en esta vida no "completan" lo que
+            le faltaría a la cruz, sino que son los <em>medios mediante los cuales</em> la gracia ya
+            infinitamente ganada por Cristo se aplica progresivamente al alma concreta. El Purgatorio
+            es, sencillamente, la continuación de ese mismo proceso de aplicación —ya aceptado por
+            cualquier cristiano que reza, ayuna o se confiesa en esta vida— prolongado, para quien lo
+            necesite, más allá de la muerte. Cristo no "necesita ayuda": es el alma la que necesita
+            ser conformada a Él, y esa conformación, comenzada en vida, puede culminar después de
+            ella sin disminuir en nada el mérito infinito de la cruz.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 4.2 -->
+      <article class="articulo" id="art-4-2">
+        <span class="articulo-etiqueta">Parte IV · Artículo 2</span>
+        <h3>"La palabra 'Purgatorio' no aparece en la Biblia"</h3>
+        <span class="capitular">E</span>
+        <p>s cierto que el sustantivo "Purgatorio" no figura literalmente en el texto bíblico. De
+        ahí se objeta que toda la doctrina carecería de fundamento escriturístico.</p>
+
+        <div class="objeciones">
+          <h4>Respuesta</h4>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Primera precisión —</span>
+            <p>El argumento, llevado a su conclusión lógica, probaría demasiado: palabras como
+            "Trinidad", "Encarnación" o "transubstanciación" tampoco aparecen literalmente en el
+            texto bíblico, y sin embargo designan realidades que la Iglesia reconoce como reveladas,
+            porque se siguen necesariamente del conjunto de la Escritura leída con coherencia. La
+            ausencia de un término técnico no equivale a la ausencia de la realidad que ese término
+            nombra.</p>
+          </div>
+          <div class="respuesta-obj" style="margin-top:14px;">
+            <span class="etiqueta-resp">Segunda precisión —</span>
+            <p>Como se ha mostrado extensamente en la Parte Primera de este tratado, la realidad
+            misma —un estado de purificación temporal, distinto del cielo y del infierno, en el que
+            la oración por los difuntos resulta eficaz— está testificada en al menos siete líneas
+            textuales independientes del Antiguo y del Nuevo Testamento. El nombre es posterior; la
+            cosa nombrada, no.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 4.3 -->
+      <article class="articulo" id="art-4-3">
+        <span class="articulo-etiqueta">Parte IV · Artículo 3</span>
+        <h3>"Es una invención medieval, ligada a la venta de indulgencias"</h3>
+        <span class="capitular">E</span>
+        <p>se objeta con frecuencia que el Purgatorio fue "inventado" en la Edad Media,
+        particularmente para justificar abusos económicos vinculados a las indulgencias, como los
+        que denunció la Reforma del siglo XVI.</p>
+
+        <div class="objeciones">
+          <h4>Respuesta</h4>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Distinción histórica necesaria —</span>
+            <p>Conviene separar con cuidado dos cuestiones de naturaleza completamente distinta: la
+            doctrina del Purgatorio en sí misma, y los abusos históricos puntuales —reales y
+            justamente denunciados— en la predicación de las indulgencias en ciertas regiones de la
+            Europa del siglo XVI. La existencia de un abuso en la aplicación práctica de una doctrina
+            no invalida la doctrina misma, del mismo modo que el abuso financiero de algunos
+            predicadores televisivos contemporáneos no invalida la doctrina cristiana de la limosna.</p>
+          </div>
+          <div class="respuesta-obj" style="margin-top:14px;">
+            <span class="etiqueta-resp">Sobre la cronología —</span>
+            <p>Como demuestra exhaustivamente la Parte Segunda de este tratado, el testimonio
+            patrístico de la purificación post mortem y de la utilidad de la oración por los
+            difuntos es ininterrumpido desde el siglo II (Tertuliano) hasta el siglo VIII (Juan
+            Damasceno), abarcando las principales sedes de Oriente y Occidente, casi un milenio
+            antes de cualquier controversia medieval sobre indulgencias. Lo que la Edad Media
+            tardía aportó fue una sistematización escolástica más precisa del término y, en algunos
+            casos lamentables, abusos en su predicación práctica —no la invención de la doctrina
+            misma.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 4.4 -->
+      <article class="articulo" id="art-4-4">
+        <span class="articulo-etiqueta">Parte IV · Artículo 4</span>
+        <h3>"Contradice la justificación solo por la fe"</h3>
+        <span class="capitular">A</span>
+        <p>lgunas tradiciones cristianas objetan que, si la justificación es por la fe y no por las
+        obras (cf. Romanos 3, 28), entonces cualquier proceso purificador posterior a la muerte
+        introduciría subrepticiamente una "salvación por obras" incompatible con la gracia.</p>
+
+        <div class="objeciones">
+          <h4>Respuesta</h4>
+          <div class="respuesta-obj">
+            <span class="etiqueta-resp">Distinción capital —</span>
+            <p>El Purgatorio no es un mecanismo para "ganar" la salvación ni la justificación
+            inicial: el alma que entra en el Purgatorio está ya definitivamente salvada, ya
+            justificada, ya en gracia, con su destino final al cielo absolutamente garantizado y sin
+            posibilidad de condenación. El Purgatorio no decide si un alma se salva, sino que
+            purifica a un alma que ya está salvada, de las consecuencias temporales de pecados ya
+            perdonados en su culpa. No hay, por tanto, contradicción posible con "la justificación es
+            por la fe" porque el Purgatorio actúa enteramente después de que la justificación ya ha
+            tenido lugar: es efecto de la gracia ya recibida, no condición para recibirla.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PARTE V — MAGISTERIO Y SÍNTESIS -->
+    <!-- ====================================================== -->
+    <section class="parte" id="parte-quinta">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Parte Quinta</span>
+        <h2>Magisterio y síntesis doctrinal</h2>
+        <p class="descripcion-parte">La doctrina expuesta a lo largo de este tratado fue
+        solemnemente definida por la Iglesia en dos concilios ecuménicos y recogida en el
+        Catecismo universal.</p>
+        <div class="divisor-orna">✦ ✦ ✦</div>
+      </div>
+
+      <!-- ART 5.1 -->
+      <article class="articulo" id="art-5-1">
+        <span class="articulo-etiqueta">Parte V · Artículo 1</span>
+        <h3>Los Concilios de Florencia y Trento</h3>
+        <span class="capitular">E</span>
+        <p>l Concilio de Florencia (1439), en su decreto de unión con los griegos, definió la
+        existencia del Purgatorio en términos deliberadamente sobrios, evitando precisamente las
+        especulaciones más detalladas sobre la naturaleza exacta de su fuego, en respeto a la
+        sensibilidad de la tradición oriental.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">CONC.<br>FLOR.<br>1439</div>
+          <div class="cita-padre-texto">
+            <p>"Asimismo, si los verdaderos penitentes salieren de este mundo antes de haber satisfecho con frutos dignos de penitencia por lo cometido y omitido, sus almas son purgadas con penas purificatorias después de la muerte, y para ser aliviadas de esas penas les aprovechan los sufragios de los fieles vivos, tales como el sacrificio de la misa, oraciones y limosnas, y otros oficios de piedad, que los fieles acostumbran practicar por los otros fieles, según las instituciones de la Iglesia."</p>
+            <span class="fuente-padre"><b>Concilio de Florencia</b> — Decreto para los griegos, Bula <em>Laetentur Caeli</em> (6 de julio de 1439) — texto según Denzinger-Hünermann, trad. española de uso corriente</span>
+          </div>
+        </div>
+
+        <p>Más de un siglo después, frente a la negación protestante de la doctrina, el Concilio de
+        Trento la reafirmó solemnemente, recordando al mismo tiempo —con notable equilibrio
+        pastoral— que conviene evitar en la predicación las cuestiones más difíciles, sutiles o
+        meramente curiosas que no edifican la piedad.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">CONC.<br>TRID.<br>1563</div>
+          <div class="cita-padre-texto">
+            <p>"Habiendo enseñado la Iglesia católica en los sagrados concilios y muy recientemente en este Sínodo ecuménico, adoctrinada del Espíritu Santo por las Sagradas Escrituras y por la antigua tradición de los Padres, que hay purgatorio y que las almas retenidas allí son ayudadas por los sufragios de los fieles, pero, sobre todo, por el sacrificio del altar, digno de ser aceptado: el santo Sínodo manda a los obispos que procuren diligentemente que la sana doctrina sobre el purgatorio, transmitida por los Santos Padres y los sagrados concilios, sea creída por los fieles cristianos, mantenida, enseñada y predicada en todas partes."</p>
+            <span class="fuente-padre"><b>Concilio de Trento</b> — Sesión XXV, <em>Decreto sobre el Purgatorio</em> (1563) — texto según Denzinger-Hünermann (Dz. 1820), trad. española de uso corriente</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 5.2 -->
+      <article class="articulo" id="art-5-2">
+        <span class="articulo-etiqueta">Parte V · Artículo 2</span>
+        <h3>El Catecismo de la Iglesia Católica</h3>
+        <span class="capitular">L</span>
+        <p>a formulación contemporánea más autorizada y accesible se encuentra en el Catecismo
+        promulgado en 1992, que recoge en lenguaje moderno toda la tradición expuesta en este
+        tratado.</p>
+
+        <div class="cita-padre">
+          <div class="sello-padre">CIC<br>§1030–<br>1031</div>
+          <div class="cita-padre-texto">
+            <p>"Los que mueren en la gracia y en la amistad de Dios, pero imperfectamente purificados, aunque están seguros de su eterna salvación, sufren después de su muerte una purificación, a fin de obtener la santidad necesaria para entrar en la alegría del cielo. La Iglesia llama Purgatorio a esta purificación final de los elegidos, que es completamente distinta del castigo de los condenados."</p>
+            <span class="fuente-padre"><b>Catecismo de la Iglesia Católica</b>, §1030-1031 — texto oficial, edición típica (1992/1997)</span>
+          </div>
+        </div>
+
+        <div class="cita-padre">
+          <div class="sello-padre">CIC<br>§1031</div>
+          <div class="cita-padre-texto">
+            <p>"La tradición de la Iglesia, haciendo referencia a ciertos textos de la Escritura, habla de un fuego purificador: 'Respecto a ciertas faltas ligeras, es necesario creer que, antes del juicio, existe un fuego purificador, según lo que afirma Aquel que es la Verdad, al decir que, si alguno ha pronunciado una blasfemia contra el Espíritu Santo, esto no le será perdonado ni en este siglo, ni en el futuro' (San Gregorio Magno)."</p>
+            <span class="fuente-padre"><b>Catecismo de la Iglesia Católica</b>, §1031 — texto oficial, citando a San Gregorio Magno, <em>Diálogos</em> 4, 41, 3</span>
+          </div>
+        </div>
+
+        <p>El Catecismo añade, citando explícitamente a San Gregorio Magno y el testimonio de
+        Macabeos ya examinados en este tratado, que la Iglesia desde los primeros tiempos honró la
+        memoria de los difuntos y ofreció por ellos sufragios, en particular el sacrificio
+        eucarístico, fundándose en la convicción de que es bueno y saludable orar por los muertos
+        para que sean liberados de sus pecados.</p>
+
+        <div class="objeciones">
+          <h4>Precisión catequética importante</h4>
+          <div class="objecion">
+            <span class="num-obj">§</span>
+            <p>El Catecismo subraya con cuidado dos puntos que cierran toda lectura distorsionada de
+            la doctrina: primero, que el Purgatorio no es un "segundo infierno" ni un lugar de
+            condenación, sino estado seguro de salvación garantizada; segundo, que la Iglesia evita
+            deliberadamente especular sobre su naturaleza física o su duración temporal, limitándose
+            a afirmar la realidad del proceso purificador sin pretender describir sus modalidades
+            concretas, que pertenecen al misterio.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ART 5.3 — SÍNTESIS FINAL -->
+      <article class="articulo" id="art-5-3">
+        <span class="articulo-etiqueta">Parte V · Artículo 3</span>
+        <h3>Recapitulación silogística general</h3>
+        <span class="capitular">A</span>
+        <p>l cierre de este tratado, conviene reunir en un único silogismo recapitulativo la fuerza
+        conjunta de los tres órdenes de testimonio recorridos: bíblico, patrístico y filosófico.</p>
+
+        <div class="silogismo">
+          <div class="silogismo-cabecera">
+            <span>Silogismo VIII — Recapitulación general</span>
+            <span class="forma">de la triple convergencia</span>
+          </div>
+          <div class="silogismo-cuerpo">
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa M.</span>
+              <span>Toda doctrina atestiguada simultáneamente por múltiples textos bíblicos
+              independientes, por el consenso unánime y geográficamente disperso de los Padres desde
+              el siglo II, y por la demostración de la razón natural a partir de los atributos
+              divinos, posee la máxima certeza teológica alcanzable fuera de una definición dogmática
+              explícita —y, si además ha sido definida solemnemente en concilio ecuménico, alcanza
+              certeza de fe.</span>
+            </div>
+            <div class="silogismo-linea">
+              <span class="etiqueta">Premisa m.</span>
+              <span>La doctrina del Purgatorio está atestiguada por trece líneas bíblicas
+              independientes —Antiguo y Nuevo Testamento (Parte I)—, por el consenso patrístico
+              ininterrumpido desde Tertuliano hasta Juan Damasceno en todas las grandes sedes de la
+              cristiandad antigua (Parte II), por seis argumentos filosóficos derivados de los
+              atributos divinos (Parte III), y ha sido definida solemnemente por dos concilios
+              ecuménicos, Florencia y Trento (Parte V).</span>
+            </div>
+            <div class="silogismo-linea conclusion">
+              <span class="etiqueta">Conclusión</span>
+              <span>Luego la doctrina del Purgatorio posee certeza de fe católica: no es opinión
+              piadosa opcional, ni invención medieval, ni contradicción de la gracia, sino verdad
+              revelada, atestiguada y razonada que pertenece al depósito de la fe transmitido desde
+              los Apóstoles.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sintesis">
+          <h4>Palabra final</h4>
+          <p>Si esta doctrina es verdadera —y este tratado ha procurado mostrar que lo es, con la
+          mayor honestidad posible hacia las objeciones más serias— entonces se sigue una
+          consecuencia práctica, no meramente especulativa: que orar por los difuntos, ofrecer por
+          ellos el sacrificio eucarístico y practicar obras de caridad en su memoria no es piedad
+          sentimental, sino acto de justicia y amor real hacia almas reales que pueden, en efecto,
+          ser ayudadas. <em>Requiem aeternam dona eis, Domine, et lux perpetua luceat eis.</em></p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- GLOSARIO -->
+    <!-- ====================================================== -->
+    <section class="parte" id="glosario">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Apéndice</span>
+        <h2>Glosario de términos</h2>
+        <div class="divisor-orna">✦ ✦ ✦</div>
+      </div>
+
+      <div class="articulo">
+        <p><strong>Apocatástasis</strong> — Doctrina, asociada a ciertas especulaciones
+        origenianas y no recibida por la Iglesia, de la restauración final universal de todas las
+        criaturas, incluidos los demonios.</p>
+
+        <p><strong>Culpa</strong> — La ofensa misma cometida contra Dios por el pecado, distinta
+        de la pena debida por ella.</p>
+
+        <p><strong>Indulgencia</strong> — Remisión ante Dios de la pena temporal por pecados ya
+        perdonados en su culpa, concedida por la Iglesia mediante el tesoro de los méritos de
+        Cristo y de los santos.</p>
+
+        <p><strong>Pena de daño</strong> — El sufrimiento que consiste en verse privado, aunque
+        sea temporalmente, de la visión inmediata de Dios, deseada con todas las fuerzas del alma.</p>
+
+        <p><strong>Pena de sentido</strong> — El sufrimiento positivo, tradicionalmente figurado
+        como fuego, que acompaña a la purificación.</p>
+
+        <p><strong>Pena temporal</strong> — La consecuencia reparadora del pecado que subsiste
+        incluso después de perdonada la culpa eterna, y que debe ser satisfecha en esta vida o en
+        el Purgatorio.</p>
+
+        <p><strong>Sufragio</strong> — Toda obra de piedad —oración, limosna, ayuno, y
+        especialmente el sacrificio eucarístico— ofrecida por los vivos en favor de las almas del
+        Purgatorio.</p>
+
+        <p><strong>Visión beatífica</strong> — La contemplación inmediata y directa de la esencia
+        divina, propia de los bienaventurados en el cielo.</p>
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- FUENTES -->
+    <!-- ====================================================== -->
+    <section class="parte" id="fuentes">
+      <div class="parte-encabezado">
+        <span class="numero-romano">Apéndice</span>
+        <h2>Fuentes y ediciones citadas</h2>
+        <div class="divisor-orna">✦ ✦ ✦</div>
+      </div>
+
+      <div class="articulo">
+        <p>Las citas bíblicas siguen sustancialmente la versión de Mons. Felipe Scío de San Miguel
+        / Nácar-Colunga en su numeración tradicional, cotejada con la Vulgata para los pasajes
+        donde la formulación latina resulta especialmente significativa para el argumento (1 Cor 3,
+        13). Las citas patrísticas y conciliares se reproducen <strong>verbatim</strong> a partir de
+        ediciones de dominio público: el texto latino original según las ediciones críticas
+        estándar (CSEL, Patrologia Latina de Migne, The Latin Library) para Tertuliano, Cipriano,
+        Ambrosio y Agustín; la traducción inglesa clásica de la serie <em>Ante-Nicene</em> y
+        <em>Nicene and Post-Nicene Fathers</em> (ed. Philip Schaff, siglo XIX, dominio público) para
+        Orígenes, Cirilo de Jerusalén y Juan Crisóstomo; y la traducción inglesa de 1608 (reed.
+        Gardner, 1911) para los <em>Diálogos</em> de San Gregorio Magno. En cada caso se ofrece el
+        texto original o su traducción de dominio público, seguido de una versión española literal
+        elaborada para este tratado. Los textos conciliares y catequéticos siguen la numeración y
+        traducción de referencia de Denzinger-Hünermann y la edición típica del Catecismo de la
+        Iglesia Católica. Se recomienda al lector interesado acudir a las ediciones críticas
+        completas para el estudio directo e íntegro de cada obra.</p>
+      </div>
+    </section>
+
+    <!-- ============ PIE ============ -->
+    <footer class="pie-tratado">
+      <div class="crismon">✠</div>
+      <p>"Bienaventurados los muertos que mueren en el Señor" (Apocalipsis 14, 13)</p>
+      <p>Tratado compuesto como recurso de estudio apologético, para honra de las almas del
+      Purgatorio y utilidad de quien lo lea.</p>
+      <span class="sello-final">Laus Deo Semper</span>
+    </footer>
+
+  </main>
+</div>
+
+<button class="volver-arriba" id="volverArriba" aria-label="Volver al inicio">↑</button>
+
+<script>
+// ---- Toggle índice móvil ----
+const toggleIndice = document.getElementById('toggleIndice');
+const indiceLateral = document.getElementById('indiceLateral');
+const overlayIndice = document.getElementById('overlayIndice');
+
+function abrirIndice(){
+  indiceLateral.classList.add('abierto');
+  overlayIndice.classList.add('visible');
+  toggleIndice.textContent = '✕';
+}
+function cerrarIndice(){
+  indiceLateral.classList.remove('abierto');
+  overlayIndice.classList.remove('visible');
+  toggleIndice.textContent = '☰';
+}
+toggleIndice.addEventListener('click', () => {
+  indiceLateral.classList.contains('abierto') ? cerrarIndice() : abrirIndice();
+});
+overlayIndice.addEventListener('click', cerrarIndice);
+
+// cerrar al navegar en móvil
+document.querySelectorAll('.tabla-materias a').forEach(a=>{
+  a.addEventListener('click', () => {
+    if(window.innerWidth <= 980) cerrarIndice();
+  });
+});
+
+// ---- Buscador del índice ----
+// Cada bloque .tm-parte puede tener: un enlace de Parte (siempre visible si hay match)
+// y una lista de artículos. Buscamos en AMBOS niveles.
+const buscadorIndice = document.getElementById('buscadorIndice');
+const sinResultados = document.getElementById('sinResultadosIndice');
+
+buscadorIndice.addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  let huboResultado = false;
+
+  document.querySelectorAll('.tm-parte').forEach(parte => {
+    const tituloEl = parte.querySelector('.tm-parte-titulo');
+    const tituloTexto = tituloEl.textContent.toLowerCase();
+    const tituloCoincide = tituloTexto.includes(q);
+
+    const items = parte.querySelectorAll('ul.tm-articulos li');
+    let algunaVisible = false;
+
+    items.forEach(li => {
+      const texto = li.textContent.toLowerCase();
+      const coincide = q === '' || texto.includes(q);
+      li.style.display = coincide ? '' : 'none';
+      if(coincide) algunaVisible = true;
+    });
+
+    const mostrarParte = q === '' || tituloCoincide || algunaVisible;
+    parte.style.display = mostrarParte ? '' : 'none';
+
+    // si el título de la parte no coincide pero sí algún artículo, mostramos todos los artículos igualmente
+    if(!tituloCoincide && algunaVisible){
+      items.forEach(li => { li.style.display = ''; });
+    }
+
+    if(mostrarParte) huboResultado = true;
+  });
+
+  if(sinResultados) sinResultados.style.display = huboResultado ? 'none' : 'block';
+});
+
+// ---- Resaltar entrada activa al hacer scroll (IntersectionObserver) ----
+const enlacesIndice = Array.from(document.querySelectorAll('.tabla-materias a[href^="#"]'));
+const mapaEnlaces = new Map();
+enlacesIndice.forEach(a => {
+  const id = a.getAttribute('href').slice(1);
+  const el = document.getElementById(id);
+  if(el) mapaEnlaces.set(el, a);
+});
+
+function marcarActivo(enlace){
+  enlacesIndice.forEach(a => a.classList.remove('activo'));
+  if(enlace){
+    enlace.classList.add('activo');
+    // si el activo es un artículo, despliega visualmente su contexto (scroll dentro del aside)
+    if(window.innerWidth > 980){
+      const rectEnlace = enlace.getBoundingClientRect();
+      const rectAside = indiceLateral.getBoundingClientRect();
+      if(rectEnlace.top < rectAside.top + 60 || rectEnlace.bottom > rectAside.bottom - 20){
+        enlace.scrollIntoView({block:'center', behavior:'auto'});
+      }
+    }
+  }
+}
+
+let ultimoVisible = null;
+const observador = new IntersectionObserver((entradas) => {
+  // Elegimos la entrada visible más cercana a la parte superior del viewport
+  const visibles = entradas.filter(en => en.isIntersecting);
+  if(visibles.length === 0) return;
+  visibles.sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
+  const elegido = visibles[0].target;
+  if(elegido !== ultimoVisible){
+    ultimoVisible = elegido;
+    marcarActivo(mapaEnlaces.get(elegido));
+  }
+}, {
+  root:null,
+  rootMargin:'-110px 0px -65% 0px',
+  threshold:0
+});
+
+mapaEnlaces.forEach((_, el) => observador.observe(el));
+
+// ---- Barra de progreso + botón volver arriba ----
+const barraProgreso = document.getElementById('barraProgreso');
+const volverArriba = document.getElementById('volverArriba');
+
+function actualizarScroll(){
+  const alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
+  const progreso = alturaTotal > 0 ? (window.scrollY / alturaTotal) * 100 : 0;
+  barraProgreso.style.width = progreso + '%';
+  volverArriba.classList.toggle('visible', window.scrollY > 500);
+}
+
+window.addEventListener('scroll', actualizarScroll, {passive:true});
+window.addEventListener('load', actualizarScroll);
+window.addEventListener('resize', actualizarScroll);
+
+volverArriba.addEventListener('click', () => {
+  window.scrollTo({top:0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Transubstanciación: filosofía, Escritura, Padres y silogismos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070705;--bg-alt:#0d0d0a;--card:#131310;--card-2:#17170f;
+    --border:rgba(212,175,55,0.22);--border-soft:rgba(212,175,55,0.10);
+    --gold:#c9a227;--gold-bright:#ecc659;--gold-soft:rgba(212,175,55,0.10);
+    --white:#f4efe3;--white-dim:#b9b6ab;--maxw:880px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--white-dim);line-height:1.75;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--gold);color:#0a0a08;}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--card-2);border:1px solid var(--border);border-radius:6px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+  a{color:var(--gold-bright);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  strong{color:var(--white);font-weight:600;}
+  em{color:var(--white);}
+
+  #progressBar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));z-index:200;transition:width .12s linear;}
+  .skip-link{position:absolute;left:-999px;top:0;background:var(--gold);color:#000;padding:.5rem 1rem;z-index:300;font-weight:600;}
+  .skip-link:focus{left:0;}
+
+  /* === SIDEBAR === */
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:300px;background:var(--bg-alt);border-right:1px solid var(--border);overflow-y:auto;padding:2.2rem 1.4rem 3rem;z-index:100;}
+  .brand{display:flex;flex-direction:column;gap:.35rem;padding:0 .6rem;}
+  .brand .mark{width:42px;height:42px;display:flex;align-items:center;justify-content:center;}
+  .brand h1{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--white);font-weight:600;letter-spacing:.02em;margin-top:.6rem;}
+  .brand p{font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;margin-top:.2rem;}
+  .toc-title{margin:2.2rem 0 .8rem;padding:0 .6rem;font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .toc-list{list-style:none;display:flex;flex-direction:column;gap:.15rem;}
+  .toc-list a{display:flex;gap:.75rem;align-items:baseline;padding:.6rem .7rem;border-radius:6px;color:var(--white-dim);font-size:.88rem;border-left:2px solid transparent;transition:background .15s,color .15s,border-color .15s;}
+  .toc-list a .num{font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:700;font-size:.85rem;min-width:1.8rem;}
+  .toc-list a:hover{background:var(--gold-soft);color:var(--white);text-decoration:none;}
+  .toc-list a.active{background:var(--gold-soft);color:var(--gold-bright);font-weight:600;border-left-color:var(--gold);}
+  .toc-list a.active .num{color:var(--gold-bright);}
+  .sidebar-foot{margin-top:2.4rem;padding:1rem .7rem 0;border-top:1px solid var(--border-soft);font-size:.72rem;color:var(--white-dim);line-height:1.6;}
+  #menuToggle{display:none;position:fixed;top:1rem;left:1rem;z-index:150;width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--gold-bright);font-size:1.2rem;align-items:center;justify-content:center;cursor:pointer;}
+
+  /* === LAYOUT === */
+  main{margin-left:300px;}
+  .section{max-width:var(--maxw);margin:0 auto;padding:5.5rem 2.6rem 0;scroll-margin-top:1.5rem;}
+  .section:last-of-type{padding-bottom:2rem;}
+  .eyebrow{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.25;margin-bottom:1.4rem;}
+  h3{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:clamp(1.15rem,2.5vw,1.45rem);margin:2rem 0 .8rem;}
+  h4{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:1.08rem;margin-bottom:.5rem;}
+  p{margin-bottom:1.15rem;font-size:1.02rem;}
+  ul,ol{margin:0 0 1.15rem 1.4rem;}
+  li{margin-bottom:.5rem;}
+
+  /* === HERO === */
+  .hero{padding:5rem 2.6rem 3rem;max-width:var(--maxw);margin:0 auto;position:relative;}
+  .hero-rosette{position:absolute;top:1rem;right:1.5rem;opacity:.45;}
+  @media (prefers-reduced-motion:no-preference){.hero-rosette .spin{animation:spin 70s linear infinite;transform-origin:50% 50%;}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(2.2rem,6.5vw,3.6rem);line-height:1.15;max-width:700px;}
+  .hero h1 span{color:var(--gold-bright);}
+  .hero .lede{margin-top:1.4rem;font-size:1.12rem;color:var(--white-dim);max-width:660px;}
+  .pills{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.8rem;}
+  .pill{border:1px solid var(--border);border-radius:999px;padding:.4rem 1.1rem;font-size:.78rem;color:var(--gold-bright);letter-spacing:.06em;background:var(--gold-soft);}
+
+  /* === CALLOUTS === */
+  .callout{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:1.3rem 1.5rem;margin:1.6rem 0 2.2rem;}
+  .callout-title{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-weight:600;font-size:1.05rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
+  .callout p:last-child{margin-bottom:0;}
+  .callout.note{border-left:3px solid var(--gold);}
+  .callout.warning{border-left:3px solid #b04040;}
+  .callout-title.warning-title{color:#e06060;}
+
+  /* === VERSE CARD === */
+  .verse-card{border:1px solid var(--gold);border-radius:6px;padding:2.4rem 2rem;margin:2rem 0;text-align:center;background:linear-gradient(180deg,rgba(212,175,55,0.07),transparent 70%);position:relative;}
+  .verse-card::before,.verse-card::after{content:'';position:absolute;width:14px;height:14px;border:1px solid var(--gold);opacity:.6;}
+  .verse-card::before{top:8px;left:8px;border-right:none;border-bottom:none;}
+  .verse-card::after{bottom:8px;right:8px;border-left:none;border-top:none;}
+  .verse-greek{font-family:'Frank Ruhl Libre',serif;font-size:clamp(1.1rem,3vw,1.6rem);color:var(--gold-bright);line-height:2;margin-bottom:1.1rem;letter-spacing:.01em;}
+  .verse-translation{font-style:italic;color:var(--white);font-size:1.04rem;max-width:580px;margin:0 auto;}
+  .verse-ref{margin-top:1rem;font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;}
+
+  /* === GRID DE POSTURAS === */
+  .lectura-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.6rem 0;}
+  .lectura{border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.3rem;background:var(--card);}
+  .lectura .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:.15rem .55rem;margin-bottom:.7rem;}
+  .lectura p{font-size:.93rem;margin-bottom:0;}
+
+  /* === PADRES === */
+  .padre-card{border-left:3px solid var(--white);background:var(--card);border-radius:0 8px 8px 0;padding:1.1rem 1.35rem;margin:.9rem 0;}
+  .padre-card .name{color:var(--white);font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.1rem;}
+  .padre-card .work{color:var(--gold);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem;display:block;}
+  .padre-card p{font-size:.95rem;margin-bottom:0;}
+  .padre-card p+p{margin-top:.55rem;}
+  .quote-block{border-left:2px solid var(--gold);padding:.6rem 1rem;margin:.7rem 0;font-style:italic;color:var(--white);font-size:.96rem;}
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin:1.6rem 0;}
+
+  /* === BOXES === */
+  .box{border-left:3px solid var(--gold);background:var(--card);border-radius:0 8px 8px 0;padding:1.15rem 1.4rem;margin:1rem 0;}
+  .box.alt{border-left-color:var(--white);}
+  .box.danger{border-left-color:#b04040;}
+  .box-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.55rem;flex-wrap:wrap;}
+  .tag{font-family:'Cormorant Garamond',serif;font-weight:700;color:#0a0a08;background:var(--gold);padding:.18rem .65rem;border-radius:4px;font-size:.8rem;letter-spacing:.04em;white-space:nowrap;}
+  .tag.white{background:var(--white);}
+  .tag.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold-bright);}
+  .tag.red{background:#b04040;color:var(--white);}
+  .box p{margin-bottom:0;font-size:.98rem;}
+  .box p+p{margin-top:.6rem;}
+  .box .label{color:var(--gold-bright);font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;}
+
+  /* === SILOGISMOS === */
+  .silogismo{border:1px solid var(--gold);border-radius:10px;padding:1.8rem 1.6rem;margin:2rem 0;background:var(--card);}
+  .silogismo-title{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-weight:700;font-size:1.25rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+  .silogismo-title::before{content:'';display:block;width:22px;height:1px;background:var(--gold);}
+  .sil-line{display:flex;gap:.9rem;align-items:baseline;padding:.5rem 0;border-bottom:1px solid var(--border-soft);}
+  .sil-line:last-child{border-bottom:none;padding-top:.8rem;margin-top:.3rem;}
+  .sil-key{font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:700;font-size:1rem;min-width:2.4rem;}
+  .sil-text{font-size:.97rem;color:var(--white-dim);}
+  .sil-text strong{color:var(--white);}
+  .sil-line.conclusion{background:rgba(212,175,55,0.08);border-radius:6px;padding:.8rem .9rem;border-bottom:none;}
+  .sil-line.conclusion .sil-text{color:var(--white);}
+
+  /* === TABLA === */
+  .table-wrap{overflow-x:auto;margin:1.8rem 0;border:1px solid var(--border);border-radius:8px;}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:640px;}
+  th,td{padding:.9rem 1.05rem;border-bottom:1px solid var(--border-soft);text-align:left;vertical-align:top;}
+  th{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-size:1rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--gold);background:var(--bg-alt);position:sticky;top:0;}
+  tbody tr:hover{background:rgba(212,175,55,0.04);}
+  tbody tr:last-child td{border-bottom:none;}
+  td.flag{color:var(--gold-bright);font-weight:600;white-space:nowrap;}
+  td.red{color:#e06060;}
+  td.green{color:#7ec87e;}
+
+  /* === TIMELINE === */
+  .timeline{display:flex;flex-direction:column;gap:1.1rem;margin:1.8rem 0;border-left:2px solid var(--border);padding-left:1.5rem;}
+  .timeline-item{position:relative;}
+  .timeline-item::before{content:'';position:absolute;left:-1.62rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--gold);}
+  .timeline-item .year{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.05rem;}
+  .timeline-item p{margin:.25rem 0 0;font-size:.94rem;}
+
+  /* === ESCALA VISUAL === */
+  .scale-wrap{margin:1.8rem 0 2.2rem;}
+  .scale-labels{display:flex;justify-content:space-between;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.7rem;}
+  .scale-track{position:relative;height:6px;border-radius:999px;background:linear-gradient(90deg,var(--card-2),var(--gold-soft));border:1px solid var(--border);}
+  .scale-marker{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:var(--gold-bright);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--gold);transform:translate(-50%,-50%);}
+  .scale-caption{margin-top:.7rem;font-size:.84rem;color:var(--white-dim);text-align:center;}
+
+  /* === DIVIDERS === */
+  .divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3.2rem 0;opacity:.55;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border));}
+  .divider::after{background:linear-gradient(to left,transparent,var(--border));}
+  .divider svg{flex:0 0 auto;}
+
+  /* === FOOTER === */
+  footer{border-top:1px solid var(--border);margin-top:4rem;padding:2.4rem 2.6rem 3rem;max-width:var(--maxw);margin-left:auto;margin-right:auto;text-align:center;font-size:.85rem;color:var(--white-dim);}
+  footer .mark-small{margin:0 auto 1rem;opacity:.6;}
+
+  #backToTop{position:fixed;bottom:1.6rem;right:1.6rem;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:var(--card);color:var(--gold-bright);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:120;}
+  #backToTop.visible{opacity:1;pointer-events:auto;}
+  #backToTop:hover{transform:translateY(-3px);}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px;}
+
+  @media (max-width:980px){
+    .sidebar{transform:translateX(-100%);transition:transform .28s ease;box-shadow:20px 0 40px rgba(0,0,0,.5);}
+    .sidebar.open{transform:translateX(0);}
+    main{margin-left:0;}
+    #menuToggle{display:flex;}
+    .hero,.section{padding-left:1.4rem;padding-right:1.4rem;}
+    .hero{padding-top:4.6rem;}
+    .hero-rosette{display:none;}
+  }
+  @media (max-width:560px){.verse-card{padding:1.8rem 1.1rem;}.verse-greek{font-size:1rem;}}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="progressBar" aria-hidden="true"></div>
+<button id="menuToggle" aria-label="Abrir índice" aria-expanded="false">☰</button>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar" aria-label="Índice del documento">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">
+      <svg width="42" height="42" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1.1">
+          <rect x="15" y="15" width="30" height="30"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+          <circle cx="30" cy="30" r="22"/>
+        </g>
+      </svg>
+    </div>
+    <h1>La Transubstanciación</h1>
+    <p>Filosofía · Escritura · Padres</p>
+  </div>
+
+  <div class="toc-title">Índice interactivo</div>
+  <ul class="toc-list">
+    <li><a href="#inicio"><span class="num">00</span><span>Apertura</span></a></li>
+    <li><a href="#filosofia"><span class="num">01</span><span>Marco filosófico: sustancia y accidentes</span></a></li>
+    <li><a href="#juan6"><span class="num">02</span><span>Juan 6 — El pan de vida</span></a></li>
+    <li><a href="#ultima-cena"><span class="num">03</span><span>La Última Cena — las palabras de institución</span></a></li>
+    <li><a href="#padres"><span class="num">04</span><span>Los Padres de la Iglesia</span></a></li>
+    <li><a href="#magisterio"><span class="num">05</span><span>El Magisterio: Trento, Florencia, CIC</span></a></li>
+    <li><a href="#consustanciacion"><span class="num">06</span><span>Problemas con la consustanciación</span></a></li>
+    <li><a href="#simbolico"><span class="num">07</span><span>Problemas con la lectura simbólica</span></a></li>
+    <li><a href="#sangre-torah"><span class="num">08</span><span>La Torah y la sangre — la objeción</span></a></li>
+    <li><a href="#divinidad"><span class="num">09</span><span>¿La divinidad presente "de modo impropio"?</span></a></li>
+    <li><a href="#silogismos"><span class="num">10</span><span>Silogismos formales</span></a></li>
+    <li><a href="#sintesis"><span class="num">11</span><span>Síntesis general</span></a></li>
+  </ul>
+
+  <div class="sidebar-foot">
+    Análisis de la presencia real de Cristo en la Eucaristía: bases filosóficas, exégesis bíblica, Padres de la Iglesia, Magisterio y respuesta a las posturas alternativas.
+  </div>
+</nav>
+
+<!-- CONTENIDO -->
+<main id="contenido">
+
+  <!-- HERO -->
+  <header class="hero" id="inicio">
+    <div class="hero-rosette" aria-hidden="true">
+      <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+        <g class="spin">
+          <g stroke="var(--gold)" stroke-width="0.8">
+            <rect x="40" y="40" width="120" height="120"/>
+            <rect x="40" y="40" width="120" height="120" transform="rotate(45 100 100)"/>
+            <circle cx="100" cy="100" r="85"/>
+            <circle cx="100" cy="100" r="60"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="eyebrow">Apertura</div>
+    <h1>La Transubstanciación: <span>filosofía, Escritura, Padres y silogismos</span></h1>
+    <p class="lede">
+      La Eucaristía es, para la Iglesia Católica, el "Santísimo Sacramento", la fuente y la cumbre de toda la
+      vida cristiana. En su corazón se encuentra una afirmación que la distingue radicalmente de todas las demás
+      tradiciones occidentales: que en la consagración, el pan y el vino <strong>dejan de ser</strong> pan y
+      vino para convertirse en el Cuerpo, la Sangre, el Alma y la Divinidad de Cristo —real, verdadera y
+      sustancialmente presentes— aunque los accidentes (color, forma, sabor, peso) permanezcan.
+    </p>
+    <p class="lede">
+      Este documento defiende esa enseñanza desde cuatro ángulos simultáneos —filosófico, bíblico, exegético y
+      patrístico—, con citas verificadas de los Padres de la Iglesia, responde a las objeciones de la
+      consustanciación luterana y la lectura simbólica zuingliana, aborda la aparente tensión con la prohibición
+      toráica de comer sangre, aclara una confusión frecuente sobre la presencia de la divinidad, y cierra con
+      tres silogismos formales.
+    </p>
+    <div class="pills">
+      <span class="pill">Transubstanciación</span>
+      <span class="pill">Juan 6</span>
+      <span class="pill">Última Cena</span>
+      <span class="pill">Padres Apostólicos</span>
+      <span class="pill">Trento</span>
+      <span class="pill">Consustanciación</span>
+      <span class="pill">Torah y sangre</span>
+      <span class="pill">Concomitancia</span>
+    </div>
+  </header>
+
+  <!-- 01 — FILOSOFÍA -->
+  <section class="section" id="filosofia">
+    <div class="eyebrow">01 · Marco filosófico</div>
+    <h2>Sustancia y accidentes: el andamiaje conceptual</h2>
+    <p>
+      La noción filosófica que hace inteligible la transubstanciación proviene de la metafísica aristotélica tal
+      como fue incorporada y perfeccionada por la escolástica medieval —principalmente por Santo Tomás de
+      Aquino—. No se trata de que la Iglesia "impusiera" el aristotelismo al misterio eucarístico, sino que
+      esta metafísica ofrece el vocabulario más preciso para hablar de lo que ocurre, sin pretender que el
+      misterio quede reducido a un mecanismo filosófico comprensible por completo.
+    </p>
+
+    <h3>Los dos planos de la realidad</h3>
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">Sustancia</span>
+        <h4>Lo que una cosa <em>es</em></h4>
+        <p>
+          La sustancia es la realidad profunda, el "qué es" de una cosa —lo que la hace ser lo que es y no
+          otra cosa. No es directamente perceptible por los sentidos: nadie "ve" la sustancia del pan; se ve su
+          color, se nota su peso, se percibe su sabor.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Accidentes</span>
+        <h4>Cómo aparece una cosa</h4>
+        <p>
+          Los accidentes son las propiedades que se "asientan" en la sustancia: color, sabor, forma, peso,
+          extensión, textura. Normalmente, los accidentes no pueden existir separados de una sustancia que los
+          soporte; dependen de ella para existir.
+        </p>
+      </div>
+    </div>
+
+    <h3>El cambio natural y el cambio eucarístico</h3>
+    <p>
+      En cualquier cambio natural —la combustión de un leño, la digestión del pan, el envejecimiento de una
+      fruta— los accidentes cambian mientras la sustancia se mantiene o se convierte en otra de forma gradual
+      (con materia en común). La transubstanciación es el único tipo de cambio en el que ocurre lo inverso:
+      <strong>la sustancia cambia de forma total e instantánea, mientras que los accidentes permanecen</strong>.
+      No queda nada de la sustancia del pan ni del vino; solo permanecen sus propiedades sensibles, sostenidas
+      milagrosamente por la potencia divina sin la sustancia que en condiciones ordinarias las sustentaría.
+    </p>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">STh III, q.75, a.2</span><span class="label">Santo Tomás de Aquino</span></div>
+      <p>
+        "En este sacramento no se produce una conversión formal, es decir, de una forma en otra, ni accidental,
+        sino una conversión de toda la sustancia. Y por eso esta conversión no es natural en ningún sentido,
+        sino únicamente sobrenatural, efectuada por el solo poder de Dios."
+      </p>
+    </div>
+
+    <h3>¿Por qué el aristotelismo y no otro sistema?</h3>
+    <p>
+      La Iglesia no ha definido dogmáticamente que el aristotelismo sea la única filosofía legítima. Lo que
+      ha definido es el <em>contenido</em> del misterio —la conversión real de la sustancia—, no el sistema
+      filosófico que debe usarse para expresarlo. Sin embargo, la distinción sustancia-accidentes ha probado
+      ser particularmente apta para formular sin contradicción interna lo que ocurre: la presencia real de
+      Cristo bajo las apariencias del pan y el vino. Cualquier otra filosofía que pretenda dar cuenta del mismo
+      misterio tendrá que desarrollar categorías equivalentes o más precisas, no eliminar el problema que esas
+      categorías resuelven.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">Un misterio, no una explicación cerrada</div>
+      <p>
+        El lenguaje filosófico no "agota" el misterio eucarístico: lo delimita y lo protege de errores. Santo
+        Tomás es el primero en insistir en que la transubstanciación no es un mecanismo que la mente humana
+        pueda comprender en su totalidad, sino un hecho de fe cuya realidad el entendimiento puede articular
+        sin contradicción, pero cuya profundidad excede cualquier sistema conceptual.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 02 — JUAN 6 -->
+  <section class="section" id="juan6">
+    <div class="eyebrow">02 · Exégesis bíblica</div>
+    <h2>Juan 6: el discurso del pan de vida</h2>
+    <p>
+      Juan 6 es la columna vertebral bíblica de la doctrina eucarística. El capítulo se construye en tres
+      movimientos: la multiplicación de los panes (6:1-15), el discurso inaugural sobre el pan del cielo
+      (6:22-50) y el discurso eucarístico propiamente dicho (6:51-58), que concluye con el abandono de muchos
+      discípulos (6:60-66) —un detalle narrativo de importancia crucial para la interpretación.
+    </p>
+
+    <div class="verse-card">
+      <div class="verse-greek">ἐγώ εἰμι ὁ ἄρτος ὁ ζῶν ὁ ἐκ τοῦ οὐρανοῦ καταβάς· ἐάν τις φάγῃ ἐκ τούτου τοῦ ἄρτου ζήσεται εἰς τὸν αἰῶνα· καὶ ὁ ἄρτος δὲ ὃν ἐγὼ δώσω ἡ σάρξ μού ἐστιν ὑπὲρ τῆς τοῦ κόσμου ζωῆς.</div>
+      <div class="verse-translation">"Yo soy el pan vivo bajado del cielo. Si alguno come de este pan, vivirá eternamente; y el pan que yo daré es mi carne, para la vida del mundo."</div>
+      <div class="verse-ref">Juan 6:51</div>
+    </div>
+
+    <h3>Tres argumentos exegéticos decisivos</h3>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Arg. 1</span><span class="label">τρώγω — "masticar / comer con mordisco"</span></div>
+      <p>
+        En los versículos 54-58, Juan cambia el verbo genérico φαγεῖν (<em>phagein</em>, "comer") por τρώγειν
+        (<em>trōgein</em>), que en griego koiné designa el acto físico de masticar, morder, roer. Este verbo no
+        se usa en sentido metafórico en ningún otro texto del Nuevo Testamento. La elección no es casual:
+        el evangelista marca con el vocabulario más físico posible que lo que se está describiendo no es una
+        acción espiritual abstracta sino una ingesta real. Si Jesús hubiera querido decir "cree en mí" o "acéptame
+        simbólicamente", la lengua griega ofrecía múltiples términos más apropiados.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Arg. 2</span><span class="label">σάρξ — "carne" (no "espíritu", no "palabra")</span></div>
+      <p>
+        El término σάρξ (<em>sarx</em>) es deliberadamente terrenal, concreto, casi chocante. En el Cuarto
+        Evangelio, "sarx" designa la humanidad histórica y física de Cristo —el mismo término del Prólogo:
+        "el Verbo se hizo carne" (1:14)—. Si Jesús hubiera dicho "mi espíritu" (πνεῦμα) o "mi palabra"
+        (λόγος), la interpretación metafórica sería lingüísticamente plausible. "Sarx" no.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Arg. 3</span><span class="label">La reacción de los discípulos (6:60-66)</span></div>
+      <p>
+        Cuando los oyentes escandalizados exclaman que "este lenguaje es duro, ¿quién puede escucharlo?",
+        Jesús no los corrige ni aclara que "hablaba en sentido figurado". Esto sería el momento narrativo
+        natural para clarificar un malentendido —todos los Evangelios muestran a Jesús corrigiendo
+        interpretaciones erróneas en otros contextos—. En cambio, endurece el discurso y deja marchar a los
+        que no pueden aceptarlo. <strong>El abandono de los discípulos es la prueba textual más poderosa de
+        que la audiencia entendió las palabras de Jesús en sentido literal</strong>, y que Jesús no intentó
+        corregir esa comprensión.
+      </p>
+    </div>
+
+    <div class="verse-card">
+      <div class="verse-greek">ὁ τρώγων μου τὴν σάρκα καὶ πίνων μου τὸ αἷμα ἔχει ζωὴν αἰώνιον, κἀγὼ ἀναστήσω αὐτὸν τῇ ἐσχάτῃ ἡμέρᾳ.</div>
+      <div class="verse-translation">"El que come [mastica] mi carne y bebe mi sangre tiene vida eterna, y yo lo resucitaré el último día."</div>
+      <div class="verse-ref">Juan 6:54</div>
+    </div>
+
+    <h3>El trasfondo de la mano tintada en la Pascua</h3>
+    <p>
+      El capítulo 6 de Juan se sitúa deliberadamente "cerca de la Pascua de los judíos" (6:4). El lector
+      de la primera comunidad cristiana comprendería de inmediato la tipología: el maná del desierto
+      (6:31-33, 49) es la figura; el "pan bajado del cielo" que es la carne de Jesús es la realidad. El
+      cordero pascual cuya sangre protegió las casas en Egipto (Éxodo 12) es la figura; la sangre de Cristo
+      dada para beber es su cumplimiento. Toda la arquitectura tipológica del discurso apunta hacia una
+      realidad sacramental concreta, no hacia una metáfora flotante.
+    </p>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 03 — ÚLTIMA CENA -->
+  <section class="section" id="ultima-cena">
+    <div class="eyebrow">03 · Los relatos de institución</div>
+    <h2>La Última Cena: Mateo, Marcos, Lucas y Primera de Corintios</h2>
+    <p>
+      El Nuevo Testamento conserva cuatro relatos de la institución de la Eucaristía: Mateo 26:26-28,
+      Marcos 14:22-24, Lucas 22:19-20 y 1 Corintios 11:23-26 —este último el más antiguo en fecha de
+      composición, anterior a cualquiera de los Evangelios escritos—. Su convergencia en las mismas palabras
+      centrales constituye uno de los testimonios más sólidamente atestiguados de toda la literatura neotestamentaria.
+    </p>
+
+    <div class="verse-card">
+      <div class="verse-greek">τοῦτό ἐστιν τὸ σῶμά μου· τοῦτό ἐστιν τὸ αἷμά μου τῆς διαθήκης τὸ περὶ πολλῶν ἐκχυννόμενον.</div>
+      <div class="verse-translation">"Esto <em>es</em> mi Cuerpo... Esto <em>es</em> mi Sangre de la Alianza, que es derramada por muchos."</div>
+      <div class="verse-ref">Marcos 14:22-24 (paralelos en Mt 26:26-28; Lc 22:19-20; 1 Cor 11:24-25)</div>
+    </div>
+
+    <h3>El peso de ἐστίν: "es", no "significa"</h3>
+    <p>
+      La clave gramatical está en el verbo ἐστίν (<em>estin</em>): "es". Los defensores de la lectura simbólica
+      proponen que ἐστίν equivale aquí a "significa" o "representa" —como cuando se dice "el pan es la vida"
+      (es decir, "el pan representa la vida"). Sin embargo, varios argumentos filológicos y contextuales
+      dificultan esta lectura:
+    </p>
+    <ul>
+      <li>
+        En el arameo que habría usado Jesús, la frase de identificación (<em>den hū gûphî</em>, "esto es mi
+        cuerpo") carece de cópula explícita —el arameo no usa verbo "ser" en estas frases—, lo que refuerza
+        la identificación directa e inmediata, no la relación figurada.
+      </li>
+      <li>
+        Los textos de comparación que los reformadores usaron ("Yo soy la vid", "Yo soy la puerta") tienen una
+        estructura muy diferente: Jesús habla de sí mismo en tercera persona metafórica. En la institución,
+        señala un objeto concreto externo a sí mismo y lo identifica con su propio cuerpo —una estructura
+        gramatical que, en el contexto cultual judío, indica siempre identificación real, no representación.
+      </li>
+      <li>
+        La frase "mi sangre de la Alianza" evoca directamente Éxodo 24:8 ("esta es la sangre de la alianza"),
+        donde Moisés aspergía con sangre real al pueblo en el monte Sinaí. Cristo no dice "este es el símbolo
+        de la sangre": usa exactamente el mismo formulario que introduce una realidad efectiva.
+      </li>
+    </ul>
+
+    <h3>1 Corintios 11:27-29 — El argumento de la indignidad</h3>
+    <div class="box">
+      <div class="box-head"><span class="tag">1 Cor 11:27-29</span><span class="label">El pasaje más demoledor para el simbolismo</span></div>
+      <p>
+        "Por tanto, quien coma el pan o beba el cáliz del Señor indignamente, será reo del Cuerpo y de la
+        Sangre del Señor... porque quien come y bebe sin discernir el Cuerpo, come y bebe su propia
+        condenación."
+      </p>
+      <p>
+        San Pablo afirma que quien recibe la Eucaristía de forma indigna "peca contra el Cuerpo y la Sangre
+        del Señor" (<em>enochos estai tou sōmatos kai tou haimatos tou Kyriou</em>). Esta expresión,
+        en el Derecho judío del Primer Siglo, designa una responsabilidad moral directa frente a una
+        <strong>persona real</strong> —no frente a un símbolo—. Nadie "peca contra" la imagen de un rey;
+        se peca contra el rey mismo. Si la Eucaristía fuera solo un memorial simbólico, el nivel de
+        responsabilidad moral que Pablo le atribuye sería completamente desproporcionado.
+      </p>
+    </div>
+
+    <h3>1 Corintios 10:16 — "Participación" en el cuerpo y la sangre</h3>
+    <div class="verse-card">
+      <div class="verse-greek">τὸ ποτήριον τῆς εὐλογίας ὃ εὐλογοῦμεν, οὐχὶ κοινωνία ἐστὶν τοῦ αἵματος τοῦ Χριστοῦ; τὸν ἄρτον ὃν κλῶμεν, οὐχὶ κοινωνία τοῦ σώματος τοῦ Χριστοῦ ἐστίν;</div>
+      <div class="verse-translation">"El cáliz de bendición que bendecimos, ¿no es acaso comunión con la sangre de Cristo? El pan que partimos, ¿no es acaso comunión con el cuerpo de Cristo?"</div>
+      <div class="verse-ref">1 Corintios 10:16</div>
+    </div>
+    <p>
+      El término κοινωνία (<em>koinōnia</em>) designa participación real en una realidad, comunión efectiva
+      —no contemplación simbólica de una imagen—. Es el mismo vocabulario con el que Pablo describe la
+      participación en la naturaleza divina (2 Pe 1:4) y la comunión de vida entre los miembros del Cuerpo
+      de Cristo.
+    </p>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 04 — PADRES -->
+  <section class="section" id="padres">
+    <div class="eyebrow">04 · Tradición patrística</div>
+    <h2>Los Padres de la Iglesia: una voz unánime antes del debate medieval</h2>
+    <p>
+      Antes de que existieran Lutero, Zuinglio o cualquier otra reforma —antes incluso de que se acuñara la
+      palabra "transubstanciación" (siglo XII)—, los Padres de la Iglesia de los primeros siglos expresaron
+      sin ambigüedades su creencia en la presencia real de Cristo en la Eucaristía. Lo que cambió con la
+      escolástica medieval no fue la <em>fe</em>, sino el <em>vocabulario técnico</em> para articularla.
+    </p>
+
+    <h3>San Ignacio de Antioquía (c. 110 d.C.)</h3>
+    <p>Discípulo directo del apóstol Juan y obispo de Antioquía, fue martirizado en Roma. Sus cartas son los testimonios patrísticos más tempranos fuera del Nuevo Testamento.</p>
+    <div class="padre-card">
+      <span class="work">Carta a los Esmirnienses, 7,1</span>
+      <span class="name">La Eucaristía es la carne del Salvador</span>
+      <div class="quote-block">"Se abstienen de la Eucaristía y de la oración, porque no confiesan que la Eucaristía es la carne de nuestro Salvador Jesucristo, la misma que padeció por nuestros pecados y que el Padre resucitó por su bondad."</div>
+      <p>Ignacio critica a los docetas precisamente porque su cristología errónea (Cristo no tenía cuerpo real) los lleva a rechazar la Eucaristía: si su carne no fue real, tampoco lo es en la Eucaristía. La conexión es perfecta y confirma la lectura realista.</p>
+    </div>
+    <div class="padre-card">
+      <span class="work">Carta a los Romanos, 7,3</span>
+      <span class="name">El pan eucarístico como carne de Cristo</span>
+      <div class="quote-block">"Deseo el pan de Dios, que es la carne de Jesucristo, del linaje de David, y como bebida quiero su sangre, que es amor incorruptible."</div>
+    </div>
+
+    <h3>San Justino Mártir (c. 155 d.C.)</h3>
+    <p>El primer gran apologista cristiano, escribiendo para el emperador pagano —es decir, sin ningún motivo devocional que lo lleve a exagerar—, describe la Eucaristía con un detalle doctrinalmente muy preciso.</p>
+    <div class="padre-card">
+      <span class="work">Primera Apología, 66</span>
+      <span class="name">No pan común, sino carne del Verbo encarnado</span>
+      <div class="quote-block">"No recibimos esto como pan ordinario ni como bebida ordinaria; sino que, así como Jesucristo nuestro Salvador, habiéndose hecho carne por la Palabra de Dios, tuvo carne y sangre para nuestra salvación, así también se nos ha enseñado que ese alimento sobre el que se ha pronunciado la acción de gracias mediante la Palabra de oración que viene de Él —alimento con el cual se nutren nuestra sangre y nuestra carne por transmutación— es la Carne y la Sangre de aquel Jesús encarnado."</div>
+      <p>La expresión "por transmutación" (<em>κατὰ μεταβολήν</em>) es directamente precursora del lenguaje de conversión sustancial.</p>
+    </div>
+
+    <h3>San Ireneo de Lyon (c. 180 d.C.)</h3>
+    <div class="padre-card">
+      <span class="work">Adversus Haereses, IV, 18, 5</span>
+      <span class="name">El cáliz y el pan reciben la Palabra de Dios y se convierten</span>
+      <div class="quote-block">"El cáliz mezclado y el pan partido reciben la Palabra de Dios y se convierten en la Eucaristía, que es el Cuerpo y la Sangre de Cristo."</div>
+    </div>
+    <div class="padre-card">
+      <span class="work">Adversus Haereses, V, 2, 2-3</span>
+      <span class="name">La carne se alimenta del Cuerpo y la Sangre del Señor</span>
+      <div class="quote-block">"¿Cómo afirman que la carne es incapaz de recibir el don de Dios que es la vida eterna, siendo que se alimenta con el Cuerpo y la Sangre del Señor y es miembro de Él? [...] El cáliz de la creación [es] su Sangre, del que nutre nuestra sangre; el pan de la creación [es] su Cuerpo, del que fortalece nuestros cuerpos."</div>
+      <p>Ireneo usa la presencia real eucarística como argumento contra los gnósticos que negaban la resurrección corporal: si la carne se alimenta de algo que es realmente el Cuerpo de Cristo, puede ser resucitada por Él.</p>
+    </div>
+
+    <h3>San Cipriano de Cartago (c. 250 d.C.)</h3>
+    <div class="padre-card">
+      <span class="work">Epístola 63 (Ad Caecilium), 13</span>
+      <span class="name">La sangre de Cristo no puede estar ausente del cáliz</span>
+      <div class="quote-block">"¿Cómo vamos a derramar sangre por Cristo, si cuando hacemos el sacrificio del Señor no vertemos la sangre de Cristo? [...] Porque si Jesús Cristo, nuestro Señor y Dios, es Él mismo el Sumo Sacerdote de Dios Padre, y se ofreció a sí mismo como sacrificio al Padre, y ordenó que esto mismo se realizara en memoria de Él, entonces ese sacerdote hace verdaderamente las veces de Cristo quien imita lo que Cristo hizo, y ofrece entonces en la Iglesia un sacrificio verdadero y pleno a Dios Padre."</div>
+    </div>
+
+    <h3>San Cirilo de Jerusalén (c. 350 d.C.)</h3>
+    <p>Sus <em>Catequesis Mistagógicas</em> son el tratado más explícito y detallado sobre la Eucaristía en toda la patrística antigua, dirigido a los recién bautizados que por primera vez acceden al conocimiento completo del misterio.</p>
+    <div class="padre-card">
+      <span class="work">Catequesis Mistagógica IV (De Corpore et Sanguine), 1 y 3</span>
+      <span class="name">Creer a Cristo, no a los sentidos</span>
+      <div class="quote-block">"Cuando el mismo Señor declara y dice: 'Esto es mi Cuerpo', ¿quién osará dudar? Y cuando Él mismo ha afirmado y dicho: 'Esto es mi Sangre', ¿quién tendrá alguna vez la vacilación de decir que no es su Sangre? [...] Con plena certeza recibamos esto como el Cuerpo y la Sangre de Cristo. Pues bajo la figura del pan se nos da su Cuerpo, y bajo la figura del vino se nos da su Sangre, para que, habiendo recibido el Cuerpo y la Sangre de Cristo, seamos concorpóreos y consanguíneos con Él."</div>
+      <p>El término "figura" en Cirilo no significa "símbolo vacío": usa <em>τύπος</em> en el sentido de las apariencias externas bajo las cuales está presente la realidad.</p>
+    </div>
+
+    <h3>San Ambrosio de Milán (c. 380 d.C.)</h3>
+    <p>Ambrosio es el Padre que usa el lenguaje más cercano al de la transubstanciación escolástica, con una claridad que no admite interpretación metafórica.</p>
+    <div class="padre-card">
+      <span class="work">De Sacramentis, IV, 4, 14</span>
+      <span class="name">Antes de la consagración: pan. Después: Cuerpo de Cristo</span>
+      <div class="quote-block">"Quizás digas: 'Mi pan es ordinario.' Pero ese pan es pan antes de las palabras de los sacramentos; cuando sobreviene la consagración, del pan se convierte en el Cuerpo de Cristo." (<em>ubi accesserit consecratio, de pane fit corpus Christi</em>)</div>
+    </div>
+    <div class="padre-card">
+      <span class="work">De Mysteriis, 9, 50</span>
+      <span class="name">El poder de las palabras de Cristo supera al de la naturaleza</span>
+      <div class="quote-block">"La palabra de Cristo, que pudo hacer de la nada lo que no existía, ¿no puede cambiar las cosas que ya existen en lo que no eran? Porque no es menos darles una naturaleza nueva que cambiar las naturalezas."</div>
+    </div>
+
+    <h3>San Juan Crisóstomo (c. 390 d.C.)</h3>
+    <div class="padre-card">
+      <span class="work">Homilías sobre Mateo, 82, 4-5 (sobre Mt 26:26-29)</span>
+      <span class="name">Creer a Cristo, no a los sentidos</span>
+      <div class="quote-block">"No lo dudemos, ni nos detengamos en lo que los sentidos nos dicen, sino que, al contrario, estemos atentos a sus palabras; porque su palabra no puede engañar."</div>
+    </div>
+    <div class="padre-card">
+      <span class="work">Homilías sobre 1 Corintios, 24, 1-2 (sobre 1 Cor 10:16)</span>
+      <span class="name">El mismo cuerpo nacido de María</span>
+      <div class="quote-block">"¿Qué es el pan? El Cuerpo de Cristo. ¿Qué se convierten los que comulgan? Cuerpo de Cristo. No muchos cuerpos, sino un solo Cuerpo. [...] Este cuerpo está sentado allá arriba, en la diestra del Padre, y recibe aquí la adoración, y puede verse en la mano del sacerdote."</div>
+    </div>
+
+    <h3>San Agustín de Hipona (c. 400 d.C.)</h3>
+    <p>
+      Agustín usa con frecuencia el lenguaje del "signo" y "símbolo" en sus homilías más catequéticas —lo
+      que ha llevado a algunos reformados a citarlo como precursor del simbolismo—. Pero en contexto, Agustín
+      no niega la presencia real: distingue entre la "especie" visible (el signo sensible) y la "res" (la
+      realidad sacramental), que para él es precisamente el Cuerpo y la Sangre de Cristo realmente presentes.
+      Además, en sus textos más teológicos es igualmente explícito:
+    </p>
+    <div class="padre-card">
+      <span class="work">Sermo 272 (In die Pentecostes)</span>
+      <span class="name">El pan de la mesa es el Cuerpo de Cristo</span>
+      <div class="quote-block">"Lo que veis en la mesa del Señor es pan y cáliz; eso es lo que vuestros ojos os dicen. Pero lo que vuestra fe pide que se le enseñe: el pan es el Cuerpo de Cristo, el cáliz es la Sangre de Cristo." (<em>panis est corpus Christi, calix sanguis Christi</em>)</div>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">Consenso sin excepción antes del siglo IX</div>
+      <p>
+        No existe ningún Padre de la Iglesia —ni oriental ni occidental— de los cuatro primeros siglos que
+        interprete la Eucaristía como mero símbolo o memorial sin presencia real. El primer conflicto
+        teológico explícito sobre el significado de "esto es mi cuerpo" no aparece hasta la polémica entre
+        Pascasio Radberto y Ratramno en el siglo IX, y aun entonces ambas posiciones afirmaban la presencia
+        real —solo discutían cómo describirla técnicamente.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 05 — MAGISTERIO -->
+  <section class="section" id="magisterio">
+    <div class="eyebrow">05 · Definición dogmática</div>
+    <h2>El Magisterio: Florencia, Trento y el Catecismo</h2>
+    <p>
+      La doctrina de la transubstanciación no fue "inventada" en Trento ni en el Cuarto Concilio de Letrán:
+      fue <em>definida</em> formalmente cuando las controversias la pusieron en cuestión. La fe venía antes;
+      la definición dogmática precisa el vocabulario para protegerla.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="year">1215 — IV Concilio de Letrán</span>
+        <p>Primera aparición del término "transubstanciado" (transubstantiatis) en un documento conciliar ecuménico, al describir la Eucaristía y la autoridad del sacerdote sobre ella.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1439 — Concilio de Florencia, Decreto para los Armenios (Exsultate Deo)</span>
+        <p>Describe el efecto de las palabras de consagración: "por el poder de estas palabras, la sustancia del pan se convierte en el Cuerpo de Cristo, y la sustancia del vino en su Sangre."</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1551 — Concilio de Trento, Sesión XIII, Decreto sobre la Eucaristía</span>
+        <p>Definición dogmática más precisa: "Por la consagración del pan y del vino se opera la conversión de toda la sustancia del pan en la sustancia del Cuerpo de Cristo nuestro Señor, y de toda la sustancia del vino en la sustancia de su Sangre; conversión que la santa Iglesia Católica llama, acertada y propiamente, transubstanciación." (Cap. IV; Canon 2)</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1965 — Pablo VI, Mysterium Fidei</span>
+        <p>Reafirma la transubstanciación frente a intentos de reformularla como "transignificación" o "transfinalización": el cambio ontológico de la sustancia es condición necesaria para cualquier cambio de significado o finalidad.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1992 — Catecismo de la Iglesia Católica, §1374-1376</span>
+        <p>"En la santísima Eucaristía están 'contenidos verdadera, real y sustancialmente el Cuerpo y la Sangre, juntos con el alma y la divinidad, de nuestro Señor Jesucristo, y por consiguiente Cristo entero'." (CCC 1374, citando Trento)</p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">Canon 2 de Trento: definición técnica de herejía</div>
+      <p>
+        "Si alguno dijere que en el sacrosanto sacramento de la Eucaristía queda la sustancia del pan y del vino
+        juntamente con el Cuerpo y la Sangre de nuestro Señor Jesucristo, y negare aquella admirable y singular
+        conversión de toda la sustancia del pan en el Cuerpo, y de toda la sustancia del vino en la Sangre,
+        quedando tan solo las especies del pan y del vino, conversión que la Iglesia católica llama muy
+        apropiadamente transubstanciación: sea anatema."
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 06 — CONSUSTANCIACIÓN -->
+  <section class="section" id="consustanciacion">
+    <div class="eyebrow">06 · Postura alternativa I</div>
+    <h2>Problemas con la consustanciación luterana</h2>
+    <p>
+      La consustanciación —llamada por Lutero "unión sacramental" (<em>unio sacramentalis</em>)— sostiene que
+      el cuerpo y la sangre de Cristo están presentes "en, con y bajo" las especies de pan y vino, pero que
+      la sustancia del pan y la del vino <strong>permanecen</strong> junto a la sustancia del cuerpo y la
+      sangre de Cristo. Lutero rechazó tanto la lectura simbólica de Zuinglio como la transubstanciación
+      católica. El resultado es una posición que hereda los problemas metafísicos más graves de ambas sin
+      resolver ninguno.
+    </p>
+
+    <h3>Cuatro dificultades metafísicas insuperables</h3>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Problema 1</span><span class="label">Dos sustancias completas en el mismo lugar</span></div>
+      <p>
+        Afirmar que la sustancia del pan y la sustancia del cuerpo de Cristo coexisten en el mismo lugar,
+        al mismo tiempo, genera una dificultad ontológica sin precedentes: dos sustancias materiales completas
+        e irreducibles ocupando simultáneamente el mismo espacio. Esto no tiene ningún modelo en la metafísica
+        clásica ni en ninguna alternativa contemporánea. Lutero lo resolvió apelando a la <em>ubiquidad</em>
+        del cuerpo glorificado de Cristo —que puede estar en todos lados a la vez—, pero esto introduce un
+        nuevo problema: si Cristo está en todas partes corporalmente, ¿qué sentido tiene la "presencia
+        especial" en la Eucaristía?
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Problema 2</span><span class="label">¿Qué ocurre después de la comunión?</span></div>
+      <p>
+        Si la sustancia del pan permanece junto al cuerpo de Cristo, la pregunta es inevitable: una vez
+        consumida la Eucaristía, cuando el pan se digiere y se corrompe, ¿qué ocurre con la sustancia de Cristo
+        que estaba "en, con y bajo" esa sustancia de pan? La transubstanciación responde con elegancia: una
+        vez que las especies sensibles se destruyen (se digieren, se consumen), cesa la presencia de Cristo —no
+        porque Cristo "se destruya", sino porque ya no existen las condiciones sacramentales (las species).
+        La consustanciación no tiene una respuesta coherente a esta pregunta.
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Problema 3</span><span class="label">El texto no dice "en", sino "es"</span></div>
+      <p>
+        La consustanciación pretende respetar las palabras de institución, pero en realidad las modifica.
+        Jesús no dijo "en esto está mi cuerpo" o "con esto viene mi cuerpo": dijo "esto <em>es</em> mi cuerpo"
+        (identificación directa). La transubstanciación es, paradójicamente, la única doctrina que toma las
+        palabras de institución completamente en serio —porque afirma que "esto" (lo que sostiene Jesús en
+        sus manos) se ha convertido en lo que Él dice que es, sin que quede nada de lo que era antes.
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Problema 4</span><span class="label">Incoherencia con la tradición patrística</span></div>
+      <p>
+        Como se mostró en la sección 04, ningún Padre de los primeros cuatro siglos propone nada parecido a la
+        coexistencia de la sustancia del pan y la del cuerpo de Cristo. Todos hablan de conversión, cambio,
+        transmutación —no de añadidura o coexistencia. La posición luterana no tiene respaldo patrístico y
+        es, en ese sentido, tan "nueva" como la que pretende criticar.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 07 — SIMBÓLICO -->
+  <section class="section" id="simbolico">
+    <div class="eyebrow">07 · Postura alternativa II</div>
+    <h2>Problemas con la lectura simbólica (zuingliana)</h2>
+    <p>
+      La posición de Ulrico Zuinglio, y la que comparten hoy la mayoría de las tradiciones protestantes
+      evangélicas, lee las palabras de institución como una figura: "esto <em>representa</em> o <em>es imagen
+      de</em> mi cuerpo". La Eucaristía sería un memorial simbólico de la pasión de Cristo, sin que Él esté
+      presente de forma especial en el pan y el vino. Esta postura tiene problemas exegéticos, históricos y
+      lógicos que el propio Lutero ya señaló en su polémica con Zuinglio en Marburgo (1529).
+    </p>
+
+    <h3>Cuatro problemas exegéticos irresolubles</h3>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Problema 1</span><span class="label">τρώγω no es metafórico (Juan 6:54-58)</span></div>
+      <p>
+        Ya desarrollado en la sección 02: el evangelista Juan usa deliberadamente el verbo más físico posible
+        para la acción de comer. En los casi dos mil años de literatura griega que rodean al Nuevo Testamento,
+        τρώγω no se usa jamás en sentido metafórico. No existe ningún texto paralelo donde "masticar" signifique
+        "creer", "contemplar" o "recordar".
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Problema 2</span><span class="label">La reacción de los discípulos (Juan 6:60-66)</span></div>
+      <p>
+        Si Jesús hablaba en sentido simbólico, la reacción de sus discípulos —"este lenguaje es duro"— habría
+        sido un incomprensible malentendido que Jesús habría corregido de inmediato. Pero no lo corrige.
+        Los deja marchar. El escándalo de los discípulos solo tiene sentido si entendieron las palabras de
+        Jesús en sentido literal y Jesús <strong>quería</strong> que las entendieran así.
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Problema 3</span><span class="label">1 Cor 11:27-29 — culpabilidad frente al Cuerpo real</span></div>
+      <p>
+        San Pablo afirma que recibir indignamente la Eucaristía hace al comulgante "reo del Cuerpo y de la
+        Sangre del Señor" —una expresión de responsabilidad jurídico-moral frente a una persona, no frente a
+        un símbolo—. Y añade que muchos en Corinto están "enfermos y débiles" e incluso han muerto (1 Cor
+        11:30) como consecuencia. Ninguna teología del signo o símbolo puro puede dar cuenta de esta gravedad
+        sin caer en incoherencia.
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Problema 4</span><span class="label">Ausencia total en la patrística</span></div>
+      <p>
+        La lectura simbólica no aparece en ningún Padre de la Iglesia de los primeros cuatro siglos. Nadie
+        —ni en Oriente ni en Occidente, ni apologista ni teólogo especulativo— describió nunca la Eucaristía
+        como "solo un símbolo" antes de que Zuinglio introdujera esa lectura en el siglo XVI. Si la
+        interpretación simbólica fuera la "obvia" y la literal fuera un error doctrinal grave, habría algún
+        rastro de esa posición en los primeros siglos —donde se discutieron y condenaron prácticamente todas
+        las herejías imaginables. No lo hay.
+      </p>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">El propio Lutero contra Zuinglio</div>
+      <p>
+        En el Coloquio de Marburgo (1529), Lutero trazó sobre la mesa las palabras "<em>Hoc est corpus meum</em>"
+        y se negó a moverse de ellas. Dijo que prefería beber sangre de Cristo con los papistas a vino con los
+        zuinglianos. Aunque su posición final (consustanciación) tenga los problemas señalados en la sección 06,
+        su rechazo del puro simbolismo se basa en los mismos argumentos exegéticos que hemos expuesto.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 08 — SANGRE TORAH -->
+  <section class="section" id="sangre-torah">
+    <div class="eyebrow">08 · La objeción judía</div>
+    <h2>La Torah prohíbe beber sangre: ¿acaso Jesús nos manda violarla?</h2>
+    <p>
+      Es una de las objeciones más antiguas y más agudas contra la Eucaristía en sentido literal —y fue,
+      de hecho, lo que hizo que el discurso de Juan 6 resultara tan escandaloso para los oyentes judíos de
+      Jesús—. Los textos son inequívocos:
+    </p>
+
+    <div class="verse-card">
+      <div class="verse-greek">כִּי נֶפֶשׁ הַבָּשָׂר בַּדָּם הִוא וַאֲנִי נְתַתִּיו לָכֶם עַל-הַמִּזְבֵּחַ לְכַפֵּר עַל-נַפְשֹׁתֵיכֶם</div>
+      <div class="verse-translation">"Pues la vida de la carne está en la sangre; y yo os la he dado sobre el altar para hacer expiación por vuestras almas."</div>
+      <div class="verse-ref">Levítico 17:11 — también Lv 7:26-27; Gn 9:4; Hch 15:29</div>
+    </div>
+
+    <p>
+      La pregunta, formulada en toda su fuerza, es esta: si la sangre pertenece a Dios porque la vida está en
+      la sangre, y por eso está prohibida para el consumo humano, ¿cómo puede Jesús mandar a sus discípulos
+      "beber mi sangre"? ¿No sería esto una transgresión directa de la ley que el mismo Dios promulgó?
+    </p>
+
+    <h3>Cinco respuestas que se articulan entre sí</h3>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Respuesta 1</span><span class="label">La razón de la prohibición contiene ya la respuesta</span></div>
+      <p>
+        La prohibición de Levítico 17:11 no es arbitraria: tiene una razón explícita. La sangre es prohibida
+        porque "la vida de la carne está en la sangre", y esa vida-sangre ha sido <strong>dada</strong> por
+        Dios para la expiación en el altar. La sangre animal pertenece a Dios; el ser humano no puede tomarla
+        para sí porque es el vehículo de expiación reservado a la acción divina.
+      </p>
+      <p>
+        Pero ahora Dios mismo, en Cristo, <strong>da voluntariamente</strong> su propia sangre —no la toma
+        el hombre de Dios, sino que Dios la ofrece al hombre. La dirección de la transacción es exactamente
+        la inversa. El alma de la prohibición toráica era proteger lo sagrado de ser arrebatado por el hombre;
+        en la Eucaristía, lo sagrado se da al hombre por iniciativa de Dios.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Respuesta 2</span><span class="label">Figura vs. realidad: cumplimiento, no violación</span></div>
+      <p>
+        Toda la teología tipológica del Nuevo Testamento —y la carta a los Hebreos es el desarrollo más
+        sistemático— afirma que las prescripciones cultuales de la Torah son figuras (<em>typoi</em>) de la
+        realidad definitiva que llega en Cristo. Los sacrificios animales, cuya sangre estaba prohibida para
+        comer, eran <em>sombras</em> del único sacrificio real (Heb 10:1-14). La sangre de toros y machos
+        cabríos "nunca puede quitar pecados" (Heb 10:4), precisamente porque son sangre de criaturas finitas;
+        su sangre expiaba de forma tipológica, señalando hacia la sangre del Cordero definitivo.
+      </p>
+      <p>
+        Cuando Cristo dice "bebed mi sangre", está proclamando exactamente lo que el sistema levítico
+        <em>apuntaba hacia</em>: la entrega de la vida divina. Beber la Sangre de Cristo no "viola" la
+        prohibición del Levítico por la misma razón que la misa no "viola" la prohibición de sacrificios
+        fuera del templo (Lv 17:3-4): porque es la realidad que todas esas normas prefiguraban, no una
+        instancia más dentro del mismo sistema.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Respuesta 3</span><span class="label">Sangre de animal vs. Sangre del Verbo encarnado</span></div>
+      <p>
+        La prohibición toráica se refiere específicamente a la sangre de "la carne" (<em>basar</em>) —los
+        animales que el hombre mata para comer (Lv 17:13; Gn 9:4). La Sangre eucarística no es sangre de
+        un animal sacrificado para expiación ritual, sino la <strong>Sangre del Hijo de Dios encarnado</strong>.
+        No son dos instancias del mismo tipo de cosa: son categorías ontológicamente distintas. Aplicar
+        la norma de Levítico 17 a la Sangre de Cristo sería como aplicar la prohibición de venerar ídolos
+        a la veneración de Cristo —un error de categoría.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Respuesta 4</span><span class="label">La Sangre de Cristo da vida; la sangre animal quitaba vida (en sentido expiatorio)</span></div>
+      <p>
+        Levítico 17:11: "la sangre hace expiación al precio de la vida [del animal]". La sangre animal
+        funcionaba como precio de rescate —la vida de una criatura en lugar de la vida del pecador—. La
+        Sangre de Cristo, en cambio, no "sustituye" una vida: <strong>comunica</strong> la vida eterna del
+        mismo Dios al que la recibe. "El que beba mi sangre tiene vida eterna" (Jn 6:54). El movimiento es
+        radicalmente opuesto: la sangre toráica era tomada para expiación; la Sangre eucarística es dada
+        para deificación. Una priva de la vida al animal para cubrir el pecado del hombre; la otra imparte
+        la Vida divina al hombre para transformarlo.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Respuesta 5</span><span class="label">El Concilio de Jerusalén (Hch 15) y el alcance de la prohibición</span></div>
+      <p>
+        Hechos 15:29, en la carta del Concilio de Jerusalén, aún pide a los gentiles que se "abstengan de la
+        sangre" —lo que muestra que la prohibición tenía vigencia en la comunidad judeocristiana primitiva—.
+        Pero el mismo texto del capítulo 15 precede y coexiste con una comunidad que ya celebraba la
+        "fracción del pan" eucarística (Hch 2:42, 20:7). La Iglesia apostólica no vio ninguna contradicción
+        entre ambas cosas —lo cual confirma que, desde el principio, la Eucaristía se entendía como
+        cualitativamente diferente del tipo de "ingesta de sangre" que la Torah prohibía.
+      </p>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">Síntesis: ¿cumplimiento o violación?</div>
+      <p>
+        La ley prohibía apropiarse de la sangre —de la vida— que pertenece a Dios. Cristo, que <em>es</em>
+        Dios, no transgrede esa ley al dar su propia sangre: la cumple y la supera. El mandato eucarístico
+        no es "toma lo que es de Dios", sino "recibe lo que Dios da de sí mismo". Uno es usurpación;
+        el otro es don.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 09 — DIVINIDAD -->
+  <section class="section" id="divinidad">
+    <div class="eyebrow">09 · Aclaración doctrinal</div>
+    <h2>¿Está la divinidad presente "de modo impropio"? La concomitancia explicada</h2>
+    <p>
+      Esta es una confusión frecuente que vale la pena aclarar con precisión, porque puede generar un
+      malentendido grave. La respuesta corta es: <strong>la divinidad de Cristo está plena y propiamente
+      presente en la Eucaristía</strong>. Lo que es técnicamente distinto no es el <em>grado</em> de su
+      presencia, sino la <em>modalidad</em> por la que se explica esa presencia.
+    </p>
+
+    <h3>Dos modalidades de presencia eucarística (doctrina escolástica clásica)</h3>
+
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">En virtud de las palabras</span>
+        <h4><em>Ex vi verborum</em></h4>
+        <p>
+          Lo que está directamente implicado por las palabras de consagración: el <strong>Cuerpo</strong>
+          de Cristo bajo las especies del pan, y la <strong>Sangre</strong> de Cristo bajo las especies del
+          vino. Es lo que las palabras de institución identifican directamente.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Por concomitancia</span>
+        <h4><em>Per concomitantiam naturalem</em></h4>
+        <p>
+          Lo que está presente <em>necesariamente</em> porque es inseparable de lo que ya fue identificado:
+          el <strong>Alma</strong> de Cristo (pues no existe sin su cuerpo glorificado), y la
+          <strong>Divinidad</strong> (pues, por la unión hipostática, donde está la humanidad de Cristo,
+          allí está también su divinidad).
+        </p>
+      </div>
+    </div>
+
+    <div class="box alt">
+      <div class="box-head"><span class="tag white">CCC 1374 · Trento, Sesión XIII, Cap. III</span></div>
+      <p>
+        "En el santísimo sacramento de la Eucaristía están contenidos verdadera, real y sustancialmente el
+        Cuerpo y la Sangre, junto con el alma y la Divinidad, de nuestro Señor Jesucristo, y por consiguiente,
+        Cristo entero."
+      </p>
+    </div>
+
+    <h3>¿Por qué "por concomitancia" NO significa "de modo impropio"?</h3>
+    <p>
+      El término <em>per concomitantiam</em> —"por concomitancia"— describe la <strong>razón</strong> por la
+      que la divinidad está presente, no la <strong>calidad</strong> de esa presencia. La divinidad está
+      presente de forma <em>plena, real y sustancial</em> —no menor, no simbólica, no disminuida—. La
+      diferencia entre "en virtud de las palabras" y "por concomitancia" es una distinción en la vía de
+      explicación teológica, no una diferencia en la intensidad o realidad de la presencia.
+    </p>
+    <p>
+      Una analogía: cuando digo "esta habitación está ocupada", el hecho de que tú estés ahí puede ser "lo
+      que directamente afirmo", pero el hecho de que tu mente y tu voluntad también estén ahí es "por
+      concomitancia" —porque no puedes estar ahí sin tu mente y tu voluntad. Nadie diría que tu mente está
+      presente "de modo impropio" en la habitación. Está tan presente como tú.
+    </p>
+
+    <h3>La unión hipostática como fundamento</h3>
+    <p>
+      La razón por la que la divinidad está presente "por concomitancia" en la Eucaristía es la doctrina de la
+      <strong>unión hipostática</strong> definida en el Concilio de Calcedonia (451): Cristo es una sola
+      Persona en dos naturalezas —divina y humana— inseparables, sin confusión pero sin separación. Por
+      tanto, donde está el cuerpo glorificado de Cristo (su humanidad), allí está también su divinidad —no
+      porque la divinidad tenga una "presencia espacial" propia, sino porque <em>es inseparable</em> de la
+      humanidad del Verbo encarnado.
+    </p>
+
+    <div class="callout warning">
+      <div class="callout-title warning-title">⚠ La expresión "de modo impropio" sería incorrecta</div>
+      <p>
+        Decir que la divinidad está presente en la Eucaristía "de manera impropia" —en el sentido de "no
+        verdaderamente" o "de forma disminuida o indirecta"— sería doctrinalmente incorrecto. El Concilio
+        de Trento definió que <strong>"Cristo entero"</strong> está presente, lo que incluye sin excepción
+        la divinidad. Lo correcto es distinguir la <em>modalidad</em> (por concomitancia) de la
+        <em>realidad</em> (plena e íntegra).
+      </p>
+    </div>
+
+    <div class="box alt">
+      <div class="box-head"><span class="tag white">STh III, q.76, a.1 · Santo Tomás de Aquino</span></div>
+      <p>
+        "En este sacramento, por el poder de las palabras de la forma, se contiene el Cuerpo de Cristo bajo
+        las especies del pan, y la Sangre de Cristo bajo las especies del vino. Pero por concomitancia natural
+        y real, con el Cuerpo están el alma y la divinidad de Cristo, puesto que desde el momento de la
+        Encarnación el alma no se separa nunca del Cuerpo de Cristo; ni la divinidad de la humanidad."
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 10 — SILOGISMOS -->
+  <section class="section" id="silogismos">
+    <div class="eyebrow">10 · Argumentación formal</div>
+    <h2>Tres silogismos formales a favor de la transubstanciación</h2>
+    <p>
+      Los siguientes silogismos sintetizan de forma deductiva los argumentos desarrollados en las secciones
+      anteriores. No pretenden "demostrar" el misterio eucarístico como si fuera una ecuación matemática,
+      sino mostrar que la doctrina de la transubstanciación es la conclusión más coherente desde el punto de
+      vista bíblico, patrístico y metafísico.
+    </p>
+
+    <!-- SILOGISMO 1 -->
+    <div class="silogismo">
+      <div class="silogismo-title">Silogismo I — Desde el texto bíblico</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">Jesús dijo, señalando el pan: "Esto <strong>es</strong> mi Cuerpo"; y señalando el cáliz: "Esto <strong>es</strong> mi Sangre" (Mt 26:26-28; Mc 14:22-24; Lc 22:19-20; 1 Cor 11:24-25).</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">Cristo es la Verdad (Jn 14:6) y no puede engañar; sus palabras deben entenderse en su sentido más directo cuando no hay corrección contextual que indique lo contrario — y en Juan 6:60-66 Jesús no corrige la comprensión literal de sus oyentes sino que la confirma al dejar que los que no pueden aceptarla se vayan.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P3</span>
+        <span class="sil-text">El verbo "es" (ἐστίν / est) en este contexto de identificación directa no requiere y no admite una lectura metafórica sin un indicador textual explícito de ese alcance figurado, indicador que no aparece en ninguno de los cuatro relatos de institución.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>El pan consagrado es, en sentido real y no meramente simbólico, el Cuerpo de Cristo; el cáliz consagrado es su Sangre.</strong> Cualquier otra interpretación exige una modificación del texto que el propio texto no autoriza.</span>
+      </div>
+    </div>
+
+    <!-- SILOGISMO 2 -->
+    <div class="silogismo">
+      <div class="silogismo-title">Silogismo II — Desde la metafísica</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">En la consagración, algo cambia realmente en el pan y el vino: los apóstoles que recibieron lo que Jesús les dio no recibieron "pan ordinario" sino algo que Pablo califica de una gravedad moral tal que su recepción indigna conlleva "juicio" y es ser "reo del Cuerpo y la Sangre del Señor" (1 Cor 11:27-29). Ese nivel de responsabilidad solo se justifica ante una presencia real, no ante un símbolo.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">Las propiedades sensibles del pan y el vino (color, sabor, forma, peso, extensión) permanecen inalteradas tras la consagración — lo que excluye que lo que cambia sea la apariencia (los accidentes).</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P3</span>
+        <span class="sil-text">Si algo real cambia pero los accidentes no cambian, lo que cambia es necesariamente la sustancia — aquello que la cosa "es" en su realidad profunda.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>La sustancia del pan y del vino se convierte en la sustancia del Cuerpo y la Sangre de Cristo, mientras que los accidentes permanecen:</strong> esto es precisamente lo que la Iglesia llama transubstanciación.</span>
+      </div>
+    </div>
+
+    <!-- SILOGISMO 3 -->
+    <div class="silogismo">
+      <div class="silogismo-title">Silogismo III — Desde la tradición apostólica</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">Si las palabras de Jesús en la Última Cena significaran "esto <em>representa</em> mi Cuerpo", habría en la Iglesia de los primeros siglos —donde la doctrina eucarística se vivía, transmitía y celebraba diariamente— algún testimonio de esa interpretación simbólica.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">No existe ningún Padre de la Iglesia de los siglos I al IV que interprete la Eucaristía como puro memorial simbólico sin presencia real. Todos —Ignacio, Justino, Ireneo, Cipriano, Cirilo, Ambrosio, Crisóstomo, Agustín— afirman que el pan y el cáliz son el Cuerpo y la Sangre de Cristo en sentido real.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P3</span>
+        <span class="sil-text">La doctrina simbólica no hace su primera aparición hasta el siglo XVI, casi 1.500 años después de la institución eucarística y de la muerte de todos los que conocieron a los apóstoles o a sus discípulos directos.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>La interpretación simbólica carece de respaldo en la tradición apostólica y no puede ser "lo que siempre se creyó".</strong> La presencia real es la fe constante e ininterrumpida de la Iglesia desde los orígenes.</span>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 11 — SÍNTESIS -->
+  <section class="section" id="sintesis">
+    <div class="eyebrow">11 · Vista panorámica</div>
+    <h2>Síntesis general</h2>
+    <p>
+      Las cuatro columnas del argumento se refuerzan mutuamente: la metafísica proporciona el vocabulario
+      preciso para articular lo que el texto afirma; el texto bíblico proporciona el contenido que la
+      metafísica no podría deducir por sí sola; los Padres demuestran que esa lectura del texto es la
+      original y constante; y el Magisterio protege esa fe con definiciones precisas cuando la controversia
+      la amenaza.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Argumento</th><th>Base</th><th>Conclusión</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="flag">Filosófico</td>
+            <td>Distinción sustancia-accidentes (Aristóteles / Tomás)</td>
+            <td>Solo la conversión de la sustancia explica el cambio real sin cambio en las apariencias.</td>
+          </tr>
+          <tr>
+            <td class="flag">Juan 6</td>
+            <td>τρώγω, σάρξ, reacción de los discípulos</td>
+            <td>Jesús afirma la presencia real y no corrige la comprensión literal.</td>
+          </tr>
+          <tr>
+            <td class="flag">Última Cena</td>
+            <td>ἐστίν; 1 Cor 11:27-29; 1 Cor 10:16</td>
+            <td>Identificación directa, responsabilidad moral real, participación ontológica.</td>
+          </tr>
+          <tr>
+            <td class="flag">Patrístico</td>
+            <td>Ignacio, Justino, Ireneo, Cipriano, Cirilo, Ambrosio, Crisóstomo, Agustín</td>
+            <td>Presencia real afirmada sin excepción en los primeros cuatro siglos.</td>
+          </tr>
+          <tr>
+            <td class="flag">Contra la consustanciación</td>
+            <td>Dos sustancias en un lugar; qué ocurre tras la comunión; "es" ≠ "contiene"</td>
+            <td>Posición metafísicamente inconsistente y sin respaldo patrístico.</td>
+          </tr>
+          <tr>
+            <td class="flag">Contra el simbolismo</td>
+            <td>τρώγω; Jn 6:60-66; 1 Cor 11:27-29; silencio patrístico</td>
+            <td>Sin fundamento exegético ni histórico en los primeros 1.500 años.</td>
+          </tr>
+          <tr>
+            <td class="flag">Objeción de la sangre</td>
+            <td>Lv 17:11; tipología de Hebreos; dirección del don</td>
+            <td>Cumplimiento y superación de la figura, no violación de la ley.</td>
+          </tr>
+          <tr>
+            <td class="flag">Divinidad y concomitancia</td>
+            <td>Unión hipostática; STh III q.76; Trento Ses. XIII</td>
+            <td>La divinidad está plena y propiamente presente; "por concomitancia" describe la vía, no disminuye la realidad.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">Una nota final</div>
+      <p>
+        La Eucaristía no es, para la fe católica, una teoría metafísica que se acepta intelectualmente: es
+        el mismo Cristo que se da, que se comunica, que permanece entre los suyos —"Yo estoy con vosotros
+        todos los días hasta el fin del mundo" (Mt 28:20)—. Las categorías filosóficas sirven para articular
+        sin contradicción lo que la fe recibe con adoración. El pan consagrado no es una representación de
+        Cristo: es Cristo. Esta es la afirmación más antigua, más constante y más radical de la tradición
+        cristiana, y los documentos patrísticos, bíblicos y magisteriales reunidos en este texto son todos
+        testigos de una sola cosa: que quien es la Vida dio su Vida para que la tuviéramos en abundancia.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mark-small" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+          <circle cx="30" cy="30" r="22"/>
+        </g>
+      </svg>
+    </div>
+    <p>Defensa de la transubstanciación desde la filosofía, la exégesis, los Padres de la Iglesia y el Magisterio — con respuesta a posturas alternativas y silogismos formales.</p>
+  </footer>
+
+</main>
+
+<button id="backToTop" aria-label="Volver arriba">↑</button>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const menuToggle = document.getElementById('menuToggle');
+  menuToggle.addEventListener('click', () => {
+    const open = sidebar.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open);
+    menuToggle.textContent = open ? '✕' : '☰';
+  });
+  document.querySelectorAll('.toc-list a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 980) {
+        sidebar.classList.remove('open');
+        menuToggle.textContent = '☰';
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  const progressBar = document.getElementById('progressBar');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = (isFinite(scrolled) ? scrolled : 0) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  const sections = document.querySelectorAll('main .section, main .hero');
+  const links = document.querySelectorAll('.toc-list a');
+  const linkMap = {};
+  links.forEach(l => linkMap[l.getAttribute('href').slice(1)] = l);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        if (linkMap[entry.target.id]) linkMap[entry.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  const backToTop = document.getElementById('backToTop');
+  document.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 600);
+  }, {passive:true});
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>

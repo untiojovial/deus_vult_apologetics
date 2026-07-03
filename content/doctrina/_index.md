@@ -23,3 +23,8 @@ Aqui se desarrollaran los contenidos esenciales de la fe cristiana de forma orde
 - [Divinidad de Cristo y del Espíritu Santo en Hechos (Dossier)](/doctrina/divinidad-cristo-hechos-dossier/)
 - [Credo Divino Prepaulino de Filipenses (Dossier)](/doctrina/credo-divino-prepaulino-filipenses-dossier/)
 - [Cristo Impecabilidad: Tentación e Impecabilidad de Cristo (Dossier)](/doctrina/cristo-impecabilidad-dossier/)
+- [Maria, Madre de Dios (Dossier)](/doctrina/maria-madre-de-dios-dossier/)
+- [De Purgatorio (Dossier)](/doctrina/de-purgatorio-dossier/)
+- [De Assumptione (Dossier)](/doctrina/de-assumptione-dossier/)
+- [La Transubstanciacion (Dossier)](/doctrina/transubstanciacion-dossier/)
+- [Contra la Sola Scriptura (Dossier)](/doctrina/sola-scriptura-dossier/)

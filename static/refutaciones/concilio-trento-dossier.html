@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Concilio de Trento: la Iglesia, la Reforma y la respuesta católica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070705;--bg-alt:#0d0d0a;--card:#131310;--card-2:#17170f;
+    --border:rgba(212,175,55,0.22);--border-soft:rgba(212,175,55,0.10);
+    --gold:#c9a227;--gold-bright:#ecc659;--gold-soft:rgba(212,175,55,0.10);
+    --white:#f4efe3;--white-dim:#b9b6ab;--maxw:880px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--white-dim);line-height:1.78;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--gold);color:#0a0a08;}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--card-2);border:1px solid var(--border);border-radius:6px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+  a{color:var(--gold-bright);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  strong{color:var(--white);font-weight:600;}
+  em{color:var(--white);}
+
+  #progressBar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));z-index:200;transition:width .12s linear;}
+  .skip-link{position:absolute;left:-999px;top:0;background:var(--gold);color:#000;padding:.5rem 1rem;z-index:300;font-weight:600;}
+  .skip-link:focus{left:0;}
+
+  /* SIDEBAR */
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:308px;background:var(--bg-alt);border-right:1px solid var(--border);overflow-y:auto;padding:2.2rem 1.4rem 3rem;z-index:100;}
+  .brand{display:flex;flex-direction:column;gap:.35rem;padding:0 .6rem;}
+  .brand .mark{width:44px;height:44px;display:flex;align-items:center;justify-content:center;}
+  .brand h1{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--white);font-weight:600;letter-spacing:.02em;margin-top:.6rem;line-height:1.3;}
+  .brand p{font-size:.76rem;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;margin-top:.25rem;}
+  .toc-title{margin:2.2rem 0 .8rem;padding:0 .6rem;font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .toc-list{list-style:none;display:flex;flex-direction:column;gap:.12rem;}
+  .toc-list a{display:flex;gap:.7rem;align-items:baseline;padding:.55rem .7rem;border-radius:6px;color:var(--white-dim);font-size:.86rem;border-left:2px solid transparent;transition:background .15s,color .15s,border-color .15s;}
+  .toc-list a .num{font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:700;font-size:.85rem;min-width:1.8rem;}
+  .toc-list a:hover{background:var(--gold-soft);color:var(--white);text-decoration:none;}
+  .toc-list a.active{background:var(--gold-soft);color:var(--gold-bright);font-weight:600;border-left-color:var(--gold);}
+  .toc-list a.active .num{color:var(--gold-bright);}
+  .sidebar-foot{margin-top:2.4rem;padding:1rem .7rem 0;border-top:1px solid var(--border-soft);font-size:.72rem;color:var(--white-dim);line-height:1.6;}
+  #menuToggle{display:none;position:fixed;top:1rem;left:1rem;z-index:150;width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--gold-bright);font-size:1.2rem;align-items:center;justify-content:center;cursor:pointer;}
+
+  /* LAYOUT */
+  main{margin-left:308px;}
+  .section{max-width:var(--maxw);margin:0 auto;padding:5.5rem 2.6rem 0;scroll-margin-top:1.5rem;}
+  .section:last-of-type{padding-bottom:2rem;}
+  .eyebrow{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.22;margin-bottom:1.4rem;}
+  h3{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:clamp(1.15rem,2.5vw,1.45rem);margin:2.2rem 0 .8rem;}
+  h4{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:1.08rem;margin-bottom:.5rem;}
+  p{margin-bottom:1.15rem;font-size:1.02rem;}
+  ul,ol{margin:0 0 1.15rem 1.4rem;}
+  li{margin-bottom:.5rem;font-size:1.02rem;}
+
+  /* HERO */
+  .hero{padding:5rem 2.6rem 3rem;max-width:var(--maxw);margin:0 auto;position:relative;}
+  .hero-rosette{position:absolute;top:1rem;right:1.5rem;opacity:.4;}
+  @media (prefers-reduced-motion:no-preference){.hero-rosette .spin{animation:spin 80s linear infinite;transform-origin:50% 50%;}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(2.1rem,6vw,3.5rem);line-height:1.14;max-width:720px;}
+  .hero h1 span{color:var(--gold-bright);}
+  .hero .lede{margin-top:1.4rem;font-size:1.12rem;color:var(--white-dim);max-width:670px;line-height:1.8;}
+  .pills{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.8rem;}
+  .pill{border:1px solid var(--border);border-radius:999px;padding:.4rem 1.1rem;font-size:.77rem;color:var(--gold-bright);letter-spacing:.06em;background:var(--gold-soft);}
+
+  /* CALLOUTS */
+  .callout{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:1.3rem 1.5rem;margin:1.6rem 0 2.2rem;}
+  .callout.note{border-left:3px solid var(--gold);}
+  .callout.danger{border-left:3px solid #9a3535;}
+  .callout-title{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-weight:600;font-size:1.05rem;margin-bottom:.55rem;display:flex;align-items:center;gap:.5rem;}
+  .callout-title.red{color:#d96060;}
+  .callout p:last-child{margin-bottom:0;}
+
+  /* CITAS HISTÓRICAS */
+  .hist-quote{border-left:3px solid var(--gold);padding:.8rem 1.2rem;margin:1.4rem 0;background:rgba(212,175,55,0.05);border-radius:0 6px 6px 0;}
+  .hist-quote p{font-family:'IM Fell English',serif;font-style:italic;font-size:1.05rem;color:var(--white);margin-bottom:.3rem;}
+  .hist-quote .attr{font-size:.76rem;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;}
+
+  /* PERSONA CARDS */
+  .persona-card{border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.4rem;background:var(--card);margin:.8rem 0;}
+  .persona-card .name{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:1.15rem;}
+  .persona-card .dates{color:var(--gold);font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem;display:block;}
+  .persona-card p{font-size:.95rem;margin-bottom:0;}
+
+  /* LECTURA GRID */
+  .lectura-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.6rem 0;}
+  .lectura{border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.3rem;background:var(--card);}
+  .lectura .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:.15rem .55rem;margin-bottom:.7rem;}
+  .lectura .badge.red{color:#d96060;border-color:#9a3535;}
+  .lectura p{font-size:.93rem;margin-bottom:0;}
+
+  /* BOXES */
+  .box{border-left:3px solid var(--gold);background:var(--card);border-radius:0 8px 8px 0;padding:1.15rem 1.4rem;margin:1rem 0;}
+  .box.alt{border-left-color:var(--white);}
+  .box.danger{border-left-color:#9a3535;}
+  .box.green{border-left-color:#4a8c4a;}
+  .box-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;flex-wrap:wrap;}
+  .tag{font-family:'Cormorant Garamond',serif;font-weight:700;color:#0a0a08;background:var(--gold);padding:.18rem .65rem;border-radius:4px;font-size:.8rem;letter-spacing:.04em;white-space:nowrap;}
+  .tag.white{background:var(--white);}
+  .tag.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold-bright);}
+  .tag.red{background:#9a3535;color:var(--white);}
+  .tag.green{background:#3a6e3a;color:var(--white);}
+  .box p{margin-bottom:0;font-size:.98rem;}
+  .box p+p{margin-top:.6rem;}
+  .box .label{color:var(--gold-bright);font-weight:600;font-size:.83rem;text-transform:uppercase;letter-spacing:.1em;}
+
+  /* TIMELINE */
+  .timeline{display:flex;flex-direction:column;gap:1.15rem;margin:1.8rem 0;border-left:2px solid var(--border);padding-left:1.6rem;}
+  .timeline-item{position:relative;}
+  .timeline-item::before{content:'';position:absolute;left:-1.67rem;top:.38rem;width:10px;height:10px;border-radius:50%;background:var(--gold);}
+  .timeline-item .year{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.08rem;}
+  .timeline-item p{margin:.25rem 0 0;font-size:.95rem;}
+  .timeline-item.red::before{background:#9a3535;}
+  .timeline-item.green::before{background:#4a8c4a;}
+
+  /* TABLA */
+  .table-wrap{overflow-x:auto;margin:1.8rem 0;border:1px solid var(--border);border-radius:8px;}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:640px;}
+  th,td{padding:.9rem 1.05rem;border-bottom:1px solid var(--border-soft);text-align:left;vertical-align:top;}
+  th{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-size:1rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--gold);background:var(--bg-alt);position:sticky;top:0;}
+  tbody tr:hover{background:rgba(212,175,55,0.04);}
+  tbody tr:last-child td{border-bottom:none;}
+  td.flag{color:var(--gold-bright);font-weight:600;}
+  td.red{color:#d96060;}
+  td.green{color:#7ec87e;}
+
+  /* DECRETO CARDS */
+  .decreto{border:1px solid var(--gold);border-radius:8px;padding:1.5rem 1.6rem;margin:1.2rem 0;background:linear-gradient(180deg,rgba(212,175,55,0.06),transparent);}
+  .decreto-num{font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;margin-bottom:.5rem;}
+  .decreto h4{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.2rem;font-weight:700;margin-bottom:.7rem;}
+  .decreto p{font-size:.96rem;margin-bottom:0;}
+
+  /* ESCALA */
+  .scale-wrap{margin:1.8rem 0 2.2rem;}
+  .scale-labels{display:flex;justify-content:space-between;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.7rem;}
+  .scale-track{position:relative;height:6px;border-radius:999px;background:linear-gradient(90deg,var(--card-2),var(--gold-soft));border:1px solid var(--border);}
+  .scale-marker{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:var(--gold-bright);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--gold);transform:translate(-50%,-50%);}
+  .scale-caption{margin-top:.7rem;font-size:.84rem;color:var(--white-dim);text-align:center;}
+
+  /* DIVIDERS */
+  .divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3.4rem 0;opacity:.5;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border));}
+  .divider::after{background:linear-gradient(to left,transparent,var(--border));}
+  .divider svg{flex:0 0 auto;}
+
+  /* BANNER DECORATIVO */
+  .section-banner{background:linear-gradient(135deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--border);border-radius:10px;padding:2rem 2rem 1.6rem;margin:2rem 0 2.4rem;position:relative;overflow:hidden;}
+  .section-banner::before{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.12),transparent 70%);}
+  .section-banner h3{margin-top:0;color:var(--gold-bright);}
+  .section-banner p{font-size:.97rem;}
+  .section-banner p:last-child{margin-bottom:0;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);margin-top:4rem;padding:2.4rem 2.6rem 3rem;max-width:var(--maxw);margin-left:auto;margin-right:auto;text-align:center;font-size:.85rem;color:var(--white-dim);}
+  footer .mark-small{margin:0 auto 1rem;opacity:.6;}
+
+  #backToTop{position:fixed;bottom:1.6rem;right:1.6rem;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:var(--card);color:var(--gold-bright);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:120;}
+  #backToTop.visible{opacity:1;pointer-events:auto;}
+  #backToTop:hover{transform:translateY(-3px);}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px;}
+
+  @media (max-width:980px){
+    .sidebar{transform:translateX(-100%);transition:transform .28s ease;box-shadow:20px 0 40px rgba(0,0,0,.5);}
+    .sidebar.open{transform:translateX(0);}
+    main{margin-left:0;}
+    #menuToggle{display:flex;}
+    .hero,.section{padding-left:1.4rem;padding-right:1.4rem;}
+    .hero{padding-top:4.8rem;}
+    .hero-rosette{display:none;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="progressBar" aria-hidden="true"></div>
+<button id="menuToggle" aria-label="Abrir índice" aria-expanded="false">☰</button>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar" aria-label="Índice del documento">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">
+      <svg width="44" height="44" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1.1">
+          <rect x="14" y="14" width="32" height="32"/>
+          <rect x="14" y="14" width="32" height="32" transform="rotate(45 30 30)"/>
+          <circle cx="30" cy="30" r="23"/>
+        </g>
+      </svg>
+    </div>
+    <h1>El Concilio de Trento y la Reforma</h1>
+    <p>Historia · Dogma · Respuesta</p>
+  </div>
+
+  <div class="toc-title">Índice interactivo</div>
+  <ul class="toc-list">
+    <li><a href="#inicio"><span class="num">00</span><span>Apertura</span></a></li>
+    <li><a href="#iglesia-medieval"><span class="num">01</span><span>La Iglesia medieval: grandeza y tensiones</span></a></li>
+    <li><a href="#precursores"><span class="num">02</span><span>Wyclif, Hus y el conciliarismo</span></a></li>
+    <li><a href="#lutero"><span class="num">03</span><span>Martín Lutero: de monje a reformador</span></a></li>
+    <li><a href="#tesis-ruptura"><span class="num">04</span><span>Las 95 Tesis y la escalada</span></a></li>
+    <li><a href="#argumentos"><span class="num">05</span><span>Los argumentos de Lutero: refutación católica</span></a></li>
+    <li><a href="#fragmentacion"><span class="num">06</span><span>Zuinglio, Calvino y la fragmentación</span></a></li>
+    <li><a href="#camino-trento"><span class="num">07</span><span>El camino al Concilio</span></a></li>
+    <li><a href="#trento-periodos"><span class="num">08</span><span>Trento: los tres períodos</span></a></li>
+    <li><a href="#decretos-dogmaticos"><span class="num">09</span><span>Los grandes decretos dogmáticos</span></a></li>
+    <li><a href="#reforma-interior"><span class="num">10</span><span>La reforma interior: disciplina y santos</span></a></li>
+    <li><a href="#frutos"><span class="num">11</span><span>Los frutos: la Iglesia renovada</span></a></li>
+    <li><a href="#sintesis"><span class="num">12</span><span>Síntesis y conclusión</span></a></li>
+  </ul>
+
+  <div class="sidebar-foot">
+    Historia del Concilio de Trento, los antecedentes de la Reforma, los argumentos de Lutero y la respuesta dogmática y disciplinar de la Iglesia Católica (1517–1563).
+  </div>
+</nav>
+
+<!-- CONTENIDO -->
+<main id="contenido">
+
+  <!-- HERO -->
+  <header class="hero" id="inicio">
+    <div class="hero-rosette" aria-hidden="true">
+      <svg width="170" height="170" viewBox="0 0 200 200" fill="none">
+        <g class="spin">
+          <g stroke="var(--gold)" stroke-width="0.75">
+            <rect x="38" y="38" width="124" height="124"/>
+            <rect x="38" y="38" width="124" height="124" transform="rotate(45 100 100)"/>
+            <circle cx="100" cy="100" r="87"/>
+            <circle cx="100" cy="100" r="60"/>
+            <circle cx="100" cy="100" r="30"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="eyebrow">Apertura</div>
+    <h1>El Concilio de Trento: <span>la Iglesia ante la tormenta y el renacimiento</span></h1>
+    <p class="lede">
+      En 1517, un monje agustino sajón clavó —o hizo llegar— noventa y cinco tesis sobre las indulgencias a
+      la puerta de la iglesia del Castillo de Wittenberg. Antes de que acabara ese siglo, la unidad cristiana
+      de Occidente, forjada a lo largo de un milenio, estaba rota de forma permanente. Entre ese momento y
+      1563, cuando el Concilio de Trento clausuró sus trabajos tras dieciocho años de labor, la Iglesia
+      Católica atravesó su mayor crisis institucional desde el Gran Cisma, y surgió de ella más precisa en
+      su doctrina, más exigente en su disciplina y más rica en sus santos que en ningún siglo anterior.
+    </p>
+    <p class="lede">
+      Este documento narra esa historia desde la perspectiva católica: los antecedentes que hicieron posible
+      la Reforma, las razones legítimas de reforma que la Iglesia debía afrontar, los argumentos teológicos
+      de Lutero y su refutación punto por punto, la fragmentación del protestantismo en corrientes
+      irreconciliables entre sí, y la respuesta definitiva que Trento ofreció —no solo como controversia
+      dogmática, sino como genuina reforma del Cuerpo de Cristo desde dentro.
+    </p>
+    <div class="pills">
+      <span class="pill">Siglos XIV-XVI</span>
+      <span class="pill">Martín Lutero</span>
+      <span class="pill">Sola Scriptura</span>
+      <span class="pill">Sola Fide</span>
+      <span class="pill">Concilio de Trento</span>
+      <span class="pill">Justificación</span>
+      <span class="pill">Contrarreforma</span>
+      <span class="pill">Jesuitas</span>
+    </div>
+  </header>
+
+  <!-- 01 — IGLESIA MEDIEVAL -->
+  <section class="section" id="iglesia-medieval">
+    <div class="eyebrow">01 · Contexto</div>
+    <h2>La Iglesia medieval: grandeza real y tensiones reales</h2>
+    <p>
+      Para entender la Reforma es imprescindible entender la Iglesia en la que nació. Y para entender esa
+      Iglesia hay que resistir dos tentaciones opuestas: la del apólogo que niega toda mancha, y la del
+      polemista que reduce un milenio de civilización cristiana a su catálogo de abusos. La realidad es más
+      rica y más trágica que cualquiera de las dos caricaturas.
+    </p>
+
+    <h3>Lo que la Iglesia medieval construyó</h3>
+    <p>
+      La Edad Media europea es impensable sin la Iglesia. Las catedrales góticas —Notre-Dame de París,
+      Chartres, Burgos, Colonia— son el mayor esfuerzo colectivo de arte sagrado que ha producido la
+      humanidad. Las universidades de Bolonia, París, Oxford, Salamanca y Coimbra nacieron bajo auspicios
+      eclesiásticos. La escolástica produjo en Santo Tomás de Aquino una de las síntesis filosóficas más
+      ambiciosas de la historia intelectual. Las órdenes mendicantes —franciscanos y dominicos— evangelizaron
+      el continente desde abajo, predicando a los pobres en sus propias lenguas. Los hospitales medievales,
+      los hospicios, los orfanatos: todos fueron fundaciones eclesiásticas antes de que existiera ningún
+      equivalente estatal. La Iglesia era, en el sentido más literal de la expresión, la columna vertebral
+      de la civilización occidental.
+    </p>
+
+    <h3>Los problemas reales: no herejía, sino corrupción institucional</h3>
+    <p>
+      La distinción que la apologética católica siempre ha subrayado es la siguiente: <strong>los problemas
+      de la Iglesia tardomedieval no eran, en su mayor parte, problemas doctrinales, sino institucionales
+      y morales</strong>. No es que la Iglesia enseñara algo falso —su doctrina permanecía íntegra—, sino
+      que sus ministros, con frecuencia, vivían en flagrante contradicción con lo que esa doctrina exigía.
+      Esta distinción no es un escudo apologético: es la diferencia que determina si la solución correcta
+      era la reforma (corrección de las personas y las estructuras) o la revolución (reconstrucción de
+      la doctrina misma).
+    </p>
+
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge red">Problema real</span>
+        <h4>La simonía</h4>
+        <p>La compraventa de cargos eclesiásticos —obispados, abadías, canonjías— estaba teóricamente prohibida, pero en la práctica era endémica. Algunos obispos compraban sus sillas sin haber recibido siquiera las órdenes sagradas.</p>
+      </div>
+      <div class="lectura">
+        <span class="badge red">Problema real</span>
+        <h4>El absentismo episcopal</h4>
+        <p>Muchos obispos y cardenales acumulaban varias diócesis y beneficios sin residir en ninguno de ellos, delegando en vicarios mal pagados. Sus feligreses podían no ver a su obispo en décadas enteras.</p>
+      </div>
+      <div class="lectura">
+        <span class="badge red">Problema real</span>
+        <h4>El nepotismo</h4>
+        <p>El nombramiento de parientes —incluso de hijos ilegítimos— para cargos eclesiásticos. El papado renacentista fue especialmente vulnerable: Alejandro VI nombró cardenal a su hijo César Borgia, que luego renunció para convertirse en señor de guerra secular.</p>
+      </div>
+      <div class="lectura">
+        <span class="badge red">Problema real</span>
+        <h4>El clero ignorante</h4>
+        <p>En muchas parroquias rurales, el sacerdote apenas sabía latín suficiente para recitar la misa, y era incapaz de predicar o catequizar. La educación sacerdotal no tenía estructuras sistemáticas antes de Trento.</p>
+      </div>
+    </div>
+
+    <h3>El papado renacentista: el problema más visible</h3>
+    <p>
+      Ningún período generó más escándalo que el papado renacentista, y ningún papado más escándalo que
+      el de Alejandro VI (Rodrigo Borgia, 1492-1503). Su vida personal era públicamente inmoral; sus
+      nombramientos, abiertamente nepotistas; su política, la de un príncipe italiano secular que por
+      accidente también era obispo de Roma. Julio II (1503-1513) prefería el casco militar a la mitra y
+      dirigía personalmente las campañas de los Estados Pontificios. León X (Giovanni de Medici, 1513-1521)
+      era un hombre refinado y mecenas del arte, que celebró su elección diciendo a su hermano "ya que Dios
+      nos ha dado el papado, disfrutémoslo" —la frase más infortunada de la historia pontificia—, y fue el
+      papa que tuvo que afrontar a Lutero.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">Lo que esto no significa</div>
+      <p>
+        Ninguno de estos papas definió herejía alguna. Ninguno alteró un solo dogma. Su corrupción personal
+        era escandalosa y Dios la habrá juzgado con toda su justicia —pero la promesa de Cristo a Pedro
+        ("las puertas del infierno no prevalecerán contra ella", Mt 16:18) no garantiza la santidad
+        personal de todos los papas, sino la indefectibilidad de la Iglesia en la fe. Una doctrina verdadera
+        no se convierte en falsa porque la enseñe un hombre indigno —y una institución no merece ser
+        destruida porque necesite ser reformada.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 02 — PRECURSORES -->
+  <section class="section" id="precursores">
+    <div class="eyebrow">02 · Antecedentes</div>
+    <h2>Los precursores: Wyclif, Hus y la crisis del conciliarismo</h2>
+    <p>
+      Lutero no surgió de la nada. La crisis del siglo XIV preparó el terreno intelectual y emocional sobre
+      el que creció la Reforma. Tres fenómenos convergentes debilitaron la autoridad moral y jurisdiccional
+      de la Santa Sede antes de que Lutero naciera.
+    </p>
+
+    <h3>La Cautividad Babilónica y el Gran Cisma</h3>
+    <p>
+      De 1309 a 1377, el papado residió en Aviñón, bajo la sombra de la corona francesa —lo que sus
+      críticos llamaron la "Cautividad Babilónica" del papado—. Cuando Gregorio XI regresó a Roma, la
+      elección de su sucesor desencadenó el <strong>Gran Cisma de Occidente</strong> (1378-1417): dos papas
+      —y en un momento, tres— se excomulgaron mutuamente, dividiendo a toda la Iglesia. Cada uno tenía su
+      obediencia, sus cardenales, sus canonizaciones, sus cruzadas. Durante cuarenta años, un cristiano
+      corriente no podía saber con certeza quién era el legítimo Vicario de Cristo. El daño a la credibilidad
+      del papado fue incalculable.
+    </p>
+
+    <h3>John Wyclif (c. 1330-1384)</h3>
+    <div class="persona-card">
+      <span class="name">John Wyclif</span>
+      <span class="dates">Oxford · c. 1330–1384 · Condenado póstumamente en Constanza, 1415</span>
+      <p>
+        Teólogo inglés que, en reacción a los abusos del clero, desarrolló posiciones que anticipan en mucho
+        las de Lutero: negó la transubstanciación tal como la Iglesia la entendía, rechazó la autoridad
+        papal sin base bíblica explícita, propuso traducir la Biblia al inglés para hacerla accesible al
+        pueblo, y sostuvo que los sacramentos eran inválidos cuando los administraba un sacerdote en estado
+        de pecado mortal —una idea (el donatismo renovado) que destruiría la certeza de cualquier sacramento
+        administrado por cualquier sacerdote—. El Concilio de Constanza condenó sus tesis (45 artículos)
+        y ordenó exhumar y quemar sus restos.
+      </p>
+    </div>
+
+    <h3>Jan Hus (c. 1369-1415)</h3>
+    <div class="persona-card">
+      <span class="name">Jan Hus</span>
+      <span class="dates">Bohemia · c. 1369–1415 · Quemado en el Concilio de Constanza</span>
+      <p>
+        Rector de la Universidad de Praga, Hus adoptó muchas ideas de Wyclif y las popularizó en Bohemia,
+        añadiendo una fuerte carga de identidad nacional checa frente al dominio alemán. Defendía la comunión
+        bajo las dos especies (pan y vino) para los laicos —práctica que la Iglesia había ido reservando
+        para el sacerdote por razones prácticas—, criticaba la corrupción del clero, y cuestionaba la
+        autoridad papal cuando un papa vivía en pecado mortal. Fue al Concilio de Constanza con un salvoconducto
+        del emperador Segismundo, fue detenido de todas formas, juzgado por hereje y quemado vivo en 1415.
+        Su martirio encendió las guerras husitas en Bohemia y dejó una memoria de agravio que un siglo después
+        Lutero explotaría con habilidad retórica.
+      </p>
+    </div>
+
+    <div class="hist-quote">
+      <p>"Yo condeno a Hus como hereje, pero no condeno todas y cada una de sus doctrinas."</p>
+      <span class="attr">— Martín Lutero, Debate de Leipzig, 1519 · un momento de honestidad que Eck usó contra él con efecto devastador</span>
+    </div>
+
+    <h3>El conciliarismo y su fracaso</h3>
+    <p>
+      El Gran Cisma generó una respuesta teológico-política llamada <strong>conciliarismo</strong>: la teoría
+      de que un concilio general de la Iglesia tiene autoridad superior al papa, y puede deponerlo si es
+      necesario. El Concilio de Constanza (1414-1418) fue el triunfo del conciliarismo —depuso a tres papas
+      rivales y eligió a uno nuevo, Martín V, restaurando la unidad—. Pero el conciliarismo llevaba en sí
+      mismo una semilla de disolución: si un concilio puede deponer a un papa, ¿qué impide que un sínodo
+      regional depose a un concilio? ¿Quién tiene la última palabra? La respuesta de la teología católica
+      —que el concilio es infalible <em>con</em> el papa, no <em>contra</em> él— fue precisamente lo que
+      los conciliaristas rechazaban, creando un círculo sin solida autoridad definitiva. Cuando Lutero
+      apeló a un concilio general contra el papa, estaba heredando la retórica conciliarista —sin advertir
+      que, en el fondo, ningún concilio le sería favorable tampoco.
+    </p>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 03 — LUTERO -->
+  <section class="section" id="lutero">
+    <div class="eyebrow">03 · El protagonista</div>
+    <h2>Martín Lutero: de monje agustino a reformador</h2>
+    <p>
+      Martín Lutero nació el 10 de noviembre de 1483 en Eisleben, Sajonia, hijo de un próspero minero que
+      soñaba con hacer de él un abogado. Su entrada en el convento agustino de Erfurt en 1505 —según su
+      propio relato, tras ser casi alcanzado por un rayo durante una tormenta y gritar "¡Santa Ana, haré
+      voto de ser monje!"— fue el primer acto de una vida marcada por la angustia espiritual.
+    </p>
+
+    <h3>Las <em>Anfechtungen</em>: el problema psicológico-teológico de fondo</h3>
+    <p>
+      El término alemán <em>Anfechtung</em> —sin traducción precisa en español, algo entre "angustia
+      espiritual", "tentación" y "asalto del alma"— describe el estado crónico que Lutero vivió durante
+      años en el convento. Se sentía aplastado por la justicia de Dios, convencido de que nunca podría
+      hacer suficiente para ganar su favor, incapaz de encontrar en la confesión, la penitencia o las
+      obras piadosas una paz duradera. Sus superiores, especialmente el vicario general Johannes von Staupitz,
+      intentaron orientarle hacia una lectura más esperanzadora de la gracia divina —con cierto éxito, pero
+      no el suficiente para curar su angustia de raíz.
+    </p>
+    <p>
+      Este trasfondo psicológico es importante porque la solución teológica que Lutero encontró —la
+      "justificación por la sola fe"— fue en gran parte la respuesta a su problema personal: la certeza
+      subjetiva de la salvación, sin que ninguna obra propia pudiera amenazarla. Lo que comenzó como
+      una solución a una crisis espiritual personal terminó convirtiéndose en el principio organizador
+      de una nueva teología.
+    </p>
+
+    <h3>La "experiencia de la Torre" (c. 1513-1519)</h3>
+    <p>
+      Lutero describe en sus <em>Tischreden</em> (conversaciones de mesa, escritas al final de su vida)
+      un momento de iluminación —la llamada "experiencia de la Torre"— en el que, leyendo Romanos 1:17
+      ("el justo vivirá por la fe"), comprendió que la "justicia de Dios" no era la justicia punitiva que
+      castiga al pecador, sino la justicia que Dios <em>da</em> gratuitamente al pecador que cree. Esta
+      lectura le produjo, según dice, una sensación de haber renacido y de ver el paraíso abierto.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">Lo que la Iglesia ya enseñaba</div>
+      <p>
+        La ironía teológica es que la Iglesia nunca enseñó que la salvación se "gana" por obras humanas
+        independientemente de la gracia divina. La doctrina de la gracia gratuita estaba en el núcleo de
+        toda la tradición, desde Pablo hasta Agustín. Lo que Lutero "descubrió" —que la justificación
+        es don de Dios y no mérito humano— era ortodoxia católica. Lo que añadió como novedad fue la
+        conclusión de que la fe <em>sola</em>, sin obras, sin sacramentos, sin cooperación humana, era
+        suficiente —y esa conclusión sí representaba una ruptura con la tradición.
+      </p>
+    </div>
+
+    <h3>El encuentro con Johann Tetzel y las indulgencias</h3>
+    <p>
+      El detonante inmediato de las 95 Tesis no fue la teología de la justificación, sino las indulgencias.
+      El dominico Johann Tetzel predicaba en las proximidades de Wittenberg una indulgencia especial —en
+      realidad una campaña de financiación para la construcción de la Basílica de San Pedro en Roma y,
+      secretamente, para pagar las deudas del arzobispo Alberto de Maguncia, que había comprado su sede
+      mediante un préstamo de los banqueros Fugger—. Los feligreses de Lutero cruzaban la frontera de
+      Sajonia para comprar indulgencias y luego le decían que no necesitaban confesarse ni cambiar de vida
+      porque ya tenían "papel firmado por el papa". El escándalo era real, la predicación de Tetzel era
+      teológicamente dudosa incluso según los estándares de la época, y la irritación de Lutero estaba
+      parcialmente justificada. Pero su reacción fue mucho más lejos de lo que cualquier reforma legítima
+      de las indulgencias habría requerido.
+    </p>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 04 — TESIS Y RUPTURA -->
+  <section class="section" id="tesis-ruptura">
+    <div class="eyebrow">04 · La crisis</div>
+    <h2>Las 95 Tesis y la escalada hacia el cisma</h2>
+    <p>
+      El 31 de octubre de 1517, Lutero envió a los obispos de Brandeburgo y de Maguncia sus tesis sobre las
+      indulgencias, acompañadas de una carta respetuosa pidiendo que se corrigiera la predicación de Tetzel.
+      Si también las clavó en la puerta de la iglesia de Wittenberg ese mismo día —como la tradición recuerda—
+      o lo hizo días después, sigue siendo objeto de debate histórico. Lo que no se debate es lo que
+      ocurrió a continuación: gracias a la imprenta, las tesis circularon por toda Alemania en semanas
+      y por toda Europa en meses.
+    </p>
+
+    <h3>La escalada: de las indulgencias a la autoridad</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="year">1517 — Las 95 Tesis</span>
+        <p>Cuestionan la predicación de las indulgencias, no la doctrina en sí. Tono académico, dentro del debate teológico legítimo. León X las toma inicialmente como "querella de frailes".</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1518 — Audiencia ante el Cardenal Cayetano en Augsburgo</span>
+        <p>El cardenal Tommaso de Vio "Cayetano" —uno de los más grandes teólogos tomistas del siglo— pide a Lutero que se retracte. Lutero se niega y huye de Augsburgo. Primera señal de que el asunto va más allá de la reforma de los abusos.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1519 — Debate de Leipzig con Johann Eck</span>
+        <p>El teólogo Johann Eck lleva a Lutero a defender explícitamente que el Concilio de Constanza se equivocó al condenar a Hus. Al afirmar que un concilio puede errar, Lutero ha cortado el último puente: ya no apela a la autoridad de ningún concilio porque cualquier concilio podría condenarlo también. La única autoridad que le queda es la Escritura tal como él la interpreta.</p>
+      </div>
+      <div class="timeline-item red">
+        <span class="year">1520 — Los tres grandes tratados y la bula <em>Exsurge Domine</em></span>
+        <p>Lutero publica tres obras fundamentales que articulan el programa reformador completo: <em>A la nobleza cristiana de la nación alemana</em>, <em>La cautividad babilónica de la Iglesia</em> y <em>La libertad del cristiano</em>. León X responde con la bula <em>Exsurge Domine</em> (15 junio 1520), que condena 41 proposiciones de Lutero y le da 60 días para retractarse. Lutero quema públicamente la bula.</p>
+      </div>
+      <div class="timeline-item red">
+        <span class="year">1521 — Excomunión y Dieta de Worms</span>
+        <p>El papa León X excomulga a Lutero (bula <em>Decet Romanum Pontificem</em>, enero 1521). En la Dieta Imperial de Worms, ante el emperador Carlos V y los príncipes alemanes, Lutero pronuncia su célebre negativa: "No puedo ni quiero retractarme de nada, porque obrar contra la conciencia no es seguro ni honesto. Aquí estoy; no puedo hacer otra cosa. Dios me ayude." El Edicto de Worms lo declara hereje y proscrito del Imperio.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">1521-1522 — El Wartburg y la traducción del Nuevo Testamento</span>
+        <p>El elector Federico de Sajonia "protege" a Lutero manteniéndolo escondido en el castillo de Wartburg. Allí traduce el Nuevo Testamento al alemán en once semanas —una obra maestra de la lengua alemana que contribuirá a modelar el alemán moderno, pero también un poderoso instrumento de propaganda reformadora.</p>
+      </div>
+      <div class="timeline-item green">
+        <span class="year">1525 — La Guerra de los Campesinos: la fractura con el radicalismo</span>
+        <p>Cuando los campesinos alemanes, creyendo que la "libertad cristiana" de Lutero implicaba también libertad política, se rebelan, Lutero los condena con una violencia retórica que asombra: pide a los príncipes que los "maten, estrangulen y apuñalen" sin compasión. Este episodio revela hasta qué punto la Reforma luterana dependió desde el principio del apoyo de los príncipes seculares —y cómo ese apoyo tuvo un precio político enorme.</p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">La imprenta: la primera "guerra mediática"</div>
+      <p>
+        Entre 1517 y 1520, Lutero publicó más de treinta escritos. En ese mismo período, salieron de las
+        imprentas alemanas más panfletos luteranos que escritos de todos sus oponentes juntos. La imprenta
+        de Gutenberg (inventada hacia 1450) había hecho posible la circulación masiva de ideas a una velocidad
+        sin precedentes. Sin ella, la Reforma habría tenido el mismo destino que las de Wyclif o Hus: una
+        condena local sin consecuencias europeístas. Con ella, en tres años Lutero era conocido en toda Europa.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 05 — ARGUMENTOS Y REFUTACIÓN -->
+  <section class="section" id="argumentos">
+    <div class="eyebrow">05 · Debate teológico</div>
+    <h2>Los argumentos de Lutero: refutación católica argumento por argumento</h2>
+    <p>
+      La teología de Lutero puede reducirse a tres principios fundacionales —<em>sola Scriptura</em>,
+      <em>sola gratia</em>, <em>sola fide</em>— más una serie de aplicaciones prácticas (indulgencias,
+      purgatorio, los sacramentos, el papado, el celibato clerical). Cada uno merece ser examinado con
+      seriedad, porque algunos de sus puntos tocaban abusos reales, y la respuesta católica era tanto más
+      poderosa cuando distinguía el abuso legítimamente criticable de la doctrina que no debía ceder.
+    </p>
+
+    <!-- SOLA SCRIPTURA -->
+    <h3>Argumento 1 — <em>Sola Scriptura</em>: la Escritura sola es la autoridad</h3>
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Posición de Lutero</span></div>
+      <p>
+        La Sagrada Escritura es la única fuente de autoridad doctrinal en la Iglesia. Los concilios, los
+        papas, los Padres de la Iglesia pueden errar; solo la Escritura es infalible. Y cada cristiano
+        tiene el derecho y la capacidad de interpretar la Escritura por sí mismo con la guía del Espíritu
+        Santo.
+      </p>
+    </div>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Refutación católica</span></div>
+      <p>
+        <strong>El problema del canon.</strong> La primera pregunta que destruye la sola Scriptura es: ¿qué
+        libros forman la Escritura? El canon del Nuevo Testamento —los 27 libros que todos los protestantes
+        aceptan— no fue establecido por la Escritura misma, sino por la Iglesia, en los concilios de Hipona
+        (393), Cartago (397) y Cartago (419). Lutero mismo rechazó la canonicidad de Santiago, Hebreos,
+        Judas y Apocalipsis (a los que llamó "epístolas de paja" y libros "de Juan"). ¿Con qué autoridad?
+        Con la suya propia. El principio se destruye a sí mismo: para saber qué es la Escritura, hay que
+        acudir a una autoridad fuera de la Escritura.
+      </p>
+      <p>
+        <strong>El problema de la interpretación.</strong> Si cada cristiano interpreta la Escritura
+        por sí mismo, ¿quién resuelve los desacuerdos? La respuesta de la historia fue devastadora: en menos
+        de una generación, el protestantismo se fragmentó en docenas de corrientes irreconciliables entre
+        sí —luteranos, zuinglianos, calvinistas, anabaptistas, anglicanos— que se acusaban mutuamente de
+        error y se excomulgaban mutuamente, cada uno apelando a la misma Escritura.
+      </p>
+      <p>
+        <strong>La Escritura misma afirma la Tradición.</strong> 2 Tesalonicenses 2:15: "Permaneced firmes
+        y conservad las tradiciones que habéis recibido, ya de palabra, ya por carta nuestra." Juan 21:25:
+        "Jesús hizo otras muchas cosas; si se escribieran una por una, creo que ni el mundo entero podría
+        contener los libros que se escribirían." La Iglesia y su Tradición oral existieron antes que cualquier
+        libro del Nuevo Testamento.
+      </p>
+    </div>
+
+    <!-- SOLA FIDE -->
+    <h3>Argumento 2 — <em>Sola Fide</em>: la justificación es solo por la fe</h3>
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Posición de Lutero</span></div>
+      <p>
+        El hombre es justificado ante Dios únicamente por la fe, no por las obras. Las obras son fruto de
+        la fe ya presente, nunca causa de la justificación. Las obras de penitencia, los sacramentos, el
+        esfuerzo moral: nada de esto contribuye a la salvación; añadirlo es una forma de pelagianismo que
+        oscurece la gracia. La justificación, además, no es una transformación interior real del pecador,
+        sino una "imputación forense": Dios declara al pecador justo, cubriendo sus pecados con la justicia
+        de Cristo, sin que el pecador cambie realmente por dentro.
+      </p>
+    </div>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Refutación católica</span></div>
+      <p>
+        <strong>Santiago 2:24</strong>: "El hombre es justificado por las obras y no solo por la fe." Este
+        versículo es tan explícito que Lutero llamó a la carta de Santiago "epístola de paja" y propuso
+        sacarla del canon. Pero no puede sacarse: estaba en el canon de la Iglesia desde siglos antes.
+      </p>
+      <p>
+        <strong>La posición católica no es pelagiana.</strong> La Iglesia jamás enseñó que las obras humanas
+        <em>independientemente de la gracia</em> merezcan la salvación. El Concilio de Trento definió con
+        toda claridad que la justificación es un don gratuito de Dios, iniciado por Dios sin mérito previo
+        del hombre, que incluye tanto la remisión de los pecados como la renovación interior real del
+        pecador por la infusión de la gracia santificante. La diferencia con Lutero no es "gracia sí o
+        gracia no", sino si la justificación es una <em>declaración externa</em> o una <em>transformación
+        real</em> del alma.
+      </p>
+      <p>
+        <strong>Pablo mismo une fe y obras.</strong> Gálatas 5:6: "En Cristo Jesús, ni la circuncisión ni
+        la incircuncisión tienen valor alguno, sino la fe que actúa por el amor." La fe auténtica, para
+        Pablo, no es una convicción intelectual aislada: es una fe que "actúa" —que obra a través del amor.
+        Cuando Pablo condena las "obras de la ley" (Romanos y Gálatas), se refiere específicamente a las
+        obras de la Ley mosaica (circuncisión, purity laws, sabbath) como medio de justificación frente
+        a los gentiles, no a toda acción moral humana cooperante con la gracia.
+      </p>
+    </div>
+
+    <!-- INDULGENCIAS -->
+    <h3>Argumento 3 — Las indulgencias: abuso real, doctrina mal comprendida</h3>
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Posición de Lutero</span></div>
+      <p>Las indulgencias son una invención sin base bíblica, un instrumento de extorsión clerical. Nadie puede vender el perdón de Dios. La contrición sincera basta; no se necesita ningún "papel del papa".</p>
+    </div>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Refutación católica</span></div>
+      <p>
+        En esto hay que distinguir con cuidado. <strong>Los abusos de Tetzel eran reales y teológicamente
+        indefendibles</strong> incluso para los estándares de la época: la predicación que insinuaba que
+        con la moneda se compraba automáticamente la salvación de las almas del purgatorio fue criticada
+        por teólogos católicos antes que por Lutero. Pero los abusos no invalidan la doctrina subyacente.
+      </p>
+      <p>
+        La doctrina de las indulgencias descansa en tres pilares: (1) el <em>thesaurus Ecclesiae</em>,
+        el "tesoro de la Iglesia" formado por los merecimientos sobreabundantes de Cristo y los santos,
+        que la Iglesia puede aplicar a los fieles; (2) la distinción entre la culpa del pecado (remitida
+        en la confesión) y la pena temporal debida por el pecado (que puede remitirse mediante la
+        indulgencia); (3) la solidaridad en el Cuerpo Místico de Cristo, por la que los méritos de unos
+        pueden beneficiar a otros. Ninguno de estos tres pilares carece de base bíblica (cf. Col 1:24;
+        2 Cor 5:19; Mt 16:19) o patrística.
+      </p>
+    </div>
+
+    <!-- EL PAPADO -->
+    <h3>Argumento 4 — El papado: institución humana, no divina</h3>
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Posición de Lutero</span></div>
+      <p>El primado del papa es una institución humana de desarrollo tardío, sin fundamento en la Escritura. Mateo 16:18 se refiere a la fe de Pedro, no a Pedro mismo. El papa no tiene ninguna autoridad especial sobre la Iglesia universal.</p>
+    </div>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Refutación católica</span></div>
+      <p>
+        <strong>Mateo 16:18-19:</strong> "Tú eres Pedro, y sobre esta piedra edificaré mi Iglesia... A ti
+        te daré las llaves del Reino de los Cielos." La palabra aramea que usó Jesús —<em>Kēphā'</em>—
+        es la misma para "Pedro" y para "roca": "Tú eres Roca, y sobre esta Roca edificaré mi Iglesia."
+        La interpretación que separa la "roca" de Pedro y la aplica solo a su "fe" requiere forzar el
+        texto: el antecedente natural de "esta piedra" en su contexto narrativo es Pedro mismo, a quien
+        acaban de dar un nuevo nombre.
+      </p>
+      <p>
+        <strong>Lucas 22:32:</strong> "He rogado por ti para que tu fe no desfallezca; y tú, cuando
+        hayas vuelto, confirma a tus hermanos." La función de "confirmar" a los demás apóstoles en la
+        fe no es una distinción puramente honorífica.
+      </p>
+      <p>
+        <strong>Juan 21:15-17:</strong> Tres veces Jesús pregunta a Pedro: "¿Me amas?" y tres veces le
+        encarga "Apacienta mis corderos / mis ovejas" —un encargo universal, no limitado a ninguna
+        comunidad local.
+      </p>
+      <p>
+        <strong>El testimonio de los Padres.</strong> San Ignacio de Antioquía (c. 110 d.C.) habla de la
+        Iglesia de Roma como la que "preside en el amor" (<em>prokathēmenē tēs agapēs</em>). San Irineo
+        de Lyon (c. 180) afirma que toda iglesia debe concordar con la de Roma por su especial autoridad.
+        El primado romano no es una invención medieval: está atestiguado desde el siglo II.
+      </p>
+    </div>
+
+    <!-- PURGATORIO -->
+    <h3>Argumento 5 — El Purgatorio: pura ficción medieval</h3>
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Posición de Lutero</span></div>
+      <p>El purgatorio no tiene base bíblica. Es una invención tardía que sirve para perpetuar el negocio de las indulgencias y las misas de difuntos. Al morir, el alma va directamente ante Dios —condenada o salva, sin estadio intermedio.</p>
+    </div>
+    <div class="box green">
+      <div class="box-head"><span class="tag green">Refutación católica</span></div>
+      <p>
+        <strong>2 Macabeos 12:41-46:</strong> Judas Macabeo manda hacer expiación por los soldados caídos
+        en pecado, "porque si no esperara la resurrección de los muertos, sería inútil y vano orar por
+        ellos." Lutero responde que los libros de los Macabeos no son canónicos —pero es precisamente
+        él quien los eliminó del canon, usando como criterio su propia opinión.
+      </p>
+      <p>
+        <strong>1 Corintios 3:15:</strong> "Si la obra de alguien se quema, él sufrirá daño, pero se
+        salvará, aunque como a través del fuego." El texto distingue entre salvación final y un proceso
+        de purificación que precede a ella.
+      </p>
+      <p>
+        <strong>Mateo 12:32:</strong> "Al que diga una palabra contra el Espíritu Santo, no le será
+        perdonado ni en este mundo ni en el futuro." La formulación implica que ciertos pecados pueden
+        ser perdonados en "el mundo futuro" —lo que presupone un estado de purificación más allá de la
+        muerte.
+      </p>
+      <p>
+        <strong>La práctica de orar por los difuntos</strong> es anterior al canon del Nuevo Testamento:
+        aparece en inscripciones funerarias cristianas del siglo II, en la liturgia de Santiago, en Tertuliano y en San Agustín. Si el alma al morir va directamente al cielo o al infierno, la oración por los difuntos carece de todo sentido —y sin embargo es la práctica cristiana más antigua.
+      </p>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">El patrón del debate</div>
+      <p>
+        En cada uno de estos puntos, el patrón es el mismo: Lutero toca un abuso real o una dificultad
+        pastoral real, pero la solución que propone no corrige el abuso sino que elimina la doctrina que
+        lo subyace. El resultado es una teología más simple —y en algunos aspectos más tranquilizadora a
+        nivel emocional— pero con menos recursos para dar cuenta de la experiencia espiritual completa
+        del cristiano, de la Escritura entera, y de la Tradición apostólica.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 06 — FRAGMENTACIÓN -->
+  <section class="section" id="fragmentacion">
+    <div class="eyebrow">06 · El protestantismo se divide</div>
+    <h2>Zuinglio, Calvino y la fragmentación del protestantismo</h2>
+    <p>
+      Una de las pruebas más poderosas en favor de la posición católica es el propio desarrollo histórico
+      del protestantismo: en menos de una generación, el principio de la sola Scriptura interpretada
+      individualmente generó no una Iglesia reformada, sino docenas de iglesias incompatibles entre sí,
+      que se excomulgaron y persiguieron mutuamente con tanta energía como lo habían hecho con Roma.
+    </p>
+
+    <h3>Lutero vs. Zuinglio: el fracaso de Marburgo (1529)</h3>
+    <p>
+      El Landgrave Felipe de Hesse convocó en 1529 el Coloquio de Marburgo para intentar unificar a
+      luteranos y zuinglianos. El punto de ruptura fue la Eucaristía. Lutero defendía la presencia real
+      del cuerpo de Cristo "en, con y bajo" el pan. Zuinglio sostenía que la Eucaristía era un puro
+      memorial simbólico: "esto significa mi cuerpo". Los dos reformadores, que habían coincidido en
+      catorce de los quince puntos del debate, se separaron en Marburgo sin acuerdo y sin comunión,
+      acusándose mutuamente de hereje. Si la Escritura es clara y el Espíritu Santo guía a cada
+      intérprete hacia la verdad, ¿cómo explicar que dos de los más grandes teólogos del movimiento
+      lleguen a conclusiones opuestas leyendo las mismas palabras?
+    </p>
+
+    <div class="hist-quote">
+      <p>"Vuestro espíritu es diferente del nuestro."</p>
+      <span class="attr">— Martín Lutero a Ulrico Zuinglio, al final del Coloquio de Marburgo, 1529</span>
+    </div>
+
+    <h3>Juan Calvino y el calvinismo (desde 1536)</h3>
+    <p>
+      El francés Juan Calvino, asentado en Ginebra, llevó la Reforma hasta sus conclusiones lógicas más
+      extremas en puntos que Lutero habría rechazado. Su doctrina de la <strong>doble predestinación</strong>
+      —Dios elige desde la eternidad a algunos para la salvación y a otros para la condenación,
+      independientemente de cualquier mérito o decisión humana— era coherente con el rechazo del libre
+      albedrío, pero producía una imagen de Dios que la mayoría de los católicos, y muchos protestantes,
+      encontraban moralmente incompatible con un Dios de amor. El propio Erasmo, que compartía muchas
+      críticas al clero, la rechazó explícitamente en su <em>De Libero Arbitrio</em> (1524).
+    </p>
+
+    <h3>Los anabaptistas: la Reforma radicalizada</h3>
+    <p>
+      Más allá de Calvino, los anabaptistas rechazaban el bautismo infantil, el servicio militar, el
+      juramento y cualquier alianza con el poder secular —incluyendo la reforma luterana apoyada por
+      los príncipes—. Fueron perseguidos por católicos, luteranos y calvinistas por igual. El episodio
+      más dramático fue la "Nueva Jerusalén" de Münster (1534-1535), donde un grupo de anabaptistas radicales
+      tomó el poder, instauró la poligamia, ejecutó a los disidentes y esperó el inminente fin del mundo
+      —hasta que un ejército conjunto de católicos y protestantes asedió y destruyó la ciudad, ejecutando
+      a sus líderes.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">El argumento de la fragmentación</div>
+      <p>
+        El argumento que la apologética católica extrae de todo esto es simple y poderoso: si la
+        <em>sola Scriptura</em> más el <em>libre examen individual</em> fuera el método correcto para
+        conocer la voluntad de Dios, cabría esperar que condujera a la unidad en la verdad. En cambio,
+        condujo —en cincuenta años— a cientos de denominaciones irreconciliables. La Iglesia Católica,
+        con su magisterio unificado, mantuvo una doctrina coherente a través de todos los siglos —incluso
+        a pesar de las debilidades personales de muchos de sus ministros.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 07 — CAMINO A TRENTO -->
+  <section class="section" id="camino-trento">
+    <div class="eyebrow">07 · Preparación del Concilio</div>
+    <h2>El largo camino hacia Trento: por qué tardó tanto</h2>
+    <p>
+      El Concilio de Trento no se convocó tarde por negligencia o miedo —aunque hubo de ambas cosas en
+      algunos círculos—, sino por una confluencia de obstáculos políticos, militares y eclesiásticos de
+      magnitud extraordinaria. Entender los retrasos es entender la complejidad del contexto en el que
+      la Iglesia actuó.
+    </p>
+
+    <h3>Los tres obstáculos mayores</h3>
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">Obstáculo 1</span>
+        <h4>La rivalidad Carlos V-Francisco I</h4>
+        <p>El emperador Carlos V quería un concilio en suelo imperial que humillara a los príncipes protestantes alemanes. El rey Francisco I de Francia temía que ese concilio fortaleciera al emperador y prefería el statu quo —y en ocasiones llegó a aliarse con los príncipes protestantes precisamente para debilitar a Carlos. Sin el acuerdo franco-imperial, convocar un concilio que toda Europa reconociera como legítimo era casi imposible.</p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Obstáculo 2</span>
+        <h4>El Saqueo de Roma (1527)</h4>
+        <p>Las tropas imperiales de Carlos V —paradójicamente el más ferviente defensor del concilio— saquearon Roma durante semanas con una brutalidad que escandalizó a Europa. El papa Clemente VII quedó virtualmente prisionero en el Castel Sant'Angelo. La autoridad moral del papado quedó en el punto más bajo desde el Gran Cisma. En ese contexto, reunir un concilio solemne era prácticamente imposible.</p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Obstáculo 3</span>
+        <h4>El miedo al conciliarismo</h4>
+        <p>Muchos en la Curia romana temían que un concilio general reviviría el espectro del conciliarismo y podría acabar limitando la autoridad papal —o incluso siendo instrumentalizado por los príncipes protestantes para redefinir la doctrina. Este miedo no era irracional: el Concilio de Constanza había depuesto a tres papas.</p>
+      </div>
+    </div>
+
+    <h3>El Papa Paulo III y la determinación final</h3>
+    <div class="persona-card">
+      <span class="name">Papa Paulo III (Alessandro Farnese)</span>
+      <span class="dates">Pontificado: 1534–1549 · El papa que convocó Trento</span>
+      <p>
+        Paulo III es una figura contradictoria que la historia católica generalmente evalúa con más
+        benevolencia que severidad: fue en su juventud un hombre de la corte renacentista con hijos
+        ilegítimos, y como papa nombró cardenales a dos nietos suyos adolescentes —el límite de la
+        tolerancia incluso para la época—. Pero también fue él quien finalmente convocó el concilio,
+        quien encargó en 1537 el célebre <em>Consilium de emendanda Ecclesia</em> —un informe brutal
+        y honesto sobre los abusos de la Iglesia redactado por una comisión de reformistas— y quien
+        aprobó la Compañía de Jesús de Ignacio de Loyola en 1540. Sus motivaciones mezclaban
+        política y fe, pero el resultado fue el inicio del concilio que transformaría la Iglesia.
+      </p>
+    </div>
+
+    <div class="hist-quote">
+      <p>"La Iglesia necesita reforma; nadie lo niega. Pero la reforma de la Iglesia debe hacerse en la Iglesia y a través de la Iglesia, no contra ella."</p>
+      <span class="attr">— Espíritu del <em>Consilium de emendanda Ecclesia</em>, 1537, encargado por Paulo III</span>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 08 — LOS TRES PERÍODOS -->
+  <section class="section" id="trento-periodos">
+    <div class="eyebrow">08 · El Concilio</div>
+    <h2>Trento: los tres períodos (1545-1563)</h2>
+    <p>
+      El Concilio de Trento se celebró en la ciudad de Trento —un obispado del Sacro Imperio Romano
+      Germánico, pero de lengua italiana, lo que satisfacía a ambas partes—. Se desarrolló en tres
+      períodos separados bajo tres pontificados distintos, con interrupciones impuestas por la política
+      y la guerra, a lo largo de dieciocho años y veinticinco sesiones. Es el concilio ecuménico más
+      largo de la historia de la Iglesia.
+    </p>
+
+    <div class="section-banner">
+      <h3>Primer Período: Paulo III (1545-1547)</h3>
+      <p>
+        Las sesiones inaugurales abordaron las cuestiones dogmáticas más urgentes que la Reforma había
+        puesto en entredicho. La decisión más importante del primer período fue también la primera:
+        frente a los protestantes que invocaban solo la Escritura, el Concilio declaró en la Sesión IV
+        (abril 1546) que la Revelación divina se transmite tanto por la <strong>Escritura</strong> como
+        por la <strong>Tradición apostólica</strong>, y que ambas deben recibirse "con igual afecto de
+        piedad y reverencia". Esta fue la madre de todas las decisiones: establecía que el protestantismo
+        había comenzado eliminando la mitad de las fuentes de la fe.
+      </p>
+      <p>
+        Siguieron los decretos sobre el <strong>pecado original</strong> (contra la visión luterana de
+        la total corrupción de la naturaleza humana por el pecado) y, el más importante de todos,
+        el decreto sobre la <strong>justificación</strong> (Sesión VI, enero 1547): dieciséis capítulos
+        y treinta y tres cánones que constituyen el análisis dogmático más detallado de este tema en
+        la historia de la teología. El concilio fue trasladado a Bolonia en 1547 y suspendido en 1548.
+      </p>
+    </div>
+
+    <div class="section-banner">
+      <h3>Segundo Período: Julio III (1551-1552)</h3>
+      <p>
+        El concilio reanudó sus sesiones en Trento bajo el nuevo papa Julio III. Este período produjo
+        los grandes decretos sacramentales: sobre la <strong>Eucaristía</strong> (Sesión XIII, 1551),
+        que definió la transubstanciación de forma precisa y respondió a todas las posiciones protestantes;
+        sobre la <strong>penitencia</strong> y la <strong>extremaunción</strong> (Sesión XIV, 1551);
+        y se abrieron debates sobre las órdenes sagradas y el matrimonio. La rebelión del príncipe
+        elector Mauricio de Sajonia contra el emperador Carlos V, y la amenaza militar sobre la propia
+        Trento, forzaron la suspensión del concilio en 1552.
+      </p>
+    </div>
+
+    <div class="section-banner">
+      <h3>Tercer Período: Pío IV (1562-1563)</h3>
+      <p>
+        Diez años después, el cardenal Morone como legado pontificio y bajo el papa Pío IV, el concilio
+        completó su obra en un último impulso de energía. Las sesiones XXII-XXV fueron especialmente
+        prolíficas: decreto sobre la <strong>Misa</strong> como sacrificio (Sesión XXII), sobre las
+        <strong>órdenes sagradas</strong> (Sesión XXIII), sobre el <strong>matrimonio</strong> con el
+        decreto <em>Tametsi</em> que exigía la forma pública para la validez del matrimonio (Sesión XXIV),
+        y los decretos finales sobre el purgatorio, las indulgencias, las imágenes sagradas y las
+        reliquias (Sesión XXV, diciembre 1563). El papa Pío IV confirmó todos los decretos el 26 de
+        enero de 1564. Trento había terminado.
+      </p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Sesión</th><th>Año</th><th>Decreto principal</th><th>Punto atacado por la Reforma</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="flag">IV</td><td>1546</td><td>Escritura y Tradición; Vulgata</td><td>Sola Scriptura</td></tr>
+          <tr><td class="flag">V</td><td>1546</td><td>Pecado original</td><td>Total corrupción de la naturaleza</td></tr>
+          <tr><td class="flag">VI</td><td>1547</td><td>Justificación</td><td>Sola fide; imputación forense</td></tr>
+          <tr><td class="flag">VII</td><td>1547</td><td>Los siete sacramentos</td><td>Reducción a dos sacramentos</td></tr>
+          <tr><td class="flag">XIII</td><td>1551</td><td>Eucaristía y transubstanciación</td><td>Presencia real negada</td></tr>
+          <tr><td class="flag">XIV</td><td>1551</td><td>Penitencia y Extremaunción</td><td>Ambos negados como sacramentos</td></tr>
+          <tr><td class="flag">XXII</td><td>1562</td><td>El Sacrificio de la Misa</td><td>La Misa como "idolatría"</td></tr>
+          <tr><td class="flag">XXIII</td><td>1563</td><td>Órdenes sagradas</td><td>Sacerdocio ministerial negado</td></tr>
+          <tr><td class="flag">XXIV</td><td>1563</td><td>Matrimonio (<em>Tametsi</em>)</td><td>Matrimonio clerical</td></tr>
+          <tr><td class="flag">XXV</td><td>1563</td><td>Purgatorio, indulgencias, imágenes</td><td>Purgatorio e indulgencias</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 09 — DECRETOS DOGMÁTICOS -->
+  <section class="section" id="decretos-dogmaticos">
+    <div class="eyebrow">09 · Definiciones de fe</div>
+    <h2>Los grandes decretos dogmáticos de Trento</h2>
+    <p>
+      Trento no se limitó a condenar errores: construyó. Cada decreto no solo fijaba lo que había que
+      rechazar, sino que articulaba con una precisión sin precedentes lo que la Iglesia <em>creía</em>,
+      usando un vocabulario suficientemente técnico para proteger la doctrina y suficientemente abierto
+      para no clausurar legítimas diferencias entre escuelas teológicas.
+    </p>
+
+    <div class="decreto">
+      <div class="decreto-num">Sesión VI (1547) · El más importante de todos</div>
+      <h4>El Decreto sobre la Justificación</h4>
+      <p>
+        Consta de dieciséis capítulos y treinta y tres cánones. Afirma que la justificación comienza
+        siempre por la gracia gratuita de Dios, sin ningún mérito previo del hombre; que el hombre
+        coopera libremente con esa gracia (contra el determinismo calvinista); que la justificación no
+        es solo una declaración externa sino una renovación interior real del alma; que la fe es
+        necesaria pero no suficiente —se requiere también la esperanza y el amor—; y que las obras
+        realizadas en gracia son verdaderamente meritorias ante Dios (no en el sentido de que el
+        hombre tenga un derecho propio sobre Dios, sino en el sentido de que Dios quiere coronar sus
+        propios dones). El decreto rechaza explícitamente tanto el pelagianismo como la "seguridad
+        de la salvación" luterana —la idea de que el creyente puede tener certeza absoluta de su
+        propia predestinación.
+      </p>
+    </div>
+
+    <div class="decreto">
+      <div class="decreto-num">Sesión XIII (1551)</div>
+      <h4>La Eucaristía y la Transubstanciación</h4>
+      <p>
+        Después del decreto sobre la justificación, este es el más extenso. Define que en la Eucaristía
+        están presentes "verdadera, real y sustancialmente" el Cuerpo, la Sangre, el Alma y la Divinidad
+        de Cristo. Llama "transubstanciación" a la conversión de toda la sustancia del pan en el Cuerpo
+        de Cristo y toda la sustancia del vino en su Sangre. Condena expresamente la consustanciación
+        luterana (Canon 2) y el simbolismo zuingliano (Canon 1). Define también la adoración de la
+        Eucaristía y su reserva en el tabernáculo.
+      </p>
+    </div>
+
+    <div class="decreto">
+      <div class="decreto-num">Sesión XXII (1562)</div>
+      <h4>El Sacrificio de la Misa</h4>
+      <p>
+        Contra la posición protestante que llamaba a la Misa "abominación" e "idolatría", Trento define
+        que la Misa es un sacrificio real —el mismo sacrificio del Calvario "representado" (re-presentado,
+        hecho presente) de forma incruenta en el altar—. El sacerdote actúa <em>in persona Christi</em>
+        (en la persona de Cristo), no meramente como delegado de la comunidad. La Misa se ofrece
+        válidamente "por los vivos y por los difuntos" —reafirmando así la comunión entre la Iglesia
+        de la tierra y la del purgatorio.
+      </p>
+    </div>
+
+    <div class="decreto">
+      <div class="decreto-num">Sesión XXIII (1563)</div>
+      <h4>Las Órdenes Sagradas</h4>
+      <p>
+        Contra la doctrina luterana del "sacerdocio universal" que disuelve el sacerdocio ministerial
+        en el sacerdocio de todos los bautizados, Trento define que el Orden Sagrado es un verdadero
+        sacramento que imprime carácter, que los obispos son superiores a los presbíteros en la jerarquía
+        sacramental, y que la potestad de ofrecer el sacrificio eucarístico y de perdonar los pecados
+        corresponde al sacerdocio ministerial de forma propia e irredelegable. Este decreto tiene también
+        una consecuencia disciplinar directa: exige que cada diócesis establezca un <strong>seminario</strong>
+        para la formación de los futuros sacerdotes —una de las reformas disciplinares más fecundas de
+        la historia de la Iglesia.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 10 — REFORMA INTERIOR -->
+  <section class="section" id="reforma-interior">
+    <div class="eyebrow">10 · La verdadera reforma</div>
+    <h2>La reforma interior: disciplina, seminarios y santos</h2>
+    <p>
+      El aspecto más frecuentemente ignorado del Concilio de Trento —y el que sus críticos más invierten
+      en silenciar— es que Trento no solo respondió a los protestantes: <strong>reformó la Iglesia de
+      verdad</strong>. Los decretos disciplinares de Trento atacaron de frente los mismos abusos que
+      habían provocado la ira de Lutero, sin necesidad de abandonar ningún dogma.
+    </p>
+
+    <h3>Los grandes decretos disciplinares</h3>
+    <ul>
+      <li><strong>Residencia obligatoria de los obispos en sus diócesis.</strong> Acabó con el escándalo del absentismo episcopal. Un obispo que no viviera en su diócesis debía tener permiso expreso de Roma para ausentarse.</li>
+      <li><strong>Prohibición de acumular beneficios eclesiásticos.</strong> Nadie podía ser obispo de varias diócesis simultáneamente.</li>
+      <li><strong>Los seminarios diocesanos</strong> (Sesión XXIII, cap. XVIII): cada obispo debía establecer un colegio para la formación de los futuros clérigos. Antes de Trento no existía una estructura sistemática de formación sacerdotal. Después, los seminarios fueron el principal instrumento de transformación del clero durante los siglos siguientes.</li>
+      <li><strong>Reforma del proceso de nombramiento.</strong> Se exigieron condiciones mínimas de formación y de vida moral para los candidatos a órdenes sagradas y a beneficios eclesiásticos.</li>
+      <li><strong>El decreto <em>Tametsi</em> sobre el matrimonio</strong> (Sesión XXIV) exigió que todo matrimonio se celebrara públicamente, ante el párroco propio y dos testigos —dando fin a los "matrimonios clandestinos" que habían generado siglos de escándalo y litigios.</li>
+      <li><strong>Reforma de la liturgia:</strong> bajo Pío V (1570), se publicó el Misal Romano Tridentino —la Misa de San Pío V—, unificando la liturgia en todo el Occidente latino. Bajo el mismo papa se publicó el Breviario reformado y, bajo Gregorio XIII en 1566, el Catecismo Romano, un instrumento de catequesis sistemática para párrocos.</li>
+    </ul>
+
+    <h3>Los santos de la Reforma Católica</h3>
+    <p>
+      Ningún argumento habla más alto que el de la santidad. El siglo XVI vio en la Iglesia Católica
+      un florecimiento de santidad que no tenía equivalente en el campo protestante —donde la
+      teología de la gracia irresistible y de la total corrupción de la naturaleza hacía difícil el
+      concepto mismo de heroísmo moral ascético.
+    </p>
+
+    <div class="cards-grid">
+      <div class="persona-card">
+        <span class="name">San Ignacio de Loyola</span>
+        <span class="dates">1491–1556 · Fundador de la Compañía de Jesús</span>
+        <p>Militar vasco convertido durante una convalecencia, fundó la Compañía de Jesús (Jesuitas) en 1540. Los jesuitas se convirtieron en la vanguardia intelectual de la Contrarreforma: educadores, misioneros, teólogos, confesores de reyes. Reconquistaron Polonia, Bavaria y Alemania del Sur para el catolicismo sin ejércitos, solo con escuelas y predicación.</p>
+      </div>
+      <div class="persona-card">
+        <span class="name">Santa Teresa de Ávila</span>
+        <span class="dates">1515–1582 · Reformadora del Carmelo · Doctora de la Iglesia</span>
+        <p>Mística castellana que reformó la Orden del Carmen desde dentro, devolviendo al Carmelo su vocación contemplativa original. Sus obras —<em>El libro de la vida</em>, <em>Las Moradas</em>, <em>El Camino de perfección</em>— son cumbres de la literatura espiritual universal y de la prosa castellana del siglo XVI.</p>
+      </div>
+      <div class="persona-card">
+        <span class="name">San Juan de la Cruz</span>
+        <span class="dates">1542–1591 · Cofundador del Carmelo Descalzo · Doctor de la Iglesia</span>
+        <p>Colaborador de Teresa de Ávila, poeta místico cuya <em>Noche oscura del alma</em> y <em>Cántico espiritual</em> son consideradas cimas de la poesía española, además de tratados insuperables sobre el camino hacia Dios.</p>
+      </div>
+      <div class="persona-card">
+        <span class="name">San Carlos Borromeo</span>
+        <span class="dates">1538–1584 · Arzobispo de Milán</span>
+        <p>Sobrino de Pío IV y secretario de Estado del Vaticano durante Trento, renunció a una carrera cortesana brillante para convertirse en el modelo del obispo tridentino: vivió en su diócesis, evangelizó personalmente, fundó seminarios, visitó cada parroquia, atendió a los enfermos durante la peste de 1576 con riesgo de su propia vida. Su ejemplo definió lo que Trento había pedido a los obispos.</p>
+      </div>
+      <div class="persona-card">
+        <span class="name">San Felipe Neri</span>
+        <span class="dates">1515–1595 · Apóstol de Roma</span>
+        <p>Con humor, alegría y hospitalidad, evangelizó Roma desde abajo, fundando el Oratorio —reuniones de laicos para la oración, el canto y las obras de misericordia—. Su figura representa el polo opuesto al rigorismo: la Reforma Católica como fiesta, no como angustia.</p>
+      </div>
+      <div class="persona-card">
+        <span class="name">San Francisco de Sales</span>
+        <span class="dates">1567–1622 · Obispo de Ginebra · Doctor de la Iglesia</span>
+        <p>Evangelizó el Chablais saboyano —territorio calvinis­ta— a pie y sin escolta, a través de la predicación y los famosos "papeles" (panfletos devotos pegados en puertas y paredes). Reconvirtió decenas de miles de personas. Su <em>Introducción a la vida devota</em> democratizó la espiritualidad: la santidad no es solo para monjes, sino para todos.</p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 11 — FRUTOS -->
+  <section class="section" id="frutos">
+    <div class="eyebrow">11 · El resultado</div>
+    <h2>Los frutos: la Iglesia renovada y el mundo recatolicizado</h2>
+    <p>
+      La narrativa protestante presenta el período post-Trento como una "Contrarreforma" —una reacción
+      defensiva y represiva de una institución acorralada. La narrativa católica lo ve, con razón
+      histórica, como una <strong>Reforma Católica auténtica</strong>: no una reacción a Lutero, sino
+      un movimiento de renovación que en parte precedía a Lutero (los Oratorios del Amor Divino, los
+      Teatinos, los Capuchinos, la reforma de Cisneros en España) y que Trento organizó, sistematizó
+      y potenció.
+    </p>
+
+    <h3>La reconversión de Europa</h3>
+    <p>
+      Hacia 1560, parecía que el protestantismo estaba destinado a conquistar toda la Europa septentrional
+      y central. Polonia, Baviera, Austria, Hungría, Bohemia estaban en proceso de protestantización.
+      A finales del siglo XVI y comienzos del XVII, gracias a los jesuitas y a los obispos tridentinos,
+      Polonia había regresado casi completamente al catolicismo, Baviera se había consolidado, y gran
+      parte del sur de Alemania permanecía católica. No fue el resultado de la Inquisición —que tuvo
+      un papel muy limitado en el centro y norte de Europa—, sino de la educación, la predicación y
+      la ejemplaridad de vida.
+    </p>
+
+    <h3>La expansión misional: el catolicismo se vuelve global</h3>
+    <p>
+      Mientras Europa se fracturaba, la Iglesia Católica se hacía mundial. Los jesuitas llegaron a
+      Japón en 1549 con San Francisco Javier —que había llegado a la India en 1542—. La evangelización
+      de América Latina producía millones de bautizados. El padre Matteo Ricci llegaba a China con
+      el método de la <em>acomodación cultural</em>. El padre Roberto de Nobili hacía lo mismo en
+      la India. Lo que Europa perdía al norte lo ganaba al sur, al este y al oeste.
+    </p>
+
+    <div class="hist-quote">
+      <p>"Dame fe y que yo tenga el corazón de Cristo: lo demás vendrá por añadidura."</p>
+      <span class="attr">— San Francisco Javier, apóstol de Asia, desde la India, c. 1545</span>
+    </div>
+
+    <h3>La Iglesia que emergió de Trento</h3>
+    <p>
+      La Iglesia post-tridentina era recognociblemente la misma Iglesia de antes —en doctrina, en
+      sacramentos, en estructura jerárquica—, pero profundamente transformada en su práctica y en su
+      autoconciencia. Algunos de sus rasgos más visibles:
+    </p>
+    <ul>
+      <li>Un clero <strong>mejor formado</strong> gracias a los seminarios, más consciente de sus responsabilidades pastorales.</li>
+      <li>Una <strong>catequesis sistematizada</strong> a través del Catecismo Romano (1566) y los catecismos para niños, especialmente el del beato Pedro Canisio, que fue el instrumento catequético más usado en Europa central durante dos siglos.</li>
+      <li>Una <strong>liturgia unificada</strong> con el Misal Tridentino (1570), que dio a la Misa latina una estabilidad sin precedentes, manteniéndose sustancialmente inalterada hasta el Concilio Vaticano II (1962).</li>
+      <li>Un <strong>episcopado residente y comprometido</strong>, del que San Carlos Borromeo fue el modelo insuperable.</li>
+      <li>Un <strong>florecimiento de arte barroco</strong> —Bernini, Caravaggio, Rubens, Zurbarán, Murillo— que expresó en piedra, pincel y música la confianza renovada de una Iglesia que había mirado al abismo y había elegido reformarse desde adentro.</li>
+    </ul>
+
+    <div class="divider" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><rect x="15" y="15" width="30" height="30"/><rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/></g></svg>
+    </div>
+  </section>
+
+  <!-- 12 — SÍNTESIS -->
+  <section class="section" id="sintesis">
+    <div class="eyebrow">12 · Conclusión</div>
+    <h2>Síntesis y conclusión: la reforma que salió de la fe, no contra ella</h2>
+    <p>
+      La Reforma del siglo XVI fue posible por dos razones. La primera fue que la Iglesia, en parte de
+      sus miembros y estructura, había traicionado el Evangelio que custodiaba —y esa traición creó un
+      suelo fértil para quienes prometían un regreso a la pureza original. La segunda fue que Lutero
+      propuso, como solución a los problemas reales, una reconstrucción doctrinal que iba mucho más
+      allá de lo que los problemas requerían —y que, al prescindir de la Tradición apostólica, la
+      autoridad magisterial y siete de los sacramentos, privó al creyente de recursos espirituales
+      irreemplazables.
+    </p>
+    <p>
+      El Concilio de Trento respondió a ambas dimensiones: afrontó los abusos con reformas disciplinares
+      concretas y exigentes, y defendió la doctrina con una precisión que ninguna generación anterior
+      había alcanzado. No fue una respuesta perfecta —la persecución de disidentes, el uso político
+      de la religión por los príncipes católicos, y las guerras de religión que asolaron Europa durante
+      el siglo XVII son realidades que la historia católica no puede ignorar—, pero fue una respuesta
+      auténtica, generada por la misma fe que la Iglesia había recibido de los apóstoles y conservado
+      a través de todos los siglos.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Argumento protestante</th><th>Posición católica</th><th>Respuesta de Trento</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="flag">Sola Scriptura</td>
+            <td>Escritura <em>y</em> Tradición; la Iglesia interpreta</td>
+            <td>Sesión IV: ambas fuentes de igual autoridad</td>
+          </tr>
+          <tr>
+            <td class="flag">Sola Fide</td>
+            <td>Fe + gracia + cooperación humana + obras</td>
+            <td>Sesión VI: decreto sobre la justificación</td>
+          </tr>
+          <tr>
+            <td class="flag">Solo 2 sacramentos</td>
+            <td>Siete sacramentos instituidos por Cristo</td>
+            <td>Sesión VII: canones sobre los sacramentos</td>
+          </tr>
+          <tr>
+            <td class="flag">Eucaristía simbólica</td>
+            <td>Presencia real; transubstanciación</td>
+            <td>Sesión XIII: decreto sobre la Eucaristía</td>
+          </tr>
+          <tr>
+            <td class="flag">La Misa no es sacrificio</td>
+            <td>Re-presentación incruenta del Calvario</td>
+            <td>Sesión XXII: decreto sobre la Misa</td>
+          </tr>
+          <tr>
+            <td class="flag">Sin purgatorio</td>
+            <td>Purgatorio afirmado por Escritura y Tradición</td>
+            <td>Sesión XXV: decreto sobre el purgatorio</td>
+          </tr>
+          <tr>
+            <td class="flag">Clero corrupto</td>
+            <td>Reforma real desde dentro, no demolición</td>
+            <td>Decretos disciplinares; seminarios; residencia</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">La última palabra: la vida de los santos</div>
+      <p>
+        En última instancia, la prueba más elocuente de una religión no son sus decretos sino sus
+        frutos. El siglo XVI católico produjo a Ignacio de Loyola, Teresa de Ávila, Juan de la Cruz,
+        Carlos Borromeo, Felipe Neri y Francisco de Sales. Estos hombres y mujeres no huyeron de la
+        Iglesia institucion­al con sus defectos: la amaron, la sirvieron, la reformaron desde dentro y
+        la santificaron con sus vidas. No necesitaron inventar una nueva Iglesia para encontrar a Cristo:
+        lo encontraron en la Eucaristía, en la confesión, en la obediencia al papa, en la oración
+        litúrgica —en todos los "recursos" que la Reforma había descartado como obstáculos. Su
+        testimonio es, para el creyente, más fuerte que cualquier argumento teológico.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mark-small" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1">
+          <rect x="15" y="15" width="30" height="30"/>
+          <rect x="15" y="15" width="30" height="30" transform="rotate(45 30 30)"/>
+          <circle cx="30" cy="30" r="22"/>
+        </g>
+      </svg>
+    </div>
+    <p>Historia del Concilio de Trento (1545-1563) y de la Reforma protestante desde la perspectiva católica: antecedentes, argumentos, refutación dogmática, reforma disciplinar y frutos espirituales.</p>
+  </footer>
+
+</main>
+
+<button id="backToTop" aria-label="Volver arriba">↑</button>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const menuToggle = document.getElementById('menuToggle');
+  menuToggle.addEventListener('click', () => {
+    const open = sidebar.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open);
+    menuToggle.textContent = open ? '✕' : '☰';
+  });
+  document.querySelectorAll('.toc-list a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 980) {
+        sidebar.classList.remove('open');
+        menuToggle.textContent = '☰';
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  const progressBar = document.getElementById('progressBar');
+  function updateProgress(){
+    const h = document.documentElement;
+    const s = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = (isFinite(s) ? s : 0) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  const sections = document.querySelectorAll('main .section, main .hero');
+  const links = document.querySelectorAll('.toc-list a');
+  const linkMap = {};
+  links.forEach(l => linkMap[l.getAttribute('href').slice(1)] = l);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        if (linkMap[entry.target.id]) linkMap[entry.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  const backToTop = document.getElementById('backToTop');
+  document.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 600);
+  }, {passive:true});
+  backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+
+</body>
+</html>

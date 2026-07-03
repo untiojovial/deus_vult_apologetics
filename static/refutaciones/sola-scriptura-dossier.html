@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contra la Sola Scriptura: teología, lógica e historia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070705;--bg-alt:#0d0d0a;--card:#131310;--card-2:#17170f;
+    --border:rgba(212,175,55,0.22);--border-soft:rgba(212,175,55,0.10);
+    --gold:#c9a227;--gold-bright:#ecc659;--gold-soft:rgba(212,175,55,0.10);
+    --white:#f4efe3;--white-dim:#b9b6ab;--maxw:880px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--white-dim);line-height:1.78;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--gold);color:#0a0a08;}
+  ::-webkit-scrollbar{width:10px;}::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--card-2);border:1px solid var(--border);border-radius:6px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+  a{color:var(--gold-bright);text-decoration:none;}a:hover{text-decoration:underline;}
+  strong{color:var(--white);font-weight:600;}em{color:var(--white);}
+
+  #progressBar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));z-index:200;transition:width .12s linear;}
+  .skip-link{position:absolute;left:-999px;top:0;background:var(--gold);color:#000;padding:.5rem 1rem;z-index:300;font-weight:600;}
+  .skip-link:focus{left:0;}
+
+  /* SIDEBAR */
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:310px;background:var(--bg-alt);border-right:1px solid var(--border);overflow-y:auto;padding:2.2rem 1.4rem 3rem;z-index:100;}
+  .brand{display:flex;flex-direction:column;gap:.35rem;padding:0 .6rem;}
+  .brand .mark{width:44px;height:44px;display:flex;align-items:center;justify-content:center;}
+  .brand h1{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--white);font-weight:600;letter-spacing:.02em;margin-top:.6rem;line-height:1.3;}
+  .brand p{font-size:.75rem;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;margin-top:.25rem;}
+  .toc-title{margin:2rem 0 .7rem;padding:0 .6rem;font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .toc-list{list-style:none;display:flex;flex-direction:column;gap:.1rem;}
+  .toc-list a{display:flex;gap:.65rem;align-items:baseline;padding:.52rem .7rem;border-radius:6px;color:var(--white-dim);font-size:.84rem;border-left:2px solid transparent;transition:background .15s,color .15s,border-color .15s;}
+  .toc-list a .num{font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:700;font-size:.84rem;min-width:1.7rem;}
+  .toc-list a:hover{background:var(--gold-soft);color:var(--white);text-decoration:none;}
+  .toc-list a.active{background:var(--gold-soft);color:var(--gold-bright);font-weight:600;border-left-color:var(--gold);}
+  .toc-list a.active .num{color:var(--gold-bright);}
+  .sidebar-foot{margin-top:2.2rem;padding:1rem .7rem 0;border-top:1px solid var(--border-soft);font-size:.72rem;color:var(--white-dim);line-height:1.6;}
+  #menuToggle{display:none;position:fixed;top:1rem;left:1rem;z-index:150;width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--gold-bright);font-size:1.2rem;align-items:center;justify-content:center;cursor:pointer;}
+
+  /* LAYOUT */
+  main{margin-left:310px;}
+  .section{max-width:var(--maxw);margin:0 auto;padding:5.5rem 2.6rem 0;scroll-margin-top:1.5rem;}
+  .section:last-of-type{padding-bottom:2rem;}
+  .eyebrow{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:600;}
+  .eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.22;margin-bottom:1.4rem;}
+  h3{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:clamp(1.12rem,2.5vw,1.42rem);margin:2.2rem 0 .8rem;}
+  h4{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold-bright);font-size:1.1rem;margin-bottom:.5rem;}
+  p{margin-bottom:1.15rem;font-size:1.02rem;}
+  ul,ol{margin:0 0 1.15rem 1.4rem;}
+  li{margin-bottom:.5rem;font-size:1.02rem;}
+
+  /* HERO */
+  .hero{padding:5rem 2.6rem 3rem;max-width:var(--maxw);margin:0 auto;position:relative;}
+  .hero-rosette{position:absolute;top:1rem;right:1.5rem;opacity:.38;}
+  @media(prefers-reduced-motion:no-preference){.hero-rosette .spin{animation:spin 90s linear infinite;transform-origin:50% 50%;}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:clamp(2rem,5.8vw,3.4rem);line-height:1.14;max-width:720px;}
+  .hero h1 span{color:var(--gold-bright);}
+  .hero .lede{margin-top:1.4rem;font-size:1.1rem;color:var(--white-dim);max-width:670px;line-height:1.8;}
+  .pills{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.8rem;}
+  .pill{border:1px solid var(--border);border-radius:999px;padding:.4rem 1.1rem;font-size:.77rem;color:var(--gold-bright);letter-spacing:.06em;background:var(--gold-soft);}
+
+  /* CALLOUTS */
+  .callout{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:1.3rem 1.5rem;margin:1.6rem 0 2.2rem;}
+  .callout.note{border-left:3px solid var(--gold);}
+  .callout.danger{border-left:3px solid #9a3535;}
+  .callout.green{border-left:3px solid #3a6e3a;}
+  .callout-title{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-weight:600;font-size:1.05rem;margin-bottom:.55rem;display:flex;align-items:center;gap:.5rem;}
+  .callout-title.red{color:#d96060;}
+  .callout-title.green-t{color:#7ec87e;}
+  .callout p:last-child{margin-bottom:0;}
+
+  /* CITAS BÍBLICAS Y PATRÍSTICAS */
+  .verse-block{border-left:3px solid var(--gold);padding:.9rem 1.3rem;margin:1.5rem 0;background:rgba(212,175,55,0.05);border-radius:0 6px 6px 0;}
+  .verse-block p{font-family:'IM Fell English',serif;font-style:italic;font-size:1.05rem;color:var(--white);margin-bottom:.35rem;}
+  .verse-block .ref{font-size:.74rem;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;}
+
+  .padre-quote{border-left:3px solid var(--white);background:var(--card);border-radius:0 8px 8px 0;padding:1.1rem 1.4rem;margin:1rem 0;}
+  .padre-quote .name{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--white);font-size:1.1rem;}
+  .padre-quote .obra{color:var(--gold);font-size:.73rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem;display:block;}
+  .padre-quote blockquote{font-family:'IM Fell English',serif;font-style:italic;font-size:1rem;color:var(--white-dim);margin:.5rem 0 0;border:none;padding:0;}
+  .padre-quote .nota{font-size:.82rem;color:var(--gold-bright);margin-top:.5rem;}
+
+  /* BOXES */
+  .box{border-left:3px solid var(--gold);background:var(--card);border-radius:0 8px 8px 0;padding:1.15rem 1.4rem;margin:1rem 0;}
+  .box.alt{border-left-color:var(--white);}
+  .box.danger{border-left-color:#9a3535;}
+  .box.green{border-left-color:#3a6e3a;}
+  .box-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;flex-wrap:wrap;}
+  .tag{font-family:'Cormorant Garamond',serif;font-weight:700;color:#0a0a08;background:var(--gold);padding:.18rem .65rem;border-radius:4px;font-size:.8rem;letter-spacing:.04em;white-space:nowrap;}
+  .tag.white{background:var(--white);}
+  .tag.red{background:#9a3535;color:var(--white);}
+  .tag.green{background:#3a6e3a;color:var(--white);}
+  .tag.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold-bright);}
+  .box p{margin-bottom:0;font-size:.98rem;}
+  .box p+p{margin-top:.6rem;}
+  .box .label{color:var(--gold-bright);font-weight:600;font-size:.83rem;text-transform:uppercase;letter-spacing:.1em;}
+
+  /* SILOGISMOS */
+  .silogismo{border:1px solid var(--gold);border-radius:10px;padding:1.8rem 1.7rem;margin:2.2rem 0;background:var(--card);}
+  .sil-title{font-family:'Cormorant Garamond',serif;color:var(--gold-bright);font-weight:700;font-size:1.3rem;margin-bottom:1.3rem;display:flex;align-items:center;gap:.7rem;}
+  .sil-title::before{content:'';display:block;width:22px;height:1px;background:var(--gold);}
+  .sil-line{display:flex;gap:.9rem;align-items:baseline;padding:.55rem 0;border-bottom:1px solid var(--border-soft);}
+  .sil-line:last-child{border-bottom:none;padding-top:.9rem;margin-top:.3rem;}
+  .sil-key{font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:700;font-size:1.05rem;min-width:2.4rem;}
+  .sil-text{font-size:.97rem;color:var(--white-dim);}
+  .sil-text strong{color:var(--white);}
+  .sil-line.conclusion{background:rgba(212,175,55,0.09);border-radius:6px;padding:.9rem 1rem;border-bottom:none;}
+  .sil-line.conclusion .sil-text{color:var(--white);}
+  .sil-line.conclusion .sil-key{color:var(--gold-bright);}
+
+  /* LECTURA GRID */
+  .lectura-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:1.6rem 0;}
+  .lectura{border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.3rem;background:var(--card);}
+  .lectura .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:.15rem .55rem;margin-bottom:.7rem;}
+  .lectura .badge.red{color:#d96060;border-color:#9a3535;}
+  .lectura p{font-size:.93rem;margin-bottom:0;}
+
+  /* OBJECCION / RESPUESTA */
+  .obj-resp{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.6rem 0;}
+  @media(max-width:640px){.obj-resp{grid-template-columns:1fr;}}
+  .obj{border:1px solid #6a2020;background:rgba(100,20,20,0.14);border-radius:8px;padding:1.15rem 1.2rem;}
+  .obj .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:#d96060;border:1px solid #9a3535;border-radius:4px;padding:.15rem .55rem;margin-bottom:.6rem;}
+  .obj p{font-size:.92rem;margin-bottom:0;color:var(--white-dim);}
+  .resp{border:1px solid rgba(212,175,55,0.4);background:rgba(212,175,55,0.06);border-radius:8px;padding:1.15rem 1.2rem;}
+  .resp .badge{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold-bright);border:1px solid var(--gold);border-radius:4px;padding:.15rem .55rem;margin-bottom:.6rem;}
+  .resp p{font-size:.92rem;margin-bottom:0;}
+
+  /* TABLA */
+  .table-wrap{overflow-x:auto;margin:1.8rem 0;border:1px solid var(--border);border-radius:8px;}
+  table{width:100%;border-collapse:collapse;font-size:.91rem;min-width:600px;}
+  th,td{padding:.85rem 1rem;border-bottom:1px solid var(--border-soft);text-align:left;vertical-align:top;}
+  th{color:var(--gold-bright);font-family:'Cormorant Garamond',serif;font-size:.98rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid var(--gold);background:var(--bg-alt);position:sticky;top:0;}
+  tbody tr:hover{background:rgba(212,175,55,0.04);}
+  tbody tr:last-child td{border-bottom:none;}
+  td.flag{color:var(--gold-bright);font-weight:600;}
+  td.red{color:#d96060;}td.green{color:#7ec87e;}
+
+  /* SECTION BANNER */
+  .section-banner{background:linear-gradient(135deg,var(--card) 0%,var(--card-2) 100%);border:1px solid var(--border);border-radius:10px;padding:1.8rem 2rem 1.5rem;margin:2rem 0 2.4rem;position:relative;overflow:hidden;}
+  .section-banner::before{content:'';position:absolute;right:-20px;top:-20px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.12),transparent 70%);}
+  .section-banner h3{margin-top:0;color:var(--gold-bright);}
+  .section-banner p{font-size:.96rem;}
+  .section-banner p:last-child{margin-bottom:0;}
+
+  /* PILARES */
+  .pilares-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin:1.8rem 0;}
+  @media(max-width:640px){.pilares-grid{grid-template-columns:1fr;}}
+  .pilar{border:1px solid var(--gold);border-radius:8px;padding:1.5rem 1.2rem;background:var(--card);text-align:center;}
+  .pilar-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold-bright);font-weight:700;display:block;line-height:1;}
+  .pilar h4{color:var(--white);margin:.5rem 0 .6rem;}
+  .pilar p{font-size:.88rem;margin:0;}
+
+  /* DIVIDERS */
+  .divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3.4rem 0;opacity:.5;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border));}
+  .divider::after{background:linear-gradient(to left,transparent,var(--border));}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);margin-top:4rem;padding:2.4rem 2.6rem 3rem;max-width:var(--maxw);margin-left:auto;margin-right:auto;text-align:center;font-size:.85rem;color:var(--white-dim);}
+  footer .mark-small{margin:0 auto 1rem;opacity:.6;}
+  #backToTop{position:fixed;bottom:1.6rem;right:1.6rem;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:var(--card);color:var(--gold-bright);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:120;}
+  #backToTop.visible{opacity:1;pointer-events:auto;}
+  #backToTop:hover{transform:translateY(-3px);}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px;}
+
+  @media(max-width:980px){
+    .sidebar{transform:translateX(-100%);transition:transform .28s ease;box-shadow:20px 0 40px rgba(0,0,0,.5);}
+    .sidebar.open{transform:translateX(0);}
+    main{margin-left:0;}
+    #menuToggle{display:flex;}
+    .hero,.section{padding-left:1.4rem;padding-right:1.4rem;}
+    .hero{padding-top:4.8rem;}
+    .hero-rosette{display:none;}
+    .obj-resp{grid-template-columns:1fr;}
+    .pilares-grid{grid-template-columns:1fr;}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div id="progressBar" aria-hidden="true"></div>
+<button id="menuToggle" aria-label="Abrir índice" aria-expanded="false">☰</button>
+
+<nav class="sidebar" id="sidebar" aria-label="Índice del documento">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">
+      <svg width="44" height="44" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1.4">
+          <circle cx="30" cy="30" r="26"/>
+          <line x1="30" y1="7" x2="30" y2="53"/>
+          <line x1="9" y1="22" x2="51" y2="22"/>
+        </g>
+      </svg>
+    </div>
+    <h1>Contra la Sola Scriptura</h1>
+    <p>Lógica · Escritura · Padres</p>
+  </div>
+
+  <div class="toc-title">Índice interactivo</div>
+  <ul class="toc-list">
+    <li><a href="#inicio"><span class="num">00</span><span>Apertura</span></a></li>
+    <li><a href="#autorefutacion"><span class="num">01</span><span>La autorefutación lógica nuclear</span></a></li>
+    <li><a href="#canon"><span class="num">02</span><span>El canon: quién define qué es la Biblia</span></a></li>
+    <li><a href="#exegesis-2tim"><span class="num">03</span><span>Exégesis de 2 Timoteo 3:16-17</span></a></li>
+    <li><a href="#iglesia-antes"><span class="num">04</span><span>La Iglesia existió antes que el NT</span></a></li>
+    <li><a href="#padres"><span class="num">05</span><span>Los Padres contra la Sola Scriptura</span></a></li>
+    <li><a href="#deuterocanonicos"><span class="num">06</span><span>Los Deuterocanónicos: la fisura</span></a></li>
+    <li><a href="#lutero-canon"><span class="num">07</span><span>Lutero devora su propio canon</span></a></li>
+    <li><a href="#magisterio"><span class="num">08</span><span>El Magisterio como intérprete necesario</span></a></li>
+    <li><a href="#objeciones"><span class="num">09</span><span>Respuesta a las objeciones protestantes</span></a></li>
+    <li><a href="#biblia-interpreta"><span class="num">09b</span><span>"La Biblia se interpreta sola" — reducción al absurdo</span></a></li>
+    <li><a href="#judaizante"><span class="num">10</span><span>La objeción judaizante respondida</span></a></li>
+    <li><a href="#fragmentacion"><span class="num">11</span><span>La fragmentación: prueba empírica</span></a></li>
+    <li><a href="#relativismo-catolico"><span class="num">11b</span><span>"El catolicismo también tiene pluralismo" — respuesta filosófica</span></a></li>
+    <li><a href="#silogismos"><span class="num">12</span><span>Cuatro silogismos formales</span></a></li>
+    <li><a href="#conclusion"><span class="num">13</span><span>Conclusión: los tres pilares</span></a></li>
+  </ul>
+
+  <div class="sidebar-foot">
+    Refutación teológica, lógica e histórica de la Sola Scriptura. Citas verificadas de la Escritura, los Padres y el Magisterio. Correcciones a errores en citas de las diapositivas incluidas.
+  </div>
+</nav>
+
+<main id="contenido">
+
+  <header class="hero" id="inicio">
+    <div class="hero-rosette" aria-hidden="true">
+      <svg width="170" height="170" viewBox="0 0 200 200" fill="none">
+        <g class="spin">
+          <g stroke="var(--gold)" stroke-width="0.75">
+            <circle cx="100" cy="100" r="88"/>
+            <circle cx="100" cy="100" r="62"/>
+            <circle cx="100" cy="100" r="36"/>
+            <line x1="100" y1="12" x2="100" y2="188"/>
+            <line x1="12" y1="100" x2="188" y2="100"/>
+            <line x1="38" y1="38" x2="162" y2="162"/>
+            <line x1="162" y1="38" x2="38" y2="162"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="eyebrow">Apertura</div>
+    <h1>Contra la <em>Sola Scriptura</em>: <span>el principio que se devora a sí mismo</span></h1>
+    <p class="lede">
+      La <em>Sola Scriptura</em> —la doctrina protestante de que la Biblia es la única autoridad infalible
+      en materia de fe— es el pilar sobre el que descansa toda la Reforma del siglo XVI. Sin ella, la
+      ruptura con la Iglesia Católica carece de justificación teológica. Con ella, según sus defensores,
+      el cristiano puede conocer la voluntad de Dios sin depender de ninguna autoridad humana externa.
+    </p>
+    <p class="lede">
+      Este documento demuestra, desde cuatro ángulos simultáneos —la lógica formal, la exégesis bíblica,
+      la historia de la Iglesia primitiva y el testimonio unánime de los Padres—, que la <em>Sola Scriptura</em>
+      es un principio <strong>autorefutante</strong>, <strong>ahistórico</strong> y <strong>antibíblico</strong>:
+      autorefutante porque necesita una autoridad fuera de sí misma para funcionar; ahistórico porque nunca
+      existió antes del siglo XVI; y antibíblico porque la propia Escritura ordena guardar tradiciones orales
+      y someternos a un Magisterio interpretativo.
+    </p>
+    <div class="pills">
+      <span class="pill">Lógica formal</span>
+      <span class="pill">Exégesis bíblica</span>
+      <span class="pill">Padres de la Iglesia</span>
+      <span class="pill">El canon</span>
+      <span class="pill">Lutero vs. el NT</span>
+      <span class="pill">Magisterio</span>
+      <span class="pill">Silogismos</span>
+    </div>
+  </header>
+
+  <!-- 01 -->
+  <section class="section" id="autorefutacion">
+    <div class="eyebrow">01 · El problema nuclear</div>
+    <h2>La autorefutación lógica: la <em>Sola Scriptura</em> destruye su propio fundamento</h2>
+    <p>
+      Antes de cualquier argumento bíblico o histórico, existe un problema lógico que la <em>Sola
+      Scriptura</em> no puede superar: <strong>es un principio que se autodestruye</strong>. Para
+      comprenderlo, basta con hacer la pregunta más básica que cualquier posición epistemológica
+      debe responder: ¿de dónde proviene su propia autoridad?
+    </p>
+
+    <h3>El dilema del canon: la Biblia no se lista a sí misma</h3>
+    <p>
+      La <em>Sola Scriptura</em> afirma que solo la Biblia es la autoridad infalible. Pero ningún libro
+      de la Biblia contiene una tabla de contenidos de la Biblia. Ningún texto bíblico dice: "Los
+      libros canónicos son exactamente estos y no otros." El creyente que quiere seguir la Escritura
+      sola necesita saber primero <em>qué es la Escritura</em> —y esa pregunta no tiene respuesta
+      dentro de la Escritura misma.
+    </p>
+
+    <div class="callout danger">
+      <div class="callout-title red">El círculo vicioso fundamental</div>
+      <p>
+        Para usar la Escritura como autoridad única, primero necesito saber cuáles libros son la
+        Escritura. Pero para saber cuáles libros son la Escritura, necesito una autoridad fuera de
+        la Escritura. Por tanto, la <em>Sola Scriptura</em> requiere una autoridad extra-bíblica como
+        condición de posibilidad —lo que la contradice de raíz. No es un problema periférico: es el
+        colapso del principio antes de poder aplicarlo.
+      </p>
+    </div>
+
+    <h3>La <em>Sola Scriptura</em> es ella misma una tradición humana</h3>
+    <p>
+      La doctrina de la <em>Sola Scriptura</em> no aparece explícitamente en ningún versículo bíblico.
+      Ningún texto dice "solo la Escritura es la autoridad". Es, en sus propios términos, una tradición
+      humana —una doctrina formulada por Lutero y los reformadores en el siglo XVI, sin precedente en
+      los quince siglos anteriores de Iglesia—. Sostener que "solo la Escritura tiene autoridad" apelando
+      a algo que no está en la Escritura viola el principio que pretende establecer. La <em>Sola Scriptura</em>
+      es antibíblica por definición: es una "tradición de hombres" (Mc 7:8) que se impone sobre el
+      depósito apostólico.
+    </p>
+
+    <h3>La paradoja de Marción: el primer canon fue herético</h3>
+    <p>
+      El primer "canon" cristiano fue propuesto hacia el año 140 d.C. por el hereje Marción de Sínope.
+      Rechazó completamente el Antiguo Testamento, redujo el Evangelio a una versión truncada de Lucas
+      y aceptó solo diez cartas de Pablo, eliminando las pastorales. Su canon era explícitamente una
+      lectura "solo de la Escritura" sin referencia a ninguna autoridad apostólica viviente. La Iglesia
+      lo condenó unánimemente —pero para condenarlo necesitó invocar precisamente lo que la <em>Sola
+      Scriptura</em> rechaza: la Tradición apostólica viviente y la autoridad del Magisterio episcopal.
+      Sin esa autoridad, no habría forma de distinguir el canon de Marción del canon cristiano.
+    </p>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 02 -->
+  <section class="section" id="canon">
+    <div class="eyebrow">02 · El argumento del canon</div>
+    <h2>El canon: quién define qué libros son la Biblia</h2>
+    <p>
+      El argumento histórico sobre el canon es, junto con el lógico, el más demoledor para la
+      <em>Sola Scriptura</em>. No se trata de especulación teológica: es un hecho histórico documentado,
+      verificable y no discutido por los propios historiadores protestantes.
+    </p>
+
+    <h3>El canon del Nuevo Testamento fue definido por la Iglesia Católica</h3>
+    <div class="section-banner">
+      <h3>Cronología verificada de la definición del canon</h3>
+      <p>
+        <strong>382 d.C. — Concilio de Roma</strong> bajo el Papa Dámaso I: primera lista oficial
+        completa del canon bíblico, incluyendo todos los deuterocanónicos, idéntica a la actual lista
+        católica. Es el primer documento eclesial que lista exactamente los 73 libros que la Iglesia
+        Católica reconoce hoy.
+      </p>
+      <p>
+        <strong>393 d.C. — Concilio de Hipona</strong>: confirmó el canon de Roma. San Agustín
+        participó activamente.
+      </p>
+      <p>
+        <strong>397 d.C. — Concilio de Cartago III</strong>: reafirmó el mismo canon y lo envió
+        a Roma para su confirmación por el papa.
+      </p>
+      <p>
+        <strong>1546 — Concilio de Trento</strong>: definió dogmáticamente este canon en respuesta
+        a las alteraciones protestantes, ratificando lo que la Tradición apostólica había transmitido.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">El argumento definitivo</span></div>
+      <p>
+        El protestante acepta el canon del Nuevo Testamento —los 27 libros— como Palabra de Dios.
+        Ese canon fue definido por la Iglesia Católica en los siglos IV-V, aplicando criterios de
+        Tradición apostólica, uso litúrgico y conformidad con la regla de fe —criterios todos
+        externos a la Escritura misma—. Al aceptar ese canon, el protestante reconoce implícitamente
+        la autoridad de la Iglesia que lo definió. Luego rechaza esa misma autoridad para todo lo
+        demás. Es, en términos filosóficos, una inconsistencia de primer orden: aceptar la conclusión
+        rechazando las premisas que la hacen posible.
+      </p>
+    </div>
+
+    <h3>Los libros "disputados" del NT: Eusebio de Cesarea</h3>
+    <p>
+      El historiador eclesiástico Eusebio de Cesarea, en su <em>Historia Eclesiástica</em> (III.25,
+      principios del siglo IV), clasifica los libros del Nuevo Testamento en "reconocidos", "disputados"
+      y "rechazados". En la categoría de disputados coloca Santiago, Judas, 2 Pedro, 2 y 3 Juan, y el
+      Apocalipsis. Estos son exactamente los libros que Lutero cuestionó —y que están en el NT
+      protestante hoy—. ¿Por qué están en el canon? Porque la Iglesia, invocando su autoridad
+      magisterial, los incluyó contra la opinión de muchos. La <em>Sola Scriptura</em> no hubiera
+      podido resolver ese debate: necesitó el Magisterio que pretende negar.
+    </p>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="section" id="exegesis-2tim">
+    <div class="eyebrow">03 · Exégesis bíblica</div>
+    <h2>Exégesis de 2 Timoteo 3:16-17: el versículo más citado y más incomprendido</h2>
+    <p>
+      El texto favorito de los defensores de la <em>Sola Scriptura</em> es 2 Timoteo 3:16-17. Lo
+      invocan como si estableciera su principio de forma explícita. Un análisis exegético riguroso
+      muestra que no lo hace —y que, leído en contexto, apunta en la dirección opuesta.
+    </p>
+
+    <div class="verse-block">
+      <p>"Toda Escritura es inspirada por Dios y útil para enseñar, para argüir, para corregir y para educar en la justicia; así el hombre de Dios se encuentra perfecto y preparado para toda obra buena."</p>
+      <span class="ref">2 Timoteo 3:16-17</span>
+    </div>
+
+    <h3>Tres problemas exegéticos insuperables</h3>
+
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">Problema 1</span>
+        <h4>No dice "sola"</h4>
+        <p>
+          El texto dice que la Escritura es "útil" (<em>ōphelimos</em> en griego), no que sea la
+          única fuente de autoridad. "Útil" es un adjetivo que describe una función instrumental,
+          no exclusiva. El propio Timoteo, a quien se escribe, es una herramienta "útil" para Pablo
+          (2 Tim 4:11) —sin que eso lo haga la única herramienta válida. Decir que algo es útil
+          no equivale a decir que es suficiente por sí solo.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Problema 2</span>
+        <h4>"Perfecto" no significa "auto-suficiente"</h4>
+        <p>
+          El término griego <em>artios</em> (traducido "perfecto" o "equipado") significa "apto",
+          "adecuado", "equipado para una tarea". No significa "todo lo que existe y nada más hace
+          falta". El mismo vocablo usado para describir a un artesano "equipado" no implica que
+          ese artesano no necesite supervisores, aprendices o instrucciones verbales adicionales.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Problema 3</span>
+        <h4>El contexto inmediato exige la Tradición oral</h4>
+        <p>
+          Los versículos inmediatamente anteriores y posteriores contradictores directamente la
+          lectura "sola Scriptura": 2 Tim 1:13: "Conserva el modelo de las palabras sanas que
+          <em>has oído de mí</em>." 2 Tim 2:2: "Lo que <em>has oído de mí</em> ante muchos
+          testigos, confíalo a hombres fieles." 2 Tim 3:14: "Permanece en lo que <em>aprendiste</em>
+          y te convenciste, sabiendo de quién lo <em>aprendiste</em>." Pablo apela reiteradamente
+          a la enseñanza oral transmitida, no solo al texto escrito.
+        </p>
+      </div>
+    </div>
+
+    <h3>¿Qué "Escritura" conocía Timoteo?</h3>
+    <p>
+      Un detalle exegético decisivo que suele pasarse por alto: cuando Pablo escribe a Timoteo,
+      no existe aún el canon del Nuevo Testamento. La "Escritura" a la que Pablo se refiere en
+      2 Tim 3:16 es casi con certeza el Antiguo Testamento, posiblemente con algunas cartas
+      paulinas circulando. Si la <em>Sola Scriptura</em> fuera el principio correcto aplicando
+      este texto, implicaría que solo el Antiguo Testamento es la regla de fe —una conclusión
+      que ningún protestante acepta. El principio, aplicado consistentemente, lleva a un absurdo.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title">El silogismo implícito del texto</div>
+      <p>
+        2 Tim 3:16 prueba que la Escritura es inspirada y útil. No prueba que sea la <em>única</em>
+        autoridad. La diferencia entre "útil" y "única fuente de verdad" es tan grande como la
+        diferencia entre "el martillo es útil para construir" y "el martillo es el único instrumento
+        que existe para construir". Quien no ve esa diferencia está leyendo en el texto lo que
+        quiere encontrar, no lo que el texto dice.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 04 -->
+  <section class="section" id="iglesia-antes">
+    <div class="eyebrow">04 · Argumento histórico</div>
+    <h2>La Iglesia existió antes que el Nuevo Testamento: el argumento histórico decisivo</h2>
+    <p>
+      La <em>Sola Scriptura</em> opera como si la Biblia hubiera precedido a la Iglesia —como si
+      la comunidad cristiana hubiera nacido del libro—. La historia real es exactamente la inversa:
+      <strong>la Iglesia existió, predicó, bautizó, celebró la Eucaristía y se extendió por el
+      Imperio Romano durante décadas antes de que existiera un solo libro del Nuevo Testamento</strong>.
+    </p>
+
+    <h3>La cronología que destruye el presupuesto</h3>
+    <ul>
+      <li><strong>30 d.C.:</strong> Pentecostés. La Iglesia nace. No existe ningún texto del Nuevo Testamento.</li>
+      <li><strong>~48-50 d.C.:</strong> Pablo escribe 1 Tesalonicenses, probablemente el primer documento del NT. La Iglesia lleva 18-20 años funcionando sin él.</li>
+      <li><strong>~50-60 d.C.:</strong> Las cartas paulinas se escriben y circulan.</li>
+      <li><strong>~65-100 d.C.:</strong> Los Evangelios y demás libros del NT se escriben y comienzan a circular.</li>
+      <li><strong>382 d.C.:</strong> El canon del NT es definido oficialmente por primera vez —350 años después de la fundación de la Iglesia.</li>
+    </ul>
+    <p>
+      Durante ese período de 350 años, ¿cómo conocían la fe los cristianos? Por la predicación oral
+      de los apóstoles y sus sucesores, transmitida a través de la Tradición apostólica viviente.
+      La Iglesia primitiva funcionó durante generaciones sin un Nuevo Testamento completo. La
+      <em>Sola Scriptura</em> simplemente no existía como concepto ni como posibilidad práctica
+      en la Iglesia apostólica.
+    </p>
+
+    <div class="verse-block">
+      <p>"Así que, hermanos, manteneos firmes y conservad las tradiciones que habéis aprendido, sea por palabra, sea por carta nuestra."</p>
+      <span class="ref">2 Tesalonicenses 2:15 — Pablo distingue explícitamente "de palabra" y "por carta", dando igual autoridad a ambas</span>
+    </div>
+
+    <div class="verse-block">
+      <p>"Os alabo porque en todo os acordáis de mí y conserváis las tradiciones tal como os las he transmitido."</p>
+      <span class="ref">1 Corintios 11:2 — Pablo alaba guardar las tradiciones orales apostólicas</span>
+    </div>
+
+    <h3>El modelo saduceo y el modelo fariseo: Jesús y la Tradición oral</h3>
+    <p>
+      En el judaísmo del siglo I coexistían dos posiciones sobre la Tradición oral. Los saduceos
+      rechazaban toda autoridad fuera del Pentateuco escrito —el equivalente judío de la <em>Sola
+      Scriptura</em>. Los fariseos aceptaban la Torá escrita más la Torá oral, la Tradición rabínica
+      viva. Jesús criticó muchas interpretaciones fariseas específicas, pero aceptó explícitamente
+      el <em>principio</em> de la autoridad oral: "En la cátedra de Moisés se han sentado los
+      escribas y los fariseos. Haced, pues, y observad todo lo que os digan" (Mt 23:2-3). Jesús
+      validó la enseñanza oral autorizada —y su Iglesia la continuó.
+    </p>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="section" id="padres">
+    <div class="eyebrow">05 · Unanimidad apostólica</div>
+    <h2>Los Padres de la Iglesia contra la <em>Sola Scriptura</em>: unanimidad sin excepción</h2>
+    <p>
+      Si la <em>Sola Scriptura</em> fuera el principio correcto para conocer la fe cristiana,
+      cabría esperar que algún Padre de la Iglesia —en los primeros cuatro o cinco siglos, los
+      más cercanos a los apóstoles— la enseñara, la practicara o al menos la insinuara. No existe
+      ninguno. Todos los Padres, sin excepción de ningún tipo, apelan a la Tradición apostólica
+      oral y a la autoridad del obispo como criterios necesarios para interpretar correctamente
+      la Escritura.
+    </p>
+
+    <div class="padre-quote">
+      <span class="name">San Basilio Magno</span>
+      <span class="obra">Sobre el Espíritu Santo, cap. 27 · s. IV</span>
+      <blockquote>"De las doctrinas y predicaciones conservadas en la Iglesia, algunas las tenemos por enseñanza escrita y otras las hemos recibido de la Tradición apostólica, transmitidas en secreto. Ambas tienen la misma fuerza en orden a la piedad."</blockquote>
+      <p class="nota">Cita verificada. San Basilio afirma explícitamente la igualdad de autoridad entre la enseñanza escrita y la oral apostólica. Niega radicalmente cualquier primacía exclusiva del texto escrito.</p>
+    </div>
+
+    <div class="padre-quote">
+      <span class="name">San Agustín de Hipona</span>
+      <span class="obra">Contra la Epístola del Maniqueo llamada "Fundamental", 5:6 · s. V</span>
+      <blockquote>"Ego vero Evangelio non crederem, nisi me catholicae Ecclesiae commoveret auctoritas." — "Yo, en verdad, no creería en el Evangelio si no me moviera a ello la autoridad de la Iglesia Católica."</blockquote>
+      <p class="nota">Cita verificada en el latín original. Agustín no dice que la Iglesia sea superior al Evangelio: dice que el criterio para reconocer qué es el Evangelio es la autoridad de la Iglesia. La Escritura no se autentica a sí misma.</p>
+    </div>
+
+    <div class="padre-quote">
+      <span class="name">San Ireneo de Lyon</span>
+      <span class="obra">Adversus Haereses (Contra las herejías), III.4.1 · s. II</span>
+      <blockquote>"La Tradición de los apóstoles, manifestada en todo el mundo, puede ser percibida en toda la Iglesia por aquellos que quieren ver la verdad; y podemos enumerar a los obispos que fueron constituidos por los apóstoles y sus sucesores hasta nuestros días."</blockquote>
+      <p class="nota">Cita verificada. Ireneo combate a los gnósticos que también invocaban "escrituras" propias. Su argumento: la verdad no se determina por quién tiene un texto, sino por quién tiene la sucesión apostólica. Sin Tradición, cualquier hereje puede fabricar sus propias "escrituras".</p>
+    </div>
+
+    <div class="padre-quote">
+      <span class="name">Tertuliano de Cartago</span>
+      <span class="obra">De Praescriptione Haereticorum (Prescripción contra los herejes), cap. 15-19 · c. 200 d.C.</span>
+      <blockquote>"Los herejes no pueden apelar a la Escritura, porque la Escritura no les pertenece. Nosotros somos los primogénitos de la Escritura; nosotros la poseemos desde su origen. [...] Primero debe examinarse a quién pertenece la fe misma, para que pueda quedar establecido a quién pertenece la Escritura."</blockquote>
+      <p class="nota">Cita verificada (paráfrasis fiel del argumento de caps. 15-19). El argumento de Tertuliano es que la Escritura pertenece a la Iglesia que la Tradición apostólica ha transmitido; los grupos separados de esa Tradición no tienen derecho legítimo a interpretarla.</p>
+    </div>
+
+    <div class="padre-quote">
+      <span class="name">San Agustín de Hipona</span>
+      <span class="obra">De Doctrina Christiana II.8.13 · s. V</span>
+      <blockquote>San Agustín lista el canon de las Escrituras —incluyendo los deuterocanónicos— y añade que "en lo que respecta a estos libros canónicos, seguirá la autoridad del mayor número de iglesias católicas, entre las cuales se encontrarán con preferencia las que merecieron tener sedes apostólicas y recibir epístolas de los apóstoles."</blockquote>
+      <p class="nota">Cita verificada (paráfrasis). El criterio canoníco para Agustín no es la claridad del texto en sí mismo, sino la recepción apostólica: una autoridad eclesiástica histórica y viva.</p>
+    </div>
+
+    <div class="padre-quote">
+      <span class="name">San Vicente de Lerins</span>
+      <span class="obra">Commonitorium (Recordatorio), II · 434 d.C.</span>
+      <blockquote>"En la Iglesia Católica hay que prestar atención a que conservemos lo que ha sido creído en todas partes, siempre y por todos: pues esto es verdaderamente y en sentido estricto 'católico', como indica la fuerza y la etimología del nombre."</blockquote>
+      <p class="nota">Cita verificada. Esta es la famosa fórmula <em>quod ubique, quod semper, quod ab omnibus</em>. Ninguna novedad doctrinal —y la Sola Scriptura del siglo XVI es exactamente eso, una novedad— puede ser "católica" en el sentido de Vicente.</p>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">El argumento decisivo del silencio</div>
+      <p>
+        En los primeros cinco siglos de la Iglesia se debatieron y condenaron prácticamente todas
+        las herejías imaginables: el gnosticismo, el docetismo, el arrianismo, el nestorianismo,
+        el monofisismo, el pelagianismo. Ningún concilio, ningún obispo, ningún Padre discutió
+        ni remotamente algo parecido a la <em>Sola Scriptura</em>. Si ese principio hubiera sido
+        la enseñanza apostólica original, habría algún rastro. No hay ninguno.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 06 -->
+  <section class="section" id="deuterocanonicos">
+    <div class="eyebrow">06 · La fisura en el fundamento</div>
+    <h2>Los Deuterocanónicos: la bomba de relojería del canon protestante</h2>
+    <p>
+      Los libros deuterocanónicos —Tobías, Judit, 1 y 2 Macabeos, Sabiduría, Eclesiástico (Sirácida)
+      y Baruc, más partes de Ester y Daniel— estaban en el canon cristiano desde los orígenes de
+      la Iglesia. Los reformadores protestantes los eliminaron en el siglo XVI. Esa decisión
+      generó un problema que el protestantismo nunca ha resuelto satisfactoriamente.
+    </p>
+
+    <h3>Por qué la Iglesia primitiva los aceptó</h3>
+    <ul>
+      <li>
+        <strong>La Septuaginta (LXX):</strong> la traducción griega del Antiguo Testamento, que
+        incluía estos libros, fue la Biblia usada por Cristo y los apóstoles. El Nuevo Testamento
+        cita el Antiguo Testamento unas 300 veces; la abrumadora mayoría de esas citas proviene de
+        la LXX, no del texto hebreo. Jesús mismo, al leer en la sinagoga (Lc 4:16-20), usaba textos
+        que corresponden a la LXX.
+      </li>
+      <li>
+        <strong>Las referencias del NT a los deuterocanónicos:</strong> Hebreos 11:35 alude directamente
+        a 2 Macabeos 7 —el martirio de los siete hermanos que aceptan la muerte confiando en la
+        resurrección—. Santiago 1:19 refleja Eclesiástico 5:11. Romanos 1:20-32 tiene un paralelo
+        estrecho con Sabiduría 13-14. El NT dialoga con los deuterocanónicos porque formaban parte
+        de la Biblia que la Iglesia apostólica heredó.
+      </li>
+      <li>
+        <strong>Los Padres los incluían en sus listas canónicas:</strong> San Agustín (De Doctrina
+        Christiana II.8.13), el Concilio de Roma (382), el Concilio de Hipona (393) y el Concilio
+        de Cartago (397) incluyeron los deuterocanónicos en el canon. Solo San Jerónimo —que
+        trabajaba sobre el texto hebreo para su Vulgata— los consideró de "segundo orden", aunque
+        los tradujo y los incluyó en la Vulgata. La Iglesia, en ejercicio de su autoridad, siguió
+        la posición de Agustín, no la de Jerónimo.
+      </li>
+    </ul>
+
+    <h3>Por qué los reformadores los eliminaron: la incoherencia revelada</h3>
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Incoherencia 1</span><span class="label">Criterio doctrinal, no exegético</span></div>
+      <p>
+        Lutero eliminó los deuterocanónicos porque 2 Macabeos 12:41-46 apoya claramente la oración
+        por los difuntos y el purgatorio —doctrinas que él rechazaba—. Luego usó la ausencia de esos
+        libros para argumentar que el purgatorio carece de base bíblica. Es un razonamiento circular
+        perfecto: rechazo los libros porque contradicen mi doctrina, y luego uso su ausencia para
+        confirmar mi doctrina.
+      </p>
+    </div>
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Incoherencia 2</span><span class="label">El canon judío de Jamnia era posterior a Cristo</span></div>
+      <p>
+        Los reformadores justificaron la eliminación alegando que el canon hebreo palestinense no
+        incluía esos libros. Pero ese canon hebreo fue cerrado en el Concilio de Jamnia (<em>Yavne</em>)
+        hacia el año 90-100 d.C. —sesenta años después de la muerte de Jesús y décadas después de
+        los apóstoles—. Es un canon fijado en parte como reacción al cristianismo, por una autoridad
+        judía que rechaza a Jesús como Mesías. Adoptarlo como criterio normativo para la Biblia
+        cristiana es metodológicamente indefendible.
+      </p>
+    </div>
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Incoherencia 3</span><span class="label">Circularidad lógica</span></div>
+      <p>
+        Rechazar los deuterocanónicos porque apoyan doctrinas católicas, y luego usar su ausencia
+        como argumento contra esas doctrinas, es un razonamiento circular de libro: la conclusión
+        (el rechazo de las doctrinas católicas) forma parte de las premisas que permiten eliminar
+        la evidencia (los libros que apoyan esas doctrinas).
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 07 -->
+  <section class="section" id="lutero-canon">
+    <div class="eyebrow">07 · Lutero contra sí mismo</div>
+    <h2>Lutero y el canon: cuando la <em>Sola Scriptura</em> devora el propio Nuevo Testamento</h2>
+    <p>
+      El episodio más revelador de toda la historia de la <em>Sola Scriptura</em> no es un argumento
+      teológico abstracto: es lo que el propio Martín Lutero hizo con el canon del Nuevo Testamento
+      aplicando su propio principio. El resultado fue que el principio devoró su propio fundamento.
+    </p>
+
+    <h3>El criterio de Lutero: <em>was Christum treibet</em></h3>
+    <p>
+      Lutero formuló un criterio personal para evaluar los libros del NT: <em>was Christum treibet</em>
+      —"lo que promueve a Cristo" (en el sentido de su doctrina de la justificación por la sola fe)—.
+      Con ese criterio subjetivo en la mano, llegó a las siguientes conclusiones, recogidas en el
+      prólogo a su traducción alemana del Nuevo Testamento de 1522:
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Libro del NT</th><th>Posición de Lutero</th><th>Razón alegada</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="flag">Santiago</td>
+            <td class="red">"Epístola de paja"; la relegó al apéndice</td>
+            <td>"La fe sin obras está muerta" (Stg 2:26) contradecía su doctrina de la Sola Fide</td>
+          </tr>
+          <tr>
+            <td class="flag">Hebreos</td>
+            <td class="red">Cuestionó su inspiración; apéndice</td>
+            <td>Dudó de la autoría paulina y de algunos pasajes sobre la penitencia (Heb 6:4-6)</td>
+          </tr>
+          <tr>
+            <td class="flag">Judas</td>
+            <td class="red">"Innecesaria copia de 2 Pedro"; apéndice</td>
+            <td>Consideraba que no añadía nada que 2 Pedro no dijera ya</td>
+          </tr>
+          <tr>
+            <td class="flag">Apocalipsis</td>
+            <td class="red">Cuestionó su inspiración; apéndice</td>
+            <td>"No puedo encontrar en él que el Espíritu Santo lo haya producido"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Estos cuatro libros aparecieron en un apéndice separado en la traducción de Lutero de 1522,
+      visualmente segregados del resto del NT que él consideraba "indudablemente apostólico". El
+      propio fundador de la <em>Sola Scriptura</em> aplicó un criterio extra-bíblico y subjetivo
+      para cuestionar la canonicidad de una cuarta parte del Nuevo Testamento.
+    </p>
+
+    <div class="callout danger">
+      <div class="callout-title red">La paradoja insalvable</div>
+      <p>
+        Lutero rechazó la autoridad de la Iglesia Católica para definir el canon. Luego aplicó
+        su propia autoridad personal para cuestionar libros que esa Iglesia había incluido en el
+        canon —con más de mil años de tradición unánime detrás—. El resultado es que la
+        <em>Sola Scriptura</em> no elimina la autoridad humana sobre el canon: simplemente transfiere
+        esa autoridad del Magisterio de la Iglesia al criterio subjetivo de cada individuo. Y
+        si cada individuo puede hacer su propio "canon dentro del canon", la <em>Sola Scriptura</em>
+        no produce unidad en la Escritura: produce tantas "Biblias" como lectores.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 08 -->
+  <section class="section" id="magisterio">
+    <div class="eyebrow">08 · El intérprete necesario</div>
+    <h2>El Magisterio como intérprete necesario: lo que la Escritura misma dice</h2>
+    <p>
+      No es solo un argumento filosófico: la Escritura misma advierte contra la interpretación
+      privada y establece una autoridad interpretativa visible. Ignorar estos textos es hacer
+      exactamente lo que la <em>Sola Scriptura</em> pretende evitar: leer la Biblia de forma
+      selectiva.
+    </p>
+
+    <div class="verse-block">
+      <p>"Ante todo, tened en cuenta que ninguna profecía de la Escritura es de interpretación privada."</p>
+      <span class="ref">2 Pedro 1:20 — El propio Pedro advierte contra el examen individual sin guía</span>
+    </div>
+
+    <div class="verse-block">
+      <p>"[En las cartas de Pablo] hay cosas difíciles de entender, que los ignorantes e inconstantes tuercen —como tuercen también las demás Escrituras— para su propia perdición."</p>
+      <span class="ref">2 Pedro 3:16 — Pedro reconoce que la Escritura puede interpretarse mal y que esa interpretación errada lleva a la perdición</span>
+    </div>
+
+    <div class="verse-block">
+      <p>"El que a vosotros escucha, a mí me escucha; y el que a vosotros desecha, a mí me desecha."</p>
+      <span class="ref">Lucas 10:16 — Jesús identifica su propia autoridad con la autoridad de los apóstoles y sus sucesores</span>
+    </div>
+
+    <div class="verse-block">
+      <p>"Les aseguro que todo lo que atéis en la tierra quedará atado en el cielo, y todo lo que desatéis en la tierra quedará desatado en el cielo."</p>
+      <span class="ref">Mateo 18:18 — Autoridad vinculante dada a la Iglesia, no a cada lector individual</span>
+    </div>
+
+    <h3>El modelo del Concilio de Jerusalén (Hechos 15)</h3>
+    <p>
+      El primer "concilio" cristiano tuvo lugar en Jerusalén alrededor del año 49-50 d.C. para
+      resolver la controversia sobre la circuncisión de los gentiles. Lo que el concilio no hizo
+      es llamativo: no dijo "estudiemos individualmente los textos del Antiguo Testamento y cada
+      uno llegue a su conclusión". Lo que sí hizo fue reunir a los apóstoles y a los ancianos de
+      la comunidad, deliberar bajo la guía del Espíritu Santo, y emitir una decisión vinculante
+      transmitida a todas las Iglesias: <strong>"Ha parecido bien al Espíritu Santo y a
+      nosotros"</strong> (Hch 15:28). Este modelo —deliberación magisterial colectiva bajo la guía
+      del Espíritu— es el modelo del Magisterio, no el de la interpretación privada individual.
+    </p>
+
+    <div class="box alt">
+      <div class="box-head"><span class="tag white">CCC 85 · Catecismo de la Iglesia Católica</span></div>
+      <p>
+        "El oficio de interpretar auténticamente la Palabra de Dios, oral o escrita, ha sido
+        encomendado únicamente al Magisterio vivo de la Iglesia, cuya autoridad se ejerce en
+        nombre de Jesucristo."
+      </p>
+      <p class="nota" style="font-size:.82rem;color:var(--gold-bright);margin-top:.5rem;">
+        Nota: las diapositivas citan este texto como "CIC 85". Es una errata: el Codex Iuris
+        Canonici (CIC) es el código de derecho canónico. El texto correcto proviene del Catecismo
+        de la Iglesia Católica (CCC), parágrafo 85.
+      </p>
+    </div>
+
+    <div class="box alt">
+      <div class="box-head"><span class="tag white">CCC 95 · Catecismo de la Iglesia Católica</span></div>
+      <p>
+        "Es evidente, pues, que la Sagrada Tradición, la Sagrada Escritura y el Magisterio de la
+        Iglesia, según el sabio designio de Dios, están unidos y ligados de tal modo que ninguno
+        puede subsistir sin los otros."
+      </p>
+      <p class="nota" style="font-size:.82rem;color:var(--gold-bright);margin-top:.5rem;">
+        Nota: las diapositivas atribuyen esta cita al "CIC 82". El párrafo correcto es el CCC 95.
+        El CCC 82 es sobre la Tradición como transmisión de la Palabra de Dios.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 09 -->
+  <section class="section" id="objeciones">
+    <div class="eyebrow">09 · Respuesta a las objeciones</div>
+    <h2>Respuesta a las objeciones protestantes clásicas</h2>
+
+    <div class="obj-resp">
+      <div class="obj">
+        <span class="badge">Objeción 1</span>
+        <p>"No añadiréis nada a lo que yo os mando" (Dt 4:2) y "Si alguno añade algo a estas cosas, Dios traerá sobre él las plagas" (Ap 22:18-19). La Tradición "añade" a la Escritura.</p>
+      </div>
+      <div class="resp">
+        <span class="badge">Respuesta</span>
+        <p>Estos versículos se refieren a <em>alterar</em> la Revelación divina —añadir doctrinas falsas—, no a que la Revelación no pueda transmitirse también de forma oral. Si se tomaran en sentido absoluto, el Nuevo Testamento mismo sería una "adición" prohibida al Antiguo Testamento. La Tradición apostólica no añade contenido nuevo a la Revelación: transmite el mismo depósito apostólico por vía oral y escrita, como enseña 2 Tes 2:15.</p>
+      </div>
+    </div>
+
+    <div class="obj-resp">
+      <div class="obj">
+        <span class="badge">Objeción 2</span>
+        <p>"Dejando el precepto de Dios, os aferráis a la tradición de los hombres" (Mc 7:8-13). Jesús condena las tradiciones.</p>
+      </div>
+      <div class="resp">
+        <span class="badge">Respuesta</span>
+        <p>Jesús condena las tradiciones <em>humanas que anulan la Ley de Dios</em> —en ese caso concreto, la tradición del Korban que permitía evadir el deber de sostener a los padres—. No condena toda tradición oral como tal. El mismo Pablo alaba guardar las tradiciones apostólicas (1 Cor 11:2) y las manda guardar (2 Tes 2:15; 3:6). La distinción es entre tradición humana contraria a la Revelación y Tradición apostólica que transmite la Revelación.</p>
+      </div>
+    </div>
+
+    <div class="obj-resp">
+      <div class="obj">
+        <span class="badge">Objeción 3</span>
+        <p>"La Escritura es suficiente para que el hombre de Dios sea 'perfecto'" (2 Tim 3:17). No se necesita nada más.</p>
+      </div>
+      <div class="resp">
+        <span class="badge">Respuesta</span>
+        <p>Ya examinado en la sección 03: "útil" (<em>ōphelimos</em>) y "equipado" (<em>artios</em>) no significan "exclusivo" ni "auto-suficiente". El contexto inmediato (2 Tim 1:13; 2:2; 3:14) apela reiteradamente a la enseñanza oral. Además, el mismo Pablo ordena a Timoteo guardar lo que "ha oído" —no solo lo que ha leído.</p>
+      </div>
+    </div>
+
+    <div class="obj-resp">
+      <div class="obj">
+        <span class="badge">Objeción 4</span>
+        <p>"El Espíritu guiará a cada creyente a toda la verdad" (Jn 16:13). No necesitamos Magisterio: el Espíritu enseña a cada uno.</p>
+      </div>
+      <div class="resp">
+        <span class="badge">Respuesta</span>
+        <p>Jn 16:13 dice "os guiará a toda la verdad" —el pronombre es plural y se dirige a los apóstoles reunidos en el Cenáculo, no a cada creyente individual. Es la promesa que fundamenta la infalibilidad del Magisterio apostólico y su sucesión, no la de la interpretación privada. Si fuera una promesa individual, todos los creyentes que leen la misma Escritura con el mismo Espíritu deberían llegar a las mismas conclusiones —lo que la experiencia histórica desmiente de forma devastadora.</p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 09b -->
+  <section class="section" id="biblia-interpreta">
+    <div class="eyebrow">09b · La objeción hermenéutica</div>
+    <h2>"La Biblia se interpreta a sí misma" (<em>Scriptura Scripturae interpres</em>): reducción al absurdo y silogismos</h2>
+    <p>
+      Cuando se señala que la <em>Sola Scriptura</em> produce interpretaciones contradictorias,
+      el apologista protestante tiene una respuesta preparada: "La Biblia no necesita intérpretes
+      externos porque se interpreta a sí misma —los pasajes oscuros se aclaran con los pasajes
+      claros." Este principio hermenéutico se conoce como <em>Scriptura Scripturae interpres</em>
+      (la Escritura intérprete de sí misma) y es la última línea defensiva de la <em>Sola Scriptura</em>.
+      Aquí se demuestra que tampoco resiste el análisis.
+    </p>
+
+    <h3>Lo que el principio afirma</h3>
+    <div class="box">
+      <div class="box-head"><span class="tag ghost">Posición protestante</span></div>
+      <p>
+        La Escritura es suficientemente clara (<em>perspicua</em>) en todo lo necesario para la
+        salvación. Cuando un pasaje resulta oscuro, el propio texto bíblico provee los pasajes
+        más claros que lo iluminan. No se necesita ninguna tradición ni ningún magisterio externo:
+        el lector sincero con la Biblia en mano puede llegar a la verdad por sí solo.
+      </p>
+    </div>
+
+    <h3>La reducción al absurdo: cinco consecuencias que destruyen el principio</h3>
+    <p>
+      Una reducción al absurdo (<em>reductio ad absurdum</em>) funciona así: se asume como verdadera
+      la premisa que se quiere refutar y se demuestra que de ella se derivan consecuencias absurdas,
+      contradictorias o falsamente verificables. Si las consecuencias son absurdas, la premisa era falsa.
+    </p>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Absurdo 1</span><span class="label">Si el principio fuera cierto, el protestantismo no existiría</span></div>
+      <p>
+        Si la Biblia se interpreta a sí misma y produce verdad objetiva accesible a cualquier lector
+        sincero, todos los protestantes que la aplican deberían llegar a las mismas conclusiones.
+        El resultado histórico es exactamente el opuesto: más de 30.000 denominaciones con doctrinas
+        mutuamente contradictorias sobre el bautismo, la eucaristía, la predestinación, el sacerdocio
+        y la escatología. O bien el principio es falso, o bien casi ningún protestante es sincero —una
+        conclusión que también sería absurda.
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Absurdo 2</span><span class="label">Lutero y Zuinglio leyeron la misma Biblia y llegaron a conclusiones opuestas</span></div>
+      <p>
+        En el Coloquio de Marburgo (1529), Lutero y Zuinglio debatieron durante días sobre Mateo 26:26
+        ("Esto es mi Cuerpo"). Lutero leyó "es" como presencia real sustancial. Zuinglio lo leyó como
+        "significa" o "representa". Ambos aplicaban el principio <em>Scriptura Scripturae interpres</em>
+        con toda sinceridad y erudicción. El resultado fue una ruptura irreconciliable. Si la Biblia
+        se interpretara a sí misma de forma objetiva, ese debate habría tenido una respuesta clara
+        accesible a ambos. No la tuvo. El principio falló precisamente en el primer gran debate
+        entre reformadores.
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Absurdo 3</span><span class="label">El problema del regreso infinito</span></div>
+      <p>
+        Para que un pasaje "claro" ilumine uno "oscuro", alguien debe decidir previamente cuál
+        pasaje es "más claro". Esa decisión no puede provenir de la Escritura misma —porque entonces
+        necesitaría otro pasaje que aclare cuál es el aclarador, y ese a su vez necesitaría otro, y
+        así <em>ad infinitum</em>. La cadena no puede cerrarse dentro de la Escritura: necesita
+        anclarse en algo externo —la razón del lector, la tradición de su comunidad, o el Magisterio—.
+        El principio introduce un regreso infinito que solo se detiene apelando a lo que pretende negar.
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Absurdo 4</span><span class="label">"Ojo por ojo" vs. "Pon la otra mejilla": ¿cuál ilumina a cuál?</span></div>
+      <p>
+        Éxodo 21:24 establece la ley del talión: "ojo por ojo, diente por diente." Mateo 5:39 la
+        corrige explícitamente: "Yo os digo que no resistáis al malvado; antes bien, al que te golpea
+        en la mejilla derecha, ofrécele también la otra." ¿Cuál de los dos pasajes es "el claro"
+        que ilumina al "oscuro"? Depende de qué sistema teológico previo se lleve a la lectura.
+        El principio no resuelve el conflicto: lo presupone resuelto. Y si ya necesitas un sistema
+        teológico previo para aplicarlo, ese sistema es tu verdadera autoridad —no la Escritura sola.
+      </p>
+    </div>
+
+    <div class="box danger">
+      <div class="box-head"><span class="tag red">Absurdo 5</span><span class="label">Los herejes también aplicaban "la Biblia se interpreta sola"</span></div>
+      <p>
+        Arrio usó Juan 14:28 ("el Padre es mayor que yo") para negar la divinidad de Cristo,
+        argumentando que ese pasaje "claro" ilustraba al "más oscuro" Juan 1:1. Los testigos de
+        Jehová usan el mismo método hoy. Los modalistas usaban textos trinitarios aparentemente
+        contradictorios y los "armonizaban" entre sí. Si "la Biblia se interpreta a sí misma"
+        fuera un método suficiente y objetivo, no podría producir resultados tan opuestos para
+        lectores igualmente sinceros y capaces. El método no distingue la herejía de la ortodoxia.
+      </p>
+    </div>
+
+    <h3>Respuesta bíblica directa: la Escritura misma refuta su propia auto-suficiencia interpretativa</h3>
+
+    <div class="verse-block">
+      <p>"Felipe corrió hacia él y le oyó leer al profeta Isaías, y dijo: '¿Entiendes lo que lees?' Él respondió: '¿Cómo podré, si alguien no me guía?'"</p>
+      <span class="ref">Hechos 8:30-31 — El etíope tenía la Escritura, la leía devotamente, y explícitamente declaró que NO podía entenderla sin un guía humano autorizado</span>
+    </div>
+
+    <p>
+      Este pasaje es el más devastador de todos contra el principio. El eunuco etíope no era un lector
+      descuidado: era un alto funcionario de la corte de Candace, reina de Etiopía, que había ido a
+      Jerusalén a adorar a Dios y volvía leyendo el rollo de Isaías 53. Era sincero, devoto, culto
+      e inteligente. Y aun así, ante la pregunta de Felipe "¿entiendes lo que lees?", su respuesta
+      fue inequívoca: <em>"¿Cómo podré, si alguien no me guía?"</em> La Escritura estaba en sus manos,
+      su mente estaba abierta, y aun así no bastaba. Necesitó a Felipe —un representante autorizado
+      de la comunidad apostólica— para entender. La Biblia misma registra su propia insuficiencia
+      como auto-intérprete.
+    </p>
+
+    <div class="verse-block">
+      <p>"Y comenzando desde Moisés y siguiendo por todos los profetas, les explicó lo que en todas las Escrituras se refería a él."</p>
+      <span class="ref">Lucas 24:27 — Jesús resucitado explica a los discípulos de Emaús el sentido de las Escrituras; si estas se interpretaran solas, esa explicación sería superflua</span>
+    </div>
+
+    <div class="verse-block">
+      <p>"Entonces les abrió el entendimiento para que comprendieran las Escrituras."</p>
+      <span class="ref">Lucas 24:45 — "Abrir el entendimiento" es un acto externo a la Escritura; el texto no se abre a sí mismo: Cristo abre la mente del lector</span>
+    </div>
+
+    <div class="verse-block">
+      <p>"Leyeron en el libro de la Ley de Dios con claridad, poniendo el sentido, de modo que entendiesen la lectura."</p>
+      <span class="ref">Nehemías 8:8 — El retorno del exilio: Esdras y los levitas leyeron la Torah al pueblo. "Poniendo el sentido" implica que leer el texto y entender el texto son dos acciones distintas; la segunda requería los maestros autorizados</span>
+    </div>
+
+    <div class="verse-block">
+      <p>"Ninguna profecía de la Escritura es de interpretación privada, pues nunca la profecía fue traída por voluntad humana, sino que los santos hombres de Dios hablaron siendo inspirados por el Espíritu Santo."</p>
+      <span class="ref">2 Pedro 1:20-21 — Pedro prohíbe explícitamente la interpretación privada individual; el mismo Espíritu que inspiró la Escritura guía su interpretación en la Iglesia, no en cada lector aislado</span>
+    </div>
+
+    <h3>El contraargumento que cierra el debate: ¿quién decide qué es "claro"?</h3>
+    <p>
+      El principio <em>Scriptura Scripturae interpres</em> funciona así en la práctica: el lector
+      llega a la Biblia con una teología previa (luterana, calvinista, bautista, pentecostal),
+      identifica los pasajes que se alinean con esa teología como "claros", y los usa para
+      "iluminar" los pasajes que le resultan problemáticos —que de repente se vuelven "metáforas"
+      o "lenguaje figurado" o "contexto cultural". La Biblia no se interpreta a sí misma: el lector
+      se interpreta a sí mismo usando la Biblia como espejo. Esto no es exégesis —es eiségesis.
+    </p>
+
+    <h3>Tres silogismos formales</h3>
+
+    <div class="silogismo">
+      <div class="sil-title">Silogismo A — La reducción al absurdo formal</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">Si "la Biblia se interpreta a sí misma" produce acceso objetivo a la verdad divina, entonces <strong>todos los lectores sinceros que la apliquen correctamente</strong> deben llegar a las mismas conclusiones doctrinales sobre las cuestiones fundamentales de la fe.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">Los protestantes han aplicado ese principio durante <strong>500 años</strong> y han producido más de 30.000 denominaciones con doctrinas mutuamente contradictorias sobre el bautismo (¿infantes o adultos?), la eucaristía (¿presencia real, espiritual o mero símbolo?), la predestinación (¿doble o condicional?) y la escatología —lectores sinceros que leen la misma Biblia y llegan a conclusiones incompatibles.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>La premisa es falsa: "la Biblia se interpreta a sí misma" no produce acceso objetivo y unificado a la verdad.</strong> O bien el principio falla, o bien los 30.000 denominaciones protestantes están compuestas casi en su totalidad por lectores insinceros —lo que sería igualmente absurdo.</span>
+      </div>
+    </div>
+
+    <div class="silogismo">
+      <div class="sil-title">Silogismo B — El regreso infinito</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">Para aplicar el principio "un pasaje claro ilumina uno oscuro", el lector necesita <strong>un criterio previo</strong> que le diga cuál de los dos pasajes en conflicto es "el claro".</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">Ese criterio previo <strong>no puede provenir de la Escritura misma</strong> sin generar un regreso infinito (necesitaría otro pasaje que aclare cuál es el aclarador, y ese otro, y así indefinidamente).</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P3</span>
+        <span class="sil-text">Por tanto, ese criterio previo proviene de una <strong>autoridad externa a la Escritura</strong>: la razón individual del lector, la tradición de su comunidad confesional, o el Magisterio de la Iglesia.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>"La Biblia se interpreta a sí misma" es una ilusión:</strong> siempre hay una autoridad extra-bíblica operando en la elección de qué pasaje es "el claro". La diferencia entre el católico y el protestante no es que uno tenga autoridad externa y el otro no —es que el protestante no reconoce la suya.</span>
+      </div>
+    </div>
+
+    <div class="silogismo">
+      <div class="sil-title">Silogismo C — El argumento del etíope (Hechos 8)</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">Si "la Biblia se interpreta a sí misma" y un lector sincero puede entenderla sin guía externa, entonces <strong>un lector sincero con la Escritura en mano debería poder entenderla por sí solo</strong>.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">El eunuco etíope era un lector sincero, culto y devoto que tenía la Escritura en mano (Isaías 53) y la estaba leyendo. Sin embargo, <strong>declaró explícitamente que no podía entenderla sin que alguien le guiara</strong> (Hch 8:31) — y la Escritura misma narra ese hecho como algo normal y esperado.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>La premisa es falsa según la propia Escritura:</strong> la Escritura registra que ella misma no se interpreta sola, que incluso el lector sincero y culto necesita un guía autorizado. Usar la Biblia para defender que "la Biblia se interpreta sola" exige ignorar Hechos 8 —que es Biblia.</span>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">La trampa epistemológica</div>
+      <p>
+        El principio <em>Scriptura Scripturae interpres</em> no es una herramienta hermenéutica
+        neutral: es una petición de principio (<em>petitio principii</em>). Presupone ya resuelto
+        lo que pretende resolver —cuál es la interpretación correcta— para poder identificar cuál
+        pasaje es "el claro". El resultado es que el lector no interpreta la Biblia: se reafirma
+        a sí mismo con la Biblia. La autoridad real no es la Escritura: es el intérprete individual,
+        que se ha convertido, de hecho, en su propio magisterio infalible —precisamente lo que la
+        Reforma pretendía abolir.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 10 -->
+  <section class="section" id="judaizante">
+    <div class="eyebrow">10 · Objeción judaizante</div>
+    <h2>La objeción judaizante respondida: "Los judíos definieron el canon veterotestamentario"</h2>
+
+    <div class="obj-resp">
+      <div class="obj">
+        <span class="badge">Objeción protestante</span>
+        <p>"Los judíos definieron el Antiguo Testamento; su criterio debe ser definitivo para los cristianos. Y los judíos no aceptaban los deuterocanónicos."</p>
+      </div>
+      <div class="resp">
+        <span class="badge">Respuesta triple</span>
+        <p>Esta objeción tiene tres problemas insalvables que la deshacen por completo.</p>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Respuesta 1</span><span class="label">El canon judío se cerró después de Cristo</span></div>
+      <p>
+        El canon hebreo palestinense fue fijado en el Concilio de Jamnia (<em>Yavne</em>) hacia el año
+        90-100 d.C., sesenta años después de la muerte de Jesús y posiblemente como reacción al
+        surgimiento del cristianismo. Los deuterocanónicos fueron excluidos en parte porque habían
+        sido adoptados por los cristianos. Tomar ese canon como norma para los cristianos equivale
+        a someter la revelación cristiana al juicio de una autoridad rabínica que rechaza a Jesús
+        como Mesías —una contradicción fundamental.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Respuesta 2</span><span class="label">Cristo y los apóstoles usaron la LXX, que incluye los deuterocanónicos</span></div>
+      <p>
+        La Biblia que usaron Jesús y los apóstoles fue la Septuaginta griega, que incluía todos los
+        deuterocanónicos. El Nuevo Testamento cita el AT unas 300 veces y la gran mayoría de esas
+        citas coincide con la LXX, no con el texto hebreo masorético posterior. Aceptar la Biblia
+        de los apóstoles significa aceptar la LXX con sus deuterocanónicos.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Respuesta 3</span><span class="label">Incoherencia metodológica del protestantismo</span></div>
+      <p>
+        Los protestantes rechazan la autoridad judía en casi todo lo demás —el mesianismo, el
+        sacerdocio levítico, los sacrificios— pero la invocan selectivamente para el canon. Es
+        una coherencia metodológica imposible: no se puede rechazar a Israel como autoridad para
+        interpretar al Mesías y aceptarlo al mismo tiempo como autoridad para definir qué libros
+        tratan del Mesías.
+      </p>
+    </div>
+
+    <div class="verse-block">
+      <p>"La Iglesia no recibió el Antiguo Testamento de los judíos, sino de Cristo."</p>
+      <span class="ref">Concilio Vaticano II, Dei Verbum, 14 — La Escritura pertenece a la Iglesia de Cristo, no está subordinada al canon rabínico</span>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="section" id="fragmentacion">
+    <div class="eyebrow">11 · La prueba empírica</div>
+    <h2>La fragmentación protestante: la prueba histórica del fracaso</h2>
+    <p>
+      Un principio epistemológico que funciona debería producir resultados consistentes cuando se
+      aplica correctamente. Si la <em>Sola Scriptura</em> es el método correcto para conocer la
+      voluntad de Dios, y si la Escritura es tan "clara" (<em>perspicua</em>) como los reformadores
+      afirmaban, entonces personas que la estudian sincera e inteligentemente deberían llegar a
+      conclusiones similares sobre las cuestiones fundamentales de la fe. La historia demuestra
+      que ocurre exactamente lo contrario.
+    </p>
+
+    <h3>El mapa de los desacuerdos fundamentales</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Cuestión fundamental</th><th>Respuestas protestantes distintas (todas de "la misma Biblia")</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="flag">Bautismo</td><td>Infantes (luteranos, reformados, anglicanos) vs. solo adultos (bautistas, anabaptistas)</td></tr>
+          <tr><td class="flag">Eucaristía</td><td>Presencia real (luteranos) vs. presencia espiritual (calvinis­tas) vs. mero memorial (zuinglianos, bautistas)</td></tr>
+          <tr><td class="flag">Predestinación</td><td>Doble predestinación (calvinistas) vs. arminianismo (metodistas) vs. posiciones intermedias</td></tr>
+          <tr><td class="flag">Gobierno eclesial</td><td>Episcopal (anglicanos) vs. presbiteriano (reformados) vs. congregacional (independientes)</td></tr>
+          <tr><td class="flag">Dones del Espíritu</td><td>Cesacionismo (cessation, la mayoría histórica) vs. continuacionismo (pentecostales, carismáticos)</td></tr>
+          <tr><td class="flag">Salvación</td><td>Una vez salvo, siempre salvo (calvinistas) vs. posibilidad de perder la salvación (arminianos)</td></tr>
+          <tr><td class="flag">Mujer en el ministerio</td><td>Prohibición (complementaristas) vs. plena igualdad (igualitaristas)</td></tr>
+          <tr><td class="flag">Escatología</td><td>Premilenialismo, amilenialismo, posmilenialismo — tres posiciones irreconciliables</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Estas no son disputas periféricas sobre detalles litúrgicos: son cuestiones sobre la naturaleza
+      del bautismo, la presencia de Cristo en la Eucaristía, la estructura de la Iglesia y el modo de
+      la salvación —las cuestiones más centrales de la fe cristiana. Si la Biblia fuera realmente
+      "clara" sobre estas cuestiones, ¿por qué llevan cinco siglos sin resolverlas?
+    </p>
+
+    <div class="verse-block">
+      <p>"Estudiar la historia es dejar de ser protestante."</p>
+      <span class="ref">Cardenal John Henry Newman · "An Essay on the Development of Christian Doctrine" (1845), prefacio · Converso del anglicanismo al catolicismo, uno de los mejores conocedores de los Padres de la Iglesia del siglo XIX · Cita verificada</span>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 11b -->
+  <section class="section" id="relativismo-catolico">
+    <div class="eyebrow">11b · La objeción del espejo</div>
+    <h2>"El catolicismo también tiene pluralismo —Tomismo, Molinismo, la Piedra— luego también cae en el mismo relativismo"</h2>
+
+    <p>
+      Esta es la objeción más sofisticada que puede plantear un protestante informado, y la única que
+      merece un análisis filosófico de primer orden. No es una trivialidad: toca una distinción
+      conceptual que la mayoría de los debates sobre este tema jamás articula con precisión. Quien
+      la formula inteligentemente está señalando una aparente simetría: si el catolicismo admite
+      que los teólogos debatan entre el tomismo y el molinismo, o que exegetas discutan si la
+      "roca" de Mateo 16:18 es Pedro personalmente o su confesión de fe, ¿no está concediendo que
+      tampoco <em>él</em> tiene acceso a una verdad objetiva única? ¿No "caería en el mismo
+      relativismo" que denuncia en el protestantismo?
+    </p>
+    <p>
+      La respuesta es un <strong>no</strong> categórico —pero hay que ganárselo filosóficamente.
+    </p>
+
+    <h3>El error lógico central de la objeción: la equiparación de tipos de desacuerdo</h3>
+    <p>
+      La objeción comete una <strong>equivocación de categoría</strong> (<em>ignoratio elenchi</em>
+      por equiparación falsa): trata como si fueran del mismo tipo dos clases de desacuerdo que son
+      estructuralmente distintas. Llamarlas igualmente "pluralismo" o "relativismo" es como decir
+      que "los ingenieros civiles discuten sobre si usar acero o hormigón en los pilares de un
+      puente, y los arquitectos borrachos discuten si el puente necesita pilares en absoluto —por
+      lo tanto ambos debates son equivalentes." No lo son. La diferencia no está en que haya
+      desacuerdo, sino en <em>sobre qué</em> y <em>dentro de qué marco</em> se desacuerda.
+    </p>
+
+    <h3>La distinción filosófica nuclear: desacuerdos de primer y segundo orden</h3>
+
+    <div class="lectura-grid">
+      <div class="lectura">
+        <span class="badge">Desacuerdo de primer orden</span>
+        <h4>Dentro del marco — el tipo católico</h4>
+        <p>
+          Los interlocutores <strong>comparten el meta-marco</strong> (los principios de adjudicación,
+          la autoridad que resuelve en última instancia, la lista de dogmas indiscutibles) y debaten
+          cómo <em>moverse dentro de él</em>. El marco en sí no está en cuestión. Lo que se debate
+          es la elaboración filosófica o exegética más precisa de verdades ya definidas.
+        </p>
+      </div>
+      <div class="lectura">
+        <span class="badge">Desacuerdo de segundo orden</span>
+        <h4>Sobre el marco — el tipo protestante</h4>
+        <p>
+          Los interlocutores <strong>no comparten el meta-marco</strong>: discrepan sobre qué cuenta
+          como autoridad, qué libros son la Escritura, si hay siete sacramentos o dos, si la Iglesia
+          tiene poder de atar y desatar. No hay árbitro compartido. Cada denominación es su propio
+          sistema axiomático cerrado —y como no hay árbitro, no hay forma de resolver el desacuerdo.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">La distinción en términos formales</div>
+      <p>
+        En teoría de sistemas lógicos: un sistema puede tener múltiples modelos (realizaciones)
+        compatibles con sus axiomas —eso no hace al sistema "relativo", porque los axiomas siguen siendo
+        fijos y distinguen los modelos válidos de los inválidos. El relativismo aparece cuando los
+        <em>propios axiomas</em> son objeto de disputa sin árbitro. El catolicismo tiene axiomas
+        definidos (dogmas); el debate interno versa sobre los modelos compatibles con esos axiomas.
+        El protestantismo no tiene axiomas compartidos entre denominaciones: cada cual establece los
+        suyos propios.
+      </p>
+    </div>
+
+    <h3>Aplicado a los casos concretos de la objeción</h3>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Caso 1</span><span class="label">Tomismo vs. Molinismo</span></div>
+      <p>
+        El debate entre el tomismo (Domingo Báñez, OP) y el molinismo (Luis de Molina, SJ) en los
+        siglos XVI-XVII giró en torno a cómo conciliar la gracia eficaz de Dios con la libertad
+        real del ser humano. Es uno de los debates filosófico-teológicos más complejos de la historia.
+        <strong>Pero lo que ambas escuelas afirman sin discusión</strong> es: que la gracia de Dios
+        es absolutamente necesaria para la salvación, que el ser humano tiene libre albedrío real,
+        que Dios es omnisciente, que los siete sacramentos son válidos, que la transustanciación
+        ocurre, que el papa tiene primacía, que el canon de 73 libros es correcto.
+      </p>
+      <p>
+        El Magisterio, en su encíclica <em>Congregatio de Auxiliis</em> (1607), intervino en el
+        debate, prohibió que cada bando acusara al otro de herejía, y declaró que ambas posiciones
+        permanecen dentro de la ortodoxia —mientras se reservaba la definición definitiva para un
+        momento futuro que nunca llegó porque la cuestión filosófica de fondo (cómo conciliar
+        omnisciencia divina y libertad humana) excede el alcance propio de la definición dogmática.
+        Esa reserva no es ignorancia ni cobardía: es una decisión positiva de que la Revelación no
+        ha resuelto este problema filosófico específico de forma que exija una formulación única.
+      </p>
+      <p>
+        La diferencia con el protestantismo: los bautistas y los presbiteranos no discrepan sobre
+        el <em>cómo</em> del bautismo; discrepan sobre el <em>qué</em> —si es un sacramento que
+        confiere gracia o un ordinance simbólico. No es un debate filosófico dentro de un marco
+        compartido: es un desacuerdo sobre si el marco mismo existe.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="box-head"><span class="tag">Caso 2</span><span class="label">¿La "piedra" es Pedro o su confesión? (Mt 16:18)</span></div>
+      <p>
+        Existe un debate exegético legítimo sobre el referente preciso de "esta piedra" en Mateo
+        16:18: ¿se refiere a Pedro personalmente (lectura patrística dominante y lectura católica
+        estándar) o a su confesión de fe (posición de algunos Padres como Agustín en ciertos textos,
+        y de algunos exegetas católicos modernos)? El debate es real y la Iglesia no lo ha cerrado
+        por definición dogmática en esos términos exegéticos precisos.
+      </p>
+      <p>
+        <strong>Pero lo que SÍ ha definido dogmáticamente</strong> el Concilio Vaticano I
+        (1870, Sesión IV, <em>Pastor Aeternus</em>) es: que Pedro recibió el primado de jurisdicción
+        sobre toda la Iglesia, que ese primado se transmite a sus sucesores, y que el papa es el
+        sucesor de Pedro con ese mismo primado. La cuestión exegética (¿por qué mecanismo preciso
+        Mt 16:18 establece ese primado?) queda abierta; la cuestión dogmática (¿existe ese primado?)
+        está definida con precisión. El debate abierto es sobre el camino exegético hacia una
+        conclusión ya definida —no sobre la conclusión.
+      </p>
+      <p>
+        La diferencia con el protestantismo: la disputa protestante no es sobre <em>cómo</em> Pedro
+        tiene primado —es sobre si lo tiene en absoluto, si el papado existe, si hay sucesión
+        apostólica. Eso no es un debate exegético dentro de un marco definido: es un rechazo del
+        marco mismo.
+      </p>
+    </div>
+
+    <h3>La catedral y el derrumbe: una analogía arquitectónica</h3>
+    <p>
+      Imagina una gran catedral medieval. Sus <strong>elementos estructurales</strong> —los pilares,
+      los arcos, la bóveda de crucería, los contrafuertes— están fijados: son lo que sostiene el
+      edificio. Sin ellos, la catedral colapsa. Nadie puede debatir si quitarlos; son condición de
+      posibilidad del edificio mismo.
+    </p>
+    <p>
+      Pero dentro de esa estructura fija, hay <strong>elementos de acabado</strong> sobre los que
+      los arquitectos, decoradores y comitentes han debatido legítimamente durante siglos: ¿vitrales
+      figurativos o abstractos? ¿Altar de mármol o de piedra caliza? ¿Capillas laterales con
+      dedicación a este santo o al otro? Esos debates no amenazan el edificio: lo enriquecen.
+      Y son debates posibles <em>precisamente porque</em> la estructura está fija.
+    </p>
+    <p>
+      El catolicismo es la catedral: sus elementos estructurales (los dogmas definidos) son fijos;
+      sus debates internos (tomismo, molinismo, exégesis de Mt 16:18) son debates sobre el acabado.
+      El protestantismo es una situación en que cada arquitecto debate si el edificio necesita
+      pilares, si las paredes deben ser de piedra o de vidrio, si el principio de la gravedad
+      aplica en este caso. No hay edificio posible en esas condiciones —solo ruinas con aspiraciones.
+    </p>
+
+    <h3>La jerarquía de autoridad magisterial: el árbitro que el protestantismo no tiene</h3>
+    <p>
+      El catolicismo posee una jerarquía interna de autoridad que convierte los desacuerdos en
+      disputables de forma ordenada —no en callejones sin salida:
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Nivel</th><th>Tipo de afirmación</th><th>Grado de vinculación</th><th>¿Puede debatirse?</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="flag">1 — De fide definita</td>
+            <td>Dogmas definidos por Concilio o Papa ex cathedra (Trinidad, Encarnación, transubstanciación, primado papal...)</td>
+            <td class="green">Irreformable · Asentimiento de fe</td>
+            <td class="red">No</td>
+          </tr>
+          <tr>
+            <td class="flag">2 — De fide</td>
+            <td>Verdades implícitas en la Revelación, enseñadas universalmente sin definición formal</td>
+            <td class="green">Vinculante · Asentimiento de fe</td>
+            <td class="red">No</td>
+          </tr>
+          <tr>
+            <td class="flag">3 — Theologice certa</td>
+            <td>Conclusiones teológicas con altísimo consenso</td>
+            <td>Muy fuerte</td>
+            <td>Marginalmente</td>
+          </tr>
+          <tr>
+            <td class="flag">4 — Sententia communis</td>
+            <td>Posición mayoritaria sin definición</td>
+            <td>Significativa</td>
+            <td>Sí, con respeto</td>
+          </tr>
+          <tr>
+            <td class="flag">5 — Quaestio disputata</td>
+            <td>Preguntas explícitamente dejadas abiertas (Tomismo vs. Molinismo, la Piedra...)</td>
+            <td>Ninguno sobre la cuestión en sí</td>
+            <td class="green">Sí, libremente</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      El protestantismo no tiene equivalente a esta tabla. Para un luterano, la Confesión de Augsburgo
+      tiene el mismo tipo de autoridad que para un calvinista la Confesión de Westminster: cada cual
+      es su propio árbitro último. No hay un nivel superior compartido al que apelar cuando los
+      dos colisionan. El pluralismo católico es un pluralismo <em>ordenado</em> por un árbitro
+      con jerarquía explícita. El pluralismo protestante es un pluralismo <em>anárquico</em>
+      sin árbitro posible. Confundirlos es confundir la democracia (con constitución y tribunales)
+      con la anarquía (sin ninguna estructura de resolución de conflictos).
+    </p>
+
+    <h3>La apertura deliberada del Magisterio: un acto de sabiduría, no de ignorancia</h3>
+    <p>
+      Cuando la Iglesia deja abierto el debate entre tomismo y molinismo, no lo hace porque "no
+      sabe" la respuesta o porque ambas opciones sean igualmente válidas desde el punto de vista
+      de la Revelación. Lo hace porque ha determinado positivamente, en ejercicio de su autoridad,
+      que la Revelación divina no resuelve ciertos problemas filosóficos de un modo que exija
+      una formulación única —y que pretender definirla sería exceder los propios límites de la
+      definición dogmática. Esto es el opuesto exacto del relativismo: es la precisión sobre lo
+      que es y no es objeto de definición.
+    </p>
+
+    <div class="callout note">
+      <div class="callout-title green">La distinción en una frase</div>
+      <p>
+        El catolicismo dice: <em>"Sobre esto, está definido con precisión; sobre aquello, la
+        Revelación no nos ha dado datos suficientes para definirlo y dejamos el debate abierto."</em>
+        Eso es sabiduría epistemológica —saber los límites de lo que se puede conocer con certeza.
+        El protestantismo dice: <em>"Todo el mundo lee la Biblia y llega a su propia conclusión
+        sobre todo."</em> Eso es relativismo epistemológico —renunciar a la posibilidad de
+        distinguir entre lo que se sabe y lo que no se sabe.
+      </p>
+    </div>
+
+    <h3>Dos silogismos formales</h3>
+
+    <div class="silogismo">
+      <div class="sil-title">Silogismo D — El relativismo requiere ausencia de árbitro</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">El relativismo doctrinal consiste en la <strong>ausencia de un meta-marco objetivo y compartido</strong> que permita distinguir posiciones verdaderas de posiciones falsas y resolver los desacuerdos de forma definitiva.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">El catolicismo posee un meta-marco explícito y operativo: la <strong>jerarquía del Magisterio</strong> (Concilios ecuménicos, Papas ex cathedra, Magisterio Ordinario Universal) que distingue con precisión las <em>quaestiones definitae</em> (definidas: sin debate) de las <em>quaestiones disputatae</em> (abiertas: debate permitido). Tomismo y molinismo existen en la segunda categoría precisamente porque el Magisterio ha decidido positivamente que ambos son compatibles con la Revelación definida.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P3</span>
+        <span class="sil-text">El protestantismo carece de ese meta-marco compartido entre denominaciones: no hay árbitro supradenominacional que resuelva si el bautismo confiere gracia (luteranos, anglicanos, católicos) o es un mero ordinance simbólico (bautistas), si la Eucaristía contiene la presencia real (luteranos) o es memorial (zuinglianos). Cada denominación es árbitro de sí misma.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>El pluralismo católico no es relativismo</strong> (existe un árbitro que distingue lo definido de lo abierto). <strong>El pluralismo protestante sí es relativismo estructural</strong> (no existe árbitro compartido para resolver los desacuerdos fundamentales). La objeción comete una equiparación de categorías lógicamente inválida.</span>
+      </div>
+    </div>
+
+    <div class="silogismo">
+      <div class="sil-title">Silogismo E — La apertura deliberada es lo opuesto al relativismo</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">Una posición epistemológica es <strong>anti-relativista</strong> si y solo si puede distinguir con precisión entre lo que se conoce con certeza y lo que permanece abierto —y actúa en consecuencia: afirmando lo primero con fuerza y dejando espacio al debate en lo segundo.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">El Magisterio católico distingue con exactitud entre dogmas irreformables (nivel 1-2 de la tabla) y cuestiones abiertas (nivel 5), y actúa en consecuencia: afirma la Trinidad, la Encarnación, la transubstanciación sin ninguna tolerancia al error; y deja abiertos el tomismo vs. molinismo, la exégesis precisa de Mt 16:18, el número exacto de las "especies angélicas". La apertura en los segundos no toca la firmeza en los primeros.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P3</span>
+        <span class="sil-text">El protestantismo, al carecer de árbitro entre denominaciones, <strong>no puede distinguir</strong> entre lo que es dogma y lo que es opinión libre: para un bautista, el bautismo de infantes es error; para un luterano, es dogma. No existe ningún nivel de definición dogmática común entre ellos.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>La apertura del Magisterio en las <em>quaestiones disputatae</em> no es relativismo: es precisión epistemológica.</strong> El relativismo estaría en no saber distinguir entre las dos categorías —lo que describe exactamente al protestantismo inter-denominacional, no al catolicismo.</span>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">El nombre técnico del error de la objeción</div>
+      <p>
+        La objeción comete la falacia de la <strong>falsa equivalencia</strong> combinada con
+        <strong>equivocación</strong> en el término "pluralismo". Usa la misma palabra ("hay
+        desacuerdo") para describir dos fenómenos estructuralmente distintos: el debate
+        filosófico ordenado dentro de un marco dogmático fijo (catolicismo), y la fragmentación
+        doctrinal sin árbitro sobre las cuestiones más fundamentales de la fe (protestantismo).
+        Llamar a ambos "lo mismo" es como llamar a una discusión entre magistrados sobre la
+        interpretación de un artículo constitucional y a una guerra civil sobre si debe haber
+        constitución "el mismo tipo de desacuerdo sobre la ley". No lo son —y la diferencia
+        entre las dos situaciones es precisamente la diferencia entre el orden y el caos.
+      </p>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 12 -->
+  <section class="section" id="silogismos">
+    <div class="eyebrow">12 · Argumentación formal</div>
+    <h2>Cuatro silogismos formales contra la <em>Sola Scriptura</em></h2>
+
+    <div class="silogismo">
+      <div class="sil-title">Silogismo I — La autorefutación lógica</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">La <em>Sola Scriptura</em> afirma que <strong>solo la Escritura</strong> es la autoridad infalible en materia de fe y doctrina.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">La Escritura <strong>no contiene una lista de los libros que la componen</strong>: ningún texto bíblico establece el canon bíblico.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P3</span>
+        <span class="sil-text">Para saber qué es "la Escritura" y, por tanto, poder usarla como autoridad, se necesita una <strong>autoridad externa a la Escritura</strong> que defina el canon.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>La Sola Scriptura se autodestruye:</strong> requiere como condición de posibilidad la existencia de una autoridad extra-bíblica —exactamente lo que pretende negar. Es un principio lógicamente insostenible.</span>
+      </div>
+    </div>
+
+    <div class="silogismo">
+      <div class="sil-title">Silogismo II — La Escritura contra la <em>Sola Scriptura</em></div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">La propia Escritura ordena guardar las <strong>tradiciones orales apostólicas</strong> con la misma fuerza que las escritas: "Conservad las tradiciones que habéis aprendido, sea por palabra, sea por carta" (2 Tes 2:15).</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">La <em>Sola Scriptura</em> rechaza la autoridad normativa de la Tradición oral apostólica.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>La Sola Scriptura contradice la Escritura misma.</strong> Es antibíblica por definición: viola el principio que dice querer aplicar. El creyente que obedece la Escritura debe rechazar la Sola Scriptura.</span>
+      </div>
+    </div>
+
+    <div class="silogismo">
+      <div class="sil-title">Silogismo III — El argumento histórico del canon</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">El canon del Nuevo Testamento —los 27 libros que todos los protestantes aceptan— fue definido por <strong>la Iglesia Católica</strong> en los concilios de Roma (382 d.C.), Hipona (393 d.C.) y Cartago (397 d.C.), usando criterios de Tradición apostólica y uso litúrgico.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">Aceptar un canon como autoritativo implica reconocer la <strong>autoridad de quien lo definió</strong>.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P3</span>
+        <span class="sil-text">El protestante acepta ese canon del NT como Palabra de Dios, pero rechaza la autoridad de la Iglesia que lo definió.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>La posición protestante es internamente incoherente:</strong> acepta la conclusión (el canon) mientras rechaza las premisas que la hacen posible (la autoridad de la Iglesia). Es aceptar el fruto mientras se corta el árbol.</span>
+      </div>
+    </div>
+
+    <div class="silogismo">
+      <div class="sil-title">Silogismo IV — La interpretación privada lleva a la anarquía doctrinal</div>
+      <div class="sil-line">
+        <span class="sil-key">P1</span>
+        <span class="sil-text">La Escritura advierte que hay en ella "cosas difíciles de entender, que los ignorantes e inconstantes tuercen para su propia perdición" (2 Pe 3:16), y que "ninguna profecía de la Escritura es de interpretación privada" (2 Pe 1:20).</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P2</span>
+        <span class="sil-text">La <em>Sola Scriptura</em> sin Magisterio infalible da a cada lector el derecho de interpretar la Escritura por sí mismo; no existe un árbitro definitivo entre interpretaciones en conflicto.</span>
+      </div>
+      <div class="sil-line">
+        <span class="sil-key">P3</span>
+        <span class="sil-text">Sin árbitro definitivo, los desacuerdos doctrinales se multiplican indefinidamente: el protestantismo ha producido más de 30.000 denominaciones con doctrinas mutuamente contradictorias sobre las mismas cuestiones fundamentales.</span>
+      </div>
+      <div class="sil-line conclusion">
+        <span class="sil-key">∴ C</span>
+        <span class="sil-text"><strong>La Sola Scriptura conduce precisamente al caos que Pedro advirtió:</strong> la multiplicación de interpretaciones que "tuercen las Escrituras para su propia perdición". El antídoto prescrito por Pedro no es "más lectura individual": es la autoridad magisterial de la Iglesia a la que él mismo recibió las llaves.</span>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 60 60" fill="none"><g stroke="var(--gold)" stroke-width="1"><circle cx="30" cy="30" r="20"/><line x1="30" y1="10" x2="30" y2="50"/><line x1="10" y1="30" x2="50" y2="30"/></g></svg></div>
+  </section>
+
+  <!-- 13 -->
+  <section class="section" id="conclusion">
+    <div class="eyebrow">13 · Conclusión</div>
+    <h2>Conclusión: los tres pilares que ninguno puede sostenerse sin los otros</h2>
+    <p>
+      La <em>Sola Scriptura</em> no es simplemente una doctrina con la que la Iglesia Católica
+      discrepa: es un principio que se destruye a sí mismo antes de poder aplicarse, que nunca
+      existió en la Iglesia primitiva, que la Escritura misma contradice, y que produce
+      empíricamente el caos doctrinal que prometía evitar.
+    </p>
+    <p>
+      La alternativa católica no "añade" algo extraño a la Escritura: articula cómo la Revelación
+      divina ha sido comunicada y custodiada desde el principio —a través de tres pilares
+      inseparables que el propio CCC 95 describe con precisión.
+    </p>
+
+    <div class="pilares-grid">
+      <div class="pilar">
+        <span class="pilar-num">I</span>
+        <h4>Sagrada Escritura</h4>
+        <p>Palabra de Dios puesta por escrito bajo la inspiración del Espíritu Santo. Norma suprema de la fe, pero no auto-interpretativa ni auto-suficiente para definir su propio canon.</p>
+      </div>
+      <div class="pilar">
+        <span class="pilar-num">II</span>
+        <h4>Sagrada Tradición</h4>
+        <p>La Palabra de Dios transmitida oralmente por los apóstoles y sus sucesores. Precede a la Escritura, la autentica y la complementa. Sin ella no sabemos qué libros forman la Escritura.</p>
+      </div>
+      <div class="pilar">
+        <span class="pilar-num">III</span>
+        <h4>Magisterio</h4>
+        <p>La autoridad interpretativa viva dada por Cristo a la Iglesia. Sin él, la Escritura queda a merced de interpretaciones privadas que producen fragmentación indefinida.</p>
+      </div>
+    </div>
+
+    <div class="verse-block">
+      <p>"La columna y fundamento de la verdad" no es un libro: es la Iglesia del Dios vivo.</p>
+      <span class="ref">1 Timoteo 3:15 — Pablo identifica a la Iglesia, no a la Escritura, como "columna y fundamento de la verdad"</span>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-title">La posición católica en una frase</div>
+      <p>
+        La Iglesia Católica no niega la autoridad de la Escritura —la afirma con toda su fuerza.
+        Lo que niega es que la Escritura pueda ser su propio intérprete, su propio juez y su
+        propio árbitro. Cristo no dejó un libro con un índice de contenidos: dejó una Iglesia
+        a la que confió la custodia, la interpretación y la transmisión de su Revelación.
+        La Escritura nació dentro de esa Iglesia, fue reconocida por esa Iglesia y solo puede
+        leerse con plenitud dentro de esa Iglesia. Separar la Escritura de la Tradición y el
+        Magisterio no libera la Palabra de Dios: la deja a la deriva de quien tenga un púlpito
+        y una impresora.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mark-small" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 60 60" fill="none">
+        <g stroke="var(--gold)" stroke-width="1.3">
+          <circle cx="30" cy="30" r="26"/>
+          <line x1="30" y1="7" x2="30" y2="53"/>
+          <line x1="9" y1="22" x2="51" y2="22"/>
+        </g>
+      </svg>
+    </div>
+    <p>Refutación de la Sola Scriptura desde la lógica, la exégesis bíblica, la historia y los Padres de la Iglesia. Citas verificadas; erratas de las diapositivas corregidas (CIC 82→CCC 95; CIC 85→CCC 85; paráfrasis de Vicente de Lerins aclarada).</p>
+  </footer>
+
+</main>
+
+<button id="backToTop" aria-label="Volver arriba">↑</button>
+
+<script>
+  const sidebar=document.getElementById('sidebar');
+  const menuToggle=document.getElementById('menuToggle');
+  menuToggle.addEventListener('click',()=>{
+    const open=sidebar.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded',open);
+    menuToggle.textContent=open?'✕':'☰';
+  });
+  document.querySelectorAll('.toc-list a').forEach(link=>{
+    link.addEventListener('click',()=>{
+      if(window.innerWidth<=980){sidebar.classList.remove('open');menuToggle.textContent='☰';menuToggle.setAttribute('aria-expanded','false');}
+    });
+  });
+  const progressBar=document.getElementById('progressBar');
+  function updateProgress(){
+    const h=document.documentElement;
+    const s=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    progressBar.style.width=(isFinite(s)?s:0)+'%';
+  }
+  document.addEventListener('scroll',updateProgress,{passive:true});
+  updateProgress();
+  const sections=document.querySelectorAll('main .section, main .hero');
+  const links=document.querySelectorAll('.toc-list a');
+  const linkMap={};
+  links.forEach(l=>linkMap[l.getAttribute('href').slice(1)]=l);
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){links.forEach(l=>l.classList.remove('active'));if(linkMap[entry.target.id])linkMap[entry.target.id].classList.add('active');}
+    });
+  },{rootMargin:'-35% 0px -55% 0px',threshold:0});
+  sections.forEach(s=>observer.observe(s));
+  const backToTop=document.getElementById('backToTop');
+  document.addEventListener('scroll',()=>{backToTop.classList.toggle('visible',window.scrollY>600);},{passive:true});
+  backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>

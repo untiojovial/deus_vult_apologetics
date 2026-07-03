@@ -33,3 +33,5 @@ La lengua de la Iglesia durante mil años: la Vulgata, los Padres, los Concilios
 
 - [Latín — Introducción + Días 1–10 (Fundamentos)](/idiomas/latin-dias1-10/)
 - [Latín — Días 11–20 (Sintaxis avanzada y la Vulgata)](/idiomas/latin-dias11-20/)
+- [Latín — Días 21–30](/idiomas/latin-dias21-30/)
+- [Latín — Días 31–40 · Nivel Avanzado](/idiomas/latin-dias31-40/)

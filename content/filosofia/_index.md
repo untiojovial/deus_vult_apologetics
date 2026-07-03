@@ -22,3 +22,4 @@ La idea es responder con argumentos claros, fuentes serias y lenguaje comprensib
 - [La Tríada Trascendental — Van Til y Tomás de Aquino (Dossier)](/filosofia/triada-trascendental-dossier/)
 - [Tomismo Intensivo — Cornelio Fabro (Dossier)](/filosofia/tomismo-intensivo-dossier/)
 - [La Inmutabilidad de Dios y los Nombres Relativos (Dossier)](/filosofia/inmutabilidad-nombres-relativos-dossier/)
+- [De Praedestinatione: Disputatio (Dossier)](/filosofia/de-praedestinatione-dossier/)
