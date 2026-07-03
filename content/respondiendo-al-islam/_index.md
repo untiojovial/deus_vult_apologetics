@@ -26,3 +26,4 @@ aliases:
 - [Daniel y el Quinto Reino (Dossier)](/respondiendo-al-islam/daniel-quinto-reino-dossier/)
 - [Hadices Médicos y Problemas Científicos en la Sunnah (Dossier)](/respondiendo-al-islam/hadices-medicos-dossier/)
 - [El Testigo Involuntario — Abu Dawud 4002 y Q18:86 (Dossier)](/respondiendo-al-islam/testigo-involuntario-dossier/)
+- [Predestinación Islámica: Qadar y la Excusa de Adán (Dossier)](/respondiendo-al-islam/predestinacion-islamica-dossier/)

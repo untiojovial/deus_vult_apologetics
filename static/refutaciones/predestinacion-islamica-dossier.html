@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier · El Dilema del Libre Albedrío en el Islam: Qadar y la Excusa de Adán</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+:root {
+  --ink:     #f0e8c8;
+  --bg:      #0f0f0f;
+  --aged:    #1a1a1a;
+  --deep:    #050505;
+  --gold:    #c8a828;
+  --gold-lt: #e8c840;
+  --gold-dk: #8a7010;
+  --white:   #f8f4e8;
+  --rule:    #5a4a10;
+  --rule-lt: #8a7820;
+  --margin:  #a09060;
+  --nav-bg:  #080808;
+  --nav-w:   272px;
+  --red:     #b03020;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--deep);font-family:'EB Garamond',Georgia,serif;color:var(--ink)}
+
+#toc-btn{position:fixed;top:16px;left:16px;z-index:400;background:var(--nav-bg);border:1px solid var(--gold);color:var(--gold-lt);font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;padding:8px 13px 8px 10px;cursor:pointer;display:flex;align-items:center;gap:9px;box-shadow:0 2px 14px rgba(0,0,0,0.8);transition:background 0.15s;user-select:none;line-height:1}
+#toc-btn:hover{background:#111}
+.hbars{display:flex;flex-direction:column;gap:4px}
+.hbars span{display:block;width:17px;height:1.5px;background:var(--gold-lt);transition:transform 0.22s,opacity 0.22s;transform-origin:center}
+#toc-btn.is-open .hbars span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+#toc-btn.is-open .hbars span:nth-child(2){opacity:0;transform:scaleX(0)}
+#toc-btn.is-open .hbars span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+#toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:300;opacity:0;pointer-events:none;transition:opacity 0.25s}
+#toc-overlay.is-open{opacity:1;pointer-events:all}
+
+#toc-panel{position:fixed;top:0;left:0;bottom:0;width:var(--nav-w);background:var(--nav-bg);border-right:2px solid var(--gold-dk);z-index:350;overflow-y:auto;padding:0 0 48px;transform:translateX(calc(-1 * var(--nav-w) - 8px));transition:transform 0.28s cubic-bezier(.4,0,.2,1);box-shadow:6px 0 30px rgba(0,0,0,0.9)}
+#toc-panel.is-open{transform:translateX(0)}
+#toc-panel::-webkit-scrollbar{width:3px}
+#toc-panel::-webkit-scrollbar-thumb{background:var(--gold-dk);border-radius:2px}
+.toc-spacer{height:60px}
+.toc-title{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:4px;color:var(--gold-lt);text-transform:uppercase;padding:0 18px 12px;border-bottom:1px solid rgba(200,168,40,0.2);margin-bottom:4px}
+.toc-group{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;padding:12px 18px 3px}
+#toc-panel a{display:block;padding:6px 14px 6px 22px;font-family:'Source Sans 3',sans-serif;font-size:10.8px;color:rgba(200,170,100,0.72);text-decoration:none;line-height:1.3;border-left:3px solid transparent;transition:background 0.13s,color 0.13s,border-color 0.13s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#toc-panel a:hover{color:var(--gold-lt);background:rgba(200,168,40,0.07);border-left-color:rgba(200,168,40,0.4)}
+#toc-panel a.active{color:var(--gold-lt);background:rgba(200,168,40,0.12);border-left-color:var(--gold-lt)}
+
+#main{max-width:900px;margin:0 auto;background:var(--bg);min-height:100vh;box-shadow:0 0 80px rgba(0,0,0,0.9)}
+
+.cover{background:#000;padding:68px 56px 56px;text-align:center;position:relative;border-bottom:6px double var(--gold)}
+.cover::before{content:'';position:absolute;inset:12px;border:1px solid rgba(200,168,40,0.2);pointer-events:none}
+.cover-eyebrow{font-family:'Cinzel',serif;font-size:9px;letter-spacing:5px;color:var(--gold-lt);text-transform:uppercase;margin-bottom:20px}
+.cover-title{font-family:'Cinzel',serif;font-size:1.95rem;font-weight:700;color:var(--white);line-height:1.14;margin-bottom:12px}
+.cover-sub{font-style:italic;color:var(--gold);font-size:1.05rem;margin-bottom:28px}
+.cover-verse{display:inline-block;font-style:italic;color:rgba(248,244,232,0.85);font-size:.92rem;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);padding:10px 28px;line-height:1.75}
+.ar-lg{display:block;direction:rtl;font-size:1.55rem;color:var(--gold-lt);margin-bottom:8px;font-style:normal}
+
+section{padding:46px 56px 42px;border-bottom:1px solid var(--rule)}
+section:last-child{border-bottom:none}
+.sec-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:var(--gold-dk);text-transform:uppercase;margin-bottom:6px}
+h2{font-family:'Cinzel',serif;font-size:1.22rem;font-weight:600;color:var(--gold-lt);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--rule)}
+h3{font-family:'EB Garamond',serif;font-size:1.06rem;font-weight:700;color:var(--gold);margin:22px 0 9px}
+p{line-height:1.78;margin-bottom:13px;font-size:1rem;color:var(--ink)}
+p:last-child{margin-bottom:0}
+
+blockquote{margin:16px 0;padding:14px 18px 14px 28px;background:var(--aged);border-left:4px solid var(--gold);font-style:italic;font-size:.97rem;line-height:1.72;color:#d8c890;position:relative}
+blockquote::before{content:'\201C';font-size:2.8rem;color:var(--rule-lt);position:absolute;top:-4px;left:6px;line-height:1;font-family:Georgia,serif}
+.src{display:block;font-style:normal;font-size:.76rem;font-family:'Source Sans 3',sans-serif;color:var(--gold);margin-top:7px;letter-spacing:.4px}
+
+/* QURAN / HADITH BOX */
+.q-box{background:#0a0500;border:1px solid var(--gold-dk);border-left:5px solid var(--gold);padding:18px 22px;margin:18px 0}
+.q-lbl{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.q-ar{direction:rtl;font-size:1.25rem;color:var(--gold-lt);line-height:2.1;text-align:right;margin-bottom:10px}
+.q-tr{font-style:italic;color:#d8c890;font-size:.97rem;line-height:1.72}
+.q-ref{font-family:'Source Sans 3',sans-serif;font-size:.78rem;color:var(--gold);margin-top:8px;display:block}
+
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.91rem}
+thead tr{background:#000;color:var(--gold-lt)}
+thead th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:9px 11px;text-align:left}
+tbody tr:nth-child(odd){background:var(--bg)}
+tbody tr:nth-child(even){background:var(--aged)}
+td{padding:9px 11px;line-height:1.5;vertical-align:top;color:var(--ink)}
+td:first-child{font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold);font-weight:600}
+
+.card{background:var(--aged);border:1px solid var(--rule);padding:18px 22px;margin:18px 0}
+.card-lbl{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+
+.verdict{background:#000;color:var(--ink);padding:22px 26px;margin:22px 0 0;border-left:5px solid var(--gold-lt)}
+.verdict-lbl{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:var(--gold-lt);text-transform:uppercase;margin-bottom:10px}
+.verdict p{color:var(--ink);margin-bottom:10px}
+.verdict p:last-child{margin-bottom:0}
+.verdict em{color:var(--gold)}
+.verdict strong{color:var(--white)}
+
+.obj{margin:22px 0}
+.obj-q{background:#1a1400;border-left:4px solid var(--gold-dk);padding:12px 18px;font-style:italic;color:var(--gold-lt);font-size:.97rem;line-height:1.6}
+.obj-q::before{content:'✦ Objeción apologética islámica: ';font-style:normal;font-weight:700;color:var(--gold)}
+.obj-r{background:var(--aged);border-left:4px solid var(--red);padding:12px 18px;line-height:1.72;font-size:.97rem;color:var(--ink)}
+.obj-r::before{content:'→ Refutación: ';font-weight:700;color:var(--red)}
+
+.syllogism{background:var(--aged);border:1.5px solid var(--gold);padding:20px 26px;margin:20px 0}
+.syllogism-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.syllogism p{margin-bottom:6px;font-size:.96rem;color:var(--ink)}
+.syllogism .conclusion{font-weight:700;border-top:1px solid var(--rule);padding-top:8px;margin-top:8px;color:var(--gold-lt)}
+
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.sc{background:var(--aged);border:1px solid var(--rule);padding:14px 16px}
+.sc-name{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-lt);margin-bottom:3px}
+.sc-date{font-family:'Source Sans 3',sans-serif;font-size:10px;color:var(--margin);margin-bottom:8px;letter-spacing:.5px}
+.sc p{font-size:.87rem;line-height:1.54;margin:0;color:var(--ink)}
+
+strong{font-weight:700;color:var(--white)}
+.ar{direction:rtl;font-size:1.12rem;display:inline-block;line-height:1.7;color:var(--gold-lt)}
+.la{font-style:italic;color:#a0a060}
+
+.hl{border:1.5px solid var(--gold-dk);padding:14px 20px;margin:16px 0;background:var(--aged);font-size:.96rem;line-height:1.72;color:var(--ink)}
+
+.footnote{border-top:1px solid var(--rule);margin-top:30px;padding-top:13px;font-size:.78rem;font-family:'Source Sans 3',sans-serif;color:var(--margin);line-height:1.65}
+
+@media(max-width:680px){
+  .cover{padding:38px 20px 30px}.cover-title{font-size:1.3rem}
+  section{padding:28px 18px 26px}.sg{grid-template-columns:1fr}
+  h2{font-size:1.04rem}#main{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<button id="toc-btn" aria-controls="toc-panel" aria-expanded="false">
+  <span class="hbars"><span></span><span></span><span></span></span>Índice
+</button>
+<div id="toc-overlay"></div>
+
+<nav id="toc-panel">
+  <div class="toc-spacer"></div>
+  <div class="toc-title">Contenido</div>
+
+  <div class="toc-group">Fundamentos</div>
+  <a href="#definiciones">I. Qué es el Qadar</a>
+  <a href="#escuelas">II. Las escuelas islámicas del debate</a>
+
+  <div class="toc-group">El Corán</div>
+  <a href="#guia-condicionada">III. La guía condicionada: «guía a quien quiere»</a>
+  <a href="#verso3213">IV. Corán 32:13: el versículo más radical</a>
+
+  <div class="toc-group">La Sunnah</div>
+  <a href="#calamo">V. El Cálamo y los 50.000 años</a>
+  <a href="#vientre">VI. Las cuatro cosas escritas en el vientre</a>
+  <a href="#zina">VII. La porción de adulterio ya escrita</a>
+  <a href="#palito">VIII. El hadiz del palito: ¿para qué obrar?</a>
+  <a href="#adan-moises">IX. El Hadiz de Adán y Moisés</a>
+  <a href="#analisis-adan">X. ¿Ganó Adán el argumento?</a>
+  <a href="#aisha">XI. El Hadiz de Aisha y el niño</a>
+
+  <div class="toc-group">Contexto Histórico</div>
+  <a href="#historia">XII. Jabriyya, Qadariyya, Mutazila, Asharismo</a>
+
+  <div class="toc-group">La Solución Católica</div>
+  <a href="#catolica">XIII. Libre albedrío, gracia y predestinación</a>
+
+  <div class="toc-group">Defensa</div>
+  <a href="#excusa">XIV. ¿Podemos excusarnos como Adán?</a>
+  <a href="#objeciones">XV. Objeciones y refutaciones</a>
+  <a href="#silogismos">XVI. Silogismos formales</a>
+  <a href="#conclusion">Conclusión</a>
+</nav>
+
+<div id="main">
+
+<div class="cover">
+  <div class="cover-eyebrow">Dossier Apologético · Teología Comparada</div>
+  <h1 class="cover-title">El Dilema del Libre Albedrío en el Islam:<br>Qadar y la Excusa de Adán</h1>
+  <p class="cover-sub">Un análisis del determinismo coránico y profético frente a la doctrina católica de la libertad humana</p>
+  <div class="cover-verse">
+    <span class="ar-lg">أَتَلُومُنِي عَلَى أَمْرٍ قَدَّرَهُ اللَّهُ عَلَيَّ قَبْلَ أَنْ يَخْلُقَنِي بِأَرْبَعِينَ عَامًا</span>
+    <em>«¿Me culpas por algo que Alá había decretado sobre mí cuarenta años antes de crearme?»</em><br>
+    <span style="font-size:.78rem;color:var(--gold);">Adán a Moisés, Sahih al-Bujari 6614; Sahih Muslim 2652c — El argumento que «venció»</span>
+  </div>
+</div>
+
+<!-- I -->
+<section id="definiciones">
+  <div class="sec-label">Sección I</div>
+  <h2>Qué es el <em>Qadar</em>: El Sexto Pilar de la Fe</h2>
+
+  <p>El <strong>Qadar</strong> (<span class="ar" style="font-size:.95rem;">القَدَر</span>, «decreto», «medida», «predestinación») es uno de los seis pilares de la fe (<em>arkān al-īmān</em>) del Islam sunní, junto con la fe en Alá, los ángeles, los libros, los profetas y el Día del Juicio. Se basa en el hadiz de Gabriel, recogido en Sahih Muslim, donde el ángel pregunta a Mahoma sobre la fe (<em>īmān</em>) y este responde:</p>
+
+  <blockquote>
+    «Que creas en Alá, en Sus ángeles, en Sus libros, en Sus mensajeros, en el Último Día, y que creas en el decreto (<em>qadar</em>), tanto en su bien como en su mal.»
+    <span class="src">— Sahih Muslim 8 (Libro de la Fe); también Sahih al-Bujari 50. Verificado en sunnah.com</span>
+  </blockquote>
+
+  <p>La doctrina del Qadar sostiene que Alá ha decretado y escrito de antemano todo lo que ocurrirá — cada acción humana, cada destino, cada elección — antes de la creación del mundo. Esta doctrina genera una tensión teológica clásica con la responsabilidad moral humana, que es exactamente el objeto de este dossier: si todo está ya decretado y escrito, ¿en qué sentido el ser humano es libremente responsable de sus actos, y sobre qué base puede ser justamente castigado o recompensado?</p>
+
+  <div class="card">
+    <div class="card-lbl">Los cuatro elementos clásicos del Qadar (según la teología sunní tradicional)</div>
+    <p><strong>1. Al-ʿIlm</strong> (el Conocimiento): Alá conoce de antemano todo lo que ocurrirá.</p>
+    <p style="margin-top:8px;"><strong>2. Al-Kitāba</strong> (la Escritura): Alá ha escrito todo eso en la Tabla Preservada (<em>al-Lawh al-Mahfūz</em>) antes de la creación.</p>
+    <p style="margin-top:8px;"><strong>3. Al-Mashīʾa</strong> (la Voluntad): Nada ocurre en el universo sin que Alá lo quiera que ocurra.</p>
+    <p style="margin-top:8px;"><strong>4. Al-Khalq</strong> (la Creación): Alá es el creador directo de todas las cosas, incluidas las acciones de los seres humanos.</p>
+  </div>
+
+  <p>Es precisamente esta cuarta categoría —que Alá es el creador directo de las acciones humanas, incluidas las malas— la que genera el problema central examinado en este dossier.</p>
+</section>
+
+<!-- II -->
+<section id="escuelas">
+  <div class="sec-label">Sección II</div>
+  <h2>Las Escuelas Islámicas del Debate sobre el Libre Albedrío</h2>
+
+  <p>El problema del Qadar generó, ya en el siglo I–II de la Hégira, uno de los debates teológicos más intensos de la historia islámica. No es una cuestión inventada por críticos externos — es una controversia reconocida internamente por los propios teólogos musulmanes clásicos.</p>
+
+  <table>
+    <thead><tr><th>Escuela</th><th>Posición sobre el libre albedrío</th><th>Problema que señalan sus críticos</th></tr></thead>
+    <tbody>
+      <tr><td>Jabriyya (<span class="ar" style="font-size:.9rem;">الجبرية</span>)</td><td>Determinismo puro: el ser humano no tiene ninguna capacidad real de actuar; Alá es el único agente verdadero</td><td>Elimina toda responsabilidad moral; el castigo divino parece injusto</td></tr>
+      <tr><td>Qadariyya (<span class="ar" style="font-size:.9rem;">القدرية</span>)</td><td>Libre albedrío genuino: el ser humano crea sus propios actos con libertad real</td><td>Declarada herética por la ortodoxia sunní temprana; el hadiz los llama «los magos de esta comunidad»</td></tr>
+      <tr><td>Mutazila (<span class="ar" style="font-size:.9rem;">المعتزلة</span>)</td><td>Racionalismo: defiende la justicia divina (ʿadl) exigiendo libertad humana real para que el castigo sea justo</td><td>Considerada herética por limitar el poder absoluto de Alá</td></tr>
+      <tr><td>Asharismo (<span class="ar" style="font-size:.9rem;">الأشعرية</span>)</td><td><em>Kasb</em> («adquisición»): Alá crea el acto, el hombre lo «adquiere»; solución de compromiso predominante hoy</td><td>Críticos —incluidos filósofos musulmanes— la consideran un juego de palabras que no resuelve el determinismo de fondo</td></tr>
+      <tr><td>Maturidismo (<span class="ar" style="font-size:.9rem;">الماتريدية</span>)</td><td>Variante del Asharismo con mayor énfasis en la capacidad humana (<em>qudra</em>) previa al acto</td><td>Sigue sin resolver plenamente la tensión con los textos deterministas</td></tr>
+    </tbody>
+  </table>
+
+  <p>El hecho de que estas escuelas hayan debatido durante más de un milenio sin llegar a consenso es en sí mismo revelador: el problema es real y está incrustado en el propio corpus textual del Islam, no es una construcción polémica externa.</p>
+</section>
+
+<!-- III -->
+<section id="guia-condicionada">
+  <div class="sec-label">Sección III</div>
+  <h2>La Guía Condicionada: «Alá Guía a Quien Quiere»</h2>
+
+  <p>El Corán contiene una fórmula que se repite con variaciones en múltiples suras: Alá extravía a quien quiere y guía a quien quiere, sin que el versículo condicione esa voluntad divina a ningún mérito o elección previa del ser humano.</p>
+
+  <div class="q-box">
+    <div class="q-lbl">Corán 14:4</div>
+    <div class="q-ar">وَمَا أَرْسَلْنَا مِن رَّسُولٍ إِلَّا بِلِسَانِ قَوْمِهِ لِيُبَيِّنَ لَهُمْ ۖ فَيُضِلُّ اللَّهُ مَن يَشَاءُ وَيَهْدِي مَن يَشَاءُ ۚ وَهُوَ الْعَزِيزُ الْحَكِيمُ</div>
+    <div class="q-tr">«Y no enviamos a ningún mensajero sino en la lengua de su pueblo, para que les explicara con claridad. Así, Alá extravía a quien quiere y guía a quien quiere; y Él es el Poderoso, el Sabio.»</div>
+    <span class="q-ref">— Corán 14:4 (Sahih International)</span>
+  </div>
+
+  <div class="q-box">
+    <div class="q-lbl">Corán 7:178</div>
+    <div class="q-ar">مَن يَهْدِ اللَّهُ فَهُوَ الْمُهْتَدِي ۖ وَمَن يُضْلِلْ فَأُولَٰئِكَ هُمُ الْخَاسِرُونَ</div>
+    <div class="q-tr">«A quien Alá guía, ese es el bien guiado; y a quienes extravía, esos son los perdedores.»</div>
+    <span class="q-ref">— Corán 7:178</span>
+  </div>
+
+  <div class="q-box">
+    <div class="q-lbl">Corán 16:93</div>
+    <div class="q-ar">وَلَوْ شَاءَ اللَّهُ لَجَعَلَكُمْ أُمَّةً وَاحِدَةً وَلَٰكِن يُضِلُّ مَن يَشَاءُ وَيَهْدِي مَن يَشَاءُ ۚ وَلَتُسْأَلُنَّ عَمَّا كُنتُمْ تَعْمَلُونَ</div>
+    <div class="q-tr">«Y si Alá hubiera querido, os habría hecho una sola comunidad; pero Él extravía a quien quiere y guía a quien quiere. Y ciertamente seréis interrogados por lo que hacíais.»</div>
+    <span class="q-ref">— Corán 16:93</span>
+  </div>
+
+  <div class="q-box">
+    <div class="q-lbl">Corán 13:27</div>
+    <div class="q-ar">...إِنَّ اللَّهَ يُضِلُّ مَن يَشَاءُ وَيَهْدِي إِلَيْهِ مَنْ أَنَابَ</div>
+    <div class="q-tr">«…Ciertamente Alá extravía a quien quiere y guía hacia Sí a quien se vuelve a Él con arrepentimiento.»</div>
+    <span class="q-ref">— Corán 13:27</span>
+  </div>
+
+  <div class="q-box">
+    <div class="q-lbl">Corán 6:39</div>
+    <div class="q-ar">وَالَّذِينَ كَذَّبُوا بِآيَاتِنَا صُمٌّ وَبُكْمٌ فِي الظُّلُمَاتِ ۗ مَن يَشَإِ اللَّهُ يُضْلِلْهُ وَمَن يَشَأْ يَجْعَلْهُ عَلَىٰ صِرَاطٍ مُّسْتَقِيمٍ</div>
+    <div class="q-tr">«Y quienes desmienten Nuestros signos son sordos y mudos en las tinieblas. A quien Alá quiere, lo extravía, y a quien quiere lo pone en un camino recto.»</div>
+    <span class="q-ref">— Corán 6:39</span>
+  </div>
+
+  <p>El patrón textual es notable por su simetría: no dice «Alá extravía a quien elige el mal», sino «a quien Alá quiere». La condición de la extraviación y de la guía recae explícitamente en la voluntad divina, no en una elección humana previa mencionada en el propio texto. La sección XII de este dossier examinará críticamente el intento apologético de reinsertar una condición humana implícita.</p>
+</section>
+
+<!-- IV -->
+<section id="verso3213">
+  <div class="sec-label">Sección IV</div>
+  <h2>Corán 32:13: El Versículo Más Radical</h2>
+
+  <div class="q-box">
+    <div class="q-lbl">Corán 32:13 — As-Sajda</div>
+    <div class="q-ar">وَلَوْ شِئْنَا لَآتَيْنَا كُلَّ نَفْسٍ هُدَاهَا وَلَٰكِنْ حَقَّ الْقَوْلُ مِنِّي لَأَمْلَأَنَّ جَهَنَّمَ مِنَ الْجِنَّةِ وَالنَّاسِ أَجْمَعِينَ</div>
+    <div class="q-tr">«Y si hubiéramos querido, habríamos dado a cada alma su guía; pero se ha cumplido la palabra que salió de Mí: "Ciertamente llenaré el Infierno de yinn y de hombres, todos juntos."»</div>
+    <span class="q-ref">— Corán 32:13 (Sahih International)</span>
+  </div>
+
+  <p>Este es, dentro del propio texto coránico, el versículo teológicamente más problemático para cualquier defensa del libre albedrío genuino. Afirma explícitamente tres cosas:</p>
+
+  <div class="card">
+    <div class="card-lbl">Las tres afirmaciones del versículo</div>
+    <p><strong>1.</strong> Alá <em>podía</em> haber dado a cada alma su guía —es decir, tenía el poder de guiar a todos hacia la fe y la salvación.</p>
+    <p style="margin-top:8px;"><strong>2.</strong> Alá <em>eligió no hacerlo</em> —«pero se ha cumplido la palabra que salió de Mí».</p>
+    <p style="margin-top:8px;"><strong>3.</strong> El propósito declarado de esa elección es <em>llenar el Infierno</em> con una mezcla predeterminada de yinn y hombres — no como consecuencia de sus elecciones libres, sino como cumplimiento de una «palabra» pronunciada de antemano por Alá mismo.</p>
+  </div>
+
+  <p>El versículo no dice «llenaré el Infierno de quienes elijan libremente el mal». Dice que la palabra de llenar el Infierno «se ha cumplido» (<span class="ar" style="font-size:.95rem;">حَقَّ الْقَوْلُ</span>) — un verbo que indica el cumplimiento necesario de un decreto ya pronunciado, no una consecuencia contingente de decisiones humanas futuras.</p>
+</section>
+
+<!-- V -->
+<section id="calamo">
+  <div class="sec-label">Sección V</div>
+  <h2>La Sunnah: El Cálamo y los Cincuenta Mil Años</h2>
+
+  <div class="q-box">
+    <div class="q-lbl">Sahih Muslim 2653 (Libro del Qadar)</div>
+    <div class="q-tr">El Profeta dijo: «Alá escribió los decretos de la creación cincuenta mil años antes de crear los cielos y la tierra», y añadió: «Su Trono estaba sobre el agua.»</div>
+    <span class="q-ref">— Sahih Muslim 2653; narrado por Abdullah ibn Amr. Verificado en sunnah.com</span>
+  </div>
+
+  <div class="q-box">
+    <div class="q-lbl">Sunan al-Tirmidhi — «El Cálamo se ha Levantado»</div>
+    <div class="q-ar">رُفِعَتِ الأَقْلاَمُ وَجَفَّتِ الصُّحُفُ</div>
+    <div class="q-tr">«Los cálamos se han levantado y las páginas se han secado.»</div>
+    <span class="q-ref">— Sunan al-Tirmidhi 2516, clasificado <em>hasan sahih</em>; formulación estándar sobre el cierre del decreto divino</span>
+  </div>
+
+  <p>La imagen del «Cálamo» (<em>al-Qalam</em>) que escribe el decreto de toda la creación cincuenta mil años antes de la existencia del universo, y cuya tinta ya se ha secado, es central en la teología sunní del Qadar. El decreto no es una previsión pasiva del conocimiento divino sobre lo que los hombres elegirán libremente — es una escritura activa y ya cerrada, sellada antes de que el objeto de la escritura (el ser humano) exista siquiera.</p>
+</section>
+
+<!-- VI -->
+<section id="vientre">
+  <div class="sec-label">Sección VI</div>
+  <h2>Las Cuatro Cosas Escritas en el Vientre Materno</h2>
+
+  <div class="q-box">
+    <div class="q-lbl">Sahih al-Bujari (Libro del Comienzo de la Creación) y Sahih Muslim (Libro del Qadar)</div>
+    <div class="q-tr">El Profeta, el veraz y divinamente inspirado, dijo: «La creación de cada uno de vosotros se reúne en el vientre de su madre durante cuarenta días [como semen], luego es un coágulo de sangre por un período similar, luego es un pedazo de carne por un período similar. Después Alá envía un ángel a quien se ordena escribir cuatro cosas: escribe sus obras, su sustento, [la fecha de] su muerte, y si será bienaventurado o desdichado [en la religión]. Después el alma le es insuflada.»</div>
+    <span class="q-ref">— Sahih al-Bujari, Libro 55 (Los Profetas); también Libro 54; narrado por Abdullah ibn Masud. Verificado en fuentes múltiples de sunnah.com y iium.edu.my</span>
+  </div>
+
+  <p>Este hadiz establece que el destino final del ser humano — si será <em>shaqīy</em> (desdichado, destinado al Infierno) o <em>saʿīd</em> (bienaventurado, destinado al Paraíso) — es escrito por un ángel <strong>antes de que el alma sea insuflada en el feto</strong>, es decir, antes de que exista como persona moral capaz de elegir nada. El mismo hadiz añade una continuación que resulta perturbadora:</p>
+
+  <blockquote>
+    «Así, un hombre puede hacer obras características de la gente del Paraíso hasta que solo hay un codo de distancia entre él y el Paraíso, y entonces lo que está escrito para él le alcanza, y comienza a hacer obras características de la gente del Fuego, y entra en él. Y de manera similar, un hombre puede hacer obras características de la gente del Fuego hasta que solo hay un codo de distancia entre él y el Fuego, y entonces lo que está escrito para él le alcanza, y comienza a hacer obras características de la gente del Paraíso, y entra en él.»
+    <span class="src">— Continuación del mismo hadiz (Sahih al-Bujari 6594, Libro del Qadar; Sahih Muslim 2643)</span>
+  </blockquote>
+
+  <p>Este pasaje es explícito: un hombre puede vivir toda su vida haciendo obras piadosas y, en el último instante antes de morir, «lo que está escrito» lo alcanza y le hace cambiar hacia la condenación — sin relación aparente con ninguna decisión consciente suya en ese momento. El destino escrito «alcanza» al hombre como una fuerza externa que determina su comportamiento final.</p>
+</section>
+
+<!-- VII -->
+<section id="zina">
+  <div class="sec-label">Sección VII</div>
+  <h2>La Porción de Adulterio Ya Escrita para Cada Hombre</h2>
+
+  <p>Este hadiz es, junto con el de Adán y Moisés, uno de los textos más directamente perturbadores para la doctrina de la responsabilidad moral, porque aplica el determinismo del Qadar a un pecado grave y concreto —el adulterio (<em>zina</em>)— con un lenguaje de inevitabilidad explícita.</p>
+
+  <div class="q-box">
+    <div class="q-lbl">Sahih al-Bujari 6612 — Texto árabe y traducción, verificado en sunnah.com</div>
+    <div class="q-ar">إِنَّ اللَّهَ كَتَبَ عَلَى ابْنِ آدَمَ حَظَّهُ مِنَ الزِّنَا، أَدْرَكَ ذَلِكَ لاَ مَحَالَةَ، فَزِنَا الْعَيْنِ النَّظَرُ، وَزِنَا اللِّسَانِ الْمَنْطِقُ، وَالنَّفْسُ تَمَنَّى وَتَشْتَهِي، وَالْفَرْجُ يُصَدِّقُ ذَلِكَ وَيُكَذِّبُهُ</div>
+    <div class="q-tr">«Ciertamente, Alá ha escrito para el hijo de Adán su porción de adulterio, la cual alcanzará sin remedio (<em>lā maḥālata</em>, «sin escape posible»): el adulterio del ojo es la mirada, el adulterio de la lengua es el habla, el alma desea y anhela, y las partes íntimas confirman eso o lo desmienten.»</div>
+    <span class="q-ref">— Narrado por Ibn Abbas, citando a Abu Hurayra. Sahih al-Bujari 6612 (Libro del Decreto Divino, <em>Kitāb al-Qadar</em>); también recogido en el Libro de Pedir Permiso (<em>Kitāb al-Istiʾdhān</em>). Verificado en sunnah.com/bukhari:6612</span>
+  </div>
+
+  <div class="q-box">
+    <div class="q-lbl">Sahih Muslim 2657b / 2658a — Versión ampliada, verificada</div>
+    <div class="q-tr">Abu Hurayra narró que el Mensajero de Alá dijo: «Alá ha fijado la porción exacta de adulterio en la que un hombre incurrirá. No habrá escape de ello. El adulterio del ojo es la mirada lujuriosa, el adulterio de los oídos es escuchar [canto o conversación] voluptuosa, el adulterio de la lengua es el habla licenciosa, el adulterio de la mano es el asimiento lujurioso, el adulterio de los pies es caminar [hacia el lugar] donde pretende cometer el adulterio, y el corazón anhela y desea, lo cual las partes [del cuerpo] pueden llevar a la práctica o no.»</div>
+    <span class="q-ref">— Sahih Muslim 2657b y 2658a (Libro del Decreto Divino, <em>Kitāb al-Qadar</em>, capítulo: «La porción de adulterio del hijo de Adán y otros está decretada para él»). Verificado en sunnah.com/muslim:2657b y sunnah.com/muslim:2658a</span>
+  </div>
+
+  <h3>Análisis: el problema de la «porción inevitable»</h3>
+
+  <p>La frase clave del hadiz es <span class="ar" style="font-size:.95rem;">أَدْرَكَ ذَلِكَ لاَ مَحَالَةَ</span> — «lo alcanzará sin remedio» o «sin escape posible». El término árabe <em>lā maḥālata</em> es una fórmula de necesidad absoluta: no expresa una probabilidad estadística ni una tendencia general a la tentación (que sería teológicamente poco problemática, dado que la Escritura y el sentido común reconocen la inclinación humana al pecado), sino la certeza de que cada hijo de Adán cometerá necesariamente su «porción» ya escrita de adulterio, aunque sea en su forma más leve (la mirada, el pensamiento).</p>
+
+  <div class="card">
+    <div class="card-lbl">La estructura del problema</div>
+    <p><strong>1. El decreto precede al acto.</strong> Al igual que en el hadiz del vientre materno (Sección VI), la «porción» de adulterio de cada persona está <em>escrita</em> (<span class="ar" style="font-size:.95rem;">كَتَبَ</span>, <em>kataba</em>, el mismo verbo técnico de la escritura del decreto divino) antes de que el acto ocurra — no es una previsión pasiva, sino una asignación activa de una cuota de pecado que cada individuo cumplirá inevitablemente.</p>
+    <p style="margin-top:8px;"><strong>2. La taxonomía gradual no elimina el problema, lo disemina.</strong> El hadiz distingue formas «menores» (la mirada, el pensamiento) de la forma «mayor» (el acto físico, que «las partes íntimas confirman o desmienten»). Esta distinción, lejos de resolver la tensión, la extiende: incluso quien nunca comete el acto físico ha cometido ya, según el propio hadiz, una forma de adulterio en el ojo, el oído, la lengua o el corazón — actos que el hadiz describe como igualmente decretados e inevitables.</p>
+    <p style="margin-top:8px;"><strong>3. Ibn Abbas lo asocia con <em>al-lamam</em>.</strong> El propio narrador, Ibn Abbas, introduce el hadiz diciendo que no ha visto nada que se parezca tanto a <em>al-lamam</em> («los pecados menores» o «pecados leves», mencionados en Corán 53:32) como lo que describió Abu Hurayra — es decir, la propia tradición islámica temprana entendió este hadiz como una explicación de por qué los pecados «leves» e involuntarios (una mirada, un pensamiento fugaz) no acarrean la misma culpa que el acto consumado, precisamente porque están decretados como inevitables.</p>
+  </div>
+
+  <p>El problema teológico de fondo permanece: si la «porción» de adulterio —incluso en su forma más leve— es escrita por Alá y su cumplimiento es descrito con el lenguaje de la necesidad absoluta (<em>lā maḥālata</em>), entonces el marco conceptual es idéntico al del hadiz de Adán (Sección IX): un acto pecaminoso específico, predecretado antes de que el agente tuviera oportunidad de decidir nada al respecto, del cual —según la lógica que el propio Mahoma validó en el caso de Adán— el agente podría legítimamente argumentar no ser el responsable último.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">La aplicación directa al «Dilema de Adán»</div>
+    <p>Este hadiz reduce el problema general del Qadar a un caso concreto y universal: no se trata solo del destino eterno (Paraíso/Infierno) o del pecado original de un solo hombre (Adán), sino de un pecado específico —el adulterio, en cualquiera de sus grados— que el propio Mahoma afirma que <strong>todo</strong> hijo de Adán cometerá «sin remedio». Si Adán pudo apelar legítimamente a la escritura previa de su pecado para «vencer» la acusación de Moisés (Sección IX), cualquier persona que cometa cualquier grado de adulterio —incluida la mirada lujuriosa, que el hadiz declara igualmente decretada e ineludible— dispone, según la misma lógica ya validada por el Profeta, de idéntico fundamento textual para invocar la misma defensa.</p>
+  </div>
+</section>
+
+<!-- VIII -->
+<section id="palito">
+  <div class="sec-label">Sección VIII</div>
+  <h2>El Hadiz del Palito: «¿Entonces Para Qué Hacer Buenas Obras?»</h2>
+
+  <p>Este es quizás el hadiz más citado por los propios musulmanes cuando intentan resolver la tensión práctica del Qadar, porque registra la pregunta que cualquier creyente formularía de inmediato: si el destino final ya está escrito, ¿qué sentido tiene el esfuerzo moral?</p>
+
+  <div class="q-box">
+    <div class="q-lbl">Sahih al-Bujari 1362 — Texto completo verificado (narrado por Ali ibn Abi Talib)</div>
+    <div class="q-tr">«Estábamos acompañando un cortejo fúnebre en Baqi al-Gharqad. El Profeta vino a nosotros y se sentó, y nosotros nos sentamos a su alrededor. Tenía un palito pequeño en la mano, y entonces bajó la cabeza y comenzó a rascar el suelo con él. Dijo: "No hay ninguno de vosotros, ni un alma creada, que no tenga ya un lugar asignado, ya sea en el Paraíso o en el Infierno, y que no esté también determinado si será de los bienaventurados o de los desdichados." Un hombre dijo: "¡Mensajero de Alá! ¿Entonces no deberíamos depender de lo que ya ha sido escrito para nosotros, y abandonar las obras, ya que quien de nosotros esté destinado a ser bienaventurado hará las obras de un bienaventurado, y quien esté destinado a ser desdichado hará las obras de un desdichado?" El Profeta dijo: <strong>"Las buenas obras se facilitan para el bienaventurado, y las malas obras se facilitan para el desdichado."</strong> Después recitó los versículos: "En cuanto a quien da (en caridad) y teme a Alá, y cree en la mejor recompensa…"»
+    </div>
+    <span class="q-ref">— Sahih al-Bujari 1362 (Libro de los Funerales); versión paralela en Sahih al-Bujari, Libro 77 (Kitāb al-Qadar); ambas citan Corán 92:5–10. Verificado en sunnah.com/bukhari:1362</span>
+  </div>
+
+  <h3>El versículo coránico que el Profeta cita como respuesta</h3>
+
+  <div class="q-box">
+    <div class="q-lbl">Corán 92:5–10 — Sura al-Layl</div>
+    <div class="q-ar">فَأَمَّا مَنْ أَعْطَىٰ وَاتَّقَىٰ ﴿٥﴾ وَصَدَّقَ بِالْحُسْنَىٰ ﴿٦﴾ فَسَنُيَسِّرُهُ لِلْيُسْرَىٰ ﴿٧﴾ وَأَمَّا مَن بَخِلَ وَاسْتَغْنَىٰ ﴿٨﴾ وَكَذَّبَ بِالْحُسْنَىٰ ﴿٩﴾ فَسَنُيَسِّرُهُ لِلْعُسْرَىٰ ﴿١٠﴾</div>
+    <div class="q-tr">«En cuanto a quien da y teme [a Alá], y cree en la mejor recompensa, le facilitaremos el camino hacia la facilidad. Pero en cuanto a quien es avaro y se considera autosuficiente, y desmiente la mejor recompensa, le facilitaremos el camino hacia la dificultad.»</div>
+    <span class="q-ref">— Corán 92:5–10 (Sahih International)</span>
+  </div>
+
+  <h3>Análisis: ¿resuelve esto el problema o lo reformula?</h3>
+
+  <p>La respuesta del Profeta a la objeción práctica —«¿para qué esforzarse si ya está escrito?»— es, en sentido estricto, un desplazamiento del problema, no una solución a él. La formulación «las buenas obras se facilitan para el bienaventurado, y las malas obras se facilitan para el desdichado» (<span class="ar" style="font-size:.95rem;">فَأَمَّا مَنْ كَانَ مِنْ أَهْلِ السَّعَادَةِ فَيُيَسَّرُ لِعَمَلِ أَهْلِ السَّعَادَةِ</span> en la versión ampliada) no responde a la pregunta de <em>por qué</em> alguien debería esforzarse, sino que describe <em>cómo funciona el mecanismo determinista</em>: el esfuerzo mismo, y la facilidad o dificultad de ejercerlo, ya están predeterminados según la categoría (bienaventurado/desdichado) que el ángel escribió en el vientre materno (cf. Sección VI).</p>
+
+  <div class="card">
+    <div class="card-lbl">La estructura circular de la respuesta profética</div>
+    <p><strong>Pregunta del compañero:</strong> Si mi destino final ya está escrito, ¿para qué esforzarme en las obras?</p>
+    <p style="margin-top:8px;"><strong>Respuesta del Profeta:</strong> Haz las obras, porque a cada uno se le facilita hacer las obras correspondientes a su destino ya escrito.</p>
+    <p style="margin-top:8px;"><strong>Lo que la respuesta no explica:</strong> Por qué el esfuerzo moral de quien está «destinado a ser desdichado» sería genuino, si el propio hadiz afirma que las malas obras «se le facilitan» precisamente en virtud de esa categoría previa. La respuesta no elimina el determinismo — lo hace operar también sobre el grado de dificultad o facilidad de la propia voluntad al obrar.</p>
+  </div>
+
+  <p>Es revelador que el mismo compañero anticipe exactamente la objeción lógica que cualquier observador plantearía («¿deberíamos entonces abandonar las obras?»), y que la respuesta del Profeta no niegue la premisa determinista de la pregunta —de hecho la reafirma explícitamente («no hay ninguno de vosotros... que no tenga ya un lugar asignado»)— sino que simplemente instruye a continuar actuando dentro de ese marco ya fijado, apoyándose en Corán 92:5–10, que a su vez describe la facilidad o dificultad del camino moral como algo que Alá «facilitará» (<span class="ar" style="font-size:.9rem;">فَسَنُيَسِّرُهُ</span>, verbo en futuro con sujeto divino), no como una capacidad que resida de forma autónoma en el agente humano.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Por qué este hadiz no resuelve el dilema sino que lo confirma</div>
+    <p>Lejos de proporcionar una salida al determinismo, este hadiz es la evidencia más clara de que el propio círculo de compañeros del Profeta percibió inmediatamente la tensión lógica entre el Qadar y la responsabilidad moral —tan pronto como se les explicó la doctrina del destino ya escrito, la primera pregunta que formularon fue precisamente la que este dossier examina. La respuesta recibida no fue una refutación de la premisa determinista, sino una exhortación pragmática a seguir actuando «como si» fuera libre, sin que se ofrezca ninguna resolución filosófica de por qué ese «como si» sería coherente con un destino ya sellado por el Cálamo cincuenta mil años antes de la creación (cf. Sección V).</p>
+  </div>
+</section>
+
+<!-- VIII -->
+<section id="adan-moises">
+  <div class="sec-label">Sección IX</div>
+  <h2>El Hadiz de Adán y Moisés: El Argumento que «Venció»</h2>
+
+  <div class="q-box">
+    <div class="q-lbl">Sahih al-Bujari 6614 — Texto completo verificado</div>
+    <div class="q-ar">احْتَجَّ آدَمُ وَمُوسَى، فَقَالَ مُوسَى أَنْتَ آدَمُ الَّذِي أَخْرَجْتَ ذُرِّيَّتَكَ مِنَ الْجَنَّةِ. قَالَ آدَمُ أَنْتَ مُوسَى الَّذِي اصْطَفَاكَ اللَّهُ بِرِسَالاَتِهِ وَكَلاَمِهِ، ثُمَّ تَلُومُنِي عَلَى أَمْرٍ قَدْ قُدِّرَ عَلَىَّ قَبْلَ أَنْ أُخْلَقَ. فَحَجَّ آدَمُ مُوسَى</div>
+    <div class="q-tr">«Adán y Moisés discutieron. Moisés dijo a Adán: "Tú eres Adán, el que sacó a su descendencia del Paraíso." Adán respondió: "Tú eres Moisés, a quien Alá eligió con Sus mensajes y con Su palabra directa; y aun así, ¿me culpas por algo que ya había sido decretado sobre mí antes de que yo fuera creado?" <strong>Así Adán venció a Moisés en el argumento.</strong>»</div>
+    <span class="q-ref">— Narrado por Abu Hurayra. Sahih al-Bujari 6614 (Libro del Decreto Divino, Kitāb al-Qadar); paralelo idéntico en Sahih Muslim 2652c. Verificado en sunnah.com/bukhari:6614 y sunnah.com/muslim:2652c</span>
+  </div>
+
+  <h3>La versión extendida de Sahih Muslim</h3>
+
+  <div class="q-box">
+    <div class="q-lbl">Sahih Muslim 2652c — Versión ampliada, verificada</div>
+    <div class="q-tr">Moisés dijo: «¿Eres tú aquel Adán a quien Alá creó con Su mano, en quien insufló Su espíritu, ante quien ordenó a los ángeles postrarse, y a quien hizo vivir en el Paraíso con comodidad y descanso? Y sin embargo, causaste que la gente descendiera a la tierra por tu falta.» Adán dijo: «¿Eres tú aquel Moisés a quien Alá eligió para Su Mensaje y para conversar con Él, y a quien concedió las Tablas en las que todo estaba claramente explicado? ¿Cuál es tu opinión, cuánto tiempo antes de que yo fuera creado había sido escrita la Torá?» Moisés dijo: «Cuarenta años antes.» Adán dijo: «¿No viste estas palabras: "Adán cometió un error y fue inducido a hacerlo"?» Él (Moisés) dijo: «Sí.» Entonces él (Adán) dijo: «¿Me culpas entonces por un acto que Alá había decretado para mí cuarenta años antes de crearme?»</div>
+    <span class="q-ref">— Sahih Muslim 2652c. Verificado en sunnah.com/muslim:2652c</span>
+  </div>
+
+  <p>El propio Profeta, según el hadiz, repite la conclusión tres veces: <strong>«Así Adán venció a Moisés, Adán venció a Moisés, Adán venció a Moisés.»</strong> No es una anécdota ambigua — es presentada explícitamente como una victoria argumentativa validada por la autoridad profética misma.</p>
+</section>
+
+<!-- VIII -->
+<section id="analisis-adan">
+  <div class="sec-label">Sección X</div>
+  <h2>¿Ganó Adán el Argumento? Análisis Teológico del Precedente</h2>
+
+  <p>Este hadiz plantea un problema teológico de primer orden que los propios comentaristas islámicos clásicos han debatido extensamente, como muestra el comentario de <em>hadeethenc.com</em> citado en fuentes verificadas: «Esto no absuelve al transgresor de la culpa y el castigo» — un intento de limitar el alcance del precedente. Pero el problema de fondo permanece sin resolver satisfactoriamente:</p>
+
+  <div class="card">
+    <div class="card-lbl">La estructura lógica del argumento de Adán</div>
+    <p><strong>Premisa de Moisés:</strong> Adán cometió el pecado original que causó la expulsión de la humanidad del Paraíso — es moralmente responsable.</p>
+    <p style="margin-top:8px;"><strong>Contraargumento de Adán:</strong> El pecado ya estaba escrito en el decreto divino (la Torá que Moisés recibió) cuarenta años antes de que Adán existiera. Por tanto, culpar a Adán por cumplir un decreto ya fijado con anterioridad a su propia existencia es incoherente.</p>
+    <p style="margin-top:8px;"><strong>Veredicto profético:</strong> «Adán venció a Moisés» — el argumento de la predestinación previa es presentado como lógicamente superior al argumento de la responsabilidad moral.</p>
+  </div>
+
+  <p>Los comentaristas islámicos clásicos (como se documenta en la Encyclopedia of Translated Prophetic Hadiths) intentan matizar esto explicando que «esto no significa que la predestinación pueda usarse como excusa para pecar deliberadamente» y que Adán ya se había arrepentido antes de usar este argumento, por lo que estaba simplemente «buscando consuelo», no justificando el pecado en sí. Sin embargo, esta distinción no resuelve el problema lógico de fondo: si el argumento de la predestinación previa es válido para vencer una acusación moral —como el propio Profeta certifica que lo fue frente a Moisés— entonces la misma estructura lógica es válida para cualquier ser humano frente a cualquier pecado que Alá ya haya decretado y escrito con anterioridad a su existencia.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">El problema irresuelto</div>
+    <p>Si el argumento de Adán —«no me culpes por lo que ya estaba decretado antes de que yo existiera»— es válido para derrotar la acusación de Moisés en presencia de Alá, entonces la teología islámica no tiene un criterio claro para explicar por qué ese mismo argumento no sería igualmente válido para cualquier pecador en el Día del Juicio. La distinción entre «usarlo como consuelo tras el arrepentimiento» y «usarlo como justificación» es una distinción psicológica sobre la intención del hablante, no una distinción lógica sobre la validez del argumento mismo.</p>
+  </div>
+</section>
+
+<!-- IX -->
+<section id="aisha">
+  <div class="sec-label">Sección XI</div>
+  <h2>El Hadiz de Aisha: Los Bebés Predestinados al Cielo o al Infierno</h2>
+
+  <div class="q-box">
+    <div class="q-lbl">Sahih Muslim 2662c — Texto verificado</div>
+    <div class="q-tr">Se llevó a un niño ante el Mensajero de Alá para el rezo fúnebre. Aisha dijo: «Mensajero de Alá, hay felicidad para este niño, que es un pájaro de los pájaros del Paraíso, porque no cometió ningún pecado ni alcanzó la edad en la que uno puede pecar.» Él dijo: «Aisha, tal vez sea de otro modo, porque Alá creó para el Paraíso a quienes son aptos para él mientras aún estaban en los lomos de sus padres, y creó para el Infierno a quienes irán al Infierno; los creó para el Infierno mientras aún estaban en los lomos de sus padres.»</div>
+    <span class="q-ref">— Sahih Muslim 2662c. Verificado en sunnah.com/muslim:2662c</span>
+  </div>
+
+  <h3>Análisis del hadiz</h3>
+
+  <p>El razonamiento de Aisha era, desde una perspectiva de justicia moral intuitiva, perfectamente sensato: un niño que muere antes de la edad de responsabilidad moral (<em>bulūgh</em>) no puede haber cometido pecado alguno, por lo que merece necesariamente el Paraíso. El Profeta corrige explícitamente ese razonamiento — no confirmando que todos los niños van al Paraíso por su inocencia, sino afirmando que su destino final (Paraíso o Infierno) fue <strong>decretado por Alá mientras aún estaban en los lomos de sus padres</strong> — es decir, antes incluso de su concepción, sin relación alguna con ninguna obra, pecado o mérito propio, ni siquiera con el pecado original en el sentido bíblico.</p>
+
+  <div class="card">
+    <div class="card-lbl">El problema teológico específico de este hadiz</div>
+    <p>A diferencia del pecado original cristiano —que al menos ofrece una causa histórica y una solución (el bautismo, la redención de Cristo)— este hadiz no ofrece ningún mecanismo causal ni remedio. El niño no es condenado por el pecado de Adán ni por ningún acto propio: es condenado o salvado por un decreto anterior incluso a su concepción, sin que exista ninguna vía de intervención humana, sacramental o de arrepentimiento aplicable a un bebé que muere en la infancia.</p>
+  </div>
+
+  <p>El propio foro académico islámico de Ghamidi (fuente citada y verificada) documenta la incomodidad de comentaristas musulmanes modernos con este hadiz: uno de los participantes escribe explícitamente: «Este hadiz rechaza el concepto de libre albedrío. Si es así, entonces todo está predecidido, si iré al infierno o al cielo» — y la única respuesta ofrecida por otros participantes es una reformulación no textual («Alá simplemente creó de antemano a quienes elegirían el infierno o el paraíso»), que el propio hadiz no dice: el texto afirma que fueron «creados para el Infierno» y «creados para el Paraíso» mientras estaban en los lomos de sus padres, no que Alá simplemente previó sus futuras elecciones libres.</p>
+</section>
+
+<!-- X -->
+<section id="historia">
+  <div class="sec-label">Sección XII</div>
+  <h2>Contexto Histórico: El Debate Interno del Islam</h2>
+
+  <p>El problema examinado en este dossier no es una construcción de la polémica cristiana moderna — es un debate que dividió profundamente a la comunidad islámica desde el siglo I de la Hégira.</p>
+
+  <h3>Los Qadariyya: la primera reacción</h3>
+  <p>Ya en el siglo VII–VIII d.C., un grupo conocido como los Qadariyya (literalmente, «los del poder [humano de obrar]») defendió que el ser humano posee libertad genuina de acción, precisamente para salvaguardar la justicia divina: si Alá predetermina el pecado y luego castiga por él, Su justicia queda en entredicho. Un hadiz atribuido al Profeta los condena severamente:</p>
+  <blockquote>
+    «Los Qadariyya son los magos (<em>majūs</em>) de esta comunidad (<em>umma</em>).»
+    <span class="src">— Hadiz recogido en Sunan Abu Dawud 4691 y Musnad Ahmad; su autenticidad es discutida por algunos muhaddithin, pero es ampliamente citado en la literatura teológica sunní clásica como reprobación de la posición qadariyya</span>
+  </blockquote>
+
+  <h3>Los Mutazilíes: el racionalismo derrotado</h3>
+  <p>La escuela mutazilí, floreciente en el siglo IX bajo el califato abasí (incluyendo el período de la <em>Miḥna</em>, la «inquisición» mutazilí bajo al-Ma'mun), defendió el principio del <em>ʿadl</em> (justicia divina) exigiendo libertad humana real como condición de la justicia del castigo. Fue finalmente derrotada teológica y políticamente por la reacción sunní ortodoxa liderada por Ahmad ibn Hanbal y consolidada después por Abu al-Hasan al-Ashʿari.</p>
+
+  <h3>El compromiso ashʿarí: <em>kasb</em></h3>
+  <p>La solución que se convirtió en ortodoxia sunní dominante fue la teoría del <em>kasb</em> («adquisición») de al-Ashʿari: Alá crea el acto humano en el momento en que ocurre, pero el hombre lo «adquiere» y por tanto es responsable de él. Los críticos —incluidos filósofos islámicos posteriores— han señalado durante siglos que esta es una distinción verbal que no resuelve el problema metafísico de fondo: si Alá es la única causa eficiente del acto, la «adquisición» humana es una etiqueta sin contenido causal real.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Por qué este contexto histórico importa</div>
+    <p>El hecho de que este problema haya generado cismas, condenas de herejía, una inquisición estatal (la Miḥna) y más de un milenio de debate teológico irresuelto dentro del propio Islam confirma que no se trata de una lectura sesgada o polémica de los textos — es una tensión genuina, reconocida internamente, que la propia tradición islámica no ha logrado resolver de manera consensuada.</p>
+  </div>
+</section>
+
+<!-- XI -->
+<section id="catolica">
+  <div class="sec-label">Sección XIII</div>
+  <h2>La Solución Católica: Libre Albedrío, Gracia y Predestinación</h2>
+
+  <p>La teología católica enfrenta preguntas estructuralmente similares —la relación entre la presciencia divina, la gracia y la libertad humana— pero desarrolla una síntesis que preserva simultáneamente la soberanía de Dios y la responsabilidad moral genuina del ser humano.</p>
+
+  <h3>El principio fundamental: Dios quiere que todos se salven</h3>
+  <blockquote>
+    «Dios nuestro Salvador… quiere que todos los hombres se salven y lleguen al conocimiento de la verdad.»
+    <span class="src">— 1 Timoteo 2:3–4 (NA28)</span>
+  </blockquote>
+  <p>A diferencia de Corán 32:13, que declara que Alá <em>podía</em> haber guiado a todos pero decidió no hacerlo con el propósito declarado de llenar el Infierno, la Escritura cristiana afirma que la voluntad salvífica de Dios es universal y positiva: Dios no predestina a nadie positivamente a la condenación. El Concilio de Trento (Sesión VI, Decreto sobre la Justificación, canon 17) condena explícitamente la doctrina de que «la gracia de la justificación se da solamente a los predestinados» de manera que excluya a los demás de la posibilidad real de salvación.</p>
+
+  <h3>La distinción clave: predestinación positiva vs. permisión del mal</h3>
+  <div class="card">
+    <div class="card-lbl">El marco tomista clásico</div>
+    <p><strong>Predestinación a la gloria:</strong> Dios predestina positivamente a los elegidos a la vida eterna, en vista de los méritos de Cristo, sin que ello anule su libertad —la gracia mueve la voluntad sin forzarla.</p>
+    <p style="margin-top:8px;"><strong>Permisión del pecado, no predestinación al mal:</strong> Dios no predestina a nadie positivamente al pecado o al Infierno. El Catecismo de la Iglesia Católica (CCC 1037) es explícito: «Dios no predestina a nadie a ir al infierno; para eso, es necesario un apartamiento voluntario de Dios (un pecado mortal) y una perseverancia en él hasta el final.»</p>
+    <p style="margin-top:8px;"><strong>La ciencia media (Molinismo):</strong> Una escuela católica desarrollada por Luis de Molina (s. XVI) propone que Dios conoce con certeza infalible («ciencia media») qué haría libremente cada persona en cualquier circunstancia posible, sin que ese conocimiento determine causalmente la elección — preservando la libertad genuina y la presciencia divina simultáneamente.</p>
+  </div>
+
+  <h3>Sobre los niños que mueren sin bautismo</h3>
+  <p>La doctrina católica sobre los niños fallecidos —desarrollada extensamente en un dossier previo de esta serie— es la antítesis exacta del hadiz de Aisha. El CCC 1261 declara: «Por lo que se refiere a los niños muertos sin Bautismo, la Iglesia sólo puede encomendarlos a la misericordia de Dios… nos permiten confiar en que haya un camino de salvación para los niños que han muerto sin Bautismo.» No hay ningún texto católico que afirme que Dios «creó» a ciertos niños específicamente para el Infierno antes de su concepción, sin relación con pecado ni mérito alguno.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">La diferencia estructural decisiva</div>
+    <p>El catolicismo distingue entre la <em>presciencia</em> divina (Dios conoce de antemano lo que el hombre elegirá libremente) y la <em>predeterminación causal</em> (Dios causa directamente esa elección). El Islam sunní ortodoxo, en los textos examinados en este dossier, no hace esta distinción de forma clara y consistente: el Cálamo no <em>prevé</em> el destino del hombre — lo <em>escribe</em> y ese destino «alcanza» al hombre como una fuerza causal externa (Bujari 6594). La distinción católica entre presciencia y predeterminación es precisamente la que permite afirmar simultáneamente la omnisciencia divina y la responsabilidad moral genuina —algo que la teología islámica clásica, pese a siglos de esfuerzo teológico (Jabriyya, Qadariyya, Mutazila, Ashʿarismo), no ha logrado articular de forma consensuada.</p>
+  </div>
+</section>
+
+<!-- XII -->
+<section id="excusa">
+  <div class="sec-label">Sección XIV</div>
+  <h2>¿Podemos Nosotros Excusarnos como Adán?</h2>
+
+  <p>Esta es la pregunta más incisiva que plantea el hadiz de Bujari 6614: si el propio Profeta certificó que el argumento de Adán —«no me culpes por algo que ya estaba decretado antes de mi creación»— <em>venció</em> a la acusación de responsabilidad moral formulada por Moisés, ¿por qué no podría cualquier musulmán, o cualquier ser humano en general, invocar el mismo argumento ante Alá el Día del Juicio?</p>
+
+  <div class="card">
+    <div class="card-lbl">La aplicación universal del precedente de Adán</div>
+    <p><strong>El caso de Adán:</strong> Su pecado (comer del árbol) estaba escrito en la Torá cuarenta años antes de su creación. Argumento: «No me culpes por cumplir un decreto anterior a mi existencia.» Resultado: «Adán venció a Moisés.»</p>
+    <p style="margin-top:8px;"><strong>El caso de cualquier ser humano:</strong> Según Bujari, Libro 55/54, el destino de cada persona —bienaventurado o desdichado— fue escrito por un ángel antes de que el alma fuera insuflada en el vientre. Según el Cálamo (Muslim 2653), todo fue decretado cincuenta mil años antes de la creación del universo. Argumento paralelo: «No me culpes por cometer el pecado que ya estaba escrito para mí antes de que yo existiera siquiera como feto.»</p>
+  </div>
+
+  <p>La estructura lógica de ambos argumentos es idéntica: en ambos casos, el decreto divino precede por completo a la existencia del agente moral, eliminando toda posibilidad de que el agente haya influido en el contenido del decreto. Si esta estructura fue válida para vencer una acusación en el caso paradigmático de Adán —validada explícitamente por el propio Mahoma— la teología islámica carece de un criterio no arbitrario para negar su aplicación universal.</p>
+
+  <div class="verdict">
+    <div class="verdict-lbl">El dilema irresoluble</div>
+    <p>Si los apologistas responden que «el argumento de Adán solo funcionó porque ya se había arrepentido», la respuesta genera una nueva pregunta: ¿por qué sería necesario el arrepentimiento si, como el propio hadiz afirma, el pecado ya estaba «decretado» antes de la creación del pecador? El arrepentimiento mismo, según la lógica determinista del Cálamo, tendría que estar igualmente predeterminado — lo que no resuelve el problema, sino que lo traslada un nivel más atrás, sin escapar de él.</p>
+  </div>
+</section>
+
+<!-- XIII -->
+<section id="objeciones">
+  <div class="sec-label">Sección XV</div>
+  <h2>Objeciones Apologéticas y Refutaciones</h2>
+
+  <div class="obj">
+    <div class="obj-q">«Alá guía a quien quiere» no significa que Alá extravía arbitrariamente — significa que Alá solo guía a quienes ya han elegido libremente querer ser guiados. La voluntad divina responde a la elección humana previa, no la sustituye.</div>
+    <div class="obj-r">Esta lectura, aunque teológicamente atractiva, no está en el texto de los versículos citados. Ninguno de los pasajes examinados (14:4; 7:178; 16:93; 13:27; 6:39) menciona una condición de elección humana previa como causa de la guía o el extravío — el sujeto activo del verbo es siempre Alá («Yudillu», «Yahdi» — Él extravía, Él guía), sin cláusula condicional sobre la voluntad humana. La única excepción parcial es Corán 13:27, que sí incluye la frase «guía hacia Sí a quien se vuelve a Él con arrepentimiento» — pero incluso allí, el «volverse con arrepentimiento» requiere ya una guía previa (según Corán 32:13, nadie puede tener «su guía» a menos que Alá se la dé), lo que hace que la condición sea circular: solo puede volverse a Alá quien ya ha sido guiado por Alá a hacerlo.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">El hadiz de Adán y Moisés no es sobre libre albedrío en general, sino sobre el debate específico de a quién culpar por la expulsión del Paraíso —un evento histórico único, no un principio aplicable a cualquier pecado individual.</div>
+    <div class="obj-r">El propio texto del hadiz no limita el alcance del argumento a ese evento único. La estructura lógica que Adán invoca —«no me culpes por algo que Alá había decretado antes de mi creación»— es general y aplicable a cualquier acto que el Cálamo (Muslim 2653) y el ángel del vientre materno (Bujari 55) hayan escrito de antemano, es decir, a cualquier acto humano según la doctrina ortodoxa del Qadar. Limitar el alcance del argumento a un solo evento histórico sin ninguna base textual explícita es una restricción ad hoc introducida por los comentaristas, no una limitación presente en el hadiz mismo.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">El hadiz de Aisha sobre los niños no niega el libre albedrío de los adultos — solo afirma que Alá conoce de antemano (presciencia) quién será apto para el Paraíso o el Infierno, no que los cause a hacer el mal.</div>
+    <div class="obj-r">El texto del hadiz no usa vocabulario de mero conocimiento previo (<em>ʿilm</em>) sino de creación activa: «Alá creó (<em>khalaqa</em>) para el Paraíso a quienes son aptos para él… y creó (<em>khalaqahum</em>) para el Infierno a quienes irán al Infierno.» El verbo árabe <span class="ar" style="font-size:.95rem;">خَلَقَ</span> (<em>khalaqa</em>) es el verbo técnico de la creación activa y causal, el mismo que se usa para la creación del universo por Alá — no es un verbo de mero conocimiento. Además, se trata de niños que mueren antes del uso de razón: no pueden haber «elegido» nada que justifique su destino eterno, por lo que la distinción entre presciencia y predestinación causal, aunque válida en principio, no puede aplicarse a este caso específico, donde no hay ningún acto libre que Alá pudiera estar simplemente «previendo».</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">El asharismo resuelve el problema con la doctrina del <em>kasb</em> («adquisición»): Alá crea el acto, pero el hombre lo adquiere libremente, y por tanto es moralmente responsable.</div>
+    <div class="obj-r">Esta es precisamente la solución que generaciones de filósofos y teólogos musulmanes han considerado insatisfactoria. Si Alá es la única causa eficiente y creadora del acto —incluida la voluntad de «adquirirlo»— entonces la «adquisición» humana no añade ninguna causalidad real distinta de la causalidad divina ya completa. Es, en la crítica clásica de los propios filósofos islámicos racionalistas, una distinción verbal (<em>lafẓī</em>) sin correlato metafísico: llamar «adquisición» a un acto totalmente causado por otro no lo convierte en libre en ningún sentido filosóficamente robusto.</div>
+  </div>
+
+  <div class="obj">
+    <div class="obj-q">Corán 32:13 no significa que Alá predestine arbitrariamente a algunos al Infierno — solo indica que Alá conocía de antemano, mediante su ciencia perfecta, quiénes elegirían libremente el mal.</div>
+    <div class="obj-r">El propio versículo lo contradice explícitamente: dice que Alá <em>podía</em> haber dado a «cada alma su guía» (es decir, tenía el poder positivo de guiar a todos hacia el bien) pero no lo hizo, «pero se ha cumplido la palabra que salió de Mí». Si se tratara de mera presciencia sobre elecciones libres futuras, no tendría sentido que Alá afirmara que «podía» haber dado la guía a todos — la presciencia no es un poder que se «retiene»; es un conocimiento que simplemente refleja lo que ocurrirá. La formulación del versículo describe una decisión activa de no otorgar la guía a todos, con el propósito explícito declarado de llenar el Infierno.</div>
+  </div>
+</section>
+
+<!-- XIV -->
+<section id="silogismos">
+  <div class="sec-label">Sección XVI</div>
+  <h2>Silogismos Formales</h2>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo I — Del Cálamo y la responsabilidad moral</div>
+    <p><strong>Premisa mayor:</strong> Para que un agente sea justamente responsable de un acto, ese acto debe originarse, al menos en parte, en su propia deliberación libre, y no estar completamente determinado y escrito por una causa externa antes de que el agente exista.</p>
+    <p><strong>Premisa menor:</strong> Según la doctrina sunní ortodoxa del Qadar (Sahih Muslim 2653; Sahih al-Bujari, Libros 54–55), el destino y las obras de cada ser humano fueron escritos por Alá cincuenta mil años antes de la creación del universo, y específicamente por un ángel antes de que el alma fuera insuflada en el vientre materno.</p>
+    <p class="conclusion">∴ Conclusión: Según los propios textos canónicos sunníes, los actos humanos no se originan en una deliberación libre no determinada externamente, sino en un decreto anterior a la existencia misma del agente — lo cual socava el fundamento de la responsabilidad moral que el mismo sistema teológico pretende sostener.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo II — Del precedente de Adán</div>
+    <p><strong>Premisa mayor:</strong> Un argumento que el Profeta certifica explícitamente como victorioso («Adán venció a Moisés», repetido tres veces) establece un precedente lógico válido dentro del marco teológico islámico.</p>
+    <p><strong>Premisa menor:</strong> El argumento de Adán fue: «No me culpes por un acto que Alá había decretado sobre mí antes de mi creación» (Sahih al-Bujari 6614; Sahih Muslim 2652c). La misma estructura —decreto anterior a la existencia del agente— se aplica, según la propia doctrina del Qadar, a todo pecado de todo ser humano.</p>
+    <p class="conclusion">∴ Conclusión: Si el argumento de Adán fue válido para él, la teología islámica carece de un criterio textual no arbitrario para negar su validez universal para cualquier pecador que invoque la misma estructura lógica ante el juicio divino.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo III — De los niños de Aisha y la justicia divina</div>
+    <p><strong>Premisa mayor:</strong> Un decreto de condenación eterna pronunciado sobre un individuo antes de su concepción, sin relación causal con ningún acto, pecado o mérito de ese individuo, no puede ser reconciliado con un principio de justicia retributiva basada en las obras.</p>
+    <p><strong>Premisa menor:</strong> Según Sahih Muslim 2662c, Alá «creó para el Infierno a quienes irán al Infierno» mientras aún estaban «en los lomos de sus padres» — es decir, antes de su propia concepción, sin ningún acto propio posible que hubiera podido causar esa creación.</p>
+    <p class="conclusion">∴ Conclusión: El hadiz de Aisha describe un decreto de condenación que precede lógica y temporalmente a cualquier posibilidad de mérito o culpa del individuo, lo que plantea una tensión irresuelta con cualquier noción de justicia retributiva basada en el juicio de las obras humanas (cf. Corán 99:7–8, que sí vincula el juicio con las obras).</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo IV — Del contraste con la doctrina católica</div>
+    <p><strong>Premisa mayor:</strong> Un sistema teológico que distingue coherentemente entre la presciencia divina (conocimiento de lo que el agente elegirá libremente) y la predeterminación causal (Dios como causa eficiente directa de la elección) puede afirmar simultáneamente la omnisciencia divina y la libertad humana genuina sin contradicción lógica.</p>
+    <p><strong>Premisa menor:</strong> La doctrina católica (CCC 1037; Trento, Sesión VI can. 17) mantiene explícitamente esta distinción: Dios no predestina positivamente a nadie al mal o al Infierno; permite el mal sin causarlo. Los textos islámicos examinados en este dossier (Corán 32:13; Bujari 55/6594; Muslim 2653, 2662c) no mantienen esta distinción de forma clara —usan vocabulario de creación activa y causal (<em>khalaqa</em>) tanto para el destino al Paraíso como al Infierno.</p>
+    <p class="conclusion">∴ Conclusión: El marco católico ofrece una resolución teológica más coherente a la tensión entre soberanía divina y libertad humana que la que la teología islámica clásica —pese a más de un milenio de debate entre Jabriyya, Qadariyya, Mutazila y Ashʿarismo— ha logrado articular de manera consensuada.</p>
+  </div>
+
+  <div class="syllogism">
+    <div class="syllogism-title">Silogismo V — Del hadiz del palito: la facilitación como determinismo encubierto</div>
+    <p><strong>Premisa mayor:</strong> Si la capacidad y disposición para obrar bien o mal es ella misma «facilitada» por una causa externa en virtud de una categoría (bienaventurado/desdichado) ya fijada antes del acto, entonces el acto no procede de una deliberación autónoma del agente, sino de una predisposición causada externamente.</p>
+    <p><strong>Premisa menor:</strong> Según Sahih al-Bujari 1362, cuando un compañero preguntó al Profeta si debían abandonar las obras dado que el destino ya está escrito, el Profeta no negó la premisa determinista —de hecho la reafirmó («no hay ninguno de vosotros... que no tenga ya un lugar asignado»)— sino que respondió citando Corán 92:5–10: Alá «facilitará» el camino fácil a quien da y teme, y «facilitará» el camino difícil a quien es avaro, en virtud de su categoría ya asignada.</p>
+    <p class="conclusion">∴ Conclusión: La respuesta profética no resuelve la tensión entre Qadar y responsabilidad moral — la traslada del nivel del <em>acto</em> (¿es libre el pecado?) al nivel de la <em>disposición para actuar</em> (¿es libre la facilidad o dificultad de querer obrar bien?), sin ofrecer ninguna instancia en la cadena causal que no esté ya determinada por el decreto previo de Alá. El propio hecho de que los compañeros del Profeta formularan espontáneamente esta objeción confirma que percibieron la misma tensión lógica examinada en este dossier, sin que la respuesta recibida la disolviera filosóficamente.</p>
+  </div>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section id="conclusion">
+  <div class="sec-label">Conclusión</div>
+  <h2>Síntesis del Dilema</h2>
+
+  <table>
+    <thead><tr><th>Fuente</th><th>Referencia</th><th>Problema para el libre albedrío</th></tr></thead>
+    <tbody>
+      <tr><td>Guía condicionada</td><td>Corán 14:4; 7:178; 16:93; 6:39</td><td>Alá extravía/guía «a quien quiere», sin condición textual de mérito humano previo</td></tr>
+      <tr><td>El versículo más radical</td><td>Corán 32:13</td><td>Alá podía guiar a todos pero eligió no hacerlo, para llenar el Infierno</td></tr>
+      <tr><td>El Cálamo</td><td>Sahih Muslim 2653</td><td>Todo decretado 50.000 años antes de la creación del universo</td></tr>
+      <tr><td>El ángel del vientre</td><td>Sahih al-Bujari 54–55; Muslim 2643</td><td>Destino final escrito antes de que el alma sea insuflada; alcanza al hombre al final de la vida</td></tr>
+      <tr><td>La porción de adulterio</td><td>Sahih al-Bujari 6612; Muslim 2657b/2658a</td><td>Cada hombre cometerá «sin remedio» su porción de zina, escrita de antemano</td></tr>
+      <tr><td>El palito</td><td>Sahih al-Bujari 1362</td><td>«¿Para qué obrar?» — el Profeta reafirma el determinismo y traslada el problema a la «facilitación» del acto</td></tr>
+      <tr><td>Adán y Moisés</td><td>Sahih al-Bujari 6614; Muslim 2652c</td><td>El argumento de la predestinación previa «venció» —validado por el Profeta tres veces</td></tr>
+      <tr><td>Aisha y el niño</td><td>Sahih Muslim 2662c</td><td>Niños creados para el Infierno o el Paraíso antes de su concepción, sin acto propio</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-lbl">Veredicto Final</div>
+    <p>Los textos canónicos del Islam sunní —tanto coránicos como del hadiz auténtico (<em>sahih</em>)— contienen una doctrina del decreto divino (<em>Qadar</em>) que, en su formulación más consistente y literal, presenta al ser humano como el ejecutor de un guion ya escrito antes de su existencia, más que como un agente moral genuinamente libre. El propio Islam ha reconocido internamente esta tensión durante más de un milenio, sin lograr una resolución consensuada: la condena de los Qadariyya, la derrota política de los Mutazilíes, y la solución verbal del <em>kasb</em> ashʿarí son testimonios de un problema no resuelto, no de una controversia zanjada.</p>
+    <p>El precedente del hadiz de Adán es el más incisivo de todos: si el argumento «no me culpes por lo que ya estaba decretado antes de mi creación» fue certificado por el propio Profeta como una victoria argumentativa contra la acusación de responsabilidad moral, la teología islámica carece de fundamento textual para negar la aplicación universal de ese mismo argumento a cualquier pecador que se enfrente al juicio divino invocando exactamente la misma estructura lógica que Adán empleó y con la que, según Mahoma, «venció».</p>
+    <p>La teología católica, al distinguir con precisión entre la presciencia divina y la predeterminación causal, y al afirmar categóricamente que Dios no predestina a nadie positivamente al mal (CCC 1037), ofrece un marco que preserva simultáneamente la omnisciencia y soberanía de Dios y la responsabilidad moral genuina del ser humano — precisamente la síntesis que los textos islámicos examinados en este dossier no logran sostener sin contradicción interna.</p>
+  </div>
+
+  <div class="footnote">
+    <strong>Fuentes primarias verificadas:</strong>
+    Corán 6:39; 7:178; 13:27; 14:4; 16:93; 32:13; 92:5–10 (Sahih International; texto árabe estándar del Muṣḥaf);
+    Sahih al-Bujari 50 (Libro de la Fe); 1362 (Libro de los Funerales — hadiz del palito); 6594, 6612, 6614 (Libro del Decreto Divino — Kitāb al-Qadar); Libros 54–55 (Comienzo de la Creación / Los Profetas) — todos verificados en sunnah.com;
+    Sahih Muslim 8 (Libro de la Fe); 2643, 2652c, 2653, 2657b, 2658a, 2662c (Libro del Decreto Divino — Kitāb al-Qadar) — verificados en sunnah.com y iium.edu.my/deed/hadith;
+    Sunan al-Tirmidhi 2516 (clasificado <em>hasan sahih</em>);
+    Sunan Abu Dawud 4691 (hadiz sobre los Qadariyya; autenticidad discutida en la literatura clásica);
+    Catecismo de la Iglesia Católica, CCC 1037 (vatican.va);
+    Concilio de Trento, Sesión VI, Decreto sobre la Justificación, canon 17 (DH 1567);
+    1 Timoteo 2:3–4 (NA28);
+    Encyclopedia of Translated Prophetic Hadiths, hadeethenc.com/en/browse/hadith/8317 (comentario clásico sobre el hadiz de Adán y Moisés);
+    Documentación histórica sobre Jabriyya, Qadariyya, Mutazila y Ashʿarismo: fuentes estándar de historia de la teología islámica clásica.
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('toc-btn');
+  var panel=document.getElementById('toc-panel');
+  var overlay=document.getElementById('toc-overlay');
+  function open(){panel.classList.add('is-open');overlay.classList.add('is-open');btn.classList.add('is-open');btn.setAttribute('aria-expanded','true')}
+  function close(){panel.classList.remove('is-open');overlay.classList.remove('is-open');btn.classList.remove('is-open');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){panel.classList.contains('is-open')?close():open()});
+  overlay.addEventListener('click',close);
+  panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
+  var links=panel.querySelectorAll('a');
+  var secs=document.querySelectorAll('section[id]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(l){l.classList.remove('active')});
+          var active=panel.querySelector('a[href="#'+e.target.id+'"]');
+          if(active){active.classList.add('active');active.scrollIntoView({block:'nearest'})}
+        }
+      });
+    },{rootMargin:'0px 0px -55% 0px',threshold:0});
+    secs.forEach(function(s){io.observe(s)});
+  }
+}());
+</script>
+</body>
+</html>

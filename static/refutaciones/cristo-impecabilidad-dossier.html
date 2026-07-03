@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>¿Tuvo Cristo pecado? — Tentación e impecabilidad — Defensa tomista</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#07111D;--surf:#0D1B2E;--card:#12223A;--card2:#172C48;
+  --border:#1A2F50;--border2:#22426E;
+  --navy:#1B2A4A;--gold:#C9A84C;--goldD:#8B6914;--goldG:rgba(201,168,76,.11);
+  --crim:#8B1A1A;--crimL:#C0392B;--white:#F0EDE6;--dim:#96A8BE;--faint:#3A4E65;
+  --green:#1A5A2A;--greenL:#27AE60;--red:#C0392B;--nav-h:54px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;font-size:16px;line-height:1.78;overflow-x:hidden;}
+#topnav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(7,17,29,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);z-index:500;display:flex;align-items:center;}
+#nav-logo{flex-shrink:0;padding:0 1.3rem;border-right:1px solid var(--border);height:100%;display:flex;flex-direction:column;justify-content:center;}
+#nav-logo .ln1{font-family:'Playfair Display',serif;font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;}
+#nav-logo .ln2{font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);font-weight:700;}
+#nav-tabs{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;height:100%;flex:1;}
+#nav-tabs::-webkit-scrollbar{display:none;}
+.ntab{flex-shrink:0;padding:0 .9rem;cursor:pointer;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);border:none;background:none;height:100%;display:flex;align-items:center;gap:.4rem;border-bottom:2px solid transparent;transition:all .18s;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.ntab:hover{color:var(--white);background:var(--goldG);}
+.ntab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--goldG);}
+.ntab .tn{font-size:.55rem;color:var(--faint);}
+.ntab.active .tn{color:var(--goldD);}
+#toc-btn{flex-shrink:0;border:none;background:none;cursor:pointer;padding:0 1.1rem;height:100%;border-left:1px solid var(--border);color:var(--dim);font-size:.85rem;transition:all .18s;display:flex;align-items:center;gap:.4rem;}
+#toc-btn:hover{color:var(--gold);background:var(--goldG);}
+#toc-btn span{font-size:.62rem;text-transform:uppercase;letter-spacing:.15em;font-family:'JetBrains Mono',monospace;}
+#pbar{position:fixed;top:var(--nav-h);left:0;right:0;height:2px;background:var(--border);z-index:490;}
+#pfill{height:100%;background:linear-gradient(90deg,var(--crim),var(--gold));width:0%;}
+#toc-ov{position:fixed;inset:0;z-index:800;display:none;background:rgba(3,8,17,.9);backdrop-filter:blur(8px);align-items:flex-start;justify-content:center;padding-top:75px;}
+#toc-ov.open{display:flex;}
+#toc-panel{background:var(--surf);border:1px solid var(--border2);width:min(660px,90vw);max-height:80vh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+#toc-panel::-webkit-scrollbar{width:4px;}
+#toc-hdr{position:sticky;top:0;background:var(--card);padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+#toc-hdr h2{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--white);}
+#toc-close{border:none;background:none;color:var(--dim);cursor:pointer;font-size:1.3rem;line-height:1;transition:color .2s;}
+#toc-close:hover{color:var(--gold);}
+.tg{padding:.4rem 0;}
+.tg-lbl{padding:.5rem 1.4rem .2rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.2em;color:var(--faint);}
+.ti{display:flex;align-items:center;gap:.9rem;padding:.6rem 1.4rem;cursor:pointer;border-left:2px solid transparent;transition:all .17s;}
+.ti:hover{background:var(--goldG);border-left-color:var(--goldD);}
+.ti .tinum{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--goldD);min-width:1.6rem;}
+.ti .titxt{font-size:.88rem;color:var(--dim);}
+.ti:hover .titxt{color:var(--white);}
+.ti.done .titxt{opacity:.5;}
+main{padding-top:var(--nav-h);}
+#sec-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 8vw 5rem;position:relative;overflow:hidden;background:radial-gradient(ellipse at 65% 40%,rgba(201,168,76,.06) 0%,transparent 65%);}
+#sec-hero::before{content:'IHS';position:absolute;right:-0.02em;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:clamp(8rem,22vw,20rem);color:rgba(201,168,76,.025);pointer-events:none;line-height:1;z-index:0;letter-spacing:.08em;}
+.hero-in{position:relative;z-index:1;max-width:860px;}
+.hkick{font-family:'JetBrains Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.28em;color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;}
+.hkick::before{content:'';width:2rem;height:1px;background:var(--gold);}
+.htitle{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:900;color:var(--white);line-height:1.14;margin-bottom:.7rem;}
+.htitle em{color:var(--gold);font-style:normal;}
+.hsub{font-size:1.02rem;color:var(--dim);max-width:660px;line-height:1.88;font-weight:300;margin-bottom:2.2rem;}
+.hpills{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:2.5rem;}
+.pill{font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.26rem .7rem;border:1px solid var(--border2);color:var(--dim);text-transform:uppercase;letter-spacing:.1em;}
+.pill.g{border-color:var(--goldD);color:var(--gold);}
+.pill.r{border-color:var(--crim);color:#E57373;}
+.pill.gr{border-color:var(--green);color:#5FD67A;}
+.hclaim{background:var(--card);border-left:4px solid var(--gold);padding:1.2rem 1.5rem;max-width:720px;margin-bottom:2rem;}
+.hclaim-lbl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.4rem;}
+.hclaim-txt{font-size:.95rem;color:var(--dim);line-height:1.78;font-style:italic;}
+.section{padding:5.5rem 8vw 2rem;}
+.sec-ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.25em;color:var(--gold);display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;}
+.sec-ey::before{content:'';width:1.6rem;height:1px;background:var(--gold);}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:700;color:var(--white);margin-bottom:.5rem;line-height:1.22;}
+.rule{width:2.8rem;height:2px;background:linear-gradient(90deg,var(--crim),var(--gold));margin:1.2rem 0 2rem;}
+.lead{font-size:1.04rem;color:var(--dim);line-height:1.88;max-width:800px;margin-bottom:1.8rem;}
+p{color:var(--dim);margin-bottom:1.2rem;max-width:800px;line-height:1.85;}
+p strong,p b{color:var(--white);}
+h3.sub{font-family:'Playfair Display',serif;font-size:1.18rem;color:var(--white);margin:2.3rem 0 .8rem;}
+h4.subsub{font-family:'Playfair Display',serif;font-size:1.02rem;color:var(--gold);margin:1.6rem 0 .6rem;}
+.claim-box{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.3);border-left:4px solid var(--gold);padding:1.4rem 1.7rem;margin:2rem 0;}
+.claim-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
+.claim-lbl::before{content:'§';font-size:.9rem;}
+.claim-txt{font-size:.95rem;color:var(--dim);line-height:1.8;font-style:italic;}
+.rebut-box{background:rgba(26,90,42,.1);border:1px solid rgba(39,174,96,.3);border-left:4px solid var(--greenL);padding:1.4rem 1.7rem;margin:2rem 0;}
+.rebut-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;color:var(--greenL);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
+.rebut-lbl::before{content:'✓';}
+.rebut-txt{font-size:.95rem;color:#C5E8CE;line-height:1.8;}
+.heb-block{background:linear-gradient(135deg,var(--card),var(--surf));border:1px solid var(--border2);border-left:4px solid var(--gold);padding:1.8rem 2rem;margin:2rem 0;text-align:center;}
+.hb-main{font-family:'Playfair Display',serif;font-size:clamp(1.05rem,2.4vw,1.55rem);color:var(--gold);display:block;line-height:1.6;margin-bottom:.6rem;letter-spacing:.02em;font-style:italic;}
+.hb-tr{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim);display:block;margin-bottom:.45rem;}
+.hb-trad{font-size:.96rem;color:var(--white);font-style:italic;font-family:'Playfair Display',serif;}
+.qb{border-left:3px solid var(--gold);padding:1.3rem 1.7rem;background:var(--card);margin:1.8rem 0;position:relative;}
+.qb::before{content:'\201C';font-family:'Playfair Display',serif;font-size:4rem;color:var(--gold);opacity:.15;position:absolute;top:-.4rem;left:.7rem;line-height:1;pointer-events:none;}
+.qt{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:var(--white);line-height:1.85;padding-left:.7rem;margin-bottom:.55rem;}
+.qs{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--gold);text-transform:uppercase;letter-spacing:.13em;padding-left:.7rem;}
+.qb.gr-q{border-left-color:var(--greenL);}
+.qb.gr-q::before{color:var(--greenL);}
+.qb.gr-q .qs{color:var(--greenL);}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.15rem;margin:2rem 0;}
+.card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--gold);padding:1.4rem;}
+.card.cr{border-top-color:var(--crimL);}
+.card.gr{border-top-color:var(--greenL);}
+.card.go{border-top-color:var(--gold);}
+.cey{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.45rem;}
+.card.cr .cey{color:#E57373;}
+.card.gr .cey{color:#5FD67A;}
+.cttl{font-size:.94rem;font-weight:600;color:var(--white);margin-bottom:.45rem;line-height:1.3;}
+.cbod{font-size:.85rem;color:var(--dim);line-height:1.72;}
+.sil{background:var(--surf);border:1px solid var(--border2);margin:2.5rem 0;}
+.sil-hdr{background:linear-gradient(90deg,var(--crim),#5A0A0A);padding:.68rem 1.4rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--white);text-transform:uppercase;letter-spacing:.2em;}
+.sil.gold .sil-hdr{background:linear-gradient(90deg,var(--goldD),#5A3A00);}
+.sil-row{display:flex;border-bottom:1px solid var(--border);}
+.sil-row:last-child{border-bottom:none;}
+.sil-lbl{min-width:3.6rem;padding:.9rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.83rem;font-weight:600;color:var(--gold);border-right:1px solid var(--border);display:flex;align-items:flex-start;}
+.sil-row.C .sil-lbl{background:var(--gold);color:#000;}
+.sil-row.C .sil-txt{background:rgba(201,168,76,.06);color:var(--white);}
+.sil-txt{padding:.9rem 1.3rem;font-size:.9rem;color:var(--dim);line-height:1.82;flex:1;}
+.sil-txt strong{color:var(--white);}
+.ctbl{width:100%;border-collapse:collapse;margin:2rem 0;font-size:.87rem;}
+.ctbl th{padding:.75rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.13em;text-align:left;}
+.ctbl th:nth-child(1){background:var(--navy);color:var(--white);}
+.ctbl th:nth-child(2){background:var(--crimL);color:var(--white);}
+.ctbl th:nth-child(3){background:var(--green);color:var(--white);}
+.ctbl th:nth-child(4){background:var(--goldD);color:#000;}
+.ctbl td{padding:.9rem 1rem;border:1px solid var(--border);vertical-align:top;line-height:1.68;}
+.ctbl tr:nth-child(even) td{background:var(--card);}
+.ctbl tr:nth-child(odd) td{background:var(--surf);}
+.ctbl td:nth-child(1){color:var(--white);font-weight:600;background:rgba(27,42,74,.5)!important;}
+.callout{background:var(--goldG);border:1px solid rgba(201,168,76,.25);padding:1.3rem 1.6rem;margin:2rem 0;}
+.callout-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem;}
+.callout-body{font-size:.92rem;color:var(--dim);line-height:1.82;}
+.callout-body strong{color:var(--white);}
+.verdict{background:rgba(201,168,76,.07);border:2px solid rgba(201,168,76,.3);padding:1.5rem 1.8rem;margin:2rem 0;}
+.verdict-lbl{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.22em;color:var(--gold);margin-bottom:.6rem;}
+.verdict-txt{font-size:1.02rem;color:var(--white);line-height:1.85;}
+.sec-nav{display:flex;align-items:center;justify-content:space-between;padding:2.5rem 0 0;border-top:1px solid var(--border);margin-top:4rem;gap:1rem;}
+.snbtn{display:flex;align-items:center;gap:.7rem;padding:.8rem 1.2rem;background:var(--surf);border:1px solid var(--border2);cursor:pointer;transition:all .2s;max-width:42%;text-decoration:none;}
+.snbtn:hover{background:var(--goldG);border-color:var(--goldD);}
+.snbtn.dis{opacity:.2;pointer-events:none;}
+.snbtn .arr{font-size:1.1rem;color:var(--gold);flex-shrink:0;}
+.snbtn .meta{font-family:'JetBrains Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.15em;color:var(--dim);margin-bottom:.18rem;}
+.snbtn .lbl{font-size:.82rem;color:var(--white);line-height:1.3;}
+.snbtn.next{flex-direction:row-reverse;text-align:right;}
+.sncenter{display:flex;flex-direction:column;align-items:center;gap:.4rem;flex-shrink:0;}
+.sndots{display:flex;gap:.32rem;}
+.sndot{width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .2s;}
+.sndot.active{background:var(--gold);transform:scale(1.4);}
+.sndot.done{background:var(--goldD);}
+.snpos{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--faint);text-transform:uppercase;letter-spacing:.15em;}
+.sdiv{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);}
+.reveal{opacity:0;transform:translateY(15px);transition:opacity .5s ease,transform .5s ease;}
+.reveal.vis{opacity:1;transform:none;}
+#bttop{position:fixed;bottom:2rem;right:2rem;width:2.4rem;height:2.4rem;background:var(--gold);border:none;cursor:pointer;color:#000;font-size:1rem;font-weight:700;display:none;align-items:center;justify-content:center;z-index:400;}
+#bttop.show{display:flex;}
+#kbd{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(13,27,46,.9);border:1px solid var(--border2);padding:.45rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--dim);letter-spacing:.1em;z-index:400;pointer-events:none;opacity:0;transition:opacity .4s;}
+#kbd.show{opacity:1;}
+.synthtbl{width:100%;border-collapse:collapse;margin:2rem 0;font-size:.85rem;}
+.synthtbl th{background:var(--navy);color:var(--white);padding:.7rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;text-transform:uppercase;letter-spacing:.1em;text-align:left;}
+.synthtbl td{padding:.85rem .9rem;border:1px solid var(--border);line-height:1.6;}
+.synthtbl tr:nth-child(even) td{background:var(--card);}
+.synthtbl tr:nth-child(odd) td{background:var(--surf);}
+.synthtbl td:first-child{color:var(--gold);font-weight:600;background:rgba(201,168,76,.05)!important;}
+@media(max-width:800px){.section{padding:4rem 5vw 1.5rem;}#sec-hero{padding:5rem 5vw 4rem;}.sec-nav{flex-direction:column;}.snbtn{max-width:100%;width:100%;}.ctbl{font-size:.78rem;}}
+</style>
+</head>
+<body>
+<div id="pbar"><div id="pfill"></div></div>
+<header id="topnav">
+  <div id="nav-logo"><div class="ln1">Cristología tomista</div><div class="ln2">¿Tuvo Cristo pecado?</div></div>
+  <div id="nav-tabs"></div>
+  <button id="toc-btn" onclick="openToc()"><span>☰</span><span>Índice</span></button>
+</header>
+<div id="toc-ov" onclick="if(event.target===this)closeToc()">
+  <div id="toc-panel">
+    <div id="toc-hdr"><h2>Índice — Impecabilidad de Cristo</h2><button id="toc-close" onclick="closeToc()">✕</button></div>
+  </div>
+</div>
+<main>
+
+<section id="sec-hero" class="section">
+  <div class="hero-in">
+    <div class="hkick">Cristología tomista · Filosofía escolástica · Patrística conciliar</div>
+    <h1 class="htitle">¿Tuvo Cristo<br><em>pecado</em>?</h1>
+    <p class="hsub">Tentación, impecabilidad y las pasiones humanas de Cristo. Un estudio sistemático desde la <em>Summa Theologiae</em> de Santo Tomás de Aquino sobre si Cristo pecó, si pudo pecar, si fue realmente tentado, y si tuvo inclinaciones — incluidas la ira y la concupiscencia sexual — con silogismos formales, textos bíblicos íntegros y las definiciones conciliares que sostienen toda la arquitectura.</p>
+    <div class="hpills">
+      <span class="pill g">Summa III, q.15</span><span class="pill g">Summa III, q.18</span><span class="pill g">Summa III, q.41</span>
+      <span class="pill">Hebreos 4:15</span><span class="pill">Calcedonia 451</span><span class="pill">Constantinopla III, 681</span>
+      <span class="pill">fomes peccati</span><span class="pill">propassio</span><span class="pill gr">Ocho silogismos</span>
+    </div>
+    <div class="hclaim">
+      <div class="hclaim-lbl">La pregunta en sus términos exactos</div>
+      <div class="hclaim-txt">¿Cometió Cristo pecado alguna vez? ¿Pudo haberlo cometido? ¿Fue realmente tentado, o la tentación fue solo aparente? ¿Tuvo inclinaciones desordenadas —concupiscencia sexual, ira pecaminosa— como las tiene todo hombre caído? Estas cuatro preguntas son lógicamente distintas y exigen respuestas distintas. Este estudio las distingue con precisión escolástica antes de responderlas.</div>
+    </div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-marco" class="section">
+  <div class="sec-ey">Parte I · Fundamentos</div>
+  <h2 class="sec-title">Marco conceptual — Seis categorías que hay que distinguir antes de responder</h2>
+  <div class="rule"></div>
+
+  <p class="lead">Ninguna de las cuatro preguntas planteadas puede responderse bien sin antes fijar seis categorías técnicas. No son seis ideas sueltas: son seis piezas de un mismo mecanismo, y cada una limita y permite lo que las demás pueden afirmar. Por eso se exponen juntas, en el orden en que se necesitan, antes de entrar en las respuestas.</p>
+
+  <h3 class="sub">1.1 — La unión hipostática: un solo sujeto, dos naturalezas</h3>
+  <p>El Concilio de Calcedonia (451 d.C.) definió que en Cristo hay <strong>una sola persona (hipóstasis)</strong> que subsiste en <strong>dos naturalezas completas</strong> —divina y humana— «sin confusión, sin cambio, sin división, sin separación» (ἀσυγχύτως, ἀτρέπτως, ἀδιαιρέτως, ἀχωρίστως). Las naturalezas no se mezclan ni se funden: cada una conserva sus propiedades íntegras, pero ambas concurren en un único sujeto que actúa.</p>
+  <p>De aquí se sigue un axioma metafísico decisivo que Santo Tomás hereda de Aristóteles y aplica sistemáticamente: <em>actiones sunt suppositorum</em> — «las acciones pertenecen a los supuestos», es decir, al sujeto que subsiste, no a la naturaleza considerada en abstracto. No existe un «hombre Jesús» que actúe como sujeto separado junto al Verbo: hay un único sujeto, el Verbo encarnado, que actúa humanamente a través de su naturaleza humana y divinamente a través de su naturaleza divina. <strong>Todo acto humano de Cristo es acto de la Persona divina del Verbo.</strong> Esta primera categoría será la base de la impecabilidad (§3).</p>
+
+  <h3 class="sub">1.2 — Dos voluntades, dos operaciones: el diotelitismo de Constantinopla III</h3>
+  <p>El Tercer Concilio de Constantinopla (681 d.C.) condenó el monotelismo —la tesis de que Cristo tendría una sola voluntad, fusión de la divina y la humana— y definió que en Cristo hay <strong>dos voluntades naturales y dos operaciones naturales</strong>, divina y humana, «sin división, sin cambio, sin separación, sin confusión», precisando además que la voluntad humana de Cristo <strong>no se opone nunca a la divina sino que la sigue, sujeta y subordinada a ella</strong>.</p>
+  <p>Esta categoría es indispensable para que las tres siguientes tengan sentido: si Cristo no tuviera una voluntad humana real y distinta —con su propia capacidad de querer, de sentir aversión natural al sufrimiento, de desear— entonces hablar de «tentación» o de «pasiones» en él sería pura apariencia (docetismo). El diotelitismo garantiza que la psicología humana de Cristo es <strong>real</strong>, no fingida, y a la vez que esa voluntad humana, aun siendo real y distinta, jamás se levanta contra Dios.</p>
+
+  <h3 class="sub">1.3 — Propassio, passio y peccatum: la distinción de Jerónimo retomada por Tomás</h3>
+  <p>San Jerónimo, comentando la agonía de Getsemaní y el episodio de la purificación del Templo, acuñó el término <strong>propassio</strong> («pre-pasión») para nombrar el primer movimiento espontáneo del apetito sensitivo —hambre, temor natural, indignación— que surge antes de cualquier deliberación de la razón. Santo Tomás recoge esta distinción (Summa III, q.15, especialmente el tratamiento de las pasiones del alma de Cristo) y la sistematiza en tres niveles:</p>
+  <div class="cards">
+    <div class="card go reveal">
+      <div class="cey">Nivel 1 — Propassio</div>
+      <div class="cttl">Movimiento de primer impulso, anterior a la deliberación</div>
+      <div class="cbod">El apetito sensitivo reacciona espontáneamente ante un objeto (hambre ante la comida, temor ante el peligro, indignación ante la injusticia). No implica todavía consentimiento de la voluntad ni de la razón. No es pecaminoso por sí mismo: es la reacción de una naturaleza sensitiva sana.</div>
+    </div>
+    <div class="card reveal">
+      <div class="cey">Nivel 2 — Passio ordinata</div>
+      <div class="cttl">El movimiento sensitivo, ya asumido y gobernado por la razón</div>
+      <div class="cbod">La razón consiente o modera el movimiento sensitivo, ordenándolo a un fin bueno. El hambre se convierte en la decisión razonable de buscar comida; la indignación, en un acto de celo justo. Esto tampoco es pecado: es virtud en ejercicio.</div>
+    </div>
+    <div class="card cr reveal">
+      <div class="cey">Nivel 3 — Passio peccaminosa</div>
+      <div class="cttl">El movimiento sensitivo que se impone contra la razón, o que la razón consiente desordenadamente</div>
+      <div class="cbod">Aquí, y solo aquí, hay materia de pecado: cuando el apetito sensitivo busca un objeto contra el orden de la razón recta, o cuando la razón consiente a ese desorden. La gula, la lujuria desordenada y la ira desordenada pertenecen a este nivel.</div>
+    </div>
+  </div>
+  <p>Esta triple distinción es la llave de todo el problema: preguntar «¿tuvo Cristo hambre, temor, indignación?» (nivel 1-2) es una pregunta distinta de preguntar «¿tuvo Cristo pasiones desordenadas?» (nivel 3). Las respuestas, como se verá, son afirmativa para la primera y negativa para la segunda.</p>
+
+  <h3 class="sub">1.4 — El fomes peccati: la «yesca del pecado» y por qué Cristo no la tuvo</h3>
+  <p>San Agustín, en <em>La Ciudad de Dios</em> (libro XIV, capítulos 16-24), describe el efecto más característico del pecado original: la pérdida de la <em>justicia original</em>, el don por el cual, en Adán antes de la caída, todas las potencias inferiores del alma estaban perfectamente sujetas a la razón, y la razón a Dios. Tras el pecado, esa sujeción se rompe: aparece lo que Agustín llama la «rebelión de la carne» — el apetito sensitivo, y en particular el apetito generativo, se mueve a veces <em>sin</em> y a veces <em>contra</em> el consentimiento de la voluntad. Esta inclinación desordenada, transmitida con la generación natural, recibe en la escolástica el nombre técnico de <strong>fomes peccati</strong> («yesca» o «pábulo del pecado»): no es ya pecado actual, pero es el combustible permanentemente dispuesto a inflamarse en pecado.</p>
+  <div class="claim-box reveal">
+    <div class="claim-lbl">§ La pregunta directa de Santo Tomás — Summa III, q.15, a.2</div>
+    <div class="claim-txt">Utrum in Christo fuerit fomes peccati — «¿Hubo en Cristo la yesca del pecado?»</div>
+  </div>
+  <div class="rebut-box reveal">
+    <div class="rebut-lbl">Respondeo — La solución tomista</div>
+    <div class="rebut-txt">No. El fomes consiste formalmente en que las potencias inferiores del alma no están del todo sujetas a la razón, a causa de la pérdida de la justicia original. Pero el alma de Cristo, desde el primer instante de su existencia, gozó de la unión hipostática y de la plenitud de la gracia, de modo que sus potencias inferiores estuvieron siempre perfecta y totalmente sujetas a la razón, y la razón perfectamente sujeta a Dios. Cristo, además, no fue concebido por generación ordinaria sino por obra del Espíritu Santo, fuera del cauce por el cual se transmite el pecado original y su fomes. Por tanto, en Cristo no hubo fomes peccati.</div>
+  </div>
+  <p>Esta categoría es la más decisiva de las seis para responder a la pregunta sobre las «inclinaciones» de Cristo —incluida la sexual y la de la ira—, porque el fomes es, por definición, precisamente eso: la inclinación desordenada que existe con independencia de cualquier estímulo externo. Su ausencia en Cristo no significa que careciera de apetitos naturales (§1.3, niveles 1-2), sino que esos apetitos jamás operaron fuera del orden de la razón.</p>
+
+  <h3 class="sub">1.5 — La triple ciencia de Cristo y la visión beatífica</h3>
+  <p>Santo Tomás distingue en Cristo tres modos de conocimiento humano (Summa III, qq.9-12): el conocimiento <strong>adquirido</strong> (experiencial, el que «crecía en sabiduría y estatura», Lucas 2:52), el conocimiento <strong>infuso</strong> (especies inteligibles infundidas directamente en su intelecto, como en los ángeles), y el conocimiento <strong>beatífico</strong> — la visión inmediata de la esencia divina, la misma visión que gozan los bienaventurados en el cielo, que Cristo poseyó, según Tomás, desde el primer instante de su existencia humana (q.9, a.2).</p>
+  <p>Esta visión beatífica tiene una consecuencia directa sobre la voluntad: el entendimiento que contempla a Dios sin velo ni intermediario no puede jamás presentar a la voluntad un bien creado como preferible al Bien infinito que está viendo. El pecado exige siempre que el entendimiento, de algún modo, presente un bien parcial como si fuera el bien total —un error de juicio práctico. Ese error es imposible en un entendimiento que tiene a Dios mismo constantemente a la vista.</p>
+
+  <h3 class="sub">1.6 — Peccabilidad vs. impecabilidad: posse non peccare / non posse peccare</h3>
+  <p>La tradición agustiniana distingue cuatro estados posibles respecto del pecado: <em>posse peccare</em> (poder pecar, sin más — el hombre caído, esclavo del pecado); <em>posse non peccare</em> (poder no pecar — el estado de Adán antes de la caída, libre mas no confirmado); <em>non posse non peccare</em> (no poder no pecar — el hombre caído sin gracia, en su dimensión más radical); y <em>non posse peccare</em> (no poder pecar en absoluto — el estado de los bienaventurados, confirmados en gracia, y el de Cristo).</p>
+  <div class="claim-box reveal">
+    <div class="claim-lbl">§ La objeción que hay que afrontar</div>
+    <div class="claim-txt">Si Cristo «no podía pecar» (non posse peccare), ¿no se sigue que su libertad era ilusoria, y con ella toda su tentación un simple teatro sin riesgo real?</div>
+  </div>
+  <div class="rebut-box reveal">
+    <div class="rebut-lbl">Respondeo</div>
+    <div class="rebut-txt">No, porque la impecabilidad de Cristo no es <em>por razón de la naturaleza</em> humana en sí misma (que, considerada en abstracto, conserva el libre albedrío y la capacidad radical de optar), sino <em>por razón de la persona</em> (ratione personae): porque esa naturaleza humana subsiste en la Persona del Verbo, que es Dios. Esto es exactamente paralelo al caso de los bienaventurados en el cielo: ellos son simultáneamente libres —quieren a Dios con un acto propio, no forzado— e impecables —no pueden ya querer otra cosa—, porque su voluntad ha alcanzado su perfección, no porque se la haya cancelado desde fuera. La libertad alcanza su plenitud, no su anulación, cuando se adhiere de manera estable e irrevocable al Bien supremo. La tentación de Cristo fue real en el sentido más estricto: una voluntad humana genuina, solicitada genuinamente por bienes aparentes, que respondió con un acto libre y meritorio de rechazo —no la ausencia de combate, sino su victoria garantizada por la unión con quien combatía a través de ella.</div>
+  </div>
+
+  <h3 class="sub">1.7 — Síntesis: cómo encajan las seis categorías</h3>
+  <p>Cada categoría hace un trabajo distinto y necesario. Juntas, y solo juntas, permiten sostener sin contradicción que Cristo tuvo una psicología humana plenamente real y, a la vez, jamás pecó ni pudo pecar:</p>
+  <table class="synthtbl reveal">
+    <thead><tr><th>Categoría</th><th>Qué establece</th><th>Qué excluye en Cristo</th><th>Qué permite afirmar</th></tr></thead>
+    <tbody>
+      <tr><td>1.1 Unión hipostática</td><td>Un solo sujeto que actúa en dos naturalezas</td><td>Un sujeto humano separado que pudiera pecar por su cuenta</td><td>Que todo acto humano de Cristo es acto de la Persona divina</td></tr>
+      <tr><td>1.2 Dos voluntades</td><td>Una voluntad humana real y distinta de la divina</td><td>El docetismo: que su psicología fuera apariencia</td><td>Que el miedo, el deseo y el dolor de Cristo fueron reales</td></tr>
+      <tr><td>1.3 Propassio / passio / peccatum</td><td>Tres niveles de movimiento apetitivo</td><td>Que todo apetito natural sea ya pecaminoso</td><td>Que Cristo sintiera hambre, temor, indignación sin pecar</td></tr>
+      <tr><td>1.4 Fomes peccati</td><td>El origen de la inclinación desordenada</td><td>Toda inclinación desordenada en Cristo (sexual, de ira, etc.)</td><td>Que sus apetitos naturales nunca operaron fuera del orden de la razón</td></tr>
+      <tr><td>1.5 Visión beatífica</td><td>Conocimiento inmediato y constante de Dios</td><td>El error de juicio práctico que hace posible el pecado</td><td>Que su voluntad jamás pudo preferir un bien creado a Dios</td></tr>
+      <tr><td>1.6 Non posse peccare</td><td>Impecabilidad por razón de la persona, no de la naturaleza</td><td>Que la libertad y la tentación fueran ilusorias</td><td>Que la tentación fue real y libremente vencida, no simulada</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-pecado" class="section">
+  <div class="sec-ey">Parte II · El hecho</div>
+  <h2 class="sec-title">¿Cometió Cristo pecado alguna vez? — El testimonio convergente de la Escritura</h2>
+  <div class="rule"></div>
+  <p class="lead">Antes de entrar en la cuestión metafísica de si Cristo <em>pudo</em> pecar, hay que establecer el dato bíblico más simple: el Nuevo Testamento afirma, desde cuatro tradiciones literarias independientes entre sí, que Cristo de hecho nunca pecó.</p>
+
+  <div class="cards">
+    <div class="card gr reveal">
+      <div class="cey">Tradición paulina</div>
+      <div class="cttl">2 Corintios 5:21</div>
+      <div class="cbod">«Al que no conoció pecado, por nosotros lo hizo pecado, para que nosotros fuésemos hechos justicia de Dios en él.» La negación es absoluta: τὸν μὴ γνόντα ἁμαρτίαν, «el que no conoció pecado» en ningún sentido.</div>
+    </div>
+    <div class="card gr reveal">
+      <div class="cey">Tradición petrina</div>
+      <div class="cttl">1 Pedro 2:22, citando Isaías 53:9</div>
+      <div class="cbod">«El cual no hizo pecado, ni se halló engaño en su boca.» Pedro aplica a Jesús directamente el oráculo del Siervo Sufriente, leído ya en el siglo I como referido al Mesías individual.</div>
+    </div>
+    <div class="card gr reveal">
+      <div class="cey">Tradición joánica</div>
+      <div class="cttl">1 Juan 3:5</div>
+      <div class="cbod">«Y sabéis que él apareció para quitar nuestros pecados, y no hay pecado en él.» Καὶ ἁμαρτία ἐν αὐτῷ οὐκ ἔστιν — formulación en presente intemporal: «no hay pecado en él», no «no hubo».</div>
+    </div>
+    <div class="card go reveal">
+      <div class="cey">Autotestimonio sinóptico</div>
+      <div class="cttl">Juan 8:46</div>
+      <div class="cbod">«¿Quién de vosotros me redarguye de pecado?» Jesús lanza este reto públicamente a sus adversarios más hostiles, en su propio territorio, sin que ninguno de los evangelios registre una respuesta afirmativa.</div>
+    </div>
+  </div>
+
+  <p>A esto se suma el testimonio de la carta a los Hebreos, que formula la cuestión exactamente en los términos que aquí se examinan:</p>
+  <div class="heb-block reveal">
+    <span class="hb-main">πεπειρασμένον κατὰ πάντα καθ' ὁμοιότητα χωρὶς ἁμαρτίας</span>
+    <span class="hb-tr">Hebreos 4:15 (texto griego, cláusula central)</span>
+    <span class="hb-trad">«...tentado en todo según nuestra semejanza, pero sin pecado.»</span>
+  </div>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo I · La sinlessness histórica de Cristo</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">Si la ausencia de pecado en Cristo fuera una construcción teológica tardía o aislada, debería aparecer en una sola tradición literaria del Nuevo Testamento, sin respaldo independiente en las demás.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">La afirmación aparece, con formulación distinta en cada caso pero idéntico contenido, en la tradición paulina (2 Cor 5:21), la petrina (1 Pe 2:22, sobre base de Isaías 53:9), la joánica (1 Jn 3:5), el autotestimonio sinóptico de Jesús (Jn 8:46) y la carta a los Hebreos (4:15) — cinco corrientes literarias del Nuevo Testamento, de autoría y públicos distintos, convergiendo en el mismo dato.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>La ausencia de pecado actual en Cristo es el dato cristológico con mayor convergencia textual independiente del Nuevo Testamento, fuera de su propia filiación divina. No es una tesis de una escuela: es el consenso de todas las tradiciones apostólicas documentadas.</strong></div></div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-impecable" class="section">
+  <div class="sec-ey">Parte III · La posibilidad metafísica</div>
+  <h2 class="sec-title">¿Pudo Cristo pecar? — El argumento tomista de la impecabilidad</h2>
+  <div class="rule"></div>
+  <p class="lead">Esta es la pregunta más fuerte de las cuatro: no si Cristo de hecho pecó (§2 ya lo niega), sino si era siquiera <em>posible</em> que pecara. Santo Tomás responde negativamente en Summa III, q.15, a.1, con tres argumentos que se apoyan en las categorías ya fijadas en la Parte I.</p>
+
+  <div class="claim-box reveal">
+    <div class="claim-lbl">§ Utrum Christus potuerit peccare — Summa III, q.15, a.1</div>
+    <div class="claim-txt">«¿Pudo Cristo pecar?»</div>
+  </div>
+
+  <h4 class="subsub">Argumento 1 — Desde la unión hipostática (§1.1)</h4>
+  <p>El pecado es siempre acto de una persona, no de una naturaleza en abstracto: <em>peccatum est actus personalis</em>. En Cristo no hay una persona humana distinta que pudiera ser sujeto de un acto pecaminoso propio y separado: la única persona que actúa es el Verbo. Que el Verbo —Dios mismo— pecara a través de su naturaleza humana es una contradicción en los términos, porque el pecado es precisamente apartarse de Dios, y el sujeto que actuaría sería Dios mismo apartándose de sí.</p>
+
+  <h4 class="subsub">Argumento 2 — Desde la plenitud de la gracia (gratia capitis)</h4>
+  <p>El evangelio de Juan afirma de Cristo: «pues no da Dios el Espíritu por medida» (Juan 3:34). Cristo posee la gracia santificante en grado sumo y sin límite, como <em>Cabeza</em> de toda la Iglesia (<em>gratia capitis</em>) — no una gracia entre otras, sino la fuente de toda gracia creada. Una plenitud de gracia sin límite excluye, por definición, cualquier defecto moral, porque el pecado es precisamente déficit de gracia y de orden.</p>
+
+  <h4 class="subsub">Argumento 3 — Desde la visión beatífica (§1.5)</h4>
+  <p>Como se estableció en 1.5, la voluntad no puede apartarse de un bien que el entendimiento presenta sin defecto como el Bien total. El entendimiento humano de Cristo contempló la esencia divina sin interrupción desde el primer instante de su existencia. Por tanto, su voluntad humana nunca pudo ser movida por el error de juicio práctico que el pecado siempre presupone.</p>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo II · La impecabilidad desde la unión hipostática</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">El pecado es siempre acto personal: requiere un sujeto que se aparte deliberadamente de Dios (<em>actiones sunt suppositorum</em>, §1.1).</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">En Cristo, la naturaleza humana no subsiste en una persona humana propia, sino en la única Persona del Verbo (Calcedonia, 451). No existe, por tanto, un sujeto humano distinto capaz de protagonizar un acto pecaminoso separado del Verbo.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>Es metafísicamente imposible que el acto humano de Cristo sea, a la vez, acto suyo (de la Persona del Verbo) y acto de rebelión contra Dios, porque el sujeto de ambos sería idéntico y Dios no puede apartarse de sí mismo.</strong></div></div>
+  </div>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo III · La impecabilidad desde la gracia y la visión beatífica</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">El pecado requiere que la voluntad sea movida hacia un bien aparente que el entendimiento, erróneamente, presenta como preferible al Bien supremo.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">Cristo poseyó la gracia santificante «sin medida» (Jn 3:34) como Cabeza de la Iglesia, y su entendimiento humano gozó de la visión inmediata de la esencia divina desde el primer instante de su existencia (Summa III, q.9, a.2).</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt">Un entendimiento que contempla constantemente a Dios como es no puede sufrir el error de juicio práctico requerido para que la voluntad lo prefiera a un bien menor.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>La voluntad humana de Cristo jamás pudo ser movida hacia el pecado, no por una restricción externa impuesta sobre una voluntad que de otro modo querría pecar, sino porque las condiciones internas que hacen posible el pecado —error de juicio, déficit de gracia— estuvieron, en él, sin excepción, ausentes.</strong></div></div>
+  </div>
+
+  <p>Es importante subrayar, como ya se hizo en 1.6, que esta impecabilidad no anula la libertad: es <em>ratione personae</em>, no <em>ratione naturae</em>. La naturaleza humana de Cristo, considerada en sí misma, conservó el libre albedrío como facultad real; lo que estuvo excluido fue que esa facultad, unida hipostáticamente al Verbo y bañada en gracia sin medida y en visión beatífica, terminara alguna vez optando contra Dios. Es la misma estructura, llevada a su grado máximo, que la de los bienaventurados: libres e impecables a la vez.</p>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-tentado" class="section">
+  <div class="sec-ey">Parte IV · La tentación real</div>
+  <h2 class="sec-title">¿Fue Cristo realmente tentado? — Ab extra sin fomes ab intra</h2>
+  <div class="rule"></div>
+  <p class="lead">Si Cristo era impecable, ¿en qué sentido pudo ser «tentado en todo según nuestra semejanza» (Heb 4:15)? La respuesta tomista distingue dos orígenes posibles de toda tentación, y afirma que Cristo experimentó el primero en plenitud y careció enteramente del segundo.</p>
+
+  <div class="cards">
+    <div class="card go reveal">
+      <div class="cey">Tentación ab extra</div>
+      <div class="cttl">Solicitación externa — un objeto, persona o circunstancia que se presenta como atractivo</div>
+      <div class="cbod">El demonio que propone, el hambre tras el ayuno, la posibilidad real de evitar la cruz, la injusticia que provoca indignación. Es una solicitación genuina dirigida a una voluntad real y libre, que debe responder con un acto propio.</div>
+    </div>
+    <div class="card cr reveal">
+      <div class="cey">Tentación ab intra</div>
+      <div class="cttl">Inclinación interna ya desordenada — el fomes peccati operando desde dentro</div>
+      <div class="cbod">El apetito ya inclinado contra la razón, que «atrae y seduce» desde el propio interior, como describe Santiago 1:14: «cada uno es tentado, cuando de su propia concupiscencia es atraído y seducido». Esta es la tentación que presupone el fomes (§1.4), y que Cristo no tuvo.</div>
+    </div>
+  </div>
+
+  <div class="qb reveal">
+    <div class="qt">«Sino que cada uno es tentado, cuando de su propia concupiscencia es atraído y seducido.»</div>
+    <div class="qs">Santiago 1:14 — la estructura de la tentación ordinaria, que presupone la concupiscencia (fomes) como aliada interna</div>
+  </div>
+
+  <p>El contraste es exacto: Santiago describe la tentación del hombre caído como un proceso en el que el sujeto es arrastrado <em>por su propia</em> (ἰδίας) concupiscencia — hay, dentro de él, algo que ya tira hacia el mal antes de que llegue ningún estímulo externo. En Cristo, según lo establecido en 1.4, ese «algo interno» no existía. Sus tentaciones, por tanto, fueron enteramente <em>ab extra</em>: reales, dolorosas, libremente combatidas — pero sin un quinto columnista actuando desde dentro.</p>
+
+  <div class="heb-block reveal">
+    <span class="hb-main">ἐπειράσθη κατὰ πάντα καθ' ὁμοιότητα χωρὶς ἁμαρτίας</span>
+    <span class="hb-tr">Hebreos 4:15 — cláusula completa con su contexto inmediato</span>
+    <span class="hb-trad">«Porque no tenemos un sumo sacerdote que no pueda compadecerse de nuestras debilidades, sino uno que fue tentado en todo según nuestra semejanza, pero sin pecado.»</span>
+  </div>
+
+  <p>La expresión griega <strong>χωρὶς ἁμαρτίας</strong> («sin pecado», «aparte del pecado») admite —y exige, leída junto con Santiago 1:14— una doble lectura que no es ambigüedad sino precisión: (a) sin pecado <em>en el origen</em> de la tentación, es decir, sin que partiera de una concupiscencia ya desordenada; y (b) sin pecado <em>en el resultado</em>, es decir, sin que jamás llegara a consumarse. Ambas lecturas son verdaderas simultáneamente y se exponen con más detalle en el Silogismo Final.</p>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo IV · Tentación real sin fomes peccati</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">Toda tentación procede de un origen externo (<em>ab extra</em>: solicitación de un objeto, persona o circunstancia) o de un origen interno (<em>ab intra</em>: una inclinación ya desordenada, el fomes peccati, que «atrae y seduce» según Santiago 1:14).</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">Cristo, concebido por obra del Espíritu Santo fuera del cauce ordinario de generación, careció del fomes peccati (Summa III, q.15, a.2; §1.4). No tuvo, por tanto, origen interno de tentación alguna.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt">Cristo sí poseyó naturaleza humana íntegra con sus apetitos naturales inocentes (hambre, fatiga, dolor natural, repugnancia natural al sufrimiento) y fue objeto de solicitaciones externas genuinas, documentadas en el relato evangélico del desierto (Mt 4; Lc 4) y en toda su pasión.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>Las tentaciones de Cristo fueron enteramente reales en cuanto solicitación externa —no menos reales que las nuestras, sino más puras, porque no contaban con ningún aliado interno— y por eso mismo nunca encontraron en él el terreno fértil de una inclinación ya predispuesta. Fue tentado «en todo según nuestra semejanza» en la forma del ataque; «sin pecado» en el origen y en el desenlace.</strong></div></div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-desierto" class="section">
+  <div class="sec-ey">Parte V · Caso de estudio I</div>
+  <h2 class="sec-title">El desierto — Mateo 4:1-11 — Las tres tentaciones y el Nuevo Adán</h2>
+  <div class="rule"></div>
+  <p class="lead">El relato sinóptico de las tentaciones es el único episodio del Nuevo Testamento donde la tentación de Cristo se narra con detalle dramático completo. La tradición patrística y la escolástica leen las tres tentaciones como una recapitulación deliberada y exacta de la triple tentación de Eva en el Edén, ahora vencida.</p>
+
+  <div class="heb-block reveal">
+    <span class="hb-main">εἰ Υἱὸς εἶ τοῦ Θεοῦ, εἰπὲ ἵνα οἱ λίθοι οὗτοι ἄρτοι γένωνται</span>
+    <span class="hb-tr">Mateo 4:3</span>
+    <span class="hb-trad">«Si eres Hijo de Dios, di que estas piedras se conviertan en pan.»</span>
+  </div>
+
+  <p>Jesús había ayunado cuarenta días: el hambre que sintió era <strong>propassio</strong> real, no fingida (§1.3, nivel 1) — su cuerpo humano padecía genuina necesidad. La tentación no consiste en que sentir hambre sea pecado (no lo es), sino en la propuesta de resolverla por una vía que sustituiría la confianza filial en el Padre por una autoafirmación de poder. Cristo responde citando Deuteronomio 8:3: «No solo de pan vivirá el hombre, sino de toda palabra que sale de la boca de Dios.»</p>
+
+  <table class="ctbl reveal">
+    <thead><tr><th>Tentación del desierto</th><th>Categoría (1 Juan 2:16)</th><th>Eco del Edén (Génesis 3:6)</th></tr></thead>
+    <tbody>
+      <tr><td>Piedras en pan (Mt 4:3)</td><td>«los deseos de la carne»</td><td>«el árbol era bueno para comer»</td></tr>
+      <tr><td>Arrojarse del pináculo (Mt 4:5-6)</td><td>«la vanagloria de la vida»</td><td>«era codiciable para alcanzar la sabiduría»</td></tr>
+      <tr><td>Los reinos del mundo (Mt 4:8-9)</td><td>«los deseos de los ojos»</td><td>«era agradable a los ojos»</td></tr>
+    </tbody>
+  </table>
+
+  <p>San Pablo llama explícitamente a Cristo «el último Adán» (1 Corintios 15:45) y desarrolla en Romanos 5:12-19 la lógica de la recapitulación: donde el primer Adán cedió, el segundo resiste; donde la desobediencia de uno trajo condena, la obediencia del otro trae justicia. Las tres respuestas de Cristo en el desierto —las tres citando el Deuteronomio, es decir, apelando no a su propio poder sino a la Palabra del Padre— son actos libres, deliberados, de una voluntad humana real que rechaza activamente lo que se le ofrece, sin que ningún fomes interno facilitara la rendición.</p>
+
+  <div class="callout reveal">
+    <div class="callout-lbl">Por qué esto no reduce la tentación a un simulacro</div>
+    <div class="callout-body">Que Cristo no tuviera fomes no significa que decir «no» le costara nada. El hambre tras cuarenta días de ayuno es un sufrimiento físico extremo y real; la oferta de los reinos del mundo sin pasar por la cruz era, en términos puramente humanos, una vía de escape genuinamente disponible al entendimiento práctico. El mérito de la resistencia no depende de que hubiera un enemigo interior que vencer, sino de que la voluntad humana, libremente y con esfuerzo real frente a un bien aparente genuino, optó por la obediencia. Esto es, de hecho, una forma de tentación <em>más</em> pura, no menos seria: combate sin la ventaja (para el tentador) de un cómplice ya instalado dentro.</div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-ira" class="section">
+  <div class="sec-ey">Parte VI · Caso de estudio II</div>
+  <h2 class="sec-title">La ira de Cristo — Marcos 3:5 y Juan 2:13-17 — Ira per zelum, no ira pecaminosa</h2>
+  <div class="rule"></div>
+  <p class="lead">El Nuevo Testamento atestigua sin ambigüedad que Cristo se encolerizó. La pregunta tomista no es si sintió ira —la Escritura lo dice expresamente— sino si esa ira fue <em>passio ordinata</em> (nivel 2 de §1.3) o <em>passio peccaminosa</em> (nivel 3).</p>
+
+  <h4 class="subsub">La doctrina general sobre la ira — Summa II-II, q.158</h4>
+  <p>Santo Tomás no considera la ira mala en sí misma. Es un movimiento del apetito irascible que responde al rechazo de una injusticia percibida, ordenado por naturaleza a la corrección del mal. Se vuelve pecaminosa solo cuando excede la medida de la razón —en su intensidad, en su objeto o en su fin (deseo de venganza desproporcionada en vez de corrección justa). San Pablo recoge la misma doctrina citando el Salmo 4:4: «Airaos, pero no pequéis; no se ponga el sol sobre vuestro enojo» (Efesios 4:26) — lo cual presupone que existe una ira que no es, en sí, pecado.</p>
+
+  <div class="qb gr-q reveal">
+    <div class="qt">«Y mirándolos alrededor con enojo, entristecido por la dureza de sus corazones, dijo al hombre: Extiende tu mano. Y él la extendió, y la mano le fue restaurada sana.»</div>
+    <div class="qs">Marcos 3:5 — la sinagoga, el hombre de la mano seca, el sábado</div>
+  </div>
+
+  <p>Nótese la estructura del versículo: la ira de Jesús va unida a la <em>tristeza</em> por la dureza de corazón de sus interlocutores —no busca su daño, sino que lamenta su ceguera— y desemboca inmediatamente en un acto de curación. Es ira ordenada a un bien, no a un mal.</p>
+
+  <div class="qb gr-q reveal">
+    <div class="qt">«Y haciendo un azote de cuerdas, echó fuera del templo a todos... Entonces se acordaron sus discípulos que está escrito: El celo de tu casa me consume.»</div>
+    <div class="qs">Juan 2:15,17 — la purificación del Templo, citando Salmo 69:9</div>
+  </div>
+
+  <p>Los discípulos —testigos directos— interpretan la acción no como un estallido descontrolado sino como cumplimiento de un texto profético sobre el <strong>celo</strong> (ζῆλος): la pasión ardiente por el honor debido a Dios. Esta es exactamente la categoría que Santo Tomás llama <em>ira per zelum</em>, «ira por celo», y que distingue tajantemente de la <em>ira per vitium</em>, «ira por vicio».</p>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo V · La ira de Cristo como propassio de celo justo</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">La ira es pecaminosa solo cuando excede la medida de la razón recta o busca un fin injusto (venganza desproporcionada); es virtuosa cuando responde a una injusticia real, guarda proporción, y se ordena a la corrección o al honor debido (Summa II-II, q.158; Ef 4:26).</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">Las dos escenas evangélicas de la ira de Cristo (Mc 3:5: dureza de corazón ante un enfermo; Jn 2:13-17: profanación comercial del Templo) tienen como objeto una injusticia real, van acompañadas de tristeza por el mal ajeno (no de deseo de dañar), guardan proporción con la ofensa, y desembocan en un bien (la curación; la restauración del culto), nunca en venganza personal.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>La ira de Cristo, atestiguada explícitamente en el texto evangélico, es en ambos casos documentados ira per zelum —propassio ordenada a un bien por la razón y la caridad—, no ira pecaminosa. No hubo en Cristo ausencia de ira, sino ira siempre gobernada: el caso perfecto de la "passio ordinata" del nivel 2 (§1.3).</strong></div></div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-sexual" class="section">
+  <div class="sec-ey">Parte VII · Caso de estudio III</div>
+  <h2 class="sec-title">La facultad generativa y la concupiscencia — Tratamiento tomista de la dimensión sexual</h2>
+  <div class="rule"></div>
+  <p class="lead">Esta es la pregunta más delicada y, por eso mismo, exige el mayor rigor terminológico. La tradición la trata con la misma seriedad clínica con que trata cualquier otra facultad humana, distinguiendo siempre, con absoluta precisión, la <em>facultad</em> (bien de la naturaleza) de la <em>concupiscencia</em> (desorden post-lapsario de esa facultad).</p>
+
+  <h4 class="subsub">El axioma cristológico de base: lo no asumido no es sanado</h4>
+  <div class="qb reveal">
+    <div class="qt">«Τὸ γὰρ ἀπρόσληπτον, ἀθεράπευτον» — «Lo que no ha sido asumido, no ha sido sanado.»</div>
+    <div class="qs">San Gregorio Nacianceno, Epístola 101 a Cledonio — axioma cristológico fundamental, recogido por toda la tradición posterior</div>
+  </div>
+  <p>Gregorio Nacianceno formula este principio contra Apolinar, que negaba que Cristo hubiera asumido una mente humana racional completa. El principio se generaliza: si Cristo no asumió íntegramente algún elemento de la naturaleza humana, ese elemento queda fuera de la redención que opera por la asunción misma. Cristo, varón verdadero, asumió por tanto una naturaleza humana íntegra, incluida su facultad generativa —porque esa facultad es, en sí misma, <strong>un bien de la naturaleza</strong>, instituido por Dios antes de la caída («fructificad y multiplicaos», Génesis 1:28), no una realidad mala que hubiera que evitar asumir.</p>
+
+  <h4 class="subsub">El desorden no está en la facultad, sino en su pérdida de sujeción a la razón</h4>
+  <p>San Agustín, en el mismo pasaje citado en 1.4 (<em>La Ciudad de Dios</em>, XIV.16-24), es explícito: antes de la caída, en el estado de justicia original, la facultad generativa habría estado, como cualquier otro miembro del cuerpo, enteramente sujeta al imperio de la voluntad —sin ningún movimiento involuntario ni descontrolado. Lo que el pecado original introdujo no fue la facultad (que ya existía y era buena) sino precisamente la pérdida de esa sujeción voluntaria: el movimiento que surge <em>al margen</em> de —o <em>contra</em>— la deliberación de la razón. A esta inestabilidad concreta, Agustín la llama la señal más visible de la «rebelión de la carne», y es, técnicamente, una manifestación específica del fomes peccati general descrito en 1.4.</p>
+
+  <div class="claim-box reveal">
+    <div class="claim-lbl">§ La pregunta exacta</div>
+    <div class="claim-txt">¿Tuvo Cristo la facultad generativa? Sí, por ser varón verdadero (Gregorio Nacianceno). ¿Tuvo, entonces, concupiscencia sexual desordenada —movimientos de ese apetito que escaparan al gobierno de su razón y voluntad?</div>
+  </div>
+  <div class="rebut-box reveal">
+    <div class="rebut-lbl">Respondeo — aplicación directa de Summa III, q.15, a.2</div>
+    <div class="rebut-txt">No, por la misma razón ya establecida en 1.4 de manera general: Cristo careció del fomes peccati en su totalidad, no de una parte de él. Su facultad generativa, real y completa, estuvo —como todas sus demás potencias inferiores— perfecta y constantemente sujeta a su razón y a su voluntad, las cuales estaban a su vez perfectamente unidas a Dios. No hubo en él, por tanto, el movimiento involuntario, espontáneo y desordenado que Agustín describe como específico de la condición caída. Esto no significa una facultad ausente o «anestesiada»: significa una facultad íntegra que jamás operó fuera del orden de la razón, exactamente como habría sido el caso en la humanidad no caída.</div>
+  </div>
+
+  <h4 class="subsub">La virginidad de Cristo como ordenación positiva, no como victoria sobre un enemigo interior</h4>
+  <p>Cristo, según la tradición unánime, vivió célibe. Esta elección se entiende mejor a la luz de sus propias palabras sobre quienes «se hicieron eunucos a sí mismos por causa del reino de los cielos» (Mateo 19:12) — un texto que la tradición lee como el fundamento de la castidad consagrada, con Cristo mismo como su arquetipo. La diferencia con la castidad de cualquier otro hombre santo es precisa: en el santo ordinario, la castidad es una virtud adquirida mediante el esfuerzo continuado de someter una facultad que, por el fomes, tiende espontáneamente al desorden. En Cristo, la entrega de esa facultad a su misión fue la ordenación positiva, libre y sin resistencia interior, de un bien que nunca tendió por sí mismo a salirse del orden de la razón. No es menos libre por eso: es, de nuevo, libertad en su forma más alta, no su ausencia (cf. §1.6).</p>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo VI · La facultad generativa como bien íntegro sin concupiscencia desordenada</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">«Lo no asumido no es sanado» (Gregorio Nacianceno): Cristo, varón verdadero, asumió una naturaleza humana íntegra, incluida la facultad generativa, que es en sí misma un bien de la naturaleza instituido antes de la caída (Gn 1:28).</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">El desorden histórico asociado a la sexualidad después de la caída —la «rebelión de la carne» (Agustín, Ciudad de Dios XIV.16-24)— no reside en la facultad misma, sino en la pérdida de la sujeción de esa facultad a la razón y la voluntad, es decir, en el fomes peccati (§1.4).</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt">Cristo careció enteramente del fomes peccati, por su concepción virginal obrada por el Espíritu Santo, fuera del cauce ordinario de generación por el que se transmite el pecado original (Summa III, q.15, a.2).</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>Cristo poseyó la facultad generativa íntegra como verdadero varón, pero esa facultad, como todas sus potencias inferiores, estuvo siempre y sin excepción sujeta a su razón y voluntad, unidas perfectamente a Dios; nunca experimentó, por tanto, el movimiento desordenado e involuntario que la tradición agustiniano-tomista llama concupiscencia. Su virginidad fue ordenación libre de un bien íntegro a su misión, no victoria sobre un adversario interior que, en su caso, sencillamente no existía.</strong></div></div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-getsemani" class="section">
+  <div class="sec-ey">Parte VIII · Caso de estudio IV</div>
+  <h2 class="sec-title">Getsemaní — El dolor natural ante la muerte y las dos voluntades en acto</h2>
+  <div class="rule"></div>
+  <p class="lead">Ningún episodio evangélico exhibe con mayor crudeza la psicología humana real de Cristo que la agonía en el huerto. Es también el lugar donde el diotelitismo de Constantinopla III (§1.2) deja de ser una tesis abstracta y se vuelve visible en el texto mismo.</p>
+
+  <div class="heb-block reveal">
+    <span class="hb-main">πάτερ μου, εἰ δυνατόν ἐστιν, παρελθάτω ἀπ' ἐμοῦ τὸ ποτήριον τοῦτο· πλὴν οὐχ ὡς ἐγὼ θέλω, ἀλλ' ὡς σύ</span>
+    <span class="hb-tr">Mateo 26:39</span>
+    <span class="hb-trad">«Padre mío, si es posible, pase de mí esta copa; pero no sea como yo quiero, sino como tú.»</span>
+  </div>
+
+  <p>Santo Tomás, siguiendo a Máximo el Confesor (cuya doctrina fue precisamente la base de la definición de Constantinopla III), distingue aquí dos actos de una misma voluntad humana operando en dos registros: la <strong>voluntad como naturaleza</strong> (<em>voluntas ut natura</em>) y la <strong>voluntad como razón deliberante</strong> (<em>voluntas ut ratio</em>).</p>
+
+  <div class="cards">
+    <div class="card go reveal">
+      <div class="cey">«Pase de mí esta copa»</div>
+      <div class="cttl">Voluntas ut natura — el rechazo natural del mal en cuanto mal</div>
+      <div class="cbod">Toda naturaleza sana rehúye, por constitución, el sufrimiento y la muerte como males físicos. Este rechazo no es pecado: es la reacción correcta de una naturaleza humana íntegra ante un mal real. Cristo lo expresa sin disimulo: su humanidad no era estoica ni insensible.</div>
+    </div>
+    <div class="card gr reveal">
+      <div class="cey">«No como yo quiero, sino como tú»</div>
+      <div class="cttl">Voluntas ut ratio — la voluntad deliberada que se conforma libremente al Padre</div>
+      <div class="cbod">El mismo sujeto, en el mismo acto de oración, eleva el primer movimiento natural a la decisión libre y deliberada de aceptar la voluntad del Padre. No hay dos voluntades en pugna real: hay una voluntad humana que pasa, en un único acto orante, del primer registro al segundo, sin resistencia última.</div>
+    </div>
+  </div>
+
+  <div class="heb-block reveal">
+    <span class="hb-main">καὶ γενόμενος ἐν ἀγωνίᾳ ἐκτενέστερον προσηύχετο· ἐγένετο δὲ ὁ ἱδρὼς αὐτοῦ ὡσεὶ θρόμβοι αἵματος καταβαίνοντες ἐπὶ τὴν γῆν</span>
+    <span class="hb-tr">Lucas 22:44</span>
+    <span class="hb-trad">«Y estando en agonía, oraba más intensamente; y era su sudor como grandes gotas de sangre que caían hasta la tierra.»</span>
+  </div>
+
+  <p>Este versículo es la prueba textual más fuerte contra cualquier lectura docetista: el sufrimiento de Cristo en Getsemaní tuvo correlato fisiológico extremo (hematidrosis), atestiguado por Lucas, el evangelista médico. No es metáfora. Es <em>propassio</em> en su grado máximo —el primer movimiento natural de una naturaleza humana íntegra ante el mal supremo de la muerte violenta inminente— enteramente real y, a la vez, enteramente sometida, en el mismo instante, a la voluntad deliberada de obedecer.</p>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo VII · Getsemaní: dos voluntades, un solo sujeto sin pecado</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">El Concilio III de Constantinopla (681) define que en Cristo hay dos voluntades naturales, divina y humana, sin división ni confusión, y que la voluntad humana sigue siempre, sujeta y subordinada, a la divina, sin oponérsele jamás.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">En Getsemaní, la voluntad humana de Cristo expresa, en un primer movimiento natural (voluntas ut natura), el rechazo genuino del sufrimiento y la muerte —«pase de mí esta copa»— con manifestación fisiológica extrema (Lc 22:44).</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt">En el mismo acto orante, esa misma voluntad, ahora como razón deliberante (voluntas ut ratio), se somete libremente: «no como yo quiero, sino como tú» (Mt 26:39).</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>Getsemaní muestra, en el texto mismo, la coexistencia exacta que toda esta arquitectura conceptual predice: una psicología humana plenamente real, con dolor, angustia y repugnancia natural ante el mal —y, en el mismo instante, sin la menor fractura, una obediencia perfecta que excluye cualquier pecado. El primer movimiento natural nunca se convirtió en resistencia deliberada: fue, de principio a fin, integrado libremente en la obediencia.</strong></div></div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-tabla" class="section">
+  <div class="sec-ey">Parte IX · Síntesis</div>
+  <h2 class="sec-title">Tabla comparativa — Las pasiones de Cristo, caso por caso</h2>
+  <div class="rule"></div>
+  <p class="lead">Reuniendo los cuatro casos de estudio bajo las categorías fijadas en la Parte I, el panorama completo queda así:</p>
+
+  <table class="ctbl reveal">
+    <thead><tr><th>Movimiento</th><th>¿Lo tuvo Cristo?</th><th>¿Fue fomes / concupiscencia desordenada?</th><th>Texto bíblico clave</th></tr></thead>
+    <tbody>
+      <tr><td>Hambre tras el ayuno</td><td>Sí — propassio real (nivel 1)</td><td>No. Apetito natural inocente, nunca desordenado</td><td>Mateo 4:2-3</td></tr>
+      <tr><td>Fatiga, sed, sueño</td><td>Sí — propassio real</td><td>No. Necesidades corporales genuinas, sin desorden</td><td>Juan 4:6 («cansado del camino»); 19:28 («tengo sed»)</td></tr>
+      <tr><td>Tristeza, angustia natural ante la muerte</td><td>Sí — propassio en grado extremo</td><td>No. Rechazo natural del mal, no rebeldía contra la razón</td><td>Mateo 26:38; Lucas 22:44</td></tr>
+      <tr><td>Ira / indignación</td><td>Sí — passio ordenada (nivel 2), ira per zelum</td><td>No. Proporcionada, ordenada a un bien, sin venganza</td><td>Marcos 3:5; Juan 2:13-17</td></tr>
+      <tr><td>Facultad generativa</td><td>Sí, íntegra, como verdadero varón</td><td>No. Sujeta siempre a razón y voluntad, sin fomes</td><td>Mateo 19:12 (interpretación tradicional); Gregorio Nacianceno, Ep. 101</td></tr>
+      <tr><td>Deseo de evitar el sufrimiento</td><td>Sí — voluntas ut natura, real</td><td>No. Integrado libremente en la obediencia, sin resistencia final</td><td>Mateo 26:39</td></tr>
+      <tr><td>Pecado actual de cualquier clase</td><td>Nunca, en ningún momento</td><td>—</td><td>2 Co 5:21; 1 Pe 2:22; 1 Jn 3:5; Jn 8:46</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-final" class="section">
+  <div class="sec-ey">Síntesis · El argumento cerrado</div>
+  <h2 class="sec-title">Silogismo Final — Hebreos 4:15 leído con precisión escolástica completa</h2>
+  <div class="rule"></div>
+  <p class="lead">Las seis categorías de la Parte I y los siete silogismos precedentes convergen en la lectura exacta del único versículo que formula, en una sola frase, las cuatro preguntas de partida.</p>
+
+  <div class="sil gold reveal">
+    <div class="sil-hdr">⬡ Silogismo Final · La síntesis tomista completa</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt"><strong>Desde la unión hipostática (§1.1, Silogismo II):</strong> el pecado es siempre acto personal; en Cristo no hay persona humana separada que pueda protagonizarlo, sino solo la Persona del Verbo actuando humanamente. El pecado de Cristo sería, contradictoriamente, Dios apartándose de sí mismo.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt"><strong>Desde la gracia y la visión beatífica (§1.5, Silogismo III):</strong> Cristo posee la gracia sin medida (Jn 3:34) y la visión inmediata de Dios desde el primer instante; su voluntad jamás pudo sufrir el error de juicio práctico que el pecado presupone.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt"><strong>Desde la ausencia del fomes peccati (§1.4, Silogismos IV y VI):</strong> concebido virginalmente por el Espíritu Santo, Cristo no heredó la inclinación desordenada que el pecado original transmite. Sus tentaciones fueron, por tanto, enteramente ab extra, sin aliado interno —ni en el hambre, ni en la ira, ni en la facultad generativa, ni en ningún otro apetito.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P4</div><div class="sil-txt"><strong>Desde el diotelitismo (§1.2, Silogismo VII):</strong> Cristo tuvo una voluntad humana real y un apetito sensitivo real, con movimientos naturales genuinos (hambre, fatiga, tristeza, repugnancia ante la muerte, indignación justa) —documentados con el máximo detalle fisiológico en Getsemaní— que nunca se opusieron, ni un instante, a la voluntad divina.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt">
+      <strong>Hebreos 4:15 — «tentado en todo según nuestra semejanza, pero sin pecado» (χωρὶς ἁμαρτίας) — debe leerse con una doble precisión simultánea, no como vaguedad sino como exactitud teológica:</strong><br><br>
+      <strong>(a) «Tentado en todo según nuestra semejanza»</strong> afirma la realidad plena de su psicología humana: hambre, fatiga, dolor, temor natural, indignación, la facultad generativa íntegra —todo ello genuino, sentido, vivido, sin docetismo alguno (P4).<br><br>
+      <strong>(b) «Sin pecado»</strong> afirma simultáneamente dos cosas que en el hombre caído están separadas y en Cristo coinciden: que sus tentaciones <em>no nacieron</em> de una inclinación ya desordenada (sin pecado en el origen, por P3) y que <em>jamás desembocaron</em> en una transgresión (sin pecado en el resultado, por P1 y P2).<br><br>
+      <strong>No hay en esta lectura ninguna contradicción entre la realidad de la tentación y la certeza de la victoria.</strong> Al contrario: solo porque las cuatro categorías —unión hipostática, gracia y visión beatífica, ausencia del fomes, diotelitismo— operan juntas y sin fisuras, puede afirmarse a la vez, sin reducir ninguna de las dos partes, que Cristo padeció genuinamente como hombre y que, como hombre y como Dios en una sola Persona, nunca pudo ni de hecho pecó.
+    </div></div>
+  </div>
+
+  <div class="verdict reveal">
+    <div class="verdict-lbl">Veredicto tomista</div>
+    <div class="verdict-txt">Cristo tuvo hambre, fatiga, tristeza, miedo natural a la muerte e indignación justa: su humanidad fue completa y su sufrimiento, real. Tuvo también, por ser varón verdadero, facultad generativa íntegra, jamás desordenada. Fue tentado genuinamente —en el desierto, en Getsemaní, a lo largo de toda su vida pública— por solicitaciones externas reales a las que respondió con actos libres y meritorios de su voluntad humana. Y, sin embargo, no pudo pecar y no pecó nunca, porque la única Persona que actuaba en cada uno de esos actos era el Verbo de Dios, dotado de gracia sin medida y de visión inmediata del Padre, y exento, por su concepción virginal, de la inclinación desordenada que en todo otro hombre hace de la tentación una batalla con un traidor adentro. Su libertad, lejos de quedar anulada por la impecabilidad, alcanzó en ella su forma más alta y más plena.</div>
+  </div>
+
+  <div class="callout reveal" style="margin-top:2rem;">
+    <div class="callout-lbl">Fuentes citadas — Verificables en cualquier edición crítica</div>
+    <div class="callout-body">
+      <strong>Santo Tomás de Aquino</strong> · Summa Theologiae, Tertia Pars: q.9 (la ciencia de Cristo, especialmente a.2 sobre la visión beatífica desde la concepción) · q.15 (los defectos del alma asumidos por Cristo, especialmente a.1 sobre la impecabilidad y a.2 sobre el fomes peccati) · q.18 (la unidad de la voluntad en Cristo) · q.41 (la tentación de Cristo) · Summa Theologiae, Secunda Secundae, q.158 (la ira)<br><br>
+      <strong>San Agustín</strong> · De Civitate Dei (La Ciudad de Dios), Libro XIV, capítulos 16-24 (la justicia original, la pérdida de la sujeción, la «rebelión de la carne»)<br><br>
+      <strong>San Gregorio Nacianceno</strong> · Epístola 101 a Cledonio (el axioma «lo no asumido no es sanado»)<br><br>
+      <strong>San Jerónimo</strong> · Comentario al Evangelio de Mateo (la distinción propassio / passio)<br><br>
+      <strong>Definiciones conciliares</strong> · Concilio de Calcedonia (451 d.C.) · Concilio III de Constantinopla (681 d.C.)<br><br>
+      <strong>Textos bíblicos citados íntegramente</strong> · Hebreos 4:15 · Hebreos 2:17-18 · 2 Corintios 5:21 · 1 Pedro 2:22 (cf. Isaías 53:9) · 1 Juan 3:5 · Juan 8:46 · Santiago 1:14 · Mateo 4:1-11 · Mateo 19:12 · Marcos 3:5 · Juan 2:13-17 (cf. Salmo 69:9) · Mateo 26:38-39 · Lucas 22:44 · Romanos 5:12-19 · 1 Corintios 15:45 · Efesios 4:26 (cf. Salmo 4:4) · Génesis 1:28; 3:6 · Lucas 2:52 · Juan 3:34 · Juan 4:6; 19:28
+    </div>
+  </div>
+</section>
+
+</main>
+<button id="bttop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div id="kbd">← → para navegar entre secciones</div>
+
+<script>
+const SECS=[
+  {id:'sec-hero',  tab:'Portada',       group:''},
+  {id:'sec-marco', tab:'I. Categorías', group:'Fundamentos'},
+  {id:'sec-pecado',tab:'II. ¿Pecó?',    group:'Preguntas'},
+  {id:'sec-impecable',tab:'III. ¿Pudo pecar?', group:'Preguntas'},
+  {id:'sec-tentado',tab:'IV. ¿Tentado?',group:'Preguntas'},
+  {id:'sec-desierto',tab:'V. Desierto', group:'Casos'},
+  {id:'sec-ira',   tab:'VI. Ira',       group:'Casos'},
+  {id:'sec-sexual',tab:'VII. Generativa',group:'Casos'},
+  {id:'sec-getsemani',tab:'VIII. Getsemaní',group:'Casos'},
+  {id:'sec-tabla', tab:'IX. Tabla',     group:'Síntesis'},
+  {id:'sec-final', tab:'⬡ Final',       group:'Síntesis'},
+];
+let cur=0;
+const tabsEl=document.getElementById('nav-tabs');
+SECS.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='ntab'+(i===0?' active':'');
+  b.dataset.idx=i;
+  b.innerHTML=`<span class="tn">${i>0?String(i).padStart(2,'0'):''}</span>${s.tab}`;
+  b.onclick=()=>goTo(i);
+  tabsEl.appendChild(b);
+});
+const tp=document.getElementById('toc-panel');
+const groups={};
+SECS.forEach((s,i)=>{ const g=s.group||'General'; if(!groups[g])groups[g]=[]; groups[g].push({...s,idx:i}); });
+Object.entries(groups).forEach(([g,items])=>{
+  const div=document.createElement('div'); div.className='tg';
+  const lbl=document.createElement('div'); lbl.className='tg-lbl'; lbl.textContent=g; div.appendChild(lbl);
+  items.forEach(it=>{
+    const row=document.createElement('div'); row.className='ti'; row.id='ti-'+it.idx;
+    row.innerHTML=`<span class="tinum">${String(it.idx+1).padStart(2,'0')}</span><span class="titxt">${it.tab}</span>`;
+    row.onclick=()=>{goTo(it.idx);closeToc();};
+    div.appendChild(row);
+  });
+  tp.appendChild(div);
+});
+function buildNavs(){
+  SECS.forEach((s,i)=>{
+    const sec=document.getElementById(s.id); if(!sec) return;
+    const nav=document.createElement('div'); nav.className='sec-nav';
+    const prev=i>0?SECS[i-1]:null;
+    const next=i<SECS.length-1?SECS[i+1]:null;
+    const pb=document.createElement('button');
+    pb.className='snbtn prev'+(prev?'':' dis');
+    pb.innerHTML=`<span class="arr">←</span><div><div class="meta">Anterior</div><div class="lbl">${prev?prev.tab:'—'}</div></div>`;
+    if(prev) pb.onclick=()=>goTo(i-1);
+    const cen=document.createElement('div'); cen.className='sncenter';
+    const dots=document.createElement('div'); dots.className='sndots';
+    SECS.forEach((_,di)=>{ const d=document.createElement('div'); d.className='sndot'+(di===i?' active':di<i?' done':''); d.onclick=()=>goTo(di); d.title=SECS[di].tab; dots.appendChild(d); });
+    const pos=document.createElement('div'); pos.className='snpos'; pos.textContent=`${i+1} / ${SECS.length}`;
+    cen.appendChild(dots); cen.appendChild(pos);
+    const nb=document.createElement('button');
+    nb.className='snbtn next'+(next?'':' dis');
+    nb.innerHTML=`<div><div class="meta">Siguiente</div><div class="lbl">${next?next.tab:'—'}</div></div><span class="arr">→</span>`;
+    if(next) nb.onclick=()=>goTo(i+1);
+    nav.appendChild(pb); nav.appendChild(cen); nav.appendChild(nb);
+    sec.appendChild(nav);
+  });
+}
+buildNavs();
+function goTo(idx){
+  const el=document.getElementById(SECS[idx].id); if(!el) return;
+  window.scrollTo({top:el.offsetTop-58,behavior:'smooth'});
+  setActive(idx);
+}
+function setActive(idx){
+  cur=idx;
+  document.querySelectorAll('.ntab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  const at=document.querySelector(`.ntab[data-idx="${idx}"]`);
+  if(at) at.scrollIntoView({block:'nearest',inline:'nearest'});
+  document.querySelectorAll('.ti').forEach((r,i)=>r.classList.toggle('done',i<idx));
+}
+const secEls=SECS.map(s=>document.getElementById(s.id));
+const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){const idx=secEls.indexOf(en.target);if(idx!==-1)setActive(idx);}}),{rootMargin:'-25% 0px -68% 0px'});
+secEls.forEach(el=>{if(el)obs.observe(el);});
+const fill=document.getElementById('pfill');
+window.addEventListener('scroll',()=>{
+  const h=document.body.scrollHeight-window.innerHeight;
+  fill.style.width=(window.scrollY/h*100)+'%';
+  document.getElementById('bttop').classList.toggle('show',window.scrollY>400);
+},{passive:true});
+const reveals=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('vis');}),{threshold:.06});
+reveals.forEach(r=>ro.observe(r));
+let kbt;
+document.addEventListener('keydown',e=>{
+  const tg=document.activeElement.tagName;
+  if(tg==='INPUT'||tg==='TEXTAREA') return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();goTo(Math.min(cur+1,SECS.length-1));showK();}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();goTo(Math.max(cur-1,0));showK();}
+  if(e.key==='Escape') closeToc();
+});
+function showK(){const k=document.getElementById('kbd');k.classList.add('show');clearTimeout(kbt);kbt=setTimeout(()=>k.classList.remove('show'),1800);}
+function openToc(){document.getElementById('toc-ov').classList.add('open');}
+function closeToc(){document.getElementById('toc-ov').classList.remove('open');}
+setTimeout(showK,1200);
+</script>
+</body>
+</html>

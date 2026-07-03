@@ -21,3 +21,5 @@ Aqui se desarrollaran los contenidos esenciales de la fe cristiana de forma orde
 - [La Divinidad de Cristo en las Epístolas Católicas (Dossier)](/doctrina/divinidad-cristo-epistolas-dossier/)
 - [El Cristo de Pablo — Corpus Paulino (Dossier)](/doctrina/divinidad-cristo-paulina-dossier/)
 - [Divinidad de Cristo y del Espíritu Santo en Hechos (Dossier)](/doctrina/divinidad-cristo-hechos-dossier/)
+- [Credo Divino Prepaulino de Filipenses (Dossier)](/doctrina/credo-divino-prepaulino-filipenses-dossier/)
+- [Cristo Impecabilidad: Tentación e Impecabilidad de Cristo (Dossier)](/doctrina/cristo-impecabilidad-dossier/)
