@@ -1,6 +1,6 @@
 ---
 title: "Divergencias entre Coranes: Sura Hud 11:81 (Dossier)"
-date: 2026-07-07T09:05:00-05:00
+date: 2026-07-06T09:05:00-05:00
 draft: false
 slug: "divergencias-coranes-dossier"
 url: "/respondiendo-al-islam/divergencias-coranes-dossier/"

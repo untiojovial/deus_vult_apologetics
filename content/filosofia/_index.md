@@ -23,3 +23,4 @@ La idea es responder con argumentos claros, fuentes serias y lenguaje comprensib
 - [Tomismo Intensivo — Cornelio Fabro (Dossier)](/filosofia/tomismo-intensivo-dossier/)
 - [La Inmutabilidad de Dios y los Nombres Relativos (Dossier)](/filosofia/inmutabilidad-nombres-relativos-dossier/)
 - [De Praedestinatione: Disputatio (Dossier)](/filosofia/de-praedestinatione-dossier/)
+- [El Espejo Vacío: Autoconciencia Divina y Tawḥīd (Dossier)](/filosofia/espejo-vacio-tawhid-dossier/)

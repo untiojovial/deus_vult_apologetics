@@ -1,6 +1,6 @@
 ---
 title: "El Dilema de los Dos Cuernos: Pablo de Tarso ante Sura 61:14 y 3:55 (Dossier)"
-date: 2026-07-07T09:00:00-05:00
+date: 2026-07-06T09:00:00-05:00
 draft: false
 slug: "dilema-dos-cuernos-pablo-dossier"
 url: "/respondiendo-al-islam/dilema-dos-cuernos-pablo-dossier/"

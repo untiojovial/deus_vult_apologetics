@@ -1,6 +1,6 @@
 ---
 title: "¿Nadie Cargara el Pecado de Otro? La Contradiccion Coranica sobre la Culpa Ajena (Dossier)"
-date: 2026-07-07T09:25:00-05:00
+date: 2026-07-06T09:25:00-05:00
 draft: false
 slug: "contradiccion-carga-ajena-coran-dossier"
 url: "/respondiendo-al-islam/contradiccion-carga-ajena-coran-dossier/"

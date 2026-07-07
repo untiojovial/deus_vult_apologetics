@@ -1,6 +1,6 @@
 ---
 title: "El Tawatur bajo la Psicologia Cognitiva (Dossier)"
-date: 2026-07-07T09:20:00-05:00
+date: 2026-07-06T09:20:00-05:00
 draft: false
 slug: "tawatur-psicologia-cognitiva-dossier"
 url: "/respondiendo-al-islam/tawatur-psicologia-cognitiva-dossier/"

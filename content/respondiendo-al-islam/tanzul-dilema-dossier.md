@@ -1,6 +1,6 @@
 ---
 title: "¿Desciende Allah? El Dilema del Tanzul (Dossier)"
-date: 2026-07-07T09:15:00-05:00
+date: 2026-07-06T09:15:00-05:00
 draft: false
 slug: "tanzul-dilema-dossier"
 url: "/respondiendo-al-islam/tanzul-dilema-dossier/"

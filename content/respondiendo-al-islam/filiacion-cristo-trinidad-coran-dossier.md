@@ -1,6 +1,6 @@
 ---
 title: "¿Un Hijo sin Consorte? La Filiacion de Cristo y la Trinidad en el Coran (Dossier)"
-date: 2026-07-07T09:30:00-05:00
+date: 2026-07-06T09:30:00-05:00
 draft: false
 slug: "filiacion-cristo-trinidad-coran-dossier"
 url: "/respondiendo-al-islam/filiacion-cristo-trinidad-coran-dossier/"

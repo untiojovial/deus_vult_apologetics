@@ -1,6 +1,6 @@
 ---
 title: "El Final Largo de Marcos: Defensa Integra de Marcos 16:9-20 (Dossier)"
-date: 2026-07-07T09:10:00-05:00
+date: 2026-07-06T09:10:00-05:00
 draft: false
 slug: "defensa-final-largo-marcos-dossier"
 url: "/biblia/defensa-final-largo-marcos-dossier/"
