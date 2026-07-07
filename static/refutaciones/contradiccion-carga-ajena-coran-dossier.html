@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Nadie Cargará el Pecado de Otro? La Contradicción Coránica sobre la Culpa Ajena</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f7f4ef;
+    --accent: #6b1d3a;
+    --accent2: #1a3a5c;
+    --gold: #b8860b;
+    --green: #2f4d33;
+    --teal: #1e4d4a;
+    --sepia: #8b5a2b;
+    --grey-light: #e8e4dc;
+    --grey-mid: #9e9589;
+    --white: #ffffff;
+    --verdict: #1a0a1f;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    z-index: 9999; transition: width 0.1s linear;
+  }
+
+  #sidebar {
+    position: fixed; left: 0; top: 0; width: 320px; height: 100vh;
+    background: var(--ink); color: var(--paper); overflow-y: auto; z-index: 100;
+    transform: translateX(-320px); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    padding: 2rem 1.5rem;
+  }
+  #sidebar.open { transform: translateX(0); }
+  #sidebar h2 {
+    font-family: 'Playfair Display', serif; font-size: 1rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333; padding-bottom: 0.75rem;
+  }
+  #sidebar nav a {
+    display: block; padding: 0.42rem 0; color: #ccc; text-decoration: none;
+    font-family: 'Source Serif 4', serif; font-size: 0.8rem;
+    border-bottom: 1px solid #222; transition: color 0.2s, padding-left 0.2s;
+  }
+  #sidebar nav a:hover { color: var(--gold); padding-left: 0.5rem; }
+  #sidebar nav a.active { color: var(--gold); font-weight: 600; }
+  #sidebar nav .section-label {
+    display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--grey-mid); padding: 0.75rem 0 0.25rem;
+  }
+
+  #nav-toggle {
+    position: fixed; left: 1rem; top: 1rem; z-index: 200; background: var(--ink);
+    border: none; color: var(--paper); width: 44px; height: 44px; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; padding: 8px; transition: background 0.2s;
+  }
+  #nav-toggle:hover { background: var(--accent); }
+  #nav-toggle span { display: block; width: 24px; height: 2px; background: currentColor; transition: transform 0.3s, opacity 0.3s; }
+  #nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #nav-toggle.open span:nth-child(2) { opacity: 0; }
+  #nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  #overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 50; }
+  #overlay.visible { display: block; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 2rem 2rem 6rem; }
+
+  .hero {
+    padding: 6rem 0 4rem; border-bottom: 3px solid var(--ink); margin-bottom: 4rem;
+    text-align: center; position: relative;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900; line-height: 1.15; color: var(--ink); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-subtitle { font-size: 1.1rem; color: var(--grey-mid); max-width: 580px; margin: 0 auto 2rem; font-style: italic; }
+  .hero-badge {
+    display: inline-block; background: var(--accent); color: white; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.4rem 1rem;
+  }
+
+  .part-header { margin: 5rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--grey-light); }
+  .part-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.5rem;
+  }
+  .part-header h2 {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3.6vw, 2.2rem);
+    font-weight: 700; line-height: 1.25; color: var(--ink);
+  }
+
+  section { margin-bottom: 3rem; scroll-margin-top: 2rem; }
+  section h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--accent2);
+    margin: 2.5rem 0 0.75rem; border-left: 4px solid var(--accent2); padding-left: 0.75rem;
+  }
+
+  p { margin-bottom: 1.2rem; }
+
+  .syllogism {
+    background: var(--ink); color: var(--paper); padding: 2rem 2.5rem; margin: 2.5rem 0;
+    position: relative; border-left: 6px solid var(--gold);
+  }
+  .syllogism::before {
+    content: 'SILOGISMO'; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.2em; color: var(--gold); display: block; margin-bottom: 1rem;
+  }
+  .syllogism.maestro::before { content: 'SILOGISMO MAESTRO'; }
+  .syllogism.maestro { border-left-color: var(--accent); background: #1a0a14; }
+  .syllogism .premise {
+    display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem; align-items: start; font-size: 0.95rem;
+  }
+  .syllogism .premise .label { font-family: 'JetBrains Mono', monospace; color: var(--gold); font-size: 0.75rem; padding-top: 0.15rem; }
+  .syllogism .conclusion {
+    margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #444;
+    font-weight: 600; font-size: 1.05rem; color: #fff;
+  }
+  .syllogism .conclusion::before { content: '∴ '; color: var(--gold); font-weight: 700; }
+
+  .scripture {
+    background: #fff; border: 1px solid var(--grey-light); border-left: 6px solid var(--accent2);
+    padding: 1.5rem 2rem; margin: 2rem 0; font-style: italic;
+  }
+  .scripture .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent2); font-style: normal; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+  .scripture .text { font-size: 1rem; line-height: 1.7; color: var(--ink); }
+
+  .quran {
+    background: #f4faf9; border: 1px solid #b8d4d0; border-left: 6px solid var(--teal);
+    padding: 1.5rem 2rem; margin: 2rem 0; font-style: italic;
+  }
+  .quran .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--teal); font-style: normal; margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 700; }
+  .quran .text { font-size: 1rem; line-height: 1.7; color: #16302e; }
+
+  .hadith {
+    background: #faf3ea; border: 1px solid #d9c4a8; border-left: 6px solid var(--sepia);
+    padding: 1.5rem 2rem; margin: 1.5rem 0;
+  }
+  .hadith .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--sepia); margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 700; }
+  .hadith .text { font-size: 0.98rem; line-height: 1.7; color: #4a3420; font-style: italic; }
+
+  .academic {
+    background: #f0f5f0; border: 1px solid #c3d6c5; border-left: 6px solid var(--green);
+    padding: 1.5rem 2rem; margin: 1.5rem 0;
+  }
+  .academic .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green); margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 700; }
+  .academic .text { font-size: 0.98rem; line-height: 1.7; color: #1f3322; }
+
+  .verse-card {
+    background: #fff; border: 1px solid var(--grey-light); border-top: 5px solid var(--accent2);
+    padding: 2rem; margin: 2.5rem 0;
+  }
+  .verse-card .verse-number {
+    display: inline-block; background: var(--accent2); color: white; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.1em; padding: 0.3rem 0.7rem; margin-bottom: 1rem;
+  }
+  .verse-card h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 1rem; }
+
+  .dilemma { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .dilemma-side { padding: 1.5rem; border-top: 4px solid; }
+  .dilemma-side.a { border-color: var(--accent); background: #fdf0f4; }
+  .dilemma-side.b { border-color: var(--accent2); background: #f0f4ff; }
+  .dilemma-side h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .dilemma-side p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .objection-block { border: 2px solid var(--teal); padding: 0; margin: 2rem 0; overflow: hidden; }
+  .objection-header { background: var(--teal); color: #fff; padding: 0.9rem 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; }
+  .objection-body { padding: 1.5rem 1.75rem; background: #fff; font-size: 0.97rem; }
+  .response-header { background: var(--accent2); color: #fff; padding: 0.9rem 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; }
+  .response-body { padding: 1.5rem 1.75rem; background: #f7faff; font-size: 0.97rem; }
+
+  .highlight { background: #fffbeb; border: 1px solid var(--gold); padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.95rem; }
+  .highlight strong { color: var(--accent2); }
+
+  .verified-tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--green); background: #e7f0e8; border: 1px solid #b8d0ba;
+    padding: 0.25rem 0.6rem; margin-bottom: 1rem;
+  }
+  .verified-tag::before { content: '✓'; font-weight: 700; }
+
+  .debate-tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gold); background: #fdf3e0; border: 1px solid #e6cf9e;
+    padding: 0.25rem 0.6rem; margin-bottom: 1rem;
+  }
+  .debate-tag::before { content: '⚖'; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+  th { background: var(--ink); color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.65rem 0.8rem; text-align: left; }
+  td { padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--grey-light); vertical-align: top; }
+  tr:nth-child(even) td { background: #fff; }
+
+  .verdict { background: var(--verdict); color: #fff; padding: 3rem 2.5rem; margin: 4rem 0; border-top: 6px solid var(--gold); }
+  .verdict h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--gold); margin-bottom: 1.5rem; }
+  .verdict p { font-size: 1.05rem; line-height: 1.8; color: #ddd; margin-bottom: 1.25rem; }
+  .verdict strong { color: #fff; }
+
+  @media (max-width: 640px) {
+    main { padding: 1.25rem 1.25rem 4rem; }
+    .dilemma { grid-template-columns: 1fr; }
+    table { font-size: 0.74rem; }
+  }
+  @media print {
+    #sidebar, #nav-toggle, #overlay, #progress-bar { display: none; }
+    main { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="overlay"></div>
+<button id="nav-toggle" aria-label="Menú de navegación"><span></span><span></span><span></span></button>
+
+<nav id="sidebar" role="navigation" aria-label="Índice de contenidos">
+  <h2>Índice</h2>
+  <nav>
+    <span class="section-label">Introducción</span>
+    <a href="#intro">La contradicción y su alcance real</a>
+
+    <span class="section-label">Parte I — El Principio General</span>
+    <a href="#panorama-general">1. Panorama: las cuatro repeticiones del principio</a>
+    <a href="#voluntaria-3518">2. 35:18 y el rechazo incluso de la sustitución voluntaria</a>
+
+    <span class="section-label">Parte II — La Excepción de los Extraviadores</span>
+    <a href="#extraviadores-1625">3. 16:25 y 29:12-13: "cargarán también parte de las cargas ajenas"</a>
+    <a href="#resolucion-clasica">4. La resolución clásica: carga añadida, no carga transferida</a>
+
+    <span class="section-label">Parte III — El Hadiz del Rescate</span>
+    <a href="#hadiz-rescate">5. Sahih Muslim: judíos y cristianos como "rescate del fuego"</a>
+    <a href="#hadiz-no-alcanza">6. Por qué la resolución clásica no alcanza a este hadiz</a>
+
+    <span class="section-label">Parte IV — El Sacrificio Vicario Cristiano</span>
+    <a href="#voluntario-involuntario">7. Voluntario contra involuntario: la distinción categórica</a>
+    <a href="#isaias-juan">8. Isaías 53 y Juan 10:17-18: Cristo elige entregar su vida</a>
+
+    <span class="section-label">Parte V — Objeciones y Respuestas</span>
+    <a href="#objecion-resuelto">9. "16:25 y 29:13 ya resuelven cualquier tensión"</a>
+    <a href="#objecion-autenticidad">10. "El hadiz del rescate es de autenticidad dudosa"</a>
+    <a href="#objecion-cristo-injusto">11. "El sacrificio de Cristo es igual de injusto"</a>
+
+    <span class="section-label">Conclusión</span>
+    <a href="#silogismo-maestro">12. El silogismo maestro</a>
+    <a href="#veredicto">13. El veredicto final</a>
+  </nav>
+</nav>
+
+<main>
+
+  <header class="hero" id="intro">
+    <p class="hero-eyebrow">Apologética Cristiana · Diálogo Cristiano-Islámico</p>
+    <h1>¿Nadie Cargará <em>el Pecado de Otro</em>?<br>La Contradicción Coránica sobre la Culpa Ajena</h1>
+    <p class="hero-subtitle">El principio coránico repetido cuatro veces, su excepción para "quienes extravían", y el hadiz que va más allá de ambos: judíos y cristianos como rescate involuntario del fuego</p>
+    <span class="hero-badge">Cada versículo y cada hadiz verificados en texto árabe, tafsir clásico y sunnah.com</span>
+  </header>
+
+  <section>
+    <p>El Corán establece, en al menos cuatro pasajes distintos, un principio de responsabilidad individual formulado con una claridad poco frecuente en textos religiosos: nadie cargará con el pecado de otro. Es un principio de justicia retributiva estricta, repetido casi palabra por palabra en tres suras diferentes. Y sin embargo, el propio Corán contiene versículos que parecen matizar ese principio —quienes extravían a otros cargan, además de su propio pecado, "algo" del pecado de los extraviados—, y al menos un hadiz canónico de Sahih Muslim describe un escenario que va considerablemente más allá de cualquier matización: judíos y cristianos, sin haber cometido los pecados en cuestión y sin haber consentido en nada, sustituyendo literalmente a los musulmanes en el fuego del infierno como "rescate".</p>
+
+    <p>Este documento examina las tres capas de esta cuestión por separado —el principio general, la excepción coránica de los extraviadores, y el hadiz del rescate—, distinguiendo con cuidado cuál de ellas genera una tensión real y cuál admite una resolución razonable dentro de la propia tradición islámica. Cierra con el contraste que el propio planteamiento exige: la diferencia categórica entre una sustitución impuesta sin consentimiento y el sacrificio vicario cristiano, ofrecido, según los evangelios, de forma enteramente voluntaria.</p>
+
+    <div class="highlight">
+      <strong>Método:</strong> toda cita coránica ha sido cotejada contra el texto árabe y múltiples traducciones reconocidas (Sahih International, Yusuf Ali, Pickthall, Abdul Haleem, Maududi); todo hadiz procede de Sahih Muslim o Riyad as-Salihin, verificado en sunnah.com con su texto árabe original; y se distingue expresamente, en cada sección, entre lo que la propia exégesis clásica islámica ya resuelve y lo que permanece como tensión sin resolución satisfactoria.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE I -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="panorama-general">
+    <span class="part-label">Parte I — El Principio General</span>
+    <h2>"Ningún portador de cargas cargará con la carga de otro"</h2>
+  </div>
+
+  <section>
+    <h3>1. Panorama: las cuatro repeticiones del principio</h3>
+    <span class="verified-tag">Verificado en texto árabe y cinco traducciones cotejadas para cada versículo</span>
+
+    <p>La fórmula —en árabe, <em>wa la taziru waziratun wizra ukhra</em>, "y ningún alma cargada de pecado cargará con el pecado de otra"— aparece con una estabilidad textual notable en cuatro lugares distintos del Corán.</p>
+
+    <table>
+      <tr><th>Referencia</th><th>Cita (Sahih International)</th><th>Sura</th></tr>
+      <tr><td>6:164</td><td>"Y ningún alma obtiene [culpa] sino contra sí misma, y ningún portador de cargas cargará con la carga de otro."</td><td>Al-An'am ("Los Rebaños")</td></tr>
+      <tr><td>17:15</td><td>"Quien se guía, se guía solo para el bien de su propia alma. Y quien se extravía, se extravía solo en detrimento de ella. Y ningún portador de cargas cargará con la carga de otro."</td><td>Al-Isra ("El Viaje Nocturno")</td></tr>
+      <tr><td>35:18</td><td>"Y ningún portador de cargas cargará con la carga de otro. Y si un alma cargada llama a otra para [llevar parte de] su carga, nada de ella será llevado, aunque se trate de un pariente cercano."</td><td>Fatir ("El Originador")</td></tr>
+      <tr><td>53:38</td><td>"Que ningún portador de cargas cargará con la carga de otro."</td><td>An-Najm ("La Estrella")</td></tr>
+    </table>
+
+    <div class="quran">
+      <div class="source">Corán 6:164</div>
+      <div class="text">"Di: '¿He de buscar como Señor a otro que no sea Dios, siendo Él el Señor de todas las cosas?' Y ningún alma obtiene [culpa] sino contra sí misma, y ningún portador de cargas cargará con la carga de otro. Luego, a vuestro Señor es vuestro retorno, y Él os informará acerca de aquello en lo que discrepabais."</div>
+    </div>
+
+    <p>La repetición de esta fórmula en cuatro suras distintas —dos de época meca temprana (53, 17) y dos de transición o época medinesa (6, 35), según la cronología tradicional de la revelación— indica que no se trata de una afirmación aislada, sino de un principio estructural de la teología coránica de la justicia: cada alma responde exclusivamente por sus propios actos, sin que exista mecanismo alguno de transferencia de responsabilidad penal entre personas distintas.</p>
+  </section>
+
+  <section id="voluntaria-3518">
+    <h3>2. 35:18 y el rechazo incluso de la sustitución voluntaria</h3>
+    <span class="verified-tag">Verificado en texto árabe y tafsir clásico (Maududi)</span>
+
+    <div class="quran">
+      <div class="source">Corán 35:18 (continuación)</div>
+      <div class="text">"...Y si un alma cargada llama a otra para [llevar parte de] su carga, nada de ella será llevado, aunque se trate de un pariente cercano. Tú solo puedes advertir a quienes temen a su Señor en lo oculto y han establecido la oración. Y quien se purifica, se purifica solo para [beneficio de] su propia alma."</div>
+    </div>
+
+    <p>Este añadido es significativo para el argumento de este documento porque no se limita a negar una transferencia impuesta: niega expresamente que el principio admita excepción incluso cuando el alma cargada <em>solicita activamente</em> ayuda ("llama a otra para llevar parte de su carga") y el pariente, presumiblemente, estaría dispuesto a acceder. "Nada de ella será llevado" —ni siquiera con consentimiento y buena voluntad del pariente que quisiera ayudar.</p>
+
+    <div class="academic">
+      <div class="source">Abul Ala Maududi, comentario a Corán 35:18 (Tafhim al-Qur'an, s. XX)</div>
+      <div class="text">Maududi conecta este versículo con un contexto histórico concreto: los parientes politeístas de La Meca presionaban a los nuevos musulmanes para que abandonaran el islam, ofreciéndose expresamente a "tomar sobre sí mismos" cualquier castigo futuro que esa apostasía pudiera acarrear —"nosotros asumimos la responsabilidad de cualquier castigo"—. El versículo responde directamente a esa oferta concreta de sustitución voluntaria, negando que semejante acuerdo tenga validez alguna ante Dios.</div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El Corán afirma, en al menos cuatro pasajes distintos y en cuatro suras diferentes (6:164; 17:15; 35:18; 53:38), que ningún portador de cargas cargará jamás con la carga de otro.</span></div>
+      <div class="premise"><span class="label">P2</span><span>35:18 extiende explícitamente este principio incluso al caso de un ofrecimiento voluntario y solicitado —un pariente dispuesto a asumir la carga de otro—, negando que tal sustitución, aun siendo consentida y buscada por ambas partes, sea posible o válida.</span></div>
+      <div class="conclusion">Por tanto, el principio general coránico no es simplemente una prohibición contra imposiciones injustas: es una negación categórica de que la carga penal de un alma pueda pasar jamás a otra, con o sin consentimiento de ambas partes.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE II -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="extraviadores-1625">
+    <span class="part-label">Parte II — La Excepción de los Extraviadores</span>
+    <h2>Quienes extravían a otros, ¿cargan con su pecado?</h2>
+  </div>
+
+  <section>
+    <h3>3. 16:25 y 29:12-13: "cargarán también parte de las cargas ajenas"</h3>
+    <span class="verified-tag">Verificado en texto árabe y múltiples traducciones cotejadas</span>
+
+    <div class="quran">
+      <div class="source">Corán 16:25 (sura An-Nahl, "Las Abejas")</div>
+      <div class="text">"[Esto,] para que carguen con sus propias cargas por completo el Día de la Resurrección, y con parte de las cargas de aquellos a quienes extraviaron sin conocimiento. ¡Qué mal es lo que cargan!"</div>
+    </div>
+
+    <div class="quran">
+      <div class="source">Corán 29:12-13 (sura Al-Ankabut, "La Araña")</div>
+      <div class="text">"Y dicen los que no creen a los que creen: 'Seguid nuestro camino, y cargaremos con vuestros pecados.' Pero no cargarán con nada de sus pecados: ciertamente, son mentirosos. Pero ciertamente cargarán con sus propias cargas, y con otras cargas junto a sus propias cargas, y ciertamente serán interrogados el Día de la Resurrección acerca de lo que solían inventar."</div>
+    </div>
+
+    <p>Este pasaje es especialmente instructivo porque contiene, en un solo lugar, tanto el ofrecimiento explícito de sustitución voluntaria ("cargaremos con vuestros pecados") como su doble rechazo: primero, una negación directa ("no cargarán con nada de sus pecados: son mentirosos"), y después, la fórmula de la "carga adicional" (cargarán "sus propias cargas, y otras cargas junto a sus propias cargas"). A primera vista, esta última cláusula parece contradecir el principio general examinado en la Parte I: si "no cargarán con nada de los pecados" de los creyentes, pero sí cargarán "otras cargas" además de las propias, ¿de quién son esas "otras cargas", si no son transferidas de alguien más?</p>
+  </section>
+
+  <section id="resolucion-clasica">
+    <h3>4. La resolución clásica: carga añadida, no carga transferida</h3>
+    <span class="verified-tag">Verificado: hadiz de Sahih Muslim, Libro del Conocimiento, citado por la propia exégesis clásica para resolver esta cuestión</span>
+
+    <p>La propia tradición exegética islámica ha abordado esta aparente tensión directamente, y lo hace apelando a un hadiz que funciona como principio interpretativo general.</p>
+
+    <div class="hadith">
+      <div class="source">Sahih Muslim, Libro del Conocimiento (Kitab al-'Ilm), capítulo "Quien inicia una práctica buena o mala" (citado en el comentario de Maududi a 16:25 y 29:13)</div>
+      <div class="text">El Profeta dijo: "Quien invite [a otros] a la buena guía recibirá una recompensa equivalente a la de quienes le siguieron por su invitación, sin que la recompensa de ninguno de ellos se vea disminuida en absoluto; y quien invite [a otros] al error incurrirá en un pecado equivalente al de quienes le siguieron, sin que el pecado de ninguno de ellos se vea disminuido en lo más mínimo."</div>
+    </div>
+
+    <div class="academic">
+      <div class="source">Abul Ala Maududi, comentario a Corán 16:25 y 29:13 (Tafhim al-Qur'an)</div>
+      <div class="text">Maududi explica, apoyándose expresamente en este hadiz, que la "carga adicional" de 16:25 y 29:13 no reduce en absoluto la carga del extraviado —que sigue cargando "el peso completo" de su propio pecado, exactamente igual que si nadie lo hubiera extraviado—. Lo que ocurre, según esta lectura, es que el extraviador comete un segundo pecado distinto e independiente —el de haber causado el extravío de otro—, por el cual se le añade una carga propia, nueva, sin que ello implique quitarle nada al pecado original del extraviado.</div>
+    </div>
+
+    <p>Esta resolución es coherente, está bien establecida dentro de la propia tradición exegética islámica, y disuelve satisfactoriamente la aparente contradicción entre el principio general y 16:25/29:13: no hay, en sentido estricto, transferencia de carga alguna. Cada persona recibe exactamente el peso correspondiente a sus propios actos —incluido el acto adicional, y separado, de haber inducido a otro al error—. El principio de 6:164, 17:15, 35:18 y 53:38 queda intacto.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>16:25 y 29:13 afirman que quienes extravían a otros cargarán "sus propias cargas" completas más "algunas de las cargas" de los extraviados.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La propia exégesis clásica islámica, apoyada en un hadiz explícito de Sahih Muslim, aclara que esta carga adicional no resta nada de la carga del extraviado —que sigue soportando su pecado completo, sin disminución alguna— sino que constituye una segunda carga, propia e independiente, impuesta al extraviador por el pecado distinto de haber causado el extravío.</span></div>
+      <div class="conclusion">Por tanto, 16:25 y 29:13, leídos con la exégesis clásica que los explica, no describen una transferencia real de responsabilidad penal, y en consecuencia no contradicen, en sentido estricto, el principio general de que nadie carga con el pecado de otro.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE III -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="hadiz-rescate">
+    <span class="part-label">Parte III — El Hadiz del Rescate</span>
+    <h2>Donde la resolución clásica ya no alcanza</h2>
+  </div>
+
+  <section>
+    <h3>5. Sahih Muslim: judíos y cristianos como "rescate del fuego"</h3>
+    <span class="verified-tag">Verificado en sunnah.com: Sahih Muslim 2767 (variantes a-d) y Riyad as-Salihin 432, con texto árabe</span>
+
+    <p>Frente a la solución razonable de la sección anterior, existe un hadiz —recogido en Sahih Muslim, la segunda colección más autorizada del sunismo tras Sahih al-Bujari, y repetido también en Riyad as-Salihin, la compilación devocional de referencia de an-Nawawi— que describe un escenario categóricamente distinto: no una carga adicional independiente, sino una sustitución real y efectiva de la pena.</p>
+
+    <div class="hadith">
+      <div class="source">Sahih Muslim 2767, narrado por Abu Musa al-Ash'ari (Libro del Arrepentimiento)</div>
+      <div class="text">El Mensajero de Alá dijo: "Cuando llegue el Día de la Resurrección, Alá entregará a cada musulmán un judío o un cristiano, y dirá: 'Este es tu rescate del fuego.'"</div>
+    </div>
+
+    <div class="hadith">
+      <div class="source">Sahih Muslim 2767 (variante), narrado por Abu Burda, de su padre</div>
+      <div class="text">El Mensajero de Alá dijo: "Ningún musulmán morirá sin que Alá admita en su lugar a un judío o a un cristiano en el fuego del infierno."</div>
+    </div>
+
+    <div class="hadith">
+      <div class="source">Sahih Muslim 2767, narrado por Abu Burda (variante adicional)</div>
+      <div class="text">El Mensajero de Alá dijo: "Vendrán gentes de entre los musulmanes el Día de la Resurrección con pecados tan pesados como una montaña, y Alá los perdonará, y pondrá en su lugar a los judíos y a los cristianos."</div>
+    </div>
+
+    <p>Esta misma narración, con cadenas de transmisión (<em>isnad</em>) independientes entre sí —lo cual, según los propios criterios de la ciencia islámica del hadiz, refuerza su solidez como tradición ampliamente atestiguada—, aparece también recogida en Riyad as-Salihin, hadiz 432, con idéntico contenido y texto árabe verificable.</p>
+
+    <div class="hadith">
+      <div class="source">Riyad as-Salihin 432 (compilación de al-Nawawi, s. XIII, atribuido a Sahih Muslim)</div>
+      <div class="text">"El Mensajero de Alá dijo: 'El Día de la Resurrección, Alá entregará a cada musulmán un judío o un cristiano, y dirá: Este es tu rescate del fuego.'"</div>
+    </div>
+
+    <p>El vocabulario empleado —"rescate" (<em>fikak</em>), "en su lugar" (sustitución directa), "puso en su lugar a los judíos y cristianos"— no describe una carga añadida e independiente para un tercero que cometió su propio pecado adicional (como en 16:25/29:13); describe la eliminación de la pena que correspondía al musulmán, y su traslado efectivo a una persona distinta, que no cometió el pecado en cuestión y que, según el propio texto, no ha tenido ninguna intervención voluntaria en el proceso: simplemente es "entregada" o "puesta en su lugar" por decisión unilateral de Alá.</p>
+  </section>
+
+  <section id="hadiz-no-alcanza">
+    <h3>6. Por qué la resolución clásica no alcanza a este hadiz</h3>
+    <span class="debate-tag">Distinción estructural entre dos tipos de "carga adicional", presentada con precisión</span>
+
+    <p>La resolución que disuelve la tensión entre el principio general y 16:25/29:13 —"carga añadida, no transferida"— depende de una condición estructural precisa: que la persona que recibe la "carga adicional" sea alguien que <em>cometió su propio acto</em> (el de extraviar a otros), de modo que la carga que se le añade corresponde exactamente a ese acto propio, no al pecado ajeno como tal. Esa condición no se cumple en el hadiz del rescate: el judío o el cristiano al que se "entrega" como rescate no ha cometido el pecado concreto del musulmán al que sustituye —el hadiz no dice que el sustituto sea castigado por su propio pecado <em>además</em> del ajeno, sino que el pecado del musulmán, literalmente, deja de estar en el musulmán ("Alá los perdonará") y pasa a ocupar el lugar del castigo del sustituto ("y pondrá en su lugar a los judíos y a los cristianos").</p>
+
+    <div class="dilemma">
+      <div class="dilemma-side a">
+        <h4>16:25 / 29:13 (resuelto)</h4>
+        <p>El extraviador comete un acto propio (extraviar a otro). Por ese acto propio recibe una carga propia y adicional. El extraviado sigue cargando el peso íntegro de su pecado original, sin ninguna reducción. Nadie deja de cargar lo que le corresponde por derecho. No hay transferencia: hay dos cargas paralelas, cada una correspondiente a su propio responsable.</p>
+      </div>
+      <div class="dilemma-side b">
+        <h4>El hadiz del rescate (no resuelto)</h4>
+        <p>El musulmán es perdonado —su pecado deja de pesar sobre él ("Alá los perdonará")—. El judío o cristiano no cometió ese pecado, y sin embargo ocupa el lugar de castigo que a ese pecado correspondía ("pondrá en su lugar"). Aquí sí hay una carga que se traslada de quien la cometió a quien no la cometió: exactamente el escenario que el principio general, en sus cuatro formulaciones, declara imposible.</p>
+      </div>
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El principio coránico general establece que ningún portador de cargas cargará con la carga de otro, ni siquiera mediante sustitución voluntaria y solicitada (35:18); y la excepción de 16:25/29:13 se resuelve, según la propia exégesis clásica, únicamente porque no implica transferencia real, sino una carga propia y adicional para quien cometió el acto distinto de extraviar a otros.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El hadiz del rescate (Sahih Muslim 2767; Riyad as-Salihin 432) describe, en cambio, que Alá "perdona" el pecado del musulmán y "pone en su lugar" a un judío o cristiano que no cometió ese pecado —es decir, una sustitución efectiva de la pena, no una carga adicional independiente por un acto propio del sustituto—.</span></div>
+      <div class="conclusion">Por tanto, la solución que disuelve la tensión entre el principio general y 16:25/29:13 no es aplicable al hadiz del rescate, que describe precisamente el escenario —transferencia real de la pena de un pecador a quien no cometió el pecado— que el principio coránico, en sus cuatro repeticiones, declara imposible incluso bajo consentimiento voluntario.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE IV -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="voluntario-involuntario">
+    <span class="part-label">Parte IV — El Sacrificio Vicario Cristiano</span>
+    <h2>La distinción que cambia la naturaleza moral del acto</h2>
+  </div>
+
+  <section>
+    <h3>7. Voluntario contra involuntario: la distinción categórica</h3>
+
+    <p>Es en este punto donde conviene anticipar una comparación que suele plantearse en sentido inverso: ¿no es la propia doctrina cristiana de la expiación vicaria de Cristo —un inocente que sufre por los pecados de otros— exactamente el mismo tipo de "transferencia injusta" que el principio coránico rechaza? La respuesta exige distinguir con precisión qué es lo que hace moralmente aceptable o inaceptable que alguien cargue con las consecuencias de la falta de otro: no el mero hecho de la sustitución, sino el consentimiento de quien la sostiene.</p>
+
+    <p>En el hadiz del rescate, ningún texto citado sugiere en ningún momento que el judío o el cristiano sustituto elija, acepte o consienta ocupar el lugar del musulmán en el fuego: es, en su formulación literal, una imposición unilateral de Alá sobre un tercero que ni siquiera es consultado. En la doctrina cristiana, por el contrario, el elemento central e insistentemente repetido en el Nuevo Testamento es que Cristo <em>elige</em> libremente entregar su vida: no es una víctima arrastrada contra su voluntad a un destino impuesto por decisión ajena, sino un agente que, según los evangelios, ejerce su propia voluntad al aceptar el sacrificio.</p>
+  </section>
+
+  <section id="isaias-juan">
+    <h3>8. Isaías 53 y Juan 10:17-18: Cristo elige entregar su vida</h3>
+
+    <div class="scripture">
+      <div class="source">Juan 10:17-18</div>
+      <div class="text">"Por eso me ama el Padre, porque yo pongo mi vida, para volverla a tomar. Nadie me la quita, sino que yo de mí mismo la pongo. Tengo poder para ponerla, y tengo poder para volverla a tomar. Este mandamiento recibí de mi Padre."</div>
+    </div>
+
+    <div class="scripture">
+      <div class="source">Isaías 53:7</div>
+      <div class="text">"Angustiado él, y afligido, no abrió su boca; como cordero fue llevado al matadero; y como oveja delante de sus trasquiladores, enmudeció, y no abrió su boca."</div>
+    </div>
+
+    <div class="scripture">
+      <div class="source">Hebreos 12:2</div>
+      <div class="text">"...puestos los ojos en Jesús, el autor y consumador de la fe, el cual por el gozo puesto delante de él sufrió la cruz, menospreciando el oprobio, y se sentó a la diestra del trono de Dios."</div>
+    </div>
+
+    <p>El énfasis de estos tres textos no es incidental: Juan 10:17-18 afirma explícitamente que "nadie" le quita la vida a Cristo, que es él quien la "pone de sí mismo", y que posee "poder" tanto para entregarla como para recuperarla —el vocabulario de la autoridad y la elección propia, no el de la víctima pasiva de una imposición ajena—. Isaías 53:7 describe una sumisión activa y silenciosa —"no abrió su boca"— ante un sufrimiento que podría haber rechazado. Hebreos 12:2 llega a describir el motivo interior de esa elección: "por el gozo puesto delante de él", una entrega orientada a un fin querido, no una imposición padecida sin sentido ni consentimiento.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El hadiz del rescate describe una sustitución penal impuesta sin ningún indicio textual de consentimiento: el judío o cristiano sustituto no elige, no acepta y no es consultado; simplemente es "entregado" y "puesto en su lugar" por decisión unilateral de un tercero.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La doctrina cristiana de la expiación vicaria se apoya en textos que afirman explícitamente la elección voluntaria del sustituto: "nadie me la quita, sino que yo de mí mismo la pongo" (Juan 10:18), con una sumisión activa y consciente (Isaías 53:7) y un motivo interior de entrega deseada (Hebreos 12:2).</span></div>
+      <div class="conclusion">Por tanto, aunque ambos escenarios impliquen que alguien distinto del pecador original cargue con una consecuencia penal, no son moralmente equivalentes: uno describe una imposición sin consentimiento sobre un tercero no consultado; el otro, la entrega libre de quien, según la propia fuente que lo describe, tiene "poder" tanto para darla como para no darla.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE V -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="objecion-resuelto">
+    <span class="part-label">Parte V — Objeciones y Respuestas</span>
+    <h2>El argumento más fuerte de cada lado</h2>
+  </div>
+
+  <section>
+    <h3>9. "16:25 y 29:13 ya resuelven cualquier tensión, no hay contradicción"</h3>
+
+    <div class="objection-block">
+      <div class="objection-header">LA OBJECIÓN</div>
+      <div class="objection-body">La propia exégesis clásica islámica —no una respuesta cristiana defensiva— ya explica satisfactoriamente 16:25 y 29:13 mediante el hadiz de "quien inicia una práctica buena o mala": no hay transferencia de carga, solo una carga adicional propia. Por tanto, la premisa misma de este documento —que existe una "contradicción coránica"— queda desactivada desde el principio, y el resto del argumento sobre el hadiz del rescate es una cuestión aparte que no puede llamarse, con propiedad, parte de la misma "contradicción".</div>
+    </div>
+    <div class="objection-block">
+      <div class="response-header">LA RESPUESTA</div>
+      <div class="response-body">
+        <p>Este documento concede explícitamente ese punto en la sección 4: la resolución clásica de 16:25 y 29:13 es coherente y disuelve satisfactoriamente esa tensión concreta. La honestidad exige reconocerlo sin regateos. Pero de ahí no se sigue que no exista ninguna contradicción en el conjunto del corpus examinado: la sección 6 de este documento muestra, con la misma exigencia de rigor, que el hadiz del rescate no cumple la condición estructural —una carga propia por un acto propio del sustituto— que permite esa resolución. Aceptar que 16:25/29:13 están resueltos no implica aceptar que el hadiz del rescate también lo esté: son dos textos con estructuras lógicas diferentes, y este documento ha tenido cuidado de no tratarlos como si fueran el mismo caso. La contradicción real de este documento no reside, por tanto, en la comparación interna entre versículos coránicos, sino en la comparación entre el principio general (en sus cuatro formulaciones, extendido incluso a la sustitución voluntaria en 35:18) y el hadiz canónico que describe una sustitución real, no consentida y no equiparable a la de los extraviadores.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="objecion-autenticidad">
+    <h3>10. "El hadiz del rescate es de autenticidad dudosa"</h3>
+
+    <div class="objection-block">
+      <div class="objection-header">LA OBJECIÓN</div>
+      <div class="objection-body">Un solo hadiz, por muy llamativo que resulte para la polémica interreligiosa, no puede pesar tanto como cuatro versículos coránicos explícitos y repetidos. Los hadices, a diferencia del Corán, no gozan de la misma garantía de preservación textual, y este en particular podría ser objeto de reinterpretación metafórica —una forma retórica de expresar que Alá es misericordioso con los musulmanes arrepentidos, no una afirmación literal de sustitución penal—.</div>
+    </div>
+    <div class="objection-block">
+      <div class="response-header">LA RESPUESTA</div>
+      <div class="response-body">
+        <p>El argumento de la autenticidad no favorece, en este caso, la objeción: el hadiz no aparece en una única narración aislada, sino en al menos tres variantes textuales distintas dentro de Sahih Muslim (2767, con sus formas a-d, narradas independientemente por Abu Musa al-Ash'ari y por Abu Burda a través de su padre), y se repite, de forma independiente, en Riyad as-Salihin —la compilación devocional de an-Nawawi, ampliamente usada y de autoridad no disputada dentro del sunismo—. La multiplicidad de cadenas de transmisión (<em>isnad</em>) independientes es, precisamente, el criterio que la propia ciencia islámica del hadiz (<em>'ilm al-hadiz</em>) utiliza para reforzar, no para debilitar, la solidez de una narración. En cuanto a la lectura metafórica, el vocabulario del hadiz —"entregará", "en su lugar", "rescate del fuego"— no admite fácilmente una lectura puramente simbólica sin vaciar de contenido específico la propia estructura de la frase, que menciona explícitamente a dos grupos humanos concretos (judíos y cristianos) como destinatarios literales de la sustitución, no como una metáfora general de "los que no creen".</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="objecion-cristo-injusto">
+    <h3>11. "El sacrificio de Cristo es igual de injusto"</h3>
+
+    <div class="objection-block">
+      <div class="objection-header">LA OBJECIÓN</div>
+      <div class="objection-body">Incluso concediendo que Cristo "eligiera" morir, el resultado estructural es idéntico al hadiz del rescate: alguien que no cometió el pecado (Cristo, o el judío/cristiano del hadiz) termina cargando con las consecuencias penales de otro (el pecador humano, o el musulmán). Si el principio de "nadie carga con el pecado de otro" es un principio de justicia objetiva, la voluntad del sustituto no debería cambiar si el resultado —alguien inocente sufriendo por la culpa de otro— es justo o injusto en sí mismo.</div>
+    </div>
+    <div class="objection-block">
+      <div class="response-header">LA RESPUESTA</div>
+      <div class="response-body">
+        <p>Esta objeción pasa por alto una distinción que prácticamente todo sistema ético y jurídico humano reconoce como decisiva: el consentimiento transforma la naturaleza moral de un acto, incluso cuando el resultado material —quién sufre, y cuánto— permanece igual. Que a una persona se le extraiga un riñón contra su voluntad es un crimen; que esa misma persona done un riñón voluntariamente es un acto de virtud, aunque el resultado físico sea idéntico en ambos casos. La objeción trata "alguien distinto del culpable sufre" como si fuera la única variable moralmente relevante, cuando la variable decisiva —reconocida en cualquier marco ético serio, no solo en el cristiano— es si ese alguien lo consiente. El hadiz del rescate no ofrece al judío o cristiano sustituto ninguna posibilidad de consentir, rechazar o negociar su papel; los evangelios presentan a Cristo afirmando expresamente que "nadie" le quita la vida, que él la entrega "de sí mismo", y que posee "poder" para hacerlo o no hacerlo. Tratar estos dos escenarios como moralmente idénticos porque comparten un resultado superficial —alguien distinto del pecador original sufre la pena— es ignorar precisamente la distinción que hace que una sustitución sea un abuso de poder o un acto de amor libremente ofrecido.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- CONCLUSIÓN -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="silogismo-maestro">
+    <span class="part-label">Conclusión</span>
+    <h2>El silogismo maestro y el veredicto final</h2>
+  </div>
+
+  <section>
+    <h3>12. El silogismo maestro</h3>
+
+    <p>Las once secciones anteriores —que cubren el principio general en sus cuatro formulaciones, su extensión a la sustitución voluntaria, la excepción de los extraviadores y su resolución clásica, el hadiz del rescate y por qué escapa a esa misma resolución, y el contraste con la expiación vicaria cristiana— convergen en una formulación final.</p>
+
+    <div class="syllogism maestro">
+      <div class="premise"><span class="label">P1</span><span>El Corán establece, en cuatro pasajes distintos (6:164; 17:15; 35:18; 53:38), que ningún portador de cargas cargará jamás con la carga de otro, extendiendo esta prohibición explícitamente incluso al caso de una sustitución voluntaria y solicitada entre parientes (35:18).</span></div>
+      <div class="premise"><span class="label">P2</span><span>La excepción aparente de 16:25 y 29:12-13 —quienes extravían a otros cargan también con "algo" de las cargas ajenas— se resuelve, según la propia exégesis clásica islámica apoyada en un hadiz de Sahih Muslim, como una carga propia e independiente por el acto distinto de extraviar, sin que ello reduzca ni transfiera la carga original del extraviado; esta resolución, sin embargo, depende de una condición estructural —que el que recibe la carga adicional haya cometido su propio acto distinto— que no se cumple en el hadiz del rescate (Sahih Muslim 2767; Riyad as-Salihin 432), donde Alá "perdona" al musulmán y "pone en su lugar" a un judío o cristiano que no cometió ese pecado ni consintió en sustituirlo.</span></div>
+      <div class="premise"><span class="label">P3</span><span>La doctrina cristiana de la expiación vicaria, aunque también implica que alguien distinto del pecador cargue con una consecuencia penal, se distingue categóricamente del hadiz del rescate en el elemento que la propia ética general reconoce como decisivo: el consentimiento voluntario del sustituto, afirmado explícitamente en los textos evangélicos (Juan 10:17-18) y profético-mesiánicos (Isaías 53:7) que fundamentan esa doctrina.</span></div>
+      <div class="conclusion">Por tanto, el corpus coránico y profético examinado contiene una genuina tensión sin resolución satisfactoria: el principio general, extendido incluso a la sustitución voluntaria, es contradicho no por 16:25/29:13 —razonablemente armonizables— sino por un hadiz canónico, atestiguado en múltiples narraciones independientes, que describe precisamente la transferencia real, no consentida, de una pena de un pecador a quien no cometió el pecado; una transferencia que, además, no puede equipararse moralmente a la expiación vicaria cristiana, fundada explícitamente en el consentimiento libre del sustituto.</div>
+    </div>
+  </section>
+
+  <div class="verdict" id="veredicto">
+    <h2>El veredicto final</h2>
+
+    <p><strong>La honestidad exige distinguir grados de tensión, no tratarlos como uno solo.</strong> Este documento no ha argumentado que todo el corpus coránico sobre la responsabilidad individual sea internamente incoherente: 16:25 y 29:12-13, examinados con la propia exégesis clásica islámica, encuentran una resolución razonable que este documento reconoce sin reservas. La tensión real e irresuelta se concentra en un lugar más preciso y, por ello, más difícil de relativizar: el hadiz del rescate, que no cumple la condición que hace coherentes a los versículos anteriores, y que describe, en el vocabulario más literal posible, la sustitución efectiva de una pena.</p>
+
+    <p><strong>El contraste con la expiación cristiana no es una equivalencia, sino una distinción.</strong> Quien objete que "toda sustitución penal es igual de problemática" debe explicar por qué el consentimiento —criterio que rige la diferencia entre un robo y una donación, entre un secuestro y una adopción, entre una violación y un matrimonio— dejaría de ser relevante exclusivamente en este caso. Este documento sostiene que no hay razón para hacer esa excepción, y que la diferencia entre una sustitución impuesta sobre un tercero no consultado y una entrega libremente ofrecida por quien "tiene poder para darla y poder para recobrarla" es, precisamente, la diferencia entre la injusticia y el amor.</p>
+
+    <p><strong>La conclusión.</strong> Un musulmán que responda a este documento con la resolución clásica de 16:25/29:13 habrá respondido correctamente a una parte del argumento, pero no a su núcleo: la pregunta que permanece abierta es si el hadiz del rescate, atestiguado en múltiples narraciones de Sahih Muslim y en Riyad as-Salihin, puede armonizarse con el principio de que "ningún portador de cargas cargará con la carga de otro" mediante algún mecanismo distinto del que ya se ha mostrado insuficiente para él.</p>
+
+    <p>FUENTES PRINCIPALES CITADAS: Corán 6:164; 16:25; 17:15; 29:12-13; 35:18; 53:38 (texto árabe y traducciones Sahih International, Yusuf Ali, Pickthall, Abdul Haleem, Maududi cotejadas) · Sahih Muslim 2767 (a-d), Libro del Arrepentimiento (sunnah.com) · Riyad as-Salihin 432 (sunnah.com) · Sahih Muslim, Libro del Conocimiento, hadiz "man sanna sunnatan hasanatan aw sayyi'atan" · Abul Ala Maududi, Tafhim al-Qur'an, comentarios a 16:25, 29:12-13 y 35:18 · Juan 10:17-18 · Isaías 53:7 · Hebreos 12:2</p>
+  </div>
+
+</main>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('nav-toggle');
+  const overlay = document.getElementById('overlay');
+
+  function closeNav() {
+    sidebar.classList.remove('open');
+    toggle.classList.remove('open');
+    overlay.classList.remove('visible');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = sidebar.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    overlay.classList.toggle('visible', isOpen);
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.querySelectorAll('#sidebar nav a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('progress-bar').style.width = scrolled + '%';
+  });
+
+  const navLinks = document.querySelectorAll('#sidebar nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  document.querySelectorAll('main [id]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

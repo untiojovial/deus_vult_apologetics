@@ -22,3 +22,4 @@ Aqui trabajamos pasajes complejos con metodo: contexto, genero, lenguaje y tradi
 - [Defensa de la Torah — Apologética Académica (Dossier)](/biblia/defensa-torah-dossier/)
 - [100 Profecias Cumplidas en los Cuatro Evangelios (Dossier)](/biblia/profecias-evangelios-dossier/)
 - [Versiculos Dificiles de la Biblia (Dossier)](/biblia/versiculos-dificiles-dossier/)
+- [El Final Largo de Marcos: Defensa Integra de Marcos 16:9-20 (Dossier)](/biblia/defensa-final-largo-marcos-dossier/)

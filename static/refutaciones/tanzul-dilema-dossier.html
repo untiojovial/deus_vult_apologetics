@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>¿Desciende Allah? — El dilema del tanzul — Kalam, tanzih y reducción al absurdo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#07111D;--surf:#0D1B2E;--card:#12223A;--card2:#172C48;
+  --border:#1A2F50;--border2:#22426E;
+  --navy:#1B2A4A;--gold:#C9A84C;--goldD:#8B6914;--goldG:rgba(201,168,76,.11);
+  --crim:#8B1A1A;--crimL:#C0392B;--white:#F0EDE6;--dim:#96A8BE;--faint:#3A4E65;
+  --green:#1A5A2A;--greenL:#27AE60;--teal:#1A4A4A;--tealL:#2E8B8B;--nav-h:54px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;font-size:16px;line-height:1.78;overflow-x:hidden;}
+#topnav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(7,17,29,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);z-index:500;display:flex;align-items:center;}
+#nav-logo{flex-shrink:0;padding:0 1.3rem;border-right:1px solid var(--border);height:100%;display:flex;flex-direction:column;justify-content:center;}
+#nav-logo .ln1{font-family:'Playfair Display',serif;font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;}
+#nav-logo .ln2{font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);font-weight:700;}
+#nav-tabs{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;height:100%;flex:1;}
+#nav-tabs::-webkit-scrollbar{display:none;}
+.ntab{flex-shrink:0;padding:0 .9rem;cursor:pointer;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);border:none;background:none;height:100%;display:flex;align-items:center;gap:.4rem;border-bottom:2px solid transparent;transition:all .18s;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.ntab:hover{color:var(--white);background:var(--goldG);}
+.ntab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--goldG);}
+.ntab .tn{font-size:.55rem;color:var(--faint);}
+.ntab.active .tn{color:var(--goldD);}
+#toc-btn{flex-shrink:0;border:none;background:none;cursor:pointer;padding:0 1.1rem;height:100%;border-left:1px solid var(--border);color:var(--dim);font-size:.85rem;transition:all .18s;display:flex;align-items:center;gap:.4rem;}
+#toc-btn:hover{color:var(--gold);background:var(--goldG);}
+#toc-btn span{font-size:.62rem;text-transform:uppercase;letter-spacing:.15em;font-family:'JetBrains Mono',monospace;}
+#pbar{position:fixed;top:var(--nav-h);left:0;right:0;height:2px;background:var(--border);z-index:490;}
+#pfill{height:100%;background:linear-gradient(90deg,var(--crim),var(--gold));width:0%;}
+#toc-ov{position:fixed;inset:0;z-index:800;display:none;background:rgba(3,8,17,.9);backdrop-filter:blur(8px);align-items:flex-start;justify-content:center;padding-top:75px;}
+#toc-ov.open{display:flex;}
+#toc-panel{background:var(--surf);border:1px solid var(--border2);width:min(660px,90vw);max-height:80vh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+#toc-panel::-webkit-scrollbar{width:4px;}
+#toc-hdr{position:sticky;top:0;background:var(--card);padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+#toc-hdr h2{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--white);}
+#toc-close{border:none;background:none;color:var(--dim);cursor:pointer;font-size:1.3rem;line-height:1;transition:color .2s;}
+#toc-close:hover{color:var(--gold);}
+.tg{padding:.4rem 0;}
+.tg-lbl{padding:.5rem 1.4rem .2rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.2em;color:var(--faint);}
+.ti{display:flex;align-items:center;gap:.9rem;padding:.6rem 1.4rem;cursor:pointer;border-left:2px solid transparent;transition:all .17s;}
+.ti:hover{background:var(--goldG);border-left-color:var(--goldD);}
+.ti .tinum{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--goldD);min-width:1.6rem;}
+.ti .titxt{font-size:.88rem;color:var(--dim);}
+.ti:hover .titxt{color:var(--white);}
+.ti.done .titxt{opacity:.5;}
+main{padding-top:var(--nav-h);}
+#sec-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 8vw 5rem;position:relative;overflow:hidden;background:radial-gradient(ellipse at 65% 40%,rgba(201,168,76,.06) 0%,transparent 65%);}
+#sec-hero::before{content:'التنزل';position:absolute;right:-0.02em;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:clamp(7rem,20vw,18rem);color:rgba(201,168,76,.025);pointer-events:none;line-height:1;z-index:0;direction:rtl;}
+.hero-in{position:relative;z-index:1;max-width:880px;}
+.hkick{font-family:'JetBrains Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.26em;color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;}
+.hkick::before{content:'';width:2rem;height:1px;background:var(--gold);}
+.htitle{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.6vw,3.3rem);font-weight:900;color:var(--white);line-height:1.16;margin-bottom:.7rem;}
+.htitle em{color:var(--gold);font-style:normal;}
+.hsub{font-size:1.02rem;color:var(--dim);max-width:680px;line-height:1.88;font-weight:300;margin-bottom:2.2rem;}
+.hpills{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:2.5rem;}
+.pill{font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.26rem .7rem;border:1px solid var(--border2);color:var(--dim);text-transform:uppercase;letter-spacing:.1em;}
+.pill.g{border-color:var(--goldD);color:var(--gold);}
+.pill.r{border-color:var(--crim);color:#E57373;}
+.pill.t{border-color:var(--tealL);color:#5FD6D6;}
+.hclaim{background:var(--card);border-left:4px solid var(--gold);padding:1.2rem 1.5rem;max-width:740px;margin-bottom:2rem;}
+.hclaim-lbl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.4rem;}
+.hclaim-txt{font-size:.95rem;color:var(--dim);line-height:1.78;font-style:italic;}
+.section{padding:5.5rem 8vw 2rem;}
+.sec-ey{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.25em;color:var(--gold);display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;}
+.sec-ey::before{content:'';width:1.6rem;height:1px;background:var(--gold);}
+.sec-ey.crim{color:var(--crimL);}
+.sec-ey.crim::before{background:var(--crimL);}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.45rem,2.7vw,2.15rem);font-weight:700;color:var(--white);margin-bottom:.5rem;line-height:1.24;}
+.rule{width:2.8rem;height:2px;background:linear-gradient(90deg,var(--crim),var(--gold));margin:1.2rem 0 2rem;}
+.lead{font-size:1.04rem;color:var(--dim);line-height:1.88;max-width:820px;margin-bottom:1.8rem;}
+p{color:var(--dim);margin-bottom:1.2rem;max-width:820px;line-height:1.85;}
+p strong,p b{color:var(--white);}
+h3.sub{font-family:'Playfair Display',serif;font-size:1.16rem;color:var(--white);margin:2.3rem 0 .8rem;}
+h4.subsub{font-family:'Playfair Display',serif;font-size:1.0rem;color:var(--gold);margin:1.6rem 0 .6rem;}
+.claim-box{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.3);border-left:4px solid var(--gold);padding:1.4rem 1.7rem;margin:2rem 0;}
+.claim-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
+.claim-lbl::before{content:'§';font-size:.9rem;}
+.claim-txt{font-size:.95rem;color:var(--dim);line-height:1.8;font-style:italic;}
+.rebut-box{background:rgba(26,90,42,.1);border:1px solid rgba(39,174,96,.3);border-left:4px solid var(--greenL);padding:1.4rem 1.7rem;margin:2rem 0;}
+.rebut-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;color:var(--greenL);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
+.rebut-lbl::before{content:'✓';}
+.rebut-txt{font-size:.95rem;color:#C5E8CE;line-height:1.8;}
+.ar-block{background:linear-gradient(135deg,var(--card),var(--surf));border:1px solid var(--border2);border-left:4px solid var(--gold);padding:1.8rem 2rem;margin:2rem 0;text-align:center;}
+.ar-main{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.6vw,1.5rem);color:var(--gold);display:block;line-height:2;margin-bottom:.6rem;direction:rtl;}
+.ar-tr{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim);display:block;margin-bottom:.45rem;font-style:italic;}
+.ar-trad{font-size:.96rem;color:var(--white);font-style:italic;font-family:'Playfair Display',serif;}
+.qb{border-left:3px solid var(--gold);padding:1.3rem 1.7rem;background:var(--card);margin:1.8rem 0;position:relative;}
+.qb::before{content:'\201C';font-family:'Playfair Display',serif;font-size:4rem;color:var(--gold);opacity:.15;position:absolute;top:-.4rem;left:.7rem;line-height:1;pointer-events:none;}
+.qt{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:var(--white);line-height:1.85;padding-left:.7rem;margin-bottom:.55rem;}
+.qs{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--gold);text-transform:uppercase;letter-spacing:.13em;padding-left:.7rem;}
+.qb.gr-q{border-left-color:var(--greenL);}
+.qb.gr-q::before{color:var(--greenL);}
+.qb.gr-q .qs{color:var(--greenL);}
+.qb.tl-q{border-left-color:var(--tealL);}
+.qb.tl-q::before{color:var(--tealL);}
+.qb.tl-q .qs{color:#5FD6D6;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.15rem;margin:2rem 0;}
+.card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--gold);padding:1.4rem;}
+.card.cr{border-top-color:var(--crimL);}
+.card.gr{border-top-color:var(--greenL);}
+.card.go{border-top-color:var(--gold);}
+.card.tl{border-top-color:var(--tealL);}
+.cey{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.45rem;}
+.card.cr .cey{color:#E57373;}
+.card.gr .cey{color:#5FD67A;}
+.card.tl .cey{color:#5FD6D6;}
+.cttl{font-size:.94rem;font-weight:600;color:var(--white);margin-bottom:.45rem;line-height:1.3;}
+.cbod{font-size:.85rem;color:var(--dim);line-height:1.72;}
+.sil{background:var(--surf);border:1px solid var(--border2);margin:2.5rem 0;}
+.sil-hdr{background:linear-gradient(90deg,var(--crim),#5A0A0A);padding:.68rem 1.4rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--white);text-transform:uppercase;letter-spacing:.2em;}
+.sil.gold .sil-hdr{background:linear-gradient(90deg,var(--goldD),#5A3A00);}
+.sil-row{display:flex;border-bottom:1px solid var(--border);}
+.sil-row:last-child{border-bottom:none;}
+.sil-lbl{min-width:3.6rem;padding:.9rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.83rem;font-weight:600;color:var(--gold);border-right:1px solid var(--border);display:flex;align-items:flex-start;}
+.sil-row.C .sil-lbl{background:var(--gold);color:#000;}
+.sil-row.C .sil-txt{background:rgba(201,168,76,.06);color:var(--white);}
+.sil-txt{padding:.9rem 1.3rem;font-size:.9rem;color:var(--dim);line-height:1.82;flex:1;}
+.sil-txt strong{color:var(--white);}
+.ctbl{width:100%;border-collapse:collapse;margin:2rem 0;font-size:.85rem;}
+.ctbl th{padding:.75rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;text-transform:uppercase;letter-spacing:.12em;text-align:left;}
+.ctbl th:nth-child(1){background:var(--navy);color:var(--white);}
+.ctbl th:nth-child(2){background:var(--crimL);color:var(--white);}
+.ctbl th:nth-child(3){background:var(--green);color:var(--white);}
+.ctbl th:nth-child(4){background:var(--goldD);color:#000;}
+.ctbl th:nth-child(5){background:var(--teal);color:var(--white);}
+.ctbl td{padding:.85rem .9rem;border:1px solid var(--border);vertical-align:top;line-height:1.65;}
+.ctbl tr:nth-child(even) td{background:var(--card);}
+.ctbl tr:nth-child(odd) td{background:var(--surf);}
+.ctbl td:nth-child(1){color:var(--white);font-weight:600;background:rgba(27,42,74,.5)!important;}
+.callout{background:var(--goldG);border:1px solid rgba(201,168,76,.25);padding:1.3rem 1.6rem;margin:2rem 0;}
+.callout-lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem;}
+.callout-body{font-size:.92rem;color:var(--dim);line-height:1.82;}
+.callout-body strong{color:var(--white);}
+.verdict{background:rgba(201,168,76,.07);border:2px solid rgba(201,168,76,.3);padding:1.5rem 1.8rem;margin:2rem 0;}
+.verdict-lbl{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.22em;color:var(--gold);margin-bottom:.6rem;}
+.verdict-txt{font-size:1.02rem;color:var(--white);line-height:1.85;}
+.sec-nav{display:flex;align-items:center;justify-content:space-between;padding:2.5rem 0 0;border-top:1px solid var(--border);margin-top:4rem;gap:1rem;}
+.snbtn{display:flex;align-items:center;gap:.7rem;padding:.8rem 1.2rem;background:var(--surf);border:1px solid var(--border2);cursor:pointer;transition:all .2s;max-width:42%;text-decoration:none;}
+.snbtn:hover{background:var(--goldG);border-color:var(--goldD);}
+.snbtn.dis{opacity:.2;pointer-events:none;}
+.snbtn .arr{font-size:1.1rem;color:var(--gold);flex-shrink:0;}
+.snbtn .meta{font-family:'JetBrains Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.15em;color:var(--dim);margin-bottom:.18rem;}
+.snbtn .lbl{font-size:.82rem;color:var(--white);line-height:1.3;}
+.snbtn.next{flex-direction:row-reverse;text-align:right;}
+.sncenter{display:flex;flex-direction:column;align-items:center;gap:.4rem;flex-shrink:0;}
+.sndots{display:flex;gap:.32rem;flex-wrap:wrap;justify-content:center;max-width:180px;}
+.sndot{width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .2s;}
+.sndot.active{background:var(--gold);transform:scale(1.4);}
+.sndot.done{background:var(--goldD);}
+.snpos{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--faint);text-transform:uppercase;letter-spacing:.15em;}
+.sdiv{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);}
+.reveal{opacity:0;transform:translateY(15px);transition:opacity .5s ease,transform .5s ease;}
+.reveal.vis{opacity:1;transform:none;}
+#bttop{position:fixed;bottom:2rem;right:2rem;width:2.4rem;height:2.4rem;background:var(--gold);border:none;cursor:pointer;color:#000;font-size:1rem;font-weight:700;display:none;align-items:center;justify-content:center;z-index:400;}
+#bttop.show{display:flex;}
+#kbd{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(13,27,46,.9);border:1px solid var(--border2);padding:.45rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--dim);letter-spacing:.1em;z-index:400;pointer-events:none;opacity:0;transition:opacity .4s;}
+#kbd.show{opacity:1;}
+.synthtbl{width:100%;border-collapse:collapse;margin:2rem 0;font-size:.84rem;}
+.synthtbl th{background:var(--navy);color:var(--white);padding:.7rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;text-align:left;}
+.synthtbl td{padding:.85rem .9rem;border:1px solid var(--border);line-height:1.6;}
+.synthtbl tr:nth-child(even) td{background:var(--card);}
+.synthtbl tr:nth-child(odd) td{background:var(--surf);}
+.synthtbl td:first-child{color:var(--gold);font-weight:600;background:rgba(201,168,76,.05)!important;}
+.horn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:2rem 0;}
+.horn-card{background:var(--card2);border:1px solid var(--border2);border-top:4px solid var(--crimL);padding:1.2rem;position:relative;}
+.horn-num{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:var(--crimL);line-height:1;margin-bottom:.4rem;}
+.horn-name{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.35rem;}
+.horn-def{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--goldD);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.06em;}
+.horn-desc{font-size:.82rem;color:var(--dim);line-height:1.65;margin-bottom:.7rem;}
+.horn-fail{display:inline-flex;align-items:center;gap:.4rem;background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.4);color:#E57373;font-family:'JetBrains Mono',monospace;font-size:.64rem;padding:.28rem .6rem;text-transform:uppercase;letter-spacing:.08em;}
+.horn-fail::before{content:'✗';}
+@media(max-width:800px){.section{padding:4rem 5vw 1.5rem;}#sec-hero{padding:5rem 5vw 4rem;}.sec-nav{flex-direction:column;}.snbtn{max-width:100%;width:100%;}.ctbl{font-size:.76rem;}}
+</style>
+</head>
+<body>
+<div id="pbar"><div id="pfill"></div></div>
+<header id="topnav">
+  <div id="nav-logo"><div class="ln1">Teología comparada</div><div class="ln2">El dilema del tanzul</div></div>
+  <div id="nav-tabs"></div>
+  <button id="toc-btn" onclick="openToc()"><span>☰</span><span>Índice</span></button>
+</header>
+<div id="toc-ov" onclick="if(event.target===this)closeToc()">
+  <div id="toc-panel">
+    <div id="toc-hdr"><h2>Índice — El dilema del tanzul</h2><button id="toc-close" onclick="closeToc()">✕</button></div>
+  </div>
+</div>
+<main>
+
+<section id="sec-hero" class="section">
+  <div class="hero-in">
+    <div class="hkick">Teología islámica · Kalam · Filosofía de la religión · Dilema de cinco cuernos</div>
+    <h1 class="htitle">¿Desciende <em>Allah</em> al cielo más bajo?</h1>
+    <p class="hsub">El hadiz del <em>nuzūl</em> (النزول, «el descenso»), la trascendencia divina (tanzīh) y el argumento cosmológico kalām. Un análisis en forma de dilema constructivo de cinco cuernos —con reducciones al absurdo, silogismos formales y el debate real que ha dividido a las escuelas teológicas sunitas más rigurosas durante más de mil años— sobre si es coherente afirmar que Allah desciende, cada noche, a un lugar específico, en un momento específico.</p>
+    <div class="hpills">
+      <span class="pill g">Sahih al-Bujari 1145</span><span class="pill g">Sahih Muslim 758</span><span class="pill g">Corán 42:11</span><span class="pill g">Corán 20:5</span>
+      <span class="pill">Ibn Taymiyya</span><span class="pill">Al-Ash'ari</span><span class="pill">Fajr al-Din al-Razi</span><span class="pill">Al-Ghazali</span>
+      <span class="pill t">Argumento kalam</span><span class="pill r">Cinco cuernos</span>
+    </div>
+    <div class="hclaim">
+      <div class="hclaim-lbl">La doctrina en sus términos exactos</div>
+      <div class="hclaim-txt">«Nuestro Señor, Bendito y Exaltado, desciende cada noche al cielo más bajo cuando queda el último tercio de la noche, y dice: ¿Quién me invoca, para que yo le responda? ¿Quién me pide, para que yo le dé? ¿Quién me pide perdón, para que yo le perdone?» — Sahih al-Bujari 1145; Sahih Muslim 758. Este estudio pregunta: ¿puede esta afirmación sostenerse sin contradicción junto con la trascendencia, la inmutabilidad y la incorporeidad que la propia teología islámica clásica atribuye a Allah?</div>
+    </div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-marco" class="section">
+  <div class="sec-ey">Parte I · Fundamentos</div>
+  <h2 class="sec-title">Marco conceptual — Lo que hay que fijar antes de juzgar la doctrina</h2>
+  <div class="rule"></div>
+  <p class="lead">Antes de plantear el dilema, hace falta reunir seis piezas: el texto exacto del hadiz, su grado de autenticidad, los textos coránicos de trascendencia con los que entra en tensión, las tres escuelas sunitas que han intentado resolver esa tensión, el aparato filosófico del kalam que la propia tradición islámica desarrolló para probar la existencia de Dios, y el vocabulario técnico que todas las partes usan. Sin estas seis piezas, cualquier veredicto sobre el tanzul es prematuro.</p>
+
+  <h3 class="sub">1.1 — El hadiz del nuzul: el texto exacto</h3>
+  <div class="ar-block reveal">
+    <span class="ar-main">يَنْزِلُ رَبُّنَا تَبَارَكَ وَتَعَالَى كُلَّ لَيْلَةٍ إِلَى السَّمَاءِ الدُّنْيَا حِينَ يَبْقَى ثُلُثُ اللَّيْلِ الْآخِرُ</span>
+    <span class="ar-tr">Yanzilu Rabbunā tabāraka wa taʿālā kulla laylatin ilā as-samāʾi ad-dunyā ḥīna yabqā thuluthu al-layli al-ākhir</span>
+    <span class="ar-trad">«Nuestro Señor, Bendito y Exaltado, desciende cada noche al cielo más bajo cuando queda el último tercio de la noche, y dice: ¿Quién me invoca, para que yo le responda? ¿Quién me pide, para que yo le dé? ¿Quién me pide perdón, para que yo le perdone?»</span>
+  </div>
+  <p>Este hadiz aparece, con formulaciones casi idénticas, en Sahih al-Bujari (Libro del Tahajjud, 1145; también 6321 y 7494) y en Sahih Muslim (Libro de la oración de los viajeros, 758), las dos colecciones más autorizadas del canon sunita. Ibn Hajar al-Asqalani, en su comentario clásico <em>Fath al-Bari</em>, discute extensamente las variantes de transmisión y la cuestión de en qué momento exacto «termina» el descenso.</p>
+
+  <h3 class="sub">1.2 — El grado de autenticidad: por qué no puede descartarse por debilidad</h3>
+  <p>Este hadiz no es un caso aislado ni débil. Ha sido transmitido por al menos una veintena de Compañeros del Profeta a través de decenas de cadenas independientes, lo que ha llevado a numerosos especialistas en la ciencia del hadiz —entre ellos Ibn Abd al-Barr, Ibn Taymiyya, al-Dhahabi y, en el siglo XX, al-Albani— a clasificarlo como <strong>mutawátir</strong> (متواتر): transmitido por tantas vías independientes que, según la propia epistemología suní, produce certeza (ʿilm yaqīnī), no simple probabilidad. Esta clasificación es decisiva para todo el dilema: significa que descartar el hadiz por conveniencia filosófica no es una opción metodológicamente barata dentro del propio marco suní (se desarrolla en la Parte VII).</p>
+
+  <h3 class="sub">1.3 — Los textos coránicos de trascendencia: la tensión ya está en el propio Corán</h3>
+  <p>El problema no lo introduce un observador externo: está ya inscrito en la tensión entre los propios textos que el Islam considera revelados. Cuatro versículos son especialmente relevantes:</p>
+
+  <div class="ar-block reveal">
+    <span class="ar-main">لَيْسَ كَمِثْلِهِ شَيْءٌ وَهُوَ السَّمِيعُ الْبَصِيرُ</span>
+    <span class="ar-tr">Laysa kamithlihi shayʾun wa huwa as-samīʿu al-baṣīr — Corán 42:11 (Ash-Shura)</span>
+    <span class="ar-trad">«No hay nada semejante a Él, y Él es el que todo lo oye, el que todo lo ve.»</span>
+  </div>
+  <div class="ar-block reveal">
+    <span class="ar-main">قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ</span>
+    <span class="ar-tr">Qul huwa Allāhu aḥad. Allāhu-ṣ-ṣamad. Lam yalid wa lam yūlad. Wa lam yakun lahu kufuwan aḥad — Corán 112 (Al-Ijlas)</span>
+    <span class="ar-trad">«Di: Él es Allah, Uno. Allah, el Absoluto. No engendra ni es engendrado. Y no hay nadie semejante a Él.»</span>
+  </div>
+  <div class="ar-block reveal">
+    <span class="ar-main">الرَّحْمَٰنُ عَلَى الْعَرْشِ اسْتَوَىٰ</span>
+    <span class="ar-tr">Ar-Raḥmānu ʿalā al-ʿarshi-stawā — Corán 20:5 (Ta-Ha)</span>
+    <span class="ar-trad">«El Misericordioso se estableció sobre el Trono.»</span>
+  </div>
+  <div class="ar-block reveal">
+    <span class="ar-main">وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ</span>
+    <span class="ar-tr">Wa huwa maʿakum ayna mā kuntum — Corán 57:4 (Al-Hadid, fragmento)</span>
+    <span class="ar-trad">«Y Él está con vosotros dondequiera que estéis.»</span>
+  </div>
+  <p>Cuatro afirmaciones simultáneamente reveladas y simultáneamente autoritativas: (a) nada se asemeja a Él —trascendencia radical (tanzih); (b) es «Uno» sin comparación posible; (c) se «estableció» sobre un Trono —lenguaje que sugiere ubicación; (d) está «con vosotros dondequiera que estéis» —omnipresencia. A esto se suma el hadiz del nuzul: desciende «al cielo más bajo», un lugar cosmológicamente específico, en un momento cosmológicamente específico. La pregunta que estructura todo este análisis es si estas cinco afirmaciones —tanzih, unicidad, istiwa, maʿiyyah, nuzul— pueden sostenerse juntas sin contradicción, o si alguna debe ceder ante las demás.</p>
+
+  <h3 class="sub">1.4 — Las tres escuelas: cómo ha respondido la tradición suní</h3>
+  <div class="cards">
+    <div class="card cr reveal">
+      <div class="cey">Atarismo (Salafismo clásico)</div>
+      <div class="cttl">Afirmación literal sin preguntar el «cómo» (bila kayfa)</div>
+      <div class="cbod">Representada por Ibn Khuzayma (<em>Kitab al-Tawhid</em>), y sistematizada de forma más filosóficamente elaborada por Ibn Taymiyya (<em>al-ʿAqīda al-Wāsiṭiyya</em>; <em>Darʾ Taʿāruḍ al-ʿAql wa-n-Naql</em>). Sostiene que todos los atributos —incluido el descenso— deben afirmarse tal como aparecen en el texto, sin negarlos (taʿṭīl), sin compararlos con la modalidad de las criaturas (tashbīh) y sin preguntar cómo ocurren (bila kayfa).</div>
+    </div>
+    <div class="card go reveal">
+      <div class="cey">Ash'arismo</div>
+      <div class="cttl">Reinterpretación metafórica (taʾwīl) de los atributos «corporales»</div>
+      <div class="cbod">Desarrollada por teólogos post-clásicos como Abu Bakr al-Bayhaqi (<em>Kitab al-Asmaʾ wa-s-Sifat</em>) y, de forma más sistemática, Fajr al-Din al-Razi (<em>Asas al-Taqdis</em>), con eco en el comentario de al-Nawawi a Sahih Muslim. Sostiene que expresiones como «descender», «mano» o «rostro» no pueden tomarse literalmente sin comprometer la trascendencia (42:11), y deben interpretarse como referidas a la misericordia, el mandato, o un ángel que desciende.</div>
+    </div>
+    <div class="card tl reveal">
+      <div class="cey">Maturidismo</div>
+      <div class="cttl">Posición intermedia, más cercana al ash'arismo en la práctica</div>
+      <div class="cbod">Fundada por Abu Mansur al-Maturidi, comparte con el ash'arismo la prioridad de la razón (ʿaql) para resolver aparentes antropomorfismos, aunque con matices propios sobre la relación entre razón y revelación. En la práctica, tiende también hacia alguna forma de reinterpretación o suspensión de juicio (tafwīḍ) sobre el «cómo».</div>
+    </div>
+  </div>
+
+  <h3 class="sub">1.5 — El argumento cosmológico kalam: la propia tradición islámica exige un Dios sin espacio ni tiempo</h3>
+  <p>Aquí está la pieza que hace del tanzul un problema particularmente agudo para el Islam, y no solo un problema genérico de lenguaje religioso sobre Dios: <strong>la misma tradición intelectual islámica desarrolló el argumento filosófico más influyente de la historia para demostrar que la Causa Primera no puede tener extensión espacial ni sucesión temporal.</strong></p>
+  <div class="qb tl-q reveal">
+    <div class="qt">«Todo lo que comienza a existir tiene una causa de su existencia; el universo comenzó a existir; por tanto, el universo tiene una causa de su existencia» —y esa causa, para poder originar el espacio, el tiempo y la materia, debe ser ella misma sin principio, inmutable, inmaterial, atemporal y aespacial.</div>
+    <div class="qs">Formulación estándar del argumento cosmológico kalam — desarrollado por Al-Kindi y sistematizado por Al-Ghazali (Tahafut al-Falasifa; Al-Iqtisad fi al-Iʿtiqad), popularizado en su forma moderna por William Lane Craig y adoptado extensamente en la dawah islámica contemporánea</div>
+  </div>
+  <p>Ibn Sina (Avicena) llega a la misma conclusión por otra vía: el <em>Wajib al-Wujud</em> (el Ser Necesario) debe ser absolutamente simple, sin composición de partes, sin cambio y sin lugar, porque cualquier composición, cambio o localización introduciría contingencia, y lo contingente requeriría a su vez una causa externa —lo cual es incompatible con la necesidad absoluta del Ser Necesario. <strong>Este es el mismo argumento que hoy usan activamente los apologistas musulmanes de dawah para convencer a escépticos de la existencia de Dios</strong> —lo cual hace que la tensión con el hadiz del nuzul no sea un ataque externo, sino una fisura interna entre dos piezas de la propia caja de herramientas islámica.</p>
+
+  <h3 class="sub">1.6 — Vocabulario técnico necesario</h3>
+  <div class="cards">
+    <div class="card reveal"><div class="cey">جهة — Jihah</div><div class="cttl">Dirección / lugar</div><div class="cbod">Tener <em>jihah</em> significa poder ser señalado en una dirección espacial (arriba, abajo, aquí, allí). Los filósofos kalam y los ash'aritas sostienen que Allah no tiene jihah; los ataristas lo niegan como categoría aplicable sin más matices.</div></div>
+    <div class="card reveal"><div class="cey">حركة — Harakah</div><div class="cttl">Movimiento / cambio de estado</div><div class="cbod">Todo movimiento implica pasar de la potencia al acto: un sujeto que no estaba en un lugar y pasa a estarlo. La harakah es, en la física aristotélica que el kalam absorbió, la marca de lo contingente y lo compuesto.</div></div>
+    <div class="card reveal"><div class="cey">حدوث — Hudūth</div><div class="cttl">Originación / contingencia temporal</div><div class="cbod">Premisa central del kalam: todo lo que cambia o se mueve en el tiempo es, en algún sentido, «originado» o determinado por algo distinto de sí mismo, y por tanto no puede ser el Ser Necesario increado.</div></div>
+    <div class="card reveal"><div class="cey">تجسيم — Tajsīm</div><div class="cttl">Corporeización</div><div class="cbod">Atribuir a Allah las propiedades de un cuerpo (extensión, lugar, movimiento). Es la acusación central que los ash'aritas dirigen contra la lectura literal atarista del nuzul.</div></div>
+    <div class="card reveal"><div class="cey">تشبيه — Tashbīh</div><div class="cttl">Semejanza con lo creado</div><div class="cbod">Comparar a Allah con las criaturas, violando 42:11. Todas las escuelas rechazan el tashbih; discrepan en si la lectura literal del descenso lo implica necesariamente o no.</div></div>
+    <div class="card reveal"><div class="cey">بلا كيف — Bila kayfa</div><div class="cttl">«Sin preguntar cómo»</div><div class="cbod">Fórmula clásica —atribuida al imán Malik ibn Anas respecto al istiwa— para afirmar el atributo tal como aparece en el texto sin especificar su modalidad. Es el recurso central de la Parte V.</div></div>
+  </div>
+
+  <h3 class="sub">1.7 — Síntesis: cómo encajan las piezas</h3>
+  <table class="synthtbl reveal">
+    <thead><tr><th>Pieza</th><th>Qué aporta</th><th>Por qué es indispensable para el dilema</th></tr></thead>
+    <tbody>
+      <tr><td>1.1 El hadiz</td><td>El texto exacto de la afirmación en disputa</td><td>Define qué se está evaluando: descenso, lugar específico, momento específico</td></tr>
+      <tr><td>1.2 Mutawátir</td><td>Grado de autenticidad casi máximo dentro del sistema suní</td><td>Cierra la salida fácil de «descartar el hadiz por débil» (se retoma en Parte VII)</td></tr>
+      <tr><td>1.3 Los cuatro versículos</td><td>La tensión textual ya presente en el Corán mismo</td><td>Muestra que el problema no es una imposición externa, sino interna al canon</td></tr>
+      <tr><td>1.4 Las tres escuelas</td><td>Las respuestas históricas reales, no caricaturas</td><td>Permite tratar cada cuerno del dilema con su mejor defensor documentado</td></tr>
+      <tr><td>1.5 El kalam</td><td>La exigencia filosófica de un Dios aespacial y atemporal</td><td>Es la fuente del conflicto: la misma tradición que lo exige también narra el descenso</td></tr>
+      <tr><td>1.6 Vocabulario técnico</td><td>Los términos exactos con los que operan las tres escuelas</td><td>Evita equívocos al formalizar los silogismos de las Partes III–VII</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-dilema" class="section">
+  <div class="sec-ey">Parte II · La estructura del problema</div>
+  <h2 class="sec-title">El dilema de cinco cuernos — Mapa general</h2>
+  <div class="rule"></div>
+  <p class="lead">Frente a la pregunta «¿cómo debe entenderse el hadiz del nuzul de manera que sea compatible con la trascendencia, la simplicidad y la inmutabilidad exigidas por 42:11 y por el propio argumento cosmológico kalam?», solo existen cinco respuestas lógicamente posibles. Cada una ha sido efectivamente defendida por alguna escuela o pensador musulmán serio a lo largo de la historia. El resto de este documento examina cada una por separado, con su mejor formulación histórica, y muestra por qué las cinco, sin excepción, terminan en una contradicción o en un vaciamiento del propio texto.</p>
+
+  <div class="horn-grid reveal">
+    <div class="horn-card">
+      <div class="horn-num">I</div>
+      <div class="horn-name">Descenso literal-espacial</div>
+      <div class="horn-def">Atarismo · Ibn Taymiyya</div>
+      <div class="horn-desc">Allah desciende realmente, en algún sentido espacial no especificado, a un lugar cósmico llamado «el cielo más bajo».</div>
+      <div class="horn-fail">Colapsa en el problema del huso horario</div>
+    </div>
+    <div class="horn-card">
+      <div class="horn-num">II</div>
+      <div class="horn-name">Interpretación metafórica</div>
+      <div class="horn-def">Ash'arismo · Al-Razi</div>
+      <div class="horn-desc">«Descender» no es Allah moviéndose, sino su misericordia, su mandato, o un ángel.</div>
+      <div class="horn-fail">Colapsa en arbitrariedad hermenéutica</div>
+    </div>
+    <div class="horn-card">
+      <div class="horn-num">III</div>
+      <div class="horn-name">Bila kayfa</div>
+      <div class="horn-def">Imam Malik · Ibn Khuzayma</div>
+      <div class="horn-desc">Se afirma el descenso como real, pero se rehúsa explicar su modalidad.</div>
+      <div class="horn-fail">Colapsa en evasión lingüística</div>
+    </div>
+    <div class="horn-card">
+      <div class="horn-num">IV</div>
+      <div class="horn-name">Omnipresencia constante</div>
+      <div class="horn-def">Apologética moderna</div>
+      <div class="horn-desc">Allah ya está en todas partes; «descender» describe una manifestación diferencial, no un desplazamiento.</div>
+      <div class="horn-fail">Colapsa vaciando el texto de contenido</div>
+    </div>
+    <div class="horn-card">
+      <div class="horn-num">V</div>
+      <div class="horn-name">Rechazo del hadiz</div>
+      <div class="horn-def">Corrientes racionalistas/coranistas</div>
+      <div class="horn-desc">El hadiz simplemente no es fiable y puede descartarse.</div>
+      <div class="horn-fail">Colapsa el propio método epistemológico suní</div>
+    </div>
+  </div>
+
+  <div class="callout reveal">
+    <div class="callout-lbl">Estructura lógica del dilema constructivo</div>
+    <div class="callout-body">O bien (I) el descenso es literal-espacial, o (II) es puramente metafórico, o (III) se afirma sin especificar modalidad, o (IV) se reduce a una manifestación de la omnipresencia constante, o (V) el hadiz se rechaza. No hay una sexta opción: estas cinco agotan lógicamente el espacio de respuestas posibles a la pregunta «¿qué clase de afirmación es esta?». Se demostrará que cada una, individualmente, conduce a una consecuencia que su propio defensor no puede aceptar sin abandonar otro compromiso igualmente importante de su sistema.</div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-cuerno1" class="section">
+  <div class="sec-ey crim">Cuerno I · Atarismo</div>
+  <h2 class="sec-title">El descenso literal-espacial y el problema del huso horario</h2>
+  <div class="rule"></div>
+  <p class="lead">La posición atarista clásica, mejor defendida filosóficamente por Ibn Taymiyya, no es un antropomorfismo ingenuo: es un rechazo deliberado y argumentado de que la metafísica helenística importada por los filósofos (falasifa) y absorbida por el kalam ash'arí tenga autoridad para reinterpretar el sentido aparente (zahir) de un texto revelado y mutawátir.</p>
+
+  <h4 class="subsub">La posición en su mejor formulación — Ibn Taymiyya</h4>
+  <div class="qb reveal">
+    <div class="qt">No negamos lo que Allah ha afirmado de Sí mismo, ni lo que Su Mensajero le ha atribuido, sin distorsión (taḥrīf) ni negación (taʿṭīl), y sin preguntar cómo (takyīf) ni compararlo con lo creado (tamthīl).</div>
+    <div class="qs">Ibn Taymiyya, síntesis de la doctrina expuesta en al-ʿAqīda al-Wāsiṭiyya — la fórmula programática de la vía atarista</div>
+  </div>
+  <p>En su obra mayor <em>Darʾ Taʿāruḍ al-ʿAql wa-n-Naql</em> («Repeler la contradicción entre la razón y el texto transmitido»), Ibn Taymiyya argumenta que no existe, en rigor, ninguna contradicción real entre la razón sana (ʿaql sarih) y el texto revelado auténtico (naql sahih); las contradicciones aparentes surgen porque los teólogos kalam importaron, sin advertirlo, categorías metafísicas aristotélicas —como la exigencia de que todo lo que se mueve deba ser un cuerpo compuesto y, por tanto, contingente— que el Corán nunca autorizó como criterio para interpretar sus propias palabras. Bajo esta lectura, negarse a tomar «desciende» en su sentido llano no es piedad, sino una capitulación filosófica no autorizada por la revelación.</p>
+
+  <h4 class="subsub">La reducción al absurdo: el problema del huso horario</h4>
+  <p>Aquí es donde la posición literal, por coherente que sea en su rechazo del marco kalam, se encuentra con un obstáculo que no depende de ninguna importación filosófica griega, sino de un hecho astronómico que la propia ciencia islámica clásica —necesaria para calcular los horarios de la oración (mawāqīt aṣ-ṣalāh) en cada longitud— reconoció y sistematizó: <strong>la Tierra es un globo en rotación, y por tanto «el último tercio de la noche» no ocurre nunca de forma simultánea en todo el planeta; ocurre siempre, de manera continua, en alguna franja del globo que va desplazándose sin pausa.</strong></p>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo I · El problema del huso horario</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">El hadiz especifica que el descenso ocurre «cada noche» (kulla laylah) «cuando queda el último tercio de la noche» —una condición temporal necesariamente local, porque «la noche» y sus tercios dependen de la posición del sol respecto a cada longitud terrestre, tal como reconoce y exige la propia ciencia islámica de los horarios de oración.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">Dado que la Tierra rota continuamente sobre su eje, en todo instante existe siempre alguna franja del planeta que se encuentra, en ese preciso momento, en su último tercio de la noche local, mientras en otras franjas es simultáneamente mediodía, atardecer o amanecer.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt">Si el descenso «al cielo más bajo» es un desplazamiento espacial literal hacia la porción de cielo situada sobre la región que atraviesa su último tercio de noche, entonces Allah debe estar, en todo instante y sin interrupción, desplazándose y re-posicionándose sobre una franja que recorre continuamente los 360° del globo —lo que convierte el «descenso nocturno» singular que describe el hadiz en un proceso ininterrumpido, perpetuo y sin principio ni fin discernible, contradiciendo la propia gramática del texto («desciende... cada noche», que describe un acto discreto y recurrente, no un estado continuo).</div></div>
+    <div class="sil-row"><div class="sil-lbl">P4</div><div class="sil-txt">Si, para evitarlo, se sostiene que el descenso ocurre a la totalidad del «cielo más bajo» entendido como esfera global, independientemente de qué región vive su último tercio de noche, entonces el marcador temporal específico del hadiz —«cuando queda el último tercio de la noche»— deja de tener contenido restrictivo alguno, puesto que esa condición se cumple ininterrumpidamente en alguna parte del globo en todo momento del día y de la noche, vaciando de sentido la cláusula temporal que el propio hadiz se toma la molestia de especificar.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>La lectura literal-espacial del descenso, aplicada con el rigor astronómico que la propia tradición islámica de cálculo de horarios exige, produce necesariamente una de dos consecuencias inaceptables para el propio texto: o bien un proceso divino perpetuo, ininterrumpido y omnipresente que contradice el carácter discreto y recurrente («cada noche») que el hadiz describe, o bien un vaciamiento total de la especificidad temporal («el último tercio de la noche») que el hadiz explícitamente declara. El cuerno literal-espacial no puede sostenerse sin sacrificar alguna cláusula del propio texto que dice defender al pie de la letra.</strong></div></div>
+  </div>
+
+  <div class="callout reveal">
+    <div class="callout-lbl">Por qué esto no es una objeción «externa» ni anti-islámica</div>
+    <div class="callout-body">Esta reducción no depende de ninguna premisa filosófica griega que Ibn Taymiyya pudiera rechazar como importación ilegítima: depende únicamente de la esfericidad y rotación de la Tierra, un hecho que la propia astronomía islámica clásica —al-Battani, al-Biruni (que calculó la circunferencia terrestre con notable precisión), al-Khwarizmi— estableció y que sostiene hasta hoy el cálculo de los cinco horarios de oración diaria en cada país musulmán. El horno I no fracasa por un choque con la filosofía helenística: fracasa por un choque con la propia ciencia astronómica que el Islam clásico desarrolló y necesita.</div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-cuerno2" class="section">
+  <div class="sec-ey crim">Cuerno II · Ash'arismo</div>
+  <h2 class="sec-title">La interpretación metafórica (taʾwīl) y el problema de la arbitrariedad</h2>
+  <div class="rule"></div>
+  <p class="lead">Frente al Cuerno I, la solución ash'arí parece elegante: si «descender» entendido literalmente genera contradicciones astronómicas y metafísicas, basta con leerlo como metáfora. Fajr al-Din al-Razi, en su <em>Asas al-Taqdis</em> («Fundamento de la santificación»), es el defensor más sistemático de esta vía.</p>
+
+  <h4 class="subsub">La posición en su mejor formulación — Fajr al-Din al-Razi y al-Bayhaqi</h4>
+  <div class="qb reveal">
+    <div class="qt">Lo que desciende no es la Esencia divina, sino Su misericordia, Su mandato, o un ángel que ejecuta Su orden; pues Allah está exento de moverse de un lugar a otro, ya que el movimiento es propio de los cuerpos.</div>
+    <div class="qs">Síntesis de la posición defendida por Fajr al-Din al-Razi (Asas al-Taqdis) y recogida por Abu Bakr al-Bayhaqi (Kitab al-Asmaʾ wa-s-Sifat) — la vía del taʾwil aplicada al nuzul</div>
+  </div>
+  <p>Al-Nawawi, en su comentario a Sahih Muslim, recoge esta misma familia de interpretaciones al glosar el hadiz del nuzul: lo que «desciende» es la orden, la misericordia o un ángel encargado, precisamente para salvaguardar 42:11 sin negar la autenticidad del hadiz. Es, sin duda, una posición sofisticada, consciente del problema y motivada por preservar la trascendencia divina, no por escepticismo hacia el texto.</p>
+
+  <h4 class="subsub">La reducción: el criterio de selección es él mismo el problema</h4>
+  <p>Los ash'aritas también afirman de Allah atributos como el oído, la vista, la voluntad y el habla —de manera literal, aunque «sin semejanza» (bila tashbih)— y sin embargo reinterpretan como metáfora la mano, el rostro, el asiento sobre el trono y el descenso. La pregunta que exige respuesta es: ¿con qué criterio, extraído del texto mismo y no impuesto desde fuera, se decide qué expresiones se toman literalmente y cuáles se metaforizan?</p>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo II · La arbitrariedad hermenéutica del taʾwil selectivo</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">Si existiera un criterio puramente textual e interno para decidir qué términos aparentemente antropomórficos del Corán y el hadiz deben tomarse literalmente (oír, ver, querer, hablar) y cuáles deben reinterpretarse como metáfora (mano, rostro, descenso, asentarse), ese criterio debería derivarse de la gramática o el contexto revelado mismo, sin apelar a premisas filosóficas externas sobre qué propiedades «implican necesariamente corporeidad».</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">El criterio que efectivamente usan al-Razi y los ash'aritas —que oír, ver y querer no implican intrínsecamente extensión espacial mientras que mano, rostro y descenso sí— es un juicio filosófico sobre qué predicados son compatibles con la incorporeidad, tomado precisamente de la misma tradición aristotélico-avicenniana de la que depende el argumento cosmológico kalam (§1.5), no un criterio derivado exclusivamente de la gramática árabe o del uso coránico del término.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt">Por tanto, la vía del taʾwil no resuelve la tensión entre el hadiz y la trascendencia mediante un principio hermenéutico neutral: la resuelve importando, exactamente igual que hace el kalam falsafi, la premisa filosófica de que Dios no puede tener predicados que impliquen composición o espacio —la misma premisa que Ibn Taymiyya (Cuerno I) rechaza explícitamente como no autorizada por la revelación misma.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>El Cuerno II no logra una solución textualmente neutral: solo desplaza la pregunta. Su coherencia depende enteramente de aceptar, como premisa previa y no derivada del texto, la misma tesis filosófica de incorporeidad divina que el Cuerno I rechaza como importación ilegítima. Además, al autorizar la reinterpretación libre de un hadiz mutawátir (§1.2) cuando su sentido aparente resulta filosóficamente incómodo, el ash'arismo abre una puerta metodológica: si el sentido llano de un texto con el máximo grado de autenticidad puede descartarse por preferencia filosófica, la autoridad probatoria de la transmisión textual —el fundamento mismo de la ortodoxia suní— queda debilitada de raíz.</strong></div></div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-cuerno3" class="section">
+  <div class="sec-ey crim">Cuerno III · La vía intermedia clásica</div>
+  <h2 class="sec-title">Bila kayfa — «Sin preguntar cómo» — ¿tercera vía o evasión verbal?</h2>
+  <div class="rule"></div>
+  <p class="lead">Existe una tercera opción, distinta de literalizar (Cuerno I) o metaforizar (Cuerno II): afirmar el descenso como real y verdadero, tal como suena, pero rehusarse por principio a especificar su modalidad (kayfiyyah). Esta es la fórmula más citada de toda la tradición sobre atributos divinos, atribuida al imán Malik ibn Anas respecto al istiwa (Corán 20:5) y aplicada por extensión al nuzul.</p>
+
+  <div class="ar-block reveal">
+    <span class="ar-main">الِاسْتِوَاءُ مَعْلُومٌ، وَالْكَيْفُ مَجْهُولٌ، وَالْإِيمَانُ بِهِ وَاجِبٌ، وَالسُّؤَالُ عَنْهُ بِدْعَةٌ</span>
+    <span class="ar-tr">Al-istiwāʾu maʿlūm, wa-l-kayfu majhūl, wa-l-īmānu bihi wājib, wa-s-suʾālu ʿanhu bidʿah</span>
+    <span class="ar-trad">«El istiwā [el asentarse] es conocido [en su palabra], el cómo es desconocido, creer en él es obligatorio, y preguntar sobre el cómo es una innovación.» — Atribuido al imán Malik ibn Anas, recogido en al-Bayhaqi, Kitab al-Asmaʾ wa-s-Sifat</span>
+  </div>
+  <p>Ibn Khuzayma, en su <em>Kitab al-Tawhid</em>, aplica exactamente esta misma lógica al hadiz del nuzul: se afirma que Allah desciende, se niega que ese descenso se parezca al de una criatura, y se rehúsa, por principio, a explicar en qué consiste. Esta postura pretende evitar tanto el tajsim del Cuerno I como el taʿtil (vaciamiento) que los ataristas acusan al Cuerno II.</p>
+
+  <h4 class="subsub">La reducción: ¿es esto una tercera posición, o las otras dos disfrazadas?</h4>
+  <p>El problema del bila kayfa no es que sea intelectualmente deshonesto —es, de hecho, una postura de humildad epistémica genuina y muy respetada—, sino que, examinado con precisión lógica, no ocupa realmente un tercer espacio conceptual distinto de los dos anteriores: colapsa en uno de ellos según cómo se presione la pregunta.</p>
+
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo III · El dilema interno del bila kayfa</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">Cuando se afirma «Allah desciende, sin preguntar cómo», la palabra «desciende» debe, o bien conservar alguna porción de su significado ordinario —desplazamiento desde un punto a otro, cambio de relación espacial—, o bien no conservar ninguno de esos componentes semánticos ordinarios.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2a</div><div class="sil-txt"><em>Cuerno interno (a):</em> Si conserva algún componente semántico ordinario de desplazamiento, entonces el bila kayfa es, de hecho, una afirmación literal-espacial parcial —es decir, es el Cuerno I con un matiz agnóstico sobre los detalles— y hereda exactamente la reducción del huso horario formalizada en el Silogismo I, porque esa reducción no depende de conocer el «cómo» exacto del desplazamiento, solo de que haya alguno indexado a un lugar y a un momento local.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2b</div><div class="sil-txt"><em>Cuerno interno (b):</em> Si no conserva ningún componente semántico ordinario de desplazamiento —si «descender» no implica siquiera parcialmente pasar de no estar en un lugar a estarlo—, entonces la palabra se está usando en un sentido tan alejado de su uso ordinario que resulta indistinguible, en la práctica, de una metáfora cuyo referente literal se desconoce: es decir, se ha colapsado silenciosamente en el Cuerno II, solo que sin admitirlo como tal y sin ofrecer siquiera la interpretación positiva («es la misericordia», «es un ángel») que el Cuerno II al menos propone.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>El bila kayfa no es una tercera posición lógicamente independiente: es una negativa a elegir entre el Cuerno I y el Cuerno II, presentada retóricamente como una virtud epistémica. Si se le exige precisión sobre si «descender» retiene o no algún contenido espacial, se ve forzado a caer en uno de los dos cuernos anteriores y hereda su respectiva reducción. Además, y esto es decisivo, el bila kayfa no ofrece ninguna respuesta al problema del huso horario (Silogismo I): sea cual sea el «cómo» que se rehúsa a explicar, el «cuándo» —indexado al último tercio de la noche local— sigue generando la misma multiplicación simultánea o el mismo vaciamiento temporal, con independencia de que se especifique o no la modalidad del descenso.</strong></div></div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-cuerno4" class="section">
+  <div class="sec-ey crim">Cuerno IV · Apologética contemporánea</div>
+  <h2 class="sec-title">La omnipresencia constante: ¿disuelve el problema o lo esconde?</h2>
+  <div class="rule"></div>
+  <p class="lead">Una respuesta más reciente, popular en círculos apologéticos contemporáneos, intenta resolver la tensión apelando a la omnipresencia divina afirmada en 57:4: si Allah ya está «con vosotros dondequiera que estéis», entonces «descender» no describiría ningún desplazamiento real, sino una intensificación o manifestación diferencial de una presencia que, en el fondo, ya es total y constante en todo lugar.</p>
+
+  <h4 class="subsub">La posición en su mejor formulación</h4>
+  <div class="claim-box reveal">
+    <div class="claim-lbl">§ La respuesta apologética</div>
+    <div class="claim-txt">«Allah no está confinado por el espacio ni el tiempo como las criaturas; Su "descenso" no es un movimiento de un lugar a otro, porque Él ya está en todas partes según Su conocimiento y Su poder. "Descender" describe, más bien, una manifestación especial de cercanía, atención y disposición a responder, no un tránsito espacial literal, y por eso puede ocurrir simultáneamente en cualquier lugar de la Tierra sin ninguna contradicción.»</div>
+  </div>
+  <p>Esta respuesta tiene la virtud de intentar tomar en serio tanto 57:4 como el problema del huso horario (§Cuerno I), y no puede descartarse como ingenua: apela genuinamente a la omnipresencia como atributo ya aceptado por todas las escuelas.</p>
+
+  <h4 class="subsub">La reducción: si siempre está descendido, ¿qué añade el texto?</h4>
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo IV · El vaciamiento por sobre-generalización</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">Si «descender» no añade ninguna diferencia real respecto del estado ordinario y constante de la presencia u omnisciencia de Allah —si Él está, en todo momento y en todo lugar, ya igual de «cerca» y «dispuesto a responder» que durante el supuesto descenso—, entonces la cláusula temporal del hadiz («cuando queda el último tercio de la noche») no señala ninguna diferencia objetiva respecto de cualquier otro momento del día.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">Pero el hadiz afirma explícitamente una diferencia: solo durante ese tercio final de la noche se hace la invitación «¿quién me invoca, que yo le responda?», lo cual el propio corpus de hadices sobre las virtudes de la oración nocturna (qiyām al-layl) trata como un tiempo cualitativamente distinto y especialmente propicio, no intercambiable con cualquier otro momento.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt">Si se insiste en que sí hay una diferencia real —que durante ese tercio de la noche ocurre algo que no ocurre en otros momentos, aunque sea solo una «manifestación» y no un desplazamiento—, entonces se está afirmando una transición real de un estado a otro indexada al tiempo: un «antes» en que esa manifestación especial no estaba activa y un «después» en que sí lo está (y viceversa hacia el amanecer). Eso es, precisamente, lo que la inmutabilidad divina (exigida por el mismo argumento kalam de §1.5) prohíbe atribuir a la Esencia de Dios: un cambio real de estado en función del tiempo.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>El Cuerno IV se ve forzado a elegir entre dos salidas, ambas costosas: o bien admite que no hay ninguna diferencia real asociada al último tercio de la noche —con lo que vacía de contenido informativo la cláusula temporal más específica de todo el hadiz—, o bien admite que sí hay una transición real de estado indexada al tiempo, con lo que reintroduce exactamente el tipo de cambio temporal que la inmutabilidad divina excluye, solo que rebautizado como «manifestación» en vez de «movimiento». A diferencia de la tradición cristiana, que desarrolló para un problema estructuralmente análogo la doctrina tomista de la «relación mixta» (relatio mixta: real en la criatura, solo de razón en Dios; Summa Theologiae I, q.13, a.7), la teología kalam suní no cuenta con un desarrollo técnico equivalente que permita afirmar una transición real solo del lado creado sin comprometer la inmutabilidad divina en el lado de Allah; y cuando alguna apologética moderna importa implícitamente ese tipo de recurso, vuelve a depender —igual que el Cuerno II— de una categoría filosófica no derivada del texto mismo.</strong></div></div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-cuerno5" class="section">
+  <div class="sec-ey crim">Cuerno V · La salida racionalista</div>
+  <h2 class="sec-title">Rechazar el hadiz — Disponible solo al precio de abandonar el propio método</h2>
+  <div class="rule"></div>
+  <p class="lead">Queda una última salida lógica: negar que el hadiz sea realmente vinculante, ya sea cuestionando su autenticidad o negando en general la autoridad doctrinal de los hadices frente al Corán. Esta es la vía de ciertas corrientes modernistas y «coranistas» (Ahl al-Qur'an), que sostienen que solo el Corán es fuente de doctrina.</p>
+
+  <h4 class="subsub">La posición en su mejor formulación</h4>
+  <p>El argumento modernista sostiene que la colección de hadices, transmitida oralmente durante generaciones antes de su fijación escrita, es una fuente de menor certeza que el Corán mismo, y que las descripciones antropomórficas de Allah que allí aparecen pueden atribuirse a la mentalidad de los transmisores humanos, no a una revelación directa de igual estatus que el texto coránico.</p>
+
+  <h4 class="subsub">La reducción: esta salida no es gratuita dentro del marco suní</h4>
+  <div class="sil reveal">
+    <div class="sil-hdr">Silogismo V · El costo epistemológico del rechazo</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">La epistemología suní clásica distingue la transmisión ahad (de pocas vías, que produce solo probabilidad, ẓann) de la transmisión mutawátir (de tantas vías independientes que produce certeza, ʿilm yaqīnī), y trata a esta última con el mismo peso probatorio que una premisa cierta.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">El hadiz del nuzul ha sido clasificado como mutawátir por especialistas de primer rango en la ciencia del hadiz a lo largo de los siglos (§1.2): Ibn Abd al-Barr, Ibn Taymiyya, al-Dhahabi y al-Albani, entre otros, documentan decenas de cadenas de transmisión independientes procedentes de al menos una veintena de Compañeros.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt">Rechazar por conveniencia filosófica un hadiz clasificado como mutawátir no es un simple ajuste puntual: es rechazar el criterio mismo (el tawatur) que la ortodoxia suní usa para certificar la fiabilidad de otras doctrinas centrales —incluyendo, por ejemplo, el número de unidades de oración diarias, detalles del ritual del hach, o la preservación textual del propio Corán, que se defiende en parte apelando precisamente a la fuerza de la transmisión masiva y concordante.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt"><strong>El Cuerno V es lógicamente disponible, pero no es gratuito: quien lo adopta debe explicar por qué el criterio del tawatur es válido para certificar unas doctrinas (la integridad del texto coránico, el número de oraciones) y se vuelve súbitamente invalidable cuando resulta filosóficamente incómodo para otra (el nuzul). Sin ese principio de demarcación —y ninguna corriente modernista lo ha ofrecido de forma que no sea, otra vez, una importación filosófica externa al método del hadiz mismo—, esta salida exige abandonar, de manera selectiva y no principiada, el propio aparato epistemológico que sostiene buena parte del edificio doctrinal suní.</strong></div></div>
+  </div>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-contraste" class="section">
+  <div class="sec-ey">Parte VIII · Contraste breve</div>
+  <h2 class="sec-title">Cómo resuelve un problema estructuralmente análogo la teología cristiana clásica</h2>
+  <div class="rule"></div>
+  <p class="lead">El Antiguo Testamento contiene un lenguaje sobre Dios igualmente vívido y en apariencia espacial: «el Señor descendió para ver la ciudad» (Génesis 11:5), «oyeron la voz del Señor Dios que se paseaba en el jardín» (Génesis 3:8). La teología cristiana clásica no ha estado exenta de este problema —y tiene, de hecho, sus propios debates internos sobre impasibilidad e inmutabilidad—, pero desarrolló con notable precisión técnica dos herramientas específicas para tratarlo sin sacrificar ni el lenguaje bíblico ni la inmutabilidad divina.</p>
+
+  <div class="cards">
+    <div class="card gr reveal">
+      <div class="cey">La doctrina de la acomodación</div>
+      <div class="cttl">Calvino: «Dios balbucea con nosotros como una nodriza con un niño»</div>
+      <div class="cbod">Juan Calvino formula el principio de que el lenguaje bíblico sobre Dios «descendiendo», «arrepintiéndose» o «caminando» es acomodación pedagógica deliberada a la capacidad humana, sin que ello reste ni autoridad ni verdad al texto: describe con precisión la relación de Dios con el mundo usando categorías que un oyente humano puede comprender, sin implicar que Dios sufra cambio real en Sí mismo.</div>
+    </div>
+    <div class="card gr reveal">
+      <div class="cey">La relación mixta de Santo Tomás</div>
+      <div class="cttl">Summa Theologiae I, q.13, a.7</div>
+      <div class="cbod">Cuando la Escritura dice que Dios se «acerca» o «se aparta», hay una relación real —pero esa realidad está enteramente del lado de la criatura, que cambia su disposición hacia Dios, mientras que en Dios esa misma relación es solo «de razón», es decir, un modo humano de describir una realidad que del lado divino no implica cambio ninguno. Esta es la misma herramienta conceptual, aplicada con rigor escolástico completo, que la Parte VI señalaba como ausente en un desarrollo equivalente dentro del kalam suní.</div>
+    </div>
+  </div>
+  <p>Esta comparación no pretende sugerir que la teología cristiana esté libre de tensiones análogas —las tiene, por ejemplo en los debates modernos entre teísmo clásico y teísmo abierto sobre la impasibilidad divina—, sino mostrar que existe, en al menos una tradición teológica, un aparato técnico desarrollado específicamente para separar el cambio real (que se ubica siempre del lado de la criatura) del lenguaje figurado sobre Dios (que describe esa relación sin comprometer Su inmutabilidad), sin que ese aparato dependa de metaforizar selectivamente solo algunos textos por conveniencia.</p>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-tabla" class="section">
+  <div class="sec-ey">Parte IX · Síntesis</div>
+  <h2 class="sec-title">Tabla comparativa de los cinco cuernos</h2>
+  <div class="rule"></div>
+  <table class="ctbl reveal">
+    <thead><tr><th>Cuerno</th><th>Mejor defensor</th><th>Movimiento central</th><th>Por qué falla</th><th>Silogismo</th></tr></thead>
+    <tbody>
+      <tr><td>I. Literal-espacial</td><td>Ibn Taymiyya</td><td>Afirmar el sentido llano, bila kayfa sobre el detalle</td><td>Multiplicación infinita simultánea o vaciamiento del marcador temporal (huso horario)</td><td>Silogismo I</td></tr>
+      <tr><td>II. Metafórico (taʾwil)</td><td>Fajr al-Din al-Razi</td><td>Reinterpretar «desciende» como misericordia, mandato o ángel</td><td>Arbitrariedad hermenéutica; socava la autoridad de un hadiz mutawátir</td><td>Silogismo II</td></tr>
+      <tr><td>III. Bila kayfa</td><td>Imam Malik · Ibn Khuzayma</td><td>Afirmar sin especificar modalidad</td><td>No es una tercera vía real: colapsa en I o en II según se le presione</td><td>Silogismo III</td></tr>
+      <tr><td>IV. Omnipresencia constante</td><td>Apologética contemporánea</td><td>«Descender» = manifestación diferencial de presencia ya total</td><td>Vacía la cláusula temporal o reintroduce cambio real en Dios</td><td>Silogismo IV</td></tr>
+      <tr><td>V. Rechazo del hadiz</td><td>Corrientes coranistas/modernistas</td><td>Negar la autoridad doctrinal del hadiz</td><td>Exige abandonar selectivamente el criterio del tawatur sin principio de demarcación</td><td>Silogismo V</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="sdiv"></div>
+<section id="sec-final" class="section">
+  <div class="sec-ey">Síntesis final · El dilema cerrado</div>
+  <h2 class="sec-title">Silogismo Final — El dilema constructivo de cinco cuernos</h2>
+  <div class="rule"></div>
+  <p class="lead">Los cinco silogismos anteriores no son piezas sueltas: juntos forman un único dilema constructivo que agota el espacio lógico de respuestas y cierra cualquier vía de escape.</p>
+
+  <div class="sil gold reveal">
+    <div class="sil-hdr">⬡ Silogismo Final · Dilema constructivo de cinco cuernos</div>
+    <div class="sil-row"><div class="sil-lbl">P1</div><div class="sil-txt">Toda interpretación posible del hadiz del nuzul debe caer en una de estas cinco categorías, que agotan lógicamente el espacio de respuestas: (I) descenso literal-espacial, (II) reinterpretación puramente metafórica, (III) afirmación sin especificación de modalidad (bila kayfa), (IV) reducción a manifestación de una omnipresencia constante, o (V) rechazo de la autenticidad o autoridad del hadiz.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P2</div><div class="sil-txt">Si (I), entonces, por el Silogismo I, se sigue una multiplicación simultánea e infinita del acto de descenso alrededor del globo terráqueo, o un vaciamiento total de la cláusula temporal específica del texto («el último tercio de la noche»).</div></div>
+    <div class="sil-row"><div class="sil-lbl">P3</div><div class="sil-txt">Si (II), entonces, por el Silogismo II, la reinterpretación depende de un criterio filosófico de incorporeidad no derivado del texto mismo, y aplicado selectivamente sin principio de demarcación explícito, lo cual socava la autoridad probatoria del propio hadiz mutawátir que se pretende conservar como palabra profética auténtica.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P4</div><div class="sil-txt">Si (III), entonces, por el Silogismo III, la posición no constituye una tercera vía lógicamente independiente, sino una negativa a precisar si «descender» retiene o no contenido espacial —y en cualquiera de los dos casos posibles, hereda las consecuencias de (I) o de (II), además de no ofrecer respuesta alguna al problema del huso horario.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P5</div><div class="sil-txt">Si (IV), entonces, por el Silogismo IV, o bien se vacía de contenido informativo la especificidad temporal más marcada de todo el hadiz, o bien se reintroduce, bajo el nombre de «manifestación», exactamente el tipo de cambio real indexado al tiempo que la inmutabilidad divina —exigida por el propio argumento cosmológico kalam que sostiene gran parte de la apologética islámica contemporánea— prohíbe atribuir a la Esencia de Allah.</div></div>
+    <div class="sil-row"><div class="sil-lbl">P6</div><div class="sil-txt">Si (V), entonces, por el Silogismo V, se abandona selectivamente —sin ofrecer un principio de demarcación no ad hoc— el criterio del tawatur que la propia ortodoxia suní invoca para certificar otras doctrinas centrales, incluyendo, en muchas formulaciones apologéticas, la integridad textual del propio Corán.</div></div>
+    <div class="sil-row C"><div class="sil-lbl">∴ C</div><div class="sil-txt">
+      <strong>Las cinco ramas del dilema, sin excepción, desembocan en una contradicción interna con otro compromiso igualmente central del sistema que las sostiene, o en un vaciamiento del contenido específico del propio hadiz que dicen estar interpretando fielmente.</strong> Esto no es un artefacto retórico de la formulación: es la razón estructural por la cual las tres grandes escuelas sunitas de teología de los atributos —atarismo, ash'arismo, maturidismo— llevan más de un milenio sin alcanzar consenso sobre este punto preciso, y por la cual las obras más sofisticadas de cada bando (Ibn Taymiyya contra al-Razi, y viceversa) dedican cientos de páginas a intentar cerrar exactamente las grietas aquí formalizadas, sin que ninguna lo haya logrado de manera que la escuela contraria reconozca como resuelta.<br><br>
+      La conclusión no es que el Islam carezca de teólogos rigurosos —los tiene, de primer nivel, en ambos bandos de esta disputa— sino que el problema mismo, tal como está planteado por la combinación de un hadiz mutawátir de descenso espacio-temporalmente específico y una doctrina de trascendencia radical (42:11) reforzada por el argumento cosmológico kalam, no admite, dentro de las herramientas conceptuales desarrolladas hasta ahora por la propia tradición sunita, una resolución que no ceda en algún punto que su propio sistema considera igualmente irrenunciable.
+    </div></div>
+  </div>
+
+  <div class="verdict reveal">
+    <div class="verdict-lbl">Veredicto</div>
+    <div class="verdict-txt">El hadiz del nuzul —autenticado con el máximo grado de certeza epistemológica que la tradición sunita reconoce— describe un acto espacial y temporalmente específico que resiste, en sus cinco interpretaciones lógicamente posibles, la compatibilización estable con la trascendencia radical de 42:11 y con la inmutabilidad exigida por el propio argumento cosmológico kalam que buena parte de la apologética islámica emplea activamente para demostrar la existencia de Dios. La disputa entre atharíes y ashʿaríes a lo largo de más de un milenio no es una curiosidad histórica menor: es el síntoma visible, documentado por los propios protagonistas de máximo nivel intelectual, de una tensión que ninguna de las cinco vías lógicamente disponibles ha logrado disolver sin coste.</div>
+  </div>
+
+  <div class="callout reveal" style="margin-top:2rem;">
+    <div class="callout-lbl">Fuentes citadas — Verificables en cualquier edición crítica o biblioteca especializada</div>
+    <div class="callout-body">
+      <strong>Hadiz</strong> · Sahih al-Bujari, Libro del Tahajjud, 1145 (también 6321, 7494) · Sahih Muslim, Libro de la oración de los viajeros, 758 · Ibn Hajar al-Asqalani, Fath al-Bari (comentario a Bujari)<br><br>
+      <strong>Corán</strong> · 42:11 (Ash-Shura) · 112:1-4 (Al-Ijlas) · 20:5 (Ta-Ha) · 57:4 (Al-Hadid)<br><br>
+      <strong>Atarismo</strong> · Ibn Khuzayma, Kitab al-Tawhid · Ibn Taymiyya, al-ʿAqīda al-Wāsiṭiyya; Darʾ Taʿāruḍ al-ʿAql wa-n-Naql<br><br>
+      <strong>Ash'arismo</strong> · Abu Bakr al-Bayhaqi, Kitab al-Asmaʾ wa-s-Sifat · Fajr al-Din al-Razi, Asas al-Taqdis · Al-Nawawi, Sharh Sahih Muslim (comentario al hadiz del nuzul)<br><br>
+      <strong>Kalam y filosofía</strong> · Al-Kindi · Al-Ghazali, Tahafut al-Falasifa; Al-Iqtisad fi al-Iʿtiqad · Ibn Sina, doctrina del Wajib al-Wujud · William Lane Craig, The Kalam Cosmological Argument (formulación moderna)<br><br>
+      <strong>Contraste cristiano</strong> · Juan Calvino, Institución de la religión cristiana (doctrina de la acomodación) · Santo Tomás de Aquino, Summa Theologiae I, q.13, a.7 (relatio mixta)
+    </div>
+  </div>
+</section>
+
+</main>
+<button id="bttop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div id="kbd">← → para navegar entre secciones</div>
+
+<script>
+const SECS=[
+  {id:'sec-hero',    tab:'Portada',        group:''},
+  {id:'sec-marco',   tab:'I. Marco conceptual', group:'Fundamentos'},
+  {id:'sec-dilema',  tab:'II. El dilema',  group:'Fundamentos'},
+  {id:'sec-cuerno1', tab:'III. Cuerno I',  group:'Los cinco cuernos'},
+  {id:'sec-cuerno2', tab:'IV. Cuerno II',  group:'Los cinco cuernos'},
+  {id:'sec-cuerno3', tab:'V. Cuerno III',  group:'Los cinco cuernos'},
+  {id:'sec-cuerno4', tab:'VI. Cuerno IV',  group:'Los cinco cuernos'},
+  {id:'sec-cuerno5', tab:'VII. Cuerno V',  group:'Los cinco cuernos'},
+  {id:'sec-contraste',tab:'VIII. Contraste',group:'Síntesis'},
+  {id:'sec-tabla',   tab:'IX. Tabla',      group:'Síntesis'},
+  {id:'sec-final',   tab:'⬡ Final',        group:'Síntesis'},
+];
+let cur=0;
+const tabsEl=document.getElementById('nav-tabs');
+SECS.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='ntab'+(i===0?' active':'');
+  b.dataset.idx=i;
+  b.innerHTML=`<span class="tn">${i>0?String(i).padStart(2,'0'):''}</span>${s.tab}`;
+  b.onclick=()=>goTo(i);
+  tabsEl.appendChild(b);
+});
+const tp=document.getElementById('toc-panel');
+const groups={};
+SECS.forEach((s,i)=>{ const g=s.group||'General'; if(!groups[g])groups[g]=[]; groups[g].push({...s,idx:i}); });
+Object.entries(groups).forEach(([g,items])=>{
+  const div=document.createElement('div'); div.className='tg';
+  const lbl=document.createElement('div'); lbl.className='tg-lbl'; lbl.textContent=g; div.appendChild(lbl);
+  items.forEach(it=>{
+    const row=document.createElement('div'); row.className='ti'; row.id='ti-'+it.idx;
+    row.innerHTML=`<span class="tinum">${String(it.idx+1).padStart(2,'0')}</span><span class="titxt">${it.tab}</span>`;
+    row.onclick=()=>{goTo(it.idx);closeToc();};
+    div.appendChild(row);
+  });
+  tp.appendChild(div);
+});
+function buildNavs(){
+  SECS.forEach((s,i)=>{
+    const sec=document.getElementById(s.id); if(!sec) return;
+    const nav=document.createElement('div'); nav.className='sec-nav';
+    const prev=i>0?SECS[i-1]:null;
+    const next=i<SECS.length-1?SECS[i+1]:null;
+    const pb=document.createElement('button');
+    pb.className='snbtn prev'+(prev?'':' dis');
+    pb.innerHTML=`<span class="arr">←</span><div><div class="meta">Anterior</div><div class="lbl">${prev?prev.tab:'—'}</div></div>`;
+    if(prev) pb.onclick=()=>goTo(i-1);
+    const cen=document.createElement('div'); cen.className='sncenter';
+    const dots=document.createElement('div'); dots.className='sndots';
+    SECS.forEach((_,di)=>{ const d=document.createElement('div'); d.className='sndot'+(di===i?' active':di<i?' done':''); d.onclick=()=>goTo(di); d.title=SECS[di].tab; dots.appendChild(d); });
+    const pos=document.createElement('div'); pos.className='snpos'; pos.textContent=`${i+1} / ${SECS.length}`;
+    cen.appendChild(dots); cen.appendChild(pos);
+    const nb=document.createElement('button');
+    nb.className='snbtn next'+(next?'':' dis');
+    nb.innerHTML=`<div><div class="meta">Siguiente</div><div class="lbl">${next?next.tab:'—'}</div></div><span class="arr">→</span>`;
+    if(next) nb.onclick=()=>goTo(i+1);
+    nav.appendChild(pb); nav.appendChild(cen); nav.appendChild(nb);
+    sec.appendChild(nav);
+  });
+}
+buildNavs();
+function goTo(idx){
+  const el=document.getElementById(SECS[idx].id); if(!el) return;
+  window.scrollTo({top:el.offsetTop-58,behavior:'smooth'});
+  setActive(idx);
+}
+function setActive(idx){
+  cur=idx;
+  document.querySelectorAll('.ntab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  const at=document.querySelector(`.ntab[data-idx="${idx}"]`);
+  if(at) at.scrollIntoView({block:'nearest',inline:'nearest'});
+  document.querySelectorAll('.ti').forEach((r,i)=>r.classList.toggle('done',i<idx));
+}
+const secEls=SECS.map(s=>document.getElementById(s.id));
+const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){const idx=secEls.indexOf(en.target);if(idx!==-1)setActive(idx);}}),{rootMargin:'-25% 0px -68% 0px'});
+secEls.forEach(el=>{if(el)obs.observe(el);});
+const fill=document.getElementById('pfill');
+window.addEventListener('scroll',()=>{
+  const h=document.body.scrollHeight-window.innerHeight;
+  fill.style.width=(window.scrollY/h*100)+'%';
+  document.getElementById('bttop').classList.toggle('show',window.scrollY>400);
+},{passive:true});
+const reveals=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('vis');}),{threshold:.06});
+reveals.forEach(r=>ro.observe(r));
+let kbt;
+document.addEventListener('keydown',e=>{
+  const tg=document.activeElement.tagName;
+  if(tg==='INPUT'||tg==='TEXTAREA') return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();goTo(Math.min(cur+1,SECS.length-1));showK();}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();goTo(Math.max(cur-1,0));showK();}
+  if(e.key==='Escape') closeToc();
+});
+function showK(){const k=document.getElementById('kbd');k.classList.add('show');clearTimeout(kbt);kbt=setTimeout(()=>k.classList.remove('show'),1800);}
+function openToc(){document.getElementById('toc-ov').classList.add('open');}
+function closeToc(){document.getElementById('toc-ov').classList.remove('open');}
+setTimeout(showK,1200);
+</script>
+</body>
+</html>

@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Final Largo de Marcos — Defensa Íntegra de Marcos 16:9-20</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Cormorant+SC:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:        #14110c;
+  --ink-soft:   #211c14;
+  --ink-card:   #29231a;
+  --gold:       #b8912f;
+  --gold-bright:#d9ad3f;
+  --gold-pale:  #f1e2b8;
+  --parchment:  #f7f1e0;
+  --parchment-deep: #eee2c2;
+  --paper:      #fffdf6;
+  --text-ink:   #241f16;
+  --text-mute:  #5c5340;
+  --border-gold:#d8c48a;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --display-sc: 'Cormorant SC', Georgia, serif;
+  --body: 'EB Garamond', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family: var(--body);
+  background: var(--parchment);
+  color: var(--text-ink);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+::selection{ background: var(--gold); color: var(--ink); }
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+#progressTrack{
+  position:fixed; top:0; left:0; width:100%; height:3px;
+  background: rgba(20,17,12,0.12); z-index:999;
+}
+#progressBar{
+  height:100%; width:0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+}
+
+/* ============================================================
+   MOBILE TOGGLE
+   ============================================================ */
+#sidebarToggle{
+  display:none; position:fixed; top:16px; left:16px; z-index:1002;
+  width:46px; height:46px; border-radius:3px;
+  background: var(--ink); border:1px solid var(--gold); color:var(--gold);
+  font-family: var(--mono); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+#sidebarScrim{
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:499;
+}
+
+/* ============================================================
+   SIDEBAR — styled as a manuscript margin / colophon column
+   ============================================================ */
+#sidebar{
+  position:fixed; top:0; left:0; width:328px; height:100vh;
+  background: var(--ink); color:#cfc7b2; overflow-y:auto;
+  z-index:500; border-right:1px solid #3a331f;
+}
+#sidebar::before{
+  content:""; position:absolute; top:0; right:6px; width:1px; height:100%;
+  background: linear-gradient(to bottom, transparent, var(--gold) 8%, var(--gold) 92%, transparent);
+  opacity:0.5;
+}
+#sidebar::-webkit-scrollbar{ width:5px; }
+#sidebar::-webkit-scrollbar-thumb{ background:#4a4128; }
+
+.sidebar-brand{
+  padding: 34px 26px 22px; border-bottom:1px solid #322c1c;
+}
+.sidebar-brand .kicker{
+  font-family: var(--mono); font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
+  color: var(--gold);
+}
+.sidebar-brand h2{
+  font-family: var(--display); font-weight:600; font-size:23px; color:var(--paper);
+  margin-top:8px; line-height:1.25;
+}
+.sidebar-brand .sub{
+  font-family: var(--body); font-style:italic; font-size:13px; color:#8a8067; margin-top:8px;
+}
+
+nav#toc{ padding: 10px 0 40px; }
+nav#toc ul{ list-style:none; }
+
+.toc-top-row{ display:flex; align-items:stretch; }
+.toc-top-link{
+  flex:1; display:flex; align-items:baseline; gap:10px;
+  font-family: var(--mono); font-size:12.5px; font-weight:500; letter-spacing:0.3px;
+  color:#d8d0ba; text-decoration:none; padding:11px 8px 11px 26px;
+  border-left:3px solid transparent; transition: all .15s ease;
+}
+.toc-top-link .toc-num{ color:var(--gold); font-weight:600; min-width:24px; }
+.toc-top-link:hover{ background:#1c1710; color:var(--gold-bright); }
+
+.toc-caret-btn{
+  width:38px; border:none; background:none; color:#6b6248; cursor:pointer;
+  font-size:11px; transition: transform .2s ease, color .2s ease;
+}
+.toc-group.open > .toc-top-row .toc-caret-btn{ transform:rotate(90deg); color:var(--gold); }
+
+.toc-sub{
+  max-height:0; overflow:hidden; transition:max-height .35s ease; background:#1a160e;
+}
+.toc-group.open > .toc-sub{ max-height:600px; }
+.toc-sub a{
+  display:block; font-family: var(--body); font-style:italic; font-size:14.5px;
+  color:#a89d80; text-decoration:none; padding:8px 24px 8px 58px;
+  border-left:3px solid transparent;
+}
+.toc-sub a:hover{ color: var(--gold-bright); background:#1c1710; }
+
+nav#toc a.active{
+  color: var(--gold-bright) !important; border-left-color: var(--gold) !important;
+  background:#1c1710;
+}
+.toc-item-flat .toc-top-link{ padding-right:26px; }
+
+.toc-biblio{
+  margin-top:14px; padding-top:14px; border-top:1px solid #322c1c;
+}
+
+/* ============================================================
+   MAIN LAYOUT
+   ============================================================ */
+main{ margin-left:328px; }
+
+.hero{
+  background: var(--ink); color: var(--paper);
+  padding: 86px 60px 60px; text-align:center; position:relative;
+  border-bottom: 1px solid var(--gold);
+}
+.hero .kicker{
+  font-family: var(--mono); font-size:12px; letter-spacing:4px; text-transform:uppercase;
+  color: var(--gold);
+}
+.hero .epigraph{
+  max-width:680px; margin:30px auto; padding:22px 28px; text-align:left;
+  border-top:1px solid #3a331f; border-bottom:1px solid #3a331f;
+}
+.hero .epigraph .greek{
+  font-family: var(--body); font-size:19px; color:#d8cba3; line-height:1.9; font-style:italic;
+}
+.hero .epigraph .seam{
+  display:inline-block; margin:0 4px; padding:1px 8px; background:var(--gold);
+  color:var(--ink); font-style:normal; font-family:var(--mono); font-size:12px;
+  border-radius:2px; transform:translateY(-2px);
+}
+.hero .epigraph .ref{
+  display:block; margin-top:12px; font-family:var(--mono); font-size:11px; color:#7a715a;
+  letter-spacing:0.5px;
+}
+.hero h1{
+  font-family: var(--display); font-weight:700; font-size:clamp(34px,5.2vw,60px);
+  margin:8px 0 14px; line-height:1.12; color:var(--paper);
+}
+.hero h1 em{ color:var(--gold-bright); font-style:normal; }
+.hero .subtitle{
+  font-family: var(--body); font-style:italic; font-size:20px; color:#c9bfa2;
+  max-width:640px; margin:0 auto;
+}
+.hero .facts-line{
+  margin-top:34px; font-family:var(--mono); font-size:11.5px; letter-spacing:0.5px;
+  color:#8a8067; display:flex; justify-content:center; gap:14px; flex-wrap:wrap;
+}
+.hero .facts-line span{ white-space:nowrap; }
+.hero .facts-line .dot{ color:var(--gold); }
+
+.container{ max-width:760px; margin:0 auto; padding:0 44px; }
+
+section.chapter{
+  padding: 64px 0 8px; border-bottom:1px solid var(--border-gold);
+  opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;
+}
+section.chapter.visible{ opacity:1; transform:translateY(0); }
+section.chapter:last-of-type{ border-bottom:none; }
+
+.chapter-mark{
+  display:flex; align-items:center; gap:14px; margin-bottom:8px;
+}
+.chapter-mark .rule{ flex:1; height:1px; background:var(--border-gold); }
+.chapter-mark .num{
+  font-family: var(--display-sc); font-size:15px; letter-spacing:3px; color:var(--gold);
+  font-weight:600;
+}
+.chapter-head h2{
+  font-family: var(--display); font-weight:700; font-size:clamp(26px,3.4vw,36px);
+  color: var(--text-ink); line-height:1.2; margin: 6px 0 34px;
+}
+
+h3.sub-head{
+  font-family: var(--display); font-size:24px; font-weight:600; color:var(--text-ink);
+  margin: 42px 0 16px; display:flex; align-items:baseline; gap:10px;
+}
+h3.sub-head .letter{
+  font-family: var(--mono); font-size:13px; color:var(--gold); border:1px solid var(--gold);
+  border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center;
+  justify-content:center; flex-shrink:0;
+}
+h4.micro-head{
+  font-family: var(--mono); font-size:13px; font-weight:600; text-transform:uppercase;
+  letter-spacing:1px; color: var(--gold); margin: 26px 0 10px; border-bottom: 1px dotted var(--border-gold); padding-bottom: 6px;
+}
+
+p{ margin-bottom:17px; color:var(--text-mute); }
+strong{ color:var(--text-ink); font-weight:600; }
+a{ color:var(--gold); }
+.griego{ font-style:italic; color:#6b5518; }
+
+.drop-cap{
+  float:left; font-family:var(--display); font-weight:700; font-size:84px; line-height:0.78;
+  color:var(--gold); padding:8px 10px 0 0;
+}
+
+blockquote.cita{
+  background: var(--parchment-deep); border-left:4px solid var(--gold);
+  padding: 22px 28px; margin: 22px 0; border-radius:0 6px 6px 0;
+}
+blockquote.cita .griego-block{
+  display:block; font-family:var(--body); font-style:italic; color:#4d3f14; margin-bottom:12px; font-size:17px;
+}
+blockquote.cita .traduccion{
+  display:block; color: var(--text-ink); font-style:italic;
+}
+blockquote.cita .fuente{
+  display:block; font-style:normal; font-family:var(--mono); font-size:11px;
+  text-transform:uppercase; letter-spacing:0.6px; color:var(--gold); margin-top:12px; font-weight:600;
+}
+
+.box-grid{ display:grid; gap:16px; margin:26px 0; }
+.box{
+  background: var(--paper); border:1px solid var(--border-gold); border-top:3px solid var(--gold);
+  border-radius:4px; padding:20px 24px;
+}
+.box .box-title{
+  font-family:var(--mono); font-weight:600; color:var(--text-ink); margin-bottom:8px; font-size:14px;
+  display:flex; align-items:center; gap:10px; text-transform:uppercase; letter-spacing:0.4px;
+}
+.box .box-title .tag{
+  background:var(--ink); color:var(--gold); width:24px; height:24px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0;
+}
+.box p:last-child{ margin-bottom:0; }
+.box p{ font-size:16px; }
+
+table.tabla{
+  width:100%; border-collapse:collapse; margin:26px 0; font-family:var(--body); font-size:16px;
+}
+table.tabla th{
+  background:var(--ink); color:var(--gold-pale); padding:12px 16px; text-align:left;
+  font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; font-weight:500;
+}
+table.tabla td{ padding:12px 16px; border-bottom:1px solid var(--border-gold); color:var(--text-mute); }
+table.tabla tr:nth-child(even) td{ background:var(--parchment-deep); }
+
+.scholar-grid{ display:grid; grid-template-columns: repeat(auto-fill,minmax(270px,1fr)); gap:16px; margin:26px 0; }
+.scholar-card{
+  border:1px solid var(--border-gold); border-radius:4px; padding:18px 22px; background:var(--paper);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.scholar-card:hover{ border-color:var(--gold); box-shadow:0 8px 20px rgba(20,17,12,0.10); transform:translateY(-2px); }
+.scholar-card .name{ font-family:var(--display); font-weight:700; font-size:18px; color:var(--text-ink); }
+.scholar-card .role{ font-family:var(--mono); font-size:11px; color:var(--gold); margin:5px 0 10px; text-transform:uppercase; letter-spacing:0.3px; }
+.scholar-card p{ font-size:15.5px; margin-bottom:0; color:var(--text-mute); }
+
+.veredicto{
+  background: var(--ink); color:#d8d0ba; padding:28px 32px; border-radius:4px; margin:30px 0;
+  border-left:4px solid var(--gold);
+}
+.veredicto .label{
+  font-family:var(--mono); color:var(--gold); text-transform:uppercase; font-size:11px;
+  letter-spacing:1.5px; font-weight:600; margin-bottom:10px; display:block;
+}
+.veredicto p{ color:#d8d0ba; margin-bottom:10px; }
+.veredicto p:last-child{ margin-bottom:0; }
+.veredicto strong{ color:var(--gold-bright); }
+
+ul.lista, ol.lista{ margin: 16px 0 20px 24px; }
+ul.lista li, ol.lista li{ margin-bottom:11px; color:var(--text-mute); }
+ul.lista li::marker{ color:var(--gold); font-weight:700; }
+ol.lista li::marker{ color:var(--gold); font-weight:700; font-family:var(--mono); }
+
+mark.destacado{ background:var(--gold-pale); color:var(--text-ink); padding:1px 5px; border-radius:2px; }
+
+.verdict-pill{
+  display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12px;
+  padding:5px 14px; border-radius:20px; margin: 4px 6px 4px 0; letter-spacing:0.3px;
+}
+.pill-favor{ background:#e9f2df; color:#3d5c24; border:1px solid #b9d49c; }
+.pill-contra{ background:#f7e3de; color:#7a2e1c; border:1px solid #e2ab9a; }
+.pill-neutro{ background:var(--parchment-deep); color:var(--text-mute); border:1px solid var(--border-gold); }
+
+#backToTop{
+  position:fixed; bottom:28px; right:28px; width:48px; height:48px; border-radius:50%;
+  background:var(--gold); color:var(--ink); border:none; font-size:19px; cursor:pointer;
+  box-shadow:0 6px 18px rgba(20,17,12,0.3); display:none; align-items:center; justify-content:center;
+  z-index:600; font-family:var(--mono);
+}
+#backToTop.show{ display:flex; }
+
+footer.doc-footer{
+  background: var(--ink); color:#8a8067; text-align:center; padding:56px 30px 44px;
+  font-family: var(--mono); font-size:12px; letter-spacing:0.3px;
+}
+footer.doc-footer .rule{ width:50px; height:2px; background:var(--gold); margin:0 auto 22px; }
+footer.doc-footer .title{ font-family:var(--display); font-style:italic; font-size:17px; color:var(--gold-pale); margin-bottom:14px; }
+
+@media (max-width: 940px){
+  #sidebar{ transform:translateX(-100%); transition:transform .3s ease; box-shadow:20px 0 50px rgba(0,0,0,0.4); }
+  #sidebar.open{ transform:translateX(0); }
+  #sidebarScrim.show{ display:block; }
+  main{ margin-left:0; }
+  #sidebarToggle{ display:flex; }
+  .hero{ padding:84px 26px 44px; }
+  .container{ padding:0 24px; }
+  .drop-cap{ font-size:64px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  section.chapter{ opacity:1; transform:none; transition:none; }
+  .scholar-card{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="progressTrack"><div id="progressBar"></div></div>
+<button id="sidebarToggle" aria-label="Abrir índice">☰</button>
+<div id="sidebarScrim"></div>
+
+<!-- ============================================================
+     SIDEBAR / ÍNDICE INTERACTIVO
+     ============================================================ -->
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <div class="kicker">Codex · Apologética</div>
+    <h2>El Final Largo<br>de Marcos</h2>
+    <div class="sub">Índice de la defensa</div>
+  </div>
+  <nav id="toc">
+    <ul>
+
+      <li class="toc-item-flat">
+        <div class="toc-top-row"><a href="#intro" class="toc-top-link"><span class="toc-num">I</span> Introducción</a></div>
+      </li>
+
+      <li class="toc-group open">
+        <div class="toc-top-row">
+          <a href="#manuscritos" class="toc-top-link"><span class="toc-num">II</span> Estado Manuscrito</a>
+          <button class="toc-caret-btn">▸</button>
+        </div>
+        <ul class="toc-sub">
+          <li><a href="#mss-omiten">Los que omiten</a></li>
+          <li><a href="#mss-incluyen">Los que incluyen</a></li>
+        </ul>
+      </li>
+
+      <li class="toc-group">
+        <div class="toc-top-row">
+          <a href="#patristica" class="toc-top-link"><span class="toc-num">III</span> Evidencia Patrística</a>
+          <button class="toc-caret-btn">▸</button>
+        </div>
+        <ul class="toc-sub">
+          <li><a href="#ireneo">Ireneo de Lyon</a></li>
+          <li><a href="#diatessaron">Diatessaron de Taciano</a></li>
+          <li><a href="#justino">Justino Mártir</a></li>
+          <li><a href="#otros-padres">Otros Padres</a></li>
+        </ul>
+      </li>
+
+      <li class="toc-group">
+        <div class="toc-top-row">
+          <a href="#eusebio" class="toc-top-link"><span class="toc-num">IV</span> Eusebio de Cesarea</a>
+          <button class="toc-caret-btn">▸</button>
+        </div>
+        <ul class="toc-sub">
+          <li><a href="#eusebio-texto">El texto de la Quaestio</a></li>
+          <li><a href="#eusebio-matizaciones">Cuatro matizaciones</a></li>
+          <li><a href="#eusebio-otras-citas">¿Cita el texto en otras obras?</a></li>
+          <li><a href="#anfiloco">Anfíloco de Iconio</a></li>
+          <li><a href="#victor-antioquia">Víctor de Antioquía</a></li>
+          <li><a href="#eusebio-implicaciones">Implicaciones del silencio</a></li>
+        </ul>
+      </li>
+
+      <li class="toc-group">
+        <div class="toc-top-row">
+          <a href="#jeronimo" class="toc-top-link"><span class="toc-num">V</span> Jerónimo de Estridón</a>
+          <button class="toc-caret-btn">▸</button>
+        </div>
+        <ul class="toc-sub">
+          <li><a href="#jeronimo-textos">Los textos reales</a></li>
+          <li><a href="#jeronimo-tensiones">Cuatro tensiones</a></li>
+          <li><a href="#jeronimo-contemporaneos">Contemporáneos occidentales</a></li>
+          <li><a href="#codex-fuldensis">El Codex Fuldensis</a></li>
+          <li><a href="#jeronimo-implicaciones">Implicaciones combinadas</a></li>
+        </ul>
+      </li>
+
+      <li class="toc-group">
+        <div class="toc-top-row">
+          <a href="#armonizacion" class="toc-top-link"><span class="toc-num">VI</span> Mateo 28:1 vs Marcos 16:9</a>
+          <button class="toc-caret-btn">▸</button>
+        </div>
+        <ul class="toc-sub">
+          <li><a href="#problema-exacto">El problema exacto</a></li>
+          <li><a href="#eusebio-sol1">1ª solución (textual)</a></li>
+          <li><a href="#eusebio-sol2">2ª solución (gramatical)</a></li>
+          <li><a href="#jeronimo-solucion">La solución de Jerónimo</a></li>
+          <li><a href="#otras-soluciones">Otras soluciones posibles</a></li>
+          <li><a href="#valoracion-sintetica">Valoración sintética</a></li>
+        </ul>
+      </li>
+
+      <li class="toc-item-flat">
+        <div class="toc-top-row"><a href="#versional" class="toc-top-link"><span class="toc-num">VII</span> Evidencia Versional</a></div>
+      </li>
+
+      <li class="toc-group">
+        <div class="toc-top-row">
+          <a href="#argumentos-internos" class="toc-top-link"><span class="toc-num">VIII</span> Argumentos Internos</a>
+          <button class="toc-caret-btn">▸</button>
+        </div>
+        <ul class="toc-sub">
+          <li><a href="#final-16-8">El problema del final en 16:8</a></li>
+          <li><a href="#final-perdido">La tesis del final perdido</a></li>
+          <li><a href="#coherencia-tematica">Coherencia temática</a></li>
+        </ul>
+      </li>
+
+      <li class="toc-group">
+        <div class="toc-top-row">
+          <a href="#respuesta-objeciones" class="toc-top-link"><span class="toc-num">IX</span> Respuesta a Objeciones</a>
+          <button class="toc-caret-btn">▸</button>
+        </div>
+        <ul class="toc-sub">
+          <li><a href="#vocabulario-estilo">Vocabulario y estilo</a></li>
+          <li><a href="#referencias-cruzadas">Referencias cruzadas</a></li>
+          <li><a href="#final-corto">El "Final Corto"</a></li>
+        </ul>
+      </li>
+
+      <li class="toc-item-flat">
+        <div class="toc-top-row"><a href="#academicos" class="toc-top-link"><span class="toc-num">X</span> Académicos que lo Defienden</a></div>
+      </li>
+
+      <li class="toc-item-flat">
+        <div class="toc-top-row"><a href="#triada" class="toc-top-link"><span class="toc-num">XI</span> Wright, Bauckham y Metzger</a></div>
+      </li>
+
+      <li class="toc-item-flat">
+        <div class="toc-top-row"><a href="#canonica" class="toc-top-link"><span class="toc-num">XII</span> Consideración Canónica</a></div>
+      </li>
+
+      <li class="toc-item-flat">
+        <div class="toc-top-row"><a href="#sintesis-critica" class="toc-top-link"><span class="toc-num">XIII</span> Síntesis Crítica</a></div>
+      </li>
+
+      <li class="toc-item-flat">
+        <div class="toc-top-row"><a href="#conclusion" class="toc-top-link"><span class="toc-num">XIV</span> Conclusión General</a></div>
+      </li>
+
+      <li class="toc-item-flat toc-biblio">
+        <div class="toc-top-row"><a href="#bibliografia" class="toc-top-link">❧ Bibliografía</a></div>
+      </li>
+
+    </ul>
+  </nav>
+</aside>
+
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+<main>
+
+  <div class="hero">
+    <div class="kicker">Crítica Textual Neotestamentaria</div>
+    <div class="epigraph">
+      <span class="greek">...καὶ οὐδενὶ οὐδὲν εἶπαν· ἐφοβοῦντο γάρ.<span class="seam">16:8 / 16:9</span>Ἀναστὰς δὲ πρωῒ πρώτῃ σαββάτου ἐφάνη πρῶτον Μαρίᾳ τῇ Μαγδαληνῇ...</span>
+      <span class="ref">Marcos 16:8b–9 — la sutura textual más disputada del Nuevo Testamento</span>
+    </div>
+    <h1>El Final Largo <em>de Marcos</em></h1>
+    <p class="subtitle">Defensa íntegra de la autenticidad de Marcos 16:9-20 — manuscritos, patrística, versiones y argumento interno</p>
+    <div class="facts-line">
+      <span>Vaticanus <span class="dot">·</span> Sinaiticus</span>
+      <span class="dot">—</span>
+      <span>+1.600 testigos griegos</span>
+      <span class="dot">—</span>
+      <span>Ireneo, c. 180 d.C.</span>
+      <span class="dot">—</span>
+      <span>10 versiones antiguas</span>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- ============================================================
+         I. INTRODUCCIÓN
+         ============================================================ -->
+    <section class="chapter" id="intro">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">I. Introducción</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>El problema textual y su alcance</h2></div>
+
+      <p><span class="drop-cap">E</span>l llamado <em>Finale longum Marci</em> (Marcos 16:9-20) es uno de los pasajes más debatidos en toda la crítica textual del Nuevo Testamento. Doce versículos que narran apariciones del Resucitado, el mandato misionero, señales prometidas y la Ascensión han sido cuestionados por una parte de la erudición moderna como una adición posterior al texto original de Marcos. Sin embargo, esta postura —aunque dominante en ciertos círculos académicos desde el siglo XIX— descansa sobre una base mucho más frágil de lo que habitualmente se reconoce en los manuales de crítica textual.</p>
+
+      <p>Una defensa rigurosa del <em>Finale longum</em> no requiere ignorar las dificultades textuales; requiere examinarlas con la misma severidad crítica con que se examinan los argumentos contrarios. Y cuando se hace eso con rigor, el equilibrio de la evidencia apunta, por lo menos, a que el rechazo moderno del Final Largo es prematuro, y en muchos aspectos, metodológicamente inconsistente.</p>
+
+      <div class="box">
+        <div class="box-title"><span class="tag">§</span>Hoja de ruta de esta defensa</div>
+        <p>Se examinará, en este orden: el estado real de la tradición manuscrita (no solo los dos grandes unciales que se citan siempre); el testimonio patrístico desde el siglo II; un análisis exhaustivo de los dos testigos más invocados en contra —Eusebio y Jerónimo— leídos en su propio contexto y género literario; la contradicción cronológica concreta que ambos intentan resolver sin eliminar el texto; la evidencia versional; los argumentos internos narrativos; la respuesta punto por punto a las objeciones estilísticas; el estado real de la erudición académica —incluyendo una aclaración honesta sobre Wright, Bauckham y Metzger—; y una síntesis crítica de por qué el consenso moderno es más vulnerable de lo que aparenta.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         II. ESTADO DE LOS MANUSCRITOS
+         ============================================================ -->
+    <section class="chapter" id="manuscritos">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">II. Estado Manuscrito</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>La verdad completa sobre los testigos</h2></div>
+
+      <div id="mss-omiten">
+        <h3 class="sub-head"><span class="letter">A</span>Los que omiten el Final Largo</h3>
+        <p>Los adversarios del <em>Finale longum</em> citan siempre los mismos dos grandes códices: el <strong>Codex Sinaiticus (א)</strong>, del siglo IV, y el <strong>Codex Vaticanus (B)</strong>, también del siglo IV. Estos dos pergaminos en letra uncial omiten Marcos 16:9-20. Y es aquí donde la argumentación crítica suele detenerse, como si dos manuscritos —por venerables que sean— fueran suficientes para zanjar la cuestión. Pero hay varios matices absolutamente cruciales.</p>
+
+        <h4 class="micro-head">El espacio en blanco de Vaticanus</h4>
+        <p>En el Codex Vaticanus, al final de Marcos 16:8, el escriba dejó una columna entera en blanco antes de comenzar el Evangelio de Lucas. Este fenómeno es extraordinario y único en todo el manuscrito: en ningún otro lugar del texto el escriba deja espacios tan grandes entre libros. La explicación más natural, como han señalado William Farmer y otros, es que el escriba sabía que faltaba algo pero no tenía acceso al texto en ese momento. El espacio vacío no es evidencia de que 16:9-20 no existía, sino —paradójicamente— de que el copista sabía que su <em>exemplar</em> estaba incompleto.</p>
+
+        <h4 class="micro-head">Sinaiticus tampoco es un testigo neutral</h4>
+        <p>El Codex Sinaiticus ha sido corregido por múltiples manos (<em>correctors</em>: Sᵃ, Sᵇ, Sᶜ). Hay signos de corrección en toda la tradición textual del Vaticanus también. Además, el análisis paleográfico demuestra que en Sinaiticus hay un cambio de mano justo en el final de Marcos 16:8, lo cual ha llevado a algunos especialistas a sospechar que el texto fue intervenido.</p>
+
+        <h4 class="micro-head">El resto de la tradición es abrumadoramente favorable</h4>
+        <p>Más de <strong>1.600 manuscritos griegos</strong> incluyen Marcos 16:9-20. Esto representa aproximadamente el 99% de toda la tradición manuscrita griega del Evangelio de Marcos. Rechazar el Final Largo basándose en dos manuscritos frente a más de mil seiscientos requiere una justificación metodológica muy sólida que los críticos modernos raramente proveen de manera satisfactoria.</p>
+      </div>
+
+      <div id="mss-incluyen">
+        <h3 class="sub-head"><span class="letter">B</span>Los que incluyen el Final Largo</h3>
+        <p>La lista de testimonios positivos es impresionante en su antigüedad, geografía y diversidad:</p>
+        <table class="tabla">
+          <tr><th>Testigo</th><th>Fecha</th><th>Observación</th></tr>
+          <tr><td>Codex Alexandrinus (A)</td><td>Siglo V</td><td>Texto bizantino/alejandrino mixto</td></tr>
+          <tr><td>Codex Ephraemi Rescriptus (C)</td><td>Siglo V</td><td>Palimpsesto</td></tr>
+          <tr><td>Codex Bezae Cantabrigiensis (D)</td><td>Siglo V</td><td>Texto occidental</td></tr>
+          <tr><td>Codex Washingtonianus (W)</td><td>Siglo IV-V</td><td>Incluye la <em>Freer Logion</em> entre 16:14 y 16:15 — evidencia de tradición textual propia y activa ya en el siglo IV</td></tr>
+          <tr><td>Codex Θ, Familia 1, Familia 13</td><td>Varios</td><td>Casi toda la tradición minúscula</td></tr>
+          <tr><td>Texto Mayoritario / Bizantino</td><td>Transmisión continua</td><td>Forma utilizada siglos en la iglesia griega</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         III. EVIDENCIA PATRÍSTICA TEMPRANA
+         ============================================================ -->
+    <section class="chapter" id="patristica">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">III. Evidencia Patrística</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>El testimonio de los Padres de la Iglesia</h2></div>
+
+      <p>Este es quizás el argumento más devastador contra los que rechazan el Final Largo: los Padres de la Iglesia lo conocían, lo citaban y lo consideraban parte del Evangelio de Marcos.</p>
+
+      <div id="ireneo">
+        <h3 class="sub-head"><span class="letter">A</span>Ireneo de Lyon (c. 180 d.C.)</h3>
+        <p>Ireneo cita explícitamente <strong>Marcos 16:19</strong> en su obra <em>Adversus Haereses</em> (III.10.5):</p>
+        <blockquote class="cita">
+          <span class="traduccion">"También el final del Evangelio de Marcos dice: 'Y así el Señor Jesús, después de hablar con ellos, fue llevado al cielo y se sentó a la diestra de Dios.'"</span>
+          <span class="fuente">Ireneo, Adversus Haereses III.10.5</span>
+        </blockquote>
+        <p>Ireneo atribuye este versículo específicamente al final del Evangelio de Marcos, lo cual demuestra que ya en el siglo II, a menos de 100 años de la composición del evangelio, el Final Largo era considerado parte del texto marcano. Si el texto ya circulaba como parte de Marcos en el 180 d.C., su origen debe ser anterior, posiblemente tan antiguo como el propio texto de Marcos.</p>
+      </div>
+
+      <div id="diatessaron">
+        <h3 class="sub-head"><span class="letter">B</span>El Diatessaron de Taciano (c. 170 d.C.)</h3>
+        <p>Taciano, discípulo de Justino Mártir, compuso el <em>Diatessaron</em>, una armonía de los cuatro evangelios ampliamente utilizada en la iglesia siria durante siglos. El análisis reconstruido del Diatessaron muestra que incluía material proveniente de Marcos 16:9-20. Dado que Taciano compuso su obra alrededor del año 170 d.C., el Final Largo debe haber existido ya en esa época como parte del texto marcano.</p>
+      </div>
+
+      <div id="justino">
+        <h3 class="sub-head"><span class="letter">C</span>Justino Mártir (c. 150-165 d.C.)</h3>
+        <p>En la <em>Primera Apología</em> (cap. 45), Justino escribe sobre la Ascensión del Señor de manera que evoca claramente el lenguaje de Marcos 16:19. Si bien la cita no es <em>verbatim</em>, la dependencia lingüística ha sido argumentada por múltiples especialistas.</p>
+      </div>
+
+      <div id="otros-padres">
+        <h3 class="sub-head"><span class="letter">D</span>Otros Padres Latinos y Griegos</h3>
+        <p>El Final Largo está presupuesto o citado por una cadena ininterrumpida de testigos patrísticos:</p>
+        <ul class="lista">
+          <li><strong>Tertuliano</strong> (c. 200 d.C.)</li>
+          <li><strong>Afrahat</strong> (siglo IV)</li>
+          <li><strong>Ambrosio de Milán</strong> — cita 16:15-18</li>
+          <li><strong>Agustín de Hipona</strong> — cita y comenta extensamente 16:17-18 en el <em>De Consensu Evangelistarum</em></li>
+          <li><strong>Juan Crisóstomo</strong> — conoce y utiliza el texto</li>
+          <li><strong>Jerónimo</strong> — lo incluye en la Vulgata (ver Sección V, con análisis exhaustivo)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         IV. EUSEBIO DE CESAREA — ANÁLISIS EXHAUSTIVO
+         ============================================================ -->
+    <section class="chapter" id="eusebio">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">IV. Eusebio de Cesarea</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>El testimonio ambiguo, examinado a fondo</h2></div>
+
+      <div id="eusebio-texto">
+        <h3 class="sub-head"><span class="letter">A</span>El texto de la <em>Quaestio ad Marinum</em></h3>
+        <p>La carta de Eusebio conocida como <em>Quaestiones ad Marinum</em> (conservada fragmentariamente en griego en la <em>Patrologia Graeca</em> de Migne, vol. 22, cols. 937-958, y más completa en versión siríaca) no es un tratado de crítica textual sino una respuesta pastoral a un problema de armonización evangélica. Marinus había preguntado cómo reconciliar Mateo 28:1 con Marcos 16:9. El pasaje que se invoca es la <strong>primera</strong> de las dos soluciones que Eusebio ofrece:</p>
+
+        <blockquote class="cita">
+          <span class="griego-block">"Πρὸς τοῦτο λέγοι ἄν τις, ὅτι οὐ πάντα τὰ ἀντίγραφα τοῦ κατὰ Μάρκον εὐαγγελίου ταῦτα ἔχουσιν. σχεδὸν γάρ, ἐν πᾶσιν τοῖς ἀντιγράφοις τοῦ κατὰ Μάρκον εὐαγγελίου τὸ τέλος κεῖται κατὰ τὴν τοῦ Ἀνδρωνίου φωνήν· ἐν ᾧ τὸ ἐν τοῖς ἀκριβέσι τῶν ἀντιγράφων σχεδόν γε πάντων ὁρίζει τὸ τέλος τοῦ κατὰ Μάρκον"</span>
+          <span class="traduccion">"A esto se podría decir que no todos los ejemplares del Evangelio según Marcos tienen estas cosas. Pues en casi todos los ejemplares del Evangelio según Marcos el final está colocado según la expresión del joven [en 16:8], donde en los ejemplares exactos, en casi todos ellos, se delimita el final de Marcos."</span>
+          <span class="fuente">Eusebio, Quaestio ad Marinum · PG 22, 937</span>
+        </blockquote>
+
+        <p>Y añade, ofreciendo la <strong>segunda solución</strong>:</p>
+
+        <blockquote class="cita">
+          <span class="traduccion">"Pero si alguien considera que es impío desechar completamente cualquier parte de los Evangelios que ha sido leída en las iglesias, y acepta ambos pasajes [Mateo y Marcos], es preciso que resuelva la aparente contradicción de esta manera..."</span>
+          <span class="fuente">Eusebio, Quaestio ad Marinum</span>
+        </blockquote>
+
+        <p>Y a continuación ofrece una armonización gramatical que <strong>presupone la autenticidad del texto</strong> de Marcos 16:9 (desarrollada en detalle en la Sección VI).</p>
+      </div>
+
+      <div id="eusebio-matizaciones">
+        <h3 class="sub-head"><span class="letter">B</span>Cuatro matizaciones decisivas</h3>
+
+        <div class="box-grid">
+          <div class="box">
+            <div class="box-title"><span class="tag">1</span>No es un juicio de autenticidad</div>
+            <p>Es fundamental comprender el género literario del texto. Eusebio no está escribiendo un tratado de crítica textual comparable al moderno aparato crítico de Nestle-Aland. Está respondiendo a un problema de <em>harmonística</em> evangélica —el mismo tipo de preguntas que planteaban los adversarios paganos como Celso o Porfirio—. La primera solución que ofrece es esencialmente una salida pastoral a un problema hermenéutico, no una afirmación de que el texto es espurio.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">2</span>σχεδόν ("casi") es limitativa, no absoluta</div>
+            <p>Eusebio no dice que el Final Largo esté ausente en <em>todos</em> los manuscritos sino en "casi todos los exactos" (ἐν τοῖς ἀκριβέσι... σχεδόν). La partícula <span class="griego">σχεδόν</span> reconoce implícitamente que incluso entre los manuscritos que Eusebio consideraba "exactos" había algunos que sí lo incluían. Esto es radicalmente diferente a la imagen de un Eusebio que atestigua la ausencia universal del texto.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">3</span>Los "exactos" son probablemente los de Cesarea</div>
+            <p>La biblioteca de Cesarea Marítima, fundada por Orígenes y ampliada por Pánfilo (mentor de Eusebio), contenía principalmente manuscritos de la tradición alejandrina. Es muy probable que los manuscritos "exactos" (ἀκριβέστερα) de Eusebio sean esa colección local específica —que coincide precisamente con la familia textual luego representada por Vaticanus y Sinaiticus—, no la tradición manuscrita universal.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">4</span>La segunda solución presupone el texto válido</div>
+            <p>Cuando Eusebio pasa a armonizar Mateo 28:1 con Marcos 16:9 mediante análisis gramatical, está tratando a Marcos 16:9-20 como texto auténtico que merece ser armonizado. Si creyera genuinamente que era una falsificación, no ofrecería una segunda vía que lo presupone válido. Su estructura lógica es: "o bien puedes decir que no está en todos los manuscritos... o bien, si aceptas el texto, puedes resolverlo así." La segunda vía no es descartada.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="eusebio-otras-citas">
+        <h3 class="sub-head"><span class="letter">C</span>¿Cita Eusebio el Final Largo en otras obras?</h3>
+        <p>Aquí hay un elemento que la literatura crítica frecuentemente silencia: <strong>Eusebio en otras obras parece presuponer el contenido de Marcos 16:15-20.</strong> En su <em>Historia Ecclesiastica</em> y en su <em>Demonstratio Evangelica</em>, Eusebio habla de la misión universal de los apóstoles y de la predicación a todas las naciones de manera que refleja el vocabulario de Marcos 16:15 ("id por todo el mundo y predicad el evangelio a toda criatura"). Aunque no hay una cita <em>verbatim</em>, el eco terminológico es notable. Más importante: en su <em>Theophania</em> (conservada en siríaco), Eusebio discute las apariciones postresurrección en términos compatibles con el contenido de Marcos 16:9-20.</p>
+      </div>
+
+      <div id="anfiloco">
+        <h3 class="sub-head"><span class="letter">D</span>Anfíloco de Iconio (c. 380 d.C.)</h3>
+        <p>Un testigo contemporáneo de Vaticanus y Sinaiticus que frecuentemente se omite es <strong>Anfíloco de Iconio</strong>, amigo íntimo de Basilio de Cesarea y Gregorio de Nacianzo. En su poema <em>Iambi ad Seleucum</em> —catálogo del canon de las Escrituras—, Anfíloco menciona que "algunos dicen" que el final de Marcos es espurio (<em>nothon</em>), pero él mismo lo incluye en el canon. Este testimonio muestra:</p>
+        <ol class="lista">
+          <li>Que la disputa existía en el siglo IV (no es un problema moderno)</li>
+          <li>Que incluso quienes conocían la disputa incluían el Final Largo en el canon</li>
+          <li>Que la posición de rechazarlo era minoritaria incluso entonces</li>
+        </ol>
+      </div>
+
+      <div id="victor-antioquia">
+        <h3 class="sub-head"><span class="letter">E</span>Víctor de Antioquía: el testigo más decisivo</h3>
+        <p><strong>Víctor de Antioquía</strong> escribió el primer comentario completo conservado al Evangelio de Marcos (siglo V). En su prefacio, aborda directamente el problema textual:</p>
+        <blockquote class="cita">
+          <span class="traduccion">"Habiendo encontrado en muchos ejemplares este pasaje [Marcos 16:9-20], y habiéndolo encontrado en los antiguos [ἐν τοῖς ἀρχαίοις], lo hemos incluido."</span>
+          <span class="fuente">Víctor de Antioquía, Comentario a Marcos, prefacio</span>
+        </blockquote>
+        <p>Este testimonio es crítico porque Víctor era consciente de que algunos manuscritos no tenían el texto —conocía el problema—, y sin embargo encontró el pasaje en "muchos ejemplares" y en manuscritos "antiguos", decidiendo incluirlo basándose en el peso de la tradición manuscrita que él mismo consultó. Esto prueba que en el siglo V existían manuscritos "antiguos" con el Final Largo que hoy no conservamos, y que Vaticanus y Sinaiticus no representaban la tradición universal sino una variante textual específica.</p>
+      </div>
+
+      <div id="eusebio-implicaciones">
+        <h3 class="sub-head"><span class="letter">F</span>Implicaciones del silencio en los manuscritos más antiguos</h3>
+        <p>Es hora de enfrentar directamente la pregunta: <strong>¿qué implica que los dos manuscritos más antiguos completos del NT griego no tengan el Final Largo?</strong></p>
+
+        <div class="box-grid">
+          <div class="box">
+            <div class="box-title"><span class="tag">A</span>Antigüedad no equivale a fidelidad</div>
+            <p>El principio de que "más antiguo = más fiel" es una regla heurística, no una ley. Un manuscrito del siglo IV puede copiar un original corrupto o local del siglo II, mientras que uno del siglo IX puede copiar fielmente una tradición impecable del siglo I. Lo que importa es el <em>tipo textual</em> y la <em>historia de transmisión</em>, no meramente la fecha de copiado.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">B</span>Un mismo tipo textual, no dos testigos independientes</div>
+            <p>Vaticanus y Sinaiticus son dos representantes de la misma tradición regional alejandrina. Decir "los dos manuscritos más antiguos no lo tienen" equivale, en realidad, a decir "la tradición alejandrina no lo tiene" —una afirmación sobre una familia textual particular, no sobre toda la tradición manuscrita. La tradición occidental (Bezae), la bizantina (+1.600 mss.) y las versiones latinas, siríacas, coptas y armenias sí lo tienen.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">C</span>Ireneo precede a Vaticanus por 150 años</div>
+            <p>Ireneo de Lyon cita Marcos 16:19 como parte del evangelio de Marcos hacia el año 180 d.C. Vaticanus fue copiado hacia el 325-350 d.C.; Sinaiticus hacia el 325-360 d.C. Si Ireneo cita el texto como marcano en el 180 d.C., la ausencia del texto en dos manuscritos copiados 150 años después no prueba que el texto fuera añadido — prueba que esos dos manuscritos representan una tradición que en algún momento lo perdió u omitió.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">D</span>El espacio en blanco como evidencia positiva</div>
+            <p>En el Codex Vaticanus, el texto termina en Marcos 16:8 en la tercera columna de la página; la cuarta columna queda completamente en blanco. En ningún otro lugar del manuscrito —de más de 1.700 páginas— se repite este fenómeno al final de un libro. El paleógrafo <strong>T.C. Skeat</strong>, del British Museum, señaló que esta columna en blanco no puede explicarse por mero formato: el copista dejó espacio deliberadamente, lo cual sugiere que sabía que su <em>exemplar</em> estaba incompleto en ese punto — no que el Final Largo no existiera en la tradición.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         V. JERÓNIMO DE ESTRIDÓN — ANÁLISIS EXHAUSTIVO
+         ============================================================ -->
+    <section class="chapter" id="jeronimo">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">V. Jerónimo de Estridón</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>El otro testimonio invocado en contra</h2></div>
+
+      <div id="jeronimo-textos">
+        <h3 class="sub-head"><span class="letter">A</span>Los textos reales y lo que dicen exactamente</h3>
+        <p>Jerónimo se pronuncia sobre el Final Largo en al menos dos lugares distintos, con afirmaciones que, leídas conjuntamente, crean una tensión que la crítica moderna raramente resuelve de manera satisfactoria.</p>
+
+        <h4 class="micro-head">Texto 1 — Epistula CXX (ad Hedybiam), Quaestio III (c. 406-407 d.C.)</h4>
+        <p>Hedybia, noble gala de amplia cultura, envió a Jerónimo preguntas exegéticas. La tercera abordaba la aparente contradicción entre los evangelios sobre las mujeres en la tumba:</p>
+        <blockquote class="cita">
+          <span class="griego-block">"...in quibusdam codicibus et maxime in Graecis codicibus, hoc capitulum vel non habetur vel raro invenitur, et si haberetur, quaedam interpretabuntur aliter..."</span>
+          <span class="traduccion">"...en algunos códices, y especialmente en los griegos, este capítulo o no se encuentra o rara vez aparece, y si se encontrara, ciertos [pasajes] serán interpretados de otra manera..."</span>
+          <span class="fuente">Jerónimo, Epistula 120, PL 22, 986</span>
+        </blockquote>
+
+        <h4 class="micro-head">Texto 2 — De Viris Illustribus, cap. III (c. 392 d.C.)</h4>
+        <p>En su catálogo de escritores eclesiásticos, describiendo el Evangelio de Marcos:</p>
+        <blockquote class="cita">
+          <span class="griego-block">"Marcus evangelium scripsit, iuxta Petrum narrans... qui in quibusdam Graecis voluminibus hoc ultimo capite non habetur."</span>
+          <span class="traduccion">"Marcos escribió el evangelio, narrando según Pedro... el cual [capítulo final] no se encuentra en algunos volúmenes griegos."</span>
+          <span class="fuente">Jerónimo, De Viris Illustribus III</span>
+        </blockquote>
+      </div>
+
+      <div id="jeronimo-tensiones">
+        <h3 class="sub-head"><span class="letter">B</span>Cuatro tensiones en el testimonio de Jerónimo</h3>
+        <div class="box-grid">
+          <div class="box">
+            <div class="box-title"><span class="tag">1</span>Dice "algunos" pero incluye el texto</div>
+            <p>Nótese la diferencia entre Eusebio y Jerónimo. Eusebio habla de "casi todos" los manuscritos exactos que no lo tienen; Jerónimo dice "algunos" (<em>quibusdam</em>) códices, especialmente los griegos. Es una afirmación considerablemente más débil. Si Jerónimo hubiera encontrado que la abrumadora mayoría carecía del Final Largo, es improbable que usara el cuantificador moderado <em>quibusdam</em> ("algunos", "ciertos") en vez de uno universal.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">2</span>La Vulgata es una decisión editorial deliberada</div>
+            <p>La Vulgata fue el proyecto intelectual y teológico de Jerónimo, encargado por el papa Dámaso I en 382 d.C. precisamente para revisar el texto latino a la luz de los mejores manuscritos griegos. Jerónimo conocía los manuscritos alejandrinos sin el Final Largo y conocía la carta de Eusebio. Aun así tomó la <strong>decisión editorial consciente</strong> de incluir Marcos 16:9-20 en la Vulgata. No puede explicarse como descuido; es un juicio crítico-textual a favor del pasaje.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">3</span>Cita el contenido en otras obras</div>
+            <p>En varios comentarios, Jerónimo hace referencia al contenido de Marcos 16:17-18 (las señales prometidas a los creyentes), aludiendo a estos versículos sin cuestionar su autenticidad. Si genuinamente los creyera espurios, sería inconsistente citarlos como testimonio de doctrina cristiana.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">4</span>Posible eco amplificado de Eusebio</div>
+            <p>Jerónimo tradujo al latín la <em>Crónica</em> de Eusebio y su <em>Onomasticon</em>; lo conocía profundamente. Es posible que su afirmación de que el capítulo final "rara vez se encuentra en los griegos" reproduzca en parte el testimonio de Eusebio sin verificación independiente exhaustiva. De ser así, los dos testimonios se reducirían a uno solo en cuanto a su peso textual —no dos voces independientes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="jeronimo-contemporaneos">
+        <h3 class="sub-head"><span class="letter">C</span>El uso del Final Largo por contemporáneos occidentales</h3>
+        <p>Otro elemento que contextualiza el testimonio de Jerónimo es que sus contemporáneos en Occidente utilizaban el Final Largo sin ninguna reserva:</p>
+        <ul class="lista">
+          <li><strong>Ambrosio de Milán</strong> (c. 339-397 d.C.) cita y comenta Marcos 16:15-18 en <em>De Spiritu Sancto</em>, <em>De Fide</em> y <em>Expositio in Lucam</em> como texto auténtico y autoritativo.</li>
+          <li><strong>Agustín de Hipona</strong> (354-430 d.C.) discute Marcos 16:9-20 extensamente en <em>De Consensu Evangelistarum</em> (lib. III, cap. 24-25), obra dedicada precisamente a armonizar los evangelios. No cuestiona en ningún momento la autenticidad del pasaje.</li>
+          <li><strong>Ambrosiastro</strong> (anónimo latino del siglo IV) cita Marcos 16:17-18 como texto marcano sin reservas.</li>
+        </ul>
+        <p>Esto significa que en el Occidente latino del siglo IV-V —el mismo período en que se copian Vaticanus y Sinaiticus en Oriente—, el Final Largo era texto estándar, indiscutido, base de teología y exégesis.</p>
+      </div>
+
+      <div id="codex-fuldensis">
+        <h3 class="sub-head"><span class="letter">D</span>El Codex Fuldensis y la confirmación de la Vulgata</h3>
+        <p>Existe un manuscrito particular que ilustra con especial claridad la historia del texto en la tradición latina: el <strong>Codex Fuldensis</strong> (c. 546 d.C.), un manuscrito de la Vulgata que incluye una armonía evangélica similar al Diatessaron. Este códice incluye Marcos 16:9-20 sin ninguna marca de duda o asterisco, como parte integral del texto. Fue producido por encargo del obispo Víctor de Capua y representa la tradición oficial latina del siglo VI, continuadora directa de la decisión de Jerónimo.</p>
+      </div>
+
+      <div id="jeronimo-implicaciones">
+        <h3 class="sub-head"><span class="letter">E</span>Implicaciones combinadas de Eusebio y Jerónimo</h3>
+        <div class="box-grid">
+          <div class="box">
+            <div class="box-title"><span class="tag">A</span>El problema era conocido, no ignorado</div>
+            <p>La Iglesia antigua no ignoró el debate. Eusebio, Anfíloco, Víctor de Antioquía y Jerónimo atestiguan que algunos manuscritos lo omitían. La pregunta relevante no es si la disputa existía, sino cómo la resolvió la tradición eclesiástica — y la respuesta es unívoca: la incluyó.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">B</span>El problema era geográficamente local</div>
+            <p>La omisión parece haber sido característica de la tradición alejandrina y de los manuscritos de la biblioteca de Cesarea. Cuando Jerónimo habla de códices "y especialmente los griegos", habla de los griegos alejandrinos que conocía, no de la tradición griega en general (que, como demuestran los +1.600 manuscritos posteriores, sí lo incluía).</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">C</span>Ninguno de los dos lo rechazó como espurio</div>
+            <p>Este es el punto crucial: ni Eusebio ni Jerónimo declaran el Final Largo un texto falso o una interpolación ilegítima. Eusebio ofrece una segunda solución que lo presupone válido; Jerónimo lo incluye en la Vulgata. El silencio de ambos ante la posibilidad de declararlo espurio —conociendo la variante textual— es evidencia implícita de que ninguno lo consideraba fraudulento.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">D</span>Variante regional, no tradición original</div>
+            <p>Si el Final Largo fuera una adición tardía del siglo II-III, cabría esperar alguna tradición patrística que lo denunciara como interpolación —como sí ocurrió con el <em>Comma Johanneum</em> (1 Jn 5:7-8) o la <em>Pericopa Adulterae</em> (Jn 7:53-8:11), donde la tradición es mucho más dividida. No existe ningún Padre que declare Marcos 16:9-20 una falsificación. La ausencia de esta denuncia en toda la patrística favorece la autenticidad.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">E</span>La decisión de la Vulgata tiene consecuencias canónicas</div>
+            <p>La inclusión del Final Largo en la Vulgata no fue una decisión menor: se convirtió en el texto bíblico oficial de la Iglesia occidental durante más de mil años, y fue declarada auténtica por el Concilio de Trento (1546). La tradición occidental ininterrumpida —desde el siglo IV hasta Trento y más allá— considera Marcos 16:9-20 parte del canon inspirado, arrancando de la decisión crítico-textual de Jerónimo.</p>
+          </div>
+        </div>
+
+        <div class="veredicto">
+          <span class="label">Veredicto de la sección</span>
+          <p>El análisis pormenorizado de Eusebio y Jerónimo produce un resultado paradójico: <strong>los dos testigos que más frecuentemente se invocan contra el Final Largo resultan ser, leídos con atención, testigos ambiguos o incluso favorables a su inclusión.</strong> Eusebio no lo rechaza; ofrece una segunda vía que lo valida. Jerónimo lo incluye en la Vulgata. Víctor de Antioquía, Ambrosio y Agustín lo usan sin reservas. Anfíloco lo incluye en el canon pese a conocer la disputa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         VI. MATEO 28:1 vs MARCOS 16:9 — EL PROBLEMA QUE RESUELVEN
+         ============================================================ -->
+    <section class="chapter" id="armonizacion">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">VI. Armonización</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>Qué contradicción resuelven realmente ambas cartas</h2></div>
+
+      <div id="problema-exacto">
+        <h3 class="sub-head"><span class="letter">A</span>El problema exacto: la contradicción cronológica</h3>
+        <p>Tanto Eusebio en su <em>Quaestio ad Marinum</em> como Jerónimo en su <em>Epistula ad Hedybiam</em> (Ep. 120, q. 3) responden a la <strong>misma contradicción aparente</strong>: una discrepancia cronológica entre Mateo y Marcos sobre el momento de la primera aparición del Resucitado.</p>
+
+        <table class="tabla">
+          <tr><th>Referencia</th><th>Texto griego</th><th>Traducción literal</th></tr>
+          <tr><td>Mateo 28:1</td><td class="griego">Ὀψὲ δὲ σαββάτων, τῇ ἐπιφωσκούσῃ εἰς μίαν σαββάτων, ἦλθεν Μαριὰμ ἡ Μαγδαληνὴ καὶ ἡ ἄλλη Μαρία θεωρῆσαι τὸν τάφον.</td><td>"Tarde ya del sábado, amaneciendo hacia el primer día de la semana, vino María Magdalena y la otra María a ver el sepulcro."</td></tr>
+          <tr><td>Marcos 16:9</td><td class="griego">Ἀναστὰς δὲ πρωῒ πρώτῃ σαββάτου ἐφάνη πρῶτον Μαρίᾳ τῇ Μαγδαληνῇ</td><td>"Habiendo resucitado temprano el primer día de la semana, apareció primero a María Magdalena"</td></tr>
+        </table>
+
+        <p>La dificultad se concentra en la expresión de Mateo <strong>ὀψὲ σαββάτων</strong> frente al <strong>πρωΐ</strong> ("temprano/de mañana") de Marcos 16:9. <span class="griego">ὀψὲ</span> significa en griego clásico "tarde", "al atardecer". Aplicado a <span class="griego">σαββάτων</span>, la lectura más natural sería <strong>"al atardecer del sábado"</strong> —el sábado por la tarde-noche, antes de acabar el día de reposo—. Pero Marcos 16:9 dice que Jesús apareció a María de <strong>madrugada</strong> del <strong>primer día</strong> de la semana —el domingo por la mañana—.</p>
+
+        <div class="veredicto">
+          <span class="label">La pregunta de Marinus a Eusebio</span>
+          <p>¿Cómo puede Mateo 28:1 situar la llegada de las mujeres "al atardecer del sábado" si Marcos 16:9 dice que la primera aparición fue "temprano el primer día de la semana"? Mateo parecería poner el evento en la tarde del <strong>sábado</strong>; Marcos, en la <strong>madrugada del domingo</strong>. Esta era una objeción conocida que adversarios del cristianismo —desde Celso hasta Porfirio— usaban para atacar la coherencia narrativa de los evangelios.</p>
+        </div>
+      </div>
+
+      <div id="eusebio-sol1">
+        <h3 class="sub-head"><span class="letter">B</span>Primera solución de Eusebio: eliminar el texto</h3>
+        <p>La primera solución que Eusebio ofrece es textual: alguien que no quiera verse molestado por el problema puede simplemente decir que muchos manuscritos no tienen ese pasaje de Marcos 16:9-20, y que el evangelio termina en 16:8. Si no existe Marcos 16:9, no existe contradicción. Esta solución es cómoda, pero Eusebio la presenta como una opción para quien no quiera tomarse el trabajo de armonizar — no como la única ni la preferida.</p>
+      </div>
+
+      <div id="eusebio-sol2">
+        <h3 class="sub-head"><span class="letter">C</span>Segunda solución de Eusebio: análisis gramatical del participio</h3>
+        <p>Esta es la solución que Eusebio desarrolla con más detalle y que <strong>presupone el texto como auténtico</strong>. Eusebio propone que el participio aoristo <strong>Ἀναστάς</strong> ("habiendo resucitado") no debe leerse como sincrónico con <em>πρωΐ πρώτῃ σαββάτου</em>, sino como participio de <strong>acción antecedente</strong>: Jesús ya había resucitado cuando llegó el primer día de la semana, y fue entonces —en la mañana del domingo— cuando <em>apareció</em> a María.</p>
+
+        <div class="box">
+          <div class="box-title"><span class="tag">≡</span>Estructura gramatical propuesta</div>
+          <p><span class="griego">[Ἀναστάς]</span> → <span class="griego">[πρωΐ πρώτῃ σαββάτου]</span> → <span class="griego">[ἐφάνη πρῶτον Μαρίᾳ]</span><br>= "El que ya había resucitado [antes], al amanecer del primer día de la semana, apareció primero a María"</p>
+        </div>
+
+        <p><strong>Ἀναστάς</strong> no describe <em>cuándo</em> resucitó sino su estado: era el Resucitado. El <em>cuándo</em> de la resurrección queda indeterminado en este versículo. Si la resurrección ocurrió en algún momento de la noche del sábado al domingo (en cómputo judío, el primer día empieza en el ocaso del sábado), y la primera <em>aparición</em> ocurrió al amanecer del domingo, entonces Mateo 28:1 describe el momento en que las mujeres van al sepulcro, y Marcos 16:9 describe la primera aparición — momentos distintos del mismo proceso, no eventos contradictorios.</p>
+
+        <p>Para completar la solución, Eusebio (y después Jerónimo) ofrecen un argumento filológico adicional: <strong>ὀψὲ</strong> en griego helenístico (koiné) no significa únicamente "al atardecer" sino también <strong>"después de"</strong>, <strong>"pasado ya"</strong>, uso atestiguado en papiros egipcios del período helenístico. Así, <span class="griego">ὀψὲ σαββάτων</span> puede leerse como <strong>"pasado ya el sábado"</strong> — el amanecer del domingo. La prueba es que el propio Mateo añade inmediatamente la aposición explicativa <span class="griego">τῇ ἐπιφωσκούσῃ εἰς μίαν σαββάτων</span> ("mientras amanecía hacia el primer día de la semana") — claramente el alba dominical, no el sábado por la tarde.</p>
+      </div>
+
+      <div id="jeronimo-solucion">
+        <h3 class="sub-head"><span class="letter">D</span>La solución de Jerónimo en la Epistula ad Hedybiam</h3>
+        <p>Jerónimo enfrenta un problema similar con un ángulo distinto: Hedybia preguntaba sobre la multiplicidad de visitas al sepulcro y la aparente confusión sobre cuántas Marías fueron, cuántas veces y a qué hora.</p>
+
+        <h4 class="micro-head">El argumento del hebraísmo subyacente</h4>
+        <p>Jerónimo señala que los evangelistas, de trasfondo semítico, pensaban en hebreo/arameo aunque escribieran en griego. La expresión hebrea equivalente a <span class="griego">ὀψὲ σαββάτων</span> sería <strong>מוצאי שבת</strong> (<em>motzaei Shabbat</em>) — literalmente "la salida del sábado"—, que en el calendario judío designa el momento justo después de concluir el sábado: el anochecer, inicio ya del domingo según el cómputo judío (que empieza el día con la noche, siguiendo Génesis 1).</p>
+        <p>Para Jerónimo, Mateo traduce al griego una expresión hebrea que significa "al terminar el sábado" —inicio de la noche que es ya el domingo—, armonizando perfectamente con Marcos 16:9: las mujeres van al sepulcro "al comenzar el primer día" (noche del sábado), y Jesús aparece a María "temprano del primer día" (madrugada del domingo). Ambos eventos pertenecen al mismo "primer día de la semana" en cómputo judío.</p>
+
+        <h4 class="micro-head">La solución narrativa: dos visitas distintas</h4>
+        <p>Jerónimo propone además —solución independiente de la gramatical— que los evangelios describen <strong>dos visitas distintas al sepulcro</strong>: una primera "al concluir el sábado" (de noche), en la que las mujeres constatan que la piedra sigue puesta y regresan; y una segunda "de madrugada", en la que encuentran el sepulcro abierto y se produce la aparición. Esta solución toma en serio la pluralidad de los relatos evangélicos sin forzar su identidad, permitiendo que cada evangelista privilegiara un momento distinto del mismo complejo de eventos.</p>
+      </div>
+
+      <div id="otras-soluciones">
+        <h3 class="sub-head"><span class="letter">E</span>Otras soluciones posibles a la contradicción</h3>
+        <p>Más allá de Eusebio y Jerónimo, la historia de la exégesis ha producido otras respuestas igualmente sólidas:</p>
+
+        <div class="box-grid">
+          <div class="box">
+            <div class="box-title"><span class="tag">1</span>El participio como puramente adjetival</div>
+            <p>Algunos exegetas proponen que <strong>Ἀναστάς</strong> funciona casi como un título permanente —"el Resucitado"— y no como participio temporal en absoluto. El versículo diría simplemente: "Él, el Resucitado, apareció temprano el domingo a María Magdalena", sin referencia al <em>momento</em> de la resurrección. La contradicción con Mateo desaparece porque Marcos 16:9 sencillamente no afirma cuándo ocurrió la resurrección.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">2</span>Distinción entre resurrección y aparición</div>
+            <p>Resurrección y aparición son eventos distintos. El NT en ningún lugar describe el acto mismo de la resurrección (nadie lo presenció); lo que los testigos presencian son las <strong>apariciones</strong>. Marcos 16:9 no dice "resucitó de mañana el domingo" sino "habiendo resucitado [en algún momento], de mañana el domingo apareció a María." La resurrección misma precede a todas las apariciones sin que ningún evangelista pretenda fijar su momento exacto.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">3</span>La semántica amplia de πρωΐ</div>
+            <p><strong>πρωΐ</strong> en griego helenístico puede designar un período amplio que incluye desde la última parte de la noche hasta el amanecer. En la división romana de la noche en cuatro vigilias, la cuarta (<em>ὄρθρος</em>) va de ~3:00 a.m. al amanecer. Marcos podría usar πρωΐ en este sentido amplio, que no excluye la oscuridad previa al alba — armonizando con Juan 20:1, que dice que María fue al sepulcro "aún de noche" y también "muy de mañana".</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">4</span>Cómputo judío vs. cómputo romano del día</div>
+            <p>En el cómputo judío el día empieza al anochecer (Gén 1); en el romano, a medianoche. Mateo, escribiendo para audiencia judeocristiana, puede usar el cómputo judío, donde el "primer día" empieza la noche del sábado. Marcos, escribiendo para Roma, puede usar el cómputo romano, donde el domingo comienza a medianoche. Ambos describen el mismo evento con calendarios distintos — diferencia de convención cultural, no contradicción real.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">5</span>ὀψὲ como "después de" en la Septuaginta</div>
+            <p>Hay precedentes en la LXX donde <strong>ὀψὲ</strong> tiene valor de "después de" más que "al atardecer de" — por ejemplo en Génesis 24:11 y algunos salmos. Si Mateo sigue el uso de los LXX —el griego bíblico que conocía—, <span class="griego">ὀψὲ σαββάτων</span> significa "después del sábado", equivalente a la madrugada del domingo: concordancia perfecta con Marcos 16:9.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="valoracion-sintetica">
+        <h3 class="sub-head"><span class="letter">F</span>Valoración sintética</h3>
+        <p>Lo especialmente significativo del ejercicio de Eusebio y Jerónimo es que <strong>ambos eruditos, conociendo perfectamente la variante textual que omite el Final Largo, eligieron sin embargo trabajar con el texto y ofrecer soluciones armonísticas.</strong> Esto implica que la solución de eliminar el texto era para ellos una salida de emergencia intelectual, no la respuesta genuinamente convincente; que las contradicciones aparentes entre los evangelios tenían solución sin necesidad de atirizar el texto; y que la riqueza gramatical y filológica del griego koiné, combinada con el trasfondo hebreo-judío de los escritores del NT, ofrece herramientas más que suficientes para armonizar los relatos sin sacrificar ninguno de ellos.</p>
+        <p>La contradicción entre Mateo 28:1 y Marcos 16:9 no es una contradicción real sino una tensión aparente que surge de leer el griego koiné evangélico con categorías del griego clásico y sin atender al trasfondo semítico. Una vez corregidos esos dos errores hermenéuticos, los textos se armonizan sin violencia exegética y el Final Largo permanece indemne.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         VII. EVIDENCIA VERSIONAL
+         ============================================================ -->
+    <section class="chapter" id="versional">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">VII. Evidencia Versional</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>Las traducciones antiguas</h2></div>
+
+      <p>La evidencia de las antiguas versiones es aplastantemente favorable al Final Largo:</p>
+
+      <table class="tabla">
+        <tr><th>Versión</th><th>Fecha</th><th>Testimonio</th></tr>
+        <tr><td>Vulgata latina (Jerónimo)</td><td>Siglo IV-V</td><td>Incluye 16:9-20</td></tr>
+        <tr><td>Vetus Latina</td><td>Anterior a la Vulgata</td><td>Prácticamente todas la incluyen</td></tr>
+        <tr><td>Peshitta siríaca</td><td>Versión estándar siríaca</td><td>Incluye 16:9-20</td></tr>
+        <tr><td>Copta (sahídica y boháirica)</td><td>—</td><td>Incluye 16:9-20 (con complicaciones menores en la sahídica)</td></tr>
+        <tr><td>Armenia</td><td>—</td><td>Mayoritariamente la incluye</td></tr>
+        <tr><td>Georgiana</td><td>—</td><td>La incluye</td></tr>
+        <tr><td>Gótica (Úlfilas)</td><td>Siglo IV</td><td>La incluye</td></tr>
+        <tr><td>Etíope</td><td>—</td><td>La incluye</td></tr>
+      </table>
+
+      <p>El peso combinado de todas estas traducciones independientes —realizadas en distintas épocas, regiones y tradiciones eclesiales— apunta a que el texto con el Final Largo era el texto estándar en toda la Iglesia cristiana antigua.</p>
+    </section>
+
+    <!-- ============================================================
+         VIII. ARGUMENTOS INTERNOS
+         ============================================================ -->
+    <section class="chapter" id="argumentos-internos">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">VIII. Argumentos Internos</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>La lógica narrativa del propio Marcos</h2></div>
+
+      <div id="final-16-8">
+        <h3 class="sub-head"><span class="letter">A</span>El problema del final en 16:8</h3>
+        <p>Los que rechazan el Final Largo proponen que Marcos terminó deliberadamente su evangelio con la frase:</p>
+        <blockquote class="cita">
+          <span class="griego-block">καὶ οὐδενὶ οὐδὲν εἶπαν· ἐφοβοῦντο γάρ</span>
+          <span class="traduccion">"Y no dijeron nada a nadie, porque tenían miedo"</span>
+        </blockquote>
+        <p>Esto plantea problemas formidables:</p>
+
+        <div class="box-grid">
+          <div class="box">
+            <div class="box-title"><span class="tag">1</span>El problema gramatical del γάρ final</div>
+            <p>Terminar un libro con la partícula pospositiva <span class="griego">γάρ</span> ("porque/pues") es extraordinariamente inusual en griego antiguo. Los críticos que defienden este final como deliberado deben explicar por qué Marcos violaría las convenciones retóricas más básicas de la prosa griega. Los paralelos buscados no son convincentes: los ejemplos de γάρ final en otros textos se dan en frases, no como final de obras enteras.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">2</span>El problema narrativo</div>
+            <p>A lo largo del evangelio, Jesús promete explícitamente reunirse con los discípulos en Galilea tras su resurrección (14:28; 16:7). Un evangelio que termina sin que esa promesa se cumpla narrativamente es literariamente deficiente. La promesa quedaría suspendida en el aire, inexplicable si Marcos era un narrador deliberado —como claramente lo era.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">3</span>El problema teológico</div>
+            <p>La Gran Comisión de Mateo (28:18-20), el mandato misional de Lucas (24:47-49) y el de Juan (20:21-23) tienen paralelos claros en Marcos 16:15-18. Un evangelio sin ningún mandato misionero explícito del Resucitado sería único entre los cuatro, lo cual es sospechoso.</p>
+          </div>
+          <div class="box">
+            <div class="box-title"><span class="tag">4</span>Las mujeres en 16:8 vs. 16:7</div>
+            <p>En 16:7 el mensajero angelical ordena a las mujeres decir a los discípulos que Jesús irá delante de ellos a Galilea. En 16:8 se afirma que no dijeron nada a nadie. Si el evangelio termina aquí, ¿cómo supieron los discípulos ir a Galilea? ¿Cómo se comunicó el mensaje? La narrativa quedaría sin resolución.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="final-perdido">
+        <h3 class="sub-head"><span class="letter">B</span>La tesis del final perdido o truncado</h3>
+        <p>Muchos críticos que rechazan el Final Largo como auténtico reconocen, sin embargo, que Marcos difícilmente terminó en 16:8. Proponen entonces que el final original se perdió. Esta hipótesis tiene sus propios problemas:</p>
+        <ol class="lista">
+          <li>No existe ningún manuscrito, fragmento, Padre de la Iglesia ni versión antigua que preserve ese supuesto "final auténtico perdido".</li>
+          <li>Los rollos papiráceos eran más vulnerables a daño en los extremos, pero la transmisión posterior habría recuperado el texto si hubiera existido otro final.</li>
+          <li>La hipótesis del final perdido es, en rigor, una conjetura sin apoyo positivo en ningún testimonio.</li>
+        </ol>
+      </div>
+
+      <div id="coherencia-tematica">
+        <h3 class="sub-head"><span class="letter">C</span>La coherencia temática del Final Largo con Marcos</h3>
+        <p>Contra la idea de que el Final Largo es un centón harmonístico de otros evangelios, varios estudiosos han demostrado que muchos de sus elementos son perfectamente coherentes con los temas marcianos:</p>
+        <ul class="lista">
+          <li>El escepticismo de los discípulos (16:11, 14) es un tema marciano recurrente ("dureza de corazón", 6:52; 8:17)</li>
+          <li>El mandato de predicar a "toda criatura" (16:15) conecta con el carácter universalista del evangelio</li>
+          <li>El concepto de señales que acompañan a los creyentes conecta con el énfasis marciano en los milagros como evidencia del Reino</li>
+          <li>El repentismo narrativo de la Ascensión (16:19) es perfectamente marciano: el evangelio de Marcos es famoso por su estilo escueto y directo</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         IX. RESPUESTA A LOS ARGUMENTOS EN CONTRA
+         ============================================================ -->
+    <section class="chapter" id="respuesta-objeciones">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">IX. Respuesta a Objeciones</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>Punto por punto</h2></div>
+
+      <div id="vocabulario-estilo">
+        <h3 class="sub-head"><span class="letter">A</span>El argumento del vocabulario y estilo diferente</h3>
+        <p><strong>Objeción:</strong> Marcos 16:9-20 contiene un número inusualmente alto de <em>hápax legomena</em> (palabras que no aparecen en el resto de Marcos) y el estilo difiere del evangelio.</p>
+        <div class="veredicto">
+          <span class="label">Respuesta</span>
+          <p>Doce versículos son una muestra demasiado pequeña para análisis estilístico estadísticamente significativo — cualquier sección de doce versículos en Marcos contiene términos únicos. <strong>Nicholas Lunn</strong>, en <em>The Original Ending of Mark</em> (2014), realizó un análisis estadístico exhaustivo demostrando que la densidad de hápax en 16:9-20 no es estadísticamente mayor que en otras secciones de Marcos de longitud comparable. El cambio de tema (relato de la pasión vs. apariciones postresurrección) justifica naturalmente un cambio de vocabulario. Si este criterio bastara para rechazar pasajes, deberíamos rechazar enormes porciones de todos los libros bíblicos.</p>
+        </div>
+      </div>
+
+      <div id="referencias-cruzadas">
+        <h3 class="sub-head"><span class="letter">B</span>El argumento de la referencia cruzada con otros evangelios</h3>
+        <p><strong>Objeción:</strong> 16:9-20 parece compilado de Lucas, Juan y Hechos (María Magdalena como primera testigo de Juan 20, la incredulidad de los discípulos de Lucas 24, el mandato misional de Mateo 28, etc.)</p>
+        <div class="veredicto">
+          <span class="label">Respuesta</span>
+          <p>Este argumento asume que Marcos fue el último evangelio en este pasaje, lo cual invierte el orden usual de Marcos como primer evangelio. Si Marcos es el primero (como la mayoría acepta), los paralelismos van en la dirección contraria: los otros evangelios dependen de Marcos, no al revés. Además, los paralelismos entre evangelios son esperables porque describen los mismos eventos históricos — la similitud no prueba dependencia literaria; puede probar simplemente que todos dependen de una misma tradición histórica. Y aun si hubiera dependencia literaria, esto no probaría que el Final Largo no es de Marcos; podría indicar simplemente que Marcos mismo conocía y utilizó material de la tradición primitiva.</p>
+        </div>
+      </div>
+
+      <div id="final-corto">
+        <h3 class="sub-head"><span class="letter">C</span>El "Final Corto" como evidencia de problema textual</h3>
+        <p><strong>Objeción:</strong> Algunos manuscritos (minúsculo 274, la versión sahídica antigua, algunos manuscritos etíopes) contienen un "Final Corto" alternativo en lugar o además del Final Largo, lo cual mostraría que los escribas sabían que 16:8 era problemático e inventaron finales.</p>
+        <div class="veredicto">
+          <span class="label">Respuesta</span>
+          <p>El Final Corto existe en muy pocos manuscritos y nunca suplantó al Final Largo como tradición principal. La existencia de intentos de solucionar el final "abrupto" en 16:8 es igualmente compatible con la autenticidad del Final Largo: si este se perdió en ciertos círculos de transmisión, es natural que algunos escribas intentaran suplirlo. De hecho, en algunos manuscritos el Final Corto aparece <em>junto</em> al Final Largo como alternativa, lo cual sugiere que los escribas conocían ambas versiones y preferían conservarlas ambas antes que descartar ninguna.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         X. ACADÉMICOS QUE DEFIENDEN EL FINAL LARGO
+         ============================================================ -->
+    <section class="chapter" id="academicos">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">X. Académicos</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>Eruditos que defienden el Final Largo</h2></div>
+
+      <h4 class="micro-head">Defensores históricos de peso</h4>
+      <div class="scholar-grid">
+        <div class="scholar-card">
+          <div class="name">John William Burgon</div>
+          <div class="role">1813–1888 · Oxford</div>
+          <p>Su monografía <em>The Last Twelve Verses of the Gospel According to S. Mark</em> (1871) sigue siendo la defensa clásica más extensa. Rastreó exhaustivamente la patrística y demostró que la sola cita de Ireneo basta para llevar el testimonio al siglo II.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">F.H.A. Scrivener</div>
+          <div class="role">1813–1891 · Paleógrafo</div>
+          <p>Crítico textual victoriano; defendió la autenticidad en su <em>A Plain Introduction to the Criticism of the New Testament</em> (1894).</p>
+        </div>
+      </div>
+
+      <h4 class="micro-head">Defensores académicos modernos</h4>
+      <div class="scholar-grid">
+        <div class="scholar-card">
+          <div class="name">William Rees Farmer</div>
+          <div class="role">1921–2000 · Southern Methodist University</div>
+          <p><em>The Last Twelve Verses of Mark</em> (1974, Cambridge UP): el espacio en blanco de Vaticanus como evidencia, y el peso de la tradición patrística y versional sobre los dos grandes unciales.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">David Alan Black</div>
+          <div class="role">Southeastern Baptist Theological Seminary</div>
+          <p>Editó <em>Perspectives on the Ending of Mark: 4 Views</em> (2008, B&amp;H); simpatizante de la autenticidad del Final Largo.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">Nicholas P. Lunn</div>
+          <div class="role">Autor de la monografía más rigurosa</div>
+          <p><em>The Original Ending of Mark</em> (2014, Pickwick): estadísticas de vocabulario, patrística, el espacio de Vaticanus, el Diatessaron y la coherencia estructural del pasaje.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">James Snapp Jr.</div>
+          <div class="role">Investigador independiente</div>
+          <p><em>Authentic: The Case for Mark 16:9-20</em> (2016); mantiene la colección más completa de evidencias públicamente disponible.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">Maurice A. Robinson</div>
+          <div class="role">Southeastern Baptist Theological Seminary</div>
+          <p>Especialista en el texto mayoritario bizantino; argumenta contra el privilegio metodológico indebido otorgado a Vaticanus y Sinaiticus.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">Eta Linnemann</div>
+          <div class="role">1926–2009 · Ex discípula de Bultmann</div>
+          <p>En <em>Biblical Criticism on Trial</em> (1990) atacó los presupuestos metodológicos que llevan a rechazar pasajes como el Final Largo.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">John Christopher Thomas</div>
+          <div class="role">Teólogo pentecostal</div>
+          <p>Estudió Marcos 16:17-18 en el contexto de la tradición primitiva de señales; defiende la autenticidad e integridad del pasaje.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">Ben Witherington III</div>
+          <div class="role"><em>The Gospel of Mark</em> (2001, Eerdmans)</div>
+          <p>Cauto pero reconoce que el Final Largo puede preservar tradición auténtica temprana; no descarta que perteneciera al original.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">Helmut Koester</div>
+          <div class="role">Crítico en general</div>
+          <p>Aun siendo crítico, reconoció que el Final Largo es muy antiguo y que la tradición que representa circuló en fechas tempranas.</p>
+        </div>
+        <div class="scholar-card">
+          <div class="name">T.C. Skeat</div>
+          <div class="role">Paleógrafo, British Museum</div>
+          <p>Sus análisis del Codex Vaticanus contribuyeron a interpretar el espacio en blanco como evidencia de un original más largo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         XI. WRIGHT, BAUCKHAM Y METZGER
+         ============================================================ -->
+    <section class="chapter" id="triada">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">XI. Wright · Bauckham · Metzger</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>Precisión honesta: quién apoya y quién no</h2></div>
+
+      <div class="veredicto">
+        <span class="label">Advertencia de honestidad intelectual</span>
+        <p>Hay que distinguir entre defender la <strong>resurrección histórica</strong> y defender la <strong>autenticidad textual</strong> de Marcos 16:9-20. Los tres nombres que suelen preguntarse no encajan donde muchos asumen.</p>
+      </div>
+
+      <h3 class="sub-head"><span class="letter">✕</span>N.T. Wright</h3>
+      <span class="verdict-pill pill-contra">No defiende el Final Largo</span>
+      <p>En su monumental <em>The Resurrection of the Son of God</em> (2003, SPCK/Fortress), Wright discute el final de Marcos extensamente (pp. 617-624 aprox.) pero acepta sustancialmente el consenso crítico de que 16:9-20 es probablemente una adición posterior. Propone una interpretación teológica del final en 16:8 como un "final deliberadamente abierto" que invita al lector a completar la historia —la proclamación del evangelio continúa en la comunidad lectora—. Su interés real es demostrar que la <strong>resurrección como hecho histórico</strong> es defendible con independencia de qué texto sea original en Marcos, apoyándose en Pablo (1 Cor 15:3-8) y en los demás evangelios. Wright sería el primero en señalar que el rechazo del Final Largo no afecta en nada a la historicidad de la resurrección ni a las apariciones del Resucitado.</p>
+
+      <h3 class="sub-head"><span class="letter">≈</span>Richard Bauckham</h3>
+      <span class="verdict-pill pill-neutro">Silencio / aceptación implícita del consenso</span>
+      <p>Bauckham tampoco es un defensor explícito del Final Largo como texto original de Marcos. En <em>Jesus and the Eyewitnesses</em> (2006, Eerdmans), su interés es la estructura de los testigos oculares detrás del evangelio y la coherencia interna de la narración marcana, no la defensa textual de 16:9-20. Su posición en este punto concreto es de silencio, o de aceptación implícita del estado de la cuestión crítica dominante.</p>
+
+      <h3 class="sub-head"><span class="letter">✕</span>Bruce Metzger</h3>
+      <span class="verdict-pill pill-contra">Contrario explícito</span>
+      <p>Metzger es el más claramente <strong>contrario</strong> al Final Largo. Como editor del <em>Novum Testamentum Graece</em> (Nestle-Aland) y autor del <em>A Textual Commentary on the Greek New Testament</em> (UBS, 1994, 2ª ed.), incluye Marcos 16:9-20 en el aparato crítico con calificación <strong>{B}</strong>, indicando que el Comité consideró que el texto "casi con certeza" no es parte del original. Argumenta que el vocabulario, el estilo y la dependencia de los demás evangelios indican una composición posterior del siglo II, describiendo el Final Largo como una "compilación" bien intencionada pero no original.</p>
+      <p>Sin embargo, es importante matizar: el hecho de que Metzger rechace la autenticidad <strong>no significa que la cuestión esté cerrada</strong>. Metzger mismo fue un crítico desde una tradición metodológica particular (la crítica eclética racional) que privilegia a Vaticanus y Sinaiticus de maneras que han sido cuestionadas por Robinson, Pierpont y otros.</p>
+    </section>
+
+    <!-- ============================================================
+         XII. CONSIDERACIÓN CANÓNICA Y ECLESIAL
+         ============================================================ -->
+    <section class="chapter" id="canonica">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">XII. Consideración Canónica</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>El canon y la Iglesia</h2></div>
+
+      <p>Hay un argumento de naturaleza distinta —no meramente textual sino teológico-canónico— que merece mención en una defensa integral.</p>
+      <p>La Iglesia Católica, en el <strong>Concilio de Trento</strong> (1546), definió el canon de las Escrituras incluyendo el texto completo de Marcos tal como aparece en la Vulgata, que incluye 16:9-20. El Magisterio ordinario de la Iglesia ha considerado siempre este pasaje como parte del Evangelio inspirado. La <strong>Pontificia Comisión Bíblica</strong>, en sus respuestas históricas, nunca ha excluido el Final Largo del texto canónico.</p>
+      <p>En el contexto protestante, todas las Biblias de la Reforma —la Lutherbibel, la King James Version, la Reina-Valera— incluyen el Final Largo como texto. Aunque esto no es un argumento textual-crítico directo, sí indica que la tradición textual utilizada por la Iglesia a lo largo de la historia es la que incluye el Final Largo.</p>
+    </section>
+
+    <!-- ============================================================
+         XIII. SÍNTESIS CRÍTICA
+         ============================================================ -->
+    <section class="chapter" id="sintesis-critica">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">XIII. Síntesis Crítica</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>Por qué el consenso moderno es vulnerable</h2></div>
+
+      <p>El consenso académico moderno que rechaza el Final Largo se basa en un conjunto de presupuestos metodológicos que merecen ser cuestionados:</p>
+
+      <div class="box-grid">
+        <div class="box">
+          <div class="box-title"><span class="tag">1</span>El privilegio indebido de Vaticanus y Sinaiticus</div>
+          <p>La crítica textual del siglo XIX, especialmente tras Westcott y Hort, estableció que los manuscritos alejandrinos más antiguos (א y B) son superiores a la tradición mayoritaria. Este principio fue elaborado en un contexto teológico e intelectual particular (el liberalismo teológico del siglo XIX) y ha sido cuestionado crecientemente por especialistas como Maurice Robinson, Wieland Willker y otros que abogan por métodos más equilibrados. El peso del número —más de 1.600 manuscritos— no puede ser ignorado tan fácilmente.</p>
+        </div>
+        <div class="box">
+          <div class="box-title"><span class="tag">2</span>La falacia de la "lectura más difícil"</div>
+          <p>El principio de <em>lectio difficilior potior</em> se aplica mecánicamente para favorecer el final abrupto en 16:8. Pero este principio tiene límites: una lectura puede ser "difícil" sencillamente porque es incompleta o corrupta, no porque sea original.</p>
+        </div>
+        <div class="box">
+          <div class="box-title"><span class="tag">3</span>El argumento circular de la dependencia</div>
+          <p>Se arguye que el Final Largo depende de los otros evangelios; pero si Marcos fue escrito primero, la dirección de dependencia es la contraria. El argumento solo funciona si se asume previamente lo que se quiere demostrar.</p>
+        </div>
+        <div class="box">
+          <div class="box-title"><span class="tag">4</span>La datación tardía sin evidencia positiva</div>
+          <p>Cuando se afirma que el Final Largo fue compuesto en el siglo II, esto debería demostrarse con evidencia positiva. Sin embargo, la evidencia más antigua que tenemos —Ireneo, 180 d.C.— ya lo atribuye a Marcos, lo cual presupone una tradición mucho más antigua.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         XIV. CONCLUSIÓN GENERAL
+         ============================================================ -->
+    <section class="chapter" id="conclusion">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">XIV. Conclusión</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>Recapitulación de la defensa</h2></div>
+
+      <p>La defensa del Final Largo de Marcos (16:9-20) descansa sobre:</p>
+      <ol class="lista">
+        <li>Una <strong>tradición manuscrita abrumadoramente mayoritaria</strong> —más de 1.600 manuscritos griegos—</li>
+        <li><strong>Testimonio patrístico</strong> que remonta al siglo II con Ireneo y el Diatessaron de Taciano</li>
+        <li>Un <strong>apoyo versional universal</strong> en latín, siríaco, copto, armenio, georgiano, gótico y etíope</li>
+        <li><strong>Argumentos internos narrativos</strong> que demuestran que el final en 16:8 es literariamente problemático</li>
+        <li>La <strong>refutación de los argumentos estilísticos</strong> mediante análisis estadístico riguroso (Lunn)</li>
+        <li>La <strong>interpretación correcta del espacio en blanco de Vaticanus</strong> como evidencia de incompletitud</li>
+        <li>La <strong>tradición canónica ininterrumpida</strong> de la Iglesia universal</li>
+        <li>Un análisis exhaustivo de <strong>Eusebio y Jerónimo</strong> que revela testimonios mucho más matizados y favorables de lo que la crítica moderna reconoce</li>
+      </ol>
+
+      <p>El rechazo moderno del Final Largo, aunque sostenido por eruditos de gran calibre como Metzger, se basa en una metodología que privilegia excesivamente a dos manuscritos del siglo IV sobre el conjunto de toda la evidencia antigua. N.T. Wright y Richard Bauckham, aunque gigantes de la erudición neotestamentaria, no son en este punto defensores del Final Largo —y conviene decirlo con honestidad para no construir la defensa sobre apoyos falsos.</p>
+
+      <div class="veredicto">
+        <span class="label">Conclusión final</span>
+        <p>Sin embargo, la causa del Final Largo tiene en <strong>Burgon, Farmer, Lunn y Robinson</strong> defensores rigurosos cuya obra académica no ha sido refutada, sino simplemente marginada por un consenso que se perpetúa más por inercia institucional que por el peso real de la evidencia.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BIBLIOGRAFÍA
+         ============================================================ -->
+    <section class="chapter" id="bibliografia">
+      <div class="chapter-mark"><span class="rule"></span><span class="num">❧ Bibliografía Esencial</span><span class="rule"></span></div>
+      <div class="chapter-head"><h2>Para profundizar</h2></div>
+      <ul class="lista">
+        <li>Burgon, J.W. <em>The Last Twelve Verses of Mark</em> (1871)</li>
+        <li>Farmer, W.R. <em>The Last Twelve Verses of Mark</em> (1974, Cambridge UP)</li>
+        <li>Lunn, N.P. <em>The Original Ending of Mark</em> (2014, Pickwick)</li>
+        <li>Snapp, J. <em>Authentic: The Case for Mark 16:9-20</em> (2016)</li>
+        <li>Black, D.A. (ed.) <em>Perspectives on the Ending of Mark: 4 Views</em> (2008, B&amp;H)</li>
+        <li>Scrivener, F.H.A. <em>A Plain Introduction to the Criticism of the New Testament</em> (1894)</li>
+        <li>Linnemann, E. <em>Biblical Criticism on Trial</em> (1990)</li>
+        <li>Witherington III, B. <em>The Gospel of Mark: A Socio-Rhetorical Commentary</em> (2001, Eerdmans)</li>
+        <li><strong>Metzger, B.M.</strong> <em>A Textual Commentary on the Greek New Testament</em> (1994, UBS) — posición contraria, imprescindible conocer</li>
+        <li><strong>Wright, N.T.</strong> <em>The Resurrection of the Son of God</em> (2003, SPCK/Fortress) — posición contraria, imprescindible</li>
+        <li>Bauckham, R. <em>Jesus and the Eyewitnesses</em> (2006, Eerdmans)</li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+<footer class="doc-footer">
+  <div class="rule"></div>
+  <div class="title">"τὸ τέλος τοῦ κατὰ Μάρκον"</div>
+  <p>Documento apologético de referencia · Marcos 16:9-20 · Compilado para estudio y debate</p>
+</footer>
+
+<button id="backToTop" aria-label="Volver arriba">↑</button>
+
+<script>
+// Sidebar mobile toggle
+const sidebar = document.getElementById('sidebar');
+const toggleBtn = document.getElementById('sidebarToggle');
+const scrim = document.getElementById('sidebarScrim');
+function openSidebar(){ sidebar.classList.add('open'); scrim.classList.add('show'); }
+function closeSidebar(){ sidebar.classList.remove('open'); scrim.classList.remove('show'); }
+toggleBtn.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+scrim.addEventListener('click', closeSidebar);
+document.querySelectorAll('#toc a').forEach(a => a.addEventListener('click', () => {
+  if(window.innerWidth <= 940) closeSidebar();
+}));
+
+// Group expand/collapse
+document.querySelectorAll('.toc-caret-btn').forEach(btn => {
+  btn.addEventListener('click', () => btn.closest('.toc-group').classList.toggle('open'));
+});
+document.querySelectorAll('.toc-top-link').forEach(link => {
+  link.addEventListener('click', () => {
+    const group = link.closest('.toc-group');
+    if(group) group.classList.add('open');
+  });
+});
+
+// Progress bar
+const progressBar = document.getElementById('progressBar');
+function updateProgress(){
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateProgress);
+updateProgress();
+
+// Back to top
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('show', window.scrollY > 700);
+});
+backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// Scrollspy across every nav target (top-level + sub-level)
+const navLinks = Array.from(document.querySelectorAll('#toc a[href^="#"]'));
+const targets = navLinks.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+const spyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
+      const activeLink = document.querySelector('#toc a.active');
+      if(activeLink){
+        const grp = activeLink.closest('.toc-group');
+        if(grp) grp.classList.add('open');
+      }
+    }
+  });
+}, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+targets.forEach(t => spyObserver.observe(t));
+
+// Fade-in reveal for chapters
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('section.chapter').forEach(s => revealObserver.observe(s));
+</script>
+</body>
+</html>

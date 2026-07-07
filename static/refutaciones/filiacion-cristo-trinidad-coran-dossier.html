@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Un Hijo sin Consorte? La Filiación de Cristo y la Trinidad en el Corán</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f7f4ef;
+    --accent: #6b1d3a;
+    --accent2: #1a3a5c;
+    --gold: #b8860b;
+    --green: #2f4d33;
+    --teal: #1e4d4a;
+    --sepia: #8b5a2b;
+    --grey-light: #e8e4dc;
+    --grey-mid: #9e9589;
+    --white: #ffffff;
+    --verdict: #1a0a1f;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    z-index: 9999; transition: width 0.1s linear;
+  }
+
+  #sidebar {
+    position: fixed; left: 0; top: 0; width: 320px; height: 100vh;
+    background: var(--ink); color: var(--paper); overflow-y: auto; z-index: 100;
+    transform: translateX(-320px); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    padding: 2rem 1.5rem;
+  }
+  #sidebar.open { transform: translateX(0); }
+  #sidebar h2 {
+    font-family: 'Playfair Display', serif; font-size: 1rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333; padding-bottom: 0.75rem;
+  }
+  #sidebar nav a {
+    display: block; padding: 0.42rem 0; color: #ccc; text-decoration: none;
+    font-family: 'Source Serif 4', serif; font-size: 0.8rem;
+    border-bottom: 1px solid #222; transition: color 0.2s, padding-left 0.2s;
+  }
+  #sidebar nav a:hover { color: var(--gold); padding-left: 0.5rem; }
+  #sidebar nav a.active { color: var(--gold); font-weight: 600; }
+  #sidebar nav .section-label {
+    display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--grey-mid); padding: 0.75rem 0 0.25rem;
+  }
+
+  #nav-toggle {
+    position: fixed; left: 1rem; top: 1rem; z-index: 200; background: var(--ink);
+    border: none; color: var(--paper); width: 44px; height: 44px; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; padding: 8px; transition: background 0.2s;
+  }
+  #nav-toggle:hover { background: var(--accent); }
+  #nav-toggle span { display: block; width: 24px; height: 2px; background: currentColor; transition: transform 0.3s, opacity 0.3s; }
+  #nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #nav-toggle.open span:nth-child(2) { opacity: 0; }
+  #nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  #overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 50; }
+  #overlay.visible { display: block; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 2rem 2rem 6rem; }
+
+  .hero {
+    padding: 6rem 0 4rem; border-bottom: 3px solid var(--ink); margin-bottom: 4rem;
+    text-align: center; position: relative;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.1rem, 5.2vw, 3.7rem);
+    font-weight: 900; line-height: 1.15; color: var(--ink); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-subtitle { font-size: 1.1rem; color: var(--grey-mid); max-width: 580px; margin: 0 auto 2rem; font-style: italic; }
+  .hero-badge {
+    display: inline-block; background: var(--accent); color: white; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.4rem 1rem;
+  }
+
+  .part-header { margin: 5rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--grey-light); }
+  .part-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.5rem;
+  }
+  .part-header h2 {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3.6vw, 2.2rem);
+    font-weight: 700; line-height: 1.25; color: var(--ink);
+  }
+
+  section { margin-bottom: 3rem; scroll-margin-top: 2rem; }
+  section h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--accent2);
+    margin: 2.5rem 0 0.75rem; border-left: 4px solid var(--accent2); padding-left: 0.75rem;
+  }
+
+  p { margin-bottom: 1.2rem; }
+
+  .syllogism {
+    background: var(--ink); color: var(--paper); padding: 2rem 2.5rem; margin: 2.5rem 0;
+    position: relative; border-left: 6px solid var(--gold);
+  }
+  .syllogism::before {
+    content: 'SILOGISMO'; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.2em; color: var(--gold); display: block; margin-bottom: 1rem;
+  }
+  .syllogism.maestro::before { content: 'SILOGISMO MAESTRO'; }
+  .syllogism.maestro { border-left-color: var(--accent); background: #1a0a14; }
+  .syllogism .premise {
+    display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem; align-items: start; font-size: 0.95rem;
+  }
+  .syllogism .premise .label { font-family: 'JetBrains Mono', monospace; color: var(--gold); font-size: 0.75rem; padding-top: 0.15rem; }
+  .syllogism .conclusion {
+    margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #444;
+    font-weight: 600; font-size: 1.05rem; color: #fff;
+  }
+  .syllogism .conclusion::before { content: '∴ '; color: var(--gold); font-weight: 700; }
+
+  .scripture {
+    background: #fff; border: 1px solid var(--grey-light); border-left: 6px solid var(--accent2);
+    padding: 1.5rem 2rem; margin: 2rem 0; font-style: italic;
+  }
+  .scripture .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent2); font-style: normal; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+  .scripture .text { font-size: 1rem; line-height: 1.7; color: var(--ink); }
+
+  .quran {
+    background: #f4faf9; border: 1px solid #b8d4d0; border-left: 6px solid var(--teal);
+    padding: 1.5rem 2rem; margin: 2rem 0; font-style: italic;
+  }
+  .quran .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--teal); font-style: normal; margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 700; }
+  .quran .text { font-size: 1rem; line-height: 1.7; color: #16302e; }
+
+  .hadith {
+    background: #faf3ea; border: 1px solid #d9c4a8; border-left: 6px solid var(--sepia);
+    padding: 1.5rem 2rem; margin: 1.5rem 0;
+  }
+  .hadith .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--sepia); margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 700; }
+  .hadith .text { font-size: 0.98rem; line-height: 1.7; color: #4a3420; font-style: italic; }
+
+  .academic {
+    background: #f0f5f0; border: 1px solid #c3d6c5; border-left: 6px solid var(--green);
+    padding: 1.5rem 2rem; margin: 1.5rem 0;
+  }
+  .academic .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green); margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 700; }
+  .academic .text { font-size: 0.98rem; line-height: 1.7; color: #1f3322; }
+
+  .patristic {
+    background: #fdf8f2; border: 1px solid #e6d5b8; border-left: 6px solid var(--gold);
+    padding: 1.5rem 2rem; margin: 1.5rem 0;
+  }
+  .patristic .source { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--gold); margin-bottom: 0.75rem; letter-spacing: 0.05em; font-weight: 700; }
+  .patristic .text { font-size: 0.98rem; line-height: 1.7; color: #3a2e1f; font-style: italic; }
+
+  .verse-card {
+    background: #fff; border: 1px solid var(--grey-light); border-top: 5px solid var(--accent2);
+    padding: 2rem; margin: 2.5rem 0;
+  }
+  .verse-card .verse-number {
+    display: inline-block; background: var(--accent2); color: white; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.1em; padding: 0.3rem 0.7rem; margin-bottom: 1rem;
+  }
+  .verse-card h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 1rem; }
+
+  .dilemma { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .dilemma-side { padding: 1.5rem; border-top: 4px solid; }
+  .dilemma-side.a { border-color: var(--accent); background: #fdf0f4; }
+  .dilemma-side.b { border-color: var(--accent2); background: #f0f4ff; }
+  .dilemma-side h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .dilemma-side p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .objection-block { border: 2px solid var(--teal); padding: 0; margin: 2rem 0; overflow: hidden; }
+  .objection-header { background: var(--teal); color: #fff; padding: 0.9rem 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; }
+  .objection-body { padding: 1.5rem 1.75rem; background: #fff; font-size: 0.97rem; }
+  .response-header { background: var(--accent2); color: #fff; padding: 0.9rem 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; }
+  .response-body { padding: 1.5rem 1.75rem; background: #f7faff; font-size: 0.97rem; }
+
+  .highlight { background: #fffbeb; border: 1px solid var(--gold); padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 0.95rem; }
+  .highlight strong { color: var(--accent2); }
+
+  .verified-tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--green); background: #e7f0e8; border: 1px solid #b8d0ba;
+    padding: 0.25rem 0.6rem; margin-bottom: 1rem;
+  }
+  .verified-tag::before { content: '✓'; font-weight: 700; }
+
+  .debate-tag {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gold); background: #fdf3e0; border: 1px solid #e6cf9e;
+    padding: 0.25rem 0.6rem; margin-bottom: 1rem;
+  }
+  .debate-tag::before { content: '⚖'; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+  th { background: var(--ink); color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.65rem 0.8rem; text-align: left; }
+  td { padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--grey-light); vertical-align: top; }
+  tr:nth-child(even) td { background: #fff; }
+
+  .verdict { background: var(--verdict); color: #fff; padding: 3rem 2.5rem; margin: 4rem 0; border-top: 6px solid var(--gold); }
+  .verdict h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--gold); margin-bottom: 1.5rem; }
+  .verdict p { font-size: 1.05rem; line-height: 1.8; color: #ddd; margin-bottom: 1.25rem; }
+  .verdict strong { color: #fff; }
+
+  @media (max-width: 640px) {
+    main { padding: 1.25rem 1.25rem 4rem; }
+    .dilemma { grid-template-columns: 1fr; }
+    table { font-size: 0.74rem; }
+  }
+  @media print {
+    #sidebar, #nav-toggle, #overlay, #progress-bar { display: none; }
+    main { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="overlay"></div>
+<button id="nav-toggle" aria-label="Menú de navegación"><span></span><span></span><span></span></button>
+
+<nav id="sidebar" role="navigation" aria-label="Índice de contenidos">
+  <h2>Índice</h2>
+  <nav>
+    <span class="section-label">Introducción</span>
+    <a href="#intro">El argumento coránico y su respuesta cristiana</a>
+
+    <span class="section-label">Parte I — El Corpus Coránico</span>
+    <a href="#corpus-panorama">1. Panorama general: la negación sistemática</a>
+    <a href="#argumento-consorte">2. El argumento central: 6:101, "sin compañera"</a>
+
+    <span class="section-label">Parte II — El Trasfondo Real</span>
+    <a href="#hijas-de-ala">3. Las "hijas de Alá": el contexto pagano de Arabia</a>
+    <a href="#tension-394">4. La tensión con 39:4 y su resolución</a>
+
+    <span class="section-label">Parte III — El Malentendido Categorial</span>
+    <a href="#generacion-eterna">5. Generación eterna, no procreación: Nicea, 300 años antes</a>
+    <a href="#ibn-sabil">6. El propio Corán usa "hijo" sin sentido biológico</a>
+    <a href="#kalimatun-minhu">7. Kalimatun minhu y Ruh minhu: los títulos que el Corán da a Cristo</a>
+
+    <span class="section-label">Parte IV — La Trinidad Según el Corán</span>
+    <a href="#trinidad-cuatro">8. 4:171 y 5:73: "No digáis tres"</a>
+    <a href="#trinidad-maria">9. 5:116: "¿Tomarme a mí y a mi madre como dioses?"</a>
+
+    <span class="section-label">Parte V — Los Hadices</span>
+    <a href="#hadices">10. Sahih al-Bujari: "el hijo de Adán me insulta"</a>
+
+    <span class="section-label">Parte VI — Objeciones y Respuestas</span>
+    <a href="#objecion-ibn">11. "Ibn siempre implica filiación física real"</a>
+    <a href="#objecion-triteismo">12. "La Trinidad es politeísmo disfrazado"</a>
+    <a href="#objecion-maria">13. "5:116 prueba que los cristianos adoraban a María"</a>
+
+    <span class="section-label">Conclusión</span>
+    <a href="#silogismo-maestro">14. El silogismo maestro</a>
+    <a href="#veredicto">15. El veredicto final</a>
+  </nav>
+</nav>
+
+<main>
+
+  <header class="hero" id="intro">
+    <p class="hero-eyebrow">Apologética Cristiana · Diálogo Cristiano-Islámico</p>
+    <h1>¿Un Hijo <em>sin Consorte</em>?<br>La Filiación de Cristo y la Trinidad en el Corán</h1>
+    <p class="hero-subtitle">El argumento coránico del "sin compañera", examinado verso por verso, con su trasfondo histórico, los hadices que lo refuerzan, y la respuesta teológica cristiana que lo precede en tres siglos</p>
+    <span class="hero-badge">Cada cita coránica y cada hadiz cotejados en múltiples traducciones y fuentes primarias</span>
+  </header>
+
+  <section>
+    <p>Además de negar la muerte en cruz de Cristo —examinada en el documento sobre el Dilema Islámico de David Wood—, el Corán dedica más de una docena de versículos, repartidos en al menos nueve suras distintas, a negar de forma explícita que Dios tenga un hijo, y a rechazar la doctrina cristiana de la Trinidad. El argumento coránico central es, además, sorprendentemente concreto y verificable: Dios no puede tener un hijo porque no tiene compañera (<em>sahibah</em>). Es decir, el texto asume que la generación de un hijo requiere, necesariamente, una unión conyugal.</p>
+
+    <p>Este documento examina ese argumento en su formulación exacta, junto con el resto del corpus coránico sobre la filiación divina y la Trinidad, los hadices proféticos que lo refuerzan, y la respuesta teológica cristiana —que, formulada ya en el Concilio de Nicea del año 325 d.C., casi trescientos años antes de la predicación coránica, nunca entendió la filiación de Cristo como procreación física—.</p>
+
+    <div class="highlight">
+      <strong>Método:</strong> toda cita coránica ha sido cotejada contra el texto árabe y al menos tres traducciones reconocidas (Sahih International, Yusuf Ali, Pickthall, Abdul Haleem, Maududi); todo hadiz citado procede de Sahih al-Bujari, verificado en sunnah.com, la referencia estándar de la tradición sunita; y toda fuente patrística o conciliar ha sido verificada en su texto original antes de traducirse.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE I -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="corpus-panorama">
+    <span class="part-label">Parte I — El Corpus Coránico</span>
+    <h2>Lo que el Corán dice sobre la filiación de Cristo</h2>
+  </div>
+
+  <section>
+    <h3>1. Panorama general: la negación sistemática</h3>
+    <span class="verified-tag">Cada referencia verificada en texto árabe y traducción cotejada</span>
+
+    <p>La negación de que Dios tenga un hijo no aparece una sola vez en el Corán: es un tema recurrente, repetido en suras de época meca y medinesa por igual, con un vocabulario notablemente estable.</p>
+
+    <table>
+      <tr><th>Referencia</th><th>Cita clave</th><th>Tema</th></tr>
+      <tr><td>10:68</td><td>"Allah ha tomado un hijo para sí. Alá es puro, autosuficiente… ¿Tenéis alguna autoridad para lo que decís?"</td><td>Falta de fundamento de la creencia</td></tr>
+      <tr><td>16:57</td><td>"Y atribuyen a Dios hijas —¡gloria a Él!— y para sí mismos lo que desean [hijos]"</td><td>Origen pagano: "hijas de Alá"</td></tr>
+      <tr><td>17:111</td><td>"Alabado sea Dios, que no ha tomado hijo, ni tiene socio en Su dominio"</td><td>Fórmula doxológica de negación</td></tr>
+      <tr><td>19:88-92</td><td>"Los cielos están a punto de desgarrarse… de que atribuyan un hijo al Clementísimo"</td><td>Gravedad cósmica de la afirmación</td></tr>
+      <tr><td>21:26</td><td>"Dicen: el Clementísimo tiene descendencia. ¡Gloria a Dios! Son solo siervos honrados"</td><td>Los "hijos" son en realidad ángeles-siervos</td></tr>
+      <tr><td>39:4</td><td>"Si Dios hubiera querido tomar un hijo, habría elegido lo que quisiera de Su creación"</td><td>Formulación condicional (véase §4)</td></tr>
+      <tr><td>43:81</td><td>"Di: si el Clementísimo tuviera un hijo, yo sería el primero en adorarlo"</td><td>Condicional retórico similar a 39:4</td></tr>
+      <tr><td>72:3</td><td>"Él —exaltada sea Su majestad— no ha tomado ni esposa ni hijo"</td><td>Unión explícita de ambas negaciones</td></tr>
+      <tr><td>112:1-4</td><td>"No engendra, ni ha sido engendrado, y no hay nadie que se Le compare"</td><td>Al-Ikhlas: la profesión de fe nuclear</td></tr>
+    </table>
+
+    <div class="quran">
+      <div class="source">Corán 19:88-92 (sura Maryam)</div>
+      <div class="text">"Y dicen: 'El Clementísimo ha tomado un hijo.' Ciertamente, habéis proferido algo verdaderamente monstruoso, por el cual los cielos están a punto de desgarrarse, la tierra de abrirse en dos, y las montañas de desplomarse en pedazos, de que atribuyan un hijo al Clementísimo. No es propio del Clementísimo tomar un hijo."</div>
+    </div>
+
+    <div class="quran">
+      <div class="source">Corán 112:1-4 (sura Al-Ikhlas, "La Sinceridad")</div>
+      <div class="text">"Di: Él es Dios, Uno. Dios, el Refugio Eterno. No engendra, ni ha sido engendrado. Y no hay nadie que se Le pueda comparar."</div>
+    </div>
+
+    <p>Esta última sura merece una mención aparte por su peso litúrgico: según un hadiz ampliamente atestiguado (Sahih al-Bujari 5013 y 5015), el propio Mahoma la describió como equivalente "a un tercio del Corán", y es, junto con la Fatiha, la sura que todo musulmán recita con más frecuencia en la oración diaria. La negación de la filiación divina no es, por tanto, un tema marginal: es parte del núcleo devocional más repetido del islam.</p>
+  </section>
+
+  <section id="argumento-consorte">
+    <h3>2. El argumento central: 6:101, "sin compañera"</h3>
+    <span class="verified-tag">Verificado en texto árabe y cinco traducciones cotejadas</span>
+
+    <div class="quran">
+      <div class="source">Corán 6:100-101 (sura Al-An'am, "Los Rebaños")</div>
+      <div class="text">"Y con todo, atribuyen a Dios genios como copartícipes suyos, siendo Él quien los creó; y, sin conocimiento alguno, Le han inventado hijos e hijas. ¡Gloria a Él! Está muy por encima de lo que Le atribuyen. [Él es] el Originador de los cielos y la tierra. ¿Cómo podría tener un hijo, si no tiene compañera? Él ha creado todas las cosas, y Él tiene pleno conocimiento de todas las cosas."</div>
+    </div>
+
+    <p>Este es, con diferencia, el argumento coránico más citado contra la filiación divina de Cristo, y el más filosóficamente explícito: no se limita a negar el hecho, sino que ofrece una razón. La palabra árabe traducida como "compañera" es <em>sahibah</em> —esposa, consorte—, y el argumento tiene una lógica interna clara: un hijo es el fruto de la unión entre dos progenitores de la misma naturaleza; Dios no tiene una "esposa" divina con la que engendrar; por tanto, es lógicamente imposible que tenga un hijo.</p>
+
+    <div class="academic">
+      <div class="source">Ibn Kathir, Tafsir sobre Corán 6:101 (comentario clásico, s. XIV, ampliamente usado como referencia estándar en la exégesis sunita)</div>
+      <div class="text">El comentario clásico explica el versículo precisamente en estos términos: "el hijo es la descendencia de dos cónyuges compatibles"; Dios no tiene igual entre Sus criaturas, y por tanto no puede tener una esposa "adecuada a Su majestad" de la cual pudiera nacer un hijo. El argumento, tal como lo presenta esta fuente clásica, opera enteramente dentro del marco de la generación biológica: hijo como producto de cónyuges.</div>
+    </div>
+
+    <p>Este argumento es, dentro de su propio marco de referencia, válido: si "tener un hijo" significa necesariamente "engendrar mediante unión sexual con una consorte", entonces, en efecto, Dios no puede tener un hijo sin tener consorte. La pregunta que este documento examina en las secciones siguientes es si ese marco de referencia —hijo como producto biológico de una unión conyugal— es el mismo marco en el que la teología cristiana ha entendido alguna vez la filiación de Cristo.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE II -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="hijas-de-ala">
+    <span class="part-label">Parte II — El Trasfondo Real del Argumento</span>
+    <h2>Contra quién habla realmente el Corán</h2>
+  </div>
+
+  <section>
+    <h3>3. Las "hijas de Alá": el contexto pagano de la Arabia preislámica</h3>
+    <span class="verified-tag">Verificado en tafsir clásico (Ibn Kathir, Maududi) y en fuentes de historia de la religión árabe preislámica</span>
+
+    <div class="quran">
+      <div class="source">Corán 16:57 (sura An-Nahl, "Las Abejas")</div>
+      <div class="text">"Y atribuyen a Dios hijas —¡gloria a Él!— y para sí mismos lo que desean."</div>
+    </div>
+
+    <div class="quran">
+      <div class="source">Corán 43:16-19 (sura Az-Zukhruf, "El Adorno")</div>
+      <div class="text">"¿Ha tomado Dios hijas de entre lo que crea, y os ha escogido a vosotros para tener hijos [varones]?... Y dicen que los ángeles, que son siervos del Clementísimo, son hembras. ¿Acaso presenciaron su creación?"</div>
+    </div>
+
+    <p>Estos versículos son la clave hermenéutica que la propia exégesis islámica clásica proporciona para entender contra quién argumenta el Corán. Según explican tanto Ibn Kathir como Abul Ala Maududi en sus comentarios a estos pasajes, los árabes preislámicos de La Meca sostenían una creencia muy concreta: que sus diosas —principalmente Al-Lat, Al-Uzza y Manat, veneradas en santuarios cerca de La Meca— y los ángeles eran literalmente "hijas de Alá" (<em>banat Allah</em>), nacidas de alguna forma de unión o descendencia divina, del mismo modo que un rey generaba príncipes. El propio texto coránico documenta la incoherencia de esta creencia: los mismos hombres que consideraban vergonzoso tener hijas —hasta el punto, según 16:58-59, de sentir "su rostro ennegrecerse" ante el nacimiento de una— asignaban a Dios precisamente esa descendencia que despreciaban para sí mismos.</p>
+
+    <div class="academic">
+      <div class="source">Abul Ala Maududi, comentario a Corán 16:57 y 43:16 (Tafhim al-Qur'an, s. XX, obra de referencia en la exégesis islámica moderna)</div>
+      <div class="text">Maududi explica que esta es "una tradición de los antiguos árabes", que "consideraban a sus diosas y a los ángeles como hijas de Dios" —una creencia perteneciente al panteón politeísta de la Arabia preislámica, en el que, según el propio comentario, "las diosas superaban en número a los dioses".</div>
+    </div>
+
+    <p>Este dato reubica el argumento de 6:101 en su contexto histórico más preciso: el Corán no está formulando, en primer término, un argumento filosófico abstracto contra cualquier posible sentido del término "hijo de Dios", sino refutando una creencia pagana muy concreta y muy literal, en la que Alá habría engendrado hijas divinas —Al-Lat, Al-Uzza, Manat— de manera biológicamente análoga a como un padre humano engendra descendencia con una esposa. Contra esa creencia, la pregunta "¿cómo podría tener un hijo si no tiene compañera?" es no solo válida, sino demoledora.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>El argumento de 6:100-101 está formulado, según la propia exégesis islámica clásica (Ibn Kathir, Maududi), en el contexto explícito de la creencia pagana preislámica en "hijas de Alá" (16:57; 43:16-19) —diosas y ángeles concebidos como descendencia biológica literal de la divinidad—.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La doctrina cristiana de la filiación de Cristo nunca ha afirmado ni presupuesto una divinidad femenina que actuara como "compañera" o consorte de Dios en un sentido biológico o sexual, ni ha entendido jamás al Hijo como una entidad nacida por generación de dos progenitores de naturaleza divina distinta.</span></div>
+      <div class="conclusion">Por tanto, el argumento de 6:101 refuta con precisión la creencia pagana concreta a la que responde en su contexto original, pero no alcanza, sin una premisa adicional no formulada en el propio texto, a una doctrina —la cristiana— que nunca sostuvo la premisa que el argumento refuta.</div>
+    </div>
+  </section>
+
+  <section id="tension-394">
+    <h3>4. La tensión con 39:4 y su resolución</h3>
+    <span class="debate-tag">Tensión reconocida y resuelta dentro de la propia tradición exegética islámica</span>
+
+    <div class="quran">
+      <div class="source">Corán 39:4 (sura Az-Zumar, "Los Grupos")</div>
+      <div class="text">"Si Dios hubiera querido tomar un hijo, habría elegido lo que quisiera de entre lo que crea. ¡Gloria a Él! Él es Dios, el Uno, el Dominante sobre todas las cosas."</div>
+    </div>
+
+    <p>Este versículo introduce una formulación distinta y, a primera vista, en tensión con 6:101: mientras 6:101 presenta la imposibilidad de que Dios tenga un hijo como una cuestión de <em>lógica absoluta</em> (no puede, porque no tiene compañera), 39:4 la presenta como una cuestión de <em>voluntad</em> (si hubiera querido, podría haber elegido). Un lector que compare ambos versículos podría preguntarse legítimamente si el Corán sostiene que un hijo divino es imposible en términos absolutos, o solo que Dios ha decidido no tenerlo.</p>
+
+    <div class="academic">
+      <div class="source">Ibn Kathir, Tafsir sobre Corán 39:4 (comentario clásico, s. XIV)</div>
+      <div class="text">La exégesis clásica resuelve esta tensión identificando el versículo como una "oración condicional" de un tipo retórico reconocido en árabe, que puede formularse válidamente sobre algo imposible con el fin de subrayar la ignorancia de quienes lo afirman —comparándolo con Corán 21:17 y 43:81, que emplean la misma estructura—. Según esta lectura, el versículo no implica que Dios pudiera realmente tener un hijo, sino que, incluso concediendo hipotéticamente esa posibilidad, ese "hijo" tendría que ser necesariamente "de entre lo que crea": una criatura escogida, no un ser co-eterno de Su misma sustancia.</div>
+    </div>
+
+    <p>Esta resolución —bien establecida dentro de la propia tradición islámica— es coherente y disuelve la aparente contradicción lógica. Pero, precisamente por resolver la tensión de ese modo, revela algo significativo para el argumento de este documento: incluso en su formulación hipotética más favorable, el Corán solo concibe dos categorías posibles para un "hijo" de Dios —la generación biológica mediante consorte (rechazada en 6:101) o la elección de un ser ya creado, es decir, una filiación adoptiva dentro del orden de la creación (contemplada hipotéticamente en 39:4)—. En ningún momento el texto contempla, ni para afirmarla ni para negarla en estos términos, una tercera categoría: la de un Hijo engendrado eternamente, de la misma sustancia increada que el Padre, sin que medie ni unión sexual ni acto de creación. Esa tercera categoría es, exactamente, lo que la teología cristiana afirma —y es examinada en la sección siguiente—.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE III -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="generacion-eterna">
+    <span class="part-label">Parte III — El Malentendido Categorial</span>
+    <h2>Lo que el cristianismo nunca enseñó</h2>
+  </div>
+
+  <section>
+    <h3>5. Generación eterna, no procreación: Nicea, 300 años antes</h3>
+    <span class="verified-tag">Verificado en el texto original del Credo de Nicea (325 d.C.)</span>
+
+    <div class="patristic">
+      <div class="source">Credo del Primer Concilio de Nicea (325 d.C.)</div>
+      <div class="text">"Y en un solo Señor Jesucristo, el Hijo de Dios, unigénito, es decir, de la sustancia del Padre, Dios de Dios, luz de luz, Dios verdadero de Dios verdadero, engendrado, no creado, de la misma sustancia que el Padre, por quien todas las cosas fueron hechas, tanto las que hay en el cielo como las que hay en la tierra."</div>
+    </div>
+
+    <p>Esta fórmula —"engendrado, no creado" (en griego, <em>gennethenta ou poiethenta</em>)— es la clave que la objeción coránica no contempla, y es anterior en casi trescientos años a la predicación islámica: no es, por tanto, una respuesta cristiana inventada después de la crítica coránica, sino la propia definición conciliar del término, ya fijada en el año 325 d.C. La fórmula distingue explícitamente y de forma deliberada dos categorías que 6:101 y 39:4 tratan como las únicas posibles —"engendrado" frente a "creado"— para introducir una tercera que ninguna de las dos: una generación que no es creación (el Hijo no es una criatura hecha de la nada, como sostenía el arrianismo, la herejía que el propio Concilio de Nicea fue convocado para refutar) y que tampoco es procreación biológica (no hay una "consorte" divina, ni una sustancia previa de la que Dios "extraiga" una parte para formar al Hijo).</p>
+
+    <p>El concepto teológico preciso es el de <strong>generación eterna</strong>: una relación interna a la única naturaleza divina, sin inicio temporal, sin materia, sin sexualidad, y sin multiplicación de esencias —el Padre no se hace "menos Dios" al generar al Hijo, ni el Hijo es "menos Dios" por ser generado, del mismo modo en que la luz no disminuye a su fuente—. Es, precisamente, la misma imagen que usa el propio Credo: "luz de luz". La objeción de 6:101 ("¿cómo podría tener un hijo si no tiene compañera?") presupone que la única alternativa a "no tener hijo" es la generación sexual; la teología nicena, formulada siglos antes, ya había excluido expresamente esa alternativa como categoría aplicable a Dios, sin por ello negar la filiación real del Hijo.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>6:101 concluye la imposibilidad de un hijo divino a partir de la premisa de que todo "hijo" requiere una consorte que lo engendre biológicamente.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La definición conciliar cristiana de la filiación de Cristo —fijada en Nicea en el año 325 d.C., casi tres siglos antes de la revelación coránica— excluye explícitamente tanto la creación como la generación biológica mediante consorte, afirmando en su lugar una generación eterna dentro de una sola sustancia indivisa, sin inicio, sin materia y sin segundo progenitor.</span></div>
+      <div class="conclusion">Por tanto, la premisa que 6:101 refuta —que un hijo divino exige una consorte— no es la premisa que la doctrina cristiana de la filiación afirma, ni pudo serlo por primera vez como respuesta al Corán, puesto que la formulación que la excluye es anterior a la predicación coránica en casi trescientos años.</div>
+    </div>
+  </section>
+
+  <section id="ibn-sabil">
+    <h3>6. El propio Corán usa "hijo" sin sentido biológico</h3>
+    <span class="verified-tag">Verificado: ocho apariciones coránicas confirmadas (2:177; 2:215; 4:36; 8:41; 9:60; 17:26; 30:38; 59:7)</span>
+
+    <p>Un segundo argumento, de naturaleza puramente lingüística, refuerza el anterior: el propio árabe coránico usa la palabra <em>ibn</em> ("hijo") en sentido no biológico, sin que ello genere ninguna dificultad teológica. La expresión <em>ibn as-sabil</em> —literalmente, "hijo del camino"— aparece en el Corán al menos ocho veces (2:177; 2:215; 4:36; 8:41; 9:60; 17:26; 30:38; 59:7) para designar, simplemente, al viajero o transeúnte necesitado, uno de los ocho grupos legítimos receptores del <em>zakat</em> según 9:60.</p>
+
+    <div class="quran">
+      <div class="source">Corán 9:60 (sura At-Tawbah, "El Arrepentimiento")</div>
+      <div class="text">"...y para los cautivos, y los endeudados, y la causa de Dios, y el viajero (<em>ibn as-sabil</em>)..."</div>
+    </div>
+
+    <div class="academic">
+      <div class="source">Comentaristas clásicos árabes sobre la expresión "ibn as-sabil" (Al-Tabari, entre otros, según recogen fuentes de referencia lingüística islámica)</div>
+      <div class="text">La explicación tradicional de esta expresión es que llamar al viajero "hijo del camino" expresa una relación de "pertenencia y dependencia completas", de forma análoga a como un hijo pertenece y depende de su madre —una metáfora de relación intensa, no una afirmación de que el camino haya engendrado biológicamente al viajero—.</div>
+    </div>
+
+    <p>Este dato lingüístico es significativo porque priva de fuerza a una posible réplica según la cual "en árabe, <em>ibn</em> siempre implica descendencia biológica real, y por tanto cualquier uso del término para Cristo debe leerse literalmente". El propio uso coránico de <em>ibn</em> —aplicado al camino, no a una persona— demuestra que la lengua árabe, y el Corán mismo, disponían ya de un uso figurado y relacional del término "hijo" sin ninguna implicación de procreación física. La pregunta relevante para la filiación de Cristo no es, por tanto, si "hijo" puede tener sentido no biológico en árabe —evidentemente puede—, sino cuál de los sentidos disponibles emplea la teología cristiana, examinada en la sección anterior.</p>
+  </section>
+
+  <section id="kalimatun-minhu">
+    <h3>7. Kalimatun minhu y Ruh minhu: los títulos que el Corán da a Cristo</h3>
+    <span class="verified-tag">Verificado en texto árabe y traducciones cotejadas (3:45; 4:171)</span>
+
+    <div class="quran">
+      <div class="source">Corán 3:45 (sura Ali 'Imran)</div>
+      <div class="text">"Cuando los ángeles dijeron: '¡Oh, María! Dios te anuncia la buena nueva de una palabra (<em>kalimatun</em>) procedente de Él, cuyo nombre será el Mesías, Jesús hijo de María, distinguido en este mundo y en el más allá, y uno de los que están cerca [de Dios].'"</div>
+    </div>
+
+    <div class="quran">
+      <div class="source">Corán 4:171 (sura An-Nisa)</div>
+      <div class="text">"...El Mesías, Jesús hijo de María, no fue sino un Mensajero de Dios, y Su palabra (<em>kalimatuhu</em>) que transmitió a María, y un espíritu (<em>ruhun</em>) procedente de Él..."</div>
+    </div>
+
+    <p>Este es, quizás, el punto de mayor interés teológico de todo el corpus examinado, y suele pasar inadvertido: al mismo tiempo que niega explícitamente la filiación divina de Cristo, el propio Corán le concede dos títulos —"Palabra de Dios" (<em>Kalimat Allah</em>) y "Espíritu procedente de Él" (<em>Ruh minhu</em>)— que ningún otro profeta recibe en todo el texto coránico, ni Abraham, ni Moisés, ni el propio Mahoma. Ambos títulos son, además, sorprendentemente cercanos al vocabulario que la teología cristiana más temprana —anterior en varios siglos al islam— usa precisamente para explicar la generación eterna del Hijo: el Evangelio de Juan abre afirmando que "en el principio era el Verbo (<em>ho Logos</em>, la Palabra), y el Verbo era con Dios, y el Verbo era Dios" (Juan 1:1), y describe la encarnación de esa Palabra en Cristo.</p>
+
+    <div class="highlight">
+      <strong>La ironía señalada por siglos de apologética cristiana:</strong> una "Palabra" no es un ser creado de la nada en un instante, como una piedra o un árbol; una palabra procede de quien la pronuncia, participa de su pensamiento, y sin embargo es distinguible de él como interlocución. Es, dicho de otro modo, la imagen natural más cercana a la propia noción de "generación sin procreación" que la teología nicena articula formalmente. El Corán, al llamar a Cristo "Palabra de Dios" y "Espíritu procedente de Él" mientras simultáneamente niega que sea "engendrado", se encuentra usando un vocabulario que roza —sin llegar a afirmarla— la misma categoría intermedia entre "creado" y "procreado biológicamente" que la doctrina cristiana de la generación eterna había articulado con precisión técnica siglos antes.
+    </div>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Los títulos "Palabra procedente de Dios" y "Espíritu procedente de Él", que el Corán reserva exclusivamente para Cristo entre todos los profetas mencionados, describen un origen que procede de Dios mismo sin ser, por ello, un acto de creación externa comparable a la creación del resto del universo "a partir de la nada" o mediante la simple orden "Sé, y es" aplicada a materia inerte.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La teología cristiana nicena describe la generación del Hijo, de forma independiente y anterior en siglos, exactamente en estos términos: una procedencia real desde el Padre, sin creación a partir de la nada y sin materia intermedia —"luz de luz", "Dios de Dios"—.</span></div>
+      <div class="conclusion">Por tanto, el vocabulario que el propio Corán reserva para Cristo —y para ningún otro profeta— se aproxima, sin llegar a afirmarlo con las mismas conclusiones, al tipo exacto de categoría teológica que la doctrina de la generación eterna había ya articulado antes del islam, lo cual dificulta sostener que el Corán esté simplemente ignorando esa categoría por no existir, y sugiere más bien que la rechaza sin plena consideración de sus propios términos.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE IV -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="trinidad-cuatro">
+    <span class="part-label">Parte IV — La Trinidad Según el Corán</span>
+    <h2>Lo que el texto refuta, y lo que no refuta</h2>
+  </div>
+
+  <section>
+    <h3>8. 4:171 y 5:73: "No digáis tres"</h3>
+    <span class="verified-tag">Verificado en texto árabe y cinco traducciones cotejadas</span>
+
+    <div class="quran">
+      <div class="source">Corán 4:171</div>
+      <div class="text">"...Creed, pues, en Dios y en Sus mensajeros, y no digáis 'tres'. Desistid; será mejor para vosotros. Dios es solo un Dios único. Lejos esté Él de tener un hijo."</div>
+    </div>
+
+    <div class="quran">
+      <div class="source">Corán 5:73</div>
+      <div class="text">"Ciertamente, no creen quienes dicen: 'Dios es el tercero de tres.' Y no hay sino un Dios único."</div>
+    </div>
+
+    <p>La formulación exacta de 5:73 —"Dios es el tercero de tres" (<em>thalithu thalathatin</em>)— describe, con precisión, una estructura de conteo: tres unidades distintas, de las cuales Dios sería una entre otras dos. Esa estructura es la definición técnica de <strong>triteísmo</strong> —la creencia en tres dioses separados, cada uno una unidad contable, sumándose a un total de tres divinidades—. Es, en efecto, una herejía que la propia tradición cristiana ha condenado explícitamente y sin ambigüedad desde sus primeros concilios, exactamente por las mismas razones que 5:73 aduce: hay un único Dios, no tres.</p>
+
+    <p>La doctrina trinitaria nicena, sin embargo, no describe "tres dioses, uno de los cuales es Dios": describe una sola sustancia divina indivisible, subsistente en tres Personas realmente distintas mas no separables. La diferencia no es de matiz retórico, sino de estructura lógica completa: en el triteísmo que 5:73 refuta, "tres" es un número que cuenta divinidades (1+1+1=3 dioses); en la Trinidad nicena, "tres" no cuenta divinidades, sino relaciones internas dentro de una única divinidad numéricamente una (1 Dios, subsistente trinitariamente). El propio Credo de Nicea, examinado en la sección 5, lo expresa con la fórmula "de la misma sustancia que el Padre" —precisamente la cláusula que excluye la lectura de "tres unidades sumables" que 4:171 y 5:73 refutan.</p>
+  </section>
+
+  <section id="trinidad-maria">
+    <h3>9. 5:116: "¿Tomarme a mí y a mi madre como dioses?"</h3>
+    <span class="debate-tag">Debate académico real sobre el trasfondo histórico, presentado con sus dos posiciones</span>
+
+    <div class="quran">
+      <div class="source">Corán 5:116</div>
+      <div class="text">"Y [recuerda] cuando Dios diga: '¡Oh, Jesús, hijo de María! ¿Dijiste tú a la gente: Tomadme a mí y a mi madre como divinidades además de Dios?' Él dirá: '¡Gloria a Ti! No me corresponde a mí decir lo que no tengo derecho [a decir]. Si lo hubiera dicho, Tú ciertamente lo habrías sabido. Tú sabes lo que hay en mí, y yo no sé lo que hay en Ti. Ciertamente, Tú eres el Conocedor de lo oculto.'"</div>
+    </div>
+
+    <p>Este versículo suele presentarse como prueba de que el Corán "malinterpreta" la Trinidad como si fuera un grupo de tres personas —Padre, Jesús y María— en lugar de Padre, Hijo y Espíritu Santo. Algunos comentaristas islámicos clásicos, como Maududi, lo conectan con el auge histórico real de la devoción mariana en el cristianismo bizantino de los siglos previos al islam —el título "Madre de Dios" (<em>Theotokos</em>), definido en el Concilio de Éfeso del año 431 d.C., y la extendida veneración de imágenes y reliquias marianas documentada, por ejemplo, en el estandarte con la imagen de María que portaba el emperador Heraclio, contemporáneo de Mahoma—.</p>
+
+    <div class="academic">
+      <div class="source">Epifanio de Salamina, Panarion, c. 375-377 d.C. (única fuente antigua sobre la existencia de los llamados "colliridianos")</div>
+      <div class="text">Epifanio documenta la existencia, en la Arabia del siglo IV, de un grupo minoritario —probablemente formado en su mayoría por mujeres— que ofrecía panecillos (<em>kollyris</em>) a María como si fuera una diosa, práctica que el propio Epifanio condena expresamente como herejía, insistiendo en que "la adoración debe cesar" y que a María corresponde honor, no culto de latría. Historiadores modernos como Averil Cameron han cuestionado la fiabilidad de este único testimonio, y no existe evidencia de que el grupo, si existió realmente, perviviera hasta la época de Mahoma —dos siglos y medio después—.</div>
+    </div>
+
+    <p>Es importante, con el mismo rigor exigido en el resto de este documento, no sobredimensionar esta conexión: la existencia histórica de los "colliridianos" como grupo organizado es, en la propia investigación académica no confesional, objeto de duda razonable, y ninguna fuente cristiana antigua, oriental u occidental, ortodoxa o herética, ha enseñado jamás que María ocupe el lugar del Espíritu Santo dentro de la Trinidad. El propio versículo, además, contiene su respuesta implícita: es el mismo Cristo quien, en el texto coránico, niega categóricamente haber dicho tal cosa —"no me corresponde a mí decir lo que no tengo derecho a decir"—. Leído con atención, 5:116 no afirma que el cristianismo ortodoxo enseñara esa doctrina, sino que pone en boca de Cristo mismo la negación de haberla enseñado nunca, lo cual es, precisamente, compatible con la posición cristiana de que tal creencia jamás formó parte de la fe recibida de los apóstoles.</p>
+
+    <div class="syllogism">
+      <div class="premise"><span class="label">P1</span><span>Ninguna profesión de fe, concilio o catecismo cristiano —ni siquiera entre las corrientes heréticas documentadas de la Antigüedad tardía— ha enseñado jamás que María sea la tercera Persona de la Trinidad o que deba recibir culto de adoración equivalente al debido a Dios.</span></div>
+      <div class="premise"><span class="label">P2</span><span>El propio Corán, en 5:116, presenta a Cristo negando explícitamente haber enseñado tal cosa a la gente —"no me corresponde a mí decir lo que no tengo derecho a decir"—, lo cual el texto no contradice en ningún otro lugar.</span></div>
+      <div class="conclusion">Por tanto, 5:116, leído en su propio contenido, no establece que la doctrina cristiana ortodoxa enseñara la divinidad de María, sino que documenta, en el peor de los casos, una práctica devocional excesiva y minoritaria —de existencia históricamente incierta— que ni el cristianismo la reconoció nunca como propia ni el propio texto coránico atribuye a Cristo haberla autorizado.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE V -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="hadices">
+    <span class="part-label">Parte V — Los Hadices</span>
+    <h2>El refuerzo profético a la negación coránica</h2>
+  </div>
+
+  <section>
+    <h3>10. Sahih al-Bujari: "el hijo de Adán me insulta"</h3>
+    <span class="verified-tag">Verificado en sunnah.com: Sahih al-Bujari 4974, 4975 y 4482, con texto árabe e isnad</span>
+
+    <p>La negación coránica de la filiación divina no queda confinada al texto coránico: se refuerza en al menos tres narraciones distintas dentro de la colección de hadices más autorizada del sunismo, Sahih al-Bujari, todas ellas clasificadas en el "Libro del Tafsir" (comentario coránico), en el capítulo dedicado precisamente a los versículos sobre la filiación divina.</p>
+
+    <div class="hadith">
+      <div class="source">Sahih al-Bujari 4974, narrado por Abu Huraira (Libro del Tafsir, comentario a Sura Al-Ikhlas)</div>
+      <div class="text">El Profeta dijo: "Alá ha dicho: 'El hijo de Adán me desmiente, sin tener derecho a hacerlo, y me insulta, sin tener derecho a hacerlo. Su desmentirme consiste en decir que Yo no lo recrearé como lo creé la primera vez —siendo que la primera creación no Me resultó más fácil que la nueva creación—. Y su insultarme consiste en decir que Alá ha engendrado hijos, siendo Yo el Uno, el Señor Autosuficiente a quien todas las criaturas necesitan: no engendro, ni he sido engendrado, y no hay nadie semejante a Mí.'"</div>
+    </div>
+
+    <p>Este hadiz qudsi —es decir, una narración en la que el propio Mahoma transmite palabras que atribuye directamente a Alá— es notable porque cita, casi literalmente, el texto de la sura Al-Ikhlas (112:3-4: "no engendra, ni ha sido engendrado, y no hay nadie que se Le pueda comparar"), incorporándolo a la propia voz divina en primera persona. La misma narración, con una cadena de transmisión (<em>isnad</em>) distinta mas idéntica en contenido, aparece registrada también como Sahih al-Bujari 4975, y una tercera variante —Sahih al-Bujari 4482— la sitúa explícitamente como comentario profético a Corán 2:116 ("Y dicen: Dios ha engendrado un hijo. ¡Gloria a Él!").</p>
+
+    <div class="hadith">
+      <div class="source">Sahih al-Bujari 4482, narrado por Abu Huraira (Libro del Tafsir, comentario a Sura Al-Baqarah 2:116)</div>
+      <div class="text">El Profeta dijo: "Alá ha dicho: 'El hijo de Adán me desmiente, sin tener derecho a hacerlo, y me insulta, sin tener derecho a hacerlo. En cuanto a desmentirme, consiste en que afirma que no puedo recrearlo tal como lo creé antes; y en cuanto a insultarme, consiste en su afirmación de que Yo tengo descendencia. ¡No! Glorificado sea Yo.'"</div>
+    </div>
+
+    <p>El lenguaje empleado —"me desmiente", "me insulta"— es notablemente más severo que el de la mera corrección doctrinal: clasifica la creencia en la filiación divina, explícitamente, como una ofensa personal dirigida contra Dios mismo, situada en la misma categoría que negar la resurrección corporal. Esta gradación de severidad es relevante para entender por qué la polémica coránica contra la Trinidad y la filiación de Cristo ocupa, dentro de la tradición islámica, un lugar doctrinal de primer orden y no una discrepancia secundaria.</p>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PARTE VI -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="objecion-ibn">
+    <span class="part-label">Parte VI — Objeciones y Respuestas</span>
+    <h2>El argumento más fuerte de cada lado</h2>
+  </div>
+
+  <section>
+    <h3>11. "Ibn siempre implica filiación física real en árabe"</h3>
+
+    <div class="objection-block">
+      <div class="objection-header">LA OBJECIÓN</div>
+      <div class="objection-body">El recurso cristiano a la "generación eterna" para explicar por qué "Hijo de Dios" no implica procreación física suena a una evasión inventada después de que el Corán expusiera la incoherencia literal de la doctrina. En árabe, y en el uso semítico general del término, <em>ibn</em> designa descendencia real, biológica; el caso de <em>ibn as-sabil</em> es una excepción idiomática aislada y reconocida como tal precisamente por su rareza, no la prueba de un patrón general que permita reinterpretar libremente "Hijo de Dios" en cualquier sentido conveniente.</div>
+    </div>
+    <div class="objection-block">
+      <div class="response-header">LA RESPUESTA</div>
+      <div class="response-body">
+        <p>El argumento de la generación eterna no puede ser una "evasión posterior al Corán" por una razón cronológica simple y verificable: el Credo de Nicea, que fija esa doctrina con la fórmula técnica "engendrado, no creado, de la misma sustancia que el Padre", fue promulgado en el año 325 d.C. —casi trescientos años antes de que Mahoma comenzara su predicación hacia el 610 d.C.—. No es una respuesta cristiana al Corán: es la doctrina cristiana que el Corán, al formular su crítica seis siglos después de los evangelios y tres siglos después de Nicea, tenía disponible para conocer y no refutó en sus propios términos técnicos, sino en los términos de una creencia distinta —la generación biológica pagana— que la teología cristiana ya había excluido explícitamente. En cuanto al argumento lingüístico, el punto de <em>ibn as-sabil</em> no depende de que sea un uso frecuente, sino de que sea un uso <em>coránico y arraigado</em>: basta con que el propio texto sagrado del islam demuestre que la lengua árabe, tal como el Corán la emplea, es capaz de un uso relacional y no biológico del término "hijo" para que la objeción "en árabe ibn siempre es literal" quede refutada por el propio corpus que la formula.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="objecion-triteismo">
+    <h3>12. "La Trinidad es politeísmo disfrazado"</h3>
+
+    <div class="objection-block">
+      <div class="objection-header">LA OBJECIÓN</div>
+      <div class="objection-body">La distinción entre "tres dioses" (triteísmo, refutado por 5:73) y "un Dios en tres Personas" (Trinidad nicena) es una sofisticación filosófica tardía, diseñada para blindar una doctrina que, en la práctica devocional y en el lenguaje cotidiano de los propios cristianos —que rezan al Padre, a Jesús y, con menos frecuencia, invocan al Espíritu Santo como agentes aparentemente distintos con voluntades propias— funciona exactamente como un politeísmo de tres divinidades. Si camina como triteísmo y se le reza como triteísmo, la etiqueta técnica de "una sola sustancia" no cambia la realidad devocional que el Corán está observando y corrigiendo.</div>
+    </div>
+    <div class="objection-block">
+      <div class="response-header">LA RESPUESTA</div>
+      <div class="response-body">
+        <p>Esta objeción confunde la fenomenología de la devoción —cómo reza, en la práctica, un creyente concreto, que puede hacerlo con mayor o menor precisión teológica— con el contenido doctrinal formalmente definido, que es el único objeto posible de una crítica coránica seria. Por esa misma lógica, cualquier musulmán que en la práctica atribuyera poder efectivo de intercesión a un santo o a un ángel, tratándolo devocionalmente como una fuente de ayuda independiente de Alá, estaría —según el mismo criterio fenomenológico— comprometiendo el <em>tawhid</em> islámico en la práctica, sin que ello demuestre que la doctrina islámica formal enseñe politeísmo. La pregunta relevante no es cómo reza, con mayor o menor cuidado teológico, cada creyente individual, sino qué es lo que la doctrina formalmente define y exige creer: y la doctrina trinitaria nicena define, sin ambigüedad ni margen de interpretación alterna, una sola sustancia divina numéricamente indivisa. Rechazar esa definición exige refutar su contenido —lo cual 5:73, al describir una estructura de conteo ("el tercero de tres") ajena a esa definición, no hace—, no señalar que algunos devotos la practiquen con menor rigor del que ella misma exige.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="objecion-maria">
+    <h3>13. "5:116 prueba que los cristianos adoraban a María"</h3>
+
+    <div class="objection-block">
+      <div class="objection-header">LA OBJECIÓN</div>
+      <div class="objection-body">El Corán es un documento histórico contemporáneo a las comunidades cristianas de Arabia del siglo VII; si describe con tanta naturalidad una acusación de que los cristianos "toman a Jesús y a María como dos divinidades", lo más razonable históricamente es asumir que refleja con precisión alguna práctica devocional real presente en esas comunidades concretas —sea o no representativa del cristianismo "oficial" definido en concilios lejanos como Nicea o Éfeso—, y no descartarla como un malentendido sin más.</div>
+    </div>
+    <div class="objection-block">
+      <div class="response-header">LA RESPUESTA</div>
+      <div class="response-body">
+        <p>Este es un punto metodológicamente razonable, y este documento no lo descarta sin más: es enteramente posible que en la Arabia del siglo VI-VII circularan formas de devoción mariana popular, doctrinalmente descuidadas, que un observador externo pudiera describir en términos de "divinización" de María —el propio auge de la iconografía mariana bizantina, documentado independientemente por historiadores como el estandarte con la imagen de María que portaba el emperador Heraclio, hace este escenario plausible—. Lo que la evidencia disponible no permite es el paso adicional, mucho más fuerte, de que esa práctica popular reflejara la doctrina cristiana formalmente enseñada o representara al cristianismo mayoritario: ningún credo, concilio o catecismo cristiano, de ninguna corriente documentada con solidez, ha enseñado jamás la divinidad de María, y el propio texto de 5:116 —al poner en boca de Cristo la negación explícita de haber autorizado tal cosa— es compatible con, y puede leerse como, un reproche dirigido a una práctica popular desviada, no como una descripción de la enseñanza apostólica original que los propios evangelios, siglos antes, nunca contienen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- CONCLUSIÓN -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="part-header" id="silogismo-maestro">
+    <span class="part-label">Conclusión</span>
+    <h2>El silogismo maestro y el veredicto final</h2>
+  </div>
+
+  <section>
+    <h3>14. El silogismo maestro</h3>
+
+    <p>Las trece secciones anteriores —que cubren el corpus coránico completo sobre la filiación divina, su trasfondo histórico verificable, la respuesta teológica cristiana que lo precede en siglos, los hadices que refuerzan la negación, y las tres objeciones islámicas más serias— convergen en una formulación final.</p>
+
+    <div class="syllogism maestro">
+      <div class="premise"><span class="label">P1</span><span>El argumento coránico central contra la filiación divina de Cristo (6:100-101, reforzado en 16:57; 19:88-92; 43:16-19; 112:1-4, y en los hadices de Sahih al-Bujari 4974, 4975 y 4482) concluye la imposibilidad de un "hijo" de Dios a partir de la premisa de que todo hijo requiere una consorte que lo engendre biológicamente —premisa que la propia exégesis clásica islámica (Ibn Kathir, Maududi) sitúa expresamente en el contexto de la creencia pagana preislámica en "hijas de Alá" nacidas de manera literal.</span></div>
+      <div class="premise"><span class="label">P2</span><span>La doctrina cristiana de la filiación de Cristo, formalmente definida en el Concilio de Nicea del año 325 d.C. —casi tres siglos antes de la predicación coránica— excluye explícita y deliberadamente tanto la creación como la generación mediante consorte, mediante la fórmula técnica "engendrado, no creado, de la misma sustancia que el Padre"; y esta misma categoría —procedencia real sin consorte y sin creación externa— es, además, la que el propio Corán roza sin desarrollarla al conceder a Cristo, en exclusiva entre todos los profetas, los títulos de "Palabra de Dios" (3:45) y "Espíritu procedente de Él" (4:171).</span></div>
+      <div class="premise"><span class="label">P3</span><span>De igual modo, la negación coránica de la Trinidad en su formulación más precisa (5:73, "el tercero de tres") describe y refuta una estructura de conteo triteísta —tres divinidades separadas y sumables— que la definición nicena de una sola sustancia indivisa en tres Personas excluye por su propia construcción lógica; y la acusación conexa de 5:116 sobre la divinización de María carece de respaldo en cualquier credo, concilio o catecismo cristiano documentado, e incluye en el propio texto coránico la negación de Cristo mismo de haberla enseñado.</span></div>
+      <div class="conclusion">Por tanto, el corpus coránico examinado refuta, de manera verificable y con el respaldo de su propia tradición exegética clásica, una doctrina distinta de la que el cristianismo ha sostenido formalmente desde antes de la existencia del islam —la generación biológica mediante consorte, y el triteísmo de tres divinidades contables—, sin llegar a refutar, en los mismos términos técnicos, la generación eterna de una sola sustancia divina que la teología nicena articula y que el propio vocabulario coránico sobre Cristo roza sin resolverlo.</div>
+    </div>
+  </section>
+
+  <div class="verdict" id="veredicto">
+    <h2>El veredicto final</h2>
+
+    <p><strong>El argumento coránico es válido contra su objetivo original, no contra la doctrina cristiana formal.</strong> Este documento no ha argumentado que 6:101 sea un argumento débil o incoherente: dentro de su contexto histórico verificable —la refutación de la creencia árabe preislámica en divinidades femeninas engendradas biológicamente por Alá— es un argumento sólido, y la propia exégesis islámica clásica lo confirma al situarlo en ese contexto. El problema, para su aplicación a la cristología, es de categoría: la doctrina cristiana de la filiación nunca afirmó la premisa —consorte divina, procreación biológica— que el argumento refuta, y la definición que sí sostiene —generación eterna, de una sola sustancia, sin consorte y sin creación— fue formulada con precisión técnica casi trescientos años antes de que existiera el islam.</p>
+
+    <p><strong>Los hadices intensifican, pero no alteran, la estructura del argumento.</strong> Que Sahih al-Bujari clasifique la creencia en la filiación divina como un "insulto" a Dios, en la misma categoría que negar la resurrección, muestra la seriedad doctrinal que el islam atribuye a esta cuestión —pero repite, con el mismo vocabulario del "engendrar" biológico de Al-Ikhlas 112:3, la misma categoría que las secciones 5 y 6 de este documento examinan: la del engendramiento como acto físico, no como la generación eterna intra-trinitaria que el cristianismo formuló siglos antes.</p>
+
+    <p><strong>La conclusión.</strong> Un diálogo serio entre cristianos y musulmanes sobre la filiación de Cristo y la Trinidad exige, como primer paso, que ambas partes examinen qué doctrina exacta está siendo afirmada o negada. Este documento ha intentado mostrar, con las fuentes primarias verificadas y la propia tradición exegética islámica como testigo, que buena parte de la fuerza retórica del argumento coránico depende de una identificación —"hijo" como necesariamente biológico, "tres" como necesariamente tres divinidades contables— que la teología cristiana formal, ya en el siglo IV, había excluido explícitamente como no representativa de su propia fe.</p>
+
+    <p>FUENTES PRINCIPALES CITADAS: Corán 2:116; 3:45; 4:171; 5:73; 5:116; 6:100-101; 9:60; 10:68; 16:57-59; 17:111; 19:88-92; 21:26; 39:4; 43:16-19, 81; 72:3; 112:1-4 (texto árabe y traducciones Sahih International, Yusuf Ali, Pickthall, Abdul Haleem, Maududi cotejadas) · Sahih al-Bujari 4482, 4974, 4975, 5013, 5015 (sunnah.com) · Credo del Primer Concilio de Nicea (325 d.C.) · Ibn Kathir, Tafsir sobre 6:101, 16:57 y 39:4 · Abul Ala Maududi, Tafhim al-Qur'an, comentarios a 16:57, 43:16 y 5:116 · Epifanio de Salamina, Panarion (c. 375-377 d.C.) · Averil Cameron, sobre la historicidad de los colliridianos · Juan 1:1, sobre el Logos</p>
+  </div>
+
+</main>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('nav-toggle');
+  const overlay = document.getElementById('overlay');
+
+  function closeNav() {
+    sidebar.classList.remove('open');
+    toggle.classList.remove('open');
+    overlay.classList.remove('visible');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = sidebar.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    overlay.classList.toggle('visible', isOpen);
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.querySelectorAll('#sidebar nav a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('progress-bar').style.width = scrolled + '%';
+  });
+
+  const navLinks = document.querySelectorAll('#sidebar nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  document.querySelectorAll('main [id]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
