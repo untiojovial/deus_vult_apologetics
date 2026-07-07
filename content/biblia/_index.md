@@ -23,3 +23,4 @@ Aqui trabajamos pasajes complejos con metodo: contexto, genero, lenguaje y tradi
 - [100 Profecias Cumplidas en los Cuatro Evangelios (Dossier)](/biblia/profecias-evangelios-dossier/)
 - [Versiculos Dificiles de la Biblia (Dossier)](/biblia/versiculos-dificiles-dossier/)
 - [El Final Largo de Marcos: Defensa Integra de Marcos 16:9-20 (Dossier)](/biblia/defensa-final-largo-marcos-dossier/)
+- [Juan 7:53–8:11: La Veracidad Histórica de la Mujer Adúltera (Dossier)](/biblia/pericopa-adultera-dossier/)
