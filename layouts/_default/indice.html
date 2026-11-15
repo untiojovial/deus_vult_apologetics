@@ -1,0 +1,26 @@
+{{- define "main" }}
+{{- /* Índice general: todos los dossieres por orden alfabético, con filtro por texto y por controversia
+       (admite ?area=… y ?coleccion=2026 desde la portada). */ -}}
+{{- $datos := site.Data.dossieres | default dict }}
+{{- $dossieres := slice }}
+{{- range where site.RegularPages "Type" "in" site.Params.mainSections }}{{ if and (ne .Section "idiomas") (in .RawContent "dossier_iframe") }}{{ $dossieres = $dossieres | append . }}{{ end }}{{ end }}
+{{- $dossieres = sort $dossieres "Title" "asc" }}
+{{- $areas := slice }}
+{{- range $dossieres }}{{ $d := index $datos .RelPermalink | default dict }}{{ with (.Params.area | default (index $d "area")) }}{{ $areas = $areas | append . }}{{ end }}{{ end }}
+{{- $areas = $areas | uniq | sort }}
+<header class="page-header pag-cab">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<div class="post-description">{{ . }}</div>{{ end }}
+</header>
+<div class="filtros" data-filtro>
+  <input type="search" placeholder="Filtrar por título o tema…" aria-label="Filtrar el índice" autocomplete="off">
+  <button class="chip" type="button" aria-pressed="true" data-area="">Todos</button>
+  {{- range $areas }}<button class="chip" type="button" aria-pressed="false" data-area="{{ . }}">{{ . }}</button>{{ end }}
+</div>
+<p class="cuenta-res" aria-live="polite" data-cuenta>{{ len $dossieres }} documentos</p>
+<ol class="catalogo" data-catalogo>
+  {{- range $i, $p := $dossieres }}{{ partial "fila_dossier.html" (dict "pagina" $p "sig" (printf "%03d" (add $i 1))) }}{{ end }}
+</ol>
+{{- with .Content }}<div class="post-content md-content">{{ . }}</div>{{ end }}
+{{- end }}

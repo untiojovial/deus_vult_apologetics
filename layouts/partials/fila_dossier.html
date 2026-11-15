@@ -1,0 +1,18 @@
+{{- /* Una fila del catálogo. Recibe dict "pagina" (Page) y "sig" (signatura que se muestra a la izquierda). */ -}}
+{{- $p := .pagina }}
+{{- $d := index (site.Data.dossieres | default dict) $p.RelPermalink | default dict }}
+{{- $area := $p.Params.area | default (index $d "area") | default "" }}
+{{- $w := $p.Params.palabras | default (index $d "palabras") | default 0 }}
+{{- $esDossier := in $p.RawContent "dossier_iframe" }}
+<li class="fila" data-area="{{ $area }}" data-coleccion="{{ $p.Params.coleccion | default "" }}" data-t="{{ printf "%s %s %s" $p.Title ($p.Summary | plainify) (delimit ($p.Params.tags | default slice) " ") | lower }}">
+  <span class="fila-sig">{{ .sig }}</span>
+  <a href="{{ $p.RelPermalink }}">
+    <h3>{{ $p.Title }}</h3>
+    {{- with $p.Summary | plainify | htmlUnescape }}<p>{{ . | truncate 240 }}</p>{{ end }}
+  </a>
+  <span class="fila-meta">
+    {{- if gt $w 0 }}{{ lang.FormatNumberCustom 0 $w "- , ." }} palabras · {{ math.Max 1 (math.Round (div (float $w) 220)) }} min{{ else if not $esDossier }}{{ $p.ReadingTime }} min{{ end }}
+    {{- with $area }}<br>{{ . }}{{ end }}
+    {{- if and (not $area) (ne $p.Kind "section") }}{{ with $p.Parent }}<br>{{ .Title }}{{ end }}{{ end }}
+  </span>
+</li>

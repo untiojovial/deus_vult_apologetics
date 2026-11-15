@@ -1,7 +1,16 @@
+{{- /* Índice del buscador (Fuse.js de PaperMod). Mismos campos de siempre; `content` incorpora además los
+       encabezados internos de cada dossier (data/dossieres.json), su área de controversia y sus temas,
+       para que la búsqueda alcance el contenido real sin modificar ningún HTML. */ -}}
 {{- $.Scratch.Add "index" slice -}}
+{{- $datos := site.Data.dossieres | default dict -}}
 {{- range site.RegularPages -}}
-    {{- if and (not .Params.searchHidden) (ne .Layout `archives`) (ne .Layout `search`) }}
-    {{- $.Scratch.Add "index" (dict "title" .Title "content" .Plain "permalink" .RelPermalink "summary" .Summary) -}}
+    {{- if and (not .Params.searchHidden) (ne .Layout `archives`) (ne .Layout `search`) (ne .Layout `indice`) }}
+    {{- $d := index $datos .RelPermalink | default dict -}}
+    {{- $extra := delimit (index $d "encabezados" | default slice) " · " -}}
+    {{- $area := .Params.area | default (index $d "area") | default "" -}}
+    {{- $tags := delimit (.Params.tags | default slice) " " -}}
+    {{- $contenido := printf "%s %s %s %s %s" .Plain $extra $area $tags (.Params.tesis | default "") -}}
+    {{- $.Scratch.Add "index" (dict "title" .Title "content" $contenido "permalink" .RelPermalink "summary" .Summary) -}}
     {{- end }}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}

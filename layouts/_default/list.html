@@ -1,11 +1,126 @@
 {{- define "main" }}
+{{- /* Rediseño «Scriptorium».
+       · Inicio  → portada de biblioteca (colecciones, nuevas investigaciones, controversias, rutas).
+       · Apartado → catálogo con filtro; el texto y la lista manual del _index.md se conservan debajo.
+       · Términos (tags/categorías) → mismo catálogo, sin filtros.
+       Los metadatos de los dossieres antiguos (área, extensión) vienen de data/dossieres.json, porque sus
+       envoltorios están protegidos; los de los nuevos, de su propia cabecera. */ -}}
+{{- $datos := site.Data.dossieres | default dict }}
+{{- $todas := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $dossieres := slice }}
+{{- range $todas }}{{ if and (ne .Section "idiomas") (in .RawContent "dossier_iframe") }}{{ $dossieres = $dossieres | append . }}{{ end }}{{ end }}
 
-{{- if (and site.Params.profileMode.enabled .IsHome) }}
-{{- partial "index_profile.html" . }}
-{{- else }} {{/* if not profileMode */}}
+{{- /* Se conserva la paginación de PaperMod solo para que sigan existiendo las rutas /page/N/ (no se rompe ningún enlace). */ -}}
+{{- if .IsHome }}{{ $_ := .Paginate (where $todas "Params.hiddenInHomeList" "!=" "true") }}{{ else }}{{ $_ := .Paginate (union .RegularPages .Sections) }}{{ end }}
 
-{{- if not .IsHome | and .Title }}
-<header class="page-header">
+{{- if .IsHome }}
+{{- /* ───────────────────────── PORTADA ───────────────────────── */ -}}
+{{- $palabras := 0 }}
+{{- range $dossieres }}{{ $d := index $datos .RelPermalink | default dict }}{{ $palabras = add $palabras (.Params.palabras | default (index $d "palabras") | default 0) }}{{ end }}
+{{- $nuevas := where $dossieres "Params.coleccion" "biblioteca-2026" }}
+<section class="portada">
+  <div>
+    <span class="vers">Fuentes · Argumentos · Refutaciones</span>
+    <h1>Razones para creer, <em>con las fuentes delante</em>.</h1>
+  </div>
+  <div>
+    <p>{{ site.Params.presentacion | default "Una biblioteca de dossieres de investigación apologética: textos originales, manuscritos, silogismos desarrollados y la mejor versión de cada objeción, respondida." }}</p>
+    <form class="buscar" role="search" action="{{ "busqueda/" | relLangURL }}" method="get">
+      <input type="search" name="q" placeholder="Buscar un tema, un versículo, un autor…" aria-label="Buscar en la biblioteca" autocomplete="off">
+      <button type="submit">Buscar</button>
+    </form>
+    <ul class="cifras">
+      <li><b>{{ len $dossieres }}</b><span class="vers">Dossieres</span></li>
+      <li><b>{{ len (where site.Sections "Section" "in" (slice "filosofia" "historia" "biblia" "exegesis" "refutaciones" "doctrina" "respondiendo-al-islam" "santos")) }}</b><span class="vers">Apartados</span></li>
+      <li><b>{{ lang.FormatNumberCustom 0 (mul (int (div $palabras 1000)) 1000) "- , ." }}</b><span class="vers">Palabras</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-col">
+  <div class="sec-cab"><h2 id="h-col">Colecciones</h2><a class="mas" href="{{ "indice/" | relLangURL }}">Índice general →</a></div>
+  <div class="colecciones">
+    {{- $n := 0 }}
+    {{- range site.Menus.main }}
+    {{- with site.GetPage .URL }}
+    {{- if and (eq .Kind "section") (not (in (slice "idiomas" "colaboradores" "calendario") .Section)) }}
+    {{- $n = add $n 1 }}
+    {{- $c := 0 }}{{ range .RegularPages }}{{ if in .RawContent "dossier_iframe" }}{{ $c = add $c 1 }}{{ end }}{{ end }}
+    <a class="col-item" href="{{ .RelPermalink }}">
+      <span class="col-num">{{ printf "%02d" $n }}</span>
+      <h3>{{ .Title }}</h3>
+      <span class="col-cuenta">{{ $c }} {{ if eq $c 1 }}dossier{{ else }}dossieres{{ end }}</span>
+      <p>{{ .Description | plainify }}</p>
+    </a>
+    {{- end }}
+    {{- end }}
+    {{- end }}
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-nue">
+  {{- if $nuevas }}
+  <div class="sec-cab"><h2 id="h-nue">Nuevas investigaciones</h2><a class="mas" href="{{ "indice/" | relLangURL }}?coleccion=2026">Todas →</a></div>
+  <p class="sec-intro">Expedientes nuevos que responden a publicaciones concretas de la apologética musulmana, protestante, ortodoxa, restauracionista y atea, con revisión documental y adversarial.</p>
+  <ol class="catalogo">
+    {{- range first 8 ($nuevas.ByDate.Reverse) }}{{ partial "fila_dossier.html" (dict "pagina" . "sig" (.Params.dossier_id | default "")) }}{{ end }}
+  </ol>
+  {{- else }}
+  <div class="sec-cab"><h2 id="h-nue">Últimas incorporaciones</h2><a class="mas" href="{{ "indice/" | relLangURL }}">Todas →</a></div>
+  <ol class="catalogo">
+    {{- range $i, $p := first 6 (sort $dossieres "Date" "desc") }}{{ partial "fila_dossier.html" (dict "pagina" $p "sig" (printf "%02d" (add $i 1))) }}{{ end }}
+  </ol>
+  {{- end }}
+</section>
+
+{{- with site.Data.controversias }}
+<section class="sec" aria-labelledby="h-con">
+  <div class="sec-cab"><h2 id="h-con">Explorar por controversia</h2></div>
+  <div class="controversias">
+    {{- range . }}
+    {{- $nombre := .nombre }}{{ $c := 0 }}
+    {{- range $dossieres }}{{ $d := index $datos .RelPermalink | default dict }}{{ if eq (.Params.area | default (index $d "area")) $nombre }}{{ $c = add $c 1 }}{{ end }}{{ end }}
+    <a class="contro" href="{{ "indice/" | relLangURL }}?area={{ $nombre | urlquery }}">
+      <h3>{{ $nombre }}</h3>
+      <p>{{ .descripcion }}</p>
+      <span class="vers">{{ $c }} {{ if eq $c 1 }}dossier{{ else }}dossieres{{ end }}</span>
+    </a>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{- with site.Data.rutas }}
+<section class="sec" aria-labelledby="h-rut">
+  <div class="sec-cab"><h2 id="h-rut">Rutas de estudio</h2></div>
+  <div class="rutas">
+    {{- range . }}
+    <div class="ruta">
+      <h3>{{ .titulo }}</h3>
+      <p>{{ .descripcion }}</p>
+      <ol>
+        {{- range .pasos }}{{ with site.GetPage . }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}{{ end }}
+      </ol>
+    </div>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{- with site.GetPage "/calendario" }}
+<section class="sec sec-final" aria-labelledby="h-cal">
+  <div class="sec-cab"><h2 id="h-cal">{{ .Title }}</h2><a class="mas" href="{{ .RelPermalink }}">Ver apartado →</a></div>
+  <ul class="enlaces-linea">
+    {{- range .RegularPages.ByTitle }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
+  </ul>
+</section>
+{{- end }}
+
+{{- else }}
+{{- /* ───────────────────────── APARTADO / TÉRMINO ───────────────────────── */ -}}
+{{- $pages := union .RegularPages .Sections }}
+{{- $pages = sort $pages "Title" "asc" }}
+<header class="page-header pag-cab">
   {{- partial "breadcrumbs.html" . }}
   <h1>
     {{ .Title }}
@@ -23,99 +138,39 @@
     {{- end }}
   </h1>
   {{- if .Description }}
-  <div class="post-description">
-    {{ .Description | markdownify }}
-  </div>
+  <div class="post-description">{{ .Description | markdownify }}</div>
   {{- end }}
 </header>
+
+{{- if $pages }}
+{{- $areas := slice }}
+{{- range $pages }}{{ $d := index $datos .RelPermalink | default dict }}{{ with (.Params.area | default (index $d "area")) }}{{ $areas = $areas | append . }}{{ end }}{{ end }}
+{{- $areas = $areas | uniq | sort }}
+{{- if gt (len $pages) 6 }}
+<div class="filtros" data-filtro>
+  <input type="search" placeholder="Filtrar por título o tema…" aria-label="Filtrar esta lista" autocomplete="off">
+  {{- if gt (len $areas) 1 }}
+  <button class="chip" type="button" aria-pressed="true" data-area="">Todos</button>
+  {{- range $areas }}<button class="chip" type="button" aria-pressed="false" data-area="{{ . }}">{{ . }}</button>{{ end }}
+  {{- end }}
+</div>
+{{- end }}
+<p class="cuenta-res" aria-live="polite" data-cuenta>{{ len $pages }} {{ if eq (len $pages) 1 }}documento{{ else }}documentos{{ end }}</p>
+<ol class="catalogo" data-catalogo>
+  {{- range $i, $p := $pages }}{{ partial "fila_dossier.html" (dict "pagina" $p "sig" (printf "%02d" (add $i 1))) }}{{ end }}
+</ol>
 {{- end }}
 
 {{- if .Content }}
-<div class="post-content md-content">
-  {{- if not (.Param "disableAnchoredHeadings") }}
-  {{- partial "anchored_headings.html" .Content -}}
-  {{- else }}{{ .Content }}{{ end }}
-</div>
-{{- end }}
-
-{{- $pages := union .RegularPages .Sections }}
-
-{{- if .IsHome }}
-{{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
-{{- end }}
-
-{{- $paginator := .Paginate $pages }}
-
-{{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
-{{- partial "home_info.html" . }}
-{{- end }}
-
-{{- $term := .Data.Term }}
-{{- range $index, $page := $paginator.Pages }}
-
-{{- $class := "post-entry" }}
-
-{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
-{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
-{{- $class = "first-entry" }}
-{{- else if $term }}
-{{- $class = "post-entry tag-entry" }}
-{{- end }}
-
-<article class="{{ $class }}">
-  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-      {{- .Title }}
-      {{- if .Draft }}
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-      {{- end }}
-    </h2>
-  </header>
-  {{- if (ne (.Param "hideSummary") true) }}
-  <div class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+<details class="presentacion"{{ if not $pages }} open{{ end }}>
+  <summary>Presentación del apartado</summary>
+  <div class="post-content md-content">
+    {{- if not (.Param "disableAnchoredHeadings") }}
+    {{- partial "anchored_headings.html" .Content -}}
+    {{- else }}{{ .Content }}{{ end }}
   </div>
-  {{- end }}
-  {{- if not (.Param "hideMeta") }}
-  <footer class="entry-footer">
-    {{- partial "post_meta.html" . -}}
-  </footer>
-  {{- end }}
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .RelPermalink }}"></a>
-</article>
+</details>
 {{- end }}
 
-{{- if gt $paginator.TotalPages 1 }}
-<footer class="page-footer">
-  <nav class="pagination">
-    {{- if $paginator.HasPrev }}
-    <a class="prev" href="{{ $paginator.Prev.URL | relURL }}">
-      «&nbsp;{{ i18n "prev_page" }}&nbsp;
-      {{- if (.Param "ShowPageNums") }}
-      {{- sub $paginator.PageNumber 1 }}/{{ $paginator.TotalPages }}
-      {{- end }}
-    </a>
-    {{- end }}
-    {{- if $paginator.HasNext }}
-    <a class="next" href="{{ $paginator.Next.URL | relURL }}">
-      {{- i18n "next_page" }}&nbsp;
-      {{- if (.Param "ShowPageNums") }}
-      {{- add 1 $paginator.PageNumber }}/{{ $paginator.TotalPages }}
-      {{- end }}&nbsp;»
-    </a>
-    {{- end }}
-  </nav>
-</footer>
 {{- end }}
-
-{{- end }}{{/* end profileMode */}}
-
 {{- end }}{{- /* end main */ -}}
