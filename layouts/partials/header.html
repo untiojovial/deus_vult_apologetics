@@ -1,50 +1,45 @@
-<header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            {{- $label_text := (site.Params.label.text | default site.Title) }}
-            {{- if site.Title }}
-            <a href="{{ "" | relLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)">
-                {{- if site.Params.label.icon }}
-                {{- $img := resources.Get site.Params.label.icon }}
-                {{- if $img }}
-                    {{- $processableFormats := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif") -}}
-                    {{- if hugo.IsExtended -}}
-                        {{- $processableFormats = $processableFormats | append "webp" -}}
-                    {{- end -}}
-                    {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
-                    {{- if and (in $processableFormats $img.MediaType.SubType) (eq $prod true)}}
-                        {{- if site.Params.label.iconHeight }}
-                            {{- $img = $img.Resize (printf "x%d" site.Params.label.iconHeight) }}
-                        {{ else }}
-                            {{- $img = $img.Resize "x30" }}
-                        {{- end }}
+{{- /* Cabecera «Scriptorium»: sello + título, utilidades y navegación de apartados.
+       Usa el menú `main` de hugo.toml tal cual (mismos nombres y URLs). Los identificadores de
+       site.Params.navSecundaria se muestran en la fila de utilidades; el resto, en la fila de apartados. */ -}}
+{{- $label_text := (site.Params.label.text | default site.Title) }}
+{{- $secundaria := site.Params.navSecundaria | default (slice "idiomas" "colaboradores" "calendario" "busqueda") }}
+{{- $currentPage := . }}
+{{- $page_url := $currentPage.RelPermalink | relLangURL }}
+<a class="salto" href="#contenido">Saltar al contenido</a>
+<header class="header cabecera">
+    <div class="caja">
+        <div class="cab-sup">
+            <div class="logo marca">
+                <a href="{{ "" | relLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)">
+                    <svg class="sello" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+                        <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1" />
+                        <path d="M20 8v24M12 16h16" stroke="currentColor" stroke-width="1.6" fill="none" />
+                    </svg>
+                    <span class="marca-texto">
+                        <span class="marca-nombre">{{ $label_text }}</span>
+                        <span class="marca-lema vers">{{ site.Params.lema | default "Biblioteca de apologética católica" }}</span>
+                    </span>
+                </a>
+            </div>
+            <div class="cab-util">
+                <nav aria-label="Recursos">
+                    {{- range site.Menus.main }}
+                    {{- if in $secundaria .Identifier }}
+                    {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL)) | relLangURL }}
+                    {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
+                    <a href="{{ .URL | relLangURL }}" title="{{ .Title | default .Name }}{{ if $is_search }} (Alt + /){{ end }}"
+                        {{- if $is_search }} accesskey="/"{{ end }}{{ if eq $menu_item_url $page_url }} aria-current="page"{{ end }}>{{ .Name }}</a>
                     {{- end }}
-                    <img src="{{ $img.Permalink }}" alt="" aria-label="logo"
-                        height="{{- site.Params.label.iconHeight | default "30" -}}">
-                {{- else }}
-                <img src="{{- site.Params.label.icon | absURL -}}" alt="" aria-label="logo"
-                    height="{{- site.Params.label.iconHeight | default "30" -}}">
-                {{- end -}}
-                {{- else if hasPrefix site.Params.label.iconSVG "<svg" }}
-                    {{ site.Params.label.iconSVG | safeHTML }}
-                {{- end -}}
-                {{- $label_text -}}
-            </a>
-            {{- end }}
-
-            {{- $lsenabled := (or (not site.Params.disableThemeToggle) (and (not site.Params.disableLangToggle) (hugo.IsMultilingual))) }}
-            {{- if $lsenabled }}
-            <div class="logo-switches">
+                    {{- end }}
+                </nav>
                 {{- if (not site.Params.disableThemeToggle) }}
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="Cambiar tema (Alt + T)" aria-label="Cambiar entre tema claro y oscuro">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -57,58 +52,22 @@
                     </svg>
                 </button>
                 {{- end }}
-
-                {{- if (not site.Params.disableLangToggle) }}
-                    {{- $lang := .Lang}}
-                    {{- with site.Home.Translations }}
-                    {{- $separator := or $label_text (not site.Params.disableThemeToggle)}}
-                    {{- if $separator }}<span class="nav-sep">|</span>{{ end }}
-                    <ul class="lang-menu">
-                        {{- range . -}}
-                        {{- if ne $lang .Lang }}
-                        <li>
-                            <a href="{{- .RelPermalink -}}" title="{{ .Language.Params.languageAltTitle | default (.Language.LanguageName | emojify) | default (.Lang | title) }}"
-                                aria-label="{{ .Language.LanguageName | default (.Lang | title) }}">
-                                {{- if (and site.Params.displayFullLangName (.Language.LanguageName)) }}
-                                {{- .Language.LanguageName | emojify -}}
-                                {{- else }}
-                                {{- .Lang | title -}}
-                                {{- end -}}
-                            </a>
-                        </li>
-                        {{- end -}}
-                        {{- end}}
-                    </ul>
-                    {{- end }}
-                {{- end }}
+                <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-prim">Menú</button>
             </div>
-            {{- end }}
         </div>
-        {{- $currentPage := . }}
-        <ul id="menu" class="menu">
-            {{- range site.Menus.main }}
-            {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | relLangURL }}
-            {{- $page_url:= $currentPage.RelPermalink | relLangURL }}
-            {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
-            <li>
-                <a href="{{ .URL | relLangURL }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
-                {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
-                    <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
-                        {{- .Pre }}
-                        {{- .Name -}}
-                        {{ .Post -}}
-                    </span>
-                    {{- if (findRE "://" .URL) }}&nbsp;
-                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
-                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-                        <path d="M15 3h6v6"></path>
-                        <path d="M10 14L21 3"></path>
-                    </svg>
-                    {{- end }}
-                </a>
-            </li>
-            {{- end }}
-        </ul>
-    </nav>
+        <nav class="nav-prim" id="nav-prim" aria-label="Apartados">
+            <ul id="menu" class="menu">
+                {{- range site.Menus.main }}
+                {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL)) | relLangURL }}
+                {{- $es_sec := in $secundaria .Identifier }}
+                <li{{ if $es_sec }} class="solo-movil"{{ end }}>
+                    <a href="{{ .URL | relLangURL }}" title="{{ .Title | default .Name }}"
+                        {{- if or (eq $menu_item_url $page_url) (and (ne $menu_item_url "/") (strings.HasPrefix $page_url $menu_item_url)) }} aria-current="page"{{ end }}>
+                        <span>{{- .Pre }}{{- .Name -}}{{ .Post -}}</span>
+                    </a>
+                </li>
+                {{- end }}
+            </ul>
+        </nav>
+    </div>
 </header>

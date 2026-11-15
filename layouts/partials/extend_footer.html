@@ -1,0 +1,106 @@
+{{- /* Pie «Scriptorium» y pequeños comportamientos del rediseño. PaperMod incluye este parcial después de su
+       propio pie (oculto con params.hideFooter) y antes de sus scripts, que se conservan intactos. */ -}}
+{{- $secundaria := site.Params.navSecundaria | default (slice "idiomas" "colaboradores" "calendario" "busqueda") }}
+<footer class="pie">
+    <div class="caja">
+        <div class="pie-grid">
+            <div>
+                <h2 class="vers">{{ site.Title }}</h2>
+                <p>{{ site.Params.notaEditorial | default "Dossieres de investigación apologética con fuentes primarias, análisis filológico y argumentación formal. Las citas llevan su localización para que el lector pueda comprobarlas." }}</p>
+            </div>
+            <div>
+                <h2 class="vers">Apartados</h2>
+                <ul>
+                    {{- range site.Menus.main }}{{ if not (in $secundaria .Identifier) }}
+                    <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+                    {{- end }}{{ end }}
+                </ul>
+            </div>
+            <div>
+                <h2 class="vers">Recursos</h2>
+                <ul>
+                    {{- range site.Menus.main }}{{ if in $secundaria .Identifier }}
+                    <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+                    {{- end }}{{ end }}
+                </ul>
+            </div>
+            <div>
+                <h2 class="vers">Biblioteca</h2>
+                <ul>
+                    <li><a href="{{ "indice/" | relLangURL }}">Índice general</a></li>
+                    <li><a href="{{ "tags/" | relLangURL }}">Temas</a></li>
+                    <li><a href="{{ "index.xml" | relLangURL }}">RSS</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pie-fin">
+            <span class="vers">Fides quaerens intellectum</span>
+            <span class="vers">&copy; {{ now.Year }} {{ site.Title }} · Hecho con
+                <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> y
+                <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a></span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    (function () {
+        // Menú plegable en móvil
+        var btn = document.querySelector('.menu-btn'), nav = document.getElementById('nav-prim');
+        if (btn && nav) btn.addEventListener('click', function () {
+            var abierto = nav.classList.toggle('abierto');
+            btn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+        });
+
+        // Filtro instantáneo de catálogos (apartados e índice general)
+        function nrm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+        var caja = document.querySelector('[data-filtro]'), cat = document.querySelector('[data-catalogo]');
+        if (cat) {
+            var filas = [].slice.call(cat.querySelectorAll('.fila')), cuenta = document.querySelector('[data-cuenta]');
+            var q = caja ? caja.querySelector('input') : null, chips = caja ? [].slice.call(caja.querySelectorAll('.chip')) : [];
+            var area = '', coleccion = '';
+            filas.forEach(function (f) { f.dataset.n = nrm(f.dataset.t); });
+            function aplicar() {
+                var t = q ? nrm(q.value) : '', n = 0;
+                filas.forEach(function (f) {
+                    var ok = (!area || f.dataset.area === area) && (!t || f.dataset.n.indexOf(t) > -1) && (!coleccion || f.dataset.coleccion === coleccion);
+                    f.hidden = !ok; if (ok) n++;
+                });
+                if (cuenta) cuenta.textContent = n + (n === 1 ? ' documento' : ' documentos');
+            }
+            function elegir(a) {
+                area = a;
+                chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.area === a ? 'true' : 'false'); });
+                aplicar();
+            }
+            if (q) q.addEventListener('input', aplicar);
+            chips.forEach(function (c) { c.addEventListener('click', function () { elegir(c.dataset.area); }); });
+            var p = new URLSearchParams(location.search);
+            if (p.get('coleccion')) coleccion = 'biblioteca-' + p.get('coleccion');
+            if (p.get('area') && chips.some(function (c) { return c.dataset.area === p.get('area'); })) elegir(p.get('area'));
+            else if (coleccion) aplicar();
+        }
+
+        // Buscador: admite ?q=… desde la portada (el buscador de PaperMod reacciona al evento input)
+        var si = document.getElementById('searchInput'), consulta = new URLSearchParams(location.search).get('q');
+        if (si && consulta) {
+            // El índice se carga de forma asíncrona tras el evento load: se reintenta hasta que haya resultados.
+            var lanzar = function (n) {
+                si.value = consulta;
+                si.dispatchEvent(new Event('input', { bubbles: true }));
+                setTimeout(function () {
+                    if (!document.querySelector('#searchResults li') && n < 10) lanzar(n + 1);
+                }, 500);
+            };
+            if (document.readyState === 'complete') lanzar(0); else window.addEventListener('load', function () { lanzar(0); });
+        }
+
+        // Dossier a pantalla completa sin salir de la página (el enlace original a ventana nueva se conserva)
+        var marco = document.querySelector('.es-dossier .dossier-embed');
+        if (marco && marco.requestFullscreen) {
+            var b = document.createElement('button');
+            b.type = 'button'; b.className = 'chip pantalla'; b.textContent = 'Pantalla completa';
+            b.addEventListener('click', function () { marco.requestFullscreen(); });
+            marco.parentNode.insertBefore(b, marco);
+        }
+    })();
+</script>
